@@ -254,71 +254,155 @@ BrTextEditor >> initialize [
 
 { #category : #interactions }
 BrTextEditor >> initializeInteractions [
+	
+	self interactions add: (BlShortcut new
+		combination: BlKeyCombination delete;
+		action: [
+			self deleter
+				selected;
+				oneAfterCursor;
+				delete ]).
+	
+	self interactions add: (BlShortcut new
+		combination: BlKeyCombination backspace;
+		action: [
+			self deleter
+				selected;
+				oneBeforeCursor;
+				delete ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key a; build);
+		combination: BlKeyCombination return;
+		action: [
+			self inserter
+				atCursor;
+				lineEnding;
+				insert ]).
+
+	self interactions add: (BlShortcut new
+		combination: BlKeyCombination tab;
+		action: [
+			self selection isEmpty
+				ifTrue: [
+					self inserter
+						atCursor;
+						indentation;
+						insert ]
+				ifFalse: [
+					self inserter
+						indentation;
+						beforeSelectedLines;
+						withoutSelectionDelete;
+						insert ] ]).
+
+	self interactions add: (BlShortcut new
+		combination: BlKeyCombination primaryA;
 		action: [ self selecter all select ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key x; build);
+		combination: BlKeyCombination primaryX;
 		action: [ self cutSelected ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key c; build);
+		combination: BlKeyCombination primaryC;
 		action: [ self copySelected ]).
 
 	"Paste a text from the clipboard at the current cursor position.
 	I delete any currently selected text and update cursor position"
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key v; build);
+		combination: BlKeyCombination primaryV;
 		action: [ self paster fromClipboard atCursor paste ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder escape; build);
+		combination: BlKeyCombination escape;
 		action: [ self selectNone ]).
 
-	"self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder shift; key: Key arrowLeft; build);
-		action: [ self selectToLeft ]).
+	self interactions add: (BlShortcut new
+		combination: (BlKeyCombination builder shift arrowLeft build);
+		action: [
+			self selecter
+				withoutCursorUpdate;
+				moveOneToLeft;
+				select.
+			self navigator
+				moveLeft;
+				apply ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder shift; key: Key arrowRight; build);
-		action: [ self selectToRight ])."
-
-	"left-arrow => move cursor left"
+		combination: (BlKeyCombination builder shift arrowRight build);
+		action: [
+			self selecter
+				withoutCursorUpdate;
+				moveOneToRight;
+				select.
+			self navigator
+				moveRight;
+				apply ]).
+			
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder key: Key arrowLeft; build);
-		action: [ self moveCursorLeft ]).
-
-	"right-arrow => move cursor right"
+		combination: (BlKeyCombination builder shift arrowUp build);
+		action: [
+			self selecter
+				withoutCursorUpdate;
+				moveOneUp;
+				select.
+			self navigator
+				moveUp;
+				apply ]).
+			
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder key: Key arrowRight; build);
-		action: [ self moveCursorRight ]).
+		combination: (BlKeyCombination builder shift arrowDown build);
+		action: [
+			self selecter
+				withoutCursorUpdate;
+				moveOneDown;
+				select.
+			self navigator
+				moveDown;
+				apply ]).
+
+	"left-arrow => move cursor left and deselect everything"
+	self interactions add: (BlShortcut new
+		combination: (BlKeyCombination builder arrowLeft build);
+		action: [
+			self deselecter all deselect.
+			self navigator
+				moveLeft;
+				apply ]).
+
+	"right-arrow => move cursor right and deselect everything"
+	self interactions add: (BlShortcut new
+		combination: (BlKeyCombination builder arrowRight build);
+		action: [
+			self deselecter all deselect.
+			self navigator
+				moveRight;
+				apply ]).
 
 	"up-arrow => move cursor up"
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder key: Key arrowUp; build);
+		combination: (BlKeyCombination builder arrowUp build);
 		action: [ self moveCursorUp ]).
 
 	"down-arrow => move cursor down"
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder key: Key arrowDown; build);
+		combination: (BlKeyCombination builder arrowDown build);
 		action: [ self moveCursorDown ]). 
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key arrowLeft; build);
+		combination: (BlKeyCombination builder primary arrowLeft build);
 		action: [ self moveCursorToLineStart ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key arrowRight; build);
+		combination: (BlKeyCombination builder primary arrowRight build);
 		action: [ self moveCursorToLineEnd ])
 
 	"self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key arrowRight; build);
+		combination: (BlKeyCombination builder primary arrowRight build);
 		action: [ self moveCursorToEndNextWord ]).
 
 	self interactions add: (BlShortcut new
-		combination: (BlKeyCombination builder primary; key: Key arrowLeft; build);
+		combination: (BlKeyCombination builder primary arrowLeft build);
 		action: [ self moveCursorToStartPreviousWord ])."
 ]
 
@@ -401,30 +485,6 @@ BrTextEditor >> moveCursorDown [
 
 	self navigator
 		moveDown;
-		apply
-]
-
-{ #category : #'text - cursor' }
-BrTextEditor >> moveCursorLeft [
-	"Moves cursor to the left by one character without any other side effects.
-	Note:
-		- I don't change current selection.
-		- I request segments update"
-
-	self navigator
-		moveLeft;
-		apply
-]
-
-{ #category : #'text - cursor' }
-BrTextEditor >> moveCursorRight [
-	"Moves cursor to the right by one character without any other side effects.
-	Note:
-		- I don't change current selection.
-		- I request segments update"
-
-	self navigator
-		moveRight;
 		apply
 ]
 
@@ -566,14 +626,10 @@ BrTextEditor >> onAttached: anEditorElement [
 
 	anEditorElement addEventHandler: BrTextEditorSelectionHandler new.
 	anEditorElement addEventHandler: BrTextEditorInsertionHandler new.
-	anEditorElement addEventHandler: BrTextEditorDeletionHandler new.
+	anEditorElement addEventHandler: (BrTextEditorMouseDownHandler new editorElement: anEditorElement).
 
 	self interactions do: [ :anInteraction | anEditorElement addShortcut: anInteraction ].
 
-	anEditorElement when: BlMouseDownEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget requestFocus.
-		self selectNone ].
 	anEditorElement when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
 	anEditorElement when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
 	anEditorElement when: BlFocusEvent do: [ self onGotFocus ].
@@ -618,7 +674,6 @@ BrTextEditor >> onDetached: anEditorElement [
 
 	anEditorElement removeEventHandlersSuchThat: [ :aHandler | aHandler isKindOf: BrTextEditorSelectionHandler ].
 	anEditorElement removeEventHandlersSuchThat: [ :aHandler | aHandler isKindOf: BrTextEditorInsertionHandler ].
-	anEditorElement removeEventHandlersSuchThat: [ :aHandler | aHandler isKindOf: BrTextEditorDeletionHandler ].
 
 	self interactions do: [ :anInteraction | anEditorElement removeShortcut: anInteraction ].
 
@@ -766,78 +821,6 @@ BrTextEditor >> selectNone [
 ]
 
 { #category : #'text - selection' }
-BrTextEditor >> selectToLeft [
-	| fromIndex toIndex newCursorPosition |
-	
-	self
-		assert: [ self hasSelection not
-			or: [ self cursor position = self selection from
-				or: [ self cursor position = self selection to ] ] ]
-		description: [ 'If there is selection cursor must be located either at the start or end of selection interval' ].
-	
-	"which also will be either start or the end of the selection"
-	newCursorPosition := (self cursor position - 1) max: 0.
-
-	self hasSelection
-		ifTrue: [ 
-			(self cursor position = self selection from)
-				"Expand selection to the left"
-				ifTrue: [
-					fromIndex := newCursorPosition.
-					toIndex := self selection to ]
-				"Collapse selection to the left"
-				ifFalse: [
-					fromIndex := self selection from.
-					toIndex := newCursorPosition ] ]
-		ifFalse: [ 
-			fromIndex := newCursorPosition.
-			toIndex := self cursor position ].
-	
-	self selectNone.
-	self
-		select: fromIndex
-		to: toIndex.
-
-	self moveCursorTo: newCursorPosition.
-]
-
-{ #category : #'text - selection' }
-BrTextEditor >> selectToRight [
-	| fromIndex toIndex newCursorPosition |
-	
-	self
-		assert: [ self hasSelection not
-			or: [ self cursor position = self selection from
-				or: [ self cursor position = self selection to ] ] ]
-		description: [ 'If there is selection cursor must be located either at the start or end of selection interval' ].
-	
-	"which also will be either start or the end of the selection"
-	newCursorPosition := (self cursor position + 1) min: self text size.
-
-	self hasSelection
-		ifTrue: [ 
-			(self cursor position = self selection to)
-				"Expand selection to the right"
-				ifTrue: [
-					fromIndex := self selection from.
-					toIndex := newCursorPosition ]
-				"Collapse selection to the right"
-				ifFalse: [
-					fromIndex := newCursorPosition .
-					toIndex := self selection to ] ]
-		ifFalse: [ 
-			fromIndex := self cursor position.
-			toIndex := newCursorPosition ].
-
-	self selectNone.
-	self
-		select: fromIndex
-		to: toIndex.
-
-	self moveCursorTo: newCursorPosition.
-]
-
-{ #category : #'text - selection' }
 BrTextEditor >> selectedText [
 	<return: #BlText>
 	
@@ -848,6 +831,8 @@ BrTextEditor >> selectedText [
 
 { #category : #'api - modification' }
 BrTextEditor >> selecter [
+	<return: #BrTextEditorSelecter>
+
 	^ BrTextEditorSelecter new editor: self
 ]
 

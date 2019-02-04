@@ -106,27 +106,6 @@ BrTextEditorLineSegmentPiece >> isEmpty [
 	^ self text isEmpty
 ]
 
-{ #category : #'api - cursor' }
-BrTextEditorLineSegmentPiece >> moveCursorDown: aCursor pieceElement: aPieceElement of: aLineSegment in: anEditorElement [
-
-	aPieceElement dispatchEvent:
-		(BrTextEditorMoveCursorRequest new down
-			editorElement: anEditorElement;
-			hasFocus: anEditorElement isFocused;
-			cursor: aCursor;
-			cursorPosition: (self globalTextIndexToLocal: aCursor position))
-]
-
-{ #category : #'api - cursor' }
-BrTextEditorLineSegmentPiece >> moveCursorUp: aCursor pieceElement: aPieceElement of: aLineSegment in: anEditorElement [
-	aPieceElement dispatchEvent:
-		(BrTextEditorMoveCursorRequest new up
-			editorElement: anEditorElement;
-			hasFocus: anEditorElement isFocused;
-			cursor: aCursor;
-			cursorPosition: (self globalTextIndexToLocal: aCursor position))
-]
-
 { #category : #'cursor - hooks' }
 BrTextEditorLineSegmentPiece >> onCursorAdded: aCursor to: aPieceElement in: anEditorElement [
 	"Is sent when a cursor is added to a given piece element within provided editor element"
@@ -151,6 +130,15 @@ BrTextEditorLineSegmentPiece >> onCursorRemoved: aCursor from: aPieceElement in:
 { #category : #printing }
 BrTextEditorLineSegmentPiece >> printOn: aStream [
 	self text printOn: aStream
+]
+
+{ #category : #'api - cursor' }
+BrTextEditorLineSegmentPiece >> screenToCursor: aTransformation of: anEditorElement in: aPieceElement [
+
+	aPieceElement dispatchEvent:
+		(BrTextEditorScreenToCursorRequest new
+			transformation: aTransformation;
+			editorElement: anEditorElement)
 ]
 
 { #category : #accessing }
@@ -216,18 +204,44 @@ BrTextEditorLineSegmentPiece >> updateCursor: aTextElement of: aLineSegment in: 
 ]
 
 { #category : #updating }
-BrTextEditorLineSegmentPiece >> updateFocus: aBoolean of: aTextPieceElement in: anEditorElement [
-	self subclassResponsibility
+BrTextEditorLineSegmentPiece >> updateFocus: hasFocus of: aTextPieceElement in: anEditorElement [
+	| aRequest |
+
+	aRequest := hasFocus
+		ifTrue: [ BrTextEditorFocusRequest new ]
+		ifFalse: [ BrTextEditorBlurRequest new ].
+
+	aTextPieceElement dispatchEvent: (aRequest editorElement: anEditorElement)
 ]
 
 { #category : #updating }
-BrTextEditorLineSegmentPiece >> updateSelection: anElement of: aLineSegment in: anEditorElement [
-	
-	self subclassResponsibility
+BrTextEditorLineSegmentPiece >> updateSelection: aTextElement of: aLineSegment in: anEditorElement [
+	| aTextEditor |
+
+	aTextEditor := anEditorElement editor.
+
+	aTextElement dispatchEvent: (BrTextEditorDeselectRequest new
+		editorElement: anEditorElement;
+		fromIndex: 0;
+		toIndex: self text size).
+
+	(aTextEditor selection + aTextEditor selectionRecorder selection) do: [ :aSelection |
+		| aSelectionInterval textInterval |
+		aSelectionInterval := aSelection interval.
+		textInterval := BlSelection from: self text start to: self text end.
+		(aSelection overlaps: textInterval)
+			ifTrue: [
+				| localFrom localTo |
+				localFrom := (aSelectionInterval first - self text start + 1) max: 0.
+				localTo := (aSelectionInterval last - self text start + 1) min: self text size + 1.
+
+				aTextElement dispatchEvent: (BrTextEditorSelectRequest new
+					editorElement: anEditorElement;
+					fromIndex: localFrom;
+					toIndex: localTo) ] ]
 ]
 
 { #category : #updating }
-BrTextEditorLineSegmentPiece >> updateText: anElement of: aLineSegment in: anEditorElement [
-	
-	self subclassResponsibility
+BrTextEditorLineSegmentPiece >> updateText: aTextElement of: aLineSegment in: anEditorElement [
+	aTextElement dispatchEvent: (BrTextEditorTextChangedRequest new editorElement: anEditorElement)
 ]

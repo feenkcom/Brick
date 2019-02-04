@@ -6,7 +6,8 @@ Class {
 	#superclass : #BrTextEditorSegmentHolder,
 	#instVars : [
 		'segment',
-		'pieceElements'
+		'pieceElements',
+		'mouseDownHandler'
 	],
 	#classInstVars : [
 		'defaultSegmentLayoutBlock'
@@ -38,30 +39,55 @@ BrTextEditorLineSegmentHolder >> createSegmentElement [
 	^ BrTextEditorSegmentElement new
 		layout: self class defaultSegmentLayout;
 		focusability: BlFocusability after;
+		addEventHandler: (mouseDownHandler := BrTextEditorMouseDownHandler new);
+		clipChildren: false;
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical fitContent ];
+		look: (BrLayoutResizerLook new
+			hExactToMatchParent;
+			hMatchParent;
+			hFitContent;
+			vAnyToFitContent);
 		yourself
 ]
 
-{ #category : #actions }
-BrTextEditorLineSegmentHolder >> moveCursorDown: aCursor [
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
+{ #category : #cursor }
+BrTextEditorLineSegmentHolder >> explicitScreenToCursor: aTransformation [
+	| aBoundsInEditor aPositionInSegment aClosestPieceElement aClosestPiece aTransformedScreenPosition |
+	
+	aTransformedScreenPosition := aTransformation screenPosition.
+	aBoundsInEditor := (itemElement bounds inParent: self infiniteElement) bounds.
+	
+	"if location is above the first segment then the index is 0"
+	((segment isFirstIn: self editor) and: [ aTransformedScreenPosition y < aBoundsInEditor top ])
+		ifTrue: [ ^ aTransformation transformed: 0 ].
 
+	"if location is below the last segment then the index is text size"
+	((segment isLastIn: self editor) and: [ aTransformedScreenPosition y > aBoundsInEditor bottom ])
+		ifTrue: [ ^ aTransformation transformed: self editor text size ].	
+
+	"not in this segment, ignoring"
+	(aTransformedScreenPosition y between: aBoundsInEditor top and: aBoundsInEditor bottom)
+		ifFalse: [  ^ self ].
+			
+	aPositionInSegment := (itemElement globalBoundsToMine: (BlBounds origin: aTransformation screenPosition extent: 0@0) fromParent: self infiniteElement) center.	
+	segment hasPieces
+		ifFalse: [ ^ self ].
+	
+	"trying to find a segment that actually contains a given position"
 	self piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-		aPiece moveCursorDown: aCursor pieceElement: aPieceElement of: segment in: self infiniteElement ]
-]
-
-{ #category : #actions }
-BrTextEditorLineSegmentHolder >> moveCursorUp: aCursor [
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
-
-	self piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-		aPiece moveCursorUp: aCursor pieceElement: aPieceElement of: segment in: self infiniteElement ]
+		(aPieceElement bounds inParent bounds containsPoint: aPositionInSegment)
+			ifTrue: [ ^ aPiece screenToCursor: aTransformation of: self infiniteElement in: aPieceElement ] ].
+		
+	"clicked outside of a segent piece, should find the closest element"
+	
+	aClosestPieceElement := itemElement layout findClosestChildOf: itemElement to: aPositionInSegment.
+	aClosestPiece := pieceElements
+		keyAtValue: aClosestPieceElement
+		ifAbsent: [ ^ self ].
+		
+	aClosestPiece screenToCursor: aTransformation of: self infiniteElement in: aClosestPieceElement
 ]
 
 { #category : #updating }
@@ -127,10 +153,25 @@ BrTextEditorLineSegmentHolder >> piecesAndTheirElementsDo: aBlock [
 			ifPresent: [ :eachPieceElement | aBlock value: eachPiece value: eachPieceElement ] ]
 ]
 
+{ #category : #cursor }
+BrTextEditorLineSegmentHolder >> relativeScreenToCursor: aTransformation [	
+	"trying to find a segment that actually contains a given position"
+
+	self piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
+		(aTransformation cursor position between: aPiece start and: aPiece end)
+			ifTrue: [ ^ aPiece screenToCursor: aTransformation of: self infiniteElement in: aPieceElement ] ]
+]
+
+{ #category : #cursor }
+BrTextEditorLineSegmentHolder >> screenToCursor: aTransformation [
+	aTransformation evaluateOn: self
+]
+
 { #category : #accessing }
 BrTextEditorLineSegmentHolder >> segment: anEditorSegment [
 	segment := anEditorSegment.
-
+	
+	mouseDownHandler editorElement: self infiniteElement.
 	pieceElements := OrderedIdentityDictionary new.
 	segment pieces do: [ :aPiece | pieceElements at: aPiece put: (aPiece createElement: self infiniteElement) ].
 	
@@ -143,5 +184,5 @@ BrTextEditorLineSegmentHolder >> segment: anEditorSegment [
 		addChildren: pieceElements values;
 		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
 		layoutDo: [ :aLayout | aLayout lineSpacing: anEditorSegment lineSpacing ];
-		margin: anEditorSegment paragraphMargin
+		padding: anEditorSegment paragraphMargin
 ]

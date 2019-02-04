@@ -1,24 +1,27 @@
 Class {
-	#name : #BrTextWordPieceMouseDownHandler,
+	#name : #BrTextWordPieceDoubleClickHandler,
 	#superclass : #BrTextWordPieceStatefulHandler,
 	#category : #'Brick-Editor-UI - Word'
 }
 
 { #category : #accessing }
-BrTextWordPieceMouseDownHandler >> eventClass [
-	^ BlMouseDownEvent
+BrTextWordPieceDoubleClickHandler >> eventClass [
+	^ BlDoubleClickEvent
 ]
 
 { #category : #'api - event managing' }
-BrTextWordPieceMouseDownHandler >> handleEvent: anEvent [
-	| aLocalTextIndex aGobaltextIndex aNavigator |
+BrTextWordPieceDoubleClickHandler >> handleEvent: anEvent [
+	| aLocalTextIndex aGobaltextIndex aSelecter |
 	
 	aLocalTextIndex := anEvent currentTarget paragraph indexAtPosition: anEvent localPosition.
 	aGobaltextIndex := (anEvent currentTarget text start + aLocalTextIndex - 1) max: 0.
 	
-	aNavigator := self editorElement editor navigator.
+	aSelecter := self editorElement editor selecter.
+
 	anEvent modifiers isPrimaryModifier
-		ifTrue: [ aNavigator addAt: aGobaltextIndex ]
-		ifFalse: [ aNavigator moveTo: aGobaltextIndex ].
-	aNavigator apply
+		ifTrue: [ aSelecter withoutCursorUpdate ].
+
+	aSelecter
+		wordAt: aGobaltextIndex;
+		select
 ]

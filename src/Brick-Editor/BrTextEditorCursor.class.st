@@ -4,6 +4,20 @@ Class {
 	#category : 'Brick-Editor-Model - Cursor'
 }
 
+{ #category : #'instance creation' }
+BrTextEditorCursor class >> at: aTextIndex [
+	<return: #BrTextEditorSingleCursor>
+
+	^ BrTextEditorSingleCursor at: aTextIndex
+]
+
+{ #category : #'instance creation' }
+BrTextEditorCursor class >> atAll: aCollectionOfTextIndices [
+	<return: #BrTextEditorMultipleCursor>
+
+	^ BrTextEditorMultipleCursor new addAll: (aCollectionOfTextIndices collect: [ :aTextIndex | BrTextEditorSingleCursor at: aTextIndex ])
+]
+
 { #category : #accessing }
 BrTextEditorCursor >> allCursors [
 	^ Array streamContents: [ :aStream | self do: [ :aCursor | aStream nextPut: aCursor ] ]
@@ -29,6 +43,12 @@ BrTextEditorCursor >> anySatisfy: aBlock [
 	self do: [ :aCharacter | (aBlock value: aCharacter)
 			ifTrue: [ ^ true ] ].
 	^ false
+]
+
+{ #category : #enumerating }
+BrTextEditorCursor >> collect: aBlock [ 	
+	^ Array streamContents: [ :aStream |
+		self do: [ :anElement | aStream nextPut: (aBlock value: anElement) ] ]
 ]
 
 { #category : #accessing }
@@ -125,4 +145,12 @@ BrTextEditorCursor >> isNotEmpty [
 	<return: #Boolean>
 
 	^ self isEmpty not
+]
+
+{ #category : #enumerating }
+BrTextEditorCursor >> select: aBlock [ 	
+	^ Array streamContents: [ :aStream |
+			self do: [ :anElement |
+				(aBlock value: anElement)
+					ifTrue: [ aStream nextPut: anElement ] ] ]
 ]

@@ -18,6 +18,35 @@ BrEditorTextFlowLayout class >> constraints [
 	^ BrEditorTextFlowLayoutConstraints new
 ]
 
+{ #category : #geometry }
+BrEditorTextFlowLayout >> findClosestChildOf: anElement to: aPoint [
+	<return: #BlElement>
+	| aClosestLine |
+
+	aClosestLine := self findClosestLineTo: aPoint.
+	^ aClosestLine findClosestElementTo: aPoint
+]
+
+{ #category : #geometry }
+BrEditorTextFlowLayout >> findClosestLineTo: aPoint [
+	<return: #BrEditorTextFlowLine>
+	| aClosestLine aClosestDistance |
+	
+	aClosestLine := lines.
+	aClosestDistance := aClosestLine distanceTo: aPoint.
+	
+	lines do: [ :eachLine | 
+		| eachDistance |
+		
+		eachDistance := eachLine distanceTo: aPoint.
+		eachDistance < aClosestDistance
+			ifTrue: [
+				aClosestDistance := eachDistance.
+				aClosestLine := eachLine ] ].
+		
+	^ aClosestLine
+]
+
 { #category : #initialization }
 BrEditorTextFlowLayout >> initialize [
 	super initialize.
@@ -36,6 +65,7 @@ BrEditorTextFlowLayout >> layout: anElement in: aRectangle [
 	aTop := anOffsetY.
 	
 	lines do: [ :aLine |
+		aLine origin: aLeft @ aTop.
 		aLine elements do: [ :aChildElement |
 			| aWidth aMarginedTop |
 			aLeft := aLeft + aChildElement margin left.
@@ -65,8 +95,13 @@ BrEditorTextFlowLayout >> measure: anElement with: anExtentSpec [
 	| maxWidth maxHeight aCurrentLine totalContentWidth totalContentHeight |
 	
 	"compute how much space is available along both axes"
-	maxWidth := (anExtentSpec widthSpec size ifNil: [ Float infinity ]) - anElement padding width.
-	maxHeight := (anExtentSpec heightSpec size ifNil: [ Float infinity ]) - anElement padding height.
+	maxWidth := (anExtentSpec widthSpec isUnspecified
+		ifTrue: [ SmallInteger maxVal ]
+		ifFalse: [ anExtentSpec widthSpec size ]) - anElement padding width.
+		
+	maxHeight := (anExtentSpec heightSpec isUnspecified
+		ifTrue: [ SmallInteger maxVal ]
+		ifFalse: [ anExtentSpec heightSpec size ]) - anElement padding height.
 
 	"Actually a linked list of lines"
 	lines := BrEditorTextFlowLine new maxWidth: maxWidth.
