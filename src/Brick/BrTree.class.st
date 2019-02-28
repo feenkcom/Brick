@@ -14,6 +14,11 @@ BrTree >> defaultTreeModel [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - tree' }
+BrTree >> expandRoot [
+	self viewModel expandRoot
+]
+
 { #category : #initialization }
 BrTree >> initialize [
 	super initialize.
@@ -23,4 +28,9 @@ BrTree >> initialize [
 		add: (BrInteractiveModel withAll: {
 			BrLayoutHorizontalResizerModel matchParent.
 			BrLayoutVerticalResizerModel matchParent })).
+]
+
+{ #category : #'api - selection' }
+BrTree >> selectOne: anIndex dueTo: aSourceEvent [
+	selectionModel selectOne: anIndex dueTo: aSourceEvent
 ]
