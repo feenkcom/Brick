@@ -36,12 +36,12 @@ BrTextLabelLook >> attributesBuilder [
 { #category : #initialization }
 BrTextLabelLook >> initialize [
 	super initialize.
-
+	changes
+		add: (#(content label) asBrLookChildAddAsChangeWithValue: [ self label ]).
 	text := 'Label' asRopedText.
-
 	labelElement := BlTextElement new.
 	labelElement clipChildren: false.
-
+	labelElement text: text.
 	attributesBuilder := BlTextDelegatedAttributesBuilder new.
 	attributesBuilder attributesTarget: text.
 	attributesBuilder whenAdded: [ labelElement textChanged ]
@@ -52,14 +52,6 @@ BrTextLabelLook >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrLabelChanged do: [ :anEvent | self text: anEvent text ]
-]
-
-{ #category : #initialization }
-BrTextLabelLook >> initializeLook [
-	super initializeLook.
-
-	labelElement text: text.
-	self widgetContent addChild: labelElement as: #label
 ]
 
 { #category : #initialization }
@@ -96,7 +88,6 @@ BrTextLabelLook >> text [
 { #category : #accessing }
 BrTextLabelLook >> text: aTextOrString [
 	text := aTextOrString asRopedText.
-	
 	self attributesBuilder attributesTarget: text.
 	self label text: text
 ]
