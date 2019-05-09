@@ -10,7 +10,13 @@ Class {
 
 { #category : #adding }
 BrLookChanges >> add: aChange [
+	aChange source: thisContext sender method.
 	changes add: aChange
+]
+
+{ #category : #accessing }
+BrLookChanges >> changes [
+	^ changes
 ]
 
 { #category : #initialization }

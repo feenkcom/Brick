@@ -24,7 +24,13 @@ BrLookPropertyChange >> downOn: aLook [
 BrLookPropertyChange >> initialize [
 	super initialize.
 	read := [ :e | self readOn: e ].
-	up := [ :e :f | self writeOn: e value: value value ].
+	up := [ :e :f | 
+	self
+		writeOn: e
+		value:
+			(value isBlock
+				ifTrue: [ value cull: f ]
+				ifFalse: [ value ]) ].
 	down := [ :e :f :g | self writeOn: e value: f ]
 ]
 
@@ -36,6 +42,11 @@ BrLookPropertyChange >> path [
 { #category : #accessing }
 BrLookPropertyChange >> path: anObject [
 	path := anObject
+]
+
+{ #category : #printing }
+BrLookPropertyChange >> printOn: aStream [
+	aStream nextPutAll: (' ' join: (path collect: #asString))
 ]
 
 { #category : #initialization }

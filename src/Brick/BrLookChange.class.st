@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'initialized',
 		'up',
-		'down'
+		'down',
+		'source'
 	],
 	#category : #'Brick-! Core'
 }
@@ -42,6 +43,16 @@ BrLookChange >> initialized [
 { #category : #accessing }
 BrLookChange >> initialized: anObject [
 	initialized := anObject
+]
+
+{ #category : #accessing }
+BrLookChange >> source [
+	^ source
+]
+
+{ #category : #accessing }
+BrLookChange >> source: anObject [
+	source := anObject
 ]
 
 { #category : #accessing }
