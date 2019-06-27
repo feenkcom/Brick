@@ -13,7 +13,7 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.6.32/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.6.33/src' ];
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon:3362a358ff6370b559e00566c84949ea7e3a1fde/repository' ].
 		spec 
