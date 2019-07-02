@@ -1,7 +1,9 @@
 Class {
 	#name : #BrPager,
 	#superclass : #BlElement,
-	#category : 'Brick-Pager - UI'
+	#traits : 'TBrLayoutResizable',
+	#classTraits : 'TBrLayoutResizable classTrait',
+	#category : #'Brick-Pager - UI'
 }
 
 { #category : #'api - adding / removing' }
@@ -18,8 +20,12 @@ BrPager >> hasPageAfter: aPageElement [
 BrPager >> initialize [
 	super initialize.
 	
-	self look: BrPagerScrollbarLook new + BrPagerLook new + BrLayoutLook linearVertical.
-	self viewModel: BrPagerModel new
+	self look: BrPagerScrollbarLook new + BrScrollablePagerLook new.
+	self viewModel: (BrPagerModel new add: (BrInteractiveModel withAll: {
+				BrLayoutHorizontalResizerModel matchParent.
+				BrLayoutVerticalResizerModel matchParent })).
+
+	self layout: BlLinearLayout vertical
 ]
 
 { #category : #accessing }
@@ -33,6 +39,11 @@ BrPager >> pageAfter: aBlElement ifFound: aFoundBlock ifNone: aNoneBlock [
 { #category : #'api - accessing' }
 BrPager >> pages [
 	^ self viewModel pages
+]
+
+{ #category : #'api - adding / removing' }
+BrPager >> removeAllPages [
+	self viewModel removeAllPages
 ]
 
 { #category : #'api - adding / removing' }
