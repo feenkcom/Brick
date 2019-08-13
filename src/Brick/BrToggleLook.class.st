@@ -5,19 +5,6 @@ Class {
 }
 
 { #category : #initialization }
-BrToggleLook >> initialize [
-	super initialize.
-	self
-		addChange:
-			(BrLookChange new
-				up: [ :e | 
-					self toggleDeactivated.
-					self toggleEnabled ];
-				down: [ :e |  ];
-				yourself)
-]
-
-{ #category : #initialization }
 BrToggleLook >> initializeListeners [
 	super initializeListeners.
 	
@@ -38,12 +25,4 @@ BrToggleLook >> toggleActivated [
 
 { #category : #'event handling' }
 BrToggleLook >> toggleDeactivated [
-]
-
-{ #category : #'event handling' }
-BrToggleLook >> toggleDisabled [
-]
-
-{ #category : #'event handling' }
-BrToggleLook >> toggleEnabled [
 ]
