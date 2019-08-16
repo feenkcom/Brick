@@ -31,7 +31,7 @@ BrWithTooltipLook >> hideLater [
 	self assert: [ self visible ].
 	self cancelHideLater.
 	hideLaterTask := BlDelayedTaskAction new
-		delay: 200 milliSeconds;
+		delay: 300 milliSeconds;
 		action: [ self visible
 				ifTrue: [ self hide.
 					hideLaterTask := nil ] ];
@@ -104,9 +104,23 @@ BrWithTooltipLook >> newContainer [
 		addEventHandlerOn: BlMouseLeaveEvent do: [ self hideLater ];
 		in: [ :e | 
 			e
-				when: BlElementExtentChangedEvent
+				addEventHandlerOn: BlElementExtentChangedEvent
 				do: [ e isAttachedToSceneGraph
+						ifTrue: [ self relocateContainer ] ].
+			widget
+				addEventHandlerOn: BlElementExtentChangedEvent
+					do: [ e isAttachedToSceneGraph
+						ifTrue: [ self relocateContainer ] ];
+				addEventHandlerOn: BlElementPositionInSpaceChangedEvent
+					do: [ e isAttachedToSceneGraph
 						ifTrue: [ self relocateContainer ] ] ];
+		enqueueTask:
+			(BlRepeatedTaskAction new
+				delay: 500 milliSeconds;
+				action: [ (self visible
+						and: [ widget isNil or: [ widget isAttachedToSceneGraph not ] ])
+						ifTrue: [ self hide ] ];
+				yourself);
 		addChild: pointer as: #pointer;
 		addChild: tooltipWrapper as: #tooltip;
 		yourself
