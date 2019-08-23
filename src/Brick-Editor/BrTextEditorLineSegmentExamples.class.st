@@ -907,6 +907,25 @@ BrTextEditorLineSegmentExamples >> insert_C_in_CrBA_At_0 [
 ]
 
 { #category : #'examples - insertion' }
+BrTextEditorLineSegmentExamples >> insert_CrLf_in_Hello_At_5 [
+	<gtExample>
+	| aTextEditor |
+	aTextEditor := self insert_Hello_inEmptyAt_0.
+
+	aTextEditor insertString: String crlf at: 5.
+
+	self assert: aTextEditor text asString equals: 'Hello', String crlf.
+	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
+	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 5).
+	self assert: aTextEditor segmentCollector segments first text asString equals: 'Hello'.
+	self assert: aTextEditor segmentCollector segments second textInterval equals: (7 to: 7).
+	self assert: aTextEditor segmentCollector segments second text asString equals: String lf.
+	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
+
+	^ aTextEditor
+]
+
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_D_in_CCrBA_At_1 [
 	<gtExample>
 	| aTextEditor |
@@ -1339,6 +1358,25 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_2 [
 ]
 
 { #category : #'examples - insertion' }
+BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_5 [
+	<gtExample>
+	| aTextEditor |
+	aTextEditor := self insert_Hello_inEmptyAt_0.
+
+	aTextEditor insertString: String cr at: 5.
+
+	self assert: aTextEditor text asString equals: 'Hello', String cr.
+	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
+	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 5).
+	self assert: aTextEditor segmentCollector segments first text asString equals: 'Hello'.
+	self assert: aTextEditor segmentCollector segments second textInterval equals: (6 to: 6).
+	self assert: aTextEditor segmentCollector segments second text asString equals: String cr.
+	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
+
+	^ aTextEditor
+]
+
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_haCrCrbaCr_inHelloAt_2 [
 	<gtExample>
 	| aTextEditor |
@@ -1371,6 +1409,68 @@ BrTextEditorLineSegmentExamples >> lineSegmentBuilder [
 ]
 
 { #category : #'examples - pieces' }
+BrTextEditorLineSegmentExamples >> pieces_HelloCr [
+	<gtExample>
+	| aTextEditor theFirstPieces theSecondPieces |
+	
+	aTextEditor := self insert_NewLine_in_Hello_At_5.
+	
+	theFirstPieces := aTextEditor segmentCollector segments first pieces.
+	self assert: theFirstPieces size equals: 1.
+	
+	self assert: (theFirstPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: theFirstPieces first textStart equals: 0.
+	self assert: theFirstPieces first textEnd equals: 5.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 0) equals: 0.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 1) equals: 1.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 2) equals: 2.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 3) equals: 3.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 4) equals: 4.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 5) equals: 5.
+	
+	theSecondPieces := aTextEditor segmentCollector segments second pieces.
+	self assert: theSecondPieces size equals: 1.
+	
+	self assert: (theSecondPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: theSecondPieces first textStart equals: 6.
+	self assert: theSecondPieces first textEnd equals: 6.
+	self assert: (theSecondPieces first globalTextIndexToLocal: 6) equals: 0.
+	
+	^ aTextEditor
+]
+
+{ #category : #'examples - pieces' }
+BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
+	<gtExample>
+	| aTextEditor theFirstPieces theSecondPieces |
+	
+	aTextEditor := self insert_CrLf_in_Hello_At_5.
+	
+	theFirstPieces := aTextEditor segmentCollector segments first pieces.
+	self assert: theFirstPieces size equals: 1.
+	
+	self assert: (theFirstPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: theFirstPieces first textStart equals: 0.
+	self assert: theFirstPieces first textEnd equals: 5.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 0) equals: 0.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 1) equals: 1.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 2) equals: 2.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 3) equals: 3.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 4) equals: 4.
+	self assert: (theFirstPieces first globalTextIndexToLocal: 5) equals: 5.
+	
+	theSecondPieces := aTextEditor segmentCollector segments second pieces.
+	self assert: theSecondPieces size equals: 1.
+	
+	self assert: (theSecondPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: theSecondPieces first textStart equals: 7.
+	self assert: theSecondPieces first textEnd equals: 7.
+	self assert: (theSecondPieces first globalTextIndexToLocal: 7) equals: 0.
+	
+	^ aTextEditor
+]
+
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_1_WithAppending [
 	<gtExample>
 	| aTextEditor thePieces |
@@ -1398,6 +1498,60 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_1_WithAppending [
 	self assert: (thePieces fourth isKindOf: BrTextEditorLineSegmentAdornmentPiece).
 	self assert: thePieces fourth textStart equals: 0.
 	self assert: thePieces fourth textEnd equals: 7.
+	
+	^ aTextEditor
+]
+
+{ #category : #'examples - pieces' }
+BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
+	<gtExample>
+	| aTextEditor thePieces |
+	
+	aTextEditor := self emptyEditor.
+	aTextEditor text: self text_Hello_Smart_World_WithAppending.
+	
+	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
+	
+	thePieces := aTextEditor segmentCollector segments first pieces.
+	self assert: thePieces size equals: 8.
+	
+	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: thePieces first textStart equals: 0.
+	self assert: thePieces first textEnd equals: 5.
+	
+	self assert: (thePieces second isKindOf: BrTextEditorLineSegmentAdornmentPiece).
+	self assert: thePieces second textStart equals: 0.
+	self assert: thePieces second textEnd equals: 5.
+	
+	self assert: thePieces first text ~~ thePieces second text.
+	
+	self assert: (thePieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: thePieces third textStart equals: 5.
+	self assert: thePieces third textEnd equals: 6.
+	
+	self assert: (thePieces fourth isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: thePieces fourth textStart equals: 6.
+	self assert: thePieces fourth textEnd equals: 11.
+	
+	self assert: (thePieces fifth isKindOf: BrTextEditorLineSegmentAdornmentPiece).
+	self assert: thePieces fifth textStart equals: 6.
+	self assert: thePieces fifth textEnd equals: 11.
+	
+	self assert: thePieces fourth text ~~ thePieces fifth text.
+	
+	self assert: (thePieces sixth isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: thePieces sixth textStart equals: 11.
+	self assert: thePieces sixth textEnd equals: 12.
+	
+	self assert: (thePieces seventh isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: thePieces seventh textStart equals: 12.
+	self assert: thePieces seventh textEnd equals: 17.
+	
+	self assert: (thePieces eighth isKindOf: BrTextEditorLineSegmentAdornmentPiece).
+	self assert: thePieces eighth textStart equals: 12.
+	self assert: thePieces eighth textEnd equals: 17.
+	
+	self assert: thePieces seventh text ~~ thePieces eighth text.
 	
 	^ aTextEditor
 ]
@@ -2069,6 +2223,47 @@ BrTextEditorLineSegmentExamples >> text_Hello_1_WithAppending [
 			size: 20@20;
 			background: (Color gray alpha: 0.5);
 			geometry: BlEllipse new ].
+
+	^ aText
+]
+
+{ #category : #'instance creation - text' }
+BrTextEditorLineSegmentExamples >> text_Hello_Smart_World_WithAppending [
+	<gtExample>
+	| aText |
+
+	aText := 'Hello Smart World' asRopedText.
+	aText
+		monospace;
+		fontSize: 14;
+		foreground: Color black.
+
+	(aText from: 1 to: 5)
+		foreground: Color black;
+		bold;
+		appendingAdornment: [
+			BlElement new
+				size: 16@16;
+				background: (Color black alpha: 0.5);
+				geometry: BlEllipse new ].
+	
+	(aText from: 7 to: 11)
+		foreground: Color gray;
+		bold;
+		appendingAdornment: [
+			BlElement new
+				size: 16@16;
+				background: (Color gray alpha: 0.5);
+				geometry: BlEllipse new ].
+
+	(aText from: 13 to: 17)
+		foreground: Color lightGray;
+		bold;
+		appendingAdornment: [
+			BlElement new
+				size: 16@16;
+				background: (Color lightGray alpha: 0.5);
+				geometry: BlEllipse new ].
 
 	^ aText
 ]

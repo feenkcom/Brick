@@ -19,6 +19,14 @@ BrTreeNode class >> on: anObject computed: aComputationBlock [
 ]
 
 { #category : #enumeration }
+BrTreeNode >> allChildrenNodesBreadthFirst [
+	| nodes |
+	nodes := OrderedCollection new.
+	self allChildrenNodesBreadthFirstDo: [ :e | nodes add: e ].
+	^ nodes
+]
+
+{ #category : #enumeration }
 BrTreeNode >> allChildrenNodesBreadthFirstDo: aBlock [ 
 	self childrenNodesDo: aBlock.
 	self childrenNodesDo: [ :eachNode | eachNode allChildrenNodesBreadthFirstDo: aBlock ]
@@ -108,20 +116,30 @@ BrTreeNode >> depth [
 		ifFalse: [ 0 - isHidden asBit ]
 ]
 
+{ #category : #accessing }
+BrTreeNode >> ensureChildNodesComputed [
+	"Make sure child nodes are computed."
+	children keysAndValuesDo: [ :eachValue :eachNode |
+		eachNode ifNil: [ children at: eachValue put: (self newSubNode: eachValue) ] ].
+
+]
+
 { #category : #controlling }
 BrTreeNode >> expand [
 	self isExpanded
 		ifTrue: [ ^ self ].
-		
 	self isEmpty
 		ifTrue: [ ^ self ].
-
-	children keysAndValuesDo: [ :eachValue :eachNode |
-		eachNode ifNil: [ children at: eachValue put: (self newSubNode: eachValue) ] ].
+	self ensureChildNodesComputed.
 
 	isExpanded := true.
 	
 	self notifyExpanded
+]
+
+{ #category : #accessing }
+BrTreeNode >> globalIndexInTree [
+   ^ self localIndexToGlobal: 0
 ]
 
 { #category : #testing }
@@ -174,7 +192,7 @@ BrTreeNode >> localIndexToGlobal: anIndex [
 	self parent childrenNodesDo: [ :eachNode |
 		eachNode == self
 			ifFalse: [ anOffset := anOffset + eachNode size ]
-			ifTrue: [ ^ self parent localIndexToGlobal: anIndex + anOffset ] ].
+			ifTrue: [ ^ self parent localIndexToGlobal: anIndex + anOffset + 1 ] ].
 
 	^ self parent localIndexToGlobal: anIndex + anOffset
 ]
@@ -267,7 +285,30 @@ BrTreeNode >> value: anObject computation: aComputationBlock [
 ]
 
 { #category : #enumeration }
+BrTreeNode >> withAllChildrenNodesBreadthFirst [
+	| nodes |
+	nodes := OrderedCollection new.
+	self withAllChildrenNodesBreadthFirstDo: [ :e | nodes add: e ].
+	^ nodes
+]
+
+{ #category : #enumeration }
 BrTreeNode >> withAllChildrenNodesBreadthFirstDo: aBlock [ 
 	aBlock value: self.
 	self allChildrenNodesBreadthFirstDo: aBlock
+]
+
+{ #category : #enumeration }
+BrTreeNode >> withAllParentNodes [
+	| nodes |
+	nodes := OrderedCollection new.
+	self withAllParentNodesDo: [ :e | nodes add: e ].
+	^ nodes
+]
+
+{ #category : #enumeration }
+BrTreeNode >> withAllParentNodesDo: aBlock [
+	self hasParent
+		ifTrue: [ self parent withAllParentNodesDo: aBlock ].
+	aBlock value: self
 ]

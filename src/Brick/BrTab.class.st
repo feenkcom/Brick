@@ -1,8 +1,8 @@
 Class {
 	#name : #BrTab,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutAlignable',
-	#classTraits : 'TBrLayoutAlignable classTrait',
+	#traits : 'TBrLayoutAlignable + TBrLayoutResizable',
+	#classTraits : 'TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait',
 	#instVars : [
 		'labelModel',
 		'iconModel'
@@ -11,8 +11,20 @@ Class {
 }
 
 { #category : #'api - accessing' }
-BrTab >> actionsStencil: aStencilBuilder [
-	self viewModel actionsStencil: aStencilBuilder
+BrTab >> actionbarStencil: anActionbarStencilBuilder [
+	"See ${method:BrTabModel>>#actionbarStencil:}"
+
+	self viewModel actionbarStencil: anActionbarStencilBuilder
+]
+
+{ #category : #'api - accessing' }
+BrTab >> actionsStencil: anActionStencilBuilder [
+	self
+		deprecated: 'Please use #toolbarStencil: instead'
+		transformWith: '`@receiver actionsStencil:: `@statements1' 
+						-> '`@receiver toolbarStencil: `@statements1'.
+	
+	self toolbarStencil: anActionStencilBuilder
 ]
 
 { #category : #'api - selection' }
@@ -22,6 +34,8 @@ BrTab >> deselect [
 
 { #category : #'api - accessing' }
 BrTab >> icon [
+	<return: #BlElement>
+
 	^ iconModel icon
 ]
 
@@ -51,6 +65,8 @@ BrTab >> initialize [
 
 { #category : #'api - accessing' }
 BrTab >> label [
+	<return: #BlText>
+
 	^ labelModel text
 ]
 
@@ -75,4 +91,11 @@ BrTab >> select [
 { #category : #'api - accessing' }
 BrTab >> stencil: aStencilBuilder [
 	self viewModel stencil: aStencilBuilder
+]
+
+{ #category : #'api - accessing' }
+BrTab >> toolbarStencil: aToolbarStencilBuilder [
+	"See ${method:BrTabModel>>#toolbarStencil:}"
+
+	self viewModel toolbarStencil: aToolbarStencilBuilder
 ]
