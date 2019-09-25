@@ -1,12 +1,11 @@
 Class {
 	#name : #BrButton,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutAlignable + TBrLayoutResizable',
-	#classTraits : 'TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait',
+	#traits : 'TBrActivatable + TBrLayoutAlignable + TBrLayoutResizable',
+	#classTraits : 'TBrActivatable classTrait + TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait',
 	#instVars : [
 		'labelModel',
 		'iconModel',
-		'activationModel',
 		'interactiveModel',
 		'dimensionModel',
 		'expandableModel'
@@ -24,44 +23,29 @@ BrButton >> action: aValuable [
 	self viewModel action: aValuable
 ]
 
-{ #category : #'api - dimension' }
+{ #category : #'api - size' }
 BrButton >> beDefault [
 	dimensionModel beDefault
 ]
 
-{ #category : #'api - dimension' }
+{ #category : #'api - size' }
 BrButton >> beHuge [
 	dimensionModel beHuge
 ]
 
-{ #category : #'api - dimension' }
+{ #category : #'api - size' }
 BrButton >> beLarge [
 	dimensionModel beLarge
 ]
 
-{ #category : #'api - dimension' }
+{ #category : #'api - size' }
 BrButton >> beSmall [
 	dimensionModel beSmall
 ]
 
-{ #category : #'api - dimension' }
+{ #category : #'api - size' }
 BrButton >> beTiny [
 	dimensionModel beTiny
-]
-
-{ #category : #'api - widget' }
-BrButton >> disable [
-	activationModel disable
-]
-
-{ #category : #'api - widget' }
-BrButton >> enable [
-	activationModel enable
-]
-
-{ #category : #'api - widget' }
-BrButton >> enabled: aBoolean [
-	activationModel enabled: aBoolean
 ]
 
 { #category : #'api - widget' }
@@ -83,19 +67,14 @@ BrButton >> initialize [
 		(iconModel := BrIconModel new) + 
 		(BrInteractiveModel new
 			addStates: {
-				activationModel := BrActivationModel new.
+				BrActivationModel new.
 				BrPressModel new.
 				BrHoverModel new.
-				dimensionModel := BrDimensionModel new.
+				dimensionModel := BrSizeModel new.
 				BrLayoutAlignmentModel center.
 				BrLayoutHorizontalResizerModel fitContent.
 				BrLayoutVerticalResizerModel fitContent
 			}))
-]
-
-{ #category : #'api - widget' }
-BrButton >> isEnabled [
-	^ activationModel isEnabled
 ]
 
 { #category : #'api - widget' }
