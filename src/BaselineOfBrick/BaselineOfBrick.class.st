@@ -13,9 +13,9 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.7.150/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.7.151/src' ];
 			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon:82c0ed0251c99915441db32d21c9365585c2317c/repository' ].
+				spec repository: 'github://feenkcom/pharo-beacon:38cb3436c9593de5abd580b8bb23d06753afdb33/repository' ].
 		spec 
 			package: #'Brick-Editor' with: [
 				spec requires: #('Bloc' 'Beacon' ). ];
