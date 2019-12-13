@@ -34,8 +34,8 @@ BrTextEditorCursorChangeCommand >> executeOn: aTextEditor [
 		cachedSegmentAt: self position
 		ifFound: [ :aSegment |
 			aTextEditor
-				notifyItems: (aSegment index to: aSegment index)
-				event: self newHolderCommand ]
+				enqueueHolderCommand: self newHolderCommand
+				interval: (aSegment index to: aSegment index) ]
 		ifNotFound: [  ].
 ]
 
@@ -74,5 +74,5 @@ BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
 
 	theEventHandlingAttributes do: [ :eachAttribute |
 		(eachAttribute wantsEvent: anEvent in: aTextEditor)
-			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor ] ]
+			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
 ]
