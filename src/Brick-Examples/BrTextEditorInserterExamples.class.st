@@ -683,19 +683,18 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_8_selection_2_t
 { #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_open_close_parentheses_at_cursor_0_selection_0_to_0 [
 	<gtExample>
-	<noTest>
 	| anEditor |
 	
 	anEditor := self editorOnMultilineText.
 	anEditor editor moveCursorTo: 0.
 	anEditor editor select: 0 to: 0.
-	
+
 	anEditor inserter
 		atCursor;
 		string: '(';
 		surroundings: { '(' -> ')' };
 		insert.
-		
+
 	anEditor inserter
 		atCursor;
 		string: ')';
