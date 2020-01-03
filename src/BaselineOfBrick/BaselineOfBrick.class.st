@@ -13,16 +13,16 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.7.264/src' ];
 			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon/repository' ].
+				spec repository: 'github://feenkcom/pharo-beacon:38cb3436c9593de5abd580b8bb23d06753afdb33/repository' ].
 		spec 
 			package: #'Brick-Editor' with: [
-				spec requires: #('Bloc' 'Beacon' ) ];
+				spec requires: #('Bloc' 'Beacon' ). ];
 			package: #Brick with: [
-				spec requires: #('Bloc' 'Brick-Editor' 'Beacon'). ];
+				spec requires: #('Bloc' 'Brick-Editor' 'Beacon' ). ];
 			package: #'Brick-Editor-Extensions' with: [
-				spec requires: #('Brick'). ];
+				spec requires: #('Brick' ). ];
 			package: #'Brick-Material' with: [
 				spec requires: #('Brick' ). ];
 			package: #'Brick-Hydra' with: [
