@@ -24,20 +24,38 @@ BrTextStylerTaskItStrategy >> commandNameFromText: aBrText [
 		ifFalse: [ (aBrText from: 1 to: (aBrText size min: 20)) printString ]
 ]
 
+{ #category : #'instance creation' }
+BrTextStylerTaskItStrategy >> newStylingCommandFor: aBlText afterDo: aBlock [
+	<return: #BlTktTerminableCommand>
+	| aName aCommand |
+	aName := self commandNameFromText: aBlText.
+	aCommand := [
+		self doStyle: aBlText afterDo: aBlock ] asBlTktTerminableCommand.
+	aCommand name: 'Text Styler for ''' , aName , ''''.
+	^ aCommand
+]
+
+{ #category : #private }
+BrTextStylerTaskItStrategy >> postponeStylingOf: aBlText afterDo: aBlock [
+	"Must be called within monitor critical code"
+	command := BlTaskAtPostponedTerminableTaskItTask new
+		command: (self newStylingCommandFor: aBlText afterDo: aBlock);
+		pool: BlTktWorkerProvider highUICPUBoundPool;
+		scheduledTime: BlTime real now + 300 milliSeconds.
+	BlTaskAtQueue default schedule: command
+]
+
 { #category : #styling }
 BrTextStylerTaskItStrategy >> style: aBlText afterDo: aBlock [
 	self view ifNil: [ 
 		"A graphical widget is not available, we therefore do not need to style the text"
 		^ self ].
+	
 	BlUseAsyncFeatures 
 		ifEnabledDo: [ 
 			monitor critical: [ 
-				| aName |
 				self terminateBackgroundStylingProcess.
-				aName := self commandNameFromText: aBlText.
-				command := [ self doStyle: aBlText afterDo: aBlock ] asBlTktTerminableCommand.
-				command name: 'Text Styler for ''' , aName , ''''.
-				BlTktWorkerProvider highUICPUBoundPool schedule: command ] ]
+				self postponeStylingOf: aBlText afterDo: aBlock ] ]
 		otherwise: [ self doStyle: aBlText afterDo: aBlock ]
 ]
 
