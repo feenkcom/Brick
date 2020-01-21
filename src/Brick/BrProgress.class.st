@@ -14,11 +14,6 @@ BrProgress >> amount: anAmountNumber total: aTotalNumber [
 	^ self viewModel amount: anAmountNumber total: aTotalNumber
 ]
 
-{ #category : #enumerating }
-BrProgress >> barDo: anOneArgBlock [
-	anOneArgBlock value: (self childNamed: BrProgressLook widgetProgressName)
-]
-
 { #category : #'accessing - label value format' }
 BrProgress >> fileSizeLabelValues [
 	self viewModel fileSizeLabelValues
@@ -26,7 +21,7 @@ BrProgress >> fileSizeLabelValues [
 
 { #category : #'accessing - label format' }
 BrProgress >> fixedLabel: aString [
-	^ self viewModel fixedLabel: aString
+	self viewModel fixedLabel: aString
 ]
 
 { #category : #'accessing - label value format' }
@@ -68,7 +63,7 @@ BrProgress >> label [
 
 { #category : #'accessing - label format' }
 BrProgress >> patternLabel: aString [
-	^ self viewModel patternLabel: aString
+	self viewModel patternLabel: aString
 ]
 
 { #category : #accessing }
