@@ -7,45 +7,48 @@ Class {
 { #category : #'examples - model' }
 BrColumnedListExamples >> addColorIndexColumn [
 	<gtExample>
-	<noTest>
-	| aColumnedListModel |
+	| aListModel aColumnModel |
 
-	aColumnedListModel := self columnedListModel.
-	aColumnedListModel column
+	aListModel := self columnedListModel.
+	aColumnModel := aListModel children first.
+
+	aColumnModel column
 		title: 'Index';
 		stencil: [ :aRowValue :aRowIndex | BrColumnCellLabelStencil new text: aRowIndex asString ].
 
-	self assert: aColumnedListModel columns size equals: 1.
-	self assert: aColumnedListModel columns first title equals: 'Index'.
+	self assert: aColumnModel columns size equals: 1.
+	self assert: aColumnModel columns first title equals: 'Index'.
 
-	^ aColumnedListModel
+	^ aListModel
 ]
 
 { #category : #'examples - model' }
 BrColumnedListExamples >> addColorNameColumn [
 	<gtExample>
-	<noTest>
-	| aColumnedListModel |
+	| aListModel aColumnModel |
 	
-	aColumnedListModel := self addColorIndexColumn.
-	aColumnedListModel column
+	aListModel := self addColorIndexColumn.
+	aColumnModel := aListModel children first.
+
+	aColumnModel column
 		title: 'Color';
 		stencil: [ :aRowValue :aRowIndex | BrColumnCellLabelStencil new text: aRowValue name asString ].
 
-	self assert: aColumnedListModel columns size equals: 2.
-	self assert: aColumnedListModel columns second title equals: 'Color'.
+	self assert: aColumnModel columns size equals: 2.
+	self assert: aColumnModel columns second title equals: 'Color'.
 		
-	^ aColumnedListModel
+	^ aListModel
 ]
 
 { #category : #'examples - model' }
 BrColumnedListExamples >> addColorValueColumn [
 	<gtExample>
-	<noTest>
-	| aColumnedListModel |
+	| aListModel aColumnModel |
 	
-	aColumnedListModel := self addColorNameColumn.
-	aColumnedListModel column
+	aListModel := self addColorNameColumn.
+	aColumnModel := aListModel children first.
+	
+	aColumnModel column
 		title: 'Hex';
 		stencil: [ :aRowValue |
 			| aHexString |
@@ -56,12 +59,16 @@ BrColumnedListExamples >> addColorValueColumn [
 				padding: (BlInsets all: 6);
 				margin: (BlInsets top: 3 left: 0 bottom: 3 right: 0);
 				background: (Color fromHexString: aHexString);
-				look: (BrTextLabelLook new text: '#',aHexString; thin; foreground: ((Color fromHexString: aHexString) contrastingColor)) + (BrLayoutLook frame hMatchParent; vFitContent) + (BrLayoutLook of: #label) alignCenter ].
+				layout: BlLinearLayout horizontal alignCenter;
+				constraintsDo: [ :c |
+					c horizontal matchParent.
+					c vertical fitContent ];
+				look: (BrTextLabelLook new text: '#',aHexString; thin; foreground: ((Color fromHexString: aHexString) contrastingBlackAndWhiteColor))  ].
 		
-	self assert: aColumnedListModel columns size equals: 3.
-	self assert: aColumnedListModel columns third title equals: 'Hex'.
+	self assert: aColumnModel columns size equals: 3.
+	self assert: aColumnModel columns third title equals: 'Hex'.
 		
-	^ aColumnedListModel
+	^ aListModel
 ]
 
 { #category : #'examples - instance creation' }
@@ -69,9 +76,6 @@ BrColumnedListExamples >> columnedListElement [
 	<gtExample>
 	
 	^ BlElement new
-		constraintsDo: [ :c |
-			c horizontal exact: 400.
-			c vertical matchParent ]
 ]
 
 { #category : #'examples - instance creation' }
@@ -88,6 +92,10 @@ BrColumnedListExamples >> columnedListModel [
 	
 	aColumnedListModel := BrListModel new.
 	aColumnedListModel add: BrColumnedModel new.
+	aColumnedListModel add: (BrInteractiveModel withAll: {
+		BrLayoutHorizontalResizerModel exact: 400.
+		BrLayoutVerticalResizerModel matchParent
+	}).
 	
 	self assert: aColumnedListModel children first columns isEmpty.
 	
@@ -97,7 +105,6 @@ BrColumnedListExamples >> columnedListModel [
 { #category : #'examples - model' }
 BrColumnedListExamples >> columnedListModelWithColorAsItems [
 	<gtExample>
-	<noTest>
 	| aColumnedListModel |
 	
 	aColumnedListModel := self addColorValueColumn.
@@ -106,30 +113,18 @@ BrColumnedListExamples >> columnedListModelWithColorAsItems [
 	^ aColumnedListModel
 ]
 
-{ #category : #'examples - look' }
-BrColumnedListExamples >> columnedListWithLook [
-	<gtExample>
-	| aColumnedListElement aColumnedListLook |
-	
-	aColumnedListElement := self columnedListElement.
-	aColumnedListLook := self columnedListLook.
-	
-	aColumnedListElement look: aColumnedListLook.
-	
-	^ aColumnedListElement
-]
-
-{ #category : #'examples - look' }
+{ #category : #'examples - list' }
 BrColumnedListExamples >> columnedListWithLookAndModelForColors [
 	<gtExample>
-	<noTest>
-	| aColumnedListElement aColumnedListModel |
+	| aColumnedListElement aColumnedListModel aColumnedListLook |
 
-	aColumnedListElement := self columnedListWithLook.
+	aColumnedListElement := self columnedListElement.
 	aColumnedListModel := self columnedListModelWithColorAsItems.
-	
+	aColumnedListLook := self columnedListLook.
+
 	aColumnedListElement viewModel: aColumnedListModel.
-	
+	aColumnedListElement look: aColumnedListLook.
+
 	^ aColumnedListElement
 ]
 
@@ -254,6 +249,7 @@ BrColumnedListExamples >> createColumnedListRowWithBlock [
 BrColumnedListExamples >> listColumn [
 	<gtExample>
 	| aListColumn |
+	
 	aListColumn := BrColumn new.
 	
 	self assert: aListColumn title equals: 'Column'.

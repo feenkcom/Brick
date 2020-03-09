@@ -35,7 +35,11 @@ BrPressModel >> initialize [
 BrPressModel >> initializeListeners [
 	super initializeListeners.
 	
-	self when: BrPressedRequest reply: [ :aResponse | aResponse pressed: self isPressed ]
+	self when: BrPressedRequest reply: [ :aResponse | aResponse pressed: self isPressed ].
+	self when: BlDragEndEvent do: [ :anEvent | self dragEndEvent: anEvent ].
+	self when: BlDragStartEvent do: [ :anEvent | self dragStartEvent: anEvent ].
+	self when: BlMouseDownEvent do: [ :anEvent | self mouseDownEvent: anEvent ].
+	self when: BlMouseUpEvent do: [ :anEvent | self mouseUpEvent: anEvent ]
 ]
 
 { #category : #'api - testing' }
@@ -78,7 +82,7 @@ BrPressModel >> stateChangedEventClass [
 ]
 
 { #category : #streaming }
-BrPressModel >> streamStateOn: aStream [
+BrPressModel >> streamStateIn: aBrInteractionStatesMapping [
 	self isPressed
-		ifTrue: [ aStream nextPut: BrPressedState new ]
+		ifTrue: [ aBrInteractionStatesMapping addState: BrPressedState new model: self ]
 ]
