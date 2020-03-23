@@ -9,6 +9,21 @@ Class {
 	#category : #'Brick-Editor - UI'
 }
 
+{ #category : #'api - editor' }
+BrEditor >> beEditable [
+	self dispatchEvent: (BrEditorModeWish editable)
+]
+
+{ #category : #'api - editor' }
+BrEditor >> beReadOnlyWithSelection [
+	self dispatchEvent: (BrEditorModeWish readOnlyWithSelection)
+]
+
+{ #category : #'api - editor' }
+BrEditor >> beReadOnlyWithoutSelection [
+	self dispatchEvent: (BrEditorModeWish readOnlyWithoutSelection)
+]
+
 { #category : #'editor - accessing' }
 BrEditor >> cursors [
 	<return: #BrTextEditorMultipleCursor>
@@ -23,6 +38,13 @@ BrEditor >> deleter [
 	^ self editor deleter
 ]
 
+{ #category : #'editor - operations' }
+BrEditor >> deselecter [
+	<return: #BrTextEditorDeselecter>
+
+	^ self editor deselecter
+]
+
 { #category : #initialization }
 BrEditor >> initialize [
 	super initialize.
@@ -32,8 +54,18 @@ BrEditor >> initialize [
 	
 	self viewModel: (editorModel := BrEditorModel new
 			add: (BrInteractiveModel withAll: {
+				BrEditorModeModel editable.
+				BrFocusModel new.
+				BrHoverModel new.
+				BrPressModel new.
+				BrSelectModel new.
 				BrLayoutHorizontalResizerModel matchParent.
 				BrLayoutVerticalResizerModel matchParent }))
+]
+
+{ #category : #'api - editor' }
+BrEditor >> inputFilter: aBrTextEditorInputFilter [
+	self editor inputFilter: aBrTextEditorInputFilter
 ]
 
 { #category : #'editor - operations' }

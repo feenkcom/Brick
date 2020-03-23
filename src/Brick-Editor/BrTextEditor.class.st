@@ -23,7 +23,8 @@ Class {
 		'interactions',
 		'cursors',
 		'attachedElements',
-		'history'
+		'history',
+		'filter'
 	],
 	#classInstVars : [
 		'isDebug'
@@ -277,6 +278,8 @@ BrTextEditor >> deselect: aFromTextIndex to: aToTextIndex [
 
 { #category : #'api - modification' }
 BrTextEditor >> deselecter [
+	<return: #BrTextEditorDeselecter>
+
 	^ BrTextEditorDeselecter new editor: self
 ]
 
@@ -359,6 +362,7 @@ BrTextEditor >> initialize [
 	
 	attachedElements := Set new.
 	
+	filter := BrTextEditorNoInputFilter new.
 	cursors := self defaultCursors.
 	selection := self defaultSelection.
 	selectionRecorder := self defaultSelectionRecorder.
@@ -399,6 +403,18 @@ BrTextEditor >> initializeText: aBrText [
 	aBrText when: BlTextStringsInserted send: #onStringsInserted: to: self.
 	aBrText when: BlTextsDeleted send: #onTextsDeleted: to: self.
 	aBrText when: BlTextAttributeAdded send: #onTextAttributeAdded: to: self
+]
+
+{ #category : #'api - filter' }
+BrTextEditor >> inputFilter [
+	<return: #BrTextEditorInputFilter>
+
+	^ filter
+]
+
+{ #category : #'api - filter' }
+BrTextEditor >> inputFilter: aBrTextEditorInputFilter [
+	filter := aBrTextEditorInputFilter
 ]
 
 { #category : #'private - text' }
@@ -522,12 +538,12 @@ BrTextEditor >> moveCursorToStartPreviousWord [
 	"Moves cursor to the left by one character"
 
 	newPosition := self cursor first position - 1.
+	newPosition := newPosition max: 0.
 	[ newPosition > 0 and: [ (self text at: newPosition) isSeparator ] ] whileTrue:
 		[ newPosition := newPosition - 1 ].
 	[ newPosition = 0 or: [ (self text at: newPosition) isSeparator ] ] whileFalse:
 		[ newPosition := newPosition - 1 ].
 
-	newPosition := newPosition max: 0.
 	self moveCursorTo: newPosition
 ]
 
