@@ -154,6 +154,7 @@ BrGlamorousTaggerEditableLook >> newAddTagButton [
 		label: 'Add';
 		beSmall;
 		hExact: 20;
+		margin: margin;
 		constraintsDo: [ :c | c flow vertical alignCenter ];
 		action: [ :aButton | self addTagCreatorElement ];
 		addShortcut: (BlShortcut new
