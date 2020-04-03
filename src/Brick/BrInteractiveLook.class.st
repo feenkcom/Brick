@@ -19,7 +19,7 @@ Class {
 	#category : #'Brick-! Core - Looks'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
 BrInteractiveLook >> gtStylesFor: aView [
 	<gtView>
 	
@@ -52,19 +52,19 @@ BrInteractiveLook >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrInteractionChanged do: [ :anEvent | self statesChanged: anEvent ].
-	self when: BlElementAddedToSuperParentEvent do: [ :anEvent | self initializeRequests ]
+	self when: BlElementAddedToSuperParentEvent do: [ :anEvent | self requestStates ]
 ]
 
 { #category : #initialization }
 BrInteractiveLook >> initializeRequests [
 	super initializeRequests.
-	
-	self requestStates
+
+	self request: BrInteractionRequest new
 ]
 
 { #category : #initialization }
 BrInteractiveLook >> requestStates [
-	self widgetDo: [ self statesChanged: (self request: BrInteractionRequest oneWay) ]
+	self widgetDo: [ self statesChanged: (self request: (BrInteractionRequest oneWay forceUpdate: true)) ]
 ]
 
 { #category : #accessing }
@@ -79,7 +79,7 @@ BrInteractiveLook >> statesChanged: anEvent [
 	aWidget := self widget.
 	newStates := anEvent states.
 
-	currentStates = newStates
+	(anEvent forceUpdate not and: [ currentStates = newStates ])
 		ifTrue: [ ^ self ].
 
 	currentStates := newStates.
