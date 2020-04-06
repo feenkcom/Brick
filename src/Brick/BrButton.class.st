@@ -1,13 +1,12 @@
 Class {
 	#name : #BrButton,
 	#superclass : #BlElement,
-	#traits : 'TBrActivatable + TBrLayoutAlignable + TBrLayoutResizable + TBrSizeAdjustable',
-	#classTraits : 'TBrActivatable classTrait + TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait + TBrSizeAdjustable classTrait',
+	#traits : 'TBrEnableable + TBrLayoutAlignable + TBrLayoutResizable + TBrSizeAdjustable',
+	#classTraits : 'TBrEnableable classTrait + TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait + TBrSizeAdjustable classTrait',
 	#instVars : [
 		'labelModel',
 		'iconModel',
 		'interactiveModel',
-		'dimensionModel',
 		'expandableModel'
 	],
 	#category : #'Brick-Button - UI'
@@ -30,7 +29,7 @@ BrButton >> action: aValuable [
 	self viewModel action: aValuable
 ]
 
-{ #category : #'api - size' }
+{ #category : #'api - size adjustable' }
 BrButton >> beDefault [
 	self deprecated: 'Use #beNormal instead.' transformWith: '`@receiver beDefault' -> '`@receiver beNormal'.
 	self beNormal
@@ -55,11 +54,11 @@ BrButton >> initialize [
 		(iconModel := BrIconModel new) + 
 		(BrInteractiveModel new
 			addStates: {
-				BrActivationModel new.
+				BrEnablementModel new.
 				BrPressModel new.
 				BrHoverModel new.
 				BrFocusModel new.
-				dimensionModel := BrSizeAdjustmentModel new.
+				BrSizeAdjustmentModel new.
 				BrLayoutAlignmentModel center.
 				BrLayoutHorizontalResizerModel fitContent.
 				BrLayoutVerticalResizerModel fitContent

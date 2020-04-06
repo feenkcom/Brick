@@ -81,7 +81,7 @@ BrToggleExamples >> clickOnActivatedPredefinedToggle [
 	| aToggleElement aToggleModel aToggleDeactivatedEvent |
 		
 	aToggleElement := self activatePredefinedToggle.
-	aToggleModel := aToggleElement viewModel children last.
+	aToggleModel := aToggleElement viewModel.
 	
 	aToggleDeactivatedEvent := nil.
 	aToggleElement when: BrToggleDeactivatedEvent do: [ :anEvent | aToggleDeactivatedEvent := anEvent copy ].
@@ -108,7 +108,7 @@ BrToggleExamples >> clickOnDeactivatedPredefinedToggle [
 	| aToggleElement aToggleModel aToggleActivatedEvent |
 	
 	aToggleElement := self deactivatePredefinedToggle.
-	aToggleModel := aToggleElement viewModel children last.
+	aToggleModel := aToggleElement viewModel.
 	
 	aToggleActivatedEvent := nil.
 	aToggleElement when: BrToggleActivatedEvent do: [ :anEvent | aToggleActivatedEvent := anEvent copy ].
@@ -236,14 +236,6 @@ BrToggleExamples >> toggleDeactivatedPredefinedToggle [
 ]
 
 { #category : #'instance creation' }
-BrToggleExamples >> toggleElement [
-	<gtExample>
-	
-	^ BlElement new
-		relocate: 10@10
-]
-
-{ #category : #'instance creation' }
 BrToggleExamples >> toggleModel [
 	<gtExample>
 	
@@ -254,11 +246,11 @@ BrToggleExamples >> toggleModel [
 BrToggleExamples >> toggleWithMaterialChangingIcon [
 	<gtExample>
 	^ self toggleButton
-		look: (BrMaterialToggleLabelledLook + BrMaterialToggleIconifiedLook
-			when: BrToggleActivatedEvent do: [ :anEvent | 
-				anEvent currentTarget widget viewModel icon: self squareIcon ];
-			when: BrToggleDeactivatedEvent do: [ :anEvent | 
-				anEvent currentTarget widget viewModel icon: self circleIcon ])
+		look: (BrMaterialToggleLabelledLook + BrMaterialToggleIconifiedLook);
+		when: BrToggleActivatedEvent do: [ :anEvent | 
+			anEvent currentTarget icon: self squareIcon ];
+		when: BrToggleDeactivatedEvent do: [ :anEvent | 
+			anEvent currentTarget icon: self circleIcon ]
 ]
 
 { #category : #'examples - material' }
