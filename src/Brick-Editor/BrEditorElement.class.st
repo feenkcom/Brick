@@ -25,7 +25,7 @@ BrEditorElement >> editor [
 { #category : #accessing }
 BrEditorElement >> editor: aBrTextEditor [
 	self dataSource: aBrTextEditor.
-	aBrTextEditor view: self
+	self dataSource view: self.
 ]
 
 { #category : #scrolling }
