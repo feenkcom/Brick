@@ -122,14 +122,25 @@ BrTabGroupModel >> maxSelectionIndex [
 
 { #category : #'api - tabs' }
 BrTabGroupModel >> moveTab: aBrTabModel at: aNewIndex [
-	| aCurrentIndex |
+	| aCurrentIndex wasSelected |
 	aCurrentIndex := self indexOf: aBrTabModel.
 	self 
 		assert: [ aCurrentIndex isZero not ]
 		description: [ 'Only an existing tab can be moved' ].
 	aCurrentIndex = aNewIndex ifTrue: [ ^ self ].
+
+	"we have to deselect moved tab and select it again before sending tab moved event
+	otherwise selection event will not bubble"
+	wasSelected := aBrTabModel isSelected.
+	wasSelected ifTrue: [ aBrTabModel deselect ].
+
 	self tabs remove: aBrTabModel.
 	self tabs add: aBrTabModel beforeIndex: aNewIndex.
+	
+	wasSelected ifTrue: [ 
+		aBrTabModel select.
+		self selectOne: (self indexOf: aBrTabModel) ].
+	
 	self onTabMoved: aBrTabModel from: aCurrentIndex to: aNewIndex
 ]
 
@@ -224,6 +235,10 @@ BrTabGroupModel >> removeTab: aBrTabModel [
 
 	aSelectedTab := (self hasSelectedTab and: [ wasSelected not ])
 		ifTrue: [ self selectedTab ].
+		
+	self 
+		assert: [ aSelectedTab ~= aBrTabModel ]
+		description: [ 'Selected tab cannot be the removed tab' ].
 
 	aTabIndex := self tabs indexOf: aBrTabModel.
 	self tabs remove: aBrTabModel.
