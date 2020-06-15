@@ -376,7 +376,7 @@ BrTextEditorSegmentCollector >> initialize [
 	segmentsInterval := 0 to: 0.
 	segments := OrderedCollection new.
 	self flag: 'This limit has to be rethought, once the lazy loading of new segments is implemented'.
-	limit := SmallInteger maxVal.
+	limit := 100.
 	subText := BlSubText text: '' asRopedText from: 1 to: 0
 ]
 

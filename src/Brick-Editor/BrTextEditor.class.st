@@ -471,7 +471,10 @@ BrTextEditor >> invalidateAll [
 
 { #category : #accessing }
 BrTextEditor >> itemCount [
-	^ segmentCollector computedSegmentsCount
+	segmentCollector hasCached
+		ifFalse: [ segmentCollector computeForwardAt: 1 ].
+
+	^ segmentCollector lastIndex
 ]
 
 { #category : #accessing }
@@ -640,10 +643,17 @@ BrTextEditor >> onAttached: anEditorElement [
 { #category : #'instance creation' }
 BrTextEditor >> onBindHolder: aSegmentHolder at: aPosition [
 	"I bind a segment at a given position to provided segment holder"
-	| aSegment |
+	| aSegment aPreviousLastIndex |
 
 	"First we want to acquire a segment for a given position"
 	aSegment := segmentCollector segmentAt: aPosition.
+
+	(aPosition = segmentCollector lastIndex and: [ segmentCollector end < segmentCollector text size ])
+		ifTrue: [
+			aPreviousLastIndex := segmentCollector lastIndex.
+			segmentCollector computeForwardAt: aPosition.
+			self notifyInserted: (segmentCollector lastIndex - aPreviousLastIndex) at: aPosition + 1 ].
+	
 	"and than bind it to the holder"
 	aSegmentHolder segment: aSegment
 ]
