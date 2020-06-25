@@ -1055,7 +1055,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLineCrLf_in_HACrBA_At_3 [
 
 	aTextEditor insertString: String cr, String lf at: 3.
 
-	self assert: aTextEditor text asArray equals: { $H. $A .  BlTextLineEndingMacClassic new . BlTextLineEndingWindows new . $B . $A }.
+	self assert: aTextEditor text asArray equals: { $H. $A.  Character cr. Character nel. $B. $A. }.
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
 	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
@@ -2814,33 +2814,18 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_6 [
 { #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_7 [
 	<gtExample>
-	| aTextEditor aSegment |
-	
+	| aTextEditor notFoundFlag |
+
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
-	
+	self assert: aTextEditor text size equals: 6.
+
+	notFoundFlag := false.	
 	aTextEditor segmentCollector
 		cachedSegmentAt: 7
-		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
-		ifNotFound: [].
+		ifFound: [ :aFoundSegment | ]
+		ifNotFound: [ notFoundFlag := true ].
 
-	self assert: aSegment index equals: 3.
-
-	^ aTextEditor
-]
-
-{ #category : #'examples - segments' }
-BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_8 [
-	<gtExample>
-	| aTextEditor aSegment |
-	
-	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
-	
-	aTextEditor segmentCollector
-		cachedSegmentAt: 8
-		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
-		ifNotFound: [].
-
-	self assert: aSegment index equals: 3.
+	self assert: notFoundFlag.
 
 	^ aTextEditor
 ]
