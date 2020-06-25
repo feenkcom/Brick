@@ -47,6 +47,11 @@ BrEditorTextFlowLayout >> findClosestLineTo: aPoint [
 	^ aClosestLine
 ]
 
+{ #category : #testing }
+BrEditorTextFlowLayout >> hasLines [
+	^ lines notNil
+]
+
 { #category : #initialization }
 BrEditorTextFlowLayout >> initialize [
 	super initialize.
@@ -138,4 +143,15 @@ BrEditorTextFlowLayout >> measure: anElement with: anExtentSpec [
 						theElements last measuredExtent + (((anElement measuredWidth - aLine width) max: 0.0) @ theElements last padding height negated)) ] ] ].
 			
 	self measureIgnored: anElement with: anExtentSpec
+]
+
+{ #category : #'hooks - layout' }
+BrEditorTextFlowLayout >> onCleanUp: anElement [
+	self resetLines
+]
+
+{ #category : #initialization }
+BrEditorTextFlowLayout >> resetLines [
+	lines ifNotNil: [ :theLines | theLines reset ].
+	lines := nil
 ]
