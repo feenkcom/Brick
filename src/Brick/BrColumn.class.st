@@ -16,33 +16,75 @@ aColumn
 Class {
 	#name : #BrColumn,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'title',
-		'stencilBuilder',
-		'width'
+		'width',
+		'cellStencil',
+		'dataBinder'
 	],
 	#category : #'Brick-Column - Model'
 }
+
+{ #category : #accessing }
+BrColumn >> cellStencil [
+	<return: #BrColumnCellStencilBuilder>
+
+	^ cellStencil
+]
+
+{ #category : #accessing }
+BrColumn >> cellStencil: aStencil [
+	cellStencil := aStencil asStencilBuilder: BrColumnCellStencilBuilder
+]
+
+{ #category : #accessing }
+BrColumn >> cellWidth: aBrColumnWidth [
+	self 
+		assert: [ aBrColumnWidth isNotNil ]
+		description: [ 'Cell width must be non-nil' ].
+	width := aBrColumnWidth
+]
+
+{ #category : #accessing }
+BrColumn >> dataBinder [
+	^ dataBinder
+]
+
+{ #category : #accessing }
+BrColumn >> dataBinder: aStencil [
+	dataBinder := aStencil asStencilBuilder: BrColumnCellDataBinder
+]
 
 { #category : #initialization }
 BrColumn >> initialize [
 	super initialize.
 
 	title := 'Column'.
-	stencilBuilder := BrColumnCellStencilBuilder new.
+	
+	cellStencil := BrColumnCellStencilBuilder new.
+	dataBinder := BrColumnCellDataBinder new.
+	
 	width := BrColumnUndefinedWidth new
 ]
 
 { #category : #accessing }
-BrColumn >> stencil [
-	<return: #BrColumnCellStencilBuilder>
-	
-	^ stencilBuilder
-]
-
-{ #category : #accessing }
 BrColumn >> stencil: aStencil [
-	stencilBuilder := aStencil asStencilBuilder: BrColumnCellStencilBuilder
+	"aStencil is a BlockClosure of type [ :aRowObject :aRowIndex :aCellIndex ]"
+
+	self cellStencil: [
+		| aCellWrapper |
+		aCellWrapper := BlElement new
+			layout: BlFrameLayout new;
+			constraintsDo: [ :c |
+				c vertical fitContent.
+				c horizontal matchParent ].
+		aCellWrapper ].
+	self dataBinder: [ :_ :aRowObject :aRowIndex :aRowHolder :aColumnIndex |
+		(aRowHolder columnElements at: aColumnIndex)
+			removeChildren
+			addChild: (aStencil cull: aRowObject cull: aRowIndex cull: aColumnIndex) asElement ]
 ]
 
 { #category : #accessing }
