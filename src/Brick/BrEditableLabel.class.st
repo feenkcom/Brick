@@ -37,18 +37,18 @@ BrEditableLabel >> cancelEdition [
 { #category : #initialization }
 BrEditableLabel >> defaultEditorInteractions [
 	^ {
-		BlKeyCombination return -> [ :anEditor :anEvent | anEvent currentTarget acceptEdition ].
-		BlKeyCombination escape -> [ :anEditor :anEvent | anEvent currentTarget cancelEdition ]
+		BlKeyCombination return -> [ :aShortcutEvent | aShortcutEvent currentTarget acceptEdition ].
+		BlKeyCombination escape -> [ :aShortcutEvent | aShortcutEvent currentTarget cancelEdition ]
 	}
 ]
 
 { #category : #initialization }
 BrEditableLabel >> defaultLabelInteractions [
 	^ {
-		BlKeyCombination escape -> [ :anEditor :anEvent | anEvent currentTarget looseFocus ].
-		BlKeyCombination arrowLeft -> [ :anEditor :anEvent | anEvent currentTarget focusPrevious ].
-		BlKeyCombination arrowRight -> [ :anEditor :anEvent | anEvent currentTarget focusNext ].
-		BlKeyCombination return -> [ :anEditor :anEvent | anEvent currentTarget switchToEditor ]
+		BlKeyCombination escape -> [ :aShortcutEvent | aShortcutEvent currentTarget looseFocus ].
+		BlKeyCombination arrowLeft -> [ :aShortcutEvent | aShortcutEvent currentTarget focusPrevious ].
+		BlKeyCombination arrowRight -> [ :aShortcutEvent | aShortcutEvent currentTarget focusNext ].
+		BlKeyCombination return -> [ :aShortcutEvent | aShortcutEvent currentTarget switchToEditor ]
 	}
 ]
 
@@ -132,19 +132,28 @@ BrEditableLabel >> whenKey: aCombination editorDo: anAction [
 	editorInteractions := editorInteractions copyWith: (aCombination -> anAction).
 	
 	self isEditable
-		ifTrue: [ self addInteraction: (BrTextEditorInteraction new
+		ifTrue: [ self addEditorShortcut: (BrTextEditorShortcut new
 			combination: aCombination;
 			action: anAction) ]
 ]
 
 { #category : #'api - interactions' }
 BrEditableLabel >> whenKey: aCombination labelDo: anAction [
+	self
+		whenKey: aCombination
+		labelDo: anAction
+		with: nil
+]
+
+{ #category : #'api - interactions' }
+BrEditableLabel >> whenKey: aCombination labelDo: anAction with: theOptions [
 	"Add a new label mode interaction defined by a key combination and action"
 
 	labelInteractions := labelInteractions copyWith: (aCombination -> anAction).
 	
 	self isReadOnly
-		ifTrue: [ self addInteraction: (BrTextEditorInteraction new
+		ifTrue: [ self addEditorShortcut: (BrTextEditorShortcut new
 			combination: aCombination;
-			action: anAction) ]
+			action: anAction;
+			options: theOptions) ]
 ]
