@@ -102,19 +102,12 @@ BrTextEditorOperator >> findTextIndexAboveCursor: aCursor ifAbsent: anExceptionB
 		cursor: aCursor;
 		beUp;
 		whenTransformed: [ :aTextIndex | aGlobalTextIndex := aTextIndex ].
-	
+
 	self editor enqueueCommand: (BrTextEditorScreenToCursorCommand new transformation: aTransformation).
 	
-	aGlobalTextIndex
-		ifNotNil: [ ^ aGlobalTextIndex ]
-		ifNil: [ self flag: 'Until I figure out why it can be nil'. ^ anExceptionBlock value ].
-	
-	"could not find a text index for a given screen position"
-	self
-		assert: [ aGlobalTextIndex isNotNil ]
-		description: [ 'There must always be some text index found' ].
-		
 	^ aGlobalTextIndex
+		ifNotNil: [ aGlobalTextIndex ]
+		ifNil: anExceptionBlock
 ]
 
 { #category : #'api - utility' }
@@ -282,6 +275,20 @@ BrTextEditorOperator >> initialize [
 	super initialize.
 
 	subscriptions := OrderedCollection new
+]
+
+{ #category : #testing }
+BrTextEditorOperator >> isCursorOnTheFirstLine: aCursor [
+	<return: #Boolean>
+
+	^ (self findLineStartBefore: (aCursor position max: self text isNotEmpty asBit)) isZero
+]
+
+{ #category : #testing }
+BrTextEditorOperator >> isCursorOnTheLastLine: aCursor [
+	<return: #Boolean>
+
+	^ (self findLineEndAfter: (aCursor position max: self text isNotEmpty asBit)) = self text size
 ]
 
 { #category : #testing }
