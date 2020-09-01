@@ -62,7 +62,13 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 				aStyleBuilder hasCustomColor
 					ifTrue: [ aTextStyle color: aStyleBuilder color ]
 					ifFalse: [ aTextStyle color: self defaultTextColor ].
-			
+					
+				aStyleBuilder hasCustomDecoration
+					ifTrue: [
+						SkiaTextDecoration newDuring: [ :aSkiaDecoration |
+							aStyleBuilder decoration applyOnSkiaDecoration: aSkiaDecoration.
+							aTextStyle decoration: aSkiaDecoration ] ].
+
 				aParagraphBuilder
 					pushStyle: aTextStyle;
 					addString: eachSpan asString;
@@ -81,15 +87,18 @@ BrTextEditorParagraphElement >> buildParagraph [
 
 	aBuilder := SkiaParagraphBuilder
 		style: (SkiaParagraphStyle new textStyle: (SkiaParagraphTextStyle new color: Color black; fontSize: self defaultFontSize))
-		fontCollection: (SkiaFontCollection new defaultFontManager: SkiaFontManager default).
-	
+		fontCollection: (SkiaFontCollection new defaultFontManager: SkiaFontManager default)
+		tabSize: 4.
+
 	self childrenDo: [ :eachElement |
 		(eachElement isKindOf: BlTextElement)
 			ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
 			ifFalse: [
 				(eachElement isKindOf: BrCursorElement)
-					ifFalse: [ aBuilder addPlaceholder: (SkiaParagraphPlaceholderStyle new alignMiddle extent: eachElement measuredExtent) ] ] ].
-
+					ifFalse: [
+						aBuilder
+							addPlaceholder: (SkiaParagraphPlaceholderStyle new alignMiddle extent: eachElement measuredExtent)
+							charLength: (eachElement userData at: #brickEditorCharLength ifAbsent: [ 0 ]) ] ] ].
 	^ aBuilder build
 ]
 
@@ -140,7 +149,8 @@ BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 		when: [ self clipChildren ]
 		by: [ self geometry pathOnSpartaCanvas: aCanvas of: self ]
 		during: [
-			paragraph paintOn: aCanvas at: self padding topLeft.
+			paragraph
+				ifNotNil: [ :aParagraph | aParagraph paintOn: aCanvas at: self padding topLeft ].
 			self children sortedByElevation
 				do: [ :anElement |
 					(anElement isKindOf: BlTextElement)
@@ -237,7 +247,8 @@ BrTextEditorParagraphElement >> onLayout: aBounds [
 
 { #category : #layout }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
-	self placeholderAndCursorElements do:  [ :eachElement |
+	| aParagraphLayoutWidth |
+	self placeholderElements do:  [ :eachElement |
 		self layout measureChildWithMargins: eachElement parentSpec: anExtentMeasurementSpec ].
 
 	(paragraph isNil or: [ paragraph isNull ])
@@ -245,11 +256,15 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 				timeSync: 'Build paragraph'
 				during: [ paragraph := self buildParagraph ] ].
 
+	aParagraphLayoutWidth := anExtentMeasurementSpec widthSpec isUnspecified
+		ifTrue: [ SmallInteger maxVal ]
+		ifFalse: [ ((anExtentMeasurementSpec widthSpec size - self padding width) max: 0) ].
+
 	self telemetry
 		timeSync: 'Layout paragraph'
-		during: [ paragraph layoutWithWidth: anExtentMeasurementSpec widthSpec size - self padding width. ].
+		during: [ paragraph layoutWithWidth: aParagraphLayoutWidth ].
 
-	self measuredExtent: (anExtentMeasurementSpec sizeFor: paragraph longestLine @ paragraph height) + self padding extent.
+	self measuredExtent: (anExtentMeasurementSpec sizeFor: (paragraph longestLine @ paragraph height) + self padding extent).
 	
 	self telemetry
 		timeSync: 'Measure cursors'
@@ -258,9 +273,12 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 
 { #category : #drawing }
 BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
-	paragraph paintOn: aCompositorPainter canvas at: anOffset + self padding topLeft.
-	self paintSelectionOn: aCompositorPainter offset: anOffset + self padding topLeft.
-	
+
+	paragraph
+		ifNotNil: [ :aParagraph |
+			aParagraph paintOn: aCompositorPainter canvas at: anOffset + self padding topLeft.
+			self paintSelectionOn: aCompositorPainter offset: anOffset + self padding topLeft ].
+
 	aCompositorPainter
 		pushChildren: self children sortedByElevation
 		offset: anOffset
