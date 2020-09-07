@@ -3,20 +3,17 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'value',
-		'computation',
-		'children',
-		'isExpanded',
-		'isHidden',
 		'parent',
-		'announcer'
+		'size',
+		'indexInChildren',
+		'computation',
+		'isExpanded',
+		'childrenValues',
+		'childrenNodes',
+		'indexInTree'
 	],
 	#category : #'Brick-Tree - Model'
 }
-
-{ #category : #'instance creation' }
-BrTreeNode class >> on: anObject computed: aComputationBlock [
-	^ self new value: anObject computation: aComputationBlock
-]
 
 { #category : #enumeration }
 BrTreeNode >> allChildrenNodesBreadthFirst [
@@ -42,83 +39,123 @@ BrTreeNode >> allChildrenNodesDepthFirstDo: aBlock [
 BrTreeNode >> allChildrenNodesLinearDo: aBlock [
 	self childrenNodesDo:  [ :eachChild |
 		aBlock value: eachChild.
-		eachChild  allChildrenNodesLinearDo: aBlock ]
+		eachChild allChildrenNodesLinearDo: aBlock ]
 ]
 
 { #category : #accessing }
-BrTreeNode >> announcer [
-	^ announcer ifNil: [ announcer := Announcer new ]
-]
-
-{ #category : #accessing }
-BrTreeNode >> at: anIndex [
+BrTreeNode >> at: aTreeIndex [
+	"Return a child node at a tree index"
 	<return: #BrTreeNode>
-	| aLocalIndex |
-
-	self
-		assert: [ anIndex between: 1 and: self size ]
-		description: [
-			'Index({1}) must be within node bounds ({2})'
-				format: { 
-					anIndex.
-					1 to: self size } ].
-
-	(anIndex + isHidden asBit) = 1
+	
+	aTreeIndex = self indexInTree
 		ifTrue: [ ^ self ].
-	
-	aLocalIndex := anIndex - 1 + isHidden asBit.	
-	
-	self childrenNodesDo: [ :eachNode |
-		| aNodeSize |
 		
-		aNodeSize := eachNode size.
-		aLocalIndex <= aNodeSize
-			ifTrue: [ ^ eachNode at: aLocalIndex ].
-		aLocalIndex := aLocalIndex - aNodeSize ].
+	self childrenNodes
+		findBinary: [ :eachNode | aTreeIndex - eachNode indexInTree ]
+		do: [ :aFoundNode | ^ aFoundNode ]
+		ifNone: [ :aLeftNode :aRightNode |
+			aLeftNode ifNotNil: [
+				(aTreeIndex between: aLeftNode indexInTree and: aLeftNode indexInTree + aLeftNode size - 1)
+					ifTrue: [ ^ aLeftNode at: aTreeIndex ] ].
+			aRightNode ifNotNil: [
+				(aTreeIndex between: aRightNode indexInTree and: aRightNode indexInTree + aRightNode size - 1)
+					ifTrue: [ ^ aRightNode at: aTreeIndex ] ] ].
 	
 	self error: 'Must not reach'
 ]
 
-{ #category : #accessing }
-BrTreeNode >> children [
-	^ children keys
+{ #category : #testing }
+BrTreeNode >> canBeExpanded [
+	"Return true if I can be expanded (e.g. I can have children).
+	The check requires computation (if not already) of children values"
+	<return: #Boolean>
+	
+	self ensureChildrenValues.
+	^ childrenValues isNotEmpty
 ]
 
-{ #category : #'instance creation' }
-BrTreeNode >> children: aCollectionOfValues computed: aComputationBlock [
-	
-	children := OrderedIdentityDictionary new.
+{ #category : #accessing }
+BrTreeNode >> children [
+	<return: #Collection of: #Object>
 
-	aCollectionOfValues do: [ :eachValue |
-		children at: eachValue put: ((self class on: eachValue computed: aComputationBlock) parent: self) ]
+	self
+		deprecated: 'Use #childrenValues instead'
+		transformWith: '`@receiver children' -> '`@receiver childrenValues'.
+
+	^ self childrenValues
+]
+
+{ #category : #initialization }
+BrTreeNode >> children: aCollectionOfValues computed: aComputationBlock [
+
+	self
+		deprecated: 'Use #value:computation:'
+		transformWith: '`@receiver children: `@statements1 computed: `@statements2' -> '`@receiver value: `@statements1 computation: `@statements2'.
+
+	self value: aCollectionOfValues computation: aComputationBlock
 ]
 
 { #category : #enumeration }
 BrTreeNode >> childrenDo: aBlock [
-	children keysDo: aBlock
+	self
+		deprecated: 'Use #childrenValuesDo:'
+		transformWith: '`@receiver childrenDo: `@statements1' -> '`@receiver childrenValuesDo: `@statements1'.
+	
+	self childrenValuesDo: aBlock
 ]
 
 { #category : #accessing }
 BrTreeNode >> childrenNodes [
-	^ children values reject: #isNil
+	<return: #Collection of: #BrTreeNode>
+
+	^ self isExpanded
+		ifTrue: [ childrenNodes ]
+		ifFalse: [ #() ]
 ]
 
 { #category : #enumeration }
 BrTreeNode >> childrenNodesDo: aBlock [
-	children valuesDo: [ :eachNode | eachNode ifNotNil: aBlock ]
+	self childrenNodes do: aBlock
 ]
 
-{ #category : #controlling }
+{ #category : #accessing }
+BrTreeNode >> childrenValues [
+	<return: #Collection of: #Object>
+
+	^ self isExpanded
+		ifTrue: [ childrenValues ]
+		ifFalse: [ #() ]
+]
+
+{ #category : #enumeration }
+BrTreeNode >> childrenValuesDo: aBlock [
+	self childrenValues do: aBlock
+]
+
+{ #category : #'api - expandable' }
 BrTreeNode >> collapse [
-	| anExpandedSize |
-	self isExpanded
-		ifFalse: [ ^ self ].
+	| aChildrenSize |
 	
-	anExpandedSize := self size.
+	self isCollapsed
+		ifTrue: [ ^ self ].
+
+	self ensureChildrenNodes.
+
+	aChildrenSize := self computeChildrenSize.
+	size := size - aChildrenSize.
+	self
+		assert: [ size >= 0 ]
+		description: [ 'Size can not be negative' ].
 
 	isExpanded := false.
 	
-	self notifyCollapsed: anExpandedSize
+	self hasParent
+		ifTrue: [ self parent onNodesDisappearedAfter: self amount: aChildrenSize ].
+	
+	self
+		onChildCollapsed: self
+		from: self
+		size: aChildrenSize
 ]
 
 { #category : #accessing }
@@ -126,37 +163,118 @@ BrTreeNode >> computation [
 	^ computation
 ]
 
+{ #category : #private }
+BrTreeNode >> computeChildrenSize [
+	<return: #Number>
+
+	^ childrenNodes inject: 0 into: [ :aTotalSize :eachChild | aTotalSize + eachChild size ]
+]
+
 { #category : #accessing }
 BrTreeNode >> depth [
 	^ self hasParent
 		ifTrue: [ self parent depth + 1 ]
-		ifFalse: [ 0 - isHidden asBit ]
+		ifFalse: [ self isAccountedForSelf asBit ]
 ]
 
-{ #category : #accessing }
-BrTreeNode >> ensureChildNodesComputed [
-	"Make sure child nodes are computed."
-	children keysAndValuesDo: [ :eachValue :eachNode |
-		eachNode ifNil: [ children at: eachValue put: (self newSubNode: eachValue) ] ].
-
+{ #category : #private }
+BrTreeNode >> ensureChildrenNodes [
+	childrenNodes
+		ifNotNil: [ ^ self ].
+	
+	self ensureChildrenValues.
+	
+	"we do not use withIndexCollect: or collect: in order to rely on as simple Collection api as possible"
+	childrenNodes := Array streamContents: [ :aStream |
+		| eachIndex |
+		eachIndex := 0.
+		childrenValues do: [ :eachValue |
+			eachIndex := eachIndex + 1.
+			aStream nextPut: ((self newSubNode: eachValue computation: self computation)
+				parent: self;
+				indexInChildren: eachIndex;
+				shiftIndexInTreeBy: indexInTree + eachIndex - 1) ] ]
 ]
 
-{ #category : #controlling }
+{ #category : #private }
+BrTreeNode >> ensureChildrenValues [
+	childrenValues
+		ifNotNil: [ ^ self ].
+
+	childrenValues := self computation value: self value
+]
+
+{ #category : #'api - expandable' }
 BrTreeNode >> expand [
+	| aChildrenSize |
+
 	self isExpanded
 		ifTrue: [ ^ self ].
-	self isEmpty
-		ifTrue: [ ^ self ].
-	self ensureChildNodesComputed.
+
+	self canBeExpanded
+		ifFalse: [ ^ self ].
+
+	self ensureChildrenNodes.
+	aChildrenSize := self computeChildrenSize.
+
+	size := size + aChildrenSize.
+	self
+		assert: [ size >= 0 ]
+		description: [ 'Size can not be negative' ].
 
 	isExpanded := true.
 	
-	self notifyExpanded
+	self hasParent
+		ifTrue: [ self parent onNodesAppearedAfter: self amount: aChildrenSize ].
+	
+	self
+		onChildExpanded: self
+		from: self
+		size: aChildrenSize
+]
+
+{ #category : #enumeration }
+BrTreeNode >> expandUpTo: aLevelIndex [
+	"#expandUpTo: 1 is the same as just #expand"
+	self upToDepth: aLevelIndex do: [ :eachNode | eachNode expand ]
 ]
 
 { #category : #accessing }
 BrTreeNode >> globalIndexInTree [
-   ^ self localIndexToGlobal: 0
+	
+	self
+		deprecated: 'Use #indexInTree'
+		transformWith: '`@receiver globalIndexInTree' -> '`@receiver indexInTree'.
+
+   ^ self indexInTree
+]
+
+{ #category : #'gt-extension' }
+BrTreeNode >> gtNodesFor: aView [
+	<gtView>
+	
+	^ aView columnedTree
+		title: 'Nodes';
+		priority: 1;
+		items: [ { self } ];
+		children: [ :anItem | anItem childrenNodes ];
+		expandAll;
+		column: 'Item' item: [ :anItem | anItem ];
+		column: 'Index' item: [ :anItem | anItem indexInTree ] width: 80
+]
+
+{ #category : #'gt-extension' }
+BrTreeNode >> gtRawNodesFor: aView [
+	<gtView>
+	
+	^ aView columnedTree
+		title: 'Raw Nodes';
+		priority: 2;
+		items: [ { self } ];
+		children: [ :anItem | (anItem instVarNamed: #childrenNodes) ifNil: [ #() ] ];
+		expandAll;
+		column: 'Item' item: [ :anItem | anItem ];
+		column: 'Index' item: [ :anItem | anItem indexInTree ] width: 80
 ]
 
 { #category : #testing }
@@ -166,105 +284,284 @@ BrTreeNode >> hasParent [
 	^ parent isNotNil
 ]
 
-{ #category : #controlling }
-BrTreeNode >> hide [
-	isHidden := true
+{ #category : #accessing }
+BrTreeNode >> indexInChildren [
+	"index in a children collection in the parent"
+	<return: #Number>
+
+	^ indexInChildren
+]
+
+{ #category : #accessing }
+BrTreeNode >> indexInChildren: aNumber [
+	<return: #Number>
+
+	indexInChildren := aNumber
+]
+
+{ #category : #accessing }
+BrTreeNode >> indexInTree [
+	"Global index in the tree"
+	<return: #Number>
+
+	^ indexInTree
+]
+
+{ #category : #accessing }
+BrTreeNode >> indexInTree: aNumber [
+	indexInTree := aNumber
 ]
 
 { #category : #initialization }
 BrTreeNode >> initialize [
 	super initialize.
-	
-	children := OrderedIdentityDictionary new.
-	computation := [ #() ].
+
 	isExpanded := false.
-	isHidden := false
+	indexInChildren := 1.
+	indexInTree := 1.
+	size := 1.
+	childrenValues := nil.
+	childrenNodes := nil.
+
+	computation := [ #() ]
+]
+
+{ #category : #'api - adding / removing' }
+BrTreeNode >> insert: anObject atChildIndex: aChildIndex [
+	| aNewNode |
+
+	"If children values are not computed we should not insert anything because values will be properly computed lazily later"
+	childrenValues
+		ifNil: [ ^ self onNodeChanged: self ].
+
+	childrenValues := childrenValues
+		copyReplaceFrom: aChildIndex
+		to: aChildIndex - 1
+		with: {anObject}.
+
+	"there are no children nodes, they will be computed later from updated children values"
+	childrenNodes
+		ifNil: [ ^ self onNodeChanged: self ].
+
+	aNewNode := self newSubNode: anObject computation: self computation.
+	aNewNode
+		parent: self;
+		indexInChildren: aChildIndex;
+		shiftIndexInTreeBy: self indexInTree + aChildIndex - 1.
+
+	"shift the indices of the rest of my children by 1"
+	aChildIndex to: childrenNodes size do: [ :eachChildIndex | 
+		(childrenNodes at: eachChildIndex)
+			shiftIndexInChildrenBy: 1;
+			shiftIndexInTreeBy: 1 ].
+
+	childrenNodes := childrenNodes
+		copyReplaceFrom: aChildIndex
+		to: aChildIndex - 1
+		with: {aNewNode}.
+
+	"do not update my size if I am not expanded"
+	self isExpanded
+		ifTrue: [ size := size + aNewNode size.
+			self hasParent
+				ifTrue: [ self parent onNodesAppearedAfter: self amount: aNewNode size ] ].
+
+	self onNodeChanged: self.
+	self isExpanded
+		ifTrue: [ self onChildInserted: aNewNode size: aNewNode size ]
+]
+
+{ #category : #testing }
+BrTreeNode >> isAccountedForSelf [
+	^ true
+]
+
+{ #category : #testing }
+BrTreeNode >> isCollapsed [
+	^ self isExpanded not
 ]
 
 { #category : #testing }
 BrTreeNode >> isEmpty [
 	<return: #Boolean>
+	
+	self
+		deprecated: 'Use #canBeExpanded'
+		transformWith: '`@receiver isEmpty' -> '`@receiver canBeExpanded not'.
 
-	self childrenDo: [ :eachValue | ^ false ].
-	^ true
+	^ self canBeExpanded not
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 BrTreeNode >> isExpanded [
 	^ isExpanded
 ]
 
-{ #category : #testing }
-BrTreeNode >> isHidden [
-	^ isHidden
+{ #category : #initialization }
+BrTreeNode >> newSubNode: anObject computation: aComputationBlock [
+	^ self subclassResponsibility
 ]
 
-{ #category : #private }
-BrTreeNode >> localIndexToGlobal: anIndex [
-	| anOffset |
+{ #category : #hooks }
+BrTreeNode >> onChildCollapsed: aChildNode from: anOriginNode size: anAmount [
 	self hasParent
-		ifFalse: [ ^ anIndex ].
-
-	anOffset := 0.
-	self parent childrenNodesDo: [ :eachNode |
-		eachNode == self
-			ifFalse: [ anOffset := anOffset + eachNode size ]
-			ifTrue: [ ^ self parent localIndexToGlobal: anIndex + anOffset + 1 ] ].
-
-	^ self parent localIndexToGlobal: anIndex + anOffset
+		ifFalse: [ ^ self ].
+	
+	self parent
+		onChildCollapsed: self
+		from: anOriginNode
+		size: anAmount
 ]
 
-{ #category : #'instance creation' }
-BrTreeNode >> newSubNode: aValue [
-	^ (self class on: aValue computed: self computation) parent: self
+{ #category : #hooks }
+BrTreeNode >> onChildExpanded: aChildNode from: anOriginNode size: anAmount [
+	self hasParent
+		ifFalse: [ ^ self ].
+
+	self parent
+		onChildExpanded: self
+		from: anOriginNode
+		size: anAmount
 ]
 
-{ #category : #notifying }
-BrTreeNode >> notifyCollapsed: anExpandedSize [
-	| aFromIndex aToIndex |
-	
-	aFromIndex := self localIndexToGlobal: 1.
-	aToIndex := self localIndexToGlobal: anExpandedSize.
-	
-	self root announcer announce: (BrTreeNodeCollapsed new
-		from: aFromIndex;
-		to: aToIndex;
-		node: self)
+{ #category : #hooks }
+BrTreeNode >> onChildInserted: anOriginNode size: anAmount [
+	self hasParent
+		ifFalse: [ ^ self ].
+	self parent onChildInserted: anOriginNode size: anAmount
 ]
 
-{ #category : #notifying }
-BrTreeNode >> notifyExpanded [
-	| aFromIndex aToIndex |
+{ #category : #hooks }
+BrTreeNode >> onChildRemoved: anOriginNode size: anAmount [
+	self hasParent
+		ifFalse: [ ^ self ].
+	self parent onChildRemoved: anOriginNode size: anAmount
+]
+
+{ #category : #hooks }
+BrTreeNode >> onNodeChanged: aTreeNode [
+	self onNodeChanged: aTreeNode payload: nil
+]
+
+{ #category : #hooks }
+BrTreeNode >> onNodeChanged: aTreeNode payload: anObject [
+	self hasParent
+		ifFalse: [ ^ self ].
+	self parent onNodeChanged: aTreeNode payload: anObject
+]
+
+{ #category : #hooks }
+BrTreeNode >> onNodesAppearedAfter: aChildNode amount: anAmount [
+	self
+		assert: [ aChildNode hasParent and: [ self == aChildNode parent ] ]
+		description: [ 'A node should be my child' ].
+
+	self isExpanded
+		ifFalse: [ ^ self ].
+
+	size := size + anAmount.
+	self
+		assert: [ size >= 0 ]
+		description: [ 'Size can not be negative' ].
 	
-	aFromIndex := self localIndexToGlobal: 1.
-	aToIndex := self localIndexToGlobal: self size.
+	childrenNodes ifNotNil: [ :theNodes |
+		aChildNode indexInChildren + 1 to: theNodes size do: [ :eachChildIndex |
+			(theNodes at: eachChildIndex)
+				shiftIndexInTreeBy: anAmount ] ].
+
+	self hasParent
+		ifFalse: [ ^ self ].
+
+	self parent onNodesAppearedAfter: self amount: anAmount
+]
+
+{ #category : #hooks }
+BrTreeNode >> onNodesDisappearedAfter: aChildNode amount: anAmount [
+	self
+		assert: [ aChildNode hasParent and: [ self == aChildNode parent ] ]
+		description: [ 'A node should be my child' ].
+
+	self isExpanded
+		ifFalse: [ ^ self ].
+
+	size := size - anAmount.
+	self
+		assert: [ size >= 0 ]
+		description: [ 'Size can not be negative' ].
 	
-	self root announcer announce: (BrTreeNodeExpanded new
-		from: aFromIndex;
-		to: aToIndex;
-		node: self)
+	childrenNodes ifNotNil: [ :theNodes |
+		aChildNode indexInChildren + 1 to: theNodes size do: [ :eachChildIndex |
+			(theNodes at: eachChildIndex)
+				shiftIndexInTreeBy: anAmount negated ] ].
+
+	self hasParent
+		ifFalse: [ ^ self ].
+
+	self parent onNodesDisappearedAfter: self amount: anAmount
 ]
 
 { #category : #accessing }
 BrTreeNode >> parent [
+	<return: #BrTreeNode>
+
 	^ parent
 ]
 
 { #category : #accessing }
-BrTreeNode >> parent: anObject [
-	parent := anObject
-]
-
-{ #category : #accessing }
-BrTreeNode >> precomputeChildrenValues [
-	| theChildren |
-	theChildren := self computation glamourValueWithArgs: { self value }.
-	theChildren do: [ :eachChild | children at: eachChild put: nil ]
+BrTreeNode >> parent: aBrTreeNode [
+	parent := aBrTreeNode
 ]
 
 { #category : #printing }
 BrTreeNode >> printOn: aStream [
 	aStream print: self value
+]
+
+{ #category : #'api - adding / removing' }
+BrTreeNode >> removeChildAt: aChildIndex [
+	"If children values are not computed we should not delete anything because values will be properly computed lazily later"
+	| aRemovedNode |
+	childrenValues
+		ifNil: [ ^ self onNodeChanged: self ].
+	
+	childrenValues := childrenValues
+		copyReplaceFrom: aChildIndex
+		to: aChildIndex
+		with: #().
+
+	"there are no children nodes, they will be computed later from updated children values"
+	childrenNodes
+		ifNil: [ ^ self onNodeChanged: self ].
+	
+	aRemovedNode := childrenNodes at: aChildIndex.
+	
+	"shift the indices of the rest of my children by -1"
+	aChildIndex + 1 to: childrenNodes size do: [ :eachChildIndex | 
+		(childrenNodes at: eachChildIndex)
+			shiftIndexInChildrenBy: -1;
+			shiftIndexInTreeBy: -1 ].
+		
+	childrenNodes := childrenNodes
+		copyReplaceFrom: aChildIndex
+		to: aChildIndex
+		with: #().
+
+	"do not update my size if I am not expanded"
+	self isExpanded
+		ifTrue: [
+			size := size - aRemovedNode size.
+			self hasParent
+				ifTrue: [ self parent onNodesDisappearedAfter: self amount: aRemovedNode size ] ].
+
+	self onNodeChanged: self.
+	self isExpanded
+		ifTrue: [ self onChildRemoved: aRemovedNode size: aRemovedNode size ]
+]
+
+{ #category : #'api - adding / removing' }
+BrTreeNode >> removeFromParent [
+	self hasParent
+		ifTrue: [ self parent removeChildAt: self indexInChildren ]
 ]
 
 { #category : #accessing }
@@ -274,24 +571,50 @@ BrTreeNode >> root [
 		ifFalse: [ self ]
 ]
 
+{ #category : #private }
+BrTreeNode >> shiftIndexInChildrenBy: aNumber [
+	indexInChildren := indexInChildren + aNumber.
+	self
+		assert: [ indexInChildren >= 0 ]
+		description: [ 'Index can not be negative' ].
+]
+
+{ #category : #private }
+BrTreeNode >> shiftIndexInTreeBy: aNumber [
+	indexInTree := indexInTree + aNumber.
+	self
+		assert: [ indexInTree >= 0 ]
+		description: [ 'Index can not be negative' ].
+
+	childrenNodes
+		ifNotNil: [ :theNodes | theNodes do: [ :eachNode | eachNode shiftIndexInTreeBy: aNumber ] ]
+]
+
 { #category : #accessing }
 BrTreeNode >> size [
 	"Return the current amount of expanded items in the tree"
 	<return: #Number>
-	| aSize |
 	
-	aSize := 1 - isHidden asBit.
-	self isExpanded ifTrue: [
-		self childrenNodesDo: [ :eachNode | aSize := aSize + eachNode size ] ].
-	
-	^ aSize
+	^ size
 ]
 
-{ #category : #controlling }
+{ #category : #'api - expandable' }
 BrTreeNode >> toggle [
 	self isExpanded
 		ifTrue: [ self collapse ]
 		ifFalse: [ self expand ]
+]
+
+{ #category : #enumeration }
+BrTreeNode >> upToDepth: aMaxDepthLevel do: anOneArgBlock [
+	self 
+		assert: [ aMaxDepthLevel isInteger and: [ aMaxDepthLevel > 0 ] ] 
+		description: [ 'Level index must be a natural number' ].
+
+	self withAllChildrenNodesBreadthFirstDo: [ :eachNode | 
+		eachNode depth >= aMaxDepthLevel
+			ifTrue: [ ^ self ].
+		anOneArgBlock value: eachNode ]
 ]
 
 { #category : #accessing }
@@ -301,9 +624,17 @@ BrTreeNode >> value [
 
 { #category : #initialization }
 BrTreeNode >> value: anObject computation: aComputationBlock [
+	self value: anObject computation: aComputationBlock withSelf: true
+]
+
+{ #category : #initialization }
+BrTreeNode >> value: anObject computation: aComputationBlock withSelf: shouldAccountForSelf [
 	value := anObject.
 	computation := aComputationBlock.
-	self precomputeChildrenValues
+	
+	size := shouldAccountForSelf asBit.
+	indexInChildren := shouldAccountForSelf asBit.
+	indexInTree := shouldAccountForSelf asBit
 ]
 
 { #category : #enumeration }

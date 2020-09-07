@@ -36,7 +36,7 @@ BrEditor >> beReadOnlyWithoutSelection [
 
 { #category : #'editor - accessing' }
 BrEditor >> cursors [
-	<return: #BrTextEditorMultipleCursor>
+	<return: #BrTextEditorCursor>
 	
 	^ self editor cursor
 ]
@@ -59,7 +59,7 @@ BrEditor >> deselecter [
 BrEditor >> initialize [
 	super initialize.
 	
-	self editor: BrTextEditor new "beParagraphBased".
+	self editor: BrTextEditor new.
 	self padding: (BlInsets all: 5).
 	
 	self viewModel: (editorModel := BrEditorModel new

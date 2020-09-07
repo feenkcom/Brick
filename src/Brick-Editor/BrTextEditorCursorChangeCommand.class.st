@@ -28,20 +28,25 @@ BrTextEditorCursorChangeCommand >> cursor: anObject [
 { #category : #executing }
 BrTextEditorCursorChangeCommand >> executeOn: aTextEditor [
 	
-	self processAttributesOn: aTextEditor.
+	self telemetry
+		timeSync: [ 'Process attributes' ]
+		during: [ self processAttributesOn: aTextEditor ].
 
 	aTextEditor segmentCollector
 		cachedSegmentAt: self position
 		ifFound: [ :aSegment |
-			aTextEditor
-				enqueueHolderCommand: self newHolderCommand
-				interval: (aSegment index to: aSegment index) ]
+			self telemetry
+				timeSync: [ 'Enqueue cursor changed holder command {1}' format: { aSegment index to: aSegment index } ]
+				during: [
+					aTextEditor
+						enqueueHolderCommand: self newHolderCommand
+						interval: (aSegment index to: aSegment index) ] ]
 		ifNotFound: [  ].
 ]
 
 { #category : #'instance creation' }
 BrTextEditorCursorChangeCommand >> newHolderCommand [
-	^ BrTextEditorCursorChangedHolderCommand new
+	^ BrTextEditorCursorChangedHolderCommand new context: self context
 ]
 
 { #category : #accessing }
@@ -64,22 +69,19 @@ BrTextEditorCursorChangeCommand >> printOn: aStream [
 { #category : #executing }
 BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
 	| hasCursor anEvent theEventHandlingAttributes |
-
-	(self position >= aTextEditor text size)
+	self position >= aTextEditor text size
 		ifTrue: [ ^ self ].
-
-	theEventHandlingAttributes := (aTextEditor text attributesAt: self position)
+	theEventHandlingAttributes := (aTextEditor text
+		attributesAt: self position)
 		select: [ :eachAttribute | eachAttribute isEventHandler ].
-
-	theEventHandlingAttributes
-		ifEmpty: [ ^ self ].
-
-	hasCursor := aTextEditor cursor anySatisfy: [ :eachCursor | eachCursor position = self position ].
+	theEventHandlingAttributes ifEmpty: [ ^ self ].
+	hasCursor := aTextEditor cursors
+		anySatisfy: [ :eachCursor | eachCursor position = self position ].
 	anEvent := hasCursor
 		ifTrue: [ BrTextEditorCursorAddedEvent cursor: self cursor ]
 		ifFalse: [ BrTextEditorCursorRemovedEvent cursor: self cursor ].
-
-	theEventHandlingAttributes do: [ :eachAttribute |
-		(eachAttribute wantsEvent: anEvent in: aTextEditor)
-			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
+	theEventHandlingAttributes
+		do: [ :eachAttribute | 
+			(eachAttribute wantsEvent: anEvent in: aTextEditor)
+				ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
 ]

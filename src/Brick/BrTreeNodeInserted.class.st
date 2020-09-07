@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTreeNodeCollapsed,
+	#name : #BrTreeNodeInserted,
 	#superclass : #BrTreeNodeAnnouncement,
 	#instVars : [
+		'node',
 		'from',
-		'to',
-		'node'
+		'to'
 	],
 	#category : #'Brick-Tree - Events'
 }
 
 { #category : #accessing }
-BrTreeNodeCollapsed >> from [
+BrTreeNodeInserted >> from [
 	^ from
 ]
 
 { #category : #accessing }
-BrTreeNodeCollapsed >> from: anObject [
+BrTreeNodeInserted >> from: anObject [
 	from := anObject
 ]
 
 { #category : #accessing }
-BrTreeNodeCollapsed >> node [
+BrTreeNodeInserted >> node [
 	^ node
 ]
 
 { #category : #accessing }
-BrTreeNodeCollapsed >> node: anObject [
+BrTreeNodeInserted >> node: anObject [
 	node := anObject
 ]
 
 { #category : #accessing }
-BrTreeNodeCollapsed >> to [
+BrTreeNodeInserted >> to [
 	^ to
 ]
 
 { #category : #accessing }
-BrTreeNodeCollapsed >> to: anObject [
+BrTreeNodeInserted >> to: anObject [
 	to := anObject
 ]

@@ -12,11 +12,19 @@ BrTextEditorLineSegmentSplitter >> adornmentPiece: aBlText with: anAdornmentAttr
 	"Create and return a segment piece with adornment"
 	<return: #BrTextEditorLineSegmentPiece>
 
-	^ BrTextEditorLineSegmentAdornmentPiece new
+	^ self adornmentPieceClass new
 		initializeWith: aBlText
 		from: aTextStart
 		to: aTextEnd;
 		adornmentAttribute: anAdornmentAttribute
+]
+
+{ #category : #accessing }
+BrTextEditorLineSegmentSplitter >> adornmentPieceClass [
+	"Create and return a segment piece with adornment"
+	<return: #TBrTextEditorTextualPiece>
+
+	^ BrTextEditorLineSegmentAdornmentPiece
 ]
 
 { #category : #'private - pieces computation' }
@@ -82,11 +90,13 @@ BrTextEditorLineSegmentSplitter >> processWithReplacements: aTextIterator in: aS
 	aTextIterator
 		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
 		indicesDo: [ :aStart :anEnd :theAdornmentAttributes |
-			| theAttributes |
+			| theAttributes replacementFound |
 			
 			theAttributes := theAdornmentAttributes
 				ifEmpty: [ aTextIterator attributes
 					select: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldReplace ] ] ].
+			
+			replacementFound := false.
 			
 			theAttributes withIndexDo: [ :eachAttribute :eachIndex |
 				| anAdornmentSpan aTextStart aTextEnd |
@@ -106,7 +116,8 @@ BrTextEditorLineSegmentSplitter >> processWithReplacements: aTextIterator in: aS
 					in: aStream
 					from: aTextStart
 					to: aTextEnd
-					virtual: eachIndex > 1 ] ]
+					virtual: (eachAttribute shouldAppend or: [ replacementFound ]).
+				replacementFound := replacementFound or: [ eachAttribute shouldReplace ]  ] ]
 ]
 
 { #category : #'private - pieces computation' }
@@ -198,8 +209,16 @@ BrTextEditorLineSegmentSplitter >> textPiece: aBlText from: aTextStart to: aText
 	"Create and return a text segment piece"
 	<return: #BrTextEditorLineSegmentPiece>
 
-	^ BrTextEditorLineSegmentTextPiece new
+	^ self textPieceClass new
 		initializeWith: aBlText
 		from: aTextStart
 		to: aTextEnd
+]
+
+{ #category : #accessing }
+BrTextEditorLineSegmentSplitter >> textPieceClass [
+	"Create and return a text segment piece"
+	<return: #TBrTextEditorTextualPiece>
+
+	^ BrTextEditorLineSegmentTextPiece
 ]
