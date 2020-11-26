@@ -99,7 +99,7 @@ BrTextEditorLineSegmentPiece >> isText [
 { #category : #'cursor - hooks' }
 BrTextEditorLineSegmentPiece >> onCursorAdded: aCursor to: aPieceElement in: anEditorElement [
 	"Is sent when a cursor is added to a given piece element within provided editor element"
-		
+
 	aPieceElement dispatchEvent:
 		(BrTextEditorShowCursorRequest new
 			editorElement: anEditorElement;
@@ -158,9 +158,8 @@ BrTextEditorLineSegmentPiece >> setCursor: aPieceElement of: aLineSegment in: an
 
 	"tell to add new cursors"
 	theUpdatedCursors
-		do:
-			[ :aCursor | self onCursorAdded: aCursor to: aPieceElement in: anEditorElement ].
-	aFocusRequest := anEditorElement hasFocus
+		do: [ :aCursor | self onCursorAdded: aCursor to: aPieceElement in: anEditorElement ].
+	aFocusRequest := anEditorElement isFocused
 		ifTrue: [ BrTextEditorFocusRequest new ]
 		ifFalse: [ BrTextEditorBlurRequest new ].
 	aPieceElement
@@ -186,13 +185,11 @@ BrTextEditorLineSegmentPiece >> updateCursor: aPieceElement of: aLineSegment in:
 
 	"tell to remove deleted cursors"
 	theRemovedCursors
-		do:
-			[ :aCursor | self onCursorRemoved: aCursor from: aPieceElement in: anEditorElement ].
+		do: [ :aCursor | self onCursorRemoved: aCursor from: aPieceElement in: anEditorElement ].
 
 	"tell to add new cursors"
 	theAddedCursors
-		do:
-			[ :aCursor | self onCursorAdded: aCursor to: aPieceElement in: anEditorElement ]
+		do: [ :aCursor | self onCursorAdded: aCursor to: aPieceElement in: anEditorElement ]
 ]
 
 { #category : #updating }

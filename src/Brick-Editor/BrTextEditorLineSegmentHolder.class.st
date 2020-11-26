@@ -76,6 +76,10 @@ BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 									timeSync: [ 'Set cursor' ]
 									during: [ aPiece setCursor: aPieceElement of: anEditorSegment in: self infiniteElement ] ].
 						
+						self infiniteElement telemetry
+							timeSync: [ 'Set focus' ]
+							during: [ aPiece updateFocus: self infiniteElement isFocused of: aPieceElement in: self infiniteElement ].
+						
 						hasSelection
 							ifTrue: [
 								self infiniteElement telemetry
@@ -333,7 +337,10 @@ BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 					during: [ aPiece updateCursor: aPieceElement of: anEditorSegment in: self infiniteElement ].
 				self infiniteElement telemetry
 					timeSync: [ 'Update selection of {1}' format: { aPiece } ]
-					during: [ aPiece updateSelection: aPieceElement of: anEditorSegment in: self infiniteElement ] ] ].
+					during: [ aPiece updateSelection: aPieceElement of: anEditorSegment in: self infiniteElement ].
+				self infiniteElement telemetry
+					timeSync: [ 'Update focus of {1}' format: { aPiece } ]
+					during: [ aPiece updateFocus: self infiniteElement isFocused of: aPieceElement in: self infiniteElement ]. ] ].
 
 	self infiniteElement telemetry
 		timeSync: [ 'Remove children' ]

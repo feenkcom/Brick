@@ -537,11 +537,6 @@ BrTextEditor >> notifyDeletedFrom: aFromIndex to: aToIndex [
 ]
 
 { #category : #'event firing' }
-BrTextEditor >> notifyDeselelected [
-	self dispatchEvent: (BrTextEditorDeselectedEvent new)
-]
-
-{ #category : #'event firing' }
 BrTextEditor >> notifyInserted: aText at: aTextIndex [
 	self dispatchEvent: (BrTextEditorInsertedEvent text: aText at: aTextIndex)
 ]
@@ -562,8 +557,8 @@ BrTextEditor >> notifyModified: aText [
 ]
 
 { #category : #'event firing' }
-BrTextEditor >> notifySelelectedFrom: aFromIndex to: aToIndex [
-	self dispatchEvent: (BrTextEditorSelectedEvent new fromIndex: aFromIndex; toIndex: aToIndex)
+BrTextEditor >> notifySelectionChanged: aSelection [
+	self dispatchEvent: (BrTextEditorSelectionChangedEvent new selection: aSelection)
 ]
 
 { #category : #hooks }
@@ -577,8 +572,8 @@ BrTextEditor >> onAttached: anEditorElement [
 
 	anEditorElement when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
 	anEditorElement when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
-	anEditorElement when: BlFocusInEvent do: [ self onGotFocus ].
-	anEditorElement when: BlFocusOutEvent do: [ self onLostFocus ].
+	anEditorElement when: BlFocusEvent do: [ self onGotFocus ].
+	anEditorElement when: BlBlurEvent do: [ self onLostFocus ].
 
 	self notifyChanged
 ]
@@ -994,10 +989,7 @@ BrTextEditor >> selection [
 BrTextEditor >> selection: aTextSelection [
 	selection := aTextSelection.
 	
-	"self selection isEmpty
-		ifTrue: [ ^ self ].
-	self moveCursorTo: self selection to.
-	self showCursor"
+	self notifySelectionChanged: selection
 ]
 
 { #category : #accessing }
