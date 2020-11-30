@@ -561,6 +561,11 @@ BrTextEditor >> notifySelectionChanged: aSelection [
 	self dispatchEvent: (BrTextEditorSelectionChangedEvent new selection: aSelection)
 ]
 
+{ #category : #'event firing' }
+BrTextEditor >> notifyTextReplaced: aText [
+	self dispatchEvent: (BrTextEditorTextReplacedEvent new text: aText)
+]
+
 { #category : #hooks }
 BrTextEditor >> onAttached: anEditorElement [
 	super onAttached: anEditorElement.
@@ -735,8 +740,9 @@ BrTextEditor >> onTextAttributesRemoved: aBlTextAttributesRemoved [
 BrTextEditor >> onTextReplaced [
 	"Is sent after a text instance is replaced with a new one"
 	self assertUIProcess.
-		
-	self processCursorAttributes
+
+	self processCursorAttributes.
+	self notifyTextReplaced: self text
 ]
 
 { #category : #'hooks - text modifications' }
@@ -889,6 +895,30 @@ BrTextEditor >> restoreState: aBrTextEditorMemento [
 	self assertUIProcess.
 
 	aBrTextEditorMemento restoreStateOf: self
+]
+
+{ #category : #accessing }
+BrTextEditor >> restoreText: aBrText [
+
+	"before changing the text we must unsubscribe from existing one"	
+	text unsubscribe: self.
+
+	text := aBrText.
+	self initializeText: text.
+
+	"Replacing text instance means that we can not guarantee structural integrity
+	of existing cache and have to rebuild it invalidating the whole underlying model structure"
+	segmentCollector := self defaultSegmentCollector.
+	segmentCollector editor: self.
+	segmentCollector text: text.
+
+	self onTextReplaced.
+
+	"notify UI about structural update"
+	self notifyChanged.
+
+	"text changed, we should style it"
+	self styleText
 ]
 
 { #category : #'api - save state' }
@@ -1115,25 +1145,7 @@ BrTextEditor >> text: aBrText [
 				from: aBrText size to: text size;
 				deselect ].
 
-	"before changing the text we must unsubscribe from existing one"	
-	text unsubscribe: self.
-
-	text := aBrText.
-	self initializeText: text.
-
-	"Replacing text instance means that we can not guarantee structural integrity
-	of existing cache and have to rebuild it invalidating the whole underlying model structure"
-	segmentCollector := self defaultSegmentCollector.
-	segmentCollector editor: self.
-	segmentCollector text: text.
-
-	self onTextReplaced.
-
-	"notify UI about structural update"
-	self notifyChanged.
-
-	"text changed, we should style it"
-	self styleText
+	self restoreText: aBrText.
 ]
 
 { #category : #accessing }
