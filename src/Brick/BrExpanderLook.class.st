@@ -6,7 +6,6 @@ Class {
 		'headerStencil',
 		'contentElement',
 		'headerElement',
-		'layoutResizerLook',
 		'shouldRecreateHeader',
 		'shouldReplaceHeader'
 	],
@@ -82,38 +81,35 @@ BrExpanderLook >> initialize [
 	contentStencil := [ BlElement new ] asStencil.
 	headerStencil := [ BlElement new ] asStencil.
 
-	self add: (layoutResizerLook := BrLayoutResizerLook new
+	self add: (BrLayoutResizerLook new
 		inherit; "for myself"
-		matchParentToMatchParentIn: [ :aBlock | self resizableElementsDo: aBlock ];
-		exactToMatchParentIn: [ :aBlock | self resizableElementsDo: aBlock ];
-		fitContentToFitContentIn: [ :aBlock | self resizableElementsDo: aBlock ];
-		fitContentLimitedToFitContentLimitedIn: [ :aBlock | self resizableElementsDo: aBlock ])
+		matchParentToMatchParent: [ :aBlock | self resizableElementsDo: aBlock ];
+		exactToMatchParent: [ :aBlock | self resizableElementsDo: aBlock ];
+		fitContentToFitContent: [ :aBlock | self resizableElementsDo: aBlock ];
+		fitContentLimitedToFitContentLimited: [ :aBlock | self resizableElementsDo: aBlock ])
 ]
 
 { #category : #initialization }
 BrExpanderLook >> initializeContentElement [
 	contentElement := self contentStencil asElement.
-	contentElement removeFromParent.
-	layoutResizerLook requestStates
+	contentElement removeFromParent
 ]
 
 { #category : #initialization }
 BrExpanderLook >> initializeHeaderElement [
 	headerElement := self headerStencil asElement.
-	headerElement removeFromParent.
-	layoutResizerLook requestStates
+	headerElement removeFromParent
 ]
 
 { #category : #initialization }
 BrExpanderLook >> initializeListeners [
 	super initializeListeners.
 
-	self when: BrExpansionChanged do: [ :anEvent |
-		anEvent expanded
-			ifTrue: [ self onExpanded ]
-			ifFalse: [ self onCollapsed ] ].
 	self when: BrAccordionContentStencilChanged do: [ :anEvent | self contentStencil: anEvent stencil ].
-	self when: BrAccordionHeaderStencilChanged do: [ :anEvent | self headerStencil: anEvent stencil ]
+	self when: BrAccordionHeaderStencilChanged do: [ :anEvent | self headerStencil: anEvent stencil ].
+		
+	self when: BrExpandedEvent do: [ :anEvent | self onExpanded ].
+	self when: BrCollapsedEvent do: [ :anEvent | self onCollapsed ]
 ]
 
 { #category : #initialization }
@@ -127,6 +123,7 @@ BrExpanderLook >> initializeRequests [
 
 { #category : #hooks }
 BrExpanderLook >> onCollapsed [
+
 	contentElement ifNotNil: #removeFromParent.
 	
 	shouldRecreateHeader
@@ -141,6 +138,7 @@ BrExpanderLook >> onCollapsed [
 
 { #category : #hooks }
 BrExpanderLook >> onExpanded [
+
 	shouldReplaceHeader
 		ifTrue: [ headerElement ifNotNil: #removeFromParent ]
 		ifFalse: [

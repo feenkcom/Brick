@@ -9,10 +9,11 @@ BrGlamorousButtonIconLook >> initialize [
 	super initialize.
 			
 	self add: (BrSizeAdjustmentLook new
-		huge: [ self icon transformDo: [ :t | t scaleBy: 2] ];
-		large: [ self icon transformDo: [ :t | t scaleBy: 1.5] ];
-		default: [ self icon transformDo: [ :t | t scaleBy: 1 ] ];
-		small: [ self icon transformDo: [ :t | t scaleBy: 0.75] ];
-		tiny: [ self icon transformDo: [ :t | t scaleBy: 0.75] ];
-		mini: [ self icon transformDo: [ :t | t scaleBy: 0.5] ])
+		target: [ self icon ];
+		huge: [ :aStyle | aStyle scaleBy: 2 ];
+		large: [ :aStyle | aStyle scaleBy: 1.5 ];
+		normal: [ :aStyle | aStyle scaleBy: 1 ];
+		small: [ :aStyle | aStyle scaleBy: 0.75 ];
+		tiny: [ :aStyle | aStyle scaleBy: 0.75 ];
+		mini: [ :aStyle | aStyle scaleBy: 0.5 ])
 ]

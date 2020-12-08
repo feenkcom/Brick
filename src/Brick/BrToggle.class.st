@@ -45,19 +45,15 @@ BrToggle >> icon: anElement [
 BrToggle >> initialize [
 	super initialize.
 	
+	self
+		fitContent.
+	
 	self viewModel: (BrToggleModel new +
 		(labelModel := BrLabelModel new) +
 		(iconModel := BrIconModel new) +
 		(BrInteractiveModel new
 			addStates: {
-				BrEnablementModel new.
-				BrPressModel new.
-				BrHoverModel new.
-				BrFocusModel new.
-				BrSizeAdjustmentModel new.
 				BrLayoutAlignmentModel center.
-				BrLayoutHorizontalResizerModel fitContent.
-				BrLayoutVerticalResizerModel fitContent
 			}))
 ]
 

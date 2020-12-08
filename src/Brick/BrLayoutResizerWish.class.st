@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : #'Brick-Layout Resizer - Events'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #'instance creation' }
@@ -23,6 +23,11 @@ BrLayoutResizerWish class >> fitContent [
 { #category : #'instance creation' }
 BrLayoutResizerWish class >> fitContentLimited [
 	^ self resizer: BlLayoutResizer fitContentLimited
+]
+
+{ #category : #testing }
+BrLayoutResizerWish class >> isDeprecated [
+	^ true
 ]
 
 { #category : #'instance creation' }

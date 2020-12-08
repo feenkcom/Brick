@@ -134,7 +134,7 @@ BrExamplesShowroom >> accordion [
 		BrButton new
 			look: BrGlamorousAccordionHeaderLook new;
 			label: 'Click to expand/collapse';
-			action: [ accordion toggle ] ].
+			action: [ accordion toggleExpanded ] ].
 	^ accordion
 ]
 
@@ -291,7 +291,7 @@ BrExamplesShowroom >> glamorousSmallButton [
 	<gtExample>
 	
 	^ BrButton new
-		beSmall;
+		beSmallSize;
 		look: BrGlamorousButtonWithLabelLook new;
 		label: 'Button';
 		action: [ self inform: 'Clicked' ]

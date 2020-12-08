@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : #'Brick-Layout Resizer - Model'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #'instance creation' }
@@ -20,6 +20,11 @@ BrLayoutResizerModel class >> fitContent [
 { #category : #'instance creation' }
 BrLayoutResizerModel class >> fitContentLimited [
 	^ self new fitContentLimited
+]
+
+{ #category : #testing }
+BrLayoutResizerModel class >> isDeprecated [
+	^ true
 ]
 
 { #category : #'instance creation' }

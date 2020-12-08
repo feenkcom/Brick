@@ -19,13 +19,6 @@ BrSwitch >> initialize [
 		(BrInteractiveModel new
 			addStates: {
 				BrSwitchModel new.
-				BrEnablementModel new.
-				BrPressModel new.
-				BrHoverModel new.
-				BrFocusModel new.
-				BrSizeAdjustmentModel new.
 				BrLayoutAlignmentModel center.
-				BrLayoutHorizontalResizerModel fitContent.
-				BrLayoutVerticalResizerModel fitContent
 			}))
 ]

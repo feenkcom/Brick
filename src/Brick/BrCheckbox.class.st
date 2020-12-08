@@ -27,19 +27,17 @@ BrCheckbox >> action: aBlockClosure [
 BrCheckbox >> initialize [
 	super initialize.
 
+	self
+		vLocal;
+		hLocal;
+		beNormalSize.
+
 	self viewModel: (
 		BrButtonModel new
 			addAll: {
+				BrCheckboxModel new.
 				(BrInteractiveModel new
 					addStates: {
-						BrCheckboxModel new.
-						BrEnablementModel new.
-						BrPressModel new.
-						BrHoverModel new.
-						BrFocusModel new.
-						BrSizeAdjustmentModel new.
 						BrLayoutAlignmentModel center.
-						BrLayoutHorizontalResizerModel fitContent.
-						BrLayoutVerticalResizerModel fitContent
 					}) } )
 ]

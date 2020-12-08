@@ -27,14 +27,14 @@ BrBreadcrumbLinearLook >> addItemsAndSeparators [
 						at: eachItemElement
 						ifPresent:
 							[ :eachSeparatorElement | self widgetContent addChild: eachSeparatorElement ] ].
-			resizerLook requestStates ]
+			self widgetDo: [ :aWidget | aWidget requestStyle ] ]
 ]
 
 { #category : #initialization }
 BrBreadcrumbLinearLook >> initialize [
 	super initialize.
 
-	self add: (resizerLook := BrLayoutResizerLook new inherit).
+	self add: (resizerLook := BrLayoutResizerLook new inherit inherit: [ :aBlock | self itemElements do: aBlock ]).
 	self add: (BrLayoutAlignmentLook forHorizontalLinearLayout)
 ]
 

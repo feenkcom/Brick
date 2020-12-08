@@ -59,6 +59,8 @@ BrTextEditorOperatorExamples >> editorFor: aText [
 	
 	anEditor requestFocus.
 	anEditor forceLayout.
+	
+	self assert: anEditor isFocused.
 
 	^ anEditor
 ]

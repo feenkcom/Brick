@@ -30,9 +30,9 @@ BrBreadcrumb >> initialize [
 	
 	self viewModel: (BrBreadcrumbModel new
 		add: (BrInteractiveModel withAll: {
-			BrLayoutHorizontalResizerModel fitContent.
-			BrLayoutVerticalResizerModel fitContent.
-			BrLayoutAlignmentModel centerLeft }))
+			BrLayoutAlignmentModel centerLeft })).
+			
+	self fitContent
 ]
 
 { #category : #accessing }

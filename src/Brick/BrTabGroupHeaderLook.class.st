@@ -33,15 +33,15 @@ BrTabGroupHeaderLook >> initialize [
 			- tabbar
 	"
 	tabs := OrderedCollection new.
-	
+
 	header := BlElement new labeled: 'Header'.
-	scrollTabbar := BlScrollableElement new  labeled: 'Scrollable'.
+	scrollTabbar := BlScrollableElement new labeled: 'Scrollable'.
 	tabbar := BlElement new labeled: 'Tabbar'.
-	
+
 	scrollTabbar addChild: tabbar as: #tabbar.
 
 	header addChild: scrollTabbar as: #scrolltabbar.
-	
+
 	self addChangeAddChildAs: #(header) with: [ header ].
 ]
 
@@ -129,8 +129,7 @@ BrTabGroupHeaderLook >> onTabRemoved: aBrTabModel [
 BrTabGroupHeaderLook >> onTabSelected: aTabModel [
 	self
 		assert: [ self isAttachedToWidget ]
-		description: [ 'I can not receive the tab selected event without being attached to a widget' ].
-
+		description: [ 'I can not receive the tab selected event without being attached to a widget' ]
 ]
 
 { #category : #hooks }

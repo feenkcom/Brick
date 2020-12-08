@@ -1,84 +1,46 @@
 Class {
 	#name : #BrLayoutResizerState,
-	#superclass : #BrInteractionState,
-	#instVars : [
-		'resizer'
-	],
-	#category : #'Brick-Layout Resizer - States'
+	#superclass : #BlElementUniqueState,
+	#category : #'Brick-! Core - Layout Resizer'
 }
 
-{ #category : #factory }
-BrLayoutResizerState class >> any [
-	^ self exact or: (self matchParent or: (self fitContent or: self fitContentLimited))
+{ #category : #converting }
+BrLayoutResizerState >> asNotPropagated [
+	^ self
 ]
 
-{ #category : #'instance creation' }
-BrLayoutResizerState class >> exact [
-	^ self resizer: (BlLayoutResizer exact: 0.0)
-]
-
-{ #category : #'instance creation' }
-BrLayoutResizerState class >> exact: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
-	<argument: #aNumber satisfies: #isBlocPositiveFloat>
-
-	^ self resizer: (BlLayoutResizer exact: aNumber)
-]
-
-{ #category : #'instance creation' }
-BrLayoutResizerState class >> fitContent [
-	^ self resizer: BlLayoutResizer fitContent
-]
-
-{ #category : #'instance creation' }
-BrLayoutResizerState class >> fitContentLimited [
-	^ self resizer: BlLayoutResizer fitContentLimited
-]
-
-{ #category : #factory }
-BrLayoutResizerState class >> horizontal [
-	^ BrLayoutHorizontalResizerState
-]
-
-{ #category : #'instance creation' }
-BrLayoutResizerState class >> matchParent [
-	^ self resizer: BlLayoutResizer matchParent
-]
-
-{ #category : #'instance creation' }
-BrLayoutResizerState class >> resizer: aLayoutResizer [
+{ #category : #converting }
+BrLayoutResizerState >> asPropagated [
 	^ self subclassResponsibility
 ]
 
-{ #category : #factory }
-BrLayoutResizerState class >> vertical [
-	^ BrLayoutVerticalResizerState
+{ #category : #propagation }
+BrLayoutResizerState >> finishedPropagateFrom: aParentElement [
+	aParentElement layoutResizerPropagations clearPropagationRules: aParentElement
 ]
 
-{ #category : #comparing }
-BrLayoutResizerState >> = anObject [
-	"Answer whether the receiver and anObject represent the same object."
-
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
-	^ resizer class = anObject resizer class
-]
-
-{ #category : #comparing }
-BrLayoutResizerState >> hash [
-	"Answer an integer value that is related to the identity of the receiver."
-
-	^ self class hash bitXor: resizer class hash
+{ #category : #propagation }
+BrLayoutResizerState >> prepareToPropagateFrom: aParentElement [
+	aParentElement layoutResizerPropagations precomputePropagationRules: aParentElement
 ]
 
 { #category : #accessing }
-BrLayoutResizerState >> resizer [
-	^ resizer
+BrLayoutResizerState >> priority [
+	^ UserPriority
 ]
 
-{ #category : #accessing }
-BrLayoutResizerState >> resizer: aLayoutResizer [
-	resizer := aLayoutResizer
+{ #category : #propagation }
+BrLayoutResizerState >> propagatedStateFrom: aParentElement to: aChildElement [
+	"Return a state that should be propagated from a given parent element to the child instead of me"
+	<return: #BlElementState>
+
+	^ aParentElement layoutResizerPropagations
+		propagateState: self
+		from: aParentElement
+		to: aChildElement
+]
+
+{ #category : #testing }
+BrLayoutResizerState >> shouldPropagateToChildren [
+	^ true
 ]

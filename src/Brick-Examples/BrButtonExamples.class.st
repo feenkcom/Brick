@@ -68,7 +68,7 @@ BrButtonExamples >> buttonAndLookWithLabelAndExterior [
 		pressed: [ aLabelLook foreground: Color paleBlue ];
 		disabled: [ aLabelLook foreground: Color veryLightGray ]).
 
-	aLabelLook add: (BrSizeAdjustmentLook new
+	aLabelLook add: (BrDeprecatedSizeAdjustmentLook new
 		default: [ aLabelLook fontSize: 20 ];
 		tiny: [ aLabelLook fontSize: 10 ];
 		small: [ aLabelLook fontSize: 16 ];
@@ -149,7 +149,7 @@ BrButtonExamples >> buttonWithLabelLookOfDifferentSizes [
 		bold;
 		fontName: 'Source Sans Pro'.
 
-	aLabelLook add: (BrSizeAdjustmentLook new
+	aLabelLook add: (BrDeprecatedSizeAdjustmentLook new
 		default: [ aLabelLook fontSize: 20 ];
 		tiny: [ aLabelLook fontSize: 10 ];
 		small: [ aLabelLook fontSize: 16 ];
@@ -157,8 +157,8 @@ BrButtonExamples >> buttonWithLabelLookOfDifferentSizes [
 		huge: [ aLabelLook fontSize: 36 ]).
 
 	^ self newButton
-		action: [ :aButton | aButton perform: #(beNormal beTiny beSmall beLarge beHuge) atRandom ];
-		beSmall;
+		action: [ :aButton | aButton perform: #(beNormalSize beTinySize beSmallSize beLargeSize beHugeSize) atRandom ];
+		beSmallSize;
 		look: aLabelLook
 ]
 
@@ -239,7 +239,7 @@ BrButtonExamples >> labelLookWithCommonAndSizeInteractions [
 		pressed: [ aLabelLook foreground: Color black ];
 		disabled: [ aLabelLook foreground: Color veryLightGray ]).
 
-	aLabelLook add: (BrSizeAdjustmentLook new
+	aLabelLook add: (BrDeprecatedSizeAdjustmentLook new
 		default: [ aLabelLook fontSize: 20 ];
 		tiny: [ aLabelLook fontSize: 10 ];
 		small: [ aLabelLook fontSize: 16 ];

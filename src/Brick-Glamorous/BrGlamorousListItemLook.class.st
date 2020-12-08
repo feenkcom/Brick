@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousListItemLook,
-	#superclass : #BrInteractiveCommonLook,
+	#superclass : #BrStyleCommonLook,
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
@@ -9,8 +9,9 @@ BrGlamorousListItemLook >> initialize [
 	super initialize.
 
 	self
-			default: [ :aWidget | aWidget background: BrGlamorousColors deselectedListItemColor ];
-			selected: [ :aWidget | aWidget background: BrGlamorousColors selectedListItemColor ];
-			pressed: [ :aWidget | aWidget background: BrGlamorousColors pressedListItemColor ];
-			focused: [ :aWidget | aWidget border: (BlBorder paint: BrGlamorousColors focusedListItemBorder width: 1) ].
+		default: [ :aStyle | aStyle background: BrGlamorousColors deselectedListItemColor ];
+		hovered: [ :aStyle | aStyle background: BrGlamorousColors hoveredListItemColor ];
+		pressed: [ :aStyle | aStyle background: BrGlamorousColors pressedListItemColor ];
+		focused: [ :aStyle | aStyle border: (BlBorder paint: BrGlamorousColors focusedListItemBorder width: 1) ];
+		selected: [ :aStyle | aStyle background: BrGlamorousColors selectedListItemColor ]
 ]

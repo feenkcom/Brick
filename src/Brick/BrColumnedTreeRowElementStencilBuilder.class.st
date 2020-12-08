@@ -17,11 +17,7 @@ BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 		layout: BlLinearLayout horizontal alignCenterLeft;
 		constraintsDo: [ :c |
 			c horizontal matchParent.
-			c vertical fitContent ];
-		viewModel: (BrInteractiveModel new addState: BrSelectModel new);
-		look: (BrInteractiveCommonLook new
-			selected: [ :aWidget | aWidget background: BrGlamorousColors selectedListItemColor ];
-			deselected: [ :aWidget | aWidget background: BrGlamorousColors deselectedListItemColor ]).
+			c vertical fitContent ].
 
 	theCellElements := OrderedCollection new: self columns size.
 

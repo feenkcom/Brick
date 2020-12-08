@@ -16,8 +16,13 @@ Class {
 		'styles',
 		'currentStates'
 	],
-	#category : #'Brick-! Core - Looks'
+	#category : #'Brick-! Deprecated'
 }
+
+{ #category : #testing }
+BrInteractiveLook class >> isDeprecated [
+	^ true
+]
 
 { #category : #'gt-extension' }
 BrInteractiveLook >> gtStylesFor: aView [
@@ -51,8 +56,7 @@ BrInteractiveLook >> initialize [
 BrInteractiveLook >> initializeListeners [
 	super initializeListeners.
 	
-	self when: BrInteractionChanged do: [ :anEvent | self statesChanged: anEvent ].
-	self when: BlElementAddedToSuperParentEvent do: [ :anEvent | self requestStates ]
+	self when: BrInteractionChanged do: [ :anEvent | self statesChanged: anEvent ]
 ]
 
 { #category : #initialization }

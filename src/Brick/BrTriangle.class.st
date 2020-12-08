@@ -3,16 +3,13 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrExpandable + TBrEnableable + TBrSizeAdjustable',
 	#classTraits : 'TBrExpandable classTrait + TBrEnableable classTrait + TBrSizeAdjustable classTrait',
-	#instVars : [
-		'buttonModel'
-	],
 	#category : #'Brick-Triangle - UI'
 }
 
 { #category : #'api - actions' }
 BrTriangle >> action: aBlock [
 	"do no handle expand and collapse actions"
-	buttonModel action: aBlock
+	self viewModel action: aBlock
 ]
 
 { #category : #'api - visibility' }
@@ -30,13 +27,9 @@ BrTriangle >> hide: aBoolean [
 { #category : #initialization }
 BrTriangle >> initialize [
 	super initialize.
-	self viewModel: (buttonModel := BrButtonModel new 
-		action: [ self toggle ];
-		add: (BrInteractiveModel new
-				addStates: {
-					BrExpandableModel new. BrEnablementModel new.
-					BrSizeAdjustmentModel new.
-					BrHoverModel new. BrPressModel new. }))
+	
+	self viewModel: BrButtonModel new.
+	self action: [ self toggleExpanded ]
 ]
 
 { #category : #'api - visibility' }
@@ -47,7 +40,12 @@ BrTriangle >> show [
 { #category : #'api - actions' }
 BrTriangle >> toggleAction: aBlock [
 	"toggle triangle and then evaluate the block"
-	buttonModel action: [ :aWidget :aButtonModel :anEvent |
-		self toggle.
-		aBlock glamourValueWithArgs: { aWidget. aButtonModel. anEvent }. ].
+
+	self viewModel action: [ :aWidget :aButtonModel :anEvent |
+		self toggleExpanded.
+		aBlock glamourValueWithArgs: {
+			aWidget.
+			aButtonModel.
+			anEvent
+		} ]
 ]

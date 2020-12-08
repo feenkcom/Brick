@@ -10,8 +10,9 @@ BrSimpleListExamples >> allClasses [
 	^ BrSimpleList new
 		itemStencil: [
 			BrLabel new
-				hMatchParent;
-				look: BrGlamorousLabelLook new;
+				"hMatchParent;"
+				look: BrGlamorousLabelLook new + (BrStyleCommonLook new
+					selected: [ :aStyle | aStyle background: Color veryVeryLightGray ]);
 				padding: (BlInsets all: 5) ];
 		itemDataBinder: [ :eachElement :eachClass :eachIndex | eachElement text: eachClass name ];
 		items: (SystemNavigation new allClasses sorted: [ :a :b | a name < b name ])

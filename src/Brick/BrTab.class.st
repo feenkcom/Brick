@@ -29,7 +29,7 @@ BrTab >> actionsStencil: anActionStencilBuilder [
 
 { #category : #'api - selection' }
 BrTab >> deselect [
-	self dispatchEvent: (BrSelectedWish selected: false)
+	self dispatchEvent: (BlElementSelectedStateWish selected: false)
 ]
 
 { #category : #'api - accessing' }
@@ -47,19 +47,14 @@ BrTab >> icon: anElement [
 { #category : #initialization }
 BrTab >> initialize [
 	super initialize.
+	
+	self fitContent.
 
 	self viewModel: (BrTabModel new + 
 		(labelModel := BrLabelModel new) +
 		(iconModel := BrIconModel new) +
 		(BrInteractiveModel withAll: {
 			BrLayoutAlignmentModel new center.
-			BrEnablementModel new.
-			BrPressModel new.
-			BrHoverModel new.
-			BrSelectModel new.
-			BrSizeAdjustmentModel new.
-			BrLayoutHorizontalResizerModel fitContent.
-			BrLayoutVerticalResizerModel fitContent
 	}))
 ]
 
@@ -95,7 +90,7 @@ BrTab >> parentTabGroup [
 
 { #category : #'api - selection' }
 BrTab >> select [
-	self dispatchEvent: (BrSelectedWish selected: true)
+	self dispatchEvent: (BlElementSelectedStateWish selected: true)
 ]
 
 { #category : #'api - selection' }
