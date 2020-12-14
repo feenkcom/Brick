@@ -29,27 +29,30 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.118/src' ];
+				spec repository: 'github://feenkcom/Bloc/src' ];
+			baseline: 'BlocPacFocusFinder' with: [
+				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
+			baseline: 'BlocPacInfinite' with: [
+				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
 			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon:7c2cc6ba425a710274d0ca9578cac41aea84e9fb/repository' ].
+				spec repository: 'github://feenkcom/pharo-beacon/repository' ].
 		spec 
 			package: #'Brick-Editor' with: [
-				spec requires: #('Bloc' 'Beacon' ). ];
+				spec requires: #('Bloc' 'Beacon' #'BlocPacFocusFinder' 'BlocPacInfinite') ];
 			package: #Brick with: [
-				spec requires: #('Bloc' #'Brick-Editor' 'Beacon' ). ];
+				spec requires: #('Bloc' 'Brick-Editor' 'Beacon' 'BlocPacInfinite'). ];
 			package: #'Brick-Editor-Extensions' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #('Brick'). ];
 			package: #'Brick-Material' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #('Brick' ). ];
 			package: #'Brick-Hydra' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #('Brick' ). ];
 			package: #'Brick-Glamorous' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #('Brick' ). ];
 			package: #'Brick-DevTool' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #('Brick' ). ];
 			package: #'Brick-Examples' with: [
-				spec requires: #(#Brick #'Brick-Material' #'Brick-Glamorous' #'Brick-Hydra' #'Brick-DevTool' ). ];
+				spec requires: #('Brick' 'Brick-Material' 'Brick-Glamorous' 'Brick-Hydra' 'Brick-DevTool' ). ];
 			package: #'Brick-Editor-Examples' with: [
-				spec requires: #(#'Brick-Editor' #'Brick-Examples' ). ]. ].
-
+				spec requires: #('Brick-Editor' 'Brick-Examples'). ]. ].
 ]
