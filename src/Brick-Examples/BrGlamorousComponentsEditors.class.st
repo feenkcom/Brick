@@ -1,3 +1,15 @@
+"
+!Editor
+Use editors to edit text.
+!!Basic editor
+${example:BrGlamorousComponentsEditors>>#basicEditor|previewShow=#gtLiveFor:|previewHeight=100|previewExpanded=true|codeExpanded=false}$
+!!Input filter allowing digits only
+${example:BrGlamorousComponentsEditors>>#digitsOnly|previewShow=#gtLiveFor:|previewHeight=100|previewExpanded=true|codeExpanded=false}$
+!!Input field
+${example:BrGlamorousComponentsEditors>>#inputField|previewShow=#gtLiveFor:|previewHeight=100|previewExpanded=true|codeExpanded=false}$
+!!Text area
+${example:BrGlamorousComponentsEditors>>#textArea|previewShow=#gtLiveFor:|previewHeight=200|previewExpanded=true|codeExpanded=false}$
+"
 Class {
 	#name : #BrGlamorousComponentsEditors,
 	#superclass : #BrGlamorousComponents,

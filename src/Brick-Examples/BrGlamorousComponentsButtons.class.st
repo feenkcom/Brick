@@ -1,5 +1,5 @@
 "
-!Buttons
+!Button
 Use Glamorous buttons for actions in forms, popups or other views with support for multiple styles, sizes, states and more.
 !!!Relevant documents
 ${class:BrButtonExamples|label=Building a custom button look}$, ${class:BrButtonModelExamples|label=Learning how button model works}$, ${class:BrButtonLabelLookExamples|label=Playing with button label look}$
