@@ -29,13 +29,13 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.120/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.8.121/src' ];
 			baseline: 'BlocPacFocusFinder' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.1/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.2/src' ];
 			baseline: 'BlocPacElementQuery' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.1/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.2/src' ];
 			baseline: 'BlocPacInfinite' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.1/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.2/src' ];
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon:7c2cc6ba425a710274d0ca9578cac41aea84e9fb/repository' ].
 		spec 
