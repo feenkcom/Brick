@@ -29,33 +29,37 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.121/src' ];
-			baseline: 'BlocPacFocusFinder' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.2/src' ];
-			baseline: 'BlocPacElementQuery' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.2/src' ];
-			baseline: 'BlocPacInfinite' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.2/src' ];
-			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon:7c2cc6ba425a710274d0ca9578cac41aea84e9fb/repository' ].
-		spec 
+				spec repository: 'github://feenkcom/Bloc/src' ];
+			baseline: 'BlocExamples' with: [
+				spec repository: 'github://feenkcom/Bloc/src' ];
+			baseline: 'BlocPac' with: [
+				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
+			baseline: 'GToolkitResourcesUtility' with: [
+				spec repository: 'github://feenkcom/gtoolkit-utility/src' ].
+			
+		spec
+			package: #'Brick-Core' with: [
+				spec requires: #('Bloc' 'BlocPac') ];
 			package: #'Brick-Editor' with: [
-				spec requires: #('Bloc' 'Beacon' 'BlocPacFocusFinder' 'BlocPacInfinite' ). ];
-			package: #Brick with: [
-				spec requires: #('Bloc' #'Brick-Editor' 'Beacon' 'BlocPacInfinite' 'BlocPacElementQuery' ). ];
+				spec requires: #('Brick-Core') ];
 			package: #'Brick-Editor-Extensions' with: [
-				spec requires: #(#Brick ). ];
-			package: #'Brick-Material' with: [
-				spec requires: #(#Brick ). ];
-			package: #'Brick-Hydra' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #('Brick-Editor') ];
+			
+			package: #'Brick' with: [
+				spec requires: #(#'Brick-Core' #'Brick-Editor') ];
+			
 			package: #'Brick-Glamorous' with: [
-				spec requires: #(#Brick ). ];
+				spec requires: #(#'Brick' #'GToolkitResourcesUtility') ];
+			package: #'Brick-Material' with: [
+				spec requires: #(#'Brick') ];
+			package: #'Brick-Hydra' with: [
+				spec requires: #(#'Brick') ];
+			
 			package: #'Brick-DevTool' with: [
-				spec requires: #(#Brick ). ];
-			package: #'Brick-Examples' with: [
-				spec requires: #(#Brick #'Brick-Material' #'Brick-Glamorous' #'Brick-Hydra' #'Brick-DevTool' ). ];
-			package: #'Brick-Editor-Examples' with: [
-				spec requires: #(#'Brick-Editor' #'Brick-Examples' ). ]. ].
+				spec requires: #(#'Brick' #'Bloc' #'BlocPac') ];
 
+			package: #'Brick-Examples' with: [
+				spec requires: #(#'BlocExamples' #'Brick' #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra') ];
+			package: #'Brick-Editor-Examples' with: [
+				spec requires: #(#'Brick' #'Brick-Editor') ] ]
 ]
