@@ -29,11 +29,11 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.123/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.8.124/src' ];
 			baseline: 'BlocExamples' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.123/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.8.124/src' ];
 			baseline: 'BlocPac' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.4/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.5/src' ];
 			baseline: 'GToolkitResourcesUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.9/src' ].
 		spec 
