@@ -38,7 +38,7 @@ TBrTextEditorFixedMeasurerExamples >> editorFor: aText [
 				segmentPiece: aTBrTextEditorTextualPiece;
 				asElement.
 			aTextElement measurer: self fixedMeasurer.
-			aTextElement measurer measurer textOffset: aTBrTextEditorTextualPiece textStart.
+			aTextElement measurer textOffset: aTBrTextEditorTextualPiece textStart.
 			aTextElement ].
 	
 	anEditor requestFocus.
@@ -49,7 +49,7 @@ TBrTextEditorFixedMeasurerExamples >> editorFor: aText [
 
 { #category : #'private - instance creation' }
 TBrTextEditorFixedMeasurerExamples >> fixedMeasurer [
-	^ BlTextElementFixedMeasurer new
+	^ BlTextElementMockedMeasurer new
 		ascent: self ascent;
 		descent: self descent;
 		glyphWidth: self glyphWidth;
