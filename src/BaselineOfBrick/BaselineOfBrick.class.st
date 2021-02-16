@@ -33,9 +33,9 @@ BaselineOfBrick >> baseline: spec [
 			baseline: 'BlocExamples' with: [
 				spec repository: 'github://feenkcom/Bloc:v0.8.175/src' ];
 			baseline: 'BlocPac' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.62/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.63/src' ];
 			baseline: 'BlocPacExamples' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.62/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.63/src' ];
 			baseline: 'GToolkitResourcesUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.16/src' ].
 		spec 
