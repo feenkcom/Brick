@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousToggleLayoutLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Toggle - Support'
 }
 

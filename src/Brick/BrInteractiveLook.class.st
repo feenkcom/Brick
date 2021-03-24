@@ -11,7 +11,7 @@ Example:
 "
 Class {
 	#name : #BrInteractiveLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'styles',
 		'currentStates'

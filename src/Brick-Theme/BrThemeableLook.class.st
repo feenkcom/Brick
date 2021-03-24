@@ -1,6 +1,6 @@
 Class {
 	#name : #BrThemeableLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'delegate',
 		'addedToSceneGraphEventHandler',

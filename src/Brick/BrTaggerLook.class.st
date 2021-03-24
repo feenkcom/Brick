@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTaggerLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Tagger - Look'
 }
 

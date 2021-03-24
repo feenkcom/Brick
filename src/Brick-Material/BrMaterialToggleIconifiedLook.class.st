@@ -5,7 +5,7 @@ I don't apply any shadows to simplify integration into a toggle group which has 
 "
 Class {
 	#name : #BrMaterialToggleIconifiedLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'backgroundLook',
 		'icon'

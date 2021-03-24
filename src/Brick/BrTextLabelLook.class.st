@@ -15,7 +15,7 @@ The label look can directly change properties of the label element. This can be 
 "
 Class {
 	#name : #BrTextLabelLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [

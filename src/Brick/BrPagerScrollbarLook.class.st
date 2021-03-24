@@ -1,11 +1,11 @@
 Class {
 	#name : #BrPagerScrollbarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'pages',
 		'scrollbarElement'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #'instance creation' }

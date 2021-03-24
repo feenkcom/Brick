@@ -3,7 +3,7 @@ I define a link button that represents a link (in a text document).
 "
 Class {
 	#name : #BrGlamorousLinkButtonWithLabelLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Buttons'
 }
 

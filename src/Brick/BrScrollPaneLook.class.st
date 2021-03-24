@@ -1,6 +1,6 @@
 Class {
 	#name : #BrScrollPaneLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'scrollable'
 	],

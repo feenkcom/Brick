@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousEditorSpacingLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Editor'
 }
 

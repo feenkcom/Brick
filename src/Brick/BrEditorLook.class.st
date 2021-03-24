@@ -1,6 +1,6 @@
 Class {
 	#name : #BrEditorLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [

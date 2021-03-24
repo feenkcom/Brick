@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMaterialResizerBottomBarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Material-Collection'
 }
 

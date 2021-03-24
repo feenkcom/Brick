@@ -1,6 +1,6 @@
 Class {
 	#name : #BrEntailmentLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'example'
 	],

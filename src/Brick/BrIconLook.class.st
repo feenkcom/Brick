@@ -11,7 +11,7 @@ For example in a subclass of a ViewModel override ==#onAttachedTo:== and impleme
 "
 Class {
 	#name : #BrIconLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'iconElement'
 	],

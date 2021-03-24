@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTabGroupContentLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'content',
 		'contentElementsCache'

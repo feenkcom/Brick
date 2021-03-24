@@ -1,6 +1,6 @@
 Class {
 	#name : #BrFlowListLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'items',
 		'itemElements',

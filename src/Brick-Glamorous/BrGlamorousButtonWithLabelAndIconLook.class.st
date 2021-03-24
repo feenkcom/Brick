@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousButtonWithLabelAndIconLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Buttons'
 }
 

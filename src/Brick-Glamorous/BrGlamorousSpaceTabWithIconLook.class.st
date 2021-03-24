@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousSpaceTabWithIconLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Tabs - Space'
 }
 

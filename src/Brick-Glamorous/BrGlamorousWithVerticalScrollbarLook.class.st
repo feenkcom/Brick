@@ -4,7 +4,7 @@ Is designed to add a vertical ${class:BrScrollbar}$ to a widget with a ${class:T
 "
 Class {
 	#name : #BrGlamorousWithVerticalScrollbarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'scrollbar'
 	],

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTriangleLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'isExpanded',
 		'collapsedStencil',

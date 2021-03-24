@@ -1,6 +1,6 @@
 Class {
 	#name : #BrWithMaximizerLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlElementQuery',
 	#classTraits : 'TBlElementQuery classTrait',
 	#instVars : [

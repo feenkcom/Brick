@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousFlatCardLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Card'
 }
 

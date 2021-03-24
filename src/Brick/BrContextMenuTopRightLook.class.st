@@ -1,6 +1,6 @@
 Class {
 	#name : #BrContextMenuTopRightLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Context Menu - Look'
 }
 

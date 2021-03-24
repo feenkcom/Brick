@@ -7,7 +7,7 @@ A maximizer host is responsible for embedding and embellishming the maximized el
 "
 Class {
 	#name : #BrMaximizerHostLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Maximizer - Look'
 }
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTabGroupSplitterLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'splitter'
 	],

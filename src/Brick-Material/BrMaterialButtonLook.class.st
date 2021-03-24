@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMaterialButtonLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Material-Buttons'
 }
 

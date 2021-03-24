@@ -1,6 +1,6 @@
 Class {
 	#name : #BrWidgetContainerLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Layout Widgets'
 }
 

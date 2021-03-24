@@ -1,6 +1,6 @@
 Class {
 	#name : #BrResizerLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'resizerListener',
 		'location',

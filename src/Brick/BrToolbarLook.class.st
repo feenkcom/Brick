@@ -41,7 +41,7 @@ NOTE: It would be nice to explain, why this order-independed feature is importan
 "
 Class {
 	#name : #BrToolbarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'items'
 	],

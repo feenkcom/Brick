@@ -3,7 +3,7 @@ I define a rounded rectangle geometry
 "
 Class {
 	#name : #BrMaterialRoundedLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'cornerRadius'
 	],

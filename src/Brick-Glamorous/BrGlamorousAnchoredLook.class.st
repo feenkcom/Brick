@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousAnchoredLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'background',
 		'cornerRadius'

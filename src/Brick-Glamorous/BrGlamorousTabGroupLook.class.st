@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousTabGroupLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'headerLook'
 	],

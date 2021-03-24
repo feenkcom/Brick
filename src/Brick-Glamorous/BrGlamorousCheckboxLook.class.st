@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousCheckboxLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'iconLook'
 	],

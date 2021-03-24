@@ -5,7 +5,7 @@ See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous exa
 "
 Class {
 	#name : #BrGlamorousProgressWithBarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Progress'
 }
 

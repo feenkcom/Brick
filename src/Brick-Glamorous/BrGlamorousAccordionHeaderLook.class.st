@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousAccordionHeaderLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'labelLook'
 	],

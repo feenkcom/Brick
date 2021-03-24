@@ -1,7 +1,7 @@
-Extension { #name : #BrLook }
+Extension { #name : #BrAptitude }
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> allRelatedViewModels [
+BrAptitude class >> allRelatedViewModels [
 	"Find all potentially related view models based on requests"
 	<return: #Association>
 
@@ -9,7 +9,7 @@ BrLook class >> allRelatedViewModels [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> allRelatedViewModelsAndTheirRequests [
+BrAptitude class >> allRelatedViewModelsAndTheirRequests [
 	"Find all potentially related view models based on requests"
 	<return: #Association>
 	| theRequests | 
@@ -25,7 +25,7 @@ BrLook class >> allRelatedViewModelsAndTheirRequests [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> gtCoderLookGraphOverviewFor: aView context: aDictionary [
+BrAptitude class >> gtCoderLookGraphOverviewFor: aView context: aDictionary [
 	<gtClassView>
 
 	^ aView explicit
@@ -35,7 +35,7 @@ BrLook class >> gtCoderLookGraphOverviewFor: aView context: aDictionary [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> gtCoderLookHierarchyFor: aView context: aDictionary [
+BrAptitude class >> gtCoderLookHierarchyFor: aView context: aDictionary [
 	<gtClassView>
 
 	^ aView tree
@@ -52,7 +52,7 @@ BrLook class >> gtCoderLookHierarchyFor: aView context: aDictionary [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> gtCoderLookOverviewFor: aView context: aDictionary [
+BrAptitude class >> gtCoderLookOverviewFor: aView context: aDictionary [
 	<gtClassView>
 
 	^ aView explicit
@@ -62,14 +62,14 @@ BrLook class >> gtCoderLookOverviewFor: aView context: aDictionary [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassAndSubclassLooks [
+BrAptitude class >> withAllSuperclassAndSubclassLooks [
 	^ self withAllSuperclassLooks
 		addAll: self withAllSubclasses;
 		yourself
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassChangeEvents [
+BrAptitude class >> withAllSuperclassChangeEvents [
 	<return: #Set of: #'BrChangeEvent class'>
 
 	^ ((self withAllSuperclassLooks
@@ -78,7 +78,7 @@ BrLook class >> withAllSuperclassChangeEvents [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassEventReferences [
+BrAptitude class >> withAllSuperclassEventReferences [
 	<return: #Association>
 
 	^ self withAllSuperclassLooks
@@ -95,14 +95,14 @@ BrLook class >> withAllSuperclassEventReferences [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassEvents [
+BrAptitude class >> withAllSuperclassEvents [
 	<return: #Set of: #'BlEvent class'>
 
 	^ (self withAllSuperclassEventsAndTheirMethods collect: [ :each | each key ] as: Set) asArray
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassEventsAndTheirMethods [
+BrAptitude class >> withAllSuperclassEventsAndTheirMethods [
 	<return: #Association>
 
 	^ self withAllSuperclassLooks
@@ -115,23 +115,23 @@ BrLook class >> withAllSuperclassEventsAndTheirMethods [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassLooks [
+BrAptitude class >> withAllSuperclassLooks [
 	| theLooks |
 	
 	theLooks := OrderedCollection with: self.
 	
-	self = BrLook
+	self = BrAptitude
 		ifTrue: [ ^ theLooks ].
 
 	theLooks
-		addAll: (self allSuperclassesIncluding: BrLook);
+		addAll: (self allSuperclassesIncluding: BrAptitude);
 		yourself.
 		
 	^ theLooks
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassRequestReferences [
+BrAptitude class >> withAllSuperclassRequestReferences [
 	<return: #Collection of: #BrDevLookRequestReference>
 
 	^ self withAllSuperclassLooks
@@ -145,14 +145,14 @@ BrLook class >> withAllSuperclassRequestReferences [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassRequests [
+BrAptitude class >> withAllSuperclassRequests [
 	<return: #Set of: #'BrRequest class'>
 
 	^ (self withAllSuperclassRequestsAndTheirLooks collect: [ :each | each key ] as: Set) asArray
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassRequestsAndTheirLooks [
+BrAptitude class >> withAllSuperclassRequestsAndTheirLooks [
 	<return: #Association>
 
 	^ self withAllSuperclassLooks
@@ -162,7 +162,7 @@ BrLook class >> withAllSuperclassRequestsAndTheirLooks [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassRequestsAndTheirMethods [
+BrAptitude class >> withAllSuperclassRequestsAndTheirMethods [
 	<return: #Association>
 
 	^ self withAllSuperclassLooks
@@ -172,7 +172,7 @@ BrLook class >> withAllSuperclassRequestsAndTheirMethods [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassWishReferences [
+BrAptitude class >> withAllSuperclassWishReferences [
 	<return: #Collection of: #BrDevLookWishReference>
 
 	^ self withAllSuperclassLooks
@@ -186,7 +186,7 @@ BrLook class >> withAllSuperclassWishReferences [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrLook class >> withAllSuperclassWishes [
+BrAptitude class >> withAllSuperclassWishes [
 	<return: #Set of: #'BrWish class'>
 
 	^ (self withAllSuperclassWishReferences collect: [ :each | each artifact ] as: Set) asArray

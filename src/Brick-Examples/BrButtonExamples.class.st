@@ -88,7 +88,7 @@ BrButtonExamples >> buttonAndLookWithLabelAndExterior [
 	anExteriorLook add: (BrLayoutAlignmentLook forHorizontalLinearLayout).
 	anExteriorLook add: (BrFlatShadowLook new offset: 3@3).
 		
-	aButtonLook := BrLook new.
+	aButtonLook := BrAptitude new.
 	aButtonLook addAll: { aLabelLook . anExteriorLook }.
 
 	^ self newButton

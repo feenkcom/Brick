@@ -1,6 +1,6 @@
 Class {
 	#name : #BrExpanderLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'contentStencil',
 		'headerStencil',

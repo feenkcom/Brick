@@ -1,6 +1,6 @@
 Class {
 	#name : #BrStyleLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlElementStyles + TBlElementQuery',
 	#classTraits : 'TBlElementStyles classTrait + TBlElementQuery classTrait',
 	#instVars : [

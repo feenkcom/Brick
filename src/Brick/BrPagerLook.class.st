@@ -1,6 +1,6 @@
 Class {
 	#name : #BrPagerLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'pages'
 	],

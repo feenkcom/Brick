@@ -3,7 +3,7 @@ I define basic layout related properties of material buttons such as padding or 
 "
 Class {
 	#name : #BrMaterialButtonLayoutLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Material-Buttons - Support'
 }
 

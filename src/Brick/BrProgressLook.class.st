@@ -7,7 +7,7 @@ See my subclasses for specific use cases: ${class:BrProgressLook|show=#gtSubclas
 "
 Class {
 	#name : #BrProgressLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'amount',
 		'total'

@@ -10,7 +10,7 @@ aWidget look:
 "
 Class {
 	#name : #BrGlamorousLinkSquaredButtonWithLabelLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTreeLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'treeElement'
 	],

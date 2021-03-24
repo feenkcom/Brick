@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTabLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Tabs - Look'
 }
 

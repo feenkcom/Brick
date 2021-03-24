@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMaterialListItemLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'padding'
 	],

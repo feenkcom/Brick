@@ -72,7 +72,7 @@ BrLookChangeExamples >> buttonLookPropertyChange [
 			random := changes shuffled
 				copyFrom: 1
 				to: (0 to: changes size) atRandom.
-			look := BrLook new.
+			look := BrAptitude new.
 			text := ' '
 				join:
 					(random

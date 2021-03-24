@@ -13,7 +13,7 @@ ${example:BrExamplesShowroom>>#glamorousTabsSwitcherWithIcons|codeExpanded=false
 "
 Class {
 	#name : #BrGlamorousTabGroupSwitcherLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'headerLook'
 	],

@@ -5,7 +5,7 @@ To work properly and element should have some margin in order for the shadow to 
 "
 Class {
 	#name : #BrFlatShadowLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'shadow'
 	],

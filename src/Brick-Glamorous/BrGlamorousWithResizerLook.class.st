@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousWithResizerLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'resizer'
 	],

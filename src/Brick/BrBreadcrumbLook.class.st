@@ -1,6 +1,6 @@
 Class {
 	#name : #BrBreadcrumbLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'items',
 		'separators',

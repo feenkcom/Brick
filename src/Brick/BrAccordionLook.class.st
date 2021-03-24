@@ -1,6 +1,6 @@
 Class {
 	#name : #BrAccordionLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'contentElement',
 		'contentStencil',

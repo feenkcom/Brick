@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousProgressWithLabelLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [

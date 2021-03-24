@@ -1,6 +1,6 @@
 Class {
 	#name : #BrSimpleListLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBrListInfiniteElementScroll',
 	#classTraits : 'TBrListInfiniteElementScroll classTrait',
 	#instVars : [

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGridListLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'items',
 		'itemElements',

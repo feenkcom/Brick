@@ -5,7 +5,7 @@ See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous exa
 "
 Class {
 	#name : #BrGlamorousProgressWithBarAndLabelLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [

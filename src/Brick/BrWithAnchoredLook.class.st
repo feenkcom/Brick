@@ -1,6 +1,6 @@
 Class {
 	#name : #BrWithAnchoredLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'root',
 		'outerContainer',

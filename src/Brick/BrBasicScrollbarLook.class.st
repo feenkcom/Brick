@@ -1,6 +1,6 @@
 Class {
 	#name : #BrBasicScrollbarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'scrollbar',
 		'scrollable',

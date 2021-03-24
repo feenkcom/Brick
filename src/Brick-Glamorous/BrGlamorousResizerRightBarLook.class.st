@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousResizerRightBarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Resizer'
 }
 

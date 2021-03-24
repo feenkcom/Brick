@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousTabActionbarLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'actionbarContainer'
 	],
