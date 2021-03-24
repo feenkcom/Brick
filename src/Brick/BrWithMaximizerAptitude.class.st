@@ -1,5 +1,5 @@
 Class {
-	#name : #BrWithMaximizerLook,
+	#name : #BrWithMaximizerAptitude,
 	#superclass : #BrAptitude,
 	#traits : 'TBlElementQuery',
 	#classTraits : 'TBlElementQuery classTrait',
@@ -13,12 +13,12 @@ Class {
 }
 
 { #category : #private }
-BrWithMaximizerLook >> elementToMaximize [
+BrWithMaximizerAptitude >> elementToMaximize [
 	^ (targetQuery findOne: self widget) result
 ]
 
 { #category : #private }
-BrWithMaximizerLook >> findAllPossibleHostsFor: anElement [
+BrWithMaximizerAptitude >> findAllPossibleHostsFor: anElement [
 	"Given an element return a collection of all possible maximization hosts in the bottom-to-top order.
 	A maximization host is an element that that has ${class:BrMaximizerHostLook}$ or is a space root"
 	<return: #Collection of: #BlElement>
@@ -26,13 +26,13 @@ BrWithMaximizerLook >> findAllPossibleHostsFor: anElement [
 	^ Array streamContents: [ :aStream | anElement allParentsDo: [ :eachParent |
 		| hasHostLook |
 		hasHostLook := false.
-		eachParent lookDo: [ :eachParentLook | hasHostLook := eachParentLook hasActorOfKind: BrMaximizerHostLook ].
+		eachParent lookDo: [ :eachParentLook | hasHostLook := eachParentLook hasActorOfKind: BrMaximizerHostAptitude ].
 		hasHostLook
 			ifTrue: [ aStream nextPut: eachParent ] ] ]
 ]
 
 { #category : #initialization }
-BrWithMaximizerLook >> initialize [
+BrWithMaximizerAptitude >> initialize [
 	super initialize.
 	
 	isMaximized := false.
@@ -43,7 +43,7 @@ BrWithMaximizerLook >> initialize [
 ]
 
 { #category : #initialization }
-BrWithMaximizerLook >> initializeListeners [
+BrWithMaximizerAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrMaximizerMinimizeWish do: [ :anEvent |
@@ -53,12 +53,12 @@ BrWithMaximizerLook >> initializeListeners [
 ]
 
 { #category : #accessing }
-BrWithMaximizerLook >> isMaximized [
+BrWithMaximizerAptitude >> isMaximized [
 	^ isMaximized
 ]
 
 { #category : #'api - maximization' }
-BrWithMaximizerLook >> maximize [
+BrWithMaximizerAptitude >> maximize [
 	self widgetDo: [ :anElement |
 		| anElementToMaximize |
 		
@@ -71,7 +71,7 @@ BrWithMaximizerLook >> maximize [
 ]
 
 { #category : #private }
-BrWithMaximizerLook >> maximizeElement: anElementToMaximize in: aHostElement [
+BrWithMaximizerAptitude >> maximizeElement: anElementToMaximize in: aHostElement [
 	"Maximization is impossible if an element has no parent"
 	anElementToMaximize hasParent
 		ifFalse: [ ^ self ].
@@ -97,7 +97,7 @@ BrWithMaximizerLook >> maximizeElement: anElementToMaximize in: aHostElement [
 ]
 
 { #category : #private }
-BrWithMaximizerLook >> minimizeElement: anElement in: aHostElement [
+BrWithMaximizerAptitude >> minimizeElement: anElement in: aHostElement [
 	
 	self
 		assert: [ placeholderElement notNil ]
@@ -116,24 +116,24 @@ BrWithMaximizerLook >> minimizeElement: anElement in: aHostElement [
 ]
 
 { #category : #'private - hooks' }
-BrWithMaximizerLook >> onMaximized [
+BrWithMaximizerAptitude >> onMaximized [
 ]
 
 { #category : #'private - hooks' }
-BrWithMaximizerLook >> onMinimized [
+BrWithMaximizerAptitude >> onMinimized [
 ]
 
 { #category : #accessing }
-BrWithMaximizerLook >> preferredBackground [
+BrWithMaximizerAptitude >> preferredBackground [
 	^ preferredBackground
 ]
 
 { #category : #accessing }
-BrWithMaximizerLook >> preferredBackground: anObject [
+BrWithMaximizerAptitude >> preferredBackground: anObject [
 	preferredBackground := anObject
 ]
 
 { #category : #'api - query' }
-BrWithMaximizerLook >> queryStep: aBlElementStep [
+BrWithMaximizerAptitude >> queryStep: aBlElementStep [
 	targetQuery queryStep: aBlElementStep
 ]
