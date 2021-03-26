@@ -6,7 +6,5 @@ Class {
 
 { #category : #initialization }
 BrWidgetContainerLook >> initialize [
-	super initialize.
-	
-	self add: BrLayoutResizerLook inherit
+	super initialize
 ]

@@ -84,6 +84,7 @@ BlElement >> gtInspectorPaintModelLookIn: aMondrianView [
 					geometry: BlCircle new;
 					padding: (BlInsets all: 5);
 					margin: (BlInsets right: 5);
+					fitContent;
 					addChild: (BrLabel new
 						look: (BrGlamorousLabelLook new fontSize: 10);
 						text: (((each isKindOf: BlElement)
