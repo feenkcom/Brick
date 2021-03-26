@@ -145,6 +145,13 @@ BrLayoutResizerLook >> hFitContent [
 	^ self styleFor: BrLayoutHorizontalResizerState fitContent
 ]
 
+{ #category : #'api - to exact' }
+BrLayoutResizerLook >> hFitContent: aChildElementOrBlock toExact: aWidth [
+	"Exact width if widget fits content"
+
+	propagations hFitContent: aChildElementOrBlock toExact: aWidth
+]
+
 { #category : #'api - style' }
 BrLayoutResizerLook >> hFitContentLimited [
 	^ self styleFor: BrLayoutHorizontalResizerState fitContentLimited
@@ -208,6 +215,13 @@ BrLayoutResizerLook >> hInherit: aChildElementOrBlock [
 { #category : #'api - style' }
 BrLayoutResizerLook >> hMatchParent [
 	^ self styleFor: BrLayoutHorizontalResizerState matchParent
+]
+
+{ #category : #'api - to exact' }
+BrLayoutResizerLook >> hMatchParent: aChildElementOrBlock toExact: aWidth [
+	"Exact width if widget matches parent"
+
+	propagations hMatchParent: aChildElementOrBlock toExact: aWidth
 ]
 
 { #category : #'api - to fit content' }

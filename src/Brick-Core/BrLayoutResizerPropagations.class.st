@@ -19,6 +19,11 @@ BrLayoutResizerPropagations class >> hExact [
 ]
 
 { #category : #'api - layout resizeable' }
+BrLayoutResizerPropagations class >> hExact: aWidth [
+	^ BrLayoutHorizontalExactResizerPropagatedState new width: aWidth
+]
+
+{ #category : #'api - layout resizeable' }
 BrLayoutResizerPropagations class >> hFitContent [
 	^ BrLayoutHorizontalResizerState fitContent
 ]
@@ -165,6 +170,13 @@ BrLayoutResizerPropagations >> hExactToMatchParent: aChildElementOrBlock [
 		to: self class hMatchParent
 ]
 
+{ #category : #'api - to match parent' }
+BrLayoutResizerPropagations >> hFitContent: aChildElementOrBlock toExact: aWidth [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class hFitContent
+		to: (self class hExact: aWidth)
+]
+
 { #category : #'api - to fit content' }
 BrLayoutResizerPropagations >> hFitContentLimitedToFitContent: aChildElementOrBlock [
 	(self addPropagationFor: aChildElementOrBlock)
@@ -218,6 +230,13 @@ BrLayoutResizerPropagations >> hInherit: aChildElementOrBlock [
 			to: self class hFitContentLimited;
 		from: self class hMatchParent
 			to: self class hMatchParent
+]
+
+{ #category : #'api - to match parent' }
+BrLayoutResizerPropagations >> hMatchParent: aChildElementOrBlock toExact: aWidth [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class hMatchParent
+		to: (self class hExact: aWidth)
 ]
 
 { #category : #'api - to fit content' }
