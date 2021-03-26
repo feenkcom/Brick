@@ -1,11 +1,11 @@
 Class {
-	#name : #BrGlamorousMaximizerFullscreenHostLook,
-	#superclass : #BrMaximizerHostLook,
+	#name : #BrGlamorousMaximizerFullscreenHostAptitude,
+	#superclass : #BrMaximizerHostAptitude,
 	#category : #'Brick-Glamorous-Maximizer'
 }
 
 { #category : #'private - hooks' }
-BrGlamorousMaximizerFullscreenHostLook >> createCloseButton [
+BrGlamorousMaximizerFullscreenHostAptitude >> createCloseButton [
 	^ BrButton new
 		look: BrGlamorousButtonCircularLook + BrGlamorousButtonIconLook + BrGlamorousButtonFlatExteriorLook + BrGlamorousButtonLayoutLook;
 		icon: [ (BrGlamorousVectorIcons close asElement
@@ -21,7 +21,7 @@ BrGlamorousMaximizerFullscreenHostLook >> createCloseButton [
 ]
 
 { #category : #'private - hooks' }
-BrGlamorousMaximizerFullscreenHostLook >> onMaximize: aMaximizeWish [
+BrGlamorousMaximizerFullscreenHostAptitude >> onMaximize: aMaximizeWish [
 	| anElementToMaximize aHostElement originalHorizontalResizingStrategy originalVerticalResizingStrategy previousHorizontalResizerState previousVerticalResizerState originalPosition containerElement closeButton |
 	
 	anElementToMaximize := aMaximizeWish elementToMaximize.

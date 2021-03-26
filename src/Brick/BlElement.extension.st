@@ -74,28 +74,40 @@ BlElement >> gtInspectorPaintModelLookIn: aMondrianView [
 	nodes := nodes asSet asArray.
 	
 	aMondrianView nodes
-		shape: [ :each |
-			BlElement new
-				geometry: BlEllipseGeometry new;
-				size: 20@20;
-				layout: BlLinearLayout horizontal alignCenter;
-				border: (BlBorder paint: Color lightGray width: 1);
-				addChild: (BlTextElement new
-					clipChildren: false;
-					preventMouseEvents;
-					text: (((each isKindOf: BlElement)
-						ifTrue: [ 'W' asRopedText ]
-						ifFalse: [ (each isKindOf: BrAptitude)
-							ifTrue: [ 'L' asRopedText ]
-							ifFalse: [ 'M' asRopedText ] ]) fontSize: 7)) ];
+		stencil: [ :each |
+			BrHorizontalPane new
+				fitContent;
+				alignCenter;
+				padding: (BlInsets right: 5);
+				addChild: (BrHorizontalPane new 
+					background: Color veryLightGray;
+					geometry: BlCircle new;
+					padding: (BlInsets all: 5);
+					margin: (BlInsets right: 5);
+					addChild: (BrLabel new
+						look: (BrGlamorousLabelLook new fontSize: 10);
+						text: (((each isKindOf: BlElement)
+							ifTrue: [ 'W' ]
+							ifFalse: [ (each isKindOf: BrAptitude)
+								ifTrue: [ 'A' ]
+								ifFalse: [ 'M' ] ]))));
+				addChild: (BrLabel new
+					look: (BrGlamorousLabelLook new);
+					text: each class name )
+				 ];
 		with: nodes.
 	
 	aMondrianView edges 
-		fromCenterBottom;
-		toCenterTop;
+		stencil: [ :x | 
+			"BlSigmoidElement new 
+				beHorizontal;"
+			BlLineElement new
+				border: (BlBorder paint: (Color gray alpha: 0.5))];
+		fromRightCenter;
+		toLeftCenter;
 		connectToAll: #actors.
 	
-	aMondrianView layout tree
+	aMondrianView layout horizontalTree nodeDistance: 20
 ]
 
 { #category : #'*Brick' }

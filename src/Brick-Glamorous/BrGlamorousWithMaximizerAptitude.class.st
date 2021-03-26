@@ -1,6 +1,6 @@
 Class {
-	#name : #BrGlamorousWithMaximizerLook,
-	#superclass : #BrWithMaximizerLook,
+	#name : #BrGlamorousWithMaximizerAptitude,
+	#superclass : #BrWithMaximizerAptitude,
 	#instVars : [
 		'actionButton'
 	],
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousWithMaximizerLook >> createActionButton [
+BrGlamorousWithMaximizerAptitude >> createActionButton [
 	^ BrButton new
 		background: Color white;
 		look: BrIconLook + BrGlamorousFocusableShadowLook + (BrStyleCommonLook new
@@ -22,12 +22,12 @@ BrGlamorousWithMaximizerLook >> createActionButton [
 ]
 
 { #category : #'api - visibility' }
-BrGlamorousWithMaximizerLook >> hideMaximizeButton [
+BrGlamorousWithMaximizerAptitude >> hideMaximizeButton [
 	actionButton visibility: BlVisibility gone
 ]
 
 { #category : #initialization }
-BrGlamorousWithMaximizerLook >> initialize [
+BrGlamorousWithMaximizerAptitude >> initialize [
 	super initialize.
 
 	actionButton := self createActionButton.
@@ -46,20 +46,20 @@ BrGlamorousWithMaximizerLook >> initialize [
 ]
 
 { #category : #'private - hooks' }
-BrGlamorousWithMaximizerLook >> onMaximized [
+BrGlamorousWithMaximizerAptitude >> onMaximized [
 	super onMaximized.
 
 	actionButton visibility: BlVisibility gone
 ]
 
 { #category : #'private - hooks' }
-BrGlamorousWithMaximizerLook >> onMinimized [
+BrGlamorousWithMaximizerAptitude >> onMinimized [
 	super onMinimized.
 
 	actionButton visibility: BlVisibility visible
 ]
 
 { #category : #'api - visibility' }
-BrGlamorousWithMaximizerLook >> showMaximizeButton [
+BrGlamorousWithMaximizerAptitude >> showMaximizeButton [
 	actionButton visibility: BlVisibility visible
 ]
