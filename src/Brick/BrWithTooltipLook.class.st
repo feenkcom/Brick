@@ -8,7 +8,8 @@ Class {
 		'hideLaterTask',
 		'showLaterTask',
 		'showDelay',
-		'hideDelay'
+		'hideDelay',
+		'hoverShowCondition'
 	],
 	#category : #'Brick-Tooltip - Look'
 }
@@ -42,6 +43,53 @@ BrWithTooltipLook class >> handle: anObject content: anotherObject [
 				content: anotherObject asStencil asElement;
 				yourself);
 			yourself ]
+]
+
+{ #category : #initialization }
+BrWithTooltipLook >> attachToLeftAndRight [
+	strategy := BrAnchoredCompositeStrategy builder
+		single: [ :e | 
+			e
+				anchorBounds: [ :f | widget bounds inParent: f ];
+				referencePoint: BrAnchoredCenterRightReferencePoint;
+				availableBounds: BrAnchoredCenterRightAvailableBounds;
+				apply: [ innerContainer
+						removeLook: BrDropdownBottomLeftLook;
+						removeLook: BrDropdownBottomRightLook;
+						removeLook: BrDropdownTopLeftLook;
+						removeLook: BrDropdownTopRightLook;
+						addLook: BrDropdownCenterLeftLook ] ];
+		single: [ :e | 
+			e
+				anchorBounds: [ :f | widget bounds inParent: f ];
+				referencePoint: BrAnchoredCenterLeftReferencePoint;
+				availableBounds: BrAnchoredBottomLeftAvailableBounds;
+				apply: [ innerContainer
+						removeLook: BrDropdownBottomRightLook;
+						removeLook: BrDropdownTopLeftLook;
+						removeLook: BrDropdownTopRightLook;
+						addLook: BrDropdownBottomLeftLook ] ];
+		single: [ :e | 
+			e
+				anchorBounds: [ :f | widget bounds inParent: f ];
+				referencePoint: BrAnchoredCenterRightReferencePoint;
+				availableBounds: BrAnchoredTopRightAvailableBounds;
+				apply: [ innerContainer
+						removeLook: BrDropdownBottomRightLook;
+						removeLook: BrDropdownBottomLeftLook;
+						removeLook: BrDropdownTopRightLook;
+						addLook: BrDropdownTopLeftLook ] ];
+		single: [ :e | 
+			e
+				anchorBounds: [ :f | widget bounds inParent: f ];
+				referencePoint: BrAnchoredCenterLeftReferencePoint;
+				availableBounds: BrAnchoredTopLeftAvailableBounds;
+				apply: [ innerContainer
+						removeLook: BrDropdownBottomRightLook;
+						removeLook: BrDropdownBottomLeftLook;
+						removeLook: BrDropdownTopLeftLook;
+						addLook: BrDropdownTopRightLook ] ];
+		build.
 ]
 
 { #category : #accessing }
@@ -98,6 +146,8 @@ BrWithTooltipLook >> hideLater [
 { #category : #initialization }
 BrWithTooltipLook >> initialize [
 	super initialize.
+	
+	hoverShowCondition := [ :anEvent | true ].
 	preferredExtent := 200 @ 50.
 	strategy := BrAnchoredCompositeStrategy builder
 		single: [ :e | 
@@ -229,11 +279,14 @@ BrWithTooltipLook >> initialize [
 				ifTrue: [ self hide ] ].
 	overEventHandler := BlEventHandler
 		on: BlMouseEnterEvent
-		do: [ :e | 
-			self willHideLater
-				ifTrue: [ self cancelHideLater ].
-			self canShow
-				ifTrue: [ self showLater ] ].
+		do: [ :e |
+			(self shouldShowDueToHover: e)
+				ifTrue: [
+					self willHideLater
+						ifTrue: [ self cancelHideLater ].
+					self canShow
+						ifTrue: [ self showLater ] ]
+			 ].
 	outEventHandler := BlEventHandler
 		on: BlMouseLeaveEvent
 		do: [ :e | 
@@ -299,6 +352,21 @@ BrWithTooltipLook >> initializeRequests [
 
 	self request: BrTooltipStencilRequest new.
 	self request: BrTooltipVisibleRequest new
+]
+
+{ #category : #'api - displaying' }
+BrWithTooltipLook >> onPrimaryHover [
+	hoverShowCondition := [ :anEvent | anEvent modifiers isPrimaryModifier ]
+]
+
+{ #category : #'api - displaying' }
+BrWithTooltipLook >> onShiftHover [
+	hoverShowCondition := [ :anEvent | anEvent modifiers isShift ]
+]
+
+{ #category : #'private - testing' }
+BrWithTooltipLook >> shouldShowDueToHover: aMouseOverEvent [
+	^ hoverShowCondition value: aMouseOverEvent
 ]
 
 { #category : #'host space - displaying' }
