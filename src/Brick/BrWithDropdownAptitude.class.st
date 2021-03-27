@@ -40,16 +40,12 @@ BrWithDropdownAptitude class >> handle: anObject content: anotherObject [
 { #category : #'instance creation' }
 BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitudeDo: aBlock [
 	^ self
-		stencil: [
-			| anAnchoredLook |
-			
+		stencil: [ | anAnchoredLook |
 			anAnchoredLook := self anchoredAptitude
 				handle: anObject asStencil asElement;
 				content: anotherObject asStencil asElement;
 				yourself.
-
 			aBlock value: anAnchoredLook.
-			
 			BrAnchoredElement new
 				aptitude: anAnchoredLook;
 				yourself ]

@@ -22,6 +22,17 @@ BlElement >> addInteractiveModelState: aState [
 ]
 
 { #category : #'*Brick' }
+BlElement >> addLook: anAptitude [
+	self
+		deprecated: 'Please use addAptitude: instead.'
+		transformWith:
+			'`@receiver addLook: `@statements1'
+				-> '`@receiver addAptitude: `@statements1'.
+
+	self addAptitude: anAptitude 
+]
+
+{ #category : #'*Brick' }
 BlElement >> addViewModel: aViewModel [
 	self viewModel
 		ifNil: [ self viewModel: aViewModel ]
@@ -144,6 +155,9 @@ BlElement >> layoutResizerPropagations [
 
 { #category : #'*Brick' }
 BlElement >> look [
+	self
+		deprecated: 'Please use #aptitude instead.'
+		transformWith: '`@receiver look' -> '`@receiver aptitude'.
 	^ self aptitude
 ]
 
@@ -167,6 +181,17 @@ BlElement >> removeAptitude: aLook [
 					self aptitude onUninstalledIn: self.
 					self userData at: #brickLook put: nil ]
 				ifFalse: [ self aptitude remove: aLook ] ]
+]
+
+{ #category : #'*Brick' }
+BlElement >> removeLook: anAptitude [
+	self
+		deprecated: 'Please use removeAptitude: instead.'
+		transformWith:
+			'`@receiver removeLook: `@statements1'
+				-> '`@receiver removeAptitude: `@statements1'.
+
+	self removeAptitude: anAptitude 
 ]
 
 { #category : #'*Brick' }
