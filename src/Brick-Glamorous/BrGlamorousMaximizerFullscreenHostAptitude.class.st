@@ -7,7 +7,7 @@ Class {
 { #category : #'private - hooks' }
 BrGlamorousMaximizerFullscreenHostAptitude >> createCloseButton [
 	^ BrButton new
-		look: BrGlamorousButtonCircularLook + BrGlamorousButtonIconLook + BrGlamorousButtonFlatExteriorLook + BrGlamorousButtonLayoutLook;
+		aptitude: BrGlamorousButtonCircularAptitude + BrGlamorousButtonIconAptitude + BrGlamorousButtonFlatExteriorAptitude + BrGlamorousButtonLayoutAptitude;
 		icon: [ (BrGlamorousVectorIcons close asElement
 				outskirts: BlOutskirts centered;
 				background: Color gray;
@@ -72,7 +72,7 @@ BrGlamorousMaximizerFullscreenHostAptitude >> onMaximize: aMaximizeWish [
 		anElementToMaximize constraints horizontal resizer: originalHorizontalResizingStrategy.
 		anElementToMaximize constraints vertical resizer: originalVerticalResizingStrategy.
 		anElementToMaximize constraints position: originalPosition.
-		aMaximizeWish maximizerLook dispatchEvent: (BrMaximizerMinimizeWish new elementToMinimize: anElementToMaximize; hostElement: aHostElement) ].
+		aMaximizeWish maximizerAptitude dispatchEvent: (BrMaximizerMinimizeWish new elementToMinimize: anElementToMaximize; hostElement: aHostElement) ].
 
 	containerElement addChild: anElementToMaximize.
 	containerElement addChild: closeButton.

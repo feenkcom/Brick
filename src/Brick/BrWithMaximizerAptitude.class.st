@@ -26,7 +26,7 @@ BrWithMaximizerAptitude >> findAllPossibleHostsFor: anElement [
 	^ Array streamContents: [ :aStream | anElement allParentsDo: [ :eachParent |
 		| hasHostLook |
 		hasHostLook := false.
-		eachParent lookDo: [ :eachParentLook | hasHostLook := eachParentLook hasActorOfKind: BrMaximizerHostAptitude ].
+		eachParent aptitudeDo: [ :eachParentLook | hasHostLook := eachParentLook hasActorOfKind: BrMaximizerHostAptitude ].
 		hasHostLook
 			ifTrue: [ aStream nextPut: eachParent ] ] ]
 ]
@@ -83,7 +83,7 @@ BrWithMaximizerAptitude >> maximizeElement: anElementToMaximize in: aHostElement
 	anElementToMaximize parent replaceChild: anElementToMaximize with: placeholderElement.
 	
 	aHostElement dispatchEvent: (BrMaximizerMaximizeWish new
-		maximizerLook: self;
+		maximizerAptitude: self;
 		elementToMaximize: anElementToMaximize;
 		preferredBackground: self preferredBackground).
 	
