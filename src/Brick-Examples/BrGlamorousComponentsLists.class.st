@@ -1,5 +1,5 @@
 "
-!Lists
+!List
 Use lists to display large datasets.
 !!Simple
 !!!!List of all classes
