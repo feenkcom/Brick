@@ -34,8 +34,8 @@ BrStyleAptitude >> initialize [
 			up: [ :thisLook |
 				target isEmpty
 					ifFalse: [ styles := styles asForwarded: target ].
-				thisLook widget style addStyles: styles styles ];
-			down: [ :thisLook | thisLook widget style removeStyles: styles styles ];
+				thisLook widget styles addStyles: styles styles ];
+			down: [ :thisLook | thisLook widget styles removeStyles: styles styles ];
 			yourself)
 ]
 
@@ -44,7 +44,7 @@ BrStyleAptitude >> propagateStylesToWidget [
 	"Call me if this look is updated after its creation"
 
 	self widgetDo: [ :aWidget |
-		aWidget style addStyles: styles styles.
+		aWidget styles addStyles: styles styles.
 		aWidget requestStyle ]
 ]
 
