@@ -12,13 +12,13 @@ BrTextEditorShortcuts >> add: aNewEditorShortcut ifAdded: anAddedBlock ifReplace
 	"I add a new interaction shortcut or replace an existing one for the same combination and evaluate aReplacedBlock if it was the case"
 
 	shortcuts
-		at: aNewEditorShortcut combination
+		at: aNewEditorShortcut combinationForPlatform
 		ifPresent: [ :anExistingEditorShortcut |
-			shortcuts at: aNewEditorShortcut combination put: aNewEditorShortcut.
+			shortcuts at: aNewEditorShortcut combinationForPlatform put: aNewEditorShortcut.
 			aReplacedBlock value: anExistingEditorShortcut.
 			anAddedBlock value: aNewEditorShortcut ]
 		ifAbsent: [
-			shortcuts at: aNewEditorShortcut combination put: aNewEditorShortcut.
+			shortcuts at: aNewEditorShortcut combinationForPlatform put: aNewEditorShortcut.
 			anAddedBlock value: aNewEditorShortcut ]
 ]
 
@@ -43,11 +43,11 @@ BrTextEditorShortcuts >> postCopy [
 BrTextEditorShortcuts >> remove: anEditorShortcut ifFound: aFoundBlock [
 	
 	shortcuts
-		at: anEditorShortcut combination
+		at: anEditorShortcut combinationForPlatform
 		ifPresent: [ :anExistingEditorShortcut |
 			anExistingEditorShortcut = anEditorShortcut
 				ifTrue: [
-					shortcuts removeKey: anEditorShortcut combination.
+					shortcuts removeKey: anEditorShortcut combinationForPlatform.
 					aFoundBlock value: anExistingEditorShortcut ] ]
 ]
 
