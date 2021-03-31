@@ -4,7 +4,14 @@ Extension { #name : #BlElement }
 BlElement >> actors [
 	^ Array streamContents: [ :aStream |
 		self viewModelDo: [ :aViewModel | aStream nextPut: aViewModel ].	
-		self lookDo: [ :aLook | aStream nextPut: aLook ] ]
+		self aptitudeDo: [ :aLook | aStream nextPut: aLook ] ]
+]
+
+{ #category : #'*Brick' }
+BlElement >> addAptitude: aLook [
+	self aptitude
+		ifNil: [ self aptitude: aLook ]
+		ifNotNil: [ self aptitude add: aLook ].
 ]
 
 { #category : #'*Brick' }
@@ -15,10 +22,14 @@ BlElement >> addInteractiveModelState: aState [
 ]
 
 { #category : #'*Brick' }
-BlElement >> addLook: aLook [
-	self look
-		ifNil: [ self look: aLook ]
-		ifNotNil: [ self look add: aLook ].
+BlElement >> addLook: anAptitude [
+	self
+		deprecated: 'Please use addAptitude: instead.'
+		transformWith:
+			'`@receiver addLook: `@statements1'
+				-> '`@receiver addAptitude: `@statements1'.
+
+	self addAptitude: anAptitude 
 ]
 
 { #category : #'*Brick' }
@@ -39,6 +50,30 @@ BlElement >> anchor: anElement [
 ]
 
 { #category : #'*Brick' }
+BlElement >> aptitude [
+	^ self userData at: #brickLook ifAbsent: nil
+]
+
+{ #category : #'*Brick' }
+BlElement >> aptitude: aLook [
+	| aLookInstance |
+	
+	self aptitudeDo: [ :aCurrentLook |
+		aCurrentLook onUninstalledIn: self.
+		self userData at: #brickLook put: nil ].
+
+	aLookInstance := aLook asLook.
+
+	self userData at: #brickLook put: aLookInstance.
+	aLookInstance onInstalledIn: self
+]
+
+{ #category : #'*Brick' }
+BlElement >> aptitudeDo: aBlock [
+	self aptitude ifNotNil: aBlock
+]
+
+{ #category : #'*Brick' }
 BlElement >> asBrAnchoredAnchorBounds [
 	^ BrAnchoredElementAnchorBounds element: self
 ]
@@ -51,51 +86,64 @@ BlElement >> asStencil [
 { #category : #'*Brick' }
 BlElement >> asVerticallyResizableDo: aBlock [
 	^ aBlock value: (BlElement new
-		look: BrGlamorousWithVerticalResizerLook;
+		aptitude: BrGlamorousWithVerticalResizerAptitude;
 		addChild: self)
 ]
 
 { #category : #'*Brick' }
-BlElement >> gtInspectorModelLookGraphIn: aComposite [
+BlElement >> gtInspectorModelAptitudeGraphIn: aComposite [
 	<gtInspectorPresentationOrder: 30>
 	
 	^ aComposite blocMondrian
 		title: 'Widget';
-		painting: [ :view | self gtInspectorPaintModelLookIn: view ] 
+		painting: [ :view | self gtInspectorPaintModelAptitudeIn: view ] 
 ]
 
 { #category : #'*Brick' }
-BlElement >> gtInspectorPaintModelLookIn: aMondrianView [
+BlElement >> gtInspectorPaintModelAptitudeIn: aMondrianView [
 	| nodes |
 
 	nodes := { self }.
 	self viewModelDo: [ :aViewModel | nodes := nodes, aViewModel withAllChildren ].
-	self lookDo: [ :aLook | nodes := nodes, aLook withAllChildren ].
+	self aptitudeDo: [ :aLook | nodes := nodes, aLook withAllChildren ].
 	nodes := nodes asSet asArray.
 	
 	aMondrianView nodes
-		shape: [ :each |
-			BlElement new
-				geometry: BlEllipseGeometry new;
-				size: 20@20;
-				layout: BlLinearLayout horizontal alignCenter;
-				border: (BlBorder paint: Color lightGray width: 1);
-				addChild: (BlTextElement new
-					clipChildren: false;
-					preventMouseEvents;
-					text: (((each isKindOf: BlElement)
-						ifTrue: [ 'W' asRopedText ]
-						ifFalse: [ (each isKindOf: BrLook)
-							ifTrue: [ 'L' asRopedText ]
-							ifFalse: [ 'M' asRopedText ] ]) fontSize: 7)) ];
+		stencil: [ :each |
+			BrHorizontalPane new
+				fitContent;
+				alignCenter;
+				padding: (BlInsets right: 5);
+				addChild: (BrHorizontalPane new 
+					background: Color veryLightGray;
+					geometry: BlCircle new;
+					padding: (BlInsets all: 5);
+					margin: (BlInsets right: 5);
+					fitContent;
+					addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new fontSize: 10);
+						text: (((each isKindOf: BlElement)
+							ifTrue: [ 'W' ]
+							ifFalse: [ (each isKindOf: BrAptitude)
+								ifTrue: [ 'A' ]
+								ifFalse: [ 'M' ] ]))));
+				addChild: (BrLabel new
+					aptitude: (BrGlamorousLabelAptitude new);
+					text: each class name )
+				 ];
 		with: nodes.
 	
 	aMondrianView edges 
-		fromCenterBottom;
-		toCenterTop;
+		stencil: [ :x | 
+			"BlSigmoidElement new 
+				beHorizontal;"
+			BlLineElement new
+				border: (BlBorder paint: (Color gray alpha: 0.5))];
+		fromRightCenter;
+		toLeftCenter;
 		connectToAll: #actors.
 	
-	aMondrianView layout tree
+	aMondrianView layout horizontalTree nodeDistance: 20
 ]
 
 { #category : #'*Brick' }
@@ -107,37 +155,43 @@ BlElement >> layoutResizerPropagations [
 
 { #category : #'*Brick' }
 BlElement >> look [
-	^ self userData at: #brickLook ifAbsent: nil
+	self
+		deprecated: 'Please use #aptitude instead.'
+		transformWith: '`@receiver look' -> '`@receiver aptitude'.
+	^ self aptitude
 ]
 
 { #category : #'*Brick' }
-BlElement >> look: aLook [
-	| aLookInstance |
-	
-	self lookDo: [ :aCurrentLook |
-		aCurrentLook onUninstalledIn: self.
-		self userData at: #brickLook put: nil ].
+BlElement >> look: anAptitude [
+	self
+		deprecated: 'Please use aptitude: instead.'
+		transformWith:
+			'`@receiver look: `@statements1'
+				-> '`@receiver aptitude: `@statements1'.
 
-	aLookInstance := aLook asLook.
-
-	self userData at: #brickLook put: aLookInstance.
-	aLookInstance onInstalledIn: self
+	self aptitude: anAptitude 
 ]
 
 { #category : #'*Brick' }
-BlElement >> lookDo: aBlock [
-	self look ifNotNil: aBlock
-]
-
-{ #category : #'*Brick' }
-BlElement >> removeLook: aLook [
-	self look
+BlElement >> removeAptitude: aLook [
+	self aptitude
 		ifNotNil: [
-			self look = aLook
+			self aptitude = aLook
 				ifTrue: [
-					self look onUninstalledIn: self.
+					self aptitude onUninstalledIn: self.
 					self userData at: #brickLook put: nil ]
-				ifFalse: [ self look remove: aLook ] ]
+				ifFalse: [ self aptitude remove: aLook ] ]
+]
+
+{ #category : #'*Brick' }
+BlElement >> removeLook: anAptitude [
+	self
+		deprecated: 'Please use removeAptitude: instead.'
+		transformWith:
+			'`@receiver removeLook: `@statements1'
+				-> '`@receiver removeAptitude: `@statements1'.
+
+	self removeAptitude: anAptitude 
 ]
 
 { #category : #'*Brick' }
@@ -147,7 +201,7 @@ BlElement >> viewModel [
 
 { #category : #'*Brick' }
 BlElement >> viewModel: aBrViewModel [
-	self lookDo: [ :aLook | self error: 'View model must be added before look' ].
+	self aptitudeDo: [ :aLook | self error: 'View model must be added before look' ].
 
 	self viewModelDo: [ :aCurrentModel |
 		aCurrentModel onUninstalledIn: self.

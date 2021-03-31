@@ -117,6 +117,18 @@ BrTextEditorDeleter >> oneAfterCursor [
 ]
 
 { #category : #'api - configuration' }
+BrTextEditorDeleter >> oneAfterCursorIfOutsideOfSelection [
+	"Delete one symbol after the cursors but only if there is no selection nearby"
+		
+	self cursor do: [ :aCursor |
+		(self selection contains: aCursor position)
+			ifFalse: [
+				self
+					from: aCursor position
+					to: ((aCursor position + 1) min: self text size) ] ]
+]
+
+{ #category : #'api - configuration' }
 BrTextEditorDeleter >> oneBeforeCursor [
 	"Delete one symbol before the cursor"
 
@@ -130,6 +142,15 @@ BrTextEditorDeleter >> oneBeforeCursor: aCursor [
 	self
 		from: ((aCursor position - 1) max: 0)
 		to: aCursor position
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> oneBeforeCursorIfOutsideOfSelection [
+	"Delete one symbol before the cursor but only if there is no selection nearby"
+
+	self cursor do: [ :aCursor |
+		(self selection contains: aCursor position)
+			ifFalse: [ self oneBeforeCursor: aCursor ] ]
 ]
 
 { #category : #private }

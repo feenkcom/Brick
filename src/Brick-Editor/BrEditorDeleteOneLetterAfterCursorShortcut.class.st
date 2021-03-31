@@ -25,6 +25,6 @@ BrEditorDeleteOneLetterAfterCursorShortcut >> name [
 BrEditorDeleteOneLetterAfterCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor deleter
 		selected;
-		oneAfterCursor;
+		oneAfterCursorIfOutsideOfSelection;
 		delete
 ]

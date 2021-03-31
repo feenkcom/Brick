@@ -1,5 +1,5 @@
 "
-!Tabs
+!Tab
 Tab is a graphical control element that allows multiple documents or panels to be contained within a single window, using tabs as a navigational widget for switching between sets of documents.
 !!!! Default tabbable region
 ${example:BrGlamorousComponentsTabs>>#defaultTabs|previewShow=#gtLiveFor:|previewHeight=200|previewExpanded=true|codeExpanded=false}$
@@ -15,9 +15,9 @@ BrGlamorousComponentsTabs >> defaultTabs [
 	<gtExample>
 
 	^ BrTabGroup new
-		look: BrGlamorousTabGroupLook new;
+		aptitude: BrGlamorousTabGroupAptitude new;
 		addTab: (BrTab new
-			look: BrGlamorousTabLook new;
+			aptitude: BrGlamorousTabAptitude new;
 			label: 'Tab 1';
 			stencil: [
 				BrFrame new
@@ -25,7 +25,7 @@ BrGlamorousComponentsTabs >> defaultTabs [
 					margin: (BlInsets all: 10);
 					background: (Color red alpha: 0.2) ]);
 		addTab: (BrTab new
-			look: BrGlamorousTabLook new;
+			aptitude: BrGlamorousTabAptitude new;
 			label: 'Tab 2';
 			stencil: [
 				BrFrame new
@@ -34,7 +34,7 @@ BrGlamorousComponentsTabs >> defaultTabs [
 					margin: (BlInsets all: 10);
 					background: (Color blue alpha: 0.2) ]);
 		addTab: (BrTab new
-			look: BrGlamorousTabLook new;
+			aptitude: BrGlamorousTabAptitude new;
 			label: 'Tab 3';
 			stencil: [
 				BrFrame new
