@@ -685,13 +685,13 @@ BrTextEditor >> onGotFocus [
 
 { #category : #hooks }
 BrTextEditor >> onInteractionAdded: anInteraction to: anEditorElement [
-	anEditorElement removeShortcutsWithCombination: anInteraction combination.
+	anEditorElement removeShortcutsWithCombination: anInteraction combinationForPlatform.
 	anEditorElement addShortcut: anInteraction asShortcut
 ]
 
 { #category : #hooks }
 BrTextEditor >> onInteractionRemoved: anInteraction from: anEditorElement [
-	anEditorElement removeShortcutsWithCombination: anInteraction combination
+	anEditorElement removeShortcutsWithCombination: anInteraction combinationForPlatform
 ]
 
 { #category : #'private - focus' }

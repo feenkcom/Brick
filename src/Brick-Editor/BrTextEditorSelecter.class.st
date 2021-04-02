@@ -273,8 +273,8 @@ BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount
 				
 			aSelectionStart := aTextPosition - anAmount.
 			
-			aSelectionStart = aSelectionEnd
-				ifFalse: [ toSelect add: (BlSelection from: aSelectionStart to: aSelectionEnd) ] ].
+			aSelectionStart < aSelectionEnd
+				ifTrue: [ toSelect add: (BlSelection from: aSelectionStart to: aSelectionEnd) ] ].
 
 	^ BrExtendSelectionCommand new 
 		editor: editor;

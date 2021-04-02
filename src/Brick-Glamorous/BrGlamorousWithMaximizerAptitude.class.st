@@ -2,7 +2,8 @@ Class {
 	#name : #BrGlamorousWithMaximizerAptitude,
 	#superclass : #BrWithMaximizerAptitude,
 	#instVars : [
-		'actionButton'
+		'actionButton',
+		'showMaximizeButton'
 	],
 	#category : #'Brick-Glamorous-Maximizer'
 }
@@ -23,12 +24,15 @@ BrGlamorousWithMaximizerAptitude >> createActionButton [
 
 { #category : #'api - visibility' }
 BrGlamorousWithMaximizerAptitude >> hideMaximizeButton [
+	showMaximizeButton := false.
 	actionButton visibility: BlVisibility gone
 ]
 
 { #category : #initialization }
 BrGlamorousWithMaximizerAptitude >> initialize [
 	super initialize.
+
+	showMaximizeButton := true.
 
 	actionButton := self createActionButton.
 	actionButton action: [
@@ -56,10 +60,15 @@ BrGlamorousWithMaximizerAptitude >> onMaximized [
 BrGlamorousWithMaximizerAptitude >> onMinimized [
 	super onMinimized.
 
+	showMaximizeButton
+		ifFalse: [ ^ self ].
 	actionButton visibility: BlVisibility visible
 ]
 
 { #category : #'api - visibility' }
 BrGlamorousWithMaximizerAptitude >> showMaximizeButton [
-	actionButton visibility: BlVisibility visible
+	showMaximizeButton := true.
+	
+	self isMaximized
+		ifFalse: [ actionButton visibility: BlVisibility visible ]
 ]

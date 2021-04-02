@@ -49,7 +49,10 @@ BrWithMaximizerAptitude >> initializeListeners [
 	self when: BrMaximizerMinimizeWish do: [ :anEvent |
 		self
 			minimizeElement: anEvent elementToMinimize
-			in: anEvent hostElement ]
+			in: anEvent hostElement ].
+		
+	self when: BrWithMaximizerAptitudeMaximizeWish do: [ :anEvent |
+		self maximize ]
 ]
 
 { #category : #accessing }
