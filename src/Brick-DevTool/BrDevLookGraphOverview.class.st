@@ -10,110 +10,118 @@ Class {
 { #category : #'private - instance creation' }
 BrDevLookGraphOverview >> buildLookAndModelGraph [
 	| aMondrian |
-	
 	aMondrian := GtMondrian new.
-	
-	aMondrian nodes 
-		stencil: [ :eachClass |self buildNodeForClass: eachClass ];
-		with: { self lookClass };
-		forEach: [ :eachLookClass |
-			aMondrian nodes 
-				stencil: [ :eachRequestClass |
+	aMondrian nodes
+		stencil: [ :eachClass | self buildNodeForClass: eachClass ];
+		with: {self lookClass};
+		forEach: [ :eachLookClass | 
+			aMondrian nodes
+				stencil: [ :eachRequestClass | 
+					BrLabel new
+						beTinySize;
+						aptitude: BrGlamorousLabelAptitude new;
+						text: eachRequestClass value name ];
+				with:
+					((eachLookClass withAllSuperclassRequests
+						sorted: [ :a :b | a name < b name ])
+						collect: [ :aRequest | #aptitude -> aRequest ]).
+			aMondrian layout explicit: BlLinearLayout vertical ]
+			in: #requests;
+		forEach: [ :eachLookClass | 
+			aMondrian nodes
+				stencil: [ :eachRequestClass | 
 					BrLabel new
 						beTiny;
 						aptitude: BrGlamorousLabelAptitude new;
 						text: eachRequestClass value name ];
-				with: ((eachLookClass withAllSuperclassRequests sorted: [ :a :b | a name < b name ]) collect: [ :aRequest | #aptitude -> aRequest ]).
-				
-			aMondrian layout explicit: BlLinearLayout vertical
-		] in: #requests;
-		forEach: [ :eachLookClass |
-			aMondrian nodes 
-				stencil: [ :eachRequestClass |
-					BrLabel new
-						beTiny;
-						aptitude: BrGlamorousLabelAptitude new;
-						text: eachRequestClass value name ];
-				with: ((eachLookClass withAllSuperclassChangeEvents sorted: [ :a :b | a name < b name ]) collect: [ :aChangeEvent | #aptitude -> aChangeEvent ]).
-			
-			aMondrian layout explicit: BlLinearLayout vertical
-		] in: #changeEvents.
-	
-	aMondrian nodes 
+				with:
+					((eachLookClass withAllSuperclassChangeEvents
+						sorted: [ :a :b | a name < b name ])
+						collect: [ :aChangeEvent | #aptitude -> aChangeEvent ]).
+			aMondrian layout explicit: BlLinearLayout vertical ]
+			in: #changeEvents.
+	aMondrian nodes
 		stencil: [ :eachClass | self buildNodeForClass: eachClass ];
 		with: self lookClass allRelatedViewModels;
-		forEach: [ :eachModelClass |
-			aMondrian nodes 
-				stencil: [ :eachRequestClass |
+		forEach: [ :eachModelClass | 
+			aMondrian nodes
+				stencil: [ :eachRequestClass | 
+					BrLabel new
+						beTinySize;
+						aptitude: BrGlamorousLabelAptitude new;
+						text: eachRequestClass value name ];
+				with:
+					((eachModelClass withAllSuperclassRequests
+						sorted: [ :a :b | a name < b name ])
+						collect: [ :aRequest | #model -> aRequest ]).
+			aMondrian layout explicit: BlLinearLayout vertical ]
+			in: #requests;
+		forEach: [ :eachModelClass | 
+			aMondrian nodes
+				stencil: [ :eachRequestClass | 
 					BrLabel new
 						beTiny;
 						aptitude: BrGlamorousLabelAptitude new;
 						text: eachRequestClass value name ];
-				with: ((eachModelClass withAllSuperclassRequests sorted: [ :a :b | a name < b name ]) collect: [ :aRequest | #model -> aRequest ]).
-				
-			aMondrian layout explicit: BlLinearLayout vertical
-		] in: #requests;
-			
-		forEach: [ :eachModelClass |	
-			aMondrian nodes 
-				stencil: [ :eachRequestClass |
-					BrLabel new
-						beTiny;
-						aptitude: BrGlamorousLabelAptitude new;
-						text: eachRequestClass value name ];
-				with: ((eachModelClass withAllSuperclassChangeEvents sorted: [ :a :b | a name < b name ]) collect: [ :aChangeEvent | #model -> aChangeEvent ]).
-			aMondrian layout explicit: BlLinearLayout vertical.
-		]  in: #changeEvents;
-		
-		forEach: [ :eachModelClass |
+				with:
+					((eachModelClass withAllSuperclassChangeEvents
+						sorted: [ :a :b | a name < b name ])
+						collect: [ :aChangeEvent | #model -> aChangeEvent ]).
+			aMondrian layout explicit: BlLinearLayout vertical ]
+			in: #changeEvents;
+		forEach: [ :eachModelClass | 
 			aMondrian edges
 				passive;
 				fromRightCenter;
 				toRightCenter;
-				stencil: [ :x |
+				stencil: [ :x | 
 					BlParabollaArcElement new
 						border: (BlBorder paint: (Color blue alpha: 0.5) width: 2);
-						toHead: (BlArrowheadSimpleArrow new border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
-				connect: (eachModelClass withAllSuperclassRequests collect: [ :eachRequest | eachRequest -> eachRequest new responseClass ])
+						toHead:
+							(BlArrowheadSimpleArrow new
+								border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
+				connect:
+					(eachModelClass withAllSuperclassRequests
+						collect: [ :eachRequest | eachRequest -> eachRequest new responseClass ])
 					from: [ :each | #model -> each key ]
 					to: [ :each | #model -> each value ].
-					
-			aMondrian layout explicit: BlLinearLayout vertical ] in: #default.
-				
+			aMondrian layout explicit: BlLinearLayout vertical ]
+			in: #default.
 	aMondrian layout explicit: BlLinearLayout vertical.
-
 	aMondrian edges
 		stencil: [ :each | BlLineElement new border: BlBorder empty ];
 		connectToAll: #allRelatedViewModels.
-		
 	aMondrian edges
 		passive;
 		fromRightCenter;
 		toLeftCenter;
-		stencil: [ :x |
+		stencil: [ :x | 
 			BlSigmoidElement new
 				beHorizontal;
 				border: (BlBorder paint: (Color red alpha: 0.5) width: 2);
-				toHead: (BlArrowheadSimpleArrow new border: (BlBorder paint: (Color red alpha: 0.5) width: 2)) ];
+				toHead:
+					(BlArrowheadSimpleArrow new
+						border: (BlBorder paint: (Color red alpha: 0.5) width: 2)) ];
 		connect: self lookClass withAllSuperclassRequests
 			from: [ :eachRequest | #aptitude -> eachRequest ]
 			to: [ :eachRequest | #model -> eachRequest ].
-
 	aMondrian edges
 		passive;
 		fromLeftCenter;
 		toRightCenter;
-		stencil: [ :x |
+		stencil: [ :x | 
 			BlSigmoidElement new
 				beHorizontal;
 				border: (BlBorder paint: (Color blue alpha: 0.5) width: 2);
-				toHead: (BlArrowheadSimpleArrow new border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
+				toHead:
+					(BlArrowheadSimpleArrow new
+						border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
 		connect: self lookClass withAllSuperclassChangeEvents
-			from: [ :eachEvent | #model  -> eachEvent ]
+			from: [ :eachEvent | #model -> eachEvent ]
 			to: [ :eachEvent | #aptitude -> eachEvent ].
-
-	aMondrian layout horizontalTree levelDistance: 50; nodeDistance: 50.
-
+	aMondrian layout horizontalTree
+		levelDistance: 50;
+		nodeDistance: 50.
 	^ aMondrian root clipChildren: false
 ]
 
