@@ -90,3 +90,8 @@ BrSimpleTree >> stencil: aBlock [
 			removeChildren;
 			addChild: aNodeStencil asElement ]
 ]
+
+{ #category : #'api - scripting' }
+BrSimpleTree >> withoutSelection [
+	self aptitude withoutSelection
+]

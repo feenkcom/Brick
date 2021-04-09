@@ -61,6 +61,9 @@ BrColumnedTreeDataSource >> onBindHolder: anElementHolder at: aPosition [
 
 	anElementHolder itemElement states removeState: BlElementState hovered.
 
+	supportsSelection
+		ifFalse: [ ^ self ].
+
 	(self selection containsIndex: aPosition)
 		ifTrue: [ anElementHolder itemElement states addState: BlElementSelectedState uniqueInstance]
 		ifFalse: [ anElementHolder itemElement states removeState: BlElementSelectedState uniqueInstance ]
