@@ -39,3 +39,8 @@ BrColumnedTreeAptitude >> rowStencilBuilder: aStencil [
 
 	treeElement dataSource rowElementStencil: aStencil
 ]
+
+{ #category : #'as yet unclassified' }
+BrColumnedTreeAptitude >> withoutSelection [
+	treeElement dataSource supportsSelection: false
+]

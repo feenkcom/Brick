@@ -98,3 +98,8 @@ BrTreeAptitude >> root: aTreeNode [
 BrTreeAptitude >> treeElement [
 	^ treeElement
 ]
+
+{ #category : #'as yet unclassified' }
+BrTreeAptitude >> withoutSelection [
+	self subclassResponsibility
+]
