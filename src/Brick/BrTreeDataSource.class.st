@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'rootNode',
 		'treeElement',
+		'supportsSelection',
 		'selection',
 		'nodeTypeStencil',
 		'clickToSelectHandler',
@@ -20,7 +21,8 @@ BrTreeDataSource >> getRowIndex: anElementHolder [
 { #category : #initialization }
 BrTreeDataSource >> initialize [
 	super initialize.
-
+	
+	supportsSelection := true.
 	selection := BlCompositeSelection new.
 	clickToSelectHandler := BrTreeClickToSelectHandler new
 ]
@@ -127,9 +129,17 @@ BrTreeDataSource >> selection [
 
 { #category : #accessing }
 BrTreeDataSource >> selection: aBlSelection [
+	supportsSelection
+		ifFalse: [ ^ self ].
+
 	selection do: [ :eachMonotoneSelection | self notifyItemsChanged: eachMonotoneSelection indices ].
 	selection := aBlSelection.
 	selection do: [ :eachMonotoneSelection | self notifyItemsChanged: eachMonotoneSelection indices ]
+]
+
+{ #category : #accessing }
+BrTreeDataSource >> supportsSelection: aBoolean [
+	supportsSelection := aBoolean
 ]
 
 { #category : #accessing }

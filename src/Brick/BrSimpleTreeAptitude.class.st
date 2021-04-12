@@ -89,3 +89,8 @@ BrSimpleTreeAptitude >> whenDetachedDo: aBlock [
 BrSimpleTreeAptitude >> whenRecycledDo: aBlock [
 	treeElement dataSource recycledBlock: aBlock
 ]
+
+{ #category : #'as yet unclassified' }
+BrSimpleTreeAptitude >> withoutSelection [
+	treeElement dataSource supportsSelection: false
+]

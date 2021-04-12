@@ -168,9 +168,14 @@ BrDevLookOverview >> buildRequestsSection [
 { #category : #'private - instance creation' }
 BrDevLookOverview >> buildSectionLabel: aString [
 	^ BrLabel new
-		beHuge;
+		beHugeSize;
 		aptitude: BrGlamorousLabelAptitude;
-		margin: (BlInsets top: 15 right: 0 bottom: 0 left: 1);
+		margin:
+			(BlInsets
+				top: 15
+				right: 0
+				bottom: 0
+				left: 1);
 		text: aString
 ]
 
