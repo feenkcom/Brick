@@ -23,10 +23,16 @@ Class {
 	#name : #BrTheme,
 	#superclass : #Object,
 	#classInstVars : [
-		'global'
+		'global',
+		'default'
 	],
 	#category : #'Brick-Theme'
 }
+
+{ #category : #'*Brick-Theme' }
+BrTheme class >> default [
+	^ default ifNil: [ default := self new ]
+]
 
 { #category : #accessing }
 BrTheme class >> global [

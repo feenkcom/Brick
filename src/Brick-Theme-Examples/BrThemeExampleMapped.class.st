@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+BrThemeExampleMapped >> defaultBackground [
+	^ Color random
+]
+
+{ #category : #accessing }
 BrThemeExampleMapped >> initialize [
 	super initialize.
 	self at: BrButton put: #newGlamorousButtonLookFor:
