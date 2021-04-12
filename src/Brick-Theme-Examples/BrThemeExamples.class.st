@@ -42,6 +42,19 @@ BrThemeExamples >> automaticLookLookBased [
 ]
 
 { #category : #accessing }
+BrThemeExamples >> changingProperty [
+	<gtExample>
+	| red blue element |
+	red := BrThemeExampleA new.
+	blue := BrThemeExampleB new.
+	element := BlElement new.
+	element theme: red.
+	element theme: #background with: #defaultBackground.
+	element when: BlClickEvent do: [ :e | element theme: blue ].
+	^ element
+]
+
+{ #category : #accessing }
 BrThemeExamples >> container [
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
