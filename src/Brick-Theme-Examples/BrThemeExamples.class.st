@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrThemeExamples >> automaticLookElementBased [
 	<gtExample>
+	<noTest>
 	| container parent child1 child2 |
 	container := self container.
 	parent := BrThemeableElement new
@@ -23,6 +24,7 @@ BrThemeExamples >> automaticLookElementBased [
 { #category : #accessing }
 BrThemeExamples >> automaticLookLookBased [
 	<gtExample>
+	<noTest>
 	| container parent child1 child2 |
 	container := self container.
 	parent := BlElement new
