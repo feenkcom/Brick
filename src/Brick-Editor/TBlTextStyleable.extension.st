@@ -34,8 +34,8 @@ TBlTextStyleable >> onClick: aClickAction [
 { #category : #'*Brick-Editor' }
 TBlTextStyleable >> onCursorEnter: anEnterAction leave: aLeaveAction [
 	"Perform actions when a cursor enters and leaves a piece of text.
-	The enter action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorAddedEvent | ]
-	The leave action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorRemovedEvent | ]"
+	The enter action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorAddedEvent :anAttributeStart :anAttributeEnd | ]
+	The leave action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorRemovedEvent :anAttributeStart :anAttributeEnd | ]"
 
 	self attributesBuilder attribute: (BrTextCursorAttribute new
 			enterAction: anEnterAction;
