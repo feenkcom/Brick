@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrThemeExamples >> automaticLookElementBased [
 	<gtExample>
+	<noTest>
 	| container parent child1 child2 |
 	container := self container.
 	parent := BrThemeableElement new
@@ -23,6 +24,7 @@ BrThemeExamples >> automaticLookElementBased [
 { #category : #accessing }
 BrThemeExamples >> automaticLookLookBased [
 	<gtExample>
+	<noTest>
 	| container parent child1 child2 |
 	container := self container.
 	parent := BlElement new
@@ -39,6 +41,19 @@ BrThemeExamples >> automaticLookLookBased [
 	parent addChild: child1.
 	parent addChild: child2.
 	^ container
+]
+
+{ #category : #accessing }
+BrThemeExamples >> changingProperty [
+	<gtExample>
+	| red blue element |
+	red := BrThemeExampleA new.
+	blue := BrThemeExampleB new.
+	element := BlElement new.
+	element theme: red.
+	element theme: #background with: #defaultBackground.
+	element when: BlClickEvent do: [ :e | element theme: blue ].
+	^ element
 ]
 
 { #category : #accessing }

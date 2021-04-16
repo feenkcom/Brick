@@ -1,36 +1,29 @@
 Extension { #name : #BlElement }
 
 { #category : #'*Brick-Theme' }
-BlElement >> dispatchThemeChanged [
-	self flag: 'the strategy decides where to dispatch to'.
-	self userData removeKey: #brickTheme ifAbsent: [ "noop" ].
-	self dispatchEvent: BrThemeChanged new.
-	self children do: #dispatchThemeChanged
-]
-
-{ #category : #'*Brick-Theme' }
 BlElement >> theme [
-	^ self userData
-		at: #brickTheme
-		ifAbsentPut: [ self themeStrategy themeFor: self ]
+	^ self userData at: #brickTheme ifAbsent: [ BrTheme default ]
 ]
 
 { #category : #'*Brick-Theme' }
 BlElement >> theme: aTheme [
-	self themeStrategy: (BrThemeExplicitStrategy theme: aTheme)
+	"self themeStrategy: (BrThemeExplicitStrategy theme: aTheme)"
+
+	self properties
+		addProperty:
+			(BrThemeElementProperty new
+				theme: aTheme;
+				yourself)
 ]
 
 { #category : #'*Brick-Theme' }
-BlElement >> themeStrategy [
+BlElement >> theme: aSymbol with: anotherSymbol [
+	self themedProperties at: aSymbol put: anotherSymbol
+]
+
+{ #category : #'*Brick-Theme' }
+BlElement >> themedProperties [
 	^ self userData
-		at: #brickThemeStrategy
-		ifAbsentPut: [ self isRoot
-				ifTrue: [ BrThemeGlobalStrategy instance ]
-				ifFalse: [ BrThemeInheritStrategy instance ] ]
-]
-
-{ #category : #'*Brick-Theme' }
-BlElement >> themeStrategy: aStrategy [
-	self userData at: #brickThemeStrategy put: aStrategy.
-	self dispatchThemeChanged
+		at: #brickThemedProperties
+		ifAbsentPut: [ Dictionary new ]
 ]

@@ -1,3 +1,12 @@
+"
+I am an abstract superclass for several classes that can ""normalize"" values to fall within a certain range.
+The target range may be an explicit set of values (==BrIdentityNormalizer==), a numeric range (==BrNumberLinearNormalizer==), or a set of colours (==BrColorLinearNormalizer==).
+There are numerous examples in ==BrNormalizerExamples==, for example:
+
+${method:name=BrNormalizerExamples>>#numberLinearNormalizer}$
+
+
+"
 Class {
 	#name : #BrGlamorousNormalizer,
 	#superclass : #Object,

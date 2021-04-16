@@ -18,10 +18,15 @@ BrThemeElementProperty >> = anObject [
 
 { #category : #accessing }
 BrThemeElementProperty >> applyOnElement: anElement [
-	self flag: 'TODO find better than nil option?'.
+	"self flag: 'TODO find better than nil option?'.
 	anElement aptitude
 		ifNil: [ (self theme newLookFor: anElement)
-				ifNotNil: [ :e | anElement aptitude: e ] ]
+				ifNotNil: [ :e | anElement aptitude: e ] ]"
+
+	"anElement themedProperties
+		keysAndValuesDo: [ :k :v | anElement perform: k , ':' with: (theme perform: v) ]"
+		
+	anElement userData at: #brickTheme put: theme.	
 ]
 
 { #category : #accessing }

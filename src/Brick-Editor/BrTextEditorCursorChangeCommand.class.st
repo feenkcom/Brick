@@ -68,20 +68,47 @@ BrTextEditorCursorChangeCommand >> printOn: aStream [
 
 { #category : #executing }
 BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
-	| hasCursor anEvent theEventHandlingAttributes |
-	self position >= aTextEditor text size
+	| anEditorText thePotentialHandlerTextInterval theEventHandlingAttributes eventHandlingAttributesOutside eventHandlingAttributesInside |
+
+	anEditorText := aTextEditor text.
+
+	self position > anEditorText size
 		ifTrue: [ ^ self ].
-	theEventHandlingAttributes := (aTextEditor text
-		attributesAt: self position)
-		select: [ :eachAttribute | eachAttribute isEventHandler ].
-	theEventHandlingAttributes ifEmpty: [ ^ self ].
-	hasCursor := aTextEditor cursors
-		anySatisfy: [ :eachCursor | eachCursor position = self position ].
-	anEvent := hasCursor
-		ifTrue: [ BrTextEditorCursorAddedEvent cursor: self cursor ]
-		ifFalse: [ BrTextEditorCursorRemovedEvent cursor: self cursor ].
+		
+	self position <= 0
+		ifTrue: [ ^ self ].
+	
+	"only chars to the left from the cursor handle cursor events"
+	thePotentialHandlerTextInterval := self position to: self position.
+
+	theEventHandlingAttributes := ((thePotentialHandlerTextInterval
+		flatCollect: [ :eachTextIndex | anEditorText attributesAt: eachTextIndex ])
+			select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
+
 	theEventHandlingAttributes
-		do: [ :eachAttribute | 
-			(eachAttribute wantsEvent: anEvent in: aTextEditor)
-				ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
+		ifEmpty: [ ^ self ].
+	
+	eventHandlingAttributesOutside := OrderedCollection new.
+	eventHandlingAttributesInside := OrderedCollection new.
+
+	theEventHandlingAttributes do: [ :eachEventHandlerAttribute |
+		anEditorText
+			findAttribute: eachEventHandlerAttribute
+			indicesDo: [ :eachEventHandlerStart :eachEventHandlerEnd |
+				aTextEditor cursors do: [ :eachCursor |
+					(eachCursor position between: eachEventHandlerStart and: eachEventHandlerEnd)
+						ifTrue: [ eventHandlingAttributesInside add: eachEventHandlerAttribute ]
+						ifFalse: [ eventHandlingAttributesOutside add: eachEventHandlerAttribute ] ] ] ].
+	
+	eventHandlingAttributesOutside do: [ :eachEventHandlerAttribute |
+		| anEvent |
+		anEvent := BrTextEditorCursorRemovedEvent cursor: self cursor.
+		(eachEventHandlerAttribute wantsEvent: anEvent in: aTextEditor)
+			ifTrue: [ eachEventHandlerAttribute handleEvent: anEvent in: aTextEditor on: nil ] ].
+
+	eventHandlingAttributesInside do: [ :eachEventHandlerAttribute |
+		| anEvent |
+		anEvent := BrTextEditorCursorAddedEvent cursor: self cursor.
+		(eachEventHandlerAttribute wantsEvent: anEvent in: aTextEditor)
+			ifTrue: [ eachEventHandlerAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
 ]
