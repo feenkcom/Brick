@@ -6,9 +6,9 @@ Cell stencil builder builds a stencil or an element for each cell within a colum
 [[[
 | aColumn |
 
-aColumn := BrListColumn new.
+aColumn := BrColumn new.
 aColumn title: 'Column'.
-aColumn stencil: [ :aRowValue :aRowIndex :aColumnIndex | BrListLabelStencil new text: aRowValue asString ].
+aColumn stencil: [ :aRowValue :aRowIndex :aColumnIndex | BrLabel new aptitude: BrLabelAptitude text: aRowValue asString ].
 aColumn
 
 ]]]
