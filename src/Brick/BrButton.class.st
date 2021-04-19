@@ -28,6 +28,15 @@ BrButton >> action: aValuable [
 	self viewModel action: aValuable
 ]
 
+{ #category : #accessing }
+BrButton >> gtActionFor: aView [
+	<gtView>
+	self action ifNil: [ ^ aView empty ].
+	^ (self action gtSourceCodeFor: aView)
+		title: 'Action';
+		priority: 20
+]
+
 { #category : #'api - widget' }
 BrButton >> icon [
 	^ iconModel icon
