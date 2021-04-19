@@ -579,6 +579,19 @@ BrGlamorousVectorIcons class >> rightSide [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> robot [
+	<script: 'self robot inspect'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			evenOdd;
+			svg: 'M7.07 4.245v1.34h3.71c.6 0 1.1.49 1.1 1.1v1.38h1.48c.13 0 .24.1.24.24v2.8c0 .13-.1.24-.24.24h-1.48v1.38c0 .6-.49 1.1-1.1 1.1h-8.07c-.6 0-1.1-.49-1.1-1.1V11.335H.24C.1 11.335 0 11.235 0 11.105V8.305c0-.13.1-.24.24-.24h1.37V6.695c0-.6.49-1.1 1.1-1.1h3.71V4.245c-.43-.14-.73-.54-.73-1.01c0-.58.47-1.06 1.06-1.06c.58 0 1.06.47 1.06 1.06C7.8 3.715 7.5 4.115 7.07 4.245L7.07 4.245zM4.54 10.995h4.52c.22 0 .4.18.4.4v.18c0 .22-.18.4-.4.4H4.54c-.22 0-.4-.18-.4-.4v-.18C4.14 11.175 4.32 10.995 4.54 10.995L4.54 10.995zM8.7 7.435c.59 0 1.08.48 1.08 1.08c0 .59-.48 1.08-1.08 1.08s-1.08-.48-1.08-1.08C7.63 7.915 8.11 7.435 8.7 7.435L8.7 7.435zM4.88 7.435c.59 0 1.08.48 1.08 1.08c0 .59-.48 1.08-1.08 1.08c-.59 0-1.08-.48-1.08-1.08C3.81 7.915 4.29 7.435 4.88 7.435L4.88 7.435z'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> search [
 	<script: 'self search inspect'>
 
