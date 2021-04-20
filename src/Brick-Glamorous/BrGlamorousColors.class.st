@@ -35,6 +35,7 @@ Class {
 		'LinkWithErrorColor',
 		'NeutralBackgroundColor',
 		'NewsBackgroundColor',
+		'PaleErrorBackgroundColor',
 		'PressedButtonBorderColor',
 		'PressedButtonTextColor',
 		'PressedListItemBackgroundColor',
@@ -358,8 +359,9 @@ BrGlamorousColors class >> initialize [
 	"buttons - background"
 	ButtonBackgroundColor := Color white.
 	DisabledButtonBackgroundColor := Color fromHexString: #f5f5f5 "grey-3".
-	
+
 	"status - background"
+	PaleErrorBackgroundColor := Color fromHexString: #'#ffccc7' "red-2".
 	ErrorBackgroundColor := Color fromHexString: #ff7875 "red-4".
 	SuccessBackgroundColor := Color fromHexString: #'95de64' "green-4".
 	FailureBackgroundColor := Color fromHexString: #ffd666 "gold-4".
@@ -432,6 +434,11 @@ BrGlamorousColors class >> neutralBackgroundColor [
 { #category : #accessing }
 BrGlamorousColors class >> newsBackgroundColor [
 	^ NewsBackgroundColor
+]
+
+{ #category : #'status - background' }
+BrGlamorousColors class >> paleErrorBackgroundColor [
+	^ PaleErrorBackgroundColor
 ]
 
 { #category : #'button - border' }
