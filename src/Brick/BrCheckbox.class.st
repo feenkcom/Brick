@@ -39,5 +39,7 @@ BrCheckbox >> initialize [
 				(BrInteractiveModel new
 					addStates: {
 						BrLayoutAlignmentModel center.
-					}) } )
+					}) } ).
+					
+	self check
 ]
