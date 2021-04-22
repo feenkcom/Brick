@@ -47,6 +47,9 @@ BrRBTextStyler >> addAttributes: attributes forNode: anRBNode [
 
 { #category : #formatting }
 BrRBTextStyler >> addAttributes: attributes from: start to: stop [
+	text isEmpty
+		ifTrue: [ ^ self ].
+	
 	
 	text attributes: attributes
 		from: start

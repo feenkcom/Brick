@@ -41,5 +41,5 @@ BrCheckbox >> initialize [
 						BrLayoutAlignmentModel center.
 					}) } ).
 					
-	self check
+	self uncheck
 ]
