@@ -1,5 +1,5 @@
 Class {
 	#name : #BrThemeChanged,
 	#superclass : #BrChangeEvent,
-	#category : #'Brick-Theme'
+	#category : #'Brick-Theme-Examples'
 }

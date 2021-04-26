@@ -6,7 +6,7 @@ Class {
 		'addedToSceneGraphEventHandler',
 		'themeChangedEventHandler'
 	],
-	#category : #'Brick-Theme'
+	#category : #'Brick-Theme-Examples'
 }
 
 { #category : #accessing }
