@@ -11,38 +11,30 @@ BrContextMenuBottomRightAptitude >> initialize [
 		addChange:
 			(BrLookChange new
 				up: [ :e | 
-					| handle content |
-					handle := widget childNamed: #handle.
-					content := widget childNamed: #content.
 					widget
 						layout: BlLinearLayout horizontal;
 						constraintsDo: [ :c | 
 							c horizontal fitContentLimited.
 							c vertical fitContentLimited.
 							c frame horizontal alignLeft.
-							c frame vertical alignTop ];
-						padding:
-							(BlInsets
-								top: 0
-								left: 0
-								bottom: handle height
-								right: handle width);
-						removeChild: handle;
-						addChildFirst: handle.
-					content
-						constraintsDo: [ :c | 
-							c horizontal fitContentLimitedOffset: handle width.
-							c vertical fitContentLimitedOffset: handle height ];
-						margin:
-							(BlInsets
-								top: handle width
-								left: 0
-								bottom: 0
-								right: 0).
-					handle
-						constraintsDo: [ :c | 
+							c frame vertical alignTop ].
+	
+					widget childWithId: #handle ifFound: [ :aHandle |
+						widget
+							padding: (BlInsets top: 0 left: 0 bottom: aHandle height right: aHandle width);
+							removeChild: aHandle;
+							addChildFirst: aHandle.
+						aHandle constraintsDo: [ :c | 
 							c linear horizontal alignLeft.
-							c linear vertical alignTop ] ];
+							c linear vertical alignTop ] ].
+					
+					widget childWithId: #content ifFound: [ :aContent |
+						widget childWithId: #handle ifFound: [ :aHandle |
+							aContent
+								constraintsDo: [ :c | 
+									c horizontal fitContentLimitedOffset: aHandle width.
+									c vertical fitContentLimitedOffset: aHandle height ];
+								margin: (BlInsets top: aHandle width) ] ] ];
 				down: [ :e |  ];
 				yourself)
 ]
