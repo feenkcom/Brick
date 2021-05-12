@@ -25,13 +25,11 @@ BrGlamorousLinkButtonExteriorAptitude >> backgroundPaint: anObject [
 { #category : #initialization }
 BrGlamorousLinkButtonExteriorAptitude >> initialize [
 	super initialize.
-	backgroundPaint := BrGlamorousColors disabledButtonBackgroundColor.
-
+	backgroundPaint := self theme button disabledBackgroundColor.
 	self default background: self backgroundPaint.
-	self hovered background: BrGlamorousColors hoveredButtonTextColor.
-	self pressed background: BrGlamorousColors pressedButtonTextColor.
-	self disabled background: BrGlamorousColors disabledButtonTextColor.
-
+	self hovered background: self theme button hoveredTextColor.
+	self pressed background: self theme button pressedTextColor.
+	self disabled background: self theme button disabledTextColor.
 	self
 		addChangeProperty: #(widgetContent layout)
 		with: [ BlLinearLayout horizontal alignCenter ].

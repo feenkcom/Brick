@@ -33,9 +33,12 @@ BrGlamorousResizerAptitude >> initialize [
 { #category : #'private - instance creation' }
 BrGlamorousResizerAptitude >> newInteractiveCommonLook [
 	^ BrInteractiveCommonAptitude new
-		default: [ :aWidget | aWidget background: BrGlamorousColors defaultButtonBorderColor ];
-		hovered: [ :aWidget | aWidget background: BrGlamorousColors hoveredButtonBorderColor ];
-		pressed: [ :aWidget | aWidget background: BrGlamorousColors pressedButtonBorderColor ]
+		default:
+				[ :aWidget | aWidget background: self theme button defaultBorderColor ];
+		hovered:
+				[ :aWidget | aWidget background: self theme button hoveredBorderColor ];
+		pressed:
+				[ :aWidget | aWidget background: self theme button pressedBorderColor ]
 ]
 
 { #category : #'private - instance creation' }

@@ -48,7 +48,6 @@ BrGlamorousAccordionAptitude >> headerBarWidth [
 { #category : #initialization }
 BrGlamorousAccordionAptitude >> initialize [
 	super initialize.
-
 	wrapper := self newWrapper.
 	headerBar := self newHeaderBar.
 	contentBar := self newContentBar.
@@ -56,31 +55,36 @@ BrGlamorousAccordionAptitude >> initialize [
 	headerContainer addChild: headerBar.
 	contentContainer := self newContentContainer.
 	contentContainer addChild: contentBar.
-
 	wrapper addChild: headerContainer as: #header.
 	wrapper addChild: contentContainer as: #content.
-	
 	self
 		addChangeProperty: #(widget layout)
 		with: [ BlLinearLayout horizontal ].
 	self addChangeAddChildAs: #(content wrapper) with: [ wrapper ].
-	
-	self add: (BrStyleCommonAptitude new
-		@ headerBar;
-		default: [ :aStyle | aStyle background: (Color gray alpha: 0.4) ];
-		focused: [ :aStyle | aStyle background: (BrGlamorousColors primaryBorderColor alpha: 0.4) ]).
-		
-	self add: (BrStyleCommonAptitude new
-		@ contentBar;
-		default: [ :aStyle | aStyle gone; background: (Color gray alpha: 0.2) ];
-		focused: [ :aStyle | aStyle background: (BrGlamorousColors primaryBorderColor alpha: 0.2) ];
-		expanded: [ :aStyle | aStyle visible ]).
-	
-	self add: (BrLayoutResizerAptitude new
-		inherit;
-		inherit: wrapper;
-		inherit: contentContainer).
-	
+	self
+		add:
+			(BrStyleCommonAptitude new
+				@ headerBar;
+				default: [ :aStyle | aStyle background: (Color gray alpha: 0.4) ];
+				focused:
+						[ :aStyle | aStyle background: (self theme default primaryBorderColor alpha: 0.4) ]).
+	self
+		add:
+			(BrStyleCommonAptitude new
+				@ contentBar;
+				default: [ :aStyle | 
+					aStyle
+						gone;
+						background: (Color gray alpha: 0.2) ];
+				focused:
+						[ :aStyle | aStyle background: (self theme default primaryBorderColor alpha: 0.2) ];
+				expanded: [ :aStyle | aStyle visible ]).
+	self
+		add:
+			(BrLayoutResizerAptitude new
+				inherit;
+				inherit: wrapper;
+				inherit: contentContainer).
 	self
 		add:
 			(BrLayoutResizerAptitude new

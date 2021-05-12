@@ -11,16 +11,14 @@ Class {
 { #category : #private }
 BrGlamorousTaggerSelectableAptitude >> addErrorOverlayTo: aTagElement [
 	| anOverlay anAnimation |
-
 	anOverlay := (BlOverlayElement on: aTagElement)
 		geometry: aTagElement geometry copy.
-	
 	anAnimation := BlColorTransition new
-		from: (BrGlamorousColors errorBackgroundColor alpha: 0.5);
+		from: (self theme status errorBackgroundColor alpha: 0.5);
 		to: Color transparent;
 		onStepDo: [ :eachColor | anOverlay background: eachColor ];
 		onFinishedDo: [ anOverlay removeFromParent ].
-	anOverlay addAnimation:  anAnimation.
+	anOverlay addAnimation: anAnimation.
 	tags addChild: anOverlay
 ]
 
@@ -124,19 +122,21 @@ BrGlamorousTaggerSelectableAptitude >> newAddTagButton [
 { #category : #'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newAllowedTagsChooser: aCollectionOfTags whenChosen: aChosenBlock [
 	^ BrSimpleList new
-		itemStencil: [
-			BrButton new
+		itemStencil: [ BrButton new
 				hMatchParent;
-				aptitude: BrGlamorousLabelAptitude new glamorousRegularFont + (BrInteractiveCommonAptitude new
-					default: [ :f | f background: Color transparent ];
-					hovered: [ :f | f background: BrGlamorousColors defaultButtonBorderColor ]);
+				aptitude:
+					BrGlamorousLabelAptitude new glamorousRegularFont
+						+
+							(BrInteractiveCommonAptitude new
+								default: [ :f | f background: Color transparent ];
+								hovered: [ :f | f background: self theme button defaultBorderColor ]);
 				yourself ];
-		itemDataBinder: [ :aButton :eachTag |
+		itemDataBinder: [ :aButton :eachTag | 
 			aButton
 				label: eachTag asString;
-				action: [ :aButtonElement |
+				action: [ :aButtonElement | 
 					aChosenBlock value: eachTag.
-					aButtonElement fireEvent: (BrDropdownHideWish new) ] ];
+					aButtonElement fireEvent: BrDropdownHideWish new ] ];
 		items: aCollectionOfTags;
 		hFitContent;
 		vFitContent
@@ -146,25 +146,37 @@ BrGlamorousTaggerSelectableAptitude >> newAllowedTagsChooser: aCollectionOfTags 
 BrGlamorousTaggerSelectableAptitude >> newBasicAddTagButton [
 	^ BrButton new
 		aptitude:
-			(BrGlamorousButtonRectangularAptitude new +
-			BrGlamorousButtonIconAptitude new +
-			BrGlamorousButtonWithLabelTooltipAptitude new + (BrInteractiveCommonAptitude new
-				default: [ :aWidget |
-					aWidget
-						border: BlBorder empty;
-						background: BrGlamorousColors neutralBackgroundColor ];
-				hovered: [ :aWidget | aWidget background: BrGlamorousColors neutralBackgroundColor darker ];
-				pressed: [ :aWidget | aWidget background: BrGlamorousColors neutralBackgroundColor darker darker ];
-				focused: [ :aWidget | aWidget border: (BlBorder paint: BrGlamorousColors focusedEditorBorderColor width: 1) ]));
+			BrGlamorousButtonRectangularAptitude new
+				+ BrGlamorousButtonIconAptitude new
+				+ BrGlamorousButtonWithLabelTooltipAptitude new
+				+
+					(BrInteractiveCommonAptitude new
+						default: [ :aWidget | 
+							aWidget
+								border: BlBorder empty;
+								background: self theme status neutralBackgroundColor ];
+						hovered: [ :aWidget | 
+							aWidget background:
+								self theme status neutralBackgroundColor darker ];
+						pressed: [ :aWidget | 
+							aWidget
+								background:
+									self theme status neutralBackgroundColor darker darker ];
+						focused: [ :aWidget | 
+							aWidget
+								border: (BlBorder paint: self theme editor focusedBorderColor width: 1) ]);
 		icon: BrGlamorousVectorIcons add;
 		label: 'Add';
 		beSmallSize;
 		hExact: 20;
 		margin: margin;
 		constraintsDo: [ :c | c flow vertical alignCenter ];
-		addShortcut: (BlShortcutWithAction new
-			combination: BlKeyCombination arrowLeft;
-			action: [ :anEvent | anEvent currentTarget previousSiblingDo: [ :anElement | anElement requestFocus ] ])
+		addShortcut:
+			(BlShortcutWithAction new
+				combination: BlKeyCombination arrowLeft;
+				action: [ :anEvent | 
+					anEvent currentTarget
+						previousSiblingDo: [ :anElement | anElement requestFocus ] ])
 ]
 
 { #category : #'private - instance creation' }

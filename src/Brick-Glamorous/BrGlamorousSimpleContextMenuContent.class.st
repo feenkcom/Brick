@@ -17,7 +17,7 @@ BrGlamorousSimpleContextMenuContent >> initialize [
 				aptitude:
 					(BrInteractiveCommonAptitude new
 						default: [ :f | f background: Color transparent ];
-						hovered: [ :f | f background: BrGlamorousColors defaultButtonBorderColor ];
+						hovered: [ :f | f background: self theme button defaultBorderColor ];
 						yourself);
 				layout: BlLinearLayout horizontal;
 				constraintsDo: [ :c | 
@@ -25,13 +25,12 @@ BrGlamorousSimpleContextMenuContent >> initialize [
 					c vertical fitContent ];
 				padding: (BlInsets all: 5);
 				when: BlClickEvent
-					do: [
-						e value cull: self anchor.
-						self anchor
-							dispatchEvent:
-								(BrContextMenuHideWish new
-									anchor: self anchor;
-									yourself) ];
+					do: [ e value cull: self anchor.
+					self anchor
+						dispatchEvent:
+							(BrContextMenuHideWish new
+								anchor: self anchor;
+								yourself) ];
 				addChild:
 					(BrLabel new
 						aptitude: BrGlamorousLabelAptitude;

@@ -11,16 +11,16 @@ Class {
 { #category : #'instance creation' }
 BrGlamorousProgressBarAptitude >> newProgressBarElement [
 	^ super newProgressBarElement
-		background: BrGlamorousColors defaultButtonTextColor;
+		background: self theme button defaultTextColor;
 		margin: (BlInsets all: 1);
-		geometry: (BlStadium new)
+		geometry: BlStadium new
 ]
 
 { #category : #'instance creation' }
 BrGlamorousProgressBarAptitude >> newProgressContainerElement [
 	^ super newProgressContainerElement
-		background: BrGlamorousColors defaultButtonBackgroundColor;
-		border: (BlBorder paint: BrGlamorousColors defaultButtonBorderColor width: 1);
-		geometry: (BlStadium new);
+		background: self theme button defaultBackgroundColor;
+		border: (BlBorder paint: self theme button defaultBorderColor width: 1);
+		geometry: BlStadium new;
 		margin: (BlInsets left: 4)
 ]

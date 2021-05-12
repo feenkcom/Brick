@@ -48,25 +48,31 @@ BrGlamorousButtonExteriorAptitude >> borderWidth: anInteger [
 { #category : #initialization }
 BrGlamorousButtonExteriorAptitude >> initialize [
 	super initialize.
-	
-	backgroundPaint := BrGlamorousColors defaultButtonBackgroundColor.
-	borderPaint := BrGlamorousColors defaultButtonBorderColor.
+	backgroundPaint := self theme button defaultBackgroundColor.
+	borderPaint := self theme button defaultBorderColor.
 	borderWidth := 1.
-
 	self default
 		background: self backgroundPaint;
 		border: (BlBorder paint: self borderPaint width: self borderWidth).
-
 	self focused
-		border: (BlBorder paint: BrGlamorousColors hoveredButtonBorderColor width: self borderWidth).
-
+		border:
+			(BlBorder
+				paint: self theme button hoveredBorderColor
+				width: self borderWidth).
 	self hovered
-		border: (BlBorder paint: BrGlamorousColors hoveredButtonBorderColor width: self borderWidth).
-
+		border:
+			(BlBorder
+				paint: self theme button hoveredBorderColor
+				width: self borderWidth).
 	self pressed
-		border: (BlBorder paint: BrGlamorousColors pressedButtonBorderColor width: self borderWidth).
-
+		border:
+			(BlBorder
+				paint: self theme button pressedBorderColor
+				width: self borderWidth).
 	self disabled
-		background: BrGlamorousColors disabledButtonBackgroundColor;
-		border: (BlBorder paint: BrGlamorousColors disabledButtonBorderColor width: self borderWidth)
+		background: self theme button disabledBackgroundColor;
+		border:
+			(BlBorder
+				paint: self theme button disabledBorderColor
+				width: self borderWidth)
 ]

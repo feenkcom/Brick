@@ -36,10 +36,8 @@ BrGlamorousAnchoredAptitude >> cornerRadius: aNumber [
 { #category : #'instance creation' }
 BrGlamorousAnchoredAptitude >> initialize [
 	super initialize.
-	
 	background := Color white.
 	cornerRadius := 4.
-	
 	self
 		add: BrShadowAptitude new;
 		addChangeProperty: #(widget geometry)
@@ -47,6 +45,7 @@ BrGlamorousAnchoredAptitude >> initialize [
 		addChangeProperty: #(widget background) with: [ self background ];
 		addChangeProperty: #(widget border)
 			with: [ BlBorder
-				paint: BrGlamorousColors defaultButtonBorderColor asBlPaint
+				paint:
+					self theme button defaultBorderColor asBlPaint
 				width: 1 ]
 ]

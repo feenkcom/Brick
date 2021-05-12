@@ -7,7 +7,8 @@ Class {
 { #category : #initialization }
 BrGlamorousToggleBackgroundAptitude >> initialize [
 	super initialize.
-	
 	self
-		activated: [ :aStyle | aStyle background: BrGlamorousColors defaultButtonBorderColor lighter ]
+		activated: [ :aStyle | 
+			aStyle background:
+				self theme button defaultBorderColor lighter ]
 ]

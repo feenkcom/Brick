@@ -11,7 +11,9 @@ Class {
 BrDevLookOverview >> buildCategoryLabel: aString [
 	^ BrLabel new
 		beSmallSize;
-		aptitude: (BrGlamorousLabelAptitude new foreground: (BrGlamorousColors defaultButtonTextColor alpha: 0.5));
+		aptitude:
+			(BrGlamorousLabelAptitude new
+				foreground: (self theme button defaultTextColor alpha: 0.5));
 		margin: (BlInsets bottom: 5);
 		text: aString
 ]
