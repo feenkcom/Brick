@@ -1,3 +1,24 @@
+"
+usage
+
+prob1 BrGlamorousColors defaultButtonBorderColor
+static references of colors
+
+need: dynamic lookup -> themes
+
+sol1 self theme button defaultBorderColor
+
+-> lookup of theme?
+	inherit from parent or explicit
+
+-> modularizing (multiple small theme composed to one big theme)?
+force based: which widget uses which colors?
+
+
+-> transformation of call sites
+
+
+"
 Class {
 	#name : #BrThemeMigration,
 	#superclass : #Object,
@@ -149,6 +170,8 @@ BrThemeMigration >> referencesChanges [
 	<gtExample>
 	<noTest>
 	| selectorThemesMapping model |
+	(BrTheme default isKindOf: BrGlamorousTheme)
+		ifFalse: [ BrTheme default: BrGlamorousTheme new ].
 	selectorThemesMapping := (self themeSelectorsMapping associations
 		flatCollect:
 			[ :e | e value associations collect: [ :f | f value -> (e key -> f key) ] ])
