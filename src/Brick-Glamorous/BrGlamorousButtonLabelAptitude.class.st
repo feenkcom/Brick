@@ -39,31 +39,32 @@ BrGlamorousButtonLabelAptitude >> hoveredColor: aPaint [
 { #category : #initialization }
 BrGlamorousButtonLabelAptitude >> initialize [
 	super initialize.
-
-	defaultColor := BrGlamorousColors defaultButtonTextColor.
-	selectedColor := BrGlamorousColors hoveredButtonTextColor.
-	hoveredColor := BrGlamorousColors hoveredButtonTextColor.
-	pressedColor := BrGlamorousColors pressedButtonTextColor.
-
+	defaultColor := self theme button defaultTextColor.
+	selectedColor := self theme button hoveredTextColor.
+	hoveredColor := self theme button hoveredTextColor.
+	pressedColor := self theme button pressedTextColor.
 	self
 		weight: 400;
 		fontName: 'Source Sans Pro'.
-
-	labelElement addAptitude: (BrSizeAdjustmentAptitude new
-		mini: [ :aStyle | aStyle fontSizeEm: 0.55 ];
-		tiny: [ :aStyle | aStyle fontSizeEm: 0.7 ];
-		small: [ :aStyle | aStyle fontSizeEm: 0.85 ];
-		normal: [ :aStyle | aStyle fontSizeEm: 1.0 ];
-		large: [ :aStyle | aStyle fontSizeEm: 1.15 ];
-		huge: [ :aStyle | aStyle fontSizeEm: 1.55 ]).
-
-	self add: (labelLook := BrStyleCommonAptitude new
-		@ labelElement;
-		default: [ :aStyle | aStyle foreground: defaultColor ];
-		hovered: [ :aStyle | aStyle foreground: hoveredColor ];
-		pressed: [ :aStyle | aStyle foreground: pressedColor ];
-		disabled: [ :aStyle | aStyle foreground: BrGlamorousColors disabledButtonTextColor ];
-		selected: [ :aStyle | aStyle foreground: selectedColor ])
+	labelElement
+		addAptitude:
+			(BrSizeAdjustmentAptitude new
+				mini: [ :aStyle | aStyle fontSizeEm: 0.55 ];
+				tiny: [ :aStyle | aStyle fontSizeEm: 0.7 ];
+				small: [ :aStyle | aStyle fontSizeEm: 0.85 ];
+				normal: [ :aStyle | aStyle fontSizeEm: 1.0 ];
+				large: [ :aStyle | aStyle fontSizeEm: 1.15 ];
+				huge: [ :aStyle | aStyle fontSizeEm: 1.55 ]).
+	self
+		add:
+			(labelLook := BrStyleCommonAptitude new
+				@ labelElement;
+				default: [ :aStyle | aStyle foreground: defaultColor ];
+				hovered: [ :aStyle | aStyle foreground: hoveredColor ];
+				pressed: [ :aStyle | aStyle foreground: pressedColor ];
+				disabled:
+						[ :aStyle | aStyle foreground: self theme button disabledTextColor ];
+				selected: [ :aStyle | aStyle foreground: selectedColor ])
 ]
 
 { #category : #accessing }

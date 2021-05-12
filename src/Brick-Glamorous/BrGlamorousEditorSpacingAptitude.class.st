@@ -6,12 +6,14 @@ Class {
 
 { #category : #'focus handlers' }
 BrGlamorousEditorSpacingAptitude >> blurEvent: anEvent [
-	self widgetContent border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1)
+	self widgetContent
+		border: (BlBorder paint: self theme editor borderColor width: 1)
 ]
 
 { #category : #'focus handlers' }
 BrGlamorousEditorSpacingAptitude >> focusEvent: anEvent [
-	self widgetContent border: (BlBorder paint: BrGlamorousColors focusedEditorBorderColor width: 1)
+	self widgetContent
+		border: (BlBorder paint: self theme editor focusedBorderColor width: 1)
 ]
 
 { #category : #accessing }
@@ -22,7 +24,7 @@ BrGlamorousEditorSpacingAptitude >> initialize [
 		with: [ Color white ].
 	self
 		addChangeProperty: #(widgetContent border)
-		with: [ BlBorder paint: BrGlamorousColors editorBorderColor width: 1 ]
+		with: [ BlBorder paint: self theme editor borderColor width: 1 ]
 ]
 
 { #category : #initialization }

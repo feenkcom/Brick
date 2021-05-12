@@ -26,8 +26,9 @@ BrPager >> initialize [
 
 { #category : #initialization }
 BrPager >> initializeAptitude [
-	self background: BrGlamorousColors backdropColor.
-	self aptitude: BrPagerScrollbarAptitude new + BrScrollablePagerAptitude new
+	self background: self theme default backdropColor.
+	self
+		aptitude: BrPagerScrollbarAptitude new + BrScrollablePagerAptitude new
 ]
 
 { #category : #initialization }

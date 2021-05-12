@@ -23,23 +23,17 @@ Class {
 	#name : #BrTheme,
 	#superclass : #Object,
 	#classInstVars : [
-		'global',
 		'default'
 	],
 	#category : #'Brick-Theme'
 }
 
-{ #category : #'*Brick-Theme' }
+{ #category : #initialization }
 BrTheme class >> default [
-	^ default ifNil: [ default := self new ]
+	^ default ifNil: [ default := BrGlamorousTheme new ]
 ]
 
-{ #category : #accessing }
-BrTheme class >> global [
-	^ global ifNil: [ global := self new ]
-]
-
-{ #category : #accessing }
-BrTheme >> newLookFor: anElement [
-	self subclassResponsibility
+{ #category : #initialization }
+BrTheme class >> default: aTheme [
+	default := aTheme
 ]

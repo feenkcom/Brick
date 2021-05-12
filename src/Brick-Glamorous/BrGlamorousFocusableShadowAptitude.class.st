@@ -7,10 +7,11 @@ Class {
 { #category : #initialization }
 BrGlamorousFocusableShadowAptitude >> initialize [
 	super initialize.
-	
-	self add: (BrStyleCommonAptitude new
-		focused: [ :aStyle |
-			aStyle
-				do: [ self color: (BrGlamorousColors primaryBorderColor alpha: 0.75) ]
-				after: [ self color: (BrGlamorousColors darkBorderColor alpha: 0.5) ] ])
+	self
+		add:
+			(BrStyleCommonAptitude new
+				focused: [ :aStyle | 
+					aStyle
+						do: [ self color: (self theme default primaryBorderColor alpha: 0.75) ]
+						after: [ self color: (self theme default darkBorderColor alpha: 0.5) ] ])
 ]
