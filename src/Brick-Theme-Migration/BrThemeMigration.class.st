@@ -19,29 +19,6 @@ BrThemeMigration >> colorMethodsToMigrate [
 ]
 
 { #category : #accessing }
-BrThemeMigration >> ensureGlamorousTheme [
-	<gtExample>
-	| model refactoring |
-	model := RBClassModelFactory rbNamespace
-		onEnvironment: RBBrowserEnvironment new.
-	refactoring := RBAddClassRefactoring
-		model: model
-		addClass: #BrGlamorousTheme
-		superclass: BrTheme
-		subclasses: #()
-		category: #'Brick-Theme-Glamorous'.
-	refactoring primitiveExecute.
-	refactoring := RBAddClassRefactoring
-		model: model
-		addClass: #BrGlamorousTheme
-		superclass: BrTheme
-		subclasses: #()
-		category: #'Brick-Theme-Glamorous'.
-	refactoring primitiveExecute.
-	^ model changes
-]
-
-{ #category : #accessing }
 BrThemeMigration >> methodToSelector: aMethod inTheme: aString [
 	| selector |
 	selector := aMethod selector.
