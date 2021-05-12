@@ -28,12 +28,12 @@ Class {
 	#category : #'Brick-Theme'
 }
 
-{ #category : #'*Brick-Theme' }
+{ #category : #initialization }
 BrTheme class >> default [
 	^ default ifNil: [ default := self new ]
 ]
 
-{ #category : #accessing }
-BrTheme >> newLookFor: anElement [
-	self subclassResponsibility
+{ #category : #initialization }
+BrTheme class >> default: aTheme [
+	default := aTheme
 ]
