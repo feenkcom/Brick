@@ -74,13 +74,11 @@ BrSlideImageExport >> createDropdownButtonWithLabel: aString [
 { #category : #accessing }
 BrSlideImageExport >> createDropdownFieldFor: aCollection [
 	| button dropDownLook |
-
-	button := self createDropdownButtonWithLabel: aCollection first asString.
-
+	button := self
+		createDropdownButtonWithLabel: aCollection first asString.
 	dropDownLook := BrGlamorousWithDropdownAptitude
 		handle: [ self createDropdownButtonWithLabel: aCollection first asString ]
-		content: [
-			BrSimpleList new
+		content: [ BrSimpleList new
 				items: aCollection;
 				fitContent;
 				stencil: [ :each | 
@@ -89,20 +87,33 @@ BrSlideImageExport >> createDropdownFieldFor: aCollection [
 						vFitContent;
 						addAptitude:
 							(BrStyleCommonAptitude new
-								hovered: [ :aStyle | aStyle background: BrGlamorousColors defaultButtonBorderColor ]);
-						padding: (BlInsets top: 0 right: 5 bottom: 5 left: 5);
-						addChild: (BrLabel new
-							aptitude: BrGlamorousLabelAptitude new glamorousRegularFont glamorousCodeSmallSize;
-							text: each);
+								hovered:
+									[ :aStyle | aStyle background: self theme button defaultBorderColor ]);
+						padding:
+							(BlInsets
+								top: 0
+								right: 5
+								bottom: 5
+								left: 5);
+						addChild:
+							(BrLabel new
+								aptitude:
+									BrGlamorousLabelAptitude new glamorousRegularFont
+										glamorousCodeSmallSize;
+								text: each);
 						when: BlClickEvent
-							do: [ :anEvent |
-								button label: each.
-								anEvent currentTarget fireEvent: (BrDropdownHideWish new) ] ] ].
+							do: [ :anEvent | 
+							button label: each.
+							anEvent currentTarget fireEvent: BrDropdownHideWish new ] ] ].
 	button addAptitude: dropDownLook.
-	button addAptitude: (BrStyleCommonAptitude new
-		default: [ :aStyle | aStyle background: BrGlamorousColors neutralBackgroundColor ];
-		hovered: [ :aStyle | aStyle background: BrGlamorousColors neutralBackgroundColor darker ]).
-
+	button
+		addAptitude:
+			(BrStyleCommonAptitude new
+				default:
+						[ :aStyle | aStyle background: self theme status neutralBackgroundColor ];
+				hovered: [ :aStyle | 
+					aStyle background:
+						self theme status neutralBackgroundColor darker ]).
 	^ button
 ]
 

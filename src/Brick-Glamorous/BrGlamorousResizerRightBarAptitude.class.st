@@ -9,7 +9,7 @@ BrGlamorousResizerRightBarAptitude >> initialize [
 	super initialize.
 	self
 		addChangeProperty: #(widget background)
-		with: [ BrGlamorousColors editorBorderColor alpha: 0.5 ].
+		with: [ self theme editor borderColor alpha: 0.5 ].
 	self
 		addChangeProperty: #(widget geometry)
 		with: [ BlRoundedRectangleGeometry cornerRadius: 2 ].

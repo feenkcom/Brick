@@ -14,18 +14,20 @@ Class {
 { #category : #private }
 BrColumnedListHeaderAptitude >> headerPane [
 	| headerPane |
-
 	headerPane := BrHorizontalPane new
-			padding: (BlInsets bottom: 5);
-			hMatchParent;
-			vFitContent.
-
-	widget viewModel columnsDo: [ :aColumn | | label |
-		label := BrLabel new aptitude: BrGlamorousLabelAptitude.
-		label text: (aColumn title asRopedText foreground: BrGlamorousColors defaultButtonTextColor).
-		aColumn width applyOn: label.
-		headerPane addChild: label. ].
-
+		padding: (BlInsets bottom: 5);
+		hMatchParent;
+		vFitContent.
+	widget viewModel
+		columnsDo: [ :aColumn | 
+			| label |
+			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
+			label
+				text:
+					(aColumn title asRopedText
+						foreground: self theme button defaultTextColor).
+			aColumn width applyOn: label.
+			headerPane addChild: label ].
 	^ headerPane
 ]
 

@@ -25,14 +25,15 @@ BrGlamorousLinkButtonExteriorInnerAptitude >> backgroundPaint: anObject [
 { #category : #initialization }
 BrGlamorousLinkButtonExteriorInnerAptitude >> initialize [
 	super initialize.
-	backgroundPaint := BrGlamorousColors disabledButtonBackgroundColor.
-
+	backgroundPaint := self theme button disabledBackgroundColor.
 	self
 		default: [ :aStyle | aStyle background: self backgroundPaint ];
-		hovered: [ :aStyle | aStyle background: BrGlamorousColors hoveredButtonTextColor ];
-		pressed: [ :aStyle | aStyle background: BrGlamorousColors pressedButtonTextColor ];
-		disabled: [ :aStyle | aStyle background: BrGlamorousColors disabledButtonTextColor ].
-
+		hovered:
+				[ :aStyle | aStyle background: self theme button hoveredTextColor ];
+		pressed:
+				[ :aStyle | aStyle background: self theme button pressedTextColor ];
+		disabled:
+				[ :aStyle | aStyle background: self theme button disabledTextColor ].
 	self
 		addChangeProperty: #(widgetContent layout)
 		with: [ BlLinearLayout horizontal alignCenter ].
@@ -47,5 +48,9 @@ BrGlamorousLinkButtonExteriorInnerAptitude >> initialize [
 		with: BlLayoutResizer fitContent.
 	self
 		addChangeProperty: #(widgetContent padding)
-		with: [ BlInsets top: 3 left: 0 bottom: 3 right: 0 ]
+		with: [ BlInsets
+				top: 3
+				left: 0
+				bottom: 3
+				right: 0 ]
 ]

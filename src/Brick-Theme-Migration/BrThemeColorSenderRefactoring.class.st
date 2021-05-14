@@ -39,16 +39,17 @@ BrThemeColorSenderRefactoring >> transform [
 	BlElement gtIsOrInheritsFrom | BrAptitude gtIsOrInheritsFrom
 		& 'BrGlamorousColors `@s: `@a' gtRBPatternMatches
 		do: [ :m | 
-			self
-				convertMethod: m selector
-				for: (self classObjectFor: m methodClass)
-				using:
-					(RBParseTreeRewriter new
-						replace: 'BrGlamorousColors `@s: `@a'
-						withValueFrom: [ :n | 
-							| themeSelector |
-							themeSelector := selectorThemesMapping at: n selector.
-							RBParser
-								parseExpression: 'self theme ' , themeSelector key , ' ' , themeSelector value ]
-						when: [ :n | selectorThemesMapping includesKey: n selector ]) ]
+			m isFromTrait
+				ifFalse: [ self
+						convertMethod: m selector
+						for: (self classObjectFor: m methodClass)
+						using:
+							(RBParseTreeRewriter new
+								replace: 'BrGlamorousColors `@s: `@a'
+								withValueFrom: [ :n | 
+									| themeSelector |
+									themeSelector := selectorThemesMapping at: n selector.
+									RBParser
+										parseExpression: 'self theme ' , themeSelector key , ' ' , themeSelector value ]
+								when: [ :n | selectorThemesMapping includesKey: n selector ]) ] ]
 ]

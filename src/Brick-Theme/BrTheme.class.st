@@ -30,7 +30,7 @@ Class {
 
 { #category : #initialization }
 BrTheme class >> default [
-	^ default ifNil: [ default := self new ]
+	^ default ifNil: [ default := BrGlamorousTheme new ]
 ]
 
 { #category : #initialization }

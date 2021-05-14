@@ -19,7 +19,7 @@ BrGlamorousButtonFlatExteriorAptitude >> backgroundPaint: aPaint [
 
 { #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> disabledBackgroundPaint [
-	^ BrGlamorousColors disabledButtonBackgroundColor
+	^ self theme button disabledBackgroundColor
 ]
 
 { #category : #accessing }
@@ -30,14 +30,15 @@ BrGlamorousButtonFlatExteriorAptitude >> hoveredBackgroundPaint [
 { #category : #initialization }
 BrGlamorousButtonFlatExteriorAptitude >> initialize [
 	super initialize.
-	
 	backgroundPaint := Color transparent.
-
 	self
-		default: [ :aStyle | aStyle
-			background: backgroundPaint;
-			border: BlBorder empty  ];
-		focused: [ :aStyle | aStyle border: (BlBorder paint: BrGlamorousColors hoveredButtonBorderColor width: 1) ];
+		default: [ :aStyle | 
+			aStyle
+				background: backgroundPaint;
+				border: BlBorder empty ];
+		focused: [ :aStyle | 
+			aStyle
+				border: (BlBorder paint: self theme button hoveredBorderColor width: 1) ];
 		hovered: [ :aStyle | aStyle background: self hoveredBackgroundPaint ];
 		pressed: [ :aStyle | aStyle background: self pressedBackgroundPaint ];
 		disabled: [ :aStyle | aStyle background: self disabledBackgroundPaint ]
