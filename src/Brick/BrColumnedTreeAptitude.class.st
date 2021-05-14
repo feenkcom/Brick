@@ -1,7 +1,7 @@
 Class {
 	#name : #BrColumnedTreeAptitude,
 	#superclass : #BrTreeAptitude,
-	#category : #'Brick-Tree - Look'
+	#category : #'Brick-Tree - Aptitude'
 }
 
 { #category : #initialization }
@@ -19,6 +19,13 @@ BrColumnedTreeAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrColumnsChanged do: [ :anEvent | self onColumnsChanged: anEvent columns ].
+	self
+		when: BrTreeRowElementStencilChangedEvent
+		do: [ :anEvent | self onRowElementStencilChanged: anEvent rowElementStencil ].
+		
+	self
+		when: BrTreeRowDataBinderChangedEvent
+		do: [ :anEvent | self onRowDataBinderChanged: anEvent rowDataBinder ].
 ]
 
 { #category : #initialization }
@@ -26,6 +33,8 @@ BrColumnedTreeAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: BrColumnsRequest new.
+	self request: BrTreeRowElementStencilRequest new.
+	self request: BrTreeRowDataBinderRequest new.
 ]
 
 { #category : #hooks }
@@ -33,11 +42,14 @@ BrColumnedTreeAptitude >> onColumnsChanged: aCollectionOfBrListColumns [
 	treeElement dataSource columns: aCollectionOfBrListColumns
 ]
 
-{ #category : #'accessing - stencils' }
-BrColumnedTreeAptitude >> rowStencilBuilder: aStencil [
-	"aStencil is expected to be a subclass of BrColumnedTreeRowElementStencilBuilder or a valuable"
+{ #category : #hooks }
+BrColumnedTreeAptitude >> onRowDataBinderChanged: aBrTreeRowDataBinder [
+	treeElement dataSource rowDataBinder: aBrTreeRowDataBinder
+]
 
-	treeElement dataSource rowElementStencil: aStencil
+{ #category : #hooks }
+BrColumnedTreeAptitude >> onRowElementStencilChanged: aBrTreeRowElementStencilBuilder [
+	treeElement dataSource rowElementStencil: aBrTreeRowElementStencilBuilder
 ]
 
 { #category : #'as yet unclassified' }
