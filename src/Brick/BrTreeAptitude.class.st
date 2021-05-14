@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'treeElement'
 	],
-	#category : #'Brick-Tree - Look'
+	#category : #'Brick-Tree - Aptitude'
 }
 
 { #category : #initialization }

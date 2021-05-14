@@ -37,6 +37,20 @@ BrColumnedTree >> nodeType: aBrTreeNodeTypeStencilBuilderOrBlock [
 ]
 
 { #category : #'api - scripting' }
-BrColumnedTree >> rowStencil: aRowStencil [
-	self aptitude rowStencilBuilder: aRowStencil
+BrColumnedTree >> rowDataBinder: aBrTreeRowDataBinderOrBlock [
+	"An item type stencil can be a #value-able of the form [ :aRowElement :aTreeNode :aRowPosition | ]"
+
+	self viewModel rowDataBinder: aBrTreeRowDataBinderOrBlock
+]
+
+{ #category : #'api - scripting' }
+BrColumnedTree >> rowStencil: aBrColumnedTreeRowElementStencilBuilderOrBlock [
+	"A row element stencil can be a #value-able of the form [ :aNodeType :theColumnElements :theColumns | ]"
+
+	self viewModel rowElementStencil: aBrColumnedTreeRowElementStencilBuilderOrBlock
+]
+
+{ #category : #'api - scripting' }
+BrColumnedTree >> withoutSelection [
+	self aptitude withoutSelection
 ]

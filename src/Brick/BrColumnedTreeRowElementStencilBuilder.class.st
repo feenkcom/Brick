@@ -13,11 +13,7 @@ BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 	| aRowElement theCellElements |
 
-	aRowElement := BlElement new
-		layout: BlLinearLayout horizontal alignCenterLeft;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical fitContent ].
+	aRowElement := self createRowElement.
 
 	theCellElements := OrderedCollection new: self columns size.
 
@@ -32,7 +28,7 @@ BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 				c vertical fitContent ].
 
 		self columns first width applyOn: aFirstColumnWrapper.
-
+		
 		aToggleButton := self createExpandCollapseElement
 			toggleAction: [ :aToggleElement :aToggleModel | aToggleModel model toggle ].
 
@@ -73,6 +69,15 @@ BrColumnedTreeRowElementStencilBuilder >> columns: anObject [
 BrColumnedTreeRowElementStencilBuilder >> createExpandCollapseElement [
 	^ BrTriangle new
 		aptitude: BrGlamorousTriangleInCircleAptitude
+]
+
+{ #category : #'api - instantiation' }
+BrColumnedTreeRowElementStencilBuilder >> createRowElement [
+	^ BlElement new
+		layout: BlLinearLayout horizontal alignCenterLeft;
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical fitContent ]
 ]
 
 { #category : #'api - instantiation' }

@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'rootNode',
 		'nodeTypeStencil',
-		'nodeIdStencil'
+		'nodeIdStencil',
+		'rowElementStencil',
+		'rowDataBinder'
 	],
 	#category : #'Brick-Tree - Model'
 }
@@ -19,6 +21,11 @@ BrAbstractTreeModel >> collapseAll [
 BrAbstractTreeModel >> collapseAt: aLevelIndex [
 	self upToDepth: aLevelIndex do: [ :eachNode |
 		eachNode depth + 1 = aLevelIndex ifTrue: [ eachNode collapse ] ].
+]
+
+{ #category : #initialization }
+BrAbstractTreeModel >> defaultRowElementStencil [
+	^ self subclassResponsibility
 ]
 
 { #category : #'expanding-collapsing' }
@@ -99,7 +106,10 @@ BrAbstractTreeModel >> initialize [
 
 	rootNode := BrRootTreeNode onMany: #() computed: [ :eachChild | #() ].
 	nodeTypeStencil := BrTreeDefaultItemTypeStencilBuilder new.
-	nodeIdStencil := nil
+	nodeIdStencil := nil.
+	
+	rowDataBinder := BrDefaultTreeRowDataBinder new.
+	rowElementStencil := self defaultRowElementStencil
 ]
 
 { #category : #initialization }
@@ -109,6 +119,9 @@ BrAbstractTreeModel >> initializeListeners [
 	self when: BrTreeChildrenRequest reply: [ :aResponse | aResponse root: self root ].
 	self when: BrTreeNodeTypeStencilRequest reply: [ :aResponse | aResponse nodeTypeStencil: self nodeTypeStencil ].
 	self when: BrTreeNodeIdStencilRequest reply: [ :aResponse | aResponse nodeIdStencil: self nodeIdStencil ].
+
+	self when: BrTreeRowDataBinderRequest reply: [ :aResponse | aResponse rowDataBinder: self rowDataBinder ].
+	self when: BrTreeRowElementStencilRequest reply: [ :aResponse | aResponse rowElementStencil: self rowElementStencil ]
 ]
 
 { #category : #'api - accessing' }
@@ -197,6 +210,37 @@ BrAbstractTreeModel >> root [
 	<return: #BrRootTreeNode>
 
 	^ rootNode
+]
+
+{ #category : #'api - accessing' }
+BrAbstractTreeModel >> rowDataBinder [
+	"Return a stencil that is used to bind row data to a given row element"
+	<return: #BrTreeRowDataBinder>
+
+	^ rowDataBinder
+]
+
+{ #category : #'api - accessing' }
+BrAbstractTreeModel >> rowDataBinder: aStencil [
+	"Set a stencil that will be used to bind row data to a given row element"
+
+	rowDataBinder := aStencil asStencilBuilder: BrTreeRowDataBinder.
+	self dispatchEvent: (BrTreeRowDataBinderChangedEvent new rowDataBinder: rowDataBinder)
+]
+
+{ #category : #'api - accessing' }
+BrAbstractTreeModel >> rowElementStencil [	
+	"Return a stencil that is used to create a row element for a given node type and node element.
+	Basically, a stencil that decorates a node element"
+	<return: #BrSimpleTreeRowElementStencilBuilder>
+
+	^ rowElementStencil
+]
+
+{ #category : #'api - accessing' }
+BrAbstractTreeModel >> rowElementStencil: aBrSimpleTreeRowElementStencilBuilder [
+	rowElementStencil := aBrSimpleTreeRowElementStencilBuilder.
+	self dispatchEvent: (BrTreeRowElementStencilChangedEvent new rowElementStencil: rowElementStencil)
 ]
 
 { #category : #'expanding-collapsing' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSimpleTreeAptitude,
 	#superclass : #BrTreeAptitude,
-	#category : #'Brick-Tree - Look'
+	#category : #'Brick-Tree - Aptitude'
 }
 
 { #category : #initialization }
@@ -45,9 +45,10 @@ BrSimpleTreeAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: BrTreeRowElementStencilRequest new.
+	self request: BrTreeRowDataBinderRequest new.
+
 	self request: BrTreeNodeElementStencilRequest new.
 	self request: BrTreeNodeDataBinderRequest new.
-	self request: BrTreeRowDataBinderRequest new
 ]
 
 { #category : #hooks }
