@@ -49,3 +49,8 @@ BrColumnedTree >> rowStencil: aBrColumnedTreeRowElementStencilBuilderOrBlock [
 
 	self viewModel rowElementStencil: aBrColumnedTreeRowElementStencilBuilderOrBlock
 ]
+
+{ #category : #'api - scripting' }
+BrColumnedTree >> withoutSelection [
+	self aptitude withoutSelection
+]
