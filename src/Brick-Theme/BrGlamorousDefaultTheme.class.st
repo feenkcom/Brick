@@ -11,7 +11,8 @@ Class {
 		'lightBorderColor',
 		'expandCollapseTriangleBackgroundColor',
 		'shadowColor',
-		'distinctTenLightColors'
+		'distinctTenLightColors',
+		'contentBackgroundColor'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -24,6 +25,16 @@ BrGlamorousDefaultTheme >> backdropColor [
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropColor: anObject [
 	backdropColor := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> contentBackgroundColor [
+	^ contentBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> contentBackgroundColor: aColor [
+	contentBackgroundColor := aColor
 ]
 
 { #category : #accessing }
@@ -79,6 +90,7 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 { #category : #initialization }
 BrGlamorousDefaultTheme >> initialize [
 	super initialize.
+	contentBackgroundColor := Color white.
 	defaultShadowColor := BrGlamorousColors defaultShadowColor.
 	backdropColor := BrGlamorousColors backdropColor.
 	primaryBorderColor := BrGlamorousColors primaryBorderColor.
