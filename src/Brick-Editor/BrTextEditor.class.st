@@ -274,6 +274,15 @@ BrTextEditor >> disableStyleTextWhenModified [
 	shouldStyleWhenTextModified := false
 ]
 
+{ #category : #'text - styling' }
+BrTextEditor >> disableStyleTextWhenModifiedDuring: aBlock [
+	| aPreviousShouldStyleWhenTextModified |
+	
+	aPreviousShouldStyleWhenTextModified := shouldStyleWhenTextModified.
+	shouldStyleWhenTextModified := false.
+	aBlock ensure: [ shouldStyleWhenTextModified := aPreviousShouldStyleWhenTextModified ]
+]
+
 { #category : #'api - mode' }
 BrTextEditor >> editorMode [
 	<return: #BrTextEditorMode>
@@ -592,6 +601,11 @@ BrTextEditor >> notifyTextReplaced: aText [
 	self dispatchEvent: (BrTextEditorTextReplacedEvent new text: aText)
 ]
 
+{ #category : #'event firing' }
+BrTextEditor >> notifyTextStyled: aText [
+	self dispatchEvent: (BrTextEditorTextStyledEvent new styledText: aText)
+]
+
 { #category : #hooks }
 BrTextEditor >> onAttached: anEditorElement [
 	super onAttached: anEditorElement.
@@ -787,6 +801,8 @@ BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 			
 			"notify the event handling attributes that they are within the cursors"
 			self processCursorAttributes.
+			
+			self notifyTextStyled: self text.
 			
 			self updater
 				all;
