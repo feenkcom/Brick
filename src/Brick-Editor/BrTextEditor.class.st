@@ -948,7 +948,6 @@ BrTextEditor >> restoreState: aBrTextEditorMemento [
 
 { #category : #accessing }
 BrTextEditor >> restoreText: aBrText [
-
 	"before changing the text we must unsubscribe from existing one"	
 	text unsubscribe: self.
 

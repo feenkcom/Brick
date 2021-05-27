@@ -25,6 +25,11 @@ TBlTextStyleable >> expandingAdornment: aBrTextAdornmentStencilBuilder [
 ]
 
 { #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> glamorousCodeDefaultFont [
+	self defaultFontName: 'Source Code Pro'
+]
+
+{ #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousCodeFont [
 	self fontName: 'Source Code Pro'
 ]
