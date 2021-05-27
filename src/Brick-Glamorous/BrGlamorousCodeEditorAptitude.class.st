@@ -7,7 +7,6 @@ Class {
 { #category : #initialization }
 BrGlamorousCodeEditorAptitude >> initialize [
 	super initialize.
-	self 
-		glamorousCodeFont;
-		fontSize: 1 fontEm
+
+	self glamorousCodeDefaultFont
 ]

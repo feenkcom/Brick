@@ -106,7 +106,7 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 					ifFalse: [ aTextStyle fontSize: self defaultFontSize ].
 					
 				aFontAndStyleBuilder hasCustomFamilyName
-					ifTrue: [ aTextStyle fontFamily: aFontAndStyleBuilder familyName ].
+					ifTrue: [ aTextStyle fontFamily: aFontAndStyleBuilder resolvedFontFamilyName ].
 
 				aFontAndStyleBuilder hasCustomColor
 					ifTrue: [ aTextStyle color: aFontAndStyleBuilder color ]

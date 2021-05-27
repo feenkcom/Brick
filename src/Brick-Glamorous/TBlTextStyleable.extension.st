@@ -25,6 +25,11 @@ TBlTextStyleable >> expandingAdornment: aBrTextAdornmentStencilBuilder [
 ]
 
 { #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> glamorousCodeDefaultFont [
+	self defaultFontName: 'Source Code Pro'
+]
+
+{ #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousCodeFont [
 	self fontName: 'Source Code Pro'
 ]
@@ -83,6 +88,11 @@ TBlTextStyleable >> glamorousCodeTinySize [
 { #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousMonospace [
 	self glamorousCodeFont
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> glamorousRegularDefaultFont [
+	self defaultFontName: 'Source Sans Pro'
 ]
 
 { #category : #'*Brick-Glamorous' }
