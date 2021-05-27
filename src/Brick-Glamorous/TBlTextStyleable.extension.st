@@ -86,6 +86,11 @@ TBlTextStyleable >> glamorousMonospace [
 ]
 
 { #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> glamorousRegularDefaultFont [
+	self defaultFontName: 'Source Sans Pro'
+]
+
+{ #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousRegularFont [
 	self fontName: 'Source Sans Pro'
 ]
