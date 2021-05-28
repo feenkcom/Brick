@@ -453,6 +453,39 @@ BrGlamorousVectorIcons class >> leftSide [
 		background: Color black ] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> link [
+	<script: 'self link inspect'>
+
+	^ [
+		BlElement new
+			size: 16@16;
+			addChildren: { 
+				BlElement new
+					size: 16@16;
+					outskirts: BlOutskirts centered;
+					geometry: (BlSvgPath new
+						svg: 'M 5.988362 3 L 3 3.0398502 L 3 13 L 13 13 L 13 9.379078'
+						viewbox: (0@0 extent: 16@16));
+					border: (BlBorder builder paint: Color black; width: 1; capRound; build).
+				BlElement new
+					size: 16@16;
+					outskirts: BlOutskirts centered;
+					geometry: (BlSvgPath new
+						svg: 'M 11.73528 3.511166 L 6.735281 8.511166 L 7.088834 8.864719 L 12.088834 3.8647194 Z'
+						viewbox: (0@0 extent: 16@16));
+					border: (BlBorder builder paint: Color black; width: 1; capRound; build).
+				BlElement new
+					size: 16@16;
+					geometry: (BlSvgPath new
+						svg: 'M 10.232233 3.1464466 L 12.707107 2.7928932 L 12.353553 5.267767 Z'
+						viewbox: (0@0 extent: 16@16));
+					outskirts: BlOutskirts centered;
+					background: Color black;
+					border: (BlBorder builder paint: Color black; width: 1; capRound; build).
+			} ] asStencil
+]
+
 { #category : #'private - geometry' }
 BrGlamorousVectorIcons class >> minusGeometry: aThickness extent: anExtent origin: anOrigin [
 	<return: #BlElementVectorGeometry>
