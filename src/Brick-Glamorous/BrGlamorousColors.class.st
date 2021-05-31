@@ -395,7 +395,7 @@ BrGlamorousColors class >> initialize [
 	HoveredListItemBackgroundColor := Color gray alpha: 0.1.
 	SelectedListItemBackgroundColor := (Color fromHexString: #'69ABFD') alpha: 0.34.
 	PressedListItemBackgroundColor := Color gray alpha: 0.2. 
-	ExpandCollapseTriangleBackgroundColor := Color gray.
+	ExpandCollapseTriangleBackgroundColor := Color fromHexString: #'d9d9d9'. "grey-5"
 
 	"editors"
 	EditorBorderColor := LightBorderColor.
