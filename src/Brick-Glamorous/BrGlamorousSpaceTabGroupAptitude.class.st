@@ -7,22 +7,14 @@ Class {
 { #category : #initialization }
 BrGlamorousSpaceTabGroupAptitude >> initialize [
 	super initialize.
-	self
-		add:
-			(BrGlamorousTabGroupHeaderAptitude new
-				headerDo: [ :e | 
-					e
-						padding:
-							(BlInsets
-								top: 10
-								right: 10
-								bottom: 0
-								left: 10) ]).
+
+	self add: (BrGlamorousTabGroupHeaderAptitude new headerDo: [ :e | e padding: ((BlInsets all: 10) withBottom: 0) ]).
 	self add: BrTabGroupContentAptitude new.
-	self add: BrLayoutResizerAptitude inherit.
+
 	self
 		addChangeProperty: #(widget layout)
 		with: [ BlLinearLayout vertical ].
+
 	self
 		addChange:
 			(BrLookChange new

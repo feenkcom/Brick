@@ -27,9 +27,9 @@ BrTabGroupContentAptitude >> initialize [
 	content := BlElement new 
 		layout: BlLinearLayout horizontal;
 		labeled: 'Content'.
-
-	content addAptitude: (BrLayoutResizerAptitude new inherit).
-
+	
+	self add: (BrLayoutResizerAptitude new inherit: content).
+	
 	contentElementsCache := IdentityDictionary new.
 	self addChangeAddChildAs: #(content) with: [ content ]
 ]

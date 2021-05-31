@@ -37,3 +37,8 @@ BrTheme class >> default [
 BrTheme class >> default: aTheme [
 	default := aTheme
 ]
+
+{ #category : #accessing }
+BrTheme class >> resetDefault [
+	default := nil.
+]
