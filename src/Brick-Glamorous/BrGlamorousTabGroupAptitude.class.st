@@ -19,8 +19,7 @@ BrGlamorousTabGroupAptitude >> initialize [
 	self addAll: {
 		headerLook := BrGlamorousTabGroupHeaderAptitude new.
 		BrTabGroupSplitterAptitude new.
-		BrTabGroupContentAptitude new.
-		BrLayoutResizerAptitude inherit }.
+		BrTabGroupContentAptitude new }.
 
 	self addChangeProperty: #(widget layout) with: [ BlLinearLayout vertical ]
 ]
