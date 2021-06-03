@@ -54,7 +54,7 @@ BrTextStylerTaskItStrategy >> scheduleStyleTextInEditorElement: aBrEditorElement
 			monitor critical: [ 
 				self terminateBackgroundStylingProcess.
 
-				BlTktWorkerProvider nonUIMultiPool
+				BlTktWorkerProvider textStylerPool
 					schedule: (command := self
 						newStylingCommandFor: aTextToStyle
 						with: aStyler
