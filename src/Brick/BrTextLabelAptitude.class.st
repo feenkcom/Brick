@@ -10,7 +10,7 @@ For example, in a subclass of a ViewModel override ==#onAttachedTo:== and implem
 ]]]
 
 The label look can directly change properties of the label element. This can be usefull when one want to customize the existing look, or change layout properties:
-[[[example=BrButtonLabelLookExamples>>#buttonLabelLookWithConstraints|expanded=true|expandedPreview=false|show=gtLiveIn:]]]
+[[[example=BrButtonLabelLookExamples>>#buttonLabelLookWithConstraints|expanded=true|previewExpanded=false|show=gtLiveIn:]]]
 
 "
 Class {
