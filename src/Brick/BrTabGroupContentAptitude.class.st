@@ -79,7 +79,7 @@ BrTabGroupContentAptitude >> onTabSelected: aTabModel [
 			aStencilBuilder tabModel: nil.
 			aTabContentElement ].
 
-	self widgetContent addChild: aContentElement
+	self widgetContent addChild: aContentElement removeFromParent
 ]
 
 { #category : #hooks }
