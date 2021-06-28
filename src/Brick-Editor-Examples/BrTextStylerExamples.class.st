@@ -93,6 +93,7 @@ BrTextStylerExamples >> editorWithSyncStylerStrategy [
 { #category : #'examples - styler strategy' }
 BrTextStylerExamples >> editorWithTaskItStylerStrategy [
 	<gtExample>
+	<noTest>
 	| anEditor aStyler theTextAttributes aSemaphore aTimeout anElement aSpace |
 	anEditor := self editorWithMethod.
 	aStyler := self codeSnippetStyler.
