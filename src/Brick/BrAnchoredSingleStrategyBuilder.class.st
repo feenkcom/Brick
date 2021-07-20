@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrAnchoredSingleStrategyBuilder',
-	#superclass : 'BrAnchoredStrategyBuilder',
+	#name : #BrAnchoredSingleStrategyBuilder,
+	#superclass : #BrAnchoredStrategyBuilder,
 	#instVars : [
 		'availableBounds',
 		'referencePoint',
@@ -11,22 +11,22 @@ Class {
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredSingleStrategyBuilder >> anchorBounds: anObject [
 	anchorBounds := anObject asBrAnchoredAnchorBounds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredSingleStrategyBuilder >> apply: aBlock [
 	apply := aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredSingleStrategyBuilder >> availableBounds: anObject [
 	availableBounds := anObject asBrAnchoredAvailableBounds
 ]
 
-{ #category : 'building' }
+{ #category : #building }
 BrAnchoredSingleStrategyBuilder >> build [
 	^ BrAnchoredSingleStrategy
 		anchorBounds: anchorBounds
@@ -36,19 +36,19 @@ BrAnchoredSingleStrategyBuilder >> build [
 		apply: apply
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAnchoredSingleStrategyBuilder >> initialize [
 	super initialize.
 	scaleFactor := 1 asBrAnchoredScaleFactor.
 	apply := [  ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredSingleStrategyBuilder >> referencePoint: anObject [
 	referencePoint := anObject asBrAnchoredReferencePoint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredSingleStrategyBuilder >> scaleFactor: anObject [
 	scaleFactor := anObject asBrAnchoredScaleFactor
 ]

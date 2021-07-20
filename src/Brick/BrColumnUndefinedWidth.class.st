@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrColumnUndefinedWidth',
-	#superclass : 'BrColumnWidth',
+	#name : #BrColumnUndefinedWidth,
+	#superclass : #BrColumnWidth,
 	#category : 'Brick-Column - Model'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrColumnUndefinedWidth >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 	self == anObject
@@ -12,11 +12,11 @@ BrColumnUndefinedWidth >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : 'hook' }
+{ #category : #hook }
 BrColumnUndefinedWidth >> applyOn: anElement [
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrColumnUndefinedWidth >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 

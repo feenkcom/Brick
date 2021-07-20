@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrResizerExactLength',
-	#superclass : 'BrResizerElementLength',
+	#name : #BrResizerExactLength,
+	#superclass : #BrResizerElementLength,
 	#instVars : [
 		'length'
 	],
 	#category : 'Brick-Resizer - Support'
 }
 
-{ #category : 'api - size' }
+{ #category : #'api - size' }
 BrResizerExactLength >> adjustHeightFor: anElement [
 	"Set element height"
 	anElement height: self length.
 	anElement states addState: BrLayoutVerticalResizerState exact
 ]
 
-{ #category : 'api - size' }
+{ #category : #'api - size' }
 BrResizerExactLength >> adjustWidthFor: anElement [
 	"Set element width"
 	anElement width: self length.
@@ -22,7 +22,7 @@ BrResizerExactLength >> adjustWidthFor: anElement [
 	anElement states addState: BrLayoutHorizontalResizerState exact.
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BrResizerExactLength >> assertLength: aNumber [
 	self 
 		assert: [ aNumber isNotNil ] 
@@ -32,30 +32,30 @@ BrResizerExactLength >> assertLength: aNumber [
 		description: [ 'Exact width must be non-negative' ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrResizerExactLength >> defaultLength [
 	^ 400
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrResizerExactLength >> initialize [
 	super initialize.
 	length := self defaultLength.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrResizerExactLength >> length [
 	<return: #Number>
 	^ length
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrResizerExactLength >> length: aNumber [
 	self assertLength: aNumber.
 	length := aNumber
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrResizerExactLength >> printOn: aStream [ 
 	aStream nextPutAll: 'Exact width: '; print: self width
 ]

@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrPagerAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrPagerAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'pages'
 	],
 	#category : 'Brick-Pager - Look'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrPagerAptitude >> initialize [
 	super initialize.
 
@@ -16,7 +16,7 @@ BrPagerAptitude >> initialize [
 	self add: BrLayoutResizerAptitude inherit
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrPagerAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -25,22 +25,22 @@ BrPagerAptitude >> initializeListeners [
 	self when: BrPagerPageRemovedEvent do: [ :anEvent | self onPageRemoved: anEvent page ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrPagerAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrPagerPagesRequest new
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrPagerAptitude >> onPage: aPageModel elementAttached: aPageElement [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrPagerAptitude >> onPage: aPageMopdel elementDetached: aPageElement [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrPagerAptitude >> onPageAdded: aPageModel [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -51,7 +51,7 @@ BrPagerAptitude >> onPageAdded: aPageModel [
 	aPageModel whenAttachedDo: [ :aPageContentElement | self onPageContentAttached: aPageContentElement ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrPagerAptitude >> onPageContentAttached: aPageContentElement [
 	| aPageModel aPageElement |
 
@@ -64,7 +64,7 @@ BrPagerAptitude >> onPageContentAttached: aPageContentElement [
 	self onPage: aPageModel elementAttached: aPageElement
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrPagerAptitude >> onPageRemoved: aPageModel [
 	| aPageElement |
 	self
@@ -75,7 +75,7 @@ BrPagerAptitude >> onPageRemoved: aPageModel [
 	self onPage: aPageModel elementDetached: aPageElement
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrPagerAptitude >> onPagesChanged: aCollectionOfModels [
 	
 	self pages removeAll.
@@ -87,12 +87,12 @@ BrPagerAptitude >> onPagesChanged: aCollectionOfModels [
 			self onPageContentAttached: aPageContentElement ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerAptitude >> pageElements [
 	^ self pages values select: #isNotNil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerAptitude >> pages [
 	^ pages
 ]

@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrTreeChildrenChanged',
-	#superclass : 'BrChangeEvent',
+	#name : #BrTreeChildrenChanged,
+	#superclass : #BrChangeEvent,
 	#instVars : [
 		'root'
 	],
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeChildrenChanged >> root [
 	<return: #BrRootTreeNode>
 
 	^ root
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeChildrenChanged >> root: aTreeNode [
 	root := aTreeNode
 ]

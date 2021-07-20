@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTreeNodeIdStencilRequest',
-	#superclass : 'BrRequest',
+	#name : #BrTreeNodeIdStencilRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNodeIdStencilRequest >> responseClass [
 	^ BrTreeNodeIdStencilChangedEvent
 ]

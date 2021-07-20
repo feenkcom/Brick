@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrSelectedState',
-	#superclass : 'BrInteractionState',
+	#name : #BrSelectedState,
+	#superclass : #BrInteractionState,
 	#category : 'Brick-! Core - States'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrSelectedState >> printOn: aStream [
 	aStream nextPutAll: 'selected'
 ]

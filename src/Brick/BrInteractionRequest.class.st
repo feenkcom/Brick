@@ -1,30 +1,30 @@
 Class {
-	#name : 'BrInteractionRequest',
-	#superclass : 'BrRequest',
+	#name : #BrInteractionRequest,
+	#superclass : #BrRequest,
 	#instVars : [
 		'forceUpdate'
 	],
 	#category : 'Brick-! Core - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrInteractionRequest >> forceUpdate [
 	^ forceUpdate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrInteractionRequest >> forceUpdate: anObject [
 	forceUpdate := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrInteractionRequest >> initialize [
 	super initialize.
 	
 	forceUpdate := false
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrInteractionRequest >> responseClass [
 	^ BrInteractionChanged
 ]

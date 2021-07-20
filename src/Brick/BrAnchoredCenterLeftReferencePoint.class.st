@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrAnchoredCenterLeftReferencePoint',
-	#superclass : 'BrAnchoredReferencePoint',
+	#name : #BrAnchoredCenterLeftReferencePoint,
+	#superclass : #BrAnchoredReferencePoint,
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredCenterLeftReferencePoint class >> label [
 	^ 'Center left'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredCenterLeftReferencePoint >> from: aBounds [
 	^ aBounds centerLeft
 ]

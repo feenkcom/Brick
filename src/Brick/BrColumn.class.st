@@ -14,8 +14,8 @@ aColumn
 ]]]
 "
 Class {
-	#name : 'BrColumn',
-	#superclass : 'Object',
+	#name : #BrColumn,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -27,21 +27,21 @@ Class {
 	#category : 'Brick-Column - Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> cellStencil [
 	<return: #BrColumnCellStencilBuilder>
 
 	^ cellStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> cellStencil: aStencil [
 	"A cell element stencil can be a #value-able of the form [ :anItemType :aBrColumn :anItemIndex | ]"
 	
 	cellStencil := aStencil asStencilBuilder: BrColumnCellStencilBuilder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> cellWidth: aBrColumnWidth [
 	self 
 		assert: [ aBrColumnWidth isNotNil ]
@@ -49,12 +49,12 @@ BrColumn >> cellWidth: aBrColumnWidth [
 	width := aBrColumnWidth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> dataBinder [
 	^ dataBinder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> dataBinder: aStencil [
 	"A cell data binder stencil can be a #value-able of the form 
 	[ :anItemElement :anItemObject :anItemIndex :aRowHolder :aColumnIndex | ]"
@@ -62,7 +62,7 @@ BrColumn >> dataBinder: aStencil [
 	dataBinder := aStencil asStencilBuilder: BrColumnCellDataBinder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrColumn >> initialize [
 	super initialize.
 
@@ -74,14 +74,14 @@ BrColumn >> initialize [
 	width := BrColumnUndefinedWidth new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> matchParent [
 	"Make a column match parent with a given proportion as a number (usually between 0 and 1)"
 
 	self weight: 1
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> stencil: aStencil [
 	"aStencil is a BlockClosure of type [ :aRowObject :aRowIndex :aCellIndex ]"
 
@@ -103,33 +103,33 @@ BrColumn >> stencil: aStencil [
 			addChild: aCellChild ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> title [
 	<return: #String>
 
 	^ title
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> title: aStringOrText [
 	title := aStringOrText
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> weight: aNumber [
 	"Make a column match parent with a given proportion as a number (usually between 0 and 1)"
 
 	width := BrColumnProportionalWidth new weight: aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> width [
 	<return: #BrColumnWidth>
 
 	^ width
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumn >> width: aNumber [
 	"Make column occupy a fixed space defined by aNumber"
 

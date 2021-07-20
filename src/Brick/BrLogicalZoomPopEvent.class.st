@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrLogicalZoomPopEvent',
-	#superclass : 'BrChangeEvent',
+	#name : #BrLogicalZoomPopEvent,
+	#superclass : #BrChangeEvent,
 	#category : 'Brick-Logical Zooming - Model'
 }

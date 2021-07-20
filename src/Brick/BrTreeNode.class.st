@@ -14,8 +14,8 @@ The isExpanded flag can only be set once the receiver has children.  However onc
 This also has the side effect that if #expandAll is sent to the tree, only those items that have children at the time will actually be expanded.  Other items will remain collapsed when children are added.
 "
 Class {
-	#name : 'BrTreeNode',
-	#superclass : 'Object',
+	#name : #BrTreeNode,
+	#superclass : #Object,
 	#instVars : [
 		'value',
 		'parent',
@@ -30,7 +30,7 @@ Class {
 	#category : 'Brick-Tree - Model'
 }
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> allChildrenNodesBreadthFirst [
 	| nodes |
 	nodes := OrderedCollection new.
@@ -38,26 +38,26 @@ BrTreeNode >> allChildrenNodesBreadthFirst [
 	^ nodes
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> allChildrenNodesBreadthFirstDo: aBlock [ 
 	self childrenNodesDo: aBlock.
 	self childrenNodesDo: [ :eachNode | eachNode allChildrenNodesBreadthFirstDo: aBlock ].
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> allChildrenNodesDepthFirstDo: aBlock [ 
 	self childrenNodesDo: [ :eachNode | eachNode allChildrenNodesDepthFirstDo: aBlock ].
 	self childrenNodesDo: aBlock
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> allChildrenNodesLinearDo: aBlock [
 	self childrenNodesDo:  [ :eachChild |
 		aBlock value: eachChild.
 		eachChild allChildrenNodesLinearDo: aBlock ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> at: aTreeIndex [
 	"Return a child node at a tree index"
 	<return: #BrTreeNode>
@@ -79,7 +79,7 @@ BrTreeNode >> at: aTreeIndex [
 	self error: 'Must not reach'
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTreeNode >> canBeExpanded [
 	"Return true if I can be expanded (e.g. I can have children).
 	The check requires computation (if not already) of children values"
@@ -89,7 +89,7 @@ BrTreeNode >> canBeExpanded [
 	^ childrenValues isNotEmpty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> children [
 	<return: #Collection of: #Object>
 
@@ -100,7 +100,7 @@ BrTreeNode >> children [
 	^ self childrenValues
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNode >> children: aCollectionOfValues computed: aComputationBlock [
 
 	self
@@ -110,7 +110,7 @@ BrTreeNode >> children: aCollectionOfValues computed: aComputationBlock [
 	self value: aCollectionOfValues computation: aComputationBlock
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> childrenDo: aBlock [
 	self
 		deprecated: 'Use #childrenValuesDo:'
@@ -119,7 +119,7 @@ BrTreeNode >> childrenDo: aBlock [
 	self childrenValuesDo: aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> childrenNodes [
 	<return: #Collection of: #BrTreeNode>
 
@@ -128,12 +128,12 @@ BrTreeNode >> childrenNodes [
 		ifFalse: [ #() ]
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> childrenNodesDo: aBlock [
 	self childrenNodes do: aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> childrenValues [
 	<return: #Collection of: #Object>
 
@@ -142,12 +142,12 @@ BrTreeNode >> childrenValues [
 		ifFalse: [ #() ]
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> childrenValuesDo: aBlock [
 	self childrenValues do: aBlock
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrTreeNode >> collapse [
 	| aChildrenSize |
 	
@@ -175,26 +175,26 @@ BrTreeNode >> collapse [
 		size: aChildrenSize
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> computation [
 	^ computation
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTreeNode >> computeChildrenSize [
 	<return: #Number>
 
 	^ childrenNodes inject: 0 into: [ :aTotalSize :eachChild | aTotalSize + eachChild size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> depth [
 	^ self hasParent
 		ifTrue: [ self parent depth + 1 - self parent isAccountedForSelf not asBit ]
 		ifFalse: [ 0 ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTreeNode >> ensureChildrenNodes [
 	childrenNodes
 		ifNotNil: [ ^ self ].
@@ -213,7 +213,7 @@ BrTreeNode >> ensureChildrenNodes [
 				shiftIndexInTreeBy: indexInTree + eachIndex - 1) ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTreeNode >> ensureChildrenValues [
 	childrenValues
 		ifNotNil: [ ^ self ].
@@ -221,7 +221,7 @@ BrTreeNode >> ensureChildrenValues [
 	childrenValues := self computation value: self value
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrTreeNode >> expand [
 	| aChildrenSize |
 
@@ -252,7 +252,7 @@ BrTreeNode >> expand [
 		size: aChildrenSize
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> expandSuchThat: anOneArgBlock [
 	"It stops expanding children if a parent node does not satisfy the condition."
 	(anOneArgBlock value: self) ifTrue: [ 
@@ -261,13 +261,13 @@ BrTreeNode >> expandSuchThat: anOneArgBlock [
 	].
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrTreeNode >> expandUpTo: aLevelIndex [
 	"#expandUpTo: 1 is the same as just #expand"
 	self upToDepth: aLevelIndex do: [ :eachNode | eachNode expand ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> globalIndexInTree [
 	
 	self
@@ -277,7 +277,7 @@ BrTreeNode >> globalIndexInTree [
    ^ self indexInTree
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 BrTreeNode >> gtNodesFor: aView [
 	<gtView>
 	
@@ -291,7 +291,7 @@ BrTreeNode >> gtNodesFor: aView [
 		column: 'Index' item: [ :anItem | anItem indexInTree ] width: 80
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 BrTreeNode >> gtRawNodesFor: aView [
 	<gtView>
 	
@@ -305,14 +305,14 @@ BrTreeNode >> gtRawNodesFor: aView [
 		column: 'Index' item: [ :anItem | anItem indexInTree ] width: 80
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTreeNode >> hasParent [
 	<return: #Boolean>
 
 	^ parent isNotNil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> indexInChildren [
 	"index in a children collection in the parent"
 	<return: #Number>
@@ -320,14 +320,14 @@ BrTreeNode >> indexInChildren [
 	^ indexInChildren
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> indexInChildren: aNumber [
 	<return: #Number>
 
 	indexInChildren := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> indexInTree [
 	"Global index in the tree"
 	<return: #Number>
@@ -335,12 +335,12 @@ BrTreeNode >> indexInTree [
 	^ indexInTree
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> indexInTree: aNumber [
 	indexInTree := aNumber
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNode >> initialize [
 	super initialize.
 
@@ -354,7 +354,7 @@ BrTreeNode >> initialize [
 	computation := [ #() ]
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BrTreeNode >> insert: anObject atChildIndex: aChildIndex [
 	| aNewNode aTreeIndexOfThePreviousNode aSizeOfThePreviousNode |
 	
@@ -411,17 +411,17 @@ BrTreeNode >> insert: anObject atChildIndex: aChildIndex [
 		ifTrue: [ self onChildInserted: aNewNode size: aNewNode size ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTreeNode >> isAccountedForSelf [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTreeNode >> isCollapsed [
 	^ self isExpanded not
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTreeNode >> isEmpty [
 	<return: #Boolean>
 	
@@ -432,17 +432,17 @@ BrTreeNode >> isEmpty [
 	^ self canBeExpanded not
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTreeNode >> isExpanded [
 	^ isExpanded
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNode >> newSubNode: anObject computation: aComputationBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onChildCollapsed: aChildNode from: anOriginNode size: anAmount [
 	self hasParent
 		ifFalse: [ ^ self ].
@@ -453,7 +453,7 @@ BrTreeNode >> onChildCollapsed: aChildNode from: anOriginNode size: anAmount [
 		size: anAmount
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onChildExpanded: aChildNode from: anOriginNode size: anAmount [
 	self hasParent
 		ifFalse: [ ^ self ].
@@ -464,33 +464,33 @@ BrTreeNode >> onChildExpanded: aChildNode from: anOriginNode size: anAmount [
 		size: anAmount
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onChildInserted: anOriginNode size: anAmount [
 	self hasParent
 		ifFalse: [ ^ self ].
 	self parent onChildInserted: anOriginNode size: anAmount
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onChildRemoved: anOriginNode size: anAmount [
 	self hasParent
 		ifFalse: [ ^ self ].
 	self parent onChildRemoved: anOriginNode size: anAmount
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onNodeChanged: aTreeNode [
 	self onNodeChanged: aTreeNode payload: nil
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onNodeChanged: aTreeNode payload: anObject [
 	self hasParent
 		ifFalse: [ ^ self ].
 	self parent onNodeChanged: aTreeNode payload: anObject
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onNodesAppearedAfter: aChildNode amount: anAmount [
 	self
 		assert: [ aChildNode hasParent and: [ self == aChildNode parent ] ]
@@ -515,7 +515,7 @@ BrTreeNode >> onNodesAppearedAfter: aChildNode amount: anAmount [
 	self parent onNodesAppearedAfter: self amount: anAmount
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeNode >> onNodesDisappearedAfter: aChildNode amount: anAmount [
 	self
 		assert: [ aChildNode hasParent and: [ self == aChildNode parent ] ]
@@ -540,24 +540,24 @@ BrTreeNode >> onNodesDisappearedAfter: aChildNode amount: anAmount [
 	self parent onNodesDisappearedAfter: self amount: anAmount
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> parent [
 	<return: #BrTreeNode>
 
 	^ parent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> parent: aBrTreeNode [
 	parent := aBrTreeNode
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTreeNode >> printOn: aStream [
 	aStream print: self value
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BrTreeNode >> removeChildAt: aChildIndex [
 	"If children values are not computed we should not delete anything because values will be properly computed lazily later"
 	| aRemovedNode |
@@ -598,20 +598,20 @@ BrTreeNode >> removeChildAt: aChildIndex [
 		ifTrue: [ self onChildRemoved: aRemovedNode size: aRemovedNode size ]
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BrTreeNode >> removeFromParent [
 	self hasParent
 		ifTrue: [ self parent removeChildAt: self indexInChildren ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> root [
 	^ self hasParent
 		ifTrue: [ self parent root ]
 		ifFalse: [ self ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTreeNode >> shiftIndexInChildrenBy: aNumber [
 	indexInChildren := indexInChildren + aNumber.
 	self
@@ -619,7 +619,7 @@ BrTreeNode >> shiftIndexInChildrenBy: aNumber [
 		description: [ 'Index can not be negative' ].
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTreeNode >> shiftIndexInTreeBy: aNumber [
 	indexInTree := indexInTree + aNumber.
 	self
@@ -630,7 +630,7 @@ BrTreeNode >> shiftIndexInTreeBy: aNumber [
 		ifNotNil: [ :theNodes | theNodes do: [ :eachNode | eachNode shiftIndexInTreeBy: aNumber ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> size [
 	"Return the current amount of expanded items in the tree"
 	<return: #Number>
@@ -638,14 +638,14 @@ BrTreeNode >> size [
 	^ size
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrTreeNode >> toggle [
 	self isExpanded
 		ifTrue: [ self collapse ]
 		ifFalse: [ self expand ]
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> upToDepth: aMaxDepthLevel do: anOneArgBlock [
 	self 
 		assert: [ aMaxDepthLevel isInteger and: [ aMaxDepthLevel > 0 ] ] 
@@ -657,14 +657,14 @@ BrTreeNode >> upToDepth: aMaxDepthLevel do: anOneArgBlock [
 		anOneArgBlock value: eachNode ]
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BrTreeNode >> update [
 	"The whole node have changed"
 
 	self onNodeChanged: self
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BrTreeNode >> update: aPayloadObject [
 	"Just a part of the node have changed, the given payload object should represent that partial update"
 	self
@@ -674,7 +674,7 @@ BrTreeNode >> update: aPayloadObject [
 	self onNodeChanged: self payload: aPayloadObject
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTreeNode >> validateIntegrity [
 	| aPreviousIndex |
 	
@@ -688,17 +688,17 @@ BrTreeNode >> validateIntegrity [
 		aPreviousIndex := eachNode indexInTree ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNode >> value [
 	^ value
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNode >> value: anObject computation: aComputationBlock [
 	self value: anObject computation: aComputationBlock withSelf: true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNode >> value: anObject computation: aComputationBlock withSelf: shouldAccountForSelf [
 	value := anObject.
 	computation := aComputationBlock.
@@ -708,7 +708,7 @@ BrTreeNode >> value: anObject computation: aComputationBlock withSelf: shouldAcc
 	indexInTree := shouldAccountForSelf asBit
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> withAllChildrenNodesBreadthFirst [
 	| nodes |
 	nodes := OrderedCollection new.
@@ -716,25 +716,25 @@ BrTreeNode >> withAllChildrenNodesBreadthFirst [
 	^ nodes
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> withAllChildrenNodesBreadthFirstDo: aBlock [ 
 	aBlock value: self.
 	self allChildrenNodesBreadthFirstDo: aBlock
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> withAllChildrenNodesDepthFirstDo: aBlock [ 
 	self allChildrenNodesDepthFirstDo: aBlock.
 	aBlock value: self
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> withAllChildrenNodesLinearDo: aBlock [
 	aBlock value: self.
 	self allChildrenNodesLinearDo: aBlock
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> withAllParentNodes [
 	| nodes |
 	nodes := OrderedCollection new.
@@ -742,7 +742,7 @@ BrTreeNode >> withAllParentNodes [
 	^ nodes
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BrTreeNode >> withAllParentNodesDo: aBlock [
 	self hasParent
 		ifTrue: [ self parent withAllParentNodesDo: aBlock ].

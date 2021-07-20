@@ -6,27 +6,27 @@ A column, while being abstract entity, should know how much of the available spa
 See ${class:BrColumnWidthExamples}$ for examples
 "
 Class {
-	#name : 'BrColumnWidth',
-	#superclass : 'Object',
+	#name : #BrColumnWidth,
+	#superclass : #Object,
 	#category : 'Brick-Column - Model'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrColumnWidth class >> isAbstract [
 	^ self = BrColumnWidth
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrColumnWidth >> = anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'hook' }
+{ #category : #hook }
 BrColumnWidth >> applyOn: anElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrColumnWidth >> hash [
 	^ self subclassResponsibility
 ]

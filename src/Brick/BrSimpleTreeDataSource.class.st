@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrSimpleTreeDataSource',
-	#superclass : 'BrTreeDataSource',
+	#name : #BrSimpleTreeDataSource,
+	#superclass : #BrTreeDataSource,
 	#instVars : [
 		'nodeElementStencil',
 		'nodeDataBinder',
@@ -14,17 +14,17 @@ Class {
 	#category : 'Brick-Tree - Support'
 }
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> attachedBlock: aBlock [
 	attachedBlock := aBlock
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> detachedBlock: aBlock [
 	detachedBlock := aBlock
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> nodeDataBinder: aBrTreeNodeDataBinder [
 	"Set a data binder that should bind node data to the node element.
 	Do not mistake it with the row data binder that adjusts the whole tree row
@@ -34,7 +34,7 @@ BrSimpleTreeDataSource >> nodeDataBinder: aBrTreeNodeDataBinder [
 	self notifyChanged
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> nodeElementStencil: aBrTreeNodeElementStencilBuilder [
 	"Set a stencil that should create an element for a given tree node. The resulting
 	element will be embellished by the tree widget to contain extra adornment elements
@@ -44,14 +44,14 @@ BrSimpleTreeDataSource >> nodeElementStencil: aBrTreeNodeElementStencilBuilder [
 	self notifyChanged
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> nodeUnbinder: aBlock [
 
 	nodeUnbinder := aBlock.
 	self notifyChanged
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSimpleTreeDataSource >> onBindHolder: anElementHolder at: aPosition payloads: aCollectionOfPayloads [
 	| anItemNode |
 
@@ -84,7 +84,7 @@ BrSimpleTreeDataSource >> onBindHolder: anElementHolder at: aPosition payloads: 
 		ifFalse: [ anElementHolder itemElement states removeState: BlElementSelectedState uniqueInstance ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSimpleTreeDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 	| aNodeElement aRowElement |
 
@@ -106,7 +106,7 @@ BrSimpleTreeDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 		nodeElement: aNodeElement
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrSimpleTreeDataSource >> onElementAttached: anElementHolder [
 	attachedBlock
 		ifNil: [ ^ self ].
@@ -116,7 +116,7 @@ BrSimpleTreeDataSource >> onElementAttached: anElementHolder [
 		cull: (rootNode at: (self getRowIndex: anElementHolder))
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrSimpleTreeDataSource >> onElementDetached: anElementHolder [
 
 	nodeUnbinder ifNotNil:
@@ -128,7 +128,7 @@ BrSimpleTreeDataSource >> onElementDetached: anElementHolder [
 			cull: (rootNode at: (self getRowIndex: anElementHolder)) ].
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrSimpleTreeDataSource >> onElementRecycled: anElementHolder [
 	recycledBlock
 		ifNil: [ ^ self ].
@@ -138,12 +138,12 @@ BrSimpleTreeDataSource >> onElementRecycled: anElementHolder [
 		cull: (rootNode at: (self getRowIndex: anElementHolder))
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> recycledBlock: aBlock [
 	recycledBlock := aBlock
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> rowDataBinder: aBrTreeRowDataBinder [
 	"Set a data binder that should bind node data to the whole tree row element"
 
@@ -151,7 +151,7 @@ BrSimpleTreeDataSource >> rowDataBinder: aBrTreeRowDataBinder [
 	self notifyChanged
 ]
 
-{ #category : 'accessing - stencils' }
+{ #category : #'accessing - stencils' }
 BrSimpleTreeDataSource >> rowElementStencil: aBrSimpleTreeRowElementStencilBuilder [
 	"Row stencil wrapps the created node element into an element that will play a role
 	of the row in the tree. Typically, a row also contains the expand button."

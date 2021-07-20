@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrLayoutHorizontalResizerWish',
-	#superclass : 'BrLayoutResizerWish',
+	#name : #BrLayoutHorizontalResizerWish,
+	#superclass : #BrLayoutResizerWish,
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrLayoutHorizontalResizerWish class >> isDeprecated [
 	^ true
 ]

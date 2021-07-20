@@ -1,24 +1,24 @@
 Class {
-	#name : 'BrExpansionStateEventHandler',
-	#superclass : 'BlElementStateEventHandler',
+	#name : #BrExpansionStateEventHandler,
+	#superclass : #BlElementStateEventHandler,
 	#category : 'Brick-! Core - Expansion'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BrExpansionStateEventHandler >> element: anElement expanded: aBoolean [
 	aBoolean
 		ifTrue: [ anElement states addState: BlElementState expanded ]
 		ifFalse: [ anElement states addState: BlElementState collapsed ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrExpansionStateEventHandler >> eventsToHandle [
 	^ {
 		BrExpansionToggleWish.
 	}
 ]
 
-{ #category : 'focus handlers' }
+{ #category : #'focus handlers' }
 BrExpansionStateEventHandler >> handleEvent: aBrExpansionToggleWish [
 	| anElement |
 	

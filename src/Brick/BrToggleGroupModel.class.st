@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrToggleGroupModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrToggleGroupModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'toggles',
 		'activatedToggle',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Toggle - Model'
 }
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> activateToggle: aBrToggleModel [
 	"a given toggle is already activated, do nothing"
 	(self hasActivatedToggle and: [ self activatedToggle = aBrToggleModel ])
@@ -25,7 +25,7 @@ BrToggleGroupModel >> activateToggle: aBrToggleModel [
 	self notifyToggleActivated: aBrToggleModel
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> activatedToggle [
 	<return: #BrToggleModel>
 	
@@ -36,12 +36,12 @@ BrToggleGroupModel >> activatedToggle [
 	^ activatedToggle
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> addToggle: aBrToggleModel [
 	self addToggle: aBrToggleModel at: self toggles size + 1
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> addToggle: aBrToggleModel at: anIndex [
 	"Toggle already exists, do nothing"
 	(self hasToggle: aBrToggleModel)
@@ -51,12 +51,12 @@ BrToggleGroupModel >> addToggle: aBrToggleModel at: anIndex [
 	self onToggleAdded: aBrToggleModel at: anIndex
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> addToggles: aCollectionOfToggleModels [
 	aCollectionOfToggleModels do: [ :aToggleModel | self addToggle: aToggleModel ]
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> deactivateToggle: aBrToggleModel [
 
 	"there are no activated toggles, do nothing"
@@ -75,21 +75,21 @@ BrToggleGroupModel >> deactivateToggle: aBrToggleModel [
 	self notifyToggleDeactivated: aBrToggleModel
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrToggleGroupModel >> hasActivatedToggle [
 	<return: #Boolean>
 	
 	^ activatedToggle isNotNil
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrToggleGroupModel >> hasToggle: aBrToggleModel [
 	<return: #Boolean>
 	
 	^ self toggles identityIncludes: aBrToggleModel
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> indexOf: aToggleModel [
 	"It returns 0 if a toggle is not present"
 	<return: #Number>
@@ -97,7 +97,7 @@ BrToggleGroupModel >> indexOf: aToggleModel [
 	^ self toggles indexOf: aToggleModel
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrToggleGroupModel >> initialize [
 	super initialize.
 	
@@ -106,7 +106,7 @@ BrToggleGroupModel >> initialize [
 	toggleEventHandler := BrToggleGroupToggleEventHandler new toggleGroup: self
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrToggleGroupModel >> isEmpty [
 	"Return true if there are no toggles in a group, false otherwise"
 	<return: #Boolean>
@@ -114,7 +114,7 @@ BrToggleGroupModel >> isEmpty [
 	^ self toggles isEmpty
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrToggleGroupModel >> isNotEmpty [
 	"Return true if there is at least one toggle in a group, false otherwise"
 	<return: #Boolean>
@@ -122,32 +122,32 @@ BrToggleGroupModel >> isNotEmpty [
 	^ self isEmpty not
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToggleGroupModel >> notifyToggleActivated: aBrToggleModel [
 	self dispatchEvent: (BrToggleActivatedEvent new toggle: aBrToggleModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToggleGroupModel >> notifyToggleAdded: aBrToggleModel [
 	self dispatchEvent: (BrToggleAddedEvent toggle: aBrToggleModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToggleGroupModel >> notifyToggleAdded: aBrToggleModel at: anIndex [
 	self dispatchEvent: ((BrToggleAddedEvent toggle: aBrToggleModel) index: anIndex)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToggleGroupModel >> notifyToggleDeactivated: aBrToggleModel [
 	self dispatchEvent: (BrToggleDeactivatedEvent new toggle: aBrToggleModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToggleGroupModel >> notifyToggleRemoved: aBrToggleModel [
 	self dispatchEvent: (BrToggleRemovedEvent toggle: aBrToggleModel)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrToggleGroupModel >> onToggleAdded: aBrToggleModel at: anIndex [
 	
 	self
@@ -164,7 +164,7 @@ BrToggleGroupModel >> onToggleAdded: aBrToggleModel at: anIndex [
 		ifTrue: [ self activateToggle: aBrToggleModel ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrToggleGroupModel >> onToggleRemoved: aBrToggleModel at: anIndex [
 	self
 		assert: [ aBrToggleModel isNotNil ]
@@ -174,7 +174,7 @@ BrToggleGroupModel >> onToggleRemoved: aBrToggleModel at: anIndex [
 	self notifyToggleRemoved: aBrToggleModel
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> removeToggle: aBrToggleModel [
 	| aToggleIndex |
 
@@ -189,12 +189,12 @@ BrToggleGroupModel >> removeToggle: aBrToggleModel [
 	self onToggleRemoved: aBrToggleModel at: aToggleIndex.
 ]
 
-{ #category : 'api - toggles' }
+{ #category : #'api - toggles' }
 BrToggleGroupModel >> removeToggles [
 	self toggles reverseDo: [ :aToggleModel | self removeToggle: aToggleModel ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrToggleGroupModel >> toggles [
 	<return: #Collection of: #BrToggleModel>
 

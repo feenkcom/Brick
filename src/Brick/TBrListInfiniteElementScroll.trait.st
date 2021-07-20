@@ -1,9 +1,9 @@
 Trait {
-	#name : 'TBrListInfiniteElementScroll',
+	#name : #TBrListInfiniteElementScroll,
 	#category : 'Brick-List - Look'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 TBrListInfiniteElementScroll >> initializeScrollListeners [
 	self
 		when: BrScrollByWish
@@ -14,19 +14,19 @@ TBrListInfiniteElementScroll >> initializeScrollListeners [
 		do: [ :aWish | self onScrollToItem: aWish ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBrListInfiniteElementScroll >> listElement [
 	self explicitRequirement
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 TBrListInfiniteElementScroll >> onScrollBy: aWish [
 	aWish smooth
 		ifTrue: [ self listElement smoothScrollBy: aWish delta ]
 		ifFalse: [ self listElement scrollBy: aWish delta ]
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 TBrListInfiniteElementScroll >> onScrollToItem: aWish [
 	aWish smooth
 		ifTrue: [ self listElement smoothScrollToPosition: aWish index ]

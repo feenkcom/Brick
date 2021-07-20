@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrTooltipStencilChanged',
-	#superclass : 'BrAnchoredStencilChanged',
+	#name : #BrTooltipStencilChanged,
+	#superclass : #BrAnchoredStencilChanged,
 	#category : 'Brick-Tooltip - Events'
 }

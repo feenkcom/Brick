@@ -1,24 +1,24 @@
 Class {
-	#name : 'BrToggleEvent',
-	#superclass : 'BlEvent',
+	#name : #BrToggleEvent,
+	#superclass : #BlEvent,
 	#instVars : [
 		'toggle'
 	],
 	#category : 'Brick-Toggle - Events'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrToggleEvent class >> toggle: aBrToggleModel [
 	^ self new toggle: aBrToggleModel
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrToggleEvent >> toggle [
 	<return: #BrToggleModel>
 	^ toggle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrToggleEvent >> toggle: aBrToggleModel [
 	toggle := aBrToggleModel
 ]

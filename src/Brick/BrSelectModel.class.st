@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrSelectModel',
-	#superclass : 'BrStateModel',
+	#name : #BrSelectModel,
+	#superclass : #BrStateModel,
 	#instVars : [
 		'selected'
 	],
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrSelectModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrSelectModel class >> modelName [
 	^ 'Select'
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectModel >> deselect [
 	self isSelected
 		ifFalse: [ ^ self ].
@@ -26,14 +26,14 @@ BrSelectModel >> deselect [
 	self notifyStateChanged: selected
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrSelectModel >> initialize [
 	super initialize.
 	
 	selected := false
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrSelectModel >> initializeListeners [
 	super initializeListeners.
 
@@ -41,14 +41,14 @@ BrSelectModel >> initializeListeners [
 	self when: BrSelectedWish do: [ :aWish | self selected: aWish isSelected ]
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectModel >> isSelected [
 	<return: #Boolean>
 
 	^ selected
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectModel >> select [
 	self isSelected
 		ifTrue: [ ^ self ].
@@ -57,19 +57,19 @@ BrSelectModel >> select [
 	self notifyStateChanged: selected
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectModel >> selected: aBoolean [
 	aBoolean
 		ifTrue: [ self select ]
 		ifFalse: [ self deselect ]
 ]
 
-{ #category : 'state - accessing' }
+{ #category : #'state - accessing' }
 BrSelectModel >> stateChangedEventClass [
 	^ BrSelectedChanged
 ]
 
-{ #category : 'state - streaming' }
+{ #category : #'state - streaming' }
 BrSelectModel >> streamStateIn: aBrInteractionStatesMapping [	
 	aBrInteractionStatesMapping
 		addState: (self isSelected
@@ -78,7 +78,7 @@ BrSelectModel >> streamStateIn: aBrInteractionStatesMapping [
 		model: self
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectModel >> toggle [
 	self isSelected
 		ifTrue: [ self deselect ]

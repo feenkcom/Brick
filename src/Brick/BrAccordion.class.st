@@ -28,41 +28,41 @@ container addChildren: children.
 container
 "
 Class {
-	#name : 'BrAccordion',
-	#superclass : 'BlElement',
+	#name : #BrAccordion,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrExpandable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrExpandable classTrait',
 	#category : 'Brick-Accordion - UI'
 }
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrAccordion >> collapse [
 	self states addState: BrCollapsedState uniqueInstance
 ]
 
-{ #category : 'api - accordion' }
+{ #category : #'api - accordion' }
 BrAccordion >> content: aStencil [
 	self viewModel contentStencil: aStencil
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrAccordion >> expand [
 	self states addState: BrExpandedState uniqueInstance
 ]
 
-{ #category : 'api - accordion' }
+{ #category : #'api - accordion' }
 BrAccordion >> header: aStencil [
 	self viewModel headerStencil: aStencil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAccordion >> initialize [
 	super initialize.
 	
 	self viewModel: BrAccordionModel new
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrAccordion >> isExpanded [
 	"Return true if an widget is expanded (has expanded state), false otherwise"
 	<return: #Boolean>

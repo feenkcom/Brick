@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrToolbarModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrToolbarModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'items'
 	],
 	#category : 'Brick-Toolbar - Model'
 }
 
-{ #category : 'api - items' }
+{ #category : #'api - items' }
 BrToolbarModel >> addItem: aWidgetModel [
 	self
 		assert: [ aWidgetModel isNotNil ]
@@ -17,20 +17,20 @@ BrToolbarModel >> addItem: aWidgetModel [
 	self onItemAdded: aWidgetModel
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrToolbarModel >> hasItems [
 	<return: #Boolean>
 	
 	^ self numberOfItems > 0
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrToolbarModel >> initialize [
 	super initialize.
 	items := OrderedCollection new.
 ]
 
-{ #category : 'api - items' }
+{ #category : #'api - items' }
 BrToolbarModel >> itemAt: anIndex [
 	<return: #BrWidgetModel>
 	self
@@ -46,40 +46,40 @@ BrToolbarModel >> itemAt: anIndex [
 	^ self items at: anIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrToolbarModel >> items [
 	<return: #Collection of: #BrWidgetModel>
 	^ items
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToolbarModel >> notifyItemAdded: aWidgetModel [
 	self dispatchEvent: (BrToolbarItemAddedEvent item: aWidgetModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrToolbarModel >> notifyItemRemoved: aWidgetModel [
 	self dispatchEvent: (BrToolbarItemRemovedEvent item: aWidgetModel)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrToolbarModel >> numberOfItems [
 	<return: #Number>
 
 	^ self items size
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrToolbarModel >> onItemAdded: aWidgetModel [
 	self notifyItemAdded: aWidgetModel.
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrToolbarModel >> onItemRemoved: aWidgetModel at: anItemIndex [
 	self notifyItemRemoved: aWidgetModel
 ]
 
-{ #category : 'api - items' }
+{ #category : #'api - items' }
 BrToolbarModel >> removeItem: aWidgetModel [
 	| anItemIndex |
 
@@ -88,7 +88,7 @@ BrToolbarModel >> removeItem: aWidgetModel [
 	self onItemRemoved: aWidgetModel at: anItemIndex
 ]
 
-{ #category : 'api - items' }
+{ #category : #'api - items' }
 BrToolbarModel >> removeItemAt: anIndex [
 	self removeItem: (self itemAt: anIndex)
 ]

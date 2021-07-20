@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrAnchoredHandleChanged',
-	#superclass : 'BrChangeEvent',
+	#name : #BrAnchoredHandleChanged,
+	#superclass : #BrChangeEvent,
 	#instVars : [
 		'handle'
 	],
 	#category : 'Brick-Anchored - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredHandleChanged >> handle [
 	^ handle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredHandleChanged >> handle: anObject [
 	handle := anObject
 ]

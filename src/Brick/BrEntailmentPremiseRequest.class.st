@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrEntailmentPremiseRequest',
-	#superclass : 'BrRequest',
+	#name : #BrEntailmentPremiseRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-Entailment - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEntailmentPremiseRequest >> responseClass [
 	^ BrEntailmentPremiseChanged
 ]
