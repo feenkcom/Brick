@@ -1,22 +1,22 @@
 Class {
-	#name : #BrPager,
-	#superclass : #BlElement,
+	#name : 'BrPager',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : #'Brick-Pager - UI'
+	#category : 'Brick-Pager - UI'
 }
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPager >> addPage: aContentElement [	
 	self viewModel addPage: aContentElement viewModel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrPager >> hasPageAfter: aPageElement [
 	^ self viewModel hasPageAfter: aPageElement viewModel
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPager >> initialize [
 	super initialize.
 	self initializeViewModel.
@@ -24,29 +24,29 @@ BrPager >> initialize [
 	self initializeLayout
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPager >> initializeAptitude [
 	self background: self theme default backdropColor.
 	self
 		aptitude: BrPagerScrollbarAptitude new + BrScrollablePagerAptitude new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPager >> initializeLayout [
 	self layout: BlLinearLayout vertical
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPager >> initializeViewModel [
 	self viewModel: self newPagerModel
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrPager >> newPagerModel [
 	^ BrPagerModel new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPager >> pageAfter: aBlElement ifFound: aFoundBlock ifNone: aNoneBlock [ 
 	self viewModel 
 		pageAfter: aBlElement viewModel 
@@ -54,51 +54,51 @@ BrPager >> pageAfter: aBlElement ifFound: aFoundBlock ifNone: aNoneBlock [
 		ifNone: aNoneBlock 
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrPager >> pages [
 	^ self viewModel pages
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPager >> removeAllPages [
 	self viewModel removeAllPages
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPager >> removePage: aContentElement [	
 	self viewModel removePage: aContentElement viewModel
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPager >> removePageAt: anIndex [	
 	self viewModel removePageAt: anIndex
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPager >> removePagesAfter: aPageElement [	
 	self viewModel removePagesAfter: aPageElement viewModel
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrPager >> scrollTo: aPageIndex [
 	self dispatchEvent: (BrPagerScrollWish new
 		pageIndex: aPageIndex;
 		isSmooth: false)
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrPager >> scrollToLast [
 	self scrollTo: self pages size
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrPager >> smoothScrollTo: aPageIndex [
 	self dispatchEvent: (BrPagerScrollWish new
 		pageIndex: aPageIndex;
 		isSmooth: true)
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrPager >> smoothScrollToLast [
 	self smoothScrollTo: self pages size
 ]

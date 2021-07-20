@@ -1,28 +1,28 @@
 Class {
-	#name : #BrTreeNodeComputation,
-	#superclass : #Object,
+	#name : 'BrTreeNodeComputation',
+	#superclass : 'Object',
 	#instVars : [
 		'block'
 	],
-	#category : #'Brick-Tree - Model'
+	#category : 'Brick-Tree - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeComputation >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeComputation >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #'api - expandable' }
+{ #category : 'api - expandable' }
 BrTreeNodeComputation >> expand: aNode suchThat: anOneArgBlock [
 	self subclassResponsibility
 ]
 
-{ #category : #generated }
+{ #category : 'generated' }
 BrTreeNodeComputation >> value: anObject [
 	^ self subclassResponsibility
 ]

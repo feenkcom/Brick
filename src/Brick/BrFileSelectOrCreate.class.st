@@ -1,13 +1,13 @@
 Class {
-	#name : #BrFileSelectOrCreate,
-	#superclass : #BrFileSelector,
+	#name : 'BrFileSelectOrCreate',
+	#superclass : 'BrFileSelector',
 	#instVars : [
 		'fileInputField'
 	],
-	#category : #'Brick-File - UI'
+	#category : 'Brick-File - UI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelectOrCreate >> buildUI [
 	| alignedButton fileInputFieldLabel fileInputFieldContainer|
 	breadcrumb := self createBreadcrumb.
@@ -35,7 +35,7 @@ BrFileSelectOrCreate >> buildUI [
 		alignedButton. }.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelectOrCreate >> createFileInputField [
 	|fileInputFieldLabel |
 	fileInputFieldLabel := self createFileInputFieldLabel .
@@ -59,7 +59,7 @@ BrFileSelectOrCreate >> createFileInputField [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelectOrCreate >> createFileInputFieldLabel [
 	^ BrLabel new text:'New file name:'; 
 		addAptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
@@ -67,7 +67,7 @@ BrFileSelectOrCreate >> createFileInputFieldLabel [
 		margin: (BlInsets right: 5).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelectOrCreate >> executeAction [ 
 	"Execute the receiver's load action"
 	| newFile |

@@ -1,12 +1,12 @@
 Class {
-	#name : #BrStyleCommonAptitude,
-	#superclass : #BrStyleAptitude,
+	#name : 'BrStyleCommonAptitude',
+	#superclass : 'BrStyleAptitude',
 	#traits : 'TBlElementCommonStyles',
 	#classTraits : 'TBlElementCommonStyles classTrait',
-	#category : #'Brick-! Core - Looks'
+	#category : 'Brick-! Core - Looks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStyleCommonAptitude >> state [
 	^ BlElementState
 ]

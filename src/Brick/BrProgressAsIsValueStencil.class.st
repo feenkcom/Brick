@@ -7,12 +7,12 @@ It might be sometimes inconvenient, depending on the nature of progress values.
 
 "
 Class {
-	#name : #BrProgressAsIsValueStencil,
-	#superclass : #BrProgressValueStencil,
-	#category : #'Brick-Progress - Model'
+	#name : 'BrProgressAsIsValueStencil',
+	#superclass : 'BrProgressValueStencil',
+	#category : 'Brick-Progress - Model'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrProgressAsIsValueStencil >> create [
 	<return: #String>
 	^ self value asString

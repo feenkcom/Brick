@@ -1,5 +1,5 @@
 Class {
-	#name : #BrEditorChangedEvent,
-	#superclass : #BrChangeEvent,
-	#category : #'Brick-Editor - Events'
+	#name : 'BrEditorChangedEvent',
+	#superclass : 'BrChangeEvent',
+	#category : 'Brick-Editor - Events'
 }

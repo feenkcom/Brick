@@ -2,12 +2,12 @@
 I am sent to request a tab group view model to respond with all the registered tabs
 "
 Class {
-	#name : #BrTabGroupTabsRequest,
-	#superclass : #BrTabGroupRequest,
-	#category : #'Brick-Tabs - Events'
+	#name : 'BrTabGroupTabsRequest',
+	#superclass : 'BrTabGroupRequest',
+	#category : 'Brick-Tabs - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupTabsRequest >> responseClass [
 	^ BrTabGroupTabsChangedEvent
 ]

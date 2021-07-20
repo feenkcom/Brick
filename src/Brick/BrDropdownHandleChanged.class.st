@@ -1,5 +1,5 @@
 Class {
-	#name : #BrDropdownHandleChanged,
-	#superclass : #BrAnchoredHandleChanged,
-	#category : #'Brick-Dropdown - Events'
+	#name : 'BrDropdownHandleChanged',
+	#superclass : 'BrAnchoredHandleChanged',
+	#category : 'Brick-Dropdown - Events'
 }

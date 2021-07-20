@@ -1,30 +1,30 @@
 Class {
-	#name : #BrTreeRowElementStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTreeRowElementStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemType'
 	],
-	#category : #'Brick-Tree - Stencil'
+	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowElementStencilBuilder >> itemType [
 	^ itemType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowElementStencilBuilder >> itemType: anObject [
 	itemType := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeRowElementStencilBuilder >> paramsOn: aStencilExecutor [
 
 	aStencilExecutor
 		push: self itemType
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTreeRowElementStencilBuilder >> reset [
 	super reset.
 	

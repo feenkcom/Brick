@@ -2,60 +2,60 @@
 I update the size of a page preview element in a scroll bar according to the size of a corresponding page
 "
 Class {
-	#name : #BrPagerPagePreviewResizeListener,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BrPagerPagePreviewResizeListener',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'previewElement',
 		'height'
 	],
-	#category : #'Brick-Pager - Look'
+	#category : 'Brick-Pager - Look'
 }
 
-{ #category : #'element handlers' }
+{ #category : 'element handlers' }
 BrPagerPagePreviewResizeListener >> elementExtentChangedEvent: anEvent [
 	self updateSizeFrom: anEvent currentTarget
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrPagerPagePreviewResizeListener >> eventsToHandle [
 	^ { BlElementExtentChangedEvent }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPagePreviewResizeListener >> height [
 	^ height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPagePreviewResizeListener >> height: anObject [
 	height := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPagerPagePreviewResizeListener >> initialize [
 	super initialize.
 	
 	height := 10
 ]
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BrPagerPagePreviewResizeListener >> onInstalledIn: aPageElement [
 	super onInstalledIn: aPageElement.
 	
 	self updateSizeFrom: aPageElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPagePreviewResizeListener >> previewElement [
 	^ previewElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPagePreviewResizeListener >> previewElement: anObject [
 	previewElement := anObject
 ]
 
-{ #category : #'element handlers' }
+{ #category : 'element handlers' }
 BrPagerPagePreviewResizeListener >> updateSizeFrom: aPageElement [
 	| aPageExtent aScale aPreviewExtent |
 

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrHorizontalFlowAptitude,
-	#superclass : #BrWidgetContainerAptitude,
-	#category : #'Brick-Layout Widgets'
+	#name : 'BrHorizontalFlowAptitude',
+	#superclass : 'BrWidgetContainerAptitude',
+	#category : 'Brick-Layout Widgets'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHorizontalFlowAptitude >> initialize [
 	super initialize.
 

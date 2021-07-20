@@ -1,29 +1,29 @@
 Class {
-	#name : #BrTaggerTagAdded,
-	#superclass : #BrTaggerChangeEvent,
+	#name : 'BrTaggerTagAdded',
+	#superclass : 'BrTaggerChangeEvent',
 	#instVars : [
 		'tag',
 		'index'
 	],
-	#category : #'Brick-Tagger - Events'
+	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagAdded >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagAdded >> index: anObject [
 	index := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagAdded >> tag [
 	^ tag
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagAdded >> tag: anObject [
 	tag := anObject
 ]

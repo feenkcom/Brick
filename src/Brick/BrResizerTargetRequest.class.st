@@ -1,10 +1,10 @@
 Class {
-	#name : #BrResizerTargetRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Resizer - Events'
+	#name : 'BrResizerTargetRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Resizer - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizerTargetRequest >> responseClass [
 	^ BrResizerTargetChanged
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrShadowLook,
-	#superclass : #BrShadowAptitude,
-	#category : #'Brick-! Core - Looks'
+	#name : 'BrShadowLook',
+	#superclass : 'BrShadowAptitude',
+	#category : 'Brick-! Core - Looks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrShadowLook class >> isDeprecated [
 	^ true
 ]

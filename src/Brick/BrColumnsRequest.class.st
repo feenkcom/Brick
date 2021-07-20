@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnsRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Column - Events'
+	#name : 'BrColumnsRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Column - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnsRequest >> responseClass [
 	^ BrColumnsChanged
 ]

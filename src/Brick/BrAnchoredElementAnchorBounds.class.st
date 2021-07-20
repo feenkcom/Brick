@@ -1,30 +1,30 @@
 Class {
-	#name : #BrAnchoredElementAnchorBounds,
-	#superclass : #BrAnchoredAnchorBounds,
+	#name : 'BrAnchoredElementAnchorBounds',
+	#superclass : 'BrAnchoredAnchorBounds',
 	#instVars : [
 		'element'
 	],
-	#category : #'Brick-Anchored - Support'
+	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredElementAnchorBounds class >> element: anElement [
 	^ self new
 		element: anElement;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredElementAnchorBounds >> boundsIn: aReferenceElement [
 	^ element bounds inParent: aReferenceElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredElementAnchorBounds >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredElementAnchorBounds >> element: anObject [
 	element := anObject
 ]

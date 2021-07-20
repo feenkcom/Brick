@@ -3,54 +3,54 @@ I am sent by ${class:BrExpandableModel}$ when its expansion state changes.
 I am also a respose to the ${class:BrExpansionStateRequest}$
 "
 Class {
-	#name : #BrExpansionChanged,
-	#superclass : #BrStateChangedEvent,
+	#name : 'BrExpansionChanged',
+	#superclass : 'BrStateChangedEvent',
 	#instVars : [
 		'expanded'
 	],
-	#category : #'Brick-! Deprecated'
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrExpansionChanged class >> expanded: aBoolean [
 	^ self new expanded: aBoolean
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrExpansionChanged class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpansionChanged >> expanded [
 	<return: #Boolean>
 
 	^ expanded
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpansionChanged >> expanded: aBoolean [
 	expanded := aBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExpansionChanged >> initialize [
 	super initialize.
 	
 	expanded := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrExpansionChanged >> isCollapsed [
 	^ self expanded not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrExpansionChanged >> isExpanded [
 	^ self expanded
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpansionChanged >> state: aBoolean [
 	"Override me to properly set the given state"
 

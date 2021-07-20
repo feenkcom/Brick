@@ -1,26 +1,26 @@
 Class {
-	#name : #BrColumnedListDataSource,
-	#superclass : #BrListDataSource,
+	#name : 'BrColumnedListDataSource',
+	#superclass : 'BrListDataSource',
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-List - Support'
+	#category : 'Brick-List - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListDataSource >> columns [
 	<return: #Collection of: #BrColumn>
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListDataSource >> columns: aCollectionOfBrListColumn [
 
 	columns := aCollectionOfBrListColumn.
 	self notifyChanged
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListDataSource >> initialize [
 	super initialize.
 	
@@ -28,11 +28,11 @@ BrColumnedListDataSource >> initialize [
 	columns := #()
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColumnedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 	| anItemObject eachColumnIndex |
 
-	anItemObject := self rowValues at: aPosition.
+	anItemObject := self listModel itemIdAt: aPosition.
 
 	eachColumnIndex := 0.
 	anElementHolder columns
@@ -57,7 +57,7 @@ BrColumnedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 		ifFalse: [ anElementHolder itemElement states removeState: BlElementSelectedState uniqueInstance ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColumnedListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 	| aRowElement theColumnElements |
 
@@ -87,6 +87,6 @@ BrColumnedListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 		columnElements: theColumnElements
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrColumnedListDataSource >> rowStencilBuilder: aStencil [
 ]

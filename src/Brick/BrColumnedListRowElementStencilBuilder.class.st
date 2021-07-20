@@ -1,14 +1,14 @@
 Class {
-	#name : #BrColumnedListRowElementStencilBuilder,
-	#superclass : #BrListItemElementStencilBuilder,
+	#name : 'BrColumnedListRowElementStencilBuilder',
+	#superclass : 'BrListItemElementStencilBuilder',
 	#instVars : [
 		'cellSpacing',
 		'padding'
 	],
-	#category : #'Brick-List - Stencil'
+	#category : 'Brick-List - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnedListRowElementStencilBuilder >> buildDefault [
 	^ BlElement new
 		layout: (BlLinearLayout horizontal alignCenterLeft cellSpacing: self cellSpacing);
@@ -18,17 +18,17 @@ BrColumnedListRowElementStencilBuilder >> buildDefault [
 			c vertical fitContent ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListRowElementStencilBuilder >> cellSpacing [
 	^ cellSpacing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListRowElementStencilBuilder >> cellSpacing: anObject [
 	cellSpacing := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListRowElementStencilBuilder >> initialize [
 	super initialize.
 	
@@ -36,12 +36,12 @@ BrColumnedListRowElementStencilBuilder >> initialize [
 	padding := BlInsets empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListRowElementStencilBuilder >> padding [
 	^ padding
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListRowElementStencilBuilder >> padding: anObject [
 	padding := anObject
 ]

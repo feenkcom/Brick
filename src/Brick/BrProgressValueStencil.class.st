@@ -5,37 +5,37 @@ See my subclasses for specific examples: ${class:BrProgressValueStencil|show=#gt
 
 "
 Class {
-	#name : #BrProgressValueStencil,
-	#superclass : #BrStencil,
+	#name : 'BrProgressValueStencil',
+	#superclass : 'BrStencil',
 	#instVars : [
 		'value'
 	],
-	#category : #'Brick-Progress - Model'
+	#category : 'Brick-Progress - Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrProgressValueStencil class >> isAbstract [
 	^ self name = #BrProgressValueStencil 
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrProgressValueStencil >> create [
 	<return: #String>
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressValueStencil >> initialize [
 	super initialize.
 	value := 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressValueStencil >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressValueStencil >> value: anObject [
 	value := anObject
 ]

@@ -1,71 +1,71 @@
 Class {
-	#name : #BrLayoutAlignmentModel,
-	#superclass : #BrStateModel,
+	#name : 'BrLayoutAlignmentModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'alignment'
 	],
 	#pools : [
 		'BrLayoutAlignmentTypes'
 	],
-	#category : #'Brick-Layout Alignment - Model'
+	#category : 'Brick-Layout Alignment - Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> alignment: anObject [
 	^ self new alignment: anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> bottomCenter [
 	^ self alignment: BottomCenter
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> bottomLeft [
 	^ self alignment: BottomLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> bottomRight [
 	^ self alignment: BottomRight
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> center [
 	^ self alignment: Center
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> centerLeft [
 	^ self alignment: CenterLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> centerRight [
 	^ self alignment: CenterRight
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> topCenter [
 	^ self alignment: TopCenter
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> topLeft [
 	^ self alignment: TopLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentModel class >> topRight [
 	^ self alignment: TopRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> alignment [
 	^ alignment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> alignment: anAlignment [
 
 	self
@@ -79,44 +79,44 @@ BrLayoutAlignmentModel >> alignment: anAlignment [
 	self notifyStateChanged: anAlignment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> bottomCenter [
 	self alignment: BottomCenter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> bottomLeft [
 	self alignment: BottomLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> bottomRight [
 	self alignment: BottomRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> center [
 	self alignment: Center
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> centerLeft [
 	self alignment: CenterLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> centerRight [
 	self alignment: CenterRight
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLayoutAlignmentModel >> initialize [
 	super initialize.
 
 	alignment := None
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLayoutAlignmentModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -124,34 +124,34 @@ BrLayoutAlignmentModel >> initializeListeners [
 	self when: BrLayoutAlignmentWish do: [ :aWish | self alignment: aWish alignment ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> none [
 	self alignment: None
 ]
 
-{ #category : #'state - accessing' }
+{ #category : 'state - accessing' }
 BrLayoutAlignmentModel >> stateChangedEventClass [
 	^ BrLayoutAlignmentChanged
 ]
 
-{ #category : #'state - streaming' }
+{ #category : 'state - streaming' }
 BrLayoutAlignmentModel >> streamStateIn: aBrInteractionStatesMapping [
 	aBrInteractionStatesMapping
 		addState: (BrLayoutAlignmentState alignment: self alignment)
 		model: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> topCenter [
 	self alignment: TopCenter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> topLeft [
 	self alignment: TopLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentModel >> topRight [
 	self alignment: TopRight
 ]

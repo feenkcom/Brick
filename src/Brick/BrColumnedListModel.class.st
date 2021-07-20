@@ -1,24 +1,24 @@
 Class {
-	#name : #BrColumnedListModel,
-	#superclass : #BrAbstractListModel,
+	#name : 'BrColumnedListModel',
+	#superclass : 'BrAbstractListModel',
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-List - Model'
+	#category : 'Brick-List - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListModel >> column [
 	^ columns column
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrColumnedListModel >> columnsDo: aBlock [ 
 
 	columns columnsDo: aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListModel >> initialize [
 	super initialize.
 

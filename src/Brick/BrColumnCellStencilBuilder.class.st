@@ -1,52 +1,52 @@
 Class {
-	#name : #BrColumnCellStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrColumnCellStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemType',
 		'column',
 		'columnIndex'
 	],
-	#category : #'Brick-Column - Stencil'
+	#category : 'Brick-Column - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnCellStencilBuilder >> buildDefault [
 	^ BlElement new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellStencilBuilder >> column [
 	^ column
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellStencilBuilder >> column: anObject [
 	column := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellStencilBuilder >> columnIndex [
 	<return: #Number>
 
 	^ columnIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellStencilBuilder >> columnIndex: aNumber [
 	columnIndex := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellStencilBuilder >> itemType [
 	^ itemType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellStencilBuilder >> itemType: anObject [
 	itemType := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnCellStencilBuilder >> paramsOn: aStencilExecutor [
 
 	aStencilExecutor
@@ -55,7 +55,7 @@ BrColumnCellStencilBuilder >> paramsOn: aStencilExecutor [
 		push: self columnIndex
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnCellStencilBuilder >> reset [
 	itemType := nil.
 	column := nil.

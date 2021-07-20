@@ -1,17 +1,17 @@
 Class {
-	#name : #BrPagerPageHolder,
-	#superclass : #BlInfiniteHolder,
-	#category : #'Brick-Pager - Support'
+	#name : 'BrPagerPageHolder',
+	#superclass : 'BlInfiniteHolder',
+	#category : 'Brick-Pager - Support'
 }
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrPagerPageHolder >> onRecycled [
 	"Hook method for cleaning up resources when the page holder is recycled."
 	
 	itemElement := nil.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPageHolder >> pageElement: aPageElement [
 	aPageElement removeFromParent.
 	itemElement := aPageElement

@@ -26,17 +26,17 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #BrAnchoredAvailableBounds,
-	#superclass : #Object,
-	#category : #'Brick-Anchored - Support'
+	#name : 'BrAnchoredAvailableBounds',
+	#superclass : 'Object',
+	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrAnchoredAvailableBounds class >> asBrAnchoredAvailableBounds [
 	^ self new
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrAnchoredAvailableBounds class >> gtAllTypesFor: aView [
 	<gtView>
 		
@@ -47,7 +47,7 @@ BrAnchoredAvailableBounds class >> gtAllTypesFor: aView [
 		itemText: [ :each | each label ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrAnchoredAvailableBounds class >> gtPreviewFor: aView [
 	<gtView>
 	
@@ -61,17 +61,17 @@ BrAnchoredAvailableBounds class >> gtPreviewFor: aView [
 		view: #gtPreviewFor:
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredAvailableBounds class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrAnchoredAvailableBounds >> asBrAnchoredAvailableBounds [
 	^ self
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrAnchoredAvailableBounds >> gtPreviewFor: aView [
 	<gtView>
 	
@@ -111,7 +111,7 @@ BrAnchoredAvailableBounds >> gtPreviewFor: aView [
 		]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredAvailableBounds >> in: aBounds from: aPoint [
 	self subclassResponsibility
 ]

@@ -10,21 +10,21 @@ Example:
 ]]]
 "
 Class {
-	#name : #BrInteractiveAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrInteractiveAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'styles',
 		'currentStates'
 	],
-	#category : #'Brick-! Deprecated'
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrInteractiveAptitude class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrInteractiveAptitude >> gtStylesFor: aView [
 	<gtView>
 	
@@ -37,7 +37,7 @@ BrInteractiveAptitude >> gtStylesFor: aView [
 		
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveAptitude >> initialize [
 	super initialize.
 	
@@ -52,21 +52,21 @@ BrInteractiveAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrInteractionChanged do: [ :anEvent | self statesChanged: anEvent ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveAptitude >> initializeRequests [
 	super initializeRequests.
 
 	self request: BrInteractionRequest new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveAptitude >> requestStates [
 	self widgetDo: [ :aWidget |
 		aWidget telemetry
@@ -74,12 +74,12 @@ BrInteractiveAptitude >> requestStates [
 			during: [ self statesChanged: (self request: (BrInteractionRequest oneWay forceUpdate: true)) ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractiveAptitude >> state [
 	^ self subclassResponsibility
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrInteractiveAptitude >> statesChanged: anEvent [
 	| aWidget newStates |
 
@@ -95,19 +95,19 @@ BrInteractiveAptitude >> statesChanged: anEvent [
 		thenDo: [ :aStyle | aStyle action cull: aWidget cull: aStyle state ]
 ]
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 BrInteractiveAptitude >> style: aBlock [
 	aBlock value: (BrInteractiveCommonStyler on: self)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrInteractiveAptitude >> styles [
 	<return: #Collection of: #BrInteractiveStyle>
 	
 	^ styles
 ]
 
-{ #category : #builder }
+{ #category : 'builder' }
 BrInteractiveAptitude >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	

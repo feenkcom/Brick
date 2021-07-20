@@ -1,13 +1,13 @@
 Class {
-	#name : #BrListClickToSelectHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BrListClickToSelectHandler',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'listWidget'
 	],
-	#category : #'Brick-List - Support'
+	#category : 'Brick-List - Support'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrListClickToSelectHandler >> clickEvent: aBlClickEvent [
 	aBlClickEvent consumed: true.
 
@@ -15,24 +15,24 @@ BrListClickToSelectHandler >> clickEvent: aBlClickEvent [
 	listWidget requestFocus
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrListClickToSelectHandler >> doubleClickEvent: aBlDoubleClickEvent [
 	aBlDoubleClickEvent consumed: true.
 
 	listWidget dispatchEvent: (BrSelectionDoubleClicked new selection: listWidget selectedIndices; sourceEvent: aBlDoubleClickEvent)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrListClickToSelectHandler >> eventsToHandle [
 	^ { BlClickEvent . BlDoubleClickEvent }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListClickToSelectHandler >> listWidget [
 	^ listWidget
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListClickToSelectHandler >> listWidget: anObject [
 	listWidget := anObject
 ]

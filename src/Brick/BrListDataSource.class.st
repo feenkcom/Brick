@@ -1,8 +1,8 @@
 Class {
-	#name : #BrListDataSource,
-	#superclass : #BlInfiniteDataSource,
+	#name : 'BrListDataSource',
+	#superclass : 'BlInfiniteDataSource',
 	#instVars : [
-		'rowValues',
+		'listModel',
 		'selection',
 		'itemTypeStencil',
 		'itemElementStencil',
@@ -10,50 +10,49 @@ Class {
 		'listWidget',
 		'itemIdStencil'
 	],
-	#category : #'Brick-List - Support'
+	#category : 'Brick-List - Support'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrListDataSource >> assignRowIndex: aPosition to: anElementHolder [
 	anElementHolder itemElement
 		userData at: #listRowIndex put: aPosition
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrListDataSource >> getRowIndex: anElementHolder [
 	^ anElementHolder itemElement userData
 		at: #listRowIndex
 		ifAbsent: [ 0 ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrListDataSource >> initialize [
 	super initialize.
 	
-	rowValues := #().
 	selection := BlCompositeSelection new.
 	clickToSelectHandler := BrListClickToSelectHandler new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> itemCount [
-	^ self rowValues size
+	^ self listModel itemsCount
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrListDataSource >> itemElementStencil: aBrListItemElementStencilBuilder [
 	itemElementStencil := aBrListItemElementStencilBuilder.
 	self notifyChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> itemIdAt: anItemPosition [
 	| anItemObject anItemId |
 
 	itemIdStencil
 		ifNil: [ ^ NoId ].
 
-	anItemObject := self rowValues at: anItemPosition.
+	anItemObject := self listModel itemIdAt: anItemPosition.
 
 	anItemId := itemIdStencil
 		itemPosition: anItemPosition;
@@ -63,18 +62,18 @@ BrListDataSource >> itemIdAt: anItemPosition [
 	^ anItemId
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrListDataSource >> itemIdStencil: aBrListItemIdStencilBuilder [
 	itemIdStencil := aBrListItemIdStencilBuilder.
 	hasStableIds := aBrListItemIdStencilBuilder notNil.
 	self notifyChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> itemTypeAt: anItemPosition [
 	| anItemObject anItemType |
 
-	anItemObject := self rowValues at: anItemPosition.
+	anItemObject := self listModel itemIdAt: anItemPosition.
 
 	anItemType := itemTypeStencil
 		itemPosition: anItemPosition;
@@ -86,30 +85,41 @@ BrListDataSource >> itemTypeAt: anItemPosition [
 	^ anItemType
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrListDataSource >> itemTypeStencil: aBrListItemTypeStencilBuilder [
 	itemTypeStencil := aBrListItemTypeStencilBuilder.
 	self notifyChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> listElement [
 	^ listWidget
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> listElement: aBrList [
 	listWidget := aBrList.
 	clickToSelectHandler listWidget: aBrList
 ]
 
-{ #category : #hooks }
+{ #category : 'accessing' }
+BrListDataSource >> listModel [
+	^ listModel
+]
+
+{ #category : 'accessing' }
+BrListDataSource >> listModel: aListModel [
+	listModel := aListModel.
+	self notifyChanged
+]
+
+{ #category : 'hooks' }
 BrListDataSource >> onElementAttached: anElementHolder [
 	| anItemElement anItemPosition anItemValue |
 	
 	anItemElement := anElementHolder itemElement.
 	anItemPosition := anElementHolder position.
-	anItemValue := self rowValues at: anItemPosition.
+	anItemValue := self listModel itemIdAt: anItemPosition.
 
 	self listElement enqueueTask: (BlTaskAction new action: [
 		self listElement dispatchEvent: (BrListItemElementAttached new
@@ -118,7 +128,7 @@ BrListDataSource >> onElementAttached: anElementHolder [
 			rowValue: anItemValue) ])
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrListDataSource >> onElementDetached: anElementHolder [
 	| anItemPosition anItemValue |
 
@@ -131,26 +141,14 @@ BrListDataSource >> onElementDetached: anElementHolder [
 			rowValue: anItemValue) ])
 ]
 
-{ #category : #accessing }
-BrListDataSource >> rowValues [
-	^ rowValues
-]
-
-{ #category : #accessing }
-BrListDataSource >> rowValues: aCollection [
-
-	rowValues := aCollection.
-	self notifyChanged
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> selection [
 	<return: #BlSelection>
 	
 	^ selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListDataSource >> selection: aBlSelection [
 	selection do: [ :eachMonotoneSelection | self notifyItemsChanged: eachMonotoneSelection indices ].
 	selection := aBlSelection.

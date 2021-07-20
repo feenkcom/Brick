@@ -1,6 +1,6 @@
 Class {
-	#name : #BrLayoutAlignmentTypes,
-	#superclass : #SharedPool,
+	#name : 'BrLayoutAlignmentTypes',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'BottomCenter',
 		'BottomLeft',
@@ -13,10 +13,10 @@ Class {
 		'TopLeft',
 		'TopRight'
 	],
-	#category : #'Brick-Layout Alignment - States'
+	#category : 'Brick-Layout Alignment - States'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BrLayoutAlignmentTypes class >> initialize [
 	TopLeft := #topLeft.
 	TopRight := #topRight.

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrListItemTypeStencilRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-List - Events'
+	#name : 'BrListItemTypeStencilRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-List - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrListItemTypeStencilRequest >> responseClass [
 	^ BrListItemTypeStencilChangedEvent
 ]

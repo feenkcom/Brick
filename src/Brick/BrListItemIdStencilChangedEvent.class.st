@@ -1,18 +1,18 @@
 Class {
-	#name : #BrListItemIdStencilChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrListItemIdStencilChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'itemIdStencil'
 	],
-	#category : #'Brick-List - Events'
+	#category : 'Brick-List - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemIdStencilChangedEvent >> itemIdStencil [
 	^ itemIdStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemIdStencilChangedEvent >> itemIdStencil: anObject [
 	itemIdStencil := anObject
 ]

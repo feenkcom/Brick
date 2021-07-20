@@ -1,41 +1,41 @@
-Extension { #name : #TBlElementProperties }
+Extension { #name : 'TBlElementProperties' }
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> hExact: aWidth [
 	self addProperty: (BlElementLayoutHorizontalResizerProperty new exact: aWidth)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> hFitContent [
 	self addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> hFitContentLimited [
 	self addProperty: (BlElementLayoutHorizontalResizerProperty new fitContentLimited)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> hMatchParent [
 	self addProperty: (BlElementLayoutHorizontalResizerProperty new matchParent)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> vExact: aHeight [
 	self addProperty: (BlElementLayoutVerticalResizerProperty new exact: aHeight)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> vFitContent [
 	self addProperty: (BlElementLayoutVerticalResizerProperty new fitContent)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> vFitContentLimited [
 	self addProperty: (BlElementLayoutVerticalResizerProperty new fitContentLimited)
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementProperties >> vMatchParent [
 	self addProperty: (BlElementLayoutVerticalResizerProperty new matchParent)
 ]

@@ -1,29 +1,29 @@
 Class {
-	#name : #BrTaggerRenameTagWish,
-	#superclass : #BrTaggerWish,
+	#name : 'BrTaggerRenameTagWish',
+	#superclass : 'BrTaggerWish',
 	#instVars : [
 		'tag',
 		'newName'
 	],
-	#category : #'Brick-Tagger - Events'
+	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerRenameTagWish >> newName [
 	^ newName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerRenameTagWish >> newName: anObject [
 	newName := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerRenameTagWish >> tag [
 	^ tag
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerRenameTagWish >> tag: anObject [
 	tag := anObject
 ]

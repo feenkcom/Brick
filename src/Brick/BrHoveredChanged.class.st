@@ -1,40 +1,40 @@
 Class {
-	#name : #BrHoveredChanged,
-	#superclass : #BrStateChangedEvent,
+	#name : 'BrHoveredChanged',
+	#superclass : 'BrStateChangedEvent',
 	#instVars : [
 		'hovered'
 	],
-	#category : #'Brick-! Core - Events'
+	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrHoveredChanged class >> hovered: aBoolean [
 	^ self new hovered: aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHoveredChanged >> hovered [
 	^ hovered
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHoveredChanged >> hovered: aBoolean [
 	hovered := aBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHoveredChanged >> initialize [
 	super initialize.
 	
 	hovered := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrHoveredChanged >> isHovered [
 	^ self hovered
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHoveredChanged >> state: anObject [
 	"Override me to properly set the given state"
 

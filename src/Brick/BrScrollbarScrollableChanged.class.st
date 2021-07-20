@@ -1,18 +1,18 @@
 Class {
-	#name : #BrScrollbarScrollableChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrScrollbarScrollableChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'scrollableElement'
 	],
-	#category : #'Brick-Scrollbar - Events'
+	#category : 'Brick-Scrollbar - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollbarScrollableChanged >> scrollableElement [
 	^ scrollableElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollbarScrollableChanged >> scrollableElement: anObject [
 	scrollableElement := anObject
 ]

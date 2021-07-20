@@ -1,36 +1,36 @@
 Class {
-	#name : #BrColumnedTreeDataSource,
-	#superclass : #BrTreeDataSource,
+	#name : 'BrColumnedTreeDataSource',
+	#superclass : 'BrTreeDataSource',
 	#instVars : [
 		'columns',
 		'rowStencil',
 		'rowElementStencil',
 		'rowDataBinder'
 	],
-	#category : #'Brick-Tree - Support'
+	#category : 'Brick-Tree - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeDataSource >> columns [
 	<return: #Collection of: #BrColumn>
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeDataSource >> columns: aCollectionOfBrListColumn [
 
 	columns := aCollectionOfBrListColumn.
 	self notifyChanged
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedTreeDataSource >> initialize [
 	super initialize.
 	
 	columns := #()
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColumnedTreeDataSource >> onBindHolder: anElementHolder at: aPosition [
 	| anItemNode eachColumnIndex |
 
@@ -69,7 +69,7 @@ BrColumnedTreeDataSource >> onBindHolder: anElementHolder at: aPosition [
 		ifFalse: [ anElementHolder itemElement states removeState: BlElementSelectedState uniqueInstance ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColumnedTreeDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 	"aNodeElement is the element that should represent the data of each tree node"
 	| theColumnElements aRowElement |
@@ -102,7 +102,7 @@ BrColumnedTreeDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 		columnElements: theColumnElements
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrColumnedTreeDataSource >> rowDataBinder: aBrTreeRowDataBinder [
 	"Set a data binder that should bind node data to the whole tree row element"
 
@@ -110,7 +110,7 @@ BrColumnedTreeDataSource >> rowDataBinder: aBrTreeRowDataBinder [
 	self notifyChanged
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrColumnedTreeDataSource >> rowElementStencil: aBrColumnedTreeRowElementStencilBuilder [
 	"Row stencil wrapps the created node element into an element that will play a role
 	of the row in the tree. Typically, a row also contains the expand button."

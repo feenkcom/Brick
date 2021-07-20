@@ -1,5 +1,5 @@
 Class {
-	#name : #BrAnchoredShowWish,
-	#superclass : #BrAnchoredWish,
-	#category : #'Brick-Anchored - Events'
+	#name : 'BrAnchoredShowWish',
+	#superclass : 'BrAnchoredWish',
+	#category : 'Brick-Anchored - Events'
 }

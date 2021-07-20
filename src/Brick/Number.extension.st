@@ -1,6 +1,6 @@
-Extension { #name : #Number }
+Extension { #name : 'Number' }
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 Number >> asBrAnchoredScaleFactor [
 	^ BrAnchoredFixedScaleFactor factor: self
 ]

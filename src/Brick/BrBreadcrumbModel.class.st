@@ -1,13 +1,13 @@
 Class {
-	#name : #BrBreadcrumbModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrBreadcrumbModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'items'
 	],
-	#category : #'Brick-Breadcrumb - Model'
+	#category : 'Brick-Breadcrumb - Model'
 }
 
-{ #category : #'api - items' }
+{ #category : 'api - items' }
 BrBreadcrumbModel >> addItem: aWidgetModel [
 	self
 		assert: [ aWidgetModel isNotNil ]
@@ -17,20 +17,20 @@ BrBreadcrumbModel >> addItem: aWidgetModel [
 	self onItemAdded: aWidgetModel at: self items size
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrBreadcrumbModel >> hasItems [
 	<return: #Boolean>
 	
 	^ self numberOfItems > 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrBreadcrumbModel >> initialize [
 	super initialize.
 	items := OrderedCollection new.
 ]
 
-{ #category : #'api - items' }
+{ #category : 'api - items' }
 BrBreadcrumbModel >> itemAt: anIndex [
 	<return: #BrWidgetModel>
 	self
@@ -46,45 +46,45 @@ BrBreadcrumbModel >> itemAt: anIndex [
 	^ self items at: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrBreadcrumbModel >> items [
 	<return: #Collection of: #BrWidgetModel>
 	^ items
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrBreadcrumbModel >> notifyItemAdded: aWidgetModel at: anIndex [
 	self dispatchEvent: ((BrBreadcrumbItemAddedEvent item: aWidgetModel) index: anIndex)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrBreadcrumbModel >> notifyItemRemoved: aWidgetModel at: anItemIndex [
 	self dispatchEvent: ((BrBreadcrumbItemRemovedEvent item: aWidgetModel) index: anItemIndex)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrBreadcrumbModel >> numberOfItems [
 	<return: #Number>
 
 	^ self items size
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrBreadcrumbModel >> onItemAdded: aWidgetModel at: anIndex [
 	self notifyItemAdded: aWidgetModel at: anIndex
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrBreadcrumbModel >> onItemRemoved: aWidgetModel at: anItemIndex [
 	self notifyItemRemoved: aWidgetModel at: anItemIndex
 ]
 
-{ #category : #'api - items' }
+{ #category : 'api - items' }
 BrBreadcrumbModel >> removeAllItems [	
 	self numberOfItems to: 1 by: -1 do: [ :anIndex | self removeItemAt: anIndex ]
 ]
 
-{ #category : #'api - items' }
+{ #category : 'api - items' }
 BrBreadcrumbModel >> removeItem: aWidgetModel [
 	| anItemIndex |
 
@@ -92,7 +92,7 @@ BrBreadcrumbModel >> removeItem: aWidgetModel [
 	self removeItemAt: anItemIndex
 ]
 
-{ #category : #'api - items' }
+{ #category : 'api - items' }
 BrBreadcrumbModel >> removeItemAt: anIndex [
 	| aRemovedItem |
 	

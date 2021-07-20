@@ -1,15 +1,15 @@
 Class {
-	#name : #BrSimpleListAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrSimpleListAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBrListInfiniteElementScroll',
 	#classTraits : 'TBrListInfiniteElementScroll classTrait',
 	#instVars : [
 		'listElement'
 	],
-	#category : #'Brick-List - Look'
+	#category : 'Brick-List - Look'
 }
 
-{ #category : #'api - orientation' }
+{ #category : 'api - orientation' }
 BrSimpleListAptitude >> beHorizontal [
 	| anOldListElement |
 	self listElement class = BrHorizontalInfiniteListElement ifTrue: [ ^ self ].
@@ -19,7 +19,7 @@ BrSimpleListAptitude >> beHorizontal [
 	self requestListConfiguration.
 ]
 
-{ #category : #'api - orientation' }
+{ #category : 'api - orientation' }
 BrSimpleListAptitude >> beVertical [
 	| anOldListElement |
 	self listElement class = BrInfiniteListElement ifTrue: [ ^ self ].
@@ -29,7 +29,7 @@ BrSimpleListAptitude >> beVertical [
 	self requestListConfiguration.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleListAptitude >> initialize [
 	super initialize.
 
@@ -56,16 +56,16 @@ BrSimpleListAptitude >> initialize [
 		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleListAptitude >> initializeListElement [
 	listElement := BrInfiniteListElement new.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleListAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self when: BrListItemsChangedEvent do: [ :anEvent | self onItemsChanged: anEvent items ].
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
 	self when: BrListItemIdStencilChangedEvent do: [ :anEvent | self onItemIdStencilChanged: anEvent itemIdStencil ].
@@ -76,53 +76,61 @@ BrSimpleListAptitude >> initializeListeners [
 	self initializeScrollListeners
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleListAptitude >> initializeRequests [
 	super initializeRequests.
 	self requestListConfiguration
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrSimpleListAptitude >> listElement [
 	^ listElement
 ]
 
-{ #category : #hooks }
+{ #category : 'api - hooks' }
+BrSimpleListAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+
+	self listElement dataSource 
+		listModel: anElement viewModel
+]
+
+{ #category : 'hooks' }
 BrSimpleListAptitude >> onItemDataBinderChanged: aBrListItemDataBinder [
 	self listElement dataSource itemDataBinder: aBrListItemDataBinder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListAptitude >> onItemDataUnbinderChanged: aBrListItemDataUnbinder [
 	self listElement dataSource itemDataUnbinder: aBrListItemDataUnbinder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListAptitude >> onItemElementStencilChanged: aBrListItemElementStencilBuilder [
 	self listElement dataSource itemElementStencil: aBrListItemElementStencilBuilder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListAptitude >> onItemIdStencilChanged: aBrListItemIdStencilBuilder [
 	self listElement dataSource itemIdStencil: aBrListItemIdStencilBuilder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder [
 	self listElement dataSource itemTypeStencil: aBrListItemTypeStencilBuilder
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onItemsChanged: aCollectionOfObjects [
-	self listElement dataSource rowValues: aCollectionOfObjects
+{ #category : 'hooks' }
+BrSimpleListAptitude >> onModelItemsChanged: anEvent [
+	self listElement dataSource notifyChanged
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListAptitude >> onSelectionChanged: aCollectionOfIndices [
 	self listElement dataSource selection: (BlCompositeSelection fromIndices: aCollectionOfIndices)
 ]
 
-{ #category : #'private - updating' }
+{ #category : 'private - updating' }
 BrSimpleListAptitude >> replaceListElement: anOldListElement by: aNewListElement [
 	self widgetDo: [ :aWidget |
 		| aParent |
@@ -131,9 +139,8 @@ BrSimpleListAptitude >> replaceListElement: anOldListElement by: aNewListElement
 		self updateListElementParent. ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleListAptitude >> requestListConfiguration [
-	self request: BrListItemsRequest new.
 	self request: BrSelectionRequest new.
 	self request: BrListItemTypeStencilRequest new.
 	self request: BrListItemIdStencilRequest new.
@@ -142,7 +149,7 @@ BrSimpleListAptitude >> requestListConfiguration [
 	self request: BrListItemDataUnbinderRequest new
 ]
 
-{ #category : #'private - updating' }
+{ #category : 'private - updating' }
 BrSimpleListAptitude >> updateListElementParent [
 	self listElement dataSource listElement: self widgetContent
 ]

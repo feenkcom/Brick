@@ -4,22 +4,22 @@ I am a horizontal infinite list.
 
 "
 Class {
-	#name : #BrHorizontalInfiniteListElement,
-	#superclass : #BlInfiniteElement,
-	#category : #'Brick-List - Support'
+	#name : 'BrHorizontalInfiniteListElement',
+	#superclass : 'BlInfiniteElement',
+	#category : 'Brick-List - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHorizontalInfiniteListElement >> defaultDataSource [
 	^ BrSimpleListDataSource new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHorizontalInfiniteListElement >> defaultLayout [
 	^ BlInfiniteLinearLayout horizontal
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHorizontalInfiniteListElement >> defaultMouseScrollEventHandler [
 	^ BlInfiniteMouseOrientationRestrictedScrollListener new
 ]

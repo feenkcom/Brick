@@ -1,15 +1,15 @@
 Class {
-	#name : #BrCheckboxRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-! Deprecated'
+	#name : 'BrCheckboxRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCheckboxRequest class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCheckboxRequest >> responseClass [
 	^ BrCheckboxChanged
 ]

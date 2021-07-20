@@ -1,38 +1,38 @@
 Class {
-	#name : #BrLayoutResizerModel,
-	#superclass : #BrStateModel,
+	#name : 'BrLayoutResizerModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'resizer'
 	],
-	#category : #'Brick-! Deprecated'
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel class >> exact: aNumber [
 	^ self new exact: aNumber
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel class >> fitContent [
 	^ self new fitContent
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel class >> fitContentLimited [
 	^ self new fitContentLimited
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrLayoutResizerModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel class >> matchParent [
 	^ self new matchParent
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel >> exact: aNumber [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 	<argument: #aNumber satisfies: #isBlocPositiveFloat>
@@ -40,36 +40,36 @@ BrLayoutResizerModel >> exact: aNumber [
 	self resizer: (BlLayoutResizer exact: aNumber)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel >> fitContent [
 	self resizer: BlLayoutResizer fitContent
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel >> fitContentLimited [
 	self resizer: BlLayoutResizer fitContentLimited
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLayoutResizerModel >> initialize [
 	super initialize.
 
 	resizer := BlLayoutResizer exact: 50.0
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutResizerModel >> matchParent [
 	self resizer: BlLayoutResizer matchParent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutResizerModel >> resizer [
 	<return: #BlLayoutResizer>
 
 	^ resizer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutResizerModel >> resizer: aLayoutResizer [
 	resizer = aLayoutResizer
 		ifTrue: [ ^ self ].

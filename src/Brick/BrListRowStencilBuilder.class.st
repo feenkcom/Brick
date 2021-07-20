@@ -1,25 +1,25 @@
 Class {
-	#name : #BrListRowStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrListRowStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'rowIndex',
 		'rowValue',
 		'listElement'
 	],
-	#category : #'Brick-List - Stencil'
+	#category : 'Brick-List - Stencil'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListRowStencilBuilder >> listElement [
 	^ listElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListRowStencilBuilder >> listElement: anObject [
 	listElement := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrListRowStencilBuilder >> paramsOn: aStencilExecutor [
 
 	aStencilExecutor
@@ -28,29 +28,29 @@ BrListRowStencilBuilder >> paramsOn: aStencilExecutor [
 		push: self listElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrListRowStencilBuilder >> reset [
 	listElement := nil.
 	rowValue := nil.
 	rowIndex := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListRowStencilBuilder >> rowIndex [
 	^ rowIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListRowStencilBuilder >> rowIndex: anObject [
 	rowIndex := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListRowStencilBuilder >> rowValue [
 	^ rowValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListRowStencilBuilder >> rowValue: anObject [
 	rowValue := anObject
 ]

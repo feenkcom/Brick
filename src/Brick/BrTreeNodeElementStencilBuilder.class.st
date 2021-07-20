@@ -1,36 +1,36 @@
 Class {
-	#name : #BrTreeNodeElementStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTreeNodeElementStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemType'
 	],
-	#category : #'Brick-Tree - Stencil'
+	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeNodeElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ BlElement new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeElementStencilBuilder >> itemType [
 	^ itemType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeElementStencilBuilder >> itemType: anObject [
 	itemType := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeNodeElementStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self itemType
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTreeNodeElementStencilBuilder >> reset [
 	itemType := nil
 ]

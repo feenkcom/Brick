@@ -1,6 +1,6 @@
 Class {
-	#name : #BrWithMaximizerAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrWithMaximizerAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBlElementQuery',
 	#classTraits : 'TBlElementQuery classTrait',
 	#instVars : [
@@ -9,15 +9,15 @@ Class {
 		'preferredBackground',
 		'targetQuery'
 	],
-	#category : #'Brick-Maximizer - Look'
+	#category : 'Brick-Maximizer - Look'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrWithMaximizerAptitude >> elementToMaximize [
 	^ (targetQuery findOne: self widget) result
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrWithMaximizerAptitude >> findAllPossibleHostsFor: anElement [
 	"Given an element return a collection of all possible maximization hosts in the bottom-to-top order.
 	A maximization host is an element that that has ${class:BrMaximizerHostLook}$ or is a space root"
@@ -31,7 +31,7 @@ BrWithMaximizerAptitude >> findAllPossibleHostsFor: anElement [
 			ifTrue: [ aStream nextPut: eachParent ] ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithMaximizerAptitude >> initialize [
 	super initialize.
 	
@@ -42,7 +42,7 @@ BrWithMaximizerAptitude >> initialize [
 	targetQuery := BlElementLazyQuery new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithMaximizerAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -55,12 +55,12 @@ BrWithMaximizerAptitude >> initializeListeners [
 		self maximize ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithMaximizerAptitude >> isMaximized [
 	^ isMaximized
 ]
 
-{ #category : #'api - maximization' }
+{ #category : 'api - maximization' }
 BrWithMaximizerAptitude >> maximize [
 	self widgetDo: [ :anElement |
 		| anElementToMaximize |
@@ -73,7 +73,7 @@ BrWithMaximizerAptitude >> maximize [
 			ifNotEmpty: [ :theHosts | self maximizeElement: anElementToMaximize in: theHosts first ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrWithMaximizerAptitude >> maximizeElement: anElementToMaximize in: aHostElement [
 	"Maximization is impossible if an element has no parent"
 	anElementToMaximize hasParent
@@ -99,7 +99,7 @@ BrWithMaximizerAptitude >> maximizeElement: anElementToMaximize in: aHostElement
 	self onMaximized
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrWithMaximizerAptitude >> minimizeElement: anElement in: aHostElement [
 	
 	self
@@ -118,25 +118,25 @@ BrWithMaximizerAptitude >> minimizeElement: anElement in: aHostElement [
 	self onMinimized
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrWithMaximizerAptitude >> onMaximized [
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrWithMaximizerAptitude >> onMinimized [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithMaximizerAptitude >> preferredBackground [
 	^ preferredBackground
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithMaximizerAptitude >> preferredBackground: anObject [
 	preferredBackground := anObject
 ]
 
-{ #category : #'api - query' }
+{ #category : 'api - query' }
 BrWithMaximizerAptitude >> queryStep: aBlElementStep [
 	targetQuery queryStep: aBlElementStep
 ]

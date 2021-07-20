@@ -1,44 +1,44 @@
 Class {
-	#name : #BrTabGroup,
-	#superclass : #BlElement,
+	#name : 'BrTabGroup',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : #'Brick-Tabs - UI'
+	#category : 'Brick-Tabs - UI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabGroup >> actionbarStencil: anActionbarStencilBuilder [
 	"See ${method:BrTabGroupModel>>#actionbarStencil:}"
 
 	self viewModel actionbarStencil: anActionbarStencilBuilder
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrTabGroup >> addTab: anElement [
 	self viewModel addTab: anElement viewModel
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrTabGroup >> addTab: anElement at: anInteger [ 
 	self viewModel addTab: anElement viewModel at: anInteger
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrTabGroup >> addTabs: aCollectionOfElements [
 	self viewModel addTabs: (aCollectionOfElements collect: [ :anElement | anElement viewModel])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabGroup >> content [
 	^ self childNamed: #content
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BrTabGroup >> hasTab: anElement [
 	^ self viewModel hasTab: anElement viewModel
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroup >> initialize [
 	super initialize.
 
@@ -46,17 +46,17 @@ BrTabGroup >> initialize [
 	self viewModel: BrTabGroupModel new
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrTabGroup >> moveTab: anElement at: anInteger [
 	self viewModel moveTab: anElement viewModel at: anInteger
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrTabGroup >> removeTab: anElement [
 	self viewModel removeTab: anElement viewModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabGroup >> tabs [
 	^ self viewModel tabs
 ]

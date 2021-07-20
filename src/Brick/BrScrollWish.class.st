@@ -1,25 +1,25 @@
 Class {
-	#name : #BrScrollWish,
-	#superclass : #BrWish,
+	#name : 'BrScrollWish',
+	#superclass : 'BrWish',
 	#instVars : [
 		'smooth'
 	],
-	#category : #'Brick-Scrollable - Events'
+	#category : 'Brick-Scrollable - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollWish >> initialize [
 	super initialize.
 	
 	smooth := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollWish >> smooth [
 	^ smooth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollWish >> smooth: anObject [
 	smooth := anObject
 ]

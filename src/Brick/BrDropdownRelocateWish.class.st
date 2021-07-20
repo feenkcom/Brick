@@ -1,10 +1,10 @@
 Class {
-	#name : #BrDropdownRelocateWish,
-	#superclass : #BrAnchoredRelocateWish,
-	#category : #'Brick-Dropdown - Events'
+	#name : 'BrDropdownRelocateWish',
+	#superclass : 'BrAnchoredRelocateWish',
+	#category : 'Brick-Dropdown - Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrDropdownRelocateWish class >> anchor: anElement container: anotherElement [
 	^ self new
 		anchor: anElement;
@@ -12,7 +12,7 @@ BrDropdownRelocateWish class >> anchor: anElement container: anotherElement [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrDropdownRelocateWish >> asRelocation [
 	^ true
 ]

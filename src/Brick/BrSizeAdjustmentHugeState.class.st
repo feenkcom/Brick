@@ -1,10 +1,10 @@
 Class {
-	#name : #BrSizeAdjustmentHugeState,
-	#superclass : #BrSizeAdjustmentState,
-	#category : #'Brick-! Core - Size Adjustment'
+	#name : 'BrSizeAdjustmentHugeState',
+	#superclass : 'BrSizeAdjustmentState',
+	#category : 'Brick-! Core - Size Adjustment'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrSizeAdjustmentHugeState >> printOn: aStream [
 	super printOn: aStream.
 

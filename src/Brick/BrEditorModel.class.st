@@ -1,20 +1,20 @@
 Class {
-	#name : #BrEditorModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrEditorModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'styler',
 		'text',
 		'mode'
 	],
-	#category : #'Brick-Editor - Model'
+	#category : 'Brick-Editor - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> beEditable [
 	self mode: BrTextEditorEditableMode new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorModel >> initialize [
 	super initialize.
 	
@@ -23,7 +23,7 @@ BrEditorModel >> initialize [
 	mode := BrTextEditorEditableMode new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -32,14 +32,14 @@ BrEditorModel >> initializeListeners [
 	self when: BrEditorModeRequest reply: [ :aResponse | aResponse mode: self mode ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> mode [
 	<return: #BrTextEditorMode>
 
 	^ mode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> mode: aBrTextEditorMode [
 	mode = aBrTextEditorMode
 		ifTrue: [ ^ self ].
@@ -48,27 +48,27 @@ BrEditorModel >> mode: aBrTextEditorMode [
 	self notifyModeChanged
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrEditorModel >> notifyModeChanged [
 	self dispatchEvent: (BrEditorModeChanged new mode: self mode)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrEditorModel >> notifyStylerChanged [
 	self dispatchEvent: (BrEditorStylerChanged styler: self styler)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrEditorModel >> notifyTextChanged [
 	self dispatchEvent: (BrEditorTextChanged text: self text)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> styler [
 	^ styler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> styler: aStyler [
 	styler = aStyler
 		ifTrue: [ ^ self ].
@@ -77,12 +77,12 @@ BrEditorModel >> styler: aStyler [
 	self notifyStylerChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorModel >> text: aText [
 	text == aText
 		ifTrue: [ ^ self ].

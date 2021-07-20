@@ -40,21 +40,21 @@ NOTE: It would be nice to explain, why this order-independed feature is importan
 
 "
 Class {
-	#name : #BrToolbarAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrToolbarAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'items'
 	],
-	#category : #'Brick-Toolbar - Look'
+	#category : 'Brick-Toolbar - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrToolbarAptitude >> initialize [
 	super initialize.
 	items := OrderedDictionary new.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrToolbarAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -62,19 +62,19 @@ BrToolbarAptitude >> initializeListeners [
 	self when: BrToolbarItemRemovedEvent do: [ :anEvent | self onItemRemoved: anEvent item ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrToolbarAptitude >> itemElements [
 	^ items values select: #isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarAptitude >> items [
 	<return: #OrderedDictionary>
 
 	^ items
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrToolbarAptitude >> onItemAdded: aWidgetModel [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -88,7 +88,7 @@ BrToolbarAptitude >> onItemAdded: aWidgetModel [
 		self widgetContent addChildren: self itemElements ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrToolbarAptitude >> onItemRemoved: aWidgetModel [
 	self
 		assert: [ self isAttachedToWidget ]

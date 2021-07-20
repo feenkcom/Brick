@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTooltipShowWish,
-	#superclass : #BrAnchoredShowWish,
-	#category : #'Brick-Tooltip - Events'
+	#name : 'BrTooltipShowWish',
+	#superclass : 'BrAnchoredShowWish',
+	#category : 'Brick-Tooltip - Events'
 }

@@ -1,17 +1,17 @@
 Class {
-	#name : #BrList,
-	#superclass : #BlElement,
+	#name : 'BrList',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
-	#category : #'Brick-List - UI'
+	#category : 'Brick-List - UI'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrList >> defaultListModel [
 	^ BrAbstractListModel new
 ]
 
-{ #category : #'api - scripting' }
+{ #category : 'api - scripting' }
 BrList >> display: aCollectionOfValues [
 	self
 		deprecated: 'Please use items: method instead.'
@@ -22,7 +22,7 @@ BrList >> display: aCollectionOfValues [
 	self items: aCollectionOfValues value
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrList >> initialize [
 	super initialize.
 	
@@ -34,7 +34,7 @@ BrList >> initialize [
 	self initializeEventHandlers
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrList >> initializeEventHandlers [
 	"shortcuts only work when list has focus.
 	click handler must not be added as a filter"
@@ -59,24 +59,24 @@ BrList >> initializeEventHandlers [
 			action: [ self selectPrevious ] )
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrList >> items [
 	^ self viewModel items
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrList >> items: aCollectionOfValues [
 	self viewModel items: aCollectionOfValues
 ]
 
-{ #category : #'api - selection' }
+{ #category : 'api - selection' }
 BrList >> maxSelectionIndex [
 	<return: #Number>
 	
 	^ self items size
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrList >> scrollToItem: anObject [
 	"Request a scrollable widget to scroll to a given item"
 
@@ -85,7 +85,7 @@ BrList >> scrollToItem: anObject [
 			ifTrue: [ self scrollToIndex: anIndex ] ]
 ]
 
-{ #category : #'api - selection' }
+{ #category : 'api - selection' }
 BrList >> selectedItemDo: aBlock [
 	"Evaluate aBlock with the currently selected item and index"
 	

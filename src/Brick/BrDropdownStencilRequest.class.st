@@ -1,10 +1,10 @@
 Class {
-	#name : #BrDropdownStencilRequest,
-	#superclass : #BrAnchoredStencilRequest,
-	#category : #'Brick-Dropdown - Events'
+	#name : 'BrDropdownStencilRequest',
+	#superclass : 'BrAnchoredStencilRequest',
+	#category : 'Brick-Dropdown - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDropdownStencilRequest >> responseClass [
 	^ BrDropdownStencilChanged
 ]

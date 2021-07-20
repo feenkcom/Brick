@@ -1,54 +1,54 @@
 Class {
-	#name : #BrResizerLocationModel,
-	#superclass : #BrStateModel,
+	#name : 'BrResizerLocationModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'location'
 	],
-	#category : #'Brick-Resizer - State'
+	#category : 'Brick-Resizer - State'
 }
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizerLocationModel >> beBottom [
 	self location: BrResizerBottomLocation new
 ]
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizerLocationModel >> beLeft [
 	self location: BrResizerLeftLocation new
 ]
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizerLocationModel >> beRight [
 	self location: BrResizerRightLocation new
 ]
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizerLocationModel >> beTop [
 	self location: BrResizerTopLocation new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizerLocationModel >> initialize [
 	super initialize.
 	
 	self beBottom
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizerLocationModel >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrResizerLocationRequest reply: [ :anEvent | anEvent location: self location ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerLocationModel >> location [
 	<return: #BrResizerLocation>
 
 	^ location
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerLocationModel >> location: aLocation [
 	location = aLocation
 		ifTrue: [ ^ self ].
@@ -57,12 +57,12 @@ BrResizerLocationModel >> location: aLocation [
 	self notifyStateChanged: aLocation
 ]
 
-{ #category : #'state - accessing' }
+{ #category : 'state - accessing' }
 BrResizerLocationModel >> stateChangedEventClass [
 	^ BrResizerLocationChanged
 ]
 
-{ #category : #'state - streaming' }
+{ #category : 'state - streaming' }
 BrResizerLocationModel >> streamStateIn: aBrInteractionStatesMapping [
 	aBrInteractionStatesMapping
 		addState: (BrResizerLocationState location: self location)

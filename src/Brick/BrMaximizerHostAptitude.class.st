@@ -6,19 +6,19 @@ At any given time there can be multiple potential hosts. Users should be able to
 A maximizer host is responsible for embedding and embellishming the maximized element. This allows users to create different types of maximizer hosts that look and behave differently
 "
 Class {
-	#name : #BrMaximizerHostAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Maximizer - Look'
+	#name : 'BrMaximizerHostAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Maximizer - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrMaximizerHostAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrMaximizerMaximizeWish do: [ :anEvent | self onMaximize: anEvent ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrMaximizerHostAptitude >> onMaximize: aMaximizeWish [
 	"Subclasses should handle ${class:BrMaximizerMaximizeWish}$ and correctly place the #elementToMaximize
 	within the widget element. Maximizer hosts is responsible to saving and restoring the properties of the

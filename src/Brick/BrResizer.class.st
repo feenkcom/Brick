@@ -1,34 +1,34 @@
 Class {
-	#name : #BrResizer,
-	#superclass : #BlElement,
+	#name : 'BrResizer',
+	#superclass : 'BlElement',
 	#instVars : [
 		'locationModel',
 		'resizerModel'
 	],
-	#category : #'Brick-Resizer - UI'
+	#category : 'Brick-Resizer - UI'
 }
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizer >> beBottom [
 	locationModel beBottom
 ]
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizer >> beLeft [
 	locationModel beLeft
 ]
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizer >> beRight [
 	locationModel beRight
 ]
 
-{ #category : #location }
+{ #category : 'location' }
 BrResizer >> beTop [
 	locationModel beTop
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizer >> initialize [
 	super initialize.
 	
@@ -40,7 +40,7 @@ BrResizer >> initialize [
 		}))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizer >> target: anElement [
 	"Set which element should be resized with this resizer"
 	

@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTaggerWish,
-	#superclass : #BrWish,
-	#category : #'Brick-Tagger - Events'
+	#name : 'BrTaggerWish',
+	#superclass : 'BrWish',
+	#category : 'Brick-Tagger - Events'
 }

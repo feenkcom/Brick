@@ -1,20 +1,20 @@
 Class {
-	#name : #BrDescriptionChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrDescriptionChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-! Core - Events'
+	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDescriptionChanged >> text [
 	<return: #BlText or: #String>
 
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDescriptionChanged >> text: aBrTextOrString [
 	self
 		assert: [ aBrTextOrString isNotNil ]

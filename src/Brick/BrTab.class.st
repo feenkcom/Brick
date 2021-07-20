@@ -1,23 +1,23 @@
 Class {
-	#name : #BrTab,
-	#superclass : #BlElement,
+	#name : 'BrTab',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutAlignable + TBrLayoutResizable',
 	#classTraits : 'TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait',
 	#instVars : [
 		'labelModel',
 		'iconModel'
 	],
-	#category : #'Brick-Tabs - UI'
+	#category : 'Brick-Tabs - UI'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> actionbarStencil: anActionbarStencilBuilder [
 	"See ${method:BrTabModel>>#actionbarStencil:}"
 
 	self viewModel actionbarStencil: anActionbarStencilBuilder
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> actionsStencil: anActionStencilBuilder [
 	self
 		deprecated: 'Please use #toolbarStencil: instead'
@@ -27,24 +27,24 @@ BrTab >> actionsStencil: anActionStencilBuilder [
 	self toolbarStencil: anActionStencilBuilder
 ]
 
-{ #category : #'api - selection' }
+{ #category : 'api - selection' }
 BrTab >> deselect [
 	self viewModel deselect
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> icon [
 	<return: #BlElement>
 
 	^ iconModel icon
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> icon: anElement [
 	iconModel icon: anElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTab >> initialize [
 	super initialize.
 	
@@ -58,29 +58,29 @@ BrTab >> initialize [
 	}))
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> label [
 	<return: #BlText>
 
 	^ labelModel text
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> label: aStringOrText [
 	labelModel text: aStringOrText
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> model [
 	^ self viewModel model
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> model: anObject [
 	self viewModel model: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTab >> parentTabGroup [
 	^ self 
 		allParentsDetect: [ :aParent | aParent isKindOf: BrTabGroup ]
@@ -88,22 +88,22 @@ BrTab >> parentTabGroup [
 		ifNone: [ nil ]
 ]
 
-{ #category : #'api - selection' }
+{ #category : 'api - selection' }
 BrTab >> select [
 	self viewModel select
 ]
 
-{ #category : #'api - selection' }
+{ #category : 'api - selection' }
 BrTab >> selected: aBoolean [
 	self viewModel selected: aBoolean
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> stencil: aStencilBuilder [
 	self viewModel stencil: aStencilBuilder
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTab >> toolbarStencil: aToolbarStencilBuilder [
 	"See ${method:BrTabModel>>#toolbarStencil:}"
 

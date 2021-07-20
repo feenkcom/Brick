@@ -2,20 +2,20 @@
 I am sent by accordion model when content stencil changes
 "
 Class {
-	#name : #BrAccordionContentStencilChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrAccordionContentStencilChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'stencil'
 	],
-	#category : #'Brick-Accordion - Events'
+	#category : 'Brick-Accordion - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrAccordionContentStencilChanged class >> stencil: aBrStencil [
 	^ self new stencil: aBrStencil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAccordionContentStencilChanged >> initialize [
 	super initialize.
 	
@@ -25,14 +25,14 @@ BrAccordionContentStencilChanged >> initialize [
 		yourself ] asStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionContentStencilChanged >> stencil [
 	<return: #BrStencil>
 
 	^ stencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionContentStencilChanged >> stencil: aBrStencil [
 	stencil := aBrStencil
 ]

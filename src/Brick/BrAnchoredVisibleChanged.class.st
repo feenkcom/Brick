@@ -1,18 +1,18 @@
 Class {
-	#name : #BrAnchoredVisibleChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrAnchoredVisibleChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'visible'
 	],
-	#category : #'Brick-Anchored - Events'
+	#category : 'Brick-Anchored - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredVisibleChanged >> visible [
 	^ visible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredVisibleChanged >> visible: anObject [
 	visible := anObject
 ]

@@ -1,15 +1,15 @@
 Class {
-	#name : #BrLayoutResizerRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-! Deprecated'
+	#name : 'BrLayoutResizerRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrLayoutResizerRequest class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLayoutResizerRequest >> responseClass [
 	^ self subclassResponsibility
 ]

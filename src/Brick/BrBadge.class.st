@@ -1,6 +1,6 @@
 Class {
-	#name : #BrBadge,
-	#superclass : #BlElement,
+	#name : 'BrBadge',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
@@ -8,20 +8,20 @@ Class {
 		'activationModel',
 		'dimensionModel'
 	],
-	#category : #'Brick-Badge - UI'
+	#category : 'Brick-Badge - UI'
 }
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrBadge >> action [
 	^ self viewModel action
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrBadge >> action: aValuable [
 	self viewModel action: aValuable
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrBadge >> initialize [
 	super initialize.
 
@@ -29,12 +29,12 @@ BrBadge >> initialize [
 		(labelModel := BrLabelModel new))
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrBadge >> label [
 	^ labelModel text
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrBadge >> label: aString [
 	labelModel text: aString
 ]

@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTaggerAllowedTagsChanged,
-	#superclass : #BrTaggerChangeEvent,
+	#name : 'BrTaggerAllowedTagsChanged',
+	#superclass : 'BrTaggerChangeEvent',
 	#instVars : [
 		'allowedTags'
 	],
-	#category : #'Brick-Tagger - Events'
+	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAllowedTagsChanged >> allowedTags [
 	^ allowedTags
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAllowedTagsChanged >> allowedTags: anObject [
 	allowedTags := anObject
 ]

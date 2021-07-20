@@ -1,16 +1,16 @@
 Class {
-	#name : #BrColumnedListAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrColumnedListAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBrListInfiniteElementScroll',
 	#classTraits : 'TBrListInfiniteElementScroll classTrait',
 	#instVars : [
 		'listElement',
 		'rowStencil'
 	],
-	#category : #'Brick-List - Look'
+	#category : 'Brick-List - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListAptitude >> initialize [
 	super initialize.
 	
@@ -33,11 +33,11 @@ BrColumnedListAptitude >> initialize [
 				yourself).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListAptitude >> initializeListeners [
 	super initializeListeners.
 	
-	self when: BrListItemsChangedEvent do: [ :anEvent | self onItemsChanged: anEvent items ].
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
 	self when: BrColumnsChanged do: [ :anEvent | self onColumnsChanged: anEvent columns ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
@@ -45,42 +45,49 @@ BrColumnedListAptitude >> initializeListeners [
 	self initializeScrollListeners
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListAptitude >> initializeRequests [
 	super initializeRequests.
 	
-	self request: BrListItemsRequest new.
 	self request: BrColumnsRequest new.
 	self request: BrSelectionRequest new.
 	self request: BrListItemTypeStencilRequest new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListAptitude >> listElement [
 	^ listElement
 ]
 
-{ #category : #hooks }
+{ #category : 'api - hooks' }
+BrColumnedListAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+
+	self listElement dataSource 
+		listModel: anElement viewModel
+]
+
+{ #category : 'hooks' }
 BrColumnedListAptitude >> onColumnsChanged: aCollectionOfBrListColumns [
 	self listElement dataSource columns: aCollectionOfBrListColumns
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrColumnedListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder [
 	self listElement dataSource itemTypeStencil: aBrListItemTypeStencilBuilder
 ]
 
-{ #category : #hooks }
-BrColumnedListAptitude >> onItemsChanged: aCollectionOfBrWidgetModels [
-	self listElement dataSource rowValues: aCollectionOfBrWidgetModels
+{ #category : 'hooks' }
+BrColumnedListAptitude >> onModelItemsChanged: anEvent [
+	self listElement dataSource notifyChanged
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrColumnedListAptitude >> onSelectionChanged: aCollectionOfIndices [
 	self listElement dataSource selection: (BlCompositeSelection fromIndices: aCollectionOfIndices)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListAptitude >> rowStencilBuilder: aStencil [
 	"aStencil is expected to be a subclass of BrListRowStencilBuilder or a valuable"
 	rowStencil := aStencil asStencilBuilder: BrListRowStencilBuilder.

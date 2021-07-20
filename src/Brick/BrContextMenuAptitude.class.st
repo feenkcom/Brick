@@ -1,10 +1,10 @@
 Class {
-	#name : #BrContextMenuAptitude,
-	#superclass : #BrAnchoredWithHandleAndContentAptitude,
-	#category : #'Brick-Context Menu - Look'
+	#name : 'BrContextMenuAptitude',
+	#superclass : 'BrAnchoredWithHandleAndContentAptitude',
+	#category : 'Brick-Context Menu - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrContextMenuAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -12,7 +12,7 @@ BrContextMenuAptitude >> initializeListeners [
 	self when: BrContextMenuContentChanged do: [ :anEvent | self content: anEvent content ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrContextMenuAptitude >> initializeRequests [
 	super initializeRequests.
 

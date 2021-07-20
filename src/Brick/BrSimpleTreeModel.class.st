@@ -1,20 +1,20 @@
 Class {
-	#name : #BrSimpleTreeModel,
-	#superclass : #BrAbstractTreeModel,
+	#name : 'BrSimpleTreeModel',
+	#superclass : 'BrAbstractTreeModel',
 	#instVars : [
 		'nodeElementStencil',
 		'nodeDataBinder',
 		'nodeUnbinder'
 	],
-	#category : #'Brick-Tree - Model'
+	#category : 'Brick-Tree - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeModel >> defaultRowElementStencil [
 	^ BrSimpleTreeRowElementStencilBuilder new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeModel >> initialize [
 	super initialize.
 	
@@ -23,7 +23,7 @@ BrSimpleTreeModel >> initialize [
 	nodeUnbinder := [ :anItemElement :anItem :aTreeNode | ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeModel >> initializeListeners [
 	super initializeListeners.
 
@@ -31,7 +31,7 @@ BrSimpleTreeModel >> initializeListeners [
 	self when: BrTreeNodeDataBinderRequest reply: [ :aResponse | aResponse nodeDataBinder: self nodeDataBinder ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeModel >> nodeDataBinder [
 	"Return a stencil that is used to bind node data to a given node element"
 	<return: #BrTreeNodeDataBinder>
@@ -39,7 +39,7 @@ BrSimpleTreeModel >> nodeDataBinder [
 	^ nodeDataBinder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeModel >> nodeDataBinder: aStencil [
 	"Set a stencil that will be used to bind node data to a given node element"
 
@@ -47,7 +47,7 @@ BrSimpleTreeModel >> nodeDataBinder: aStencil [
 	self dispatchEvent: (BrTreeNodeDataBinderChangedEvent new nodeDataBinder: nodeDataBinder)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeModel >> nodeElementStencil [
 	"Return a stencil that is used to create a node element of a given type"
 	<return: #BrTreeNodeElementStencilBuilder>
@@ -55,7 +55,7 @@ BrSimpleTreeModel >> nodeElementStencil [
 	^ nodeElementStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeModel >> nodeElementStencil: aStencil [
 	"Set a stencil that will be used to create a node element of a given type"
 
@@ -63,12 +63,12 @@ BrSimpleTreeModel >> nodeElementStencil: aStencil [
 	self dispatchEvent: (BrTreeNodeElementStencilChangedEvent new nodeElementStencil: nodeElementStencil)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeModel >> nodeUnbinder [
 	^ nodeUnbinder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeModel >> nodeUnbinder: anObject [
 
 	nodeUnbinder := anObject.

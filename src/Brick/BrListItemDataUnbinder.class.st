@@ -1,52 +1,52 @@
 Class {
-	#name : #BrListItemDataUnbinder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrListItemDataUnbinder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemPosition',
 		'itemObject',
 		'itemElement'
 	],
-	#category : #'Brick-List - Stencil'
+	#category : 'Brick-List - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrListItemDataUnbinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ itemElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinder >> itemElement [
 	^ itemElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinder >> itemElement: anObject [
 	itemElement := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinder >> itemObject [
 	^ itemObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinder >> itemObject: anObject [
 	itemObject := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinder >> itemPosition [
 	^ itemPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinder >> itemPosition: anObject [
 	itemPosition := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrListItemDataUnbinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self itemElement;
@@ -54,7 +54,7 @@ BrListItemDataUnbinder >> paramsOn: aStencilExecutor [
 		push: self itemPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrListItemDataUnbinder >> reset [
 	itemObject := nil.
 	itemPosition := nil.

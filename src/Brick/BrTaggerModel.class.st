@@ -1,14 +1,14 @@
 Class {
-	#name : #BrTaggerModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrTaggerModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'tags',
 		'allowedTags'
 	],
-	#category : #'Brick-Tagger - Model'
+	#category : 'Brick-Tagger - Model'
 }
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> addTag: aTaggerTag [
 	(tags includes: aTaggerTag)
 		ifTrue: [ ^ self ].
@@ -17,12 +17,12 @@ BrTaggerModel >> addTag: aTaggerTag [
 	self notifyTagAdded: aTaggerTag at: tags size
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> addTagNamed: aTagName [
 	self addTag: (BrTaggerTag named: aTagName)
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> allowedTags: aBrTaggerAllowedTags [
 	allowedTags = aBrTaggerAllowedTags
 		ifTrue: [ ^ self ].
@@ -31,7 +31,7 @@ BrTaggerModel >> allowedTags: aBrTaggerAllowedTags [
 	self notifyAllowedTagsChanged: allowedTags
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTaggerModel >> initialize [
 	super initialize.
 
@@ -39,7 +39,7 @@ BrTaggerModel >> initialize [
 	allowedTags := BrTaggerAllowedAnyTags new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTaggerModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -49,29 +49,29 @@ BrTaggerModel >> initializeListeners [
 	self when: BrTaggerRenameTagWish do: [ :aWish | self renameTag: aWish tag to: aWish newName ]
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> namedTags: aCollectionOfTagNames [
 	self tags: (aCollectionOfTagNames collect: [ :eachName | BrTaggerTag named: eachName ])
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTaggerModel >> notifyAllowedTagsChanged: aBrTaggerAllowedTags [
 	self dispatchEvent: (BrTaggerAllowedTagsChanged new allowedTags: aBrTaggerAllowedTags)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTaggerModel >> notifyTagAdded: aTaggerTag at: anIndex [
 	self dispatchEvent: (BrTaggerTagAdded new
 		tag: aTaggerTag;
 		index: anIndex)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTaggerModel >> notifyTagRemoved: aTaggerTag at: anIndex [
 	self dispatchEvent: (BrTaggerTagRemoved new tag: aTaggerTag; index: anIndex)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTaggerModel >> notifyTagRenamed: aTaggerTag from: anOldTagName to: aNewTagName [
 	self dispatchEvent: (BrTaggerTagRenamed new
 		tag: aTaggerTag;
@@ -79,12 +79,12 @@ BrTaggerModel >> notifyTagRenamed: aTaggerTag from: anOldTagName to: aNewTagName
 		newName: aNewTagName)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTaggerModel >> notifyTagsChanged: theTags [
 	self dispatchEvent: (BrTaggerTagsChanged new tags: theTags)
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> removeTag: aTaggerTag [
 	| anIndex |
 	
@@ -97,7 +97,7 @@ BrTaggerModel >> removeTag: aTaggerTag [
 	self notifyTagRemoved: aTaggerTag at: anIndex
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> removeTagNamed: aTagName [
 	| toBeRemoved |
 
@@ -105,7 +105,7 @@ BrTaggerModel >> removeTagNamed: aTagName [
 	toBeRemoved do: [ :eachTag | self removeTag: eachTag ]
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> renameTag: aTaggerTag to: aNewName [
 	| anOldName |
 
@@ -118,7 +118,7 @@ BrTaggerModel >> renameTag: aTaggerTag to: aNewName [
 	self notifyTagRenamed: aTaggerTag from: anOldName to: aNewName
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> renameTagNamed: aTagName to: aNewName [
 	| toBeRenamed |
 
@@ -126,17 +126,17 @@ BrTaggerModel >> renameTagNamed: aTagName to: aNewName [
 	toBeRenamed do: [ :eachTag | self renameTag: eachTag to: aNewName ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerModel >> tagNames [
 	^ self tags collect: [ :eachTag | eachTag name ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerModel >> tags [
 	^ tags
 ]
 
-{ #category : #'api - tags' }
+{ #category : 'api - tags' }
 BrTaggerModel >> tags: aCollectionOfTaggerTags [
 	tags := aCollectionOfTaggerTags asOrderedCollection.
 	self notifyTagsChanged: tags

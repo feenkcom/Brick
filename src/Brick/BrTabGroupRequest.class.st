@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTabGroupRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Tabs - Events'
+	#name : 'BrTabGroupRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Tabs - Events'
 }

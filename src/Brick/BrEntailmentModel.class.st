@@ -1,14 +1,14 @@
 Class {
-	#name : #BrEntailmentModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrEntailmentModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'conclusionStencil',
 		'premiseStencil'
 	],
-	#category : #'Brick-Entailment - Model'
+	#category : 'Brick-Entailment - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEntailmentModel >> conclusion: aConclusionStencil [
 
 	self
@@ -19,7 +19,7 @@ BrEntailmentModel >> conclusion: aConclusionStencil [
 	self notifyConclusionChanged: conclusionStencil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEntailmentModel >> initialize [
 	super initialize.
 
@@ -27,7 +27,7 @@ BrEntailmentModel >> initialize [
 	conclusionStencil := [ BlElement new ] asStencil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEntailmentModel >> initializeListeners [
 	super initializeListeners.
 
@@ -35,17 +35,17 @@ BrEntailmentModel >> initializeListeners [
 	self when: BrEntailmentConclusionRequest reply: [ :aResponse | aResponse stencil: conclusionStencil ]
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrEntailmentModel >> notifyConclusionChanged: aConclusionStencil [
 	self dispatchEvent: (BrEntailmentConclusionChanged new stencil: aConclusionStencil)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrEntailmentModel >> notifyPremiseChanged: anPremiseStencil [
 	self dispatchEvent: (BrEntailmentPremiseChanged new stencil: anPremiseStencil)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEntailmentModel >> premise: aPremiseStencil [
 	self
 		assert: [ aPremiseStencil isNotNil ]
