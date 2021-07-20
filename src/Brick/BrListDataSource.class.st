@@ -36,7 +36,7 @@ BrListDataSource >> initialize [
 
 { #category : 'accessing' }
 BrListDataSource >> itemCount [
-	^ self listModel itemsCount
+	^ self listModel itemCount
 ]
 
 { #category : 'accessing - stencils' }
@@ -52,7 +52,7 @@ BrListDataSource >> itemIdAt: anItemPosition [
 	itemIdStencil
 		ifNil: [ ^ NoId ].
 
-	anItemObject := self listModel itemIdAt: anItemPosition.
+	anItemObject := self listModel itemAt: anItemPosition.
 
 	anItemId := itemIdStencil
 		itemPosition: anItemPosition;
@@ -73,7 +73,7 @@ BrListDataSource >> itemIdStencil: aBrListItemIdStencilBuilder [
 BrListDataSource >> itemTypeAt: anItemPosition [
 	| anItemObject anItemType |
 
-	anItemObject := self listModel itemIdAt: anItemPosition.
+	anItemObject := self listModel itemAt: anItemPosition.
 
 	anItemType := itemTypeStencil
 		itemPosition: anItemPosition;
@@ -119,7 +119,7 @@ BrListDataSource >> onElementAttached: anElementHolder [
 	
 	anItemElement := anElementHolder itemElement.
 	anItemPosition := anElementHolder position.
-	anItemValue := self listModel itemIdAt: anItemPosition.
+	anItemValue := self listModel itemAt: anItemPosition.
 
 	self listElement enqueueTask: (BlTaskAction new action: [
 		self listElement dispatchEvent: (BrListItemElementAttached new

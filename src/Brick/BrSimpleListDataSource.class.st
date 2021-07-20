@@ -24,7 +24,7 @@ BrSimpleListDataSource >> itemDataUnbinder: aBrListItemDataUnbinder [
 BrSimpleListDataSource >> onBindHolder: anElementHolder at: aPosition [
 	| anItemElementWithBindedData anItemObject |
 
-	anItemObject := self listModel itemIdAt: aPosition.
+	anItemObject := self listModel itemAt: aPosition.
 
 	anItemElementWithBindedData := itemDataBinder
 		itemElement: anElementHolder itemElement;
