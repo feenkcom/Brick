@@ -1,10 +1,10 @@
 Class {
-	#name : #BrCheckboxExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Checkbox'
+	#name : 'BrCheckboxExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Checkbox'
 }
 
-{ #category : #'form-scripting' }
+{ #category : 'form-scripting' }
 BrCheckboxExamples >> checkbox [
 	<gtExample>
 	| checkbox |
@@ -13,13 +13,13 @@ BrCheckboxExamples >> checkbox [
 	^ checkbox
 ]
 
-{ #category : #'form-scripting' }
+{ #category : 'form-scripting' }
 BrCheckboxExamples >> checkboxWithLook [
 	<gtExample>
 	^ self checkbox aptitude: BrGlamorousCheckboxAptitude
 ]
 
-{ #category : #'form-scripting' }
+{ #category : 'form-scripting' }
 BrCheckboxExamples >> checkedCheckbox [
 	<gtExample>
 	| checkbox |
@@ -29,7 +29,7 @@ BrCheckboxExamples >> checkedCheckbox [
 	^ checkbox
 ]
 
-{ #category : #'form-scripting' }
+{ #category : 'form-scripting' }
 BrCheckboxExamples >> checkedCheckboxWithLook [
 	<gtExample>
 	^ self checkedCheckbox aptitude: BrGlamorousCheckboxAptitude

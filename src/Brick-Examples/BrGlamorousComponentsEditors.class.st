@@ -11,12 +11,12 @@ ${example:BrGlamorousComponentsEditors>>#inputField|previewShow=#gtLiveFor:|prev
 ${example:BrGlamorousComponentsEditors>>#textArea|previewShow=#gtLiveFor:|previewHeight=200|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : #BrGlamorousComponentsEditors,
-	#superclass : #BrGlamorousComponents,
-	#category : #'Brick-Examples-! Glamorous components'
+	#name : 'BrGlamorousComponentsEditors',
+	#superclass : 'BrGlamorousComponents',
+	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrGlamorousComponentsEditors >> basicEditor [
 	<gtExample>
 
@@ -25,7 +25,7 @@ BrGlamorousComponentsEditors >> basicEditor [
 		text: String loremIpsum
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrGlamorousComponentsEditors >> digitsOnly [
 	<gtExample>
 
@@ -36,7 +36,7 @@ BrGlamorousComponentsEditors >> digitsOnly [
 		fitContent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrGlamorousComponentsEditors >> inputField [
 	<gtExample>
 
@@ -46,7 +46,7 @@ BrGlamorousComponentsEditors >> inputField [
 		fitContent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrGlamorousComponentsEditors >> textArea [
 	<gtExample>
 

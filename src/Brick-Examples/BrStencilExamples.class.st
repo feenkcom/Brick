@@ -1,17 +1,17 @@
 Class {
-	#name : #BrStencilExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Stencils'
+	#name : 'BrStencilExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Stencils'
 }
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrStencilExamples >> coloredElementStencil [
 	<gtExample>
 	
 	^ BrExampleColoredElementStencil new
 ]
 
-{ #category : #'examples - colored element stencil' }
+{ #category : 'examples - colored element stencil' }
 BrStencilExamples >> coloredElementUsingBlock [
 	<gtExample>
 	| aStencil anElement |
@@ -31,7 +31,7 @@ BrStencilExamples >> coloredElementUsingBlock [
 	^ anElement
 ]
 
-{ #category : #'examples - list' }
+{ #category : 'examples - list' }
 BrStencilExamples >> createMaterialSimpleListUsingBlock [
 	<gtExample>
 	| aStencil aList |
@@ -41,7 +41,7 @@ BrStencilExamples >> createMaterialSimpleListUsingBlock [
 	^ aList
 ]
 
-{ #category : #'examples - colored element stencil' }
+{ #category : 'examples - colored element stencil' }
 BrStencilExamples >> customizedColoredElementUsingStencil [
 	<gtExample>
 	| aStencil anElement |
@@ -58,7 +58,7 @@ BrStencilExamples >> customizedColoredElementUsingStencil [
 	^ anElement
 ]
 
-{ #category : #'examples - colored element stencil' }
+{ #category : 'examples - colored element stencil' }
 BrStencilExamples >> defaultColoredElementUsingStencil [
 	<gtExample>
 	| aStencil anElement |
@@ -72,7 +72,7 @@ BrStencilExamples >> defaultColoredElementUsingStencil [
 	^ anElement
 ]
 
-{ #category : #'examples - colored element stencil' }
+{ #category : 'examples - colored element stencil' }
 BrStencilExamples >> defaultElementUsingBlock [
 	<gtExample>
 	| aStencil anElement |
@@ -91,7 +91,7 @@ BrStencilExamples >> defaultElementUsingBlock [
 	^ anElement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrStencilExamples >> elementToStencil [
 	<gtExample>
 	| anElement aStencil aSecondElement |
@@ -103,7 +103,7 @@ BrStencilExamples >> elementToStencil [
 	^ anElement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrStencilExamples >> elementToStencilBuilder [
 	<gtExample>
 	| anElement aStencilBuilder aSecondElement |

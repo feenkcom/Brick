@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTaggerExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Tagger'
+	#name : 'BrTaggerExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Tagger'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTaggerExamples >> newGlamorousTagger [
 	<gtExample>
 
@@ -22,7 +22,7 @@ BrTaggerExamples >> newGlamorousTagger [
 				ifNotEmpty: [ :aNewName | aRequest currentTarget renameTag: aRequest tag to: aNewName ] ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTaggerExamples >> newGlamorousTaggerWithExplicitTags [
 	<gtExample>
 

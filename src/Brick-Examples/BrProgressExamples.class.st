@@ -28,12 +28,12 @@ ${example:BrProgressExamples>>#barAndTextBelow|codeExpanded=false|previewExpande
 
 "
 Class {
-	#name : #BrProgressExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Progress'
+	#name : 'BrProgressExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Progress'
 }
 
-{ #category : #'examples - bar and text compositions' }
+{ #category : 'examples - bar and text compositions' }
 BrProgressExamples >> animatedBar [
 	<gtExample>
 	| aProgress |
@@ -51,7 +51,7 @@ BrProgressExamples >> animatedBar [
 	^ aProgress
 ]
 
-{ #category : #'examples - bar and text compositions' }
+{ #category : 'examples - bar and text compositions' }
 BrProgressExamples >> animatedBarAndTextAbove [
 	<gtExample>
 	| aProgress |
@@ -70,7 +70,7 @@ BrProgressExamples >> animatedBarAndTextAbove [
 	^ aProgress
 ]
 
-{ #category : #'examples - looks' }
+{ #category : 'examples - looks' }
 BrProgressExamples >> animatedBarLook [
 	<gtExample>
 	^ BrProgressAnimatedBarAptitude new
@@ -84,7 +84,7 @@ BrProgressExamples >> animatedBarLook [
 				aBarContainer geometry: (BlRoundedRectangleGeometry cornerRadius: 8) ]
 ]
 
-{ #category : #'examples - text formats' }
+{ #category : 'examples - text formats' }
 BrProgressExamples >> asIsValues [
 	<gtExample>
 	| aProgress |
@@ -96,7 +96,7 @@ BrProgressExamples >> asIsValues [
 	^ aProgress
 ]
 
-{ #category : #'examples - bar and text compositions' }
+{ #category : 'examples - bar and text compositions' }
 BrProgressExamples >> barAndTextAbove [
 	<gtExample>
 	| aProgress |
@@ -115,7 +115,7 @@ BrProgressExamples >> barAndTextAbove [
 	^ aProgress
 ]
 
-{ #category : #'examples - bar and text compositions' }
+{ #category : 'examples - bar and text compositions' }
 BrProgressExamples >> barAndTextBelow [
 	<gtExample>
 	| aProgress |
@@ -134,7 +134,7 @@ BrProgressExamples >> barAndTextBelow [
 	^ aProgress
 ]
 
-{ #category : #'examples - bar and text compositions' }
+{ #category : 'examples - bar and text compositions' }
 BrProgressExamples >> barAndTextInside [
 	<gtExample>
 	| aProgress |
@@ -158,7 +158,7 @@ BrProgressExamples >> barAndTextInside [
 	^ aProgress
 ]
 
-{ #category : #'examples - looks' }
+{ #category : 'examples - looks' }
 BrProgressExamples >> barLook [
 	<gtExample>
 	^ BrProgressBarAptitude new
@@ -172,7 +172,7 @@ BrProgressExamples >> barLook [
 				aBarContainer geometry: (BlRoundedRectangleGeometry cornerRadius: 8) ]
 ]
 
-{ #category : #'examples - bar and text compositions' }
+{ #category : 'examples - bar and text compositions' }
 BrProgressExamples >> barOnly [
 	<gtExample>
 	| aProgress |
@@ -190,7 +190,7 @@ BrProgressExamples >> barOnly [
 	^ aProgress
 ]
 
-{ #category : #'examples - paint stencils' }
+{ #category : 'examples - paint stencils' }
 BrProgressExamples >> basicGradientPaintStencil [
 	<gtExample>
 	| aPaint |
@@ -202,7 +202,7 @@ BrProgressExamples >> basicGradientPaintStencil [
 	^ aPaint
 ]
 
-{ #category : #'examples - paint stencils' }
+{ #category : 'examples - paint stencils' }
 BrProgressExamples >> blueGradientPaintStencil [
 	<gtExample>
 	| aPaint |
@@ -214,7 +214,7 @@ BrProgressExamples >> blueGradientPaintStencil [
 	^ aPaint
 ]
 
-{ #category : #'examples - text formats' }
+{ #category : 'examples - text formats' }
 BrProgressExamples >> fileSizeValues [
 	<gtExample>
 	| aProgress |
@@ -226,7 +226,7 @@ BrProgressExamples >> fileSizeValues [
 	^ aProgress
 ]
 
-{ #category : #'examples - text formats' }
+{ #category : 'examples - text formats' }
 BrProgressExamples >> fixedLabel [
 	<gtExample>
 	| aProgress |
@@ -237,7 +237,7 @@ BrProgressExamples >> fixedLabel [
 	^ aProgress
 ]
 
-{ #category : #'examples - text formats' }
+{ #category : 'examples - text formats' }
 BrProgressExamples >> floatValues [
 	<gtExample>
 	| aProgress |
@@ -249,7 +249,7 @@ BrProgressExamples >> floatValues [
 	^ aProgress
 ]
 
-{ #category : #'examples - text formats' }
+{ #category : 'examples - text formats' }
 BrProgressExamples >> integerValues [
 	<gtExample>
 	| aProgress |
@@ -261,7 +261,7 @@ BrProgressExamples >> integerValues [
 	^ aProgress
 ]
 
-{ #category : #'examples - basic widget' }
+{ #category : 'examples - basic widget' }
 BrProgressExamples >> progress [
 	<gtExample>
 	| aProgress |
@@ -277,7 +277,7 @@ BrProgressExamples >> progress [
 	^ aProgress
 ]
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrProgressExamples >> progressModel [
 	<gtExample>
 	| aModel |
@@ -288,7 +288,7 @@ BrProgressExamples >> progressModel [
 	^ aModel
 ]
 
-{ #category : #'examples - looks' }
+{ #category : 'examples - looks' }
 BrProgressExamples >> textLook [
 	<gtExample>
 	^ BrTextLabelAptitude new 
@@ -301,7 +301,7 @@ BrProgressExamples >> textLook [
 					c ignored vertical alignCenter ] ]
 ]
 
-{ #category : #'examples - basic widget' }
+{ #category : 'examples - basic widget' }
 BrProgressExamples >> thirtyPercentProgress [
 	<gtExample>
 	| aProgress |
@@ -313,7 +313,7 @@ BrProgressExamples >> thirtyPercentProgress [
 	^ aProgress
 ]
 
-{ #category : #'examples - basic widget' }
+{ #category : 'examples - basic widget' }
 BrProgressExamples >> thirtyPercentStaticLabelProgress [
 	<gtExample>
 	| aProgress |

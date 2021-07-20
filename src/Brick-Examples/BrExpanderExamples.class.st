@@ -1,10 +1,10 @@
 Class {
-	#name : #BrExpanderExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Expander'
+	#name : 'BrExpanderExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Expander'
 }
 
-{ #category : #'examples - with text' }
+{ #category : 'examples - with text' }
 BrExpanderExamples >> expanderWithText [
 	<gtExample>
 	| anExpander aText |

@@ -1,12 +1,12 @@
 Class {
-	#name : #BrLabelModelExamples,
-	#superclass : #Object,
+	#name : 'BrLabelModelExamples',
+	#superclass : 'Object',
 	#traits : 'TBrExamplesUtility',
 	#classTraits : 'TBrExamplesUtility classTrait',
-	#category : #'Brick-Examples-Label'
+	#category : 'Brick-Examples-Label'
 }
 
-{ #category : #'example - with element' }
+{ #category : 'example - with element' }
 BrLabelModelExamples >> elementWithLabelModel [
 	<gtExample>
 	| anElement aLabelModel |
@@ -23,7 +23,7 @@ BrLabelModelExamples >> elementWithLabelModel [
 	^ anElement
 ]
 
-{ #category : #'example - with element' }
+{ #category : 'example - with element' }
 BrLabelModelExamples >> elementWithLabelModel_requestElement [
 	<gtExample>
 	| anElement aRequest aResponse aResponseEvent |
@@ -41,7 +41,7 @@ BrLabelModelExamples >> elementWithLabelModel_requestElement [
 	^ anElement
 ]
 
-{ #category : #'example - with element' }
+{ #category : 'example - with element' }
 BrLabelModelExamples >> elementWithLabelModel_requestElement_oneWay [
 	<gtExample>
 	| anElement aRequest aResponse aResponseEvent |
@@ -59,7 +59,7 @@ BrLabelModelExamples >> elementWithLabelModel_requestElement_oneWay [
 	^ anElement
 ]
 
-{ #category : #'example - with element' }
+{ #category : 'example - with element' }
 BrLabelModelExamples >> elementWithLabelModel_requestModel [
 	<gtExample>
 	| anElement aLabelModel aResponse aResponseEvent |
@@ -77,7 +77,7 @@ BrLabelModelExamples >> elementWithLabelModel_requestModel [
 	^ anElement
 ]
 
-{ #category : #'example - with element' }
+{ #category : 'example - with element' }
 BrLabelModelExamples >> elementWithLabelModel_requestModel_oneWay [
 	<gtExample>
 	| anElement aLabelModel aResponse aResponseEvent |
@@ -96,7 +96,7 @@ BrLabelModelExamples >> elementWithLabelModel_requestModel_oneWay [
 	^ anElement
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrLabelModelExamples >> labelModel [
 	<gtExample>
 	| aLabelModel |
@@ -108,7 +108,7 @@ BrLabelModelExamples >> labelModel [
 	^ aLabelModel
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrLabelModelExamples >> labelModelRequest [
 	<gtExample>
 	| aLabelModel aResponse |

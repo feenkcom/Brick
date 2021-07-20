@@ -1,10 +1,10 @@
 Class {
-	#name : #BrDropdownExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Dropdown'
+	#name : 'BrDropdownExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Dropdown'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrDropdownExamples >> alignedDropdowns [
 	<gtExample>
 	| container topLeft topCenter topRight centerLeft centerCenter centerRight bottomLeft bottomCenter bottomRight |
@@ -73,7 +73,7 @@ BrDropdownExamples >> alignedDropdowns [
 	^ container
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrDropdownExamples >> badgeButton [
 	<gtExample>
 	^ BrLabel new
@@ -91,7 +91,7 @@ BrDropdownExamples >> badgeButton [
 		yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrDropdownExamples >> coloredDropdown [
 	<gtExample>
 	| aButtonCircularLook aWithDropdownLook |
@@ -135,7 +135,7 @@ BrDropdownExamples >> coloredDropdown [
 		yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrDropdownExamples >> compact [
 	<gtExample>
 
@@ -157,7 +157,7 @@ BrDropdownExamples >> compact [
 		yourself
 ]
 
-{ #category : #'examples - hide' }
+{ #category : 'examples - hide' }
 BrDropdownExamples >> hideOnClickViaDropdownLook [
 	<gtExample>
 	| aWithDropdownLook |
@@ -181,7 +181,7 @@ BrDropdownExamples >> hideOnClickViaDropdownLook [
 		yourself
 ]
 
-{ #category : #'examples - hide' }
+{ #category : 'examples - hide' }
 BrDropdownExamples >> hideOnClickViaWish [
 	<gtExample>
 	| aWithDropdownLook |
@@ -204,7 +204,7 @@ BrDropdownExamples >> hideOnClickViaWish [
 		yourself
 ]
 
-{ #category : #'examples - hide' }
+{ #category : 'examples - hide' }
 BrDropdownExamples >> hideOnClickViaWishInNestedDropdown [
 	<gtExample>
 	| aWithDropdownLook |
@@ -245,7 +245,7 @@ BrDropdownExamples >> hideOnClickViaWishInNestedDropdown [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrDropdownExamples >> popupList [
 	<gtExample>
 	
@@ -257,7 +257,7 @@ BrDropdownExamples >> popupList [
 		hExact: 200
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrDropdownExamples >> roundedDropdownList [
 	<gtExample>
 
@@ -272,7 +272,7 @@ BrDropdownExamples >> roundedDropdownList [
 		yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrDropdownExamples >> scaledAndAlignedDropdowns [
 	<gtExample>
 	^ self alignedDropdowns
@@ -287,7 +287,7 @@ BrDropdownExamples >> scaledAndAlignedDropdowns [
 		yourself
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrDropdownExamples >> suggesterBadgeDropdownList [
 	<gtExample>
 
@@ -309,7 +309,7 @@ BrDropdownExamples >> suggesterBadgeDropdownList [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrDropdownExamples >> toggleButton [
 	<gtExample>
 	^ BrButton new

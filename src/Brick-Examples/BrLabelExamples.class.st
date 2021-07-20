@@ -1,10 +1,10 @@
 Class {
-	#name : #BrLabelExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Label'
+	#name : 'BrLabelExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Label'
 }
 
-{ #category : #'examples - label' }
+{ #category : 'examples - label' }
 BrLabelExamples >> glamorousLabel [
 	<gtExample>
 	| aLabel |
@@ -34,7 +34,7 @@ BrLabelExamples >> glamorousLabel [
 	^ aLabel
 ]
 
-{ #category : #'examples - label' }
+{ #category : 'examples - label' }
 BrLabelExamples >> glamorousLabelWithFontSize [
 	<gtExample>
 	| aLabel |
@@ -45,7 +45,7 @@ BrLabelExamples >> glamorousLabelWithFontSize [
 	^ aLabel
 ]
 
-{ #category : #'examples - label' }
+{ #category : 'examples - label' }
 BrLabelExamples >> glamorousLabelWithText [
 	<gtExample>
 	| aLabel |

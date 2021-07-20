@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnUndefinedWidthExamples,
-	#superclass : #BrColumnWidthExamples,
-	#category : #'Brick-Examples-! Model - Column'
+	#name : 'BrColumnUndefinedWidthExamples',
+	#superclass : 'BrColumnWidthExamples',
+	#category : 'Brick-Examples-! Model - Column'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnUndefinedWidthExamples >> applyOnElement [
 	<gtExample>
 	|  anElement aColumnWidth |
@@ -24,7 +24,7 @@ BrColumnUndefinedWidthExamples >> applyOnElement [
 	^ anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnUndefinedWidthExamples >> default [
 	<gtExample>
 	| aColumnWidth |
@@ -34,7 +34,7 @@ BrColumnUndefinedWidthExamples >> default [
 	^ aColumnWidth
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnUndefinedWidthExamples >> equalsAndHash [
 	<gtExample>
 	| aColumnWidth anotherColumnWidth |
@@ -48,7 +48,7 @@ BrColumnUndefinedWidthExamples >> equalsAndHash [
 	^ aColumnWidth = anotherColumnWidth
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnUndefinedWidthExamples >> notEquals [
 	<gtExample>
 	| aColumnWidth anotherColumnWidth |

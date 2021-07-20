@@ -10,7 +10,7 @@ Checkbox ${class:BrGlamorousComponentsCheckboxes}$
 Lists ${class:BrGlamorousComponentsLists}$
 "
 Class {
-	#name : #BrGlamorousComponents,
-	#superclass : #Object,
-	#category : #'Brick-Examples-! Glamorous components'
+	#name : 'BrGlamorousComponents',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-! Glamorous components'
 }

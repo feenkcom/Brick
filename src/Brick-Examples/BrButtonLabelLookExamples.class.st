@@ -25,12 +25,12 @@ When attaching a label look and a button model to a button widget the order in w
 ${example:name=BrButtonLabelLookExamples>>#buttonWithModelFirstThenLook|expanded=true|previewExpanded=true}$
 "
 Class {
-	#name : #BrButtonLabelLookExamples,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Button'
+	#name : 'BrButtonLabelLookExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Button'
 }
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> allModels [
 	<gtExample>
 	
@@ -40,7 +40,7 @@ BrButtonLabelLookExamples >> allModels [
 	^ aModel
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonContentElementWithFrameLayout [
 	<gtExample>
 
@@ -54,7 +54,7 @@ BrButtonLabelLookExamples >> buttonContentElementWithFrameLayout [
 			c padding: (BlInsets all: 10) ]
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonContentElementWithLinearLayout [
 	<gtExample>
 
@@ -68,7 +68,7 @@ BrButtonLabelLookExamples >> buttonContentElementWithLinearLayout [
 			c padding: (BlInsets all: 10) ]
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonElement [
 	<gtExample>
 
@@ -81,7 +81,7 @@ BrButtonLabelLookExamples >> buttonElement [
 		padding: (BlInsets all: 10)
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonLabelElement [
 	<gtExample>
 	
@@ -91,7 +91,7 @@ BrButtonLabelLookExamples >> buttonLabelElement [
 			c frame horizontal alignCenter ]
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonLabelLookWithConstraints [
 	<gtExample>
 
@@ -101,21 +101,21 @@ BrButtonLabelLookExamples >> buttonLabelLookWithConstraints [
 			c frame horizontal alignCenter ] ]
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonLabelLookWithoutConstraints [
 	<gtExample>
 
 	^ BrTextLabelAptitude asLook
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> buttonModel [
 	<gtExample>
 	
 	^ BrButtonModel new action: [ self inform: 'Clicked!' ]
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithChangedConstraintsInLook [
 	<gtExample>
 	| aButton aContent aLabelLook |
@@ -135,7 +135,7 @@ BrButtonLabelLookExamples >> buttonWithChangedConstraintsInLook [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithDirectlyEmbeddedLabel [
 	<gtExample>
 	| aButton aLabelLook |
@@ -152,7 +152,7 @@ BrButtonLabelLookExamples >> buttonWithDirectlyEmbeddedLabel [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithModelAndLookAndChangedModelLabel [
 	<gtExample>
 	| aButton newLabel |
@@ -169,7 +169,7 @@ BrButtonLabelLookExamples >> buttonWithModelAndLookAndChangedModelLabel [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithModelAndLookWithConstraints [
 	<gtExample>
 	| aButton aContent aLabelLook |
@@ -191,7 +191,7 @@ BrButtonLabelLookExamples >> buttonWithModelAndLookWithConstraints [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithModelAndLookWithoutConstraints [
 	<gtExample>
 	| aButton aContent aLabelLook |
@@ -213,7 +213,7 @@ BrButtonLabelLookExamples >> buttonWithModelAndLookWithoutConstraints [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithModelAndWrongContentPlacement [
 	<gtExample>
 	| aButton aContent aLabelLook |
@@ -233,7 +233,7 @@ BrButtonLabelLookExamples >> buttonWithModelAndWrongContentPlacement [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithModelFirstThenLook [
 	<gtExample>
 	| aButton aModel aLook modelLabel lookLabel |
@@ -258,7 +258,7 @@ BrButtonLabelLookExamples >> buttonWithModelFirstThenLook [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithOnlyModel [
 	<gtExample>
 	| aButton aContent aLabel |
@@ -280,7 +280,7 @@ BrButtonLabelLookExamples >> buttonWithOnlyModel [
 	^ aButton
 ]
 
-{ #category : #'example - button' }
+{ #category : 'example - button' }
 BrButtonLabelLookExamples >> buttonWithOnlyModelAndChangedModelLabel [
 	<gtExample>
 	| aButton aLabel |
@@ -298,7 +298,7 @@ BrButtonLabelLookExamples >> buttonWithOnlyModelAndChangedModelLabel [
 	^ aButton
 ]
 
-{ #category : #'example - model' }
+{ #category : 'example - model' }
 BrButtonLabelLookExamples >> changeIconOfButtonModelEvent [
 	<gtExample>
 	| anIconModel aButtonIcon anIconChangedEvent |
@@ -322,7 +322,7 @@ BrButtonLabelLookExamples >> changeIconOfButtonModelEvent [
 	^ anIconChangedEvent
 ]
 
-{ #category : #'example - model' }
+{ #category : 'example - model' }
 BrButtonLabelLookExamples >> changeLabelOfButtonModelEvent [
 	<gtExample>
 	| aButtonModel aButtonLabel aLabelChangedEvent |
@@ -346,7 +346,7 @@ BrButtonLabelLookExamples >> changeLabelOfButtonModelEvent [
 	^ aLabelChangedEvent
 ]
 
-{ #category : #'example - events' }
+{ #category : 'example - events' }
 BrButtonLabelLookExamples >> clickOnButtonTriggersAction [
 	<gtExample>
 	| aButton actionTriggeredCount |
@@ -363,7 +363,7 @@ BrButtonLabelLookExamples >> clickOnButtonTriggersAction [
 	^ aButton
 ]
 
-{ #category : #'example - events' }
+{ #category : 'example - events' }
 BrButtonLabelLookExamples >> iconChangedEvent [
 	<gtExample>
 	| aButton newIcon anIconChangedEvent |
@@ -388,14 +388,14 @@ BrButtonLabelLookExamples >> iconChangedEvent [
 	^ anIconChangedEvent
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> iconModel [
 	<gtExample>
 	
 	^ BrIconModel new
 ]
 
-{ #category : #'example - events' }
+{ #category : 'example - events' }
 BrButtonLabelLookExamples >> labelChangedEvent [
 	<gtExample>
 	| aButton newLabel aLabelChangedEvent |
@@ -420,14 +420,14 @@ BrButtonLabelLookExamples >> labelChangedEvent [
 	^ aLabelChangedEvent
 ]
 
-{ #category : #'example - instance creation' }
+{ #category : 'example - instance creation' }
 BrButtonLabelLookExamples >> labelModel [
 	<gtExample>
 	
 	^ BrLabelModel new text: self labelText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrButtonLabelLookExamples >> labelText [
 	
 	^ 'Hello'

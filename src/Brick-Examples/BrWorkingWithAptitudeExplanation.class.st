@@ -9,12 +9,12 @@ ${example:BrWorkingWithAptitudeExplanation>>#labelWithoutAptitude|previewExpande
 
 "
 Class {
-	#name : #BrWorkingWithAptitudeExplanation,
-	#superclass : #Object,
-	#category : #'Brick-Examples-Explanations'
+	#name : 'BrWorkingWithAptitudeExplanation',
+	#superclass : 'Object',
+	#category : 'Brick-Examples-Explanations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWorkingWithAptitudeExplanation >> labelWithAptitude [
 	<gtExample>
 	| label |
@@ -26,7 +26,7 @@ BrWorkingWithAptitudeExplanation >> labelWithAptitude [
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAndBehaviorAptitude [
 	<gtExample>
 	| label |
@@ -43,7 +43,7 @@ BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAndBehaviorAptitude 
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAptitude [
 	<gtExample>
 	| label |
@@ -58,7 +58,7 @@ BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAptitude [
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWorkingWithAptitudeExplanation >> labelWithoutAptitude [
 	<gtExample>
 	| label |
