@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'listElement'
 	],
-	#category : 'Brick-List - Look'
+	#category : #'Brick-List - Look'
 }
 
 { #category : #'api - orientation' }
@@ -15,6 +15,8 @@ BrSimpleListAptitude >> beHorizontal [
 	self listElement class = BrHorizontalInfiniteListElement ifTrue: [ ^ self ].
 	anOldListElement := self listElement.
 	listElement := BrHorizontalInfiniteListElement new.
+	listElement dataSource 
+		listModel: anOldListElement dataSource listModel.
 	self replaceListElement: anOldListElement by: self listElement.
 	self requestListConfiguration.
 ]
@@ -25,6 +27,8 @@ BrSimpleListAptitude >> beVertical [
 	self listElement class = BrInfiniteListElement ifTrue: [ ^ self ].
 	anOldListElement := self listElement.
 	listElement := BrInfiniteListElement new.
+	listElement dataSource 
+		listModel: anOldListElement dataSource listModel.
 	self replaceListElement: anOldListElement by: self listElement.
 	self requestListConfiguration.
 ]
