@@ -1,22 +1,22 @@
 Class {
-	#name : #BrScrollbar,
-	#superclass : #BlElement,
+	#name : 'BrScrollbar',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#category : 'Brick-Scrollbar - UI'
 }
 
-{ #category : #'api - scrollbar' }
+{ #category : 'api - scrollbar' }
 BrScrollbar >> beHorizontal [
 	self states addState: BrScrollbarOrientationState horizontal
 ]
 
-{ #category : #'api - scrollbar' }
+{ #category : 'api - scrollbar' }
 BrScrollbar >> beVertical [
 	self states addState: BrScrollbarOrientationState vertical
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollbar >> initialize [
 	super initialize.
 	
@@ -28,17 +28,17 @@ BrScrollbar >> initialize [
 	self beInSeparateCompositionLayer
 ]
 
-{ #category : #'api - scrollbar' }
+{ #category : 'api - scrollbar' }
 BrScrollbar >> scrollable: aTBlScrollable [
 	self viewModel scrollableElement: aTBlScrollable
 ]
 
-{ #category : #'api - scrollbar' }
+{ #category : 'api - scrollbar' }
 BrScrollbar >> thumb: aStencil [
 	self viewModel thumbStencil: aStencil
 ]
 
-{ #category : #'api - scrollbar' }
+{ #category : 'api - scrollbar' }
 BrScrollbar >> track: aStencil [
 	self viewModel trackStencil: aStencil
 ]

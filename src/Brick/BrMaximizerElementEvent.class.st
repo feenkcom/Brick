@@ -1,6 +1,6 @@
 Class {
-	#name : #BrMaximizerElementEvent,
-	#superclass : #BlEvent,
+	#name : 'BrMaximizerElementEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'hostElement',
 		'placeholderElement'
@@ -8,22 +8,22 @@ Class {
 	#category : 'Brick-Maximizer - Event'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerElementEvent >> hostElement [
 	^ hostElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerElementEvent >> hostElement: anObject [
 	hostElement := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerElementEvent >> placeholderElement [
 	^ placeholderElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerElementEvent >> placeholderElement: anObject [
 	placeholderElement := anObject
 ]

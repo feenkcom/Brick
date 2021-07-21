@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTreeNodeAnnouncement,
-	#superclass : #Announcement,
+	#name : 'BrTreeNodeAnnouncement',
+	#superclass : 'Announcement',
 	#category : 'Brick-Tree - Events'
 }

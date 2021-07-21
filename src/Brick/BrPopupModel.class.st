@@ -1,6 +1,6 @@
 Class {
-	#name : #BrPopupModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrPopupModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'stencil',
 		'target'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Popup - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupModel >> initialize [
 	super initialize.
 	
@@ -16,39 +16,39 @@ BrPopupModel >> initialize [
 	target := BrPopupEmptyTarget new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupModel >> initializeListeners [
 	super initializeListeners.
 
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrPopupModel >> notifyStencilChanged [
 	self dispatchEvent: (BrPopupStencilChanged new popupStencil: self stencil)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrPopupModel >> notifyTargetChanged [
 	self dispatchEvent: (BrPopupTargetChanged new popupTarget: self target)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupModel >> stencil [
 	^ stencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupModel >> stencil: aStencil [
 	stencil := aStencil asStencil.
 	self notifyStencilChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupModel >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupModel >> target: aPopupTarget [
 	target := aPopupTarget.
 	self notifyTargetChanged

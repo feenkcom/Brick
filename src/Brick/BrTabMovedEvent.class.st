@@ -2,8 +2,8 @@
 I am sent when an existing tab is moved to another position in ${class:BrTabGroupModel}
 "
 Class {
-	#name : #BrTabMovedEvent,
-	#superclass : #BrTabEvent,
+	#name : 'BrTabMovedEvent',
+	#superclass : 'BrTabEvent',
 	#instVars : [
 		'oldPosition',
 		'newPosition'
@@ -11,22 +11,22 @@ Class {
 	#category : 'Brick-Tabs - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabMovedEvent >> newPosition [
 	^ newPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabMovedEvent >> newPosition: anObject [
 	newPosition := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabMovedEvent >> oldPosition [
 	^ oldPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabMovedEvent >> oldPosition: anObject [
 	oldPosition := anObject
 ]

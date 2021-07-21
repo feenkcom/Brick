@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTreeRowDataBinderChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrTreeRowDataBinderChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'rowDataBinder'
 	],
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinderChangedEvent >> rowDataBinder [
 	^ rowDataBinder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinderChangedEvent >> rowDataBinder: anObject [
 	rowDataBinder := anObject
 ]

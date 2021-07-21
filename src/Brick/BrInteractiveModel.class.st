@@ -2,35 +2,35 @@
 I am a composite interaction model responsible for managing widget state such as pressed, hovered, focused.
 "
 Class {
-	#name : #BrInteractiveModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrInteractiveModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'stateModels'
 	],
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrInteractiveModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrInteractiveModel class >> with: aStateModel [
 	^ self new addState: aStateModel
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrInteractiveModel class >> withAll: aCollecitonOfStateModels [
 	^ self new addStates: aCollecitonOfStateModels
 ]
 
-{ #category : #'api - composition' }
+{ #category : 'api - composition' }
 BrInteractiveModel >> addInteractiveModelState: aState [
 	self addState: aState.
 ]
 
-{ #category : #'api - states' }
+{ #category : 'api - states' }
 BrInteractiveModel >> addState: aStateModel [
 	"Add a given state model as my sub-model and register corresponding update events"
 
@@ -43,12 +43,12 @@ BrInteractiveModel >> addState: aStateModel [
 	self add: aStateModel
 ]
 
-{ #category : #'api - states' }
+{ #category : 'api - states' }
 BrInteractiveModel >> addStates: aCollectionOfStateModels [
 	aCollectionOfStateModels do: [ :aStateModel | self addState: aStateModel ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrInteractiveModel >> gtLocalStatesFor: aView [
 	<gtView>
 	
@@ -59,14 +59,14 @@ BrInteractiveModel >> gtLocalStatesFor: aView [
 		view: #gtStatesFor:
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveModel >> initialize [
 	super initialize.
 	
 	stateModels := OrderedCollection new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveModel >> initializeListeners [
 	super initializeListeners.
 
@@ -76,12 +76,12 @@ BrInteractiveModel >> initializeListeners [
 			forceUpdate: aRequest forceUpdate ]
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrInteractiveModel >> notifyInteractionChanged [
 	self notifyStatesMappingChangedIn: BrInteractionStatesMapping new
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrInteractiveModel >> notifyStatesChanged: aSetOfStates ofMapping: theStatesMapping toChildren: anElement [
 	"If an element has a state model of the same type we stop propagation of the notification,
 	because such widgets are no longer within my state context"
@@ -105,7 +105,7 @@ BrInteractiveModel >> notifyStatesChanged: aSetOfStates ofMapping: theStatesMapp
 	anElement childrenDo: [ :eachChild | self notifyStatesChanged: aCurrentSetOfStates ofMapping: aCurrentStatesMapping toChildren: eachChild ]
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrInteractiveModel >> notifyStatesMappingChangedIn: theStatesMapping [
 	| theStates |
 
@@ -116,21 +116,21 @@ BrInteractiveModel >> notifyStatesMappingChangedIn: theStatesMapping [
 	self widgetDo: [ :anElement | anElement childrenDo: [ :eachChild | self notifyStatesChanged: theStates ofMapping: theStatesMapping toChildren: eachChild ] ]
 ]
 
-{ #category : #'api - states' }
+{ #category : 'api - states' }
 BrInteractiveModel >> stateModels [
 	<return: #Collection of: #BrStateModel>
 
 	^ stateModels
 ]
 
-{ #category : #'private - states' }
+{ #category : 'private - states' }
 BrInteractiveModel >> statesMapping [
 	<return: #BrInteractionStatesMapping>
 
 	^ self statesMappingIn: BrInteractionStatesMapping new
 ]
 
-{ #category : #'private - states' }
+{ #category : 'private - states' }
 BrInteractiveModel >> statesMappingIn: aStatesMapping [
 	<return: #BrInteractionStatesMapping>
 
@@ -139,28 +139,28 @@ BrInteractiveModel >> statesMappingIn: aStatesMapping [
 	^ aStatesMapping
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrInteractiveModel >> withEnablement [
 	self addState: BrEnablementModel new
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrInteractiveModel >> withExpansion [
 	self deprecated: 'IS deprecated'.
 	self addState: BrExpandableModel new
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrInteractiveModel >> withFocus [
 	self addState: BrFocusModel new
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrInteractiveModel >> withHover [
 	self addState: BrHoverModel new
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrInteractiveModel >> withPress [
 	self addState: BrPressModel new
 ]

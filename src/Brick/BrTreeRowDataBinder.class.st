@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTreeRowDataBinder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTreeRowDataBinder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'rowElement',
 		'itemNode',
@@ -9,34 +9,34 @@ Class {
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeRowDataBinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinder >> itemNode [
 	^ itemNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinder >> itemNode: anObject [
 	itemNode := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinder >> itemPosition [
 	^ itemPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinder >> itemPosition: anObject [
 	itemPosition := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeRowDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self rowElement;
@@ -44,7 +44,7 @@ BrTreeRowDataBinder >> paramsOn: aStencilExecutor [
 		push: self itemPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTreeRowDataBinder >> reset [
 	super reset.
 	
@@ -53,12 +53,12 @@ BrTreeRowDataBinder >> reset [
 	itemPosition := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinder >> rowElement [
 	^ rowElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeRowDataBinder >> rowElement: anObject [
 	rowElement := anObject
 ]

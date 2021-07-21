@@ -1,15 +1,15 @@
 Class {
-	#name : #BrLayoutHorizontalResizerModel,
-	#superclass : #BrLayoutResizerModel,
+	#name : 'BrLayoutHorizontalResizerModel',
+	#superclass : 'BrLayoutResizerModel',
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrLayoutHorizontalResizerModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLayoutHorizontalResizerModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -17,12 +17,12 @@ BrLayoutHorizontalResizerModel >> initializeListeners [
 	self when: BrLayoutHorizontalResizerWish do: [ :aWish | self resizer: aWish resizer ]
 ]
 
-{ #category : #'state - accessing' }
+{ #category : 'state - accessing' }
 BrLayoutHorizontalResizerModel >> stateChangedEventClass [
 	^ BrLayoutHorizontalResizerChanged
 ]
 
-{ #category : #'state - streaming' }
+{ #category : 'state - streaming' }
 BrLayoutHorizontalResizerModel >> streamStateIn: aBrInteractionStatesMapping [
 	aBrInteractionStatesMapping
 		addState: (BrDeprecatedLayoutHorizontalResizerState resizer: self resizer)

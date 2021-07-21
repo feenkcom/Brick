@@ -1,5 +1,5 @@
 Class {
-	#name : #BrAnchoredAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrAnchoredAptitude',
+	#superclass : 'BrAptitude',
 	#category : 'Brick-Anchored - Look'
 }

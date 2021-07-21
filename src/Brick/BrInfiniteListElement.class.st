@@ -4,22 +4,22 @@ I am a vertical infinite list.
 
 "
 Class {
-	#name : #BrInfiniteListElement,
-	#superclass : #BlInfiniteElement,
+	#name : 'BrInfiniteListElement',
+	#superclass : 'BlInfiniteElement',
 	#category : 'Brick-List - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInfiniteListElement >> defaultDataSource [
 	^ BrSimpleListDataSource new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInfiniteListElement >> defaultLayout [
 	^ BlInfiniteLinearLayout vertical
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInfiniteListElement >> defaultMouseScrollEventHandler [
 	^ BlInfiniteMouseOrientationRestrictedScrollListener new
 ]

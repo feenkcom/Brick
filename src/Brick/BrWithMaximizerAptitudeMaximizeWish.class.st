@@ -1,5 +1,5 @@
 Class {
-	#name : #BrWithMaximizerAptitudeMaximizeWish,
-	#superclass : #BlEvent,
+	#name : 'BrWithMaximizerAptitudeMaximizeWish',
+	#superclass : 'BlEvent',
 	#category : 'Brick-Maximizer - Event'
 }

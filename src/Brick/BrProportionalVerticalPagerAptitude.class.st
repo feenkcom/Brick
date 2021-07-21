@@ -1,6 +1,6 @@
 Class {
-	#name : #BrProportionalVerticalPagerAptitude,
-	#superclass : #BrPagerAptitude,
+	#name : 'BrProportionalVerticalPagerAptitude',
+	#superclass : 'BrPagerAptitude',
 	#instVars : [
 		'pagesListElement',
 		'resizers'
@@ -8,12 +8,12 @@ Class {
 	#category : 'Brick-Pager - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProportionalVerticalPagerAptitude >> hideResizers [
 	self resizers do: [ :eachResizer | eachResizer visibility: BlVisibility hidden ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProportionalVerticalPagerAptitude >> initialize [
 	super initialize.
 
@@ -29,7 +29,7 @@ BrProportionalVerticalPagerAptitude >> initialize [
 	self addChangeAddChildAs: #(content list) with: [ pagesListElement ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProportionalVerticalPagerAptitude >> onPage: aPageModel elementAttached: aPageElement [
 
 	aPageElement
@@ -52,12 +52,12 @@ BrProportionalVerticalPagerAptitude >> onPage: aPageModel elementAttached: aPage
 	pagesListElement addChild: aPageElement
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProportionalVerticalPagerAptitude >> onPage: aPageModel elementDetached: aPageElement [
 	pagesListElement removeChild: aPageElement
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProportionalVerticalPagerAptitude >> onResized: aLeftPageElement to: anExtent and: aRightPageElement [
 	| availableSize availableWeight aTopWeight aBottomWeight |
 	
@@ -75,14 +75,14 @@ BrProportionalVerticalPagerAptitude >> onResized: aLeftPageElement to: anExtent 
 	aRightPageElement constraintsDo: [ :c | c linear weight: availableWeight * aBottomWeight ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProportionalVerticalPagerAptitude >> resizers [
 	<return: #Collection of: #BrResizer>
 
 	^ resizers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProportionalVerticalPagerAptitude >> showResizers [
 	self resizers do: [ :eachResizer | eachResizer visibility: BlVisibility visible ]
 ]

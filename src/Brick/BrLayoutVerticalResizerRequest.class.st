@@ -1,15 +1,15 @@
 Class {
-	#name : #BrLayoutVerticalResizerRequest,
-	#superclass : #BrLayoutResizerRequest,
+	#name : 'BrLayoutVerticalResizerRequest',
+	#superclass : 'BrLayoutResizerRequest',
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrLayoutVerticalResizerRequest class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLayoutVerticalResizerRequest >> responseClass [
 	^ BrLayoutVerticalResizerChanged
 ]

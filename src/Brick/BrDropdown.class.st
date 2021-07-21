@@ -1,5 +1,5 @@
 Class {
-	#name : #BrDropdown,
-	#superclass : #Object,
+	#name : 'BrDropdown',
+	#superclass : 'Object',
 	#category : 'Brick-Dropdown - UI'
 }

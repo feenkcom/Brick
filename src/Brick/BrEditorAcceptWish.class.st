@@ -1,18 +1,18 @@
 Class {
-	#name : #BrEditorAcceptWish,
-	#superclass : #BrEditorWish,
+	#name : 'BrEditorAcceptWish',
+	#superclass : 'BrEditorWish',
 	#instVars : [
 		'text'
 	],
 	#category : 'Brick-Editor - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorAcceptWish >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorAcceptWish >> text: anObject [
 	text := anObject
 ]

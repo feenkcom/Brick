@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTaggerAllowedAnyTags,
-	#superclass : #BrTaggerAllowedTags,
+	#name : 'BrTaggerAllowedAnyTags',
+	#superclass : 'BrTaggerAllowedTags',
 	#category : 'Brick-Tagger - Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTaggerAllowedAnyTags >> isAnyAllowed [
 	^ true
 ]

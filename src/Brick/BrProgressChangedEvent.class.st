@@ -3,8 +3,8 @@ I inform about progress status changes. I am triggered by ${class:BrProgressMode
 
 "
 Class {
-	#name : #BrProgressChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrProgressChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'amount',
 		'total'
@@ -12,36 +12,36 @@ Class {
 	#category : 'Brick-Progress - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressChangedEvent class >> amount: anAmountNumber total: aTotalNumber [
 	^ self new
 		amount: anAmountNumber;
 		total: aTotalNumber.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressChangedEvent >> amount [
 	^ amount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressChangedEvent >> amount: anObject [
 	amount := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressChangedEvent >> initialize [
 	super initialize.
 	amount := 0.
 	total := 100.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressChangedEvent >> total [
 	^ total
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressChangedEvent >> total: anObject [
 	total := anObject
 ]

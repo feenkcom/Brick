@@ -1,10 +1,10 @@
 Class {
-	#name : #BrPressedState,
-	#superclass : #BrInteractionState,
+	#name : 'BrPressedState',
+	#superclass : 'BrInteractionState',
 	#category : 'Brick-! Core - States'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrPressedState >> printOn: aStream [
 	aStream nextPutAll: 'pressed'
 ]

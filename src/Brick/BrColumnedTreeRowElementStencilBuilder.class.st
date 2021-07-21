@@ -1,6 +1,6 @@
 Class {
-	#name : #BrColumnedTreeRowElementStencilBuilder,
-	#superclass : #BrTreeRowElementStencilBuilder,
+	#name : 'BrColumnedTreeRowElementStencilBuilder',
+	#superclass : 'BrTreeRowElementStencilBuilder',
 	#instVars : [
 		'columns',
 		'columnElements'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 	| aRowElement theCellElements |
@@ -45,33 +45,33 @@ BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 	^ aRowElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeRowElementStencilBuilder >> columnElements [
 	^ columnElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeRowElementStencilBuilder >> columnElements: anObject [
 	columnElements := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeRowElementStencilBuilder >> columns [
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeRowElementStencilBuilder >> columns: anObject [
 	columns := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnedTreeRowElementStencilBuilder >> createExpandCollapseElement [
 	^ BrTriangle new
 		aptitude: BrGlamorousTriangleInCircleAptitude
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnedTreeRowElementStencilBuilder >> createRowElement [
 	^ BlElement new
 		layout: BlLinearLayout horizontal alignCenterLeft;
@@ -80,7 +80,7 @@ BrColumnedTreeRowElementStencilBuilder >> createRowElement [
 			c vertical fitContent ]
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnedTreeRowElementStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self itemType;
@@ -88,7 +88,7 @@ BrColumnedTreeRowElementStencilBuilder >> paramsOn: aStencilExecutor [
 		push: self columns
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedTreeRowElementStencilBuilder >> reset [
 	super reset.
 	

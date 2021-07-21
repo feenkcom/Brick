@@ -1,13 +1,13 @@
 Class {
-	#name : #BrTreeClickToSelectHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BrTreeClickToSelectHandler',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'treeWidget'
 	],
 	#category : 'Brick-Tree - Support'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTreeClickToSelectHandler >> clickEvent: aBlClickEvent [
 	aBlClickEvent consumed: true.
 
@@ -15,24 +15,24 @@ BrTreeClickToSelectHandler >> clickEvent: aBlClickEvent [
 	treeWidget requestFocus
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTreeClickToSelectHandler >> doubleClickEvent: aBlDoubleClickEvent [
 	aBlDoubleClickEvent consumed: true.
 
 	treeWidget dispatchEvent: (BrSelectionDoubleClicked new selection: treeWidget selectedIndices; sourceEvent: aBlDoubleClickEvent)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTreeClickToSelectHandler >> eventsToHandle [
 	^ { BlClickEvent . BlDoubleClickEvent }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeClickToSelectHandler >> treeWidget [
 	^ treeWidget
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeClickToSelectHandler >> treeWidget: anObject [
 	treeWidget := anObject
 ]

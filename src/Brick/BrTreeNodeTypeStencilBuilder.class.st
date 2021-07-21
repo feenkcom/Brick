@@ -2,8 +2,8 @@
 I am a stencil builder that defines a general api of the object that should compute the type of a node in the tree.
 "
 Class {
-	#name : #BrTreeNodeTypeStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTreeNodeTypeStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemPosition',
 		'itemObject'
@@ -11,34 +11,34 @@ Class {
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeNodeTypeStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ BrListItemType invalid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeTypeStencilBuilder >> itemNode [
 	^ itemObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeTypeStencilBuilder >> itemNode: anObject [
 	itemObject := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeTypeStencilBuilder >> itemPosition [
 	^ itemPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeTypeStencilBuilder >> itemPosition: anObject [
 	itemPosition := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeNodeTypeStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: BrListItemType;
@@ -46,7 +46,7 @@ BrTreeNodeTypeStencilBuilder >> paramsOn: aStencilExecutor [
 		push: self itemPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTreeNodeTypeStencilBuilder >> reset [
 	super reset.
 

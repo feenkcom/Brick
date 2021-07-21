@@ -1,6 +1,6 @@
 Class {
-	#name : #BrEditableLabel,
-	#superclass : #BrEditor,
+	#name : 'BrEditableLabel',
+	#superclass : 'BrEditor',
 	#instVars : [
 		'editorShortcuts',
 		'labelShortcuts'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Editor - UI'
 }
 
-{ #category : #'api - editor' }
+{ #category : 'api - editor' }
 BrEditableLabel >> acceptEdition [
 	"Accept editor changes and switch back to the label"
 
@@ -21,7 +21,7 @@ BrEditableLabel >> acceptEdition [
 	self onEditionAccepted: self text
 ]
 
-{ #category : #'api - editor' }
+{ #category : 'api - editor' }
 BrEditableLabel >> cancelEdition [
 	"Cancel editor changes and switch back to the label"
 
@@ -34,7 +34,7 @@ BrEditableLabel >> cancelEdition [
 	self onEditionCancelled
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditableLabel >> defaultEditorShortcuts [
 	^ {
 		BrEditableLabelAcceptShortcut new.
@@ -42,7 +42,7 @@ BrEditableLabel >> defaultEditorShortcuts [
 	}
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditableLabel >> defaultLabelShortcuts [
 	^ {
 		BrEditorLoseFocusShortcut new.
@@ -52,21 +52,21 @@ BrEditableLabel >> defaultLabelShortcuts [
 	}
 ]
 
-{ #category : #'api - focus' }
+{ #category : 'api - focus' }
 BrEditableLabel >> focusNext [	
 	self
 		nextSiblingSuchThat: [ :eachElement | eachElement isFocusable ]
 		do: [ :anElement | anElement requestFocus ]
 ]
 
-{ #category : #'api - focus' }
+{ #category : 'api - focus' }
 BrEditableLabel >> focusPrevious [
 	self
 		previousSiblingSuchThat: [ :eachElement | eachElement isFocusable ]
 		do: [ :anElement | anElement requestFocus ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditableLabel >> initialize [
 	super initialize.
 
@@ -96,19 +96,19 @@ BrEditableLabel >> initialize [
 	self switchToLabel
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrEditableLabel >> onEditionAccepted: aText [
 	self viewModel model: aText copy.
 	self dispatchEvent: (BrEditorAcceptWish new text: aText)
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrEditableLabel >> onEditionCancelled [
 	self text: self viewModel model copy.
 	self dispatchEvent: (BrEditorCancelWish new)
 ]
 
-{ #category : #'api  - mode' }
+{ #category : 'api  - mode' }
 BrEditableLabel >> switchToEditor [
 	"Switch to editor mode selecting the whole text"
 
@@ -120,7 +120,7 @@ BrEditableLabel >> switchToEditor [
 	self beMode: (BrTextEditorEditableMode new withShortcuts: editorShortcuts)
 ]
 
-{ #category : #'api  - mode' }
+{ #category : 'api  - mode' }
 BrEditableLabel >> switchToLabel [
 	"Switch to the label mode deselecting the text"
 
@@ -131,7 +131,7 @@ BrEditableLabel >> switchToLabel [
 	self beMode: (BrTextEditorReadonlyWithoutSelectionMode new withShortcuts: labelShortcuts)
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrEditableLabel >> whenKey: aCombination editorDo: anAction [
 	"Add a new editor mode interaction defined by a key combination and action"
 	| aNewShortcut |
@@ -146,7 +146,7 @@ BrEditableLabel >> whenKey: aCombination editorDo: anAction [
 		ifTrue: [ self addEditorShortcut: aNewShortcut ]
 ]
 
-{ #category : #'api - interactions' }
+{ #category : 'api - interactions' }
 BrEditableLabel >> whenKey: aCombination labelDo: anAction [
 	"Add a new label mode interaction defined by a key combination and action"
 	| aNewShortcut |

@@ -1,20 +1,20 @@
 Class {
-	#name : #BrDropdownAptitude,
-	#superclass : #BrAnchoredWithHandleAndContentAptitude,
+	#name : 'BrDropdownAptitude',
+	#superclass : 'BrAnchoredWithHandleAndContentAptitude',
 	#instVars : [
 		'clickEventHandler'
 	],
 	#category : 'Brick-Dropdown - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDropdownAptitude >> handle: anElement [
 	handle removeEventFilter: clickEventHandler.
 	super handle: anElement.
 	handle addEventFilter: clickEventHandler
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDropdownAptitude >> initialize [
 	super initialize.
 
@@ -34,7 +34,7 @@ BrDropdownAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDropdownAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -42,7 +42,7 @@ BrDropdownAptitude >> initializeListeners [
 	self when: BrDropdownContentChanged do: [ :anEvent | self content: anEvent content ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDropdownAptitude >> initializeRequests [
 	super initializeRequests.
 

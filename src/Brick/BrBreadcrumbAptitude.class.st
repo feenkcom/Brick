@@ -1,6 +1,6 @@
 Class {
-	#name : #BrBreadcrumbAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrBreadcrumbAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'items',
 		'separators',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Breadcrumb - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrBreadcrumbAptitude >> initialize [
 	super initialize.
 
@@ -22,7 +22,7 @@ BrBreadcrumbAptitude >> initialize [
 	separatorStencil := [ BlElement new size: 0@0 ] asStencil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrBreadcrumbAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -30,28 +30,28 @@ BrBreadcrumbAptitude >> initializeListeners [
 	self when: BrBreadcrumbItemRemovedEvent do: [ :anEvent | self onItemRemoved: anEvent item at: anEvent index ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrBreadcrumbAptitude >> itemElements [
 	<return: #Collection of: #BlElement>
 
 	^ items values select: #isNotNil
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrBreadcrumbAptitude >> items [
 	<return: #OrderedDictionary key: #BrWidgetModel value: #BlElement>
 
 	^ items
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrBreadcrumbAptitude >> newSeparator [
 	<return: #BlElement>
 
 	^ separatorStencil asElement
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrBreadcrumbAptitude >> onItemAdded: aWidgetModel at: anIndex [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -64,22 +64,22 @@ BrBreadcrumbAptitude >> onItemAdded: aWidgetModel at: anIndex [
 		self onItemAttached: anItemElement at: anIndex ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrBreadcrumbAptitude >> onItemAttached: anItemElement at: anIndex [
 	self subclassResponsibility
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrBreadcrumbAptitude >> onItemRemoved: aWidgetModel at: anIndex [
 	self subclassResponsibility
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrBreadcrumbAptitude >> onSeparatorChanged: aSeparatorStencil [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrBreadcrumbAptitude >> separator: aStencil [
 	self
 		assert: [ aStencil isNotNil ]
@@ -89,14 +89,14 @@ BrBreadcrumbAptitude >> separator: aStencil [
 	self onSeparatorChanged: separatorStencil
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrBreadcrumbAptitude >> separatorElements [
 	<return: #Collection of: #BlElement>
 	
 	^ separators values
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrBreadcrumbAptitude >> separators [
 	<return: #OrderedDictionary key: #BlElement value: #BlElement>
 

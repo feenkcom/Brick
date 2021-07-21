@@ -1,10 +1,10 @@
 Class {
-	#name : #BrPopupStencilRequest,
-	#superclass : #BrRequest,
+	#name : 'BrPopupStencilRequest',
+	#superclass : 'BrRequest',
 	#category : 'Brick-Popup - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupStencilRequest >> responseClass [
 	^ BrPopupStencilChanged
 ]

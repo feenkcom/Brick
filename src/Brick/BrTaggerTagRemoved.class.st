@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTaggerTagRemoved,
-	#superclass : #BrTaggerChangeEvent,
+	#name : 'BrTaggerTagRemoved',
+	#superclass : 'BrTaggerChangeEvent',
 	#instVars : [
 		'tag',
 		'index'
@@ -8,22 +8,22 @@ Class {
 	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRemoved >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRemoved >> index: anObject [
 	index := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRemoved >> tag [
 	^ tag
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRemoved >> tag: anObject [
 	tag := anObject
 ]

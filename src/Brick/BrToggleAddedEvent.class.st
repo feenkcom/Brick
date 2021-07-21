@@ -1,18 +1,18 @@
 Class {
-	#name : #BrToggleAddedEvent,
-	#superclass : #BrToggleEvent,
+	#name : 'BrToggleAddedEvent',
+	#superclass : 'BrToggleEvent',
 	#instVars : [
 		'index'
 	],
 	#category : 'Brick-Toggle - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToggleAddedEvent >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToggleAddedEvent >> index: anObject [
 	index := anObject
 ]

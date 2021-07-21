@@ -2,8 +2,8 @@
 I am a text editor with a toolbar to change visual properties of the text
 "
 Class {
-	#name : #BrEditorWithToolbar,
-	#superclass : #BrVerticalPane,
+	#name : 'BrEditorWithToolbar',
+	#superclass : 'BrVerticalPane',
 	#instVars : [
 		'toolbar',
 		'editor'
@@ -11,12 +11,12 @@ Class {
 	#category : 'Brick-Editor - UI'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrEditorWithToolbar >> addAttribute: anAttribute [
 	editor selection do: [ :eachMonotoneSelection | (editor text from: eachMonotoneSelection from + 1 to: eachMonotoneSelection to) attribute: anAttribute ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorWithToolbar >> initialize [
 	super initialize.
 	toolbar := BrToolbar new.

@@ -1,15 +1,15 @@
 Class {
-	#name : #BrCheckboxIndeterminateState,
-	#superclass : #BrCheckboxState,
+	#name : 'BrCheckboxIndeterminateState',
+	#superclass : 'BrCheckboxState',
 	#category : 'Brick-Checkbox - States'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCheckboxIndeterminateState >> isIndeterminate [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrCheckboxIndeterminateState >> printOn: aStream [
 	aStream nextPutAll: 'indeterminate'
 ]

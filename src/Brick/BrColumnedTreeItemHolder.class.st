@@ -1,6 +1,6 @@
 Class {
-	#name : #BrColumnedTreeItemHolder,
-	#superclass : #BrTreeItemHolder,
+	#name : 'BrColumnedTreeItemHolder',
+	#superclass : 'BrTreeItemHolder',
 	#instVars : [
 		'columns',
 		'columnElements'
@@ -8,27 +8,27 @@ Class {
 	#category : 'Brick-Tree - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeItemHolder >> columnElements [
 	^ columnElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeItemHolder >> columnElements: anObject [
 	columnElements := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeItemHolder >> columns [
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeItemHolder >> columns: aCollectionOfBrListColumn [
 	columns := aCollectionOfBrListColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedTreeItemHolder >> initialize [
 	super initialize.
 	

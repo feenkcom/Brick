@@ -1,13 +1,13 @@
 Class {
-	#name : #BrInteractionStatesMapping,
-	#superclass : #Object,
+	#name : 'BrInteractionStatesMapping',
+	#superclass : 'Object',
 	#instVars : [
 		'mapping'
 	],
 	#category : 'Brick-! Core - States'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrInteractionStatesMapping >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,21 +18,21 @@ BrInteractionStatesMapping >> = anObject [
 	^ mapping = anObject mapping
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BrInteractionStatesMapping >> addState: aBrInteractiveState model: aBrStateModel [
 	self
 		addState: aBrInteractiveState
 		modelClass: aBrStateModel class
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BrInteractionStatesMapping >> addState: aBrInteractiveState modelClass: aBrStateModelClass [
 	mapping
 		at: aBrStateModelClass
 		put: aBrInteractiveState
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrInteractionStatesMapping >> gtStatesFor: aView [
 	<gtView>
 
@@ -46,33 +46,33 @@ BrInteractionStatesMapping >> gtStatesFor: aView [
 		view: #gtItemsFor:
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrInteractionStatesMapping >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ mapping hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractionStatesMapping >> initialize [
 	super initialize.
 	
 	mapping := IdentityDictionary new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrInteractionStatesMapping >> isEmpty [
 	<return: #Boolean>
 
 	^ mapping isEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionStatesMapping >> mapping [
 	^ mapping
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionStatesMapping >> mappingToPropagateToChildren [
 	<return: #Set of: #BrInteractionState>
 	| aNewMapping |
@@ -86,7 +86,7 @@ BrInteractionStatesMapping >> mappingToPropagateToChildren [
 	^ aNewMapping
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionStatesMapping >> states [
 	<return: #Set of: #BrInteractionState>
 	| aSet |
@@ -96,7 +96,7 @@ BrInteractionStatesMapping >> states [
 	^ aSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionStatesMapping >> statesToPropagateToChildren [
 	<return: #Set of: #BrInteractionState>
 	| aSet |

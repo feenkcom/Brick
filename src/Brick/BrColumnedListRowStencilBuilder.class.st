@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnedListRowStencilBuilder,
-	#superclass : #BrListRowStencilBuilder,
+	#name : 'BrColumnedListRowStencilBuilder',
+	#superclass : 'BrListRowStencilBuilder',
 	#category : 'Brick-List - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnedListRowStencilBuilder >> buildDefault [
 	^ BlElement new
 		layout: BlLinearLayout horizontal;

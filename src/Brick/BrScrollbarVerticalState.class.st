@@ -1,10 +1,10 @@
 Class {
-	#name : #BrScrollbarVerticalState,
-	#superclass : #BrScrollbarOrientationState,
+	#name : 'BrScrollbarVerticalState',
+	#superclass : 'BrScrollbarOrientationState',
 	#category : 'Brick-Scrollbar - State'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollbarVerticalState >> name [
 	^ 'vertical'
 ]

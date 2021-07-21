@@ -1,10 +1,10 @@
 Class {
-	#name : #BrHoveredState,
-	#superclass : #BrInteractionState,
+	#name : 'BrHoveredState',
+	#superclass : 'BrInteractionState',
 	#category : 'Brick-! Core - States'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrHoveredState >> printOn: aStream [
 	aStream nextPutAll: 'hovered'
 ]

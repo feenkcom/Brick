@@ -1,6 +1,6 @@
 Class {
-	#name : #BrAnchoredGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BrAnchoredGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'element',
 		'cornerRadius'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredGeometry class >> cornerRadius: aNumber element: anElement [
 	^ self new
 		cornerRadius: aNumber;
@@ -16,14 +16,14 @@ BrAnchoredGeometry class >> cornerRadius: aNumber element: anElement [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredGeometry class >> element: anElement [
 	^ self new
 		element: anElement;
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	"Computes boundaries according to https://stackoverflow.com/questions/289779/calculating-a-boundary-around-several-linked-rectangles.
 	Assumes bounds are overlapping or touching, gaps will lead to only parts included in geometry."
@@ -117,49 +117,49 @@ BrAnchoredGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	^ path close build
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BrAnchoredGeometry >> containsPoint: aPoint in: aBlElement [
 	^ aBlElement children
 		anySatisfy: [ :e | e containsPoint: aPoint - e position ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredGeometry >> cornerRadius [
 	^ cornerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredGeometry >> cornerRadius: anObject [
 	cornerRadius := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredGeometry >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredGeometry >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAnchoredGeometry >> initialize [
 	super initialize.
 	cornerRadius := 0
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrAnchoredGeometry >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrAnchoredGeometry >> pathOnSpartaCanvas: aCanvas of: aBlElement [
 	^ self buildPathOnSpartaCanvas: aCanvas
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BrAnchoredGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	^ anElement outskirts
 		strokedBounds: aBlBounds
@@ -167,13 +167,13 @@ BrAnchoredGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 		on: aCanvas
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BrAnchoredGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement on: aCanvas [
 	^ (self geometryBounds: aBlBounds)
 		expandBy: aBlElement border width / 2.0
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BrAnchoredGeometry >> strokedBoundsOutside: aBlBounds of: aBlElement on: aCanvas [
 	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrAnchoredAptitude2,
-	#superclass : #BrAnchoredAptitude,
+	#name : 'BrAnchoredAptitude2',
+	#superclass : 'BrAnchoredAptitude',
 	#category : 'Brick-Anchored - Look'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrAnchoredAptitude2 class >> isDeprecated [
 	^ true
 ]
