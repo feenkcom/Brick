@@ -1,13 +1,13 @@
 Class {
-	#name : #BrThemeColorSenderRefactoring,
-	#superclass : #RBRefactoring,
+	#name : 'BrThemeColorSenderRefactoring',
+	#superclass : 'RBRefactoring',
 	#instVars : [
 		'selectorThemesMapping'
 	],
-	#category : #'Brick-Theme-Migration'
+	#category : 'Brick-Theme-Migration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeColorSenderRefactoring class >> model: aModel selectorThemesMapping: aDictionary [
 	^ self new
 		model: aModel;
@@ -15,24 +15,24 @@ BrThemeColorSenderRefactoring class >> model: aModel selectorThemesMapping: aDic
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeColorSenderRefactoring class >> selectorThemesMapping: aDictionary [
 	^ self new
 		selectorThemesMapping: aDictionary;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeColorSenderRefactoring >> preconditions [
 	^ RBCondition withBlock: [ true ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeColorSenderRefactoring >> selectorThemesMapping: aDictionary [
 	selectorThemesMapping := aDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeColorSenderRefactoring >> transform [
 	"Note that this refactoring ignores the model in querying, but writes to the model"
 

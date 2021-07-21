@@ -20,17 +20,17 @@ force based: which widget uses which colors?
 
 "
 Class {
-	#name : #BrThemeMigration,
-	#superclass : #Object,
-	#category : #'Brick-Theme-Migration'
+	#name : 'BrThemeMigration',
+	#superclass : 'Object',
+	#category : 'Brick-Theme-Migration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> childThemeClassName: aString [
 	^ #BrGlamorous , aString capitalized , #Theme
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> colorMethodsToMigrate [
 	<gtExample>
 	^ BrGlamorousColors class methods
@@ -39,7 +39,7 @@ BrThemeMigration >> colorMethodsToMigrate [
 				or: [ e category = #initialization or: [ e selector isUnary not ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> methodToSelector: aMethod inTheme: aString [
 	| selector |
 	selector := aMethod selector.
@@ -60,7 +60,7 @@ BrThemeMigration >> methodToSelector: aMethod inTheme: aString [
 	^ selector , 'Color'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> methodToTheme: aMethod [
 	| category |
 	aMethod selector = #expandCollapseTriangleBackgroundColor
@@ -75,7 +75,7 @@ BrThemeMigration >> methodToTheme: aMethod [
 	^ ('-' split: category) first trimBoth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> refactoringAddChildInitializer: aString withColors: aDictionary in: aModel [
 	| source |
 	source := String
@@ -88,14 +88,14 @@ BrThemeMigration >> refactoringAddChildInitializer: aString withColors: aDiction
 						nextPutAll: ':=BrGlamorousColors ';
 						nextPutAll: v;
 						nextPut: $. ] ].
-	^ RBSilentlyAddMethodRefactoring
+	^ GtRBSilentlyAddMethodRefactoring
 		model: aModel
 		addMethod: (RBParser parseMethod: source) formattedCode
 		toClass: (self childThemeClassName: aString)
 		inProtocols: {#initialization}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> refactoringAddChildThemeClassNamed: aString in: aModel [
 	^ RBAddClassRefactoring
 		model: aModel
@@ -105,7 +105,7 @@ BrThemeMigration >> refactoringAddChildThemeClassNamed: aString in: aModel [
 		category: #'Brick-Theme-Glamorous'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> refactoringAddParentInitializerWithChildThemes: aCollection in: aModel [
 	| source |
 	source := String
@@ -118,14 +118,14 @@ BrThemeMigration >> refactoringAddParentInitializerWithChildThemes: aCollection 
 						nextPutAll: ':=';
 						nextPutAll: (self childThemeClassName: e);
 						nextPutAll: ' new.' ] ].
-	^ RBSilentlyAddMethodRefactoring
+	^ GtRBSilentlyAddMethodRefactoring
 		model: aModel
 		addMethod: (RBParser parseMethod: source) formattedCode
 		toClass: #BrGlamorousTheme
 		inProtocols: {#initialization}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> refactoringAddParentThemeClassIn: aModel [
 	^ RBAddClassRefactoring
 		model: aModel
@@ -135,7 +135,7 @@ BrThemeMigration >> refactoringAddParentThemeClassIn: aModel [
 		category: #'Brick-Theme-Glamorous'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> refactoringsAddColor: aSymbol inChildThemeNamed: aString in: aModel [
 	| themeClassName |
 	themeClassName := self childThemeClassName: aString.
@@ -150,7 +150,7 @@ BrThemeMigration >> refactoringsAddColor: aSymbol inChildThemeNamed: aString in:
 		classVariable: false)}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> refactoringsAddParentChildNamed: aString in: aModel [
 	^ {(RBAddInstanceVariableRefactoring
 		model: aModel
@@ -163,7 +163,7 @@ BrThemeMigration >> refactoringsAddParentChildNamed: aString in: aModel [
 		classVariable: false)}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> referencesChanges [
 	"Note that applying these changes requires the default theme to be the glamorous theme. Otherwise no debugger will be able to open"
 
@@ -184,7 +184,7 @@ BrThemeMigration >> referencesChanges [
 	^ model changes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> scaffoldingChanges [
 	<gtExample>
 	<noTest>
@@ -211,7 +211,7 @@ BrThemeMigration >> scaffoldingChanges [
 	^ model changes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrThemeMigration >> themeSelectorsMapping [
 	<gtExample>
 	| themes |

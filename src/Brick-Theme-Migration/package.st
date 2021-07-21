@@ -1,1 +1,1 @@
-Package { #name : #'Brick-Theme-Migration' }
+Package { #name : 'Brick-Theme-Migration' }
