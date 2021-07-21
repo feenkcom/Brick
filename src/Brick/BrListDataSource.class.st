@@ -2,7 +2,7 @@ Class {
 	#name : #BrListDataSource,
 	#superclass : #BlInfiniteDataSource,
 	#instVars : [
-		'rowValues',
+		'listModel',
 		'selection',
 		'itemTypeStencil',
 		'itemElementStencil',
@@ -30,14 +30,15 @@ BrListDataSource >> getRowIndex: anElementHolder [
 BrListDataSource >> initialize [
 	super initialize.
 	
-	rowValues := #().
 	selection := BlCompositeSelection new.
 	clickToSelectHandler := BrListClickToSelectHandler new
 ]
 
 { #category : #accessing }
 BrListDataSource >> itemCount [
-	^ self rowValues size
+	^ self listModel 
+		ifNil: [ 0 ]
+		ifNotNil: [ :aListModel | aListModel itemCount ]
 ]
 
 { #category : #'accessing - stencils' }
@@ -53,7 +54,7 @@ BrListDataSource >> itemIdAt: anItemPosition [
 	itemIdStencil
 		ifNil: [ ^ NoId ].
 
-	anItemObject := self rowValues at: anItemPosition.
+	anItemObject := self listModel itemAt: anItemPosition.
 
 	anItemId := itemIdStencil
 		itemPosition: anItemPosition;
@@ -74,7 +75,7 @@ BrListDataSource >> itemIdStencil: aBrListItemIdStencilBuilder [
 BrListDataSource >> itemTypeAt: anItemPosition [
 	| anItemObject anItemType |
 
-	anItemObject := self rowValues at: anItemPosition.
+	anItemObject := self listModel itemAt: anItemPosition.
 
 	anItemType := itemTypeStencil
 		itemPosition: anItemPosition;
@@ -103,13 +104,24 @@ BrListDataSource >> listElement: aBrList [
 	clickToSelectHandler listWidget: aBrList
 ]
 
+{ #category : #accessing }
+BrListDataSource >> listModel [
+	^ listModel
+]
+
+{ #category : #accessing }
+BrListDataSource >> listModel: aListModel [
+	listModel := aListModel.
+	self notifyChanged
+]
+
 { #category : #hooks }
 BrListDataSource >> onElementAttached: anElementHolder [
 	| anItemElement anItemPosition anItemValue |
 	
 	anItemElement := anElementHolder itemElement.
 	anItemPosition := anElementHolder position.
-	anItemValue := self rowValues at: anItemPosition.
+	anItemValue := self listModel itemAt: anItemPosition.
 
 	self listElement enqueueTask: (BlTaskAction new action: [
 		self listElement dispatchEvent: (BrListItemElementAttached new
@@ -129,18 +141,6 @@ BrListDataSource >> onElementDetached: anElementHolder [
 		self listElement dispatchEvent: (BrListItemElementDetached new
 			rowIndex: anItemPosition;
 			rowValue: anItemValue) ])
-]
-
-{ #category : #accessing }
-BrListDataSource >> rowValues [
-	^ rowValues
-]
-
-{ #category : #accessing }
-BrListDataSource >> rowValues: aCollection [
-
-	rowValues := aCollection.
-	self notifyChanged
 ]
 
 { #category : #accessing }

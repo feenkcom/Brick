@@ -5,7 +5,7 @@ Class {
 		'itemDataBinder',
 		'itemDataUnbinder'
 	],
-	#category : #'Brick-List - Support'
+	#category : 'Brick-List - Support'
 }
 
 { #category : #'accessing - stencils' }
@@ -24,7 +24,7 @@ BrSimpleListDataSource >> itemDataUnbinder: aBrListItemDataUnbinder [
 BrSimpleListDataSource >> onBindHolder: anElementHolder at: aPosition [
 	| anItemElementWithBindedData anItemObject |
 
-	anItemObject := self rowValues at: aPosition.
+	anItemObject := self listModel itemAt: aPosition.
 
 	anItemElementWithBindedData := itemDataBinder
 		itemElement: anElementHolder itemElement;

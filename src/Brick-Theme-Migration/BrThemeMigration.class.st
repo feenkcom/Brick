@@ -88,7 +88,7 @@ BrThemeMigration >> refactoringAddChildInitializer: aString withColors: aDiction
 						nextPutAll: ':=BrGlamorousColors ';
 						nextPutAll: v;
 						nextPut: $. ] ].
-	^ RBSilentlyAddMethodRefactoring
+	^ GtRBSilentlyAddMethodRefactoring
 		model: aModel
 		addMethod: (RBParser parseMethod: source) formattedCode
 		toClass: (self childThemeClassName: aString)
@@ -118,7 +118,7 @@ BrThemeMigration >> refactoringAddParentInitializerWithChildThemes: aCollection 
 						nextPutAll: ':=';
 						nextPutAll: (self childThemeClassName: e);
 						nextPutAll: ' new.' ] ].
-	^ RBSilentlyAddMethodRefactoring
+	^ GtRBSilentlyAddMethodRefactoring
 		model: aModel
 		addMethod: (RBParser parseMethod: source) formattedCode
 		toClass: #BrGlamorousTheme

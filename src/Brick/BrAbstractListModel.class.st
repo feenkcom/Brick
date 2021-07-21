@@ -6,7 +6,7 @@ Class {
 		'itemTypeStencil',
 		'itemIdStencil'
 	],
-	#category : #'Brick-List - Model'
+	#category : 'Brick-List - Model'
 }
 
 { #category : #initialization }
@@ -23,7 +23,6 @@ BrAbstractListModel >> initializeListeners [
 	super initializeListeners.
 
 	"answer if somebody is interested in what items I have"
-	self when: BrListItemsRequest reply: [ :aResponse | aResponse items: self items ].
 	self when: BrListItemTypeStencilRequest reply: [ :aResponse | aResponse itemTypeStencil: self itemTypeStencil ].
 	self when: BrListItemIdStencilRequest reply: [ :aResponse | aResponse itemIdStencil: self itemIdStencil ].
 ]
@@ -81,7 +80,6 @@ BrAbstractListModel >> items [
 
 { #category : #'api - accessing' }
 BrAbstractListModel >> items: aCollectionOfObjects [
-
 	items := aCollectionOfObjects.
-	self dispatchEvent: (BrListItemsChangedEvent items: self items)
+	self dispatchEvent: (BrListModelItemsChangedEvent new viewModel: self).
 ]

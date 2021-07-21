@@ -7,7 +7,7 @@ Class {
 		'listElement',
 		'rowStencil'
 	],
-	#category : #'Brick-List - Look'
+	#category : 'Brick-List - Look'
 }
 
 { #category : #initialization }
@@ -37,7 +37,7 @@ BrColumnedListAptitude >> initialize [
 BrColumnedListAptitude >> initializeListeners [
 	super initializeListeners.
 	
-	self when: BrListItemsChangedEvent do: [ :anEvent | self onItemsChanged: anEvent items ].
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
 	self when: BrColumnsChanged do: [ :anEvent | self onColumnsChanged: anEvent columns ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
@@ -49,7 +49,6 @@ BrColumnedListAptitude >> initializeListeners [
 BrColumnedListAptitude >> initializeRequests [
 	super initializeRequests.
 	
-	self request: BrListItemsRequest new.
 	self request: BrColumnsRequest new.
 	self request: BrSelectionRequest new.
 	self request: BrListItemTypeStencilRequest new.
@@ -58,6 +57,14 @@ BrColumnedListAptitude >> initializeRequests [
 { #category : #accessing }
 BrColumnedListAptitude >> listElement [
 	^ listElement
+]
+
+{ #category : #'api - hooks' }
+BrColumnedListAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+
+	self listElement dataSource 
+		listModel: anElement viewModel
 ]
 
 { #category : #hooks }
@@ -71,8 +78,8 @@ BrColumnedListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilde
 ]
 
 { #category : #hooks }
-BrColumnedListAptitude >> onItemsChanged: aCollectionOfBrWidgetModels [
-	self listElement dataSource rowValues: aCollectionOfBrWidgetModels
+BrColumnedListAptitude >> onModelItemsChanged: anEvent [
+	self listElement dataSource notifyChanged
 ]
 
 { #category : #hooks }

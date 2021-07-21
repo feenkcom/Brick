@@ -9,7 +9,7 @@ Class {
 		'itemStencilBuilder',
 		'selection'
 	],
-	#category : #'Brick-List - Look'
+	#category : 'Brick-List - Look'
 }
 
 { #category : #initialization }
@@ -40,7 +40,7 @@ BrFlowListAptitude >> initialize [
 BrFlowListAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self when: BrListItemsChangedEvent do: [ :anEvent | self onItemsChanged: anEvent items ].
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ]
 ]
 
@@ -58,9 +58,9 @@ BrFlowListAptitude >> listElement [
 ]
 
 { #category : #'event handling' }
-BrFlowListAptitude >> onItemsChanged: aCollectionOfObjects [
+BrFlowListAptitude >> onModelItemsChanged: anEvent [
 
-	items := aCollectionOfObjects.
+	items := anEvent viewModel items.
 	self updateList
 ]
 

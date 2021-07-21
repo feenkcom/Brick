@@ -15,6 +15,8 @@ BrSimpleListAptitude >> beHorizontal [
 	self listElement class = BrHorizontalInfiniteListElement ifTrue: [ ^ self ].
 	anOldListElement := self listElement.
 	listElement := BrHorizontalInfiniteListElement new.
+	listElement dataSource 
+		listModel: anOldListElement dataSource listModel.
 	self replaceListElement: anOldListElement by: self listElement.
 	self requestListConfiguration.
 ]
@@ -25,6 +27,8 @@ BrSimpleListAptitude >> beVertical [
 	self listElement class = BrInfiniteListElement ifTrue: [ ^ self ].
 	anOldListElement := self listElement.
 	listElement := BrInfiniteListElement new.
+	listElement dataSource 
+		listModel: anOldListElement dataSource listModel.
 	self replaceListElement: anOldListElement by: self listElement.
 	self requestListConfiguration.
 ]
@@ -65,7 +69,7 @@ BrSimpleListAptitude >> initializeListElement [
 BrSimpleListAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self when: BrListItemsChangedEvent do: [ :anEvent | self onItemsChanged: anEvent items ].
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
 	self when: BrListItemIdStencilChangedEvent do: [ :anEvent | self onItemIdStencilChanged: anEvent itemIdStencil ].
@@ -85,6 +89,14 @@ BrSimpleListAptitude >> initializeRequests [
 { #category : #'private - accessing' }
 BrSimpleListAptitude >> listElement [
 	^ listElement
+]
+
+{ #category : #'api - hooks' }
+BrSimpleListAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+
+	self listElement dataSource 
+		listModel: anElement viewModel
 ]
 
 { #category : #hooks }
@@ -113,8 +125,8 @@ BrSimpleListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder 
 ]
 
 { #category : #hooks }
-BrSimpleListAptitude >> onItemsChanged: aCollectionOfObjects [
-	self listElement dataSource rowValues: aCollectionOfObjects
+BrSimpleListAptitude >> onModelItemsChanged: anEvent [
+	self listElement dataSource notifyChanged
 ]
 
 { #category : #hooks }
@@ -133,7 +145,6 @@ BrSimpleListAptitude >> replaceListElement: anOldListElement by: aNewListElement
 
 { #category : #initialization }
 BrSimpleListAptitude >> requestListConfiguration [
-	self request: BrListItemsRequest new.
 	self request: BrSelectionRequest new.
 	self request: BrListItemTypeStencilRequest new.
 	self request: BrListItemIdStencilRequest new.

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-List - Support'
+	#category : 'Brick-List - Support'
 }
 
 { #category : #accessing }
@@ -32,7 +32,7 @@ BrColumnedListDataSource >> initialize [
 BrColumnedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 	| anItemObject eachColumnIndex |
 
-	anItemObject := self rowValues at: aPosition.
+	anItemObject := self listModel itemAt: aPosition.
 
 	eachColumnIndex := 0.
 	anElementHolder columns
