@@ -10,6 +10,11 @@ Class {
 	#category : 'Brick-List - Model'
 }
 
+{ #category : #testing }
+BrSimpleLazyListModel >> hasMoreItemsToLoad [
+	^ self itemCount < self itemsProvider totalItemsCount
+]
+
 { #category : #initialization }
 BrSimpleLazyListModel >> initialize [
 	super initialize.
@@ -19,7 +24,7 @@ BrSimpleLazyListModel >> initialize [
 
 { #category : #testing }
 BrSimpleLazyListModel >> isBoundaryNearIndex: anIndex [
-	^ anIndex < (self itemCount - 100)
+	^ self itemCount - anIndex < 10
 ]
 
 { #category : #testing }
@@ -34,7 +39,7 @@ BrSimpleLazyListModel >> itemAt: anIndex [
 	requestedItem := super itemAt: anIndex.
 	
 	(self shouldRequestNewItemsForIndex: anIndex) ifTrue: [
-		self requestNewItemsForIndex: anIndex ].
+		self requestNewItems ].
 	
 	^ requestedItem
 ]
@@ -45,14 +50,19 @@ BrSimpleLazyListModel >> itemsProvider [
 ]
 
 { #category : #accessing }
-BrSimpleLazyListModel >> itemsProvider: anObject [
-	itemsProvider := anObject
+BrSimpleLazyListModel >> itemsProvider: anItemsProvider [
+	| initialItems |
+	itemsProvider := anItemsProvider.
+	initialItems := itemsProvider totalItemsCount > 0
+		ifTrue: [ itemsProvider retrieveItemsFromIndex: 1 ]
+		ifFalse: [ #() ].
+	self items: initialItems
 ]
 
 { #category : #'api - accessing' }
-BrSimpleLazyListModel >> loadNewItemsFromLastIndex: anIndex [
-	^ self itemsProvider loadNewItemsFromLastIndex: anIndex.
-	
+BrSimpleLazyListModel >> loadNewItems [
+	^ self itemsProvider 
+		retrieveItemsFromIndex: self loadedItems size + 1
 ]
 
 { #category : #accessing }
@@ -61,24 +71,29 @@ BrSimpleLazyListModel >> loadedItems [
 ]
 
 { #category : #'api - accessing' }
-BrSimpleLazyListModel >> requestNewItemsForIndex: anIndex [
-	mutex critical: [ 
+BrSimpleLazyListModel >> requestNewItems [
+	"mutex critical: [ 
+		isRequestingItems := true.
 		currentRequest := BlTktWorkerProvider highUICPUBoundPool
-			future: [ 
-				self loadNewItemsFromLastIndex: anIndex ] ].
+			future: [ self loadNewItems ] ].
 		
 	currentRequest
 		onSuccessDo: [ :aResult | 
-			items addAll: aResult.
+			self items: items, aResult.
 			mutex critical: [ isRequestingItems := false ] ];
 		onFailureDo: [ :anException | 
-			mutex critical: [ isRequestingItems := false ] ] 
+			mutex critical: [ isRequestingItems := false ] ].
+		
+	currentRequest waitForCompletion: 10 seconds"
+	
+	self items: items, self loadNewItems
+	
 ]
 
 { #category : #testing }
 BrSimpleLazyListModel >> shouldRequestNewItemsForIndex: anIndex [
 	self isRequestingItems ifTrue: [ ^ false ].
 	
-	^ (self itemsProvider hasItemsAfterIndex: anIndex)
+	^ self hasMoreItemsToLoad
 		and: [ self isBoundaryNearIndex: anIndex ]
 ]
