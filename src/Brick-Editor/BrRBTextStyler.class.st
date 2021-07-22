@@ -209,18 +209,30 @@ BrRBTextStyler >> privateStyle: aText [
 
 { #category : #private }
 BrRBTextStyler >> resolveStyleFor: aVariableNode [
-	aVariableNode binding isUndeclared ifTrue: [
-		| var |
-		var := aVariableNode scope findVariable: [ :varS | varS name beginsWith: aVariableNode name ] ifNone: [ nil ].
-		var ifNil: [ #default ] ifNotNil: [ #incompleteIdentifier ].
-	].
-	aVariableNode binding ifNil: [^#default].
-	aVariableNode isArg ifTrue: [ ^#methodArg].
-	aVariableNode isTemp ifTrue: [ ^#tempVar].
-	aVariableNode isGlobal ifTrue: [ ^#globalVar].
-	aVariableNode isInstance ifTrue: [ ^#instVar]. 
-	aVariableNode hasIncompleteIdentifier ifTrue:[ ^#incompleteIdentifier].
-	^#invalid.
+
+	self
+		forPharo8: [ 
+			aVariableNode binding isUndeclared ifTrue: [ 
+				| var |
+				var := aVariableNode scope
+					       findVariable: [ :varS | 
+					       varS name beginsWith: aVariableNode name ]
+					       ifNone: [ nil ].
+				^ var ifNil: [ #default ] ifNotNil: [ #incompleteIdentifier ] ] ]
+		forPharo9: [ 
+			aVariableNode binding isUndeclaredVariable ifTrue: [ 
+				^ (aVariableNode scope hasBindingThatBeginsWith:
+					   aVariableNode name)
+					  ifTrue: [ #default ]
+					  ifFalse: [ #incompleteIdentifier ] ] ].
+	aVariableNode binding ifNil: [ ^ #default ].
+	aVariableNode isArgumentVariable ifTrue: [ ^ #methodArg ].
+	aVariableNode isTemp ifTrue: [ ^ #tempVar ].
+	aVariableNode isGlobal ifTrue: [ ^ #globalVar ].
+	aVariableNode isInstance ifTrue: [ ^ #instVar ].
+	aVariableNode hasIncompleteIdentifier ifTrue: [ 
+		^ #incompleteIdentifier ].
+	^ #invalid
 ]
 
 { #category : #private }
