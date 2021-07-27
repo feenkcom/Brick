@@ -1,6 +1,6 @@
 Class {
-	#name : #BrGridListAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGridListAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'items',
 		'itemElements',
@@ -12,12 +12,12 @@ Class {
 	#category : 'Brick-List - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGridListAptitude >> columnCount: aNumber [
 	listElement layoutDo: [ :l | l columnCount: aNumber ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGridListAptitude >> initialize [
 	super initialize.
 	items := #().
@@ -41,7 +41,7 @@ BrGridListAptitude >> initialize [
 		with: [ scrollableElement ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGridListAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -49,7 +49,7 @@ BrGridListAptitude >> initializeListeners [
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGridListAptitude >> itemStencilBuilder: aStencilBuilder [
 	"aStencilBuilder is expected to be a subclass of BrListRowStencil or a valuable"
 	itemStencilBuilder := aStencilBuilder asStencilBuilder: BrListRowStencilBuilder.
@@ -57,25 +57,25 @@ BrGridListAptitude >> itemStencilBuilder: aStencilBuilder [
 	self updateList
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGridListAptitude >> listElement [
 	^ listElement
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BrGridListAptitude >> onModelItemsChanged: anEvent [
 
 	items := anEvent viewModel items.
 	self updateList
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrGridListAptitude >> onSelectionChanged: aCollectionOfIndices [
 	selection := BlCompositeSelection fromIndices: aCollectionOfIndices.
 	self updateSelection
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrGridListAptitude >> updateList [
 	listElement removeChildren.
 	
@@ -89,7 +89,7 @@ BrGridListAptitude >> updateList [
 	listElement addChildren: itemElements
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrGridListAptitude >> updateSelection [
 	"itemElements withIndexDo: [ :eachItemElement :eachIndex |
 		(selection contains: eachIndex)

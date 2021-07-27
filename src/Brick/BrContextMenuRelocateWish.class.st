@@ -1,23 +1,23 @@
 Class {
-	#name : #BrContextMenuRelocateWish,
-	#superclass : #BrAnchoredRelocateWish,
+	#name : 'BrContextMenuRelocateWish',
+	#superclass : 'BrAnchoredRelocateWish',
 	#instVars : [
 		'position'
 	],
 	#category : 'Brick-Context Menu - Events'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrContextMenuRelocateWish >> asRelocation [
 	^ self position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuRelocateWish >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuRelocateWish >> position: anObject [
 	position := anObject
 ]

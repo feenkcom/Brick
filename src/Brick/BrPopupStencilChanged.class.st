@@ -1,18 +1,18 @@
 Class {
-	#name : #BrPopupStencilChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrPopupStencilChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'popupStencil'
 	],
 	#category : 'Brick-Popup - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupStencilChanged >> popupStencil [
 	^ popupStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupStencilChanged >> popupStencil: anObject [
 	popupStencil := anObject
 ]

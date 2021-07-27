@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTooltipAptitude,
-	#superclass : #BrAnchoredWithHandleAndContentAptitude,
+	#name : 'BrTooltipAptitude',
+	#superclass : 'BrAnchoredWithHandleAndContentAptitude',
 	#category : 'Brick-Tooltip - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTooltipAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -12,7 +12,7 @@ BrTooltipAptitude >> initializeListeners [
 	self when: BrTooltipContentChanged do: [ :anEvent | self content: anEvent content ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTooltipAptitude >> initializeRequests [
 	super initializeRequests.
 

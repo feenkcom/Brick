@@ -1,6 +1,6 @@
 Class {
-	#name : #BrColumnedListItemHolder,
-	#superclass : #BrListItemHolder,
+	#name : 'BrColumnedListItemHolder',
+	#superclass : 'BrListItemHolder',
 	#instVars : [
 		'columns',
 		'columnElements'
@@ -8,27 +8,27 @@ Class {
 	#category : 'Brick-List - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListItemHolder >> columnElements [
 	^ columnElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListItemHolder >> columnElements: anObject [
 	columnElements := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListItemHolder >> columns [
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnedListItemHolder >> columns: aCollectionOfBrListColumn [
 	columns := aCollectionOfBrListColumn
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListItemHolder >> initialize [
 	super initialize.
 

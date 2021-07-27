@@ -1,6 +1,6 @@
 Class {
-	#name : #BrPagerScrollbarAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrPagerScrollbarAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'pages',
 		'scrollbarElement'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Pager - Look'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 	| aPreviewElement |
 	aPageContentElement removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewResizeListener ].
@@ -33,7 +33,7 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 	^ aPreviewElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPagerScrollbarAptitude >> initialize [
 	super initialize.
 	pages := OrderedDictionary new.
@@ -49,7 +49,7 @@ BrPagerScrollbarAptitude >> initialize [
 		with: [ scrollbarElement ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPagerScrollbarAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -58,14 +58,14 @@ BrPagerScrollbarAptitude >> initializeListeners [
 	self when: BrPagerPageRemovedEvent do: [ :anEvent | self onPageRemoved: anEvent page ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPagerScrollbarAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrPagerPagesRequest new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrPagerScrollbarAptitude >> onPageAdded: aPageModel [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -78,7 +78,7 @@ BrPagerScrollbarAptitude >> onPageAdded: aPageModel [
 		self updatePagePreviews ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrPagerScrollbarAptitude >> onPageRemoved: aPageModel [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -89,7 +89,7 @@ BrPagerScrollbarAptitude >> onPageRemoved: aPageModel [
 	self updatePagePreviews
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrPagerScrollbarAptitude >> onPagesChanged: aCollectionOfModels [
 
 	self pages removeAll.
@@ -102,17 +102,17 @@ BrPagerScrollbarAptitude >> onPagesChanged: aCollectionOfModels [
 			self updatePagePreviews ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerScrollbarAptitude >> pageElements [
 	^ self pages values select: #isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerScrollbarAptitude >> pages [
 	^ pages
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrPagerScrollbarAptitude >> updatePagePreviews [
 
 	scrollbarElement removeChildren.

@@ -1,18 +1,18 @@
 Class {
-	#name : #BrScrollToWish,
-	#superclass : #BrScrollWish,
+	#name : 'BrScrollToWish',
+	#superclass : 'BrScrollWish',
 	#instVars : [
 		'position'
 	],
 	#category : 'Brick-Scrollable - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollToWish >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrScrollToWish >> position: anObject [
 	position := anObject
 ]

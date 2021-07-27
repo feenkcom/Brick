@@ -1,15 +1,15 @@
 Class {
-	#name : #BrToggleActivatedState,
-	#superclass : #BrToggleState,
+	#name : 'BrToggleActivatedState',
+	#superclass : 'BrToggleState',
 	#category : 'Brick-Toggle - States'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrToggleActivatedState >> isActivated [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrToggleActivatedState >> printOn: aStream [
 	aStream nextPutAll: 'activated'
 ]

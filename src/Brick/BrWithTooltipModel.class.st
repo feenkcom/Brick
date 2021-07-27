@@ -1,25 +1,25 @@
 Class {
-	#name : #BrWithTooltipModel,
-	#superclass : #BrWithAnchoredModel,
+	#name : 'BrWithTooltipModel',
+	#superclass : 'BrWithAnchoredModel',
 	#category : 'Brick-Tooltip - Model'
 }
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithTooltipModel >> stencilChangedEvent [
 	^ BrTooltipStencilChanged new
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithTooltipModel >> stencilRequestClass [
 	^ BrTooltipStencilRequest
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithTooltipModel >> visibleChangedEvent [
 	^ BrTooltipVisibleChanged new
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithTooltipModel >> visibleRequestClass [
 	^ BrTooltipVisibleRequest
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #BrEditableLabelShortcut,
-	#superclass : #BrEditorShortcut,
+	#name : 'BrEditableLabelShortcut',
+	#superclass : 'BrEditorShortcut',
 	#category : 'Brick-Editor - Shortcuts'
 }

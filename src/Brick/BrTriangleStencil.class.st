@@ -1,23 +1,23 @@
 Class {
-	#name : #BrTriangleStencil,
-	#superclass : #BrStencil,
+	#name : 'BrTriangleStencil',
+	#superclass : 'BrStencil',
 	#instVars : [
 		'backgroundColor'
 	],
 	#category : 'Brick-Triangle - Stencil'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTriangleStencil >> backgroundColor [
 	^ backgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTriangleStencil >> backgroundColor: anObject [
 	backgroundColor := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTriangleStencil >> create [
 	<return: #BlElement>
 
@@ -26,12 +26,12 @@ BrTriangleStencil >> create [
 		background: self backgroundColor.
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 BrTriangleStencil >> defaultBackgroundColor [
 	^ Color gray
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTriangleStencil >> initialize [
 	super initialize.
 	backgroundColor := self defaultBackgroundColor.

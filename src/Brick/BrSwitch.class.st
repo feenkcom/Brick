@@ -1,6 +1,6 @@
 Class {
-	#name : #BrSwitch,
-	#superclass : #BlElement,
+	#name : 'BrSwitch',
+	#superclass : 'BlElement',
 	#traits : 'TBrSwitchable + TBrEnableable + TBrLayoutResizable + TBrLayoutAlignable + TBrSizeAdjustable',
 	#classTraits : 'TBrSwitchable classTrait + TBrEnableable classTrait + TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait + TBrSizeAdjustable classTrait',
 	#instVars : [
@@ -10,7 +10,7 @@ Class {
 	#category : 'Brick-Switch - UI'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSwitch >> initialize [
 	super initialize.
 

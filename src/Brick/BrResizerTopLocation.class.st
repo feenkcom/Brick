@@ -1,10 +1,10 @@
 Class {
-	#name : #BrResizerTopLocation,
-	#superclass : #BrResizerLocation,
+	#name : 'BrResizerTopLocation',
+	#superclass : 'BrResizerLocation',
 	#category : 'Brick-Resizer - State'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrResizerTopLocation >> newResizerListener [
 	^ BlResizerTopListener new
 ]

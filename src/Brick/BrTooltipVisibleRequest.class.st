@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTooltipVisibleRequest,
-	#superclass : #BrAnchoredVisibleRequest,
+	#name : 'BrTooltipVisibleRequest',
+	#superclass : 'BrAnchoredVisibleRequest',
 	#category : 'Brick-Tooltip - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTooltipVisibleRequest >> responseClass [
 	^ BrTooltipVisibleChanged
 ]

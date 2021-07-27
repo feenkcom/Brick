@@ -1,40 +1,40 @@
 Class {
-	#name : #BrAnchoredDelegateReferencePoint,
-	#superclass : #BrAnchoredReferencePoint,
+	#name : 'BrAnchoredDelegateReferencePoint',
+	#superclass : 'BrAnchoredReferencePoint',
 	#instVars : [
 		'block'
 	],
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateReferencePoint class >> block: aBlock [
 	^ self new
 		block: aBlock;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateReferencePoint class >> label [
 	^ 'Delegate'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateReferencePoint >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateReferencePoint >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredDelegateReferencePoint >> from: aBounds [
 	^ block cull: aBounds
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAnchoredDelegateReferencePoint >> initialize [
 	super initialize.
 	

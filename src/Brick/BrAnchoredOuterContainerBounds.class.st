@@ -1,13 +1,13 @@
 Class {
-	#name : #BrAnchoredOuterContainerBounds,
-	#superclass : #BlBounds,
+	#name : 'BrAnchoredOuterContainerBounds',
+	#superclass : 'BlBounds',
 	#instVars : [
 		'referencePoint'
 	],
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredOuterContainerBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom referencePoint: aPoint [
 	"All topLeft, bottomRight, and absoluteReferencePoint have the same origin."
 
@@ -20,12 +20,12 @@ BrAnchoredOuterContainerBounds class >> left: aLeft top: aTop right: aRight bott
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredOuterContainerBounds >> referencePoint [
 	^ referencePoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredOuterContainerBounds >> referencePoint: anObject [
 	referencePoint := anObject
 ]

@@ -1,15 +1,15 @@
 Class {
-	#name : #BrInfiniteTreeElement,
-	#superclass : #BlInfiniteElement,
+	#name : 'BrInfiniteTreeElement',
+	#superclass : 'BlInfiniteElement',
 	#category : 'Brick-Tree - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInfiniteTreeElement >> defaultDataSource [
 	^ BrSimpleTreeDataSource new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInfiniteTreeElement >> defaultLayout [
 	^ BlInfiniteLinearLayout vertical
 ]

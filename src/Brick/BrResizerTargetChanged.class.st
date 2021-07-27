@@ -1,18 +1,18 @@
 Class {
-	#name : #BrResizerTargetChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrResizerTargetChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'targetElement'
 	],
 	#category : 'Brick-Resizer - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerTargetChanged >> targetElement [
 	^ targetElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerTargetChanged >> targetElement: anObject [
 	targetElement := anObject
 ]

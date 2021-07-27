@@ -2,22 +2,22 @@
 I am sent when icon in a view model is changed
 "
 Class {
-	#name : #BrIconChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrIconChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'icon'
 	],
 	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrIconChanged >> icon [
 	<return: #BlElement>
 
 	^ icon
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrIconChanged >> icon: anElement [
 	self
 		assert: [ anElement isNotNil ]

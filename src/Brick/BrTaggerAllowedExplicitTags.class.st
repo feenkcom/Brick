@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTaggerAllowedExplicitTags,
-	#superclass : #BrTaggerAllowedTags,
+	#name : 'BrTaggerAllowedExplicitTags',
+	#superclass : 'BrTaggerAllowedTags',
 	#instVars : [
 		'tags'
 	],
 	#category : 'Brick-Tagger - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAllowedExplicitTags >> tags [
 	^ tags
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAllowedExplicitTags >> tags: anObject [
 	tags := anObject
 ]

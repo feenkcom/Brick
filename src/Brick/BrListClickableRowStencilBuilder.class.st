@@ -1,6 +1,6 @@
 Class {
-	#name : #BrListClickableRowStencilBuilder,
-	#superclass : #BrColumnedListRowStencilBuilder,
+	#name : 'BrListClickableRowStencilBuilder',
+	#superclass : 'BrColumnedListRowStencilBuilder',
 	#instVars : [
 		'cellSpacing',
 		'padding'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrListClickableRowStencilBuilder >> buildDefault [
 	| aList anIndex |
 	aList := self listElement.
@@ -31,19 +31,19 @@ BrListClickableRowStencilBuilder >> buildDefault [
 			aList dispatchEvent: (BrSelectionDoubleClicked new selection: aList selectedIndices; sourceEvent: anEvent) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListClickableRowStencilBuilder >> cellSpacing [
 	<return: #Number>
 
 	^ cellSpacing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListClickableRowStencilBuilder >> cellSpacing: aNumber [
 	cellSpacing := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrListClickableRowStencilBuilder >> initialize [
 	super initialize.
 	
@@ -51,14 +51,14 @@ BrListClickableRowStencilBuilder >> initialize [
 	padding := BlInsets empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListClickableRowStencilBuilder >> padding [
 	<return: #BlInsets>
 
 	^ padding
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListClickableRowStencilBuilder >> padding: aBlInsets [
 	padding := aBlInsets
 ]

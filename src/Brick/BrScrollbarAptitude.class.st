@@ -1,10 +1,10 @@
 Class {
-	#name : #BrScrollbarAptitude,
-	#superclass : #BrBasicScrollbarAptitude,
+	#name : 'BrScrollbarAptitude',
+	#superclass : 'BrBasicScrollbarAptitude',
 	#category : 'Brick-Scrollbar - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollbarAptitude >> initialize [
 	super initialize.
 	

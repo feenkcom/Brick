@@ -1,5 +1,5 @@
 Class {
-	#name : #BrCollapsedEvent,
-	#superclass : #BrChangeEvent,
+	#name : 'BrCollapsedEvent',
+	#superclass : 'BrChangeEvent',
 	#category : 'Brick-! Core - Expansion'
 }

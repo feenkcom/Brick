@@ -1,6 +1,6 @@
 Class {
-	#name : #BrWithContextMenuAptitude,
-	#superclass : #BrWithAnchoredAptitude,
+	#name : 'BrWithContextMenuAptitude',
+	#superclass : 'BrWithAnchoredAptitude',
 	#instVars : [
 		'position',
 		'mouseButton',
@@ -10,17 +10,17 @@ Class {
 	#category : 'Brick-Context Menu - Look'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithContextMenuAptitude class >> anchoredAptitude [
 	^ self anchoredAptitudeClass new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithContextMenuAptitude class >> anchoredAptitudeClass [
 	^ BrContextMenuAptitude
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithContextMenuAptitude class >> content: anObject [
 	^ self stencil: [
 		BrAnchoredElement new
@@ -30,7 +30,7 @@ BrWithContextMenuAptitude class >> content: anObject [
 			yourself ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithContextMenuAptitude class >> handle: anObject content: anotherObject [
 	^ self stencil: [
 		BrAnchoredElement new
@@ -41,7 +41,7 @@ BrWithContextMenuAptitude class >> handle: anObject content: anotherObject [
 			yourself ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithContextMenuAptitude >> initialize [
 	super initialize.
 	
@@ -102,7 +102,7 @@ BrWithContextMenuAptitude >> initialize [
 		build.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithContextMenuAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -131,7 +131,7 @@ BrWithContextMenuAptitude >> initializeListeners [
 		do: [ :anEvent |  self onMouseUp: anEvent ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithContextMenuAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -139,7 +139,7 @@ BrWithContextMenuAptitude >> initializeRequests [
 	self request: BrContextMenuVisibleRequest new
 ]
 
-{ #category : #'api - context menu' }
+{ #category : 'api - context menu' }
 BrWithContextMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	"Customize the modifiers matcher in a form of [ :aBlKeyModifiers | true ] that is used
 	to test whether the context menu should be opened"
@@ -147,17 +147,17 @@ BrWithContextMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	modifiersMatcher := aBlockOrSymbol
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrWithContextMenuAptitude >> onAnchoredElementCreated: anAnchoredElement [
 	anAnchoredElement addEventHandler: hideWishHandler
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrWithContextMenuAptitude >> onAnchoredElementRemoved: anAnchoredElement [
 	anAnchoredElement removeEventHandler: hideWishHandler
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BrWithContextMenuAptitude >> onMouseUp: anEvent [
 	anEvent button = mouseButton
 		ifFalse: [ ^ self ].
@@ -174,12 +174,12 @@ BrWithContextMenuAptitude >> onMouseUp: anEvent [
 	self show
 ]
 
-{ #category : #'api - context menu' }
+{ #category : 'api - context menu' }
 BrWithContextMenuAptitude >> usePrimaryMouseButton [
 	mouseButton := BlMouseButton primary
 ]
 
-{ #category : #'api - context menu' }
+{ #category : 'api - context menu' }
 BrWithContextMenuAptitude >> useSecondaryMouseButton [
 	mouseButton := BlMouseButton secondary
 ]

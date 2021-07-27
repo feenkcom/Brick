@@ -1,5 +1,5 @@
 Class {
-	#name : #BrMaximizerElementMinimized,
-	#superclass : #BrMaximizerElementEvent,
+	#name : 'BrMaximizerElementMinimized',
+	#superclass : 'BrMaximizerElementEvent',
 	#category : 'Brick-Maximizer - Event'
 }

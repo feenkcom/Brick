@@ -1,6 +1,6 @@
 Class {
-	#name : #BrListItemElementAttached,
-	#superclass : #BlEvent,
+	#name : 'BrListItemElementAttached',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'itemElement',
 		'rowIndex',
@@ -9,32 +9,32 @@ Class {
 	#category : 'Brick-List - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemElementAttached >> itemElement [
 	^ itemElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemElementAttached >> itemElement: anObject [
 	itemElement := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemElementAttached >> rowIndex [
 	^ rowIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemElementAttached >> rowIndex: anObject [
 	rowIndex := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemElementAttached >> rowValue [
 	^ rowValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemElementAttached >> rowValue: anObject [
 	rowValue := anObject
 ]

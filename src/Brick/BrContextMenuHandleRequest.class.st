@@ -1,10 +1,10 @@
 Class {
-	#name : #BrContextMenuHandleRequest,
-	#superclass : #BrAnchoredHandleRequest,
+	#name : 'BrContextMenuHandleRequest',
+	#superclass : 'BrAnchoredHandleRequest',
 	#category : 'Brick-Context Menu - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrContextMenuHandleRequest >> responseClass [
 	^ BrContextMenuHandleChanged
 ]

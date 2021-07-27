@@ -1,6 +1,6 @@
 Class {
-	#name : #BrListModelItemsAddedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrListModelItemsAddedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'firstAddedItemIndex',
 		'addedItemsCount'
@@ -8,22 +8,22 @@ Class {
 	#category : 'Brick-List - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListModelItemsAddedEvent >> addedItemsCount [
 	^ addedItemsCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListModelItemsAddedEvent >> addedItemsCount: anInteger [
 	addedItemsCount := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListModelItemsAddedEvent >> firstAddedItemIndex [
 	^ firstAddedItemIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListModelItemsAddedEvent >> firstAddedItemIndex: anInteger [
 	firstAddedItemIndex := anInteger
 ]

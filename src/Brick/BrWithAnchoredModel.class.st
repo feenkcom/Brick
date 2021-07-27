@@ -1,6 +1,6 @@
 Class {
-	#name : #BrWithAnchoredModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrWithAnchoredModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'visible',
 		'stencil'
@@ -8,14 +8,14 @@ Class {
 	#category : 'Brick-Anchored - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithAnchoredModel >> initialize [
 	super initialize.
 	visible := false.
 	stencil := [ BlElement new ] asStencil
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrWithAnchoredModel >> initializeListeners [
 	super initializeListeners.
 	self
@@ -31,7 +31,7 @@ BrWithAnchoredModel >> initializeListeners [
 				yourself ]
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithAnchoredModel >> notifyStencilChanged [
 	self
 		dispatchEvent:
@@ -40,7 +40,7 @@ BrWithAnchoredModel >> notifyStencilChanged [
 				yourself)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithAnchoredModel >> notifyVisibleChanged [
 	self
 		dispatchEvent:
@@ -49,12 +49,12 @@ BrWithAnchoredModel >> notifyVisibleChanged [
 				yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithAnchoredModel >> stencil [
 	^ stencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithAnchoredModel >> stencil: anObject [
 	stencil = anObject
 		ifTrue: [ ^ self ].
@@ -62,22 +62,22 @@ BrWithAnchoredModel >> stencil: anObject [
 	self notifyStencilChanged
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithAnchoredModel >> stencilChangedEvent [
 	self subclassResponsibility
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithAnchoredModel >> stencilRequestClass [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithAnchoredModel >> visible [
 	^ visible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithAnchoredModel >> visible: anObject [
 	visible = anObject
 		ifTrue: [ ^ self ].
@@ -85,12 +85,12 @@ BrWithAnchoredModel >> visible: anObject [
 	self notifyVisibleChanged
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithAnchoredModel >> visibleChangedEvent [
 	self subclassResponsibility
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithAnchoredModel >> visibleRequestClass [
 	self subclassResponsibility
 ]

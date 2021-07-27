@@ -1,24 +1,24 @@
 Class {
-	#name : #BrTaggerAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrTaggerAptitude',
+	#superclass : 'BrAptitude',
 	#category : 'Brick-Tagger - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAptitude >> amountOfTags [
 	<return: #Number>
 
 	^ (self request: BrTaggerTagsRequest new oneWay) tags size
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTaggerAptitude >> initialize [
 	super initialize.
 	
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTaggerAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -29,7 +29,7 @@ BrTaggerAptitude >> initializeListeners [
 	self when: BrTaggerAllowedTagsChanged do: [ :anEvent | self onAllowedTagsChanged: anEvent allowedTags ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTaggerAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -37,22 +37,22 @@ BrTaggerAptitude >> initializeRequests [
 	self request: BrTaggerAllowedTagsRequest new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTaggerAptitude >> onAllowedTagsChanged: theAllowedTags [
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTaggerAptitude >> onTagAdded: aTaggerTag at: anIndex [
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTaggerAptitude >> onTagRemoved: aTaggerTag at: anIndex [
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTaggerAptitude >> onTagRenamed: aTaggerTag to: aNewTagName [
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTaggerAptitude >> onTagsChanged: theTags [
 ]

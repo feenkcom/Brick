@@ -1,42 +1,42 @@
 Class {
-	#name : #BrPressModel,
-	#superclass : #BrStateModel,
+	#name : 'BrPressModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'pressed'
 	],
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrPressModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrPressModel class >> modelName [
 	^ 'Press'
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BrPressModel >> dragEndEvent: anEvent [
 	anEvent consumed: true.
 	self pressed: false
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BrPressModel >> dragStartEvent: anEvent [
 	anEvent consumed: true.
 	self pressed: true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPressModel >> initialize [
 	super initialize.
 	
 	pressed := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPressModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -47,24 +47,24 @@ BrPressModel >> initializeListeners [
 	self when: BlMouseUpEvent do: [ :anEvent | self mouseUpEvent: anEvent ]
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BrPressModel >> isPressed [
 	^ pressed
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BrPressModel >> mouseDownEvent: anEvent [
 	anEvent consumed: true.
 	self pressed: true
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BrPressModel >> mouseUpEvent: anEvent [
 	anEvent consumed: true.
 	self pressed: false
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrPressModel >> pressed: aBoolean [
 	pressed = aBoolean
 		ifTrue: [ ^ self ].
@@ -73,7 +73,7 @@ BrPressModel >> pressed: aBoolean [
 	self notifyStateChanged: pressed
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrPressModel >> printOn: aStream [
 	aStream
 		nextPutAll: self modelName, '(';
@@ -81,12 +81,12 @@ BrPressModel >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
-{ #category : #streaming }
+{ #category : 'streaming' }
 BrPressModel >> stateChangedEventClass [
 	^ BrPressedChanged
 ]
 
-{ #category : #streaming }
+{ #category : 'streaming' }
 BrPressModel >> streamStateIn: aBrInteractionStatesMapping [
 	self isPressed
 		ifTrue: [ aBrInteractionStatesMapping addState: BrPressedState new model: self ]

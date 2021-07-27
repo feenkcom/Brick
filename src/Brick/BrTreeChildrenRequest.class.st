@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTreeChildrenRequest,
-	#superclass : #BrRequest,
+	#name : 'BrTreeChildrenRequest',
+	#superclass : 'BrRequest',
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTreeChildrenRequest >> responseClass [
 	^ BrTreeChildrenChanged
 ]

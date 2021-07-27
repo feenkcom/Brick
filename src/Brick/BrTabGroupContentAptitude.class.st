@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTabGroupContentAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrTabGroupContentAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'content',
 		'contentElementsCache'
@@ -8,19 +8,19 @@ Class {
 	#category : 'Brick-Tabs - Look'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupContentAptitude >> content [
 	<return: #BlElement>
 
 	^ content
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupContentAptitude >> contentDo: aBlock [
 	aBlock value: self content
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupContentAptitude >> initialize [
 	super initialize.
 
@@ -34,7 +34,7 @@ BrTabGroupContentAptitude >> initialize [
 	self addChangeAddChildAs: #(content) with: [ content ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupContentAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -44,24 +44,24 @@ BrTabGroupContentAptitude >> initializeListeners [
 	self when: BrTabStencilChangedEvent do: [ :anEvent | self onTabStencilChanged: anEvent tab ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupContentAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrSelectionRequest new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupContentAptitude >> onTabDeselected: aTabModel [
 	self widgetContent removeChildren
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupContentAptitude >> onTabRemoved: aTabModel [
 	contentElementsCache removeKey: aTabModel ifAbsent: [  ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupContentAptitude >> onTabSelected: aTabModel [
 	| aContentElement |
 	
@@ -82,7 +82,7 @@ BrTabGroupContentAptitude >> onTabSelected: aTabModel [
 	self widgetContent addChild: aContentElement "removeFromParent"
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupContentAptitude >> onTabStencilChanged: aTabModel [
 	self onTabRemoved: aTabModel.	
 	aTabModel isSelected ifTrue: [ 

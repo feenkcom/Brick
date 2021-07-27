@@ -1,6 +1,6 @@
 Class {
-	#name : #BrAnchoredSingleStrategy,
-	#superclass : #BrAnchoredStrategy,
+	#name : 'BrAnchoredSingleStrategy',
+	#superclass : 'BrAnchoredStrategy',
 	#instVars : [
 		'availableBounds',
 		'referencePoint',
@@ -11,7 +11,7 @@ Class {
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredSingleStrategy class >> anchorBounds: anAnchorBounds referencePoint: aReferencePoint availableBounds: anAvailableBounds scaleFactor: aScaleFactor apply: aBlock [
 	^ self new
 		initializeAnchorBounds: anAnchorBounds
@@ -22,19 +22,19 @@ BrAnchoredSingleStrategy class >> anchorBounds: anAnchorBounds referencePoint: a
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredSingleStrategy class >> builder [
 	^ BrAnchoredSingleStrategyBuilder new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredSingleStrategy >> availableBoundsIn: aReferenceElement forPreferredExtent: aPoint [
 	^ availableBounds
 		in: aReferenceElement bounds inLocal
 		from: (referencePoint from: (anchorBounds boundsIn: aReferenceElement))
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAnchoredSingleStrategy >> initializeAnchorBounds: anAnchorBounds referencePoint: aReferencePoint availableBounds: anAvailableBounds scaleFactor: aScaleFactor apply: aBlock [
 	self assert: [ anchorBounds isNil ].
 	self assert: [ referencePoint isNil ].
@@ -48,7 +48,7 @@ BrAnchoredSingleStrategy >> initializeAnchorBounds: anAnchorBounds referencePoin
 	apply := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredSingleStrategy >> invalidate: anElement forPreferredExtent: aPoint [
 	| bounds factor |
 	self assert: [ anElement hasParent ].

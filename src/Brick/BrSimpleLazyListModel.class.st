@@ -1,6 +1,6 @@
 Class {
-	#name : #BrSimpleLazyListModel,
-	#superclass : #BrSimpleListModel,
+	#name : 'BrSimpleLazyListModel',
+	#superclass : 'BrSimpleListModel',
 	#instVars : [
 		'itemsProvider',
 		'mutex',
@@ -10,30 +10,30 @@ Class {
 	#category : 'Brick-List - Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSimpleLazyListModel >> hasMoreItemsToLoad [
 	^ self itemCount < self itemsProvider totalItemsCount
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleLazyListModel >> initialize [
 	super initialize.
 	mutex := Mutex new.
 	isRequestingItems := false.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSimpleLazyListModel >> isBoundaryNearIndex: anIndex [
 	^ self itemCount - anIndex < 10
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSimpleLazyListModel >> isRequestingItems [
 	^ mutex critical: [ 
 		isRequestingItems ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleLazyListModel >> itemAt: anIndex [
 	| requestedItem |
 	requestedItem := super itemAt: anIndex.
@@ -44,12 +44,12 @@ BrSimpleLazyListModel >> itemAt: anIndex [
 	^ requestedItem
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleLazyListModel >> itemsProvider [
 	^ itemsProvider
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleLazyListModel >> itemsProvider: anItemsProvider [
 	| initialItems |
 	itemsProvider := anItemsProvider.
@@ -59,18 +59,18 @@ BrSimpleLazyListModel >> itemsProvider: anItemsProvider [
 	self items: initialItems
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleLazyListModel >> loadNewItems [
 	^ self itemsProvider 
 		retrieveItemsFromIndex: self loadedItems size + 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleLazyListModel >> loadedItems [ 
 	^ self items
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleLazyListModel >> requestNewItems [
 	"mutex critical: [ 
 		isRequestingItems := true.
@@ -90,7 +90,7 @@ BrSimpleLazyListModel >> requestNewItems [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSimpleLazyListModel >> shouldRequestNewItemsForIndex: anIndex [
 	self isRequestingItems ifTrue: [ ^ false ].
 	

@@ -1,19 +1,19 @@
 Class {
-	#name : #BrPagerModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrPagerModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'pages'
 	],
 	#category : 'Brick-Pager - Model'
 }
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> addPage: aPageModel [
 	self pages add: aPageModel.
 	self onPageAdded: aPageModel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrPagerModel >> hasPageAfter: aPageModel [
 	| aPageIndex |
 	aPageIndex := self pages
@@ -22,14 +22,14 @@ BrPagerModel >> hasPageAfter: aPageModel [
 	^ aPageIndex < self pages size
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPagerModel >> initialize [
 	super initialize.
 
 	pages := OrderedCollection new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrPagerModel >> initializeListeners [
 	super initializeListeners.
 
@@ -37,32 +37,32 @@ BrPagerModel >> initializeListeners [
 	self when: BrPagerPagesRequest reply: [ BrPagerPagesChanged pages: self pages ].
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrPagerModel >> notifyPageAdded: aPageModel [
 	self dispatchEvent: (BrPagerPageAddedEvent page: aPageModel)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrPagerModel >> notifyPageRemoved: aPageModel [
 	self dispatchEvent: (BrPagerPageRemovedEvent page: aPageModel)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrPagerModel >> notifyPagesChanged [
 	self dispatchEvent: (BrPagerPagesChanged pages: self pages)
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrPagerModel >> onPageAdded: aPageModel [
 	self notifyPageAdded: aPageModel
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrPagerModel >> onPageRemoved: aPageModel [
 	self notifyPageRemoved: aPageModel
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> pageAfter: aPageModel ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	| aPageIndex |
 	
@@ -75,26 +75,26 @@ BrPagerModel >> pageAfter: aPageModel ifFound: ifFoundBlock ifNone: ifNoneBlock 
 		ifFalse: [ ifNoneBlock value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerModel >> pages [
 	<return: #Collection of: #BrPagerPageModel>
 
 	^ pages
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> pages: aCollectionOfPages [
 	pages := aCollectionOfPages asOrderedCollection.
 
 	self notifyPagesChanged
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> removeAllPages [
 	self pages reverseDo: [ :eachPage | self removePage: eachPage ]
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> removePage: aPageModel [
 	| aPageIndex |
 	
@@ -102,7 +102,7 @@ BrPagerModel >> removePage: aPageModel [
 	self removePageAt: aPageIndex
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> removePageAt: aPageIndex [
 	| aPageToRemove |
 	
@@ -111,7 +111,7 @@ BrPagerModel >> removePageAt: aPageIndex [
 	self onPageRemoved: aPageToRemove
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> removePagesAfter: aPageModel [
 	| aPageIndex |
 	
@@ -125,7 +125,7 @@ BrPagerModel >> removePagesAfter: aPageModel [
 	self removePagesAfterIndex: aPageIndex + 1
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BrPagerModel >> removePagesAfterIndex: aPageIndex [
 	(self pages size to: aPageIndex by: -1) do: [ :eachIndex |
 		self removePage: (self pages at: eachIndex) ]

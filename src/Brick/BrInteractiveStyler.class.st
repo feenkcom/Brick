@@ -1,47 +1,47 @@
 Class {
-	#name : #BrInteractiveStyler,
-	#superclass : #Object,
+	#name : 'BrInteractiveStyler',
+	#superclass : 'Object',
 	#instVars : [
 		'styles'
 	],
 	#category : 'Brick-! Core - Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrInteractiveStyler class >> on: anInteractiveLook [
 	^ self new styles: anInteractiveLook styles
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrInteractiveStyler >> addState: aState action: anActionBlock [
 	self styles add: (BrInteractiveStyle new state: aState; action: anActionBlock)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractiveStyler >> initialize [
 	super initialize.
 	
 	styles := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractiveStyler >> state [
 	<return: #'BrInteractionState class'>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractiveStyler >> styles [
 	^ styles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractiveStyler >> styles: theStyles [
 	styles := theStyles
 ]
 
-{ #category : #builder }
+{ #category : 'builder' }
 BrInteractiveStyler >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	

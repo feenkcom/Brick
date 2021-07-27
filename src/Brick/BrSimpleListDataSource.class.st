@@ -1,6 +1,6 @@
 Class {
-	#name : #BrSimpleListDataSource,
-	#superclass : #BrListDataSource,
+	#name : 'BrSimpleListDataSource',
+	#superclass : 'BrListDataSource',
 	#instVars : [
 		'itemDataBinder',
 		'itemDataUnbinder'
@@ -8,19 +8,19 @@ Class {
 	#category : 'Brick-List - Support'
 }
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrSimpleListDataSource >> itemDataBinder: aBrListItemDataBinderBuilder [
 	itemDataBinder := aBrListItemDataBinderBuilder.
 	self notifyChanged
 ]
 
-{ #category : #'accessing - stencils' }
+{ #category : 'accessing - stencils' }
 BrSimpleListDataSource >> itemDataUnbinder: aBrListItemDataUnbinder [
 	itemDataUnbinder := aBrListItemDataUnbinder.
 	self notifyChanged
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListDataSource >> onBindHolder: anElementHolder at: aPosition [
 	| anItemElementWithBindedData anItemObject |
 
@@ -43,7 +43,7 @@ BrSimpleListDataSource >> onBindHolder: anElementHolder at: aPosition [
 		ifFalse: [ anElementHolder itemElement states removeState: BlElementSelectedState uniqueInstance ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 	| anItemElement |
 	
@@ -57,11 +57,11 @@ BrSimpleListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 		itemElement: anItemElement
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListDataSource >> onElementDetached: anElementHolder [
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListDataSource >> onElementRecycled: anElementHolder [
 	itemDataUnbinder
 		itemElement: anElementHolder itemElement;

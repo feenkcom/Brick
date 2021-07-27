@@ -1,10 +1,10 @@
 Class {
-	#name : #BrContextMenuVisibleRequest,
-	#superclass : #BrAnchoredVisibleRequest,
+	#name : 'BrContextMenuVisibleRequest',
+	#superclass : 'BrAnchoredVisibleRequest',
 	#category : 'Brick-Context Menu - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrContextMenuVisibleRequest >> responseClass [
 	^ BrContextMenuVisibleChanged
 ]

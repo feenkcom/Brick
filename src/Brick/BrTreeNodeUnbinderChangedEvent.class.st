@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTreeNodeUnbinderChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrTreeNodeUnbinderChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'nodeUnbinder'
 	],
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeUnbinderChangedEvent >> nodeUnbinder [
 	^ nodeUnbinder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeUnbinderChangedEvent >> nodeUnbinder: anObject [
 	nodeUnbinder := anObject
 ]

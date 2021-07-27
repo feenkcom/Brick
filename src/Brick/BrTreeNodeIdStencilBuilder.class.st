@@ -2,8 +2,8 @@
 I am a stencil builder that defines a general api of the object that should compute the id of a node in the tree.
 "
 Class {
-	#name : #BrTreeNodeIdStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTreeNodeIdStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemPosition',
 		'itemObject'
@@ -11,41 +11,41 @@ Class {
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeNodeIdStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ BlInfiniteDataSource noId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeIdStencilBuilder >> itemNode [
 	^ itemObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeIdStencilBuilder >> itemNode: anObject [
 	itemObject := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeIdStencilBuilder >> itemPosition [
 	^ itemPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeIdStencilBuilder >> itemPosition: anObject [
 	itemPosition := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTreeNodeIdStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self itemNode;
 		push: self itemPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTreeNodeIdStencilBuilder >> reset [
 	super reset.
 

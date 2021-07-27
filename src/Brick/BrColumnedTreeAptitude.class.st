@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnedTreeAptitude,
-	#superclass : #BrTreeAptitude,
+	#name : 'BrColumnedTreeAptitude',
+	#superclass : 'BrTreeAptitude',
 	#category : 'Brick-Tree - Aptitude'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedTreeAptitude >> initialize [
 	super initialize.
 
@@ -14,7 +14,7 @@ BrColumnedTreeAptitude >> initialize [
 		rowDataBinder: BrDefaultTreeRowDataBinder new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedTreeAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -28,7 +28,7 @@ BrColumnedTreeAptitude >> initializeListeners [
 		do: [ :anEvent | self onRowDataBinderChanged: anEvent rowDataBinder ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedTreeAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -37,22 +37,22 @@ BrColumnedTreeAptitude >> initializeRequests [
 	self request: BrTreeRowDataBinderRequest new.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrColumnedTreeAptitude >> onColumnsChanged: aCollectionOfBrListColumns [
 	treeElement dataSource columns: aCollectionOfBrListColumns
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrColumnedTreeAptitude >> onRowDataBinderChanged: aBrTreeRowDataBinder [
 	treeElement dataSource rowDataBinder: aBrTreeRowDataBinder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrColumnedTreeAptitude >> onRowElementStencilChanged: aBrTreeRowElementStencilBuilder [
 	treeElement dataSource rowElementStencil: aBrTreeRowElementStencilBuilder
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrColumnedTreeAptitude >> withoutSelection [
 	treeElement dataSource supportsSelection: false
 ]

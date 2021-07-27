@@ -1,5 +1,5 @@
 Class {
-	#name : #BrExpansionToggleWish,
-	#superclass : #BrWish,
+	#name : 'BrExpansionToggleWish',
+	#superclass : 'BrWish',
 	#category : 'Brick-! Core - Events'
 }

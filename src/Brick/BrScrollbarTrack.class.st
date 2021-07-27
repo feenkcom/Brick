@@ -1,5 +1,5 @@
 Class {
-	#name : #BrScrollbarTrack,
-	#superclass : #BlElement,
+	#name : 'BrScrollbarTrack',
+	#superclass : 'BlElement',
 	#category : 'Brick-Scrollbar - UI'
 }
