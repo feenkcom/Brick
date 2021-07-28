@@ -13,7 +13,7 @@ ${class:BrGlamorousVectorIcons|show=gtIconsFor:|expanded=}$
 Class {
 	#name : #BrGlamorousVectorIcons,
 	#superclass : #Object,
-	#category : #'Brick-Glamorous-Colors, Icons, Fonts'
+	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
 { #category : #icons }
@@ -71,6 +71,35 @@ BrGlamorousVectorIcons class >> cancel [
 			svg: 'M 6.487276 8.18329 L 4.354816 10.31575 L 5.7690296 11.729964 L 7.90149 9.597504 L 10.01167 11.707684 L 11.425884 10.29347 L 9.315703 8.18329 L 11.425884 6.0731096 L 10.01167 4.658896 L 7.90149 6.7690764 L 5.7690296 4.636616 L 4.354816 6.05083 Z'
 			viewbox: (0@0 extent: 16@16));
 		background: Color black ] asStencil
+]
+
+{ #category : #accessing }
+BrGlamorousVectorIcons class >> changes [
+	<script: 'self changes inspect'>
+	^ [
+		BlElement new
+			size: 64@64;
+			addChildren: { 
+				BlElement new
+					size: 24@32;
+					relocate: 10@26;
+					outskirts: BlOutskirts centered;
+					border: (BlBorder builder paint: Color black; width: 6; capSquare; build).
+				BlElement new
+					size: 64@64;
+					outskirts: BlOutskirts centered;
+					geometry: (BlSvgPath new
+						svg: 'M 20.1916 15.865 L 44.163646 15.915941 L 44.1916 47.865'
+						viewbox: (0@0 extent: 64@64));
+					border: (BlBorder builder paint: Color black; width: 5; capSquare; build).
+				BlElement new
+					size: 64@64;
+					geometry: (BlSvgPath new
+						svg: 'M 30 6 L 53.972046 6.050941 L 54 38'
+						viewbox: (0@0 extent: 64@64));
+					outskirts: BlOutskirts centered;
+					border: (BlBorder builder paint: Color black; width: 4; capSquare; build).
+			} ] asStencil
 ]
 
 { #category : #icons }
