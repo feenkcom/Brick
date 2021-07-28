@@ -1,24 +1,24 @@
 Class {
-	#name : #BrGlamorousToggleRectangularAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#name : 'BrGlamorousToggleRectangularAptitude',
+	#superclass : 'BrStyleCommonAptitude',
 	#instVars : [
 		'cornerRadius'
 	],
-	#category : #'Brick-Glamorous-Toggle - Support'
+	#category : 'Brick-Glamorous-Toggle - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousToggleRectangularAptitude >> cornerRadius [
 	^ cornerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousToggleRectangularAptitude >> cornerRadius: aNumber [
 	cornerRadius := aNumber.
 	self default geometry: (BlRoundedRectangleGeometry cornerRadius: self cornerRadius)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousToggleRectangularAptitude >> initialize [
 	super initialize.
 

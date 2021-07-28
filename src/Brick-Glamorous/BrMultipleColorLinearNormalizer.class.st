@@ -1,19 +1,19 @@
 Class {
-	#name : #BrMultipleColorLinearNormalizer,
-	#superclass : #BrGlamorousNormalizer,
+	#name : 'BrMultipleColorLinearNormalizer',
+	#superclass : 'BrGlamorousNormalizer',
 	#instVars : [
 		'normalizers'
 	],
-	#category : #'Brick-Glamorous-Normalizer'
+	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrMultipleColorLinearNormalizer class >> valueRange: anArrayOfNumbers colorRange: anArrayOfColors [
 
 	^ self new valueRange: anArrayOfNumbers colorRange: anArrayOfColors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMultipleColorLinearNormalizer >> cull: anEntity [
 
 	| value |
@@ -22,7 +22,7 @@ BrMultipleColorLinearNormalizer >> cull: anEntity [
 	^ (self detectNormalizerFor: value) cull: value
 ]
 
-{ #category : #'private-accessing' }
+{ #category : 'private-accessing' }
 BrMultipleColorLinearNormalizer >> detectNormalizerFor: aValue [
 
 	normalizers keysAndValuesDo: [:range :norm |
@@ -31,13 +31,13 @@ BrMultipleColorLinearNormalizer >> detectNormalizerFor: aValue [
 	self error: aValue asString, ' not in declared ranges'
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BrMultipleColorLinearNormalizer >> initialize [
 
 	command := #yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMultipleColorLinearNormalizer >> value: anEntity [
 
 	| value |
@@ -46,7 +46,7 @@ BrMultipleColorLinearNormalizer >> value: anEntity [
 	^ (self detectNormalizerFor: value) cull: value
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BrMultipleColorLinearNormalizer >> valueRange: anArrayOfNumbers colorRange: anArrayOfColors [
 	" {1. 2. 3} {Color red. Color yellow. Color green}"
 	

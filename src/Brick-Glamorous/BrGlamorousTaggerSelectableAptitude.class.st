@@ -1,14 +1,14 @@
 Class {
-	#name : #BrGlamorousTaggerSelectableAptitude,
-	#superclass : #BrGlamorousTaggerAptitude,
+	#name : 'BrGlamorousTaggerSelectableAptitude',
+	#superclass : 'BrGlamorousTaggerAptitude',
 	#instVars : [
 		'allowedTags',
 		'addButton'
 	],
-	#category : #'Brick-Glamorous-Tagger'
+	#category : 'Brick-Glamorous-Tagger'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrGlamorousTaggerSelectableAptitude >> addErrorOverlayTo: aTagElement [
 	| anOverlay anAnimation |
 	anOverlay := (BlOverlayElement on: aTagElement)
@@ -22,14 +22,14 @@ BrGlamorousTaggerSelectableAptitude >> addErrorOverlayTo: aTagElement [
 	tags addChild: anOverlay
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrGlamorousTaggerSelectableAptitude >> addTagCreatorElement: aTagPrototype [
 	self
 		addTagElement: (self newTagCreatorElement: aTagPrototype)
 		withSeparatorAt: tagElements size + 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTaggerSelectableAptitude >> defaultTagLabelStencil [
 	^ [ :aTag |
 		BrEditableLabel new
@@ -37,7 +37,7 @@ BrGlamorousTaggerSelectableAptitude >> defaultTagLabelStencil [
 			text: aTag name ] asStencilBuilder: BrTaggerTagStencilBuilder
 ]
 
-{ #category : #'hooks - errors' }
+{ #category : 'hooks - errors' }
 BrGlamorousTaggerSelectableAptitude >> handleAcceptError: anError from: aTagCreatorElement [
 	anError description traceCr.
 
@@ -46,14 +46,14 @@ BrGlamorousTaggerSelectableAptitude >> handleAcceptError: anError from: aTagCrea
 	self addErrorOverlayTo: aTagCreatorElement
 ]
 
-{ #category : #'hooks - errors' }
+{ #category : 'hooks - errors' }
 BrGlamorousTaggerSelectableAptitude >> handleRemoveError: anError from: aTagElement [
 	anError description traceCr.
 
 	self addErrorOverlayTo: aTagElement
 ]
 
-{ #category : #'hooks - errors' }
+{ #category : 'hooks - errors' }
 BrGlamorousTaggerSelectableAptitude >> handleRenameError: anError to: aNewName from: aTagElement [
 	anError description traceCr.
 
@@ -68,7 +68,7 @@ BrGlamorousTaggerSelectableAptitude >> handleRenameError: anError to: aNewName f
 	self addErrorOverlayTo: aTagElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTaggerSelectableAptitude >> initialize [
 	super initialize.
 	
@@ -76,14 +76,14 @@ BrGlamorousTaggerSelectableAptitude >> initialize [
 	tags addChild: (addButton := self newAddTagButton).
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newAddAllowedTagsChooser: aCollectionOfTags [
 	^ self
 		newAllowedTagsChooser: aCollectionOfTags
 		whenChosen:  [ :aTagPrototype | self addTagCreatorElement: aTagPrototype ]
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newAddAnyTagButton [
 	"Create an add button that instantiates tags of any type"
 	<return: #BrButton>
@@ -95,7 +95,7 @@ BrGlamorousTaggerSelectableAptitude >> newAddAnyTagButton [
 			action: [ :anEvent | self addTagCreatorElement: (BrTaggerTag new) ])
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newAddExplicitTagButton [
 	| aDropdownLook |
 	
@@ -112,14 +112,14 @@ BrGlamorousTaggerSelectableAptitude >> newAddExplicitTagButton [
 		addAptitude: aDropdownLook
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newAddTagButton [
 	^ allowedTags isAnyAllowed
 		ifTrue: [ self newAddAnyTagButton ]
 		ifFalse: [ self newAddExplicitTagButton ]
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newAllowedTagsChooser: aCollectionOfTags whenChosen: aChosenBlock [
 	^ BrSimpleList new
 		itemStencil: [ BrButton new
@@ -142,7 +142,7 @@ BrGlamorousTaggerSelectableAptitude >> newAllowedTagsChooser: aCollectionOfTags 
 		vFitContent
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newBasicAddTagButton [
 	^ BrButton new
 		aptitude:
@@ -179,7 +179,7 @@ BrGlamorousTaggerSelectableAptitude >> newBasicAddTagButton [
 						previousSiblingDo: [ :anElement | anElement requestFocus ] ])
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newTagCreatorElement: aTagPrototype [
 	| aNewTagCreator aNewTagEditor |
 
@@ -215,7 +215,7 @@ BrGlamorousTaggerSelectableAptitude >> newTagCreatorElement: aTagPrototype [
 	^ aNewTagCreator
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newTagElementFor: aTaggerTag [
 	<return: #BlElement>
 	| aNewTagContainer aTagEditorElement aTagPrototypeChangerButton |
@@ -256,13 +256,13 @@ BrGlamorousTaggerSelectableAptitude >> newTagElementFor: aTaggerTag [
 	^ aNewTagContainer
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrGlamorousTaggerSelectableAptitude >> onAllowedTagsChanged: theAllowedTags [
 	allowedTags := theAllowedTags.
 	tags replaceChild: addButton with: (addButton := self newAddTagButton)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrGlamorousTaggerSelectableAptitude >> removeTagCreatorElement: aTagCreatorElement withSeparatorAt: aTagIndex [
 	| aSeparatorIndex |
 
@@ -273,7 +273,7 @@ BrGlamorousTaggerSelectableAptitude >> removeTagCreatorElement: aTagCreatorEleme
 		ifTrue: [ tags removeChildAt: aSeparatorIndex ]
 ]
 
-{ #category : #'api - requests' }
+{ #category : 'api - requests' }
 BrGlamorousTaggerSelectableAptitude >> requestAddTag: aTaggerTag from: aTagCreatorElement [
 	"I request the tagger to add a new tag while handling possible errors"
 	
@@ -287,7 +287,7 @@ BrGlamorousTaggerSelectableAptitude >> requestAddTag: aTaggerTag from: aTagCreat
 		do: [ :anError | self handleAcceptError: anError from: aTagCreatorElement ]
 ]
 
-{ #category : #'api - requests' }
+{ #category : 'api - requests' }
 BrGlamorousTaggerSelectableAptitude >> requestRemoveTag: aTaggerTag from: aTagCreatorElement [
 	
 	[
@@ -300,7 +300,7 @@ BrGlamorousTaggerSelectableAptitude >> requestRemoveTag: aTaggerTag from: aTagCr
 				from: aTagCreatorElement ]
 ]
 
-{ #category : #'api - requests' }
+{ #category : 'api - requests' }
 BrGlamorousTaggerSelectableAptitude >> requestRenameTag: aTaggerTag to: aNewName from: aTagElement [
 	[
 		aTagElement text: aTaggerTag name.

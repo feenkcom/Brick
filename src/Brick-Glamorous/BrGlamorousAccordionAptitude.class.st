@@ -15,8 +15,8 @@ accordion addChildFirst: header.
 accordion.
 "
 Class {
-	#name : #BrGlamorousAccordionAptitude,
-	#superclass : #BrAccordionAptitude,
+	#name : 'BrGlamorousAccordionAptitude',
+	#superclass : 'BrAccordionAptitude',
 	#instVars : [
 		'contentContainer',
 		'bar',
@@ -25,27 +25,27 @@ Class {
 		'headerBar',
 		'contentBar'
 	],
-	#category : #'Brick-Glamorous-Accordion'
+	#category : 'Brick-Glamorous-Accordion'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAccordionAptitude >> contentBarWidth [
 	^ 10
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAccordionAptitude >> headerBar [
 	<return: #BlElement>
 
 	^ headerBar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAccordionAptitude >> headerBarWidth [
 	^ 10
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousAccordionAptitude >> initialize [
 	super initialize.
 	wrapper := self newWrapper.
@@ -91,7 +91,7 @@ BrGlamorousAccordionAptitude >> initialize [
 				inherit: [ :aBlock | aBlock value: (contentElement ifNil: [ BlElement new ]) ])
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionAptitude >> newBar [
 	<return: #BlElement>
 
@@ -102,7 +102,7 @@ BrGlamorousAccordionAptitude >> newBar [
 			c vertical matchParent ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionAptitude >> newContentBar [
 	<return: #BlElement>
 
@@ -111,14 +111,14 @@ BrGlamorousAccordionAptitude >> newContentBar [
 		margin: (BlInsets left: (self headerBarWidth - self contentBarWidth))
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionAptitude >> newContentContainer [
 	<return: #BlElement>
 
 	^ BlElement new layout: BlLinearLayout horizontal
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionAptitude >> newHeaderBar [
 	<return: #BlElement>
 
@@ -126,7 +126,7 @@ BrGlamorousAccordionAptitude >> newHeaderBar [
 		width: self headerBarWidth
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionAptitude >> newHeaderContainer [
 	<return: #BlElement>
 
@@ -137,7 +137,7 @@ BrGlamorousAccordionAptitude >> newHeaderContainer [
 			c vertical fitContent ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionAptitude >> newWrapper [
 	<return: #BlElement>
 

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousRegularEditorAptitude,
-	#superclass : #BrGlamorousEditorAptitude,
-	#category : #'Brick-Glamorous-Editor'
+	#name : 'BrGlamorousRegularEditorAptitude',
+	#superclass : 'BrGlamorousEditorAptitude',
+	#category : 'Brick-Glamorous-Editor'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousRegularEditorAptitude >> initialize [
 	super initialize.
 

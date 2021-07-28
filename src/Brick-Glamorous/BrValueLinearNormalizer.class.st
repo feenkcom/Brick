@@ -1,14 +1,14 @@
 Class {
-	#name : #BrValueLinearNormalizer,
-	#superclass : #BrLinearNormalizer,
+	#name : 'BrValueLinearNormalizer',
+	#superclass : 'BrLinearNormalizer',
 	#instVars : [
 		'minScale',
 		'maxScale'
 	],
-	#category : #'Brick-Glamorous-Normalizer'
+	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BrValueLinearNormalizer >> initialize [
 
 	super initialize.
@@ -16,38 +16,38 @@ BrValueLinearNormalizer >> initialize [
 	maxScale := 1.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrValueLinearNormalizer >> maxScale [
 
 	^maxScale.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrValueLinearNormalizer >> maxScale: aValue [
 
 	^maxScale := aValue.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrValueLinearNormalizer >> minScale [
 
 	^minScale.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrValueLinearNormalizer >> minScale: aValue [
 
 	minScale := aValue.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrValueLinearNormalizer >> slope: anEntity [
 	^ (maxScale - minScale)
 		/
 			(self maximumValue asFloat - (self minimumValue: anEntity) asFloat)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrValueLinearNormalizer >> value: anEntity [
 	"Normalize value based on minimum and maximum value."
 

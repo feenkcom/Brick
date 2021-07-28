@@ -1,14 +1,14 @@
 Class {
-	#name : #BrGlamorousWithMaximizerAptitude,
-	#superclass : #BrWithMaximizerAptitude,
+	#name : 'BrGlamorousWithMaximizerAptitude',
+	#superclass : 'BrWithMaximizerAptitude',
 	#instVars : [
 		'actionButton',
 		'showMaximizeButton'
 	],
-	#category : #'Brick-Glamorous-Maximizer'
+	#category : 'Brick-Glamorous-Maximizer'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousWithMaximizerAptitude >> createActionButton [
 	^ BrButton new
 		background: Color white;
@@ -22,13 +22,13 @@ BrGlamorousWithMaximizerAptitude >> createActionButton [
 		size: 16@16
 ]
 
-{ #category : #'api - visibility' }
+{ #category : 'api - visibility' }
 BrGlamorousWithMaximizerAptitude >> hideMaximizeButton [
 	showMaximizeButton := false.
 	actionButton visibility: BlVisibility gone
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousWithMaximizerAptitude >> initialize [
 	super initialize.
 
@@ -49,14 +49,14 @@ BrGlamorousWithMaximizerAptitude >> initialize [
 	self addChangeProperty: #(widget clipChildren) with: false
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrGlamorousWithMaximizerAptitude >> onMaximized [
 	super onMaximized.
 
 	actionButton visibility: BlVisibility gone
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrGlamorousWithMaximizerAptitude >> onMinimized [
 	super onMinimized.
 
@@ -65,7 +65,7 @@ BrGlamorousWithMaximizerAptitude >> onMinimized [
 	actionButton visibility: BlVisibility visible
 ]
 
-{ #category : #'api - visibility' }
+{ #category : 'api - visibility' }
 BrGlamorousWithMaximizerAptitude >> showMaximizeButton [
 	showMaximizeButton := true.
 	

@@ -2,12 +2,12 @@
 I am a text attribute that adds a small expand button that when clicked may apply further attributes on the text
 "
 Class {
-	#name : #BrGlamorousTrangleExpanderTextAttribute,
-	#superclass : #BrTextExpandButtonAttribute,
-	#category : #'Brick-Glamorous'
+	#name : 'BrGlamorousTrangleExpanderTextAttribute',
+	#superclass : 'BrTextExpandButtonAttribute',
+	#category : 'Brick-Glamorous'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousTrangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| aToggle |
 

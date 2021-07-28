@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousMaximizerFullscreenHostAptitude,
-	#superclass : #BrMaximizerHostAptitude,
-	#category : #'Brick-Glamorous-Maximizer'
+	#name : 'BrGlamorousMaximizerFullscreenHostAptitude',
+	#superclass : 'BrMaximizerHostAptitude',
+	#category : 'Brick-Glamorous-Maximizer'
 }
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrGlamorousMaximizerFullscreenHostAptitude >> createCloseButton [
 	^ BrButton new
 		aptitude: BrGlamorousButtonCircularAptitude + BrGlamorousButtonIconAptitude + BrGlamorousButtonFlatExteriorAptitude + BrGlamorousButtonLayoutAptitude;
@@ -20,7 +20,7 @@ BrGlamorousMaximizerFullscreenHostAptitude >> createCloseButton [
 			c margin: (BlInsets top: 5) ]
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrGlamorousMaximizerFullscreenHostAptitude >> onMaximize: aMaximizeWish [
 	| anElementToMaximize aHostElement originalHorizontalResizingStrategy originalVerticalResizingStrategy previousHorizontalResizerState previousVerticalResizerState originalPosition containerElement closeButton |
 	

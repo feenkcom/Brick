@@ -1,39 +1,39 @@
 Class {
-	#name : #BrGlamorousAnchoredAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGlamorousAnchoredAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'background',
 		'cornerRadius'
 	],
-	#category : #'Brick-Glamorous-Anchored'
+	#category : 'Brick-Glamorous-Anchored'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAnchoredAptitude >> background [
 	^ background
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAnchoredAptitude >> background: aBlBackground [
 	background := aBlBackground.
 	self widgetDo: [ :aWidget | aWidget background: background ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAnchoredAptitude >> cornerRadius [
 	<return: #Number>
 
 	^ cornerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAnchoredAptitude >> cornerRadius: aNumber [
 	cornerRadius := aNumber.
 	
 	self widgetDo: [ :aWidget | aWidget geometry: (BrAnchoredGeometry cornerRadius: aNumber element: aWidget) ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAnchoredAptitude >> initialize [
 	super initialize.
 	background := Color white.

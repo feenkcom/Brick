@@ -1,21 +1,21 @@
 Class {
-	#name : #BrGlamorousEditableLabelAptitude,
-	#superclass : #BrGlamorousEditorAptitude,
+	#name : 'BrGlamorousEditableLabelAptitude',
+	#superclass : 'BrGlamorousEditorAptitude',
 	#instVars : [
 		'defaultBackground',
 		'defaultForeground',
 		'minWidth',
 		'styleLook'
 	],
-	#category : #'Brick-Glamorous-Editor'
+	#category : 'Brick-Glamorous-Editor'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditableLabelAptitude >> defaultBackground [
 	^ defaultBackground
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditableLabelAptitude >> defaultBackground: anObject [
 	defaultBackground := anObject.
 	styleLook 
@@ -25,17 +25,17 @@ BrGlamorousEditableLabelAptitude >> defaultBackground: anObject [
 			style: [ :aStyle | aStyle background: self defaultBackground darker ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditableLabelAptitude >> defaultForeground [
 	^ defaultForeground
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditableLabelAptitude >> defaultForeground: anObject [
 	defaultForeground := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousEditableLabelAptitude >> initialize [
 	super initialize.
 	defaultBackground := self theme status neutralBackgroundColor.
@@ -71,19 +71,19 @@ BrGlamorousEditableLabelAptitude >> initialize [
 						after: [ self foreground: self defaultForeground ] ])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousEditableLabelAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BlClickEvent do: [ :anEvent | anEvent currentTarget dispatchEvent: (BlElementSelectedStateWish selected: true) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditableLabelAptitude >> minWidth [
 	^ minWidth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditableLabelAptitude >> minWidth: anObject [
 	minWidth := anObject
 ]

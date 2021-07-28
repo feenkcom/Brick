@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousBreadcrumbAptitude,
-	#superclass : #BrBreadcrumbLinearAptitude,
-	#category : #'Brick-Glamorous-Breadcrumb'
+	#name : 'BrGlamorousBreadcrumbAptitude',
+	#superclass : 'BrBreadcrumbLinearAptitude',
+	#category : 'Brick-Glamorous-Breadcrumb'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousBreadcrumbAptitude >> initialize [
 	super initialize.
 	self add: BrLayoutResizerAptitude inherit.

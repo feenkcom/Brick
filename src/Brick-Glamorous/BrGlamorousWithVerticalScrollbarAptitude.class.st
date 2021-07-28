@@ -3,15 +3,15 @@
 Is designed to add a vertical ${class:BrScrollbar}$ to a widget with a ${class:TBlScrollable}$ content. Due to the fact that the scrollbar should be above the scrollable content it should be added """"after"""" a look that adds a scrollable content.
 "
 Class {
-	#name : #BrGlamorousWithVerticalScrollbarAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGlamorousWithVerticalScrollbarAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'scrollbar'
 	],
-	#category : #'Brick-Glamorous-Scrollbar'
+	#category : 'Brick-Glamorous-Scrollbar'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousWithVerticalScrollbarAptitude >> initialize [
 	super initialize.
 
@@ -28,12 +28,12 @@ BrGlamorousWithVerticalScrollbarAptitude >> initialize [
 	self addChangeAddChildAs: #(content verticalScrollbar) with: [ self updateScrollable. scrollbar ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrGlamorousWithVerticalScrollbarAptitude >> scrollable [
 	^ self widget childNamed: #scrollable
 ]
 
-{ #category : #'private - updating' }
+{ #category : 'private - updating' }
 BrGlamorousWithVerticalScrollbarAptitude >> updateScrollable [
 	scrollbar scrollable: self scrollable.
 ]

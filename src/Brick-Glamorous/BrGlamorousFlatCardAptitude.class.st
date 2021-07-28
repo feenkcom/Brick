@@ -1,9 +1,9 @@
 Class {
-	#name : #BrGlamorousFlatCardAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Glamorous-Card'
+	#name : 'BrGlamorousFlatCardAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Glamorous-Card'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFlatCardAptitude >> initialize [
 ]

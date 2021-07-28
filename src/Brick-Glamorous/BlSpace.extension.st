@@ -1,6 +1,6 @@
-Extension { #name : #BlSpace }
+Extension { #name : 'BlSpace' }
 
-{ #category : #'*Brick-Glamorous' }
+{ #category : '*Brick-Glamorous' }
 BlSpace >> withGlamorousFullscreenMaxizimerHost [
 	self root addAptitude: BrGlamorousMaximizerFullscreenHostAptitude
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousWithLabelTooltipAptitude,
-	#superclass : #BrWithTooltipAptitude,
-	#category : #'Brick-Glamorous-Buttons'
+	#name : 'BrGlamorousWithLabelTooltipAptitude',
+	#superclass : 'BrWithTooltipAptitude',
+	#category : 'Brick-Glamorous-Buttons'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 	^ BrLabel new
 		aptitude: BrGlamorousLabelAptitude;
@@ -12,7 +12,7 @@ BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 		padding: (BlInsets all: 5)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousWithLabelTooltipAptitude >> text: aTextOrString [
 	self
 		stencil: [ BrAnchoredElement new

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousLinkSquaredButtonWithLabelAndIconAptitude,
-	#superclass : #BrGlamorousLinkSquaredButtonWithLabelAptitude,
-	#category : #'Brick-Glamorous-Buttons'
+	#name : 'BrGlamorousLinkSquaredButtonWithLabelAndIconAptitude',
+	#superclass : 'BrGlamorousLinkSquaredButtonWithLabelAptitude',
+	#category : 'Brick-Glamorous-Buttons'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousLinkSquaredButtonWithLabelAndIconAptitude >> initialize [
 
 	super initialize.

@@ -1,20 +1,20 @@
 Class {
-	#name : #BrGlamorousAccordionWithBorderAptitude,
-	#superclass : #BrGlamorousAccordionAptitude,
+	#name : 'BrGlamorousAccordionWithBorderAptitude',
+	#superclass : 'BrGlamorousAccordionAptitude',
 	#instVars : [
 		'headerTopBorder',
 		'contentBottomBorder',
 		'rightBorder'
 	],
-	#category : #'Brick-Glamorous-Accordion'
+	#category : 'Brick-Glamorous-Accordion'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAccordionWithBorderAptitude >> borderWidth [
 	^ 3
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousAccordionWithBorderAptitude >> initialize [
 	super initialize.
 
@@ -32,7 +32,7 @@ BrGlamorousAccordionWithBorderAptitude >> initialize [
 			] ] }
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionWithBorderAptitude >> newContentBottomBorder [
 	<return: #BlElement>
 
@@ -50,7 +50,7 @@ BrGlamorousAccordionWithBorderAptitude >> newContentBottomBorder [
 				c vertical exact: self borderWidth ])
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionWithBorderAptitude >> newHeaderTopBorder [
 	<return: #BlElement>
 
@@ -67,7 +67,7 @@ BrGlamorousAccordionWithBorderAptitude >> newHeaderTopBorder [
 				c vertical exact: self borderWidth ])
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousAccordionWithBorderAptitude >> newRightBorder [
 	<return: #BlElement>
 

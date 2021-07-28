@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousSpaceTabWithIconAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Glamorous-Tabs - Space'
+	#name : 'BrGlamorousSpaceTabWithIconAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Glamorous-Tabs - Space'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousSpaceTabWithIconAptitude >> initialize [
 	super initialize.
 	

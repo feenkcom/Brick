@@ -1,13 +1,13 @@
 Class {
-	#name : #BrGlamorousAccordionHeaderAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGlamorousAccordionHeaderAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'labelLook'
 	],
-	#category : #'Brick-Glamorous-Accordion'
+	#category : 'Brick-Glamorous-Accordion'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousAccordionHeaderAptitude >> initialize [
 	super initialize.
 	self

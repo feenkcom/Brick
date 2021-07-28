@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousTextLabelAptitude,
-	#superclass : #BrTextLabelAptitude,
-	#category : #'Brick-Glamorous-Label'
+	#name : 'BrGlamorousTextLabelAptitude',
+	#superclass : 'BrTextLabelAptitude',
+	#category : 'Brick-Glamorous-Label'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTextLabelAptitude >> initialize [
 	super initialize.
 

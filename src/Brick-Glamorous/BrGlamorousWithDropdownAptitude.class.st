@@ -3,12 +3,12 @@
 Adds the dropdown functionality to an element
 "
 Class {
-	#name : #BrGlamorousWithDropdownAptitude,
-	#superclass : #BrWithDropdownAptitude,
-	#category : #'Brick-Glamorous-Dropdown'
+	#name : 'BrGlamorousWithDropdownAptitude',
+	#superclass : 'BrWithDropdownAptitude',
+	#category : 'Brick-Glamorous-Dropdown'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousWithDropdownAptitude class >> anchoredAptitudeClass [
 	^ BrGlamorousDropdownAptitude
 ]

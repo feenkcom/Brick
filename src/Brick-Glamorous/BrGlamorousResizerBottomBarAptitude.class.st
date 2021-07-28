@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousResizerBottomBarAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Glamorous-Resizer'
+	#name : 'BrGlamorousResizerBottomBarAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Glamorous-Resizer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousResizerBottomBarAptitude >> initialize [
 	super initialize.
 	self

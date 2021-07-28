@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousWithContextMenuAptitude,
-	#superclass : #BrWithContextMenuAptitude,
-	#category : #'Brick-Glamorous-Context Menu'
+	#name : 'BrGlamorousWithContextMenuAptitude',
+	#superclass : 'BrWithContextMenuAptitude',
+	#category : 'Brick-Glamorous-Context Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousWithContextMenuAptitude class >> anchoredAptitudeClass [
 	^ BrGlamorousContextMenuAptitude
 ]

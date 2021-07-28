@@ -12,20 +12,20 @@ ${example:BrExamplesShowroom>>#glamorousTabsSwitcherWithIcons|codeExpanded=false
 
 "
 Class {
-	#name : #BrGlamorousTabGroupSwitcherAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGlamorousTabGroupSwitcherAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'headerLook'
 	],
-	#category : #'Brick-Glamorous-Tabs - Switcher'
+	#category : 'Brick-Glamorous-Tabs - Switcher'
 }
 
-{ #category : #'api - style' }
+{ #category : 'api - style' }
 BrGlamorousTabGroupSwitcherAptitude >> headerBackground: aBackground [
 	headerLook headerDo: [ :aHeaderElement | aHeaderElement background: aBackground ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTabGroupSwitcherAptitude >> initialize [
 	super initialize.
 
@@ -45,7 +45,7 @@ BrGlamorousTabGroupSwitcherAptitude >> initialize [
 	self addChangeProperty: #(widget layout) with: [ BlLinearLayout vertical ].
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousTabGroupSwitcherAptitude >> newHeaderLook [
 	^ BrGlamorousTabGroupSwitcherHeaderAptitude new
 ]

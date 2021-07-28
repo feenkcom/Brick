@@ -1,16 +1,16 @@
 Class {
-	#name : #BrColorLinearNormalizer,
-	#superclass : #BrLinearNormalizer,
+	#name : 'BrColorLinearNormalizer',
+	#superclass : 'BrLinearNormalizer',
 	#instVars : [
 		'minBrightness',
 		'maxBrightness',
 		'lowColor',
 		'highColor'
 	],
-	#category : #'Brick-Glamorous-Normalizer'
+	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor highColor: highColor [
 	
 	| normalizer |
@@ -20,7 +20,7 @@ BrColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor highC
 	^normalizer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor lowThreshold: lowThreshold highColor: highColor highThreshold: highThreshold [
 	
 	| normalizer |
@@ -32,7 +32,7 @@ BrColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor lowTh
 	^normalizer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock lowColor: lowColor highColor: highColor [
 	
 	| normalizer |
@@ -42,7 +42,7 @@ BrColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock lowC
 	^normalizer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock lowColor: lowColor lowThreshold: lowThreshold highColor: highColor highThreshold: highThreshold [
 	
 	| normalizer |
@@ -54,7 +54,7 @@ BrColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock lowC
 	^normalizer
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrColorLinearNormalizer >> blend: aColor with: aColorValue weight: wt [
 	"Answer a new ColorValue which is a weighted blend of the receiver and the
 	supplied ColorValue."
@@ -70,19 +70,19 @@ BrColorLinearNormalizer >> blend: aColor with: aColorValue weight: wt [
 	^Color r: rv g: gv b: bv alpha: av
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColorLinearNormalizer >> highColor: aBlock [
 	
 	highColor := aBlock
 ]
 
-{ #category : #'translator protocol' }
+{ #category : 'translator protocol' }
 BrColorLinearNormalizer >> highColorFor: anEntity [
 	
 	^ highColor
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BrColorLinearNormalizer >> initialize [
 	
 	super initialize.
@@ -90,25 +90,25 @@ BrColorLinearNormalizer >> initialize [
 	highColor := Color black
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColorLinearNormalizer >> lowColor: aBlock [
 	
 	lowColor := aBlock
 ]
 
-{ #category : #'translator protocol' }
+{ #category : 'translator protocol' }
 BrColorLinearNormalizer >> lowColorFor: anEntity [
 	
 	^lowColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColorLinearNormalizer >> maxBrightness: aBlock [
 	
 	maxBrightness := aBlock
 ]
 
-{ #category : #'translator protocol' }
+{ #category : 'translator protocol' }
 BrColorLinearNormalizer >> maxBrightnessFor: anEntity [
 	
 	^maxBrightness isNil
@@ -116,13 +116,13 @@ BrColorLinearNormalizer >> maxBrightnessFor: anEntity [
 		ifFalse: [maxBrightness cull: anEntity]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColorLinearNormalizer >> minBrightness: aBlock [
 	
 	minBrightness := aBlock
 ]
 
-{ #category : #'translator protocol' }
+{ #category : 'translator protocol' }
 BrColorLinearNormalizer >> minBrightnessFor: anEntity [
 	
 	^minBrightness isNil
@@ -130,7 +130,7 @@ BrColorLinearNormalizer >> minBrightnessFor: anEntity [
 		ifFalse: [minBrightness cull: anEntity]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColorLinearNormalizer >> value: anEntity [
 	"Calculates the color of the entity based on the context."
 

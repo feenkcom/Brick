@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousWithMaximizerLook,
-	#superclass : #BrGlamorousWithMaximizerAptitude,
-	#category : #'Brick-Glamorous-Maximizer'
+	#name : 'BrGlamorousWithMaximizerLook',
+	#superclass : 'BrGlamorousWithMaximizerAptitude',
+	#category : 'Brick-Glamorous-Maximizer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousWithMaximizerLook class >> isDeprecated [
 	^ true
 ]

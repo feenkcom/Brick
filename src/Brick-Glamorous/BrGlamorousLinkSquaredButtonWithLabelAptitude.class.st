@@ -9,29 +9,29 @@ aWidget look:
 ]]]
 "
 Class {
-	#name : #BrGlamorousLinkSquaredButtonWithLabelAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGlamorousLinkSquaredButtonWithLabelAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'labelLook'
 	],
-	#category : #'Brick-Glamorous-Buttons'
+	#category : 'Brick-Glamorous-Buttons'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousLinkSquaredButtonWithLabelAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ labelLook attributesBuilder
 ]
 
-{ #category : #'api - text font' }
+{ #category : 'api - text font' }
 BrGlamorousLinkSquaredButtonWithLabelAptitude >> fontSize: aNumber [
 	labelLook fontSize: aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousLinkSquaredButtonWithLabelAptitude >> initialize [
 	super initialize.
 	

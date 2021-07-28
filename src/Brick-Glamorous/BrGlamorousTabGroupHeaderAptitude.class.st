@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousTabGroupHeaderAptitude,
-	#superclass : #BrTabGroupHeaderWithToolbarAptitude,
-	#category : #'Brick-Glamorous-Tabs - Support'
+	#name : 'BrGlamorousTabGroupHeaderAptitude',
+	#superclass : 'BrTabGroupHeaderWithToolbarAptitude',
+	#category : 'Brick-Glamorous-Tabs - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTabGroupHeaderAptitude >> initialize [
 	super initialize.
 	

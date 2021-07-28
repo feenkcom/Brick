@@ -4,8 +4,8 @@ I define colors used for Glamorous Toolkit.
 Here is the list of available colors: ${class:BrGlamorousColors|show=gtColorsFor:|expanded=true}$
 "
 Class {
-	#name : #BrGlamorousColors,
-	#superclass : #SharedPool,
+	#name : 'BrGlamorousColors',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'ActiveColor',
 		'BackdropColor',
@@ -48,120 +48,120 @@ Class {
 		'TextHighlightColor',
 		'TextMarkupColor'
 	],
-	#category : #'Brick-Glamorous-Colors, Icons, Fonts'
+	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> backdropColor [
 	^ BackdropColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> darkBorderColor [
 	^ DarkBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> darkBorderColor: anObject [
 	DarkBorderColor := anObject
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BrGlamorousColors class >> defaultButtonBackgroundColor [
 	^ ButtonBackgroundColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BrGlamorousColors class >> defaultButtonBackgroundColor: anObject [
 	ButtonBackgroundColor := anObject
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> defaultButtonBorderColor [
 	^ ButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> defaultButtonBorderColor: anObject [
 	ButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> defaultButtonTextColor [
 	^ ButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> defaultButtonTextColor: anObject [
 	ButtonTextColor := anObject
 ]
 
-{ #category : #'header - background' }
+{ #category : 'header - background' }
 BrGlamorousColors class >> defaultHeaderBackgroundColor [
 	^ HeaderBackgroundColor
 ]
 
-{ #category : #'header - text' }
+{ #category : 'header - text' }
 BrGlamorousColors class >> defaultHeaderTextColor [
 	^ HeaderTextColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> defaultListItemColor [
 	^ self deselectedListItemColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> defaultShadowColor [
 	^ ShadowColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> deselectedListItemColor [
 	^ DeselectedListItemBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> deselectedtListItemColor: aColor [
 	DeselectedListItemBackgroundColor := aColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BrGlamorousColors class >> disabledButtonBackgroundColor [
 	^ DisabledButtonBackgroundColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BrGlamorousColors class >> disabledButtonBackgroundColor: anObject [
 	DisabledButtonBackgroundColor := anObject
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> disabledButtonBorderColor [
 	^ DisabledButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> disabledButtonBorderColor: anObject [
 	DisabledButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> disabledButtonTextColor [
 	^ DisabledButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> disabledButtonTextColor: anObject [
 	DisabledButtonTextColor := anObject
 ]
 
-{ #category : #'header - text' }
+{ #category : 'header - text' }
 BrGlamorousColors class >> disabledHeaderTextColor [
 	^ DisabledHeaderTextColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> distinctTenLightColors [
 	"This is a list of 10 light colors that can be distinguished b
 	the typical human eye even when seen together in the same picture.
@@ -222,7 +222,7 @@ BrGlamorousColors class >> distinctTenLightColors [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> distinctTenStrongColors [
 	"This is a list of 10 light colors that can be distinguished b
 	the typical human eye even when seen together in the same picture.
@@ -243,102 +243,102 @@ BrGlamorousColors class >> distinctTenStrongColors [
 			yourself
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BrGlamorousColors class >> editorBorderColor [
 	^ EditorBorderColor
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BrGlamorousColors class >> editorBorderColor: anObject [
 	EditorBorderColor := anObject
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> errorBackgroundColor [
 	^ ErrorBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> errorBackgroundColor: aColor [
 	ErrorBackgroundColor := aColor
 ]
 
-{ #category : #'status - border' }
+{ #category : 'status - border' }
 BrGlamorousColors class >> errorBorderColor [
 	^ ErrorBorderColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> expandCollapseTriangleBackgroundColor [
 	^ ExpandCollapseTriangleBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> expandCollapseTriangleBackgroundColor: aColor [
 	ExpandCollapseTriangleBackgroundColor := aColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> failureBackgroundColor [
 	^ FailureBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> failureBackgroundColor: aColor [
 	FailureBackgroundColor := aColor
 ]
 
-{ #category : #'status - border' }
+{ #category : 'status - border' }
 BrGlamorousColors class >> failureBorderColor [
 	^ FailureBorderColor
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BrGlamorousColors class >> focusedEditorBorderColor [
 	^ FocusedEditorBorderColor
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BrGlamorousColors class >> focusedEditorBorderColor: anObject [
 	FocusedEditorBorderColor := anObject
 ]
 
-{ #category : #'list and tree items - border' }
+{ #category : 'list and tree items - border' }
 BrGlamorousColors class >> focusedListItemBorder [
 	^ self primaryBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> hoveredButtonBorderColor [
 	^ HoveredButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> hoveredButtonBorderColor: anObject [
 	HoveredButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> hoveredButtonTextColor [
 	^ HoveredButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> hoveredButtonTextColor: anObject [
 	HoveredButtonTextColor := anObject
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> hoveredListItemColor [
 	^ HoveredListItemBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> hoveredListItemColor: aColor [
 	HoveredListItemBackgroundColor := aColor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousColors class >> initialize [
 	LightBorderColor := Color fromHexString: #d9d9d9.
 	DarkBorderColor := Color darkGray.
@@ -406,127 +406,127 @@ BrGlamorousColors class >> initialize [
 	LinkWithErrorColor := Color fromHexString: #cf1322.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> lightBorderColor [
 	^ LightBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> lightBorderColor: anObject [
 	LightBorderColor := anObject
 ]
 
-{ #category : #links }
+{ #category : 'links' }
 BrGlamorousColors class >> linkColor [
 	^ LinkColor
 ]
 
-{ #category : #links }
+{ #category : 'links' }
 BrGlamorousColors class >> linkWithErrorColor [
 	^ LinkWithErrorColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> neutralBackgroundColor [
 	^ NeutralBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> newsBackgroundColor [
 	^ NewsBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> paleErrorBackgroundColor [
 	^ PaleErrorBackgroundColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> pressedButtonBorderColor [
 	^ PressedButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> pressedButtonBorderColor: anObject [
 	PressedButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> pressedButtonTextColor [
 	^ PressedButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BrGlamorousColors class >> pressedButtonTextColor: anObject [
 	PressedButtonTextColor := anObject
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> pressedListItemColor [
 	^ PressedListItemBackgroundColor 
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> pressedListItemColor: aColor [
 	PressedListItemBackgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> primaryBorderColor [
 	^ PrimaryBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> primaryBorderColor: anObject [
 	PrimaryBorderColor := anObject
 ]
 
-{ #category : #'header - background' }
+{ #category : 'header - background' }
 BrGlamorousColors class >> secondaryHeaderBackgroundColor [
 	^ SecondaryHeaderBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> selectedListItemColor [
 	^ SelectedListItemBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BrGlamorousColors class >> selectedListItemColor: aColor [
 	SelectedListItemBackgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousColors class >> shadowColor [
 	^ ShadowColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> successBackgroundColor [
 	^ SuccessBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BrGlamorousColors class >> successBackgroundColor: aColor [
 	SuccessBackgroundColor := aColor
 ]
 
-{ #category : #'status - border' }
+{ #category : 'status - border' }
 BrGlamorousColors class >> successBorderColor [
 	^ SuccessBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> textHighlightColor [
 	^ TextHighlightColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BrGlamorousColors class >> textHighlightColor: anObject [
 	TextHighlightColor := anObject
 ]
 
-{ #category : #'header - text' }
+{ #category : 'header - text' }
 BrGlamorousColors class >> textMarkupColor [
 	^ TextMarkupColor
 ]

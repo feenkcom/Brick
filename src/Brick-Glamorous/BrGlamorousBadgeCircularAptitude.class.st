@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousBadgeCircularAptitude,
-	#superclass : #BrStyleCommonAptitude,
-	#category : #'Brick-Glamorous-Badge'
+	#name : 'BrGlamorousBadgeCircularAptitude',
+	#superclass : 'BrStyleCommonAptitude',
+	#category : 'Brick-Glamorous-Badge'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousBadgeCircularAptitude >> initialize [
 	super initialize.
 

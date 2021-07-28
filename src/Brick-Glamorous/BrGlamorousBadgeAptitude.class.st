@@ -1,13 +1,13 @@
 Class {
-	#name : #BrGlamorousBadgeAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#name : 'BrGlamorousBadgeAptitude',
+	#superclass : 'BrStyleCommonAptitude',
 	#instVars : [
 		'contentContainer'
 	],
-	#category : #'Brick-Glamorous-Badge'
+	#category : 'Brick-Glamorous-Badge'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousBadgeAptitude >> initialize [
 	super initialize.
 

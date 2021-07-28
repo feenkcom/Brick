@@ -1,29 +1,29 @@
 Class {
-	#name : #BrNumberLinearNormalizer,
-	#superclass : #BrLinearNormalizer,
+	#name : 'BrNumberLinearNormalizer',
+	#superclass : 'BrLinearNormalizer',
 	#instVars : [
 		'scale'
 	],
-	#category : #'Brick-Glamorous-Normalizer'
+	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrNumberLinearNormalizer >> initialize [
 	super initialize.
 	scale := 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrNumberLinearNormalizer >> scale [
 	^ scale
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrNumberLinearNormalizer >> scale: anObject [
 	scale := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrNumberLinearNormalizer >> value: anEntity [
 	"Normalize value based on maximum value."
 

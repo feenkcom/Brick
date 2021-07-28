@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousToggleBackgroundAptitude,
-	#superclass : #BrToggleAptitude,
-	#category : #'Brick-Glamorous-Toggle - Support'
+	#name : 'BrGlamorousToggleBackgroundAptitude',
+	#superclass : 'BrToggleAptitude',
+	#category : 'Brick-Glamorous-Toggle - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousToggleBackgroundAptitude >> initialize [
 	super initialize.
 	self

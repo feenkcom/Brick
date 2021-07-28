@@ -2,24 +2,24 @@
 I define the rectangular exterior of the button
 "
 Class {
-	#name : #BrGlamorousButtonRectangularAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#name : 'BrGlamorousButtonRectangularAptitude',
+	#superclass : 'BrStyleCommonAptitude',
 	#instVars : [
 		'cornerRadius',
 		'paddingScale',
 		'heightScale'
 	],
-	#category : #'Brick-Glamorous-Buttons - Support'
+	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousButtonRectangularAptitude class >> paddingScale: aPaddingScale [
 	^ self basicNew
 		setPaddingScale: aPaddingScale;
 		initialize
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousButtonRectangularAptitude class >> paddingScale: aPaddingScale heightScale: aHeightScale [
 	^ self basicNew
 		setPaddingScale: aPaddingScale;
@@ -27,7 +27,7 @@ BrGlamorousButtonRectangularAptitude class >> paddingScale: aPaddingScale height
 		initialize
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrGlamorousButtonRectangularAptitude class >> paddingScale: aPaddingScale heightScale: aHeightScale cornerRadius: aCornerRadius [
 	^ self basicNew
 		setPaddingScale: aPaddingScale;
@@ -36,18 +36,18 @@ BrGlamorousButtonRectangularAptitude class >> paddingScale: aPaddingScale height
 		initialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonRectangularAptitude >> cornerRadius [
 	^ cornerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonRectangularAptitude >> cornerRadius: aNumber [
 	cornerRadius := aNumber.
 	self default geometry: (BlRoundedRectangleGeometry cornerRadius: self cornerRadius)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousButtonRectangularAptitude >> initialize [
 	| miniPadding tinyPadding smallPadding normalPadding largePadding hugePadding miniHeight tinyHeight smallHeight normalHeight largeHeight hugeHeight |
 	super initialize.
@@ -101,17 +101,17 @@ BrGlamorousButtonRectangularAptitude >> initialize [
 	self add: BrGlamorousButtonLayoutAptitude new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousButtonRectangularAptitude >> setCornerRadius: aNumber [
 	cornerRadius := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousButtonRectangularAptitude >> setHeightScale: aNumber [
 	heightScale := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousButtonRectangularAptitude >> setPaddingScale: aNumber [
 	paddingScale := aNumber
 ]

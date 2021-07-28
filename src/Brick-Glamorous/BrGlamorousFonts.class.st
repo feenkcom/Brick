@@ -40,15 +40,15 @@ BrGlamorousFonts load: './Source Code Pro italic.ttf' as: 'sourceCodeProItalic'.
 ]]]
 "
 Class {
-	#name : #BrGlamorousFonts,
-	#superclass : #Object,
+	#name : 'BrGlamorousFonts',
+	#superclass : 'Object',
 	#classInstVars : [
 		'fontsCache'
 	],
-	#category : #'Brick-Glamorous-Colors, Icons, Fonts'
+	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrGlamorousFonts class >> fontNamed: aFontFileName fromFolderNamed: aFontFolderName [
 	fontsCache ifNil: [ fontsCache := Dictionary new ].
 	^ fontsCache 
@@ -57,45 +57,45 @@ BrGlamorousFonts class >> fontNamed: aFontFileName fromFolderNamed: aFontFolderN
 				aFileStream contents ] ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrGlamorousFonts class >> fontsFolder [
 	"Determine the fonts folder. Should work both for releaser and in development mode when the repository is present."
 	<return: #FileReference>
 	^ GtResourcesUtility default resourceAtPath: Path * 'feenkcom' / 'Brick' / 'data' / 'fonts'
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrGlamorousFonts class >> fontsSourceCodeProFolderName [
 	^ 'Source_Code_Pro'
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrGlamorousFonts class >> fontsSourceSansProFolderName [
 	^ 'Source_Sans_Pro' 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFonts class >> initialize [
 	self startUp: true.
 
 	SessionManager default registerUserClassNamed: self name
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFonts class >> initializeFonts [
 	<script: 'self initializeFonts'>
 
 	self initializeFontsOn: Bloc preferableSpartaCanvas offscreen.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFonts class >> initializeFontsOn: aCanvas [
 
 	self initializeSourceCodeProOn: aCanvas.
 	self initializeSourceSansProOn: aCanvas
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFonts class >> initializeSourceCodeProOn: aCanvas [
 
 	aCanvas fontFace
@@ -211,7 +211,7 @@ BrGlamorousFonts class >> initializeSourceCodeProOn: aCanvas [
 		build
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFonts class >> initializeSourceSansProOn: aCanvas [
 
 	aCanvas fontFace
@@ -311,137 +311,137 @@ BrGlamorousFonts class >> initializeSourceSansProOn: aCanvas [
 		build
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro200ExtraLight [
 	^ self fontNamed: 'Source Code Pro 200.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro200italicExtraLight [
 	^ self fontNamed: 'Source Code Pro 200italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro300Light [
 	^ self fontNamed: 'Source Code Pro 300.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro300italicLight [
 	^ self fontNamed: 'Source Code Pro 300italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro400Regular [
 	^ self fontNamed: 'Source Code Pro regular.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro400italicRegular [
 	^ self fontNamed: 'Source Code Pro italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro500Medium [
 	^ self fontNamed: 'Source Code Pro 500.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro500italicMedium [
 	^ self fontNamed: 'Source Code Pro 500italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro600Semibold [
 	^ self fontNamed: 'Source Code Pro 600.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro600italicSemibold [
 	^ self fontNamed: 'Source Code Pro 600italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro700Bold [
 	^ self fontNamed: 'Source Code Pro 700.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro700italicBold [
 	^ self fontNamed: 'Source Code Pro 700italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro900Black [
 	^ self fontNamed: 'Source Code Pro 900.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source code pro' }
+{ #category : 'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro900italicBlack [
 	^ self fontNamed: 'Source Code Pro 900italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro200ExtraLight [
 	^ self fontNamed: 'Source Sans Pro 200.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro200italicExtraLight [
 	^ self fontNamed: 'Source Sans Pro 200italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro300Light [
 	^ self fontNamed: 'Source Sans Pro 300.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro300italicLight [
 	^ self fontNamed: 'Source Sans Pro 300italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro400Regular [
 	^ self fontNamed: 'Source Sans Pro regular.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro400italicRegular [
 	^ self fontNamed: 'Source Sans Pro italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro600Semibold [
 	^ self fontNamed: 'Source Sans Pro 600.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro600italicSemibold [
 	^ self fontNamed: 'Source Sans Pro 600italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro700Bold [
 	^ self fontNamed: 'Source Sans Pro 700.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro700italicBold [
 	^ self fontNamed: 'Source Sans Pro 700italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro900Black [
 	^ self fontNamed: 'Source Sans Pro 900.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #'fonts - source sans pro' }
+{ #category : 'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro900italicBlack [
 	^ self fontNamed: 'Source Sans Pro 900italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousFonts class >> startUp: isImageStarting [
 	"Pharo is starting up. If this platform requires specific intialization, this is a great place to put it."
 	isImageStarting

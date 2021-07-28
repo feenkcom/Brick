@@ -8,15 +8,15 @@ The following example will desplay the preview for about 3 seconds: ${example:Br
 
 "
 Class {
-	#name : #BrGlamorousAsyncElementProgressPreviewStencil,
-	#superclass : #BlAsyncElementPreviewStencil,
+	#name : 'BrGlamorousAsyncElementProgressPreviewStencil',
+	#superclass : 'BlAsyncElementPreviewStencil',
 	#instVars : [
 		'label'
 	],
-	#category : #'Brick-Glamorous-Async Preview'
+	#category : 'Brick-Glamorous-Async Preview'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrGlamorousAsyncElementProgressPreviewStencil >> create [
 	^ BrFrame new
 		matchParent;
@@ -24,24 +24,24 @@ BrGlamorousAsyncElementProgressPreviewStencil >> create [
 		addChild: self newProgress
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousAsyncElementProgressPreviewStencil >> initialize [
 	super initialize.
 	
 	label := 'Rendering...'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAsyncElementProgressPreviewStencil >> label [
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousAsyncElementProgressPreviewStencil >> label: anObject [
 	label := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrGlamorousAsyncElementProgressPreviewStencil >> newProgress [
 	^ BrProgress new 
 		fixedLabel: self label asRopedText;

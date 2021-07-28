@@ -1,13 +1,13 @@
 Class {
-	#name : #BrGlamorousTabAptitude,
-	#superclass : #BrTabAptitude,
+	#name : 'BrGlamorousTabAptitude',
+	#superclass : 'BrTabAptitude',
 	#instVars : [
 		'bar'
 	],
-	#category : #'Brick-Glamorous-Tabs'
+	#category : 'Brick-Glamorous-Tabs'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTabAptitude >> initialize [
 	super initialize.
 	self add: (BrGlamorousTextLabelAptitude new foreground: Color black).

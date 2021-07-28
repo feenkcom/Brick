@@ -4,24 +4,24 @@ I display a progress bar with text above.
 See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
 "
 Class {
-	#name : #BrGlamorousProgressWithLabelAndBarAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrGlamorousProgressWithLabelAndBarAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'labelLook'
 	],
-	#category : #'Brick-Glamorous-Progress'
+	#category : 'Brick-Glamorous-Progress'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousProgressWithLabelAndBarAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ labelLook attributesBuilder
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousProgressWithLabelAndBarAptitude >> initialize [
 	super initialize.
 	

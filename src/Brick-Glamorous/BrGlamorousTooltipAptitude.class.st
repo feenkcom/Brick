@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousTooltipAptitude,
-	#superclass : #BrTooltipAptitude,
-	#category : #'Brick-Glamorous-Tooltip'
+	#name : 'BrGlamorousTooltipAptitude',
+	#superclass : 'BrTooltipAptitude',
+	#category : 'Brick-Glamorous-Tooltip'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTooltipAptitude >> initialize [
 	super initialize.
 	self add: BrGlamorousAnchoredAptitude

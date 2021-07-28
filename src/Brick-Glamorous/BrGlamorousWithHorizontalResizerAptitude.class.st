@@ -1,22 +1,22 @@
 Class {
-	#name : #BrGlamorousWithHorizontalResizerAptitude,
-	#superclass : #BrGlamorousWithResizerAptitude,
-	#category : #'Brick-Glamorous-Resizer'
+	#name : 'BrGlamorousWithHorizontalResizerAptitude',
+	#superclass : 'BrGlamorousWithResizerAptitude',
+	#category : 'Brick-Glamorous-Resizer'
 }
 
-{ #category : #'api - location' }
+{ #category : 'api - location' }
 BrGlamorousWithHorizontalResizerAptitude >> beLeft [
 
 	resizer beLeft
 ]
 
-{ #category : #'api - location' }
+{ #category : 'api - location' }
 BrGlamorousWithHorizontalResizerAptitude >> beRight [
 
 	resizer beRight
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousWithHorizontalResizerAptitude >> initialize [
 	super initialize.
 

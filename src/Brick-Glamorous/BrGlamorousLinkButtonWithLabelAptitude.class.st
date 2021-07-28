@@ -2,12 +2,12 @@
 I define a link button that represents a link (in a text document).
 "
 Class {
-	#name : #BrGlamorousLinkButtonWithLabelAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Glamorous-Buttons'
+	#name : 'BrGlamorousLinkButtonWithLabelAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Glamorous-Buttons'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousLinkButtonWithLabelAptitude >> initialize [
 	super initialize.
 	

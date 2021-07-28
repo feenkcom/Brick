@@ -1,22 +1,22 @@
 Class {
-	#name : #BrGlamorousEditorSpacingAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Glamorous-Editor'
+	#name : 'BrGlamorousEditorSpacingAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Glamorous-Editor'
 }
 
-{ #category : #'focus handlers' }
+{ #category : 'focus handlers' }
 BrGlamorousEditorSpacingAptitude >> blurEvent: anEvent [
 	self widgetContent
 		border: (BlBorder paint: self theme editor borderColor width: 1)
 ]
 
-{ #category : #'focus handlers' }
+{ #category : 'focus handlers' }
 BrGlamorousEditorSpacingAptitude >> focusEvent: anEvent [
 	self widgetContent
 		border: (BlBorder paint: self theme editor focusedBorderColor width: 1)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousEditorSpacingAptitude >> initialize [
 	super initialize.
 	self
@@ -27,7 +27,7 @@ BrGlamorousEditorSpacingAptitude >> initialize [
 		with: [ BlBorder paint: self theme editor borderColor width: 1 ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousEditorSpacingAptitude >> initializeListeners [
 	super initializeListeners.
 	

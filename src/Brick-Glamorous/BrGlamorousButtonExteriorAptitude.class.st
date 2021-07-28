@@ -1,20 +1,20 @@
 Class {
-	#name : #BrGlamorousButtonExteriorAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#name : 'BrGlamorousButtonExteriorAptitude',
+	#superclass : 'BrStyleCommonAptitude',
 	#instVars : [
 		'backgroundPaint',
 		'borderWidth',
 		'borderPaint'
 	],
-	#category : #'Brick-Glamorous-Buttons - Support'
+	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonExteriorAptitude >> backgroundPaint [
 	^ backgroundPaint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonExteriorAptitude >> backgroundPaint: aPaint [
 	backgroundPaint := aPaint.
 	
@@ -22,12 +22,12 @@ BrGlamorousButtonExteriorAptitude >> backgroundPaint: aPaint [
 		background: self backgroundPaint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonExteriorAptitude >> borderPaint [
 	^ borderPaint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonExteriorAptitude >> borderPaint: aColor [
 	borderPaint := aColor.
 	
@@ -35,17 +35,17 @@ BrGlamorousButtonExteriorAptitude >> borderPaint: aColor [
 		border: (BlBorder paint: self borderPaint width: self borderWidth)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonExteriorAptitude >> borderWidth [
 	^ borderWidth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousButtonExteriorAptitude >> borderWidth: anInteger [
 	borderWidth := anInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousButtonExteriorAptitude >> initialize [
 	super initialize.
 	backgroundPaint := self theme button defaultBackgroundColor.

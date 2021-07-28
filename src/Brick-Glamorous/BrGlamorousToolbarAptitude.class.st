@@ -2,22 +2,22 @@
 I am a horizontal toolbar look
 "
 Class {
-	#name : #BrGlamorousToolbarAptitude,
-	#superclass : #BrToolbarAptitude,
+	#name : 'BrGlamorousToolbarAptitude',
+	#superclass : 'BrToolbarAptitude',
 	#instVars : [
 		'spacing'
 	],
-	#category : #'Brick-Glamorous-Toolbar'
+	#category : 'Brick-Glamorous-Toolbar'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BrGlamorousToolbarAptitude class >> horizontal [
 	self deprecated: 'Use #new instead' transformWith: '`@receiver horizontal' -> '`@receiver new'.
 	
 	^ self new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousToolbarAptitude >> initialize [
 	super initialize.
 	
@@ -30,12 +30,12 @@ BrGlamorousToolbarAptitude >> initialize [
 		with: [ BlLinearLayout horizontal cellSpacing: spacing ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousToolbarAptitude >> spacing [
 	^ spacing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousToolbarAptitude >> spacing: aNumber [
 	spacing := aNumber.
 	

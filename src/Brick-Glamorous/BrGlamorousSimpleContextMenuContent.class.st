@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousSimpleContextMenuContent,
-	#superclass : #BrSimpleList,
-	#category : #'Brick-Glamorous-Context Menu'
+	#name : 'BrGlamorousSimpleContextMenuContent',
+	#superclass : 'BrSimpleList',
+	#category : 'Brick-Glamorous-Context Menu'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousSimpleContextMenuContent >> initialize [
 	super initialize.
 	self

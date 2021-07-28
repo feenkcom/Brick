@@ -5,12 +5,12 @@ I am used by ${class:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabLook}$ wher
 
 "
 Class {
-	#name : #BrGlamorousTabGroupSwitcherHeaderWithHiddenSelectedTabAptitude,
-	#superclass : #BrGlamorousTabGroupSwitcherHeaderAptitude,
-	#category : #'Brick-Glamorous-Tabs - Switcher'
+	#name : 'BrGlamorousTabGroupSwitcherHeaderWithHiddenSelectedTabAptitude',
+	#superclass : 'BrGlamorousTabGroupSwitcherHeaderAptitude',
+	#category : 'Brick-Glamorous-Tabs - Switcher'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrGlamorousTabGroupSwitcherHeaderWithHiddenSelectedTabAptitude >> onTabDeselected: aBrTabModel [ 
 	| anAssoc |
 	super onTabDeselected: aBrTabModel.
@@ -25,7 +25,7 @@ BrGlamorousTabGroupSwitcherHeaderWithHiddenSelectedTabAptitude >> onTabDeselecte
 		self tabbar addChildren: self tabElements ].
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrGlamorousTabGroupSwitcherHeaderWithHiddenSelectedTabAptitude >> onTabSelected: aTabModel [
 	| anAssoc |
 	super onTabSelected: aTabModel.

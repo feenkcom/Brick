@@ -2,12 +2,12 @@
 I define how a link (with a label) looks inside of a text, for example font size, family name, weight etc
 "
 Class {
-	#name : #BrGlamorousLinkButtonLabelAptitude,
-	#superclass : #BrTextLabelAptitude,
-	#category : #'Brick-Glamorous-Buttons - Support'
+	#name : 'BrGlamorousLinkButtonLabelAptitude',
+	#superclass : 'BrTextLabelAptitude',
+	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousLinkButtonLabelAptitude >> initialize [
 	super initialize.
 

@@ -2,27 +2,27 @@
 I define the rectangular exterior of the link button.
 "
 Class {
-	#name : #BrGlamorousLinkButtonExteriorAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#name : 'BrGlamorousLinkButtonExteriorAptitude',
+	#superclass : 'BrStyleCommonAptitude',
 	#instVars : [
 		'backgroundPaint'
 	],
-	#category : #'Brick-Glamorous-Buttons - Support'
+	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousLinkButtonExteriorAptitude >> backgroundPaint [
 	^ backgroundPaint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousLinkButtonExteriorAptitude >> backgroundPaint: anObject [
 	backgroundPaint := anObject.
 	
 	self default background: self backgroundPaint.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousLinkButtonExteriorAptitude >> initialize [
 	super initialize.
 	backgroundPaint := self theme button disabledBackgroundColor.

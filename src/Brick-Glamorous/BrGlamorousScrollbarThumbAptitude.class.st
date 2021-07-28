@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousScrollbarThumbAptitude,
-	#superclass : #BrStyleCommonAptitude,
-	#category : #'Brick-Glamorous-Scrollbar'
+	#name : 'BrGlamorousScrollbarThumbAptitude',
+	#superclass : 'BrStyleCommonAptitude',
+	#category : 'Brick-Glamorous-Scrollbar'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousScrollbarThumbAptitude >> initialize [
 	super initialize.
 	self

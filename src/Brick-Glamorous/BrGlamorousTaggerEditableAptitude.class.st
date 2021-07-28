@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousTaggerEditableAptitude,
-	#superclass : #BrGlamorousTaggerAptitude,
-	#category : #'Brick-Glamorous-Tagger'
+	#name : 'BrGlamorousTaggerEditableAptitude',
+	#superclass : 'BrGlamorousTaggerAptitude',
+	#category : 'Brick-Glamorous-Tagger'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrGlamorousTaggerEditableAptitude >> addErrorOverlayTo: aTagElement [
 	| anOverlay anAnimation |
 	anOverlay := (BlOverlayElement on: aTagElement)
@@ -18,14 +18,14 @@ BrGlamorousTaggerEditableAptitude >> addErrorOverlayTo: aTagElement [
 	tags addChild: anOverlay
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrGlamorousTaggerEditableAptitude >> addTagCreatorElement [
 	self
 		addTagElement: self newTagCreatorElement
 		withSeparatorAt: tagElements size + 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTaggerEditableAptitude >> defaultTagLabelStencil [
 	^ [ :aTag |
 		BrEditableLabel new
@@ -33,7 +33,7 @@ BrGlamorousTaggerEditableAptitude >> defaultTagLabelStencil [
 			text: aTag name ] asStencilBuilder: BrTaggerTagStencilBuilder
 ]
 
-{ #category : #'hooks - errors' }
+{ #category : 'hooks - errors' }
 BrGlamorousTaggerEditableAptitude >> handleAcceptError: anError from: aTagCreatorElement [
 	anError description traceCr.
 
@@ -42,14 +42,14 @@ BrGlamorousTaggerEditableAptitude >> handleAcceptError: anError from: aTagCreato
 	self addErrorOverlayTo: aTagCreatorElement
 ]
 
-{ #category : #'hooks - errors' }
+{ #category : 'hooks - errors' }
 BrGlamorousTaggerEditableAptitude >> handleRemoveError: anError from: aTagElement [
 	anError description traceCr.
 
 	self addErrorOverlayTo: aTagElement
 ]
 
-{ #category : #'hooks - errors' }
+{ #category : 'hooks - errors' }
 BrGlamorousTaggerEditableAptitude >> handleRenameError: anError to: aNewName from: aTagElement [
 	anError description traceCr.
 
@@ -64,14 +64,14 @@ BrGlamorousTaggerEditableAptitude >> handleRenameError: anError to: aNewName fro
 	self addErrorOverlayTo: aTagElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousTaggerEditableAptitude >> initialize [
 	super initialize.
 	
 	tags addChild: self newAddTagButton
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerEditableAptitude >> newAddTagButton [
 	^ BrButton new
 		aptitude:
@@ -113,7 +113,7 @@ BrGlamorousTaggerEditableAptitude >> newAddTagButton [
 				action: [ :anEvent | self addTagCreatorElement ])
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerEditableAptitude >> newTagCreatorElement [
 	| aNewTagCreator |
 
@@ -140,7 +140,7 @@ BrGlamorousTaggerEditableAptitude >> newTagCreatorElement [
 	^ aNewTagCreator
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrGlamorousTaggerEditableAptitude >> newTagElementFor: aTaggerTag [
 	<return: #BlElement>
 
@@ -157,7 +157,7 @@ BrGlamorousTaggerEditableAptitude >> newTagElementFor: aTaggerTag [
 					from: aShortcutEvent currentTarget ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrGlamorousTaggerEditableAptitude >> removeTagCreatorElement: aTagCreatorElement withSeparatorAt: aTagIndex [
 	| aSeparatorIndex |
 
@@ -168,7 +168,7 @@ BrGlamorousTaggerEditableAptitude >> removeTagCreatorElement: aTagCreatorElement
 		ifTrue: [ tags removeChildAt: aSeparatorIndex ]
 ]
 
-{ #category : #'api - requests' }
+{ #category : 'api - requests' }
 BrGlamorousTaggerEditableAptitude >> requestAddTag: aTaggerTag from: aTagCreatorElement [
 	"I request the tagger to add a new tag while handling possible errors"
 	
@@ -182,7 +182,7 @@ BrGlamorousTaggerEditableAptitude >> requestAddTag: aTaggerTag from: aTagCreator
 		do: [ :anError | self handleAcceptError: anError from: aTagCreatorElement ]
 ]
 
-{ #category : #'api - requests' }
+{ #category : 'api - requests' }
 BrGlamorousTaggerEditableAptitude >> requestRemoveTag: aTaggerTag from: aTagCreatorElement [
 	
 	[
@@ -195,7 +195,7 @@ BrGlamorousTaggerEditableAptitude >> requestRemoveTag: aTaggerTag from: aTagCrea
 				from: aTagCreatorElement ]
 ]
 
-{ #category : #'api - requests' }
+{ #category : 'api - requests' }
 BrGlamorousTaggerEditableAptitude >> requestRenameTag: aTaggerTag to: aNewName from: aTagElement [	
 	[
 		aTagElement text: aTaggerTag name.
