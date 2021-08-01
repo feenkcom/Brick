@@ -423,7 +423,7 @@ BrTextEditorOperator >> isCursorOnTheFirstLine: aCursor [
 BrTextEditorOperator >> isCursorOnTheLastLine: aCursor [
 	<return: #Boolean>
 
-	^ (self findLineEndAfter: (aCursor position max: self text isNotEmpty asBit)) = self text size
+	^ (self findLineEndAfter: (aCursor position + 1 max: self text isNotEmpty asBit)) = self text size
 ]
 
 { #category : #testing }

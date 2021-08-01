@@ -413,6 +413,45 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk_full [
 	^ anEditor
 ]
 
+{ #category : #accessing }
+BrTextEditorNavigatorExamples >> cursor_is_not_on_last_line [
+	<gtExample>
+	| anEditor aNavigator |
+	anEditor := self editorOnMultilineText.
+	aNavigator := anEditor editor navigator 
+		moveTo: 186; 
+		apply;
+		unsubscribe.
+	self assert: (aNavigator isCursorOnTheLastLine: anEditor editor cursors cursors anyOne) not.
+	^ anEditor
+]
+
+{ #category : #accessing }
+BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_at_the_end [
+	<gtExample>
+	| anEditor aNavigator |
+	anEditor := self editorOnMultilineText.
+	aNavigator := anEditor editor navigator 
+		moveTo: 202; 
+		apply;
+		unsubscribe.
+	self assert: (aNavigator isCursorOnTheLastLine: anEditor editor cursors cursors anyOne).
+	^ anEditor
+]
+
+{ #category : #accessing }
+BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_before_the_first_character [
+	<gtExample>
+	| anEditor aNavigator |
+	anEditor := self editorOnMultilineText.
+	aNavigator := anEditor editor navigator 
+		moveTo: 187; 
+		apply;
+		unsubscribe.
+	self assert: (aNavigator isCursorOnTheLastLine: anEditor editor cursors cursors anyOne).
+	^ anEditor
+]
+
 { #category : #'examples - move down' }
 BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	<gtExample>
