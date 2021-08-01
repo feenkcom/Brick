@@ -10,6 +10,16 @@ Class {
 }
 
 { #category : #accessing }
+BrDevLookArtifactReference >> aptitudeClass [
+	^ lookClass
+]
+
+{ #category : #accessing }
+BrDevLookArtifactReference >> aptitudeClass: anObject [
+	lookClass := anObject
+]
+
+{ #category : #accessing }
 BrDevLookArtifactReference >> artifact [
 	^ artifact
 ]
@@ -17,16 +27,6 @@ BrDevLookArtifactReference >> artifact [
 { #category : #accessing }
 BrDevLookArtifactReference >> artifact: anObject [
 	artifact := anObject
-]
-
-{ #category : #accessing }
-BrDevLookArtifactReference >> lookClass [
-	^ lookClass
-]
-
-{ #category : #accessing }
-BrDevLookArtifactReference >> lookClass: anObject [
-	lookClass := anObject
 ]
 
 { #category : #accessing }
