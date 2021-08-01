@@ -1,5 +1,5 @@
 Class {
-	#name : #BrDevLookGraphOverview,
+	#name : #BrDevAptitudeGraphOverview,
 	#superclass : #BrVerticalPane,
 	#instVars : [
 		'lookClass'
@@ -7,13 +7,25 @@ Class {
 	#category : #'Brick-DevTool'
 }
 
+{ #category : #accessing }
+BrDevAptitudeGraphOverview >> aptitudeClass [
+	^ lookClass
+]
+
+{ #category : #accessing }
+BrDevAptitudeGraphOverview >> aptitudeClass: anObject [
+	lookClass := anObject.
+
+	self addChild: (BrVerticalPane new matchParent addChild: self buildLookAndModelGraph asPannableElement).
+]
+
 { #category : #'private - instance creation' }
-BrDevLookGraphOverview >> buildLookAndModelGraph [
+BrDevAptitudeGraphOverview >> buildLookAndModelGraph [
 	| aMondrian |
 	aMondrian := GtMondrian new.
 	aMondrian nodes
 		stencil: [ :eachClass | self buildNodeForClass: eachClass ];
-		with: {self lookClass};
+		with: {self aptitudeClass};
 		forEach: [ :eachLookClass | 
 			aMondrian nodes
 				stencil: [ :eachRequestClass | 
@@ -42,7 +54,7 @@ BrDevLookGraphOverview >> buildLookAndModelGraph [
 			in: #changeEvents.
 	aMondrian nodes
 		stencil: [ :eachClass | self buildNodeForClass: eachClass ];
-		with: self lookClass allRelatedViewModels;
+		with: self aptitudeClass allRelatedViewModels;
 		forEach: [ :eachModelClass | 
 			aMondrian nodes
 				stencil: [ :eachRequestClass | 
@@ -102,7 +114,7 @@ BrDevLookGraphOverview >> buildLookAndModelGraph [
 				toHead:
 					(BlArrowheadSimpleArrow new
 						border: (BlBorder paint: (Color red alpha: 0.5) width: 2)) ];
-		connect: self lookClass withAllSuperclassRequests
+		connect: self aptitudeClass withAllSuperclassRequests
 			from: [ :eachRequest | #aptitude -> eachRequest ]
 			to: [ :eachRequest | #model -> eachRequest ].
 	aMondrian edges
@@ -116,7 +128,7 @@ BrDevLookGraphOverview >> buildLookAndModelGraph [
 				toHead:
 					(BlArrowheadSimpleArrow new
 						border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
-		connect: self lookClass withAllSuperclassChangeEvents
+		connect: self aptitudeClass withAllSuperclassChangeEvents
 			from: [ :eachEvent | #model -> eachEvent ]
 			to: [ :eachEvent | #aptitude -> eachEvent ].
 	aMondrian layout horizontalTree
@@ -126,7 +138,7 @@ BrDevLookGraphOverview >> buildLookAndModelGraph [
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookGraphOverview >> buildNodeForClass: aLookClass [
+BrDevAptitudeGraphOverview >> buildNodeForClass: aLookClass [
 	| aContainer |
 	
 	aContainer := BrVerticalPane new
@@ -169,20 +181,8 @@ BrDevLookGraphOverview >> buildNodeForClass: aLookClass [
 ]
 
 { #category : #initialization }
-BrDevLookGraphOverview >> initialize [
+BrDevAptitudeGraphOverview >> initialize [
 	super initialize.
 	
 	self matchParent
-]
-
-{ #category : #accessing }
-BrDevLookGraphOverview >> lookClass [
-	^ lookClass
-]
-
-{ #category : #accessing }
-BrDevLookGraphOverview >> lookClass: anObject [
-	lookClass := anObject.
-
-	self addChild: (BrVerticalPane new matchParent addChild: self buildLookAndModelGraph asPannableElement).
 ]

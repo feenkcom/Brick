@@ -1,14 +1,36 @@
 Class {
-	#name : #BrDevLookOverview,
+	#name : #BrDevAptitudeOverview,
 	#superclass : #BrVerticalPane,
 	#instVars : [
-		'lookClass'
+		'aptitudeClass'
 	],
 	#category : #'Brick-DevTool'
 }
 
+{ #category : #accessing }
+BrDevAptitudeOverview >> aptitudeClass [
+	^ aptitudeClass
+]
+
+{ #category : #accessing }
+BrDevAptitudeOverview >> aptitudeClass: anObject [
+	aptitudeClass := anObject.
+		
+	self addChild: (BrScrollPane new
+		aptitude: BrScrollPaneAptitude + BrGlamorousWithVerticalScrollbarAptitude;
+		content: (BrVerticalPane new
+			hMatchParent;
+			vFitContent;
+			addChildren: { 
+				self buildRequestsSection beInSeparateCompositionLayer.
+				self buildWishesSection beInSeparateCompositionLayer.
+				self buildEventsSection beInSeparateCompositionLayer
+			}
+		))
+]
+
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildCategoryLabel: aString [
+BrDevAptitudeOverview >> buildCategoryLabel: aString [
 	^ BrLabel new
 		beSmallSize;
 		aptitude:
@@ -19,7 +41,7 @@ BrDevLookOverview >> buildCategoryLabel: aString [
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildCategoryLabel: aString content: anElement [
+BrDevAptitudeOverview >> buildCategoryLabel: aString content: anElement [
 	^ BrVerticalPane new
 		matchParent;
 		addChild: (self buildCategoryLabel: aString);
@@ -27,7 +49,7 @@ BrDevLookOverview >> buildCategoryLabel: aString content: anElement [
 ]
 
 { #category : #'private - references' }
-BrDevLookOverview >> buildCoderArtifactReferenceList: aListOfWishReferences [
+BrDevAptitudeOverview >> buildCoderArtifactReferenceList: aListOfWishReferences [
 	| aList theMethodsAndTheirReference theMethodGroups |
 	
 	"method -> reference"
@@ -56,12 +78,12 @@ BrDevLookOverview >> buildCoderArtifactReferenceList: aListOfWishReferences [
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildEventsList [
+BrDevAptitudeOverview >> buildEventsList [
 	| aList |
 	
 	aList := BrSimpleList new
 		matchParent;
-		items: (self lookClass withAllSuperclassEvents);
+		items: (self aptitudeClass withAllSuperclassEvents);
 		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
 
@@ -69,10 +91,10 @@ BrDevLookOverview >> buildEventsList [
 ]
 
 { #category : #'private - section events' }
-BrDevLookOverview >> buildEventsSection [
+BrDevAptitudeOverview >> buildEventsSection [
 	| aContainer theEvents |
 	
-	theEvents := self lookClass withAllSuperclassEventReferences.
+	theEvents := self aptitudeClass withAllSuperclassEventReferences.
 	theEvents ifEmpty: [ ^ BlElement new size: 0@0 ].
 
 	aContainer := BrVerticalPane new
@@ -87,7 +109,7 @@ BrDevLookOverview >> buildEventsSection [
 		hMatchParent;
 		vFitContent;
 		beReadOnlyWithSelection;
-		text: (self whatIsEvent asRopedText, (String cr, String cr) asRopedText glamorousRegularSmallSize, self lookClass name asRopedText glamorousCodeFont,
+		text: (self whatIsEvent asRopedText, (String cr, String cr) asRopedText glamorousRegularSmallSize, self aptitudeClass name asRopedText glamorousCodeFont,
 			' listens to ' asRopedText glamorousRegularFont,
 			(theEvents size asRopedText bold attribute: (self buildExpandArtifctReferencesAttribute: theEvents)),
 			' events in:' asRopedText glamorousRegularFont)).
@@ -98,7 +120,7 @@ BrDevLookOverview >> buildEventsSection [
 ]
 
 { #category : #'private - references' }
-BrDevLookOverview >> buildExpandArtifctReferencesAttribute: theWishes [
+BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
 	^ BrGlamorousTrangleExpanderTextAttribute new 
 		attributesCreatingBlock: [
 			BrTextAdornmentDynamicAttribute new 	
@@ -112,26 +134,26 @@ BrDevLookOverview >> buildExpandArtifctReferencesAttribute: theWishes [
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildLookHierarchy [
+BrDevAptitudeOverview >> buildLookHierarchy [
 	^ BrSimpleTree new
 		matchParent;
 		nodeStencil: [ BrLabel new beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		nodeDataBinder: [ :anItemElement :anItem |
-			anItemElement text: (anItem rootClass = self lookClass
+			anItemElement text: (anItem rootClass = self aptitudeClass
 				ifTrue: [ anItem rootClass name asRopedText bold ]
 				ifFalse: [ anItem rootClass name ]) ];
-		items: (GtCoderClassesHierarchyTree fromClasses: self lookClass withAllSuperclassAndSubclassLooks) sortByClassName subclassTrees
+		items: (GtCoderClassesHierarchyTree fromClasses: self aptitudeClass withAllSuperclassAndSubclassAptitudes) sortByClassName subclassTrees
 		children: [ :anItem | anItem subclassTrees ];
 		expandAll
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildRequestsList [
+BrDevAptitudeOverview >> buildRequestsList [
 	| aList |
 	
 	aList := BrSimpleList new
 		matchParent;
-		items: (self lookClass withAllSuperclassRequests);
+		items: (self aptitudeClass withAllSuperclassRequests);
 		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
 
@@ -139,10 +161,10 @@ BrDevLookOverview >> buildRequestsList [
 ]
 
 { #category : #'private - section requests' }
-BrDevLookOverview >> buildRequestsSection [
+BrDevAptitudeOverview >> buildRequestsSection [
 	| aContainer theRequests |
 	
-	theRequests := self lookClass withAllSuperclassRequestReferences.
+	theRequests := self aptitudeClass withAllSuperclassRequestReferences.
 	theRequests ifEmpty: [ ^ BlElement new size: 0@0 ].
 
 	aContainer := BrVerticalPane new
@@ -157,7 +179,7 @@ BrDevLookOverview >> buildRequestsSection [
 		hMatchParent;
 		vFitContent;
 		beReadOnlyWithSelection;
-		text: (self whatIsRequest asRopedText, (String cr, String cr) asRopedText glamorousRegularSmallSize, self lookClass name asRopedText glamorousCodeFont,
+		text: (self whatIsRequest asRopedText, (String cr, String cr) asRopedText glamorousRegularSmallSize, self aptitudeClass name asRopedText glamorousCodeFont,
 			' sends ' asRopedText glamorousRegularFont,
 			(theRequests size asRopedText bold attribute: (self buildExpandArtifctReferencesAttribute: theRequests)),
 			' requests' asRopedText glamorousRegularFont, ' in:' asRopedText glamorousRegularFont)).
@@ -168,7 +190,7 @@ BrDevLookOverview >> buildRequestsSection [
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildSectionLabel: aString [
+BrDevAptitudeOverview >> buildSectionLabel: aString [
 	^ BrLabel new
 		beHugeSize;
 		aptitude: BrGlamorousLabelAptitude;
@@ -182,7 +204,7 @@ BrDevLookOverview >> buildSectionLabel: aString [
 ]
 
 { #category : #'private - references' }
-BrDevLookOverview >> buildSmallReferencesList: aListOfLookArtifactReferences [
+BrDevAptitudeOverview >> buildSmallReferencesList: aListOfLookArtifactReferences [
 	| aList |
 	
 	aList := BrSimpleList new
@@ -199,12 +221,12 @@ BrDevLookOverview >> buildSmallReferencesList: aListOfLookArtifactReferences [
 ]
 
 { #category : #'private - instance creation' }
-BrDevLookOverview >> buildWishesList [
+BrDevAptitudeOverview >> buildWishesList [
 	| aList |
 	
 	aList := BrSimpleList new
 		matchParent;
-		items: (self lookClass withAllSuperclassWishes);
+		items: (self aptitudeClass withAllSuperclassWishes);
 		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
 
@@ -212,10 +234,10 @@ BrDevLookOverview >> buildWishesList [
 ]
 
 { #category : #'private - section wishes' }
-BrDevLookOverview >> buildWishesSection [
+BrDevAptitudeOverview >> buildWishesSection [
 	| aContainer theWishes |
 
-	theWishes := self lookClass withAllSuperclassWishReferences.
+	theWishes := self aptitudeClass withAllSuperclassWishReferences.
 	theWishes ifEmpty: [ ^ BlElement new size: 0@0 ].
 
 	aContainer := BrVerticalPane new
@@ -230,7 +252,7 @@ BrDevLookOverview >> buildWishesSection [
 		hMatchParent;
 		vFitContent;
 		beReadOnlyWithSelection;
-		text: (self whatIsWish  asRopedText, (String cr, String cr) asRopedText glamorousRegularSmallSize, self lookClass name asRopedText glamorousCodeFont,
+		text: (self whatIsWish  asRopedText, (String cr, String cr) asRopedText glamorousRegularSmallSize, self aptitudeClass name asRopedText glamorousCodeFont,
 			' handles ' asRopedText glamorousRegularFont,
 			(theWishes size asRopedText bold attribute: (self buildExpandArtifctReferencesAttribute: theWishes)),
 			' wishes' asRopedText glamorousRegularFont, ' in:' asRopedText glamorousRegularFont)).
@@ -241,49 +263,27 @@ BrDevLookOverview >> buildWishesSection [
 ]
 
 { #category : #initialization }
-BrDevLookOverview >> initialize [
+BrDevAptitudeOverview >> initialize [
 	super initialize.
 	
 	self matchParent.
 	self padding: (BlInsets left: 10 right: 10)
 ]
 
-{ #category : #accessing }
-BrDevLookOverview >> lookClass [
-	^ lookClass
-]
-
-{ #category : #accessing }
-BrDevLookOverview >> lookClass: anObject [
-	lookClass := anObject.
-		
-	self addChild: (BrScrollPane new
-		aptitude: BrScrollPaneAptitude + BrGlamorousWithVerticalScrollbarAptitude;
-		content: (BrVerticalPane new
-			hMatchParent;
-			vFitContent;
-			addChildren: { 
-				self buildRequestsSection beInSeparateCompositionLayer.
-				self buildWishesSection beInSeparateCompositionLayer.
-				self buildEventsSection beInSeparateCompositionLayer
-			}
-		))
-]
-
 { #category : #'private - section events' }
-BrDevLookOverview >> whatIsEvent [
+BrDevAptitudeOverview >> whatIsEvent [
 	^ ('Typically UI Events that are handled by the Look')
 		asRopedText glamorousRegularFont glamorousRegularSmallSize
 ]
 
 { #category : #'private - section requests' }
-BrDevLookOverview >> whatIsRequest [
+BrDevAptitudeOverview >> whatIsRequest [
 	^ ('Request is a special Event sent by the Look to request data from the Widget Model.')
 		asRopedText glamorousRegularFont glamorousRegularSmallSize
 ]
 
 { #category : #'private - section wishes' }
-BrDevLookOverview >> whatIsWish [
+BrDevAptitudeOverview >> whatIsWish [
 	^ ('Wish is a special Event handled by the Look to perform various actions.')
 		asRopedText glamorousRegularFont glamorousRegularSmallSize
 ]

@@ -25,44 +25,44 @@ BrAptitude class >> allRelatedViewModelsAndTheirRequests [
 ]
 
 { #category : #'*Brick-DevTool' }
-BrAptitude class >> gtCoderLookGraphOverviewFor: aView context: aDictionary [
+BrAptitude class >> gtCoderAptitudeGraphOverviewFor: aView context: aDictionary [
 	<gtClassView>
-
+	<gtView>
 	^ aView explicit
 		priority: 32;
-		title: 'Look graph';
-		stencil: [ BrDevLookGraphOverview new lookClass: self ]
+		title: 'Aptitude graph';
+		stencil: [ BrDevAptitudeGraphOverview new aptitudeClass: self ]
 ]
 
 { #category : #'*Brick-DevTool' }
-BrAptitude class >> gtCoderLookHierarchyFor: aView context: aDictionary [
+BrAptitude class >> gtCoderAptitudeHierarchyFor: aView context: aDictionary [
 	<gtClassView>
-
+	<gtView>
 	^ aView tree
 		priority: 33;
-		title: 'Look hierarchy';
+		title: 'Aptitude hierarchy';
 		itemText: [ :anItem |
 			anItem rootClass = self
 				ifTrue: [ anItem rootClass name asRopedText bold ]
 				ifFalse: [ anItem rootClass name ] ];
-		items: (GtCoderClassesHierarchyTree fromClasses: self withAllSuperclassAndSubclassLooks) sortByClassName subclassTrees;
+		items: (GtCoderClassesHierarchyTree fromClasses: self withAllSuperclassAndSubclassAptitudes) sortByClassName subclassTrees;
 		children: [ :anItem | anItem subclassTrees ];
 		sendTool: [ :anItem | GtClassCoderTool forClass: anItem rootClass ];
 		expandAll
 ]
 
 { #category : #'*Brick-DevTool' }
-BrAptitude class >> gtCoderLookOverviewFor: aView context: aDictionary [
+BrAptitude class >> gtCoderAptitudeOverviewFor: aView context: aDictionary [
 	<gtClassView>
-
+	<gtView>
 	^ aView explicit
 		priority: 31;
-		title: 'Look overview';
-		stencil: [ BrDevLookOverview new lookClass: self ]
+		title: 'Aptitude overview';
+		stencil: [ BrDevAptitudeOverview new aptitudeClass: self ]
 ]
 
 { #category : #'*Brick-DevTool' }
-BrAptitude class >> withAllSuperclassAndSubclassLooks [
+BrAptitude class >> withAllSuperclassAndSubclassAptitudes [
 	^ self withAllSuperclassLooks
 		addAll: self withAllSubclasses;
 		yourself
@@ -89,7 +89,7 @@ BrAptitude class >> withAllSuperclassEventReferences [
 						and: [ (eachReferencedClass isKindOf: BrWish class) not ] ] ]
 			thenCollect: [ :eachEventClass |
 				BrDevLookRequestReference new
-					lookClass: self;
+					aptitudeClass: self;
 					artifact: eachEventClass;
 					methods: (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachEventClass binding ]) ] ]
 ]
@@ -139,7 +139,7 @@ BrAptitude class >> withAllSuperclassRequestReferences [
 			select: [ :eachReferencedClass | eachReferencedClass isKindOf: BrRequest class ]
 			thenCollect: [ :eachRequestClass |
 				BrDevLookRequestReference new
-					lookClass: self;
+					aptitudeClass: self;
 					artifact: eachRequestClass;
 					methods: (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachRequestClass binding ]) ] ]
 ]
@@ -180,7 +180,7 @@ BrAptitude class >> withAllSuperclassWishReferences [
 			select: [ :eachReferencedClass | eachReferencedClass isKindOf: BrWish class ]
 			thenCollect: [ :eachWishClass |
 				BrDevLookWishReference new
-					lookClass: self;
+					aptitudeClass: self;
 					artifact: eachWishClass;
 					methods: (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachWishClass binding ]) ] ]
 ]
