@@ -1,10 +1,10 @@
 Class {
-	#name : 'GtInspectorPlusIconStencil',
-	#superclass : 'BrPlusIconStencil',
+	#name : #GtInspectorPlusIconStencil,
+	#superclass : #BrPlusIconStencil,
 	#category : 'Brick-Glamorous'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 GtInspectorPlusIconStencil class >> isDeprecated [
 	^ true
 ]

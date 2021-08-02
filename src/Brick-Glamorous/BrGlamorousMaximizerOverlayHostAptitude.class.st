@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrGlamorousMaximizerOverlayHostAptitude',
-	#superclass : 'BrMaximizerHostAptitude',
+	#name : #BrGlamorousMaximizerOverlayHostAptitude,
+	#superclass : #BrMaximizerHostAptitude,
 	#category : 'Brick-Glamorous-Maximizer'
 }

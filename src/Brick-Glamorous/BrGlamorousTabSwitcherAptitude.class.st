@@ -5,12 +5,12 @@ My subclasses expect to be attached to ${class:BrTab}$ instances.
 
 "
 Class {
-	#name : 'BrGlamorousTabSwitcherAptitude',
-	#superclass : 'BrTabAptitude',
+	#name : #BrGlamorousTabSwitcherAptitude,
+	#superclass : #BrTabAptitude,
 	#category : 'Brick-Glamorous-Tabs - Switcher'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabSwitcherAptitude >> initialize [
 	super initialize.
 

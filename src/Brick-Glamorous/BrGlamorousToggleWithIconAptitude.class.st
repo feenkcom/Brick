@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousToggleWithIconAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousToggleWithIconAptitude,
+	#superclass : #BrAptitude,
 	#category : 'Brick-Glamorous-Toggle'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousToggleWithIconAptitude >> initialize [
 	super initialize.
 	

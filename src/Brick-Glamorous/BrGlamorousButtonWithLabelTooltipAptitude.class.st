@@ -1,22 +1,22 @@
 Class {
-	#name : 'BrGlamorousButtonWithLabelTooltipAptitude',
-	#superclass : 'BrGlamorousWithLabelTooltipAptitude',
+	#name : #BrGlamorousButtonWithLabelTooltipAptitude,
+	#superclass : #BrGlamorousWithLabelTooltipAptitude,
 	#category : 'Brick-Glamorous-Buttons'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonWithLabelTooltipAptitude >> initializeListeners [
 	super initializeListeners.
 	self when: BrLabelChanged do: [ :anEvent | self text: anEvent text ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonWithLabelTooltipAptitude >> initializeRequests [
 	super initializeRequests.
 	self request: BrLabelRequest new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousButtonWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 	^ (super newLabelWithText: aTextOrString)
 			when: BlClickEvent

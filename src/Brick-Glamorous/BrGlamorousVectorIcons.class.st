@@ -11,12 +11,12 @@ ${class:BrGlamorousVectorIcons|show=gtIconsFor:|expanded=}$
 
 "
 Class {
-	#name : 'BrGlamorousVectorIcons',
-	#superclass : 'Object',
+	#name : #BrGlamorousVectorIcons,
+	#superclass : #Object,
 	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> accept [
 	<script: 'self accept inspect'>
 
@@ -28,7 +28,7 @@ BrGlamorousVectorIcons class >> accept [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> add [
 	<script: 'self add inspect'>
 
@@ -40,7 +40,7 @@ BrGlamorousVectorIcons class >> add [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 BrGlamorousVectorIcons class >> allIcons [
 	<script: 'super inspect'>
 	^ (self class methodsInProtocol: #icons)
@@ -49,7 +49,7 @@ BrGlamorousVectorIcons class >> allIcons [
 			eachCompiledMethod selector -> (self perform: eachCompiledMethod selector) ]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> browse [
 	<script: 'self browse inspect'>
 
@@ -61,7 +61,7 @@ BrGlamorousVectorIcons class >> browse [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> cancel [
 	<script: 'self cancel inspect'>
 
@@ -73,7 +73,7 @@ BrGlamorousVectorIcons class >> cancel [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousVectorIcons class >> changes [
 	<script: 'self changes inspect'>
 	^ [
@@ -102,7 +102,7 @@ BrGlamorousVectorIcons class >> changes [
 			} ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> checkbox [
 	<script: 'self checkbox inspect'>
 
@@ -112,21 +112,21 @@ BrGlamorousVectorIcons class >> checkbox [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrGlamorousVectorIcons class >> checkedCheckboxGeometry [
 	<return: #BlElementGeometry>
 
 	^ self crossGeometry: 0.16 extent: 1@1 origin: 0@0
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> clipboard [
 	<script: 'self clipboard inspect'>
 
 	^ self transcript
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> close [
 	<script: 'self close inspect'>
 
@@ -138,7 +138,7 @@ BrGlamorousVectorIcons class >> close [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'private - geometry' }
+{ #category : #'private - geometry' }
 BrGlamorousVectorIcons class >> crossGeometry: aThickness extent: anExtent origin: anOrigin [
 	<return: #BlElementVectorGeometry>
 	| cathetus w h halfW halfH |
@@ -165,7 +165,7 @@ BrGlamorousVectorIcons class >> crossGeometry: aThickness extent: anExtent origi
 	} collect: [ :eachVertex | eachVertex + anOrigin ])
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> debug [
 	<script: 'self debug inspect'>
 
@@ -177,7 +177,7 @@ BrGlamorousVectorIcons class >> debug [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> down [
 	<script: 'self down inspect'>
 
@@ -190,7 +190,7 @@ BrGlamorousVectorIcons class >> down [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> downwards [
 	<script: 'self downwards inspect'>
 
@@ -202,7 +202,7 @@ BrGlamorousVectorIcons class >> downwards [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> driller [
 	<script: 'self driller inspect'>
 
@@ -214,7 +214,7 @@ BrGlamorousVectorIcons class >> driller [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> edit [
 	<script: 'self edit inspect'>
 
@@ -227,7 +227,7 @@ BrGlamorousVectorIcons class >> edit [
 		border: (BlBorder paint: Color black width: 1) ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> eg [
 	<script: 'self eg inspect'>
 
@@ -239,7 +239,7 @@ BrGlamorousVectorIcons class >> eg [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> emphasizedBrowse [
 	^ [ self browse asElement
 		outskirts: BlOutskirts centered;
@@ -247,7 +247,7 @@ BrGlamorousVectorIcons class >> emphasizedBrowse [
 	] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> emphasizedInspect [
 	^ [ self inspect asElement
 		outskirts: BlOutskirts centered;
@@ -255,7 +255,7 @@ BrGlamorousVectorIcons class >> emphasizedInspect [
 	] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> emphasizedPlay [
 	^ [ self play asElement
 		outskirts: BlOutskirts centered;
@@ -263,7 +263,7 @@ BrGlamorousVectorIcons class >> emphasizedPlay [
 	] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> filter [
 	<script: 'self filter inspect'>
 
@@ -275,7 +275,7 @@ BrGlamorousVectorIcons class >> filter [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> folder [
 	<script: 'self folder inspect'>
 
@@ -288,7 +288,7 @@ BrGlamorousVectorIcons class >> folder [
 		border: (BlBorder paint: Color black width: 1.5) ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> gt [
 	<script: 'self gt inspect'>
 
@@ -300,7 +300,7 @@ BrGlamorousVectorIcons class >> gt [
 	] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> hamburger [
 	<script: 'self hamburger inspect'>
 
@@ -312,14 +312,14 @@ BrGlamorousVectorIcons class >> hamburger [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrGlamorousVectorIcons class >> indeterminateCheckboxGeometry [
 	<return: #BlElementGeometry>
 
 	^ self minusGeometry: 0.16 extent: 1@1 origin: 0@0
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> inspect [
 	<script: 'self inspect inspect'>
 
@@ -331,7 +331,7 @@ BrGlamorousVectorIcons class >> inspect [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeBook [
 	<script: 'self largeBook inspect'>
 
@@ -344,7 +344,7 @@ BrGlamorousVectorIcons class >> largeBook [
 		outskirts: (BlOutskirts centered) ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeEg [
 	<script: 'self largeEg inspect'>
 
@@ -356,7 +356,7 @@ BrGlamorousVectorIcons class >> largeEg [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeGt [
 	<script: 'self largeGt inspect'>
 
@@ -367,7 +367,7 @@ BrGlamorousVectorIcons class >> largeGt [
 		((BrLabel new text: ('g' asRopedText weight: 100), ('t' asRopedText bold); aptitude: BrGlamorousLabelAptitude) asScalableElement margin: (BlInsets top: -4 left: -1)) ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largePerformance [
 	<script: 'self largePerformance inspect'>
 
@@ -380,7 +380,7 @@ BrGlamorousVectorIcons class >> largePerformance [
 		outskirts: (BlOutskirts centered) ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largePlay [
 	<script: 'self largePlay inspect'>
 
@@ -392,7 +392,7 @@ BrGlamorousVectorIcons class >> largePlay [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeSearch [
 	<script: 'self largeSearch inspect'>
 
@@ -404,7 +404,7 @@ BrGlamorousVectorIcons class >> largeSearch [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeSignal [
 	<script: 'self largeSignal inspect'>
 
@@ -417,12 +417,12 @@ BrGlamorousVectorIcons class >> largeSignal [
 		outskirts: (BlOutskirts centered) ] asStencil
 ]
 
-{ #category : 'private - sizes' }
+{ #category : #'private - sizes' }
 BrGlamorousVectorIcons class >> largeSize [
 	^ 64@64
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeTranscript [
 	<script: 'self largeTranscript inspect'>
 
@@ -434,7 +434,7 @@ BrGlamorousVectorIcons class >> largeTranscript [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largeWindow [
 	<script: 'self largeWindow inspect'>
 
@@ -446,7 +446,7 @@ BrGlamorousVectorIcons class >> largeWindow [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> largebranching [
 	<script: 'self largebranching inspect'>
 
@@ -458,7 +458,7 @@ BrGlamorousVectorIcons class >> largebranching [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> left [
 	<script: 'self left inspect'>
 
@@ -470,7 +470,7 @@ BrGlamorousVectorIcons class >> left [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> leftSide [
 	<script: 'self leftSide inspect'>
 
@@ -482,7 +482,7 @@ BrGlamorousVectorIcons class >> leftSide [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> link [
 	<script: 'self link inspect'>
 
@@ -515,7 +515,7 @@ BrGlamorousVectorIcons class >> link [
 			} ] asStencil
 ]
 
-{ #category : 'private - geometry' }
+{ #category : #'private - geometry' }
 BrGlamorousVectorIcons class >> minusGeometry: aThickness extent: anExtent origin: anOrigin [
 	<return: #BlElementVectorGeometry>
 	| w h halfH halfThickness top bottom |
@@ -536,14 +536,14 @@ BrGlamorousVectorIcons class >> minusGeometry: aThickness extent: anExtent origi
 	} collect: [ :eachVertex | eachVertex + anOrigin ])
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> noIcon [
 	^ [ BlElement new
 			size: 0@0;
 			background: BlBackground transparent ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> note [
 	<script: 'self note inspect'>
 
@@ -568,7 +568,7 @@ BrGlamorousVectorIcons class >> note [
 			} ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> performance [
 	<script: 'self performance inspect'>
 
@@ -580,7 +580,7 @@ BrGlamorousVectorIcons class >> performance [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> play [
 	<script: 'self play inspect'>
 
@@ -592,7 +592,7 @@ BrGlamorousVectorIcons class >> play [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> playground [
 	<script: 'self playground inspect'>
 
@@ -618,7 +618,7 @@ BrGlamorousVectorIcons class >> playground [
 			} ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> playinspect [
 	<script: 'self playinspect inspect'>
 
@@ -630,7 +630,7 @@ BrGlamorousVectorIcons class >> playinspect [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> refresh [
 	<script: 'self refresh inspect'>
 
@@ -642,7 +642,7 @@ BrGlamorousVectorIcons class >> refresh [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> remove [
 	<script: 'self remove inspect'>
 
@@ -654,7 +654,7 @@ BrGlamorousVectorIcons class >> remove [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> repair [
 	<script: 'self repair inspect'>
 
@@ -666,7 +666,7 @@ BrGlamorousVectorIcons class >> repair [
 		background: Color black) asScalableElement size: 16@16 ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> right [
 	<script: 'self right inspect'>
 
@@ -679,7 +679,7 @@ BrGlamorousVectorIcons class >> right [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> rightSide [
 	<script: 'self rightSide inspect'>
 
@@ -691,7 +691,7 @@ BrGlamorousVectorIcons class >> rightSide [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> robot [
 	<script: 'self robot inspect'>
 
@@ -704,7 +704,7 @@ BrGlamorousVectorIcons class >> robot [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> search [
 	<script: 'self search inspect'>
 
@@ -716,17 +716,17 @@ BrGlamorousVectorIcons class >> search [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'private - sizes' }
+{ #category : #'private - sizes' }
 BrGlamorousVectorIcons class >> smallSize [
 	^ 12@12
 ]
 
-{ #category : 'private - sizes' }
+{ #category : #'private - sizes' }
 BrGlamorousVectorIcons class >> standardSize [
 	^ 16@16
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> transcript [
 	<script: 'self transcript inspect'>
 
@@ -738,21 +738,21 @@ BrGlamorousVectorIcons class >> transcript [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> transparent [
 	^ [ BlElement new
 			size: 16@16;
 			background: BlBackground transparent ] asStencil
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrGlamorousVectorIcons class >> uncheckedCheckboxGeometry [
 	<return: #BlElementGeometry>
 
 	^ BlEmptyGeometry new
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> up [
 	<script: 'self up inspect'>
 
@@ -764,7 +764,7 @@ BrGlamorousVectorIcons class >> up [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> upwards [
 	<script: 'self upwards inspect'>
 
@@ -776,7 +776,7 @@ BrGlamorousVectorIcons class >> upwards [
 		background: Color black ] asStencil
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> upwardsDownwards [
 	<script: 'self upwardsDownwards inspect'>
 

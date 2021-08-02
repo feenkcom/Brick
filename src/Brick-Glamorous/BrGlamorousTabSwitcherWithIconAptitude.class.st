@@ -5,12 +5,12 @@ See examples at ${class:BrGlamorousTabGroupSwitcherLook}$ and ${class:BrGlamorou
 
 "
 Class {
-	#name : 'BrGlamorousTabSwitcherWithIconAptitude',
-	#superclass : 'BrGlamorousTabSwitcherAptitude',
+	#name : #BrGlamorousTabSwitcherWithIconAptitude,
+	#superclass : #BrGlamorousTabSwitcherAptitude,
 	#category : 'Brick-Glamorous-Tabs - Switcher'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabSwitcherWithIconAptitude >> initialize [
 	super initialize.
 

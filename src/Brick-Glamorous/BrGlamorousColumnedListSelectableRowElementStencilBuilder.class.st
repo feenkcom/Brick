@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousColumnedListSelectableRowElementStencilBuilder',
-	#superclass : 'BrColumnedListRowElementStencilBuilder',
+	#name : #BrGlamorousColumnedListSelectableRowElementStencilBuilder,
+	#superclass : #BrColumnedListRowElementStencilBuilder,
 	#category : 'Brick-Glamorous-List, Tree'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrGlamorousColumnedListSelectableRowElementStencilBuilder >> buildDefault [
 	^ super buildDefault
 		addAptitude: BrGlamorousListItemAptitude

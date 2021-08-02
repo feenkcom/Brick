@@ -4,12 +4,12 @@ I am used by ${class:BrGlamorousTabGroupSwitcherLook}$ where you can find exampl
 
 "
 Class {
-	#name : 'BrGlamorousTabGroupSwitcherHeaderAptitude',
-	#superclass : 'BrTabGroupHeaderAptitude',
+	#name : #BrGlamorousTabGroupSwitcherHeaderAptitude,
+	#superclass : #BrTabGroupHeaderAptitude,
 	#category : 'Brick-Glamorous-Tabs - Switcher'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabGroupSwitcherHeaderAptitude >> initialize [
 	super initialize.
 	

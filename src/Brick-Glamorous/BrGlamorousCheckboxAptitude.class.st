@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrGlamorousCheckboxAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousCheckboxAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'iconLook'
 	],
 	#category : 'Brick-Glamorous-Checkbox'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousCheckboxAptitude >> initialize [
 	super initialize.
 	self add: BrLayoutResizerAptitude inherit.

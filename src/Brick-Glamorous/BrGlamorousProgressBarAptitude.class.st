@@ -3,12 +3,12 @@ I am basic ${class:BrProgress}$ bar glamorous look.
 See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
 "
 Class {
-	#name : 'BrGlamorousProgressBarAptitude',
-	#superclass : 'BrProgressAnimatedBarAptitude',
+	#name : #BrGlamorousProgressBarAptitude,
+	#superclass : #BrProgressAnimatedBarAptitude,
 	#category : 'Brick-Glamorous-Progress'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousProgressBarAptitude >> newProgressBarElement [
 	^ super newProgressBarElement
 		background: self theme button defaultTextColor;
@@ -16,7 +16,7 @@ BrGlamorousProgressBarAptitude >> newProgressBarElement [
 		geometry: BlStadium new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousProgressBarAptitude >> newProgressContainerElement [
 	^ super newProgressContainerElement
 		background: self theme button defaultBackgroundColor;

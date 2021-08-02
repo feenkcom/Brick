@@ -5,8 +5,8 @@ Makes rows in the columned tree have selection, hover and press visual effects.
 ${example:BrGlamorousColumnedTreeSelectableRowElementStencilBuilder class>>#columnedTreeExample}$
 "
 Class {
-	#name : 'BrGlamorousColumnedTreeSelectableRowElementStencilBuilder',
-	#superclass : 'BrColumnedTreeRowElementStencilBuilder',
+	#name : #BrGlamorousColumnedTreeSelectableRowElementStencilBuilder,
+	#superclass : #BrColumnedTreeRowElementStencilBuilder,
 	#instVars : [
 		'padding',
 		'cellSpacing'
@@ -14,7 +14,7 @@ Class {
 	#category : 'Brick-Glamorous-List, Tree'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> buildDefault [
 	^ super buildDefault
 		addAptitude: BrGlamorousListItemAptitude;
@@ -22,17 +22,17 @@ BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> buildDefault [
 		padding: self padding
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> cellSpacing [
 	^ cellSpacing
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> cellSpacing: anObject [
 	cellSpacing := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> initialize [
 	super initialize.
 	
@@ -40,12 +40,12 @@ BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> initialize [
 	padding := BlInsets empty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> padding [
 	^ padding
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> padding: anObject [
 	padding := anObject
 ]

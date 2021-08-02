@@ -13,12 +13,12 @@ ${example:BrExamplesShowroom>>#glamorousTabsSwitcherWithHiddenSelectedTabsWithIc
 
 "
 Class {
-	#name : 'BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude',
-	#superclass : 'BrGlamorousTabGroupSwitcherAptitude',
+	#name : #BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude,
+	#superclass : #BrGlamorousTabGroupSwitcherAptitude,
 	#category : 'Brick-Glamorous-Tabs - Switcher'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude >> newHeaderLook [
 	^ BrGlamorousTabGroupSwitcherHeaderWithHiddenSelectedTabAptitude new
 ]

@@ -4,25 +4,25 @@ I am a copy of class BrGlamorousLinkButtonExteriorLook. This comment is copied f
 I define the rectangular exterior of the link button.
 "
 Class {
-	#name : 'BrGlamorousLinkButtonExteriorInnerAptitude',
-	#superclass : 'BrStyleCommonAptitude',
+	#name : #BrGlamorousLinkButtonExteriorInnerAptitude,
+	#superclass : #BrStyleCommonAptitude,
 	#instVars : [
 		'backgroundPaint'
 	],
 	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousLinkButtonExteriorInnerAptitude >> backgroundPaint [
 	^ backgroundPaint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousLinkButtonExteriorInnerAptitude >> backgroundPaint: anObject [
 	backgroundPaint := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousLinkButtonExteriorInnerAptitude >> initialize [
 	super initialize.
 	backgroundPaint := self theme button disabledBackgroundColor.

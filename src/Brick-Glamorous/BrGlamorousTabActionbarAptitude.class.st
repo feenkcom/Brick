@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrGlamorousTabActionbarAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousTabActionbarAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'actionbarContainer'
 	],
 	#category : 'Brick-Glamorous-Tabs - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabActionbarAptitude >> initialize [
 	super initialize.
 
@@ -20,21 +20,21 @@ BrGlamorousTabActionbarAptitude >> initialize [
 	self addChangeAddChildAs: #(content actionbar) with: [ actionbarContainer ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabActionbarAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrTabActionbarChangedEvent do: [ :anEvent | self updateActionbar: anEvent stencil tab: anEvent tab ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabActionbarAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrTabActionbarRequest new
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTabActionbarAptitude >> updateActionbar: aStencil tab: aBrTabModel [
 	actionbarContainer removeChildren.
 	aStencil

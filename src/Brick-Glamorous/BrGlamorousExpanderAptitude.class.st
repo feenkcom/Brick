@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrGlamorousExpanderAptitude',
-	#superclass : 'BrExpanderAptitude',
+	#name : #BrGlamorousExpanderAptitude,
+	#superclass : #BrExpanderAptitude,
 	#instVars : [
 		'sidebar',
 		'toggle',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Glamorous-Expander'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousExpanderAptitude >> initialize [
 	| aShadowLook |
 	super initialize.
@@ -48,12 +48,12 @@ BrGlamorousExpanderAptitude >> initialize [
 	self addChangeAddChildAs: #(content sidebar) with: [ sidebar ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousExpanderAptitude >> padding: anInsets [
 	container padding: anInsets
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousExpanderAptitude >> resizableElementsDo: aBlock [
 	super resizableElementsDo: aBlock.
 	

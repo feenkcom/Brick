@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousToggleLayoutAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousToggleLayoutAptitude,
+	#superclass : #BrAptitude,
 	#category : 'Brick-Glamorous-Toggle - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousToggleLayoutAptitude >> initialize [
 	super initialize.
 	

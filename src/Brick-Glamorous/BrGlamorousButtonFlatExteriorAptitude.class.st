@@ -1,33 +1,33 @@
 Class {
-	#name : 'BrGlamorousButtonFlatExteriorAptitude',
-	#superclass : 'BrStyleCommonAptitude',
+	#name : #BrGlamorousButtonFlatExteriorAptitude,
+	#superclass : #BrStyleCommonAptitude,
 	#instVars : [
 		'backgroundPaint'
 	],
 	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> backgroundPaint [
 	^ backgroundPaint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> backgroundPaint: aPaint [
 	backgroundPaint := aPaint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> disabledBackgroundPaint [
 	^ self theme button disabledBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> hoveredBackgroundPaint [
 	^ Color gray alpha: 0.15
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonFlatExteriorAptitude >> initialize [
 	super initialize.
 	backgroundPaint := Color transparent.
@@ -44,7 +44,7 @@ BrGlamorousButtonFlatExteriorAptitude >> initialize [
 		disabled: [ :aStyle | aStyle background: self disabledBackgroundPaint ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> pressedBackgroundPaint [
 	^ Color gray alpha: 0.3
 ]

@@ -1,6 +1,6 @@
-Extension { #name : 'BlText' }
+Extension { #name : #BlText }
 
-{ #category : '*Brick-Glamorous' }
+{ #category : #'*Brick-Glamorous' }
 BlText >> glamorousRoundedBackground [
 	self attribute: (BrTextEmbellishmentAttribute new roundedBackground: BrGlamorousColors neutralBackgroundColor)
 ]

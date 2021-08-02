@@ -1,6 +1,6 @@
-Extension { #name : 'BrTextReplacingAttribute' }
+Extension { #name : #BrTextReplacingAttribute }
 
-{ #category : '*Brick-Glamorous' }
+{ #category : #'*Brick-Glamorous' }
 BrTextReplacingAttribute >> glamorousRoundedBackground [
 	self embellishment: [ :anElement |
 		anElement background: BrGlamorousColors neutralBackgroundColor.

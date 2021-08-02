@@ -2,12 +2,12 @@
 I define the circular exterior of the button. I am designed to be used with an icon look
 "
 Class {
-	#name : 'BrGlamorousButtonCircularAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousButtonCircularAptitude,
+	#superclass : #BrAptitude,
 	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonCircularAptitude >> initialize [
 	super initialize.
 	self

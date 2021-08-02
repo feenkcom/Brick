@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrFontLinearNormalizer',
-	#superclass : 'BrLinearNormalizer',
+	#name : #BrFontLinearNormalizer,
+	#superclass : #BrLinearNormalizer,
 	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFontLinearNormalizer >> value: anEntity [
 	"Calculates the color of the entity based on the context."
 

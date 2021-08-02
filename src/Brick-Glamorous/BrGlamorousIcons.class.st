@@ -13,15 +13,15 @@ ${class:BrGlamorousIcons|show=gtIconsFor:|expanded=}$
 
 "
 Class {
-	#name : 'BrGlamorousIcons',
-	#superclass : 'Object',
+	#name : #BrGlamorousIcons,
+	#superclass : #Object,
 	#classInstVars : [
 		'icons'
 	],
 	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> accept [
 	^ self icons
 		at: #accept ifAbsentPut: [(Form
@@ -31,7 +31,7 @@ BrGlamorousIcons class >> accept [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> actualsize [
 	^ self icons
 		at: #actualsize ifAbsentPut: [(Form
@@ -41,7 +41,7 @@ BrGlamorousIcons class >> actualsize [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> add [
 	^ self icons
 		at: #add ifAbsentPut: [(Form
@@ -51,7 +51,7 @@ BrGlamorousIcons class >> add [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> alarm [
 	^ self icons
 		at: #alarm ifAbsentPut: [(Form
@@ -61,7 +61,7 @@ BrGlamorousIcons class >> alarm [
 	offset: (0@0))]
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 BrGlamorousIcons class >> allIcons [
 	<script: 'super inspect'>
 	^ (self class methodsInProtocol: #icons)
@@ -70,7 +70,7 @@ BrGlamorousIcons class >> allIcons [
 			eachCompiledMethod selector -> (self perform: eachCompiledMethod selector) ]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> bothsides [
 	^ self icons
 		at: #bothsides ifAbsentPut: [(Form
@@ -80,7 +80,7 @@ BrGlamorousIcons class >> bothsides [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> browse [
 	^ self icons
 		at: #browse ifAbsentPut: [(Form
@@ -90,7 +90,7 @@ BrGlamorousIcons class >> browse [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> cancel [
 	^ self icons
 		at: #cancel ifAbsentPut: [(Form
@@ -100,7 +100,7 @@ BrGlamorousIcons class >> cancel [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> classicon [
 	^ self icons
 		at: #classicon ifAbsentPut: [(Form
@@ -110,7 +110,7 @@ BrGlamorousIcons class >> classicon [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> clipboard [
 	^ self icons
 		at: #clipboard ifAbsentPut: [(Form
@@ -120,7 +120,7 @@ BrGlamorousIcons class >> clipboard [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> close [
 	^ self icons
 		at: #close ifAbsentPut: [(Form
@@ -130,7 +130,7 @@ BrGlamorousIcons class >> close [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> cloud [
 	^ self icons
 		at: #cloud ifAbsentPut: [(Form
@@ -140,7 +140,7 @@ BrGlamorousIcons class >> cloud [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> debug [
 	^ self icons
 		at: #debug ifAbsentPut: [(Form
@@ -150,7 +150,7 @@ BrGlamorousIcons class >> debug [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> dollar [
 	^ self icons
 		at: #dollar ifAbsentPut: [(Form
@@ -160,7 +160,7 @@ BrGlamorousIcons class >> dollar [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> down [
 	^ self icons
 		at: #down ifAbsentPut: [(Form
@@ -170,7 +170,7 @@ BrGlamorousIcons class >> down [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> edit [
 	^ self icons
 		at: #edit ifAbsentPut: [(Form
@@ -180,7 +180,7 @@ BrGlamorousIcons class >> edit [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> eg [
 	^ self icons
 		at: #eg ifAbsentPut: [(Form
@@ -190,12 +190,12 @@ BrGlamorousIcons class >> eg [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> empty [
 	^ Form extent: 16@16 
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> file [
 	^ self icons
 		at: #file ifAbsentPut: [(Form
@@ -205,7 +205,7 @@ BrGlamorousIcons class >> file [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> filter [
 	^ self icons
 		at: #filter ifAbsentPut: [(Form
@@ -215,7 +215,7 @@ BrGlamorousIcons class >> filter [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> folder [
 	^ self icons
 		at: #folder ifAbsentPut: [(Form
@@ -225,7 +225,7 @@ BrGlamorousIcons class >> folder [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> fromcloud [
 	^ self icons
 		at: #fromcloud ifAbsentPut: [(Form
@@ -235,7 +235,7 @@ BrGlamorousIcons class >> fromcloud [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> fromhere [
 	^ self icons
 		at: #fromhere ifAbsentPut: [(Form
@@ -245,7 +245,7 @@ BrGlamorousIcons class >> fromhere [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> go [
 	^ self icons
 		at: #go ifAbsentPut: [(Form
@@ -255,7 +255,7 @@ BrGlamorousIcons class >> go [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> graycircle [
 	^ self icons
 		at: #graycircle ifAbsentPut: [(Form
@@ -265,7 +265,7 @@ BrGlamorousIcons class >> graycircle [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> greencircle [
 	^ self icons
 		at: #greencircle ifAbsentPut: [(Form
@@ -275,7 +275,7 @@ BrGlamorousIcons class >> greencircle [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> gt [
 	^ self icons
 		at: #gt ifAbsentPut: [(Form
@@ -285,7 +285,7 @@ BrGlamorousIcons class >> gt [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> hamburger [
 	^ self icons
 		at: #hamburger ifAbsentPut: [(Form
@@ -295,7 +295,7 @@ BrGlamorousIcons class >> hamburger [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> help [
 	^ self icons
 		at: #help ifAbsentPut: [(Form
@@ -305,12 +305,12 @@ BrGlamorousIcons class >> help [
 	offset: (0@0))]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousIcons class >> icons [
 	^ icons
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousIcons class >> importIconsFromDirectory: aFileReference [
 	"self importIconsFromDirectory: './gt-icons' asFileReference"
 
@@ -329,12 +329,12 @@ BrGlamorousIcons class >> importIconsFromDirectory: aFileReference [
 			self class compile: method classified: 'icons' ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousIcons class >> initialize [
 	icons := Dictionary new
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> inspect [
 	^ self icons
 		at: #inspect ifAbsentPut: [(Form
@@ -344,7 +344,7 @@ BrGlamorousIcons class >> inspect [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> into [
 	^ self icons
 		at: #into ifAbsentPut: [(Form
@@ -354,7 +354,7 @@ BrGlamorousIcons class >> into [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeBook [
 	^ self icons
 		at: #largeBook ifAbsentPut: [(Form
@@ -364,7 +364,7 @@ BrGlamorousIcons class >> largeBook [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeChain [
 	^ self icons
 		at: #largeChain ifAbsentPut: [(Form
@@ -374,7 +374,7 @@ BrGlamorousIcons class >> largeChain [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeEg [
 	^ self icons
 		at: #largeEg ifAbsentPut: [(Form
@@ -384,7 +384,7 @@ BrGlamorousIcons class >> largeEg [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largePlay [
 	^ self icons
 		at: #largePlay ifAbsentPut: [(Form
@@ -394,7 +394,7 @@ BrGlamorousIcons class >> largePlay [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeSearch [
 	^ self icons
 		at: #largeSearch ifAbsentPut: [(Form
@@ -404,7 +404,7 @@ BrGlamorousIcons class >> largeSearch [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeSignal [
 	^ self icons
 		at: #largeSignal ifAbsentPut: [(Form
@@ -414,7 +414,7 @@ BrGlamorousIcons class >> largeSignal [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeTranscript [
 	^ self icons
 		at: #largeTranscript ifAbsentPut: [(Form
@@ -424,7 +424,7 @@ BrGlamorousIcons class >> largeTranscript [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largeWindow [
 	^ self icons
 		at: #largeWindow ifAbsentPut: [(Form
@@ -434,7 +434,7 @@ BrGlamorousIcons class >> largeWindow [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> largebranching [
 	^ self icons
 		at: #largebranching ifAbsentPut: [(Form
@@ -444,7 +444,7 @@ BrGlamorousIcons class >> largebranching [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> left [
 	^ self icons
 		at: #left ifAbsentPut: [(Form
@@ -454,7 +454,7 @@ BrGlamorousIcons class >> left [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> leftside [
 	^ self icons
 		at: #leftside ifAbsentPut: [(Form
@@ -464,7 +464,7 @@ BrGlamorousIcons class >> leftside [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> loadfromdisk [
 	^ self icons
 		at: #loadfromdisk ifAbsentPut: [(Form
@@ -474,7 +474,7 @@ BrGlamorousIcons class >> loadfromdisk [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> maximize [
 	^ self icons
 		at: #maximize ifAbsentPut: [(Form
@@ -484,7 +484,7 @@ BrGlamorousIcons class >> maximize [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> menu [
 	^ self icons
 		at: #menu ifAbsentPut: [(Form
@@ -494,7 +494,7 @@ BrGlamorousIcons class >> menu [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> methodicon [
 	^ self icons
 		at: #methodicon ifAbsentPut: [(Form
@@ -504,7 +504,7 @@ BrGlamorousIcons class >> methodicon [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> minimize [
 	^ self icons
 		at: #minimize ifAbsentPut: [(Form
@@ -514,7 +514,7 @@ BrGlamorousIcons class >> minimize [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> more [
 	^ self icons
 		at: #more ifAbsentPut: [(Form
@@ -524,7 +524,7 @@ BrGlamorousIcons class >> more [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> nosides [
 	^ self icons
 		at: #nosides ifAbsentPut: [(Form
@@ -534,7 +534,7 @@ BrGlamorousIcons class >> nosides [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> open [
 	^ self icons
 		at: #open ifAbsentPut: [(Form
@@ -544,7 +544,7 @@ BrGlamorousIcons class >> open [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> over [
 	^ self icons
 		at: #over ifAbsentPut: [(Form
@@ -554,7 +554,7 @@ BrGlamorousIcons class >> over [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> packageicon [
 	^ self icons
 		at: #packageicon ifAbsentPut: [(Form
@@ -564,7 +564,7 @@ BrGlamorousIcons class >> packageicon [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> performance [
 	^ self icons
 		at: #performance ifAbsentPut: [(Form
@@ -574,7 +574,7 @@ BrGlamorousIcons class >> performance [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> play [
 	^ self icons
 		at: #play ifAbsentPut: [(Form
@@ -584,7 +584,7 @@ BrGlamorousIcons class >> play [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> playall [
 	^ self icons
 		at: #playall ifAbsentPut: [(Form
@@ -594,7 +594,7 @@ BrGlamorousIcons class >> playall [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> playallinspect [
 	^ self icons
 		at: #playallinspect ifAbsentPut: [(Form
@@ -604,7 +604,7 @@ BrGlamorousIcons class >> playallinspect [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> playinspect [
 	^ self icons
 		at: #playinspect ifAbsentPut: [(Form
@@ -614,7 +614,7 @@ BrGlamorousIcons class >> playinspect [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> redcircle [
 	^ self icons
 		at: #redcircle ifAbsentPut: [(Form
@@ -624,7 +624,7 @@ BrGlamorousIcons class >> redcircle [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> refresh [
 	^ self icons
 		at: #refresh ifAbsentPut: [(Form
@@ -634,7 +634,7 @@ BrGlamorousIcons class >> refresh [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> remove [
 	^ self icons
 		at: #remove ifAbsentPut: [(Form
@@ -644,7 +644,7 @@ BrGlamorousIcons class >> remove [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> restart [
 	^ self icons
 		at: #restart ifAbsentPut: [(Form
@@ -654,7 +654,7 @@ BrGlamorousIcons class >> restart [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> right [
 	^ self icons
 		at: #right ifAbsentPut: [(Form
@@ -664,7 +664,7 @@ BrGlamorousIcons class >> right [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> rightside [
 	^ self icons
 		at: #rightside ifAbsentPut: [(Form
@@ -674,7 +674,7 @@ BrGlamorousIcons class >> rightside [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> save [
 	^ self icons
 		at: #save ifAbsentPut: [(Form
@@ -684,7 +684,7 @@ BrGlamorousIcons class >> save [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> savetodisk [
 	^ self icons
 		at: #savetodisk ifAbsentPut: [(Form
@@ -694,7 +694,7 @@ BrGlamorousIcons class >> savetodisk [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> search [
 	^ self icons
 		at: #search ifAbsentPut: [(Form
@@ -704,7 +704,7 @@ BrGlamorousIcons class >> search [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> settings [
 	^ self icons
 		at: #settings ifAbsentPut: [(Form
@@ -714,7 +714,7 @@ BrGlamorousIcons class >> settings [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> spawn [
 	^ self icons
 		at: #spawn ifAbsentPut: [(Form
@@ -724,7 +724,7 @@ BrGlamorousIcons class >> spawn [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> threepanes [
 	^ self icons
 		at: #threepanes ifAbsentPut: [(Form
@@ -734,7 +734,7 @@ BrGlamorousIcons class >> threepanes [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> through [
 	^ self icons
 		at: #through ifAbsentPut: [(Form
@@ -744,7 +744,7 @@ BrGlamorousIcons class >> through [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> tocloud [
 	^ self icons
 		at: #tocloud ifAbsentPut: [(Form
@@ -754,7 +754,7 @@ BrGlamorousIcons class >> tocloud [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> tohere [
 	^ self icons
 		at: #tohere ifAbsentPut: [(Form
@@ -764,7 +764,7 @@ BrGlamorousIcons class >> tohere [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> traitIcon [
 	^ self icons
 		at: #traitIcon ifAbsentPut: [(Form
@@ -774,7 +774,7 @@ BrGlamorousIcons class >> traitIcon [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> trash [
 	^ self icons
 		at: #trash ifAbsentPut: [(Form
@@ -784,7 +784,7 @@ BrGlamorousIcons class >> trash [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> tree [
 	^ self icons
 		at: #tree ifAbsentPut: [(Form
@@ -794,7 +794,7 @@ BrGlamorousIcons class >> tree [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> twopanes [
 	^ self icons
 		at: #twopanes ifAbsentPut: [(Form
@@ -804,7 +804,7 @@ BrGlamorousIcons class >> twopanes [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> up [
 	^ self icons
 		at: #up ifAbsentPut: [(Form
@@ -814,7 +814,7 @@ BrGlamorousIcons class >> up [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> verticaltree [
 	^ self icons
 		at: #verticaltree ifAbsentPut: [(Form
@@ -824,7 +824,7 @@ BrGlamorousIcons class >> verticaltree [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> yellowcircle [
 	^ self icons
 		at: #yellowcircle ifAbsentPut: [(Form
@@ -834,7 +834,7 @@ BrGlamorousIcons class >> yellowcircle [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> zoomin [
 	^ self icons
 		at: #zoomin ifAbsentPut: [(Form
@@ -844,7 +844,7 @@ BrGlamorousIcons class >> zoomin [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> zoomout [
 	^ self icons
 		at: #zoomout ifAbsentPut: [(Form
@@ -854,7 +854,7 @@ BrGlamorousIcons class >> zoomout [
 	offset: (0@0))]
 ]
 
-{ #category : 'icons' }
+{ #category : #icons }
 BrGlamorousIcons class >> zoomtofit [
 	^ self icons
 		at: #zoomtofit ifAbsentPut: [(Form

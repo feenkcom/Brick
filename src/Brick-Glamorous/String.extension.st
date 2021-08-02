@@ -1,11 +1,11 @@
-Extension { #name : 'String' }
+Extension { #name : #String }
 
-{ #category : '*Brick-Glamorous' }
+{ #category : #'*Brick-Glamorous' }
 String >> asHexColor [
 	^ Color fromHexString: self
 ]
 
-{ #category : '*Brick-Glamorous' }
+{ #category : #'*Brick-Glamorous' }
 String >> asThemedIcon [
 	^ BrGlamorousIcons perform: self asSymbol
 ]

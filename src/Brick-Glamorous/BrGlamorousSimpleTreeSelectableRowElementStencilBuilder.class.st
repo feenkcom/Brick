@@ -5,8 +5,8 @@ Makes rows in the simple tree have selection, hover and press visual effects.
 ${example:BrGlamorousSimpleTreeSelectableRowElementStencilBuilder class>>#simpleTreeExample}$
 "
 Class {
-	#name : 'BrGlamorousSimpleTreeSelectableRowElementStencilBuilder',
-	#superclass : 'BrSimpleTreeRowElementStencilBuilder',
+	#name : #BrGlamorousSimpleTreeSelectableRowElementStencilBuilder,
+	#superclass : #BrSimpleTreeRowElementStencilBuilder,
 	#instVars : [
 		'cellSpacing',
 		'padding'
@@ -14,7 +14,7 @@ Class {
 	#category : 'Brick-Glamorous-List, Tree'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> buildDefault [
 	^ super buildDefault
 		addAptitude: BrGlamorousListItemAptitude;
@@ -22,17 +22,17 @@ BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> buildDefault [
 		padding: self padding
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> cellSpacing [
 	^ cellSpacing
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> cellSpacing: anObject [
 	cellSpacing := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> initialize [
 	super initialize.
 	
@@ -40,12 +40,12 @@ BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> initialize [
 	padding := BlInsets empty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> padding [
 	^ padding
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousSimpleTreeSelectableRowElementStencilBuilder >> padding: anObject [
 	padding := anObject
 ]

@@ -2,16 +2,20 @@
 I am a text attribute that adds a small expand button that when clicked may apply further attributes on the text
 "
 Class {
-	#name : 'BrGlamorousTrangleExpanderTextAttribute',
-	#superclass : 'BrTextExpandButtonAttribute',
-	#category : 'Brick-Glamorous'
+	#name : #BrGlamorousTrangleExpanderTextAttribute,
+	#superclass : #BrTextExpandButtonAttribute,
+	#instVars : [
+		'id'
+	],
+	#category : #'Brick-Glamorous'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousTrangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| aToggle |
 
 	aToggle := BrTriangle new
+		id: self id;
 		aptitude: BrGlamorousTriangleInCircleAptitude;
 		expanded: self isExpanded;
 		padding: (BlInsets all: 2);
@@ -27,4 +31,23 @@ BrGlamorousTrangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece 
 		in: anEditorElement editor.
 
 	^ aToggle
+]
+
+{ #category : #accessing }
+BrGlamorousTrangleExpanderTextAttribute >> id [
+	<return: #BlElementId>
+	
+	^ id
+]
+
+{ #category : #accessing }
+BrGlamorousTrangleExpanderTextAttribute >> id: anElementId [
+	id := anElementId
+]
+
+{ #category : #accessing }
+BrGlamorousTrangleExpanderTextAttribute >> initialize [
+	super initialize.
+	
+	id := BlElementId noId
 ]

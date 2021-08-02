@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrGlamorousResizerAptitude',
-	#superclass : 'BrResizerAptitude',
+	#name : #BrGlamorousResizerAptitude,
+	#superclass : #BrResizerAptitude,
 	#instVars : [
 		'thickness',
 		'borderSeparation'
@@ -8,17 +8,17 @@ Class {
 	#category : 'Brick-Glamorous-Resizer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousResizerAptitude >> borderSeparation [
 	^ borderSeparation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousResizerAptitude >> borderSeparation: anObject [
 	borderSeparation := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousResizerAptitude >> initialize [
 	super initialize.
 	thickness := 3.
@@ -30,7 +30,7 @@ BrGlamorousResizerAptitude >> initialize [
 		with: [ BlRoundedRectangleGeometry cornerRadius: 2 ]
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BrGlamorousResizerAptitude >> newInteractiveCommonLook [
 	^ BrInteractiveCommonAptitude new
 		default:
@@ -41,7 +41,7 @@ BrGlamorousResizerAptitude >> newInteractiveCommonLook [
 				[ :aWidget | aWidget background: self theme button pressedBorderColor ]
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BrGlamorousResizerAptitude >> newResizerInteractiveLook [
 	^ BrResizerInteractiveAptitude new
 		top: [ :aWidget | 
@@ -106,12 +106,12 @@ BrGlamorousResizerAptitude >> newResizerInteractiveLook [
 					c ignored vertical weight: 0.4 ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousResizerAptitude >> thickness [
 	^ thickness
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousResizerAptitude >> thickness: anObject [
 	thickness := anObject
 ]

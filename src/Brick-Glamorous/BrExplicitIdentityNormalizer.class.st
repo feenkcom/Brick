@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrExplicitIdentityNormalizer',
-	#superclass : 'BrIdentityNormalizer',
+	#name : #BrExplicitIdentityNormalizer,
+	#superclass : #BrIdentityNormalizer,
 	#instVars : [
 		'colors',
 		'defaultColor'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrExplicitIdentityNormalizer class >> withCommand: aBlock withColors: aCollection withDefaultColor: aColor [
 	
 	^(self withCommand: aBlock)
@@ -17,31 +17,31 @@ BrExplicitIdentityNormalizer class >> withCommand: aBlock withColors: aCollectio
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExplicitIdentityNormalizer >> colors [
 	
 	^colors
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExplicitIdentityNormalizer >> colors: anObject [
 	
 	colors := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExplicitIdentityNormalizer >> defaultColor [
 	
 	^defaultColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExplicitIdentityNormalizer >> defaultColor: anObject [
 	
 	defaultColor := anObject
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrExplicitIdentityNormalizer >> nextColor [
 	
 	colorIndex := colorIndex + 1.
