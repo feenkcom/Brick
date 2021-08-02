@@ -29,45 +29,41 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				spec repository: 'github://feenkcom/Bloc:main/src' ];
 			baseline: 'BlocExamples' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				spec repository: 'github://feenkcom/Bloc:main/src' ];
 			baseline: 'BlocPac' with: [
 				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
 			baseline: 'BlocPacExamples' with: [
 				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
 			baseline: 'GToolkitResourcesUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility/src' ].
-			
-		spec
+				spec repository: 'github://feenkcom/gtoolkit-utility:main/src' ].
+		spec 
 			package: #'Brick-Core' with: [
-				spec requires: #('Bloc' 'BlocPac') ];
+				spec requires: #('Bloc' 'BlocPac' ). ];
 			package: #'Brick-Editor' with: [
-				spec requires: #('Brick-Core') ];
+				spec requires: #(#'Brick-Core' ). ];
 			package: #'Brick-Editor-Extensions' with: [
-				spec requires: #('Brick-Editor') ];
-			
-			package: #'Brick' with: [
-				spec requires: #(#'Brick-Core' #'Brick-Editor') ];
+				spec requires: #(#'Brick-Editor' ). ];
+			package: #Brick with: [
+				spec requires: #(#'Brick-Core' #'Brick-Editor' ). ];
 			package: #'Brick-Theme' with: [
-				spec requires: #(#'Brick') ];
-			
+				spec requires: #(#Brick ). ];
 			package: #'Brick-Glamorous' with: [
-				spec requires: #(#'Brick' #'GToolkitResourcesUtility') ];
+				spec requires: #(#Brick 'GToolkitResourcesUtility' ). ];
 			package: #'Brick-Material' with: [
-				spec requires: #(#'Brick') ];
+				spec requires: #(#Brick ). ];
 			package: #'Brick-Hydra' with: [
-				spec requires: #(#'Brick') ];
-			
+				spec requires: #(#Brick ). ];
 			package: #'Brick-DevTool' with: [
-				spec requires: #(#'Brick' #'Bloc' #'BlocPac') ];
-
+				spec requires: #(#Brick 'Bloc' 'BlocPac' ). ];
 			package: #'Brick-Examples' with: [
-				spec requires: #(#'BlocExamples' #'Brick' #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra') ];
+				spec requires: #('BlocExamples' #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra' ). ];
 			package: #'Brick-Theme-Examples' with: [
-				spec requires: #(#'Brick-Theme') ];
+				spec requires: #(#'Brick-Theme' ). ];
 			package: #'Brick-Theme-Migration' with: [
-				spec requires: #(#'Brick-Theme') ];
+				spec requires: #(#'Brick-Theme' ). ];
 			package: #'Brick-Editor-Examples' with: [
-				spec requires: #(#'Brick' #'Brick-Editor') ] ]
+				spec requires: #(#Brick #'Brick-Editor' ). ]. ].
+
 ]
