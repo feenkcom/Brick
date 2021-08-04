@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrResizerLocationRequest',
-	#superclass : 'BrRequest',
+	#name : #BrResizerLocationRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-Resizer - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrResizerLocationRequest >> responseClass [
 	^ BrResizerLocationChanged
 ]

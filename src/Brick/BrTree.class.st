@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrTree',
-	#superclass : 'BlElement',
+	#name : #BrTree,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
 	#category : 'Brick-Tree - UI'
 }
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> collapseAll [
 	self viewModel collapseAll
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> collapseAt: aLevelIndex [
 	self viewModel collapseAt: aLevelIndex
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTree >> defaultListModel [
 	^ BrAbstractTreeModel new
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> expandAll [
 	"Expand all items in the receiver.
 	Only items that currently have children will be expanded.  Others will remain collapsed, even if they have children added at a later time"
@@ -29,18 +29,18 @@ BrTree >> expandAll [
 	self viewModel expandAll
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> expandSuchThat: anOneArgBlock [
 	"It stops expanding children if a parent node does not satisfy the condition."
 	self viewModel expandSuchThat: anOneArgBlock
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> expandUpTo: aLevelIndex [
 	self viewModel expandUpTo: aLevelIndex
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTree >> initialize [
 	super initialize.
 
@@ -50,7 +50,7 @@ BrTree >> initialize [
 	self initializeEventHandlers
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTree >> initializeEventHandlers [
 	"shortcuts only work when tree has focus.
 	click handler must not be added as a filter"
@@ -70,7 +70,7 @@ BrTree >> initializeEventHandlers [
 			action: [ self selectedNodeDo: #expand ] )
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTree >> items: aCollectionOfItems children: aBlockOrValuable [
 	self
 		deprecated: 'Use #items:lazy: instead'
@@ -79,7 +79,7 @@ BrTree >> items: aCollectionOfItems children: aBlockOrValuable [
 	self viewModel items: aCollectionOfItems children: aBlockOrValuable
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> items: aCollectionOfItems immediate: aBlockOrValuable [
 	"Set the root items and an immediate computation block applied on each child recursively
 	at the moment of assigning items, as opposed to the lazy version #items:children:"
@@ -87,7 +87,7 @@ BrTree >> items: aCollectionOfItems immediate: aBlockOrValuable [
 	self viewModel items: aCollectionOfItems immediate: aBlockOrValuable
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> items: aCollectionOfItems lazy: aBlockOrValuable [
 	"Set the root items and a lazy computation block that will be applied on each child recursively
 	when a corresponding node is expanded, as opposed to an immediate version #items:immediate:"
@@ -95,21 +95,21 @@ BrTree >> items: aCollectionOfItems lazy: aBlockOrValuable [
 	self viewModel items: aCollectionOfItems children: aBlockOrValuable
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTree >> maxSelectionIndex [
 	<return: #Number>
 
 	^ self viewModel root size
 ]
 
-{ #category : 'api - tree' }
+{ #category : #'api - tree' }
 BrTree >> nodeAt: aTreeIndex [
 	<return: #BrTreeNode>
 
 	^ self viewModel itemAt: aTreeIndex
 ]
 
-{ #category : 'scripting' }
+{ #category : #scripting }
 BrTree >> scrollTo: anIndex [
 	self
 		deprecated: 'Use scrollToIndex: instead'
@@ -118,7 +118,7 @@ BrTree >> scrollTo: anIndex [
 	self scrollToIndex: anIndex
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BrTree >> scrollToItem: anObject [
 	"Request a scrollable widget to scroll to a given item"
 
@@ -129,7 +129,7 @@ BrTree >> scrollToItem: anObject [
 				ifTrue: [ self scrollToIndex: treeNode indexInTree ] ]
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTree >> selectAndScrollTo: anObject [
 	self viewModel root
 		allChildrenNodesBreadthFirstDo: [ :treeNode | 
@@ -142,7 +142,7 @@ BrTree >> selectAndScrollTo: anObject [
 					self scrollToIndex: treeNode indexInTree ] ]
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTree >> selectedNodeDo: aBlock [
 	"Evaluate aBlock with the currently selected node"
 	

@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrExpansionState',
-	#superclass : 'BlElementUniqueState',
+	#name : #BrExpansionState,
+	#superclass : #BlElementUniqueState,
 	#category : 'Brick-! Core - Expansion'
 }
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrExpansionState >> optionalEventHandlerDo: aBlock [
 	aBlock value: (BrExpansionStateEventHandler uniqueInstance)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExpansionState >> priority [
 	^ UserPriority
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExpansionState >> type [
 	^ BrExpansionState
 ]

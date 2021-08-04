@@ -1,12 +1,12 @@
 Class {
-	#name : 'BrInteractiveModelExamples',
-	#superclass : 'Object',
+	#name : #BrInteractiveModelExamples,
+	#superclass : #Object,
 	#traits : 'TBrExamplesUtility',
 	#classTraits : 'TBrExamplesUtility classTrait',
 	#category : 'Brick-Examples-! Model - Interactive'
 }
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BrInteractiveModelExamples >> default [
 	<gtExample>
 	| anInteractiveModel |
@@ -19,7 +19,7 @@ BrInteractiveModelExamples >> default [
 	^ anInteractiveModel
 ]
 
-{ #category : 'examples - activation' }
+{ #category : #'examples - activation' }
 BrInteractiveModelExamples >> withEnablement [
 	<gtExample>
 	| anInteractiveModel anActivationModel |

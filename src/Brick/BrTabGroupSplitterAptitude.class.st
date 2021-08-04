@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTabGroupSplitterAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrTabGroupSplitterAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'splitter'
 	],
 	#category : 'Brick-Tabs - Look'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTabGroupSplitterAptitude >> initialize [
 	super initialize.
 	splitter := BlElement new labeled: 'Splitter'.
@@ -22,17 +22,17 @@ BrTabGroupSplitterAptitude >> initialize [
 	self addChangeAddChildAs: #(header splitter) with: [ splitter ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupSplitterAptitude >> splitter [
 	^ splitter
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupSplitterAptitude >> splitter: anObject [
 	splitter := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupSplitterAptitude >> splitterDo: aBlock [
 	aBlock value: self splitter
 ]

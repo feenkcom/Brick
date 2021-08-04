@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrBasicScrollbarAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrBasicScrollbarAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'scrollbar',
 		'scrollable',
@@ -10,7 +10,7 @@ Class {
 	#category : 'Brick-Scrollbar - Look'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> beHorizontal [
 	| aCurrentScrollbar |
 	scrollbar class = BlHorizontalScrollbarElement ifTrue: [ ^ self ].
@@ -21,7 +21,7 @@ BrBasicScrollbarAptitude >> beHorizontal [
 	self replaceScrollbarElement: aCurrentScrollbar by: scrollbar.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> beVertical [
 	| aCurrentScrollbar |
 	scrollbar class = BlVerticalScrollbarElement ifTrue: [ ^ self ].
@@ -32,7 +32,7 @@ BrBasicScrollbarAptitude >> beVertical [
 	self replaceScrollbarElement: aCurrentScrollbar by: scrollbar.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> initialize [
 	super initialize.
 	
@@ -44,7 +44,7 @@ BrBasicScrollbarAptitude >> initialize [
 		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -56,7 +56,7 @@ BrBasicScrollbarAptitude >> initializeListeners [
 	self when: BrScrollbarTrackChanged do: [ :anEvent | self trackChanged: anEvent stencil ].
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -65,13 +65,13 @@ BrBasicScrollbarAptitude >> initializeRequests [
 	self request: BrScrollbarScrollableRequest new.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> initializeScrollbar [
 	scrollbar := BlVerticalScrollbarElement new.
 	self initializeScrollbar: scrollbar.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBasicScrollbarAptitude >> initializeScrollbar: aScrollbar [
 	
 	scrollable
@@ -84,7 +84,7 @@ BrBasicScrollbarAptitude >> initializeScrollbar: aScrollbar [
 		ifNotNil: [ aScrollbar track: trackStencil asElement removeFromParent ].
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrBasicScrollbarAptitude >> replaceScrollbarElement: anOldScrollbar by: aNewScrollbar [
 	self widgetDo: [ :aWidget |
 		| aParent |
@@ -92,19 +92,19 @@ BrBasicScrollbarAptitude >> replaceScrollbarElement: anOldScrollbar by: aNewScro
 		aParent replaceChild: anOldScrollbar with: aNewScrollbar as: #scrollbar. ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BrBasicScrollbarAptitude >> scrollableChanged: aTBlScrollable [
 	scrollable := aTBlScrollable.
 	scrollbar attachTo: aTBlScrollable
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BrBasicScrollbarAptitude >> thumbChanged: aStencil [
 	thumbStencil := aStencil.
 	scrollbar thumb: thumbStencil asElement
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BrBasicScrollbarAptitude >> trackChanged: aStencil [
 	trackStencil := aStencil.
 	scrollbar track: trackStencil asElement

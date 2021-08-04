@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTreeNodeDataBinderRequest',
-	#superclass : 'BrRequest',
+	#name : #BrTreeNodeDataBinderRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNodeDataBinderRequest >> responseClass [
 	^ BrTreeNodeDataBinderChangedEvent
 ]

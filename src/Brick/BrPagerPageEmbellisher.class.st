@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrPagerPageEmbellisher',
-	#superclass : 'BrStencil',
+	#name : #BrPagerPageEmbellisher,
+	#superclass : #BrStencil,
 	#instVars : [
 		'contentElement'
 	],
 	#category : 'Brick-Pager - Stencil'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPageEmbellisher >> contentElement [
 	^ contentElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPageEmbellisher >> contentElement: anElement [
 	contentElement := anElement
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrPagerPageEmbellisher >> create [
 	<return: #BlElement>
 

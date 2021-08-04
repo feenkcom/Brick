@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrScrollPaneExamples',
-	#superclass : 'Object',
+	#name : #BrScrollPaneExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Scrollpane'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrScrollPaneExamples >> content [
 	<gtExample>
 	
@@ -21,7 +21,7 @@ BrScrollPaneExamples >> content [
 					c vertical exact: 10 + (i * 5) ] ])
 ]
 
-{ #category : 'examples - scrollpane' }
+{ #category : #'examples - scrollpane' }
 BrScrollPaneExamples >> scrollpaneWithContentAndScrollbar [
 	<gtExample>
 	
@@ -30,7 +30,7 @@ BrScrollPaneExamples >> scrollpaneWithContentAndScrollbar [
 		content: self content
 ]
 
-{ #category : 'examples - scrollpane' }
+{ #category : #'examples - scrollpane' }
 BrScrollPaneExamples >> scrollpaneWithContentWithoutScrollbar [
 	<gtExample>
 

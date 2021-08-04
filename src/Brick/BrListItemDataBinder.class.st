@@ -2,8 +2,8 @@
 I define the api of an object that should bind the actual item data to the reused item elements
 "
 Class {
-	#name : 'BrListItemDataBinder',
-	#superclass : 'BrStencilBuilder',
+	#name : #BrListItemDataBinder,
+	#superclass : #BrStencilBuilder,
 	#instVars : [
 		'itemPosition',
 		'itemObject',
@@ -12,44 +12,44 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrListItemDataBinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ itemElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemDataBinder >> itemElement [
 	^ itemElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemDataBinder >> itemElement: anObject [
 	itemElement := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemDataBinder >> itemObject [
 	^ itemObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemDataBinder >> itemObject: anObject [
 	itemObject := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemDataBinder >> itemPosition [
 	^ itemPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemDataBinder >> itemPosition: anObject [
 	itemPosition := anObject
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrListItemDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self itemElement;
@@ -57,7 +57,7 @@ BrListItemDataBinder >> paramsOn: aStencilExecutor [
 		push: self itemPosition
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListItemDataBinder >> reset [
 	itemObject := nil.
 	itemPosition := nil.

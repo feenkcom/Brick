@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrColumnedLazyListModel',
-	#superclass : 'BrColumnedListModel',
+	#name : #BrColumnedLazyListModel,
+	#superclass : #BrColumnedListModel,
 	#instVars : [
 		'itemsProvider',
 		'mutex',
@@ -10,30 +10,30 @@ Class {
 	#category : 'Brick-List - Model'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrColumnedLazyListModel >> hasMoreItemsToLoad [
 	^ self itemCount < self itemsProvider totalItemsCount
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrColumnedLazyListModel >> initialize [
 	super initialize.
 	mutex := Mutex new.
 	isRequestingItems := false.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrColumnedLazyListModel >> isBoundaryNearIndex: anIndex [
 	^ self itemCount - anIndex < 10
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrColumnedLazyListModel >> isRequestingItems [
 	^ mutex critical: [ 
 		isRequestingItems ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrColumnedLazyListModel >> itemAt: anIndex [
 	| requestedItem |
 	requestedItem := super itemAt: anIndex.
@@ -44,12 +44,12 @@ BrColumnedLazyListModel >> itemAt: anIndex [
 	^ requestedItem
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumnedLazyListModel >> itemsProvider [
 	^ itemsProvider
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumnedLazyListModel >> itemsProvider: anItemsProvider [
 	| initialItems |
 	itemsProvider := anItemsProvider.
@@ -59,18 +59,18 @@ BrColumnedLazyListModel >> itemsProvider: anItemsProvider [
 	self items: initialItems
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrColumnedLazyListModel >> loadNewItems [
 	^ self itemsProvider 
 		retrieveItemsFromIndex: self loadedItems size + 1
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumnedLazyListModel >> loadedItems [ 
 	^ self items
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrColumnedLazyListModel >> requestNewItems [
 	"mutex critical: [ 
 		isRequestingItems := true.
@@ -90,7 +90,7 @@ BrColumnedLazyListModel >> requestNewItems [
 	
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrColumnedLazyListModel >> shouldRequestNewItemsForIndex: anIndex [
 	self isRequestingItems ifTrue: [ ^ false ].
 	

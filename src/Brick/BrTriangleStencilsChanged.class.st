@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTriangleStencilsChanged',
-	#superclass : 'BrChangeEvent',
+	#name : #BrTriangleStencilsChanged,
+	#superclass : #BrChangeEvent,
 	#instVars : [
 		'collapsedStencil',
 		'expandedStencil'
@@ -8,22 +8,22 @@ Class {
 	#category : 'Brick-Triangle - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleStencilsChanged >> collapsedStencil [
 	^ collapsedStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleStencilsChanged >> collapsedStencil: anObject [
 	collapsedStencil := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleStencilsChanged >> expandedStencil [
 	^ expandedStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleStencilsChanged >> expandedStencil: anObject [
 	expandedStencil := anObject
 ]

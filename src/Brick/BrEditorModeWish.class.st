@@ -1,38 +1,38 @@
 Class {
-	#name : 'BrEditorModeWish',
-	#superclass : 'BrEditorWish',
+	#name : #BrEditorModeWish,
+	#superclass : #BrEditorWish,
 	#instVars : [
 		'mode'
 	],
 	#category : 'Brick-Editor - Events'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrEditorModeWish class >> editable [
 	^ self new mode: BrTextEditorEditableMode new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrEditorModeWish class >> mode: aTextEditorMode [
 	^ self new mode: aTextEditorMode
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrEditorModeWish class >> readOnlyWithSelection [
 	^ self new mode: BrTextEditorReadonlyWithSelectionMode new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrEditorModeWish class >> readOnlyWithoutSelection [
 	^ self new mode: BrTextEditorReadonlyWithoutSelectionMode new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorModeWish >> mode [
 	^ mode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorModeWish >> mode: anObject [
 	mode := anObject
 ]

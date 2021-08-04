@@ -10,8 +10,8 @@ popup show.
 ]]]
 "
 Class {
-	#name : 'BrPopup',
-	#superclass : 'BlElement',
+	#name : #BrPopup,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait',
 	#instVars : [
@@ -20,12 +20,12 @@ Class {
 	#category : 'Brick-Popup - UI'
 }
 
-{ #category : 'api - popup' }
+{ #category : #'api - popup' }
 BrPopup >> hide [
 	expandedModel collapse
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrPopup >> initialize [
 	super initialize.
 
@@ -34,17 +34,17 @@ BrPopup >> initialize [
 			BrLayoutAlignmentModel new } })
 ]
 
-{ #category : 'api - popup' }
+{ #category : #'api - popup' }
 BrPopup >> show [
 	expandedModel expand
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPopup >> stencil: aStencil [
 	self viewModel stencil: aStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPopup >> target: aPopupTarget [
 	self viewModel target: aPopupTarget
 ]

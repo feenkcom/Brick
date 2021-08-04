@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrLookChangeExamples',
-	#superclass : 'Object',
+	#name : #BrLookChangeExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Look'
 }
 
-{ #category : 'buttons' }
+{ #category : #buttons }
 BrLookChangeExamples >> buttonLookChange [
 	<gtExample>
 	^ BrButton new
@@ -20,7 +20,7 @@ BrLookChangeExamples >> buttonLookChange [
 						label: 'I am quite materialistic...' ] ]
 ]
 
-{ #category : 'buttons' }
+{ #category : #buttons }
 BrLookChangeExamples >> buttonLookPropertyChange [
 	<gtExample>
 	| blue wide notSoWide fat pointy round roundish changes label |

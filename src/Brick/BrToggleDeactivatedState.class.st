@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrToggleDeactivatedState',
-	#superclass : 'BrToggleState',
+	#name : #BrToggleDeactivatedState,
+	#superclass : #BrToggleState,
 	#category : 'Brick-Toggle - States'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrToggleDeactivatedState >> isDeactivated [
 	^ true
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrToggleDeactivatedState >> printOn: aStream [
 	aStream nextPutAll: 'deactivated'
 ]

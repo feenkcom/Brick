@@ -1,6 +1,6 @@
-Extension { #name : 'BrWidgetModel' }
+Extension { #name : #BrWidgetModel }
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BrWidgetModel >> addInteractiveModelState: aState [
 	self allActorsBreadthFirstDo: [ :eachModel | 
 		(eachModel isKindOf: BrInteractiveModel) ifTrue: [ 

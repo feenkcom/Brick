@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrAnchoredAnchorBounds',
-	#superclass : 'Object',
+	#name : #BrAnchoredAnchorBounds,
+	#superclass : #Object,
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrAnchoredAnchorBounds class >> asBrAnchoredAnchorBounds [
 	^ self new
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrAnchoredAnchorBounds >> asBrAnchoredAnchorBounds [
 	^ self
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrAnchoredAnchorBounds >> boundsIn: aReferenceElement [
 	self subclassResponsibility
 ]

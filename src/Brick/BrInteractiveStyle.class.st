@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrInteractiveStyle',
-	#superclass : 'Object',
+	#name : #BrInteractiveStyle,
+	#superclass : #Object,
 	#instVars : [
 		'state',
 		'action'
@@ -8,19 +8,19 @@ Class {
 	#category : 'Brick-! Core - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrInteractiveStyle >> action [
 	<return: #BlockClosure>
 
 	^ action
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrInteractiveStyle >> action: aValuable [
 	action := aValuable
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrInteractiveStyle >> printOn: aStream [
 	aStream
 		nextPutAll: 'when: ';
@@ -29,14 +29,14 @@ BrInteractiveStyle >> printOn: aStream [
 		print: self action
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrInteractiveStyle >> state [
 	<return: #BrInteractionState>
 
 	^ state
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrInteractiveStyle >> state: anInteractionState [
 	state := anInteractionState
 ]

@@ -21,12 +21,12 @@ ${example:BrGlamorousComponentsPagers>>#infinitePager|previewShow=#gtLiveFor:|pr
 
 "
 Class {
-	#name : 'BrGlamorousComponentsPagers',
-	#superclass : 'BrGlamorousComponents',
+	#name : #BrGlamorousComponentsPagers,
+	#superclass : #BrGlamorousComponents,
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : 'pager - examples' }
+{ #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> dynamicPager [
 	<gtExample>
 	| aPager |
@@ -60,7 +60,7 @@ BrGlamorousComponentsPagers >> dynamicPager [
 	^ aPager
 ]
 
-{ #category : 'pager - examples' }
+{ #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> infinitePager [
 	<gtExample>
 	| aPager aPageStencil |
@@ -90,7 +90,7 @@ BrGlamorousComponentsPagers >> infinitePager [
 	^ aPager
 ]
 
-{ #category : 'pager - examples' }
+{ #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> threeFullPagePager [
 	<gtExample>
 	| aPager |
@@ -125,7 +125,7 @@ BrGlamorousComponentsPagers >> threeFullPagePager [
 	^ aPager
 ]
 
-{ #category : 'pager - examples' }
+{ #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> twoHalfPagePager [
 	<gtExample>
 	| aPager |

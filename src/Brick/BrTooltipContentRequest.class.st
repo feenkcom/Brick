@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTooltipContentRequest',
-	#superclass : 'BrAnchoredContentRequest',
+	#name : #BrTooltipContentRequest,
+	#superclass : #BrAnchoredContentRequest,
 	#category : 'Brick-Tooltip - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTooltipContentRequest >> responseClass [
 	^ BrTooltipContentChanged
 ]

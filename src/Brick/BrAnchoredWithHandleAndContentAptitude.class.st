@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrAnchoredWithHandleAndContentAptitude',
-	#superclass : 'BrAnchoredAptitude',
+	#name : #BrAnchoredWithHandleAndContentAptitude,
+	#superclass : #BrAnchoredAptitude,
 	#instVars : [
 		'handle',
 		'contentWrapper'
@@ -8,14 +8,14 @@ Class {
 	#category : 'Brick-Anchored - Look'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredWithHandleAndContentAptitude >> content [
 	<return: #BlElement>
 
 	^ contentWrapper children first
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredWithHandleAndContentAptitude >> content: anElement [
 	self content = anElement
 		ifTrue: [ ^ self ].
@@ -24,12 +24,12 @@ BrAnchoredWithHandleAndContentAptitude >> content: anElement [
 	contentWrapper addChild: anElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredWithHandleAndContentAptitude >> handle [
 	^ handle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredWithHandleAndContentAptitude >> handle: anElement [
 	handle = anElement
 		ifTrue: [ ^ self ].
@@ -40,7 +40,7 @@ BrAnchoredWithHandleAndContentAptitude >> handle: anElement [
 	self widgetDo: [ :aWidget | aWidget replaceChild: (widget childNamed: #handle) with: handle ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAnchoredWithHandleAndContentAptitude >> initialize [
 	super initialize.
 

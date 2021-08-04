@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrEditableLabelSwitchToEditorShortcut',
-	#superclass : 'BrEditableLabelShortcut',
+	#name : #BrEditableLabelSwitchToEditorShortcut,
+	#superclass : #BrEditableLabelShortcut,
 	#category : 'Brick-Editor - Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditableLabelSwitchToEditorShortcut >> description [
 	^ 'Switches the label into an editor allowing users to edit it.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditableLabelSwitchToEditorShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination return
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditableLabelSwitchToEditorShortcut >> name [
 	^ 'Switch to editor'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditableLabelSwitchToEditorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrEditorElement switchToEditor
 ]

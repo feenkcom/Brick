@@ -6,29 +6,29 @@ Example:
 [[[example=GtDiagrammerUmlClassElementExamples>>#withAttributesAndMethods|expanded=true|show=gtLiveIn:]]]
 "
 Class {
-	#name : 'BrUmlClassElement',
-	#superclass : 'BlElement',
+	#name : #BrUmlClassElement,
+	#superclass : #BlElement,
 	#category : 'Brick-UML - Stencil'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrUmlClassElement class >> new [
 	^ self withDefaultContainer
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrUmlClassElement class >> withContainers: aCollectionOfSymbols [
 	^ self basicNew
 		initialize;
 		newContainers: aCollectionOfSymbols
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrUmlClassElement class >> withDefaultContainer [
 	^ self withContainers: #(label default)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrUmlClassElement >> attributes: aCollectionOfAttributes in: aContainerSymbol [
 	"Change a text within a container given by its name"
 	
@@ -40,7 +40,7 @@ BrUmlClassElement >> attributes: aCollectionOfAttributes in: aContainerSymbol [
 			anEditor text: (anEditor text attributes: aCollectionOfAttributes) ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrUmlClassElement >> editorIn: aContainerSymbol do: aBlock [
 	"Search for an editor inside of a container by its name
 	and evaluate a block if such an editor is found"
@@ -55,7 +55,7 @@ BrUmlClassElement >> editorIn: aContainerSymbol do: aBlock [
 		ifNone: #yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrUmlClassElement >> initialize [
 	super initialize.
 	
@@ -64,12 +64,12 @@ BrUmlClassElement >> initialize [
 	self border: (BlBorder paint: Color black width: 1)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrUmlClassElement >> label: aBrText [
 	self text: aBrText in: #label
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrUmlClassElement >> newContainers: aCollectionOfSymbols [
 
 	aCollectionOfSymbols withIndexDo: [ :aSymbol :anIndex | 
@@ -100,7 +100,7 @@ BrUmlClassElement >> newContainers: aCollectionOfSymbols [
 		self addChild: aContainer as: aSymbol ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrUmlClassElement >> text: aBrText in: aContainerSymbol [
 	"Change a text within a container given by its name"
 	

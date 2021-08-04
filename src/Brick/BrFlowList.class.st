@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrFlowList',
-	#superclass : 'BrList',
+	#name : #BrFlowList,
+	#superclass : #BrList,
 	#category : 'Brick-List - UI'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFlowList >> initialize [
 	super initialize.
 
@@ -15,7 +15,7 @@ BrFlowList >> initialize [
 		c vertical matchParent ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFlowList >> stencil: aListRowStencilBuilder [
 	self aptitude itemStencilBuilder: aListRowStencilBuilder
 ]

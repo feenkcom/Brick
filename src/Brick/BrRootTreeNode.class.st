@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrRootTreeNode',
-	#superclass : 'BrTreeNode',
+	#name : #BrRootTreeNode,
+	#superclass : #BrTreeNode,
 	#instVars : [
 		'announcer',
 		'isLazy'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Tree - Model'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrRootTreeNode class >> on: anObject computed: aComputationBlock [
 	self
 		deprecated: 'Use #onMany:computed: instead'
@@ -17,7 +17,7 @@ BrRootTreeNode class >> on: anObject computed: aComputationBlock [
 	^ self onMany: anObject computed: aComputationBlock
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrRootTreeNode class >> onMany: aCollection computed: aComputationBlock [
 	"Created a root tree node on a collection of items"
 
@@ -28,7 +28,7 @@ BrRootTreeNode class >> onMany: aCollection computed: aComputationBlock [
 		withSelf: false
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrRootTreeNode class >> onMany: aCollection immediate: aComputationBlock [
 	"Created a root tree node on a collection of items"
 
@@ -39,7 +39,7 @@ BrRootTreeNode class >> onMany: aCollection immediate: aComputationBlock [
 		withSelf: false) ensureChildrenNodes
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrRootTreeNode class >> onOne: anObject computed: aComputationBlock [
 	"Created a root tree node on a single root item"
 
@@ -50,7 +50,7 @@ BrRootTreeNode class >> onOne: anObject computed: aComputationBlock [
 		withSelf: true
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrRootTreeNode class >> onOne: anObject immediate: aComputationBlock [
 	"Created a root tree node on a single root item"
 
@@ -61,51 +61,51 @@ BrRootTreeNode class >> onOne: anObject immediate: aComputationBlock [
 		withSelf: true) ensureChildrenNodes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrRootTreeNode >> announcer [
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrRootTreeNode >> depth [
 	^ 0
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrRootTreeNode >> expandSuchThat: anOneArgBlock [
 	computation expand: self suchThat: anOneArgBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrRootTreeNode >> initialize [
 	super initialize.
 	
 	isLazy := true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrRootTreeNode >> isAccountedForSelf [		
 	^ self indexInTree > 0
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrRootTreeNode >> isLazy [
 	^ isLazy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrRootTreeNode >> lazy: aBoolean [
 	isLazy := aBoolean
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrRootTreeNode >> newSubNode: anObject computation: aComputationBlock [
 	^ self isLazy
 		ifTrue: [ BrLazyTreeNode new value: anObject computation: aComputationBlock block ]
 		ifFalse: [ (BrImmediateTreeNode new value: anObject computation: aComputationBlock block) ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrRootTreeNode >> onChildCollapsed: aChildNode from: anOriginNode size: anAmount [
 	super onChildCollapsed: aChildNode from: anOriginNode size: anAmount.
 	
@@ -115,7 +115,7 @@ BrRootTreeNode >> onChildCollapsed: aChildNode from: anOriginNode size: anAmount
 		node: anOriginNode)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrRootTreeNode >> onChildExpanded: aChildNode from: anOriginNode size: anAmount [
 	super onChildExpanded: aChildNode from: anOriginNode size: anAmount.
 
@@ -125,7 +125,7 @@ BrRootTreeNode >> onChildExpanded: aChildNode from: anOriginNode size: anAmount 
 		node: anOriginNode)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrRootTreeNode >> onChildInserted: anOriginNode size: anAmount [
 	super onChildInserted: anOriginNode size: anAmount.
 	self announcer
@@ -136,7 +136,7 @@ BrRootTreeNode >> onChildInserted: anOriginNode size: anAmount [
 				node: anOriginNode)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrRootTreeNode >> onChildRemoved: anOriginNode size: anAmount [
 	super onChildRemoved: anOriginNode size: anAmount.
 	self announcer
@@ -147,7 +147,7 @@ BrRootTreeNode >> onChildRemoved: anOriginNode size: anAmount [
 				node: anOriginNode)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrRootTreeNode >> onNodeChanged: aTreeNode payload: anObject [
 	super onNodeChanged: aTreeNode payload: anObject.
 	self announcer

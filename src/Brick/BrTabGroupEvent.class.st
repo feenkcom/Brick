@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrTabGroupEvent',
-	#superclass : 'BlEvent',
+	#name : #BrTabGroupEvent,
+	#superclass : #BlEvent,
 	#category : 'Brick-Tabs - Events'
 }

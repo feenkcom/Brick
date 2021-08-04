@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrFrameAptitude',
-	#superclass : 'BrWidgetContainerAptitude',
+	#name : #BrFrameAptitude,
+	#superclass : #BrWidgetContainerAptitude,
 	#category : 'Brick-Layout Widgets'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFrameAptitude >> initialize [
 	super initialize.
 

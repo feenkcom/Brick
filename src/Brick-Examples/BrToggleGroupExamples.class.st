@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrToggleGroupExamples',
-	#superclass : 'Object',
+	#name : #BrToggleGroupExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Toggle'
 }
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> addActivatedAndDeactivatedTogglesToEmptyGroup [
 	<gtExample>
 	| aToggleGroupModel aToggleModelActivated aToggleModelDeactivated |
@@ -30,7 +30,7 @@ BrToggleGroupExamples >> addActivatedAndDeactivatedTogglesToEmptyGroup [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> addActivatedToggleToEmptyGroup [
 	<gtExample>
 	| aToggleGroupModel aToggleModel |
@@ -52,7 +52,7 @@ BrToggleGroupExamples >> addActivatedToggleToEmptyGroup [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> addActivatedToggleToGroupWithDeactivatedToggle [
 	<gtExample>
 	| aToggleGroupModel aToggleModel |
@@ -74,7 +74,7 @@ BrToggleGroupExamples >> addActivatedToggleToGroupWithDeactivatedToggle [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> addDeactivatedToggleToEmptyGroup [
 	<gtExample>
 	| aToggleGroupModel aToggleModel |
@@ -94,7 +94,7 @@ BrToggleGroupExamples >> addDeactivatedToggleToEmptyGroup [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> addDeactivatedToggleToGroupWithDeactivatedToggle [
 	<gtExample>
 	| aToggleGroupModel aToggleModel |
@@ -114,7 +114,7 @@ BrToggleGroupExamples >> addDeactivatedToggleToGroupWithDeactivatedToggle [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BrToggleGroupExamples >> emptyToggleGroupModel [
 	<gtExample>
 	| aToggleGroupModel |
@@ -132,7 +132,7 @@ BrToggleGroupExamples >> emptyToggleGroupModel [
 	
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> removeActivatedToggleFromGroupWithOneToggle [
 	<gtExample>
 	| aToggleGroupModel aToggleModel |
@@ -154,7 +154,7 @@ BrToggleGroupExamples >> removeActivatedToggleFromGroupWithOneToggle [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> removeTogglesFromGroupWithTwoTogglesOneOfWhichActivated [
 	<gtExample>
 	| aToggleGroupModel |
@@ -171,7 +171,7 @@ BrToggleGroupExamples >> removeTogglesFromGroupWithTwoTogglesOneOfWhichActivated
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - model' }
+{ #category : #'examples - model' }
 BrToggleGroupExamples >> switchActivatedTogglesInGroupWithTwoToggles [
 	<gtExample>
 	| aToggleGroupModel aToggleModelActivated aToggleModelDeactivated |
@@ -196,7 +196,7 @@ BrToggleGroupExamples >> switchActivatedTogglesInGroupWithTwoToggles [
 	^ aToggleGroupModel
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BrToggleGroupExamples >> toggleAddedEvent [
 	<gtExample>
 	| aToggleGroupModel aToggleModel aToggleAddedEvent |
@@ -220,7 +220,7 @@ BrToggleGroupExamples >> toggleAddedEvent [
 	^ aToggleAddedEvent
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BrToggleGroupExamples >> toggleDeactivatedEventDueToRemoving [
 	<gtExample>
 	| aToggleGroupModel aToggleModel aToggleDeactivatedEvent |
@@ -244,14 +244,14 @@ BrToggleGroupExamples >> toggleDeactivatedEventDueToRemoving [
 	^ aToggleDeactivatedEvent
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BrToggleGroupExamples >> toggleModel [
 	<gtExample>
 
 	^ BrToggleModel new
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BrToggleGroupExamples >> toggleRemovedDeactivatedEvent [
 	<gtExample>
 	| aToggleGroupModel aToggleModel aToggleRemovedEvent |

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrAnchoredPositionerExamples',
-	#superclass : 'Object',
+	#name : #BrAnchoredPositionerExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Anchored'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredPositionerExamples >> anchor [
 	<gtExample>
 	^ BlElement new
@@ -13,7 +13,7 @@ BrAnchoredPositionerExamples >> anchor [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredPositionerExamples >> anchorContainer [
 	<gtExample>
 	^ BlElement new
@@ -31,7 +31,7 @@ BrAnchoredPositionerExamples >> anchorContainer [
 		yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredPositionerExamples >> anchorPosition: aBlock relocateAnchored: anotherBlock assertAnchoredMaxBounds: yetAnotherBlock [
 	| space positioner anchor anchorContainer target targetContainer popup popupSize popupPreferredMaxBoundsInTarget |
 	space := BlSpace new
@@ -71,13 +71,13 @@ BrAnchoredPositionerExamples >> anchorPosition: aBlock relocateAnchored: another
 	^ space
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredPositionerExamples >> anchoredPositioner [
 	<gtExample>
 	^ BrAnchoredPositioner anchor: self anchor target: self target
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredPositionerExamples >> bottomLeft [
 	<gtExample>
 	^ self
@@ -91,7 +91,7 @@ BrAnchoredPositionerExamples >> bottomLeft [
 				corner: (anchor bounds inSpace inChild: target) right @ target height ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredPositionerExamples >> bottomRight [
 	<gtExample>
 	^ self
@@ -102,7 +102,7 @@ BrAnchoredPositionerExamples >> bottomRight [
 			[ :target :anchor :popup | BlBounds origin: (anchor bounds inSpace inChild: target) bottomLeft corner: target size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredPositionerExamples >> defaultToBottomRight [
 	<gtExample>
 	^ self
@@ -113,7 +113,7 @@ BrAnchoredPositionerExamples >> defaultToBottomRight [
 			[ :target :anchor :popup | BlBounds origin: (anchor bounds inSpace inChild: target) bottomLeft corner: target size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredPositionerExamples >> popup [
 	<gtExample>
 	^ BlElement new
@@ -122,7 +122,7 @@ BrAnchoredPositionerExamples >> popup [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredPositionerExamples >> target [
 	<gtExample>
 	^ BlElement new
@@ -139,7 +139,7 @@ BrAnchoredPositionerExamples >> target [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredPositionerExamples >> targetContainer [
 	<gtExample>
 	^ BlElement new
@@ -157,7 +157,7 @@ BrAnchoredPositionerExamples >> targetContainer [
 		yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredPositionerExamples >> topLeft [
 	<gtExample>
 	^ self
@@ -168,7 +168,7 @@ BrAnchoredPositionerExamples >> topLeft [
 			[ :target :anchor :popup | BlBounds origin: 0 @ 0 corner: (anchor bounds inSpace inChild: target) topRight ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredPositionerExamples >> topRight [
 	<gtExample>
 	^ self

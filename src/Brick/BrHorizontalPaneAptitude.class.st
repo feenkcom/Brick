@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrHorizontalPaneAptitude',
-	#superclass : 'BrWidgetContainerAptitude',
+	#name : #BrHorizontalPaneAptitude,
+	#superclass : #BrWidgetContainerAptitude,
 	#category : 'Brick-Layout Widgets'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrHorizontalPaneAptitude >> initialize [
 	super initialize.
 

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrBasicExamples',
-	#superclass : 'Object',
+	#name : #BrBasicExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples'
 }
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BrBasicExamples >> widgetModelAttachedEvent [
 	<gtExample>
 	| aWidgetElement aWidgetModel viewModelAttachedElement |

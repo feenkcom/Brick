@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrSimpleLazyList',
-	#superclass : 'BrSimpleList',
+	#name : #BrSimpleLazyList,
+	#superclass : #BrSimpleList,
 	#category : 'Brick-List - UI'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrSimpleLazyList >> defaultListModel [
 	^ BrSimpleLazyListModel new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSimpleLazyList >> itemsProvider: anItemsProvider [
 	self viewModel itemsProvider: anItemsProvider
 ]

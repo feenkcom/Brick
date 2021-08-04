@@ -1,21 +1,21 @@
 Class {
-	#name : 'BrTabGroupModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrTabGroupModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'tabs',
 		'selectedTab',
 		'tabEventHandler',
 		'actionbarStencilBuilder'
 	],
-	#category : 'Brick-Tabs - Model'
+	#category : #'Brick-Tabs - Model'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTabGroupModel class >> with: aCollectionOfTabs [
 	^ self new addTabs: aCollectionOfTabs
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupModel >> actionbarStencil: anActionbarStencilBuilder [
 	"Set a stencil to be used to create an action bar in the header of the tabgroup.
 	An action bar is usually located on the right side of the header"
@@ -24,12 +24,12 @@ BrTabGroupModel >> actionbarStencil: anActionbarStencilBuilder [
 	self notifyActionbarChanged: actionbarStencilBuilder
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> addTab: aBrTabModel [
 	self addTab: aBrTabModel at: self tabs size + 1
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> addTab: aBrTabModel at: anIndex [
 	"Tab already exists, do nothing"
 	(self hasTab: aBrTabModel)
@@ -39,12 +39,12 @@ BrTabGroupModel >> addTab: aBrTabModel at: anIndex [
 	self onTabAdded: aBrTabModel at: anIndex
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> addTabs: aCollectionOfTabModels [
 	aCollectionOfTabModels do: [ :aTabModel | self addTab: aTabModel ]
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> deselectTab: aBrTabModel [
 	"there are no selected tabs, do nothing"
 	self hasSelectedTab
@@ -62,21 +62,21 @@ BrTabGroupModel >> deselectTab: aBrTabModel [
 	self notifyTabDeselected: aBrTabModel
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrTabGroupModel >> hasSelectedTab [
 	<return: #Boolean>
 	
 	^ selectedTab notNil
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrTabGroupModel >> hasTab: aBrTabModel [
 	<return: #Boolean>
 	
 	^ self tabs identityIncludes: aBrTabModel
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> indexOf: aTab [
 	"It returns 0 if a tab is not present"
 	<return: #Number>
@@ -84,7 +84,7 @@ BrTabGroupModel >> indexOf: aTab [
 	^ self tabs indexOf: aTab
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTabGroupModel >> initialize [
 	super initialize.
 
@@ -95,7 +95,7 @@ BrTabGroupModel >> initialize [
 	actionbarStencilBuilder := nil.
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTabGroupModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -104,7 +104,7 @@ BrTabGroupModel >> initializeListeners [
 	self when: BrTabGroupActionbarRequest reply: [ :aResponse | aResponse stencil: actionbarStencilBuilder ]
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrTabGroupModel >> isEmpty [
 	"Return true if there are no tabs in a group, false otherwise"
 	<return: #Boolean>
@@ -112,7 +112,7 @@ BrTabGroupModel >> isEmpty [
 	^ self tabs isEmpty
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrTabGroupModel >> isNotEmpty [
 	"Return true if there is at least one tab in a group, false otherwise"
 	<return: #Boolean>
@@ -120,7 +120,7 @@ BrTabGroupModel >> isNotEmpty [
 	^ self tabs isNotEmpty
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> moveTab: aBrTabModel at: aNewIndex [
 	| aCurrentIndex |
 
@@ -144,49 +144,49 @@ BrTabGroupModel >> moveTab: aBrTabModel at: aNewIndex [
 	self notifyTabMoved: aBrTabModel from: aCurrentIndex to: aNewIndex.
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyActionbarChanged: aStencil [
 	self dispatchEvent: (BrTabGroupActionbarChangedEvent new stencil: aStencil)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabAdded: aBrTabModel at: anIndex [
 	self dispatchEvent: ((BrTabAddedEvent tab: aBrTabModel) position: anIndex)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabDeselected: aBrTabModel [
 	self dispatchEvent: (BrTabDeselectedEvent tab: aBrTabModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabMoved: aBrTabModel from: anOldIndex to: aNewIndex [
 	self dispatchEvent: ((BrTabMovedEvent tab: aBrTabModel) 
 		oldPosition: anOldIndex;
 		newPosition: aNewIndex)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabRemoved: aBrTabModel [
 	self dispatchEvent: (BrTabRemovedEvent tab: aBrTabModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabSelected: aBrTabModel [
 	self dispatchEvent: (BrTabSelectedEvent tab: aBrTabModel)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabStencilChanged: anEvent [
 	self dispatchEvent: anEvent
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabGroupModel >> notifyTabToolbarChanged: anEvent [
 	self dispatchEvent: anEvent
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTabGroupModel >> onTabAdded: aBrTabModel at: anIndex [
 
 	aBrTabModel addEventHandler: tabEventHandler.
@@ -201,14 +201,14 @@ BrTabGroupModel >> onTabAdded: aBrTabModel at: anIndex [
 		ifTrue: [ self selectTab: aBrTabModel ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTabGroupModel >> onTabRemoved: aBrTabModel at: anIndex [
 
 	aBrTabModel removeEventHandler: tabEventHandler.
 	self notifyTabRemoved: aBrTabModel.
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> removeTab: aBrTabModel [
 	| aTabIndex wasSelected |
 
@@ -230,7 +230,7 @@ BrTabGroupModel >> removeTab: aBrTabModel [
 		ifTrue: [ self selectTab: (self tabs at: (aTabIndex min: self tabs size)) ]
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #'api - tabs' }
 BrTabGroupModel >> selectTab: aBrTabModel [
 	"a given tab is already selected, do nothing"
 	(self hasSelectedTab and: [ self selectedTab = aBrTabModel ])
@@ -246,7 +246,29 @@ BrTabGroupModel >> selectTab: aBrTabModel [
 	self notifyTabSelected: aBrTabModel
 ]
 
-{ #category : 'api - tabs' }
+{ #category : #accessing }
+BrTabGroupModel >> selectTabToTheLeft [
+	self tabs 
+		detect: [:each | each isSelected]
+		ifFound: [:each | 
+			self selectTab: (self tabs 
+				before: each 
+				ifAbsent: [ each ]) ]
+		ifNone: [ ]
+]
+
+{ #category : #accessing }
+BrTabGroupModel >> selectTabToTheRight [
+	self tabs 
+		detect: [:each | each isSelected]
+		ifFound: [:each | 
+			self selectTab:(self tabs 
+				after: each 
+				ifAbsent: [ each ]) ]
+		ifNone: [ ]
+]
+
+{ #category : #'api - tabs' }
 BrTabGroupModel >> selectedTab [
 	<return: #BrTabModel>
 	
@@ -257,7 +279,7 @@ BrTabGroupModel >> selectedTab [
 	^ selectedTab
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupModel >> tabs [
 	<return: #Collection of: #BrTabModel>
 

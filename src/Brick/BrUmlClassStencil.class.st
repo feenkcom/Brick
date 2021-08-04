@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrUmlClassStencil',
-	#superclass : 'BrStencil',
+	#name : #BrUmlClassStencil,
+	#superclass : #BrStencil,
 	#category : 'Brick-UML - Stencil'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrUmlClassStencil >> create [
 	^ BrUmlClassElement new
 ]
