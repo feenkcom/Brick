@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousInputFieldSpacingAptitude',
-	#superclass : 'BrGlamorousEditorSpacingAptitude',
+	#name : #BrGlamorousInputFieldSpacingAptitude,
+	#superclass : #BrGlamorousEditorSpacingAptitude,
 	#category : 'Brick-Glamorous-Editor'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousInputFieldSpacingAptitude >> initialize [
 	super initialize.
 	self

@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrLinearNormalizer',
-	#superclass : 'BrGlamorousNormalizer',
+	#name : #BrLinearNormalizer,
+	#superclass : #BrGlamorousNormalizer,
 	#instVars : [
 		'maximumValue',
 		'context',
@@ -9,13 +9,13 @@ Class {
 	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrLinearNormalizer class >> inContext: aCollection [
 	
 	^self inContext: aCollection withCommand: #yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrLinearNormalizer class >> inContext: aCollection withCommand: aBlock [
 	
 	^(self new)
@@ -24,33 +24,33 @@ BrLinearNormalizer class >> inContext: aCollection withCommand: aBlock [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLinearNormalizer >> command: aBlock [
 	
 	super command: aBlock.
 	self flushCache
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLinearNormalizer >> context [
 	
 	^context
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLinearNormalizer >> context: aContext [
 	
 	context := aContext.
 	self flushCache
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLinearNormalizer >> flushCache [
 	
 	maximumValue := nil
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 BrLinearNormalizer >> initialize [
 	"Initialize a newly created instance. This method must answer the receiver."
 	
@@ -58,7 +58,7 @@ BrLinearNormalizer >> initialize [
 	maximumValue := nil
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrLinearNormalizer >> maximumValue [
 	"Returns the largest value that the color metric provides"
 	
@@ -70,7 +70,7 @@ BrLinearNormalizer >> maximumValue [
 	^maximumValue
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrLinearNormalizer >> minimumValue: anEntity [
 	"Returns the smallest value that the color metric provides"
 	

@@ -4,12 +4,12 @@ I display a progress bar only.
 See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
 "
 Class {
-	#name : 'BrGlamorousProgressWithBarAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousProgressWithBarAptitude,
+	#superclass : #BrAptitude,
 	#category : 'Brick-Glamorous-Progress'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousProgressWithBarAptitude >> initialize [
 	super initialize.
 	

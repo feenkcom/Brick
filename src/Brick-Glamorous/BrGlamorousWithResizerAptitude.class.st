@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrGlamorousWithResizerAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousWithResizerAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'resizer'
 	],
 	#category : 'Brick-Glamorous-Resizer'
 }
 
-{ #category : 'api - visibility' }
+{ #category : #'api - visibility' }
 BrGlamorousWithResizerAptitude >> hideResizer [
 	self resizerDo: [ :aResizer | aResizer visibility: BlVisibility hidden ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousWithResizerAptitude >> initialize [
 	super initialize.
 	resizer := self newResizer.
@@ -25,7 +25,7 @@ BrGlamorousWithResizerAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousWithResizerAptitude >> newResizer [
 	^ BrResizer new
 		aptitude: BrGlamorousResizerAptitude;
@@ -33,12 +33,12 @@ BrGlamorousWithResizerAptitude >> newResizer [
 		constraintsDo: [ :c | c ignoreByLayout ]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrGlamorousWithResizerAptitude >> resizerDo: aBlock [
 	aBlock value: resizer
 ]
 
-{ #category : 'api - visibility' }
+{ #category : #'api - visibility' }
 BrGlamorousWithResizerAptitude >> showResizer [
 	self resizerDo: [ :aResizer | aResizer visibility: BlVisibility visible ]
 ]

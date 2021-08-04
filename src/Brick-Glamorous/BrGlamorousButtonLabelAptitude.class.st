@@ -2,8 +2,8 @@
 I define how a label looks inside of the glamorous button, for example font size, family name, weight etc
 "
 Class {
-	#name : 'BrGlamorousButtonLabelAptitude',
-	#superclass : 'BrTextLabelAptitude',
+	#name : #BrGlamorousButtonLabelAptitude,
+	#superclass : #BrTextLabelAptitude,
 	#instVars : [
 		'selectedColor',
 		'labelLook',
@@ -14,29 +14,29 @@ Class {
 	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> defaultColor [
 	^ defaultColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> defaultColor: aPaint [
 	defaultColor := aPaint.
 	labelLook default foreground: defaultColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> hoveredColor [
 	^ hoveredColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> hoveredColor: aPaint [
 	hoveredColor := aPaint.
 	labelLook hovered foreground: hoveredColor
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonLabelAptitude >> initialize [
 	super initialize.
 	defaultColor := self theme button defaultTextColor.
@@ -67,23 +67,23 @@ BrGlamorousButtonLabelAptitude >> initialize [
 				selected: [ :aStyle | aStyle foreground: selectedColor ])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> pressedColor [
 	^ pressedColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> pressedColor: aPaint [
 	pressedColor := aPaint.
 	labelLook pressed foreground: pressedColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> selectedColor [
 	^ selectedColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> selectedColor: aPaint [
 	selectedColor := aPaint.
 	labelLook selected foreground: selectedColor

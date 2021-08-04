@@ -4,8 +4,8 @@ I display a progress bar with text below.
 See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
 "
 Class {
-	#name : 'BrGlamorousProgressWithBarAndLabelAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousProgressWithBarAndLabelAptitude,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
@@ -14,14 +14,14 @@ Class {
 	#category : 'Brick-Glamorous-Progress'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousProgressWithBarAndLabelAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ labelLook attributesBuilder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousProgressWithBarAndLabelAptitude >> initialize [
 	super initialize.
 	

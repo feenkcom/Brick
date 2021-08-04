@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrNormalizerExamples',
-	#superclass : 'Object',
+	#name : #BrNormalizerExamples,
+	#superclass : #Object,
 	#category : 'Brick-Glamorous-Normalizer'
 }
 
-{ #category : 'explicit identity' }
+{ #category : #'explicit identity' }
 BrNormalizerExamples >> explicitIdentity [
 	<gtExample>
 	| normalizer colors |
@@ -22,7 +22,7 @@ BrNormalizerExamples >> explicitIdentity [
 	^ normalizer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BrNormalizerExamples >> explicitIdentityWithNumbers [
 	<gtExample>
 	| normalizer |
@@ -40,7 +40,7 @@ BrNormalizerExamples >> explicitIdentityWithNumbers [
 	^ normalizer
 ]
 
-{ #category : 'linear' }
+{ #category : #linear }
 BrNormalizerExamples >> gradient [
 	<gtExample>
 	| normalizer |
@@ -54,7 +54,7 @@ BrNormalizerExamples >> gradient [
 	^ normalizer
 ]
 
-{ #category : 'identity' }
+{ #category : #identity }
 BrNormalizerExamples >> identity [
 	<gtExample>
 	| colorOne colorTwo normalizer |
@@ -70,7 +70,7 @@ BrNormalizerExamples >> identity [
 	^ normalizer
 ]
 
-{ #category : 'identity' }
+{ #category : #identity }
 BrNormalizerExamples >> identityStartingWithBlue [
 	<gtExample>
 	| n |
@@ -78,7 +78,7 @@ BrNormalizerExamples >> identityStartingWithBlue [
 	self assert: n nextColor = Color blue
 ]
 
-{ #category : 'identity' }
+{ #category : #identity }
 BrNormalizerExamples >> identityStartingWithRed [
 	<gtExample>
 	| n |
@@ -86,7 +86,7 @@ BrNormalizerExamples >> identityStartingWithRed [
 	self assert: n nextColor = Color red
 ]
 
-{ #category : 'identity' }
+{ #category : #identity }
 BrNormalizerExamples >> identityWithCommand [
 	<gtExample>
 	| colorOne colorTwo normalizer |
@@ -101,13 +101,13 @@ BrNormalizerExamples >> identityWithCommand [
 	self assert: colorOne = colorTwo.
 ]
 
-{ #category : 'identity' }
+{ #category : #identity }
 BrNormalizerExamples >> identityWithMoreObjectsThanColors [
 	<gtExample>
 	1 to: 150 do: [:index | BrIdentityNormalizer new value: index]
 ]
 
-{ #category : 'multiple' }
+{ #category : #multiple }
 BrNormalizerExamples >> multipleLinearNormalizer [
 	<gtExample>
 	| normalizer |
@@ -121,7 +121,7 @@ BrNormalizerExamples >> multipleLinearNormalizer [
 	^ normalizer
 ]
 
-{ #category : 'linear' }
+{ #category : #linear }
 BrNormalizerExamples >> numberLinearNormalizer [
 	<gtExample>
 	| normalizer |

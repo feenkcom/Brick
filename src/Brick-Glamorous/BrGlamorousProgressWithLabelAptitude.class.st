@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrGlamorousProgressWithLabelAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousProgressWithLabelAptitude,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
@@ -9,14 +9,14 @@ Class {
 	#category : 'Brick-Glamorous-Progress'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousProgressWithLabelAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ labelLook attributesBuilder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousProgressWithLabelAptitude >> initialize [
 	super initialize.
 	

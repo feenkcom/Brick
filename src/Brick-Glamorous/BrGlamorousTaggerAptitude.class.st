@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrGlamorousTaggerAptitude',
-	#superclass : 'BrTaggerAptitude',
+	#name : #BrGlamorousTaggerAptitude,
+	#superclass : #BrTaggerAptitude,
 	#instVars : [
 		'tags',
 		'shouldGiveFocusToNewTag',
@@ -12,7 +12,7 @@ Class {
 	#category : 'Brick-Glamorous-Tagger'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> addTagElement: aTagElement withSeparatorAt: aTagIndex [
 	| aSeparatorIndex aTagElementIndex |
 	
@@ -25,12 +25,12 @@ BrGlamorousTaggerAptitude >> addTagElement: aTagElement withSeparatorAt: aTagInd
 	tags addChild: aTagElement at: aTagElementIndex
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> assignTag: aTaggerTag toElement: aTagElement [
 	aTagElement userData at: #brickTaggerTag put: aTaggerTag
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTaggerAptitude >> defaultTagLabelStencil [
 	^ [ :aTag |
 		BrEditor new
@@ -40,7 +40,7 @@ BrGlamorousTaggerAptitude >> defaultTagLabelStencil [
 			text: aTag name ] asStencilBuilder: BrTaggerTagStencilBuilder
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> giveFocusToNewTagDuring: aBlock [
 	| previousValue |
 	
@@ -49,12 +49,12 @@ BrGlamorousTaggerAptitude >> giveFocusToNewTagDuring: aBlock [
 	aBlock ensure: [ shouldGiveFocusToNewTag := previousValue ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrGlamorousTaggerAptitude >> hasSeparator [
 	^ separatorStencil isNotNil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTaggerAptitude >> initialize [
 	super initialize.
 	
@@ -84,12 +84,12 @@ BrGlamorousTaggerAptitude >> initialize [
 		inherit: tags)
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 BrGlamorousTaggerAptitude >> margin: aBlInsets [
 	margin := aBlInsets
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BrGlamorousTaggerAptitude >> newSeparatorElement [
 	^ separatorStencil asElement
 		focusability: BlFocusability none;
@@ -97,7 +97,7 @@ BrGlamorousTaggerAptitude >> newSeparatorElement [
 		constraintsDo: [ :c | c flow vertical alignCenter ]
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BrGlamorousTaggerAptitude >> newTagElementFor: aTaggerTag [
 	<return: #BlElement>
 
@@ -105,7 +105,7 @@ BrGlamorousTaggerAptitude >> newTagElementFor: aTaggerTag [
 		margin: margin
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrGlamorousTaggerAptitude >> onTagAdded: aTaggerTag at: aTagIndex [
 	| aTagElement |
 
@@ -119,7 +119,7 @@ BrGlamorousTaggerAptitude >> onTagAdded: aTaggerTag at: aTagIndex [
 		ifTrue: [ aTagElement requestFocus ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrGlamorousTaggerAptitude >> onTagRemoved: aTaggerTag at: anIndex [
 	self
 		tagElementFor: aTaggerTag
@@ -134,20 +134,20 @@ BrGlamorousTaggerAptitude >> onTagRemoved: aTaggerTag at: anIndex [
 			self removeTagElement: aTagElement withSeparatorAt: anIndex ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrGlamorousTaggerAptitude >> onTagRenamed: aTaggerTag to: aNewName [
 	self
 		tagElementFor: aTaggerTag
 		ifFound: [ :aTagElement | aTagElement text: aNewName ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrGlamorousTaggerAptitude >> onTagsChanged: theTags [
 	tags removeChildren: self tagElements.
 	theTags withIndexDo: [ :eachTag :eachIndex | self onTagAdded: eachTag at: eachIndex ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> removeTagElement: aTagElement withSeparatorAt: aTagIndex [
 	| aSeparatorIndex |
 
@@ -158,12 +158,12 @@ BrGlamorousTaggerAptitude >> removeTagElement: aTagElement withSeparatorAt: aTag
 		ifFalse: [ tags removeChildAt: aSeparatorIndex ]
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 BrGlamorousTaggerAptitude >> separator: aStencil [
 	separatorStencil := aStencil asStencil
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> separatorChildIndexFor: aTagIndex [
 	"I compute an index of a separator when we add a new tag with a given index, assuming that a separator is added before the tag"
 	<return: #Number>
@@ -180,14 +180,14 @@ BrGlamorousTaggerAptitude >> separatorChildIndexFor: aTagIndex [
 	^ (aTagIndex - 1) * 2
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> separatorForTagElement: aTagElement ifFound: aFoundBlock [
 	aTagElement userData
 		at: #brickTaggerSeparator
 		ifPresent: aFoundBlock
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> tagChildIndexFor: aTagIndex [
 	<return: #Number>
 	
@@ -203,7 +203,7 @@ BrGlamorousTaggerAptitude >> tagChildIndexFor: aTagIndex [
 	^ (aTagIndex * 2) - 1
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> tagElementFor: aTaggerTag ifFound: aFoundBlock [
 	tags children
 		detect: [ :eachTagElement |
@@ -214,7 +214,7 @@ BrGlamorousTaggerAptitude >> tagElementFor: aTaggerTag ifFound: aFoundBlock [
 		ifFound: aFoundBlock
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrGlamorousTaggerAptitude >> tagElements [
 	^ tags children
 		select: [ :eachTagElement |
@@ -224,7 +224,7 @@ BrGlamorousTaggerAptitude >> tagElements [
 				ifAbsent: [ false ] ]
 ]
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 BrGlamorousTaggerAptitude >> tagLabel: aBrTaggerTagStencilBuilder [
 	tagLabelStencil := aBrTaggerTagStencilBuilder asStencilBuilder: BrTaggerTagStencilBuilder
 ]

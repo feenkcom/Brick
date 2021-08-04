@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousTriangleInCircleAptitude',
-	#superclass : 'BrTriangleAptitude',
+	#name : #BrGlamorousTriangleInCircleAptitude,
+	#superclass : #BrTriangleAptitude,
 	#category : 'Brick-Glamorous-List, Tree'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTriangleInCircleAptitude >> initialize [
 	super initialize.
 	self
@@ -53,7 +53,7 @@ BrGlamorousTriangleInCircleAptitude >> initialize [
 						scaleBy: 0.75 ])
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTriangleInCircleAptitude >> initializeTriangle: aTriangle [
 	"configure collapsed and expanded triangle elements"
 

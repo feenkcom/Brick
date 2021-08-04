@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousListItemAptitude',
-	#superclass : 'BrStyleCommonAptitude',
+	#name : #BrGlamorousListItemAptitude,
+	#superclass : #BrStyleCommonAptitude,
 	#category : 'Brick-Glamorous-List, Tree'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousListItemAptitude >> initialize [
 	super initialize.
 	self

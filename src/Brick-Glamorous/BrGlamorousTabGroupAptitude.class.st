@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrGlamorousTabGroupAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrGlamorousTabGroupAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'headerLook'
 	],
 	#category : 'Brick-Glamorous-Tabs'
 }
 
-{ #category : 'api - style' }
+{ #category : #'api - style' }
 BrGlamorousTabGroupAptitude >> headerBackground: aBackground [
 	headerLook headerDo: [ :aHeaderElement | aHeaderElement background: aBackground ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousTabGroupAptitude >> initialize [
 	super initialize.
 

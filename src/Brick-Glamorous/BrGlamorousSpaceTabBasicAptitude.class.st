@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousSpaceTabBasicAptitude',
-	#superclass : 'BrTabAptitude',
+	#name : #BrGlamorousSpaceTabBasicAptitude,
+	#superclass : #BrTabAptitude,
 	#category : 'Brick-Glamorous-Tabs - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousSpaceTabBasicAptitude >> initialize [
 	super initialize.
 	self add: BrGlamorousSpaceTabActionbarAptitude new.

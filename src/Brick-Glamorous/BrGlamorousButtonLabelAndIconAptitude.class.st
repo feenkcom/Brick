@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrGlamorousButtonLabelAndIconAptitude',
-	#superclass : 'BrGlamorousButtonLabelAptitude',
+	#name : #BrGlamorousButtonLabelAndIconAptitude,
+	#superclass : #BrGlamorousButtonLabelAptitude,
 	#instVars : [
 		'iconElement'
 	],
 	#category : 'Brick-Glamorous-Buttons - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAndIconAptitude >> icon [
 	<return: #BlElement>
 
 	^ iconElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousButtonLabelAndIconAptitude >> icon: aStencilOrElement [
 	self
 		assert: [ aStencilOrElement isNotNil ]
@@ -24,12 +24,12 @@ BrGlamorousButtonLabelAndIconAptitude >> icon: aStencilOrElement [
 	self updateIcon
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrGlamorousButtonLabelAndIconAptitude >> iconDo: aBlock [
 	aBlock value: self icon
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonLabelAndIconAptitude >> initialize [
 	super initialize.
 
@@ -46,14 +46,14 @@ BrGlamorousButtonLabelAndIconAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonLabelAndIconAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrIconChanged do: [ :anEvent | self icon: anEvent icon ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousButtonLabelAndIconAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -61,7 +61,7 @@ BrGlamorousButtonLabelAndIconAptitude >> initializeRequests [
 	self request: BrIconRequest new
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrGlamorousButtonLabelAndIconAptitude >> updateIcon [
 	self widgetDo: [ self widgetContent
 		childNamed: #icon

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousFocusableShadowAptitude',
-	#superclass : 'BrShadowAptitude',
+	#name : #BrGlamorousFocusableShadowAptitude,
+	#superclass : #BrShadowAptitude,
 	#category : 'Brick-Glamorous-Shadow'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousFocusableShadowAptitude >> initialize [
 	super initialize.
 	self

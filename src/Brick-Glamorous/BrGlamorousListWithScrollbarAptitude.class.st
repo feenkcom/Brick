@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrGlamorousListWithScrollbarAptitude',
-	#superclass : 'BrGlamorousWithVerticalScrollbarAptitude',
+	#name : #BrGlamorousListWithScrollbarAptitude,
+	#superclass : #BrGlamorousWithVerticalScrollbarAptitude,
 	#instVars : [
 		'scrollableHandler'
 	],
 	#category : 'Brick-Glamorous-Scrollbar'
 }
 
-{ #category : 'api - orientation' }
+{ #category : #'api - orientation' }
 BrGlamorousListWithScrollbarAptitude >> beHorizontal [
 	scrollbar beHorizontal
 ]
 
-{ #category : 'api - orientation' }
+{ #category : #'api - orientation' }
 BrGlamorousListWithScrollbarAptitude >> beVertical [
 	scrollbar beVertical
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrGlamorousListWithScrollbarAptitude >> initialize [
 	super initialize.
 
@@ -30,7 +30,7 @@ BrGlamorousListWithScrollbarAptitude >> initialize [
 		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 BrGlamorousListWithScrollbarAptitude >> onScrollableRemovedFromParent: anEvent [
 	"Since we have to remove and add a new infinite element to switch between
 	horizontal and vertical orientation, we listen to scrollable element removal from its parent.
@@ -42,7 +42,7 @@ BrGlamorousListWithScrollbarAptitude >> onScrollableRemovedFromParent: anEvent [
 	
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrGlamorousListWithScrollbarAptitude >> updateScrollable [
 	super updateScrollable.
 	self scrollable addEventHandler: scrollableHandler

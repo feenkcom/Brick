@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrGlamorousLabelLook',
-	#superclass : 'BrGlamorousLabelAptitude',
+	#name : #BrGlamorousLabelLook,
+	#superclass : #BrGlamorousLabelAptitude,
 	#category : 'Brick-Glamorous-Label'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrGlamorousLabelLook class >> isDeprecated [
 	^ true
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrPlusIconStencil',
-	#superclass : 'BrStencil',
+	#name : #BrPlusIconStencil,
+	#superclass : #BrStencil,
 	#instVars : [
 		'radius',
 		'thickness',
@@ -10,37 +10,37 @@ Class {
 	#category : 'Brick-Glamorous'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrPlusIconStencil class >> add [
 	^ self new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrPlusIconStencil class >> close [
 	^ self new angle: 45
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPlusIconStencil >> angle [
 	^ angle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPlusIconStencil >> angle: anObject [
 	angle := anObject
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrPlusIconStencil >> color [
 	^ color
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrPlusIconStencil >> color: aColor [
 	color := aColor
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrPlusIconStencil >> create [
 	| aRadius aThickness |
 	aRadius := self radius.
@@ -66,7 +66,7 @@ BrPlusIconStencil >> create [
 		transformDo: [ :t | t rotateBy: self angle ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrPlusIconStencil >> initialize [
 	super initialize.
 
@@ -76,22 +76,22 @@ BrPlusIconStencil >> initialize [
 	color := Color gray
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPlusIconStencil >> radius [
 	^ radius
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPlusIconStencil >> radius: anObject [
 	radius := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPlusIconStencil >> thickness [
 	^ thickness
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPlusIconStencil >> thickness: aNumber [
 	thickness := aNumber
 ]
