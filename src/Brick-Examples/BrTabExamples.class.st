@@ -269,6 +269,17 @@ BrTabExamples >> removeNotSelectedTabFromGroupWithTwoTabs [
 	^ aTabGroup
 ]
 
+{ #category : #accessing }
+BrTabExamples >> removeSelectedTab [
+	<gtExample>
+	| tabGroup |
+	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
+	self assert: tabGroup tabs size = 2.
+	tabGroup removeSelectedTab.
+	self assert: tabGroup tabs size = 1.
+	^ tabGroup
+]
+
 { #category : #'examples - tab group model' }
 BrTabExamples >> removeSelectedTabFromGroupWithTwoTabs [
 	<gtExample>

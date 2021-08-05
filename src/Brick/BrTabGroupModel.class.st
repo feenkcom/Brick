@@ -208,6 +208,11 @@ BrTabGroupModel >> onTabRemoved: aBrTabModel at: anIndex [
 	self notifyTabRemoved: aBrTabModel.
 ]
 
+{ #category : #accessing }
+BrTabGroupModel >> removeSelectedTab [
+	self selectedTabDo: [ :aTab | self removeTab: aTab].
+]
+
 { #category : #'api - tabs' }
 BrTabGroupModel >> removeTab: aBrTabModel [
 	| aTabIndex wasSelected |
@@ -248,24 +253,18 @@ BrTabGroupModel >> selectTab: aBrTabModel [
 
 { #category : #accessing }
 BrTabGroupModel >> selectTabToTheLeft [
-	self tabs 
-		detect: [:each | each isSelected]
-		ifFound: [:each | 
-			self selectTab: (self tabs 
-				before: each 
-				ifAbsent: [ each ]) ]
-		ifNone: [ ]
+	self selectedTabDo: [:aTab | 
+		self selectTab: (self tabs 
+			before: aTab 
+			ifAbsent: [ aTab ]) ]
 ]
 
 { #category : #accessing }
 BrTabGroupModel >> selectTabToTheRight [
-	self tabs 
-		detect: [:each | each isSelected]
-		ifFound: [:each | 
-			self selectTab:(self tabs 
-				after: each 
-				ifAbsent: [ each ]) ]
-		ifNone: [ ]
+	self selectedTabDo: [:aTab | 
+		self selectTab: (self tabs 
+			after: aTab 
+			ifAbsent: [ aTab ]) ]
 ]
 
 { #category : #'api - tabs' }
@@ -277,6 +276,12 @@ BrTabGroupModel >> selectedTab [
 		description: [ 'Can not access a selected tab if there is no one' ].
 		
 	^ selectedTab
+]
+
+{ #category : #accessing }
+BrTabGroupModel >> selectedTabDo: aBlock [ 
+	self hasSelectedTab ifFalse: [^ self].
+	aBlock value: selectedTab
 ]
 
 { #category : #accessing }

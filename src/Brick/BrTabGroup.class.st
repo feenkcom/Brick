@@ -52,6 +52,11 @@ BrTabGroup >> moveTab: anElement at: anInteger [
 ]
 
 { #category : #'api - adding / removing' }
+BrTabGroup >> removeSelectedTab [
+	self viewModel removeSelectedTab
+]
+
+{ #category : #'api - adding / removing' }
 BrTabGroup >> removeTab: anElement [
 	self viewModel removeTab: anElement viewModel
 ]
