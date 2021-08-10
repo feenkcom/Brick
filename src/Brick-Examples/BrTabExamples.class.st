@@ -269,6 +269,17 @@ BrTabExamples >> removeNotSelectedTabFromGroupWithTwoTabs [
 	^ aTabGroup
 ]
 
+{ #category : #accessing }
+BrTabExamples >> removeSelectedTab [
+	<gtExample>
+	| tabGroup |
+	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
+	self assert: tabGroup tabs size = 2.
+	tabGroup removeSelectedTab.
+	self assert: tabGroup tabs size = 1.
+	^ tabGroup
+]
+
 { #category : #'examples - tab group model' }
 BrTabExamples >> removeSelectedTabFromGroupWithTwoTabs [
 	<gtExample>
@@ -314,6 +325,50 @@ BrTabExamples >> selectTabModel [
 	aTabModel removeEventHandler: deselectedHandler.
 
 	^ aTabModel
+]
+
+{ #category : #accessing }
+BrTabExamples >> selectTabOnTheLeftOfTheFirstTab [
+	<gtExample>
+	| tabGroup |
+	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
+	self assert: tabGroup tabs first isSelected.
+	tabGroup selectTabToTheLeft.
+	self assert: tabGroup tabs first isSelected.
+	^ tabGroup
+]
+
+{ #category : #accessing }
+BrTabExamples >> selectTabOnTheLeftOfTheLastTab [
+	<gtExample>
+	| tabGroup |
+	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
+	tabGroup selectTab: tabGroup tabs last.
+	tabGroup selectTabToTheLeft.
+	self assert: tabGroup tabs first isSelected.
+	^ tabGroup
+]
+
+{ #category : #accessing }
+BrTabExamples >> selectTabOnTheRightOfTheFirstTab [
+	<gtExample>
+	| tabGroup |
+	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
+	self assert: tabGroup tabs first isSelected.
+	tabGroup selectTabToTheRight.
+	self assert: tabGroup tabs second isSelected.
+	^ tabGroup
+]
+
+{ #category : #accessing }
+BrTabExamples >> selectTabOnTheRightOfTheLastTab [
+	<gtExample>
+	| tabGroup |
+	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
+	tabGroup selectTab: tabGroup tabs last.
+	tabGroup selectTabToTheRight.
+	self assert: tabGroup tabs second isSelected.
+	^ tabGroup
 ]
 
 { #category : #'instance creation' }

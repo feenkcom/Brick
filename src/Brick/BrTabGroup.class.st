@@ -52,8 +52,23 @@ BrTabGroup >> moveTab: anElement at: anInteger [
 ]
 
 { #category : #'api - adding / removing' }
+BrTabGroup >> removeSelectedTab [
+	self viewModel removeSelectedTab
+]
+
+{ #category : #'api - adding / removing' }
 BrTabGroup >> removeTab: anElement [
 	self viewModel removeTab: anElement viewModel
+]
+
+{ #category : #accessing }
+BrTabGroup >> selectTabToTheLeft [
+	self viewModel selectTabToTheLeft
+]
+
+{ #category : #accessing }
+BrTabGroup >> selectTabToTheRight [
+	self viewModel selectTabToTheRight
 ]
 
 { #category : #accessing }
