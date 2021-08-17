@@ -1,19 +1,19 @@
 Class {
-	#name : #BrRequest,
-	#superclass : #BlEvent,
+	#name : 'BrRequest',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'response',
 		'isOneWay'
 	],
-	#category : #'Brick-Core-Events'
+	#category : 'Brick-Core-Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrRequest class >> oneWay [
 	^ self new oneWay
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrRequest >> canRespond [
 	"Not all requests support responses, return true if I am one of them"
 	<return: #Boolean>
@@ -21,7 +21,7 @@ BrRequest >> canRespond [
 	^ self responseClass = BrNoResponse
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrRequest >> initialize [
 	super initialize.
 	
@@ -30,34 +30,34 @@ BrRequest >> initialize [
 	self canBePropagated: true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrRequest >> isOneWay [
 	^ isOneWay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrRequest >> oneWay [
 	isOneWay := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrRequest >> response [
 	^ response
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrRequest >> response: anObject [
 	response := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrRequest >> responseClass [
 	<return: #'BrResponse class'>
 
 	^ BrNoResponse
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrRequest >> responseFor: aWidgetModel [
 	^ self response
 ]

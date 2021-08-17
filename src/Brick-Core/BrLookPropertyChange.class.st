@@ -1,6 +1,6 @@
 Class {
-	#name : #BrLookPropertyChange,
-	#superclass : #BrLookChange,
+	#name : 'BrLookPropertyChange',
+	#superclass : 'BrLookChange',
 	#instVars : [
 		'old',
 		'new',
@@ -8,10 +8,10 @@ Class {
 		'path',
 		'value'
 	],
-	#category : #'Brick-Core-Changes'
+	#category : 'Brick-Core-Changes'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookPropertyChange >> downOn: aLook [
 	self assert: [ initialized ].
 	down value: aLook value: old value: new.
@@ -20,7 +20,7 @@ BrLookPropertyChange >> downOn: aLook [
 	initialized := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookPropertyChange >> initialize [
 	super initialize.
 	read := [ :e | self readOn: e ].
@@ -34,28 +34,28 @@ BrLookPropertyChange >> initialize [
 	down := [ :e :f :g | self writeOn: e value: f ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookPropertyChange >> path [
 	^ path
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookPropertyChange >> path: anObject [
 	path := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrLookPropertyChange >> printOn: aStream [
 	aStream nextPutAll: (' ' join: (path collect: #asString))
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookPropertyChange >> readOn: aLook [
 
 	^ path inject: aLook into: [ :e :f | e perform: f ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookPropertyChange >> upOn: aLook [
 	self assert: [ initialized not ].
 	old := read value: aLook.
@@ -64,21 +64,21 @@ BrLookPropertyChange >> upOn: aLook [
 	initialized := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookPropertyChange >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookPropertyChange >> value: anObject [
 	value := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookPropertyChange >> writeOn: aLook value: anObject [
 	| receiver |
 	receiver := (path copyFrom: 1 to: path size - 1)
 		inject: aLook
 		into: [ :e :f | e perform: f ].
-	^ receiver perform: path last , ':' with: anObject
+	^ receiver perform: (path last asString , ':') asSymbol with: anObject
 ]

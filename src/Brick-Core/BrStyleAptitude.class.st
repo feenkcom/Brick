@@ -1,26 +1,26 @@
 Class {
-	#name : #BrStyleAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrStyleAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBlElementStyles + TBlElementQuery',
 	#classTraits : 'TBlElementStyles classTrait + TBlElementQuery classTrait',
 	#instVars : [
 		'styles',
 		'target'
 	],
-	#category : #'Brick-Core-Core'
+	#category : 'Brick-Core-Core'
 }
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BrStyleAptitude >> basicAddStyle: aStyle [
 	styles basicAddStyle: aStyle
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BrStyleAptitude >> for: aTargetObject [
 	^ styles for: aTargetObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrStyleAptitude >> initialize [
 	super initialize.
 
@@ -39,7 +39,7 @@ BrStyleAptitude >> initialize [
 			yourself)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrStyleAptitude >> propagateStylesToWidget [
 	"Call me if this look is updated after its creation"
 
@@ -48,17 +48,17 @@ BrStyleAptitude >> propagateStylesToWidget [
 		aWidget requestStyle ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStyleAptitude >> queryStep: aBlElementStep [
 	target queryStep: aBlElementStep
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStyleAptitude >> state [
 	^ BlElementState
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BrStyleAptitude >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ styles
 		styleForState: aState
@@ -66,12 +66,12 @@ BrStyleAptitude >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock
 		ifNone: aNoneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStyleAptitude >> target: aSelectorPath [	
 	self deprecated: 'Use Element Query Api instead'.
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BrStyleAptitude >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	

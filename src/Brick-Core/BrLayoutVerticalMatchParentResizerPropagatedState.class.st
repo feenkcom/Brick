@@ -1,32 +1,32 @@
 Class {
-	#name : #BrLayoutVerticalMatchParentResizerPropagatedState,
-	#superclass : #BrLayoutVerticalMatchParentResizerState,
-	#category : #'Brick-Core-Layout Resizer'
+	#name : 'BrLayoutVerticalMatchParentResizerPropagatedState',
+	#superclass : 'BrLayoutVerticalMatchParentResizerState',
+	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrLayoutVerticalMatchParentResizerPropagatedState >> asNotPropagated [
 	^ BrLayoutVerticalResizerState matchParent
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrLayoutVerticalMatchParentResizerPropagatedState >> asPropagated [
 	^ self
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrLayoutVerticalMatchParentResizerPropagatedState >> optionalOnAddedTo: anElement [
 	anElement properties vMatchParent
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrLayoutVerticalMatchParentResizerPropagatedState >> printOn: aStream [
 	super printOn: aStream.
 	aStream space;
 		nextPutAll: '(propagated)'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrLayoutVerticalMatchParentResizerPropagatedState >> shouldOverwriteChildState [
 	^ true
 ]

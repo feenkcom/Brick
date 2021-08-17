@@ -1,13 +1,13 @@
 Class {
-	#name : #BrLookAddChildChange,
-	#superclass : #BrLookPropertyChange,
+	#name : 'BrLookAddChildChange',
+	#superclass : 'BrLookPropertyChange',
 	#instVars : [
 		'child'
 	],
-	#category : #'Brick-Core-Changes'
+	#category : 'Brick-Core-Changes'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookAddChildChange >> containerOn: aLook [
 
 	path
@@ -25,18 +25,18 @@ BrLookAddChildChange >> containerOn: aLook [
 				into: [ :e :f | e childNamed: f ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrLookAddChildChange >> printOn: aStream [
 	aStream nextPutAll: 'add child '.
 	super printOn: aStream
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookAddChildChange >> readOn: aLook [
 	^ child
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookAddChildChange >> writeOn: aLook value: anObject [
 	| container |
 	container := self containerOn: aLook.
