@@ -1,1 +1,1 @@
-Package { #name : #'Brick-Core' }
+Package { #name : 'Brick-Core' }

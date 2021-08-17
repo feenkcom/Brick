@@ -1,9 +1,9 @@
 Trait {
-	#name : #TBrLayoutResizable,
-	#category : #'Brick-Core-Layout Resizer'
+	#name : 'TBrLayoutResizable',
+	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> exact: aPoint [
 	| aSize |
 	
@@ -12,19 +12,19 @@ TBrLayoutResizable >> exact: aPoint [
 	self vExact: aSize y
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> fitContent [
 	self hFitContent.
 	self vFitContent
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> fitContentLimited [
 	self hFitContentLimited.
 	self vFitContentLimited
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> hExact: aNumber [
 
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
@@ -35,7 +35,7 @@ TBrLayoutResizable >> hExact: aNumber [
 	self states addState: BrLayoutHorizontalResizerState exact
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> hFitContent [
 	(self constraints horizontal resizer isFitContent)
 		ifFalse: [ self constraintsDo: [ :c | c horizontal fitContent ] ].
@@ -43,7 +43,7 @@ TBrLayoutResizable >> hFitContent [
 	self states addState: BrLayoutHorizontalResizerState fitContent
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> hFitContentLimited [
 	(self constraints horizontal resizer isFitContentLimited)
 		ifFalse: [ self constraintsDo: [ :c | c horizontal fitContentLimited ] ].
@@ -51,12 +51,12 @@ TBrLayoutResizable >> hFitContentLimited [
 	self states addState: BrLayoutHorizontalResizerState fitContentLimited
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> hLocal [
 	self states addState: BrLayoutHorizontalResizerState local
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> hMatchParent [
 	(self constraints horizontal resizer isMatchParent)
 		ifFalse: [ self constraintsDo: [ :c | c horizontal matchParent ] ].
@@ -64,13 +64,13 @@ TBrLayoutResizable >> hMatchParent [
 	self states addState: BrLayoutHorizontalResizerState matchParent
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> matchParent [
 	self hMatchParent.
 	self vMatchParent
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> vExact: aNumber [
 	
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
@@ -82,7 +82,7 @@ TBrLayoutResizable >> vExact: aNumber [
 	self states addState: BrLayoutVerticalResizerState exact
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> vFitContent [
 	(self constraints vertical resizer isFitContent)
 		ifFalse: [ self constraintsDo: [ :c | c vertical fitContent ] ].
@@ -90,7 +90,7 @@ TBrLayoutResizable >> vFitContent [
 	self states addState: BrLayoutVerticalResizerState fitContent
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> vFitContentLimited [
 	(self constraints vertical resizer isFitContentLimited)
 		ifFalse: [ self constraintsDo: [ :c | c vertical fitContentLimited ] ].
@@ -98,12 +98,12 @@ TBrLayoutResizable >> vFitContentLimited [
 	self states addState: BrLayoutVerticalResizerState fitContentLimited
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> vLocal [
 	self states addState: BrLayoutVerticalResizerState local
 ]
 
-{ #category : #'api - layout resizeable' }
+{ #category : 'api - layout resizeable' }
 TBrLayoutResizable >> vMatchParent [
 	(self constraints vertical resizer isMatchParent)
 		ifFalse: [ self constraintsDo: [ :c | c vertical matchParent ] ].

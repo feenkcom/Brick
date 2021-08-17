@@ -1,5 +1,5 @@
 Class {
-	#name : #BrNoResponse,
-	#superclass : #BrResponse,
-	#category : #'Brick-Core-Events'
+	#name : 'BrNoResponse',
+	#superclass : 'BrResponse',
+	#category : 'Brick-Core-Events'
 }

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrLookAddChildAsChange,
-	#superclass : #BrLookPropertyChange,
-	#category : #'Brick-Core-Changes'
+	#name : 'BrLookAddChildAsChange',
+	#superclass : 'BrLookPropertyChange',
+	#category : 'Brick-Core-Changes'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookAddChildAsChange >> containerOn: aLook [
 	self flag: 'ugly hack around widgetContent'.
 	^ path first = #content
@@ -18,13 +18,13 @@ BrLookAddChildAsChange >> containerOn: aLook [
 				into: [ :e :f | e childNamed: f ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrLookAddChildAsChange >> printOn: aStream [
 	aStream nextPutAll: 'add child as '.
 	super printOn: aStream
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookAddChildAsChange >> readOn: aLook [
 	^ (self containerOn: aLook)
 		childNamed: path last
@@ -32,7 +32,7 @@ BrLookAddChildAsChange >> readOn: aLook [
 		ifNone: nil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookAddChildAsChange >> writeOn: aLook value: anObject [
 	| container |
 	container := self containerOn: aLook.

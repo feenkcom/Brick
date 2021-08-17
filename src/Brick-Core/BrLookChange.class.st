@@ -1,33 +1,33 @@
 Class {
-	#name : #BrLookChange,
-	#superclass : #Object,
+	#name : 'BrLookChange',
+	#superclass : 'Object',
 	#instVars : [
 		'initialized',
 		'up',
 		'down',
 		'source'
 	],
-	#category : #'Brick-Core-Changes'
+	#category : 'Brick-Core-Changes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> down [
 	^ down
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> down: anObject [
 	down := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookChange >> downOn: aLook [
 	self assert: [ initialized ].
 	down value: aLook.
 	initialized := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookChange >> initialize [
 	super initialize.
 	initialized := false.
@@ -35,37 +35,37 @@ BrLookChange >> initialize [
 	down := [ :e |  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> initialized [
 	^ initialized
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> initialized: anObject [
 	initialized := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> source: anObject [
 	source := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> up [
 	^ up
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLookChange >> up: anObject [
 	up := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLookChange >> upOn: aLook [
 	self assert: [ initialized not ].
 	up value: aLook.

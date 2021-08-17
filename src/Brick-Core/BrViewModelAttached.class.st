@@ -1,23 +1,23 @@
 Class {
-	#name : #BrViewModelAttached,
-	#superclass : #BlEvent,
+	#name : 'BrViewModelAttached',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'viewModel'
 	],
-	#category : #'Brick-Core-Events'
+	#category : 'Brick-Core-Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrViewModelAttached class >> viewModel: aViewModel [
 	^ self new viewModel: aViewModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrViewModelAttached >> viewModel [
 	^ viewModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrViewModelAttached >> viewModel: anObject [
 	viewModel := anObject
 ]
