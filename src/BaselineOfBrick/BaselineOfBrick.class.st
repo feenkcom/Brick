@@ -18,52 +18,56 @@ Functionality that is related, but not directly part of Brick:
 - Gt phlow views are built on top of Brick and are used to compose views of a particular object.  Their reuse is typically at the application level where the application interface may be composed of multiple Gt phlow views.
 "
 Class {
-	#name : #BaselineOfBrick,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBrick
+	#name : 'BaselineOfBrick',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBrick'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfBrick >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
-		spec 
+		spec
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.229/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.8.229/src' ].
+		spec
 			baseline: 'BlocExamples' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.229/src' ];
+				spec repository: 'github://feenkcom/Bloc:v0.8.229/src' ].
+		spec
 			baseline: 'BlocPac' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.128/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.128/src' ].
+		spec
 			baseline: 'BlocPacExamples' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.128/src' ];
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.128/src' ].
+		spec
 			baseline: 'GToolkitResourcesUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.64/src' ].
-		spec 
-			package: #'Brick-Core' with: [
-				spec requires: #('Bloc' 'BlocPac' ). ];
-			package: #'Brick-Editor' with: [
-				spec requires: #(#'Brick-Core' ). ];
-			package: #'Brick-Editor-Extensions' with: [
-				spec requires: #(#'Brick-Editor' ). ];
-			package: #Brick with: [
-				spec requires: #(#'Brick-Core' #'Brick-Editor' ). ];
-			package: #'Brick-Theme' with: [
-				spec requires: #(#Brick ). ];
-			package: #'Brick-Glamorous' with: [
-				spec requires: #(#Brick 'GToolkitResourcesUtility' ). ];
-			package: #'Brick-Material' with: [
-				spec requires: #(#Brick ). ];
-			package: #'Brick-Hydra' with: [
-				spec requires: #(#Brick ). ];
-			package: #'Brick-DevTool' with: [
-				spec requires: #(#Brick 'Bloc' 'BlocPac' ). ];
-			package: #'Brick-Examples' with: [
-				spec requires: #('BlocExamples' #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra' ). ];
-			package: #'Brick-Theme-Examples' with: [
-				spec requires: #(#'Brick-Theme' ). ];
-			package: #'Brick-Theme-Migration' with: [
-				spec requires: #(#'Brick-Theme' ). ];
-			package: #'Brick-Editor-Examples' with: [
-				spec requires: #(#Brick #'Brick-Editor' ). ]. ].
 
+		spec package: 'Brick-Core' with: [
+			spec requires: #('Bloc' 'BlocPac') ].
+		spec package: 'Brick-Editor' with: [
+			spec requires: #(#'Brick-Core') ].
+		spec package: 'Brick-Editor-Extensions' with: [
+			spec requires: #(#'Brick-Editor') ].
+		spec package: 'Brick' with: [
+			spec requires: #(#'Brick-Core' #'Brick-Editor') ].
+		spec package: 'Brick-Theme' with: [
+			spec requires: #(#Brick) ].
+		spec package: 'Brick-Glamorous' with: [
+			spec requires: #(#Brick 'GToolkitResourcesUtility') ].
+		spec package: 'Brick-Material' with: [
+			spec requires: #(#Brick) ].
+		spec package: 'Brick-Hydra' with: [
+			spec requires: #(#Brick) ].
+		spec package: 'Brick-DevTool' with: [
+			spec requires: #(#Brick 'Bloc' 'BlocPac') ].
+		spec package: 'Brick-Examples' with: [
+			spec requires: #('BlocExamples' #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra') ].
+		spec package: 'Brick-Theme-Examples' with: [
+			spec requires: #(#'Brick-Theme') ].
+		spec package: 'Brick-Theme-Migration' with: [
+			spec requires: #(#'Brick-Theme') ].
+		spec package: 'Brick-Editor-Examples' with: [
+			spec requires: #(#Brick #'Brick-Editor') ].
+	]
 ]
