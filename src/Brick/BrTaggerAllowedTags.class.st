@@ -3,17 +3,17 @@
 Describes what kind of tags are allowed
 "
 Class {
-	#name : #BrTaggerAllowedTags,
-	#superclass : #Object,
+	#name : 'BrTaggerAllowedTags',
+	#superclass : 'Object',
 	#category : 'Brick-Tagger - Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTaggerAllowedTags >> isAnyAllowed [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAllowedTags >> tags [
 	^ #()
 ]

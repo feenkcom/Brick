@@ -1,10 +1,10 @@
 Class {
-	#name : #BrSimpleTreeAptitude,
-	#superclass : #BrTreeAptitude,
+	#name : 'BrSimpleTreeAptitude',
+	#superclass : 'BrTreeAptitude',
 	#category : 'Brick-Tree - Aptitude'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeAptitude >> initialize [
 	super initialize.
 
@@ -14,7 +14,7 @@ BrSimpleTreeAptitude >> initialize [
 		rowDataBinder: BrDefaultTreeRowDataBinder new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -40,7 +40,7 @@ BrSimpleTreeAptitude >> initializeListeners [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -51,47 +51,47 @@ BrSimpleTreeAptitude >> initializeRequests [
 	self request: BrTreeNodeDataBinderRequest new.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleTreeAptitude >> onNodeDataBinderChanged: aBrTreeNodeDataBinder [
 	treeElement dataSource nodeDataBinder: aBrTreeNodeDataBinder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleTreeAptitude >> onNodeElementStencilChanged: aBrTreeNodeElementStencilBuilder [
 	treeElement dataSource nodeElementStencil: aBrTreeNodeElementStencilBuilder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleTreeAptitude >> onNodeUnbinderChanged: aBrTreeNodeUnbinder [
 	treeElement dataSource nodeUnbinder: aBrTreeNodeUnbinder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleTreeAptitude >> onRowDataBinderChanged: aBrTreeRowDataBinder [
 	treeElement dataSource rowDataBinder: aBrTreeRowDataBinder
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleTreeAptitude >> onRowElementStencilChanged: aBrTreeRowElementStencilBuilder [
 	treeElement dataSource rowElementStencil: aBrTreeRowElementStencilBuilder
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrSimpleTreeAptitude >> whenAttachedDo: aBlock [
 	treeElement dataSource attachedBlock: aBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrSimpleTreeAptitude >> whenDetachedDo: aBlock [
 	treeElement dataSource detachedBlock: aBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrSimpleTreeAptitude >> whenRecycledDo: aBlock [
 	treeElement dataSource recycledBlock: aBlock
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrSimpleTreeAptitude >> withoutSelection [
 	treeElement dataSource supportsSelection: false
 ]

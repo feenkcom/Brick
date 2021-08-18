@@ -1,10 +1,10 @@
 Class {
-	#name : #BrScrollbarTrackRequest,
-	#superclass : #BrRequest,
+	#name : 'BrScrollbarTrackRequest',
+	#superclass : 'BrRequest',
 	#category : 'Brick-Scrollbar - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollbarTrackRequest >> responseClass [
 	^ BrScrollbarTrackChanged
 ]

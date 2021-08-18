@@ -1,6 +1,6 @@
 Class {
-	#name : #BrPagerScrollWish,
-	#superclass : #BrWish,
+	#name : 'BrPagerScrollWish',
+	#superclass : 'BrWish',
 	#instVars : [
 		'isSmooth',
 		'pageIndex'
@@ -8,22 +8,22 @@ Class {
 	#category : 'Brick-Pager - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerScrollWish >> isSmooth [
 	^ isSmooth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerScrollWish >> isSmooth: aBoolean [
 	isSmooth := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerScrollWish >> pageIndex [
 	^ pageIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerScrollWish >> pageIndex: aNumber [
 	pageIndex := aNumber
 ]

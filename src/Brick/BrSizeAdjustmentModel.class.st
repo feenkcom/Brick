@@ -1,58 +1,58 @@
 Class {
-	#name : #BrSizeAdjustmentModel,
-	#superclass : #BrStateModel,
+	#name : 'BrSizeAdjustmentModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'dimension'
 	],
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSizeAdjustmentModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrSizeAdjustmentModel class >> modelName [
 	^ 'Size'
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrSizeAdjustmentModel >> beDefault [
 	self dimension: BrDeprecatedSizeAdjustmentState defaultName
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrSizeAdjustmentModel >> beHuge [
 	self dimension: BrDeprecatedSizeAdjustmentState hugeName
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrSizeAdjustmentModel >> beLarge [
 	self dimension: BrDeprecatedSizeAdjustmentState largeName
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrSizeAdjustmentModel >> beMini [
 	self dimension: BrDeprecatedSizeAdjustmentState miniName
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrSizeAdjustmentModel >> beSmall [
 	self dimension: BrDeprecatedSizeAdjustmentState smallName
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrSizeAdjustmentModel >> beTiny [
 	self dimension: BrDeprecatedSizeAdjustmentState tinyName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSizeAdjustmentModel >> dimension [
 	^ dimension
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSizeAdjustmentModel >> dimension: aSymbol [
 
 	self dimension = aSymbol
@@ -62,7 +62,7 @@ BrSizeAdjustmentModel >> dimension: aSymbol [
 	self notifyStateChanged: dimension
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSizeAdjustmentModel >> initialize [
 	super initialize.
 
@@ -70,7 +70,7 @@ BrSizeAdjustmentModel >> initialize [
 	dimension := BrDeprecatedSizeAdjustmentState defaultName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSizeAdjustmentModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -78,7 +78,7 @@ BrSizeAdjustmentModel >> initializeListeners [
 	self when: BrDeprecatedSizeAdjustmentWish do: [ :aWish | self dimension: aWish dimension ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrSizeAdjustmentModel >> printOn: aStream [
 	aStream
 		nextPutAll: self modelName, '(';
@@ -86,12 +86,12 @@ BrSizeAdjustmentModel >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
-{ #category : #'state - accessing' }
+{ #category : 'state - accessing' }
 BrSizeAdjustmentModel >> stateChangedEventClass [
 	^ BrSizeAdjustmentChanged
 ]
 
-{ #category : #'state - streaming' }
+{ #category : 'state - streaming' }
 BrSizeAdjustmentModel >> streamStateIn: aBrInteractionStatesMapping [
 	aBrInteractionStatesMapping
 		addState: (BrDeprecatedSizeAdjustmentState new dimension: self dimension)

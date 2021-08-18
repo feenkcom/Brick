@@ -1,25 +1,25 @@
 Class {
-	#name : #BrWithDropdownModel,
-	#superclass : #BrWithAnchoredModel,
+	#name : 'BrWithDropdownModel',
+	#superclass : 'BrWithAnchoredModel',
 	#category : 'Brick-Dropdown - Model'
 }
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithDropdownModel >> stencilChangedEvent [
 	^ BrDropdownStencilChanged new
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithDropdownModel >> stencilRequestClass [
 	^ BrDropdownStencilRequest
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithDropdownModel >> visibleChangedEvent [
 	^ BrDropdownVisibleChanged new
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrWithDropdownModel >> visibleRequestClass [
 	^ BrDropdownVisibleRequest
 ]

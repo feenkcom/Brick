@@ -1,13 +1,13 @@
 Class {
-	#name : #BrSimpleTreeRowElementStencilBuilder,
-	#superclass : #BrTreeRowElementStencilBuilder,
+	#name : 'BrSimpleTreeRowElementStencilBuilder',
+	#superclass : 'BrTreeRowElementStencilBuilder',
 	#instVars : [
 		'nodeElement'
 	],
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrSimpleTreeRowElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
@@ -21,32 +21,32 @@ BrSimpleTreeRowElementStencilBuilder >> buildDefault [
 		addChild: self nodeElement
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrSimpleTreeRowElementStencilBuilder >> createExpandCollapseElement [
 	^ BrTriangle new
 		aptitude: BrGlamorousTriangleInCircleAptitude
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeRowElementStencilBuilder >> nodeElement [
 	<return: #BlElement>
 
 	^ nodeElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSimpleTreeRowElementStencilBuilder >> nodeElement: anElement [
 	nodeElement := anElement
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrSimpleTreeRowElementStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self itemType;
 		push: self nodeElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleTreeRowElementStencilBuilder >> reset [
 	super reset.
 	

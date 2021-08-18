@@ -1,13 +1,13 @@
 Class {
-	#name : #BrNegationState,
-	#superclass : #BrInteractionState,
+	#name : 'BrNegationState',
+	#superclass : 'BrInteractionState',
 	#instVars : [
 		'state'
 	],
 	#category : 'Brick-! Core - States'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrNegationState >> = anotherState [
 	anotherState == self
 		ifTrue: [ ^ true ].
@@ -18,22 +18,22 @@ BrNegationState >> = anotherState [
 	^ self state = anotherState state
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrNegationState >> hash [
 	^ self class hash bitXor: self state hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrNegationState >> matches: aSetOfStates [
 	^ (self state matches: aSetOfStates) not
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BrNegationState >> not [
 	^ self state
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrNegationState >> printOn: aStream [
 	aStream
 		nextPut: $(;
@@ -42,12 +42,12 @@ BrNegationState >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrNegationState >> state [
 	^ state
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrNegationState >> state: anObject [
 	state := anObject
 ]

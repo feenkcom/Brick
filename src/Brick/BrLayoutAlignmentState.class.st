@@ -1,6 +1,6 @@
 Class {
-	#name : #BrLayoutAlignmentState,
-	#superclass : #BrInteractionState,
+	#name : 'BrLayoutAlignmentState',
+	#superclass : 'BrInteractionState',
 	#instVars : [
 		'alignment'
 	],
@@ -10,12 +10,12 @@ Class {
 	#category : 'Brick-Layout Alignment - States'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> alignment: anObject [
 	^ self new alignment: anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> any [
 	^ (((self bottomCenter or: (self bottomLeft or: self bottomRight))
 		or: (self topCenter or: (self topLeft or: self topRight)))
@@ -23,57 +23,57 @@ BrLayoutAlignmentState class >> any [
 			or: self none
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> bottomCenter [
 	^ self alignment: BottomCenter
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> bottomLeft [
 	^ self alignment: BottomLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> bottomRight [
 	^ self alignment: BottomRight
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> center [
 	^ self alignment: Center
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> centerLeft [
 	^ self alignment: CenterLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> centerRight [
 	^ self alignment: CenterRight
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> none [
 	^ self alignment: None
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> topCenter [
 	^ self alignment: TopCenter
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> topLeft [
 	^ self alignment: TopLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentState class >> topRight [
 	^ self alignment: TopRight
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrLayoutAlignmentState >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -84,17 +84,17 @@ BrLayoutAlignmentState >> = anObject [
 	^ alignment = anObject alignment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentState >> alignment [
 	^ alignment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentState >> alignment: anObject [
 	alignment := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrLayoutAlignmentState >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 

@@ -1,18 +1,18 @@
 Class {
-	#name : #BrListItemDataBinderChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrListItemDataBinderChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'itemDataBinder'
 	],
 	#category : 'Brick-List - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataBinderChangedEvent >> itemDataBinder [
 	^ itemDataBinder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataBinderChangedEvent >> itemDataBinder: anObject [
 	itemDataBinder := anObject
 ]

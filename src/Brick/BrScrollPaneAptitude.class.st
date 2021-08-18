@@ -1,13 +1,13 @@
 Class {
-	#name : #BrScrollPaneAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrScrollPaneAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'scrollable'
 	],
 	#category : 'Brick-Scrollable - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollPaneAptitude >> initialize [
 	super initialize.
 
@@ -21,7 +21,7 @@ BrScrollPaneAptitude >> initialize [
 		with: [ BlLinearLayout vertical ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollPaneAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -30,14 +30,14 @@ BrScrollPaneAptitude >> initializeListeners [
 	self when: BrScrollToItemWish do: [ :anEvent | self onScrollToChild: anEvent ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollPaneAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrScrollableContentRequest new
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrScrollPaneAptitude >> onContentChanged: aContentStencil [
 	| aContentElement |
 	
@@ -48,14 +48,14 @@ BrScrollPaneAptitude >> onContentChanged: aContentStencil [
 	scrollable addChildFirst: aContentElement
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrScrollPaneAptitude >> onScrollBy: aScrollByWish [
 	aScrollByWish smooth
 		ifTrue: [ scrollable smoothScrollBy: aScrollByWish delta ]
 		ifFalse: [ scrollable scrollBy: aScrollByWish delta ]
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrScrollPaneAptitude >> onScrollToChild: aScrollToItemWish [
 	
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #BrProportionalHorizontalPagerAptitude,
-	#superclass : #BrPagerAptitude,
+	#name : 'BrProportionalHorizontalPagerAptitude',
+	#superclass : 'BrPagerAptitude',
 	#instVars : [
 		'pagesListElement',
 		'resizers'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Pager - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProportionalHorizontalPagerAptitude >> initialize [
 	super initialize.
 
@@ -24,7 +24,7 @@ BrProportionalHorizontalPagerAptitude >> initialize [
 	self addChangeAddChildAs: #(content list) with: [ pagesListElement ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProportionalHorizontalPagerAptitude >> onPage: aPageModel elementAttached: aPageElement [
 
 	aPageElement
@@ -47,12 +47,12 @@ BrProportionalHorizontalPagerAptitude >> onPage: aPageModel elementAttached: aPa
 	pagesListElement addChild: aPageElement
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProportionalHorizontalPagerAptitude >> onPage: aPageModel elementDetached: aPageElement [
 	pagesListElement removeChild: aPageElement
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProportionalHorizontalPagerAptitude >> onResized: aLeftPageElement to: anExtent and: aRightPageElement [
 	| availableSize availableWeight aLeftWeight aRightWeight |
 	

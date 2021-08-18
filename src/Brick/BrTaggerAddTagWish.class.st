@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTaggerAddTagWish,
-	#superclass : #BrTaggerWish,
+	#name : 'BrTaggerAddTagWish',
+	#superclass : 'BrTaggerWish',
 	#instVars : [
 		'tag'
 	],
 	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAddTagWish >> tag [
 	^ tag
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerAddTagWish >> tag: anObject [
 	tag := anObject
 ]

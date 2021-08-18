@@ -1,10 +1,10 @@
 Class {
-	#name : #BrLayoutAlignmentAptitude,
-	#superclass : #BrInteractiveAptitude,
+	#name : 'BrLayoutAlignmentAptitude',
+	#superclass : 'BrInteractiveAptitude',
 	#category : 'Brick-Layout Alignment - Look'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forAlignable [
 	^ self new
 		none: [ :aWidget | aWidget layoutDo: [ :aLayout | aLayout alignNone ] ];
@@ -19,13 +19,13 @@ BrLayoutAlignmentAptitude class >> forAlignable [
 		bottomRight: [ :aWidget | aWidget layoutDo: [ :aLayout | aLayout alignBottomRight ] ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forFrameLayout [
 	^ self new
 		any: [ :aWidget | aWidget layout: BlFrameLayout new ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forHorizontalFlowLayout [
 	^ self new
 		none: [ :aWidget | aWidget layout: BlFlowLayout horizontal ];
@@ -40,13 +40,13 @@ BrLayoutAlignmentAptitude class >> forHorizontalFlowLayout [
 		bottomRight: [ :aWidget | aWidget layout: BlFlowLayout horizontal alignBottomRight ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forHorizontalGridLayout [
 	^ self new
 		any: [ :aWidget | aWidget layout: BlGridLayout horizontal ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forHorizontalLinearLayout [
 	^ self new
 		none: [ :aWidget | aWidget layout: BlLinearLayout horizontal ];
@@ -61,7 +61,7 @@ BrLayoutAlignmentAptitude class >> forHorizontalLinearLayout [
 		bottomRight: [ :aWidget | aWidget layout: BlLinearLayout horizontal alignBottomRight ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forIgnoredByLayout [
 	^ self new
 		none: [ :aWidget | aWidget constraintsDo: [ :c |
@@ -96,7 +96,7 @@ BrLayoutAlignmentAptitude class >> forIgnoredByLayout [
 			c ignored vertical alignBottom ] ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forVerticalFlowLayout [
 	^ self new
 		none: [ :aWidget | aWidget layout: BlFlowLayout vertical ];
@@ -111,7 +111,7 @@ BrLayoutAlignmentAptitude class >> forVerticalFlowLayout [
 		bottomRight: [ :aWidget | aWidget layout: BlFlowLayout vertical alignBottomRight ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrLayoutAlignmentAptitude class >> forVerticalLinearLayout [
 	^ self new
 		none: [ :aWidget | aWidget layout: BlLinearLayout vertical ];
@@ -126,82 +126,82 @@ BrLayoutAlignmentAptitude class >> forVerticalLinearLayout [
 		bottomRight: [ :aWidget | aWidget layout: BlLinearLayout vertical alignBottomRight ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> any: aBlock [
 	self
 		when: self state any
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> bottomCenter: aBlock [
 	self
 		when: self state bottomCenter
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> bottomLeft: aBlock [
 	self
 		when: self state bottomLeft
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> bottomRight: aBlock [
 	self
 		when: self state bottomRight
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> center: aBlock [
 	self
 		when: self state center
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> centerLeft: aBlock [
 	self
 		when: self state centerLeft
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> centerRight: aBlock [
 	self
 		when: self state centerRight
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> none: aBlock [
 	self
 		when: self state none
 		style: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLayoutAlignmentAptitude >> state [
 	^ BrLayoutAlignmentState
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> topCenter: aBlock [
 	self
 		when: self state topCenter
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> topLeft: aBlock [
 	self
 		when: self state topLeft
 		style: aBlock
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrLayoutAlignmentAptitude >> topRight: aBlock [
 	self
 		when: self state topRight

@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTreeNodeCollapsed,
-	#superclass : #BrTreeNodeAnnouncement,
+	#name : 'BrTreeNodeCollapsed',
+	#superclass : 'BrTreeNodeAnnouncement',
 	#instVars : [
 		'from',
 		'to',
@@ -9,32 +9,32 @@ Class {
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeCollapsed >> from [
 	^ from
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeCollapsed >> from: anObject [
 	from := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeCollapsed >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeCollapsed >> node: anObject [
 	node := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeCollapsed >> to [
 	^ to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeCollapsed >> to: anObject [
 	to := anObject
 ]

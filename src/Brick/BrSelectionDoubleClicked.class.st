@@ -1,6 +1,6 @@
 Class {
-	#name : #BrSelectionDoubleClicked,
-	#superclass : #BlEvent,
+	#name : 'BrSelectionDoubleClicked',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'selection',
 		'sourceEvent'
@@ -8,24 +8,24 @@ Class {
 	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectionDoubleClicked >> selection [
 	<return: #Collection of: #Number>
 
 	^ selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectionDoubleClicked >> selection: anObject [
 	selection := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectionDoubleClicked >> sourceEvent [
 	^ sourceEvent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectionDoubleClicked >> sourceEvent: anObject [
 	sourceEvent := anObject
 ]

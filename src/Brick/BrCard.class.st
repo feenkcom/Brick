@@ -1,6 +1,6 @@
 Class {
-	#name : #BrCard,
-	#superclass : #BlElement,
+	#name : 'BrCard',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait',
 	#instVars : [
@@ -12,27 +12,27 @@ Class {
 	#category : 'Brick-Card - UI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> action [
 	^ buttonModel action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> action: aValuable [
 	buttonModel action: aValuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> description [
 	^ descriptionModel text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> description: aStringOrBrText [
 	descriptionModel text: aStringOrBrText
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCard >> initialize [
 	super initialize.
 	
@@ -48,22 +48,22 @@ BrCard >> initialize [
 			}))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> picture [
 	^ pictureModel icon
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> picture: anElement [
 	pictureModel icon: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> title [
 	^ titleModel text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCard >> title: aStringOrBrText [
 	titleModel text: aStringOrBrText
 ]

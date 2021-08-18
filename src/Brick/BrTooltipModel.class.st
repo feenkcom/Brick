@@ -1,25 +1,25 @@
 Class {
-	#name : #BrTooltipModel,
-	#superclass : #BrAnchoredModel,
+	#name : 'BrTooltipModel',
+	#superclass : 'BrAnchoredModel',
 	#category : 'Brick-Tooltip - Model'
 }
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTooltipModel >> contentChangedEvent [
 	^ BrTooltipContentChanged new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrTooltipModel >> contentRequestClass [
 	^ BrTooltipContentRequest
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrTooltipModel >> handleChangedEvent [
 	^ BrTooltipHandleChanged new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrTooltipModel >> handleRequestClass [
 	^ BrTooltipHandleRequest
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #BlElementStates }
+Extension { #name : 'BlElementStates' }
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 BlElementStates >> withExpansion [
 	self element addEventHandlerIfNotPresent: BrExpansionStateEventHandler uniqueInstance
 ]

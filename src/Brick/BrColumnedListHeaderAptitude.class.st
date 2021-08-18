@@ -6,12 +6,12 @@ BrColumnedListHeaderLook adds a header row to a BrColumnedList.
 - The header row is constructed as a BrHorizontalPane containing the header labels and inserted as the first child of the columned list.
 "
 Class {
-	#name : #BrColumnedListHeaderAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrColumnedListHeaderAptitude',
+	#superclass : 'BrAptitude',
 	#category : 'Brick-List - Look'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrColumnedListHeaderAptitude >> headerPane [
 	| headerPane |
 	headerPane := BrHorizontalPane new
@@ -31,7 +31,7 @@ BrColumnedListHeaderAptitude >> headerPane [
 	^ headerPane
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedListHeaderAptitude >> initialize [ 
 
 	super initialize.

@@ -11,27 +11,27 @@ I am not responsible for labels or icons since buttons not necessarily have them
 See ${class:BrButtonModelExamples}$ for examples
 "
 Class {
-	#name : #BrButtonModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrButtonModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'action'
 	],
 	#category : 'Brick-Button - Model'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrButtonModel class >> modelName [
 	^ 'Button'
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButtonModel >> action [
 	<return: #BlockClosure or: #Symbol or: #Valuable>
 	
 	^ action
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButtonModel >> action: aBlockOrSymbolOrValuable [
 	"An action can be a block with two optional parameters:
 	 - a UI element to which this button model is attached
@@ -47,7 +47,7 @@ BrButtonModel >> action: aBlockOrSymbolOrValuable [
 	action := aBlockOrSymbolOrValuable
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BrButtonModel >> clickEvent: anEvent [
 	anEvent consumed: true.
 	
@@ -55,7 +55,7 @@ BrButtonModel >> clickEvent: anEvent [
 		ifFalse: [ self action glamourValueWithArgs: { self widget . self . anEvent } ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BrButtonModel >> gtActionFor: aView [
 	<gtView>
 	
@@ -73,14 +73,14 @@ BrButtonModel >> gtActionFor: aView [
 			action: [ :aButton | aButton phlow spawnObject: self action ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrButtonModel >> initialize [
 	super initialize.
 
 	action := [ :anElement :aButtonModel :anEvent | ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrButtonModel >> initializeListeners [
 	self when: BlClickEvent do: [ :anEvent | self clickEvent: anEvent ]
 ]

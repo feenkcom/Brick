@@ -2,15 +2,15 @@
 I am the wrapper around the contents of one page, resizer and next button.
 "
 Class {
-	#name : #BrPagerPageElement,
-	#superclass : #BlElement,
+	#name : 'BrPagerPageElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'weight'
 	],
 	#category : 'Brick-Pager - Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPagerPageElement >> initialize [
 	super initialize.
 	
@@ -23,7 +23,7 @@ BrPagerPageElement >> initialize [
 		c vertical matchParent ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrPagerPageElement >> onMeasure: anExtentMeasurementSpec [
 	| aWidthSpec aHeightSpec |
 	
@@ -38,14 +38,14 @@ BrPagerPageElement >> onMeasure: anExtentMeasurementSpec [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPageElement >> weight [
 	<return: #Number>
 
 	^ weight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPagerPageElement >> weight: aNumber [
 	weight := aNumber.
 	self requestLayout

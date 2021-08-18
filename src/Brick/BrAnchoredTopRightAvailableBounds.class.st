@@ -1,15 +1,15 @@
 Class {
-	#name : #BrAnchoredTopRightAvailableBounds,
-	#superclass : #BrAnchoredAvailableBounds,
+	#name : 'BrAnchoredTopRightAvailableBounds',
+	#superclass : 'BrAnchoredAvailableBounds',
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredTopRightAvailableBounds class >> label [
 	^ 'Top right'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredTopRightAvailableBounds >> in: aBounds from: aPoint [
 	^ BrAnchoredOuterContainerBounds
 		left: aPoint x

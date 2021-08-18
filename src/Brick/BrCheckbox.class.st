@@ -1,17 +1,17 @@
 Class {
-	#name : #BrCheckbox,
-	#superclass : #BlElement,
+	#name : 'BrCheckbox',
+	#superclass : 'BlElement',
 	#traits : 'TBrCheckable + TBrEnableable + TBrLayoutResizable + TBrLayoutAlignable + TBrSizeAdjustable',
 	#classTraits : 'TBrCheckable classTrait + TBrEnableable classTrait + TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait + TBrSizeAdjustable classTrait',
 	#category : 'Brick-Checkbox - UI'
 }
 
-{ #category : #'api - button' }
+{ #category : 'api - button' }
 BrCheckbox >> action [
 	^ self viewModel action
 ]
 
-{ #category : #'api - button' }
+{ #category : 'api - button' }
 BrCheckbox >> action: aBlockClosure [
 	"An action can be a block with two optional parameters:
 	 - a UI element of the widget
@@ -23,7 +23,7 @@ BrCheckbox >> action: aBlockClosure [
 	self viewModel action: aBlockClosure
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCheckbox >> initialize [
 	super initialize.
 

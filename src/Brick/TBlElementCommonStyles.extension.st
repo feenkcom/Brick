@@ -1,21 +1,21 @@
-Extension { #name : #TBlElementCommonStyles }
+Extension { #name : 'TBlElementCommonStyles' }
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementCommonStyles >> collapsed [
 	^ self styleFor: BlElementState collapsed
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementCommonStyles >> collapsed: aBlock [
 	aBlock value: self collapsed
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementCommonStyles >> expanded [
 	^ self styleFor: BlElementState expanded
 ]
 
-{ #category : #'*Brick' }
+{ #category : '*Brick' }
 TBlElementCommonStyles >> expanded: aBlock [
 	aBlock value: self expanded
 ]

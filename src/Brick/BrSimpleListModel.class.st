@@ -1,6 +1,6 @@
 Class {
-	#name : #BrSimpleListModel,
-	#superclass : #BrAbstractListModel,
+	#name : 'BrSimpleListModel',
+	#superclass : 'BrAbstractListModel',
 	#instVars : [
 		'itemElementStencil',
 		'itemDataBinder',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-List - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSimpleListModel >> initialize [
 	super initialize.
 
@@ -18,7 +18,7 @@ BrSimpleListModel >> initialize [
 	itemDataUnbinder := BrListItemDataUnbinder new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrSimpleListModel >> initializeListeners [
 	super initializeListeners.
 
@@ -27,7 +27,7 @@ BrSimpleListModel >> initializeListeners [
 	self when: BrListItemDataUnbinderRequest reply: [ :aResponse | aResponse itemDataUnbinder: self itemDataUnbinder ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleListModel >> itemDataBinder [
 	"Return a stencil that is used to bind data to a given item element"
 	<return: #BrListItemDataBinder>
@@ -35,7 +35,7 @@ BrSimpleListModel >> itemDataBinder [
 	^ itemDataBinder
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleListModel >> itemDataBinder: aStencil [
 	"Set a stencil that will be used to bind data to a given item element"
 
@@ -43,7 +43,7 @@ BrSimpleListModel >> itemDataBinder: aStencil [
 	self dispatchEvent: (BrListItemDataBinderChangedEvent new itemDataBinder: itemDataBinder)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleListModel >> itemDataUnbinder [
 	"Return a stencil that is used to unbind data from a given item element"
 	<return: #BrListItemDataUnbinder>
@@ -51,7 +51,7 @@ BrSimpleListModel >> itemDataUnbinder [
 	^ itemDataUnbinder
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleListModel >> itemDataUnbinder: aStencil [
 	"Set a stencil that will be used to unbind data from a given item element"
 
@@ -59,7 +59,7 @@ BrSimpleListModel >> itemDataUnbinder: aStencil [
 	self dispatchEvent: (BrListItemDataUnbinderChangedEvent new itemDataUnbinder: itemDataUnbinder)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleListModel >> itemElementStencil [
 	"Return a stencil that is used to create an item element of a given type"
 	<return: #BrListItemElementStencilBuilder>
@@ -67,7 +67,7 @@ BrSimpleListModel >> itemElementStencil [
 	^ itemElementStencil
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrSimpleListModel >> itemElementStencil: aStencil [
 	"Set a stencil that will be used to create an item element of a given type"
 

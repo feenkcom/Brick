@@ -1,6 +1,6 @@
 Class {
-	#name : #BrAccordionAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrAccordionAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'contentElement',
 		'contentStencil',
@@ -10,12 +10,12 @@ Class {
 	#category : 'Brick-Accordion - Look'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrAccordionAptitude >> accordionCollapsed [
 	contentElement ifNotNil: [ contentElement removeFromParent ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrAccordionAptitude >> accordionExpanded [
 
 	contentElement ifNil: [ contentElement := self contentStencil asElement ].
@@ -23,12 +23,12 @@ BrAccordionAptitude >> accordionExpanded [
 	self widgetContent addChild: contentElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionAptitude >> contentStencil [
 	 ^ contentStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionAptitude >> contentStencil: aBrStencil [
 
 	self
@@ -42,12 +42,12 @@ BrAccordionAptitude >> contentStencil: aBrStencil [
 	self request: BrExpansionStateRequest new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionAptitude >> headerStencil [
 	 ^ headerStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionAptitude >> headerStencil: aBrStencil [
 
 	self
@@ -61,7 +61,7 @@ BrAccordionAptitude >> headerStencil: aBrStencil [
 	self widgetHeader addChild: headerElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAccordionAptitude >> initialize [
 	super initialize.
 	
@@ -69,7 +69,7 @@ BrAccordionAptitude >> initialize [
 	headerStencil := BlElement new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAccordionAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -79,7 +79,7 @@ BrAccordionAptitude >> initializeListeners [
 	self when: BrAccordionHeaderStencilChanged do: [ :anEvent | self headerStencil: anEvent stencil ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAccordionAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -88,7 +88,7 @@ BrAccordionAptitude >> initializeRequests [
 	self request: BrExpansionStateRequest new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAccordionAptitude >> widgetHeader [
 	"Return widget's header container element"
 	<return: #BlElement>

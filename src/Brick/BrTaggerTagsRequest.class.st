@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTaggerTagsRequest,
-	#superclass : #BrTaggerRequest,
+	#name : 'BrTaggerTagsRequest',
+	#superclass : 'BrTaggerRequest',
 	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTaggerTagsRequest >> responseClass [
 	^ BrTaggerTagsChanged
 ]

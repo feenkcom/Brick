@@ -1,10 +1,10 @@
 Class {
-	#name : #BrLayoutHorizontalResizerChanged,
-	#superclass : #BrLayoutResizerChanged,
+	#name : 'BrLayoutHorizontalResizerChanged',
+	#superclass : 'BrLayoutResizerChanged',
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrLayoutHorizontalResizerChanged class >> isDeprecated [
 	^ true
 ]

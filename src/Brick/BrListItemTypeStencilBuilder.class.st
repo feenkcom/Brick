@@ -2,8 +2,8 @@
 I am a stencil builder that defines a general api of the object that should compute the type of an item in the list.
 "
 Class {
-	#name : #BrListItemTypeStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrListItemTypeStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'itemPosition',
 		'itemObject'
@@ -11,34 +11,34 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrListItemTypeStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ BrListItemType invalid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemTypeStencilBuilder >> itemObject [
 	^ itemObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemTypeStencilBuilder >> itemObject: anObject [
 	itemObject := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemTypeStencilBuilder >> itemPosition [
 	^ itemPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemTypeStencilBuilder >> itemPosition: anObject [
 	itemPosition := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrListItemTypeStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: BrListItemType;
@@ -46,7 +46,7 @@ BrListItemTypeStencilBuilder >> paramsOn: aStencilExecutor [
 		push: self itemPosition
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrListItemTypeStencilBuilder >> reset [
 	itemPosition := nil.
 	itemObject := nil

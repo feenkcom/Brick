@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTabGroupHeaderWithToolbarAptitude,
-	#superclass : #BrTabGroupHeaderAptitude,
+	#name : 'BrTabGroupHeaderWithToolbarAptitude',
+	#superclass : 'BrTabGroupHeaderAptitude',
 	#instVars : [
 		'toolbar',
 		'actionbar'
@@ -8,14 +8,14 @@ Class {
 	#category : 'Brick-Tabs - Look'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderWithToolbarAptitude >> actionbar [
 	<return: #BlElement>
 
 	^ actionbar
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupHeaderWithToolbarAptitude >> initialize [
 	super initialize.
 	"We have the following structure:
@@ -36,7 +36,7 @@ BrTabGroupHeaderWithToolbarAptitude >> initialize [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupHeaderWithToolbarAptitude >> initializeListeners [
 	super initializeListeners.
 	self
@@ -48,7 +48,7 @@ BrTabGroupHeaderWithToolbarAptitude >> initializeListeners [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupHeaderWithToolbarAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -56,7 +56,7 @@ BrTabGroupHeaderWithToolbarAptitude >> initializeRequests [
 	self request: BrTabGroupActionbarRequest new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderWithToolbarAptitude >> onActionbarChanged: aStencil [
 	self actionbar removeChildren.
 
@@ -64,37 +64,37 @@ BrTabGroupHeaderWithToolbarAptitude >> onActionbarChanged: aStencil [
 		ifNotNil: [ self actionbar addChild: aStencil asElement ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderWithToolbarAptitude >> onTabDeselected: aBrTabModel [ 
 	super onTabDeselected: aBrTabModel.
 	self toolbar removeChildren
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderWithToolbarAptitude >> onTabSelected: aTabModel [
 	super onTabSelected: aTabModel.
 	self updateToolbarFrom: aTabModel
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderWithToolbarAptitude >> onTabToolbarChanged: aTabModel [
 	aTabModel isSelected ifFalse: [ ^ self ].
 	self updateToolbarFrom: aTabModel.
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderWithToolbarAptitude >> toolbar [
 	<return: #BlElement>
 
 	^ toolbar
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderWithToolbarAptitude >> toolbarDo: aBlock [
 	aBlock value: self toolbar
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrTabGroupHeaderWithToolbarAptitude >> updateToolbarFrom: aTabModel [
 	self toolbar removeChildren.
 	aTabModel toolbarStencilBuilder

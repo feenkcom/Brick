@@ -1,23 +1,23 @@
 Class {
-	#name : #BrTabActionbarChangedEvent,
-	#superclass : #BrTabEvent,
+	#name : 'BrTabActionbarChangedEvent',
+	#superclass : 'BrTabEvent',
 	#instVars : [
 		'stencil'
 	],
 	#category : 'Brick-Tabs - Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BrTabActionbarChangedEvent >> sendTo: anObject [
 	anObject tabActionbarChanged: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabActionbarChangedEvent >> stencil [
 	^ stencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTabActionbarChangedEvent >> stencil: anObject [
 	stencil := anObject
 ]

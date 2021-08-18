@@ -7,68 +7,68 @@ I use ${class:BrProgressPaintStencil}$ to compute new progress bar background on
 
 "
 Class {
-	#name : #BrProgressAnimatedBarAptitude,
-	#superclass : #BrProgressBarAptitude,
+	#name : 'BrProgressAnimatedBarAptitude',
+	#superclass : 'BrProgressBarAptitude',
 	#instVars : [
 		'paintStencil'
 	],
 	#category : 'Brick-Progress - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressAnimatedBarAptitude >> animationDelay [
 	^ 121 milliSeconds
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 BrProgressAnimatedBarAptitude >> beGradientAnimation [
 	self paintStencil: BrProgressGradientPaintStencil new
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 BrProgressAnimatedBarAptitude >> beGradientAnimationBaseColor: aStartColor highlightColor: aStopColor [
 	self paintStencil: (BrProgressGradientPaintStencil new
 		startColor: aStartColor;
 		stopColor: aStopColor)
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 BrProgressAnimatedBarAptitude >> beGradientAnimationColor: aStopColor [
 	self paintStencil: (BrProgressGradientPaintStencil new
 		stopColor: aStopColor)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressAnimatedBarAptitude >> defaultPaintStencil [
 	^ BrProgressGradientPaintStencil new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressAnimatedBarAptitude >> initialize [
 	super initialize.
 	self paintStencil: self defaultPaintStencil.
 	self container enqueueTask: self newAnimationTask.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrProgressAnimatedBarAptitude >> newAnimationTask [
 	^ BlRepeatedTaskAction new
 		delay: self animationDelay;
 		action: [ self updateContainerBackground ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressAnimatedBarAptitude >> paintStencil [
 	<return: #BrProgressPaintStencil>
 	^ paintStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressAnimatedBarAptitude >> paintStencil: aBrProgressPaintStencil [
 	paintStencil := aBrProgressPaintStencil
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrProgressAnimatedBarAptitude >> updateContainerBackground [
 	"do nothing"
 	self container background: self paintStencil create.

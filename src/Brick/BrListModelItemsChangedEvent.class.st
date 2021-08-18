@@ -1,18 +1,18 @@
 Class {
-	#name : #BrListModelItemsChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrListModelItemsChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'viewModel'
 	],
 	#category : 'Brick-List - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListModelItemsChangedEvent >> viewModel [
 	^ viewModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListModelItemsChangedEvent >> viewModel: aViewModel [
 	viewModel := aViewModel
 ]

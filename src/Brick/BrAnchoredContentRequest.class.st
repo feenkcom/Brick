@@ -1,10 +1,10 @@
 Class {
-	#name : #BrAnchoredContentRequest,
-	#superclass : #BrRequest,
+	#name : 'BrAnchoredContentRequest',
+	#superclass : 'BrRequest',
 	#category : 'Brick-Anchored - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAnchoredContentRequest >> responseClass [
 	self subclassResponsibility
 ]

@@ -1,42 +1,42 @@
 Class {
-	#name : #BrCheckboxChanged,
-	#superclass : #BrStateChangedEvent,
+	#name : 'BrCheckboxChanged',
+	#superclass : 'BrStateChangedEvent',
 	#instVars : [
 		'state'
 	],
 	#category : 'Brick-Checkbox - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCheckboxChanged >> initialize [
 	super initialize.
 	
 	state := BrCheckboxState unchecked
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCheckboxChanged >> isChecked [
 	^ self state = BrCheckboxState checked
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCheckboxChanged >> isIndeterminate [
 	^ self state = BrCheckboxState indeterminate
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCheckboxChanged >> isUnchecked [
 	^ self state = BrCheckboxState unchecked
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCheckboxChanged >> state [
 	<return: #BrCheckboxState>
 
 	^ state
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCheckboxChanged >> state: aBrCheckboxState [
 	state := aBrCheckboxState
 ]

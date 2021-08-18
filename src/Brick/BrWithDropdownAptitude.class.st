@@ -1,6 +1,6 @@
 Class {
-	#name : #BrWithDropdownAptitude,
-	#superclass : #BrWithAnchoredAptitude,
+	#name : 'BrWithDropdownAptitude',
+	#superclass : 'BrWithAnchoredAptitude',
 	#instVars : [
 		'hideWishHandler',
 		'clickShowCondition',
@@ -9,17 +9,17 @@ Class {
 	#category : 'Brick-Dropdown - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithDropdownAptitude class >> anchoredAptitude [
 	^ self anchoredAptitudeClass new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithDropdownAptitude class >> anchoredAptitudeClass [
 	^ BrDropdownAptitude
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithDropdownAptitude class >> content: anObject [
 	^ self stencil: [
 		BrAnchoredElement new
@@ -29,7 +29,7 @@ BrWithDropdownAptitude class >> content: anObject [
 			yourself ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithDropdownAptitude class >> handle: anObject content: anotherObject [
 	^ self
 		handle: anObject
@@ -37,7 +37,7 @@ BrWithDropdownAptitude class >> handle: anObject content: anotherObject [
 		aptitudeDo: [ :anAnchoredLook | ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitudeDo: aBlock [
 	^ self
 		stencil: [ | anAnchoredLook |
@@ -51,7 +51,7 @@ BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitude
 				yourself ]
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> attachToCenter [
 	strategy := BrAnchoredCompositeStrategy builder
 		single: [ :e | 
@@ -97,12 +97,12 @@ BrWithDropdownAptitude >> attachToCenter [
 		build.
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> doNotHideWidget [
 	self shouldHideWidget: false
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> hide [
 	super hide.
 
@@ -110,7 +110,7 @@ BrWithDropdownAptitude >> hide [
 		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithDropdownAptitude >> initialize [
 	super initialize.
 	
@@ -168,7 +168,7 @@ BrWithDropdownAptitude >> initialize [
 		build.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithDropdownAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -202,7 +202,7 @@ BrWithDropdownAptitude >> initializeListeners [
 						self show ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithDropdownAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -210,48 +210,48 @@ BrWithDropdownAptitude >> initializeRequests [
 	self request: BrDropdownVisibleRequest new
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BrWithDropdownAptitude >> isWidgetEnabled [	
 	self widgetDo: [ :aWidget | ^ (aWidget states hasState: BlElementState disabled) not ].
 	^ true
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrWithDropdownAptitude >> onAnchoredElementCreated: anAnchoredElement [
 	anAnchoredElement addEventHandler: hideWishHandler
 ]
 
-{ #category : #'private - hooks' }
+{ #category : 'private - hooks' }
 BrWithDropdownAptitude >> onAnchoredElementRemoved: anAnchoredElement [
 	anAnchoredElement removeEventHandler: hideWishHandler
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> onControlClick [
 	clickShowCondition := [ :anEvent | anEvent modifiers isCtrl ]
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> onPrimaryClick [
 	clickShowCondition := [ :anEvent | anEvent modifiers isPrimaryModifier ]
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> shouldHideWidget [
 	^ shouldHideWidget
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> shouldHideWidget: anObject [
 	shouldHideWidget := anObject
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BrWithDropdownAptitude >> shouldShowDueToClick: aClickEvent [
 	^ clickShowCondition value: aClickEvent
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithDropdownAptitude >> show [
 	super show.
 
