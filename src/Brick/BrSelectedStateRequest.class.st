@@ -1,10 +1,10 @@
 Class {
-	#name : #BrSelectedStateRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-! Core - Events'
+	#name : 'BrSelectedStateRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSelectedStateRequest >> responseClass [
 	^ BrSelectedChanged
 ]

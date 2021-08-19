@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGridList,
-	#superclass : #BrList,
-	#category : #'Brick-List - UI'
+	#name : 'BrGridList',
+	#superclass : 'BrList',
+	#category : 'Brick-List - UI'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGridList >> initialize [
 	super initialize.
 
@@ -15,7 +15,7 @@ BrGridList >> initialize [
 		c vertical matchParent ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGridList >> stencil: aListRowStencilBuilder [
 	self aptitude itemStencilBuilder: aListRowStencilBuilder
 ]

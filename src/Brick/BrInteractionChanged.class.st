@@ -1,24 +1,24 @@
 Class {
-	#name : #BrInteractionChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrInteractionChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'states',
 		'forceUpdate'
 	],
-	#category : #'Brick-! Core - Events'
+	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionChanged >> forceUpdate [
 	^ forceUpdate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionChanged >> forceUpdate: anObject [
 	forceUpdate := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrInteractionChanged >> initialize [
 	super initialize.
 	
@@ -26,12 +26,12 @@ BrInteractionChanged >> initialize [
 	forceUpdate := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionChanged >> states [
 	^ states
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrInteractionChanged >> states: anObject [
 	states := anObject
 ]

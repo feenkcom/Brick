@@ -23,17 +23,17 @@ Individual ${method:BrProgressModel>>#amount|label=#selector}$ and ${method:BrPr
 
 "
 Class {
-	#name : #BrProgressWithLabelModel,
-	#superclass : #BrProgressModel,
+	#name : 'BrProgressWithLabelModel',
+	#superclass : 'BrProgressModel',
 	#instVars : [
 		'labelModel',
 		'labelStencil',
 		'valueStencil'
 	],
-	#category : #'Brick-Progress - Model'
+	#category : 'Brick-Progress - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> amountString [
 	<return: #String>
 	^ self valueStencil 
@@ -41,48 +41,48 @@ BrProgressWithLabelModel >> amountString [
 		create
 ]
 
-{ #category : #'accessing - label value format' }
+{ #category : 'accessing - label value format' }
 BrProgressWithLabelModel >> asIsValues [
 	self valueStencil: BrProgressAsIsValueStencil new.
 	self updateLabel.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressWithLabelModel >> defaultLabelStencil [
 	^ BrProgressFixedLabelStencil new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressWithLabelModel >> defaultValueStencil [
 	^ BrProgressAsIsValueStencil new
 ]
 
-{ #category : #'accessing - label value format' }
+{ #category : 'accessing - label value format' }
 BrProgressWithLabelModel >> fileSizeLabelValues [
 	self valueStencil: BrProgressFileSizeValueStencil new.
 	self updateLabel.
 ]
 
-{ #category : #'accessing - label format' }
+{ #category : 'accessing - label format' }
 BrProgressWithLabelModel >> fixedLabel: aString [
 	"Set fixed progress label"
 	labelStencil := BrProgressFixedLabelStencil new label: aString.
 	self updateLabel.
 ]
 
-{ #category : #'accessing - label value format' }
+{ #category : 'accessing - label value format' }
 BrProgressWithLabelModel >> floatLabelValues [
 	self valueStencil: BrProgressFloatValueStencil new.
 	self updateLabel.
 ]
 
-{ #category : #'accessing - label value format' }
+{ #category : 'accessing - label value format' }
 BrProgressWithLabelModel >> floatLabelValuesWithDecimals: aNumberOfDecimals [
 	self valueStencil: (BrProgressFloatValueStencil new numberOfDecimals: aNumberOfDecimals).
 	self updateLabel.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressWithLabelModel >> initialize [
 	super initialize.
 	labelModel := BrLabelModel new.
@@ -91,13 +91,13 @@ BrProgressWithLabelModel >> initialize [
 	self labelStencil: self defaultLabelStencil.
 ]
 
-{ #category : #'accessing - label value format' }
+{ #category : 'accessing - label value format' }
 BrProgressWithLabelModel >> integerLabelValues [
 	self valueStencil: BrProgressIntegerValueStencil new.
 	self updateLabel.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> label [
 	<return: #BlRopedText>
 	^ labelStencil 
@@ -106,25 +106,25 @@ BrProgressWithLabelModel >> label [
 		create
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> labelStencil [
 	<return: #BrProgressLabelStencil>
 	^ labelStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> labelStencil: aBrProgressLabelStencil [
 	labelStencil := aBrProgressLabelStencil.
 	self updateLabel.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProgressWithLabelModel >> onProgressChanged: anAmountNumber total: aTotalNumber [
 	super onProgressChanged: anAmountNumber total: aTotalNumber.
 	self updateLabel.
 ]
 
-{ #category : #'accessing - label format' }
+{ #category : 'accessing - label format' }
 BrProgressWithLabelModel >> patternLabel: aString [
 	"The input string can include two place holders called {1} and {2},
 	where {1} is transfered amount, and {2} is total to transfer.
@@ -133,7 +133,7 @@ BrProgressWithLabelModel >> patternLabel: aString [
 	self updateLabel.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> totalString [
 	<return: #String>
 	^ self valueStencil 
@@ -141,18 +141,18 @@ BrProgressWithLabelModel >> totalString [
 		create
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrProgressWithLabelModel >> updateLabel [
 	labelModel text: self label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> valueStencil [
 	<return: #BrProgressValueStencil>
 	^ valueStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressWithLabelModel >> valueStencil: anObject [
 	valueStencil := anObject
 ]

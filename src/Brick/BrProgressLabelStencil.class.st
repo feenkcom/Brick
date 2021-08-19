@@ -5,49 +5,49 @@ See my subclasses for specific examples: ${class:BrProgressLabelStencil|show=#gt
 
 "
 Class {
-	#name : #BrProgressLabelStencil,
-	#superclass : #BrStencil,
+	#name : 'BrProgressLabelStencil',
+	#superclass : 'BrStencil',
 	#instVars : [
 		'amount',
 		'total'
 	],
-	#category : #'Brick-Progress - Model'
+	#category : 'Brick-Progress - Model'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrProgressLabelStencil class >> isAbstract [
 	^ self name = #BrProgressLabelStencil 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressLabelStencil >> amount [
 	^ amount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressLabelStencil >> amount: anObject [
 	amount := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrProgressLabelStencil >> create [
 	<return: #BlRopedText>
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressLabelStencil >> initialize [
 	super initialize.
 	amount := 0.
 	total := 100.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressLabelStencil >> total [
 	^ total
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressLabelStencil >> total: anObject [
 	total := anObject
 ]

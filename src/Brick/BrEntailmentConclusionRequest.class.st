@@ -1,10 +1,10 @@
 Class {
-	#name : #BrEntailmentConclusionRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Entailment - Events'
+	#name : 'BrEntailmentConclusionRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Entailment - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEntailmentConclusionRequest >> responseClass [
 	^ BrEntailmentConclusionChanged
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #BrEditorAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrEditorAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
@@ -8,17 +8,17 @@ Class {
 		'text',
 		'styler'
 	],
-	#category : #'Brick-Editor - Look'
+	#category : 'Brick-Editor - Look'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ attributesBuilder
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorAptitude >> initialize [
 	super initialize.
 	
@@ -32,7 +32,7 @@ BrEditorAptitude >> initialize [
 	self add: BrLayoutResizerAptitude inherit
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -41,7 +41,7 @@ BrEditorAptitude >> initializeListeners [
 	self when: BrEditorModeChanged do: [ :anEvent | self mode: anEvent mode ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -50,21 +50,21 @@ BrEditorAptitude >> initializeRequests [
 	self request: BrEditorModeRequest new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorAptitude >> mode: aTextEditorMode [	
 	self widgetDo: [ :aWidget |
 		aWidget editor editorMode: aTextEditorMode.
 		aWidget states addState: (BrEditorModeState mode: aTextEditorMode class) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorAptitude >> styler: aStyler [
 	styler := aStyler.
 	
 	self widgetDo: [ :aWidget | aWidget editor styler: aStyler ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorAptitude >> text: aText [
 	text := aText.
 	attributesBuilder attributesTarget: text.

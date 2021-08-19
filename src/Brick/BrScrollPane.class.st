@@ -1,20 +1,20 @@
 Class {
-	#name : #BrScrollPane,
-	#superclass : #BlElement,
+	#name : 'BrScrollPane',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'scrollable'
 	],
-	#category : #'Brick-Scrollable - UI'
+	#category : 'Brick-Scrollable - UI'
 }
 
-{ #category : #'api - scrollpane' }
+{ #category : 'api - scrollpane' }
 BrScrollPane >> content: aStencil [
 	self viewModel contentStencil: aStencil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollPane >> initialize [
 	super initialize.
 	

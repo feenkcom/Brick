@@ -1,10 +1,10 @@
 Class {
-	#name : #BrDropdownCenterLeftAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Dropdown - Look'
+	#name : 'BrDropdownCenterLeftAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Dropdown - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDropdownCenterLeftAptitude >> initialize [
 	super initialize.
 	self

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrHoveredRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-! Core - Events'
+	#name : 'BrHoveredRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHoveredRequest >> responseClass [
 	^ BrHoveredChanged
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTabAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Tabs - Look'
+	#name : 'BrTabAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Tabs - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -16,7 +16,7 @@ BrTabAptitude >> initializeListeners [
 		do: [ :anEvent | self onTabDeselected: anEvent tab ].
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabAptitude >> onTabDeselected: aBrTabModel [ 
 	self
 		assert: [ self isAttachedToWidget ]
@@ -25,7 +25,7 @@ BrTabAptitude >> onTabDeselected: aBrTabModel [
 	self widget states removeState: BlElementState selected
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabAptitude >> onTabSelected: aTabModel [
 	self
 		assert: [ self isAttachedToWidget ]

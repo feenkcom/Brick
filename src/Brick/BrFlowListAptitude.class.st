@@ -1,6 +1,6 @@
 Class {
-	#name : #BrFlowListAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrFlowListAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'items',
 		'itemElements',
@@ -12,7 +12,7 @@ Class {
 	#category : 'Brick-List - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFlowListAptitude >> initialize [
 	super initialize.
 	items := #().
@@ -36,7 +36,7 @@ BrFlowListAptitude >> initialize [
 		with: [ scrollableElement ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFlowListAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -44,7 +44,7 @@ BrFlowListAptitude >> initializeListeners [
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFlowListAptitude >> itemStencilBuilder: aStencilBuilder [
 	"aStencilBuilder is expected to be a subclass of BrListRowStencil or a valuable"
 	itemStencilBuilder := aStencilBuilder asStencilBuilder: BrListRowStencilBuilder.
@@ -52,25 +52,25 @@ BrFlowListAptitude >> itemStencilBuilder: aStencilBuilder [
 	self updateList
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFlowListAptitude >> listElement [
 	^ listElement
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BrFlowListAptitude >> onModelItemsChanged: anEvent [
 
 	items := anEvent viewModel items.
 	self updateList
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrFlowListAptitude >> onSelectionChanged: aCollectionOfIndices [
 	selection := BlCompositeSelection fromIndices: aCollectionOfIndices.
 	self updateSelection
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrFlowListAptitude >> updateList [
 	listElement removeChildren.
 	
@@ -84,7 +84,7 @@ BrFlowListAptitude >> updateList [
 	listElement addChildren: itemElements
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrFlowListAptitude >> updateSelection [
 	"itemElements withIndexDo: [ :eachItemElement :eachIndex |
 		(selection contains: eachIndex)

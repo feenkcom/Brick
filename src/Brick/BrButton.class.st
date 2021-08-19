@@ -1,6 +1,6 @@
 Class {
-	#name : #BrButton,
-	#superclass : #BlElement,
+	#name : 'BrButton',
+	#superclass : 'BlElement',
 	#traits : 'TBrEnableable + TBrLayoutAlignable + TBrLayoutResizable + TBrSizeAdjustable',
 	#classTraits : 'TBrEnableable classTrait + TBrLayoutAlignable classTrait + TBrLayoutResizable classTrait + TBrSizeAdjustable classTrait',
 	#instVars : [
@@ -8,15 +8,15 @@ Class {
 		'iconModel',
 		'interactiveModel'
 	],
-	#category : #'Brick-Button - UI'
+	#category : 'Brick-Button - UI'
 }
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> action [
 	^ self viewModel action
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> action: aValuable [
 	"An action can be a block with two optional parameters:
 	 - a UI element to which this button model is attached
@@ -28,7 +28,7 @@ BrButton >> action: aValuable [
 	self viewModel action: aValuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrButton >> gtActionFor: aView [
 	<gtView>
 	self action ifNil: [ ^ aView empty ].
@@ -37,17 +37,17 @@ BrButton >> gtActionFor: aView [
 		priority: 20
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> icon [
 	^ iconModel icon
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> icon: anElement [
 	iconModel icon: anElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrButton >> initialize [
 	super initialize.
 	
@@ -65,22 +65,22 @@ BrButton >> initialize [
 			}))
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> label [
 	^ labelModel text
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> label: aStringOrBrText [
 	labelModel text: aStringOrBrText
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> model [
 	^ self viewModel model
 ]
 
-{ #category : #'api - widget' }
+{ #category : 'api - widget' }
 BrButton >> model: anObject [
 	self viewModel model: anObject
 ]

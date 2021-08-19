@@ -1,28 +1,28 @@
 Class {
-	#name : #BrTreeItemHolder,
-	#superclass : #BlInfiniteHolder,
+	#name : 'BrTreeItemHolder',
+	#superclass : 'BlInfiniteHolder',
 	#instVars : [
 		'rowValue',
 		'rowNode'
 	],
-	#category : #'Brick-Tree - Support'
+	#category : 'Brick-Tree - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeItemHolder >> itemElement: anElement [
 	itemElement := anElement.
 	itemElement compositingMode wantsCompositionLayer
 		ifFalse: [ itemElement beInSeparateCompositionLayer ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeItemHolder >> rowNode [
 	<return: #BrTreeNode>
 
 	^ rowNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeItemHolder >> rowNode: aBrTreeNode [
 	rowNode := aBrTreeNode
 ]

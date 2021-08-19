@@ -1,10 +1,10 @@
 Class {
-	#name : #BrLazyTreeNode,
-	#superclass : #BrTreeNode,
-	#category : #'Brick-Tree - Model'
+	#name : 'BrLazyTreeNode',
+	#superclass : 'BrTreeNode',
+	#category : 'Brick-Tree - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLazyTreeNode >> newSubNode: anObject computation: aComputationBlock [
 	^ self class new value: anObject computation: aComputationBlock
 ]

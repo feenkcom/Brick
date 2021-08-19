@@ -1,24 +1,24 @@
 Class {
-	#name : #BrAnchoredCompositeStrategyBuilder,
-	#superclass : #BrAnchoredStrategyBuilder,
+	#name : 'BrAnchoredCompositeStrategyBuilder',
+	#superclass : 'BrAnchoredStrategyBuilder',
 	#instVars : [
 		'strategies'
 	],
-	#category : #'Brick-Anchored - Support'
+	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #building }
+{ #category : 'building' }
 BrAnchoredCompositeStrategyBuilder >> build [
 	^ BrAnchoredCompositeStrategy strategies: strategies
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAnchoredCompositeStrategyBuilder >> initialize [
 	super initialize.
 	strategies := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredCompositeStrategyBuilder >> single: aBlock [
 	| builder |
 	builder := BrAnchoredSingleStrategy builder.

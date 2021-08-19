@@ -1,10 +1,10 @@
 Class {
-	#name : #BrPopupTargetRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Popup - Events'
+	#name : 'BrPopupTargetRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Popup - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupTargetRequest >> responseClass [
 	^ BrPopupTargetChanged
 ]

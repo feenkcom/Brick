@@ -1,14 +1,14 @@
 Class {
-	#name : #BrCompositeState,
-	#superclass : #BrInteractionState,
+	#name : 'BrCompositeState',
+	#superclass : 'BrInteractionState',
 	#instVars : [
 		'left',
 		'right'
 	],
-	#category : #'Brick-! Core - States'
+	#category : 'Brick-! Core - States'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrCompositeState >> = anotherState [
 	anotherState == self
 		ifTrue: [ ^ true ].
@@ -20,32 +20,32 @@ BrCompositeState >> = anotherState [
 		and: [ self right = anotherState right ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrCompositeState >> hash [
 	^ (self class hash bitXor: self left hash) bitXor: self right hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCompositeState >> left [
 	^ left
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCompositeState >> left: anObject [
 	left := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCompositeState >> matches: aSetOfStates [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCompositeState >> right [
 	^ right
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCompositeState >> right: anObject [
 	right := anObject
 ]

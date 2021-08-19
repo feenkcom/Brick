@@ -1,15 +1,15 @@
 Class {
-	#name : #BrSizeAdjustmentRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-! Deprecated'
+	#name : 'BrSizeAdjustmentRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSizeAdjustmentRequest class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSizeAdjustmentRequest >> responseClass [
 	^ BrSizeAdjustmentChanged
 ]

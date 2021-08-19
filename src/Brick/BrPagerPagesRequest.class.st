@@ -1,5 +1,5 @@
 Class {
-	#name : #BrPagerPagesRequest,
-	#superclass : #BrRequest,
+	#name : 'BrPagerPagesRequest',
+	#superclass : 'BrRequest',
 	#category : 'Brick-Pager - Events'
 }

@@ -1,23 +1,23 @@
 Class {
-	#name : #BrEditorStylerChanged,
-	#superclass : #BrEditorChangedEvent,
+	#name : 'BrEditorStylerChanged',
+	#superclass : 'BrEditorChangedEvent',
 	#instVars : [
 		'styler'
 	],
-	#category : #'Brick-Editor - Events'
+	#category : 'Brick-Editor - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorStylerChanged class >> styler: aStyler [
 	^ self new styler: aStyler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorStylerChanged >> styler [
 	^ styler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorStylerChanged >> styler: anObject [
 	styler := anObject
 ]

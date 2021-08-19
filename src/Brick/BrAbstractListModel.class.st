@@ -1,6 +1,6 @@
 Class {
-	#name : #BrAbstractListModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrAbstractListModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'items',
 		'itemTypeStencil',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-List - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAbstractListModel >> initialize [
 	super initialize.
 
@@ -18,7 +18,7 @@ BrAbstractListModel >> initialize [
 	itemIdStencil := nil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrAbstractListModel >> initializeListeners [
 	super initializeListeners.
 
@@ -27,19 +27,19 @@ BrAbstractListModel >> initializeListeners [
 	self when: BrListItemIdStencilRequest reply: [ :aResponse | aResponse itemIdStencil: self itemIdStencil ].
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> itemAt: anIndex [
 	^ self items at: anIndex
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> itemCount [
 	<return: #Number>
 
 	^ self items size
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> itemIdStencil [
 	"Return a stencil that is used to create an item id of a given item object"
 	<return: #BrListItemIdStencilBuilder or: nil>
@@ -47,7 +47,7 @@ BrAbstractListModel >> itemIdStencil [
 	^ itemIdStencil
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> itemIdStencil: aStencil [
 	"Set a stencil that will be used to create an item element of a given type"
 
@@ -55,7 +55,7 @@ BrAbstractListModel >> itemIdStencil: aStencil [
 	self dispatchEvent: (BrListItemIdStencilChangedEvent new itemIdStencil: itemIdStencil)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> itemTypeStencil [
 	"Return a stencil that is used to create an item type of a given item object"
 	<return: #BrListItemTypeStencilBuilder>
@@ -63,7 +63,7 @@ BrAbstractListModel >> itemTypeStencil [
 	^ itemTypeStencil
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> itemTypeStencil: aStencil [
 	"Set a stencil that will be used to create an item element of a given type"
 
@@ -71,14 +71,14 @@ BrAbstractListModel >> itemTypeStencil: aStencil [
 	self dispatchEvent: (BrListItemTypeStencilChangedEvent new itemTypeStencil: itemTypeStencil)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> items [
 	<return: #Collection of: #Object>
 	
 	^ items
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrAbstractListModel >> items: aCollectionOfObjects [
 	items := aCollectionOfObjects.
 	self dispatchEvent: (BrListModelItemsChangedEvent new viewModel: self).

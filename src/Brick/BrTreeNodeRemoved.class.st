@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTreeNodeRemoved,
-	#superclass : #BrTreeNodeAnnouncement,
+	#name : 'BrTreeNodeRemoved',
+	#superclass : 'BrTreeNodeAnnouncement',
 	#instVars : [
 		'node',
 		'from',
 		'to'
 	],
-	#category : #'Brick-Tree - Events'
+	#category : 'Brick-Tree - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeRemoved >> from [
 	^ from
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeRemoved >> from: anObject [
 	from := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeRemoved >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeRemoved >> node: anObject [
 	node := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeRemoved >> to [
 	^ to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeRemoved >> to: anObject [
 	to := anObject
 ]

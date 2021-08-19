@@ -1,6 +1,6 @@
 Class {
-	#name : #BrAnchoredPositioner,
-	#superclass : #Object,
+	#name : 'BrAnchoredPositioner',
+	#superclass : 'Object',
 	#instVars : [
 		'target',
 		'anchor',
@@ -8,10 +8,10 @@ Class {
 		'popupPreferredMaxBoundsInTarget',
 		'popupPreferredPosition'
 	],
-	#category : #'Brick-Anchored - Support'
+	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner class >> anchor: anElement target: anotherElement [
 	^ self new
 		anchor: anElement;
@@ -19,7 +19,7 @@ BrAnchoredPositioner class >> anchor: anElement target: anotherElement [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner class >> anchorBoundsInTarget: aBounds target: anotherElement [
 	^ self new
 		anchorBoundsInTarget: aBounds;
@@ -27,43 +27,43 @@ BrAnchoredPositioner class >> anchorBoundsInTarget: aBounds target: anotherEleme
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredPositioner >> anchor [
 	^ anchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredPositioner >> anchor: anObject [
 	anchor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredPositioner >> anchorBoundsInTarget [
 	^ anchorBoundsInTarget
 		ifNil: [ anchor
 				ifNotNil: [ anchorBoundsInTarget := anchor bounds inSpace inChild: target ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredPositioner >> anchorBoundsInTarget: anObject [
 	anchorBoundsInTarget := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> maxBoundsBottomLeftInTarget [
 	^ BlBounds
 		origin: 0.0 @ self anchorBoundsInTarget bottom
 		corner: self anchorBoundsInTarget right @ target size y
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> maxBoundsBottomRightInTarget [
 	^ BlBounds
 		origin: self anchorBoundsInTarget bottomLeft
 		corner: target size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> maxBoundsPreferredInTarget: anExtent [
 	"Initializes #popupPreferredMaxBoundsInTarget and #popupPreferredPosition"
 
@@ -106,19 +106,19 @@ BrAnchoredPositioner >> maxBoundsPreferredInTarget: anExtent [
 			^ popupPreferredMaxBoundsInTarget ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> maxBoundsTopLeftInTarget [
 	^ BlBounds origin: 0.0 @ 0.0 corner: self anchorBoundsInTarget topRight
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> maxBoundsTopRightInTarget [
 	^ BlBounds
 		origin: self anchorBoundsInTarget left @ 0.0
 		corner: target bounds width @ self anchorBoundsInTarget top
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> positionPreferred [
 	"Answers an association of symbols, e.g. #top->#right, to denote the relative position of the popup to the anchor.
 	Requires #popupPreferredMaxBoundsInTarget: to be called before to initialize it, answers nil otherwise."
@@ -126,32 +126,32 @@ BrAnchoredPositioner >> positionPreferred [
 	^ popupPreferredPosition
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> positionPreferredIsBottom [
 	^ popupPreferredPosition key = #bottom
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> positionPreferredIsLeft [
 	^ popupPreferredPosition value = #left
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> positionPreferredIsRight [
 	^ popupPreferredPosition value = #right
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredPositioner >> positionPreferredIsTop [
 	^ popupPreferredPosition key = #top
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredPositioner >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredPositioner >> target: anObject [
 	target := anObject
 ]

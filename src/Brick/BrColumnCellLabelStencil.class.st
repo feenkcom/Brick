@@ -11,15 +11,15 @@ anElement := aStencil create
 ]]]
 "
 Class {
-	#name : #BrColumnCellLabelStencil,
-	#superclass : #BrStencil,
+	#name : 'BrColumnCellLabelStencil',
+	#superclass : 'BrStencil',
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Column - Stencil'
+	#category : 'Brick-Column - Stencil'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColumnCellLabelStencil class >> fitContent: aText [
 	^ BlTextElement new
 		margin: (BlInsets all: 3);
@@ -29,7 +29,7 @@ BrColumnCellLabelStencil class >> fitContent: aText [
 			c vertical fitContent ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrColumnCellLabelStencil class >> matchParent: aText [
 	^ BlTextElement new
 		margin: (BlInsets all: 3);
@@ -39,7 +39,7 @@ BrColumnCellLabelStencil class >> matchParent: aText [
 			c vertical fitContent ]
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrColumnCellLabelStencil >> create [
 	^ BrLabel new
 		aptitude: BrGlamorousListLabelAptitude;
@@ -49,21 +49,21 @@ BrColumnCellLabelStencil >> create [
 		vFitContent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnCellLabelStencil >> initialize [
 	super initialize.
 	
 	text := 'Label' asRopedText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellLabelStencil >> text [
 	<return: #BlText>
 
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnCellLabelStencil >> text: aBrTextOrString [
 	text := aBrTextOrString asRopedText
 ]

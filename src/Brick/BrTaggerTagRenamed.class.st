@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTaggerTagRenamed,
-	#superclass : #BrTaggerChangeEvent,
+	#name : 'BrTaggerTagRenamed',
+	#superclass : 'BrTaggerChangeEvent',
 	#instVars : [
 		'tag',
 		'newName',
 		'oldName'
 	],
-	#category : #'Brick-Tagger - Events'
+	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRenamed >> newName [
 	^ newName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRenamed >> newName: anObject [
 	newName := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRenamed >> oldName [
 	^ oldName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRenamed >> oldName: anObject [
 	oldName := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRenamed >> tag [
 	^ tag
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTaggerTagRenamed >> tag: anObject [
 	tag := anObject
 ]

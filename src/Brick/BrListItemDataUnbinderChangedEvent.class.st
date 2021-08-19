@@ -1,18 +1,18 @@
 Class {
-	#name : #BrListItemDataUnbinderChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BrListItemDataUnbinderChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'itemDataUnbinder'
 	],
-	#category : #'Brick-List - Events'
+	#category : 'Brick-List - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinderChangedEvent >> itemDataUnbinder [
 	^ itemDataUnbinder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrListItemDataUnbinderChangedEvent >> itemDataUnbinder: anObject [
 	itemDataUnbinder := anObject
 ]

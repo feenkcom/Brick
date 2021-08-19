@@ -2,49 +2,49 @@
 I am sent when the activation status (enabled / disabled) of the widget is changed
 "
 Class {
-	#name : #BrEnablementChanged,
-	#superclass : #BrStateChangedEvent,
+	#name : 'BrEnablementChanged',
+	#superclass : 'BrStateChangedEvent',
 	#instVars : [
 		'enabled'
 	],
-	#category : #'Brick-! Core - Events'
+	#category : 'Brick-! Core - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrEnablementChanged class >> enabled: aBoolean [
 	^ self new enabled: aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEnablementChanged >> enabled [
 	<return: #Boolean>
 
 	^ enabled
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEnablementChanged >> enabled: aBoolean [
 	enabled := aBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEnablementChanged >> initialize [
 	super initialize.
 	
 	enabled := true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrEnablementChanged >> isActivated [
 	^ self isEnabled
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrEnablementChanged >> isEnabled [
 	^ self enabled
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEnablementChanged >> state: anObject [
 	"Override me to properly set the given state"
 

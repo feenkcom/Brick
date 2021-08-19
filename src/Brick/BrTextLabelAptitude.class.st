@@ -14,29 +14,29 @@ The label look can directly change properties of the label element. This can be 
 
 "
 Class {
-	#name : #BrTextLabelAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrTextLabelAptitude',
+	#superclass : 'BrAptitude',
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'labelElement'
 	],
-	#category : #'Brick-! Core - Looks'
+	#category : 'Brick-! Core - Looks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ labelElement attributesBuilder
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextLabelAptitude >> editorMeasurement [
 	labelElement editorMeasurement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextLabelAptitude >> initialize [
 	super initialize.
 
@@ -48,61 +48,61 @@ BrTextLabelAptitude >> initialize [
 	self addChangeAddChildAs: #(content label) with: [ self label ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextLabelAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrLabelChanged do: [ :anEvent | self text: anEvent text ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextLabelAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrLabelRequest new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> label [
 	<return: #BlTextElement>
 	
 	^ labelElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> labelDo: aBlock [
 	
 	self label ifNotNil: aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextLabelAptitude >> labelMeasurement [
 	labelElement labelMeasurement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> padding: aBlInsets [
 	self label padding: aBlInsets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> text [
 	<return: #BlText>
 
 	^ labelElement text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> text: aTextOrString [
 	self label text: aTextOrString asRopedText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextLabelAptitude >> textDo: aBlock [
 	self label textDo: aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextLabelAptitude >> tightMeasurement [
 	labelElement tightMeasurement
 ]

@@ -1,12 +1,12 @@
 Class {
-	#name : #BrLabel,
-	#superclass : #BlElement,
+	#name : 'BrLabel',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable + TBrSizeAdjustable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait + TBrSizeAdjustable classTrait',
-	#category : #'Brick-Label - UI'
+	#category : 'Brick-Label - UI'
 }
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrLabel >> baselineOffset [
 	^ self
 		childWithId: #label
@@ -14,13 +14,13 @@ BrLabel >> baselineOffset [
 		ifNone: [ 0 ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrLabel >> gtDisplayString [ 
 
 	^self text asString
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrLabel >> initialize [
 	super initialize.
 	
@@ -33,14 +33,14 @@ BrLabel >> initialize [
 	}))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLabel >> text [
 	<return: #BlText>
 
 	^ self viewModel text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrLabel >> text: aTextOrString [
 	self viewModel text: aTextOrString
 ]

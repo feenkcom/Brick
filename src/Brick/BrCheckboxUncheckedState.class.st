@@ -1,15 +1,15 @@
 Class {
-	#name : #BrCheckboxUncheckedState,
-	#superclass : #BrCheckboxState,
-	#category : #'Brick-Checkbox - States'
+	#name : 'BrCheckboxUncheckedState',
+	#superclass : 'BrCheckboxState',
+	#category : 'Brick-Checkbox - States'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrCheckboxUncheckedState >> isUnchecked [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrCheckboxUncheckedState >> printOn: aStream [
 	aStream nextPutAll: 'unchecked'
 ]

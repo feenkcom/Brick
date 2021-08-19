@@ -2,17 +2,17 @@
 I arrange my children in one horizontal row, one by one
 "
 Class {
-	#name : #BrHorizontalPane,
-	#superclass : #BrWidgetContainer,
-	#category : #'Brick-Layout Widgets'
+	#name : 'BrHorizontalPane',
+	#superclass : 'BrWidgetContainer',
+	#category : 'Brick-Layout Widgets'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHorizontalPane >> cellSpacing: aNumber [
 	self layoutDo: [ :l | l cellSpacing: aNumber ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHorizontalPane >> initialize [
 	super initialize.
 	
@@ -20,7 +20,7 @@ BrHorizontalPane >> initialize [
 	self aptitude: BrHorizontalPaneAptitude new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHorizontalPane >> weightSum: aNumber [
 	self layoutDo: [ :l | l weightSum: aNumber ]
 ]

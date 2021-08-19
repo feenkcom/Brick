@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTriangleStencilsRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Triangle - Events'
+	#name : 'BrTriangleStencilsRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Triangle - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTriangleStencilsRequest >> responseClass [
 	^ BrTriangleStencilsChanged
 ]

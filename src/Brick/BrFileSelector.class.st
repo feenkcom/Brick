@@ -30,8 +30,8 @@ While the default label of the accept button is 'OK', this should be changed to 
 !!!Implementation Points
 "
 Class {
-	#name : #BrFileSelector,
-	#superclass : #BrVerticalPane,
+	#name : 'BrFileSelector',
+	#superclass : 'BrVerticalPane',
 	#instVars : [
 		'folder',
 		'items',
@@ -41,10 +41,10 @@ Class {
 		'okButton',
 		'okAction'
 	],
-	#category : #'Brick-File - UI'
+	#category : 'Brick-File - UI'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFileSelector >> buildUI [
 	| alignedButton |
 
@@ -64,19 +64,19 @@ BrFileSelector >> buildUI [
 		alignedButton. }.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> buttonLabel: aString [
 	"Set the button's label"
 
 	okButton label: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> clearSelection [
 	table deselectAll
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> computeFolderItems [
 	"Determine the items to display in the file list.
 	Directories are always displayed.
@@ -93,12 +93,12 @@ BrFileSelector >> computeFolderItems [
 	^ entries
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> computeFolderParents [
 	^ folder withParents
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> createAddFolderButton [
 	|plusButton|
 	plusButton := BrButton new.
@@ -110,11 +110,11 @@ BrFileSelector >> createAddFolderButton [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFileSelector >> createBasicFileBrowser [
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> createBreadcrumb [
 	^ BrBreadcrumb new
 		fitContent;
@@ -125,7 +125,7 @@ BrFileSelector >> createBreadcrumb [
 				margin: (BlInsets left: 5 right: 5) ]).
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> createOkButton [
 	| alignedButton |
 	okButton := BrButton new 
@@ -144,7 +144,7 @@ BrFileSelector >> createOkButton [
 	^ alignedButton
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> createTable [
 	| aTable |
 	aTable := BrColumnedList new.
@@ -179,16 +179,20 @@ BrFileSelector >> createTable [
 		dataBinder: [ :aLabel :eachItem |
 			aLabel text: (eachItem isDirectory
 				ifTrue: [ '-' ]
-				ifFalse: [ eachItem humanReadableSize ])].
+				ifFalse: [ [ eachItem humanReadableSize ] 
+					on: FileException 
+					do: [ :anException | anException return: '? B' ] ])].
 	aTable column 
 		title: 'Modified' translated;
 		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :aLabel :eachItem |
-			aLabel text: (String
+			aLabel text: ([ String
 					streamContents: [ :s | 
 						eachItem creationTime printYMDOn: s.
 						s nextPut: Character space.
-						eachItem creationTime printHMSOn: s ]) ].
+						eachItem creationTime printHMSOn: s ] ] 
+					on: FileException 
+					do: [ :anException | anException return: '?' ]) ].
 
 	aTable
 		when: BrSelectionDoubleClicked
@@ -208,7 +212,7 @@ BrFileSelector >> createTable [
 	^ aTable
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> executeAction [ 
 	"Execute the receiver's load action"
 	| selectedIndices |
@@ -223,24 +227,24 @@ BrFileSelector >> executeAction [
 				cull: okButton.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> fileFilterBlock [
 	^ fileFilterBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> fileFilterBlock: aBlockClosure [
 
 	fileFilterBlock := aBlockClosure.
 	self updateDisplay.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> folder [
 	^ folder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> folder: aFileReference [
 
 	(folder = aFileReference or: [ aFileReference isDirectory not ])
@@ -251,7 +255,7 @@ BrFileSelector >> folder: aFileReference [
 	self updateDisplay.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFileSelector >> initialize [
 	| alignedButton |
 
@@ -263,17 +267,17 @@ BrFileSelector >> initialize [
 	self folder: '.' asFileReference.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> okAction [
 	^ okAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrFileSelector >> okAction: anObject [
 	okAction := anObject
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> replaceAddFolderWithEditor [
 	|folderCreator|
 	breadcrumb removeItemAt:  breadcrumb numberOfItems.
@@ -284,7 +288,7 @@ BrFileSelector >> replaceAddFolderWithEditor [
 	folderCreator requestLabelFocus.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrFileSelector >> updateDisplay [
 
 	table items: (items := self computeFolderItems).

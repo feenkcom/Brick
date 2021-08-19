@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTreeNodeChanged,
-	#superclass : #BrTreeNodeAnnouncement,
+	#name : 'BrTreeNodeChanged',
+	#superclass : 'BrTreeNodeAnnouncement',
 	#instVars : [
 		'node',
 		'index',
 		'payload'
 	],
-	#category : #'Brick-Tree - Events'
+	#category : 'Brick-Tree - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeChanged >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeChanged >> index: anObject [
 	index := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeChanged >> node [
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeChanged >> node: anObject [
 	node := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeChanged >> payload [
 	^ payload
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTreeNodeChanged >> payload: anObject [
 	payload := anObject
 ]

@@ -1,40 +1,40 @@
 Class {
-	#name : #BrSelectedWish,
-	#superclass : #BrWish,
+	#name : 'BrSelectedWish',
+	#superclass : 'BrWish',
 	#instVars : [
 		'selected'
 	],
-	#category : #'Brick-! Deprecated'
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSelectedWish class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectedWish class >> selected: aBoolean [
 	^ self new selected: aBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSelectedWish >> initialize [
 	super initialize.
 	
 	selected := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectedWish >> isSelected [
 	^ self selected
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectedWish >> selected [
 	^ selected
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrSelectedWish >> selected: anObject [
 	selected := anObject
 ]

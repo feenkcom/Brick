@@ -1,6 +1,6 @@
 Class {
-	#name : #BrExpanderAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrExpanderAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'contentStencil',
 		'headerStencil',
@@ -9,25 +9,25 @@ Class {
 		'shouldRecreateHeader',
 		'shouldReplaceHeader'
 	],
-	#category : #'Brick-Expander - Look'
+	#category : 'Brick-Expander - Look'
 }
 
-{ #category : #'protected - adding / removing' }
+{ #category : 'protected - adding / removing' }
 BrExpanderAptitude >> addContentElement: anElement [
 	self widgetContent addChild: anElement
 ]
 
-{ #category : #'protected - adding / removing' }
+{ #category : 'protected - adding / removing' }
 BrExpanderAptitude >> addHeaderElement: anElement [
 	self widgetContent addChild: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpanderAptitude >> contentStencil [
 	 ^ contentStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpanderAptitude >> contentStencil: aBrStencil [
 
 	self
@@ -44,19 +44,19 @@ BrExpanderAptitude >> contentStencil: aBrStencil [
 			ifFalse: [ self onCollapsed ] ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrExpanderAptitude >> doNotReplaceHeader [
 	"Tell expander to not replace header with the content, but instead just add it"
 	
 	shouldReplaceHeader := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpanderAptitude >> headerStencil [
 	 ^ headerStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpanderAptitude >> headerStencil: aBrStencil [
 
 	self
@@ -73,7 +73,7 @@ BrExpanderAptitude >> headerStencil: aBrStencil [
 			ifFalse: [ self onCollapsed ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExpanderAptitude >> initialize [
 	super initialize.
 	
@@ -90,19 +90,19 @@ BrExpanderAptitude >> initialize [
 		fitContentLimitedToFitContentLimited: [ :aBlock | self resizableElementsDo: aBlock ])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExpanderAptitude >> initializeContentElement [
 	contentElement := self contentStencil asElement.
 	contentElement removeFromParent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExpanderAptitude >> initializeHeaderElement [
 	headerElement := self headerStencil asElement.
 	headerElement removeFromParent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExpanderAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -113,7 +113,7 @@ BrExpanderAptitude >> initializeListeners [
 	self when: BrCollapsedEvent do: [ :anEvent | self onCollapsed ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExpanderAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -121,7 +121,7 @@ BrExpanderAptitude >> initializeRequests [
 	self request: BrAccordionHeaderStencilRequest new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrExpanderAptitude >> onCollapsed [
 	contentElement ifNotNil: #removeFromParent.
 	
@@ -135,7 +135,7 @@ BrExpanderAptitude >> onCollapsed [
 		ifFalse: [ self addHeaderElement: headerElement ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrExpanderAptitude >> onExpanded [
 
 	shouldReplaceHeader
@@ -150,13 +150,13 @@ BrExpanderAptitude >> onExpanded [
 		ifFalse: [ self addContentElement: contentElement ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrExpanderAptitude >> recreateHeader [
 	"Tell expander to recreate the header every time I am collapsed"
 	shouldRecreateHeader := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExpanderAptitude >> resizableElementsDo: aBlock [
 	"Evaluate a given block with elements to which layout resizers should be applied"
 	

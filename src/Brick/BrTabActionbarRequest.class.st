@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTabActionbarRequest,
-	#superclass : #BrTabRequest,
-	#category : #'Brick-Tabs - Events'
+	#name : 'BrTabActionbarRequest',
+	#superclass : 'BrTabRequest',
+	#category : 'Brick-Tabs - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabActionbarRequest >> responseClass [
 	^ BrTabActionbarChangedEvent
 ]

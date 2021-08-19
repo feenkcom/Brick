@@ -1,10 +1,10 @@
 Class {
-	#name : #BrDropdownContentRequest,
-	#superclass : #BrAnchoredContentRequest,
-	#category : #'Brick-Dropdown - Events'
+	#name : 'BrDropdownContentRequest',
+	#superclass : 'BrAnchoredContentRequest',
+	#category : 'Brick-Dropdown - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDropdownContentRequest >> responseClass [
 	^ BrDropdownContentChanged
 ]

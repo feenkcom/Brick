@@ -1,12 +1,12 @@
 Class {
-	#name : #BrWidgetContainer,
-	#superclass : #BlElement,
+	#name : 'BrWidgetContainer',
+	#superclass : 'BlElement',
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait',
-	#category : #'Brick-Layout Widgets'
+	#category : 'Brick-Layout Widgets'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWidgetContainer >> initialize [
 	super initialize.
 	

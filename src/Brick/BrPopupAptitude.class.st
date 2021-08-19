@@ -1,20 +1,20 @@
 Class {
-	#name : #BrPopupAptitude,
-	#superclass : #BrInteractiveCommonAptitude,
+	#name : 'BrPopupAptitude',
+	#superclass : 'BrInteractiveCommonAptitude',
 	#instVars : [
 		'popupTarget',
 		'popupStencil',
 		'resizerLook'
 	],
-	#category : #'Brick-Popup - Look'
+	#category : 'Brick-Popup - Look'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrPopupAptitude >> closePopup [
 	self widgetDo: [ :aWidget | self popupTarget closePopup: aWidget ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrPopupAptitude >> ensureContent [
 	self widgetContent
 		childNamed: #popupContent
@@ -24,7 +24,7 @@ BrPopupAptitude >> ensureContent [
 	resizerLook requestStates
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupAptitude >> initialize [
 	super initialize.
 
@@ -40,7 +40,7 @@ BrPopupAptitude >> initialize [
 			ifFalse: [ BlElement new ])])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -48,7 +48,7 @@ BrPopupAptitude >> initializeListeners [
 	self when: BrPopupStencilChanged do: [ :anEvent | self popupStencil: anEvent popupStencil ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrPopupAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -56,7 +56,7 @@ BrPopupAptitude >> initializeRequests [
 	self request: BrPopupStencilRequest new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrPopupAptitude >> openPopup [
 	self ensureContent.
 	self widgetDo: [ :aWidget |
@@ -64,12 +64,12 @@ BrPopupAptitude >> openPopup [
 			ifTrue: [ self popupTarget openPopup: aWidget ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupAptitude >> popupStencil [
 	^ popupStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupAptitude >> popupStencil: aStencil [
 	| isOpened |
 	
@@ -83,14 +83,14 @@ BrPopupAptitude >> popupStencil: aStencil [
 	isOpened ifTrue: [ self ensureContent ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupAptitude >> popupTarget [
 	<return: #BrPopupTarget>
 
 	^ popupTarget
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrPopupAptitude >> popupTarget: aPopupTarget [
 	| isOpened |
 	

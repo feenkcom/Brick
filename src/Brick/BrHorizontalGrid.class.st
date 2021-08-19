@@ -1,20 +1,20 @@
 Class {
-	#name : #BrHorizontalGrid,
-	#superclass : #BrWidgetContainer,
-	#category : #'Brick-Layout Widgets'
+	#name : 'BrHorizontalGrid',
+	#superclass : 'BrWidgetContainer',
+	#category : 'Brick-Layout Widgets'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHorizontalGrid >> cellSpacing: aNumber [
 	self layoutDo: [ :l | l cellSpacing: aNumber ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrHorizontalGrid >> columnCount: aNumber [
 	self layoutDo: [ :l | l columnCount: aNumber ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrHorizontalGrid >> initialize [
 	super initialize.
 	

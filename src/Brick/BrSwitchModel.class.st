@@ -1,20 +1,20 @@
 Class {
-	#name : #BrSwitchModel,
-	#superclass : #BrStateModel,
+	#name : 'BrSwitchModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'switchedOn'
 	],
-	#category : #'Brick-Switch - Model'
+	#category : 'Brick-Switch - Model'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSwitchModel >> initialize [
 	super initialize.
 
 	switchedOn := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSwitchModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -22,26 +22,26 @@ BrSwitchModel >> initializeListeners [
 	self when: BrSwitchWish do: [ :aWish | self switch: aWish isOn ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSwitchModel >> isOff [
 	<return: #Boolean>
 	
 	^ switchedOn not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSwitchModel >> isOn [
 	<return: #Boolean>
 
 	^ switchedOn
 ]
 
-{ #category : #'state - accessing' }
+{ #category : 'state - accessing' }
 BrSwitchModel >> stateChangedEventClass [
 	^ BrSwitchChanged
 ]
 
-{ #category : #'state - streaming' }
+{ #category : 'state - streaming' }
 BrSwitchModel >> streamStateIn: aBrInteractionStatesMapping [
 	aBrInteractionStatesMapping
 		addState: (self isOn 
@@ -50,14 +50,14 @@ BrSwitchModel >> streamStateIn: aBrInteractionStatesMapping [
 		model: self
 ]
 
-{ #category : #'api - switch' }
+{ #category : 'api - switch' }
 BrSwitchModel >> switch: aBoolean [
 	aBoolean
 		ifTrue: [ self switchOn ]
 		ifFalse: [ self switchOff ]
 ]
 
-{ #category : #'api - switch' }
+{ #category : 'api - switch' }
 BrSwitchModel >> switchOff [
 	self isOff
 		ifTrue: [ ^ self ].
@@ -66,7 +66,7 @@ BrSwitchModel >> switchOff [
 	self notifyStateChanged: switchedOn
 ]
 
-{ #category : #'api - switch' }
+{ #category : 'api - switch' }
 BrSwitchModel >> switchOn [
 	self isOn
 		ifTrue: [ ^ self ].
@@ -75,7 +75,7 @@ BrSwitchModel >> switchOn [
 	self notifyStateChanged: switchedOn
 ]
 
-{ #category : #'api - switch' }
+{ #category : 'api - switch' }
 BrSwitchModel >> toggle [
 	self switch: self isOn not
 ]

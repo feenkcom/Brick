@@ -1,15 +1,15 @@
 Class {
-	#name : #BrResizerAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrResizerAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'resizerListener',
 		'location',
 		'target'
 	],
-	#category : #'Brick-Resizer - Look'
+	#category : 'Brick-Resizer - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizerAptitude >> initialize [
 	super initialize.
 	location := BrResizerBottomLocation new.
@@ -21,7 +21,7 @@ BrResizerAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizerAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -29,7 +29,7 @@ BrResizerAptitude >> initializeListeners [
 	self when: BrResizerTargetChanged do: [ :anEvent | self target: anEvent targetElement ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrResizerAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -37,12 +37,12 @@ BrResizerAptitude >> initializeRequests [
 	self request: BrResizerTargetRequest new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerAptitude >> location [
 	^ location
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerAptitude >> location: aBrResizerLocation [
 	"When location changes we should recreate an event listener"
 
@@ -50,18 +50,18 @@ BrResizerAptitude >> location: aBrResizerLocation [
 	self updateListener
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerAptitude >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrResizerAptitude >> target: anElement [
 	target := anElement.
 	resizerListener resizeTarget: self target
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrResizerAptitude >> updateListener [
 	self widgetDo: [ :aWidget | aWidget removeEventHandler: resizerListener ].
 

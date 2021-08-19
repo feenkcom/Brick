@@ -1,35 +1,35 @@
 Class {
-	#name : #BrSwitchWish,
-	#superclass : #BrWish,
+	#name : 'BrSwitchWish',
+	#superclass : 'BrWish',
 	#instVars : [
 		'switchedOn'
 	],
-	#category : #'Brick-Switch - Events'
+	#category : 'Brick-Switch - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrSwitchWish class >> switchedOn: aBoolean [
 	^ self new switchedOn: aBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSwitchWish >> initialize [
 	super initialize.
 	
 	switchedOn := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSwitchWish >> isOff [
 	^ switchedOn not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrSwitchWish >> isOn [
 	^ switchedOn
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSwitchWish >> switchedOn: anObject [
 	switchedOn := anObject
 ]

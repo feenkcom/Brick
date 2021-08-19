@@ -1,10 +1,10 @@
 Class {
-	#name : #BrContextMenuBottomLeftAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Context Menu - Look'
+	#name : 'BrContextMenuBottomLeftAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Context Menu - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrContextMenuBottomLeftAptitude >> initialize [
 	super initialize.
 	self

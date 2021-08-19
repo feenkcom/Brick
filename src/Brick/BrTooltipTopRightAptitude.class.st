@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTooltipTopRightAptitude,
-	#superclass : #BrAptitude,
-	#category : #'Brick-Tooltip - Look'
+	#name : 'BrTooltipTopRightAptitude',
+	#superclass : 'BrAptitude',
+	#category : 'Brick-Tooltip - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTooltipTopRightAptitude >> initialize [
 	super initialize.
 	self

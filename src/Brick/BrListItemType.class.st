@@ -1,15 +1,15 @@
 Class {
-	#name : #BrListItemType,
-	#superclass : #BlInfiniteItemType,
-	#category : #'Brick-List - Support'
+	#name : 'BrListItemType',
+	#superclass : 'BlInfiniteItemType',
+	#category : 'Brick-List - Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrListItemType class >> default [
 	^ self new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrListItemType class >> named: aSymbol [
 	^ BlInfiniteNamedItemType named: aSymbol
 ]

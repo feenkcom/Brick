@@ -1,29 +1,29 @@
 Class {
-	#name : #BrMaximizerMinimizeWish,
-	#superclass : #BlEvent,
+	#name : 'BrMaximizerMinimizeWish',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'elementToMinimize',
 		'hostElement'
 	],
-	#category : #'Brick-Maximizer - Event'
+	#category : 'Brick-Maximizer - Event'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerMinimizeWish >> elementToMinimize [
 	^ elementToMinimize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerMinimizeWish >> elementToMinimize: anObject [
 	elementToMinimize := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerMinimizeWish >> hostElement [
 	^ hostElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrMaximizerMinimizeWish >> hostElement: anObject [
 	hostElement := anObject
 ]

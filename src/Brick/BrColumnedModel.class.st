@@ -1,20 +1,20 @@
 Class {
-	#name : #BrColumnedModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrColumnedModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-Column - Model'
+	#category : 'Brick-Column - Model'
 }
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BrColumnedModel >> addColumn: aBrColumn [
 	self columns add: aBrColumn.
 
 	self dispatchEvent: (BrColumnsChanged new columns: self columns)
 ]
 
-{ #category : #'api - adding' }
+{ #category : 'api - adding' }
 BrColumnedModel >> column [
 	"Create and add a new column to the list, return newly created column for further configuration.
 	
@@ -36,20 +36,20 @@ BrColumnedModel >> column [
 	^ aColumn
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrColumnedModel >> columns [
 	<return: #Collection of: #BrColumn>
 
 	^ columns
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrColumnedModel >> columnsDo: aBlock [ 
 
 	columns do: aBlock
 ]
 
-{ #category : #'gt-inspector-extension' }
+{ #category : 'gt-inspector-extension' }
 BrColumnedModel >> gtInspectorColumnsIn: aComposite [
 	<gtInspectorPresentationOrder: 2>
 
@@ -60,21 +60,21 @@ BrColumnedModel >> gtInspectorColumnsIn: aComposite [
 		column: 'Title' evaluated: #title
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedModel >> initialize [
 	super initialize.
 
 	columns := OrderedCollection new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrColumnedModel >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrColumnsRequest reply: [ :aResponse | aResponse columns: self columns ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrColumnedModel >> newColumn [
 	<return: #BrColumn>
 	

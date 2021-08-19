@@ -1,16 +1,16 @@
 Class {
-	#name : #BrTabGroupHeaderAptitude,
-	#superclass : #BrAptitude,
+	#name : 'BrTabGroupHeaderAptitude',
+	#superclass : 'BrAptitude',
 	#instVars : [
 		'tabs',
 		'header',
 		'tabbar',
 		'scrollTabbar'
 	],
-	#category : #'Brick-Tabs - Look'
+	#category : 'Brick-Tabs - Look'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderAptitude >> header [
 	"Return an element that represents a container for tab bar and tool bar"
 	<return: #BlElement>
@@ -18,12 +18,12 @@ BrTabGroupHeaderAptitude >> header [
 	^ header
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderAptitude >> headerDo: aBlock [
 	aBlock value: self header
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupHeaderAptitude >> initialize [
 	super initialize.
 	"We have the following structure:
@@ -45,7 +45,7 @@ BrTabGroupHeaderAptitude >> initialize [
 	self addChangeAddChildAs: #(header) with: [ header ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTabGroupHeaderAptitude >> initializeListeners [
 	super initializeListeners.
 	self
@@ -69,7 +69,7 @@ BrTabGroupHeaderAptitude >> initializeListeners [
 
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderAptitude >> onTabAdded: aBrTabModel at: anIndex [
 	| anAssoc |
 	self
@@ -85,7 +85,7 @@ BrTabGroupHeaderAptitude >> onTabAdded: aBrTabModel at: anIndex [
 		self tabbar addChildren: self tabElements ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderAptitude >> onTabDeselected: aBrTabModel [ 
 	self
 		assert: [ self isAttachedToWidget ]
@@ -93,7 +93,7 @@ BrTabGroupHeaderAptitude >> onTabDeselected: aBrTabModel [
 
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderAptitude >> onTabMoved: aBrTabModel from: anOldIndex to: aNewIndex [
 	| anAssoc |
 	self
@@ -114,7 +114,7 @@ BrTabGroupHeaderAptitude >> onTabMoved: aBrTabModel from: anOldIndex to: aNewInd
 		self tabbar addChildren: self tabElements ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderAptitude >> onTabRemoved: aBrTabModel [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -125,14 +125,14 @@ BrTabGroupHeaderAptitude >> onTabRemoved: aBrTabModel [
 		self tabbar removeChild: aTabElement ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderAptitude >> onTabSelected: aTabModel [
 	self
 		assert: [ self isAttachedToWidget ]
 		description: [ 'I can not receive the tab selected event without being attached to a widget' ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrTabGroupHeaderAptitude >> onTabsChanged: aCollectionOfTabs [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -143,43 +143,43 @@ BrTabGroupHeaderAptitude >> onTabsChanged: aCollectionOfTabs [
 		withIndexDo: [ :aBrTabModel :anIndex | self onTabAdded: aBrTabModel at: anIndex ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderAptitude >> scrollTabbar [
 	<return: #BlElement>
 
 	^ scrollTabbar
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderAptitude >> scrollTabbarDo: aBlock [
 	aBlock value: self scrollTabbar
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrTabGroupHeaderAptitude >> tabElements [
 	^ self tabs 
 		collect: #value 
 		thenSelect: #isNotNil
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrTabGroupHeaderAptitude >> tabModels [
 	^ self tabs collect: #key
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderAptitude >> tabbar [
 	<return: #BlElement>
 
 	^ tabbar
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTabGroupHeaderAptitude >> tabbarDo: aBlock [
 	aBlock value: self tabbar
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BrTabGroupHeaderAptitude >> tabs [
 	^ tabs
 ]

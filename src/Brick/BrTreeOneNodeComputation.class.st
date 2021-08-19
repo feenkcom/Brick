@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTreeOneNodeComputation,
-	#superclass : #BrTreeNodeComputation,
-	#category : #'Brick-Tree - Model'
+	#name : 'BrTreeOneNodeComputation',
+	#superclass : 'BrTreeNodeComputation',
+	#category : 'Brick-Tree - Model'
 }
 
-{ #category : #'api - expandable' }
+{ #category : 'api - expandable' }
 BrTreeOneNodeComputation >> expand: aNode suchThat: anOneArgBlock [
 	(anOneArgBlock value: aNode) ifFalse: [ ^ self ].
 	aNode expand.
@@ -12,7 +12,7 @@ BrTreeOneNodeComputation >> expand: aNode suchThat: anOneArgBlock [
 		eachNode expandSuchThat: anOneArgBlock ]
 ]
 
-{ #category : #generated }
+{ #category : 'generated' }
 BrTreeOneNodeComputation >> value: anObject [
 	^ self block value: anObject 
 ]

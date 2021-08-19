@@ -1,6 +1,6 @@
 Class {
-	#name : #BrWithTooltipAptitude,
-	#superclass : #BrWithAnchoredAptitude,
+	#name : 'BrWithTooltipAptitude',
+	#superclass : 'BrWithAnchoredAptitude',
 	#instVars : [
 		'clickEventHandler',
 		'overEventHandler',
@@ -11,20 +11,20 @@ Class {
 		'hideDelay',
 		'hoverShowCondition'
 	],
-	#category : #'Brick-Tooltip - Look'
+	#category : 'Brick-Tooltip - Look'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithTooltipAptitude class >> anchoredAptitude [
 	^ self anchoredAptitudeClass new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude class >> anchoredAptitudeClass [
 	^ BrTooltipAptitude
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithTooltipAptitude class >> content: anObject [
 	^ self stencil: [
 		BrAnchoredElement new
@@ -34,7 +34,7 @@ BrWithTooltipAptitude class >> content: anObject [
 			yourself ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrWithTooltipAptitude class >> handle: anObject content: anotherObject [
 	^ self stencil: [
 		BrAnchoredElement new
@@ -45,7 +45,7 @@ BrWithTooltipAptitude class >> handle: anObject content: anotherObject [
 			yourself ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithTooltipAptitude >> attachToLeftAndRight [
 	strategy := BrAnchoredCompositeStrategy builder
 		single: [ :e | 
@@ -92,26 +92,26 @@ BrWithTooltipAptitude >> attachToLeftAndRight [
 		build.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> cancelHideLater [
 	hideLaterTask ifNotNil: [ :aTask | aTask stop ].
 	hideLaterTask := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> cancelShowLater [
 	showLaterTask ifNotNil: [ :aTask | aTask stop ].
 	showLaterTask := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> contentStencil: aStencil [
 	self stencil: [ 
 		BrAnchoredElement new
 			aptitude: (self class anchoredAptitude content: aStencil asStencil asElement) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> hide [
 	super hide.
 	self willShowLater
@@ -120,17 +120,17 @@ BrWithTooltipAptitude >> hide [
 		ifTrue: [ self cancelHideLater ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> hideDelay [
 	^ hideDelay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> hideDelay: anObject [
 	hideDelay := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> hideLater [
 	self assert: [ self canHide ].
 	self cancelHideLater.
@@ -143,7 +143,7 @@ BrWithTooltipAptitude >> hideLater [
 	innerContainer enqueueTask: hideLaterTask
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithTooltipAptitude >> initialize [
 	super initialize.
 	
@@ -321,7 +321,7 @@ BrWithTooltipAptitude >> initialize [
 	self hideDelay: 300 milliSeconds
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithTooltipAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -346,7 +346,7 @@ BrWithTooltipAptitude >> initializeListeners [
 		do: [ :aWish | self onHideWish: aWish ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrWithTooltipAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -354,22 +354,22 @@ BrWithTooltipAptitude >> initializeRequests [
 	self request: BrTooltipVisibleRequest new
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithTooltipAptitude >> onPrimaryHover [
 	hoverShowCondition := [ :anEvent | anEvent modifiers isPrimaryModifier ]
 ]
 
-{ #category : #'api - displaying' }
+{ #category : 'api - displaying' }
 BrWithTooltipAptitude >> onShiftHover [
 	hoverShowCondition := [ :anEvent | anEvent modifiers isShift ]
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BrWithTooltipAptitude >> shouldShowDueToHover: aMouseOverEvent [
 	^ hoverShowCondition value: aMouseOverEvent
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : 'host space - displaying' }
 BrWithTooltipAptitude >> show [
 	super show.
 	self willShowLater
@@ -381,17 +381,17 @@ BrWithTooltipAptitude >> show [
 		addEventFilterOn: BlMouseLeaveEvent do: [ :e | self hideLater ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> showDelay [
 	^ showDelay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> showDelay: anObject [
 	showDelay := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrWithTooltipAptitude >> showLater [
 	self assert: [ self canShow ].
 	self cancelShowLater.
@@ -404,12 +404,12 @@ BrWithTooltipAptitude >> showLater [
 	widget enqueueTask: showLaterTask
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrWithTooltipAptitude >> willHideLater [
 	^ hideLaterTask isNotNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrWithTooltipAptitude >> willShowLater [
 	^ showLaterTask isNotNil
 ]

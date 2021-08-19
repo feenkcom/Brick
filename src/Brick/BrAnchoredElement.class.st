@@ -1,10 +1,10 @@
 Class {
-	#name : #BrAnchoredElement,
-	#superclass : #BlElement,
-	#category : #'Brick-Anchored - Support'
+	#name : 'BrAnchoredElement',
+	#superclass : 'BlElement',
+	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #'change reporting' }
+{ #category : 'change reporting' }
 BrAnchoredElement >> invalidRect: aBlBounds from: anElement [
 	"Force redraw of whole element to allow its own geometry to redraw"
 

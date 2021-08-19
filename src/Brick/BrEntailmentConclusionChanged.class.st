@@ -1,18 +1,18 @@
 Class {
-	#name : #BrEntailmentConclusionChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrEntailmentConclusionChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'stencil'
 	],
-	#category : #'Brick-Entailment - Events'
+	#category : 'Brick-Entailment - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEntailmentConclusionChanged >> stencil [
 	^ stencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEntailmentConclusionChanged >> stencil: anObject [
 	stencil := anObject
 ]

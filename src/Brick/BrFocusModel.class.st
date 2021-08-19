@@ -1,18 +1,18 @@
 Class {
-	#name : #BrFocusModel,
-	#superclass : #BrStateModel,
+	#name : 'BrFocusModel',
+	#superclass : 'BrStateModel',
 	#instVars : [
 		'focused'
 	],
-	#category : #'Brick-! Deprecated'
+	#category : 'Brick-! Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrFocusModel class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #'focus handlers' }
+{ #category : 'focus handlers' }
 BrFocusModel >> focusInEvent: anEvent [	
 		
 	self isFocused
@@ -22,7 +22,7 @@ BrFocusModel >> focusInEvent: anEvent [
 	self notifyStateChanged: focused
 ]
 
-{ #category : #'focus handlers' }
+{ #category : 'focus handlers' }
 BrFocusModel >> focusOutEvent: anEvent [
 
 	self isFocused
@@ -32,14 +32,14 @@ BrFocusModel >> focusOutEvent: anEvent [
 	self notifyStateChanged: focused
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFocusModel >> initialize [
 	super initialize.
 	
 	focused := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrFocusModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -47,19 +47,19 @@ BrFocusModel >> initializeListeners [
 	self when: BlFocusOutEvent do: [ :anEvent | self focusOutEvent: anEvent ]
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BrFocusModel >> isFocused [
 	<return: #Boolean>
 
 	^ focused
 ]
 
-{ #category : #streaming }
+{ #category : 'streaming' }
 BrFocusModel >> stateChangedEventClass [
 	^ BrFocusedChanged
 ]
 
-{ #category : #streaming }
+{ #category : 'streaming' }
 BrFocusModel >> streamStateIn: aBrInteractionStatesMapping [
 	aBrInteractionStatesMapping
 		addState: (self isFocused

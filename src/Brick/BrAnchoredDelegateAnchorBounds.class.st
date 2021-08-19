@@ -1,30 +1,30 @@
 Class {
-	#name : #BrAnchoredDelegateAnchorBounds,
-	#superclass : #BrAnchoredAnchorBounds,
+	#name : 'BrAnchoredDelegateAnchorBounds',
+	#superclass : 'BrAnchoredAnchorBounds',
 	#instVars : [
 		'block'
 	],
-	#category : #'Brick-Anchored - Support'
+	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateAnchorBounds class >> block: aBlock [
 	^ self new
 		block: aBlock;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateAnchorBounds >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateAnchorBounds >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredDelegateAnchorBounds >> boundsIn: aReferenceElement [
 	^ block cull: aReferenceElement
 ]

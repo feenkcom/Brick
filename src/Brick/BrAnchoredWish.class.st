@@ -1,18 +1,18 @@
 Class {
-	#name : #BrAnchoredWish,
-	#superclass : #BrWish,
+	#name : 'BrAnchoredWish',
+	#superclass : 'BrWish',
 	#instVars : [
 		'anchor'
 	],
-	#category : #'Brick-Anchored - Events'
+	#category : 'Brick-Anchored - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredWish >> anchor [
 	^ anchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredWish >> anchor: anObject [
 	anchor := anObject
 ]

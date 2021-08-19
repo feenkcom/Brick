@@ -1,10 +1,10 @@
 Class {
-	#name : #BrSwitchedOnState,
-	#superclass : #BrSwitchState,
-	#category : #'Brick-Switch - States'
+	#name : 'BrSwitchedOnState',
+	#superclass : 'BrSwitchState',
+	#category : 'Brick-Switch - States'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrSwitchedOnState >> printOn: aStream [
 	aStream nextPutAll: 'switched on'
 ]

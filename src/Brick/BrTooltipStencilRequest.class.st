@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTooltipStencilRequest,
-	#superclass : #BrAnchoredStencilRequest,
-	#category : #'Brick-Tooltip - Events'
+	#name : 'BrTooltipStencilRequest',
+	#superclass : 'BrAnchoredStencilRequest',
+	#category : 'Brick-Tooltip - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTooltipStencilRequest >> responseClass [
 	^ BrTooltipStencilChanged
 ]

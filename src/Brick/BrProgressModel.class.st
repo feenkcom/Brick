@@ -18,22 +18,22 @@ See also ${class:BrProgressWithLabelModel}$ that also handles progress descripti
 
 "
 Class {
-	#name : #BrProgressModel,
-	#superclass : #BrWidgetModel,
+	#name : 'BrProgressModel',
+	#superclass : 'BrWidgetModel',
 	#instVars : [
 		'amount',
 		'total'
 	],
-	#category : #'Brick-Progress - Model'
+	#category : 'Brick-Progress - Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> amount [
 	<return: #Number>
 	^ amount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> amount: anAmountNumber total: aTotalNumber [
 	self
 		assert: [ anAmountNumber notNil and: [ aTotalNumber notNil ] ]
@@ -47,12 +47,12 @@ BrProgressModel >> amount: anAmountNumber total: aTotalNumber [
 	self onProgressChanged: anAmountNumber total: aTotalNumber.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> fraction [
 	^ self amount / self total
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> fraction: aNumber [
 	self 
 		assert: [ aNumber notNil ]
@@ -63,14 +63,14 @@ BrProgressModel >> fraction: aNumber [
 	self amount: aNumber * 100 total: 100
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrProgressModel >> initialize [
 	super initialize.
 	amount := 0.
 	total := 100.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProgressModel >> initializeListeners [
 	super initializeListeners.
 
@@ -79,27 +79,27 @@ BrProgressModel >> initializeListeners [
 		reply: [ BrProgressChangedEvent amount: self amount total: self total ]
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BrProgressModel >> notifyProgressChanged: anAmountNumber total: aTotalNumber [
 	self dispatchEvent: (BrProgressChangedEvent amount: anAmountNumber total: aTotalNumber)
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrProgressModel >> onProgressChanged: anAmountNumber total: aTotalNumber [
 	self notifyProgressChanged: anAmountNumber total: aTotalNumber.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> percentage [
 	^ self amount / self total * 100
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> percentage: aNumber [
 	self amount: aNumber total: 100
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrProgressModel >> total [
 	<return: #Number>
 	^ total

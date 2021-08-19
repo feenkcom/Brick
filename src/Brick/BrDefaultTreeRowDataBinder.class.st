@@ -2,12 +2,12 @@
 I am used by default by both simple and columned trees to update the row element according to the node
 "
 Class {
-	#name : #BrDefaultTreeRowDataBinder,
-	#superclass : #BrTreeRowDataBinder,
-	#category : #'Brick-Tree - Stencil'
+	#name : 'BrDefaultTreeRowDataBinder',
+	#superclass : 'BrTreeRowDataBinder',
+	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrDefaultTreeRowDataBinder >> buildDefault [
 	self rowElement
 		childNamed: #toggle

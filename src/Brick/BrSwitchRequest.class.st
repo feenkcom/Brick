@@ -1,10 +1,10 @@
 Class {
-	#name : #BrSwitchRequest,
-	#superclass : #BrRequest,
-	#category : #'Brick-Switch - Events'
+	#name : 'BrSwitchRequest',
+	#superclass : 'BrRequest',
+	#category : 'Brick-Switch - Events'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrSwitchRequest >> responseClass [
 	^ BrSwitchChanged
 ]

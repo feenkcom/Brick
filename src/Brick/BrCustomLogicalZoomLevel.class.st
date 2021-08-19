@@ -1,28 +1,28 @@
 Class {
-	#name : #BrCustomLogicalZoomLevel,
-	#superclass : #BrLogicalZoomLevel,
+	#name : 'BrCustomLogicalZoomLevel',
+	#superclass : 'BrLogicalZoomLevel',
 	#instVars : [
 		'upLogic',
 		'downLogic',
 		'overridenLogic',
 		'restoredLogic'
 	],
-	#category : #'Brick-Logical Zooming - Model'
+	#category : 'Brick-Logical Zooming - Model'
 }
 
-{ #category : #navigating }
+{ #category : 'navigating' }
 BrCustomLogicalZoomLevel >> down: aBlock [
 	downLogic := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCustomLogicalZoomLevel >> downOn: aWidget whenFinished: aFinishedBlock [
 	"Is sent when this zoom level is deactivated"
 
 	downLogic value: aWidget value: aFinishedBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCustomLogicalZoomLevel >> initialize [
 	super initialize.
 	
@@ -32,36 +32,36 @@ BrCustomLogicalZoomLevel >> initialize [
 	restoredLogic := [ :aWidget :aFinishedBlock | aFinishedBlock value ].
 ]
 
-{ #category : #navigating }
+{ #category : 'navigating' }
 BrCustomLogicalZoomLevel >> overriden: aBlock [
 	overridenLogic := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCustomLogicalZoomLevel >> overridenOn: aWidget whenFinished: aFinishedBlock [
 	"Is sent when another zoom level is pushed on top of this one"
 
 	overridenLogic value: aWidget value: aFinishedBlock
 ]
 
-{ #category : #navigating }
+{ #category : 'navigating' }
 BrCustomLogicalZoomLevel >> restored: aBlock [
 	restoredLogic := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCustomLogicalZoomLevel >> restoredOn: aWidget whenFinished: aFinishedBlock [
 	"Is sent when another zoom level is popped and I am again the top one"
 
 	restoredLogic value: aWidget value: aFinishedBlock
 ]
 
-{ #category : #navigating }
+{ #category : 'navigating' }
 BrCustomLogicalZoomLevel >> up: aBlock [
 	upLogic := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCustomLogicalZoomLevel >> upOn: aWidget whenFinished: aFinishedBlock [
 	"Is sent when this zoom level is activated"
 	

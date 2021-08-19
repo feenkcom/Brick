@@ -1,13 +1,13 @@
 Class {
-	#name : #BrScrollablePagerAptitude,
-	#superclass : #BrPagerAptitude,
+	#name : 'BrScrollablePagerAptitude',
+	#superclass : 'BrPagerAptitude',
 	#instVars : [
 		'pagesListElement'
 	],
-	#category : #'Brick-Pager - Look'
+	#category : 'Brick-Pager - Look'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollablePagerAptitude >> initialize [
 	super initialize.
 
@@ -20,7 +20,7 @@ BrScrollablePagerAptitude >> initialize [
 	self add: (BrLayoutResizerAptitude inherit inherit: pagesListElement)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrScrollablePagerAptitude >> initializeListeners [
 	super initializeListeners.
 
@@ -31,22 +31,22 @@ BrScrollablePagerAptitude >> initializeListeners [
 			ifFalse: [ self scrollTo: anEvent pageIndex ] ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrScrollablePagerAptitude >> onPage: aPageModel elementAttached: aPageElement [
 	pagesListElement dataSource pageElements: self pageElements
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BrScrollablePagerAptitude >> onPage: aPageMopdel elementDetached: aPageElement [
 	pagesListElement dataSource pageElements: self pageElements
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrScrollablePagerAptitude >> scrollTo: aPageIndex [
 	pagesListElement scrollToPosition: aPageIndex
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BrScrollablePagerAptitude >> smoothScrollTo: aPageIndex [
 	pagesListElement smoothScrollToPosition: aPageIndex
 ]

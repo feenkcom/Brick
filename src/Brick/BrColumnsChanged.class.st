@@ -1,18 +1,18 @@
 Class {
-	#name : #BrColumnsChanged,
-	#superclass : #BrChangeEvent,
+	#name : 'BrColumnsChanged',
+	#superclass : 'BrChangeEvent',
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-Column - Events'
+	#category : 'Brick-Column - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnsChanged >> columns [
 	^ columns
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnsChanged >> columns: anObject [
 	columns := anObject
 ]
