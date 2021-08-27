@@ -1,10 +1,10 @@
 Class {
-	#name : #BrEditorShortcut,
-	#superclass : #BlBasicShortcut,
-	#category : #'Brick-Editor-Shortcuts'
+	#name : 'BrEditorShortcut',
+	#superclass : 'BlBasicShortcut',
+	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorShortcut >> performDueTo: aShortcutEvent [
 
 	"we consume shortcut event before evaluating a custom action in order to give subclasses a chance to not consume the event"
@@ -16,7 +16,7 @@ BrEditorShortcut >> performDueTo: aShortcutEvent [
 		dueTo: aShortcutEvent
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	self subclassResponsibility
 ]

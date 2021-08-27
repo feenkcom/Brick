@@ -1,16 +1,16 @@
 Class {
-	#name : #BrTextEditorLineSegment,
-	#superclass : #BrTextEditorSegment,
+	#name : 'BrTextEditorLineSegment',
+	#superclass : 'BrTextEditorSegment',
 	#instVars : [
 		'pieces',
 		'lineSpacing',
 		'wordPadding',
 		'paragraphMargin'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : #'pieces - computation' }
+{ #category : 'pieces - computation' }
 BrTextEditorLineSegment >> clearCache [
 	"Clear all caches and make this segment fresh as if it would just be created and initalized"
 	super clearCache.
@@ -18,7 +18,7 @@ BrTextEditorLineSegment >> clearCache [
 	pieces := nil
 ]
 
-{ #category : #'pieces - computation' }
+{ #category : 'pieces - computation' }
 BrTextEditorLineSegment >> computedPieces [
 	<return: #SequenceableCollection of: #BrTextEditorLineSegmentPiece>
 	| thePieces |
@@ -32,21 +32,21 @@ BrTextEditorLineSegment >> computedPieces [
 	^ thePieces
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorLineSegment >> hasPieces [
 	<return: #Boolean>
 
 	^ pieces isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorLineSegment >> initialize [
 	super initialize.
 
 	self resetProperties
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorLineSegment >> isLastTextPiece: aSegmentPiece [
 	<return: #Boolean>
 	
@@ -59,19 +59,19 @@ BrTextEditorLineSegment >> isLastTextPiece: aSegmentPiece [
 	^ false
 ]
 
-{ #category : #'attributes - paragraph' }
+{ #category : 'attributes - paragraph' }
 BrTextEditorLineSegment >> lineSpacing [
 	<return: #Number>
 
 	^ lineSpacing
 ]
 
-{ #category : #'attributes - paragraph' }
+{ #category : 'attributes - paragraph' }
 BrTextEditorLineSegment >> lineSpacing: aNumber [
 	lineSpacing := aNumber
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegment >> moveTextBy: aNumber [
 	super moveTextBy: aNumber.
 
@@ -83,7 +83,7 @@ BrTextEditorLineSegment >> moveTextBy: aNumber [
 		do: [ :aTextPiece | aTextPiece start: aTextPiece textStart + aNumber end: aTextPiece textEnd + aNumber ]
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegment >> moveTextPiecesBy: aNumber at: aTextIndex [
 	"aTextIndex is a Text index, not a cursor one!"
 	| aCursorIndex |
@@ -128,19 +128,19 @@ BrTextEditorLineSegment >> moveTextPiecesBy: aNumber at: aTextIndex [
 										end: aCursorIndex + ((aTextPiece textEnd - aCursorIndex - aNumber abs) max: 0) ] ] ] ]
 ]
 
-{ #category : #'attributes - paragraph' }
+{ #category : 'attributes - paragraph' }
 BrTextEditorLineSegment >> paragraphMargin [
 	<return: #BlInsets>
 
 	^ paragraphMargin
 ]
 
-{ #category : #'attributes - paragraph' }
+{ #category : 'attributes - paragraph' }
 BrTextEditorLineSegment >> paragraphMargin: aBlInsets [
 	paragraphMargin := aBlInsets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegment >> pieces [
 	<return: #Array of: #BrTextEditorLineSegmentPiece>
 
@@ -149,14 +149,14 @@ BrTextEditorLineSegment >> pieces [
 		ifFalse: [ pieces := self computedPieces ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorLineSegment >> resetProperties [
 	lineSpacing := 0.
 	wordPadding := BlInsets empty.
 	paragraphMargin := BlInsets empty.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegment >> segmentType [
 	"Return a type of this segment responsible for creation
 	of segment holder and also used as a key for caching purposes"
@@ -165,7 +165,7 @@ BrTextEditorLineSegment >> segmentType [
 	^ BrTextEditorLineSegmentType uniqueInstance
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegment >> updateSegmentProperties [
 	| theParagraphAttributes |
 	
@@ -176,14 +176,14 @@ BrTextEditorLineSegment >> updateSegmentProperties [
 		aParagraphAttribute applyOn: self ]
 ]
 
-{ #category : #'attributes - paragraph' }
+{ #category : 'attributes - paragraph' }
 BrTextEditorLineSegment >> wordPadding [
 	<return: #BlInsets>
 
 	^ wordPadding
 ]
 
-{ #category : #'attributes - paragraph' }
+{ #category : 'attributes - paragraph' }
 BrTextEditorLineSegment >> wordPadding: aBlInsets [
 	wordPadding := aBlInsets
 ]

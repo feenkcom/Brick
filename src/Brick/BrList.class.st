@@ -66,7 +66,12 @@ BrList >> items [
 
 { #category : 'api - accessing' }
 BrList >> items: aCollectionOfValues [
-	self viewModel items: aCollectionOfValues
+	self itemsProvider: (BrListSequenceableCollectionItemsProvider new collection: aCollectionOfValues)
+]
+
+{ #category : 'api - accessing' }
+BrList >> itemsProvider: aBrAbstractListItemsProvider [
+	self viewModel itemsProvider: aBrAbstractListItemsProvider
 ]
 
 { #category : 'api - selection' }
@@ -95,4 +100,9 @@ BrList >> selectedItemDo: aBlock [
 				ifTrue: [ aBlock 
 					cull: (self viewModel itemAt: theIndices first) 
 					cull: theIndices first ] ]
+]
+
+{ #category : 'api - accessing' }
+BrList >> stream: anAsyncStream [
+	self itemsProvider: (BrListStreamItemsProvider new stream: anAsyncStream)
 ]

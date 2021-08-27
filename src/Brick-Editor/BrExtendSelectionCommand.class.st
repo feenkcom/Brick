@@ -1,20 +1,20 @@
 Class {
-	#name : #BrExtendSelectionCommand,
-	#superclass : #Object,
+	#name : 'BrExtendSelectionCommand',
+	#superclass : 'Object',
 	#instVars : [
 		'editor',
 		'toSelect',
 		'toDeselect'
 	],
-	#category : #'Brick-Editor'
+	#category : 'Brick-Editor'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> editor: anEditor [
 	editor := anEditor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> gtLiveFor: aView [
 	<gtView>
 	| textToDisplay |
@@ -32,39 +32,39 @@ BrExtendSelectionCommand >> gtLiveFor: aView [
 		text: textToDisplay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> initialize [
 	super initialize.
 	toSelect := OrderedCollection new.
 	toDeselect := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> toDeselect [
 	^ toDeselect
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> toDeselect: anInterval [
 	toDeselect := anInterval
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> toDeselectDo: aBlockWithOneArgument [
 	toDeselect do: aBlockWithOneArgument
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> toSelect [
 	^ toSelect
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> toSelect: anInterval [
 	toSelect := anInterval
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExtendSelectionCommand >> toSelectDo: aBlockWithOneArgument [
 	toSelect do: aBlockWithOneArgument
 ]

@@ -1,13 +1,13 @@
 Class {
-	#name : #BrTextEditorLineSegmentPieceCollectionMap,
-	#superclass : #BrTextEditorLineSegmentPieceMap,
+	#name : 'BrTextEditorLineSegmentPieceCollectionMap',
+	#superclass : 'BrTextEditorLineSegmentPieceMap',
 	#instVars : [
 		'map'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentPieceCollectionMap >> allPieces [
 	"Return all current line segment pieces"
 	<return: #Collection of: #BrTextEditorLineSegmentPiece>
@@ -15,7 +15,7 @@ BrTextEditorLineSegmentPieceCollectionMap >> allPieces [
 	^ map collect: [ :eachAssociation | eachAssociation key ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentPieceCollectionMap >> at: aBrTextEditorLineSegmentPiece pieceAndElementsDo: thePieceAndElementsBlock ifAbsent: anAbsentBlock [
 	^ map
 		detect: [ :eachAssociation | eachAssociation key = aBrTextEditorLineSegmentPiece ]
@@ -23,19 +23,19 @@ BrTextEditorLineSegmentPieceCollectionMap >> at: aBrTextEditorLineSegmentPiece p
 		ifNone: anAbsentBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentPieceCollectionMap >> atPiece: aBrTextEditorLineSegmentPiece putElements: aCollectionOfElements [
 	map add: (aBrTextEditorLineSegmentPiece -> aCollectionOfElements)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorLineSegmentPieceCollectionMap >> initialize [
 	super initialize.
 	
 	map := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentPieceCollectionMap >> pieceForElement: aBlElement ifAbsent: anAbsentBlock [
 	map do: [ :eachAssociation |
 		(eachAssociation value includes: aBlElement) 
@@ -43,7 +43,7 @@ BrTextEditorLineSegmentPieceCollectionMap >> pieceForElement: aBlElement ifAbsen
 	^ anAbsentBlock value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentPieceCollectionMap >> piecesAndTheirElementsDo: aBlock [
 	map do: [ :eachAssociation |
 		| aPiece thePieceElements |

@@ -14,42 +14,42 @@ Some characters, e.g. quotes, should only be inserted if surrounded by spaces.  
 !!!Implementation Points
 "
 Class {
-	#name : #BrTextEditorSurroundDefinition,
-	#superclass : #Object,
+	#name : 'BrTextEditorSurroundDefinition',
+	#superclass : 'Object',
 	#instVars : [
 		'openCharacter',
 		'closeCharacter',
 		'condition'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundDefinition >> closeCharacter [
 	^ closeCharacter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundDefinition >> closeCharacter: anObject [
 	closeCharacter := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundDefinition >> condition [
 	^ condition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundDefinition >> condition: anObject [
 	condition := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundDefinition >> openCharacter [
 	^ openCharacter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundDefinition >> openCharacter: anObject [
 	openCharacter := anObject
 ]

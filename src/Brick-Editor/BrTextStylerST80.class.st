@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTextStylerST80,
-	#superclass : #BlTextStyler,
+	#name : 'BrTextStylerST80',
+	#superclass : 'BlTextStyler',
 	#instVars : [
 		'classOrMetaClass',
 		'workspace',
@@ -13,10 +13,10 @@ Class {
 		'textAttributesByPixelHeight',
 		'textAttributes'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 class >> attributeArrayForColor: aColorOrNil emphasis: anEmphasisArray [
 	"Return a collection of text or font attributes for given color (or nil)
 	and array of requested emphasis styles (#bold, #italic, #oblique or #normal)"
@@ -28,7 +28,7 @@ BrTextStylerST80 class >> attributeArrayForColor: aColorOrNil emphasis: anEmphas
 		anEmphasisArray do: [ :anEmphasis | aStream nextPut: (self emphasisAttribute: anEmphasis) ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 class >> attributesFor: aSymbol [
 	"Return a collection of text or font attributes for a given style name"
 	<return: #Array of: #BlTextAttribute>
@@ -38,7 +38,7 @@ BrTextStylerST80 class >> attributesFor: aSymbol [
 		ifAbsent: [ #() ]
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> blueStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -167,7 +167,7 @@ BrTextStylerST80 class >> blueStyleTable [
 			(module 								(green muchDarker) bold))
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BrTextStylerST80 class >> cleanUp [
 	super cleanUp.
 
@@ -175,7 +175,7 @@ BrTextStylerST80 class >> cleanUp [
 	textAttributes := nil.
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> darkStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -314,7 +314,7 @@ BrTextStylerST80 class >> darkStyleTable [
 			(module 											'B4DD6E' bold))
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> defaultStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to use the editor text color.
 	Multiple emphases can be specified using an array e.g. #(bold italic).
@@ -324,7 +324,7 @@ BrTextStylerST80 class >> defaultStyleTable [
  	^ self glamorousStyleTable
 ]
 
-{ #category : #attributes }
+{ #category : 'attributes' }
 BrTextStylerST80 class >> emphasisAttribute: anEmphasisAsSymbol [
 	"Create and return a text emphasis attribute for a given emphasis.
 	anEmphasisAsSymbol can be either #bold #italic #oblique or #normal"
@@ -348,7 +348,7 @@ BrTextStylerST80 class >> emphasisAttribute: anEmphasisAsSymbol [
 	self error: 'Unknown emphasis: ', anEmphasisAsSymbol asString
 ]
 
-{ #category : #attributes }
+{ #category : 'attributes' }
 BrTextStylerST80 class >> foregroundAttribute: aPaint [
 	"Create and return a text foreground attribute for a given paint.
 	aPaint can be a color, gradient or any other object that represents a paint
@@ -359,7 +359,7 @@ BrTextStylerST80 class >> foregroundAttribute: aPaint [
 	^ BlTextForegroundAttribute paint: aPaint
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> glamorousStyleTable [
 	<styleTable: 'Glamorous'>
 	^#(
@@ -474,7 +474,7 @@ BrTextStylerST80 class >> glamorousStyleTable [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextStylerST80 class >> initialTextAttributes [
 	| theAttributes |
 
@@ -496,14 +496,14 @@ BrTextStylerST80 class >> initialTextAttributes [
 	^ theAttributes
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextStylerST80 class >> initialize [
 	"self initialize"
 	styleTable := nil.
 	textAttributes := nil.
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> solarizedStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -639,7 +639,7 @@ BrTextStylerST80 class >> solarizedStyleTable [
 			(module 								(cyan muchDarker) bold))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 class >> styleTable [
 	"Return a style table used by default by all stylers"
 	<return: #Array>
@@ -647,7 +647,7 @@ BrTextStylerST80 class >> styleTable [
 	^ styleTable ifNil: [ styleTable := self defaultStyleTable ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 class >> styleTable: anArray [ 
 	"Set a style table that should be used by default by text stylers"
 
@@ -655,7 +655,7 @@ BrTextStylerST80 class >> styleTable: anArray [
 	textAttributes := nil
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> tangoStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -794,7 +794,7 @@ BrTextStylerST80 class >> tangoStyleTable [
 			(module 								(green muchDarker) bold))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 class >> textAttributes [
 	"Return a dictionary of text attributes as assocciations of style name and an array of attributes"
 	<return: #Dictionary>
@@ -802,7 +802,7 @@ BrTextStylerST80 class >> textAttributes [
 	^ textAttributes ifNil: [ textAttributes := self initialTextAttributes ]
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BrTextStylerST80 class >> vintageStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -941,7 +941,7 @@ BrTextStylerST80 class >> vintageStyleTable [
 			(module 								(cyan muchDarker) bold))
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrTextStylerST80 >> addAttributesFrom: attributeRuns satisfying: aTestBlock to: aText [
 
 	attributeRuns withStartStopAndValueDo: [:start :stop :attributes | 
@@ -956,7 +956,7 @@ BrTextStylerST80 >> addAttributesFrom: attributeRuns satisfying: aTestBlock to: 
 	^ aText
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 >> addLinkAttributesFor: ranges in: aText to: charAttributes [
 	| links |
 	"TODO: put this on class side"
@@ -985,7 +985,7 @@ BrTextStylerST80 >> addLinkAttributesFor: ranges in: aText to: charAttributes [
 				put: attributes ]]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 >> attributesFor: aSymbol [
 	"Return a collection of text attributes for a given name"
 	<return: #Array>
@@ -993,34 +993,34 @@ BrTextStylerST80 >> attributesFor: aSymbol [
 	^ self class attributesFor: aSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 >> classOrMetaClass: aBehavior [ 
 	classOrMetaClass := aBehavior
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 >> environment: anObject [ 
 	environment := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 >> isForWorkspace [
 	^ isForWorkspace ifNil: [ workspace notNil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 >> isForWorkspace: aBoolean [
 	isForWorkspace := aBoolean
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 >> privateStyle: aText [ 
 	(self rangesIn: aText setWorkspace: true)
 		ifNotNil: [ :ranges| self setAttributesIn: aText fromRanges: ranges].
 	^aText.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 >> rangesIn: aText setWorkspace: aBoolean [ 
 	parser ifNil: [parser := SHParserST80 new "on: (view ifNotNil: [ view model ])" ].
 	^ parser
@@ -1031,7 +1031,7 @@ BrTextStylerST80 >> rangesIn: aText setWorkspace: aBoolean [
 		environment: environment
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerST80 >> setAttributesIn: aText fromRanges: ranges [ 
 	"use the . to find and assign TextAttributes to aText"
 	| charAttr oldRuns |
@@ -1056,12 +1056,12 @@ BrTextStylerST80 >> setAttributesIn: aText fromRanges: ranges [
 		to: aText.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 >> workspace [
 	^ workspace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerST80 >> workspace: aWorkspace [ 
 	workspace := aWorkspace
 ]

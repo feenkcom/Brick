@@ -1,35 +1,35 @@
 Class {
-	#name : #BrTextEditorScreenToCursorTransformation,
-	#superclass : #Object,
+	#name : 'BrTextEditorScreenToCursorTransformation',
+	#superclass : 'Object',
 	#instVars : [
 		'resultBlock',
 		'resultIndex'
 	],
-	#category : #'Brick-Editor-Model - Cursor'
+	#category : 'Brick-Editor-Model - Cursor'
 }
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BrTextEditorScreenToCursorTransformation >> evaluateOn: anObject [
 	self subclassResponsibility
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BrTextEditorScreenToCursorTransformation >> evaluateOn: anObject for: anEvent [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorScreenToCursorTransformation >> hasResult [
 	^ resultIndex isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorScreenToCursorTransformation >> transformed: aTextIndex [
 	resultIndex := aTextIndex.
 	resultBlock value: aTextIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorScreenToCursorTransformation >> whenTransformed: aBlock [
 	resultBlock := aBlock
 ]

@@ -1,15 +1,15 @@
 Class {
-	#name : #BrTextEditorParagraphSegmentSplitter,
-	#superclass : #BrTextEditorLineSegmentSplitter,
-	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
+	#name : 'BrTextEditorParagraphSegmentSplitter',
+	#superclass : 'BrTextEditorLineSegmentSplitter',
+	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentSplitter >> adornmentPieceClass [
 	^ BrTextEditorParagraphSegmentAdornmentPiece
 ]
 
-{ #category : #'private - pieces computation' }
+{ #category : 'private - pieces computation' }
 BrTextEditorParagraphSegmentSplitter >> itemValueType: anObject [
 	"Return a type of an item within a segment.
 	Note: return value should be never used explicitely, it is only needed
@@ -19,7 +19,7 @@ BrTextEditorParagraphSegmentSplitter >> itemValueType: anObject [
 	^ #char
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentSplitter >> textPieceClass [
 	^ BrTextEditorParagraphSegmentTextPiece
 ]

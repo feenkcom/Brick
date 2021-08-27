@@ -18,18 +18,20 @@ Functionality that is related, but not directly part of Brick:
 - Gt phlow views are built on top of Brick and are used to compose views of a particular object.  Their reuse is typically at the application level where the application interface may be composed of multiple Gt phlow views.
 "
 Class {
-	#name : #BaselineOfBrick,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBrick
+	#name : 'BaselineOfBrick',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBrick'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfBrick >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Bloc' with: [
 				spec repository: 'github://feenkcom/Bloc:main/src' ];
+			baseline: 'Futures' with: [
+				spec repository: 'github://feenkcom/pharo-futures:main/src' ];
 			baseline: 'BlocExamples' with: [
 				spec repository: 'github://feenkcom/Bloc:main/src' ];
 			baseline: 'BlocPac' with: [
@@ -46,7 +48,7 @@ BaselineOfBrick >> baseline: spec [
 			package: #'Brick-Editor-Extensions' with: [
 				spec requires: #(#'Brick-Editor' ). ];
 			package: #Brick with: [
-				spec requires: #(#'Brick-Core' #'Brick-Editor' ). ];
+				spec requires: #(#'Brick-Core' #'Brick-Editor' 'Futures'). ];
 			package: #'Brick-Theme' with: [
 				spec requires: #(#Brick ). ];
 			package: #'Brick-Glamorous' with: [

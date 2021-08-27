@@ -1,23 +1,23 @@
 Class {
-	#name : #BrTextEditorSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BrTextEditorSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'textEditor'
 	],
-	#category : #'Brick-Editor-Signals'
+	#category : 'Brick-Editor-Signals'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorSignal class >> textEditor: aBrTextEditor [
 	^ self new textEditor: aBrTextEditor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSignal >> textEditor [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSignal >> textEditor: anObject [
 	textEditor := anObject
 ]

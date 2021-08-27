@@ -2,12 +2,12 @@
 I only allow digits
 "
 Class {
-	#name : #BrTextEditorDigitInputFilter,
-	#superclass : #BrTextEditorInputFilter,
-	#category : #'Brick-Editor-Model'
+	#name : 'BrTextEditorDigitInputFilter',
+	#superclass : 'BrTextEditorInputFilter',
+	#category : 'Brick-Editor-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorDigitInputFilter >> filter: aString [
 	<return: #String>
 	

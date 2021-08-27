@@ -1,27 +1,27 @@
 Class {
-	#name : #BrTextEditorUpdater,
-	#superclass : #BrTextEditorOperator,
+	#name : 'BrTextEditorUpdater',
+	#superclass : 'BrTextEditorOperator',
 	#instVars : [
 		'intervals',
 		'shouldRedraw',
 		'shouldRecreate'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorUpdater >> all [
 	self from: 1 to: self text size
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorUpdater >> from: aFromTextIndex to: aToTextIndex [
 	"Both from and to indices must be given in text coordinates"
 
 	intervals add: (aFromTextIndex to: aToTextIndex)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorUpdater >> initialize [
 	super initialize.
 	
@@ -30,13 +30,13 @@ BrTextEditorUpdater >> initialize [
 	shouldRedraw := true
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorUpdater >> redrawOnly [
 	shouldRedraw := true.
 	shouldRecreate := false
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BrTextEditorUpdater >> update [
 	intervals do: [ :eachInterval |
 		(shouldRecreate not and: [ shouldRedraw ])

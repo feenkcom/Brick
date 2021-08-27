@@ -2,18 +2,18 @@
 Is sent by the text editor after a cursor is moved from an ==oldIndex== to a ==newIndex== where both are text indices
 "
 Class {
-	#name : #BrTextEditorCursorMovedEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorCursorMovedEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'cursor',
 		'oldIndex',
 		'newIndex',
 		'dueTo'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorCursorMovedEvent class >> cursor: aCursor from: anOldIndex to: aNewIndex [
 	<return: #BrTextEditorCursorMovedEvent>
 
@@ -23,7 +23,7 @@ BrTextEditorCursorMovedEvent class >> cursor: aCursor from: anOldIndex to: aNewI
 		newIndex: aNewIndex
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorCursorMovedEvent class >> cursor: aCursor from: anOldIndex to: aNewIndex dueTo: aTextEditorOperator [
 	<return: #BrTextEditorCursorMovedEvent>
 	
@@ -34,48 +34,48 @@ BrTextEditorCursorMovedEvent class >> cursor: aCursor from: anOldIndex to: aNewI
 		dueTo: aTextEditorOperator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> cursor [
 	<return: #BrTextEditorSingleCursor>
 
 	^ cursor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> cursor: aBrTextEditorSingleCursor [
 	cursor := aBrTextEditorSingleCursor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> dueTo [
 	^ dueTo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> dueTo: aTextEditorOperator [
 	dueTo := aTextEditorOperator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> newIndex [
 	<return: #Number>
 
 	^ newIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> newIndex: aNumber [
 	newIndex := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> oldIndex [
 	<return: #Number>
 
 	^ oldIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorMovedEvent >> oldIndex: aNumber [
 	oldIndex := aNumber
 ]

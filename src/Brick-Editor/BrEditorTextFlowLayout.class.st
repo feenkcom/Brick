@@ -4,21 +4,21 @@ I am a special kind of Flow layout optimized to layout small text piece elements
 I do not support children matching parent. All of them must have either exact of fit content resizing strategies.
 "
 Class {
-	#name : #BrEditorTextFlowLayout,
-	#superclass : #BlLayout,
+	#name : 'BrEditorTextFlowLayout',
+	#superclass : 'BlLayout',
 	#instVars : [
 		'lines',
 		'lineSpacing'
 	],
-	#category : #'Brick-Editor-Layout'
+	#category : 'Brick-Editor-Layout'
 }
 
-{ #category : #constraints }
+{ #category : 'constraints' }
 BrEditorTextFlowLayout class >> constraints [
 	^ BrEditorTextFlowLayoutConstraints new
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrEditorTextFlowLayout >> findClosestChildOf: anElement to: aPoint [
 	<return: #BlElement>
 	| aClosestLine |
@@ -27,7 +27,7 @@ BrEditorTextFlowLayout >> findClosestChildOf: anElement to: aPoint [
 	^ aClosestLine findClosestChildOf: anElement to: aPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrEditorTextFlowLayout >> findClosestLineTo: aPoint [
 	<return: #BrEditorTextFlowLine>
 	| aClosestLine aClosestDistance |
@@ -47,24 +47,24 @@ BrEditorTextFlowLayout >> findClosestLineTo: aPoint [
 	^ aClosestLine
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrEditorTextFlowLayout >> hasElements [
 	^ lines notNil and: [ lines elements notNil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrEditorTextFlowLayout >> hasLines [
 	^ lines notNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorTextFlowLayout >> initialize [
 	super initialize.
 	
 	lineSpacing := 0
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrEditorTextFlowLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	| anOffsetX anOffsetY aLeft aTop |
 
@@ -97,17 +97,17 @@ BrEditorTextFlowLayout >> layout: anElement in: aRectangle context: aBlElementBo
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorTextFlowLayout >> lineSpacing [
 	^ lineSpacing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorTextFlowLayout >> lineSpacing: anObject [
 	lineSpacing := anObject
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BrEditorTextFlowLayout >> measure: anElement with: anExtentSpec [
 	| maxWidth maxHeight aCurrentLine totalContentWidth totalContentHeight |
 	
@@ -154,12 +154,12 @@ BrEditorTextFlowLayout >> measure: anElement with: anExtentSpec [
 	self measureIgnored: anElement with: anExtentSpec
 ]
 
-{ #category : #'hooks - layout' }
+{ #category : 'hooks - layout' }
 BrEditorTextFlowLayout >> onCleanUp: anElement [
 	self resetLines
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorTextFlowLayout >> resetLines [
 	lines ifNotNil: [ :theLines | theLines reset ]
 ]

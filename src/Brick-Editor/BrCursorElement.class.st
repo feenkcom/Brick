@@ -1,25 +1,25 @@
 Class {
-	#name : #BrCursorElement,
-	#superclass : #BlElement,
+	#name : 'BrCursorElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'textPosition'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrCursorElement >> initialize [
 	super initialize.
 	
 	textPosition := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCursorElement >> textPosition [
 	^ textPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrCursorElement >> textPosition: aNumber [
 	textPosition := aNumber
 ]

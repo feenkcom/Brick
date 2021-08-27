@@ -1,20 +1,20 @@
 Class {
-	#name : #BrTextEditorOperator,
-	#superclass : #Object,
+	#name : 'BrTextEditorOperator',
+	#superclass : 'Object',
 	#instVars : [
 		'editor',
 		'subscriptions',
 		'context'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #'private - asserting' }
+{ #category : 'private - asserting' }
 BrTextEditorOperator >> assertUIProcess [
 	self editor assertUIProcess
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> characterType: aCharacter [
 	<return: #Symbol>
 
@@ -27,38 +27,38 @@ BrTextEditorOperator >> characterType: aCharacter [
 	^ #other
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> context: anObject [
 	"An object that understands #telemetry message"
 	context := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> cursor [
 	^ self cursors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> cursors [
 	^ self editor cursors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> editor [
 	^ editor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> editor: aBrTextEditor [
 	editor := aBrTextEditor
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findLineEndAfter: aTextIndex [
 	<return: #Number>
 	| aText aTextIterator foundLineBreak |
@@ -76,7 +76,7 @@ BrTextEditorOperator >> findLineEndAfter: aTextIndex [
 	^ aTextIterator position - foundLineBreak asBit
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findLineStartBefore: aTextIndex [
 	"Please note, I return 0 for the first line"
 	<return: #Number>
@@ -101,7 +101,7 @@ BrTextEditorOperator >> findLineStartBefore: aTextIndex [
 	^ aTextIterator position + foundLineBreak asBit
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findLineStartsBetween: aTextStart and: aTextEnd [
 	<return: #Number>
 	| aText aTextIterator |
@@ -115,7 +115,7 @@ BrTextEditorOperator >> findLineStartsBetween: aTextStart and: aTextEnd [
 				ifTrue: [ aStream nextPut: aTextIterator position ] ] ]
 ]
 
-{ #category : #'api - utility' }
+{ #category : 'api - utility' }
 BrTextEditorOperator >> findTextIndexAboveCursor: aCursor ifAbsent: anExceptionBlock [
 	"Find a text index one line above the given cursor"
 	<return: #Number>
@@ -135,7 +135,7 @@ BrTextEditorOperator >> findTextIndexAboveCursor: aCursor ifAbsent: anExceptionB
 		ifNil: anExceptionBlock
 ]
 
-{ #category : #'api - utility' }
+{ #category : 'api - utility' }
 BrTextEditorOperator >> findTextIndexAtLineEnd: aCursor [
 	"Find a text index at the end of the line where the cursor is located"
 	<return: #Number>
@@ -154,7 +154,7 @@ BrTextEditorOperator >> findTextIndexAtLineEnd: aCursor [
 	^ aTextIterator position - foundLineBreak asBit
 ]
 
-{ #category : #'api - utility' }
+{ #category : 'api - utility' }
 BrTextEditorOperator >> findTextIndexAtLineStart: aCursor [
 	"Find a text index at the start of the line where the cursor is located"
 	<return: #Number>
@@ -176,7 +176,7 @@ BrTextEditorOperator >> findTextIndexAtLineStart: aCursor [
 	^ aTextIterator position + foundLineBreak asBit
 ]
 
-{ #category : #'api - utility' }
+{ #category : 'api - utility' }
 BrTextEditorOperator >> findTextIndexAtScreenPosition: aScreenPosition [
 	"Convert screen position to a text index"
 	<return: #Number>
@@ -197,7 +197,7 @@ BrTextEditorOperator >> findTextIndexAtScreenPosition: aScreenPosition [
 	^ aGlobalTextIndex
 ]
 
-{ #category : #'api - utility' }
+{ #category : 'api - utility' }
 BrTextEditorOperator >> findTextIndexAtScreenPosition: aScreenPosition ifAbsent: anExceptionBlock [
 	"Convert screen position to a text index"
 	<return: #Number>
@@ -222,7 +222,7 @@ BrTextEditorOperator >> findTextIndexAtScreenPosition: aScreenPosition ifAbsent:
 	^ aGlobalTextIndex
 ]
 
-{ #category : #'api - utility' }
+{ #category : 'api - utility' }
 BrTextEditorOperator >> findTextIndexBelowCursor: aCursor ifAbsent: anExceptionBlock [
 	"Find a text index one line below the given cursor"
 	<return: #Number>
@@ -249,7 +249,7 @@ BrTextEditorOperator >> findTextIndexBelowCursor: aCursor ifAbsent: anExceptionB
 	^ aGlobalTextIndex
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findWhitespaceOfLineBefore: aTextIndex [
 	| aLineStartIndex aText aTextIterator isFound |
 	<return: #String>
@@ -271,7 +271,7 @@ BrTextEditorOperator >> findWhitespaceOfLineBefore: aTextIndex [
 	^ (aText from: (aLineStartIndex min: aTextIterator position) to: aTextIterator position) asString
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findWordAt: aTextIndex [
 	"Find a word text interval or a whitespace at a given text index"
 	<return: #Interval>
@@ -306,7 +306,7 @@ BrTextEditorOperator >> findWordAt: aTextIndex [
 	^ aWordStart to: aWordEnd
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findWordEndAfter: aTextIndex [
 	"Find a text index of the end of the next word after a given text index"
 	| textIterator newPosition aText |
@@ -324,7 +324,7 @@ BrTextEditorOperator >> findWordEndAfter: aTextIndex [
 	^ newPosition
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 	"Find a text index of start of the previous word before a given text index"
 	| newPosition aText |
@@ -340,7 +340,7 @@ BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 	^ newPosition
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> hasSpaceAroundCursor: aCursor [
 	"Answer a boolean indicating whether the characters either side of the cursor are separators (or end of string)"
 	| anIterator |
@@ -356,13 +356,13 @@ BrTextEditorOperator >> hasSpaceAroundCursor: aCursor [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorOperator >> hasSpaceAroundIndex: anIndex [
 
 	^ self hasSpaceAroundCursor: (BrTextEditorSingleCursor at: anIndex)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> hasString: aString afterCursor: aCursor [
 	| anIterator |
 	
@@ -383,7 +383,7 @@ BrTextEditorOperator >> hasString: aString afterCursor: aCursor [
 	^ true
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> hasString: aString beforeCursor: aCursor [
 	| anIterator |
 	
@@ -405,57 +405,57 @@ BrTextEditorOperator >> hasString: aString beforeCursor: aCursor [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorOperator >> initialize [
 	super initialize.
 
 	subscriptions := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorOperator >> isCursorOnTheFirstLine: aCursor [
 	<return: #Boolean>
 
 	^ (self findLineStartBefore: (aCursor position max: self text isNotEmpty asBit)) isZero
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorOperator >> isCursorOnTheLastLine: aCursor [
 	<return: #Boolean>
 
 	^ (self findLineEndAfter: (aCursor position + 1 max: self text isNotEmpty asBit)) = self text size
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorOperator >> isDeleter [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorOperator >> isInserter [
 	^ false
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorOperator >> isWordChar: aCharacter [
 	<return: #Number>
 
 	^ aCharacter isAlphaNumeric
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> selection [
 	^ self editor selection
 ]
 
-{ #category : #'api - event' }
+{ #category : 'api - event' }
 BrTextEditorOperator >> subscribe: anEventHandler [
 	self editor addEventHandler: anEventHandler.
 	subscriptions add: anEventHandler.
 	^ anEventHandler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> telemetry [
 	<return: #BlTelemetry>
 
@@ -464,17 +464,17 @@ BrTextEditorOperator >> telemetry [
 		ifNotNil: [ :aContext | aContext telemetry ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorOperator >> text [
 	^ self editor text
 ]
 
-{ #category : #'api - event' }
+{ #category : 'api - event' }
 BrTextEditorOperator >> unsubscribe [
 	subscriptions do: [ :anEventHandler | self editor removeEventHandler: anEventHandler ]
 ]
 
-{ #category : #'api - event' }
+{ #category : 'api - event' }
 BrTextEditorOperator >> when: anEventClass do: aBlock [
 	^ self subscribe: (BlEventHandler on: anEventClass do: aBlock)
 ]

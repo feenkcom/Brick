@@ -1,15 +1,15 @@
 Class {
-	#name : #BrTextWordPieceScreenToCursorHandler,
-	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : #'Brick-Editor-UI - Word'
+	#name : 'BrTextWordPieceScreenToCursorHandler',
+	#superclass : 'BrTextWordPieceUniqueHandler',
+	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceScreenToCursorHandler >> eventClass [
 	^ BrTextEditorScreenToCursorRequest
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrTextWordPieceScreenToCursorHandler >> explicitScreenToCursor: aTransformation for: anEvent [
 	| aLocalPosition aLocalTextIndex aGobaltextIndex |
 		
@@ -20,7 +20,7 @@ BrTextWordPieceScreenToCursorHandler >> explicitScreenToCursor: aTransformation 
 	aTransformation transformed: aGobaltextIndex
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BrTextWordPieceScreenToCursorHandler >> handleEvent: anEvent [
 	| aTextElement |
 	aTextElement := anEvent currentTarget.
@@ -30,7 +30,7 @@ BrTextWordPieceScreenToCursorHandler >> handleEvent: anEvent [
 	anEvent transformation evaluateOn: self for: anEvent
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BrTextWordPieceScreenToCursorHandler >> relativeScreenToCursor: aTransformation for: anEvent [
 	"I do the hard work of finding a text element above or below a cursor that should be moved up or down and transfer cursor inside of it
 	based on the current location of the cursor or on desired coordinate within the text editor"

@@ -1,20 +1,20 @@
 Class {
-	#name : #BrTextWordPieceUniqueHandler,
-	#superclass : #BrTextWordPieceHandler,
+	#name : 'BrTextWordPieceUniqueHandler',
+	#superclass : 'BrTextWordPieceHandler',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Brick-Editor-UI - Word'
+	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceUniqueHandler class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceUniqueHandler class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]

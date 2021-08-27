@@ -6,7 +6,7 @@ Users may customize me by changing segment's layout, margin, padding or visual p
 Override me for more advanced customizations
 "
 Class {
-	#name : #BrTextEditorSegmentElement,
-	#superclass : #BlElement,
-	#category : #'Brick-Editor-UI'
+	#name : 'BrTextEditorSegmentElement',
+	#superclass : 'BlElement',
+	#category : 'Brick-Editor-UI'
 }

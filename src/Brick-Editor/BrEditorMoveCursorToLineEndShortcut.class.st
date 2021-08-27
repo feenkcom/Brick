@@ -1,23 +1,23 @@
 Class {
-	#name : #BrEditorMoveCursorToLineEndShortcut,
-	#superclass : #BrEditorShortcut,
+	#name : 'BrEditorMoveCursorToLineEndShortcut',
+	#superclass : 'BrEditorShortcut',
 	#instVars : [
 		'combinationForUnix'
 	],
-	#category : #'Brick-Editor-Shortcuts'
+	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BrEditorMoveCursorToLineEndShortcut >> combinationForUnix [
 	^ combinationForUnix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorMoveCursorToLineEndShortcut >> description [
 	^ 'Moves the cursor to the end of the current line and deselects any selected text.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorMoveCursorToLineEndShortcut >> initialize [
 	super initialize.
 	
@@ -25,12 +25,12 @@ BrEditorMoveCursorToLineEndShortcut >> initialize [
 	combinationForUnix := BlKeyCombination end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorMoveCursorToLineEndShortcut >> name [
 	^ 'Move cursor to the line end'
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorMoveCursorToLineEndShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor deselecter
 		all;

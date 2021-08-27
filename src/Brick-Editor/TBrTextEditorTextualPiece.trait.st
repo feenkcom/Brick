@@ -1,15 +1,15 @@
 Trait {
-	#name : #TBrTextEditorTextualPiece,
+	#name : 'TBrTextEditorTextualPiece',
 	#instVars : [
 		'text',
 		'textStart',
 		'textEnd',
 		'delimiterLength'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : #'text - copying' }
+{ #category : 'text - copying' }
 TBrTextEditorTextualPiece >> copyWithText: aBlText [
 	^ self copy
 		initializeWith: aBlText
@@ -18,12 +18,12 @@ TBrTextEditorTextualPiece >> copyWithText: aBlText [
 		delimiter: delimiterLength
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> delimiterLength [
 	^ delimiterLength
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TBrTextEditorTextualPiece >> initializeWith: aBlText from: aTextStart to: aTextEnd [
 	self
 		initializeWith: aBlText
@@ -32,7 +32,7 @@ TBrTextEditorTextualPiece >> initializeWith: aBlText from: aTextStart to: aTextE
 		delimiter: 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TBrTextEditorTextualPiece >> initializeWith: aBlText from: aTextStart to: aTextEnd delimiter: aDelimiterLength [
 	text := aBlText.
 	
@@ -41,7 +41,7 @@ TBrTextEditorTextualPiece >> initializeWith: aBlText from: aTextStart to: aTextE
 	delimiterLength := aDelimiterLength
 ]
 
-{ #category : #'text - testing' }
+{ #category : 'text - testing' }
 TBrTextEditorTextualPiece >> isEmpty [
 	"Return true if my text is empty, false otherwise"
 	<return: #Boolean>
@@ -49,12 +49,12 @@ TBrTextEditorTextualPiece >> isEmpty [
 	^ self textLength isZero
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 TBrTextEditorTextualPiece >> scopeText: aStartIndex end: anEndIndex [
 	self start: aStartIndex end: anEndIndex
 ]
 
-{ #category : #'private - text' }
+{ #category : 'private - text' }
 TBrTextEditorTextualPiece >> start: aStartIndex end: anEndIndex [
 	"aStartIndex and anEndIndex are given in cursor coordinates"
 	| aDelta |
@@ -74,7 +74,7 @@ TBrTextEditorTextualPiece >> start: aStartIndex end: anEndIndex [
 	textEnd := anEndIndex
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> text [
 	"Return a sub-text that I represent"
 	<return: #BlSubText>
@@ -82,7 +82,7 @@ TBrTextEditorTextualPiece >> text [
 	^ text
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> textEnd [
 	"Return an index of the last character of a subtext that I represent"
 	<return: #Number>
@@ -90,7 +90,7 @@ TBrTextEditorTextualPiece >> textEnd [
 	^ textEnd
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> textEndDelimited [
 	"Return an index of the last character of a subtext that I represent including the possible delimiter"
 	<return: #Number>
@@ -98,7 +98,7 @@ TBrTextEditorTextualPiece >> textEndDelimited [
 	^ textEnd + delimiterLength
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> textInterval [
 	"Return both #textStart and #textEnd in a form of Interval"
 	<return: #Interval>
@@ -106,7 +106,7 @@ TBrTextEditorTextualPiece >> textInterval [
 	^ self textStart to: self textEnd
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> textLength [
 	"Return an index of the last character of a subtext that I represent"
 	<return: #Number>
@@ -114,7 +114,7 @@ TBrTextEditorTextualPiece >> textLength [
 	^ self textEnd - self textStart
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 TBrTextEditorTextualPiece >> textStart [
 	"Return an index of the first character of a subtext that I represent"
 	<return: #Number>

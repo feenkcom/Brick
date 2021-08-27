@@ -1,14 +1,14 @@
 Class {
-	#name : #BrTextEditorParagraphSegmentAdornmentPiece,
-	#superclass : #BrTextEditorParagraphSegmentPiece,
+	#name : 'BrTextEditorParagraphSegmentAdornmentPiece',
+	#superclass : 'BrTextEditorParagraphSegmentPiece',
 	#instVars : [
 		'adornmentAttribute',
 		'isVirtual'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrTextEditorParagraphSegmentAdornmentPiece >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -19,14 +19,14 @@ BrTextEditorParagraphSegmentAdornmentPiece >> = anotherObject [
 		and: [ anotherObject adornmentAttribute = self adornmentAttribute ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentAdornmentPiece >> adornmentAttribute [
 	<return: #BrTextAdornmentAttribute>
 
 	^ adornmentAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentAdornmentPiece >> adornmentAttribute: aBrTextAdornmentAttribute [
 
 	self
@@ -36,7 +36,7 @@ BrTextEditorParagraphSegmentAdornmentPiece >> adornmentAttribute: aBrTextAdornme
 	adornmentAttribute := aBrTextAdornmentAttribute
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorParagraphSegmentAdornmentPiece >> createElement: anEditorElement [
 	| theAdornmentElements |
 
@@ -69,12 +69,12 @@ BrTextEditorParagraphSegmentAdornmentPiece >> createElement: anEditorElement [
 	^ theAdornmentElements
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrTextEditorParagraphSegmentAdornmentPiece >> hash [
 	^ (self class hash bitXor: self text hash) bitXor: self adornmentAttribute hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorParagraphSegmentAdornmentPiece >> initialize [
 	super initialize.
 
@@ -82,12 +82,12 @@ BrTextEditorParagraphSegmentAdornmentPiece >> initialize [
 	isVirtual := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentAdornmentPiece >> isVirtual [
 	^ isVirtual
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentAdornmentPiece >> virtual: aBoolean [
 	self
 		assert: [ aBoolean or: [

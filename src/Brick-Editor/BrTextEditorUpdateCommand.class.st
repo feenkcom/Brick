@@ -1,14 +1,14 @@
 Class {
-	#name : #BrTextEditorUpdateCommand,
-	#superclass : #BrTextEditorCommand,
+	#name : 'BrTextEditorUpdateCommand',
+	#superclass : 'BrTextEditorCommand',
 	#instVars : [
 		'fromIndex',
 		'toIndex'
 	],
-	#category : #'Brick-Editor-Commands'
+	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorUpdateCommand >> executeOn: aTextEditor [
 	| changedFrom changedTo |
 	
@@ -31,17 +31,17 @@ BrTextEditorUpdateCommand >> executeOn: aTextEditor [
 	aTextEditor notifyItemsChanged: (changedFrom to: changedTo)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorUpdateCommand >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorUpdateCommand >> fromIndex: aFromTextIndex [
 	fromIndex := aFromTextIndex
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrTextEditorUpdateCommand >> printOn: aStream [
 	aStream
 		nextPutAll: 'Text changed from ';
@@ -50,12 +50,12 @@ BrTextEditorUpdateCommand >> printOn: aStream [
 		print: self toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorUpdateCommand >> toIndex [
 	^ toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorUpdateCommand >> toIndex: aToTextIndex [
 	toIndex := aToTextIndex
 ]

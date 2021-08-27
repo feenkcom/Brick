@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTextEditorInputFilterMemento,
-	#superclass : #BrTextEditorMemento,
+	#name : 'BrTextEditorInputFilterMemento',
+	#superclass : 'BrTextEditorMemento',
 	#instVars : [
 		'inputFilter'
 	],
-	#category : #'Brick-Editor-Model - Memento'
+	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorInputFilterMemento >> initialize [
 	super initialize.
 	
 	inputFilter := BrTextEditorNoInputFilter new
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorInputFilterMemento >> label [
 	^ 'Input filter'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInputFilterMemento >> order [
 	^ 50
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorInputFilterMemento >> restoreStateOf: aTextEditor [
 	aTextEditor inputFilter: inputFilter
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorInputFilterMemento >> saveStateOf: aTextEditor [
 	inputFilter := aTextEditor inputFilter
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorInputFilterMemento >> value [
 	^ inputFilter
 ]

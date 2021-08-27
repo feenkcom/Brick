@@ -1,13 +1,13 @@
 Class {
-	#name : #BrTextEditorFocusChangedCommand,
-	#superclass : #BrTextEditorCommand,
+	#name : 'BrTextEditorFocusChangedCommand',
+	#superclass : 'BrTextEditorCommand',
 	#instVars : [
 		'hasFocus'
 	],
-	#category : #'Brick-Editor-Commands'
+	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorFocusChangedCommand >> executeOn: aTextEditor [
 	
 	aTextEditor
@@ -15,17 +15,17 @@ BrTextEditorFocusChangedCommand >> executeOn: aTextEditor [
 		interval: aTextEditor segmentCollector cachedInterval
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorFocusChangedCommand >> hasFocus [
 	^ hasFocus
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorFocusChangedCommand >> hasFocus: anObject [
 	hasFocus := anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorFocusChangedCommand >> newHolderCommand [
 	^ BrTextEditorFocusChangedHolderCommand new
 		hasFocus: self hasFocus

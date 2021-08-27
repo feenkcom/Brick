@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextEditorScreenToCursorCommand,
-	#superclass : #BrTextEditorCommand,
+	#name : 'BrTextEditorScreenToCursorCommand',
+	#superclass : 'BrTextEditorCommand',
 	#instVars : [
 		'transformation'
 	],
-	#category : #'Brick-Editor-Commands'
+	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorScreenToCursorCommand >> executeOn: aTextEditor [
 	self transformation evaluateOn: self for: aTextEditor
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorScreenToCursorCommand >> explicitScreenToCursor: aTransformation for: aTextEditor [
 
 	"we convert a pure screen position, should send to all segment holders"
@@ -21,13 +21,13 @@ BrTextEditorScreenToCursorCommand >> explicitScreenToCursor: aTransformation for
 		interval: aTextEditor segmentCollector cachedInterval
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorScreenToCursorCommand >> newHolderCommand [
 	^ BrTextEditorScreenToCursorHolderCommand new
 		transformation: self transformation
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorScreenToCursorCommand >> relativeScreenToCursor: aTransformation for: aTextEditor [
 
 	"we convert a pure screen position, should send to all segment holders"
@@ -40,12 +40,12 @@ BrTextEditorScreenToCursorCommand >> relativeScreenToCursor: aTransformation for
 		ifNotFound: [  ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorScreenToCursorCommand >> transformation [
 	^ transformation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorScreenToCursorCommand >> transformation: anObject [
 	transformation := anObject
 ]

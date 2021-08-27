@@ -2,27 +2,27 @@
 I am sent by the text editor model when a new cursor is added
 "
 Class {
-	#name : #BrTextEditorCursorAddedEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorCursorAddedEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'cursor'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorCursorAddedEvent class >> cursor: aCursor [
 	^ self new cursor: aCursor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorAddedEvent >> cursor [
 	<return: #BrTextEditorSingleCursor>
 
 	^ cursor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorAddedEvent >> cursor: aBrTextEditorSingleCursor [
 	cursor := aBrTextEditorSingleCursor
 ]

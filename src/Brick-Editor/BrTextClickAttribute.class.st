@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextClickAttribute,
-	#superclass : #BrTextEventHandlerAttribute,
+	#name : 'BrTextClickAttribute',
+	#superclass : 'BrTextEventHandlerAttribute',
 	#instVars : [
 		'action'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextClickAttribute >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextClickAttribute >> action: aValuable [
 	self 
 		assert: [ aValuable notNil ] 
@@ -21,19 +21,19 @@ BrTextClickAttribute >> action: aValuable [
 	action := aValuable
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 BrTextClickAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	self performAction: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextClickAttribute >> initialize [
 	super initialize.
 	
 	action := [ :aTBrTextEditorTextualPiece :aTextElement :aTextEditor :anEvent | ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextClickAttribute >> performAction: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	self action glamourValueWithArgs: {
 		aTBrTextEditorTextualPiece. "first we pass text"
@@ -43,7 +43,7 @@ BrTextClickAttribute >> performAction: anEvent in: aTextEditor on: aTBrTextEdito
 	}
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 BrTextClickAttribute >> wantsEvent: anEvent in: aTextEditor [
 	^ anEvent isKindOf: BlClickEvent
 ]

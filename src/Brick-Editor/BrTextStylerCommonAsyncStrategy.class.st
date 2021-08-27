@@ -10,26 +10,26 @@ See my subclasses for concrete async strategies: ${class:BrTextStylerCommonAsync
 
 "
 Class {
-	#name : #BrTextStylerCommonAsyncStrategy,
-	#superclass : #BrTextStylerStrategy,
+	#name : 'BrTextStylerCommonAsyncStrategy',
+	#superclass : 'BrTextStylerStrategy',
 	#instVars : [
 		'monitor',
 		'isStylingRequested'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextStylerCommonAsyncStrategy class >> isAbstract [
 	^ self name = #BrTextStylerCommonAsyncStrategy 
 ]
 
-{ #category : #'mutual exclusion' }
+{ #category : 'mutual exclusion' }
 BrTextStylerCommonAsyncStrategy >> critical: aBlock [
 	monitor critical: aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextStylerCommonAsyncStrategy >> initialize [
 	super initialize.
 
@@ -37,22 +37,22 @@ BrTextStylerCommonAsyncStrategy >> initialize [
 	isStylingRequested := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerCommonAsyncStrategy >> isStylingRequested [
 	^ isStylingRequested
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStylerCommonAsyncStrategy >> isStylingRequested: aBoolean [
 	isStylingRequested := aBoolean
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextStylerCommonAsyncStrategy >> scheduleStyleTextInEditorElement: aBrEditorElement thenDo: aBlock [
 	self subclassResponsibility
 ]
 
-{ #category : #styling }
+{ #category : 'styling' }
 BrTextStylerCommonAsyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: aBlock [
 	BrStyleTextStartSignal new emit.
 	

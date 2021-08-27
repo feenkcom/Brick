@@ -1,27 +1,27 @@
 Class {
-	#name : #BrEditorMoveCursorUpShortcut,
-	#superclass : #BrEditorShortcut,
-	#category : #'Brick-Editor-Shortcuts'
+	#name : 'BrEditorMoveCursorUpShortcut',
+	#superclass : 'BrEditorShortcut',
+	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorMoveCursorUpShortcut >> description [
 	^ 'Moves the cursor one line at a time above the current position and deselects any selected text.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorMoveCursorUpShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination arrowUp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorMoveCursorUpShortcut >> name [
 	^ 'Move cursor up'
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorMoveCursorUpShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor deselecter
 		all;

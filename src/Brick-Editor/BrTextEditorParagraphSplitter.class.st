@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorParagraphSplitter,
-	#superclass : #BrTextEditorLineSplitter,
-	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
+	#name : 'BrTextEditorParagraphSplitter',
+	#superclass : 'BrTextEditorLineSplitter',
+	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorParagraphSplitter >> newSegment [
 	^ BrTextEditorParagraphSegment new
 ]

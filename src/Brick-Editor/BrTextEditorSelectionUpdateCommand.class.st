@@ -2,16 +2,16 @@
 I do the hard job of visually updating selection by requesting segment holders to partially update themselves
 "
 Class {
-	#name : #BrTextEditorSelectionUpdateCommand,
-	#superclass : #BrTextEditorCommand,
+	#name : 'BrTextEditorSelectionUpdateCommand',
+	#superclass : 'BrTextEditorCommand',
 	#instVars : [
 		'fromIndex',
 		'toIndex'
 	],
-	#category : #'Brick-Editor-Commands'
+	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorSelectionUpdateCommand >> executeOn: aTextEditor [
 	| changedFrom changedTo |
 	
@@ -34,27 +34,27 @@ BrTextEditorSelectionUpdateCommand >> executeOn: aTextEditor [
 		interval: (changedFrom to: changedTo)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionUpdateCommand >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionUpdateCommand >> fromIndex: anObject [
 	fromIndex := anObject
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorSelectionUpdateCommand >> newHolderCommand [
 	^ BrTextEditorSelectionChangedHolderCommand new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionUpdateCommand >> toIndex [
 	^ toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionUpdateCommand >> toIndex: anObject [
 	toIndex := anObject
 ]

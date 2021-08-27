@@ -1,55 +1,55 @@
 Class {
-	#name : #BrTextEditorTextMemento,
-	#superclass : #BrTextEditorMemento,
+	#name : 'BrTextEditorTextMemento',
+	#superclass : 'BrTextEditorMemento',
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Editor-Model - Memento'
+	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorTextMemento >> initialize [
 	super initialize.
 	
 	text := '' asRopedText
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorTextMemento >> isTextMemento [
 	^ true
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorTextMemento >> label [
 	^ 'Text'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextMemento >> order [
 	^ 60
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorTextMemento >> restoreStateOf: aTextEditor [
 	aTextEditor restoreText: text copy
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorTextMemento >> saveStateOf: aTextEditor [
 	text := aTextEditor text copy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextMemento >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextMemento >> text: anObject [
 	text := anObject
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorTextMemento >> value [
 	^ text copyWithoutExternalReferences
 ]

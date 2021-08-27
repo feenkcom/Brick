@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTextEditorShortcutsMemento,
-	#superclass : #BrTextEditorMemento,
+	#name : 'BrTextEditorShortcutsMemento',
+	#superclass : 'BrTextEditorMemento',
 	#instVars : [
 		'shortcuts'
 	],
-	#category : #'Brick-Editor-Model - Memento'
+	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorShortcutsMemento >> initialize [
 	super initialize.
 	
 	shortcuts := BrTextEditorShortcuts new
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorShortcutsMemento >> label [
 	^ 'Shortcuts'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorShortcutsMemento >> order [
 	^ 10
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorShortcutsMemento >> restoreStateOf: aTextEditor [
 	aTextEditor setEditorShortcuts: shortcuts copy
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorShortcutsMemento >> saveStateOf: aTextEditor [
 	shortcuts := aTextEditor editorShortcuts copy
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorShortcutsMemento >> value [
 	^ shortcuts
 ]

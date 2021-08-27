@@ -2,17 +2,17 @@
 When in ""cursor update mode"" I place cursors at the end of each selection
 "
 Class {
-	#name : #BrTextEditorSelecter,
-	#superclass : #BrTextEditorOperator,
+	#name : 'BrTextEditorSelecter',
+	#superclass : 'BrTextEditorOperator',
 	#instVars : [
 		'selection',
 		'shouldUpdateCursor',
 		'shouldDeselectExisting'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> all [
 	"Select the whole text"
 	self assertUIProcess.
@@ -22,13 +22,13 @@ BrTextEditorSelecter >> all [
 		to: self text size
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> all: aCompositeSelection [
 	aCompositeSelection do: [ :eachMonotoneSelection |
 		self from: eachMonotoneSelection from to: eachMonotoneSelection to ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> extendToLineEnd [
 	"Extend selection to the end of the line"
 	|  theCommands |
@@ -42,7 +42,7 @@ BrTextEditorSelecter >> extendToLineEnd [
 	self privatePerformSelectAndDeselectCommands: theCommands
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> extendToLineStart [
 	"Extend selection to the start of the line"
 	|  theCommands |
@@ -56,7 +56,7 @@ BrTextEditorSelecter >> extendToLineStart [
 	self privatePerformSelectAndDeselectCommands: theCommands
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> extendToNextWordEnd [
 	"Extend selection to the end of the next word"
 	|  theCommands |
@@ -70,7 +70,7 @@ BrTextEditorSelecter >> extendToNextWordEnd [
 	self privatePerformSelectAndDeselectCommands: theCommands
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> extendToPreviousWordStart [
 	"Extend selection to start of the previous word"
 	|  theCommands |
@@ -84,7 +84,7 @@ BrTextEditorSelecter >> extendToPreviousWordStart [
 	self privatePerformSelectAndDeselectCommands: theCommands
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> findExistingSelectionEndAfter: aTextIndex within: aTextInterval [
 	| anEndIndex |
 	
@@ -100,7 +100,7 @@ BrTextEditorSelecter >> findExistingSelectionEndAfter: aTextIndex within: aTextI
 	^ anEndIndex
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> findExistingSelectionStartBefore: aTextIndex within: aTextInterval [
 	| aStartIndex |
 	
@@ -116,7 +116,7 @@ BrTextEditorSelecter >> findExistingSelectionStartBefore: aTextIndex within: aTe
 	^ aStartIndex
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> from: aFromIndex to: aToIndex [
 	self assertUIProcess.
 
@@ -126,7 +126,7 @@ BrTextEditorSelecter >> from: aFromIndex to: aToIndex [
 	selection select: aFromIndex to: aToIndex
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSelecter >> initialize [
 	super initialize.
 
@@ -135,7 +135,7 @@ BrTextEditorSelecter >> initialize [
 	shouldDeselectExisting := false
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> moveOneDown [
 	"Select and move a cursor one line down"
 	| theNewCursorPositions theCursorsOnTheLeft theCursorsOnTheRight theCursorsOutside |
@@ -167,7 +167,7 @@ BrTextEditorSelecter >> moveOneDown [
 		self from: aCursor position to: ((theNewCursorPositions at: aCursor) min: self text size) ].
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> moveOneToLeft [
 	"Select and move a cursor one character to the left"
 	|  theCommands |
@@ -181,7 +181,7 @@ BrTextEditorSelecter >> moveOneToLeft [
 	self privatePerformSelectAndDeselectCommands: theCommands
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> moveOneToRight [
 	"Select and move a cursor one character to the right"
 	|  theCommands |
@@ -195,7 +195,7 @@ BrTextEditorSelecter >> moveOneToRight [
 	self privatePerformSelectAndDeselectCommands: theCommands
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> moveOneUp [
 	"Select and move a cursor one line up"
 	| theNewCursorPositions theCursorsOnTheLeft theCursorsOnTheRight theCursorsOutside |
@@ -229,14 +229,14 @@ BrTextEditorSelecter >> moveOneUp [
 		self from: (theNewCursorPositions at: aCursor) to: aCursor position ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> overwrite [
 	"Deselect any selections if they exist and overwrite with the new selection"
 	
 	shouldDeselectExisting := true
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> privateDeselectExisting: aSelection [
 	| aDeselecter |
 	
@@ -248,7 +248,7 @@ BrTextEditorSelecter >> privateDeselectExisting: aSelection [
 	aDeselecter deselect
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount [
 	| hasSelectionAfter toSelect toDeselect |
 
@@ -282,7 +282,7 @@ BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount
 		toDeselect: toDeselect
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> privateExtendSelectionRightAt: aTextPosition by: anAmount [
 	| hasSelectionBefore toSelect toDeselect |
 
@@ -316,7 +316,7 @@ BrTextEditorSelecter >> privateExtendSelectionRightAt: aTextPosition by: anAmoun
 		toDeselect: toDeselect
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> privatePerformSelectAndDeselectCommands: theCommands [
 	| aDeselecter |
 	aDeselecter := self editor deselecter.
@@ -333,7 +333,7 @@ BrTextEditorSelecter >> privatePerformSelectAndDeselectCommands: theCommands [
 				to: eachSelectionToSelect to ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> privateSelect: aFromTextIndex to: aToTextIndex [
 	"Select text within an interval defined by provided from and to indices without any other side effects.
 	Note:
@@ -358,7 +358,7 @@ BrTextEditorSelecter >> privateSelect: aFromTextIndex to: aToTextIndex [
 	self editor enqueueCommand: aCommand
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BrTextEditorSelecter >> select [
 	| toBeSelected |
 	self assertUIProcess.
@@ -385,7 +385,7 @@ BrTextEditorSelecter >> select [
 		ifTrue: [ self updateCursors ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorSelecter >> updateCursors [
 	| aNavigator |
 	
@@ -396,12 +396,12 @@ BrTextEditorSelecter >> updateCursors [
 	aNavigator apply
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> withoutCursorUpdate [
 	shouldUpdateCursor := false
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorSelecter >> wordAt: aTextIndex [
 	"Select a word or a whitespace at a given text index"
 	| aWordInterval |

@@ -1,5 +1,5 @@
 Class {
-	#name : #BrEditorShiftLeftShortcut,
-	#superclass : #BrEditorShortcut,
-	#category : #'Brick-Editor-Shortcuts'
+	#name : 'BrEditorShiftLeftShortcut',
+	#superclass : 'BrEditorShortcut',
+	#category : 'Brick-Editor-Shortcuts'
 }

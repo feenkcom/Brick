@@ -1,51 +1,51 @@
 Class {
-	#name : #BrTextEditorParagraphSegmentPiece,
-	#superclass : #Object,
+	#name : 'BrTextEditorParagraphSegmentPiece',
+	#superclass : 'Object',
 	#traits : 'TBrTextEditorTextualPiece',
 	#classTraits : 'TBrTextEditorTextualPiece classTrait',
 	#instVars : [
 		'segment'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorParagraphSegmentPiece >> createElement: anEditorElement [
 	<return: #BlElement>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrTextEditorParagraphSegmentPiece >> gtDisplayOn: aStream [
 	self printOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorParagraphSegmentPiece >> isText [
 	^ false
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrTextEditorParagraphSegmentPiece >> onRecycled: aPieceElement in: anEditorElement [
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrTextEditorParagraphSegmentPiece >> printOn: aStream [
 	self text printOn: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentPiece >> segment [
 	^ segment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphSegmentPiece >> segment: anObject [
 	segment := anObject
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrTextEditorParagraphSegmentPiece >> updateFocus: hasFocus of: aTextPieceElement in: anEditorElement [
 	| aRequest |
 
@@ -56,7 +56,7 @@ BrTextEditorParagraphSegmentPiece >> updateFocus: hasFocus of: aTextPieceElement
 	aTextPieceElement dispatchEvent: (aRequest editorElement: anEditorElement)
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BrTextEditorParagraphSegmentPiece >> updateText: aTextElement of: aLineSegment in: anEditorElement [
 	aTextElement dispatchEvent: (BrTextEditorTextChangedRequest new
 		editorElement: anEditorElement;
@@ -66,7 +66,7 @@ BrTextEditorParagraphSegmentPiece >> updateText: aTextElement of: aLineSegment i
 		textEnd: self textEnd)
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BrTextEditorParagraphSegmentPiece >> wordMargin [
 	<return: #BlInsets>
 	| aHalfOfLineSpacing |
@@ -78,7 +78,7 @@ BrTextEditorParagraphSegmentPiece >> wordMargin [
 		bottom: (self segment lineSpacing - aHalfOfLineSpacing)
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BrTextEditorParagraphSegmentPiece >> wordPadding [
 	<return: #BlInsets>
 		

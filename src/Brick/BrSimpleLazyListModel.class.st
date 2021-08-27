@@ -2,7 +2,6 @@ Class {
 	#name : 'BrSimpleLazyListModel',
 	#superclass : 'BrSimpleListModel',
 	#instVars : [
-		'itemsProvider',
 		'mutex',
 		'isRequestingItems',
 		'currentRequest'

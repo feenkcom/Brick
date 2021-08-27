@@ -1,20 +1,20 @@
 Class {
-	#name : #BrTextEditorSingleCursor,
-	#superclass : #BrTextEditorCursor,
+	#name : 'BrTextEditorSingleCursor',
+	#superclass : 'BrTextEditorCursor',
 	#instVars : [
 		'position',
 		'isVisible',
 		'desiredCoordinate'
 	],
-	#category : #'Brick-Editor-Model - Cursor'
+	#category : 'Brick-Editor-Model - Cursor'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor class >> at: aTextIndex [
 	^ self new position: aTextIndex
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrTextEditorSingleCursor >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -24,36 +24,36 @@ BrTextEditorSingleCursor >> = anotherObject [
 	^ anotherObject position = self position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> desiredCoordinate [
 	<return: #Number>
 
 	^ desiredCoordinate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> desiredCoordinate: aNumber [
 	desiredCoordinate := aNumber
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorSingleCursor >> do: aBlock [
 	aBlock value: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorSingleCursor >> hasDesiredCoordinate [
 	<return: #Boolean>
 
 	^ desiredCoordinate isNotNil
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrTextEditorSingleCursor >> hash [
 	^ self class hash bitXor: self position hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSingleCursor >> initialize [
 	super initialize.
 	
@@ -63,7 +63,7 @@ BrTextEditorSingleCursor >> initialize [
 	isVisible := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorSingleCursor >> insideSegment: aSegment [
 	"Return true if I am inside of a given segment"
 	<return: #Boolean>
@@ -71,7 +71,7 @@ BrTextEditorSingleCursor >> insideSegment: aSegment [
 	^ self position between: aSegment textStart and: aSegment textEnd
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorSingleCursor >> insideSubText: aBrTextEditorSegmentPiece of: aSegment [
 	"Return true if I am inside a given subtext, false otherwise"
 	<return: #Boolean>
@@ -82,7 +82,7 @@ BrTextEditorSingleCursor >> insideSubText: aBrTextEditorSegmentPiece of: aSegmen
 			and: [ self position between: aSegment textStart and: aSegment textEnd ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> isVisible [
 	"Return true if this cursor should be visible, false otherwise"
 	<return: #Boolean>
@@ -90,12 +90,12 @@ BrTextEditorSingleCursor >> isVisible [
 	^ isVisible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> isVisible: aBoolean [
 	isVisible := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> position [
 	"Return position of the cursor within the text"
 	<return: #Number>
@@ -103,7 +103,7 @@ BrTextEditorSingleCursor >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> position: anIndex [
 	self
 		assert: [ anIndex >= 0 ]
@@ -112,7 +112,7 @@ BrTextEditorSingleCursor >> position: anIndex [
 	position := anIndex
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrTextEditorSingleCursor >> printOn: aStream [
 	aStream
 		nextPutAll: 'Cursor (';
@@ -120,7 +120,7 @@ BrTextEditorSingleCursor >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSingleCursor >> resetDesiredCoordinate [
 	desiredCoordinate := nil
 ]

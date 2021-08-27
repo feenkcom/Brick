@@ -4,16 +4,16 @@ I am a simple line-based segment builder and do not take text attributes into ac
 Note: I do not support embedded elements
 "
 Class {
-	#name : #BrTextEditorLineSegmentBuilder,
-	#superclass : #BrTextEditorSegmentBuilder,
+	#name : 'BrTextEditorLineSegmentBuilder',
+	#superclass : 'BrTextEditorSegmentBuilder',
 	#instVars : [
 		'lineStencilBuilder',
 		'wordStencilBuilder'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegmentBuilder >> addedAttribute: anAttribute from: aFromIndex to: aToIndex in: aBrTextEditor [
 	"Is sent after an attribute was added in provided text editor"
 	| aFromSegment aToSegment |
@@ -43,22 +43,22 @@ BrTextEditorLineSegmentBuilder >> addedAttribute: anAttribute from: aFromIndex t
 		update
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTextEditorLineSegmentBuilder >> beEditable [
 	self wordStencil: BrTextEditableWordPieceStencilBuilder new
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTextEditorLineSegmentBuilder >> beReadOnly [
 	self wordStencil: BrTextReadonlyWordPieceStencilBuilder new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorLineSegmentBuilder >> defaultSplitter [
 	^ BrTextEditorLineSplitter new
 ]
 
-{ #category : #'private - deletion' }
+{ #category : 'private - deletion' }
 BrTextEditorLineSegmentBuilder >> deleteFrom: aFromIndex segment: aFromSegment to: aToIndex segment: aToSegment in: aBrTextEditor [
 	"I do the hard work of updating segment structure after deleting a piece of text within provided interval and segments"
 	| shouldMergeWithPrevious aTargetSegment removedLength aNewEnd aNewStart |
@@ -101,7 +101,7 @@ BrTextEditorLineSegmentBuilder >> deleteFrom: aFromIndex segment: aFromSegment t
 	^ aTargetSegment
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
 	| aFromSegment aToSegment aTargetSegment |
 
@@ -135,14 +135,14 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 		update
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorLineSegmentBuilder >> initialize [
 	super initialize.
 
 	wordStencilBuilder := BrTextEditableWordPieceStencilBuilder new
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBrTextEditor [
 	"I am doing a hard work updating editor's segment cache due to inserted string.
 	Note: This is an *algorithm* that should be very performant, that is why we don't see
@@ -181,17 +181,17 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 		update
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTextEditorLineSegmentBuilder >> lineStencil: aLineStencilBuilder [
 	lineStencilBuilder := aLineStencilBuilder asStencilBuilder: BrTextEditableWordPieceStencilBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentBuilder >> lineStencilBuilder [
 	^ lineStencilBuilder
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorLineSegmentBuilder >> removedAttributesFrom: aFromIndex to: aToIndex in: aBrTextEditor [
 	"Is sent after an attributes were removed in provided text editor"
 
@@ -222,7 +222,7 @@ BrTextEditorLineSegmentBuilder >> removedAttributesFrom: aFromIndex to: aToIndex
 		update
 ]
 
-{ #category : #'private - deletion' }
+{ #category : 'private - deletion' }
 BrTextEditorLineSegmentBuilder >> shouldMergeDeletingFrom: aFromIndex segment: aFromSegment in: aBrTextEditor [
 	"Return true if we should merge a given segment with the previous if we delete a piece of
 	text in a given editor starting from a provided index, false otherwise"
@@ -245,7 +245,7 @@ BrTextEditorLineSegmentBuilder >> shouldMergeDeletingFrom: aFromIndex segment: a
 	^ (aFromIndex - aPreviousSegment textEnd) = 1
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorLineSegmentBuilder >> validateIntegrity: aTextEditor [
 	| anIntegrity |
 	
@@ -260,7 +260,7 @@ BrTextEditorLineSegmentBuilder >> validateIntegrity: aTextEditor [
 		description: [ anIntegrity value key ].
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorLineSegmentBuilder >> validateSegmentsIn: aTextEditor [
 	"Validate integrity of the segments.
 	Return true if everything is ok, false otherwise"
@@ -313,7 +313,7 @@ BrTextEditorLineSegmentBuilder >> validateSegmentsIn: aTextEditor [
 	^ (true -> 'ok')
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorLineSegmentBuilder >> validateTextPieceUniquenessIn: aTextEditor [
 	| allTextPieces allGroupedTextPieces |
 	
@@ -335,12 +335,12 @@ BrTextEditorLineSegmentBuilder >> validateTextPieceUniquenessIn: aTextEditor [
 		description: [ 'Some text pieces are not unique!' ].
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTextEditorLineSegmentBuilder >> wordStencil: aWordStencilBuilder [
 	wordStencilBuilder := aWordStencilBuilder asStencilBuilder: BrTextEditableWordPieceStencilBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentBuilder >> wordStencilBuilder [
 	<return: #BrTextEditableWordPieceStencilBuilder>
 

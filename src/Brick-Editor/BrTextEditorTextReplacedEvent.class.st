@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextEditorTextReplacedEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorTextReplacedEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextReplacedEvent >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextReplacedEvent >> text: anObject [
 	text := anObject
 ]

@@ -1,15 +1,15 @@
 Class {
-	#name : #BrTextEditorDeleter,
-	#superclass : #BrTextEditorOperator,
+	#name : 'BrTextEditorDeleter',
+	#superclass : 'BrTextEditorOperator',
 	#instVars : [
 		'deletionIntervals',
 		'shouldUpdateCursor',
 		'shouldUpdateSelection'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> afterCursor [
 	"Delete all text after all cursors"
 
@@ -19,7 +19,7 @@ BrTextEditorDeleter >> afterCursor [
 			to: self text size ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> beforeCursor [
 	"Delete all text before the cursors"
 		
@@ -29,14 +29,14 @@ BrTextEditorDeleter >> beforeCursor [
 			to: aCursor position ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorDeleter >> computeCursorMovement: aCursor [
 	"Cumpute by how much a given cursor should be moved after text deletion within current deletion intervals"
 
 	^ self computeIndexMovement: aCursor position
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorDeleter >> computeIndexMovement: anIndex [
 	"Compute by how much a given text index should be moved after text deletion within current deletion intervals"
 	| aCursorDelta |
@@ -52,7 +52,7 @@ BrTextEditorDeleter >> computeIndexMovement: anIndex [
 	^ aCursorDelta
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorDeleter >> computeSelectionMovement: aMonotoneSelection [
 	"Cumpute by how much a given selection should be moved after text deletion within current deletion intervals.
 	Note: a given monotone selection must not overlap with any deletion intervals"
@@ -69,7 +69,7 @@ BrTextEditorDeleter >> computeSelectionMovement: aMonotoneSelection [
 	^ aSelectionDelta
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BrTextEditorDeleter >> delete [
 	"Perform deletion operation"
 
@@ -82,7 +82,7 @@ BrTextEditorDeleter >> delete [
 	deletionIntervals reverseDo: [ :aMonotoneSelection | self privateDelete: aMonotoneSelection from to: aMonotoneSelection to ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> from: aFromIndex to: aToIndex [
 	"Mark a text interval given by from an to indices as the one to be deleted in cursor coordinates"
 
@@ -92,7 +92,7 @@ BrTextEditorDeleter >> from: aFromIndex to: aToIndex [
 	deletionIntervals select: aFromIndex to: aToIndex
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorDeleter >> initialize [
 	super initialize.
 	
@@ -101,12 +101,12 @@ BrTextEditorDeleter >> initialize [
 	shouldUpdateSelection := true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorDeleter >> isDeleter [
 	^ true
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> oneAfterCursor [
 	"Delete one symbol after the cursors"
 		
@@ -116,7 +116,7 @@ BrTextEditorDeleter >> oneAfterCursor [
 			to: ((aCursor position + 1) min: self text size) ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> oneAfterCursorIfOutsideOfSelection [
 	"Delete one symbol after the cursors but only if there is no selection nearby"
 		
@@ -128,14 +128,14 @@ BrTextEditorDeleter >> oneAfterCursorIfOutsideOfSelection [
 					to: ((aCursor position + 1) min: self text size) ] ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> oneBeforeCursor [
 	"Delete one symbol before the cursor"
 
 	self cursor do: [ :aCursor | self oneBeforeCursor: aCursor ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> oneBeforeCursor: aCursor [
 	"Delete one symbol before the specified cursor "
 
@@ -144,7 +144,7 @@ BrTextEditorDeleter >> oneBeforeCursor: aCursor [
 		to: aCursor position
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> oneBeforeCursorIfOutsideOfSelection [
 	"Delete one symbol before the cursor but only if there is no selection nearby"
 
@@ -153,7 +153,7 @@ BrTextEditorDeleter >> oneBeforeCursorIfOutsideOfSelection [
 			ifFalse: [ self oneBeforeCursor: aCursor ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorDeleter >> privateDelete: aFromTextIndex to: aToTextIndex [
 	"I delete a piece of text within a given text interval without cursor or selection update.
 	Note: cursor or selection location after deletion may be invalid!"
@@ -175,14 +175,14 @@ BrTextEditorDeleter >> privateDelete: aFromTextIndex to: aToTextIndex [
 	self editor enqueueCommand: aCommand
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> selected [
 	"Mark currenty selected text as the one to be deleted"
 
 	self selection do: [ :aMonotoneSelection | self from: aMonotoneSelection from to: aMonotoneSelection to ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> surroundings: aDictionaryOrArray [
 	"Delete the surrounding around each cursor (if there is any) but only if the cursor is not part of the selection"
 	| theAssociations |
@@ -205,7 +205,7 @@ BrTextEditorDeleter >> surroundings: aDictionaryOrArray [
 							to: aCursor position + aReplacement value size ] ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorDeleter >> updateCursors [
 	
 	self cursor do: [ :aCursor |
@@ -218,7 +218,7 @@ BrTextEditorDeleter >> updateCursors [
 				apply ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorDeleter >> updateSelection [
 	| aSelectionCopy newSelection |
 	
@@ -237,12 +237,12 @@ BrTextEditorDeleter >> updateSelection [
 	self editor selection: newSelection
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> withoutCursorUpdate [
 	shouldUpdateCursor := false
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorDeleter >> withoutSelectionUpdate [
 	shouldUpdateSelection := false
 ]

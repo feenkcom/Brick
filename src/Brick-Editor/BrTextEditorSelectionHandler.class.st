@@ -1,13 +1,13 @@
 Class {
-	#name : #BrTextEditorSelectionHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BrTextEditorSelectionHandler',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'startIndex'
 	],
-	#category : #'Brick-Editor-UI - Handlers'
+	#category : 'Brick-Editor-UI - Handlers'
 }
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BrTextEditorSelectionHandler >> dragEvent: anEvent [
 	| anEditor currentIndex |	
 	anEvent consumed: true.
@@ -32,7 +32,7 @@ BrTextEditorSelectionHandler >> dragEvent: anEvent [
 		select
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BrTextEditorSelectionHandler >> dragStartEvent: anEvent [
 	| anEditor |	
 	anEvent consumed: true.
@@ -45,7 +45,7 @@ BrTextEditorSelectionHandler >> dragStartEvent: anEvent [
 		ifAbsent: [ nil ].
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BrTextEditorSelectionHandler >> eventsToHandle [
 	^ { BlDragEvent . BlDragStartEvent }
 ]

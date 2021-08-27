@@ -1,6 +1,6 @@
-Extension { #name : #BlLayoutCommonConstraints }
+Extension { #name : 'BlLayoutCommonConstraints' }
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 BlLayoutCommonConstraints >> textFlow [
 	^ self at: BrEditorTextFlowLayout
 ]
