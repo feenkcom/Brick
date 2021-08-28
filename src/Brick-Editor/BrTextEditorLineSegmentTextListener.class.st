@@ -2,29 +2,29 @@
 I add support of BrTextEventHandlerAttribute - special kind of attribute that can handle events
 "
 Class {
-	#name : #BrTextEditorLineSegmentTextListener,
-	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : #'Brick-Editor-UI - Word'
+	#name : 'BrTextEditorLineSegmentTextListener',
+	#superclass : 'BrTextWordPieceUniqueHandler',
+	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BrTextEditorLineSegmentTextListener class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentTextListener class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentTextListener >> eventClass [
 	^ BlMouseEvent
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 BrTextEditorLineSegmentTextListener >> handleEvent: aBlMouseEvent [
 	| aTextElement anEditorElement aLocalPosition aTextIndex anIterator theAttributes |
 

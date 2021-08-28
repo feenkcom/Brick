@@ -79,7 +79,7 @@ BrColumnedListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilde
 
 { #category : 'hooks' }
 BrColumnedListAptitude >> onModelItemsChanged: anEvent [
-	self listElement dataSource notifyChanged
+	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ])
 ]
 
 { #category : 'hooks' }

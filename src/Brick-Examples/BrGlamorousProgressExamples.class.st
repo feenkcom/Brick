@@ -11,15 +11,15 @@ ${example:BrGlamorousProgressExamples>>#barAndTextBelow_MainUsage|codeExpanded=f
 
 "
 Class {
-	#name : #BrGlamorousProgressExamples,
-	#superclass : #Object,
+	#name : 'BrGlamorousProgressExamples',
+	#superclass : 'Object',
 	#instVars : [
 		'progressExamples'
 	],
-	#category : #'Brick-Examples-Progress'
+	#category : 'Brick-Examples-Progress'
 }
 
-{ #category : #'examples - basic compositions' }
+{ #category : 'examples - basic compositions' }
 BrGlamorousProgressExamples >> barAndTextAbove [
 	<gtExample>
 	| aProgress |
@@ -33,7 +33,7 @@ BrGlamorousProgressExamples >> barAndTextAbove [
 	^ aProgress
 ]
 
-{ #category : #'examples - main compositions' }
+{ #category : 'examples - main compositions' }
 BrGlamorousProgressExamples >> barAndTextAbove_MainUsage [
 	<gtExample>
 	| aProgress |
@@ -42,7 +42,7 @@ BrGlamorousProgressExamples >> barAndTextAbove_MainUsage [
 	^ aProgress
 ]
 
-{ #category : #'examples - main compositions' }
+{ #category : 'examples - main compositions' }
 BrGlamorousProgressExamples >> barAndTextBelow_MainUsage [
 	<gtExample>
 	| aProgress |
@@ -51,7 +51,7 @@ BrGlamorousProgressExamples >> barAndTextBelow_MainUsage [
 	^ aProgress
 ]
 
-{ #category : #'examples - basic compositions' }
+{ #category : 'examples - basic compositions' }
 BrGlamorousProgressExamples >> barOnly [
 	<gtExample>
 	| aProgress |
@@ -60,7 +60,7 @@ BrGlamorousProgressExamples >> barOnly [
 	^ aProgress
 ]
 
-{ #category : #'examples - main compositions' }
+{ #category : 'examples - main compositions' }
 BrGlamorousProgressExamples >> barOnly_MainUsage [
 	<gtExample>
 	| aProgress |
@@ -69,13 +69,13 @@ BrGlamorousProgressExamples >> barOnly_MainUsage [
 	^ aProgress
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrGlamorousProgressExamples >> initialize [
 	super initialize.
 	progressExamples := BrProgressExamples new.
 ]
 
-{ #category : #'examples - basic widget' }
+{ #category : 'examples - basic widget' }
 BrGlamorousProgressExamples >> thirtyPercentProgress [
 	<gtExample>
 	^ progressExamples thirtyPercentProgress

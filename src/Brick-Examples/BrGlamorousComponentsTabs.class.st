@@ -5,12 +5,12 @@ Tab is a graphical control element that allows multiple documents or panels to b
 ${example:BrGlamorousComponentsTabs>>#defaultTabs|previewShow=#gtLiveFor:|previewHeight=200|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : #BrGlamorousComponentsTabs,
-	#superclass : #BrGlamorousComponents,
-	#category : #'Brick-Examples-! Glamorous components'
+	#name : 'BrGlamorousComponentsTabs',
+	#superclass : 'BrGlamorousComponents',
+	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrGlamorousComponentsTabs >> defaultTabs [
 	<gtExample>
 

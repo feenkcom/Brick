@@ -2,12 +2,12 @@
 I reject all characters that responds true to ${method:Character>>#isSeparator}$.
 "
 Class {
-	#name : #BrTextEditorNoSpaceInputFilter,
-	#superclass : #BrTextEditorInputFilter,
-	#category : #'Brick-Editor-Model'
+	#name : 'BrTextEditorNoSpaceInputFilter',
+	#superclass : 'BrTextEditorInputFilter',
+	#category : 'Brick-Editor-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorNoSpaceInputFilter >> filter: aString [
 	<return: #String>
 	

@@ -1,15 +1,15 @@
 Class {
-	#name : #BrTextWordPieceHideCursorHandler,
-	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : #'Brick-Editor-UI - Word'
+	#name : 'BrTextWordPieceHideCursorHandler',
+	#superclass : 'BrTextWordPieceUniqueHandler',
+	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceHideCursorHandler >> eventClass [
 	^ BrTextEditorHideCursorRequest
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BrTextWordPieceHideCursorHandler >> handleEvent: anEvent [
 	| aTextElement aCursorElement |
 	

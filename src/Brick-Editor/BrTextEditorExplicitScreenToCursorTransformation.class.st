@@ -1,28 +1,28 @@
 Class {
-	#name : #BrTextEditorExplicitScreenToCursorTransformation,
-	#superclass : #BrTextEditorScreenToCursorTransformation,
+	#name : 'BrTextEditorExplicitScreenToCursorTransformation',
+	#superclass : 'BrTextEditorScreenToCursorTransformation',
 	#instVars : [
 		'screenPosition'
 	],
-	#category : #'Brick-Editor-Model - Cursor'
+	#category : 'Brick-Editor-Model - Cursor'
 }
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BrTextEditorExplicitScreenToCursorTransformation >> evaluateOn: anObject [
 	anObject explicitScreenToCursor: self
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BrTextEditorExplicitScreenToCursorTransformation >> evaluateOn: anObject for: anEvent [
 	anObject explicitScreenToCursor: self for: anEvent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorExplicitScreenToCursorTransformation >> screenPosition [
 	^ screenPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorExplicitScreenToCursorTransformation >> screenPosition: anObject [
 	screenPosition := anObject
 ]

@@ -1,29 +1,29 @@
 Class {
-	#name : #BrTextEditorCursor,
-	#superclass : #Object,
-	#category : #'Brick-Editor-Model - Cursor'
+	#name : 'BrTextEditorCursor',
+	#superclass : 'Object',
+	#category : 'Brick-Editor-Model - Cursor'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorCursor class >> at: aTextIndex [
 	<return: #BrTextEditorSingleCursor>
 
 	^ BrTextEditorSingleCursor at: aTextIndex
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorCursor class >> atAll: aCollectionOfTextIndices [
 	<return: #BrTextEditorMultipleCursor>
 
 	^ BrTextEditorMultipleCursor new addAll: (aCollectionOfTextIndices collect: [ :aTextIndex | BrTextEditorSingleCursor at: aTextIndex ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursor >> allCursors [
 	^ Array streamContents: [ :aStream | self do: [ :aCursor | aStream nextPut: aCursor ] ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> allSatisfy: aBlock [
 	"Evaluate aBlock with all cursor.
 	If aBlock returns false for any element return false, otherwise return true"
@@ -34,7 +34,7 @@ BrTextEditorCursor >> allSatisfy: aBlock [
 	^ true
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> anySatisfy: aBlock [
 	"Evaluate aBlock with all cursors.
 	If aBlock returns true for any element return true, otherwise return false"
@@ -45,13 +45,13 @@ BrTextEditorCursor >> anySatisfy: aBlock [
 	^ false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> collect: aBlock [ 	
 	^ Array streamContents: [ :aStream |
 		self do: [ :anElement | aStream nextPut: (aBlock value: anElement) ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursor >> cursorsCount [
 	<return: #Number>
 	| aCount |
@@ -61,7 +61,7 @@ BrTextEditorCursor >> cursorsCount [
 	^ aCount
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> detect: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Answer the first element for which aBlock evaluates to true."
@@ -69,7 +69,7 @@ BrTextEditorCursor >> detect: aBlock [
 	^ self detect: aBlock ifNone: [self errorNotFound: aBlock]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> detect: aBlock ifFound: foundBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -85,7 +85,7 @@ BrTextEditorCursor >> detect: aBlock ifFound: foundBlock [
 			 ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -99,7 +99,7 @@ BrTextEditorCursor >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock 
 	^ exceptionBlock value	
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> detect: aBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	Answer the first element for which aBlock evaluates to true. If none  
@@ -108,21 +108,21 @@ BrTextEditorCursor >> detect: aBlock ifNone: exceptionBlock [
 	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> do: aBlock [
 	"Evaluate a given block with all available cursors"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> errorNotFound: anObject [
 	"Raise a NotFound exception."
 
 	NotFound signalFor: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursor >> first [
 	"Return the first cursor sorted by position. Throw an error if there are no cursors"
 	<return: #BrTextEditorSingleCursor>
@@ -130,7 +130,7 @@ BrTextEditorCursor >> first [
 	^ (self allCursors sorted: [ :a :b | a position < b position ]) first
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorCursor >> isEmpty [
 	"Return true if there are no cursors"
 	<return: #Boolean>
@@ -139,7 +139,7 @@ BrTextEditorCursor >> isEmpty [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorCursor >> isNotEmpty [
 	"Return true if there is at least one cursor"
 	<return: #Boolean>
@@ -147,7 +147,7 @@ BrTextEditorCursor >> isNotEmpty [
 	^ self isEmpty not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorCursor >> isSingle [
 	"Return true if there is exactly *one* cursor"
 	<return: #Boolean>
@@ -155,12 +155,12 @@ BrTextEditorCursor >> isSingle [
 	^ self cursorsCount = 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursor >> positions [
 	^ self collect: [ :eachCursor | eachCursor position ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BrTextEditorCursor >> select: aBlock [ 	
 	^ Array streamContents: [ :aStream |
 			self do: [ :anElement |

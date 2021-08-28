@@ -2,7 +2,7 @@ Class {
 	#name : 'BrAbstractListModel',
 	#superclass : 'BrWidgetModel',
 	#instVars : [
-		'items',
+		'itemsProvider',
 		'itemTypeStencil',
 		'itemIdStencil'
 	],
@@ -13,7 +13,6 @@ Class {
 BrAbstractListModel >> initialize [
 	super initialize.
 
-	items := #().
 	itemTypeStencil := [ :anItemTypeFactory | anItemTypeFactory default ] asStencilBuilder: BrListItemTypeStencilBuilder.
 	itemIdStencil := nil
 ]
@@ -29,14 +28,14 @@ BrAbstractListModel >> initializeListeners [
 
 { #category : 'api - accessing' }
 BrAbstractListModel >> itemAt: anIndex [
-	^ self items at: anIndex
+	^ self itemsProvider itemAt: anIndex
 ]
 
 { #category : 'api - accessing' }
 BrAbstractListModel >> itemCount [
 	<return: #Number>
 
-	^ self items size
+	^ self itemsProvider itemCount
 ]
 
 { #category : 'api - accessing' }
@@ -75,11 +74,23 @@ BrAbstractListModel >> itemTypeStencil: aStencil [
 BrAbstractListModel >> items [
 	<return: #Collection of: #Object>
 	
-	^ items
+	^ itemsProvider currentItems
 ]
 
 { #category : 'api - accessing' }
 BrAbstractListModel >> items: aCollectionOfObjects [
-	items := aCollectionOfObjects.
-	self dispatchEvent: (BrListModelItemsChangedEvent new viewModel: self).
+	self itemsProvider: (BrListSequenceableCollectionItemsProvider new collection: aCollectionOfObjects)
+]
+
+{ #category : 'api - accessing' }
+BrAbstractListModel >> itemsProvider [
+	<return: #BrAbstractListItemsProvider>
+	
+	^ itemsProvider
+]
+
+{ #category : 'api - accessing' }
+BrAbstractListModel >> itemsProvider: anItemsProvider [
+	itemsProvider := anItemsProvider.
+	itemsProvider attachToListModel: self.
 ]

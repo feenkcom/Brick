@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTextEditorModeMemento,
-	#superclass : #BrTextEditorMemento,
+	#name : 'BrTextEditorModeMemento',
+	#superclass : 'BrTextEditorMemento',
 	#instVars : [
 		'mode'
 	],
-	#category : #'Brick-Editor-Model - Memento'
+	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorModeMemento >> initialize [
 	super initialize.
 	
 	mode := BrTextEditorEditableMode new
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorModeMemento >> label [
 	^ 'Mode'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorModeMemento >> order [
 	^ 20
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorModeMemento >> restoreStateOf: aTextEditor [
 	aTextEditor editorMode: mode copy
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorModeMemento >> saveStateOf: aTextEditor [
 	mode := aTextEditor editorMode copy
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorModeMemento >> value [
 	^ mode
 ]

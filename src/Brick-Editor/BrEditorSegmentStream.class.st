@@ -2,8 +2,8 @@
 I am used by ===BrTextEditorSegmentBuilder=== to stream created segments so that ===BrTextEditorSegmentsCollector=== could collect them.
 "
 Class {
-	#name : #BrEditorSegmentStream,
-	#superclass : #Object,
+	#name : 'BrEditorSegmentStream',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -14,17 +14,17 @@ Class {
 	#category : 'Brick-Editor-Model - Segment'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> collection [
 	^ collection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> collection: anObject [
 	collection := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorSegmentStream >> initialize [
 	super initialize.
 	
@@ -33,17 +33,17 @@ BrEditorSegmentStream >> initialize [
 	skip := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> limit [
 	^ limit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> limit: aNumber [
 	limit := aNumber
 ]
 
-{ #category : #streaming }
+{ #category : 'streaming' }
 BrEditorSegmentStream >> nextPut: aTextEditorSegment [
 	self
 		assert: [ self wantsMore ]
@@ -58,7 +58,7 @@ BrEditorSegmentStream >> nextPut: aTextEditorSegment [
 		ifFalse: [ skip := skip - 1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> segments [
 	"Return a collection of streamed text segments.
 	I am an alias to #collection allowing us to increase readability"
@@ -67,17 +67,17 @@ BrEditorSegmentStream >> segments [
 	^ self collection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> size [
 	^ collection size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> skip [
 	^ skip
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSegmentStream >> skip: aNumber [
 
 	self
@@ -87,7 +87,7 @@ BrEditorSegmentStream >> skip: aNumber [
 	skip := aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrEditorSegmentStream >> wantsMore [
 	^ self size < self limit
 ]

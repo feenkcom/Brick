@@ -1,27 +1,27 @@
 Class {
-	#name : #BrEditorCopyShortcut,
-	#superclass : #BrEditorShortcut,
-	#category : #'Brick-Editor-Shortcuts'
+	#name : 'BrEditorCopyShortcut',
+	#superclass : 'BrEditorShortcut',
+	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorCopyShortcut >> description [
 	^ 'Copies the selection text into the clipboard.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorCopyShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination primaryC
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorCopyShortcut >> name [
 	^ 'Copy'
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorCopyShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor copySelected
 ]

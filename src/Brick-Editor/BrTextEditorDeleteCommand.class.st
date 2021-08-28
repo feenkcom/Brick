@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTextEditorDeleteCommand,
-	#superclass : #BrTextEditorCommand,
+	#name : 'BrTextEditorDeleteCommand',
+	#superclass : 'BrTextEditorCommand',
 	#instVars : [
 		'fromIndex',
 		'toIndex'
@@ -8,33 +8,33 @@ Class {
 	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorDeleteCommand >> executeOn: aTextEditor [
 	aTextEditor text
 		delete: ((self fromIndex + 1) min: self toIndex)
 		to: self toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorDeleteCommand >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorDeleteCommand >> fromIndex: aNumber [
 	<return: #Number>
 
 	fromIndex := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorDeleteCommand >> toIndex [
 	<return: #Number>
 
 	^ toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorDeleteCommand >> toIndex: aNumber [
 	toIndex := aNumber
 ]

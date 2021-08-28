@@ -1,59 +1,59 @@
 Class {
-	#name : #BrTextEditorRelativeScreenToCursorTransformation,
-	#superclass : #BrTextEditorScreenToCursorTransformation,
+	#name : 'BrTextEditorRelativeScreenToCursorTransformation',
+	#superclass : 'BrTextEditorScreenToCursorTransformation',
 	#instVars : [
 		'cursor',
 		'direction'
 	],
-	#category : #'Brick-Editor-Model - Cursor'
+	#category : 'Brick-Editor-Model - Cursor'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorRelativeScreenToCursorTransformation >> beDown [
 	self direction: #down
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorRelativeScreenToCursorTransformation >> beUp [
 	self direction: #up
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorRelativeScreenToCursorTransformation >> cursor [
 	^ cursor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorRelativeScreenToCursorTransformation >> cursor: anObject [
 	cursor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorRelativeScreenToCursorTransformation >> direction [
 	^ direction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorRelativeScreenToCursorTransformation >> direction: aSymbol [
 	direction := aSymbol
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BrTextEditorRelativeScreenToCursorTransformation >> evaluateOn: anObject [
 	anObject relativeScreenToCursor: self
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BrTextEditorRelativeScreenToCursorTransformation >> evaluateOn: anObject for: anEvent [
 	anObject relativeScreenToCursor: self for: anEvent
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorRelativeScreenToCursorTransformation >> isDown [
 	^ self direction = #down
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorRelativeScreenToCursorTransformation >> isUp [
 	^ self direction = #up
 ]

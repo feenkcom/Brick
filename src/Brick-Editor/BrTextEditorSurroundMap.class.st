@@ -15,20 +15,20 @@ See BrTextEditorSurroundDefinition for more information.
 The size of the collection is assumed to be small, so a simple search is done instead of using a Dictionary.
 "
 Class {
-	#name : #BrTextEditorSurroundMap,
-	#superclass : #Object,
+	#name : 'BrTextEditorSurroundMap',
+	#superclass : 'Object',
 	#instVars : [
 		'definitions'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorSurroundMap class >> newFromArray: anArrayOfArray [
 	^ self newFromArrays: { anArrayOfArray }
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorSurroundMap class >> newFromArrays: anArrayOfArray [
 	"When inserting some special symbols a text editor should surround a cursor or selection with that symbol
 	anArrayOfArray is:
@@ -44,19 +44,19 @@ BrTextEditorSurroundMap class >> newFromArrays: anArrayOfArray [
 	^ self new addDefinitions: theDefinitions.
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BrTextEditorSurroundMap >> addDefinition: aBrTextEditorSurroundDefinition [
 
 	definitions := definitions copyWith: aBrTextEditorSurroundDefinition
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BrTextEditorSurroundMap >> addDefinitions: anArray [
 
 	definitions := definitions, anArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundMap >> associations [
 	"Answer an array of openCharacter -> closeCharacter associations"
 
@@ -64,7 +64,7 @@ BrTextEditorSurroundMap >> associations [
 		definition openCharacter -> definition closeCharacter ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundMap >> closingFor: aCharacter ifPresent: presentBlock ifAbsent: absentBlock [
 	"Answer the matching closing character for the supplied opening character"
 	| definition |
@@ -75,7 +75,7 @@ BrTextEditorSurroundMap >> closingFor: aCharacter ifPresent: presentBlock ifAbse
 	^presentBlock value: definition closeCharacter.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundMap >> closingFor: aCharacter in: anOperator at: anIndex ifPresent: presentBlock ifAbsent: absentBlock [
 	"Answer the matching closing character for the supplied opening character.
 	If the receiver has a condition block that evaluates to false, execute the absentBlock."
@@ -90,14 +90,14 @@ BrTextEditorSurroundMap >> closingFor: aCharacter in: anOperator at: anIndex ifP
 	^presentBlock value: definition closeCharacter.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSurroundMap >> initialize [ 
 
 	super initialize.
 	definitions := #().
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSurroundMap >> openingFor: aCharacter ifPresent: presentBlock ifAbsent: absentBlock [
 	"Answer the matching opening character for the supplied closing character"
 	| definition |

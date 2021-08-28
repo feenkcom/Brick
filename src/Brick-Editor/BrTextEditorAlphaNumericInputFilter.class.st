@@ -2,12 +2,12 @@
 I allow letters and digits
 "
 Class {
-	#name : #BrTextEditorAlphaNumericInputFilter,
-	#superclass : #BrTextEditorInputFilter,
-	#category : #'Brick-Editor-Model'
+	#name : 'BrTextEditorAlphaNumericInputFilter',
+	#superclass : 'BrTextEditorInputFilter',
+	#category : 'Brick-Editor-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorAlphaNumericInputFilter >> filter: aString [
 	<return: #String>
 	

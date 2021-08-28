@@ -1,16 +1,16 @@
 Class {
-	#name : #BrTextEditorLineSegmentPieces,
-	#superclass : #Object,
+	#name : 'BrTextEditorLineSegmentPieces',
+	#superclass : 'Object',
 	#instVars : [
 		'pieces',
 		'pieceElements',
 		'textElements',
 		'adornmentElements'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorLineSegmentPieces >> initialize [
 	super initialize.
 	
@@ -21,7 +21,7 @@ BrTextEditorLineSegmentPieces >> initialize [
 	adornmentElements := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorLineSegmentPieces >> pieces: aCollectionOfPieces [
 	
 ]

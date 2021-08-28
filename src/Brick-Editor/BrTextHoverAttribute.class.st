@@ -1,25 +1,25 @@
 Class {
-	#name : #BrTextHoverAttribute,
-	#superclass : #BrTextEventHandlerAttribute,
+	#name : 'BrTextHoverAttribute',
+	#superclass : 'BrTextEventHandlerAttribute',
 	#instVars : [
 		'enterAction',
 		'leaveAction',
 		'isHovered'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextHoverAttribute >> enterAction [
 	^ enterAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextHoverAttribute >> enterAction: anObject [
 	enterAction := anObject
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 BrTextHoverAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	"Handle a given event or dispatch it using #sendTo:"
 
@@ -30,7 +30,7 @@ BrTextHoverAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorT
 		ifTrue: [ self performLeaveAction: anEvent in: aTextEditor ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextHoverAttribute >> initialize [
 	super initialize.
 
@@ -39,12 +39,12 @@ BrTextHoverAttribute >> initialize [
 	isHovered := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextHoverAttribute >> leaveAction [
 	^ leaveAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextHoverAttribute >> leaveAction: aBlock [
 	self 
 		assert: [ aBlock notNil ] 
@@ -53,7 +53,7 @@ BrTextHoverAttribute >> leaveAction: aBlock [
 	leaveAction := aBlock
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
 	isHovered
 		ifTrue: [ ^ self ].
@@ -68,7 +68,7 @@ BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
 	}
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [	
 	isHovered
 		ifFalse: [ ^ self ].
@@ -83,7 +83,7 @@ BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [
 	}
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 BrTextHoverAttribute >> wantsEvent: anEvent in: aTextEditor [
 	"Return true if I am interested in a given event and want to handle it,
 	false otherwise"

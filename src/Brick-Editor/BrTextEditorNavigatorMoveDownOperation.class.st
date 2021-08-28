@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorNavigatorMoveDownOperation,
-	#superclass : #BrTextEditorNavigatorOperation,
-	#category : #'Brick-Editor-Model - Operators'
+	#name : 'BrTextEditorNavigatorMoveDownOperation',
+	#superclass : 'BrTextEditorNavigatorOperation',
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #matching }
+{ #category : 'matching' }
 BrTextEditorNavigatorMoveDownOperation >> performOn: aNavigator [
 	| aGlobalTextIndex |
 	

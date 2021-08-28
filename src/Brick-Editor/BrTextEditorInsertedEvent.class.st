@@ -2,16 +2,16 @@
 Is sent by the text editor after a new piece of text is inserted in the editor at a location defined by an insertion index
 "
 Class {
-	#name : #BrTextEditorInsertedEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorInsertedEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'text',
 		'index'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorInsertedEvent class >> text: aBlText at: anIndex [
 	<return: #BrTextEditorInsertedEvent>
 
@@ -20,22 +20,22 @@ BrTextEditorInsertedEvent class >> text: aBlText at: anIndex [
 		index: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInsertedEvent >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInsertedEvent >> index: aNumber [
 	index := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInsertedEvent >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInsertedEvent >> text: aBrText [
 	text := aBrText
 ]

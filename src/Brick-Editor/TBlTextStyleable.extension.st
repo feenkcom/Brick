@@ -1,6 +1,6 @@
-Extension { #name : #TBlTextStyleable }
+Extension { #name : 'TBlTextStyleable' }
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> appendingAdornment: aBrTextAdornmentStencilBuilder [
 	"Append a visual element defined by a given stencil builder right after a text on which I am applied.
 	A stencil builder can also be a block in the following form:
@@ -11,19 +11,19 @@ TBlTextStyleable >> appendingAdornment: aBrTextAdornmentStencilBuilder [
 		stencil: aBrTextAdornmentStencilBuilder)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> hideText [
 	"Visually replace a piece of text with a repeating aCharacter"
 
 	self attributesBuilder attribute: BrTextHideAttribute new
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> lineSpacing: aNumber [
 	self attributesBuilder attribute: (BrTextParagraphLineSpacingAttribute lineSpacing: aNumber)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> onClick: aClickAction [
 	"Perform actions when a user clicks on a piece of text.
 	The click action is a block in the following form: [ :aTBrTextEditorTextualPiece :aWorldElement :anEditorElement :anEvent | ]"
@@ -31,7 +31,7 @@ TBlTextStyleable >> onClick: aClickAction [
 	self attributesBuilder attribute: (BrTextClickAttribute new action: aClickAction)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> onCursorEnter: anEnterAction leave: aLeaveAction [
 	"Perform actions when a cursor enters and leaves a piece of text.
 	The enter action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorAddedEvent :anAttributeStart :anAttributeEnd | ]
@@ -42,12 +42,12 @@ TBlTextStyleable >> onCursorEnter: anEnterAction leave: aLeaveAction [
 			leaveAction: aLeaveAction)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> paragraphMargin: anInsets [
 	self attributesBuilder attribute: (BrTextParagraphMarginAttribute paragraphMargin: anInsets)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> replacingAdornment: aBrTextAdornmentStencilBuilder [
 	"Visually replace a piece of text with an element defined by a given stencil builder.
 	A stencil builder can also be a block in the following form:
@@ -58,19 +58,19 @@ TBlTextStyleable >> replacingAdornment: aBrTextAdornmentStencilBuilder [
 		stencil: aBrTextAdornmentStencilBuilder)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> replacingText: aCharacter [
 	"Visually replace a piece of text with a repeating aCharacter"
 
 	self attributesBuilder attribute: (BrTextReplacingAttribute new withCharacter: aCharacter)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> roundedBackground: aPaint [
 	self attributesBuilder attribute: (BrTextEmbellishmentAttribute new roundedBackground: aPaint)
 ]
 
-{ #category : #'*Brick-Editor' }
+{ #category : '*Brick-Editor' }
 TBlTextStyleable >> wordPadding: anInsets [
 	self attributesBuilder attribute: (BrTextParagraphWordPaddingAttribute wordPadding: anInsets)
 ]

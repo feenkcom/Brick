@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextEditorScreenToCursorRequest,
-	#superclass : #BrTextEditorRequest,
+	#name : 'BrTextEditorScreenToCursorRequest',
+	#superclass : 'BrTextEditorRequest',
 	#instVars : [
 		'transformation'
 	],
-	#category : #'Brick-Editor-UI - Requests'
+	#category : 'Brick-Editor-UI - Requests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorScreenToCursorRequest >> transformation [
 	^ transformation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorScreenToCursorRequest >> transformation: anObject [
 	transformation := anObject
 ]

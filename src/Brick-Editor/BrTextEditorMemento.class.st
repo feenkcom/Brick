@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTextEditorMemento,
-	#superclass : #Object,
-	#category : #'Brick-Editor-Model - Memento'
+	#name : 'BrTextEditorMemento',
+	#superclass : 'Object',
+	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorMemento >> isSelectionMemento [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorMemento >> isTextMemento [
 	^ false
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorMemento >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorMemento >> order [
 	^ self subclassResponsibility
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorMemento >> restoreStateOf: aTextEditor [
 	self subclassResponsibility
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorMemento >> saveStateOf: aTextEditor [
 	self subclassResponsibility
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorMemento >> value [
 	^ self subclassResponsibility
 ]

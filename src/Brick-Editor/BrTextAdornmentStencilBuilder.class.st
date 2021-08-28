@@ -24,49 +24,49 @@ Users can also directly use blocks for scripting:
 ]]]
 "
 Class {
-	#name : #BrTextAdornmentStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTextAdornmentStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'editorElement',
 		'segmentPiece'
 	],
-	#category : #'Brick-Editor-UI - Stencils'
+	#category : 'Brick-Editor-UI - Stencils'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTextAdornmentStencilBuilder >> buildDefault [
 	^ BlElement new
 		size: 20@20;
 		background: Color red
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextAdornmentStencilBuilder >> editor [
 	<return: #BrEditorElement>
 
 	^ editorElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextAdornmentStencilBuilder >> editor: aBrEditorElement [
 	editorElement := aBrEditorElement
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTextAdornmentStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self segmentPiece;
 		push: self editor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextAdornmentStencilBuilder >> segmentPiece [
 	<return: #TBrTextEditorTextualPiece>
 	
 	^ segmentPiece
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextAdornmentStencilBuilder >> segmentPiece: aTBrTextEditorTextualPiece [
 	segmentPiece := aTBrTextEditorTextualPiece
 ]

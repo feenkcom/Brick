@@ -1,10 +1,10 @@
 Class {
-	#name : #BrRootTreeNodeExamples,
-	#superclass : #BrTreeNodeExamples,
-	#category : #'Brick-Examples-Tree'
+	#name : 'BrRootTreeNodeExamples',
+	#superclass : 'BrTreeNodeExamples',
+	#category : 'Brick-Examples-Tree'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrRootTreeNodeExamples >> collapse_depth_1 [
 	<gtExample>
 	| aNode aCollapsedSubscription anAnnouncement |
@@ -29,7 +29,7 @@ BrRootTreeNodeExamples >> collapse_depth_1 [
 	^ aNode
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrRootTreeNodeExamples >> depth_1 [
 	<gtExample>
 	| aRope aNode |
@@ -55,7 +55,7 @@ BrRootTreeNodeExamples >> depth_1 [
 	^ aNode
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrRootTreeNodeExamples >> expand_depth_1 [
 	<gtExample>
 	| aNode anExpandedSubscription anAnnouncement |
@@ -85,7 +85,7 @@ BrRootTreeNodeExamples >> expand_depth_1 [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onMany [
 	<gtExample>
 	| aNode |
@@ -106,7 +106,7 @@ BrRootTreeNodeExamples >> onMany [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onManyEmpty_expandUpTo [
 	<gtExample>
 	| aNode |
@@ -126,7 +126,7 @@ BrRootTreeNodeExamples >> onManyEmpty_expandUpTo [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onMany_expandSuchThat [
 	<gtExample>
 	| aNode expandedCount |
@@ -157,7 +157,7 @@ BrRootTreeNodeExamples >> onMany_expandSuchThat [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onMany_expandUpTo [
 	<gtExample>
 	| aNode |
@@ -177,7 +177,7 @@ BrRootTreeNodeExamples >> onMany_expandUpTo [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onMany_immediate_expandSuchThat [
 	<gtExample>
 	| aNode expandedCount |
@@ -208,7 +208,7 @@ BrRootTreeNodeExamples >> onMany_immediate_expandSuchThat [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onMany_immediate_expandUpTo [
 	<gtExample>
 	| aNode |
@@ -228,7 +228,7 @@ BrRootTreeNodeExamples >> onMany_immediate_expandUpTo [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onOne [
 	<gtExample>
 	| aNode |
@@ -249,7 +249,7 @@ BrRootTreeNodeExamples >> onOne [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onOne_expandSuchThat [
 	<gtExample>
 	| aNode expandedCount |
@@ -280,7 +280,7 @@ BrRootTreeNodeExamples >> onOne_expandSuchThat [
 	^ aNode
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrRootTreeNodeExamples >> onOne_immediate_expandSuchThat [
 	<gtExample>
 	| aNode expandedCount |

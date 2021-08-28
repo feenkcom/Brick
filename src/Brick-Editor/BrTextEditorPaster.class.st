@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTextEditorPaster,
-	#superclass : #BrTextEditorOperator,
+	#name : 'BrTextEditorPaster',
+	#superclass : 'BrTextEditorOperator',
 	#instVars : [
 		'text',
 		'insertionIndices',
@@ -9,10 +9,10 @@ Class {
 		'shouldDeleteSelected',
 		'inputFilter'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> at: anIndex [
 	"Add a given index as another text paste location"
 
@@ -20,23 +20,23 @@ BrTextEditorPaster >> at: anIndex [
 		ifFalse: [ insertionIndices add: anIndex ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> atCursor [	
 	self cursor do: [ :aCursor | self at: aCursor position ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> atEnd [
 	"Insert a text at the very end"
 	self at: self text size
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> fromClipboard [
 	self string: Clipboard clipboardText asString
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorPaster >> initialize [
 	super initialize.
 	
@@ -48,12 +48,12 @@ BrTextEditorPaster >> initialize [
 	inputFilter := BrTextEditorNoInputFilter new
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> inputFilter: aTextEditorInputFilter [
 	inputFilter := aTextEditorInputFilter
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BrTextEditorPaster >> paste [
 	| anInserter |
 	
@@ -68,27 +68,27 @@ BrTextEditorPaster >> paste [
 	anInserter insert
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> string: aString [
 	text := aString
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> text: aText [
 	text := aText
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> withoutCursorUpdate [
 	shouldUpdateCursor := false
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> withoutSelectionDelete [
 	shouldDeleteSelected := false
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BrTextEditorPaster >> withoutSelectionUpdate [
 	shouldUpdateSelection := false
 ]

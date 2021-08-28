@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextEditorCursorChangedEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorCursorChangedEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'cursors'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorChangedEvent >> cursors [
 	^ cursors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorCursorChangedEvent >> cursors: anObject [
 	cursors := anObject
 ]

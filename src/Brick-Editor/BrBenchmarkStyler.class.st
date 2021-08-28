@@ -1,30 +1,30 @@
 Class {
-	#name : #BrBenchmarkStyler,
-	#superclass : #BlTextStyler,
+	#name : 'BrBenchmarkStyler',
+	#superclass : 'BlTextStyler',
 	#instVars : [
 		'duration'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrBenchmarkStyler >> duration [
 	^ duration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrBenchmarkStyler >> duration: anObject [
 	duration := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrBenchmarkStyler >> initialize [
 	super initialize.
 
 	duration := 100 milliSeconds
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrBenchmarkStyler >> privateStyle: aText [ 
 	<return: #BlText>
 	| aStartTime anEndTime |

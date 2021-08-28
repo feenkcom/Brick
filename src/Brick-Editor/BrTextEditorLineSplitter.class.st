@@ -2,17 +2,17 @@
 I split a piece of text into line segments ${class:BrTextEditorLineSegment}$
 "
 Class {
-	#name : #BrTextEditorLineSplitter,
-	#superclass : #BrTextEditorSplitter,
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#name : 'BrTextEditorLineSplitter',
+	#superclass : 'BrTextEditorSplitter',
+	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorLineSplitter >> newSegment [
 	^ BrTextEditorLineSegment new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorLineSplitter >> newSegment: aBlText from: aStartIndex to: anEndIndex delimited: aDelimiterIndex offset: anOffset [
 	| aText anAbsoluteTextStart anAbsoluteTextEnd |
 	"aStartIndex and anEndIndex are given in text coordinates"
@@ -31,7 +31,7 @@ BrTextEditorLineSplitter >> newSegment: aBlText from: aStartIndex to: anEndIndex
 		delimiter: aDelimiterIndex - anEndIndex
 ]
 
-{ #category : #'api - splitting' }
+{ #category : 'api - splitting' }
 BrTextEditorLineSplitter >> split: aBrText in: aBrEditorSegmentStream offset: anOffset [
 	| anIterator |
 
@@ -54,7 +54,7 @@ BrTextEditorLineSplitter >> split: aBrText in: aBrEditorSegmentStream offset: an
 		ifTrue: [ aBrEditorSegmentStream nextPut: (self newSegment: aBrText from: aBrText size + 1 to: aBrText size delimited: aBrText size offset: anOffset) ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorLineSplitter >> wantsToMergeSegments: aTextAttribute [
 	"Return true if a given attribute should merge segments and ignore a new line"
 	<return: #Boolean>

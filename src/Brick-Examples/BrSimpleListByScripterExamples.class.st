@@ -1,12 +1,12 @@
 Class {
-	#name : #BrSimpleListByScripterExamples,
-	#superclass : #Object,
+	#name : 'BrSimpleListByScripterExamples',
+	#superclass : 'Object',
 	#traits : 'TBlDevScripterExamples',
 	#classTraits : 'TBlDevScripterExamples classTrait',
-	#category : #'Brick-Examples-List'
+	#category : 'Brick-Examples-List'
 }
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists [
 	<gtExample>
 	| aScripter |
@@ -24,7 +24,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_DownBy [
 	<gtExample>
 	| aScripter |
@@ -52,7 +52,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_DownBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_LeftBy [
 	<gtExample>
 	| aScripter |
@@ -80,7 +80,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_LeftBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_RightBy [
 	<gtExample>
 	| aScripter |
@@ -108,7 +108,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_RightBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_UpBy [
 	<gtExample>
 	| aScripter |
@@ -136,7 +136,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_UpBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - horizontal list' }
+{ #category : 'examples - horizontal list' }
 BrSimpleListByScripterExamples >> horizontalList [
 	<gtExample>
 	| aScripter |
@@ -153,7 +153,7 @@ BrSimpleListByScripterExamples >> horizontalList [
 	^ aScripter syncContinue 
 ]
 
-{ #category : #'examples - horizontal list' }
+{ #category : 'examples - horizontal list' }
 BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_LeftBy [
 	<gtExample>
 	| aScripter |
@@ -179,7 +179,7 @@ BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_LeftBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - horizontal list' }
+{ #category : 'examples - horizontal list' }
 BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_RightBy [
 	<gtExample>
 	| aScripter |
@@ -205,7 +205,7 @@ BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_RightBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - vertical list' }
+{ #category : 'examples - vertical list' }
 BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_DownBy [
 	<gtExample>
 	| aScripter |
@@ -231,7 +231,7 @@ BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_DownBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - vertical list' }
+{ #category : 'examples - vertical list' }
 BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_UpBy [
 	<gtExample>
 	| aScripter |
@@ -257,7 +257,7 @@ BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_UpBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists [
 	<gtExample>
 	| aScripter |
@@ -275,7 +275,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_DownBy [
 	<gtExample>
 	| aScripter |
@@ -303,7 +303,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_DownBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_LeftBy [
 	<gtExample>
 	| aScripter |
@@ -331,7 +331,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_LeftBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_RightBy [
 	<gtExample>
 	| aScripter |
@@ -359,7 +359,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_RightBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_UpBy [
 	<gtExample>
 	| aScripter |
@@ -387,7 +387,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_UpBy [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - vertical list' }
+{ #category : 'examples - vertical list' }
 BrSimpleListByScripterExamples >> verticalList [
 	<gtExample>
 	| aScripter |

@@ -20,15 +20,15 @@ For scripting purposes a block closure can be used instead. It can have two opti
 ]]]
 "
 Class {
-	#name : #BrTextAdornmentDynamicAttribute,
-	#superclass : #BrTextAdornmentAttribute,
+	#name : 'BrTextAdornmentDynamicAttribute',
+	#superclass : 'BrTextAdornmentAttribute',
 	#instVars : [
 		'stencilBuilder'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextAdornmentDynamicAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #SequenceableCollection of: #BlElement>
@@ -45,12 +45,12 @@ BrTextAdornmentDynamicAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEd
 	^ aResult asElement asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextAdornmentDynamicAttribute >> stencil: anAdornmentStencilBuilder [
 	stencilBuilder := anAdornmentStencilBuilder asStencilBuilder: BrTextAdornmentStencilBuilder
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrTextAdornmentDynamicAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	

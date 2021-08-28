@@ -1,15 +1,15 @@
 Class {
-	#name : #BrTextWordPieceSelectionLostHandler,
-	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : #'Brick-Editor-UI - Word'
+	#name : 'BrTextWordPieceSelectionLostHandler',
+	#superclass : 'BrTextWordPieceUniqueHandler',
+	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceSelectionLostHandler >> eventClass [
 	^ BlElementSelectionLostEvent
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BrTextWordPieceSelectionLostHandler >> handleEvent: anEvent [
 	| aTextEditElement anEditorElement |
 	

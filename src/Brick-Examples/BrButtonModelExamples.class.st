@@ -20,14 +20,14 @@ To test the behaviour of the button model we can simulate a click on the element
 ${example:BrButtonModelExamples>>#clickOnElementWithButtonModel}$
 "
 Class {
-	#name : #BrButtonModelExamples,
-	#superclass : #Object,
+	#name : 'BrButtonModelExamples',
+	#superclass : 'Object',
 	#traits : 'TBrExamplesUtility',
 	#classTraits : 'TBrExamplesUtility classTrait',
-	#category : #'Brick-Examples-Button'
+	#category : 'Brick-Examples-Button'
 }
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrButtonModelExamples >> buttonModelWithAction [
 	<gtExample>
 
@@ -37,7 +37,7 @@ BrButtonModelExamples >> buttonModelWithAction [
 			self inform: 'clicked' ]
 ]
 
-{ #category : #'examples - with element' }
+{ #category : 'examples - with element' }
 BrButtonModelExamples >> clickOnElementWithButtonModel [
 	<gtExample>
 	| anElement |
@@ -50,7 +50,7 @@ BrButtonModelExamples >> clickOnElementWithButtonModel [
 	^ anElement
 ]
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrButtonModelExamples >> default [
 	<gtExample>
 	| aButtonModel |
@@ -64,7 +64,7 @@ BrButtonModelExamples >> default [
 	^ aButtonModel
 ]
 
-{ #category : #'examples - with element' }
+{ #category : 'examples - with element' }
 BrButtonModelExamples >> elementWithButtonModel [
 	<gtExample>
 	| anElement aButtonModel |

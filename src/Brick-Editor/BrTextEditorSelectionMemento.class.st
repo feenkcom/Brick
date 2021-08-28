@@ -1,35 +1,35 @@
 Class {
-	#name : #BrTextEditorSelectionMemento,
-	#superclass : #BrTextEditorMemento,
+	#name : 'BrTextEditorSelectionMemento',
+	#superclass : 'BrTextEditorMemento',
 	#instVars : [
 		'selection'
 	],
-	#category : #'Brick-Editor-Model - Memento'
+	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSelectionMemento >> initialize [
 	super initialize.
 	
 	selection := BlCompositeSelection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorSelectionMemento >> isSelectionMemento [
 	^ true
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorSelectionMemento >> label [
 	^ 'Selection'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionMemento >> order [
 	^ 70
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorSelectionMemento >> restoreStateOf: aTextEditor [
 	aTextEditor deselecter all deselect.
 
@@ -39,22 +39,22 @@ BrTextEditorSelectionMemento >> restoreStateOf: aTextEditor [
 		select
 ]
 
-{ #category : #memento }
+{ #category : 'memento' }
 BrTextEditorSelectionMemento >> saveStateOf: aTextEditor [
 	selection := aTextEditor selection copy.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionMemento >> selection [
 	^ selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionMemento >> selection: anObject [
 	selection := anObject
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BrTextEditorSelectionMemento >> value [
 	^ selection
 ]

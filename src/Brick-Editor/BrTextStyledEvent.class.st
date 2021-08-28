@@ -1,40 +1,40 @@
 Class {
-	#name : #BrTextStyledEvent,
-	#superclass : #BlEvent,
+	#name : 'BrTextStyledEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'text',
 		'afterAction',
 		'editorElement'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStyledEvent >> afterAction [
 	^ afterAction ifNil: [ [ :aStyleText | "do nothing" ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStyledEvent >> afterAction: anObject [
 	afterAction := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStyledEvent >> editorElement [
 	^ editorElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStyledEvent >> editorElement: anObject [
 	editorElement := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStyledEvent >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextStyledEvent >> text: anObject [
 	text := anObject
 ]

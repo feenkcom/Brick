@@ -1,30 +1,30 @@
 Class {
-	#name : #BrTextReplacingAttributeWithCharacterStrategy,
-	#superclass : #BrTextReplacingAttributeStrategy,
+	#name : 'BrTextReplacingAttributeWithCharacterStrategy',
+	#superclass : 'BrTextReplacingAttributeStrategy',
 	#instVars : [
 		'character'
 	],
-	#category : #'Brick-Editor-Attributes - Support'
+	#category : 'Brick-Editor-Attributes - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextReplacingAttributeWithCharacterStrategy >> character [
 	^ character
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextReplacingAttributeWithCharacterStrategy >> character: anObject [
 	character := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextReplacingAttributeWithCharacterStrategy >> initialize [
 	super initialize.
 	
 	character := $*
 ]
 
-{ #category : #replacing }
+{ #category : 'replacing' }
 BrTextReplacingAttributeWithCharacterStrategy >> swapString: aString [
 	<return: #String>
 	

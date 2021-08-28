@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTextEditorNullMode,
-	#superclass : #BrTextEditorMode,
-	#category : #'Brick-Editor-Model'
+	#name : 'BrTextEditorNullMode',
+	#superclass : 'BrTextEditorMode',
+	#category : 'Brick-Editor-Model'
 }

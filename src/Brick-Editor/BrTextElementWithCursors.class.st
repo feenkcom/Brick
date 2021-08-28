@@ -2,17 +2,17 @@
 I am extended version of the ${class:BlTextElement}$ with support of multiple cursors.
 "
 Class {
-	#name : #BrTextElementWithCursors,
-	#superclass : #BlTextElement,
+	#name : 'BrTextElementWithCursors',
+	#superclass : 'BlTextElement',
 	#instVars : [
 		'cursorElements',
 		'cursorStencil',
 		'segmentPiece'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
-{ #category : #'cursor - management' }
+{ #category : 'cursor - management' }
 BrTextElementWithCursors >> addCursorAt: aTextPosition [
 	<return: #BrCursorElement>
 	
@@ -28,12 +28,12 @@ BrTextElementWithCursors >> addCursorAt: aTextPosition [
 			aCursorElement ]
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BrTextElementWithCursors >> assertCursor: aCursorElement [
 	self assertCursorPosition: aCursorElement textPosition
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BrTextElementWithCursors >> assertCursorPosition: anIndex [
 	self
 		assert: [ self text isNotEmpty or: [ anIndex isZero ] ]
@@ -43,7 +43,7 @@ BrTextElementWithCursors >> assertCursorPosition: anIndex [
 		description: [ 'Cursor must be within text bounds (0 is allowed)' ].
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextElementWithCursors >> cursorAt: aTextPosition ifFound: aFoundBlock ifNone: aNoneBlock [
 
 	^ cursorElements
@@ -52,24 +52,24 @@ BrTextElementWithCursors >> cursorAt: aTextPosition ifFound: aFoundBlock ifNone:
 		ifNone: aNoneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextElementWithCursors >> cursorElements [
 	<return: #Collection of: #BrCursorElement>
 
 	^ cursorElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextElementWithCursors >> cursorStencil [
 	^ cursorStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextElementWithCursors >> cursorStencil: aStencil [
 	cursorStencil := aStencil
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BrTextElementWithCursors >> focusedBounds: aBlBounds [
 	"My focused bounds should be focused bounds of a cursor if it exists or my own otherwise"
 	<return: #BlBounds>
@@ -81,7 +81,7 @@ BrTextElementWithCursors >> focusedBounds: aBlBounds [
 		ifTrue: [ self cursorElement localBoundsToParent: (self cursorElement focusedBounds: aBlBounds) ]"
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextElementWithCursors >> hasCursorAt: aTextPosition [
 	"Return true if cursor at a given position exists"
 	<return: #Boolean>
@@ -92,12 +92,12 @@ BrTextElementWithCursors >> hasCursorAt: aTextPosition [
 		ifNone: [ false ]
 ]
 
-{ #category : #'cursor - management' }
+{ #category : 'cursor - management' }
 BrTextElementWithCursors >> hideCursors [
 	self cursorElements do: [ :aCursorElement | aCursorElement visibility: BlVisibility gone ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextElementWithCursors >> initialize [
 	super initialize.
 
@@ -105,7 +105,7 @@ BrTextElementWithCursors >> initialize [
 	cursorStencil := BrCursorStencil uniqueInstance
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrTextElementWithCursors >> layoutCursors: aBounds context: aBlElementBoundsUpdateContext [
 	cursorElements do: [ :aCursorElement |
 		| aCursorPosition aTextPositionX aMaxTextPositionX aMinTextPositionX aTextPosition |
@@ -125,7 +125,7 @@ BrTextElementWithCursors >> layoutCursors: aBounds context: aBlElementBoundsUpda
 			context: aBlElementBoundsUpdateContext ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextElementWithCursors >> newCursor [
 	"Create and return a new instance of a cursor element"
 	<return: #BlElement>
@@ -134,14 +134,14 @@ BrTextElementWithCursors >> newCursor [
 		constraintsDo: [ :c | c ignoreByLayout ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrTextElementWithCursors >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	super onLayout: aBounds context: aBlElementBoundsUpdateContext.
 	
 	self layoutCursors: aBounds context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrTextElementWithCursors >> printOn: aStream [
 	segmentPiece
 		ifNil: [ ^ aStream nextPutAll: 'Uknown segment' ].
@@ -155,7 +155,7 @@ BrTextElementWithCursors >> printOn: aStream [
 		print: segmentPiece text
 ]
 
-{ #category : #'cursor - management' }
+{ #category : 'cursor - management' }
 BrTextElementWithCursors >> removeCursorAt: aTextIndex [
 	"Remove cursor at a goven position"
 
@@ -168,7 +168,7 @@ BrTextElementWithCursors >> removeCursorAt: aTextIndex [
 		ifNone: [ self error: 'Cursor at ', aTextIndex asString, ' does not exist' ]
 ]
 
-{ #category : #'cursor - management' }
+{ #category : 'cursor - management' }
 BrTextElementWithCursors >> removeCursors [
 	"Remove all cursors"
 
@@ -176,20 +176,20 @@ BrTextElementWithCursors >> removeCursors [
 	self cursorElements removeAll
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextElementWithCursors >> removeSegmentPiece [
 	segmentPiece := nil.	
 	self text: '' asRopedText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextElementWithCursors >> segmentPiece [
 	<return: #TBrTextEditorTextualPiece>
 
 	^ segmentPiece
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextElementWithCursors >> segmentPiece: aSegmentPiece [
 	| isTextSame |
 	segmentPiece := aSegmentPiece.
@@ -211,12 +211,12 @@ BrTextElementWithCursors >> segmentPiece: aSegmentPiece [
 				during: [ self text: aTextCopy ] ]
 ]
 
-{ #category : #'cursor - management' }
+{ #category : 'cursor - management' }
 BrTextElementWithCursors >> showCursors [
 	self cursorElements do: [ :aCursorElement | aCursorElement visibility: BlVisibility visible ]
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 BrTextElementWithCursors >> textEnd [
 	"Return an index of the last character of a subtext that I represent"
 	<return: #Number>
@@ -224,7 +224,7 @@ BrTextElementWithCursors >> textEnd [
 	^ segmentPiece textEnd
 ]
 
-{ #category : #'text - accessing' }
+{ #category : 'text - accessing' }
 BrTextElementWithCursors >> textStart [
 	"Return an index of the first character of a subtext that I represent"
 	<return: #Number>

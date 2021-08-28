@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextEditorTextStyledEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorTextStyledEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'styledText'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextStyledEvent >> styledText [
 	^ styledText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorTextStyledEvent >> styledText: anObject [
 	styledText := anObject
 ]

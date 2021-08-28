@@ -1,18 +1,18 @@
 Class {
-	#name : #BrTextEditorSelectionChangedEvent,
-	#superclass : #BrTextEditorEvent,
+	#name : 'BrTextEditorSelectionChangedEvent',
+	#superclass : 'BrTextEditorEvent',
 	#instVars : [
 		'selection'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionChangedEvent >> selection [
 	^ selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSelectionChangedEvent >> selection: anObject [
 	selection := anObject
 ]

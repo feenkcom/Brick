@@ -1,23 +1,23 @@
 Class {
-	#name : #BrEditorSelectLineBeforeCursorShortcut,
-	#superclass : #BrEditorShortcut,
+	#name : 'BrEditorSelectLineBeforeCursorShortcut',
+	#superclass : 'BrEditorShortcut',
 	#instVars : [
 		'combinationForUnix'
 	],
-	#category : #'Brick-Editor-Shortcuts'
+	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BrEditorSelectLineBeforeCursorShortcut >> combinationForUnix [
 	^ combinationForUnix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSelectLineBeforeCursorShortcut >> description [
 	^ 'Extends the selection from the current cursor position to the beginning of a line.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorSelectLineBeforeCursorShortcut >> initialize [
 	super initialize.
 	
@@ -25,12 +25,12 @@ BrEditorSelectLineBeforeCursorShortcut >> initialize [
 	combinationForUnix := BlKeyCombination shiftHome
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSelectLineBeforeCursorShortcut >> name [
 	^ 'Select to the beginning of a line'
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorSelectLineBeforeCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
 		withoutCursorUpdate;

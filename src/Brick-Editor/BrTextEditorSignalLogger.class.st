@@ -1,15 +1,15 @@
 Class {
-	#name : #BrTextEditorSignalLogger,
-	#superclass : #MemoryLogger,
-	#category : #'Brick-Editor-Signals'
+	#name : 'BrTextEditorSignalLogger',
+	#superclass : 'MemoryLogger',
+	#category : 'Brick-Editor-Signals'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSignalLogger >> interestingSignals [
 	^ { BrTextStylerSignal }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSignalLogger >> nextPut: aSignal [
 	(self interestingSignals anySatisfy: [ :eachSignalClass |
 		aSignal class == eachSignalClass or: [ aSignal class inheritsFrom: eachSignalClass ] ])

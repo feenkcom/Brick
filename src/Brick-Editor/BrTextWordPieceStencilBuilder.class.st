@@ -1,16 +1,16 @@
 Class {
-	#name : #BrTextWordPieceStencilBuilder,
-	#superclass : #BrStencilBuilder,
+	#name : 'BrTextWordPieceStencilBuilder',
+	#superclass : 'BrStencilBuilder',
 	#instVars : [
 		'wordPadding',
 		'wordMargin',
 		'segmentPiece',
 		'shouldUsePool'
 	],
-	#category : #'Brick-Editor-UI - Stencils'
+	#category : 'Brick-Editor-UI - Stencils'
 }
 
-{ #category : #'private - pool' }
+{ #category : 'private - pool' }
 BrTextWordPieceStencilBuilder >> acquire [
 	<return: #BrTextElementWithCursors or: nil>
 	
@@ -20,7 +20,7 @@ BrTextWordPieceStencilBuilder >> acquire [
 	^ self pool acquire
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTextWordPieceStencilBuilder >> buildDefault [
 	| aTextElement |
 	
@@ -36,31 +36,31 @@ BrTextWordPieceStencilBuilder >> buildDefault [
 	^ aTextElement
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTextWordPieceStencilBuilder >> createWordElement [
 	<return: #BrTextElementWithCursors>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextWordPieceStencilBuilder >> initialize [
 	super initialize.
 	
 	self reset
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrTextWordPieceStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor push: self segmentPiece
 ]
 
-{ #category : #'private - pool' }
+{ #category : 'private - pool' }
 BrTextWordPieceStencilBuilder >> pool [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'private - pool' }
+{ #category : 'private - pool' }
 BrTextWordPieceStencilBuilder >> recycle: aPieceElement [
 	aPieceElement removeFromParent.
 	aPieceElement removeCursors.
@@ -76,7 +76,7 @@ BrTextWordPieceStencilBuilder >> recycle: aPieceElement [
 		ifPresent: [ :aPool | aPool == self pool ifTrue: [ self pool release: aPieceElement  ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextWordPieceStencilBuilder >> reset [
 	wordPadding := BlInsets empty.
 	wordMargin := BlInsets empty.
@@ -84,48 +84,48 @@ BrTextWordPieceStencilBuilder >> reset [
 	shouldUsePool := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> segmentPiece [
 	<return: #TBrTextEditorTextualPiece>
 
 	^ segmentPiece
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> segmentPiece: aTBrTextEditorTextualPiece [
 	segmentPiece := aTBrTextEditorTextualPiece
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> shouldUsePool [
 	^ shouldUsePool
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> shouldUsePool: aBoolean [
 	shouldUsePool := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> wordMargin [
 	<return: #BlInsets>
 
 	^ wordMargin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> wordMargin: aBlInsets [
 	wordMargin := aBlInsets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> wordPadding [
 	<return: #BlInsets>
 
 	^ wordPadding
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextWordPieceStencilBuilder >> wordPadding: aBlInsets [
 	wordPadding := aBlInsets
 ]

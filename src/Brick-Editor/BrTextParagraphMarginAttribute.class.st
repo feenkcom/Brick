@@ -1,49 +1,49 @@
 Class {
-	#name : #BrTextParagraphMarginAttribute,
-	#superclass : #BrTextParagraphAttribute,
+	#name : 'BrTextParagraphMarginAttribute',
+	#superclass : 'BrTextParagraphAttribute',
 	#instVars : [
 		'paragraphMargin'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextParagraphMarginAttribute class >> paragraphMargin: anInsets [
 	^ self new paragraphMargin: anInsets
 ]
 
-{ #category : #hook }
+{ #category : 'hook' }
 BrTextParagraphMarginAttribute >> applyOn: aTextParagraph [
 	aTextParagraph paragraphMargin: self paragraphMargin
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrTextParagraphMarginAttribute >> equals: anAnotherAttribute [
 	^ self paragraphMargin = anAnotherAttribute paragraphMargin
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BrTextParagraphMarginAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self paragraphMargin hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextParagraphMarginAttribute >> initialize [
 	super initialize.
 
 	paragraphMargin := BlInsets empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextParagraphMarginAttribute >> paragraphMargin [
 	<return: #BlInsets>
 
 	^ paragraphMargin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextParagraphMarginAttribute >> paragraphMargin: anInsets [
 	paragraphMargin := anInsets
 ]

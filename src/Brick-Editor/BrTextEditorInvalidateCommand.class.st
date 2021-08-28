@@ -1,14 +1,14 @@
 Class {
-	#name : #BrTextEditorInvalidateCommand,
-	#superclass : #BrTextEditorCommand,
+	#name : 'BrTextEditorInvalidateCommand',
+	#superclass : 'BrTextEditorCommand',
 	#instVars : [
 		'fromIndex',
 		'toIndex'
 	],
-	#category : #'Brick-Editor-Commands'
+	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 BrTextEditorInvalidateCommand >> executeOn: aTextEditor [
 	| changedFrom changedTo |
 	
@@ -32,27 +32,27 @@ BrTextEditorInvalidateCommand >> executeOn: aTextEditor [
 		interval: (changedFrom to: changedTo)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInvalidateCommand >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInvalidateCommand >> fromIndex: aFromTextIndex [
 	fromIndex := aFromTextIndex
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorInvalidateCommand >> newHolderCommand [
 	^ BrTextEditorTextChangedHolderCommand new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInvalidateCommand >> toIndex [
 	^ toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorInvalidateCommand >> toIndex: aToTextIndex [
 	toIndex := aToTextIndex
 ]

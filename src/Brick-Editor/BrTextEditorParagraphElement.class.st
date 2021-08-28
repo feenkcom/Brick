@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTextEditorParagraphElement,
-	#superclass : #BrTextEditorSegmentElement,
+	#name : 'BrTextEditorParagraphElement',
+	#superclass : 'BrTextEditorSegmentElement',
 	#instVars : [
 		'paragraph',
 		'text',
@@ -14,10 +14,10 @@ Class {
 		'Slants',
 		'Stretches'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorParagraphElement class >> fontSlantToSkia: aBlFontSlant [
 	Slants ifNil: [ Slants := {
 		BlFontSlant normal -> SkiaFontStyleSlant Upright.
@@ -28,7 +28,7 @@ BrTextEditorParagraphElement class >> fontSlantToSkia: aBlFontSlant [
 	^ Slants at: aBlFontSlant ifAbsent: [ SkiaFontStyleSlant Upright ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorParagraphElement class >> fontStretchToSkia: aBlFontStretch [
 	Stretches ifNil: [ Stretches := { 
 		BlFontStretch condensed -> SkiaFontStyleWidth Condensed.
@@ -44,7 +44,7 @@ BrTextEditorParagraphElement class >> fontStretchToSkia: aBlFontStretch [
 	^ Stretches at: aBlFontStretch ifAbsent: [ SkiaFontStyleWidth Normal ]
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> addCursorAt: aTextPosition [
 	<return: #BrCursorElement>
 
@@ -60,7 +60,7 @@ BrTextEditorParagraphElement >> addCursorAt: aTextPosition [
 			aCursorElement ]
 ]
 
-{ #category : #'private - paragraph' }
+{ #category : 'private - paragraph' }
 BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 	| anIterator |
 	
@@ -130,7 +130,7 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 	]
 ]
 
-{ #category : #'private - paragraph' }
+{ #category : 'private - paragraph' }
 BrTextEditorParagraphElement >> buildParagraph [
 	| aBuilder |
 
@@ -151,7 +151,7 @@ BrTextEditorParagraphElement >> buildParagraph [
 	^ aBuilder build
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorParagraphElement >> cursorAt: aTextPosition ifFound: aFoundBlock ifNone: aNoneBlock [
 
 	^ cursorElements
@@ -160,39 +160,39 @@ BrTextEditorParagraphElement >> cursorAt: aTextPosition ifFound: aFoundBlock ifN
 		ifNone: aNoneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> cursorElements [
 	<return: #Collection of: #BrCursorElement>
 
 	^ cursorElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> cursorStencil [
 	^ cursorStencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> cursorStencil: aStencil [
 	cursorStencil := aStencil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorParagraphElement >> defaultFontSize [
 	^ BlFont defaultFontSize
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorParagraphElement >> defaultSelectionColor [
 	^ (Color r: 0 g: 112 b: 252 range: 255) alpha: 0.3
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorParagraphElement >> defaultTextColor [
 	^ Color black
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 	aCanvas clip
 		when: [ self clipChildren ]
@@ -206,7 +206,7 @@ BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 						ifFalse: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ] ]
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 	| aPathBuilder |
 	
@@ -233,12 +233,12 @@ BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 		draw
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> hideCursors [
 	self cursorElements do: [ :aCursorElement | aCursorElement visibility: BlVisibility gone ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorParagraphElement >> initialize [
 	super initialize.
 
@@ -248,7 +248,7 @@ BrTextEditorParagraphElement >> initialize [
 	selection := BlSelection empty
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrTextEditorParagraphElement >> measureCursors: aCollectionOfCursorElements [
 	aCollectionOfCursorElements do: [ :eachCursor |
 		| aTextPosition eachCursorRectangle |
@@ -265,7 +265,7 @@ BrTextEditorParagraphElement >> measureCursors: aCollectionOfCursorElements [
 			position: eachCursorRectangle origin + self padding topLeft ]
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> moveCursorAt: aTextIndex to: aNewPosition [
 	"Move a cursor at a given position to a new position"
 
@@ -277,7 +277,7 @@ BrTextEditorParagraphElement >> moveCursorAt: aTextIndex to: aNewPosition [
 		ifNone: [ self error: 'Cursor at ', aTextIndex asString, ' does not exist' ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorParagraphElement >> newCursor [
 	"Create and return a new instance of a cursor element"
 	<return: #BlElement>
@@ -285,7 +285,7 @@ BrTextEditorParagraphElement >> newCursor [
 	^ self cursorStencil asElement
 ]
 
-{ #category : #'hooks - children' }
+{ #category : 'hooks - children' }
 BrTextEditorParagraphElement >> onChildAdded: anElement [
 	super onChildAdded: anElement.
 	
@@ -295,7 +295,7 @@ BrTextEditorParagraphElement >> onChildAdded: anElement [
 	
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	| placeholders |
 	
@@ -306,7 +306,7 @@ BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdat
 	self cursorElements do: [ :eachCursor | eachCursor applyLayoutIn: eachCursor measuredBounds asRectangle context: aBlElementBoundsUpdateContext ].
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 	| aParagraphLayoutWidth |
 	self placeholderElements do:  [ :eachElement |
@@ -332,7 +332,7 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 		during: [ self cursorElements ifNotEmpty: [ :theCursors | self measureCursors: theCursors ] ]
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
 
 	paragraph
@@ -349,7 +349,7 @@ BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOf
 				ifFalse: [ aChildElement fullPaintOn: aChildPainter offset: aChildOffset ] ]
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BrTextEditorParagraphElement >> paintSelectionOn: aCompositorPainter offset: anOffset [
 	selection isEmpty
 		ifTrue: [ ^ self ].
@@ -359,22 +359,22 @@ BrTextEditorParagraphElement >> paintSelectionOn: aCompositorPainter offset: anO
 		during: [ self drawSelectionOnSpartaCanvas: aCompositorPainter canvas ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> pieces: aCollectionOfPieces [
 	pieces := aCollectionOfPieces.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorParagraphElement >> placeholderAndCursorElements [
 	^ self children reject: [ :each | (each isKindOf: BlTextElement) ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorParagraphElement >> placeholderElements [
 	^ self children reject: [ :each | (each isKindOf: BlTextElement) or: [ each isKindOf: BrCursorElement ] ]
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEditorElement [
 	"trying to find a segment that actually contains a given position"
 	| aCursor aFocusFinder aDirection aLocalTextPositionOfThisCursor aLocalPositionOfThisCursor aDesiredBounds aScreenPositionOfThisCursor |
@@ -420,7 +420,7 @@ BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEd
 					ifTrue: [ aReceiverElement screenToCursor: aTransformation of: anEditorElement at: aDesiredBounds center ] ]
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> removeCursorAt: aTextIndex [
 	"Remove cursor at a goven position"
 
@@ -433,7 +433,7 @@ BrTextEditorParagraphElement >> removeCursorAt: aTextIndex [
 		ifNone: [ self error: 'Cursor at ', aTextIndex asString, ' does not exist' ]
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> removeCursors [
 	"Remove all cursors"
 
@@ -441,7 +441,7 @@ BrTextEditorParagraphElement >> removeCursors [
 	self cursorElements removeAll
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BrTextEditorParagraphElement >> requestLayout: anElement [
 	super requestLayout: anElement.
 	
@@ -449,7 +449,7 @@ BrTextEditorParagraphElement >> requestLayout: anElement [
 		ifFalse: [ paragraph := nil ].
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> screenToCursor: aTransformation of: anEditorElement at: aCursorInEditorPosition [
 	"trying to find a segment that actually contains a given position"
 	| theBoundsInLocal aCharOffsetInParagraph |
@@ -467,28 +467,28 @@ BrTextEditorParagraphElement >> screenToCursor: aTransformation of: anEditorElem
 	aTransformation transformed: aCharOffsetInParagraph + self segment textStart
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> segment [
 	^ segment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> segment: anObject [
 	segment := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> selection [
 	^ selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> selection: anObject [
 	selection := anObject.
 	self invalidate
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> setCursors: aCollectionOfCursorPositions [
 	<return: #BrCursorElement>
 	| theExistingCursors theAddedCursors theRemovedCursors theMovedCursors |
@@ -506,7 +506,7 @@ BrTextEditorParagraphElement >> setCursors: aCollectionOfCursorPositions [
 	theMovedCursors do: [ :eachAssoc | self moveCursorAt: eachAssoc key to: eachAssoc value ]
 ]
 
-{ #category : #'api - cursor' }
+{ #category : 'api - cursor' }
 BrTextEditorParagraphElement >> showCursors [
 	self cursorElements do: [ :aCursorElement |
 		aCursorElement visibility: BlVisibility visible.
@@ -514,17 +514,17 @@ BrTextEditorParagraphElement >> showCursors [
 			ifFalse: [ self addChild: aCursorElement ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorParagraphElement >> text: aBlText [
 	text := aBlText
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorParagraphElement >> textElements [
 	^ self children select: [ :each | each isKindOf: BlTextElement ]
 ]

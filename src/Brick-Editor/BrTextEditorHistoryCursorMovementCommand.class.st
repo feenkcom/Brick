@@ -1,24 +1,24 @@
 Class {
-	#name : #BrTextEditorHistoryCursorMovementCommand,
-	#superclass : #BrTextEditorHistoryCommand,
+	#name : 'BrTextEditorHistoryCursorMovementCommand',
+	#superclass : 'BrTextEditorHistoryCommand',
 	#instVars : [
 		'fromIndices',
 		'toIndices'
 	],
-	#category : #'Brick-Editor-History'
+	#category : 'Brick-Editor-History'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorHistoryCursorMovementCommand >> fromIndices [
 	^ fromIndices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorHistoryCursorMovementCommand >> fromIndices: anObject [
 	fromIndices := anObject
 ]
 
-{ #category : #'api - undo/redo' }
+{ #category : 'api - undo/redo' }
 BrTextEditorHistoryCursorMovementCommand >> redoOn: aBrTextEditor [
 	| aNavigator |
 	
@@ -28,17 +28,17 @@ BrTextEditorHistoryCursorMovementCommand >> redoOn: aBrTextEditor [
 	aNavigator apply
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorHistoryCursorMovementCommand >> toIndices [
 	^ toIndices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorHistoryCursorMovementCommand >> toIndices: anObject [
 	toIndices := anObject
 ]
 
-{ #category : #'api - undo/redo' }
+{ #category : 'api - undo/redo' }
 BrTextEditorHistoryCursorMovementCommand >> undoOn: aBrTextEditor [
 	| aNavigator |
 	

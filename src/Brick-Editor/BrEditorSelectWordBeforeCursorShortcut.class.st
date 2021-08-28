@@ -1,23 +1,23 @@
 Class {
-	#name : #BrEditorSelectWordBeforeCursorShortcut,
-	#superclass : #BrEditorShortcut,
+	#name : 'BrEditorSelectWordBeforeCursorShortcut',
+	#superclass : 'BrEditorShortcut',
 	#instVars : [
 		'combinationForMacOS'
 	],
-	#category : #'Brick-Editor-Shortcuts'
+	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BrEditorSelectWordBeforeCursorShortcut >> combinationForMacOS [
 	^ combinationForMacOS
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSelectWordBeforeCursorShortcut >> description [
 	^ 'Extends the selection from the current cursor position to the beginning of previous word.'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrEditorSelectWordBeforeCursorShortcut >> initialize [
 	super initialize.
 	
@@ -25,12 +25,12 @@ BrEditorSelectWordBeforeCursorShortcut >> initialize [
 	combinationForMacOS := BlKeyCombination builder shift alt arrowLeft build.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrEditorSelectWordBeforeCursorShortcut >> name [
 	^ 'Select previous word'
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BrEditorSelectWordBeforeCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
 		withoutCursorUpdate;

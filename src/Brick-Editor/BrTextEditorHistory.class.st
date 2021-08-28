@@ -1,6 +1,6 @@
 Class {
-	#name : #BrTextEditorHistory,
-	#superclass : #Object,
+	#name : 'BrTextEditorHistory',
+	#superclass : 'Object',
 	#instVars : [
 		'undoCommands',
 		'redoCommands',
@@ -8,10 +8,10 @@ Class {
 		'shouldGroup',
 		'currentGroup'
 	],
-	#category : #'Brick-Editor-History'
+	#category : 'Brick-Editor-History'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BrTextEditorHistory >> addCommand: aCommand [
 	isEnabled
 		ifFalse: [ ^ self ].
@@ -22,14 +22,14 @@ BrTextEditorHistory >> addCommand: aCommand [
 	redoCommands removeAll
 ]
 
-{ #category : #'api - history' }
+{ #category : 'api - history' }
 BrTextEditorHistory >> cursorsMovedFrom: aCollectionOfFromIndices to: aCollectionOfToIndices [
 	self addCommand: (BrTextEditorHistoryCursorMovementCommand new
 		fromIndices: aCollectionOfFromIndices;
 		toIndices: aCollectionOfToIndices)
 ]
 
-{ #category : #'api - history' }
+{ #category : 'api - history' }
 BrTextEditorHistory >> deletedTexts: aCollectionOfTexts undo: aCollectionOfUndoIndices redo: aCollectionOfRedoIndices [
 	self addCommand: (BrTextEditorHistoryDeletionCommand new
 		texts: aCollectionOfTexts;
@@ -37,7 +37,7 @@ BrTextEditorHistory >> deletedTexts: aCollectionOfTexts undo: aCollectionOfUndoI
 		redoIndices: aCollectionOfRedoIndices)
 ]
 
-{ #category : #'api - history' }
+{ #category : 'api - history' }
 BrTextEditorHistory >> disableDuring: aBlock [
 	| wasEnabled |
 	
@@ -47,7 +47,7 @@ BrTextEditorHistory >> disableDuring: aBlock [
 	aBlock ensure: [ isEnabled := wasEnabled ]
 ]
 
-{ #category : #'api - history' }
+{ #category : 'api - history' }
 BrTextEditorHistory >> groupDuring: aBlock [
 	| wasGrouped |
 	
@@ -70,7 +70,7 @@ BrTextEditorHistory >> groupDuring: aBlock [
 							undoCommands addAll: theCommands ] ] ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorHistory >> initialize [
 	super initialize.
 	
@@ -84,7 +84,7 @@ BrTextEditorHistory >> initialize [
 	currentGroup := BrTextEditorHistoryCompositeCommand new
 ]
 
-{ #category : #'api - history' }
+{ #category : 'api - history' }
 BrTextEditorHistory >> insertedStrings: aCollectionOfStrings undo: aCollectionOfUndoIndices redo: aCollectionOfRedoIndices [
 	self addCommand: (BrTextEditorHistoryInsertionCommand new
 		strings: aCollectionOfStrings;
@@ -92,13 +92,13 @@ BrTextEditorHistory >> insertedStrings: aCollectionOfStrings undo: aCollectionOf
 		redoIndices: aCollectionOfRedoIndices)
 ]
 
-{ #category : #'api - undo/redo' }
+{ #category : 'api - undo/redo' }
 BrTextEditorHistory >> redoOn: aBrTextEditor [
 	redoCommands ifNotEmpty: [ :theCommands |
 		self disableDuring: [ undoCommands add: (theCommands removeLast redoOn: aBrTextEditor) ] ]
 ]
 
-{ #category : #'api - undo/redo' }
+{ #category : 'api - undo/redo' }
 BrTextEditorHistory >> undoOn: aBrTextEditor [
 	undoCommands ifNotEmpty: [ :theCommands |
 		self disableDuring: [ redoCommands add: (theCommands removeLast undoOn: aBrTextEditor) ] ]

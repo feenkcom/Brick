@@ -21,8 +21,8 @@ To facilitate jumping backwards quickly the the manager builds a map of line num
 The limit represents the maximum number of items held by the receiver when an uncached segment is requested (${method:name=BrTextEditorSegmentCollector>>#segmentAt:}$).  If segments are added via ${method:name=BrTextEditorSegmentCollector>>#addSegments:after:}$ or ${method:name=BrTextEditorSegmentCollector>>#addSegments:before:}$ the limit may be safely exceeded.
 "
 Class {
-	#name : #BrTextEditorSegmentCollector,
-	#superclass : #Object,
+	#name : 'BrTextEditorSegmentCollector',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -34,10 +34,10 @@ Class {
 		'segmentsInterval',
 		'map'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : #'cache - adding / removing' }
+{ #category : 'cache - adding / removing' }
 BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments after: aSegment [
 	"Add the supplied collection of segments to the receiver after aSegment.
 	This may safely cause the number of cached segments to exceed limit."
@@ -84,7 +84,7 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments after: aSegme
 	
 ]
 
-{ #category : #'cache - adding / removing' }
+{ #category : 'cache - adding / removing' }
 BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments before: aSegment [
 	"Add the supplied collection of segments to the receiver before aSegment.
 	This may safely cause the number of cached segments to exceed limit."
@@ -130,7 +130,7 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments before: aSegm
 		description: [ 'Segment indices must correspond to the interval' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> cacheLimit [
 	"Answer the maximum number of segments that will be loaded by #segmentAt:.
 	Explicitly adding segments via #addSegments:after: or #addSegments:before: may safely exceed this limit."
@@ -139,7 +139,7 @@ BrTextEditorSegmentCollector >> cacheLimit [
 	^ limit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> cacheLimit: aNumber [
 	"Set the soft maximum number of segments to cache.
 	See the class comments for further information."
@@ -147,7 +147,7 @@ BrTextEditorSegmentCollector >> cacheLimit: aNumber [
 	limit := aNumber
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> cachedAt: anIndex [
 	"Return a cached segment at an absolute index within editor
 	(I must convert index from editor coordiantes to my local cache coordinates)"
@@ -158,7 +158,7 @@ BrTextEditorSegmentCollector >> cachedAt: anIndex [
 	^ self segments at: aCachedIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> cachedInterval [
 	"Return the interval of the indices of the currently cached segments"
 	<return: #Number>
@@ -166,7 +166,7 @@ BrTextEditorSegmentCollector >> cachedInterval [
 	^ segmentsInterval
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> cachedSegmentAt: aTextIndex ifFound: aFoundBlock ifNotFound: aNotFoundBlock [
 	| segmentIndex segment |
 
@@ -190,7 +190,7 @@ BrTextEditorSegmentCollector >> cachedSegmentAt: aTextIndex ifFound: aFoundBlock
 	aFoundBlock cull: segment
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> cachedSegmentIndexAt: aTextIndex [
 	"Return an index of a segment in a collection of cached segments that contains
 	a text item with a given index or return 0 if no such *cached* segment exists.
@@ -225,7 +225,7 @@ BrTextEditorSegmentCollector >> cachedSegmentIndexAt: aTextIndex [
 						ifFalse: [ 0 ] ] ]
 ]
 
-{ #category : #'cache - computation' }
+{ #category : 'cache - computation' }
 BrTextEditorSegmentCollector >> computeBackwardAt: anIndex [
 	"Populate the cache at anIndex, which is prior to the start of the currently cached segments."
 	| mapEntry cachedInterval stream builder newSubText newSegments overlap streamLimit |
@@ -260,7 +260,7 @@ BrTextEditorSegmentCollector >> computeBackwardAt: anIndex [
 	self computeSubText.
 ]
 
-{ #category : #'cache - computation' }
+{ #category : 'cache - computation' }
 BrTextEditorSegmentCollector >> computeForwardAt: anIndex [
 	| intervalEnd cachedInterval actualStart skip forwardText stream builder  |
 
@@ -297,7 +297,7 @@ BrTextEditorSegmentCollector >> computeForwardAt: anIndex [
 	map addLine: segmentsInterval first offset: subText start.
 ]
 
-{ #category : #'cache - computation' }
+{ #category : 'cache - computation' }
 BrTextEditorSegmentCollector >> computeInterval: anIndex [
 	<return: #Interval>
 	| start end |
@@ -309,7 +309,7 @@ BrTextEditorSegmentCollector >> computeInterval: anIndex [
 	^ start to: end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> computeSegmentAt: anIndex [
 	<return: #BrEditorSegment>
 
@@ -328,7 +328,7 @@ BrTextEditorSegmentCollector >> computeSegmentAt: anIndex [
 	^ self cachedAt: anIndex
 ]
 
-{ #category : #'private - computing' }
+{ #category : 'private - computing' }
 BrTextEditorSegmentCollector >> computeSegmentIndices [
 	"Recompute segment indices according to currently cached inerval"
 	
@@ -345,7 +345,7 @@ BrTextEditorSegmentCollector >> computeSegmentIndices [
 		do: [ :aSegment :anIndex | aSegment index: anIndex ]
 ]
 
-{ #category : #'private - computing' }
+{ #category : 'private - computing' }
 BrTextEditorSegmentCollector >> computeSubText [
 	"Recompute subtext according to currently cached segments"
 	| subTextStart subTextEnd |
@@ -365,7 +365,7 @@ BrTextEditorSegmentCollector >> computeSubText [
 	"self assert: subText asString lines size <= segments size."
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> computedSegmentsCount [
 	"Return amount of cached segments. If segments are not cached,
 	try to cache them and return their amount"
@@ -377,14 +377,14 @@ BrTextEditorSegmentCollector >> computedSegmentsCount [
 	^ self lastIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> editor [
 	<return: #BrTextEditor>
 
 	^ editor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> editor: aBrTextEditor [
 	self
 		assert: [ editor isNil ]
@@ -393,7 +393,7 @@ BrTextEditorSegmentCollector >> editor: aBrTextEditor [
 	editor := aBrTextEditor
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> end [
 	"Return the index of the last cached item in the text or 0 if nothing is cached"
 	<return: #Number>
@@ -403,7 +403,7 @@ BrTextEditorSegmentCollector >> end [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> firstIndex [
 	"Return the index of the first cached segment or 0 if there are no cached segments"
 	<return: #Number>
@@ -413,7 +413,7 @@ BrTextEditorSegmentCollector >> firstIndex [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'cache - computation' }
+{ #category : 'cache - computation' }
 BrTextEditorSegmentCollector >> forwardSegments: aNewCachedInterval [
 	"Create and return a collection which will be used to collect segments for a given new cached interval.
 	If existing cached interval overlaps with the new one, we should copy already cached segments to reduce amount of work"
@@ -426,7 +426,7 @@ BrTextEditorSegmentCollector >> forwardSegments: aNewCachedInterval [
 		ifFalse: [ self newSegments ]
 ]
 
-{ #category : #'cache - computation' }
+{ #category : 'cache - computation' }
 BrTextEditorSegmentCollector >> forwardText [
 	"Return a forward text that start from the next item after the last cached one"
 	<return: #BlText>
@@ -441,7 +441,7 @@ BrTextEditorSegmentCollector >> forwardText [
 	^ text from: textStart to: textEnd
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorSegmentCollector >> hasCached [
 	"Return true if there are cached segments, false otherwise"
 	<return: #Boolean>
@@ -449,7 +449,7 @@ BrTextEditorSegmentCollector >> hasCached [
 	^ segments isNotEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSegmentCollector >> initialize [
 
 	super initialize.	
@@ -459,7 +459,7 @@ BrTextEditorSegmentCollector >> initialize [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BrTextEditorSegmentCollector >> isCachedAt: anIndex [
 	"Return true if I have a cached segment at a given index, false otherwise"
 	<return: #Boolean>
@@ -467,7 +467,7 @@ BrTextEditorSegmentCollector >> isCachedAt: anIndex [
 	^ segmentsInterval rangeIncludes: anIndex
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> lastIndex [
 	"Return the index of the last cached segment or 0 if there are no cached segments"
 	<return: #Number>
@@ -477,7 +477,7 @@ BrTextEditorSegmentCollector >> lastIndex [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorSegmentCollector >> moveTextBy: aNumber [
 	"move all segments' subTexts start/end indices by aNumber"
 
@@ -488,7 +488,7 @@ BrTextEditorSegmentCollector >> moveTextBy: aNumber [
 	self computeSubText
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorSegmentCollector >> moveTextBy: aNumber after: aSegment [
 	"move all segments after the given segment by aNumber"
 
@@ -500,7 +500,7 @@ BrTextEditorSegmentCollector >> moveTextBy: aNumber after: aSegment [
 	self computeSubText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorSegmentCollector >> newSegments [
 	"Return a new empty collection that will be used to store segments"
 	<return: #SequenceableCollection>
@@ -508,7 +508,7 @@ BrTextEditorSegmentCollector >> newSegments [
 	^ OrderedCollection new
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset [
 	"Offset segments' #index by anOffset of all cached segments"
 	
@@ -517,7 +517,7 @@ BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset [
 		after: self firstIndex - 1
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset after: aSegmentIndex [
 	"Offset segments' #index by anOffset of all segments after a given segment index.
 	Note: #lastIndex is not valid during execution of this method!"
@@ -536,7 +536,7 @@ BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset after: aSegment
 	segmentsInterval := segmentsInterval first to: segmentsInterval last + anOffset
 ]
 
-{ #category : #'cache - adding / removing' }
+{ #category : 'cache - adding / removing' }
 BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 	"Remove all segments within index interval"
 
@@ -550,7 +550,7 @@ BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 	self editor notifyItemsRemoved: anInterval
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrTextEditorSegmentCollector >> resetCache [
 
 	segmentsInterval := 0 to: 0.
@@ -559,7 +559,7 @@ BrTextEditorSegmentCollector >> resetCache [
 	map cacheLimit: limit.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> segmentAt: anIndex [
 	"Return segment at given index"
 	<return: #BrEditorSegment>
@@ -569,14 +569,14 @@ BrTextEditorSegmentCollector >> segmentAt: anIndex [
 		ifFalse: [ self computeSegmentAt: anIndex ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> segments [
 	<return: #SequenceableCollection of: #BrEditorSegment>
 
 	^ segments
 ]
 
-{ #category : #'cache - accessing' }
+{ #category : 'cache - accessing' }
 BrTextEditorSegmentCollector >> start [
 	"Return the index of the first cached item in the text or 0 if nothing is cached"
 	<return: #Number>
@@ -586,14 +586,14 @@ BrTextEditorSegmentCollector >> start [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> text [
 	<return: #BlText>
 
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrTextEditorSegmentCollector >> text: aBrText [
 	text := aBrText
 ]
