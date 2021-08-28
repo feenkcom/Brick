@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnFixedWidthExamples,
-	#superclass : #BrColumnWidthExamples,
+	#name : 'BrColumnFixedWidthExamples',
+	#superclass : 'BrColumnWidthExamples',
 	#category : 'Brick-Examples-! Model - Column'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnFixedWidthExamples >> applyOnElement [
 	<gtExample>
 	|  anElement aColumnWidth |
@@ -25,7 +25,7 @@ BrColumnFixedWidthExamples >> applyOnElement [
 	^ anElement
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnFixedWidthExamples >> default [
 	<gtExample>
 	| aColumnWidth |
@@ -37,7 +37,7 @@ BrColumnFixedWidthExamples >> default [
 	^ aColumnWidth
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnFixedWidthExamples >> equalsAndHash [
 	<gtExample>
 	| aColumnWidth anotherColumnWidth |
@@ -51,7 +51,7 @@ BrColumnFixedWidthExamples >> equalsAndHash [
 	^ aColumnWidth = anotherColumnWidth
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnFixedWidthExamples >> notEquals [
 	<gtExample>
 	| aColumnWidth anotherColumnWidth |
@@ -64,7 +64,7 @@ BrColumnFixedWidthExamples >> notEquals [
 	^ aColumnWidth = anotherColumnWidth
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnFixedWidthExamples >> setWidth [
 	<gtExample>
 	| aColumnWidth |

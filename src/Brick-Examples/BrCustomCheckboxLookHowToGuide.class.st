@@ -44,12 +44,12 @@ This leaves us with a final custom checkbox widget built from almost from scratc
 
 "
 Class {
-	#name : #BrCustomCheckboxLookHowToGuide,
-	#superclass : #Object,
+	#name : 'BrCustomCheckboxLookHowToGuide',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Checkbox'
 }
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _1_withLabelLook [
 	<gtExample>
 	| aLabel aLook |
@@ -62,14 +62,14 @@ BrCustomCheckboxLookHowToGuide >> _1_withLabelLook [
 		aptitude: aLook + aLabel
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _1_withLabelLookAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_1_withLabelLook
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _2_withBorder [
 	<gtExample>
 	| aLabel aLook |
@@ -84,14 +84,14 @@ BrCustomCheckboxLookHowToGuide >> _2_withBorder [
 		aptitude: aLook + aLabel
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _2_withBorderAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_2_withBorder
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _3_withShape [
 	<gtExample>
 	| aLabel aLook aShape |
@@ -107,14 +107,14 @@ BrCustomCheckboxLookHowToGuide >> _3_withShape [
 		aptitude: aLook + aLabel + aShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _3_withShapeAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_3_withShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _4_withStateText [
 	<gtExample>
 	| aLabel aLook aShape |
@@ -136,14 +136,14 @@ BrCustomCheckboxLookHowToGuide >> _4_withStateText [
 		aptitude: aLook + aLabel + aShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _4_withStateTextAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_4_withStateText
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _5_withStyledStateText [
 	<gtExample>
 	| aLabel aLook aShape |
@@ -174,14 +174,14 @@ BrCustomCheckboxLookHowToGuide >> _5_withStyledStateText [
 		aptitude: aLook + aLabel + aShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _5_withStyledStateTextAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_5_withStyledStateText
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _6_withStyledBackground [
 	<gtExample>
 	| aLabel aLook aShape |
@@ -221,14 +221,14 @@ BrCustomCheckboxLookHowToGuide >> _6_withStyledBackground [
 		aptitude: aLook + aLabel + aShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _6_withStyledBackgroundAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_6_withStyledBackground
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _7_withHoveredBackground [
 	<gtExample>
 	| aLabel aLook aShape |
@@ -283,14 +283,14 @@ BrCustomCheckboxLookHowToGuide >> _7_withHoveredBackground [
 		aptitude: aLook + aLabel + aShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _7_withHoveredBackgroundAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_7_withHoveredBackground
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _8_withPressedBackground [
 	<gtExample>
 	| aLabel aLook aShape |
@@ -360,14 +360,14 @@ BrCustomCheckboxLookHowToGuide >> _8_withPressedBackground [
 		aptitude: aLook + aLabel + aShape
 ]
 
-{ #category : #'examples - look' }
+{ #category : 'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _8_withPressedBackgroundAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #_8_withPressedBackground
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BrCustomCheckboxLookHowToGuide >> allCheckboxStates: anExampleName [
 	| aContainer |
 	
@@ -393,42 +393,42 @@ BrCustomCheckboxLookHowToGuide >> allCheckboxStates: anExampleName [
 	^ aContainer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkboxLook [
 	<gtExample>
 	
 	^ BrCheckboxAptitude new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkboxWidget [
 	<gtExample>
 
 	^ BrCheckbox new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkboxWidgetAll [
 	<gtExample>
 
 	^ self allCheckboxStates: #checkboxWidget
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkedBackground [
 	<gtExample>
 
 	^ Color r: 0.71 g: 0.87 b: 1
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrCustomCheckboxLookHowToGuide >> indeterminateBackground [
 	<gtExample>
 
 	^ Color veryVeryLightGray lighter
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrCustomCheckboxLookHowToGuide >> uncheckedBackground [
 	<gtExample>
 

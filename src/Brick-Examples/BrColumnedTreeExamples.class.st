@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnedTreeExamples,
-	#superclass : #Object,
+	#name : 'BrColumnedTreeExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Tree'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnedTreeExamples >> subclassesOfCollection [
 	<gtExample>
 	| aTree |
@@ -28,7 +28,7 @@ BrColumnedTreeExamples >> subclassesOfCollection [
 	^ aTree
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrColumnedTreeExamples >> subropesTree [
 	<gtExample>
 	| aRope aTree |

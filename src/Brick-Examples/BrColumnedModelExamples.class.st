@@ -1,5 +1,5 @@
 Class {
-	#name : #BrColumnedModelExamples,
-	#superclass : #Object,
+	#name : 'BrColumnedModelExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-! Model - Column'
 }

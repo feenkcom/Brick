@@ -1,10 +1,10 @@
 Class {
-	#name : #BrAnchoredExamples,
-	#superclass : #Object,
+	#name : 'BrAnchoredExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Anchored'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredExamples >> contextMenu [
 	<gtExample>
 	| handle content container anchor anchorContainer |
@@ -53,7 +53,7 @@ BrAnchoredExamples >> contextMenu [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredExamples >> dropdown [
 	<gtExample>
 	| handle content container anchor anchorContainer |
@@ -105,7 +105,7 @@ BrAnchoredExamples >> dropdown [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredExamples >> tooltip [
 	<gtExample>
 	| tip |
@@ -121,7 +121,7 @@ BrAnchoredExamples >> tooltip [
 		addEventHandler: BlPullHandler new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrAnchoredExamples >> tooltipStaysLevel [
 	<gtExample>
 	| container anchorContainer |

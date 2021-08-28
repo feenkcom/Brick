@@ -1,10 +1,10 @@
 Class {
-	#name : #BrPagerExamples,
-	#superclass : #Object,
+	#name : 'BrPagerExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Pager'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 BrPagerExamples >> example [
 	<gtExample>
 	| pager |

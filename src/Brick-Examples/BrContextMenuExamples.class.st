@@ -1,10 +1,10 @@
 Class {
-	#name : #BrContextMenuExamples,
-	#superclass : #Object,
+	#name : 'BrContextMenuExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Context Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> aptitude [
 	<gtExample>
 	| look |
@@ -14,7 +14,7 @@ BrContextMenuExamples >> aptitude [
 	^ look
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> compact [
 	<gtExample>
 	| element |
@@ -32,7 +32,7 @@ BrContextMenuExamples >> compact [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> element [
 	<gtExample>
 	^ BlElement new
@@ -40,7 +40,7 @@ BrContextMenuExamples >> element [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> elementWithContextMenuModelAndLook [
 	<gtExample>
 	| element model look |
@@ -53,7 +53,7 @@ BrContextMenuExamples >> elementWithContextMenuModelAndLook [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> elementWithModelAndLook [
 	<gtExample>
 	| element model look |
@@ -66,7 +66,7 @@ BrContextMenuExamples >> elementWithModelAndLook [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> model [
 	<gtExample>
 	| model |
@@ -93,7 +93,7 @@ BrContextMenuExamples >> model [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrContextMenuExamples >> modelForElement: anElement [
 	| model |
 	model := BrWithContextMenuModel new

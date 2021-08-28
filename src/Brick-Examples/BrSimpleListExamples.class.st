@@ -1,10 +1,10 @@
 Class {
-	#name : #BrSimpleListExamples,
-	#superclass : #Object,
+	#name : 'BrSimpleListExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-List'
 }
 
-{ #category : #'examples - vertical list' }
+{ #category : 'examples - vertical list' }
 BrSimpleListExamples >> allClasses [
 	<gtExample>
 	^ BrSimpleList new
@@ -18,7 +18,7 @@ BrSimpleListExamples >> allClasses [
 		items: (SystemNavigation new allClasses sorted: [ :a :b | a name < b name ])
 ]
 
-{ #category : #'examples - horizontal list' }
+{ #category : 'examples - horizontal list' }
 BrSimpleListExamples >> horizontalAllClasses [
 	<gtExample>
 	| aList aResult |
@@ -28,7 +28,7 @@ BrSimpleListExamples >> horizontalAllClasses [
 	^ aList
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - nested lists' }
 BrSimpleListExamples >> horizontalAndVerticalNumbers [
 	<gtExample>
 	| aList |
@@ -38,7 +38,7 @@ BrSimpleListExamples >> horizontalAndVerticalNumbers [
 	^ aList
 ]
 
-{ #category : #'examples - support' }
+{ #category : 'examples - support' }
 BrSimpleListExamples >> horizontalListFor: aCollection [
 	<gtExample>
 	| aList aScrollable |
@@ -58,7 +58,7 @@ BrSimpleListExamples >> horizontalListFor: aCollection [
 	^ aList
 ]
 
-{ #category : #'examples - support' }
+{ #category : 'examples - support' }
 BrSimpleListExamples >> horizontalListFor: aCollection verticalListFor: aHorizontalBlock [
 	<gtExample>
 	| aList aScrollable |
@@ -82,7 +82,7 @@ BrSimpleListExamples >> horizontalListFor: aCollection verticalListFor: aHorizon
 	^ aList
 ]
 
-{ #category : #'examples - horizontal list' }
+{ #category : 'examples - horizontal list' }
 BrSimpleListExamples >> horizontalNumbers [
 	<gtExample>
 	| aList |
@@ -91,7 +91,7 @@ BrSimpleListExamples >> horizontalNumbers [
 	^ aList
 ]
 
-{ #category : #'examples - support' }
+{ #category : 'examples - support' }
 BrSimpleListExamples >> label [
 	<gtExample>
 	| aLabel |
@@ -105,7 +105,41 @@ BrSimpleListExamples >> label [
 	^ aLabel
 ]
 
-{ #category : #'examples - nested lists' }
+{ #category : 'examples - stream' }
+BrSimpleListExamples >> streamingList [
+	<gtExample>
+	<noTest>
+	| json stream |
+	
+	json := [ 'https://unsplash.it/list' asUrl retrieveContents ] asFuture.
+	json := json map: [ :jsonString | (STONJSON fromString: jsonString) asAsyncStream ].
+	stream := json asAsyncStream flatten.
+	stream := stream map: [ :eachDictionary |
+			| width height id 	maxHeight |
+
+			id := eachDictionary at: #id.
+			width := eachDictionary at: #width.
+			height := eachDictionary at: #height.
+
+		 	maxHeight := 200.
+			width := (width / (height / maxHeight)) rounded.
+			height := maxHeight.
+
+			'https://unsplash.it/', width asString, '/', height asString,'?image=', id asString ].
+
+	stream := stream map: [ :eachUrl | eachUrl asUrl retrieveContents ].
+	stream := stream filter: [ :eachContents | eachContents notNil ].
+	stream := stream map: [ :eachContents | Form fromBinaryStream: eachContents readStream ].
+	stream := stream take: 50.
+
+	^ BrSimpleList new
+		itemsProvider: (BrListStreamItemsProvider new
+			stream: stream;
+			preloadAmount: 1);
+		stencil: [ :eachImage | eachImage asElement ]
+]
+
+{ #category : 'examples - nested lists' }
 BrSimpleListExamples >> verticalAndHorizontalNumbers [
 	<gtExample>
 	| aList |
@@ -115,7 +149,7 @@ BrSimpleListExamples >> verticalAndHorizontalNumbers [
 	^ aList
 ]
 
-{ #category : #'examples - support' }
+{ #category : 'examples - support' }
 BrSimpleListExamples >> verticalListFor: aCollection [
 	<gtExample>
 	| aList aScrollable |
@@ -135,7 +169,7 @@ BrSimpleListExamples >> verticalListFor: aCollection [
 	^ aList
 ]
 
-{ #category : #'examples - support' }
+{ #category : 'examples - support' }
 BrSimpleListExamples >> verticalListFor: aCollection horizontalListFor: aHorizontalBlock [
 	<gtExample>
 	| aList aScrollable |
@@ -158,7 +192,7 @@ BrSimpleListExamples >> verticalListFor: aCollection horizontalListFor: aHorizon
 	^ aList
 ]
 
-{ #category : #'examples - vertical list' }
+{ #category : 'examples - vertical list' }
 BrSimpleListExamples >> verticalNumbers [
 	<gtExample>
 	| aList |

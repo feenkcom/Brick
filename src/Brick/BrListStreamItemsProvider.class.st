@@ -5,7 +5,8 @@ Class {
 		'items',
 		'mutex',
 		'stream',
-		'promise'
+		'promise',
+		'preloadAmount'
 	],
 	#category : 'Brick-List - Model'
 }
@@ -46,12 +47,20 @@ BrListStreamItemsProvider >> initialize [
 	
 	items := #().
 	mutex := Monitor new.
-	stream := AsyncEmptyStream new
+	stream := AsyncEmptyStream new.
+	preloadAmount := 100
 ]
 
 { #category : 'testing' }
 BrListStreamItemsProvider >> isBoundaryNearIndex: anIndex [
-	^ (self loadedItemsCount - anIndex) < 10
+	| itemsUntilEdge percentageLeftUntilEdge | 
+
+	itemsUntilEdge := self loadedItemsCount - anIndex.
+	(itemsUntilEdge > self preloadAmount)
+		ifTrue: [ ^ false ].
+
+	percentageLeftUntilEdge := (itemsUntilEdge / self preloadAmount) * 100.0.
+	^ percentageLeftUntilEdge < 20
 ]
 
 { #category : 'testing' }
@@ -84,17 +93,30 @@ BrListStreamItemsProvider >> loadedItemsCount [
 	^ items size
 ]
 
+{ #category : 'accessing' }
+BrListStreamItemsProvider >> preloadAmount [
+
+	^ preloadAmount
+]
+
+{ #category : 'initialization' }
+BrListStreamItemsProvider >> preloadAmount: aNumber [
+	preloadAmount := aNumber
+]
+
 { #category : 'api - accessing' }
 BrListStreamItemsProvider >> requestNewItems [
 	mutex critical: [ 
-		promise := (self stream take: 100) collect await.
+		promise := (self stream take: self preloadAmount) collect await.
 		promise
 			onSuccessDo: [ :aResult |
 				mutex critical: [ items := items, aResult ].
 				listModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: listModel). ];
 			onFailureDo: [ :anException |
-				
-			] ]
+				NonInteractiveTranscript stdout
+					nextPutAll: anException printString;
+					cr;
+					flush ] ]
 ]
 
 { #category : 'testing' }
@@ -112,7 +134,7 @@ BrListStreamItemsProvider >> stream [
 	^ stream
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 BrListStreamItemsProvider >> stream: aStream [
 	stream := AsyncFuseStream stream: aStream
 ]

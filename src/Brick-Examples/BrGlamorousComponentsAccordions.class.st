@@ -6,12 +6,12 @@ See ${class:BrAccordionExamples|label=Accordion examples}$ for a deeper dive int
 ${example:BrGlamorousComponentsAccordions>>#withEditor|previewShow=#gtLiveFor:|previewHeight=150|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : #BrGlamorousComponentsAccordions,
-	#superclass : #BrGlamorousComponents,
+	#name : 'BrGlamorousComponentsAccordions',
+	#superclass : 'BrGlamorousComponents',
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrGlamorousComponentsAccordions >> withEditor [
 	<gtExample>
 	| anAccordion |

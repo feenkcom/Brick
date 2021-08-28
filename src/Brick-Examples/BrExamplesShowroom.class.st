@@ -75,12 +75,12 @@ ${example:BrExamplesShowroom>>#columnedList|noCode}$
 
 "
 Class {
-	#name : #BrExamplesShowroom,
-	#superclass : #Object,
+	#name : 'BrExamplesShowroom',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-! Showroom'
 }
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom class >> allButtons [
 	<gtExample>
 
@@ -100,7 +100,7 @@ BrExamplesShowroom class >> allButtons [
 		}
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom class >> allToggles [
 	<gtExample>
 
@@ -121,7 +121,7 @@ BrExamplesShowroom class >> allToggles [
 		}
 ]
 
-{ #category : #accordion }
+{ #category : 'accordion' }
 BrExamplesShowroom >> accordion [
 	<gtExample>
 	| accordion |
@@ -138,7 +138,7 @@ BrExamplesShowroom >> accordion [
 	^ accordion
 ]
 
-{ #category : #accordion }
+{ #category : 'accordion' }
 BrExamplesShowroom >> accordionList [
 	<gtExample>
 	
@@ -167,7 +167,7 @@ BrExamplesShowroom >> accordionList [
 	^ container
 ]
 
-{ #category : #list }
+{ #category : 'list' }
 BrExamplesShowroom >> columnedList [
 	<gtExample>
 	| aList |
@@ -198,7 +198,7 @@ BrExamplesShowroom >> columnedList [
 	^ aList
 ]
 
-{ #category : #breacrumb }
+{ #category : 'breacrumb' }
 BrExamplesShowroom >> glamorousBreadcrumb [
 	<gtExample>
 	<description: 'Breadcrumb with glamorous look'>
@@ -226,7 +226,7 @@ BrExamplesShowroom >> glamorousBreadcrumb [
 	^ aBreadcrumb
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousButton [
 	<gtExample>
 	
@@ -236,7 +236,7 @@ BrExamplesShowroom >> glamorousButton [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousButtonWithTooltipLook [
 	<gtExample>
 	^ BrButton new
@@ -246,7 +246,7 @@ BrExamplesShowroom >> glamorousButtonWithTooltipLook [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousDefaultButton [
 	<gtExample>
 	
@@ -256,7 +256,7 @@ BrExamplesShowroom >> glamorousDefaultButton [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousDisabledButton [
 	<gtExample>
 	
@@ -264,7 +264,7 @@ BrExamplesShowroom >> glamorousDisabledButton [
 		disable
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousHugeButton [
 	<gtExample>
 	^ BrButton new
@@ -274,7 +274,7 @@ BrExamplesShowroom >> glamorousHugeButton [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousLargeButton [
 	<gtExample>
 	^ BrButton new
@@ -284,7 +284,7 @@ BrExamplesShowroom >> glamorousLargeButton [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousSmallButton [
 	<gtExample>
 	
@@ -295,7 +295,7 @@ BrExamplesShowroom >> glamorousSmallButton [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #tabs }
+{ #category : 'tabs' }
 BrExamplesShowroom >> glamorousTabs [
 	<gtExample>
 	<description: 'Tabs with glamorous look'>
@@ -337,7 +337,7 @@ BrExamplesShowroom >> glamorousTabs [
 	^ aTabGroup
 ]
 
-{ #category : #tabs }
+{ #category : 'tabs' }
 BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithIcons [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
@@ -371,7 +371,7 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithIcons [
 	^ aTabGroup
 ]
 
-{ #category : #tabs }
+{ #category : 'tabs' }
 BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithLabels [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
@@ -403,7 +403,7 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithLabels [
 	^ aTabGroup
 ]
 
-{ #category : #tabs }
+{ #category : 'tabs' }
 BrExamplesShowroom >> glamorousTabsSwitcherWithIcons [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
@@ -437,7 +437,7 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithIcons [
 	^ aTabGroup
 ]
 
-{ #category : #tabs }
+{ #category : 'tabs' }
 BrExamplesShowroom >> glamorousTabsSwitcherWithLabels [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
@@ -469,7 +469,7 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithLabels [
 	^ aTabGroup
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> glamorousTinyButton [
 	<gtExample>
 	^ BrButton new
@@ -479,7 +479,7 @@ BrExamplesShowroom >> glamorousTinyButton [
 		action: [ self inform: 'Clicked' ]
 ]
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 BrExamplesShowroom >> glamorousToolbar [
 	<gtExample>
 	<description: 'Toolbar with glamorous look'>
@@ -503,7 +503,7 @@ BrExamplesShowroom >> glamorousToolbar [
 	^ aToolbar
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> hydraToggle [
 	<gtExample>
 
@@ -511,7 +511,7 @@ BrExamplesShowroom >> hydraToggle [
 		aptitude: BrHydraSwitchRadioAptitude new
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> hydraWithTrackToggle [
 	<gtExample>
 
@@ -519,7 +519,7 @@ BrExamplesShowroom >> hydraWithTrackToggle [
 		aptitude: BrHydraSwitchWithTrackAptitude new
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> hydraWithoutTrackToggle [
 	<gtExample>
 
@@ -527,7 +527,7 @@ BrExamplesShowroom >> hydraWithoutTrackToggle [
 		aptitude: BrHydraSwitchWithoutTrackAptitude new
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> materialButton [
 	<gtExample>
 	
@@ -536,7 +536,7 @@ BrExamplesShowroom >> materialButton [
 		label: 'Button'
 ]
 
-{ #category : #buttons }
+{ #category : 'buttons' }
 BrExamplesShowroom >> materialDisabledButton [
 	<gtExample>
 	
@@ -546,7 +546,7 @@ BrExamplesShowroom >> materialDisabledButton [
 		disable
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> materialIconAndLabelToggle [
 	<gtExample>
 
@@ -554,7 +554,7 @@ BrExamplesShowroom >> materialIconAndLabelToggle [
 		aptitude: BrMaterialToggleWithIconAptitude + BrMaterialToggleWithLabelAptitude
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> materialIconToggle [
 	<gtExample>
 
@@ -562,7 +562,7 @@ BrExamplesShowroom >> materialIconToggle [
 		aptitude: BrMaterialToggleWithIconAptitude
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> materialLabelToggle [
 	<gtExample>
 
@@ -570,7 +570,7 @@ BrExamplesShowroom >> materialLabelToggle [
 		aptitude: BrMaterialToggleWithLabelAptitude
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> materialReversedToggle [
 	<gtExample>
 
@@ -578,7 +578,7 @@ BrExamplesShowroom >> materialReversedToggle [
 		aptitude: BrMaterialToggleWithLabelAptitude + BrMaterialToggleWithIconAptitude
 ]
 
-{ #category : #toggle }
+{ #category : 'toggle' }
 BrExamplesShowroom >> materialToggle [
 	<gtExample>
 
@@ -586,7 +586,7 @@ BrExamplesShowroom >> materialToggle [
 		aptitude: BrMaterialToggleWithIconAptitude + BrMaterialToggleWithLabelAptitude
 ]
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 BrExamplesShowroom >> materialToolbar [
 	<gtExample>
 	<description: 'Toolbar with material look'>
@@ -610,7 +610,7 @@ BrExamplesShowroom >> materialToolbar [
 	^ aToolbar
 ]
 
-{ #category : #list }
+{ #category : 'list' }
 BrExamplesShowroom >> simpleList [
 	<gtExample>
 	^ BrSimpleList new

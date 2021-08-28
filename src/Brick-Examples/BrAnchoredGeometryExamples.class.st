@@ -1,10 +1,10 @@
 Class {
-	#name : #BrAnchoredGeometryExamples,
-	#superclass : #Object,
+	#name : 'BrAnchoredGeometryExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Anchored'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredGeometryExamples >> movingCorner [
 	<gtExample>
 	| element small big |
@@ -119,7 +119,7 @@ BrAnchoredGeometryExamples >> movingCorner [
 	^ element
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BrAnchoredGeometryExamples >> touchingCorners [
 	<gtExample>
 	^ BrAnchoredElement new

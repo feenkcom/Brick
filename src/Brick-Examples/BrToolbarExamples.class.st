@@ -1,10 +1,10 @@
 Class {
-	#name : #BrToolbarExamples,
-	#superclass : #Object,
+	#name : 'BrToolbarExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Toolbar'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> addItemsOnButtonClick [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
@@ -27,7 +27,7 @@ BrToolbarExamples >> addItemsOnButtonClick [
 	^ aToolbar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> addItemsOnButtonClickVertically [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
@@ -50,7 +50,7 @@ BrToolbarExamples >> addItemsOnButtonClickVertically [
 	^ aToolbar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> removeItemsOnButtonClick [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
@@ -70,7 +70,7 @@ BrToolbarExamples >> removeItemsOnButtonClick [
 	^ aToolbar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> removeItemsOnButtonClickVertically [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
@@ -89,7 +89,7 @@ BrToolbarExamples >> removeItemsOnButtonClickVertically [
 	^ aToolbar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> toolbar [
 	<gtExample>
 	| aToolbar |
@@ -101,7 +101,7 @@ BrToolbarExamples >> toolbar [
 	^ aToolbar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> toolbarInAContainer [
 	<gtExample>
 	| aContainer |
@@ -114,7 +114,7 @@ BrToolbarExamples >> toolbarInAContainer [
 	^ aContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> toolbarItemGToolkit [
 	<gtExample>
 	^ BrButton new 
@@ -123,7 +123,7 @@ BrToolbarExamples >> toolbarItemGToolkit [
 		action: [ self inform: 'Click on GToolkit' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> toolbarItemHello [
 	<gtExample>
 	^ BrButton new 
@@ -132,7 +132,7 @@ BrToolbarExamples >> toolbarItemHello [
 		action: [ self inform: 'Click on Hello' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrToolbarExamples >> verticalToolbar [
 	<gtExample>
 	| aToolbar |

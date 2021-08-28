@@ -1,10 +1,10 @@
 Class {
-	#name : #BrGlamorousComponentsToggles,
-	#superclass : #BrGlamorousComponents,
+	#name : 'BrGlamorousComponentsToggles',
+	#superclass : 'BrGlamorousComponents',
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsToggles >> toggleGroupWithIcons [
 	<gtExample>
 
@@ -24,7 +24,7 @@ BrGlamorousComponentsToggles >> toggleGroupWithIcons [
 			label: 'Play')
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsToggles >> toggleGroupWithLabels [
 	<gtExample>
 

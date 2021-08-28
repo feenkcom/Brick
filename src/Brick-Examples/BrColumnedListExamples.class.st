@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnedListExamples,
-	#superclass : #Object,
+	#name : 'BrColumnedListExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-List'
 }
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrColumnedListExamples >> addColorIndexColumn [
 	<gtExample>
 	| aListModel aColumnModel |
@@ -22,7 +22,7 @@ BrColumnedListExamples >> addColorIndexColumn [
 	^ aListModel
 ]
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrColumnedListExamples >> addColorNameColumn [
 	<gtExample>
 	| aListModel aColumnModel |
@@ -40,7 +40,7 @@ BrColumnedListExamples >> addColorNameColumn [
 	^ aListModel
 ]
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrColumnedListExamples >> addColorValueColumn [
 	<gtExample>
 	| aListModel aColumnModel |
@@ -71,21 +71,21 @@ BrColumnedListExamples >> addColorValueColumn [
 	^ aListModel
 ]
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrColumnedListExamples >> columnedListElement [
 	<gtExample>
 	
 	^ BlElement new
 ]
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrColumnedListExamples >> columnedListLook [
 	<gtExample>
 	
 	^ BrColumnedListAptitude new
 ]
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrColumnedListExamples >> columnedListModel [
 	<gtExample>
 	| aColumnedListModel |
@@ -98,7 +98,7 @@ BrColumnedListExamples >> columnedListModel [
 	^ aColumnedListModel
 ]
 
-{ #category : #'examples - model' }
+{ #category : 'examples - model' }
 BrColumnedListExamples >> columnedListModelWithColorAsItems [
 	<gtExample>
 	| aColumnedListModel |
@@ -109,7 +109,7 @@ BrColumnedListExamples >> columnedListModelWithColorAsItems [
 	^ aColumnedListModel
 ]
 
-{ #category : #'examples - list' }
+{ #category : 'examples - list' }
 BrColumnedListExamples >> columnedListWithLookAndModelForColors [
 	<gtExample>
 	| aColumnedListElement aColumnedListModel aColumnedListLook |
@@ -124,7 +124,7 @@ BrColumnedListExamples >> columnedListWithLookAndModelForColors [
 	^ aColumnedListElement
 ]
 
-{ #category : #'examples - scripting' }
+{ #category : 'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackage [
 	<gtExample>
 	| aList |
@@ -149,7 +149,7 @@ BrColumnedListExamples >> compositeAllClassesAndPackage [
 	^ aList
 ]
 
-{ #category : #'examples - scripting' }
+{ #category : 'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithIndex [
 	<gtExample>
 	| aList |
@@ -173,7 +173,7 @@ BrColumnedListExamples >> compositeAllClassesAndPackageWithIndex [
 	^ aList
 ]
 
-{ #category : #'examples - scripting' }
+{ #category : 'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithIndexUsingBuilders [
 	<gtExample>
 	| aList |
@@ -195,7 +195,7 @@ BrColumnedListExamples >> compositeAllClassesAndPackageWithIndexUsingBuilders [
 	^ aList
 ]
 
-{ #category : #'examples - scripting' }
+{ #category : 'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesSingleColumn [
 	<gtExample>
 	| aList |
@@ -205,7 +205,7 @@ BrColumnedListExamples >> compositeAllClassesSingleColumn [
 	^ aList
 ]
 
-{ #category : #'examples - stencil' }
+{ #category : 'examples - stencil' }
 BrColumnedListExamples >> createColumnedListRowDefault [
 	<gtExample>
 	| aStencilBuilder aRowElement |
@@ -223,7 +223,7 @@ BrColumnedListExamples >> createColumnedListRowDefault [
 	^ aRowElement
 ]
 
-{ #category : #'examples - stencil' }
+{ #category : 'examples - stencil' }
 BrColumnedListExamples >> createColumnedListRowWithBlock [
 	<gtExample>
 	| aStencilBuilder aRowElement |
@@ -240,7 +240,7 @@ BrColumnedListExamples >> createColumnedListRowWithBlock [
 	^ aRowElement
 ]
 
-{ #category : #'examples - column' }
+{ #category : 'examples - column' }
 BrColumnedListExamples >> listColumn [
 	<gtExample>
 	| aListColumn |
@@ -252,7 +252,7 @@ BrColumnedListExamples >> listColumn [
 	^ aListColumn
 ]
 
-{ #category : #'examples - column' }
+{ #category : 'examples - column' }
 BrColumnedListExamples >> listColumnWithTitle [
 	<gtExample>
 	| aListColumn |

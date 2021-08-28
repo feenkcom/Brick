@@ -1,10 +1,10 @@
 Class {
-	#name : #BrUmlClassElementExamples,
-	#superclass : #BlElement,
+	#name : 'BrUmlClassElementExamples',
+	#superclass : 'BlElement',
 	#category : 'Brick-Examples'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrUmlClassElementExamples >> withAttributesAndMethods [
 	<gtExample>
 	| uml |

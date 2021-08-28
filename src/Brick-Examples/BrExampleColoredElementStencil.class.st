@@ -2,8 +2,8 @@
 I am an example of a custom Stencil that creates a rounded rectangular element with cusomizable background color and corner radius
 "
 Class {
-	#name : #BrExampleColoredElementStencil,
-	#superclass : #BrStencil,
+	#name : 'BrExampleColoredElementStencil',
+	#superclass : 'BrStencil',
 	#instVars : [
 		'color',
 		'cornerRadius'
@@ -11,27 +11,27 @@ Class {
 	#category : 'Brick-Examples-Stencils'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExampleColoredElementStencil >> color [
 	^ color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExampleColoredElementStencil >> color: anObject [
 	color := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExampleColoredElementStencil >> cornerRadius [
 	^ cornerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrExampleColoredElementStencil >> cornerRadius: anObject [
 	cornerRadius := anObject
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrExampleColoredElementStencil >> create [
 	^ BlElement new
 		size: 300@300;
@@ -39,7 +39,7 @@ BrExampleColoredElementStencil >> create [
 		geometry: (BlRoundedRectangleGeometry cornerRadius: self cornerRadius)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrExampleColoredElementStencil >> initialize [
 	super initialize.
 	

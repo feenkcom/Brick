@@ -1,10 +1,10 @@
 Class {
-	#name : #BrCardExamples,
-	#superclass : #Object,
+	#name : 'BrCardExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-Card'
 }
 
-{ #category : #card }
+{ #category : 'card' }
 BrCardExamples >> cardElement [
 	<gtExample>
 	| anElement |
@@ -15,7 +15,7 @@ BrCardExamples >> cardElement [
 	^ anElement
 ]
 
-{ #category : #card }
+{ #category : 'card' }
 BrCardExamples >> verticalCard [
 	<gtExample>
 	| anElement aTitleElement aPictureElement aDescriptionElement |

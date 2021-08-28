@@ -1,10 +1,10 @@
 Class {
-	#name : #BrColumnExamples,
-	#superclass : #Object,
+	#name : 'BrColumnExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-! Model - Column'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnExamples >> default [
 	<gtExample>
 	| aColumn |
@@ -14,7 +14,7 @@ BrColumnExamples >> default [
 	^ aColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnExamples >> setFixed [
 	<gtExample>
 	| aColumn |
@@ -29,7 +29,7 @@ BrColumnExamples >> setFixed [
 	^ aColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnExamples >> setTitle [
 	<gtExample>
 	| aColumn |
@@ -42,7 +42,7 @@ BrColumnExamples >> setTitle [
 	^ aColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrColumnExamples >> setWeight [
 	<gtExample>
 	| aColumn |

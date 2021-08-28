@@ -9,12 +9,12 @@ ${example:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithButtons|previewShow=#
 ${example:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithoutSeparator|previewShow=#gtLiveFor:|previewHeight=85|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : #BrGlamorousComponentsBreadcrumbs,
-	#superclass : #BrGlamorousComponents,
+	#name : 'BrGlamorousComponentsBreadcrumbs',
+	#superclass : 'BrGlamorousComponents',
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #breacrumb }
+{ #category : 'breacrumb' }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithButtons [
 	<gtExample>
 
@@ -35,7 +35,7 @@ BrGlamorousComponentsBreadcrumbs >> breadcrumbWithButtons [
 			label: 'T-Shirt')
 ]
 
-{ #category : #breacrumb }
+{ #category : 'breacrumb' }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithLabels [
 	<gtExample>
 
@@ -56,7 +56,7 @@ BrGlamorousComponentsBreadcrumbs >> breadcrumbWithLabels [
 			text: 'T-Shirt')
 ]
 
-{ #category : #breacrumb }
+{ #category : 'breacrumb' }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithoutSeparator [
 	<gtExample>
 

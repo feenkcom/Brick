@@ -1,6 +1,6 @@
-Extension { #name : #BrGlamorousColumnedTreeSelectableRowElementStencilBuilder }
+Extension { #name : 'BrGlamorousColumnedTreeSelectableRowElementStencilBuilder' }
 
-{ #category : #'*Brick-Examples' }
+{ #category : '*Brick-Examples' }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder class >> columnedTreeExample [
 	<gtExample>
 	

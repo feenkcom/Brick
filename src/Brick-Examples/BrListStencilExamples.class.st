@@ -1,10 +1,10 @@
 Class {
-	#name : #BrListStencilExamples,
-	#superclass : #Object,
+	#name : 'BrListStencilExamples',
+	#superclass : 'Object',
 	#category : 'Brick-Examples-List'
 }
 
-{ #category : #'examples - list label' }
+{ #category : 'examples - list label' }
 BrListStencilExamples >> createCustomTextListLabel [
 	<gtExample>	
 	| aStencil anElement |
@@ -21,7 +21,7 @@ BrListStencilExamples >> createCustomTextListLabel [
 	^ anElement
 ]
 
-{ #category : #'examples - list label' }
+{ #category : 'examples - list label' }
 BrListStencilExamples >> createDefaultListLabel [
 	<gtExample>	
 	| aStencil anElement |
@@ -37,7 +37,7 @@ BrListStencilExamples >> createDefaultListLabel [
 	^ anElement
 ]
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrListStencilExamples >> listLabelStencil [
 	<gtExample>
 	| aStencil |

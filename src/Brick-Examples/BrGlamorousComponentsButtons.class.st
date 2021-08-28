@@ -12,12 +12,12 @@ ${example:BrGlamorousComponentsButtons>>#withLabelDisabled|previewShow=#gtLiveFo
 ${example:BrGlamorousComponentsButtons>>#withLabelSizes|previewShow=#gtLiveFor:|previewHeight=85|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : #BrGlamorousComponentsButtons,
-	#superclass : #BrGlamorousComponents,
+	#name : 'BrGlamorousComponentsButtons',
+	#superclass : 'BrGlamorousComponents',
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabel [
 	<gtExample>
 	
@@ -27,7 +27,7 @@ BrGlamorousComponentsButtons >> withLabel [
 		action: [ :aButton | 'Clicked' traceCr ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelDisabled [
 	<gtExample>
 	
@@ -37,7 +37,7 @@ BrGlamorousComponentsButtons >> withLabelDisabled [
 		disable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelHuge [
 	<gtExample>
 	^ BrButton new
@@ -46,7 +46,7 @@ BrGlamorousComponentsButtons >> withLabelHuge [
 		beHugeSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelLarge [
 	<gtExample>
 	^ BrButton new
@@ -55,7 +55,7 @@ BrGlamorousComponentsButtons >> withLabelLarge [
 		beLargeSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelMini [
 	<gtExample>
 	^ BrButton new
@@ -64,7 +64,7 @@ BrGlamorousComponentsButtons >> withLabelMini [
 		beMiniSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelNormal [
 	<gtExample>
 	^ BrButton new
@@ -73,7 +73,7 @@ BrGlamorousComponentsButtons >> withLabelNormal [
 		beNormalSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelSizes [
 	<gtExample>
 	^ BrHorizontalPane new
@@ -89,7 +89,7 @@ BrGlamorousComponentsButtons >> withLabelSizes [
 		}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelSmall [
 	<gtExample>
 	^ BrButton new
@@ -98,7 +98,7 @@ BrGlamorousComponentsButtons >> withLabelSmall [
 		beSmallSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrGlamorousComponentsButtons >> withLabelTiny [
 	<gtExample>
 	^ BrButton new

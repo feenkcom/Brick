@@ -28,8 +28,11 @@ BrListSequenceableCollectionItemsProvider >> collection [
 { #category : 'accessing' }
 BrListSequenceableCollectionItemsProvider >> collection: aSequenceableCollection [
 	self
-		assert: [ aSequenceableCollection isKindOf: SequenceableCollection ]
-		description: [ 'Collection must be a SequenceableCollection' ].
+		assert: [
+			[ aSequenceableCollection size isZero
+				or: [ aSequenceableCollection at: 1 ]. true ]
+			on: Error do: [ :e | false ] ]
+		description: [ 'Collection must be indexable but was {1}' format: { aSequenceableCollection class } ].
 
 	collection := aSequenceableCollection
 ]

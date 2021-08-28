@@ -11,12 +11,12 @@ Sometimes it is necessary to hide a dropdown due to some user action, this can b
 ${example:BrGlamorousComponentsDropdowns>>#hideDropdown|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : #BrGlamorousComponentsDropdowns,
-	#superclass : #BrGlamorousComponents,
+	#name : 'BrGlamorousComponentsDropdowns',
+	#superclass : 'BrGlamorousComponents',
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : #button }
+{ #category : 'button' }
 BrGlamorousComponentsDropdowns >> buttonWithIcon [
 	<gtExample>
 
@@ -36,7 +36,7 @@ BrGlamorousComponentsDropdowns >> buttonWithIcon [
 		label: 'Click me'
 ]
 
-{ #category : #button }
+{ #category : 'button' }
 BrGlamorousComponentsDropdowns >> buttonWithLabel [
 	<gtExample>
 
@@ -55,7 +55,7 @@ BrGlamorousComponentsDropdowns >> buttonWithLabel [
 		label: 'Click me'
 ]
 
-{ #category : #button }
+{ #category : 'button' }
 BrGlamorousComponentsDropdowns >> hideDropdown [
 	<gtExample>
 
