@@ -14,7 +14,8 @@ BrAbstractListModel >> initialize [
 	super initialize.
 
 	itemTypeStencil := [ :anItemTypeFactory | anItemTypeFactory default ] asStencilBuilder: BrListItemTypeStencilBuilder.
-	itemIdStencil := nil
+	itemIdStencil := nil.
+	itemsProvider := BrListEmptyItemsProvider new
 ]
 
 { #category : 'initialization' }
