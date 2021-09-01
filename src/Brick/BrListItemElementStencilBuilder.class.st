@@ -10,6 +10,13 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
+{ #category : 'converting' }
+BrListItemElementStencilBuilder >> asStencilBuilder: aStencilBuilderClass [
+	aStencilBuilderClass = BrColumnCellStencilBuilder
+		ifTrue: [ ^ BrListItemToColumnCellStencilAdapter new listItemElementStencil: self ].
+	^ self
+]
+
 { #category : 'api - instantiation' }
 BrListItemElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>

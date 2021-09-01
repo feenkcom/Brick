@@ -12,6 +12,13 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
+{ #category : 'converting' }
+BrListItemDataBinder >> asStencilBuilder: aStencilBuilderClass [
+	aStencilBuilderClass = BrColumnCellDataBinder
+		ifTrue: [ ^ BrListItemToColumnCellDataBinderAdapter new listItemDataBinder: self ].
+	^ self
+]
+
 { #category : 'api - instantiation' }
 BrListItemDataBinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
