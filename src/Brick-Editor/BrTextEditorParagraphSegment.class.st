@@ -57,8 +57,8 @@ BrTextEditorParagraphSegment >> gtPiecesFor: aView [
 		title: 'Pieces';
 		items: [ self pieces ];
 		priority: 5;
-		column: 'Interval' item: [ :each | (each textStart to: each textEnd) asString ];
-		column: 'Text' item: [ :each | each ]
+		column: 'Interval' text: [ :each | (each textStart to: each textEnd) asString ];
+		column: 'Text' text: [ :each | each ]
 ]
 
 { #category : 'testing' }

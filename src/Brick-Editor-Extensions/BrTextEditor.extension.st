@@ -1,6 +1,6 @@
-Extension { #name : #BrTextEditor }
+Extension { #name : 'BrTextEditor' }
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditor >> gtHistoryFor: aView [
 	<gtView>
 
@@ -9,7 +9,7 @@ BrTextEditor >> gtHistoryFor: aView [
 		priority: 2
 ]
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditor >> gtLiveFor: aView [
 	<gtView>
 
@@ -26,7 +26,7 @@ BrTextEditor >> gtLiveFor: aView [
 				requestFocus ]
 ]
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditor >> gtSegmentsFor: aView [
 	<gtView>
 
@@ -35,7 +35,7 @@ BrTextEditor >> gtSegmentsFor: aView [
 		priority: 3
 ]
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditor >> gtSelectionTreeFor: aView [
 	<gtView>
 
@@ -44,7 +44,7 @@ BrTextEditor >> gtSelectionTreeFor: aView [
 		title: 'Selection'
 ]
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditor >> gtTextFor: aView [
 	<gtView>
 	^ (self text 

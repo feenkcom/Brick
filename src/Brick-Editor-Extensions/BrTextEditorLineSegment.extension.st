@@ -1,6 +1,6 @@
-Extension { #name : #BrTextEditorLineSegment }
+Extension { #name : 'BrTextEditorLineSegment' }
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditorLineSegment >> gtInfoFor: aView [
 	<gtView>
 
@@ -18,7 +18,7 @@ BrTextEditorLineSegment >> gtInfoFor: aView [
 			priority: 2
 ]
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditorLineSegment >> gtPiecesFor: aView [
 	<gtView>
 
@@ -26,6 +26,6 @@ BrTextEditorLineSegment >> gtPiecesFor: aView [
 		title: 'Pieces';
 		items: [ self pieces ];
 		priority: 5;
-		column: 'Interval' item: [ :each | (each textStart to: each textEnd) asString ];
-		column: 'Text' item: [ :each | each ]
+		column: 'Interval' text: [ :each | (each textStart to: each textEnd) asString ];
+		column: 'Text' text: [ :each | each ]
 ]
