@@ -287,8 +287,8 @@ BrTreeNode >> gtNodesFor: aView [
 		items: [ { self } ];
 		children: [ :anItem | anItem childrenNodes ];
 		expandAll;
-		column: 'Item' item: [ :anItem | anItem ];
-		column: 'Index' item: [ :anItem | anItem indexInTree ] width: 80
+		column: 'Item' text: [ :anItem | anItem ];
+		column: 'Index' text: [ :anItem | anItem indexInTree ] width: 80
 ]
 
 { #category : 'gt-extension' }
@@ -301,8 +301,8 @@ BrTreeNode >> gtRawNodesFor: aView [
 		items: [ { self } ];
 		children: [ :anItem | (anItem instVarNamed: #childrenNodes) ifNil: [ #() ] ];
 		expandAll;
-		column: 'Item' item: [ :anItem | anItem ];
-		column: 'Index' item: [ :anItem | anItem indexInTree ] width: 80
+		column: 'Item' text: [ :anItem | anItem ];
+		column: 'Index' text: [ :anItem | anItem indexInTree ] width: 80
 ]
 
 { #category : 'testing' }

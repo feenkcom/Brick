@@ -1,6 +1,6 @@
-Extension { #name : #BrTextEditorHistory }
+Extension { #name : 'BrTextEditorHistory' }
 
-{ #category : #'*Brick-Editor-Extensions' }
+{ #category : '*Brick-Editor-Extensions' }
 BrTextEditorHistory >> gtHistoryFor: aView [
 	<gtView>
 	
@@ -10,11 +10,11 @@ BrTextEditorHistory >> gtHistoryFor: aView [
 		items: [
 			(redoCommands reversed collect: [ :eachCommand | eachCommand -> #Redo ]),
 			(undoCommands reversed collect: [ :eachCommand | eachCommand -> #Undo ]) ];
-		column: 'Type' item: [ :eachCommandAndType |
+		column: 'Type' text: [ :eachCommandAndType |
 			eachCommandAndType value = #Redo
 				ifTrue: [ eachCommandAndType value gtDisplayText foreground: Color gray ]
 				ifFalse: [ eachCommandAndType value gtDisplayText ] ] width: 100;
-		column: 'Command' item: [ :eachCommandAndType |
+		column: 'Command' text: [ :eachCommandAndType |
 			eachCommandAndType value = #Redo
 				ifTrue: [ eachCommandAndType key gtDisplayText foreground: Color gray ]
 				ifFalse: [ eachCommandAndType key gtDisplayText ] ]

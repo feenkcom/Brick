@@ -32,8 +32,8 @@ BrInteractiveAptitude >> gtStylesFor: aView [
 		title: 'Styles';
 		priority: 3;
 		items: [ self styles ];
-		column: 'State' item: [ :eachItem | eachItem state ] width: 200;
-		column: 'Action' item: [ :eachItem | eachItem action ]
+		column: 'State' text: [ :eachItem | eachItem state ] width: 200;
+		column: 'Action' text: [ :eachItem | eachItem action ]
 		
 ]
 
