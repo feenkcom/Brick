@@ -865,7 +865,7 @@ BrTextEditor >> prepareSelection [
 { #category : 'private - cursor' }
 BrTextEditor >> processCursorAttributes [
 	"I search for the attributes within the whole text that contain (or not contain) any of the cursors and notify about it"
-	| anIterator anEnteredEvent aLeavedEvent eventHandlingAttributesOutside eventHandlingAttributesInside |
+	| anEnteredEvent aLeavedEvent eventHandlingAttributesOutside eventHandlingAttributesInside |
 
 	anEnteredEvent := BrTextEditorCursorAddedEvent cursor: self cursors.
 	aLeavedEvent := BrTextEditorCursorRemovedEvent cursor: self cursors.
@@ -873,19 +873,13 @@ BrTextEditor >> processCursorAttributes [
 	eventHandlingAttributesOutside := OrderedCollection new.
 	eventHandlingAttributesInside := OrderedCollection new.
 
-	anIterator := self text iterator.
-	[ anIterator hasNext ]
-		whileTrue: [
-			anIterator
-				nextAttributedEnd: [ :eachAttribute | eachAttribute isEventHandler ]
-				indicesDo: [ :aStart :anEnd :theEndedAttributes |
-					theEndedAttributes do: [ :eachAttribute |
-						self text
-							findAttribute: eachAttribute
-							indicesDo: [ :eachStart :eachEnd |
-								(self isFocused and: [ self cursors anySatisfy: [ :eachCursor | eachCursor position between: eachStart and: eachEnd ] ])
-									ifTrue: [ eventHandlingAttributesInside add: eachAttribute ]
-									ifFalse: [ eventHandlingAttributesOutside add: eachAttribute ] ] ] ] ].
+	self text
+		attributesAndIndicesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
+		do: [ :aStart :anEnd :anAttribute |
+			(self isFocused and: [
+				self cursors anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
+					ifTrue: [ eventHandlingAttributesInside add: anAttribute ]
+					ifFalse: [ eventHandlingAttributesOutside add: anAttribute ] ].
 
 	eventHandlingAttributesOutside do: [ :eachEventHandlerAttribute |
 		(eachEventHandlerAttribute wantsEvent: aLeavedEvent in: self)

@@ -306,11 +306,11 @@ BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount
 	self
 		assert: [ aTextPosition >= 0 ]
 		description: [ 'Text position must not be negative' ].
-	
+
 	self
 		assert: [ aTextPosition <= self text size ]
 		description: [ 'Text position must not exceed text size' ].
-	
+
 	self
 		assert: [ anAmount >= 0 ]
 		description: [ 'Amount must not be negative' ].
