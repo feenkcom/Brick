@@ -11,7 +11,8 @@ Class {
 BrCursorElement >> initialize [
 	super initialize.
 	
-	textPosition := 0
+	textPosition := 0.
+	self focusability: BlFocusability none
 ]
 
 { #category : 'accessing' }

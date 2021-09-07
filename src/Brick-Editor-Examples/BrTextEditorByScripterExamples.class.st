@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorByScripterExamples,
-	#superclass : #Object,
-	#category : #'Brick-Editor-Examples-By scripter'
+	#name : 'BrTextEditorByScripterExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Editor-Examples-By scripter'
 }
 
-{ #category : #'click - adornment element' }
+{ #category : 'click - adornment element' }
 BrTextEditorByScripterExamples >> click_adornment_element [
 	<gtExample>
 	| aScripter |
@@ -30,7 +30,7 @@ BrTextEditorByScripterExamples >> click_adornment_element [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'click - empty' }
+{ #category : 'click - empty' }
 BrTextEditorByScripterExamples >> click_empty [
 	<gtExample>
 	| aScripter |
@@ -51,14 +51,14 @@ BrTextEditorByScripterExamples >> click_empty [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorByScripterExamples >> scripter [
 	<gtExample>
 	
 	^ BlDevScripter new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorByScripterExamples >> scripterElement [
 	<gtExample>
 
@@ -68,7 +68,7 @@ BrTextEditorByScripterExamples >> scripterElement [
 		text: '' asRopedText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorByScripterExamples >> scripterWithElement [
 	<gtExample>
 	| aScripter |
@@ -88,7 +88,7 @@ BrTextEditorByScripterExamples >> scripterWithElement [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'click - adornment element' }
+{ #category : 'click - adornment element' }
 BrTextEditorByScripterExamples >> textWithAdornment [
 	<gtExample>
 

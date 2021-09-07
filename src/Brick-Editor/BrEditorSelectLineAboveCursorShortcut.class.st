@@ -24,11 +24,6 @@ BrEditorSelectLineAboveCursorShortcut >> name [
 { #category : 'evaluation' }
 BrEditorSelectLineAboveCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
-		withoutCursorUpdate;
 		moveOneUp;
-		select.
-	aBrTextEditor navigator
-		moveUp;
-		withoutResettingDesiredCoordinate;
-		apply
+		select
 ]

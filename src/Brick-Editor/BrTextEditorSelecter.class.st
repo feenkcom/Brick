@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'selection',
 		'shouldUpdateCursor',
-		'shouldDeselectExisting'
+		'shouldDeselectExisting',
+		'commands'
 	],
 	#category : 'Brick-Editor-Model - Operators'
 }
@@ -35,11 +36,13 @@ BrTextEditorSelecter >> extendToLineEnd [
 	self assertUIProcess.
 
 	theCommands := self cursors collect: [ :aCursor |
-		self
+		| aDelta |
+		aDelta := (self findTextIndexAtLineEnd: aCursor) - aCursor position.
+		(self
 			privateExtendSelectionRightAt: aCursor position
-			by: (self findTextIndexAtLineEnd: aCursor) - aCursor position ].
+			by: aDelta) toMoveCursor: aCursor by: aDelta ].
 	
-	self privatePerformSelectAndDeselectCommands: theCommands
+	commands addAll: theCommands
 ]
 
 { #category : 'api - configuration' }
@@ -49,11 +52,15 @@ BrTextEditorSelecter >> extendToLineStart [
 	self assertUIProcess.
 
 	theCommands := self cursors collect: [ :aCursor |
-		self
+		| aDelta |
+		aDelta := aCursor position - (self findTextIndexAtLineStart: aCursor).
+		(self
 			privateExtendSelectionLeftAt: aCursor position
-			by: aCursor position - (self findTextIndexAtLineStart: aCursor) ].
+			by: aDelta)
+				toMoveCursor: aCursor
+				by: aDelta negated ].
 
-	self privatePerformSelectAndDeselectCommands: theCommands
+	commands addAll: theCommands
 ]
 
 { #category : 'api - configuration' }
@@ -63,11 +70,16 @@ BrTextEditorSelecter >> extendToNextWordEnd [
 	self assertUIProcess.
 
 	theCommands := self cursors collect: [ :aCursor |
-		self
+		| aDelta |
+		
+		aDelta := (self findWordEndAfter: aCursor position) - aCursor position.
+		(self
 			privateExtendSelectionRightAt: aCursor position
-			by: (self findWordEndAfter: aCursor position) - aCursor position ].
+			by: aDelta)
+				toMoveCursor: aCursor
+				by: aDelta ].
 	
-	self privatePerformSelectAndDeselectCommands: theCommands
+	commands addAll: theCommands
 ]
 
 { #category : 'api - configuration' }
@@ -77,11 +89,16 @@ BrTextEditorSelecter >> extendToPreviousWordStart [
 	self assertUIProcess.
 
 	theCommands := self cursors collect: [ :aCursor |
-		self
+		| aDelta |
+		
+		aDelta := aCursor position - (self findWordStartBefore: aCursor position).
+		(self
 			privateExtendSelectionLeftAt: aCursor position
-			by: aCursor position - (self findWordStartBefore: aCursor position) ].
+			by: aDelta)
+				toMoveCursor: aCursor
+				by: aDelta negated ].
 	
-	self privatePerformSelectAndDeselectCommands: theCommands
+	commands addAll: theCommands
 ]
 
 { #category : 'private' }
@@ -122,8 +139,12 @@ BrTextEditorSelecter >> from: aFromIndex to: aToIndex [
 
 	aFromIndex = aToIndex
 		ifTrue: [ ^ self ].
-
-	selection select: aFromIndex to: aToIndex
+	
+	commands add: (BrExtendSelectionCommand new 
+		editor: editor;
+		toSelect: { BlSelection from: aFromIndex to: aToIndex };
+		toAddCursor: aToIndex;
+		toRemoveCursors: self cursors allCursors)
 ]
 
 { #category : 'initialization' }
@@ -132,14 +153,17 @@ BrTextEditorSelecter >> initialize [
 
 	selection := BlCompositeSelection new.
 	shouldUpdateCursor := true.
-	shouldDeselectExisting := false
+	shouldDeselectExisting := false.
+	commands := OrderedCollection new
 ]
 
 { #category : 'api - configuration' }
 BrTextEditorSelecter >> moveOneDown [
 	"Select and move a cursor one line down"
-	| theNewCursorPositions theCursorsOnTheLeft theCursorsOnTheRight theCursorsOutside |
+	| theCommands theNewCursorPositions theCursorsOnTheLeft theCursorsOnTheRight theCursorsOutside |
 	self assertUIProcess.
+
+	theCommands := OrderedCollection new.
 
 	theNewCursorPositions := (self cursors collect: [ :aCursor |
 		aCursor -> (self
@@ -159,12 +183,23 @@ BrTextEditorSelecter >> moveOneDown [
 		select: [ :aCursor | (self selection anySatisfy: [ :aSelection | aCursor position between: aSelection from and: aSelection to ]) not ].
 
 	theCursorsOnTheLeft do: [ :aCursor |
-		self editor deselecter
-			from: aCursor position to: (theNewCursorPositions at: aCursor);
-			deselect ].
+		| aDelta |
+		aDelta := (theNewCursorPositions at: aCursor) - aCursor position.
+		theCommands add: (BrExtendSelectionCommand new 
+			editor: editor;
+			toDeselect: { BlSelection from: aCursor position to: (theNewCursorPositions at: aCursor) };
+			toMoveCursor: aCursor by: aDelta) ].
 
 	theCursorsOnTheRight, theCursorsOutside do: [ :aCursor | 
-		self from: aCursor position to: ((theNewCursorPositions at: aCursor) min: self text size) ].
+		| aDelta |
+		aDelta := ((theNewCursorPositions at: aCursor) min: self text size) - aCursor position.
+		theCommands add: (BrExtendSelectionCommand new 
+			editor: editor;
+			toSelect: { BlSelection from: aCursor position to: ((theNewCursorPositions at: aCursor) min: self text size) };
+			toMoveCursor: aCursor by: aDelta;
+			withoutResettingDesiredCoordinate) ].
+		
+	commands addAll: theCommands.
 ]
 
 { #category : 'api - configuration' }
@@ -174,11 +209,13 @@ BrTextEditorSelecter >> moveOneToLeft [
 	self assertUIProcess.
 
 	theCommands := self cursors collect: [ :aCursor |
-		self
+		(self
 			privateExtendSelectionLeftAt: aCursor position
-			by: 1 ].
-	
-	self privatePerformSelectAndDeselectCommands: theCommands
+			by: 1)
+				toMoveCursor: aCursor
+				by: -1 ].
+			
+	commands addAll: theCommands
 ]
 
 { #category : 'api - configuration' }
@@ -188,19 +225,22 @@ BrTextEditorSelecter >> moveOneToRight [
 	self assertUIProcess.
 
 	theCommands := self cursors collect: [ :aCursor |
-		self
+		(self
 			privateExtendSelectionRightAt: aCursor position
-			by: 1 ].
+			by: 1)
+				toMoveCursor: aCursor
+				by: 1 ].
 	
-	self privatePerformSelectAndDeselectCommands: theCommands
+	commands addAll: theCommands
 ]
 
 { #category : 'api - configuration' }
 BrTextEditorSelecter >> moveOneUp [
 	"Select and move a cursor one line up"
-	| theNewCursorPositions theCursorsOnTheLeft theCursorsOnTheRight theCursorsOutside |
+	| theNewCursorPositions theCursorsOnTheLeft theCursorsOnTheRight theCursorsOutside theCommands |
 	self assertUIProcess.
-
+	
+	theCommands := OrderedCollection new.
 	theNewCursorPositions := (self cursors collect: [ :aCursor |
 		aCursor -> (self
 			findTextIndexAboveCursor: aCursor
@@ -220,13 +260,24 @@ BrTextEditorSelecter >> moveOneUp [
 
 	"the cursor is on the right side of the selection, we should deselect from the new potential position to its current location"
 	theCursorsOnTheRight do: [ :aCursor |
-		self editor deselecter
-			from: (theNewCursorPositions at: aCursor) to: aCursor position;
-			deselect ].
+		| aDelta |
+		aDelta := aCursor position - (theNewCursorPositions at: aCursor).
+		theCommands add: (BrExtendSelectionCommand new 
+			editor: editor;
+			toDeselect: { BlSelection from: (theNewCursorPositions at: aCursor) to: aCursor position };
+			toMoveCursor: aCursor by: aDelta negated) ].
 	
 	"the cursor is on the left side of the selection or is not inside any selection, we should extend it to the new potential location"
 	theCursorsOnTheLeft, theCursorsOutside do: [ :aCursor | 
-		self from: (theNewCursorPositions at: aCursor) to: aCursor position ]
+		| aDelta |
+		aDelta := aCursor position - (theNewCursorPositions at: aCursor).
+		theCommands add: (BrExtendSelectionCommand new 
+			editor: editor;
+			toSelect: { BlSelection from: (theNewCursorPositions at: aCursor) to: aCursor position };
+			toMoveCursor: aCursor by: aDelta negated;
+			withoutResettingDesiredCoordinate) ].
+
+	commands addAll: theCommands.
 ]
 
 { #category : 'api - configuration' }
@@ -250,7 +301,19 @@ BrTextEditorSelecter >> privateDeselectExisting: aSelection [
 
 { #category : 'private' }
 BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount [
-	| hasSelectionAfter toSelect toDeselect |
+	| hasSelectionAfter toSelect toDeselect aNewSelectionStart |
+
+	self
+		assert: [ aTextPosition >= 0 ]
+		description: [ 'Text position must not be negative' ].
+	
+	self
+		assert: [ aTextPosition <= self text size ]
+		description: [ 'Text position must not exceed text size' ].
+	
+	self
+		assert: [ anAmount >= 0 ]
+		description: [ 'Amount must not be negative' ].
 
 	toSelect := OrderedCollection new.
 	toDeselect := OrderedCollection new.
@@ -260,18 +323,23 @@ BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount
 			(eachMonotoneSelection from <= aTextPosition)
 				and: [ eachMonotoneSelection to > aTextPosition ] ].
 
+	aNewSelectionStart := (aTextPosition - anAmount) max: 0.
+	self
+		assert: [ aNewSelectionStart >= 0 ]
+		description: [ 'Selection start must not be less than 0' ].
+
 	hasSelectionAfter
-		ifTrue: [ toSelect add: (BlSelection from: aTextPosition - anAmount to: aTextPosition) ]
+		ifTrue: [ toSelect add: (BlSelection from: aNewSelectionStart to: aTextPosition) ]
 		ifFalse: [
 			| aSelectionStart aSelectionEnd |
 			aSelectionEnd := self
 				findExistingSelectionStartBefore: aTextPosition
-				within: (aTextPosition - anAmount to: aTextPosition).
+				within: (aNewSelectionStart to: aTextPosition).
 			
 			aSelectionEnd = aTextPosition
 				ifFalse: [ toDeselect add: (BlSelection from: aSelectionEnd to: aTextPosition) ].
 				
-			aSelectionStart := aTextPosition - anAmount.
+			aSelectionStart := aNewSelectionStart.
 			
 			aSelectionStart < aSelectionEnd
 				ifTrue: [ toSelect add: (BlSelection from: aSelectionStart to: aSelectionEnd) ] ].
@@ -284,7 +352,19 @@ BrTextEditorSelecter >> privateExtendSelectionLeftAt: aTextPosition by: anAmount
 
 { #category : 'private' }
 BrTextEditorSelecter >> privateExtendSelectionRightAt: aTextPosition by: anAmount [
-	| hasSelectionBefore toSelect toDeselect |
+	| hasSelectionBefore toSelect toDeselect aNewSelectionEnd |
+
+	self
+		assert: [ aTextPosition >= 0 ]
+		description: [ 'Text position must not be negative' ].
+		
+	self
+		assert: [ aTextPosition <= self text size ]
+		description: [ 'Text position must not exceed text size' ].
+		
+	self
+		assert: [ anAmount >= 0 ]
+		description: [ 'Amount must not be negative' ].
 
 	toSelect := OrderedCollection new.
 	toDeselect := OrderedCollection new.
@@ -294,18 +374,23 @@ BrTextEditorSelecter >> privateExtendSelectionRightAt: aTextPosition by: anAmoun
 			(eachMonotoneSelection from < aTextPosition)
 				and: [ eachMonotoneSelection to >= aTextPosition ] ].
 
+	aNewSelectionEnd := (aTextPosition + anAmount) min: self text size.
+	self
+		assert: [ aNewSelectionEnd <= self text size ]
+		description: [ 'Selection end must not exceed text size' ].
+
 	hasSelectionBefore
-		ifTrue: [ toSelect add: (BlSelection from: aTextPosition to: aTextPosition + anAmount) ]
+		ifTrue: [ toSelect add: (BlSelection from: aTextPosition to: aNewSelectionEnd) ]
 		ifFalse: [
 			| aSelectionStart aSelectionEnd |
 			aSelectionStart := self
 				findExistingSelectionEndAfter: aTextPosition
-				within: (aTextPosition to: aTextPosition + anAmount).
+				within: (aTextPosition to: aNewSelectionEnd).
 			
 			aSelectionStart = aTextPosition
 				ifFalse: [ toDeselect add: (BlSelection from: aTextPosition to: aSelectionStart) ].
 				
-			aSelectionEnd := aTextPosition + anAmount.
+			aSelectionEnd := aNewSelectionEnd.
 			
 			aSelectionStart = aSelectionEnd
 				ifFalse: [ toSelect add: (BlSelection from: aSelectionStart to: aSelectionEnd) ] ].
@@ -317,20 +402,53 @@ BrTextEditorSelecter >> privateExtendSelectionRightAt: aTextPosition by: anAmoun
 ]
 
 { #category : 'private' }
+BrTextEditorSelecter >> privateFrom: aFromIndex to: aToIndex [
+	self assertUIProcess.
+
+	aFromIndex = aToIndex
+		ifTrue: [ ^ self ].
+
+	selection select: aFromIndex to: aToIndex
+]
+
+{ #category : 'private' }
 BrTextEditorSelecter >> privatePerformSelectAndDeselectCommands: theCommands [
-	| aDeselecter |
+	| aDeselecter  |
+
 	aDeselecter := self editor deselecter.
+
 	theCommands do: [ :aCommand |
 		aCommand toDeselectDo: [ :eachSelectionToDeselect |
 			aDeselecter
 				from: eachSelectionToDeselect from
 				to: eachSelectionToDeselect to ] ].
 	aDeselecter deselect.
+
 	theCommands do: [ :aCommand |
 		aCommand toSelectDo: [ :eachSelectionToSelect |
 			self
-				from: eachSelectionToSelect from
-				to: eachSelectionToSelect to ] ]
+				privateFrom: eachSelectionToSelect from
+				to: eachSelectionToSelect to ] ].
+	
+	shouldUpdateCursor
+		ifFalse: [ ^ self ].
+	
+	theCommands do: [ :aCommand |
+		| aNavigator |
+		aNavigator := self editor navigator.
+		aNavigator dueTo: self.
+		
+		aCommand shouldResetDesiredCoordinate
+			ifTrue: [ aNavigator withResettingDesiredCoordinate ]
+			ifFalse: [ aNavigator withoutResettingDesiredCoordinate ].
+		
+		aCommand toMoveCursorDo: [ :eachCursor :anAmount |
+			aNavigator move: eachCursor by: anAmount ].
+		aCommand toAddCursorDo: [ :aCursorPosition |
+			aNavigator addAt: aCursorPosition ].
+		aCommand toRemoveCursorsDo: [ :aCursor |
+			aNavigator remove: aCursor ].
+		aNavigator apply ].
 ]
 
 { #category : 'private' }
@@ -363,6 +481,9 @@ BrTextEditorSelecter >> select [
 	| toBeSelected |
 	self assertUIProcess.
 
+	self privatePerformSelectAndDeselectCommands: commands.
+	commands removeAll.
+
 	selection isEmpty
 		ifTrue: [ ^ self ].
 
@@ -379,10 +500,7 @@ BrTextEditorSelecter >> select [
 
 	toBeSelected do: [ :aMonotoneSelection |
 		(aMonotoneSelection interval size > 1)
-			ifTrue: [ self privateSelect: aMonotoneSelection from to: aMonotoneSelection to ] ].
-
-	shouldUpdateCursor
-		ifTrue: [ self updateCursors ]
+			ifTrue: [ self privateSelect: aMonotoneSelection from to: aMonotoneSelection to ] ]
 ]
 
 { #category : 'private' }

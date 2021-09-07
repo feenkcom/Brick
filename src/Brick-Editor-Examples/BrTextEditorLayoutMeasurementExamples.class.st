@@ -1,12 +1,12 @@
 Class {
-	#name : #BrTextEditorLayoutMeasurementExamples,
-	#superclass : #Object,
+	#name : 'BrTextEditorLayoutMeasurementExamples',
+	#superclass : 'Object',
 	#traits : 'TBrTextEditorFixedMeasurerExamples',
 	#classTraits : 'TBrTextEditorFixedMeasurerExamples classTrait',
-	#category : #'Brick-Editor-Examples'
+	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorLayoutMeasurementExamples >> editorFor: aText [
 	<return: #BrEditor>
 	| anEditor aRopedText |
@@ -37,7 +37,7 @@ BrTextEditorLayoutMeasurementExamples >> editorFor: aText [
 	^ anEditor
 ]
 
-{ #category : #'examples - measurement' }
+{ #category : 'examples - measurement' }
 BrTextEditorLayoutMeasurementExamples >> fit_content_Hello [
 	<gtExample>
 	<noTest>
@@ -51,7 +51,7 @@ BrTextEditorLayoutMeasurementExamples >> fit_content_Hello [
 	^ anEditorElement
 ]
 
-{ #category : #'examples - measurement' }
+{ #category : 'examples - measurement' }
 BrTextEditorLayoutMeasurementExamples >> fit_content_Hello_World [
 	<gtExample>
 	<noTest>

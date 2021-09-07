@@ -1,12 +1,12 @@
 Class {
-	#name : #BrTextEditorOperatorExamples,
-	#superclass : #Object,
+	#name : 'BrTextEditorOperatorExamples',
+	#superclass : 'Object',
 	#traits : 'TBrTextEditorFixedMeasurerExamples',
 	#classTraits : 'TBrTextEditorFixedMeasurerExamples classTrait',
-	#category : #'Brick-Editor-Examples-Operators'
+	#category : 'Brick-Editor-Examples-Operators'
 }
 
-{ #category : #'focus - examples' }
+{ #category : 'focus - examples' }
 BrTextEditorOperatorExamples >> editorCreatesOneCursorOnFocus [
 	<gtExample>
 	| anEditor aSpace |
@@ -31,7 +31,7 @@ BrTextEditorOperatorExamples >> editorCreatesOneCursorOnFocus [
 	^ anEditor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorOperatorExamples >> editorFor: aText [
 	<return: #BrEditor>
 	| anEditor aRopedText |
@@ -62,7 +62,7 @@ BrTextEditorOperatorExamples >> editorFor: aText [
 	^ anEditor
 ]
 
-{ #category : #'focus - examples' }
+{ #category : 'focus - examples' }
 BrTextEditorOperatorExamples >> editorHasNoFocusByDefault [
 	<gtExample>
 	| anEditor |
@@ -74,7 +74,7 @@ BrTextEditorOperatorExamples >> editorHasNoFocusByDefault [
 	^ anEditor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorOperatorExamples >> editorOnEmptyText [
 	<gtExample>
 	| anEditor anEditorElement |
@@ -88,7 +88,7 @@ BrTextEditorOperatorExamples >> editorOnEmptyText [
 	^ anEditorElement
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorOperatorExamples >> editorOnMultilineText [
 	<gtExample>
 	| anEditor anEditorElement |
@@ -102,7 +102,7 @@ BrTextEditorOperatorExamples >> editorOnMultilineText [
 	^ anEditorElement
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceInEmptyAt_0 [
 	<gtExample>
 	| text editor whitespace |
@@ -116,7 +116,7 @@ BrTextEditorOperatorExamples >> findWhitespaceInEmptyAt_0 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_0 [
 	<gtExample>
 	| text editor whitespace |
@@ -130,7 +130,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_0 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_1 [
 	<gtExample>
 	| text editor whitespace |
@@ -144,7 +144,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_1 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_2 [
 	<gtExample>
 	| text editor whitespace |
@@ -158,7 +158,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_2 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_3 [
 	<gtExample>
 	| text editor whitespace |
@@ -172,7 +172,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_3 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_4 [
 	<gtExample>
 	| text editor whitespace |
@@ -186,7 +186,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_4 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_5 [
 	<gtExample>
 	| text editor whitespace |
@@ -200,7 +200,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_5 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_6 [
 	<gtExample>
 	| text editor whitespace |
@@ -214,7 +214,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_6 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_7 [
 	<gtExample>
 	| text editor whitespace |
@@ -228,7 +228,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_7 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_8 [
 	<gtExample>
 	| text editor whitespace |
@@ -242,7 +242,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_8 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_6 [
 	<gtExample>
 	| text editor whitespace |
@@ -256,7 +256,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_6 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_7 [
 	<gtExample>
 	| text editor whitespace |
@@ -270,7 +270,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_7 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_8 [
 	<gtExample>
 	| text editor whitespace |
@@ -284,7 +284,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_8 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_0 [
 	<gtExample>
 	| text editor whitespace |
@@ -298,7 +298,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_0 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_1 [
 	<gtExample>
 	| text editor whitespace |
@@ -312,7 +312,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_1 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_2 [
 	<gtExample>
 	| text editor whitespace |
@@ -326,7 +326,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_2 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_at_0 [
 	<gtExample>
 	| text editor whitespace |
@@ -340,7 +340,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_at_0 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_at_1 [
 	<gtExample>
 	| text editor whitespace |
@@ -354,7 +354,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_at_1 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_0 [
 	<gtExample>
 	| text editor whitespace |
@@ -368,7 +368,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_0 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_1 [
 	<gtExample>
 	| text editor whitespace |
@@ -382,7 +382,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_1 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_2 [
 	<gtExample>
 	| text editor whitespace |
@@ -396,7 +396,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_2 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_0 [
 	<gtExample>
 	| text editor whitespace |
@@ -410,7 +410,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_0 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_1 [
 	<gtExample>
 	| text editor whitespace |
@@ -424,7 +424,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_1 [
 	^ whitespace
 ]
 
-{ #category : #'utility - examples' }
+{ #category : 'utility - examples' }
 BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_2 [
 	<gtExample>
 	| text editor whitespace |
@@ -438,7 +438,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_2 [
 	^ whitespace
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorOperatorExamples >> multilineText [
 	<gtExample>
 	
@@ -455,19 +455,19 @@ The color and scent of the wisteria
 Seems far away.' asRopedText
 ]
 
-{ #category : #'private - utility' }
+{ #category : 'private - utility' }
 BrTextEditorOperatorExamples >> piecesWithCursorIn: anEditorElement [
 	^ anEditorElement withAllChildrenBreadthFirst
 		select: [ :eachChild | eachChild isKindOf: BrCursorElement ]
 		thenCollect: [ :eachCursor | eachCursor parent ]
 ]
 
-{ #category : #'private - events' }
+{ #category : 'private - events' }
 BrTextEditorOperatorExamples >> subscribe: anEventClass do: aBlock for: anElement [
 	anElement when: anEventClass do: aBlock
 ]
 
-{ #category : #'private - events' }
+{ #category : 'private - events' }
 BrTextEditorOperatorExamples >> unsubscribe: anEventClass from: anElement [
 	anElement removeEventHandlersSuchThat: [ :anEventHandler | (anEventHandler isKindOf: BlEventHandler) and: [ anEventHandler eventClass = anEventClass ] ]
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorDeleterExamples,
-	#superclass : #BrTextEditorOperatorExamples,
-	#category : #'Brick-Editor-Examples-Operators'
+	#name : 'BrTextEditorDeleterExamples',
+	#superclass : 'BrTextEditorOperatorExamples',
+	#category : 'Brick-Editor-Examples-Operators'
 }
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_0_cursorAt_0_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -24,7 +24,7 @@ BrTextEditorDeleterExamples >> delete_0_to_0_cursorAt_0_selection_0_to_0 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_0_cursorAt_0_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -44,7 +44,7 @@ BrTextEditorDeleterExamples >> delete_0_to_0_cursorAt_0_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_1_cursorAt_0_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -64,7 +64,7 @@ BrTextEditorDeleterExamples >> delete_0_to_1_cursorAt_0_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -84,7 +84,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_28 [
 	<gtExample>
 	| anEditor |
@@ -104,7 +104,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_28 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_29 [
 	<gtExample>
 	| anEditor |
@@ -124,7 +124,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_29 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_38 [
 	<gtExample>
 	| anEditor |
@@ -144,7 +144,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_38 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_38_and_48_to_50 [
 	<gtExample>
 	| anEditor |
@@ -165,7 +165,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_0_selection_0_to_38_and_4
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_10_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -185,7 +185,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_10_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_28_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -205,7 +205,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_28_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_29_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -225,7 +225,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_29_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_38_selection_0_to_10 [
 	<gtExample>
 	| anEditor |
@@ -245,7 +245,7 @@ BrTextEditorDeleterExamples >> delete_0_to_28_cursorAt_38_selection_0_to_10 [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> delete_0_to_5_from_HelloCr [
 	<gtExample>
 	| anEditor |
@@ -261,7 +261,7 @@ BrTextEditorDeleterExamples >> delete_0_to_5_from_HelloCr [
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> surroundings_delete_at_0_from_parenthesis_open_close [
 	<gtExample>
 	| anEditor |
@@ -281,7 +281,7 @@ BrTextEditorDeleterExamples >> surroundings_delete_at_0_from_parenthesis_open_cl
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> surroundings_delete_at_1_from_parenthesis_open_close [
 	<gtExample>
 	| anEditor |
@@ -301,7 +301,7 @@ BrTextEditorDeleterExamples >> surroundings_delete_at_1_from_parenthesis_open_cl
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> surroundings_delete_at_1_from_parenthesis_open_close_close [
 	<gtExample>
 	| anEditor |
@@ -321,7 +321,7 @@ BrTextEditorDeleterExamples >> surroundings_delete_at_1_from_parenthesis_open_cl
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> surroundings_delete_at_2_from_parenthesis_open_close [
 	<gtExample>
 	| anEditor |
@@ -341,7 +341,7 @@ BrTextEditorDeleterExamples >> surroundings_delete_at_2_from_parenthesis_open_cl
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> surroundings_delete_at_2_from_parenthesis_open_close_selected_1_to_2 [
 	<gtExample>
 	| anEditor |
@@ -366,7 +366,7 @@ BrTextEditorDeleterExamples >> surroundings_delete_at_2_from_parenthesis_open_cl
 	^ anEditor
 ]
 
-{ #category : #'examples - deletion special' }
+{ #category : 'examples - deletion special' }
 BrTextEditorDeleterExamples >> surroundings_delete_at_2_from_parenthesis_open_open_close [
 	<gtExample>
 	| anEditor |

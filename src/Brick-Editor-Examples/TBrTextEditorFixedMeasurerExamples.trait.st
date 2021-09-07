@@ -2,21 +2,21 @@
 I add utility methods related to fixed text measurer
 "
 Trait {
-	#name : #TBrTextEditorFixedMeasurerExamples,
-	#category : #'Brick-Editor-Examples'
+	#name : 'TBrTextEditorFixedMeasurerExamples',
+	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> ascent [
 	^ -20
 ]
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> descent [
 	^ 20
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 TBrTextEditorFixedMeasurerExamples >> editorFor: aText [
 	<return: #BrEditor>
 	| anEditor aRopedText |
@@ -47,7 +47,7 @@ TBrTextEditorFixedMeasurerExamples >> editorFor: aText [
 	^ anEditor
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 TBrTextEditorFixedMeasurerExamples >> fixedMeasurer [
 	^ BlTextElementMockedMeasurer new
 		ascent: self ascent;
@@ -56,27 +56,27 @@ TBrTextEditorFixedMeasurerExamples >> fixedMeasurer [
 		glyphHeight: self glyphHeight
 ]
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> glyphHeight [
 	^ self ascent abs + self descent
 ]
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> glyphWidth [
 	^ 30
 ]
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> lineSpacing [
 	^ 5
 ]
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> paragraphMargin [
 	^ BlInsets all: 15
 ]
 
-{ #category : #'private - font metrics' }
+{ #category : 'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> wordPadding [
 	^ BlInsets top: 3 bottom: 3
 ]

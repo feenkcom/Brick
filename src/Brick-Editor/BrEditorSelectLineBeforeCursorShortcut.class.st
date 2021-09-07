@@ -33,11 +33,6 @@ BrEditorSelectLineBeforeCursorShortcut >> name [
 { #category : 'evaluation' }
 BrEditorSelectLineBeforeCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
-		withoutCursorUpdate;
 		extendToLineStart;
-		select.
-
-	aBrTextEditor navigator
-		moveToLineStart;
-		apply
+		select
 ]

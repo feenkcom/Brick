@@ -258,7 +258,8 @@ BrTextEditorLineSegmentHolder >> relativeScreenToCursor: aTransformation [
 
 	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
 		(aTransformation cursor insideSubText: aPiece of: segment)
-			ifTrue: [ ^ aPiece screenToCursor: aTransformation of: self infiniteElement in: aPieceElement ] ]
+			ifTrue: [
+				^ aPiece screenToCursor: aTransformation of: self infiniteElement in: aPieceElement ] ]
 ]
 
 { #category : 'cursor' }
