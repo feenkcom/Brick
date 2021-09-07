@@ -91,24 +91,30 @@ BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
 	eventHandlingAttributesOutside := OrderedCollection new.
 	eventHandlingAttributesInside := OrderedCollection new.
 
-	theEventHandlingAttributes do: [ :eachEventHandlerAttribute |
-		anEditorText
-			findAttribute: eachEventHandlerAttribute
-			indicesDo: [ :eachEventHandlerStart :eachEventHandlerEnd |
-				aTextEditor cursors do: [ :eachCursor |
-					(eachCursor position between: eachEventHandlerStart and: eachEventHandlerEnd)
-						ifTrue: [ eventHandlingAttributesInside add: eachEventHandlerAttribute ]
-						ifFalse: [ eventHandlingAttributesOutside add: eachEventHandlerAttribute ] ] ] ].
+	anEditorText
+		findAttributes: theEventHandlingAttributes
+		indicesDo: [ :eachEventHandlerStart :eachEventHandlerEnd :eachEventHandlerAttribute |
+			aTextEditor cursors do: [ :eachCursor |
+				(eachCursor position between: eachEventHandlerStart and: eachEventHandlerEnd)
+					ifTrue: [ eventHandlingAttributesInside add: eachEventHandlerAttribute -> (eachEventHandlerStart to: eachEventHandlerEnd) ]
+					ifFalse: [ eventHandlingAttributesOutside add: eachEventHandlerAttribute -> (eachEventHandlerStart to: eachEventHandlerEnd) ] ] ].
 	
-	eventHandlingAttributesOutside do: [ :eachEventHandlerAttribute |
-		| anEvent |
-		anEvent := BrTextEditorCursorRemovedEvent cursor: self cursor.
-		(eachEventHandlerAttribute wantsEvent: anEvent in: aTextEditor)
-			ifTrue: [ eachEventHandlerAttribute handleEvent: anEvent in: aTextEditor on: nil ] ].
+	eventHandlingAttributesOutside do: [ :eachEventHandlerAttributeAndInterval |
+		| eachAttribute eachInterval anEvent |
+		
+		eachAttribute := eachEventHandlerAttributeAndInterval key.
+		eachInterval := eachEventHandlerAttributeAndInterval value.
 
-	eventHandlingAttributesInside do: [ :eachEventHandlerAttribute |
-		| anEvent |
-		anEvent := BrTextEditorCursorAddedEvent cursor: self cursor.
-		(eachEventHandlerAttribute wantsEvent: anEvent in: aTextEditor)
-			ifTrue: [ eachEventHandlerAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
+		anEvent := BrTextCursorAttributeLeaveEvent new interval: eachInterval.
+		(eachAttribute wantsEvent: anEvent in: aTextEditor)
+			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ].
+
+	eventHandlingAttributesInside do: [ :eachEventHandlerAttributeAndInterval |
+		| eachAttribute eachInterval anEvent |
+		
+		eachAttribute := eachEventHandlerAttributeAndInterval key.
+		eachInterval := eachEventHandlerAttributeAndInterval value.
+		anEvent := BrTextCursorAttributeEnterEvent new interval: eachInterval.
+		(eachAttribute wantsEvent: anEvent in: aTextEditor)
+			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
 ]

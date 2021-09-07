@@ -528,20 +528,6 @@ BrTextEditor >> newUpdateCommand [
 ]
 
 { #category : 'private - cursor' }
-BrTextEditor >> notifyAttributesOutsideCursor: aCollectionOfAttributes [
-	"I notify the cursor attributes that they are not anymore within the current cursors"
-	| theEventHandlingAttributes anEvent |
-	
-	theEventHandlingAttributes := (aCollectionOfAttributes select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
-	
-	anEvent := BrTextEditorCursorRemovedEvent cursor: self cursors.
-	
-	theEventHandlingAttributes do: [ :eachAttribute |
-		(eachAttribute wantsEvent: anEvent in: self)
-				ifTrue: [ eachAttribute handleEvent: anEvent in: self on: nil ] ]
-]
-
-{ #category : 'private - cursor' }
 BrTextEditor >> notifyAttributesWithinCursor: aCollectionOfAttributes [
 	"I select and notify those attributes in the given collection that are within any of the cursors"
 	| theEventHandlingAttributes anEvent |
@@ -549,18 +535,19 @@ BrTextEditor >> notifyAttributesWithinCursor: aCollectionOfAttributes [
 	self isFocused
 		ifFalse: [ ^ self ].
 
-	anEvent := BrTextEditorCursorAddedEvent cursor: self cursors.
+	anEvent := BrTextCursorAttributeEnterEvent new.
 	
 	theEventHandlingAttributes := (aCollectionOfAttributes select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
-	theEventHandlingAttributes do: [ :eachAttribute |
-		self text
-			findAttribute: eachAttribute
-			indicesDo: [ :aStart :anEnd |
-				(self cursors anySatisfy: [ :eachCursor |
+	
+	self text
+		attributesAndIndicesSuchThat: [ :eachAttribute | theEventHandlingAttributes includes:  eachAttribute ]
+		do: [ :aStart :anEnd :eachAttribute |
+			(self cursors anySatisfy: [ :eachCursor |
 					eachCursor position between: aStart and: anEnd ])
 						ifTrue: [
+							anEvent interval: (aStart to: anEnd).
 							(eachAttribute wantsEvent: anEvent in: self)
-								ifTrue: [ eachAttribute handleEvent: anEvent in: self on: nil ] ] ] ]
+								ifTrue: [ eachAttribute handleEvent: anEvent in: self on: nil ] ] ]
 ]
 
 { #category : 'event firing' }
@@ -799,14 +786,26 @@ BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 		ifTrue: [
 			self text rope: aBlTextStyledEvent text text rope.
 			
-			"notify the event handling attributes that they are within the cursors"
-			self processCursorAttributes.
+			aBlTextStyledEvent editorElement telemetry
+				timeSync: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
+				during: [ aBlTextStyledEvent afterAction value: self text. ].
+
+			aBlTextStyledEvent editorElement telemetry
+				timeSync: [ 'processCursorAttributes' ]
+				during: [
+						"notify the event handling attributes that they are within the cursors"
+						self processCursorAttributes ].
 			
-			self notifyTextStyled: self text.
+			aBlTextStyledEvent editorElement telemetry
+				timeSync: [ 'notifyTextStyled' ]
+				during: [ self notifyTextStyled: self text ].
 			
-			self updater
-				all;
-				update ]
+			aBlTextStyledEvent editorElement telemetry
+				timeSync: [ 'Invalidate the whole text editor due to text change' ]
+				during: [
+					self updater
+						all;
+						update ] ]
 		ifFalse: [ self styleTextAndAfterDo: aBlTextStyledEvent afterAction ]
 ]
 
@@ -867,8 +866,8 @@ BrTextEditor >> processCursorAttributes [
 	"I search for the attributes within the whole text that contain (or not contain) any of the cursors and notify about it"
 	| anEnteredEvent aLeavedEvent eventHandlingAttributesOutside eventHandlingAttributesInside |
 
-	anEnteredEvent := BrTextEditorCursorAddedEvent cursor: self cursors.
-	aLeavedEvent := BrTextEditorCursorRemovedEvent cursor: self cursors.
+	anEnteredEvent := BrTextCursorAttributeEnterEvent new.
+	aLeavedEvent := BrTextCursorAttributeLeaveEvent new.
 
 	eventHandlingAttributesOutside := OrderedCollection new.
 	eventHandlingAttributesInside := OrderedCollection new.
@@ -878,16 +877,28 @@ BrTextEditor >> processCursorAttributes [
 		do: [ :aStart :anEnd :anAttribute |
 			(self isFocused and: [
 				self cursors anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
-					ifTrue: [ eventHandlingAttributesInside add: anAttribute ]
-					ifFalse: [ eventHandlingAttributesOutside add: anAttribute ] ].
+					ifTrue: [ eventHandlingAttributesInside add: anAttribute -> (aStart to: anEnd) ]
+					ifFalse: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ].
 
-	eventHandlingAttributesOutside do: [ :eachEventHandlerAttribute |
-		(eachEventHandlerAttribute wantsEvent: aLeavedEvent in: self)
-			ifTrue: [ eachEventHandlerAttribute handleEvent: aLeavedEvent in: self on: nil ] ].
+	eventHandlingAttributesOutside do: [ :eachEventHandlerAttributeAndInterval |
+		| eachAttribute eachInterval |
+		
+		eachAttribute := eachEventHandlerAttributeAndInterval key.
+		eachInterval := eachEventHandlerAttributeAndInterval value.
+		aLeavedEvent interval: eachInterval.
+		
+		(eachAttribute wantsEvent: aLeavedEvent in: self)
+			ifTrue: [ eachAttribute handleEvent: aLeavedEvent in: self on: nil ] ].
 
-	eventHandlingAttributesInside do: [ :eachEventHandlerAttribute |
-		(eachEventHandlerAttribute wantsEvent: anEnteredEvent in: self)
-			ifTrue: [ eachEventHandlerAttribute handleEvent: anEnteredEvent in: self on: nil ] ]
+	eventHandlingAttributesInside do: [ :eachEventHandlerAttributeAndInterval |
+		| eachAttribute eachInterval |
+		
+		eachAttribute := eachEventHandlerAttributeAndInterval key.
+		eachInterval := eachEventHandlerAttributeAndInterval value.
+		anEnteredEvent interval: eachInterval.
+		
+		(eachAttribute wantsEvent: anEnteredEvent in: self)
+			ifTrue: [ eachAttribute handleEvent: anEnteredEvent in: self on: nil ] ]
 ]
 
 { #category : 'private - selection' }
