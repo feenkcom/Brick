@@ -7,7 +7,8 @@ Class {
 		'toDeselect',
 		'toMoveCursor',
 		'toAddCursor',
-		'shouldResetDesiredCoordinate'
+		'shouldResetDesiredCoordinate',
+		'toRemoveCursors'
 	],
 	#category : 'Brick-Editor-Model - Operators'
 }
@@ -43,6 +44,7 @@ BrExtendSelectionCommand >> initialize [
 	toDeselect := OrderedCollection new.
 	toMoveCursor := nil.
 	toAddCursor := nil.
+	toRemoveCursors := OrderedCollection new.
 	shouldResetDesiredCoordinate := true
 ]
 
@@ -51,12 +53,12 @@ BrExtendSelectionCommand >> shouldResetDesiredCoordinate [
 	^ shouldResetDesiredCoordinate
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - cursor' }
 BrExtendSelectionCommand >> toAddCursor: aPosition [
 	toAddCursor := aPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - cursor' }
 BrExtendSelectionCommand >> toAddCursorDo: aBlock [
 	toAddCursor ifNotNil: [ :aPosition | aBlock value: aPosition ]
 ]
@@ -76,15 +78,30 @@ BrExtendSelectionCommand >> toDeselectDo: aBlockWithOneArgument [
 	toDeselect do: aBlockWithOneArgument
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - cursor' }
 BrExtendSelectionCommand >> toMoveCursor: aCursor by: anAmount [
 	toMoveCursor := aCursor -> anAmount
 ]
 
-{ #category : 'accessing' }
+{ #category : 'accessing - cursor' }
 BrExtendSelectionCommand >> toMoveCursorDo: aBlock [
 	toMoveCursor ifNotNil: [ :anAssociation |
 		aBlock value: anAssociation key value: anAssociation value ]
+]
+
+{ #category : 'accessing - cursor' }
+BrExtendSelectionCommand >> toRemoveCursor: aCursor [
+	toRemoveCursors add: aCursor
+]
+
+{ #category : 'accessing - cursor' }
+BrExtendSelectionCommand >> toRemoveCursors: aCollectionOfCursors [
+	toRemoveCursors addAll: aCollectionOfCursors
+]
+
+{ #category : 'accessing - cursor' }
+BrExtendSelectionCommand >> toRemoveCursorsDo: aBlock [
+	toRemoveCursors do: aBlock
 ]
 
 { #category : 'accessing' }

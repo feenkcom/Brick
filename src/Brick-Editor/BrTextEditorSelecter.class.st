@@ -143,7 +143,8 @@ BrTextEditorSelecter >> from: aFromIndex to: aToIndex [
 	commands add: (BrExtendSelectionCommand new 
 		editor: editor;
 		toSelect: { BlSelection from: aFromIndex to: aToIndex };
-		toAddCursor: aToIndex)
+		toAddCursor: aToIndex;
+		toRemoveCursors: self cursors allCursors)
 ]
 
 { #category : 'initialization' }
@@ -445,6 +446,8 @@ BrTextEditorSelecter >> privatePerformSelectAndDeselectCommands: theCommands [
 			aNavigator move: eachCursor by: anAmount ].
 		aCommand toAddCursorDo: [ :aCursorPosition |
 			aNavigator addAt: aCursorPosition ].
+		aCommand toRemoveCursorsDo: [ :aCursor |
+			aNavigator remove: aCursor ].
 		aNavigator apply ].
 ]
 
@@ -479,6 +482,7 @@ BrTextEditorSelecter >> select [
 	self assertUIProcess.
 
 	self privatePerformSelectAndDeselectCommands: commands.
+	commands removeAll.
 
 	selection isEmpty
 		ifTrue: [ ^ self ].

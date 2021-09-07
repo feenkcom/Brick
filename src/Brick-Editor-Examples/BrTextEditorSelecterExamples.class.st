@@ -74,6 +74,48 @@ BrTextEditorSelecterExamples >> select_all_reduced [
 	^ anEditor
 ]
 
+{ #category : 'examples - from to' }
+BrTextEditorSelecterExamples >> select_from_0_to_5 [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnMultilineText.
+
+	anEditor selecter
+		from: 0 to: 5;
+		select.
+		
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 0 to: 5).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(5)).
+
+	^ anEditor
+]
+
+{ #category : 'examples - from to' }
+BrTextEditorSelecterExamples >> select_from_0_to_5_in_steps [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnMultilineText.
+
+	anEditor selecter
+		from: 0 to: 1;
+		select;
+		from: 1 to: 2;
+		select;
+		from: 2 to: 3;
+		select;
+		from: 3 to: 4;
+		select;
+		from: 4 to: 5;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 0 to: 5).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(5)).
+
+	^ anEditor
+]
+
 { #category : 'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
 	<gtExample>
