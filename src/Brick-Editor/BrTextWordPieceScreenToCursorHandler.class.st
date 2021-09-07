@@ -71,5 +71,6 @@ BrTextWordPieceScreenToCursorHandler >> relativeScreenToCursor: aTransformation 
 						aLocalTextPosition := aReceiverElement indexAtScreenPosition: (aDesiredCoordinate @ 0) + aReceiverElement padding topLeft .
 						aGlobalTextPosition := self localTextIndexToGlobal: aLocalTextPosition in: aReceiverElement.
 
+						
 						aTransformation transformed: aGlobalTextPosition ] ]
 ]

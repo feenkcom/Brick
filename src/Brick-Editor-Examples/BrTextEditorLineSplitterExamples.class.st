@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorLineSplitterExamples,
-	#superclass : #Object,
-	#category : #'Brick-Editor-Examples'
+	#name : 'BrTextEditorLineSplitterExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> beReplaceTextAttribute [
 	<gtExample>
 	^ BrTextAdornmentDynamicAttribute new
@@ -14,7 +14,7 @@ BrTextEditorLineSplitterExamples >> beReplaceTextAttribute [
 			background: Color lightGray ]
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningEmptyCollection [
 	<gtExample>
 	^ BrTextAdornmentDynamicAttribute new
@@ -22,7 +22,7 @@ BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningEmptyCollecti
 		stencil: [ #() ]
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningTwoElements [
 	<gtExample>
 	^ BrTextAdornmentDynamicAttribute new
@@ -36,7 +36,7 @@ BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningTwoElements [
 				background: Color gray } ]
 ]
 
-{ #category : #'examples - split subtext' }
+{ #category : 'examples - split subtext' }
 BrTextEditorLineSplitterExamples >> splitSub_Hello_from_HabaHelloFoo [
 	<gtExample>
 	| aText aSubText aSplitter aStream |
@@ -56,7 +56,7 @@ BrTextEditorLineSplitterExamples >> splitSub_Hello_from_HabaHelloFoo [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningEmptyCollection_FollowedByLf [
 	<gtExample>
 	| aText aSplitter aStream aTextAttribute theAttributes |
@@ -90,7 +90,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningEmptyCo
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningTwoElements_FollowedByLf [
 	<gtExample>
 	| aText aSplitter aStream aTextAttribute theAttributes |
@@ -124,7 +124,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningTwoElem
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtribute_FollowedByLf [
 	<gtExample>
 	| aText aSplitter aStream aTextAttribute theAttributes |
@@ -158,7 +158,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtribute_FollowedByLf [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_Cr [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -186,7 +186,7 @@ BrTextEditorLineSplitterExamples >> split_Cr [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CrCr [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -220,7 +220,7 @@ BrTextEditorLineSplitterExamples >> split_CrCr [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CrLf [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -248,7 +248,7 @@ BrTextEditorLineSplitterExamples >> split_CrLf [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CrLfCrLf [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -282,7 +282,7 @@ BrTextEditorLineSplitterExamples >> split_CrLfCrLf [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_Cra [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -308,7 +308,7 @@ BrTextEditorLineSplitterExamples >> split_Cra [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCr [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -339,7 +339,7 @@ BrTextEditorLineSplitterExamples >> split_CraCr [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCrLf [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -370,7 +370,7 @@ BrTextEditorLineSplitterExamples >> split_CraCrLf [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCrLfb [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -401,7 +401,7 @@ BrTextEditorLineSplitterExamples >> split_CraCrLfb [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCrLfbLf [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -440,7 +440,7 @@ BrTextEditorLineSplitterExamples >> split_CraCrLfbLf [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_Hello [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -461,7 +461,7 @@ BrTextEditorLineSplitterExamples >> split_Hello [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacement [
 	<gtExample>
 	| aText aSplitter aStream |
@@ -481,7 +481,7 @@ BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacement
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacementAndAppending [
 	<gtExample>
 	| aText aSplitter aStream |
@@ -503,7 +503,7 @@ BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacement
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloCrWorldWithReplacement [
 	<gtExample>
 	| aText aSplitter aStream |
@@ -523,7 +523,7 @@ BrTextEditorLineSplitterExamples >> split_HelloCrWorldWithReplacement [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloSpaceWorldWithReplacementOfSpace [
 	<gtExample>
 	| aText aSplitter aStream |
@@ -543,7 +543,7 @@ BrTextEditorLineSplitterExamples >> split_HelloSpaceWorldWithReplacementOfSpace 
 	^ aStream
 ]
 
-{ #category : #'examples - split subtext' }
+{ #category : 'examples - split subtext' }
 BrTextEditorLineSplitterExamples >> split_Hello_from_HabaHelloFoo [
 	<gtExample>
 	| aText aSplitter aStream |
@@ -562,7 +562,7 @@ BrTextEditorLineSplitterExamples >> split_Hello_from_HabaHelloFoo [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_a [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -583,7 +583,7 @@ BrTextEditorLineSplitterExamples >> split_a [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_empty [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -604,7 +604,7 @@ BrTextEditorLineSplitterExamples >> split_empty [
 	^ aStream
 ]
 
-{ #category : #'examples - split' }
+{ #category : 'examples - split' }
 BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 	<gtExample>
 	| aText aSplitter aStream aSegment |
@@ -640,14 +640,14 @@ BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 	^ aStream
 ]
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrTextEditorLineSplitterExamples >> textLineSplitter [
 	<gtExample>
 
 	^ BrTextEditorLineSplitter new
 ]
 
-{ #category : #'examples - instance creation' }
+{ #category : 'examples - instance creation' }
 BrTextEditorLineSplitterExamples >> textSegmentStream [
 	<gtExample>
 

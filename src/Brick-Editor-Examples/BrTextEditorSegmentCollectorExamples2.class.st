@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorSegmentCollectorExamples2,
-	#superclass : #Object,
-	#category : #'Brick-Editor-Examples'
+	#name : 'BrTextEditorSegmentCollectorExamples2',
+	#superclass : 'Object',
+	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorSegmentCollectorExamples2 >> retrieveLimitPlusOne [
 	<gtExample>
 	| string limit editor collector |
@@ -31,7 +31,7 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveLimitPlusOne [
 
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorSegmentCollectorExamples2 >> retrieveWithinLimit [
 	<gtExample>
 	| string limit editor collector |

@@ -31,22 +31,22 @@
 
 "
 Class {
-	#name : #BrTextEditorExamples,
-	#superclass : #Object,
+	#name : 'BrTextEditorExamples',
+	#superclass : 'Object',
 	#classInstVars : [
 		'loremIpsum'
 	],
-	#category : #'Brick-Editor-Examples'
+	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BrTextEditorExamples class >> cleanUp [
 	super cleanUp.
 	
 	loremIpsum := nil 
 ]
 
-{ #category : #'examples - comparison' }
+{ #category : 'examples - comparison' }
 BrTextEditorExamples class >> exampleEditor [
 	| space editorElement editor text |
 
@@ -67,7 +67,7 @@ BrTextEditorExamples class >> exampleEditor [
 	space show
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples class >> exampleMethodTextOpen [
 	| space editorElement |
 
@@ -89,7 +89,7 @@ BrTextEditorExamples class >> exampleMethodTextOpen [
 	space show.
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples class >> exampleMethodTextOpenEmbedElement [
 	| space editorElement |
 
@@ -110,7 +110,7 @@ BrTextEditorExamples class >> exampleMethodTextOpenEmbedElement [
 	space show.
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples class >> exampleTextOpen [
 	| space editorElement |
 	
@@ -132,17 +132,17 @@ BrTextEditorExamples class >> exampleTextOpen [
 	space show
 ]
 
-{ #category : #'examples - comparison' }
+{ #category : 'examples - comparison' }
 BrTextEditorExamples class >> extent [
 	^ 600@400
 ]
 
-{ #category : #'examples - comparison' }
+{ #category : 'examples - comparison' }
 BrTextEditorExamples class >> loremIpsum [
 	^ self loremIpsum: 1000000
 ]
 
-{ #category : #'examples - comparison' }
+{ #category : 'examples - comparison' }
 BrTextEditorExamples class >> loremIpsum: aLength [
 	loremIpsum ifNil: [ loremIpsum := Dictionary new ].
 	^ loremIpsum
@@ -150,20 +150,20 @@ BrTextEditorExamples class >> loremIpsum: aLength [
 			ifAbsentPut: [ String loremIpsum: aLength ]
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> adormentDynamicAttribute [
 	<gtExample>
 	
 	^ self newElement editor: self editorWithAdormentDynamicAttribute
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> brickString [
 	<gtExample>
 	^ 'Brick'
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> editorWithAdormentDynamicAttribute [
 	<gtExample>
 	| editor text |
@@ -182,7 +182,7 @@ BrTextEditorExamples >> editorWithAdormentDynamicAttribute [
 	^ editor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningEmptyCollection [
 	<gtExample>
 	| editor text |
@@ -197,7 +197,7 @@ BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningEmptyCollecti
 	^ editor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningTwoElements [
 	<gtExample>
 	| editor text |
@@ -220,7 +220,7 @@ BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningTwoElements [
 	^ editor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> editorWithBrickText [
 	<gtExample>
 	| anEditor aText |
@@ -231,7 +231,7 @@ BrTextEditorExamples >> editorWithBrickText [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> editorWithLastHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -242,13 +242,13 @@ BrTextEditorExamples >> editorWithLastHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #'examples - editor' }
+{ #category : 'examples - editor' }
 BrTextEditorExamples >> editorWithMethod [
 	<gtExample>
 	^ self newEditor text: self newMethodText
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> editorWithSecondHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -259,13 +259,13 @@ BrTextEditorExamples >> editorWithSecondHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> editorWithText [
 	<gtExample>
 	^ self newEditor text: self newText
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> elementOnMethodWithSyntaxHighlighting [
 	<gtExample>
 	| element styler text editor |
@@ -280,28 +280,28 @@ BrTextEditorExamples >> elementOnMethodWithSyntaxHighlighting [
 	^ element
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> elementWithEditor [
 	<gtExample>
 	
 	^ self newElement editor: self editorWithText
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> elementWithEmptyEditor [
 	<gtExample>
 	
 	^ self newElement editor: (self newEditor text: (' ' asRopedText fontSize: 16; monospace))
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BrTextEditorExamples >> elementWithMethod [
 	<gtExample>
 	
 	^ self newElement editor: self editorWithMethod
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorExamples >> fullDrawOn: aCanvas [
 	"Draw the full Morphic structure on the given Canvas"
 
@@ -331,7 +331,7 @@ BrTextEditorExamples >> fullDrawOn: aCanvas [
 	]
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> insertAStringAfterLastHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -341,7 +341,7 @@ BrTextEditorExamples >> insertAStringAfterLastHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> insertAStringAfterSecondHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -351,7 +351,7 @@ BrTextEditorExamples >> insertAStringAfterSecondHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> insertLineFeedString [
 	<gtExample>
 	| anEditor |
@@ -361,7 +361,7 @@ BrTextEditorExamples >> insertLineFeedString [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> insertLineFeedStringAfterLastHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -371,7 +371,7 @@ BrTextEditorExamples >> insertLineFeedStringAfterLastHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> insertLineFeedStringAfterSecondHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -381,7 +381,7 @@ BrTextEditorExamples >> insertLineFeedStringAfterSecondHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> insertLineFeedStringBeforeSecondHiddenCharacter [
 	<gtExample>
 	| anEditor |
@@ -391,7 +391,7 @@ BrTextEditorExamples >> insertLineFeedStringBeforeSecondHiddenCharacter [
 	^ anEditor
 ]
 
-{ #category : #'examples - editing' }
+{ #category : 'examples - editing' }
 BrTextEditorExamples >> newBeReplaceTextAttribute [
 	<gtExample>
 	^ BrTextAdornmentDynamicAttribute new
@@ -401,14 +401,14 @@ BrTextEditorExamples >> newBeReplaceTextAttribute [
 			background: Color lightGray ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorExamples >> newEditor [
 	<gtExample>
 
 	^ BrTextEditor new beLineBased
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorExamples >> newElement [
 	<gtExample>
 	
@@ -419,21 +419,21 @@ BrTextEditorExamples >> newElement [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorExamples >> newMethodText [
 	<gtExample>
 	
 	^ BlRopedText string: (BrTextEditorExamples>>#fullDrawOn:) sourceCode
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorExamples >> newText [
 	<gtExample>
 	
 	^ BlRopedText string: (String loremIpsum: 2000000)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorExamples >> newThreeLineText [
 	<gtExample>
 	

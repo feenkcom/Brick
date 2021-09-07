@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextCursorAttributeExamples,
-	#superclass : #BrTextEditorAdornmentsExamples,
-	#category : #'Brick-Editor-Examples-! Documentation'
+	#name : 'BrTextCursorAttributeExamples',
+	#superclass : 'BrTextEditorAdornmentsExamples',
+	#category : 'Brick-Editor-Examples-! Documentation'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 BrTextCursorAttributeExamples >> changingForeground [
 	<gtExample>
 	| text |

@@ -1,10 +1,10 @@
 Class {
-	#name : #BrTextEditorMementoExamples,
-	#superclass : #Object,
-	#category : #'Brick-Editor-Examples-Model'
+	#name : 'BrTextEditorMementoExamples',
+	#superclass : 'Object',
+	#category : 'Brick-Editor-Examples-Model'
 }
 
-{ #category : #'examples - memento' }
+{ #category : 'examples - memento' }
 BrTextEditorMementoExamples >> editorRestoreState [
 	<gtExample>
 	| aMemento aTextEditor |
@@ -17,7 +17,7 @@ BrTextEditorMementoExamples >> editorRestoreState [
 	^ aTextEditor
 ]
 
-{ #category : #'examples - memento' }
+{ #category : 'examples - memento' }
 BrTextEditorMementoExamples >> editorSaveState [
 	<gtExample>
 	| aTextEditor aMemento |
@@ -28,7 +28,7 @@ BrTextEditorMementoExamples >> editorSaveState [
 	^ aMemento
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorMementoExamples >> newTextEditor [
 	<gtExample>
 	| aTextEditor |
@@ -37,7 +37,7 @@ BrTextEditorMementoExamples >> newTextEditor [
 	^ aTextEditor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrTextEditorMementoExamples >> textEditorWithState [
 	<gtExample>
 	| aTextEditor |

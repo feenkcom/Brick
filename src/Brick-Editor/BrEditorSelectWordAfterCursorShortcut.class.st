@@ -33,11 +33,6 @@ BrEditorSelectWordAfterCursorShortcut >> name [
 { #category : 'evaluation' }
 BrEditorSelectWordAfterCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
-		withoutCursorUpdate;
 		extendToNextWordEnd;
-		select.
-
-	aBrTextEditor navigator
-		moveToEndNextWord;
-		apply
+		select
 ]

@@ -30,7 +30,7 @@ BrTextEditorScreenToCursorCommand >> newHolderCommand [
 { #category : 'executing' }
 BrTextEditorScreenToCursorCommand >> relativeScreenToCursor: aTransformation for: aTextEditor [
 
-	"we convert a pure screen position, should send to all segment holders"
+	"we convert a relative screen position, should send only to the segment at the cursor position"
 	aTextEditor segmentCollector
 		cachedSegmentAt: self transformation cursor position
 		ifFound: [ :aSegment |

@@ -24,10 +24,6 @@ BrEditorSelectLetterAfterCursorShortcut >> name [
 { #category : 'evaluation' }
 BrEditorSelectLetterAfterCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
-		withoutCursorUpdate;
 		moveOneToRight;
-		select.
-	aBrTextEditor navigator
-		moveRight;
-		apply
+		select
 ]
