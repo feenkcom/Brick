@@ -540,8 +540,8 @@ BrTextEditor >> notifyAttributesWithinCursor: aCollectionOfAttributes [
 	theEventHandlingAttributes := (aCollectionOfAttributes select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
 	
 	self text
-		attributesAndIndicesSuchThat: [ :eachAttribute | theEventHandlingAttributes includes:  eachAttribute ]
-		do: [ :aStart :anEnd :eachAttribute |
+		findAttributesSuchThat: [ :eachAttribute | theEventHandlingAttributes includes:  eachAttribute ]
+		indicesDo: [ :aStart :anEnd :eachAttribute |
 			(self cursors anySatisfy: [ :eachCursor |
 					eachCursor position between: aStart and: anEnd ])
 						ifTrue: [
@@ -789,16 +789,14 @@ BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 			aBlTextStyledEvent editorElement telemetry
 				timeSync: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
 				during: [ aBlTextStyledEvent afterAction value: self text. ].
-
-			aBlTextStyledEvent editorElement telemetry
-				timeSync: [ 'processCursorAttributes' ]
-				during: [
-						"notify the event handling attributes that they are within the cursors"
-						self processCursorAttributes ].
 			
 			aBlTextStyledEvent editorElement telemetry
 				timeSync: [ 'notifyTextStyled' ]
 				during: [ self notifyTextStyled: self text ].
+			
+			aBlTextStyledEvent editorElement telemetry
+				timeSync: [ 'processCursorAttributes' ]
+				during: [ self processCursorAttributes ].
 			
 			aBlTextStyledEvent editorElement telemetry
 				timeSync: [ 'Invalidate the whole text editor due to text change' ]
@@ -873,8 +871,8 @@ BrTextEditor >> processCursorAttributes [
 	eventHandlingAttributesInside := OrderedCollection new.
 
 	self text
-		attributesAndIndicesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
-		do: [ :aStart :anEnd :anAttribute |
+		findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
+		indicesDo: [ :aStart :anEnd :anAttribute |
 			(self isFocused and: [
 				self cursors anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
 					ifTrue: [ eventHandlingAttributesInside add: anAttribute -> (aStart to: anEnd) ]

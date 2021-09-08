@@ -74,7 +74,7 @@ BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
 
 	self position > anEditorText size
 		ifTrue: [ ^ self ].
-		
+
 	self position <= 0
 		ifTrue: [ ^ self ].
 	
