@@ -33,11 +33,11 @@ BrTextCursorAttribute >> enterAction: aBlock [
 BrTextCursorAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	"Handle a given event or dispatch it using #sendTo:"
 
-	(anEvent isKindOf: BrTextEditorCursorAddedEvent)
+	(anEvent isKindOf: BrTextCursorAttributeEnterEvent)
 		ifTrue: [ self performEnterAction: anEvent in: aTextEditor ].
 
-	(anEvent isKindOf: BrTextEditorCursorRemovedEvent)
-		ifTrue: [ self performLeaveAction: anEvent in: aTextEditor ].
+	(anEvent isKindOf: BrTextCursorAttributeLeaveEvent)
+		ifTrue: [ self performLeaveAction: anEvent in: aTextEditor ]
 ]
 
 { #category : 'initialization' }
@@ -71,16 +71,11 @@ BrTextCursorAttribute >> performEnterAction: anEvent in: aTextEditor [
 
 	isInside := true.
 	
-	aTextEditor text
-		findAttribute: self
-		indicesDo: [ :aStart :anEnd |
-			self enterAction glamourValueWithArgs: {
-				aTextEditor. "then the whole editor element"
-				anEvent. "the event itself"
-				aStart.
-				anEnd
-			}
-		].
+	self enterAction glamourValueWithArgs: {
+		aTextEditor. "then the whole editor element"
+		anEvent. "the event itself"
+		anEvent attributeStart.
+		anEvent attributeEnd }
 ]
 
 { #category : 'private' }
@@ -90,16 +85,11 @@ BrTextCursorAttribute >> performLeaveAction: anEvent in: aTextEditor [
 
 	isInside := false.
 
-	aTextEditor text
-		findAttribute: self
-		indicesDo: [ :aStart :anEnd |
-			self leaveAction glamourValueWithArgs: {
-				aTextEditor. "then the whole editor element"
-				anEvent. "the event itself"
-				aStart.
-				anEnd
-			}
-		]
+	self leaveAction glamourValueWithArgs: {
+		aTextEditor. "then the whole editor element"
+		anEvent. "the event itself"
+		anEvent attributeStart.
+		anEvent attributeEnd }
 ]
 
 { #category : 'events' }
@@ -108,6 +98,6 @@ BrTextCursorAttribute >> wantsEvent: anEvent in: aTextEditor [
 	false otherwise"
 	<return: #Boolean>
 
-	^ (anEvent isKindOf: BrTextEditorCursorAddedEvent)
-		or: [ anEvent isKindOf: BrTextEditorCursorRemovedEvent ]
+	^ (anEvent isKindOf: BrTextCursorAttributeEnterEvent)
+		or: [ anEvent isKindOf: BrTextCursorAttributeLeaveEvent ]
 ]
