@@ -1,25 +1,25 @@
 Class {
-	#name : #BrDevAptitudeGraphOverview,
-	#superclass : #BrVerticalPane,
+	#name : 'BrDevAptitudeGraphOverview',
+	#superclass : 'BrVerticalPane',
 	#instVars : [
 		'lookClass'
 	],
-	#category : #'Brick-DevTool'
+	#category : 'Brick-DevTool'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevAptitudeGraphOverview >> aptitudeClass [
 	^ lookClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevAptitudeGraphOverview >> aptitudeClass: anObject [
 	lookClass := anObject.
 
 	self addChild: (BrVerticalPane new matchParent addChild: self buildLookAndModelGraph asPannableElement).
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeGraphOverview >> buildLookAndModelGraph [
 	| aMondrian |
 	aMondrian := GtMondrian new.
@@ -137,7 +137,7 @@ BrDevAptitudeGraphOverview >> buildLookAndModelGraph [
 	^ aMondrian root clipChildren: false
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeGraphOverview >> buildNodeForClass: aLookClass [
 	| aContainer |
 	
@@ -180,7 +180,7 @@ BrDevAptitudeGraphOverview >> buildNodeForClass: aLookClass [
 		addChild: aContainer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDevAptitudeGraphOverview >> initialize [
 	super initialize.
 	

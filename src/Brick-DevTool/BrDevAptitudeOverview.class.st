@@ -1,18 +1,18 @@
 Class {
-	#name : #BrDevAptitudeOverview,
-	#superclass : #BrVerticalPane,
+	#name : 'BrDevAptitudeOverview',
+	#superclass : 'BrVerticalPane',
 	#instVars : [
 		'aptitudeClass'
 	],
-	#category : #'Brick-DevTool'
+	#category : 'Brick-DevTool'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevAptitudeOverview >> aptitudeClass [
 	^ aptitudeClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevAptitudeOverview >> aptitudeClass: anObject [
 	aptitudeClass := anObject.
 		
@@ -29,7 +29,7 @@ BrDevAptitudeOverview >> aptitudeClass: anObject [
 		))
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildCategoryLabel: aString [
 	^ BrLabel new
 		beSmallSize;
@@ -40,7 +40,7 @@ BrDevAptitudeOverview >> buildCategoryLabel: aString [
 		text: aString
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildCategoryLabel: aString content: anElement [
 	^ BrVerticalPane new
 		matchParent;
@@ -48,7 +48,7 @@ BrDevAptitudeOverview >> buildCategoryLabel: aString content: anElement [
 		addChild: anElement
 ]
 
-{ #category : #'private - references' }
+{ #category : 'private - references' }
 BrDevAptitudeOverview >> buildCoderArtifactReferenceList: aListOfWishReferences [
 	| aList theMethodsAndTheirReference theMethodGroups |
 	
@@ -77,7 +77,7 @@ BrDevAptitudeOverview >> buildCoderArtifactReferenceList: aListOfWishReferences 
 	^ aList
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildEventsList [
 	| aList |
 	
@@ -90,7 +90,7 @@ BrDevAptitudeOverview >> buildEventsList [
 	^ aList
 ]
 
-{ #category : #'private - section events' }
+{ #category : 'private - section events' }
 BrDevAptitudeOverview >> buildEventsSection [
 	| aContainer theEvents |
 	
@@ -119,7 +119,7 @@ BrDevAptitudeOverview >> buildEventsSection [
 	^ aContainer
 ]
 
-{ #category : #'private - references' }
+{ #category : 'private - references' }
 BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
 	^ BrGlamorousTrangleExpanderTextAttribute new 
 		attributesCreatingBlock: [
@@ -133,7 +133,7 @@ BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
 						constraintsDo: [ :c | c textFlow pushLine ] ] ]
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildLookHierarchy [
 	^ BrSimpleTree new
 		matchParent;
@@ -147,7 +147,7 @@ BrDevAptitudeOverview >> buildLookHierarchy [
 		expandAll
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildRequestsList [
 	| aList |
 	
@@ -160,7 +160,7 @@ BrDevAptitudeOverview >> buildRequestsList [
 	^ aList
 ]
 
-{ #category : #'private - section requests' }
+{ #category : 'private - section requests' }
 BrDevAptitudeOverview >> buildRequestsSection [
 	| aContainer theRequests |
 	
@@ -189,7 +189,7 @@ BrDevAptitudeOverview >> buildRequestsSection [
 	^ aContainer
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildSectionLabel: aString [
 	^ BrLabel new
 		beHugeSize;
@@ -203,7 +203,7 @@ BrDevAptitudeOverview >> buildSectionLabel: aString [
 		text: aString
 ]
 
-{ #category : #'private - references' }
+{ #category : 'private - references' }
 BrDevAptitudeOverview >> buildSmallReferencesList: aListOfLookArtifactReferences [
 	| aList |
 	
@@ -220,7 +220,7 @@ BrDevAptitudeOverview >> buildSmallReferencesList: aListOfLookArtifactReferences
 	^ aList
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BrDevAptitudeOverview >> buildWishesList [
 	| aList |
 	
@@ -233,7 +233,7 @@ BrDevAptitudeOverview >> buildWishesList [
 	^ aList
 ]
 
-{ #category : #'private - section wishes' }
+{ #category : 'private - section wishes' }
 BrDevAptitudeOverview >> buildWishesSection [
 	| aContainer theWishes |
 
@@ -262,7 +262,7 @@ BrDevAptitudeOverview >> buildWishesSection [
 	^ aContainer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDevAptitudeOverview >> initialize [
 	super initialize.
 	
@@ -270,19 +270,19 @@ BrDevAptitudeOverview >> initialize [
 	self padding: (BlInsets left: 10 right: 10)
 ]
 
-{ #category : #'private - section events' }
+{ #category : 'private - section events' }
 BrDevAptitudeOverview >> whatIsEvent [
 	^ ('Typically UI Events that are handled by the Look')
 		asRopedText glamorousRegularFont glamorousRegularSmallSize
 ]
 
-{ #category : #'private - section requests' }
+{ #category : 'private - section requests' }
 BrDevAptitudeOverview >> whatIsRequest [
 	^ ('Request is a special Event sent by the Look to request data from the Widget Model.')
 		asRopedText glamorousRegularFont glamorousRegularSmallSize
 ]
 
-{ #category : #'private - section wishes' }
+{ #category : 'private - section wishes' }
 BrDevAptitudeOverview >> whatIsWish [
 	^ ('Wish is a special Event handled by the Look to perform various actions.')
 		asRopedText glamorousRegularFont glamorousRegularSmallSize

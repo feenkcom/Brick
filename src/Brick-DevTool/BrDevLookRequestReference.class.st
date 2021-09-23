@@ -1,5 +1,5 @@
 Class {
-	#name : #BrDevLookRequestReference,
-	#superclass : #BrDevLookArtifactReference,
-	#category : #'Brick-DevTool'
+	#name : 'BrDevLookRequestReference',
+	#superclass : 'BrDevLookArtifactReference',
+	#category : 'Brick-DevTool'
 }
