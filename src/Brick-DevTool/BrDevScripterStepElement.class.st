@@ -1,20 +1,20 @@
 Class {
-	#name : #BrDevScripterStepElement,
-	#superclass : #BlElement,
+	#name : 'BrDevScripterStepElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'labelElement',
 		'targetElement',
 		'statusElement'
 	],
-	#category : #'Brick-DevTool'
+	#category : 'Brick-DevTool'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrDevScripterStepElement class >> newFromStep: aBlDevScripterStep [
 	^ self new initializeFromStep: aBlDevScripterStep
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDevScripterStepElement >> initialize [
 	| contents |
 	super initialize.
@@ -41,7 +41,7 @@ BrDevScripterStepElement >> initialize [
 	contents addChild: targetElement as: #target.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 	| aStepText aTargetStep |
 	statusElement background: aBlDevScripterStep stateColor.
@@ -53,7 +53,7 @@ BrDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 	targetElement text: aTargetStep.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDevScripterStepElement >> initializeLabelElement [
 	labelElement := BrLabel new 
 		zIndex: 10;
@@ -65,12 +65,12 @@ BrDevScripterStepElement >> initializeLabelElement [
 		text: 'Step' asRopedText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevScripterStepElement >> initializeStatusElement [
 	statusElement := BrVerticalPane new vMatchParent; hExact: 15; background: Color white
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrDevScripterStepElement >> initializeTargetElement [
 	targetElement := BrLabel new
 		aptitude: (BrGlamorousLabelAptitude new fontSize: 10; foreground: Color gray); 

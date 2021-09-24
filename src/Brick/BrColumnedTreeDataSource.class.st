@@ -44,6 +44,7 @@ BrColumnedTreeDataSource >> onBindHolder: anElementHolder at: aPosition [
 			
 			eachColumn dataBinder
 				cellElement: eachCellElement;
+				itemObject: anItemNode value;
 				rowObject: anItemNode value;
 				rowIndex: aPosition;
 				rowHolder: anElementHolder;

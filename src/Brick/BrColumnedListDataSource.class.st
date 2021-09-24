@@ -42,6 +42,7 @@ BrColumnedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 			
 			eachColumn dataBinder
 				cellElement: eachCellElement;
+				itemObject: anItemObject;
 				rowObject: anItemObject;
 				rowIndex: aPosition;
 				rowHolder: anElementHolder;

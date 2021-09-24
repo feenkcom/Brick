@@ -6,7 +6,8 @@ Class {
 		'rowObject',
 		'rowIndex',
 		'rowHolder',
-		'columnIndex'
+		'columnIndex',
+		'itemObject'
 	],
 	#category : 'Brick-Column - Stencil'
 }
@@ -38,11 +39,21 @@ BrColumnCellDataBinder >> columnIndex: anObject [
 	columnIndex := anObject
 ]
 
+{ #category : 'accessing' }
+BrColumnCellDataBinder >> itemObject [
+	^ itemObject
+]
+
+{ #category : 'accessing' }
+BrColumnCellDataBinder >> itemObject: anObject [
+	itemObject := anObject
+]
+
 { #category : 'api - instantiation' }
 BrColumnCellDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self cellElement;
-		push: self rowObject;
+		push: self itemObject;
 		push: self rowIndex;
 		push: self rowHolder;
 		push: self columnIndex

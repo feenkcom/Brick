@@ -1,40 +1,40 @@
 Class {
-	#name : #BrDevLookArtifactReference,
-	#superclass : #Object,
+	#name : 'BrDevLookArtifactReference',
+	#superclass : 'Object',
 	#instVars : [
 		'lookClass',
 		'artifact',
 		'methods'
 	],
-	#category : #'Brick-DevTool'
+	#category : 'Brick-DevTool'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevLookArtifactReference >> aptitudeClass [
 	^ lookClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevLookArtifactReference >> aptitudeClass: anObject [
 	lookClass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevLookArtifactReference >> artifact [
 	^ artifact
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevLookArtifactReference >> artifact: anObject [
 	artifact := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevLookArtifactReference >> methods [
 	^ methods
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrDevLookArtifactReference >> methods: anObject [
 	methods := anObject
 ]
