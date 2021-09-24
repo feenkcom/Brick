@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'itemPosition',
 		'itemObject',
-		'itemElement'
+		'itemElement',
+		'rowObject'
 	],
 	#category : 'Brick-List - Stencil'
 }
@@ -69,4 +70,14 @@ BrListItemDataBinder >> reset [
 	itemObject := nil.
 	itemPosition := nil.
 	itemElement := nil
+]
+
+{ #category : 'accessing' }
+BrListItemDataBinder >> rowObject [
+	^ rowObject
+]
+
+{ #category : 'accessing' }
+BrListItemDataBinder >> rowObject: anObject [
+	rowObject := anObject
 ]

@@ -29,6 +29,7 @@ BrSimpleListDataSource >> onBindHolder: anElementHolder at: aPosition [
 	anItemElementWithBindedData := itemDataBinder
 		itemElement: anElementHolder itemElement;
 		itemObject: anItemObject;
+		rowObject: anItemObject;
 		itemPosition: aPosition;
 		asElement.
 

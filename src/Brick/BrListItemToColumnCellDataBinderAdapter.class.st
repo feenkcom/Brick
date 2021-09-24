@@ -11,7 +11,8 @@ Class {
 BrListItemToColumnCellDataBinderAdapter >> buildDefault [
 	^ listItemDataBinder
 		itemElement: cellElement;
-		itemObject: rowObject;
+		itemObject: itemObject;
+		rowObject: rowObject;
 		itemPosition: rowIndex;
 		build
 ]
