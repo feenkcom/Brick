@@ -1,6 +1,8 @@
 Class {
 	#name : 'BrFromFuture',
 	#superclass : 'BlElement',
+	#traits : 'TBrLayoutResizable',
+	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'future',
 		'dataSnapshot',
@@ -17,13 +19,18 @@ BrFromFuture >> dataBinder: aFromFutureDataBinder [
 	elementDataBinder := aFromFutureDataBinder asStencilBuilder: BrFromFutureDataBinder
 ]
 
-{ #category : 'api - accessing' }
-BrFromFuture >> future: aFuture [
-	self future: aFuture initialData: nil
+{ #category : 'initialization' }
+BrFromFuture >> defaultLayout [
+	^ BlFrameLayout new
 ]
 
 { #category : 'api - accessing' }
-BrFromFuture >> future: aFuture initialData: anObject [
+BrFromFuture >> future: aFuture [
+	self future: aFuture initialValue: nil
+]
+
+{ #category : 'api - accessing' }
+BrFromFuture >> future: aFuture initialValue: anObject [
 	future := aFuture asFuture.
 	dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject
 ]
