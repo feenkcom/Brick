@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrCollapsedState',
-	#superclass : 'BrExpansionState',
+	#name : #BrCollapsedState,
+	#superclass : #BrExpansionState,
 	#category : 'Brick-! Core - Expansion'
 }
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrCollapsedState >> optionalOnAddedTo: anElement [
 	anElement dispatchEvent: BrCollapsedEvent new
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrCollapsedState >> printOn: aStream [
 	aStream nextPutAll: 'collapsed'
 ]

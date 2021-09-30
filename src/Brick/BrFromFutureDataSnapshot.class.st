@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrFromFutureDataSnapshot',
-	#superclass : 'Object',
+	#name : #BrFromFutureDataSnapshot,
+	#superclass : #Object,
 	#instVars : [
 		'state'
 	],
@@ -12,14 +12,14 @@ Class {
 	#category : 'Brick-Future - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFutureDataSnapshot class >> initialize [
 	DataState := #data.
 	ErrorState := #error.
 	PendingState := #pending
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataSnapshot >> data [
 	self
 		assert: [ self hasData ]
@@ -28,7 +28,7 @@ BrFromFutureDataSnapshot >> data [
 	^ state value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataSnapshot >> error [
 	self
 		assert: [ self hasError ]
@@ -37,17 +37,17 @@ BrFromFutureDataSnapshot >> error [
 	^ state value
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrFromFutureDataSnapshot >> hasData [
 	^ state key = DataState
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrFromFutureDataSnapshot >> hasError [
 	^ state key = ErrorState
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataSnapshot >> ifSuccess: aDataBlock ifError: anErrorBlock ifPending: aPendingBlock [
 	self hasData
 		ifTrue: [ ^ aDataBlock cull: self data ].
@@ -59,7 +59,7 @@ BrFromFutureDataSnapshot >> ifSuccess: aDataBlock ifError: anErrorBlock ifPendin
 		ifTrue: [ ^ aPendingBlock cull: self initialData ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataSnapshot >> ifSuccess: aDataBlock ifPending: aPendingBlock [
 	^ self
 		ifSuccess: aDataBlock
@@ -67,7 +67,7 @@ BrFromFutureDataSnapshot >> ifSuccess: aDataBlock ifPending: aPendingBlock [
 		ifPending: aPendingBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataSnapshot >> initialData [
 	self
 		assert: [ self isPending ]
@@ -76,29 +76,29 @@ BrFromFutureDataSnapshot >> initialData [
 	^ state value
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFutureDataSnapshot >> initialize [
 	super initialize.
 	
 	state := PendingState -> nil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrFromFutureDataSnapshot >> isPending [
 	^ state key = PendingState
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFutureDataSnapshot >> setData: theData [
 	state := DataState -> theData
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFutureDataSnapshot >> setError: anError [
 	state := ErrorState -> anError
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFutureDataSnapshot >> setPending: anInitialOrPreviousData [
 	state := PendingState -> anInitialOrPreviousData
 ]

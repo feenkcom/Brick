@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrAnchoredTopCenterAvailableBounds',
-	#superclass : 'BrAnchoredAvailableBounds',
+	#name : #BrAnchoredTopCenterAvailableBounds,
+	#superclass : #BrAnchoredAvailableBounds,
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredTopCenterAvailableBounds class >> label [
 	^ 'Top center'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredTopCenterAvailableBounds >> in: aBounds from: aPoint [
 	| width |
 	width := aBounds width - aPoint x min: aPoint x.

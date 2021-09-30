@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrListEmptyItemsProvider',
-	#superclass : 'BrAbstractListItemsProvider',
+	#name : #BrListEmptyItemsProvider,
+	#superclass : #BrAbstractListItemsProvider,
 	#category : 'Brick-List - Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListEmptyItemsProvider >> currentItems [
 	^ #()
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListEmptyItemsProvider >> itemAt: anIndex [
 	^ self currentItems at: anIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListEmptyItemsProvider >> itemCount [
 	<return: #Number>
 

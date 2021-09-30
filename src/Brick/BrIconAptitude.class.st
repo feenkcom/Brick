@@ -10,22 +10,22 @@ For example in a subclass of a ViewModel override ==#onAttachedTo:== and impleme
 ]]]
 "
 Class {
-	#name : 'BrIconAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrIconAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'iconElement'
 	],
 	#category : 'Brick-! Core - Looks'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrIconAptitude >> icon [
 	<return: #BlElement>
 
 	^ iconElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrIconAptitude >> icon: aStencilOrElement [
 	self
 		assert: [ aStencilOrElement isNotNil ]
@@ -35,12 +35,12 @@ BrIconAptitude >> icon: aStencilOrElement [
 	self updateIcon
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrIconAptitude >> iconDo: aBlock [
 	aBlock value: self icon
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrIconAptitude >> initialize [
 	super initialize.
 
@@ -57,14 +57,14 @@ BrIconAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrIconAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrIconChanged do: [ :anEvent | self icon: anEvent icon ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrIconAptitude >> initializeRequests [
 	super initializeRequests.
 
@@ -72,7 +72,7 @@ BrIconAptitude >> initializeRequests [
 	self request: BrIconRequest new
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrIconAptitude >> updateIcon [
 	self widgetDo: [ self widgetContent
 		childNamed: #icon

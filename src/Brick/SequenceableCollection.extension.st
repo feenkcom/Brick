@@ -1,6 +1,6 @@
-Extension { #name : 'SequenceableCollection' }
+Extension { #name : #SequenceableCollection }
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 SequenceableCollection >> asBrItemsProvider [
 	^ BrListSequenceableCollectionItemsProvider forCollection: self
 ]

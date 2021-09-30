@@ -1,40 +1,40 @@
 Class {
-	#name : 'BrAbstractListItemsProvider',
-	#superclass : 'BrWidgetModel',
+	#name : #BrAbstractListItemsProvider,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'listModel'
 	],
 	#category : 'Brick-List - Model'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrAbstractListItemsProvider >> asBrItemsProvider [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAbstractListItemsProvider >> attachToListModel: aListModel [
 	listModel := aListModel
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAbstractListItemsProvider >> currentItems [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAbstractListItemsProvider >> itemAt: anIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAbstractListItemsProvider >> itemCount [
 	<return: #Number>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAbstractListItemsProvider >> listModel [
 
 	^ listModel

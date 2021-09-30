@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrContextMenuStencilRequest',
-	#superclass : 'BrAnchoredStencilRequest',
+	#name : #BrContextMenuStencilRequest,
+	#superclass : #BrAnchoredStencilRequest,
 	#category : 'Brick-Context Menu - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrContextMenuStencilRequest >> responseClass [
 	^ BrContextMenuStencilChanged
 ]

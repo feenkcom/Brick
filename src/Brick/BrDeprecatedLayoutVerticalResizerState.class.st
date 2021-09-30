@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrDeprecatedLayoutVerticalResizerState',
-	#superclass : 'BrDeprecatedLayoutResizerState',
+	#name : #BrDeprecatedLayoutVerticalResizerState,
+	#superclass : #BrDeprecatedLayoutResizerState,
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrDeprecatedLayoutVerticalResizerState class >> isDeprecated [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDeprecatedLayoutVerticalResizerState class >> resizer: aLayoutResizer [
 	^ self new resizer: aLayoutResizer
 ]

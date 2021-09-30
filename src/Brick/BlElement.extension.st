@@ -1,27 +1,27 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> actors [
 	^ Array streamContents: [ :aStream |
 		self viewModelDo: [ :aViewModel | aStream nextPut: aViewModel ].	
 		self aptitudeDo: [ :aLook | aStream nextPut: aLook ] ]
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> addAptitude: aLook [
 	self aptitude
 		ifNil: [ self aptitude: aLook ]
 		ifNotNil: [ self aptitude add: aLook ].
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> addInteractiveModelState: aState [
 	self viewModel
 		ifNil: [ self viewModel: (BrInteractiveModel with: aState) ]
 		ifNotNil: [ self viewModel addInteractiveModelState: aState ].
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> addLook: anAptitude [
 	self
 		deprecated: 'Please use addAptitude: instead.'
@@ -32,29 +32,29 @@ BlElement >> addLook: anAptitude [
 	self addAptitude: anAptitude 
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> addViewModel: aViewModel [
 	self viewModel
 		ifNil: [ self viewModel: aViewModel ]
 		ifNotNil: [ self viewModel add: aViewModel ].
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> anchor [
 	^ self userData at: #brickAnchor ifAbsent: [ self parent ifNotNil: #anchor ]
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> anchor: anElement [
 	self userData at: #brickAnchor put: anElement
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> aptitude [
 	^ self userData at: #brickLook ifAbsent: nil
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> aptitude: aLook [
 	| aLookInstance |
 	
@@ -68,29 +68,29 @@ BlElement >> aptitude: aLook [
 	aLookInstance onInstalledIn: self
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> aptitudeDo: aBlock [
 	self aptitude ifNotNil: aBlock
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> asBrAnchoredAnchorBounds [
 	^ BrAnchoredElementAnchorBounds element: self
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> asStencil [
 	^ self
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> asVerticallyResizableDo: aBlock [
 	^ aBlock value: (BlElement new
 		aptitude: BrGlamorousWithVerticalResizerAptitude;
 		addChild: self)
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> gtInspectorModelAptitudeGraphIn: aComposite [
 	<gtInspectorPresentationOrder: 30>
 	
@@ -99,7 +99,7 @@ BlElement >> gtInspectorModelAptitudeGraphIn: aComposite [
 		painting: [ :view | self gtInspectorPaintModelAptitudeIn: view ] 
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> gtInspectorPaintModelAptitudeIn: aMondrianView [
 	| nodes |
 
@@ -146,14 +146,14 @@ BlElement >> gtInspectorPaintModelAptitudeIn: aMondrianView [
 	aMondrianView layout horizontalTree nodeDistance: 20
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> layoutResizerPropagations [
 	^ self userData
 		at: #brickLayoutResizerPropagations
 		ifAbsentPut: [ BrLayoutResizerElementPropagations new element: self ]
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> look [
 	self
 		deprecated: 'Please use #aptitude instead.'
@@ -161,7 +161,7 @@ BlElement >> look [
 	^ self aptitude
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> look: anAptitude [
 	self
 		deprecated: 'Please use aptitude: instead.'
@@ -172,7 +172,7 @@ BlElement >> look: anAptitude [
 	self aptitude: anAptitude 
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> removeAptitude: aLook [
 	self aptitude
 		ifNotNil: [
@@ -183,7 +183,7 @@ BlElement >> removeAptitude: aLook [
 				ifFalse: [ self aptitude remove: aLook ] ]
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> removeLook: anAptitude [
 	self
 		deprecated: 'Please use removeAptitude: instead.'
@@ -194,12 +194,12 @@ BlElement >> removeLook: anAptitude [
 	self removeAptitude: anAptitude 
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> viewModel [
 	^ self userData at: #brickViewModel ifAbsent: nil
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> viewModel: aBrViewModel [
 	self aptitudeDo: [ :aLook | self error: 'View model must be added before look' ].
 
@@ -211,12 +211,12 @@ BlElement >> viewModel: aBrViewModel [
 	aBrViewModel onInstalledIn: self
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> viewModelDo: aBlock [
 	self userData at: #brickViewModel ifPresent: aBlock
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElement >> viewModelDo: aBlock ifAbsent: anAbsentBlock [
 	^ self userData
 		at: #brickViewModel

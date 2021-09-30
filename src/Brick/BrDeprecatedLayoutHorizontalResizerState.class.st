@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrDeprecatedLayoutHorizontalResizerState',
-	#superclass : 'BrDeprecatedLayoutResizerState',
+	#name : #BrDeprecatedLayoutHorizontalResizerState,
+	#superclass : #BrDeprecatedLayoutResizerState,
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrDeprecatedLayoutHorizontalResizerState class >> isDeprecated [
 	^ true
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrDeprecatedLayoutHorizontalResizerState class >> resizer: aLayoutResizer [
 	^ self new resizer: aLayoutResizer
 ]

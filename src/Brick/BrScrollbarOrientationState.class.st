@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrScrollbarOrientationState',
-	#superclass : 'BlElementUniqueState',
+	#name : #BrScrollbarOrientationState,
+	#superclass : #BlElementUniqueState,
 	#classInstVars : [
 		'vertical',
 		'horizontal'
@@ -8,32 +8,32 @@ Class {
 	#category : 'Brick-Scrollbar - State'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrScrollbarOrientationState class >> horizontal [
 	^ BrScrollbarHorizontalState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrScrollbarOrientationState class >> vertical [
 	^ BrScrollbarVerticalState uniqueInstance
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrScrollbarOrientationState >> isHorizontal [
 	^ self = self class horizontal
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrScrollbarOrientationState >> isVertical [
 	^ self = self class vertical
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarOrientationState >> name [
 	^ 'orientation'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrScrollbarOrientationState >> printOn: aStream [
 	aStream
 		nextPutAll: 'scrollbar ';
@@ -41,17 +41,17 @@ BrScrollbarOrientationState >> printOn: aStream [
 		nextPutAll: ' orientation'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarOrientationState >> priority [
 	^ UserPriority
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarOrientationState >> shouldPropagateToChildren [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarOrientationState >> type [
 	^ BrScrollbarOrientationState
 ]

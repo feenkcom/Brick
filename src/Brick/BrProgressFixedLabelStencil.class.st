@@ -5,33 +5,33 @@ ${example:BrProgressExamples>>#fixedLabel|codeExpanded=false|previewExpanded=tru
 
 "
 Class {
-	#name : 'BrProgressFixedLabelStencil',
-	#superclass : 'BrProgressLabelStencil',
+	#name : #BrProgressFixedLabelStencil,
+	#superclass : #BrProgressLabelStencil,
 	#instVars : [
 		'label'
 	],
 	#category : 'Brick-Progress - Model'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrProgressFixedLabelStencil >> create [
 	<return: #BlRopedText>
 	^ self label
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressFixedLabelStencil >> initialize [
 	super initialize.
 	self label: 'Preparing...'.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressFixedLabelStencil >> label [
 	<return: #BlRopedText>
 	^ label
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressFixedLabelStencil >> label: aStringOrText [
 	label := aStringOrText asRopedText
 ]

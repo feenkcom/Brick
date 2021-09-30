@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrTaggerRequest',
-	#superclass : 'BrRequest',
+	#name : #BrTaggerRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-Tagger - Events'
 }

@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrFolderCreateWidget',
-	#superclass : 'BrHorizontalPane',
+	#name : #BrFolderCreateWidget,
+	#superclass : #BrHorizontalPane,
 	#instVars : [
 		'folder',
 		'container',
@@ -11,7 +11,7 @@ Class {
 	#category : 'Brick'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> createButton [
 	^ BrButton new
 				icon: BrGlamorousIcons accept;
@@ -19,7 +19,7 @@ BrFolderCreateWidget >> createButton [
 				disable
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> createLabel [
 	^ BrEditableLabel new
 		aptitude: BrGlamorousEditableLabelAptitude new glamorousRegularFontAndSize;
@@ -27,18 +27,18 @@ BrFolderCreateWidget >> createLabel [
 	text: 'Double click me'.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> defaultFolderName: anObject [ 
 	label text: anObject.
 	(folder / anObject) exists ifFalse: [button enable]; ifTrue:[button disable].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> folder: aFolderReference [
 	folder := aFolderReference
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> initialize [
 	super initialize.
 	self hMatchParent.
@@ -58,12 +58,12 @@ BrFolderCreateWidget >> initialize [
 	onFolderCreated ifNotNil: [onFolderCreated value]].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> onFolderCreated: aBlock [
 	onFolderCreated := aBlock.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFolderCreateWidget >> requestLabelFocus [
 	label requestFocus.
 ]

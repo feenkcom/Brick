@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrExpandedTriangleStencil',
-	#superclass : 'BrTriangleStencil',
+	#name : #BrExpandedTriangleStencil,
+	#superclass : #BrTriangleStencil,
 	#category : 'Brick-Triangle - Stencil'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrExpandedTriangleStencil >> create [
 	<return: #BlElement>
 	

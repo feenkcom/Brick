@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrEditorStylerRequest',
-	#superclass : 'BrEditorRequest',
+	#name : #BrEditorStylerRequest,
+	#superclass : #BrEditorRequest,
 	#category : 'Brick-Editor - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorStylerRequest >> responseClass [
 	^ BrEditorStylerChanged
 ]

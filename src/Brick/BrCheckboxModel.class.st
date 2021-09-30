@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrCheckboxModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrCheckboxModel,
+	#superclass : #BrWidgetModel,
 	#category : 'Brick-Checkbox - Model'
 }
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BrCheckboxModel >> clickEvent: anEvent [
 	| anElement |
 	anEvent consumed: true.
@@ -21,7 +21,7 @@ BrCheckboxModel >> clickEvent: anEvent [
 		ifTrue: [ ^ anElement check ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrCheckboxModel >> initializeListeners [
 	super initializeListeners.
 

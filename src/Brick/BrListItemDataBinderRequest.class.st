@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrListItemDataBinderRequest',
-	#superclass : 'BrRequest',
+	#name : #BrListItemDataBinderRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-List - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListItemDataBinderRequest >> responseClass [
 	^ BrListItemDataBinderChangedEvent
 ]

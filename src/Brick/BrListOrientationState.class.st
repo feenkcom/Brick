@@ -3,37 +3,37 @@ I am a ${class:BlElementUniqueState}$.
 I define whether a ${class:BrSimpleList}$ should be displayed either vertically or horizontally.
 "
 Class {
-	#name : 'BrListOrientationState',
-	#superclass : 'BlElementUniqueState',
+	#name : #BrListOrientationState,
+	#superclass : #BlElementUniqueState,
 	#category : 'Brick-List - State'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BrListOrientationState class >> horizontal [
 	^ BrListHorizontalState uniqueInstance
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BrListOrientationState class >> vertical [
 	^ BrListVerticalState uniqueInstance
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListOrientationState >> isHorizontal [
 	^ self = self class horizontal
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListOrientationState >> isVertical [
 	^ self = self class vertical
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListOrientationState >> name [
 	^ 'orientation'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrListOrientationState >> printOn: aStream [
 	aStream
 		nextPutAll: 'list ';
@@ -41,17 +41,17 @@ BrListOrientationState >> printOn: aStream [
 		nextPutAll: ' orientation'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListOrientationState >> priority [
 	^ UserPriority
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListOrientationState >> shouldPropagateToChildren [
 	^ false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListOrientationState >> type [
 	^ BrListOrientationState
 ]

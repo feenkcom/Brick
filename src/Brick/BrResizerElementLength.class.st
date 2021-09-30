@@ -1,38 +1,38 @@
 Class {
-	#name : 'BrResizerElementLength',
-	#superclass : 'Object',
+	#name : #BrResizerElementLength,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Brick-Resizer - Support'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BrResizerElementLength class >> exact [
 	^ BrResizerExactLength new
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BrResizerElementLength class >> exact: aNumber [
 	^ self exact length: aNumber
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BrResizerElementLength class >> weight: aNumber [
 	^ self weighted weight: aNumber
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BrResizerElementLength class >> weighted [
 	^ BrResizerWeightedLength new
 ]
 
-{ #category : 'api - size' }
+{ #category : #'api - size' }
 BrResizerElementLength >> adjustHeightFor: anElement [
 	"Set element height"
 	self subclassResponsibility
 ]
 
-{ #category : 'api - size' }
+{ #category : #'api - size' }
 BrResizerElementLength >> adjustWidthFor: anElement [
 	"Set element width"
 	self subclassResponsibility

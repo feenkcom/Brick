@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrTabGroupActionbarChangedEvent',
-	#superclass : 'BrTabGroupEvent',
+	#name : #BrTabGroupActionbarChangedEvent,
+	#superclass : #BrTabGroupEvent,
 	#instVars : [
 		'stencil'
 	],
 	#category : 'Brick-Tabs - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupActionbarChangedEvent >> stencil [
 	^ stencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabGroupActionbarChangedEvent >> stencil: anObject [
 	stencil := anObject
 ]

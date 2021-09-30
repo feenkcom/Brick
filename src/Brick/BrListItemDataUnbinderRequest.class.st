@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrListItemDataUnbinderRequest',
-	#superclass : 'BrRequest',
+	#name : #BrListItemDataUnbinderRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-List - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListItemDataUnbinderRequest >> responseClass [
 	^ BrListItemDataUnbinderChangedEvent
 ]

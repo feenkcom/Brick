@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrFromFuture',
-	#superclass : 'BlElement',
+	#name : #BrFromFuture,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
@@ -14,28 +14,28 @@ Class {
 	#category : 'Brick-Future - Support'
 }
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> dataBinder: aFromFutureDataBinder [
 	elementDataBinder := aFromFutureDataBinder asStencilBuilder: BrFromFutureDataBinder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFuture >> defaultLayout [
 	^ BlFrameLayout new
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> future: aFuture [
 	self future: aFuture initialValue: nil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> future: aFuture initialValue: anObject [
 	future := aFuture asFuture.
 	dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFuture >> initialize [
 	super initialize.
 	
@@ -46,7 +46,7 @@ BrFromFuture >> initialize [
 	updater element: self selector: #privateUpdateElement.
 ]
 
-{ #category : 'hooks - children' }
+{ #category : #'hooks - children' }
 BrFromFuture >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
 	
@@ -66,13 +66,13 @@ BrFromFuture >> onAddedToSceneGraph [
 			self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFromFuture >> privateDataSnapshot: aDataSnapshot [
 	dataSnapshot := aDataSnapshot.
 	updater requestUpdate
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFromFuture >> privateUpdateElement [
 	"Must be called from the UI thread"
 	| anEmbellishedElement aTargetElementToAdd |
@@ -96,7 +96,7 @@ BrFromFuture >> privateUpdateElement [
 			self addChild: aTargetElementToAdd ].
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> stencil: aStencil [
 	elementStencil := aStencil asStencil
 ]

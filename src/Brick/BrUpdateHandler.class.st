@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrUpdateHandler',
-	#superclass : 'Object',
+	#name : #BrUpdateHandler,
+	#superclass : #Object,
 	#instVars : [
 		'action',
 		'monitor',
@@ -11,20 +11,20 @@ Class {
 	#category : 'Brick-Future - Support'
 }
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrUpdateHandler >> element: anElement action: aBlockOrMessageSend [
 	element := anElement.
 	action := aBlockOrMessageSend
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrUpdateHandler >> element: anElement selector: aSelector [
 	self
 		element: anElement
 		action: (MessageSend receiver: anElement selector: aSelector)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrUpdateHandler >> initialize [
 	super initialize.
 	
@@ -33,7 +33,7 @@ BrUpdateHandler >> initialize [
 	updateTask := nil.
 ]
 
-{ #category : 'api - future handler' }
+{ #category : #'api - future handler' }
 BrUpdateHandler >> updateValue: aValue synchronously: isSynchronous [
 	monitor critical: [ 
 		isSynchronous

@@ -1,32 +1,32 @@
 Class {
-	#name : 'BrExpander',
-	#superclass : 'BlElement',
+	#name : #BrExpander,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrExpandable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrExpandable classTrait',
 	#category : 'Brick-Expander - UI'
 }
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrExpander >> collapse [
 	self states addState: BrCollapsedState uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExpander >> content: aStencil [
 	self viewModel contentStencil: aStencil
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrExpander >> expand [
 	self states addState: BrExpandedState uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExpander >> header: aStencil [
 	self viewModel headerStencil: aStencil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrExpander >> initialize [
 	super initialize.
 	
@@ -34,7 +34,7 @@ BrExpander >> initialize [
 	self collapse.
 ]
 
-{ #category : 'api - expandable' }
+{ #category : #'api - expandable' }
 BrExpander >> isExpanded [
 	"Return true if an widget is expanded (has expanded state), false otherwise"
 	<return: #Boolean>
@@ -42,12 +42,12 @@ BrExpander >> isExpanded [
 	^ self states hasState: BrExpandedState uniqueInstance
 ]
 
-{ #category : 'api - events' }
+{ #category : #'api - events' }
 BrExpander >> whenCollapsedDo: aBlock [
 	self when: BrCollapsedEvent do: [ :anEvent | aBlock cull: anEvent ]
 ]
 
-{ #category : 'api - events' }
+{ #category : #'api - events' }
 BrExpander >> whenExpandedDo: aBlock [
 	self when: BrExpandedEvent do: [ :anEvent | aBlock cull: anEvent ]
 ]

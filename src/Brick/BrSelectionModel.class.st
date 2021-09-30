@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrSelectionModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrSelectionModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'selection'
 	],
 	#category : 'Brick-! Core - Models'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrSelectionModel class >> modelName [
 	^ 'Selection'
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrSelectionModel >> contains: anIndex [
 	"Return true if item at a given index is selected, false otherwise"
 	<return: #Boolean>
@@ -20,7 +20,7 @@ BrSelectionModel >> contains: anIndex [
 	^ selection containsIndex: anIndex
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> deselect: aFromIndex to: aToIndex [
 	"Deselect items within a given interval"
 
@@ -28,66 +28,66 @@ BrSelectionModel >> deselect: aFromIndex to: aToIndex [
 	self notifyDeselected: (aFromIndex to: aToIndex)
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> deselectAll [
 	"Deselect all items"
 
 	selection reverseDo: [ :aMonotoneSelection | self deselect: aMonotoneSelection from + 1 to: aMonotoneSelection to ]
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> deselectOne: anIndex [
 	"Deselect items with a given index"
 
 	self deselect: anIndex to: anIndex
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrSelectionModel >> hasSelection [
 	<return: #Boolean>
 	
 	^ selection isNotEmpty
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrSelectionModel >> indices [
 	<return: #Collection of: #Number>
 	
 	^ selection indices
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrSelectionModel >> initialize [
 	super initialize.
 
 	selection := BlCompositeSelection new
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrSelectionModel >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrSelectionRequest reply: [ :aResponse | aResponse selection: selection ]
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrSelectionModel >> notifyDeselected: anInterval [
 	self dispatchEvent: (BrSelectionChanged new selection: selection; deselectedInterval: anInterval)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrSelectionModel >> notifySelected: anInterval [
 	self
 		notifySelected: anInterval
 		dueTo: nil
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrSelectionModel >> notifySelected: anInterval dueTo: aSourceEvent [
 	self dispatchEvent: (BrSelectionChanged new selection: selection; selectedInterval: anInterval; sourceEvent: aSourceEvent)
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> select: aFromIndex to: aToIndex [
 	"Select items within a given interval"
 
@@ -97,7 +97,7 @@ BrSelectionModel >> select: aFromIndex to: aToIndex [
 		dueTo: nil
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> select: aFromIndex to: aToIndex dueTo: aSourceEvent [
 	"Select items within a given interval"
 
@@ -105,7 +105,7 @@ BrSelectionModel >> select: aFromIndex to: aToIndex dueTo: aSourceEvent [
 	self notifySelected: (aFromIndex to: aToIndex) dueTo: aSourceEvent
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> selectOne: anIndex [
 	"Select an item at a given index deselecting all previously selected items"
 	
@@ -114,7 +114,7 @@ BrSelectionModel >> selectOne: anIndex [
 		dueTo: nil
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrSelectionModel >> selectOne: anIndex dueTo: aSourceEvent [
 	"Select an item at a given index deselecting all previously selected items"
 	| aSelectionCopy |

@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrAnchoredReferencePoint',
-	#superclass : 'Object',
+	#name : #BrAnchoredReferencePoint,
+	#superclass : #Object,
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrAnchoredReferencePoint class >> asBrAnchoredReferencePoint [
 	^ self new
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 BrAnchoredReferencePoint class >> gtAllTypesFor: aView [
 	<gtView>
 		
@@ -20,7 +20,7 @@ BrAnchoredReferencePoint class >> gtAllTypesFor: aView [
 		itemText: [ :each | each label ]
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 BrAnchoredReferencePoint class >> gtPreviewFor: aView [
 	<gtView>
 	
@@ -34,22 +34,22 @@ BrAnchoredReferencePoint class >> gtPreviewFor: aView [
 		view: #gtPreviewFor:
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredReferencePoint class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrAnchoredReferencePoint >> asBrAnchoredReferencePoint [
 	^ self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredReferencePoint >> from: aBounds [
 	self subclassResponsibility
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 BrAnchoredReferencePoint >> gtPreviewFor: aView [
 	<gtView>
 	

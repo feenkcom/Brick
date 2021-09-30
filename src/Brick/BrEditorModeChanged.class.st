@@ -1,25 +1,25 @@
 Class {
-	#name : 'BrEditorModeChanged',
-	#superclass : 'BrEditorChangedEvent',
+	#name : #BrEditorModeChanged,
+	#superclass : #BrEditorChangedEvent,
 	#instVars : [
 		'mode'
 	],
 	#category : 'Brick-Editor - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorModeChanged >> initialize [
 	super initialize.
 	
 	mode := BrTextEditorNullMode new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorModeChanged >> mode [
 	^ mode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorModeChanged >> mode: anObject [
 	mode := anObject
 ]

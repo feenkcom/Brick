@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrAbstractTreeModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrAbstractTreeModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'rootNode',
 		'nodeTypeStencil',
@@ -11,40 +11,40 @@ Class {
 	#category : 'Brick-Tree - Model'
 }
 
-{ #category : 'expanding-collapsing' }
+{ #category : #'expanding-collapsing' }
 BrAbstractTreeModel >> collapseAll [
 	self root allChildrenNodesBreadthFirstDo: [ :eachNode | eachNode collapse ].
 	self root expand.
 ]
 
-{ #category : 'expanding-collapsing' }
+{ #category : #'expanding-collapsing' }
 BrAbstractTreeModel >> collapseAt: aLevelIndex [
 	self upToDepth: aLevelIndex do: [ :eachNode |
 		eachNode depth + 1 = aLevelIndex ifTrue: [ eachNode collapse ] ].
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAbstractTreeModel >> defaultRowElementStencil [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'expanding-collapsing' }
+{ #category : #'expanding-collapsing' }
 BrAbstractTreeModel >> expandAll [
 	self root withAllChildrenNodesBreadthFirstDo: [ :eachNode | eachNode expand ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAbstractTreeModel >> expandSuchThat: anOneArgBlock [
 	"It stops expanding children if a parent node does not satisfy the condition."
 	self root expandSuchThat: anOneArgBlock
 ]
 
-{ #category : 'expanding-collapsing' }
+{ #category : #'expanding-collapsing' }
 BrAbstractTreeModel >> expandUpTo: aLevelIndex [
 	self root expandUpTo: aLevelIndex
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> indexOf: anObject [
 	<return: #Number>
 	| anIndex |
@@ -61,7 +61,7 @@ BrAbstractTreeModel >> indexOf: anObject [
 	^ 0
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> indexOf: anObject do: aBlock [
 	<return: #Number>
 	| anIndex |
@@ -71,7 +71,7 @@ BrAbstractTreeModel >> indexOf: anObject do: aBlock [
 		ifTrue: [ aBlock value: anIndex ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> indexOfSuchThat: aBlock [
 	<return: #Number>
 	| anIndex aCheckBlock |
@@ -90,7 +90,7 @@ BrAbstractTreeModel >> indexOfSuchThat: aBlock [
 	^ 0
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> indexOfSuchThat: aBlock do: aFoundBlock [
 	<return: #Number>
 	| anIndex |
@@ -100,7 +100,7 @@ BrAbstractTreeModel >> indexOfSuchThat: aBlock do: aFoundBlock [
 		ifTrue: [ aFoundBlock value: anIndex ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAbstractTreeModel >> initialize [
 	super initialize.
 
@@ -112,7 +112,7 @@ BrAbstractTreeModel >> initialize [
 	rowElementStencil := self defaultRowElementStencil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAbstractTreeModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -124,21 +124,21 @@ BrAbstractTreeModel >> initializeListeners [
 	self when: BrTreeRowElementStencilRequest reply: [ :aResponse | aResponse rowElementStencil: self rowElementStencil ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> itemAt: anIndex [
 	<return: #BrTreeNode>
 
 	^ self root at: anIndex
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> itemCount [
 	<return: #Number>
 
 	^ self root size
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> items: aCollectionOfItems children: aBlockOrValuable [
 	rootNode := BrRootTreeNode onMany: aCollectionOfItems computed: aBlockOrValuable.
 	rootNode expand.
@@ -146,7 +146,7 @@ BrAbstractTreeModel >> items: aCollectionOfItems children: aBlockOrValuable [
 	self notifyChildrenChanged
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> items: aCollectionOfItems immediate: aBlockOrValuable [
 	rootNode := BrRootTreeNode onMany: aCollectionOfItems immediate: aBlockOrValuable.
 	rootNode expand.
@@ -154,7 +154,7 @@ BrAbstractTreeModel >> items: aCollectionOfItems immediate: aBlockOrValuable [
 	self notifyChildrenChanged
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> nodeIdStencil [
 	"Return a stencil that is used to create a node id of a given item object"
 	<return: #BrTreeNodeIdStencilBuilder or: nil>
@@ -162,7 +162,7 @@ BrAbstractTreeModel >> nodeIdStencil [
 	^ nodeIdStencil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> nodeIdStencil: aStencil [
 	"Set a stencil that will be used to compute an id of a node object"
 
@@ -170,7 +170,7 @@ BrAbstractTreeModel >> nodeIdStencil: aStencil [
 	self dispatchEvent: (BrTreeNodeIdStencilChangedEvent new nodeIdStencil: nodeIdStencil)
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> nodeOf: anObject ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Find a tree node for a given object, while computing the children nodes thus killing any laziness,
 	Use me with cautious!"
@@ -184,7 +184,7 @@ BrAbstractTreeModel >> nodeOf: anObject ifFound: aFoundBlock ifNone: anException
 	^ anExceptionBlock value
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> nodeTypeStencil [
 	"Return a stencil that is used to create a node type of a given tree node"
 	<return: #BrTreeNodeTypeStencilBuilder>
@@ -192,7 +192,7 @@ BrAbstractTreeModel >> nodeTypeStencil [
 	^ nodeTypeStencil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> nodeTypeStencil: aStencil [
 	"Set a stencil that will be used to compute the node type"
 
@@ -200,19 +200,19 @@ BrAbstractTreeModel >> nodeTypeStencil: aStencil [
 	self dispatchEvent: (BrTreeNodeTypeStencilChangedEvent new nodeTypeStencil: nodeTypeStencil)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAbstractTreeModel >> notifyChildrenChanged [
 	self dispatchEvent: (BrTreeChildrenChanged new root: self root)
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> root [
 	<return: #BrRootTreeNode>
 
 	^ rootNode
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> rowDataBinder [
 	"Return a stencil that is used to bind row data to a given row element"
 	<return: #BrTreeRowDataBinder>
@@ -220,7 +220,7 @@ BrAbstractTreeModel >> rowDataBinder [
 	^ rowDataBinder
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> rowDataBinder: aStencil [
 	"Set a stencil that will be used to bind row data to a given row element"
 
@@ -228,7 +228,7 @@ BrAbstractTreeModel >> rowDataBinder: aStencil [
 	self dispatchEvent: (BrTreeRowDataBinderChangedEvent new rowDataBinder: rowDataBinder)
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> rowElementStencil [	
 	"Return a stencil that is used to create a row element for a given node type and node element.
 	Basically, a stencil that decorates a node element"
@@ -237,13 +237,13 @@ BrAbstractTreeModel >> rowElementStencil [
 	^ rowElementStencil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAbstractTreeModel >> rowElementStencil: aBrSimpleTreeRowElementStencilBuilder [
 	rowElementStencil := aBrSimpleTreeRowElementStencilBuilder.
 	self dispatchEvent: (BrTreeRowElementStencilChangedEvent new rowElementStencil: rowElementStencil)
 ]
 
-{ #category : 'expanding-collapsing' }
+{ #category : #'expanding-collapsing' }
 BrAbstractTreeModel >> upToDepth: aMaxDepthLevel do: anOneArgBlock [
 	self root upToDepth: aMaxDepthLevel do: anOneArgBlock
 ]

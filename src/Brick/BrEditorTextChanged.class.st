@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrEditorTextChanged',
-	#superclass : 'BrEditorChangedEvent',
+	#name : #BrEditorTextChanged,
+	#superclass : #BrEditorChangedEvent,
 	#instVars : [
 		'text'
 	],
 	#category : 'Brick-Editor - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextChanged class >> text: aText [
 	^ self new text: aText
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextChanged >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextChanged >> text: anObject [
 	text := anObject
 ]

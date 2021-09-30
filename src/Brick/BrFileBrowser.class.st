@@ -24,8 +24,8 @@ The list of files displayed, folder and a fileFilterBlock can be specified, see 
 !!!Implementation Points
 "
 Class {
-	#name : 'BrFileBrowser',
-	#superclass : 'BrVerticalPane',
+	#name : #BrFileBrowser,
+	#superclass : #BrVerticalPane,
 	#instVars : [
 		'folder',
 		'items',
@@ -36,7 +36,7 @@ Class {
 	#category : 'Brick-File - UI'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BrFileBrowser >> computeFolderItems [
 	"Determine the items to display in the file list.
 	Directories are always displayed.
@@ -53,12 +53,12 @@ BrFileBrowser >> computeFolderItems [
 	^ entries
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFileBrowser >> computeFolderParents [
 	^ folder withParents
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFileBrowser >> createBreadcrumb [
 	^ BrBreadcrumb new
 		fitContent;
@@ -69,7 +69,7 @@ BrFileBrowser >> createBreadcrumb [
 				margin: (BlInsets left: 5 right: 5) ]).
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFileBrowser >> createTable [
 	| aTable |
 	aTable := BrColumnedList new.
@@ -128,24 +128,24 @@ BrFileBrowser >> createTable [
 	^ aTable
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFileBrowser >> fileFilterBlock [
 	^ fileFilterBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFileBrowser >> fileFilterBlock: aBlockClosure [
 
 	fileFilterBlock := aBlockClosure.
 	self updateDisplay.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFileBrowser >> folder [
 	^ folder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFileBrowser >> folder: aFileReference [
 
 	(folder = aFileReference or: [ aFileReference isDirectory not ])
@@ -156,7 +156,7 @@ BrFileBrowser >> folder: aFileReference [
 	self updateDisplay.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFileBrowser >> initialize [
 	| alignedButton |
 
@@ -180,7 +180,7 @@ BrFileBrowser >> initialize [
 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFileBrowser >> updateDisplay [
 
 	table items: (items := self computeFolderItems).

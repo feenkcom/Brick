@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrTreeNodeDataBinderChangedEvent',
-	#superclass : 'BlEvent',
+	#name : #BrTreeNodeDataBinderChangedEvent,
+	#superclass : #BlEvent,
 	#instVars : [
 		'nodeDataBinder'
 	],
 	#category : 'Brick-Tree - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinderChangedEvent >> nodeDataBinder [
 	^ nodeDataBinder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinderChangedEvent >> nodeDataBinder: anObject [
 	nodeDataBinder := anObject
 ]

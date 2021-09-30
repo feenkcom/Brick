@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrAnchoredStrategyBuilder',
-	#superclass : 'Object',
+	#name : #BrAnchoredStrategyBuilder,
+	#superclass : #Object,
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'building' }
+{ #category : #building }
 BrAnchoredStrategyBuilder >> build [
 	self subclassResponsibility
 ]

@@ -5,33 +5,33 @@ ${example:BrProgressExamples>>#floatValues|codeExpanded=false|previewExpanded=tr
 
 "
 Class {
-	#name : 'BrProgressFloatValueStencil',
-	#superclass : 'BrProgressValueStencil',
+	#name : #BrProgressFloatValueStencil,
+	#superclass : #BrProgressValueStencil,
 	#instVars : [
 		'numberOfDecimals'
 	],
 	#category : 'Brick-Progress - Model'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrProgressFloatValueStencil >> create [
 	<return: #String>
 	^ (self value asFloat round: self numberOfDecimals) asString
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressFloatValueStencil >> initialize [
 	super initialize.
 	numberOfDecimals := 2.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressFloatValueStencil >> numberOfDecimals [
 	<return: #Integer>
 	^ numberOfDecimals
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressFloatValueStencil >> numberOfDecimals: anInteger [
 	numberOfDecimals := anInteger
 ]

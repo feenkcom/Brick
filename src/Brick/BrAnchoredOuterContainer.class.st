@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrAnchoredOuterContainer',
-	#superclass : 'BlElement',
+	#name : #BrAnchoredOuterContainer,
+	#superclass : #BlElement,
 	#category : 'Brick-Anchored - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAnchoredOuterContainer >> initialize [
 	super initialize.
 	self
@@ -14,7 +14,7 @@ BrAnchoredOuterContainer >> initialize [
 		clipChildren: false
 ]
 
-{ #category : 'change reporting' }
+{ #category : #'change reporting' }
 BrAnchoredOuterContainer >> invalidRect: aBlBounds from: anElement [
 	"Force redraw of whole element to allow its own geometry to redraw"
 
