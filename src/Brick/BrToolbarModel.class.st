@@ -80,6 +80,12 @@ BrToolbarModel >> onItemRemoved: aWidgetModel at: anItemIndex [
 ]
 
 { #category : 'api - items' }
+BrToolbarModel >> removeAllItems [
+	self items reverseDo: [ :eachItem |
+		self removeItem: eachItem ]
+]
+
+{ #category : 'api - items' }
 BrToolbarModel >> removeItem: aWidgetModel [
 	| anItemIndex |
 

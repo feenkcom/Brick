@@ -50,6 +50,11 @@ BrToolbar >> numberOfItems [
 ]
 
 { #category : 'api - adding / removing' }
+BrToolbar >> removeAllItems [
+	self viewModel removeAllItems
+]
+
+{ #category : 'api - adding / removing' }
 BrToolbar >> removeItem: anElement [
 	self viewModel removeItem: anElement viewModel
 ]
