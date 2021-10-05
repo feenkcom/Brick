@@ -11,7 +11,7 @@ Class {
 		'element',
 		'updater'
 	],
-	#category : 'Brick-Future - Support'
+	#category : #'Brick-Future - Support'
 }
 
 { #category : #'api - accessing' }
@@ -31,7 +31,7 @@ BrFromFuture >> future: aFuture [
 
 { #category : #'api - accessing' }
 BrFromFuture >> future: aFuture initialValue: anObject [
-	future := aFuture asFuture.
+	future := aFuture asAsyncFuture.
 	dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject
 ]
 
@@ -52,11 +52,11 @@ BrFromFuture >> onAddedToSceneGraph [
 	
 	dataSnapshot isPending
 		ifFalse: [ ^ self ].
-	
+
 	element
 		ifNil: [
 			element := elementStencil asElement ].
-	
+
 	self privateUpdateElement.
 
 	future await

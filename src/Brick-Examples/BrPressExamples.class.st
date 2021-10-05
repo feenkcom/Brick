@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrPressExamples',
-	#superclass : 'Object',
+	#name : #BrPressExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Press'
 }
 
-{ #category : 'examples - mouse events' }
+{ #category : #'examples - mouse events' }
 BrPressExamples >> mouseDownOnPressableElement [
 	<gtExample>
 	| anElement aModel aPressEventHandler aPressCounter aPressStateFromEvent |
@@ -31,7 +31,7 @@ BrPressExamples >> mouseDownOnPressableElement [
 	^ anElement
 ]
 
-{ #category : 'examples - mouse events' }
+{ #category : #'examples - mouse events' }
 BrPressExamples >> mouseUpOnPressableElement [
 	<gtExample>
 	| anElement aModel aPressEventHandler aPressCounter aPressStateFromEvent |
@@ -58,7 +58,7 @@ BrPressExamples >> mouseUpOnPressableElement [
 	^ anElement
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BrPressExamples >> pressModel [
 	<gtExample>
 	| aModel |
@@ -69,7 +69,7 @@ BrPressExamples >> pressModel [
 	^ aModel
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BrPressExamples >> pressableElement [
 	<gtExample>
 	
@@ -81,7 +81,7 @@ BrPressExamples >> pressableElement [
 		yourself
 ]
 
-{ #category : 'examples - requests' }
+{ #category : #'examples - requests' }
 BrPressExamples >> requestPressedState [
 	<gtExample>
 	| anElement aModel aResponse |
@@ -96,7 +96,7 @@ BrPressExamples >> requestPressedState [
 	^ aModel
 ]
 
-{ #category : 'examples - requests' }
+{ #category : #'examples - requests' }
 BrPressExamples >> requestUnpressedState [
 	<gtExample>
 	| anElement aModel aResponse |

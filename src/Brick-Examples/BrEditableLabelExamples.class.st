@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrEditableLabelExamples',
-	#superclass : 'Object',
+	#name : #BrEditableLabelExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Editor'
 }
 
-{ #category : 'examples - actions' }
+{ #category : #'examples - actions' }
 BrEditableLabelExamples >> acceptTextInEditorMode [
 	<gtExample>
 	| anEditableLabel wasAccepted acceptedText |
@@ -28,7 +28,7 @@ BrEditableLabelExamples >> acceptTextInEditorMode [
 	^ anEditableLabel
 ]
 
-{ #category : 'examples - actions' }
+{ #category : #'examples - actions' }
 BrEditableLabelExamples >> cancelTextInEditorMode [
 	<gtExample>
 	| anEditableLabel wasCancelled |
@@ -49,7 +49,7 @@ BrEditableLabelExamples >> cancelTextInEditorMode [
 	^ anEditableLabel
 ]
 
-{ #category : 'examples - actions' }
+{ #category : #'examples - actions' }
 BrEditableLabelExamples >> editTextInEditorMode [
 	<gtExample>
 	| anEditableLabel |
@@ -67,7 +67,7 @@ BrEditableLabelExamples >> editTextInEditorMode [
 	^ anEditableLabel
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BrEditableLabelExamples >> editableLabelWithGlamorousLook [
 	<gtExample>
 	| anEditableLabel |
@@ -82,7 +82,7 @@ BrEditableLabelExamples >> editableLabelWithGlamorousLook [
 	^ anEditableLabel
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_01_initial [
 	<gtExample>
 	| aScripter |
@@ -98,7 +98,7 @@ BrEditableLabelExamples >> scripter_01_initial [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_02_double_click_to_edit [
 	<gtExample>
 	| aScripter |
@@ -128,7 +128,7 @@ BrEditableLabelExamples >> scripter_02_double_click_to_edit [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 	<gtExample>
 	| aScripter |
@@ -150,7 +150,7 @@ BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - actions' }
+{ #category : #'examples - actions' }
 BrEditableLabelExamples >> switchToEditor [
 	<gtExample>
 	| anEditableLabel |
@@ -164,7 +164,7 @@ BrEditableLabelExamples >> switchToEditor [
 	^ anEditableLabel
 ]
 
-{ #category : 'examples - actions' }
+{ #category : #'examples - actions' }
 BrEditableLabelExamples >> switchToLabelWhileInEditorMode [
 	<gtExample>
 	| anEditableLabel |

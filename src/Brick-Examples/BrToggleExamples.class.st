@@ -18,12 +18,12 @@ ${example:BrToggleExamples>>#toggleWithMaterialChangingIcon|previewExpanded}$
 
 "
 Class {
-	#name : 'BrToggleExamples',
-	#superclass : 'Object',
+	#name : #BrToggleExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Toggle'
 }
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> activatePredefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -36,7 +36,7 @@ BrToggleExamples >> activatePredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> changeIconOfThePredefinedToggle [
 	<gtExample>
 	| aToggle anIcon |
@@ -50,7 +50,7 @@ BrToggleExamples >> changeIconOfThePredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> changeLabelOfThePredefinedToggle [
 	<gtExample>
 	| aToggle aLabel |
@@ -64,7 +64,7 @@ BrToggleExamples >> changeLabelOfThePredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrToggleExamples >> circleIcon [
 	<gtExample>
 	
@@ -75,7 +75,7 @@ BrToggleExamples >> circleIcon [
 		margin: (BlInsets all: 3)
 ]
 
-{ #category : 'examples - click' }
+{ #category : #'examples - click' }
 BrToggleExamples >> clickOnActivatedPredefinedToggle [
 	<gtExample>
 	| aToggleElement aToggleModel aToggleDeactivatedEvent |
@@ -102,7 +102,7 @@ BrToggleExamples >> clickOnActivatedPredefinedToggle [
 	^ aToggleDeactivatedEvent
 ]
 
-{ #category : 'examples - click' }
+{ #category : #'examples - click' }
 BrToggleExamples >> clickOnDeactivatedPredefinedToggle [
 	<gtExample>
 	| aToggleElement aToggleModel aToggleActivatedEvent |
@@ -129,7 +129,7 @@ BrToggleExamples >> clickOnDeactivatedPredefinedToggle [
 	^ aToggleActivatedEvent
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> deactivatePredefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -142,7 +142,7 @@ BrToggleExamples >> deactivatePredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> predefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -159,7 +159,7 @@ BrToggleExamples >> predefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> setActivatedOfPredefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -172,7 +172,7 @@ BrToggleExamples >> setActivatedOfPredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> setDeactivatedOfPredefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -185,7 +185,7 @@ BrToggleExamples >> setDeactivatedOfPredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrToggleExamples >> squareIcon [
 	<gtExample>
 	
@@ -195,7 +195,7 @@ BrToggleExamples >> squareIcon [
 		margin: (BlInsets all: 3)
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> toggleActivatedPredefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -208,13 +208,13 @@ BrToggleExamples >> toggleActivatedPredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrToggleExamples >> toggleButton [
 	<gtExample>
 	^ BrToggle new relocate: 10 @ 10
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrToggleExamples >> toggleButtonIcon [
 	<gtExample>
 	
@@ -222,7 +222,7 @@ BrToggleExamples >> toggleButtonIcon [
 		background: Color red
 ]
 
-{ #category : 'examples - toggle' }
+{ #category : #'examples - toggle' }
 BrToggleExamples >> toggleDeactivatedPredefinedToggle [
 	<gtExample>
 	| aToggle |
@@ -235,14 +235,14 @@ BrToggleExamples >> toggleDeactivatedPredefinedToggle [
 	^ aToggle
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrToggleExamples >> toggleModel [
 	<gtExample>
 	
 	^ BrToggleModel new
 ]
 
-{ #category : 'examples - material' }
+{ #category : #'examples - material' }
 BrToggleExamples >> toggleWithMaterialChangingIcon [
 	<gtExample>
 	^ self toggleButton
@@ -253,7 +253,7 @@ BrToggleExamples >> toggleWithMaterialChangingIcon [
 			anEvent currentTarget icon: self circleIcon ]
 ]
 
-{ #category : 'examples - material' }
+{ #category : #'examples - material' }
 BrToggleExamples >> toggleWithMaterialIconAndLabel [
 	<gtExample>
 	^ self toggleButton
@@ -261,7 +261,7 @@ BrToggleExamples >> toggleWithMaterialIconAndLabel [
 		icon: self toggleButtonIcon
 ]
 
-{ #category : 'examples - material' }
+{ #category : #'examples - material' }
 BrToggleExamples >> toggleWithMaterialLabelAndIcon [
 	<gtExample>
 	^ self toggleButton
@@ -269,7 +269,7 @@ BrToggleExamples >> toggleWithMaterialLabelAndIcon [
 		icon: self toggleButtonIcon
 ]
 
-{ #category : 'examples - material' }
+{ #category : #'examples - material' }
 BrToggleExamples >> toogleWithMaterialIcon [
 	<gtExample>
 	^ self toggleButton
@@ -277,7 +277,7 @@ BrToggleExamples >> toogleWithMaterialIcon [
 		icon: self toggleButtonIcon
 ]
 
-{ #category : 'examples - material' }
+{ #category : #'examples - material' }
 BrToggleExamples >> toogleWithMaterialLabel [
 	<gtExample>
 	^ self toggleButton

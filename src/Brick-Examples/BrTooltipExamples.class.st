@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTooltipExamples',
-	#superclass : 'Object',
+	#name : #BrTooltipExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Tooltip'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTooltipExamples >> aptitude [
 	<gtExample>
 	| look |
@@ -14,7 +14,7 @@ BrTooltipExamples >> aptitude [
 	^ look
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTooltipExamples >> element [
 	<gtExample>
 	^ BlElement new
@@ -22,7 +22,7 @@ BrTooltipExamples >> element [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTooltipExamples >> elementWithModelAndLook [
 	<gtExample>
 	| element model look |
@@ -41,7 +41,7 @@ BrTooltipExamples >> elementWithModelAndLook [
 	^ element
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrTooltipExamples >> model [
 	<gtExample>
 	| model tooltip |
@@ -56,7 +56,7 @@ BrTooltipExamples >> model [
 	^ model
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTooltipExamples >> removingAnchor [
 	"Removing an anchor with a tooltip while the tooltip is scheduled to show later, but an expensive task is running during before the removal effectively finishing after the show later delay lead to an assertion failure due to the assertion being too weak, assuming the widget of the look being still attached to the scene. This example exercises the race condition, yet there is now no assertion failure anymore."
 

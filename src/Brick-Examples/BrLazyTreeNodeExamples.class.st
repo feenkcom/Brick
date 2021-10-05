@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrLazyTreeNodeExamples',
-	#superclass : 'BrTreeNodeExamples',
+	#name : #BrLazyTreeNodeExamples,
+	#superclass : #BrTreeNodeExamples,
 	#category : 'Brick-Examples-Tree'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrLazyTreeNodeExamples >> depth_1 [
 	<gtExample>
 	| aRope aNode |
@@ -28,7 +28,7 @@ BrLazyTreeNodeExamples >> depth_1 [
 	^ aNode
 ]
 
-{ #category : 'depth 5' }
+{ #category : #'depth 5' }
 BrLazyTreeNodeExamples >> depth_5 [
 	<gtExample>
 	| aRope aNode |
@@ -54,7 +54,7 @@ BrLazyTreeNodeExamples >> depth_5 [
 	^ aNode
 ]
 
-{ #category : 'depth 5' }
+{ #category : #'depth 5' }
 BrLazyTreeNodeExamples >> depth_5_expand_1 [
 	<gtExample>
 	| aNode |
@@ -83,7 +83,7 @@ BrLazyTreeNodeExamples >> depth_5_expand_1 [
 	^ aNode
 ]
 
-{ #category : 'depth 5' }
+{ #category : #'depth 5' }
 BrLazyTreeNodeExamples >> depth_5_expand_1_twice [
 	<gtExample>
 	| aNode |
@@ -112,7 +112,7 @@ BrLazyTreeNodeExamples >> depth_5_expand_1_twice [
 	^ aNode
 ]
 
-{ #category : 'depth 5' }
+{ #category : #'depth 5' }
 BrLazyTreeNodeExamples >> depth_5_expand_2 [
 	<gtExample>
 	| aNode aSubNode |

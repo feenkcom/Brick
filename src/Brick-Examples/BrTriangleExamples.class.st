@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTriangleExamples',
-	#superclass : 'Object',
+	#name : #BrTriangleExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Triangle'
 }
 
-{ #category : 'basic' }
+{ #category : #basic }
 BrTriangleExamples >> basicTriangle [
 	<gtExample>
 	| aTriangle |
@@ -12,7 +12,7 @@ BrTriangleExamples >> basicTriangle [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircle [
 	<gtExample>
 	| aTriangle |
@@ -21,7 +21,7 @@ BrTriangleExamples >> glamorousInCircle [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircleCollapsed [
 	<gtExample>
 	| aTriangle |
@@ -31,7 +31,7 @@ BrTriangleExamples >> glamorousInCircleCollapsed [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircleDisabled [
 	<gtExample>
 	| aTriangle |
@@ -42,7 +42,7 @@ BrTriangleExamples >> glamorousInCircleDisabled [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircleExpanded [
 	<gtExample>
 	| aTriangle |
@@ -52,7 +52,7 @@ BrTriangleExamples >> glamorousInCircleExpanded [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircleHidden [
 	<gtExample>
 	| aTriangle |
@@ -61,7 +61,7 @@ BrTriangleExamples >> glamorousInCircleHidden [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircleVisible [
 	<gtExample>
 	| aTriangle |
@@ -70,7 +70,7 @@ BrTriangleExamples >> glamorousInCircleVisible [
 	^ aTriangle
 ]
 
-{ #category : 'glamorous' }
+{ #category : #glamorous }
 BrTriangleExamples >> glamorousInCircleWithAction [
 	<gtExample>
 	| aTriangle theActions |
@@ -90,7 +90,7 @@ BrTriangleExamples >> glamorousInCircleWithAction [
 	^ aTriangle
 ]
 
-{ #category : 'basic' }
+{ #category : #basic }
 BrTriangleExamples >> triangle [
 	<gtExample>
 	| aTriangle |

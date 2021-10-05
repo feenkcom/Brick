@@ -17,7 +17,7 @@ Class {
 		'showEventHandler',
 		'relocateEventHandler'
 	],
-	#category : 'Brick-Anchored - Look'
+	#category : #'Brick-Anchored - Look'
 }
 
 { #category : #accessing }
@@ -203,9 +203,20 @@ BrWithAnchoredAptitude >> relocate: aRelocateEvent [
 	self canRelocate
 		ifFalse: [ ^ self ].
 	
-	strategy
+	[ strategy
 		invalidate: outerContainer
-		forPreferredExtent: preferredExtent
+		forPreferredExtent: preferredExtent ]
+			on: Error
+			do: [ :anError |
+				anError emit.
+
+				NonInteractiveTranscript stdout
+					nextPutAll: '[';
+					nextPutAll: self class name;
+					nextPutAll: '] ';
+					print: anError;
+					cr.
+			]
 ]
 
 { #category : #accessing }

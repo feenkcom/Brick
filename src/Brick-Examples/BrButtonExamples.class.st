@@ -47,12 +47,12 @@ ${example:BrButtonExamples>>#labelLookWithCommonAndSizeInteractions}$
 
 "
 Class {
-	#name : 'BrButtonExamples',
-	#superclass : 'Object',
+	#name : #BrButtonExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Button'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonAndLookWithLabelAndExterior [
 	<gtExample>
 	| aButtonLook aLabelLook anExteriorLook |
@@ -96,7 +96,7 @@ BrButtonExamples >> buttonAndLookWithLabelAndExterior [
 		aptitude: aButtonLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithExteriorLook [
 	<gtExample>
 	| anExteriorLook |
@@ -112,7 +112,7 @@ BrButtonExamples >> buttonWithExteriorLook [
 		aptitude: anExteriorLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithLabelLook [
 	<gtExample>
 	| aLabelLook |
@@ -123,7 +123,7 @@ BrButtonExamples >> buttonWithLabelLook [
 		aptitude: aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithLabelLookAndCustomFont [
 	<gtExample>
 	| aLabelLook |
@@ -139,7 +139,7 @@ BrButtonExamples >> buttonWithLabelLookAndCustomFont [
 		aptitude: aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithLabelLookOfDifferentSizes [
 	<gtExample>
 	| aLabelLook |
@@ -162,7 +162,7 @@ BrButtonExamples >> buttonWithLabelLookOfDifferentSizes [
 		aptitude: aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithLabelLookReactingToHover [
 	<gtExample>
 	| aLabelLook |
@@ -181,7 +181,7 @@ BrButtonExamples >> buttonWithLabelLookReactingToHover [
 		aptitude: aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithLabelLookReactingToHoverAndPress [
 	<gtExample>
 	| aLabelLook |
@@ -201,7 +201,7 @@ BrButtonExamples >> buttonWithLabelLookReactingToHoverAndPress [
 		aptitude: aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> buttonWithLabelLookReactingToHoverAndPressAndDisabled [
 	<gtExample>
 	| aLabelLook |
@@ -223,7 +223,7 @@ BrButtonExamples >> buttonWithLabelLookReactingToHoverAndPressAndDisabled [
 		aptitude: aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> labelLookWithCommonAndSizeInteractions [
 	<gtExample>
 	| aLabelLook |
@@ -249,7 +249,7 @@ BrButtonExamples >> labelLookWithCommonAndSizeInteractions [
 	^ aLabelLook
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrButtonExamples >> newButton [
 	<gtExample>
 	
