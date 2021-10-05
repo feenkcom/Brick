@@ -1,25 +1,25 @@
 Class {
-	#name : 'BrIconModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrIconModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'icon'
 	],
 	#category : 'Brick-! Core - Models'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrIconModel class >> modelName [
 	^ 'Icon'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrIconModel >> icon [
 	<return: #BlElement>
 
 	^ icon
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrIconModel >> icon: aStencil [
 
 	icon = aStencil
@@ -29,7 +29,7 @@ BrIconModel >> icon: aStencil [
 	self notifyIconChanged
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrIconModel >> initialize [
 	super initialize.
 	icon := [
@@ -40,19 +40,19 @@ BrIconModel >> initialize [
 			border: (BlBorder paint: Color gray width: 1) ] asStencil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrIconModel >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrIconRequest reply: [ :aResponse | aResponse icon: self icon ]
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrIconModel >> notifyIconChanged [
 	self dispatchEvent: (BrIconChanged new icon: self icon)
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrIconModel >> printOn: aStream [
 	aStream
 		nextPutAll: self modelName, '(';

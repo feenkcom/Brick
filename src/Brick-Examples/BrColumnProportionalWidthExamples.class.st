@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrColumnProportionalWidthExamples',
-	#superclass : 'BrColumnWidthExamples',
+	#name : #BrColumnProportionalWidthExamples,
+	#superclass : #BrColumnWidthExamples,
 	#category : 'Brick-Examples-! Model - Column'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrColumnProportionalWidthExamples >> applyOnElement [
 	<gtExample>
 	|  anElement aColumnWidth |
@@ -27,7 +27,7 @@ BrColumnProportionalWidthExamples >> applyOnElement [
 	^ anElement
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrColumnProportionalWidthExamples >> default [
 	<gtExample>
 	| aColumnWidth |
@@ -39,7 +39,7 @@ BrColumnProportionalWidthExamples >> default [
 	^ aColumnWidth
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrColumnProportionalWidthExamples >> equalsAndHash [
 	<gtExample>
 	| aColumnWidth anotherColumnWidth |
@@ -53,7 +53,7 @@ BrColumnProportionalWidthExamples >> equalsAndHash [
 	^ aColumnWidth = anotherColumnWidth
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrColumnProportionalWidthExamples >> notEquals [
 	<gtExample>
 	| aColumnWidth anotherColumnWidth |
@@ -66,7 +66,7 @@ BrColumnProportionalWidthExamples >> notEquals [
 	^ aColumnWidth = anotherColumnWidth
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrColumnProportionalWidthExamples >> setWeight [
 	<gtExample>
 	| aColumnWidth |

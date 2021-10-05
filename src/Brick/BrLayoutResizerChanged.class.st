@@ -1,28 +1,28 @@
 Class {
-	#name : 'BrLayoutResizerChanged',
-	#superclass : 'BrStateChangedEvent',
+	#name : #BrLayoutResizerChanged,
+	#superclass : #BrStateChangedEvent,
 	#instVars : [
 		'resizer'
 	],
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrLayoutResizerChanged class >> isDeprecated [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutResizerChanged >> resizer [
 	^ resizer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutResizerChanged >> resizer: anObject [
 	resizer := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutResizerChanged >> state: anObject [
 	"Override me to properly set the given state"
 

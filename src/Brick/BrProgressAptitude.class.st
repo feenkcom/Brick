@@ -6,8 +6,8 @@ See my subclasses for specific use cases: ${class:BrProgressLook|show=#gtSubclas
 
 "
 Class {
-	#name : 'BrProgressAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrProgressAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'amount',
 		'total'
@@ -15,12 +15,12 @@ Class {
 	#category : 'Brick-Progress - Look'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressAptitude >> amount [
 	^ amount
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressAptitude >> amount: anAmountNumber total: aTotalNumber [
 	self
 		assert: [ anAmountNumber notNil and: [ aTotalNumber notNil ] ]
@@ -34,12 +34,12 @@ BrProgressAptitude >> amount: anAmountNumber total: aTotalNumber [
 	self onProgressChanged
 ]
 
-{ #category : 'accessing-computed' }
+{ #category : #'accessing-computed' }
 BrProgressAptitude >> fraction [
 	^ self amount / self total
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrProgressAptitude >> fraction: aNumber [
 	self 
 		assert: [ aNumber notNil ]
@@ -50,14 +50,14 @@ BrProgressAptitude >> fraction: aNumber [
 	self amount: aNumber * 100 total: 100
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressAptitude >> initialize [
 	super initialize.
 	amount := 0.
 	total := 100.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -66,29 +66,29 @@ BrProgressAptitude >> initializeListeners [
 		do: [ :anEvent | self amount: anEvent amount total: anEvent total ].
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrProgressStatusRequest new
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrProgressAptitude >> onProgressChanged [
 	"looks can react to progress changes"
 ]
 
-{ #category : 'accessing-computed' }
+{ #category : #'accessing-computed' }
 BrProgressAptitude >> percentage [
 	^ self amount / self total * 100
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressAptitude >> percentage: aNumber [
 	self amount: aNumber total: 100
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressAptitude >> total [
 	^ total
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrFutureHandler',
-	#superclass : 'Object',
+	#name : #BrFutureHandler,
+	#superclass : #Object,
 	#instVars : [
 		'future',
 		'action',
@@ -9,24 +9,24 @@ Class {
 	#category : 'Brick-Future - Support'
 }
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrFutureHandler >> action: aBlockOrMessageSend [
 	action := aBlockOrMessageSend
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFutureHandler >> initialize [
 	super initialize.
 	
 	monitor := Monitor new
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrFutureHandler >> receiver: anObject selector: aSelector [
 	self action: (MessageSend receiver: anObject selector: aSelector)
 ]
 
-{ #category : 'api - future handler' }
+{ #category : #'api - future handler' }
 BrFutureHandler >> updateWithFuture: aFuture [
 	monitor critical: [ 
 		future := aFuture.

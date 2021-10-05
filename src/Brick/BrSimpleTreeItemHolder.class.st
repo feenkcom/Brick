@@ -1,20 +1,20 @@
 Class {
-	#name : 'BrSimpleTreeItemHolder',
-	#superclass : 'BrTreeItemHolder',
+	#name : #BrSimpleTreeItemHolder,
+	#superclass : #BrTreeItemHolder,
 	#instVars : [
 		'nodeElement'
 	],
 	#category : 'Brick-Tree - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSimpleTreeItemHolder >> nodeElement [
 	<return: #BlElement>
 
 	^ nodeElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSimpleTreeItemHolder >> nodeElement: anElement [
 	nodeElement := anElement
 ]

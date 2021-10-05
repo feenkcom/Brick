@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrDropdownVisibleRequest',
-	#superclass : 'BrAnchoredVisibleRequest',
+	#name : #BrDropdownVisibleRequest,
+	#superclass : #BrAnchoredVisibleRequest,
 	#category : 'Brick-Dropdown - Events'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrDropdownVisibleRequest >> responseClass [
 	^ BrDropdownVisibleChanged
 ]

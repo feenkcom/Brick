@@ -5,12 +5,12 @@ ${example:BrProgressExamples>>#fileSizeValues|codeExpanded=false|previewExpanded
 
 "
 Class {
-	#name : 'BrProgressFileSizeValueStencil',
-	#superclass : 'BrProgressValueStencil',
+	#name : #BrProgressFileSizeValueStencil,
+	#superclass : #BrProgressValueStencil,
 	#category : 'Brick-Progress - Model'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrProgressFileSizeValueStencil >> create [
 	<return: #String>
 	| aValue aHumanReadable aLength aUnit |

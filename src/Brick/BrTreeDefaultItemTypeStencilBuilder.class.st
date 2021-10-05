@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTreeDefaultItemTypeStencilBuilder',
-	#superclass : 'BrTreeNodeTypeStencilBuilder',
+	#name : #BrTreeDefaultItemTypeStencilBuilder,
+	#superclass : #BrTreeNodeTypeStencilBuilder,
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrTreeDefaultItemTypeStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 

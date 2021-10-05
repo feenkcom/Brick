@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrToolbarItemRemovedEvent',
-	#superclass : 'BrToolbarItemEvent',
+	#name : #BrToolbarItemRemovedEvent,
+	#superclass : #BrToolbarItemEvent,
 	#category : 'Brick-Toolbar - Events'
 }

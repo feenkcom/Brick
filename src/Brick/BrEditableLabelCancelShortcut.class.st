@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrEditableLabelCancelShortcut',
-	#superclass : 'BrEditableLabelShortcut',
+	#name : #BrEditableLabelCancelShortcut,
+	#superclass : #BrEditableLabelShortcut,
 	#category : 'Brick-Editor - Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditableLabelCancelShortcut >> description [
 	^ 'Cancels changes and brings back the state of the editor.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditableLabelCancelShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination escape
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditableLabelCancelShortcut >> name [
 	^ 'Cancel'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditableLabelCancelShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrEditorElement cancelEdition
 ]

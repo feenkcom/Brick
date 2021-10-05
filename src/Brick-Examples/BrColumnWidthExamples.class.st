@@ -8,12 +8,12 @@ The ${class:BrColumnWidth}$ is an abstract class. There are examples for each ty
 - ${class:BrColumnUndefinedWidthExamples}$ to see examples of the undefined column width
 "
 Class {
-	#name : 'BrColumnWidthExamples',
-	#superclass : 'Object',
+	#name : #BrColumnWidthExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-! Model - Column'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrColumnWidthExamples >> columnWidthIsAbstract [
 	<gtExample>
 	

@@ -13,12 +13,12 @@ ${example:name=BrAccordionExamples>>#glamorousWithEditorExpandedWithFocus|noCode
 !! Resizing
 "
 Class {
-	#name : 'BrAccordionExamples',
-	#superclass : 'Object',
+	#name : #BrAccordionExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Accordion'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrAccordionExamples >> glamorousWithEditor [
 	<gtExample>
 	| anAccordion |
@@ -40,7 +40,7 @@ BrAccordionExamples >> glamorousWithEditor [
 	^ anAccordion
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrAccordionExamples >> glamorousWithEditorExpanded [
 	<gtExample>
 	| anAccordion |
@@ -51,7 +51,7 @@ BrAccordionExamples >> glamorousWithEditorExpanded [
 	^ anAccordion
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrAccordionExamples >> glamorousWithEditorExpandedWithFocus [
 	<gtExample>
 	| anAccordion |

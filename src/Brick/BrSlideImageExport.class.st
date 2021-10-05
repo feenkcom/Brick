@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrSlideImageExport',
-	#superclass : 'BrFileSelectOrCreate',
+	#name : #BrSlideImageExport,
+	#superclass : #BrFileSelectOrCreate,
 	#instVars : [
 		'formatInputField',
 		'heightInputField',
@@ -12,7 +12,7 @@ Class {
 	#category : 'Brick-File - UI'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> buildUI [
 	| alignedButton fileInputFieldLabel fileInputFieldContainer formatSection resolutionSection rangeSection imageDetailsContainer |
 	
@@ -57,7 +57,7 @@ BrSlideImageExport >> buildUI [
 		alignedButton }.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createDropdownButtonWithLabel: aString [
 	^ BrButton new
 		aptitude:
@@ -71,7 +71,7 @@ BrSlideImageExport >> createDropdownButtonWithLabel: aString [
 		beSmallSize.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createDropdownFieldFor: aCollection [
 	| button dropDownLook |
 	button := self
@@ -117,7 +117,7 @@ BrSlideImageExport >> createDropdownFieldFor: aCollection [
 	^ button
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createEditableField [
 	^ BrEditableLabel new
 		aptitude: BrGlamorousEditableLabelAptitude new glamorousRegularFontAndSize;
@@ -125,7 +125,7 @@ BrSlideImageExport >> createEditableField [
 		text: ''.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createFormatInputSection [
 	| formatLabel |
 	formatLabel := self createLabelWithText: 'Format: '.
@@ -142,7 +142,7 @@ BrSlideImageExport >> createFormatInputSection [
 		addChildren: {formatLabel. formatInputField}.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createLabelWithText: aString [
 	^ BrLabel new
 		aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
@@ -151,7 +151,7 @@ BrSlideImageExport >> createLabelWithText: aString [
 		fitContent.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createRangeSection [
 	| rangeLabel rangeDropdown |
 	rangeLabel := self createLabelWithText: 'Export: '.
@@ -167,7 +167,7 @@ BrSlideImageExport >> createRangeSection [
 		addChildren: {rangeLabel. rangeInputField}.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> createResolutionSection [
 	| resolutionLabel separatorLabel |
 	resolutionLabel := self createLabelWithText: 'Resolution: '.
@@ -186,7 +186,7 @@ BrSlideImageExport >> createResolutionSection [
 		addChildren: {resolutionLabel. widthInputField. separatorLabel. heightInputField}.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> executeAction [ 
 	"Execute the receiver's load action"
 	| fileName |
@@ -198,22 +198,22 @@ BrSlideImageExport >> executeAction [
 		cull: fileName.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> exportRange [
 	^ rangeInputField text asString ifEmpty: [ ^ 'All' asString ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> imageFormat [
 	^ formatInputField text asString ifEmpty: [ ^ 'JPEG' asString ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> imageHeight [
 	^ heightInputField text asString ifEmpty: [ ^ '1080' asString ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSlideImageExport >> imageWidth [
 	^ widthInputField text asString ifEmpty: [ ^ '1920' asString ]. 
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrFromFutureExamples',
-	#superclass : 'Object',
+	#name : #BrFromFutureExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Future'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrFromFutureExamples >> fromFutureLabel [
 	<gtExample>
 	
@@ -21,7 +21,7 @@ BrFromFutureExamples >> fromFutureLabel [
 				ifPending: [ :anInitialValue | aLabel text: anInitialValue ] ]
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrFromFutureExamples >> fromFutureLabelWithError [
 	<gtExample>
 	

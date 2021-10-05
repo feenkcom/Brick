@@ -9,12 +9,12 @@ ${example:BrGlamorousComponentsCheckboxes>>#checked|previewShow=#gtLiveFor:|prev
 ${example:BrGlamorousComponentsCheckboxes>>#indeterminate|previewShow=#gtLiveFor:|previewHeight=60|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : 'BrGlamorousComponentsCheckboxes',
-	#superclass : 'BrGlamorousComponents',
+	#name : #BrGlamorousComponentsCheckboxes,
+	#superclass : #BrGlamorousComponents,
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousComponentsCheckboxes >> checked [
 	<gtExample>
 	
@@ -23,7 +23,7 @@ BrGlamorousComponentsCheckboxes >> checked [
 		check
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousComponentsCheckboxes >> indeterminate [
 	<gtExample>
 
@@ -32,7 +32,7 @@ BrGlamorousComponentsCheckboxes >> indeterminate [
 		indeterminate
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrGlamorousComponentsCheckboxes >> unchecked [
 	<gtExample>
 	

@@ -1,28 +1,28 @@
 Class {
-	#name : 'BrPagerPageModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrPagerPageModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'embellisher'
 	],
 	#category : 'Brick-Pager - Model'
 }
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrPagerPageModel >> defaultEmbellisher [
 	^ BrPagerPageEmbellisher new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPageModel >> embellisher [
 	^ embellisher
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPageModel >> embellisher: aPagerPageEmbellisher [
 	embellisher := aPagerPageEmbellisher
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrPagerPageModel >> initialize [
 	super initialize.
 	embellisher := self defaultEmbellisher

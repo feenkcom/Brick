@@ -1,31 +1,31 @@
 Class {
-	#name : 'BrListSequenceableCollectionItemsProvider',
-	#superclass : 'BrAbstractListItemsProvider',
+	#name : #BrListSequenceableCollectionItemsProvider,
+	#superclass : #BrAbstractListItemsProvider,
 	#instVars : [
 		'collection'
 	],
 	#category : 'Brick-List - Model'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrListSequenceableCollectionItemsProvider class >> forCollection: aSequenceableCollection [
 	^ self new collection: aSequenceableCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 
 	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel).
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> collection [
 
 	^ collection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> collection: aSequenceableCollection [
 	self
 		assert: [
@@ -37,24 +37,24 @@ BrListSequenceableCollectionItemsProvider >> collection: aSequenceableCollection
 	collection := aSequenceableCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> currentItems [
 	^ collection
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListSequenceableCollectionItemsProvider >> initialize [
 	super initialize.
 	
 	collection := #()
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> itemAt: anIndex [
 	^ self collection at: anIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> itemCount [
 	<return: #Number>
 

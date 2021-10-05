@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTabExamples',
-	#superclass : 'Object',
+	#name : #BrTabExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Tab'
 }
 
-{ #category : 'examples - tab model' }
+{ #category : #'examples - tab model' }
 BrTabExamples >> changeStencilTabModel [
 	<gtExample>
 	| aTabModel stencilChangedHander changed changedTabModel changedTabStencil |
@@ -31,7 +31,7 @@ BrTabExamples >> changeStencilTabModel [
 	^ aTabModel
 ]
 
-{ #category : 'examples - tab model' }
+{ #category : #'examples - tab model' }
 BrTabExamples >> changeToolbarStencilModel [
 	<gtExample>
 	| aTabModel stencilChangedHander changed changedTabModel changedTabStencil |
@@ -58,7 +58,7 @@ BrTabExamples >> changeToolbarStencilModel [
 	^ aTabModel
 ]
 
-{ #category : 'examples - tab model' }
+{ #category : #'examples - tab model' }
 BrTabExamples >> deselectTabModel [
 	<gtExample>
 	| aTabModel selected deselected deselectedTab selectedHandler deselectedHandler |
@@ -87,14 +87,14 @@ BrTabExamples >> deselectTabModel [
 	^ aTabModel
 ]
 
-{ #category : 'examples - ui header' }
+{ #category : #'examples - ui header' }
 BrTabExamples >> groupHeaderLook [
 	<gtExample>
 
 	^ BrTabGroupHeaderWithToolbarAptitude asLook
 ]
 
-{ #category : 'examples - ui header' }
+{ #category : #'examples - ui header' }
 BrTabExamples >> groupHeaderWithAddedTabAtFirstPosition [
 	<gtExample>
 	
@@ -122,7 +122,7 @@ BrTabExamples >> groupHeaderWithAddedTabAtFirstPosition [
 	^ aHeaderElement
 ]
 
-{ #category : 'examples - ui header' }
+{ #category : #'examples - ui header' }
 BrTabExamples >> groupHeaderWithBoundTabs [
 	<gtExample>
 	| aHeaderElement tabElement1 tabElement2 tabElement3 |
@@ -156,7 +156,7 @@ BrTabExamples >> groupHeaderWithBoundTabs [
 	^ aHeaderElement
 ]
 
-{ #category : 'examples - ui header' }
+{ #category : #'examples - ui header' }
 BrTabExamples >> groupHeaderWithoutBoundTabs [
 	<gtExample>	
 	| tab1 tab2 tab3 tabGroup headerElement headerLook tabsRequest tabsChanged |
@@ -192,14 +192,14 @@ BrTabExamples >> groupHeaderWithoutBoundTabs [
 	^ headerElement
 ]
 
-{ #category : 'examples - ui header' }
+{ #category : #'examples - ui header' }
 BrTabExamples >> groupTabLook [
 	<gtExample>
 
 	^ BrTextLabelAptitude new
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> moveNotSelectedTabInGroupWithTwoTabs_FromOne_ToTwo [
 	<gtExample>
 	| aTabGroup aSelectedTab aNotSelectedTab |
@@ -225,7 +225,7 @@ BrTabExamples >> moveNotSelectedTabInGroupWithTwoTabs_FromOne_ToTwo [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> moveSelectedTabInGroupWithTwoTabs_FromTwo_ToOne [
 	<gtExample>
 	| aTabGroup aSelectedTab aNotSelectedTab |
@@ -251,7 +251,7 @@ BrTabExamples >> moveSelectedTabInGroupWithTwoTabs_FromTwo_ToOne [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> removeNotSelectedTabFromGroupWithTwoTabs [
 	<gtExample>
 	| aTabGroup |
@@ -269,7 +269,7 @@ BrTabExamples >> removeNotSelectedTabFromGroupWithTwoTabs [
 	^ aTabGroup
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabExamples >> removeSelectedTab [
 	<gtExample>
 	| tabGroup |
@@ -280,7 +280,7 @@ BrTabExamples >> removeSelectedTab [
 	^ tabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> removeSelectedTabFromGroupWithTwoTabs [
 	<gtExample>
 	| aTabGroup |
@@ -298,7 +298,7 @@ BrTabExamples >> removeSelectedTabFromGroupWithTwoTabs [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab model' }
+{ #category : #'examples - tab model' }
 BrTabExamples >> selectTabModel [
 	<gtExample>
 	| aTabModel selected selectedTab deselected selectedHandler deselectedHandler |
@@ -327,7 +327,7 @@ BrTabExamples >> selectTabModel [
 	^ aTabModel
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabExamples >> selectTabOnTheLeftOfTheFirstTab [
 	<gtExample>
 	| tabGroup |
@@ -338,7 +338,7 @@ BrTabExamples >> selectTabOnTheLeftOfTheFirstTab [
 	^ tabGroup
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabExamples >> selectTabOnTheLeftOfTheLastTab [
 	<gtExample>
 	| tabGroup |
@@ -349,7 +349,7 @@ BrTabExamples >> selectTabOnTheLeftOfTheLastTab [
 	^ tabGroup
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabExamples >> selectTabOnTheRightOfTheFirstTab [
 	<gtExample>
 	| tabGroup |
@@ -360,7 +360,7 @@ BrTabExamples >> selectTabOnTheRightOfTheFirstTab [
 	^ tabGroup
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabExamples >> selectTabOnTheRightOfTheLastTab [
 	<gtExample>
 	| tabGroup |
@@ -371,7 +371,7 @@ BrTabExamples >> selectTabOnTheRightOfTheLastTab [
 	^ tabGroup
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTabExamples >> tabGroupModel [
 	<gtExample>
 	| aTabGroup |
@@ -383,7 +383,7 @@ BrTabExamples >> tabGroupModel [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithOneTab [
 	<gtExample>
 	| aTabGroupModel aTab theEvents |
@@ -414,7 +414,7 @@ BrTabExamples >> tabGroupWithOneTab [
 	^ aTabGroupModel
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithOneTabChangingStencil [
 	<gtExample>
 	| aTabGroupModel aTabModel changed changedTabModel changedTabStencil stencilChangedHandler |
@@ -448,7 +448,7 @@ BrTabExamples >> tabGroupWithOneTabChangingStencil [
 	^ aTabGroupModel
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithOneTabChangingToolbarStencil [
 	<gtExample>
 	| aTabGroupModel aTabModel changed changedTabModel changedTabStencil stencilChangedHandler |
@@ -482,7 +482,7 @@ BrTabExamples >> tabGroupWithOneTabChangingToolbarStencil [
 	^ aTabGroupModel
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithSecondSelectedTabAddedAtFirstPosition [
 	<gtExample>
 	| aTabGroup aTab |
@@ -502,7 +502,7 @@ BrTabExamples >> tabGroupWithSecondSelectedTabAddedAtFirstPosition [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithSecondTabAddedAtFirstPosition [
 	<gtExample>
 	| aTabGroup aTab theEvents |
@@ -526,7 +526,7 @@ BrTabExamples >> tabGroupWithSecondTabAddedAtFirstPosition [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithTabAddedAtFirstPosition [
 	<gtExample>
 	| aTabGroup anExistingTab anAddedTab |
@@ -553,7 +553,7 @@ BrTabExamples >> tabGroupWithTabAddedAtFirstPosition [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithTwoTabsSelectedAfterAdding [
 	<gtExample>
 	| aTabGroup aTab |
@@ -575,7 +575,7 @@ BrTabExamples >> tabGroupWithTwoTabsSelectedAfterAdding [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithTwoTabsSelectedBeforeAdding [
 	<gtExample>
 	| aTabGroup aTab |
@@ -597,7 +597,7 @@ BrTabExamples >> tabGroupWithTwoTabsSelectedBeforeAdding [
 	^ aTabGroup
 ]
 
-{ #category : 'examples - tab group model' }
+{ #category : #'examples - tab group model' }
 BrTabExamples >> tabGroupWithTwoTabsWithoutExplicitSelection [
 	<gtExample>
 	| aTabGroup aTab |
@@ -615,7 +615,7 @@ BrTabExamples >> tabGroupWithTwoTabsWithoutExplicitSelection [
 	^ aTabGroup
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTabExamples >> tabModel [
 	<gtExample>
 	| aTabModel |

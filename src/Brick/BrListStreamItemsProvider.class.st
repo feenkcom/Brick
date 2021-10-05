@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrListStreamItemsProvider',
-	#superclass : 'BrAbstractListItemsProvider',
+	#name : #BrListStreamItemsProvider,
+	#superclass : #BrAbstractListItemsProvider,
 	#instVars : [
 		'items',
 		'mutex',
@@ -11,17 +11,17 @@ Class {
 	#category : 'Brick-List - Model'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrListStreamItemsProvider class >> forCollection: aSequenceableCollection [
 	^ self forStream: aSequenceableCollection asAsyncStream
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrListStreamItemsProvider class >> forStream: anAsyncStream [
 	^ self new stream: anAsyncStream
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 	
@@ -31,17 +31,17 @@ BrListStreamItemsProvider >> attachToListModel: aListModel [
 		ifTrue: [ self requestNewItems ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> currentItems [
 	^ items
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListStreamItemsProvider >> hasMoreItemsToLoad [
 	^ stream isDone not
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListStreamItemsProvider >> initialize [
 	super initialize.
 	
@@ -51,7 +51,7 @@ BrListStreamItemsProvider >> initialize [
 	preloadAmount := 100
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListStreamItemsProvider >> isBoundaryNearIndex: anIndex [
 	| itemsUntilEdge percentageLeftUntilEdge | 
 
@@ -63,13 +63,13 @@ BrListStreamItemsProvider >> isBoundaryNearIndex: anIndex [
 	^ percentageLeftUntilEdge < 20
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListStreamItemsProvider >> isRequestingItems [
 	^ mutex critical: [
 		promise notNil and: [ promise isFinished not ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> itemAt: anIndex [
 	| requestedItem |
 
@@ -81,30 +81,30 @@ BrListStreamItemsProvider >> itemAt: anIndex [
 	^ requestedItem
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> itemCount [
 	<return: #Number>
 
 	^ items size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> loadedItemsCount [
 	^ items size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> preloadAmount [
 
 	^ preloadAmount
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListStreamItemsProvider >> preloadAmount: aNumber [
 	preloadAmount := aNumber
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrListStreamItemsProvider >> requestNewItems [
 	mutex critical: [ 
 		promise := (self stream take: self preloadAmount) collect await.
@@ -119,7 +119,7 @@ BrListStreamItemsProvider >> requestNewItems [
 					flush ] ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrListStreamItemsProvider >> shouldRequestNewItemsForIndex: anIndex [
 	self isRequestingItems
 		ifTrue: [ ^ false ].
@@ -128,13 +128,13 @@ BrListStreamItemsProvider >> shouldRequestNewItemsForIndex: anIndex [
 		and: [ self isBoundaryNearIndex: anIndex ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListStreamItemsProvider >> stream [
 
 	^ stream
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrListStreamItemsProvider >> stream: aStream [
 	stream := AsyncFuseStream stream: aStream
 ]

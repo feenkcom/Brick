@@ -8,17 +8,17 @@ See my subclasses for specific use cases: ${class:BrProgressPaintStencil|show=#g
 
 "
 Class {
-	#name : 'BrProgressPaintStencil',
-	#superclass : 'BrStencil',
+	#name : #BrProgressPaintStencil,
+	#superclass : #BrStencil,
 	#category : 'Brick-Progress - Look'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrProgressPaintStencil class >> isAbstract [
 	^ self name = #BrProgressPaintStencil 
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrProgressPaintStencil >> create [
 	<return: #BlPaint>
 	^ self subclassResponsibility

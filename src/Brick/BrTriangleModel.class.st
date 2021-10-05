@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTriangleModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrTriangleModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'collapsedStencil',
 		'expandedStencil'
@@ -8,46 +8,46 @@ Class {
 	#category : 'Brick-Triangle - Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleModel >> collapsedStencil [
 	^ collapsedStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleModel >> collapsedStencil: aStencil [
 	collapsedStencil := aStencil.
 	self notifyStencilsChanged.
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrTriangleModel >> defaultCollapsedStencil [
 	^ BrCollapsedTriangleStencil new
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrTriangleModel >> defaultExpandedStencil [
 	^ BrExpandedTriangleStencil new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleModel >> expandedStencil [
 	^ expandedStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTriangleModel >> expandedStencil: aStencil [
 	expandedStencil := aStencil.
 	self notifyStencilsChanged.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTriangleModel >> initialize [
 	super initialize.
 	collapsedStencil := self defaultCollapsedStencil.
 	expandedStencil := self defaultExpandedStencil.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTriangleModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -59,7 +59,7 @@ BrTriangleModel >> initializeListeners [
 				expandedStencil: self expandedStencil ]
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTriangleModel >> notifyStencilsChanged [
 	self dispatchEvent: (BrTriangleStencilsChanged new 
 		collapsedStencil: self collapsedStencil;

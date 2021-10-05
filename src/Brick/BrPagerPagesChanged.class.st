@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrPagerPagesChanged',
-	#superclass : 'BlEvent',
+	#name : #BrPagerPagesChanged,
+	#superclass : #BlEvent,
 	#instVars : [
 		'pages'
 	],
 	#category : 'Brick-Pager - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPagesChanged class >> pages: aCollectionOfPages [
 	^ self new pages: aCollectionOfPages
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPagesChanged >> pages [
 	^ pages
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrPagerPagesChanged >> pages: anObject [
 	pages := anObject
 ]

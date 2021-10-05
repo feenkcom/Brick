@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrScrollByWish',
-	#superclass : 'BrScrollWish',
+	#name : #BrScrollByWish,
+	#superclass : #BrScrollWish,
 	#instVars : [
 		'delta'
 	],
 	#category : 'Brick-Scrollable - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollByWish >> delta [
 	^ delta
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollByWish >> delta: anObject [
 	delta := anObject
 ]

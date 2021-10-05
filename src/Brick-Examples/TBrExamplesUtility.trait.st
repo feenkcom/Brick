@@ -1,21 +1,21 @@
 Trait {
-	#name : 'TBrExamplesUtility',
+	#name : #TBrExamplesUtility,
 	#category : 'Brick-Examples-Utilities'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 TBrExamplesUtility >> assertEventTarget: anEventTarget hasEventHandlerOn: anEventClass [
 
 	self assert: (self doesEventTarget: anEventTarget hasEventHandlerOn: anEventClass)
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 TBrExamplesUtility >> assertEventTarget: anEventTarget hasNoEventHandlerOn: anEventClass [
 
 	self assert: (self doesEventTarget: anEventTarget hasEventHandlerOn: anEventClass) not
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 TBrExamplesUtility >> doesEventHandler: anEventHandler want: anEventClass [
 	<return: #Boolean>
 
@@ -28,7 +28,7 @@ TBrExamplesUtility >> doesEventHandler: anEventHandler want: anEventClass [
 	^ false
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 TBrExamplesUtility >> doesEventTarget: anEventTarget hasEventHandlerOn: anEventClass [
 	<return: #Boolean>
 

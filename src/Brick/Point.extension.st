@@ -1,6 +1,6 @@
-Extension { #name : 'Point' }
+Extension { #name : #Point }
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 Point >> asBrAnchoredAnchorBounds [
 	^ BrAnchoredPointAnchorBounds point: self
 ]

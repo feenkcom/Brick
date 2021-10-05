@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrWithAnchoredAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrWithAnchoredAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'root',
 		'outerContainer',
@@ -17,22 +17,22 @@ Class {
 		'showEventHandler',
 		'relocateEventHandler'
 	],
-	#category : 'Brick-Anchored - Look'
+	#category : #'Brick-Anchored - Look'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude class >> stencil: anObject [
 	^ self new
 		stencil: anObject;
 		yourself
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrWithAnchoredAptitude >> canHide [
 	^ self visible
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrWithAnchoredAptitude >> canRelocate [
 	^ widget isNotNil
 		and: [ widget isAttachedToSceneGraph
@@ -40,7 +40,7 @@ BrWithAnchoredAptitude >> canRelocate [
 						and: [ outerContainer isAttachedToSceneGraph ] ] ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrWithAnchoredAptitude >> canShow [
 	^ self visible not
 		and: [ widget isNotNil
@@ -48,7 +48,7 @@ BrWithAnchoredAptitude >> canShow [
 					[ widget isAttachedToSceneGraph and: [ widget visibility shouldDraw ] ] ]
 ]
 
-{ #category : 'api - displaying' }
+{ #category : #'api - displaying' }
 BrWithAnchoredAptitude >> hide [
 	self canHide
 		ifFalse: [ ^ self ].
@@ -71,7 +71,7 @@ BrWithAnchoredAptitude >> hide [
 	innerContainer := nil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrWithAnchoredAptitude >> initialize [
 	super initialize.
 	self stencil: [ BlElement new ].
@@ -120,15 +120,15 @@ BrWithAnchoredAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : 'private - hooks' }
+{ #category : #'private - hooks' }
 BrWithAnchoredAptitude >> onAnchoredElementCreated: anAnchoredElement [
 ]
 
-{ #category : 'private - hooks' }
+{ #category : #'private - hooks' }
 BrWithAnchoredAptitude >> onAnchoredElementRemoved: anAnchoredElement [
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 BrWithAnchoredAptitude >> onHideWish: aWish [
 	"hide on wish"
 
@@ -151,13 +151,13 @@ BrWithAnchoredAptitude >> onHideWish: aWish [
 			^ self hide ]
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 BrWithAnchoredAptitude >> onRelocateWish: aWish [
 	(aWish anchor = widget and: [ self canRelocate ])
 		ifTrue: [ self relocate: aWish ]
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 BrWithAnchoredAptitude >> onShowWish: aWish [
 	self canShow
 		ifFalse: [ ^ self ].
@@ -175,7 +175,7 @@ BrWithAnchoredAptitude >> onShowWish: aWish [
 			^ self show ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> preferredExtent [
 	"Answer the minimum extent required by the widget.
 	This will be used by the ${class:name=BrAnchoredAvailableBounds}$ to determine where the widget should be placed and its available extent."
@@ -184,7 +184,7 @@ BrWithAnchoredAptitude >> preferredExtent [
 	^ preferredExtent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> preferredExtent: anObject [
 	preferredExtent = anObject
 		ifTrue: [ ^ self ].
@@ -193,27 +193,38 @@ BrWithAnchoredAptitude >> preferredExtent: anObject [
 		ifTrue: [ self canRelocate ]
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 BrWithAnchoredAptitude >> relocate [
 	self relocate: nil
 ]
 
-{ #category : 'private - event handling' }
+{ #category : #'private - event handling' }
 BrWithAnchoredAptitude >> relocate: aRelocateEvent [
 	self canRelocate
 		ifFalse: [ ^ self ].
 	
-	strategy
+	[ strategy
 		invalidate: outerContainer
-		forPreferredExtent: preferredExtent
+		forPreferredExtent: preferredExtent ]
+			on: Error
+			do: [ :anError |
+				anError emit.
+
+				NonInteractiveTranscript stdout
+					nextPutAll: '[';
+					nextPutAll: self class name;
+					nextPutAll: '] ';
+					print: anError;
+					cr.
+			]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> root [
 	^ root ifNil: [ root := widget topMostParent ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> root: anElement [
 	| shouldHide |
 	self flag: 'TODO root should be part of model'.
@@ -225,7 +236,7 @@ BrWithAnchoredAptitude >> root: anElement [
 		ifTrue: [ self show ]
 ]
 
-{ #category : 'api - displaying' }
+{ #category : #'api - displaying' }
 BrWithAnchoredAptitude >> show [
 	self canShow
 		ifFalse: [ ^ self ].
@@ -256,12 +267,12 @@ BrWithAnchoredAptitude >> show [
 	self relocate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> stencil [
 	^ stencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> stencil: anObject [
 	stencil = anObject
 		ifTrue: [ ^ self ].
@@ -272,12 +283,12 @@ BrWithAnchoredAptitude >> stencil: anObject [
 				show ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> strategy [
 	^ strategy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> strategy: anObject [
 	strategy = anObject
 		ifTrue: [ ^ self ].
@@ -286,12 +297,12 @@ BrWithAnchoredAptitude >> strategy: anObject [
 		ifTrue: [ self canRelocate ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> visible [
 	^ innerContainer ifNil: [ false ] ifNotNil: #isAttachedToSceneGraph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrWithAnchoredAptitude >> visible: aBoolean [
 	aBoolean
 		ifTrue: [ self canShow

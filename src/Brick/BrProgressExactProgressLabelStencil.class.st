@@ -13,38 +13,38 @@ ${example:BrProgressExamples>>#fileSizeValues|codeExpanded=false|previewExpanded
 
 "
 Class {
-	#name : 'BrProgressExactProgressLabelStencil',
-	#superclass : 'BrProgressLabelStencil',
+	#name : #BrProgressExactProgressLabelStencil,
+	#superclass : #BrProgressLabelStencil,
 	#instVars : [
 		'pattern'
 	],
 	#category : 'Brick-Progress - Model'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrProgressExactProgressLabelStencil >> create [
 	<return: #BlRopedText>
 	^ (self pattern format: { self amount. self total }) asRopedText
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressExactProgressLabelStencil >> defaultPattern [
 	^ '{1} out of {2} is ready...'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressExactProgressLabelStencil >> initialize [
 	super initialize.
 	pattern := self defaultPattern.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressExactProgressLabelStencil >> pattern [
 	<return: #String>
 	^ pattern
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressExactProgressLabelStencil >> pattern: aString [
 	"The input string can include two place holders called {1} and {2},
 	where {1} is transfered amount, and {2} is total to transfer.
