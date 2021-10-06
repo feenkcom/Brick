@@ -5,6 +5,7 @@ Class {
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'future',
+		'futureExecution',
 		'dataSnapshot',
 		'elementStencil',
 		'elementDataBinder',
@@ -53,13 +54,18 @@ BrFromFuture >> onAddedToSceneGraph [
 	dataSnapshot isPending
 		ifFalse: [ ^ self ].
 
+	"the future is running"
+	futureExecution
+		ifNotNil: [ ^ self ].
+
 	element
 		ifNil: [
 			element := elementStencil asElement ].
 
 	self privateUpdateElement.
 
-	future await
+	futureExecution := future await.
+	futureExecution
 		onSuccessDo: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ];
 		onFailureDo: [ :anError |
 			anError freeze.
@@ -75,25 +81,17 @@ BrFromFuture >> privateDataSnapshot: aDataSnapshot [
 { #category : #private }
 BrFromFuture >> privateUpdateElement [
 	"Must be called from the UI thread"
-	| anEmbellishedElement aTargetElementToAdd |
 
-	anEmbellishedElement := elementDataBinder 
+	elementDataBinder 
 		element: element;
 		data: dataSnapshot;
 		build.
+	
+	(self hasChild: element)
+		ifTrue: [ ^ self ].
 
-	aTargetElementToAdd := (anEmbellishedElement isKindOf: BlElement)
-		ifTrue: [ anEmbellishedElement == element
-			ifTrue: [ element ]
-			ifFalse: [ anEmbellishedElement ] ]
-		ifFalse: [ element ].
-
-	(self hasChild: aTargetElementToAdd)
-		ifFalse: [
-			self removeChildren.
-			element removeFromParent.
-			aTargetElementToAdd removeFromParent.
-			self addChild: aTargetElementToAdd ].
+	element removeFromParent.
+	self addChild: element
 ]
 
 { #category : #'api - accessing' }
