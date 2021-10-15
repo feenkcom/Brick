@@ -8,7 +8,7 @@ Class {
 		'promise',
 		'preloadAmount'
 	],
-	#category : 'Brick-List - Model'
+	#category : #'Brick-List - Model'
 }
 
 { #category : #'instance creation' }
@@ -113,7 +113,10 @@ BrListStreamItemsProvider >> requestNewItems [
 				mutex critical: [ items := items, aResult ].
 				listModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: listModel). ];
 			onFailureDo: [ :anException |
-				NonInteractiveTranscript stdout
+				"Logging the error on the transcript only shows the exception, not where it came from.
+				Emit the exception as well so that it can be found with a beacon logger (which includes the stack)."
+				anException emit.
+				NonInteractiveTranscript stderr
 					nextPutAll: anException printString;
 					cr;
 					flush ] ]
