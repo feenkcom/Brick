@@ -4,8 +4,8 @@ Allows users to react to the cursor movement within the editor.
 ${example:BrTextCursorAttributeExamples>>#changingForeground|previewExpanded=true|previewShow=#gtTextFor:|previewHeight=100}$
 "
 Class {
-	#name : 'BrTextCursorAttribute',
-	#superclass : 'BrTextEventHandlerAttribute',
+	#name : #BrTextCursorAttribute,
+	#superclass : #BrTextEventHandlerAttribute,
 	#instVars : [
 		'enterAction',
 		'leaveAction',
@@ -14,12 +14,12 @@ Class {
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttribute >> enterAction [
 	^ enterAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttribute >> enterAction: aBlock [
 	"A Block in a form [ :aTextEditor :anEvent :aTextStart :aTextEnd | ]"
 	self 
@@ -29,7 +29,7 @@ BrTextCursorAttribute >> enterAction: aBlock [
 	enterAction := aBlock
 ]
 
-{ #category : 'events' }
+{ #category : #events }
 BrTextCursorAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	"Handle a given event or dispatch it using #sendTo:"
 
@@ -40,7 +40,7 @@ BrTextCursorAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditor
 		ifTrue: [ self performLeaveAction: anEvent in: aTextEditor ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextCursorAttribute >> initialize [
 	super initialize.
 
@@ -49,12 +49,12 @@ BrTextCursorAttribute >> initialize [
 	isInside := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttribute >> leaveAction [
 	^ leaveAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttribute >> leaveAction: aBlock [
 	"A Block in a form [ :aTextEditor :anEvent :aTextStart :aTextEnd | ]"
 	self 
@@ -64,7 +64,7 @@ BrTextCursorAttribute >> leaveAction: aBlock [
 	leaveAction := aBlock
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextCursorAttribute >> performEnterAction: anEvent in: aTextEditor [
 	isInside = true
 		ifTrue: [ ^ self ].
@@ -78,7 +78,7 @@ BrTextCursorAttribute >> performEnterAction: anEvent in: aTextEditor [
 		anEvent attributeEnd }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextCursorAttribute >> performLeaveAction: anEvent in: aTextEditor [
 	isInside = false
 		ifTrue: [ ^ self ].
@@ -92,7 +92,7 @@ BrTextCursorAttribute >> performLeaveAction: anEvent in: aTextEditor [
 		anEvent attributeEnd }
 ]
 
-{ #category : 'events' }
+{ #category : #events }
 BrTextCursorAttribute >> wantsEvent: anEvent in: aTextEditor [
 	"Return true if I am interested in a given event and want to handle it,
 	false otherwise"

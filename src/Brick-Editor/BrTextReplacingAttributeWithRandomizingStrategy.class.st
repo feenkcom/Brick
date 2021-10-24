@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTextReplacingAttributeWithRandomizingStrategy',
-	#superclass : 'BrTextReplacingAttributeStrategy',
+	#name : #BrTextReplacingAttributeWithRandomizingStrategy,
+	#superclass : #BrTextReplacingAttributeStrategy,
 	#instVars : [
 		'special'
 	],
 	#category : 'Brick-Editor-Attributes - Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextReplacingAttributeWithRandomizingStrategy >> initialize [
 	super initialize.
 	
@@ -18,7 +18,7 @@ BrTextReplacingAttributeWithRandomizingStrategy >> initialize [
 		   with: Character times))
 ]
 
-{ #category : 'replacing' }
+{ #category : #replacing }
 BrTextReplacingAttributeWithRandomizingStrategy >> replaceCharacter: aCharacter [
 
 	aCharacter isDigit
@@ -35,17 +35,17 @@ BrTextReplacingAttributeWithRandomizingStrategy >> replaceCharacter: aCharacter 
 	^ aCharacter
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttributeWithRandomizingStrategy >> special [
 	^ special
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttributeWithRandomizingStrategy >> special: anObject [
 	special := anObject
 ]
 
-{ #category : 'replacing' }
+{ #category : #replacing }
 BrTextReplacingAttributeWithRandomizingStrategy >> swapString: aString [
 	<return: #String>
 	

@@ -2,12 +2,12 @@
 I am responsible for splitting a given piece of text into segments
 "
 Class {
-	#name : 'BrTextEditorSplitter',
-	#superclass : 'Object',
+	#name : #BrTextEditorSplitter,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : 'api - splitting' }
+{ #category : #'api - splitting' }
 BrTextEditorSplitter >> split: aBlText in: aBrEditorSegmentStream [
 	self
 		split: (aBlText from: 1 to: aBlText size)
@@ -15,7 +15,7 @@ BrTextEditorSplitter >> split: aBlText in: aBrEditorSegmentStream [
 		offset: 0
 ]
 
-{ #category : 'api - splitting' }
+{ #category : #'api - splitting' }
 BrTextEditorSplitter >> split: aBrText in: aBrEditorSegmentStream offset: anOffset [
 	self subclassResponsibility
 ]

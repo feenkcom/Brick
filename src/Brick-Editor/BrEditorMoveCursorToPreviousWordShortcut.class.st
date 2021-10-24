@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrEditorMoveCursorToPreviousWordShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorMoveCursorToPreviousWordShortcut,
+	#superclass : #BrEditorShortcut,
 	#instVars : [
 		'combinationForMacOS'
 	],
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'api - combination' }
+{ #category : #'api - combination' }
 BrEditorMoveCursorToPreviousWordShortcut >> combinationForMacOS [
 	^ combinationForMacOS
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorMoveCursorToPreviousWordShortcut >> description [
 	^ 'Moves the cursor to the start of the previous (or current) word and deselects any selected text.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorMoveCursorToPreviousWordShortcut >> initialize [
 	super initialize.
 
@@ -25,12 +25,12 @@ BrEditorMoveCursorToPreviousWordShortcut >> initialize [
 	combinationForMacOS := BlKeyCombination builder alt arrowLeft build.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorMoveCursorToPreviousWordShortcut >> name [
 	^ 'Move cursor to the previous word'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorMoveCursorToPreviousWordShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor deselecter
 		all;

@@ -2,8 +2,8 @@
 I deselect an interval of text from ===fromIndex=== to ===toIndex===
 "
 Class {
-	#name : 'BrTextEditorDeselectCommand',
-	#superclass : 'BrTextEditorCommand',
+	#name : #BrTextEditorDeselectCommand,
+	#superclass : #BrTextEditorCommand,
 	#instVars : [
 		'fromIndex',
 		'toIndex'
@@ -11,7 +11,7 @@ Class {
 	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : 'executing' }
+{ #category : #executing }
 BrTextEditorDeselectCommand >> executeOn: aTextEditor [
 
 	aTextEditor selection isEmpty
@@ -22,22 +22,22 @@ BrTextEditorDeselectCommand >> executeOn: aTextEditor [
 	aTextEditor notifySelectionChanged: aTextEditor selection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDeselectCommand >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDeselectCommand >> fromIndex: anObject [
 	fromIndex := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDeselectCommand >> toIndex [
 	^ toIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDeselectCommand >> toIndex: anObject [
 	toIndex := anObject
 ]

@@ -2,12 +2,12 @@
 I split a piece of text behind a ${class:BrTextEditorLineSegment}$ into pieces ${class:BrTextEditorLineSegmentPiece}
 "
 Class {
-	#name : 'BrTextEditorLineSegmentSplitter',
-	#superclass : 'Object',
+	#name : #BrTextEditorLineSegmentSplitter,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorLineSegmentSplitter >> adornmentPiece: aBlText with: anAdornmentAttribute from: aTextStart to: aTextEnd [
 	"Create and return a segment piece with adornment"
 	<return: #BrTextEditorLineSegmentPiece>
@@ -20,7 +20,7 @@ BrTextEditorLineSegmentSplitter >> adornmentPiece: aBlText with: anAdornmentAttr
 		adornmentAttribute: anAdornmentAttribute
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentSplitter >> adornmentPieceClass [
 	"Create and return a segment piece with adornment"
 	<return: #TBrTextEditorTextualPiece>
@@ -28,7 +28,7 @@ BrTextEditorLineSegmentSplitter >> adornmentPieceClass [
 	^ BrTextEditorLineSegmentAdornmentPiece
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> itemValueType: anObject [
 	"Return a type of an item within a segment.
 	Note: return value should be never used explicitely, it is only needed
@@ -42,12 +42,12 @@ BrTextEditorLineSegmentSplitter >> itemValueType: anObject [
 		ifFalse: [ #object ]
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> processAdornmentAttribute: anAdornmentAttribute of: aText in: aStream from: aTextStart to: aTextEnd virtual: isVirtual [
 	aStream nextPut: ((self adornmentPiece: aText with: anAdornmentAttribute from: aTextStart to: aTextEnd) virtual: isVirtual)
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> processPureWords: aTextIterator in: aStream offset: anOffset [
 	"Process a text within a scope of the given iterator as if it does not contain any adornment attributes
 	nor event handling attributes. At this point we should just split it in words based on the text separator
@@ -67,7 +67,7 @@ BrTextEditorLineSegmentSplitter >> processPureWords: aTextIterator in: aStream o
 			aStream nextPut: (self textPiece: aWord from: aTextStart to: aTextEnd) ]
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> processSegment: aTextIterator in: aStream offset: anOffset [
 	
 	aTextIterator
@@ -84,7 +84,7 @@ BrTextEditorLineSegmentSplitter >> processSegment: aTextIterator in: aStream off
 						ifFalse: [ self processWithoutReplacements: aSpanIterator in: aStream offset: anOffset + aDelta ] ] ]
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> processWithReplacements: aTextIterator in: aStream offset: anOffset [
 	"There is at least one replacement attribute applied on every character within the scope of the given text iterator"
 	
@@ -121,7 +121,7 @@ BrTextEditorLineSegmentSplitter >> processWithReplacements: aTextIterator in: aS
 				replacementFound := replacementFound or: [ eachAttribute shouldReplace ]  ] ]
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> processWithoutAdornments: aTextIterator in: aStream offset: anOffset [
 	"Process a text within the scope of the given iterator as there are no adornment attributes.
 	Now that adornment attributes are filtered we can split text into pieces based on the presence of
@@ -139,7 +139,7 @@ BrTextEditorLineSegmentSplitter >> processWithoutAdornments: aTextIterator in: a
 				self processPureWords: aSpanIterator in: aStream offset: anOffset + aDelta ] ]
 ]
 
-{ #category : 'private - pieces computation' }
+{ #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> processWithoutReplacements: aTextIterator in: aStream offset: anOffset [
 	"There are no replacement attributes within the scope of the given iterator"
 
@@ -186,7 +186,7 @@ BrTextEditorLineSegmentSplitter >> processWithoutReplacements: aTextIterator in:
 										virtual: true ]	] ] ] ]
 ]
 
-{ #category : 'splitting' }
+{ #category : #splitting }
 BrTextEditorLineSegmentSplitter >> split: aText from: aStartIndex to: anEndIndex [
 	"aStartIndex and anEndIndex are given in cursor coordinates"
 	| thePieces |
@@ -205,7 +205,7 @@ BrTextEditorLineSegmentSplitter >> split: aText from: aStartIndex to: anEndIndex
 	^ thePieces
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorLineSegmentSplitter >> textPiece: aBlText from: aTextStart to: aTextEnd [
 	"Create and return a text segment piece"
 	<return: #BrTextEditorLineSegmentPiece>
@@ -217,7 +217,7 @@ BrTextEditorLineSegmentSplitter >> textPiece: aBlText from: aTextStart to: aText
 		delimiter: 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentSplitter >> textPieceClass [
 	"Create and return a text segment piece"
 	<return: #TBrTextEditorTextualPiece>

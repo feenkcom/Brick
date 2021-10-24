@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEditorHistoryInsertionCommand',
-	#superclass : 'BrTextEditorHistoryCommand',
+	#name : #BrTextEditorHistoryInsertionCommand,
+	#superclass : #BrTextEditorHistoryCommand,
 	#instVars : [
 		'strings',
 		'undoIndices',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Editor-History'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextEditorHistoryInsertionCommand >> gtDisplayOn: aStream [
 	
 	aStream nextPutAll: 'Insert'.
@@ -24,17 +24,17 @@ BrTextEditorHistoryInsertionCommand >> gtDisplayOn: aStream [
 				nextPut: $, ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHistoryInsertionCommand >> redoIndices [
 	^ redoIndices
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHistoryInsertionCommand >> redoIndices: anObject [
 	redoIndices := anObject
 ]
 
-{ #category : 'api - undo/redo' }
+{ #category : #'api - undo/redo' }
 BrTextEditorHistoryInsertionCommand >> redoOn: aBrTextEditor [
 	| anInserter |
 	aBrTextEditor deselecter all deselect.
@@ -46,27 +46,27 @@ BrTextEditorHistoryInsertionCommand >> redoOn: aBrTextEditor [
 	anInserter insert
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHistoryInsertionCommand >> strings [
 	^ strings
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHistoryInsertionCommand >> strings: anObject [
 	strings := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHistoryInsertionCommand >> undoIndices [
 	^ undoIndices
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHistoryInsertionCommand >> undoIndices: anObject [
 	undoIndices := anObject
 ]
 
-{ #category : 'api - undo/redo' }
+{ #category : #'api - undo/redo' }
 BrTextEditorHistoryInsertionCommand >> undoOn: aBrTextEditor [
 	| aDeleter |
 	aBrTextEditor deselecter all deselect.

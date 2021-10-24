@@ -5,19 +5,19 @@ We split the whole text into segment in order to support infinite list that is u
 By default segment is a single line: a piece of text between new line characters
 "
 Class {
-	#name : 'BrTextEditorSegment',
-	#superclass : 'BrEditorSegment',
+	#name : #BrTextEditorSegment,
+	#superclass : #BrEditorSegment,
 	#traits : 'TBrTextEditorTextualPiece',
 	#classTraits : 'TBrTextEditorTextualPiece classTrait',
 	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextEditorSegment >> gtDisplayOn: aStream [
 	self printOn: aStream
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorSegment >> initializeWith: aBlText from: aTextStart to: aTextEnd delimiter: aDelimiterLength [
 	self
 		assert: [ aBlText isKindOf: BlSubText ]
@@ -33,7 +33,7 @@ BrTextEditorSegment >> initializeWith: aBlText from: aTextStart to: aTextEnd del
 	self updateSegmentProperties
 ]
 
-{ #category : 'api - operations' }
+{ #category : #'api - operations' }
 BrTextEditorSegment >> insert: aCollectionOfSegments [
 	| theSegments theRestLength |
 	<return: #Collection of: #BrTextEditorSegment>
@@ -57,7 +57,7 @@ BrTextEditorSegment >> insert: aCollectionOfSegments [
 	^ theSegments
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorSegment >> isAllLineBreak [
 	"Return true if segment only consists of line break, false otherwise"
 	<return: #Boolean>
@@ -65,7 +65,7 @@ BrTextEditorSegment >> isAllLineBreak [
 	^ self text allSatisfy: #isLineBreak
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorSegment >> isLineBreak [
 	"Return true if segment only consists of line break, false otherwise"
 	<return: #Boolean>
@@ -73,7 +73,7 @@ BrTextEditorSegment >> isLineBreak [
 	^ self text anySatisfy: #isLineBreak
 ]
 
-{ #category : 'text - modifications' }
+{ #category : #'text - modifications' }
 BrTextEditorSegment >> moveTextBy: aNumber [
 	"Move all sub-text pieces (#start and #end) known by the segment by a given amount of indicies.
 	If aNumber is negative sub-texts will be moved to the left (maybe this is a result of a deletion).
@@ -83,16 +83,16 @@ BrTextEditorSegment >> moveTextBy: aNumber [
 	self start: textStart + aNumber end: textEnd + aNumber
 ]
 
-{ #category : 'text - modifications' }
+{ #category : #'text - modifications' }
 BrTextEditorSegment >> moveTextPiecesBy: aNumber at: aTextIndex [
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextEditorSegment >> printOn: aStream [
 	self text printOn: aStream
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSegment >> segmentType [
 	"Return a type of this segment responsible for creation
 	of segment holder and also used as a key for caching purposes"
@@ -101,6 +101,6 @@ BrTextEditorSegment >> segmentType [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'text - modifications' }
+{ #category : #'text - modifications' }
 BrTextEditorSegment >> updateSegmentProperties [
 ]

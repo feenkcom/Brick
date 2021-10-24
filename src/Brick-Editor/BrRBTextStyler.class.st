@@ -21,8 +21,8 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : 'BrRBTextStyler',
-	#superclass : 'BrTextStylerST80',
+	#name : #BrRBTextStyler,
+	#superclass : #BrTextStylerST80,
 	#traits : 'TRBProgramNodeVisitor',
 	#classTraits : 'TRBProgramNodeVisitor classTrait',
 	#instVars : [
@@ -32,7 +32,7 @@ Class {
 	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addAttributes: attributes forNode: anRBNode [
 	
 	"RB bug?"
@@ -45,7 +45,7 @@ BrRBTextStyler >> addAttributes: attributes forNode: anRBNode [
 		to: anRBNode stop
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addAttributes: attributes from: start to: stop [
 	text isEmpty
 		ifTrue: [ ^ self ].
@@ -56,7 +56,7 @@ BrRBTextStyler >> addAttributes: attributes from: start to: stop [
 		to: stop
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute forNode: anRBNode [
 
 	self 
@@ -65,7 +65,7 @@ BrRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute forNode: 
 		forNode: anRBNode.
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute from: start to: end [
 
 	self
@@ -74,7 +74,7 @@ BrRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute from: sta
 		to: end
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addStyle: styleSymbol attributes: additionalAttributes forNode: anRBNode [
 
 	self 
@@ -82,7 +82,7 @@ BrRBTextStyler >> addStyle: styleSymbol attributes: additionalAttributes forNode
 		forNode: anRBNode
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addStyle: styleSymbol forNode: anRBNode [
 	"Style a piece of text that represents a given node for a provided style name"
 
@@ -91,7 +91,7 @@ BrRBTextStyler >> addStyle: styleSymbol forNode: anRBNode [
 		forNode: anRBNode
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> addStyle: aStyleSymbol from: aStart to: anEnd [
 	"Style a piece of text from aStart to anEnd for a provided style name"
 
@@ -101,36 +101,36 @@ BrRBTextStyler >> addStyle: aStyleSymbol from: aStart to: anEnd [
 		to: anEnd
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> currentClosedBracketStyleName [
 	bracketLevel isZero ifTrue: [ ^ #blockEnd ].
 	^ (#blockEnd asString , bracketLevel asString) asSymbol
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> currentClosedParenthesisStyleName [
 	parentheseLevel isZero ifTrue: [ ^ #rightParenthesis ].
 	^ (#rightParenthesis asString , parentheseLevel asString) asSymbol
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> currentOpenedBracketStyleName [
 	bracketLevel isZero ifTrue: [ ^ #blockStart ].
 	^ (#blockStart asString , bracketLevel asString) asSymbol
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> currentOpenedParenthesisStyleName [
 	parentheseLevel isZero ifTrue: [ ^ #leftParenthesis ].
 	^ (#leftParenthesis asString , parentheseLevel asString) asSymbol
 ]
 
-{ #category : 'moldability' }
+{ #category : #moldability }
 BrRBTextStyler >> extraStyle: aText ast: ast [
 	"override this in subclasses for applying extra styling"
 ]
 
-{ #category : 'formatting' }
+{ #category : #formatting }
 BrRBTextStyler >> literalStyleSymbol: aValue [
 	aValue isSymbol
 		ifTrue: [ ^ #symbol ].
@@ -149,28 +149,28 @@ BrRBTextStyler >> literalStyleSymbol: aValue [
 	^ #default
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> methodOrBlockArgStyleFor: anArgumentNode [
 	^ anArgumentNode isBlockVar
 		ifTrue: [ #blockArg ]
 		ifFalse: [ #methodArg ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> methodOrBlockTempDeclStyleFor: aSequenceNode [
 	^ aSequenceNode scope isBlockScope
 		ifTrue: [ #blockPatternTempVar ]
 		ifFalse: [ #patternTempVar ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> methodOrBlockTempStyleFor: aTemporaryNode [
 	^ aTemporaryNode isBlockVar
 		ifTrue: [ #blockTempVar ]
 		ifFalse: [ #tempVar ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> parse: aText isMethod: isMethod [
 	|root aString |
 	
@@ -186,7 +186,7 @@ BrRBTextStyler >> parse: aText isMethod: isMethod [
 		ifFalse:[ ^RBParser parseFaultyExpression: aString ].
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> privateStyle: aText [ 
     | ast |
 
@@ -207,7 +207,7 @@ BrRBTextStyler >> privateStyle: aText [
     ^ aText
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> resolveStyleFor: aVariableNode [
 
 	self
@@ -238,7 +238,7 @@ BrRBTextStyler >> resolveStyleFor: aVariableNode [
 	^ #invalid
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> resolveTextLinkFor: aVariableNode [
 
 	aVariableNode binding isGlobalVariable
@@ -247,7 +247,7 @@ BrRBTextStyler >> resolveTextLinkFor: aVariableNode [
 	^ BlTextVariableLink variableName: aVariableNode name
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> style: aText ast: ast [
 	text := aText.
 	text attributes: (self attributesFor: #default).
@@ -257,14 +257,14 @@ BrRBTextStyler >> style: aText ast: ast [
 		text := nil ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> styleCloseBracket: aBlockNode [
 	bracketLevel := bracketLevel - 1.
 	(aBlockNode right isZero or: [  aBlockNode value isNil ]) ifTrue:[^ self].
 	self addStyle: self currentClosedBracketStyleName from: aBlockNode right to: aBlockNode right
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> styleCloseParenthese: aMessageNode [
 	aMessageNode parentheses
 		ifNotEmpty: [ 
@@ -276,7 +276,7 @@ BrRBTextStyler >> styleCloseParenthese: aMessageNode [
 					self addStyle: self currentClosedParenthesisStyleName from: pos to: pos ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> styleOpenBracket: aBlockNode [
 	| style |
 	style := aBlockNode isFaulty
@@ -286,7 +286,7 @@ BrRBTextStyler >> styleOpenBracket: aBlockNode [
 	bracketLevel := bracketLevel + 1
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> styleOpenParenthese: aMessageNode [
 	aMessageNode parentheses
 		ifNotEmpty: [ 
@@ -298,7 +298,7 @@ BrRBTextStyler >> styleOpenParenthese: aMessageNode [
 					parentheseLevel := parentheseLevel + 1 ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrRBTextStyler >> styleTempBars: aSequenceNode [
 	| tempBarAttribute |
 	tempBarAttribute := aSequenceNode scope isMethodScope
@@ -310,7 +310,7 @@ BrRBTextStyler >> styleTempBars: aSequenceNode [
 		ifNotNil: [ :pos | self addStyle: tempBarAttribute from: pos to: pos ]
 ]
 
-{ #category : 'moldability' }
+{ #category : #moldability }
 BrRBTextStyler >> styledParseCsv: aText [
 	| aString indices |
 	
@@ -328,7 +328,7 @@ BrRBTextStyler >> styledParseCsv: aText [
 		to: indices second key - 1
 ]
 
-{ #category : 'moldability' }
+{ #category : #moldability }
 BrRBTextStyler >> styledParseImage: aText [
 	| aString indices |
 	
@@ -346,26 +346,26 @@ BrRBTextStyler >> styledParseImage: aText [
 		to: indices second key - 1
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitArgumentNode: anArgumentNode [
 	| blockOrMethodArgStyle |
 	blockOrMethodArgStyle := self methodOrBlockArgStyleFor: anArgumentNode.
 	self addStyle: blockOrMethodArgStyle forNode: anArgumentNode
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitArgumentNodes: aNodeCollection [ 
 	"Sent *once* when visiting method and block nodes"
 	^aNodeCollection do: [ :each | self visitArgumentNode: each ]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitArrayNode: anArrayNode [ 
 
 	anArrayNode children do: [:each | self visitNode: each]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitAssignmentNode: anAssignmentNode [
 	self visitNode: anAssignmentNode variable.
 	self visitNode: anAssignmentNode value.
@@ -373,7 +373,7 @@ BrRBTextStyler >> visitAssignmentNode: anAssignmentNode [
 		ifFalse: [ self addStyle: #invalid forNode: anAssignmentNode ]
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitBlockNode: aBlockNode [
 	aBlockNode comments do: [ :comment | self addStyle: #comment from: comment start to: comment stop ].
 	aBlockNode arguments do: [ :argument | self addStyle: #blockPatternArg forNode: argument ].
@@ -384,23 +384,23 @@ BrRBTextStyler >> visitBlockNode: aBlockNode [
 	self styleCloseBracket: aBlockNode
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitCascadeNode: aCascadeNode [
 	aCascadeNode messages do: [ :each | self visitNode: each ].
 	aCascadeNode semicolons do: [ :pos | self addStyle: #cascadeSeparator from: pos to: pos ]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitGlobalNode: aSelfNode [
 	^ self visitVariableNode: aSelfNode
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitInstanceVariableNode: aSelfNode [
 	^ self visitVariableNode: aSelfNode
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitLiteralArrayNode: aRBLiteralArrayNode [
 	"in a (valid) byte array all elements are of the same type, style the whole contents
 at once, but for ordinary literal arrays, style every node"
@@ -410,7 +410,7 @@ at once, but for ordinary literal arrays, style every node"
 		ifFalse: [ aRBLiteralArrayNode contents do: [ :each | self visitNode: each ] ]
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitLiteralNode: aLiteralNode [
 	| value |
 	value := aLiteralNode value.
@@ -420,7 +420,7 @@ BrRBTextStyler >> visitLiteralNode: aLiteralNode [
 		forNode: aLiteralNode
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitMessageNode: aMessageNode [
 	| style link |
 	style := #keyword.
@@ -445,7 +445,7 @@ BrRBTextStyler >> visitMessageNode: aMessageNode [
 	self styleCloseParenthese: aMessageNode
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitMethodNode: aMethodNode [ 
 aMethodNode comments do: [ :comment|
 		self 
@@ -469,7 +469,7 @@ aMethodNode comments do: [ :comment|
 	self visitNode: aMethodNode body
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitNode: aNode [ 
 	aNode comments do: [ :comment|
 		self 
@@ -480,27 +480,27 @@ BrRBTextStyler >> visitNode: aNode [
 	^aNode acceptVisitor: self
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitParseErrorNode: anErrorNode [
 	self 
 		addStyle: #invalid
 		forNode: anErrorNode
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitPatternBlockNode: aRBPatternBlockNode [ 
 	self visitArgumentNodes: aRBPatternBlockNode arguments.
 	self visitNode: aRBPatternBlockNode body
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitPatternWrapperBlockNode: aRBPatternWrapperBlockNode [ 
 	self visitNode: aRBPatternWrapperBlockNode wrappedNode.
 	self visitArgumentNodes: aRBPatternWrapperBlockNode arguments.
 	self visitNode: aRBPatternWrapperBlockNode body
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitPragmaNode: aPragmaNode [
 	aPragmaNode selectorParts with: aPragmaNode keywordsPositions do: [ :keyword : position|
 	self 
@@ -512,7 +512,7 @@ BrRBTextStyler >> visitPragmaNode: aPragmaNode [
 	aPragmaNode arguments do: [ :each | self visitNode: each ]
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitReturnNode: aReturnNode [ 
 	self 
 		addStyle: #return
@@ -522,14 +522,14 @@ BrRBTextStyler >> visitReturnNode: aReturnNode [
 	self visitNode: aReturnNode value
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitSelfNode: aSelfNode [
 	self 
 		addStyle: #self
 		forNode: aSelfNode
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitSequenceNode: aSequenceNode [
 	| patternTempStyle |
 	patternTempStyle := self methodOrBlockTempDeclStyleFor: aSequenceNode.
@@ -540,34 +540,34 @@ BrRBTextStyler >> visitSequenceNode: aSequenceNode [
 	aSequenceNode periods do: [ :pos | self addStyle: #statementSeparator from: pos to: pos ]
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitSuperNode: aSuperNode [
 	self 
 		addStyle: #super
 		forNode: aSuperNode
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitTemporaryNode: aTemporaryNode [
 	| methodOrBlockTempStyle |
 	methodOrBlockTempStyle := self methodOrBlockTempStyleFor: aTemporaryNode.
 	self addStyle: methodOrBlockTempStyle forNode: aTemporaryNode
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BrRBTextStyler >> visitTemporaryNodes: aNodeCollection [ 
 	"This is triggered when defining the temporaries between the pipes"
 	^self visitArgumentNodes: aNodeCollection
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitThisContextNode: aThisContextNode [
 	self 
 		addStyle: #thisContext
 		forNode: aThisContextNode
 ]
 
-{ #category : 'visiting rb nodes' }
+{ #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitVariableNode: aVariableNode [
 	self 
 		addStyle: (self resolveStyleFor: aVariableNode) 

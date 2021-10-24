@@ -2,22 +2,22 @@
 I am sent to the segment piece element when a cursor at a given text index in local text piece coordinates should be hidden
 "
 Class {
-	#name : 'BrTextEditorHideCursorRequest',
-	#superclass : 'BrTextEditorRequest',
+	#name : #BrTextEditorHideCursorRequest,
+	#superclass : #BrTextEditorRequest,
 	#instVars : [
 		'cursorPosition'
 	],
 	#category : 'Brick-Editor-UI - Requests'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHideCursorRequest >> cursorPosition [
 	<return: #Number>
 
 	^ cursorPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorHideCursorRequest >> cursorPosition: aNumber [
 	
 	self

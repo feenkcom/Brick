@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrEditorLoseFocusShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorLoseFocusShortcut,
+	#superclass : #BrEditorShortcut,
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorLoseFocusShortcut >> description [
 	^ 'Loses focus.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorLoseFocusShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination escape
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorLoseFocusShortcut >> name [
 	^ 'Lose focus'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorLoseFocusShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrEditorElement loseFocus
 ]

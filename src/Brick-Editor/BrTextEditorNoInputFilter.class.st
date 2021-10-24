@@ -2,12 +2,12 @@
 I don't apply any filter and return the bare input
 "
 Class {
-	#name : 'BrTextEditorNoInputFilter',
-	#superclass : 'BrTextEditorInputFilter',
+	#name : #BrTextEditorNoInputFilter,
+	#superclass : #BrTextEditorInputFilter,
 	#category : 'Brick-Editor-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorNoInputFilter >> filter: aString [
 	<return: #String>
 	

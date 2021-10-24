@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextHideAttribute',
-	#superclass : 'BrTextAdornmentAttribute',
+	#name : #BrTextHideAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextHideAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #SequenceableCollection of: #BlElement>
@@ -12,7 +12,7 @@ BrTextHideAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement 
 	^ #()
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextHideAttribute >> initialize [
 	super initialize.
 	

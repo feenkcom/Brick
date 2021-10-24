@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrExtendSelectionCommand',
-	#superclass : 'Object',
+	#name : #BrExtendSelectionCommand,
+	#superclass : #Object,
 	#instVars : [
 		'editor',
 		'toSelect',
@@ -13,12 +13,12 @@ Class {
 	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> editor: anEditor [
 	editor := anEditor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> gtLiveFor: aView [
 	<gtView>
 	| textToDisplay |
@@ -36,7 +36,7 @@ BrExtendSelectionCommand >> gtLiveFor: aView [
 		text: textToDisplay
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> initialize [
 	super initialize.
 
@@ -48,78 +48,78 @@ BrExtendSelectionCommand >> initialize [
 	shouldResetDesiredCoordinate := true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> shouldResetDesiredCoordinate [
 	^ shouldResetDesiredCoordinate
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toAddCursor: aPosition [
 	toAddCursor := aPosition
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toAddCursorDo: aBlock [
 	toAddCursor ifNotNil: [ :aPosition | aBlock value: aPosition ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> toDeselect [
 	^ toDeselect
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> toDeselect: aCollection [
 	toDeselect := aCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> toDeselectDo: aBlockWithOneArgument [
 	toDeselect do: aBlockWithOneArgument
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toMoveCursor: aCursor by: anAmount [
 	toMoveCursor := aCursor -> anAmount
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toMoveCursorDo: aBlock [
 	toMoveCursor ifNotNil: [ :anAssociation |
 		aBlock value: anAssociation key value: anAssociation value ]
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toRemoveCursor: aCursor [
 	toRemoveCursors add: aCursor
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toRemoveCursors: aCollectionOfCursors [
 	toRemoveCursors addAll: aCollectionOfCursors
 ]
 
-{ #category : 'accessing - cursor' }
+{ #category : #'accessing - cursor' }
 BrExtendSelectionCommand >> toRemoveCursorsDo: aBlock [
 	toRemoveCursors do: aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> toSelect [
 	^ toSelect
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> toSelect: aCollection [
 	toSelect := aCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> toSelectDo: aBlockWithOneArgument [
 	toSelect do: aBlockWithOneArgument
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrExtendSelectionCommand >> withoutResettingDesiredCoordinate [
 	shouldResetDesiredCoordinate := false
 ]

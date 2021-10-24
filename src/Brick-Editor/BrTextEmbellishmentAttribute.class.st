@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEmbellishmentAttribute',
-	#superclass : 'BrTextAdornmentAttribute',
+	#name : #BrTextEmbellishmentAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#instVars : [
 		'embellishment',
 		'padding',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEmbellishmentAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #SequenceableCollection of: #BlElement>
@@ -29,17 +29,17 @@ BrTextEmbellishmentAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEdito
 	}
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextEmbellishmentAttribute >> embellishment [
 	^ embellishment
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextEmbellishmentAttribute >> embellishment: anObject [
 	embellishment := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEmbellishmentAttribute >> initialize [
 	super initialize.
 	
@@ -48,29 +48,29 @@ BrTextEmbellishmentAttribute >> initialize [
 	margin := BlInsets empty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEmbellishmentAttribute >> margin [
 	^ margin
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEmbellishmentAttribute >> margin: anObject [
 	margin := anObject
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextEmbellishmentAttribute >> padding [
 	<return: #BlInsets>
 
 	^ padding
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextEmbellishmentAttribute >> padding: anObject [
 	padding := anObject
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextEmbellishmentAttribute >> roundedBackground: aPaint [
 	self embellishment: [ :anElement |
 		anElement background: aPaint.

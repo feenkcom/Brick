@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorNavigatorAddCursorOperation',
-	#superclass : 'BrTextEditorNavigatorOperation',
+	#name : #BrTextEditorNavigatorAddCursorOperation,
+	#superclass : #BrTextEditorNavigatorOperation,
 	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : 'matching' }
+{ #category : #matching }
 BrTextEditorNavigatorAddCursorOperation >> performOn: aNavigator [
 	aNavigator privateRegisterForAdd: self cursor
 ]

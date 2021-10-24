@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrEditorMoveCursorToLineStartShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorMoveCursorToLineStartShortcut,
+	#superclass : #BrEditorShortcut,
 	#instVars : [
 		'combinationForUnix'
 	],
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'api - combination' }
+{ #category : #'api - combination' }
 BrEditorMoveCursorToLineStartShortcut >> combinationForUnix [
 	^ combinationForUnix
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorMoveCursorToLineStartShortcut >> description [
 	^ 'Moves the cursor to the start of the current line and deselects any selected text.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorMoveCursorToLineStartShortcut >> initialize [
 	super initialize.
 	
@@ -25,12 +25,12 @@ BrEditorMoveCursorToLineStartShortcut >> initialize [
 	combinationForUnix := BlKeyCombination home
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorMoveCursorToLineStartShortcut >> name [
 	^ 'Move cursor to the line start'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorMoveCursorToLineStartShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor deselecter
 		all;

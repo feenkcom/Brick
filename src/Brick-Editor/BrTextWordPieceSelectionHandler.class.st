@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrTextWordPieceSelectionHandler',
-	#superclass : 'BrTextWordPieceUniqueHandler',
+	#name : #BrTextWordPieceSelectionHandler,
+	#superclass : #BrTextWordPieceUniqueHandler,
 	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextWordPieceSelectionHandler >> eventClass [
 	^ BrTextEditorSelectRequest
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BrTextWordPieceSelectionHandler >> handleEvent: anEvent [
 	anEvent currentTarget select: anEvent fromIndex to: anEvent toIndex
 ]

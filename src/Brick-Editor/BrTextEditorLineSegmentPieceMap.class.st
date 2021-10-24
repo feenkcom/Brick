@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorLineSegmentPieceMap',
-	#superclass : 'Object',
+	#name : #BrTextEditorLineSegmentPieceMap,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> allPieces [
 	"Return all current line segment pieces"
 	<return: #Collection of: #BrTextEditorLineSegmentPiece>
@@ -12,24 +12,24 @@ BrTextEditorLineSegmentPieceMap >> allPieces [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> at: aBrTextEditorLineSegmentPiece pieceAndElementsDo: thePieceAndElementsBlock ifAbsent: anAbsentBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> atPiece: aBrTextEditorLineSegmentPiece putElements: aCollectionOfElements [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> pieceForElement: aBlElement ifAbsent: anAbsentBlock [
 	<return: #BrTextEditorLineSegmentPiece or: #Object>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> piecesAndTheirElementsDo: aBlock [
 	self subclassResponsibility
 ]

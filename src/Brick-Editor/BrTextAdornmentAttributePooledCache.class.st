@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTextAdornmentAttributePooledCache',
-	#superclass : 'BrTextAdornmentAttributeCache',
+	#name : #BrTextAdornmentAttributePooledCache,
+	#superclass : #BrTextAdornmentAttributeCache,
 	#instVars : [
 		'cachePool'
 	],
 	#category : 'Brick-Editor-Attributes - Support'
 }
 
-{ #category : 'private - cache' }
+{ #category : #'private - cache' }
 BrTextAdornmentAttributePooledCache >> canElementBeReusedFromCache: anElement [
 	"Return true if given element can be reused from the cache"
 	<return: #Boolean>
@@ -19,7 +19,7 @@ BrTextAdornmentAttributePooledCache >> canElementBeReusedFromCache: anElement [
 	^ anElement isRemovedFromSceneGraph and: [ anElement hasParent not ]
 ]
 
-{ #category : 'private - cache' }
+{ #category : #'private - cache' }
 BrTextAdornmentAttributePooledCache >> canEntryBeReusedFromCache: aCollectionOfElementsOrElement [
 	"Return true if a given cache entry can be reused from the cache"
 	<return: #Boolean>
@@ -29,7 +29,7 @@ BrTextAdornmentAttributePooledCache >> canEntryBeReusedFromCache: aCollectionOfE
 		ifFalse: [ self canElementBeReusedFromCache: aCollectionOfElementsOrElement ]
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttributePooledCache >> ifAbsentPut: aBlock [
 	"Return available cached elements previously created by an adornment attribute"
 	<return: #SequenceableCollection of: #BlElement>
@@ -43,7 +43,7 @@ BrTextAdornmentAttributePooledCache >> ifAbsentPut: aBlock [
 			aNewCacheEntry ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextAdornmentAttributePooledCache >> initialize [
 	super initialize.
 	

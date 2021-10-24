@@ -2,32 +2,32 @@
 I handle mouse down events and move or add a cursor at a corresponding position
 "
 Class {
-	#name : 'BrTextEditorMouseDownHandler',
-	#superclass : 'BlCustomEventHandler',
+	#name : #BrTextEditorMouseDownHandler,
+	#superclass : #BlCustomEventHandler,
 	#classInstVars : [
 		'uniqueInstance'
 	],
 	#category : 'Brick-Editor-UI - Handlers'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BrTextEditorMouseDownHandler class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BrTextEditorMouseDownHandler class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrTextEditorMouseDownHandler >> eventsToHandle [
 	^ { BlMouseDownEvent }
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BrTextEditorMouseDownHandler >> mouseDownEvent: anEvent [
 	| aNavigator aScreenPosition anEditorElement |
 	
@@ -59,7 +59,7 @@ BrTextEditorMouseDownHandler >> mouseDownEvent: anEvent [
 	anEditorElement requestFocus
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BrTextEditorMouseDownHandler >> wantsEvent: anEvent [
 	^ (super wantsEvent: anEvent) and: [ anEvent primaryButtonPressed ]
 ]

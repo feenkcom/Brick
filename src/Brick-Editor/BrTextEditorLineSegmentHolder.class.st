@@ -2,8 +2,8 @@
 I am a line segment holder and is responsible for binding ===BrTextEditorLineSegment=== with corresponding visual element
 "
 Class {
-	#name : 'BrTextEditorLineSegmentHolder',
-	#superclass : 'BrTextEditorSegmentHolder',
+	#name : #BrTextEditorLineSegmentHolder,
+	#superclass : #BrTextEditorSegmentHolder,
 	#instVars : [
 		'segment',
 		'pieceElements'
@@ -14,24 +14,24 @@ Class {
 	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BrTextEditorLineSegmentHolder class >> cleanUp [
 	super cleanUp.
 	
 	defaultSegmentLayoutBlock := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentHolder class >> defaultSegmentLayout [
 	^ (defaultSegmentLayoutBlock ifNil: [ BrEditorTextFlowLayout new ]) value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentHolder class >> defaultSegmentLayout: aBlock [
 	defaultSegmentLayoutBlock := aBlock
 ]
 
-{ #category : 'private - segment' }
+{ #category : #'private - segment' }
 BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 	| newPieceElements thePieces hasSelection hasCursor |
 
@@ -99,14 +99,14 @@ BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 		padding: anEditorSegment paragraphMargin
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorLineSegmentHolder >> cachedPieces [
 	<return: #Collection of: #BrTextEditorLineSegmentPiece>
 	
 	^ pieceElements allPieces
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorLineSegmentHolder >> createSegmentElement [
 	<return: #BlElement>
 
@@ -123,7 +123,7 @@ BrTextEditorLineSegmentHolder >> createSegmentElement [
 		yourself
 ]
 
-{ #category : 'cursor' }
+{ #category : #cursor }
 BrTextEditorLineSegmentHolder >> explicitScreenToCursor: aTransformation [
 	| aBoundsInEditor aPositionInSegment aClosestPieceElement aClosestPiece aTransformedScreenPosition |
 	
@@ -161,7 +161,7 @@ BrTextEditorLineSegmentHolder >> explicitScreenToCursor: aTransformation [
 	aClosestPiece screenToCursor: aTransformation of: self infiniteElement in: aClosestPieceElement
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BrTextEditorLineSegmentHolder >> hasCursor [
 	| aTextEditor |
 	aTextEditor := self infiniteElement editor.
@@ -172,7 +172,7 @@ BrTextEditorLineSegmentHolder >> hasCursor [
 	^ false
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BrTextEditorLineSegmentHolder >> hasSelection [
 	| aTextEditor textInterval |
 
@@ -186,12 +186,12 @@ BrTextEditorLineSegmentHolder >> hasSelection [
 	^ false
 ]
 
-{ #category : 'private - segment' }
+{ #category : #'private - segment' }
 BrTextEditorLineSegmentHolder >> newPiecesMap [
 	^ BrTextEditorLineSegmentPieceCollectionMap new
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorLineSegmentHolder >> onCursorChanged [
 	"Is sent when text editor's cursor changes.
 	Segment holder should update text elements accordingly"
@@ -204,7 +204,7 @@ BrTextEditorLineSegmentHolder >> onCursorChanged [
 		aPiece updateCursor: aPieceElement of: segment in: self infiniteElement ]
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorLineSegmentHolder >> onFocusChanged: aBoolean [
 	"Is sent when text editor's focus state changes.
 	Segment holder should update text elements accordingly"
@@ -217,7 +217,7 @@ BrTextEditorLineSegmentHolder >> onFocusChanged: aBoolean [
 		aPiece updateFocus: aBoolean of: aPieceElement in: self infiniteElement ]
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorLineSegmentHolder >> onRecycled [
 
 	itemElement removeChildren.
@@ -226,7 +226,7 @@ BrTextEditorLineSegmentHolder >> onRecycled [
 	segment := nil.
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorLineSegmentHolder >> onSelectionChanged [
 	"Is sent when text editor's selection changes.
 	Segment holder should update text elements accordingly"
@@ -239,7 +239,7 @@ BrTextEditorLineSegmentHolder >> onSelectionChanged [
 		aPiece updateSelection: aPieceElement of: segment in: self infiniteElement ]
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorLineSegmentHolder >> onTextChanged [
 	"Is sent when text changed in the editor (for example style attributes).
 	Segment holder should update text elements accordingly"
@@ -252,7 +252,7 @@ BrTextEditorLineSegmentHolder >> onTextChanged [
 		aPiece updateText: aPieceElement of: segment in: self infiniteElement ]
 ]
 
-{ #category : 'cursor' }
+{ #category : #cursor }
 BrTextEditorLineSegmentHolder >> relativeScreenToCursor: aTransformation [	
 	"trying to find a segment that actually contains a given position"
 
@@ -262,12 +262,12 @@ BrTextEditorLineSegmentHolder >> relativeScreenToCursor: aTransformation [
 				^ aPiece screenToCursor: aTransformation of: self infiniteElement in: aPieceElement ] ]
 ]
 
-{ #category : 'cursor' }
+{ #category : #cursor }
 BrTextEditorLineSegmentHolder >> screenToCursor: aTransformation [
 	aTransformation evaluateOn: self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentHolder >> segment: anEditorSegment [
 	segment == anEditorSegment
 		ifTrue: [
@@ -280,7 +280,7 @@ BrTextEditorLineSegmentHolder >> segment: anEditorSegment [
 				during: [ self buildSegment: anEditorSegment ] ]
 ]
 
-{ #category : 'private - segment' }
+{ #category : #'private - segment' }
 BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 	| newPieceElements newPieceMap |
 	self

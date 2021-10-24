@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorEditableMode',
-	#superclass : 'BrTextEditorBasicMode',
+	#name : #BrTextEditorEditableMode,
+	#superclass : #BrTextEditorBasicMode,
 	#category : 'Brick-Editor-Model'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorEditableMode >> createEventHandlers [
 	^ super createEventHandlers, {
 		BrTextEditorMouseDownHandler uniqueInstance.
@@ -15,7 +15,7 @@ BrTextEditorEditableMode >> createEventHandlers [
 	}
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorEditableMode >> initialize [
 	super initialize.
 
@@ -53,19 +53,19 @@ BrTextEditorEditableMode >> initialize [
 	}
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrTextEditorEditableMode >> installOnEditor: aTextEditor [
 	super installOnEditor: aTextEditor.
 
 	aTextEditor segmentBuilder beEditable
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorEditableMode >> isEditable [
 	^ true
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrTextEditorEditableMode >> returnKeyAndAction [
 	^ BrEditorLineEndingShortcut new
 ]

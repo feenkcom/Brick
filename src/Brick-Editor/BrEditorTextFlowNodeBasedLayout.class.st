@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrEditorTextFlowNodeBasedLayout',
-	#superclass : 'BlNodeBasedLayout',
+	#name : #BrEditorTextFlowNodeBasedLayout,
+	#superclass : #BlNodeBasedLayout,
 	#instVars : [
 		'lines',
 		'lineSpacing'
@@ -8,12 +8,12 @@ Class {
 	#category : 'Brick-Editor-Layout'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BrEditorTextFlowNodeBasedLayout class >> constraints [
 	^ BrEditorTextFlowLayoutConstraints new
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLayout >> findClosestChildOf: anElement to: aPoint [
 	<return: #BlElement>
 	| aClosestLine |
@@ -22,7 +22,7 @@ BrEditorTextFlowNodeBasedLayout >> findClosestChildOf: anElement to: aPoint [
 	^ aClosestLine findClosestChildOf: anElement to: aPoint
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLayout >> findClosestLineTo: aPoint [
 	<return: #BrEditorTextFlowLine>
 	| aClosestLine aClosestDistance |
@@ -42,24 +42,24 @@ BrEditorTextFlowNodeBasedLayout >> findClosestLineTo: aPoint [
 	^ aClosestLine
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowNodeBasedLayout >> hasElements [
 	^ lines notNil and: [ lines elements notNil ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowNodeBasedLayout >> hasLines [
 	^ lines notNil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorTextFlowNodeBasedLayout >> initialize [
 	super initialize.
 	
 	lineSpacing := 0
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BrEditorTextFlowNodeBasedLayout >> layout: aParentLayoutNode [
 	| anOffsetX anOffsetY aLeft aTop |
 
@@ -90,17 +90,17 @@ BrEditorTextFlowNodeBasedLayout >> layout: aParentLayoutNode [
 		aTop := aTop + aLine height + lineSpacing ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLayout >> lineSpacing [
 	^ lineSpacing
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLayout >> lineSpacing: anObject [
 	lineSpacing := anObject
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BrEditorTextFlowNodeBasedLayout >> measure: aParentLayoutNode [
 	| maxWidth aCurrentLine totalContentWidth totalContentHeight |
 	

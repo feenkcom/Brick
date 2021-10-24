@@ -4,8 +4,8 @@ I am sent when a cursor related change happened at a given text position.
 It can be that a cursor was removed from this position or added at it
 "
 Class {
-	#name : 'BrTextEditorCursorChangeCommand',
-	#superclass : 'BrTextEditorCommand',
+	#name : #BrTextEditorCursorChangeCommand,
+	#superclass : #BrTextEditorCommand,
 	#instVars : [
 		'position',
 		'cursor'
@@ -13,19 +13,19 @@ Class {
 	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCursorChangeCommand >> cursor [
 	<return: #BrTextEditorSingleCursor>
 
 	^ cursor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCursorChangeCommand >> cursor: anObject [
 	cursor := anObject
 ]
 
-{ #category : 'executing' }
+{ #category : #executing }
 BrTextEditorCursorChangeCommand >> executeOn: aTextEditor [
 	
 	self telemetry
@@ -44,29 +44,29 @@ BrTextEditorCursorChangeCommand >> executeOn: aTextEditor [
 		ifNotFound: [  ].
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorCursorChangeCommand >> newHolderCommand [
 	^ BrTextEditorCursorChangedHolderCommand new context: self context
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCursorChangeCommand >> position [
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCursorChangeCommand >> position: anObject [
 	position := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextEditorCursorChangeCommand >> printOn: aStream [
 	aStream
 		nextPutAll: 'Cursor changed at ';
 		print: self position
 ]
 
-{ #category : 'executing' }
+{ #category : #executing }
 BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
 	| anEditorText thePotentialHandlerTextInterval theEventHandlingAttributes eventHandlingAttributesOutside eventHandlingAttributesInside |
 

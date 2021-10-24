@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEditorInsertStringsCommand',
-	#superclass : 'BrTextEditorCommand',
+	#name : #BrTextEditorInsertStringsCommand,
+	#superclass : #BrTextEditorCommand,
 	#instVars : [
 		'strings',
 		'indices'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : 'executing' }
+{ #category : #executing }
 BrTextEditorInsertStringsCommand >> executeOn: aTextEditor [
 
 	aTextEditor text
@@ -16,17 +16,17 @@ BrTextEditorInsertStringsCommand >> executeOn: aTextEditor [
 		atAll: self indices
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorInsertStringsCommand >> indices [
 	^ indices
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorInsertStringsCommand >> indices: anObject [
 	indices := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextEditorInsertStringsCommand >> printOn: aStream [
 	aStream
 		nextPutAll: 'Inserted'.
@@ -39,12 +39,12 @@ BrTextEditorInsertStringsCommand >> printOn: aStream [
 			print: anIndex ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorInsertStringsCommand >> strings [
 	^ strings
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorInsertStringsCommand >> strings: anObject [
 	strings := anObject
 ]
