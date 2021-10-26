@@ -10,7 +10,7 @@ Class {
 		'action',
 		'postponedDuration'
 	],
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
 { #category : #'private - accessing' }
@@ -131,8 +131,18 @@ BrElementUpdater >> mayUpdateNow [
 ]
 
 { #category : #'private - event handling' }
-BrElementUpdater >> onElementAddedTooSceneGraph [
+BrElementUpdater >> onElementAddedToSceneGraph [
 	self mayUpdateNow
+]
+
+{ #category : #'private - event handling' }
+BrElementUpdater >> onElementAddedTooSceneGraph [
+
+	self
+		deprecated: 'typo, use #onElementAddedToSceneGraph instead'
+		transformWith: '`@receiver onElementAddedTooSceneGraph'
+			-> '`@receiver onElementAddedToSceneGraph'.
+	self onElementAddedToSceneGraph
 ]
 
 { #category : #'private - updating' }
@@ -202,9 +212,10 @@ BrElementUpdater >> resetUpdateRequested [
 
 { #category : #'private - subscriptions' }
 BrElementUpdater >> subscribeToElement [
+
 	self element
 		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | self onElementAddedTooSceneGraph ]
+		do: [ :anEvent | self onElementAddedToSceneGraph ]
 ]
 
 { #category : #'private - updating' }
