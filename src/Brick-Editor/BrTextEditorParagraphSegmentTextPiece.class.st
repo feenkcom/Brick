@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorParagraphSegmentTextPiece',
-	#superclass : 'BrTextEditorParagraphSegmentPiece',
+	#name : #BrTextEditorParagraphSegmentTextPiece,
+	#superclass : #BrTextEditorParagraphSegmentPiece,
 	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrTextEditorParagraphSegmentTextPiece >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -14,7 +14,7 @@ BrTextEditorParagraphSegmentTextPiece >> = anotherObject [
 	^ anotherObject text = self text
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorParagraphSegmentTextPiece >> createElement: anEditorElement [
 	<return: #BlElement>
 	| anElement |
@@ -28,17 +28,17 @@ BrTextEditorParagraphSegmentTextPiece >> createElement: anEditorElement [
 	^ anElement
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrTextEditorParagraphSegmentTextPiece >> hash [
 	^ self class hash bitXor: self text hash
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorParagraphSegmentTextPiece >> isText [
 	^ true
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorParagraphSegmentTextPiece >> onRecycled: aPieceElement in: anEditorElement [
 	anEditorElement editor segmentBuilder wordStencilBuilder recycle: aPieceElement
 ]

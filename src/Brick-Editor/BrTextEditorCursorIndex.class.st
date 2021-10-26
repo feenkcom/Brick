@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrTextEditorCursorIndex',
-	#superclass : 'BrTextEditorIndex',
+	#name : #BrTextEditorCursorIndex,
+	#superclass : #BrTextEditorIndex,
 	#category : 'Brick-Editor-Model'
 }

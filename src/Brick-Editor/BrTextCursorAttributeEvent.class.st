@@ -1,29 +1,29 @@
 Class {
-	#name : 'BrTextCursorAttributeEvent',
-	#superclass : 'BlEvent',
+	#name : #BrTextCursorAttributeEvent,
+	#superclass : #BlEvent,
 	#instVars : [
 		'interval'
 	],
 	#category : 'Brick-Editor-Attributes - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttributeEvent >> attributeEnd [
 	^ interval last
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttributeEvent >> attributeStart [
 	^ interval first
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttributeEvent >> interval [
 
 	^ interval
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextCursorAttributeEvent >> interval: anObject [
 
 	interval := anObject

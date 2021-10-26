@@ -2,12 +2,12 @@
 I only allow letters
 "
 Class {
-	#name : 'BrTextEditorLetterInputFilter',
-	#superclass : 'BrTextEditorInputFilter',
+	#name : #BrTextEditorLetterInputFilter,
+	#superclass : #BrTextEditorInputFilter,
 	#category : 'Brick-Editor-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLetterInputFilter >> filter: aString [
 	<return: #String>
 	

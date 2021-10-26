@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrTextEditorScreenToCursorHolderCommand',
-	#superclass : 'BrTextEditorHolderCommand',
+	#name : #BrTextEditorScreenToCursorHolderCommand,
+	#superclass : #BrTextEditorHolderCommand,
 	#instVars : [
 		'transformation'
 	],
 	#category : 'Brick-Editor-Commands-Holder'
 }
 
-{ #category : 'executing' }
+{ #category : #executing }
 BrTextEditorScreenToCursorHolderCommand >> executeOn: aSegmentHolder [
 	aSegmentHolder screenToCursor: self transformation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorScreenToCursorHolderCommand >> transformation [
 	^ transformation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorScreenToCursorHolderCommand >> transformation: anObject [
 	transformation := anObject
 ]

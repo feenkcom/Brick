@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEditorBasicMode',
-	#superclass : 'BrTextEditorMode',
+	#name : #BrTextEditorBasicMode,
+	#superclass : #BrTextEditorMode,
 	#instVars : [
 		'eventHandlers',
 		'shortcuts'
@@ -8,17 +8,17 @@ Class {
 	#category : 'Brick-Editor-Model'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorBasicMode >> createEventHandlers [
 	^ #()
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorBasicMode >> eventHandlers [
 	^ eventHandlers ifNil: [ eventHandlers := self createEventHandlers ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorBasicMode >> initialize [
 	super initialize.
 	
@@ -28,7 +28,7 @@ BrTextEditorBasicMode >> initialize [
 	shortcuts := {}
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrTextEditorBasicMode >> installOnEditor: aTextEditor [
 	super installOnEditor: aTextEditor.
 	
@@ -36,7 +36,7 @@ BrTextEditorBasicMode >> installOnEditor: aTextEditor [
 		aTextEditor addEditorShortcut: eachInteraction ]
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrTextEditorBasicMode >> installOnEditorElement: anEditorElement [
 	super installOnEditorElement: anEditorElement.
 
@@ -44,14 +44,14 @@ BrTextEditorBasicMode >> installOnEditorElement: anEditorElement [
 		anEditorElement addEventHandler: eachEventHandler ]
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 BrTextEditorBasicMode >> postCopy [
 	"they will be initialized lazily later"
 	eventHandlers := nil.
 	shortcuts := shortcuts copy
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrTextEditorBasicMode >> uninstallFromEditor: aTextEditor [
 	super uninstallFromEditor: aTextEditor.
 	
@@ -59,7 +59,7 @@ BrTextEditorBasicMode >> uninstallFromEditor: aTextEditor [
 		aTextEditor removeEditorShortcut: eachInteraction ]
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrTextEditorBasicMode >> uninstallFromEditorElement: anEditorElement [
 	super uninstallFromEditorElement: anEditorElement.
 
@@ -67,7 +67,7 @@ BrTextEditorBasicMode >> uninstallFromEditorElement: anEditorElement [
 		anEditorElement removeEventHandler: eachEventHandler ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorBasicMode >> withShortcuts: aCollectionOfShortcuts [
 	shortcuts := shortcuts, aCollectionOfShortcuts
 ]

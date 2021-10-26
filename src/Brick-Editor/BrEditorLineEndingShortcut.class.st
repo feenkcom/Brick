@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrEditorLineEndingShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorLineEndingShortcut,
+	#superclass : #BrEditorShortcut,
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorLineEndingShortcut >> description [
 	^ 'Inserts a platform specific line ending at the cursor location and indents the new line to match the indentation of the previous line.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorLineEndingShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination return
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorLineEndingShortcut >> name [
 	^ 'Insert line ending'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorLineEndingShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor inserter
 		inputFilter: aBrTextEditor inputFilter;

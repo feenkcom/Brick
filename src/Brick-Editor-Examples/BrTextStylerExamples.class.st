@@ -2,19 +2,19 @@
 Hello World *https://gtoolkit.com*
 "
 Class {
-	#name : 'BrTextStylerExamples',
-	#superclass : 'Object',
+	#name : #BrTextStylerExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : 'examples - editor' }
+{ #category : #'examples - editor' }
 BrTextStylerExamples >> codeSnippetStyler [
 	<gtExample>
 
 	^ BrRBTextStyler new classOrMetaClass: BlElement
 ]
 
-{ #category : 'examples - styler strategy' }
+{ #category : #'examples - styler strategy' }
 BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 	<gtExample>
 	<noTest>
@@ -62,14 +62,14 @@ BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 	
 ]
 
-{ #category : 'examples - editor' }
+{ #category : #'examples - editor' }
 BrTextStylerExamples >> editorWithMethod [
 	<gtExample>
 
 	^ self newEditor text: self newMethodText
 ]
 
-{ #category : 'examples - styler strategy' }
+{ #category : #'examples - styler strategy' }
 BrTextStylerExamples >> editorWithSyncStylerStrategy [
 	<gtExample>
 	| anEditor anEditorElement aStyler theTextAttributes |
@@ -90,7 +90,7 @@ BrTextStylerExamples >> editorWithSyncStylerStrategy [
 	
 ]
 
-{ #category : 'examples - styler strategy' }
+{ #category : #'examples - styler strategy' }
 BrTextStylerExamples >> editorWithTaskItStylerStrategy [
 	<gtExample>
 	| anEditor aStyler theTextAttributes aSemaphore aTimeout anElement aSpace |
@@ -134,20 +134,20 @@ BrTextStylerExamples >> editorWithTaskItStylerStrategy [
 	
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextStylerExamples >> newEditor [
 	<gtExample>
 
 	^ BrTextEditor new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextStylerExamples >> newMethodText [
 	<gtExample>
 	^ BlRopedText string: (BlElement>>#applyLayoutSafelyIn:context:) sourceCode
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrTextStylerExamples >> timeoutMilliseconds [
 	^ 500
 ]

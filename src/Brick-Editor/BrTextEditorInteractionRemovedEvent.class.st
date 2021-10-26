@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrTextEditorInteractionRemovedEvent',
-	#superclass : 'BrTextEditorEvent',
+	#name : #BrTextEditorInteractionRemovedEvent,
+	#superclass : #BrTextEditorEvent,
 	#instVars : [
 		'interaction'
 	],
 	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorInteractionRemovedEvent >> interaction [
 	^ interaction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorInteractionRemovedEvent >> interaction: anObject [
 	interaction := anObject
 ]

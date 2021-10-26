@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorParagraphAttributesExamples',
-	#superclass : 'Object',
+	#name : #BrTextEditorParagraphAttributesExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorParagraphAttributesExamples >> editorElement [
 	<gtExample>
 	| textEditor editorElement |
@@ -19,7 +19,7 @@ BrTextEditorParagraphAttributesExamples >> editorElement [
 	^ editorElement
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorParagraphAttributesExamples >> helloEditor [
 	<gtExample>
 	| anEditorElement |
@@ -43,7 +43,7 @@ BrTextEditorParagraphAttributesExamples >> helloEditor [
 	^ anEditorElement
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorParagraphAttributesExamples >> helloText [
 	<gtExample>
 	| aText |

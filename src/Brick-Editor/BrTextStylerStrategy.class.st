@@ -10,19 +10,19 @@ See my subclasses for concrete strategies: ${class:BrTextStylerStrategy|expanded
 
 "
 Class {
-	#name : 'BrTextStylerStrategy',
-	#superclass : 'Object',
+	#name : #BrTextStylerStrategy,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextStylerStrategy class >> isAbstract [
 	^ self name = #BrTextStylerStrategy 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextStylerStrategy >> doStyleText: aBlText with: aStyler afterDo: aBlock [
 	"Synchronously style a given text with provided styler and evaluate a Block with the styled text
 	once completed. Return styled text"
@@ -33,7 +33,7 @@ BrTextStylerStrategy >> doStyleText: aBlText with: aStyler afterDo: aBlock [
 	^ aStyledText
 ]
 
-{ #category : 'styling' }
+{ #category : #styling }
 BrTextStylerStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: aBlock [
 	self subclassResponsibility
 ]

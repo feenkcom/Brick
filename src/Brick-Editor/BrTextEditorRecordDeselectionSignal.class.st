@@ -2,25 +2,25 @@
 I am signaled when selection recorder records a new motone deselection
 "
 Class {
-	#name : 'BrTextEditorRecordDeselectionSignal',
-	#superclass : 'BeaconSignal',
+	#name : #BrTextEditorRecordDeselectionSignal,
+	#superclass : #BeaconSignal,
 	#instVars : [
 		'selection'
 	],
 	#category : 'Brick-Editor-Model - Selection'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextEditorRecordDeselectionSignal >> printOneLineContentsOn: stream [
 	self selection printOn: stream 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorRecordDeselectionSignal >> selection [
 	^ selection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorRecordDeselectionSignal >> selection: anObject [
 	selection := anObject
 ]

@@ -18,12 +18,12 @@ They can also overlapp. In this case attributes that end first take precedence o
 
 "
 Class {
-	#name : 'BrTextEditorReplacingAdornmentsExamples',
-	#superclass : 'BrTextEditorAdornmentsExamples',
+	#name : #BrTextEditorReplacingAdornmentsExamples,
+	#superclass : #BrTextEditorAdornmentsExamples,
 	#category : 'Brick-Editor-Examples-! Documentation'
 }
 
-{ #category : 'examples - replacements' }
+{ #category : #'examples - replacements' }
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleOverlappingReplacements [
 	<gtExample>
 	<description: 'Multiple replacements can overlapp. In this case the order of the added elements is defined by the end index of the intervals of the attributes'>
@@ -46,7 +46,7 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleOverlapping
 	^ aText
 ]
 
-{ #category : 'examples - replacements' }
+{ #category : #'examples - replacements' }
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleReplacementsOnTopEachOther [
 	<gtExample>
 	<description: 'Multiple replacements can stack up. The order of added elements is defined by the order in which the attributes are added'>
@@ -68,7 +68,7 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleReplacement
 	^ aText
 ]
 
-{ #category : 'examples - replacements' }
+{ #category : #'examples - replacements' }
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementAll [
 	<gtExample>
 	<description: 'Even the whole line of text can be replaced'>
@@ -84,7 +84,7 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementAll [
 	^ aText
 ]
 
-{ #category : 'examples - replacements' }
+{ #category : #'examples - replacements' }
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementFirst [
 	<gtExample>
 	<description: 'We can replace the first word in a sentence'>
@@ -101,7 +101,7 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementFirst [
 	^ aText
 ]
 
-{ #category : 'examples - replacements' }
+{ #category : #'examples - replacements' }
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementLast [
 	<gtExample>
 	<description: 'We can replace the last word in a sentence'>
@@ -118,7 +118,7 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementLast [
 	^ aText
 ]
 
-{ #category : 'examples - replacements' }
+{ #category : #'examples - replacements' }
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementMiddle [
 	<gtExample>
 	<description: 'We can replace a word in the middle of a sentence'>

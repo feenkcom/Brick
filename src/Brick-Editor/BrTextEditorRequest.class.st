@@ -6,20 +6,20 @@ A request is a special type of the event that is sent by the editor to each segm
 """"Requests are dispatched by the editor to each segment piece""""
 "
 Class {
-	#name : 'BrTextEditorRequest',
-	#superclass : 'BlEvent',
+	#name : #BrTextEditorRequest,
+	#superclass : #BlEvent,
 	#instVars : [
 		'editorElement'
 	],
 	#category : 'Brick-Editor-UI - Requests'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorRequest >> editorElement [
 	^ editorElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorRequest >> editorElement: anObject [
 	editorElement := anObject
 ]

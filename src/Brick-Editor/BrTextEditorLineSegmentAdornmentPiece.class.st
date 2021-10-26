@@ -4,8 +4,8 @@ I special type of a segment piece that creates an element based on adornment att
 I am created by BrTextEditorAttributedLineSegment - a segment that supports adornment attributes
 "
 Class {
-	#name : 'BrTextEditorLineSegmentAdornmentPiece',
-	#superclass : 'BrTextEditorLineSegmentPiece',
+	#name : #BrTextEditorLineSegmentAdornmentPiece,
+	#superclass : #BrTextEditorLineSegmentPiece,
 	#instVars : [
 		'adornmentAttribute',
 		'isVirtual'
@@ -13,7 +13,7 @@ Class {
 	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrTextEditorLineSegmentAdornmentPiece >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -24,14 +24,14 @@ BrTextEditorLineSegmentAdornmentPiece >> = anotherObject [
 		and: [ anotherObject adornmentAttribute = self adornmentAttribute ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentAdornmentPiece >> adornmentAttribute [
 	<return: #BrTextAdornmentAttribute>
 
 	^ adornmentAttribute
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentAdornmentPiece >> adornmentAttribute: aBrTextAdornmentAttribute [
 
 	self
@@ -41,7 +41,7 @@ BrTextEditorLineSegmentAdornmentPiece >> adornmentAttribute: aBrTextAdornmentAtt
 	adornmentAttribute := aBrTextAdornmentAttribute
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 	| theAdornmentElements |
 
@@ -69,12 +69,12 @@ BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 	^ theAdornmentElements
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrTextEditorLineSegmentAdornmentPiece >> hash [
 	^ (self class hash bitXor: self text hash) bitXor: self adornmentAttribute hash
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorLineSegmentAdornmentPiece >> initialize [
 	super initialize.
 
@@ -82,12 +82,12 @@ BrTextEditorLineSegmentAdornmentPiece >> initialize [
 	isVirtual := true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentAdornmentPiece >> isVirtual [
 	^ isVirtual
 ]
 
-{ #category : 'api - cursor' }
+{ #category : #'api - cursor' }
 BrTextEditorLineSegmentAdornmentPiece >> screenToCursor: aTransformation of: anEditorElement in: aPieceElement [
 	super screenToCursor: aTransformation of: anEditorElement in: aPieceElement.
 	
@@ -95,7 +95,7 @@ BrTextEditorLineSegmentAdornmentPiece >> screenToCursor: aTransformation of: anE
 		ifFalse: [ aTransformation transformed: self textEnd ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentAdornmentPiece >> virtual: aBoolean [
 	isVirtual := aBoolean
 ]

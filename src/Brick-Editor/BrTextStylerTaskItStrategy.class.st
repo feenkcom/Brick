@@ -9,22 +9,22 @@ Example: ${example:BrTextStylerExamples>>#editorWithTaskItStylerStrategy|codeExp
 
 "
 Class {
-	#name : 'BrTextStylerTaskItStrategy',
-	#superclass : 'BrTextStylerCommonAsyncStrategy',
+	#name : #BrTextStylerTaskItStrategy,
+	#superclass : #BrTextStylerCommonAsyncStrategy,
 	#instVars : [
 		'command'
 	],
 	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextStylerTaskItStrategy >> commandNameFromText: aBrText [
 	^ aBrText isEmpty
 		ifTrue: [ '<empty query>' ]
 		ifFalse: [ (aBrText from: 1 to: (aBrText size min: 20)) printString ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextStylerTaskItStrategy >> newStylingCommandFor: aBlText with: aStyler inEditorElement: aBrEditorElement afterDo: aBlock [
 	<return: #BlTktTerminableCommand>
 	| aName aCommand |
@@ -42,7 +42,7 @@ BrTextStylerTaskItStrategy >> newStylingCommandFor: aBlText with: aStyler inEdit
 	^ aCommand
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextStylerTaskItStrategy >> scheduleStyleTextInEditorElement: aBrEditorElement thenDo: aBlock [
 	| aTextToStyle aStyler |
 	
@@ -69,7 +69,7 @@ BrTextStylerTaskItStrategy >> scheduleStyleTextInEditorElement: aBrEditorElement
 				editorElement: aBrEditorElement) ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextStylerTaskItStrategy >> terminateBackgroundStylingProcess [
 	"Must be called within monitor critical code"
 	command ifNotNil: [ :aCommand |

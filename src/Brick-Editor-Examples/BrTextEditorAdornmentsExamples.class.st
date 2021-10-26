@@ -9,7 +9,7 @@ Adornment attribute can replace a piece of text with arbitrary visual elements o
 # appending ${class:BrTextEditorAppendingAdornmentsExamples}$
 "
 Class {
-	#name : 'BrTextEditorAdornmentsExamples',
-	#superclass : 'Object',
+	#name : #BrTextEditorAdornmentsExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples-! Documentation'
 }

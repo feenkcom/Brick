@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrTextWordPieceShowCursorHandler',
-	#superclass : 'BrTextWordPieceUniqueHandler',
+	#name : #BrTextWordPieceShowCursorHandler,
+	#superclass : #BrTextWordPieceUniqueHandler,
 	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextWordPieceShowCursorHandler >> eventClass [
 	^ BrTextEditorShowCursorRequest
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BrTextWordPieceShowCursorHandler >> handleEvent: anEvent [
 	| aCursorElement |
 

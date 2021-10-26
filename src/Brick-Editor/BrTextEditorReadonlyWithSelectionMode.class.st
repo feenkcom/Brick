@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorReadonlyWithSelectionMode',
-	#superclass : 'BrTextEditorBasicMode',
+	#name : #BrTextEditorReadonlyWithSelectionMode,
+	#superclass : #BrTextEditorBasicMode,
 	#category : 'Brick-Editor-Model'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorReadonlyWithSelectionMode >> createEventHandlers [
 	^ super createEventHandlers, {
 		BrTextEditorMouseDownHandler uniqueInstance.
@@ -14,7 +14,7 @@ BrTextEditorReadonlyWithSelectionMode >> createEventHandlers [
 	}
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorReadonlyWithSelectionMode >> initialize [
 	super initialize.
 	
@@ -25,14 +25,14 @@ BrTextEditorReadonlyWithSelectionMode >> initialize [
 	}
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrTextEditorReadonlyWithSelectionMode >> installOnEditor: aTextEditor [
 	super installOnEditor: aTextEditor.
 
 	aTextEditor segmentBuilder beReadOnly
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorReadonlyWithSelectionMode >> isReadOnly [
 	^ true
 ]

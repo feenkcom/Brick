@@ -6,8 +6,8 @@ I am an attribute which when applied on a text visually replaces some parts of i
 See ${class:BrTextEditorAdornmentsExamples}$
 "
 Class {
-	#name : 'BrTextAdornmentAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #BrTextAdornmentAttribute,
+	#superclass : #BlTextAttribute,
 	#instVars : [
 		'shouldAppend',
 		'renderingStrategy',
@@ -16,7 +16,7 @@ Class {
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #SequenceableCollection of: #BlElement>
@@ -24,39 +24,39 @@ BrTextAdornmentAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorEleme
 	^ self cache ifAbsentPut: [ self renderingStrategy affect: aTBrTextEditorTextualPiece in: anEditorElement ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> beAppend [
 	shouldAppend := true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> beLazy [
 	self renderingStrategy: BrTextAdornmentAttributeTaskItRenderingStrategy new.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> beReplace [
 	shouldAppend := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> beSync [
 	self renderingStrategy: BrTextAdornmentAttributeSyncRenderingStrategy new.
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttribute >> cache [
 	<return: #BrTextAdornmentAttributeCache>
 
 	^ cache
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttribute >> cache: aBrTextAdornmentAttributeCache [
 	cache := aBrTextAdornmentAttributeCache
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #SequenceableCollection of: #BlElement>
@@ -64,7 +64,7 @@ BrTextAdornmentAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorEle
 	^ self subclassResponsibility
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextAdornmentAttribute >> initialize [
 	super initialize.
 	
@@ -73,12 +73,12 @@ BrTextAdornmentAttribute >> initialize [
 	cache := BrTextAdornmentAttributeNoCache uniqueInstance
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextAdornmentAttribute >> initializeLazyElement: aBlLazyElement [
 	"Subclasses can initialize the element"
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextAdornmentAttribute >> isAdornment [
 	"Return true if attribute influences text structure, for examples if it replaces one or more characters
 	with any amount of other arbitrary items, false otherwise"
@@ -87,7 +87,7 @@ BrTextAdornmentAttribute >> isAdornment [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextAdornmentAttribute >> isFocusable [
 	"Return true if an element (but not its children) created by the adornment attribute can be focused"
 	<return: #Boolean>
@@ -95,32 +95,32 @@ BrTextAdornmentAttribute >> isFocusable [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextAdornmentAttribute >> isStyle [
 	"I am not a text style related attribute"
 
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextAdornmentAttribute >> mayHaveExternalReferences [
 	"Answer if this attribute can have references to some external objects like AST nodes or computation results"
 
 	^ true
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextAdornmentAttribute >> newPooledCache [
 	^ BrTextAdornmentAttributePooledCache new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> renderingStrategy [
 	<return: #BrTextAdornmentAttributeRenderingStrategy>
 	^ renderingStrategy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttribute >> renderingStrategy: aBrTextAdornmentAttributeRenderingStrategy [
 	self 
 		assert: [ aBrTextAdornmentAttributeRenderingStrategy isNotNil ] 
@@ -129,17 +129,17 @@ BrTextAdornmentAttribute >> renderingStrategy: aBrTextAdornmentAttributeRenderin
 	renderingStrategy := aBrTextAdornmentAttributeRenderingStrategy
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextAdornmentAttribute >> shouldAppend [
 	^ shouldAppend
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextAdornmentAttribute >> shouldReplace [
 	^ shouldAppend not
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrTextAdornmentAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	
@@ -149,19 +149,19 @@ BrTextAdornmentAttribute >> storeOn: aStream [
 		ifFalse: [ #beReplace ]) asString
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrTextAdornmentAttribute >> type [
 	^ self
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttribute >> withCache: aDictionary key: aKey [
 	self cache: (aDictionary
 		at: aKey
 		ifAbsentPut: [ self newPooledCache ])
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttribute >> withCache: anObject selector: aSelectorSymbol [
 	(anObject perform: aSelectorSymbol withArguments: #())
 		ifNil: [
@@ -173,7 +173,7 @@ BrTextAdornmentAttribute >> withCache: anObject selector: aSelectorSymbol [
 		ifNotNil: [ :aCache | self cache: aCache ]
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttribute >> withCacheGet: aGetBlock set: aSetBlock [
 	aGetBlock value
 		ifNil: [
@@ -185,7 +185,7 @@ BrTextAdornmentAttribute >> withCacheGet: aGetBlock set: aSetBlock [
 		ifNotNil: [ :aCache | self cache: aCache ]
 ]
 
-{ #category : 'api - cache' }
+{ #category : #'api - cache' }
 BrTextAdornmentAttribute >> withoutCache [
 	self cache: BrTextAdornmentAttributeNoCache uniqueInstance
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrEditorTextFlowLayoutExamples',
-	#superclass : 'Object',
+	#name : #BrEditorTextFlowLayoutExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples-Layout'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrEditorTextFlowLayoutExamples >> container [
 	<gtExample>
 	| anElement |
@@ -23,7 +23,7 @@ BrEditorTextFlowLayoutExamples >> container [
 	^ anElement
 ]
 
-{ #category : 'examples - layout' }
+{ #category : #'examples - layout' }
 BrEditorTextFlowLayoutExamples >> container_extent [
 	<gtExample>
 	| aContainer |
@@ -36,7 +36,7 @@ BrEditorTextFlowLayoutExamples >> container_extent [
 	^ aContainer
 ]
 
-{ #category : 'examples - layout' }
+{ #category : #'examples - layout' }
 BrEditorTextFlowLayoutExamples >> layout_no_memory_leak [
 	<gtExample>
 	| aContainer |

@@ -1,25 +1,25 @@
 Class {
-	#name : 'BrCursorStencil',
-	#superclass : 'BrStencil',
+	#name : #BrCursorStencil,
+	#superclass : #BrStencil,
 	#classInstVars : [
 		'uniqueInstance'
 	],
 	#category : 'Brick-Editor-UI - Stencils'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrCursorStencil class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrCursorStencil class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrCursorStencil >> create [
 	^ BrCursorElement new
 		constraintsDo: [ :c |

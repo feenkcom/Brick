@@ -4,8 +4,8 @@ I represent a single line of a flow layout.
 I store reference to the next line in order to avoid unnecessary array of lines creation for a very common case of just one line
 "
 Class {
-	#name : 'BrEditorTextFlowLine',
-	#superclass : 'Object',
+	#name : #BrEditorTextFlowLine,
+	#superclass : #Object,
 	#instVars : [
 		'elements',
 		'maxWidth',
@@ -20,7 +20,7 @@ Class {
 	#category : 'Brick-Editor-Layout'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 BrEditorTextFlowLine >> add: anElement [
 	"Try to assign a given element to this line (if possible) or create a new line.
 	Return a line to which next element should be tried to added"
@@ -41,12 +41,12 @@ BrEditorTextFlowLine >> add: anElement [
 		ifFalse: [ currentLine ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> baseline [
 	^ baseline
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> count [
 	"Return how many lines there are in total"
 	<return: #Number>
@@ -56,7 +56,7 @@ BrEditorTextFlowLine >> count [
 		ifFalse: [ 0 ])
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> distanceTo: aPoint [
 	"Compute the vertical distance from me to a given point"
 	<return: #Number>
@@ -67,7 +67,7 @@ BrEditorTextFlowLine >> distanceTo: aPoint [
 	^ (aPoint y - aClampedCoordinate) abs
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrEditorTextFlowLine >> do: aBlock [
 	"Evaluate aBlock with each of my next lines as the argument"
 
@@ -76,7 +76,7 @@ BrEditorTextFlowLine >> do: aBlock [
 		ifTrue: [ nextLine do: aBlock ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> elements [
 	"Return a collection of all elements assigned to this line"
 	<return: #OrderedCollection>
@@ -84,7 +84,7 @@ BrEditorTextFlowLine >> elements [
 	^ elements
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> elementsIn: anElement [
 	"Return a collection of all elements assigned to this line"
 	<return: #OrderedCollection>
@@ -92,7 +92,7 @@ BrEditorTextFlowLine >> elementsIn: anElement [
 	^ elements ifNil: [ elements := anElement children select: [ :eachChild | eachChild constraints textFlow assignedLine = self ] ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> findClosestChildOf: anElement to: aPoint [
 	<return: #BlElement>
 	
@@ -106,7 +106,7 @@ BrEditorTextFlowLine >> findClosestChildOf: anElement to: aPoint [
 		in: (anElement children select: [ :eachChild | eachChild constraints textFlow assignedLine = self ])
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> findClosestElementTo: aPoint in: aCollectionOfElements [
 	<return: #BlElement>
 	| aClosestElement aClosestDistance |
@@ -126,7 +126,7 @@ BrEditorTextFlowLine >> findClosestElementTo: aPoint in: aCollectionOfElements [
 	^ aClosestElement
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowLine >> hasNextLine [
 	"Return true if there is a next line, false otherwise"
 	<return: #Boolean>
@@ -134,7 +134,7 @@ BrEditorTextFlowLine >> hasNextLine [
 	^ nextLine isNotNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowLine >> hasSpaceFor: anElement [
 	"Return true if I am able to provide space for a given element.
 	By convention I always allow element to take space if I am empty
@@ -153,7 +153,7 @@ BrEditorTextFlowLine >> hasSpaceFor: anElement [
 			ifFalse: [ availableWidth closeTo: aChildWidth epsilon: 0.5 ] ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> height [
 	"Return my height which is equal to the height of the highest element"
 	<return: #Number>
@@ -161,7 +161,7 @@ BrEditorTextFlowLine >> height [
 	^ height
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorTextFlowLine >> initialize [
 	super initialize.
 	
@@ -178,7 +178,7 @@ BrEditorTextFlowLine >> initialize [
 	nextLine := nil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowLine >> isEmpty [
 	"Return true if I am an empty line without any element, false otherwise"
 	<return: #Boolean>
@@ -186,7 +186,7 @@ BrEditorTextFlowLine >> isEmpty [
 	^ elements isEmpty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> maxWidth [
 	"Return maximal width limit for the current line"
 	<return: #Number>
@@ -194,7 +194,7 @@ BrEditorTextFlowLine >> maxWidth [
 	^ maxWidth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> maxWidth: aNumber [
 	"Limit maximal width to the given number"
 
@@ -202,7 +202,7 @@ BrEditorTextFlowLine >> maxWidth: aNumber [
 	availableWidth := maxWidth - width
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> nextLine [
 	"Return or create a new next line to which we should continue adding elements"
 	<return: #BrEditorTextFlowLine>
@@ -214,19 +214,19 @@ BrEditorTextFlowLine >> nextLine [
 			yourself ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> origin [
 	<return: #Point>
 
 	^ origin
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> origin: aPoint [
 	origin := aPoint
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrEditorTextFlowLine >> push: anElement [
 	"Push pushes given element to the end of element's collection
 	and update my geometry properties taking new element into account "
@@ -241,17 +241,17 @@ BrEditorTextFlowLine >> push: anElement [
 	baseline := baseline max: (anElement baselineOffset + anElement margin top)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> pushedQueue [
 	^ pushedQueue
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowLine >> pushedQueue: aQueue [
 	pushedQueue := aQueue
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorTextFlowLine >> reset [
 	elements := nil.
 	pushedQueue := nil.
@@ -259,7 +259,7 @@ BrEditorTextFlowLine >> reset [
 	nextLine ifNotNil: [ :aNextLine | aNextLine reset ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> totalHeight [
 	"Return a total height taking into account all next lines"
 	<return: #Number>
@@ -272,7 +272,7 @@ BrEditorTextFlowLine >> totalHeight [
 	^ self height + aTotalHeight
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> totalWidth [
 	"Return a total width taking into account all next lines"
 	<return: #Number>
@@ -285,7 +285,7 @@ BrEditorTextFlowLine >> totalWidth [
 	^ self width max: aTotalWidth
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowLine >> width [
 	"Return my width which is a sum of widths of all my elements"
 	<return: #Number>

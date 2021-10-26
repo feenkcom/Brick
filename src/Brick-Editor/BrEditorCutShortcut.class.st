@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrEditorCutShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorCutShortcut,
+	#superclass : #BrEditorShortcut,
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorCutShortcut >> description [
 	^ 'Cut selected text and save it to the clipboard ready to paste elsewhere.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorCutShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination primaryX
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorCutShortcut >> name [
 	^ 'Cut'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorCutShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor cutSelected
 ]

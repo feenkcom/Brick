@@ -2,8 +2,8 @@
 I am sent to the segment piece element when text inside it changes.
 "
 Class {
-	#name : 'BrTextEditorTextChangedRequest',
-	#superclass : 'BrTextEditorRequest',
+	#name : #BrTextEditorTextChangedRequest,
+	#superclass : #BrTextEditorRequest,
 	#instVars : [
 		'segmentPiece',
 		'text',
@@ -13,42 +13,42 @@ Class {
 	#category : 'Brick-Editor-UI - Requests'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> segmentPiece [
 	^ segmentPiece
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> segmentPiece: anObject [
 	segmentPiece := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> text: anObject [
 	text := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> textEnd [
 	^ textEnd
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> textEnd: anObject [
 	textEnd := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> textStart [
 	^ textStart
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextChangedRequest >> textStart: anObject [
 	textStart := anObject
 ]

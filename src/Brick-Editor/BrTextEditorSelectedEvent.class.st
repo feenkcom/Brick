@@ -2,8 +2,8 @@
 I am sent by the text editor model when an interval of text is selected
 "
 Class {
-	#name : 'BrTextEditorSelectedEvent',
-	#superclass : 'BrTextEditorEvent',
+	#name : #BrTextEditorSelectedEvent,
+	#superclass : #BrTextEditorEvent,
 	#instVars : [
 		'fromIndex',
 		'toIndex'
@@ -11,22 +11,22 @@ Class {
 	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSelectedEvent >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSelectedEvent >> fromIndex: anObject [
 	fromIndex := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSelectedEvent >> toIndex [
 	^ toIndex
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSelectedEvent >> toIndex: anObject [
 	toIndex := anObject
 ]

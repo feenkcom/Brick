@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrTextWordPieceSelectionAcquiredHandler',
-	#superclass : 'BrTextWordPieceUniqueHandler',
+	#name : #BrTextWordPieceSelectionAcquiredHandler,
+	#superclass : #BrTextWordPieceUniqueHandler,
 	#category : 'Brick-Editor-UI - Word'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextWordPieceSelectionAcquiredHandler >> eventClass [
 	^ BlElementSelectionAcquiredEvent
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BrTextWordPieceSelectionAcquiredHandler >> handleEvent: anEvent [
 	| anEditorElement aTextElement aGlobalFrom aGlobalTo |
 

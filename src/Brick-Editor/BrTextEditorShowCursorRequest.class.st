@@ -2,8 +2,8 @@
 I am sent to the segment piece element when a cursor at a given text index in local text piece coordinates should be shown
 "
 Class {
-	#name : 'BrTextEditorShowCursorRequest',
-	#superclass : 'BrTextEditorRequest',
+	#name : #BrTextEditorShowCursorRequest,
+	#superclass : #BrTextEditorRequest,
 	#instVars : [
 		'cursorPosition',
 		'hasFocus'
@@ -11,14 +11,14 @@ Class {
 	#category : 'Brick-Editor-UI - Requests'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorShowCursorRequest >> cursorPosition [
 	<return: #Number>
 
 	^ cursorPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorShowCursorRequest >> cursorPosition: aNumber [
 	
 	self
@@ -28,12 +28,12 @@ BrTextEditorShowCursorRequest >> cursorPosition: aNumber [
 	cursorPosition := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorShowCursorRequest >> hasFocus [
 	^ hasFocus
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorShowCursorRequest >> hasFocus: anObject [
 	hasFocus := anObject
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEditorParagraphSegmentHolder',
-	#superclass : 'BrTextEditorSegmentHolder',
+	#name : #BrTextEditorParagraphSegmentHolder,
+	#superclass : #BrTextEditorSegmentHolder,
 	#instVars : [
 		'segment',
 		'pieceElements'
@@ -11,24 +11,24 @@ Class {
 	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BrTextEditorParagraphSegmentHolder class >> cleanUp [
 	super cleanUp.
 	
 	defaultSegmentLayoutBlock := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorParagraphSegmentHolder class >> defaultSegmentLayout [
 	^ (defaultSegmentLayoutBlock ifNil: [ BrEditorTextFlowLayout new ]) value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorParagraphSegmentHolder class >> defaultSegmentLayout: aBlock [
 	defaultSegmentLayoutBlock := aBlock
 ]
 
-{ #category : 'private - segment' }
+{ #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 	| newPieceElements thePieces hasSelection hasCursor |
 
@@ -93,7 +93,7 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 		padding: anEditorSegment paragraphMargin
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorParagraphSegmentHolder >> createSegmentElement [
 	<return: #BlElement>
 
@@ -109,7 +109,7 @@ BrTextEditorParagraphSegmentHolder >> createSegmentElement [
 		yourself
 ]
 
-{ #category : 'cursor' }
+{ #category : #cursor }
 BrTextEditorParagraphSegmentHolder >> explicitScreenToCursor: aTransformation [
 	| aBoundsInEditor aTransformedScreenPosition |
 	
@@ -137,7 +137,7 @@ BrTextEditorParagraphSegmentHolder >> explicitScreenToCursor: aTransformation [
 		at: aTransformation screenPosition
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BrTextEditorParagraphSegmentHolder >> hasCursor [
 	| aTextEditor |
 	aTextEditor := self infiniteElement editor.
@@ -148,7 +148,7 @@ BrTextEditorParagraphSegmentHolder >> hasCursor [
 	^ false
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BrTextEditorParagraphSegmentHolder >> hasSelection [
 	| aTextEditor textInterval |
 
@@ -162,12 +162,12 @@ BrTextEditorParagraphSegmentHolder >> hasSelection [
 	^ false
 ]
 
-{ #category : 'private - segment' }
+{ #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> newPiecesMap [
 	^ BrTextEditorLineSegmentPieceCollectionMap new
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onCursorChanged [
 	"Is sent when text editor's cursor changes.
 	Segment holder should update text elements accordingly"
@@ -191,7 +191,7 @@ BrTextEditorParagraphSegmentHolder >> onCursorChanged [
 				during: [ itemElement showCursors ] ]
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onFocusChanged: aBoolean [
 	"Is sent when text editor's focus state changes.
 	Segment holder should update text elements accordingly"
@@ -204,7 +204,7 @@ BrTextEditorParagraphSegmentHolder >> onFocusChanged: aBoolean [
 		aPiece updateFocus: aBoolean of: aPieceElement in: self infiniteElement ]
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onRecycled [
 
 	itemElement removeChildren.
@@ -213,7 +213,7 @@ BrTextEditorParagraphSegmentHolder >> onRecycled [
 	segment := nil.
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onSelectionChanged [
 	"Is sent when text editor's selection changes.
 	Segment holder should update text elements accordingly"
@@ -225,7 +225,7 @@ BrTextEditorParagraphSegmentHolder >> onSelectionChanged [
 	itemElement selection: (self selectionIn: self infiniteElement editor)
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onTextChanged [
 	"Is sent when text changed in the editor (for example style attributes).
 	Segment holder should update text elements accordingly"
@@ -240,19 +240,19 @@ BrTextEditorParagraphSegmentHolder >> onTextChanged [
 	itemElement text: segment text
 ]
 
-{ #category : 'cursor' }
+{ #category : #cursor }
 BrTextEditorParagraphSegmentHolder >> relativeScreenToCursor: aTransformation [
 	"trying to find a segment that actually contains a given position"
 		
 	itemElement relativeScreenToCursor: aTransformation of: self infiniteElement
 ]
 
-{ #category : 'cursor' }
+{ #category : #cursor }
 BrTextEditorParagraphSegmentHolder >> screenToCursor: aTransformation [
 	aTransformation evaluateOn: self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorParagraphSegmentHolder >> segment: anEditorSegment [
 	segment == anEditorSegment
 		ifTrue: [
@@ -267,7 +267,7 @@ BrTextEditorParagraphSegmentHolder >> segment: anEditorSegment [
 					self infiniteElement ignoreRequestLayoutDuring: [ self buildSegment: anEditorSegment ] ] ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorParagraphSegmentHolder >> selectionIn: aTextEditor [
 	| theLocalSelection |
 	
@@ -288,7 +288,7 @@ BrTextEditorParagraphSegmentHolder >> selectionIn: aTextEditor [
 	^ theLocalSelection
 ]
 
-{ #category : 'private - segment' }
+{ #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> updateSegment: anEditorSegment [
 	| newPieceElements newPieceMap hasCursor hasSelection |
 	self
