@@ -6,12 +6,12 @@ ${example:BrTextAttributesHowToGuide>>#linkInText|previewExpanded}$
 ${example:BrTextAttributesHowToGuide>>#hideMarkupInText|previewExpanded}$
 "
 Class {
-	#name : 'BrTextAttributesHowToGuide',
-	#superclass : 'Object',
+	#name : #BrTextAttributesHowToGuide,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples-! Documentation'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextAttributesHowToGuide >> hideMarkupInText [
 	<gtExample>
 	| text leftMarker rightMarker |
@@ -47,7 +47,7 @@ BrTextAttributesHowToGuide >> hideMarkupInText [
 		text: text
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextAttributesHowToGuide >> linkInText [
 	<gtExample>
 	| text |

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorSelecterExamples',
-	#superclass : 'BrTextEditorOperatorExamples',
+	#name : #BrTextEditorSelecterExamples,
+	#superclass : #BrTextEditorOperatorExamples,
 	#category : 'Brick-Editor-Examples-Operators'
 }
 
-{ #category : 'examples - all' }
+{ #category : #'examples - all' }
 BrTextEditorSelecterExamples >> select_all_in_empty [
 	<gtExample>
 	| anEditor |
@@ -19,7 +19,7 @@ BrTextEditorSelecterExamples >> select_all_in_empty [
 	^ anEditor
 ]
 
-{ #category : 'examples - all' }
+{ #category : #'examples - all' }
 BrTextEditorSelecterExamples >> select_all_in_empty_with_curor [
 	<gtExample>
 	| anEditor |
@@ -43,7 +43,7 @@ BrTextEditorSelecterExamples >> select_all_in_empty_with_curor [
 	^ anEditor
 ]
 
-{ #category : 'examples - all' }
+{ #category : #'examples - all' }
 BrTextEditorSelecterExamples >> select_all_reduced [
 	"There was a bug, that if a new text is smaller than the existing selection, then things can go wrong"
 	<gtExample>
@@ -74,7 +74,7 @@ BrTextEditorSelecterExamples >> select_all_reduced [
 	^ anEditor
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BrTextEditorSelecterExamples >> select_from_0_to_5 [
 	<gtExample>
 	| anEditor |
@@ -91,7 +91,7 @@ BrTextEditorSelecterExamples >> select_from_0_to_5 [
 	^ anEditor
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BrTextEditorSelecterExamples >> select_from_0_to_5_in_steps [
 	<gtExample>
 	| anEditor |
@@ -116,7 +116,7 @@ BrTextEditorSelecterExamples >> select_from_0_to_5_in_steps [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
 	<gtExample>
 	| anEditor |
@@ -137,7 +137,7 @@ BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneDown_at_6_thenUp [
 	<gtExample>
 	| anEditor |
@@ -156,7 +156,7 @@ BrTextEditorSelecterExamples >> select_moveOneDown_at_6_thenUp [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneLeft_at_0 [
 	<gtExample>
 	| anEditor |
@@ -174,7 +174,7 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_0 [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneLeft_at_4 [
 	<gtExample>
 	| anEditor |
@@ -198,7 +198,7 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_4 [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneLeft_at_4_extendToNextWordEnd [
 	<gtExample>
 	| anEditor |
@@ -218,7 +218,7 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_4_extendToNextWordEnd [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneRight_at_6 [
 	<gtExample>
 	| anEditor |
@@ -242,7 +242,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6 [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd [
 	<gtExample>
 	| anEditor |
@@ -265,7 +265,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd_twice [
 	<gtExample>
 	| anEditor |
@@ -287,7 +287,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd_twi
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordStart [
 	<gtExample>
 	| anEditor |
@@ -309,7 +309,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordSta
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordStart_twice [
 	<gtExample>
 	| anEditor |
@@ -331,7 +331,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordSta
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneRight_at_End [
 	<gtExample>
 	| anEditor |
@@ -349,7 +349,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_End [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneUp_at_35 [
 	<gtExample>
 	| anEditor |
@@ -370,7 +370,7 @@ BrTextEditorSelecterExamples >> select_moveOneUp_at_35 [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneUp_at_35_thenDown [
 	<gtExample>
 	| anEditor |
@@ -389,7 +389,7 @@ BrTextEditorSelecterExamples >> select_moveOneUp_at_35_thenDown [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveTwiceLeft_at_1 [
 	<gtExample>
 	| anEditor |
@@ -417,7 +417,7 @@ BrTextEditorSelecterExamples >> select_moveTwiceLeft_at_1 [
 	^ anEditor
 ]
 
-{ #category : 'examples - move' }
+{ #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveTwiceRight_at_End [
 	<gtExample>
 	| anEditor |
@@ -443,7 +443,7 @@ BrTextEditorSelecterExamples >> select_moveTwiceRight_at_End [
 	^ anEditor
 ]
 
-{ #category : 'examples - word' }
+{ #category : #'examples - word' }
 BrTextEditorSelecterExamples >> select_word_at_0 [
 	<gtExample>
 	| anEditor |
@@ -461,7 +461,7 @@ BrTextEditorSelecterExamples >> select_word_at_0 [
 	^ anEditor
 ]
 
-{ #category : 'examples - word' }
+{ #category : #'examples - word' }
 BrTextEditorSelecterExamples >> select_word_at_1 [
 	<gtExample>
 	| anEditor |
@@ -479,7 +479,7 @@ BrTextEditorSelecterExamples >> select_word_at_1 [
 	^ anEditor
 ]
 
-{ #category : 'examples - word' }
+{ #category : #'examples - word' }
 BrTextEditorSelecterExamples >> select_word_at_2 [
 	<gtExample>
 	| anEditor |
@@ -497,7 +497,7 @@ BrTextEditorSelecterExamples >> select_word_at_2 [
 	^ anEditor
 ]
 
-{ #category : 'examples - word' }
+{ #category : #'examples - word' }
 BrTextEditorSelecterExamples >> select_word_at_2_and_10 [
 	<gtExample>
 	| anEditor |

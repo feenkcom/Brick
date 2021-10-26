@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrEditorShortcutExamples',
-	#superclass : 'Object',
+	#name : #BrEditorShortcutExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples-Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorShortcutExamples >> deleteOneLetterAfterCursorWithSelection [
 	<gtExample>
 	| anEditorElement anEditor |
@@ -32,7 +32,7 @@ BrEditorShortcutExamples >> deleteOneLetterAfterCursorWithSelection [
 	^ anEditorElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorShortcutExamples >> deleteOneLetterAfterCursorWithSelectionBeforeCursor [
 	<gtExample>
 	| anEditorElement anEditor |
@@ -57,7 +57,7 @@ BrEditorShortcutExamples >> deleteOneLetterAfterCursorWithSelectionBeforeCursor 
 	^ anEditorElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorShortcutExamples >> deleteOneLetterBeforeCursorWithSelection [
 	<gtExample>
 	| anEditorElement anEditor |
@@ -82,7 +82,7 @@ BrEditorShortcutExamples >> deleteOneLetterBeforeCursorWithSelection [
 	^ anEditorElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorShortcutExamples >> deleteOneLetterBeforeCursorWithSelectionAfterCursor [
 	<gtExample>
 	| anEditorElement anEditor |
