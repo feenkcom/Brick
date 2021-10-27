@@ -3,7 +3,7 @@ I request current progress status. I am triggered by ${class:BrProgressLook}$ an
 
 "
 Class {
-	#name : 'BrProgressStatusRequest',
-	#superclass : 'BrRequest',
+	#name : #BrProgressStatusRequest,
+	#superclass : #BrRequest,
 	#category : 'Brick-Progress - Events'
 }

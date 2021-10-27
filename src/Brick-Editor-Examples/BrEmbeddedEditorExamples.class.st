@@ -1,12 +1,12 @@
 Class {
-	#name : 'BrEmbeddedEditorExamples',
-	#superclass : 'BrTextEditorExamples',
+	#name : #BrEmbeddedEditorExamples,
+	#superclass : #BrTextEditorExamples,
 	#traits : 'TBrTextEditorFixedMeasurerExamples',
 	#classTraits : 'TBrTextEditorFixedMeasurerExamples classTrait',
 	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrEmbeddedEditorExamples >> editorFor: aText [
 	<return: #BrEditor>
 	| anEditor aRopedText |
@@ -37,7 +37,7 @@ BrEmbeddedEditorExamples >> editorFor: aText [
 	^ anEditor
 ]
 
-{ #category : 'examples - embedded' }
+{ #category : #'examples - embedded' }
 BrEmbeddedEditorExamples >> editorWithEmbeddedEditor [
 	<gtExample>
 
@@ -46,19 +46,19 @@ BrEmbeddedEditorExamples >> editorWithEmbeddedEditor [
 		segmentBuilderDo: [ :aSegmentBuilder | self makeFixedMeasurement: aSegmentBuilder ]
 ]
 
-{ #category : 'examples - embedded' }
+{ #category : #'examples - embedded' }
 BrEmbeddedEditorExamples >> elementWithEmbeddedEditor [
 	<gtExample>
 	
 	^ self newElement editor: self editorWithEmbeddedEditor
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BrEmbeddedEditorExamples >> embeddedEditorText [
 	^ 'Hello world' asRopedText
 ]
 
-{ #category : 'examples - embedded' }
+{ #category : #'examples - embedded' }
 BrEmbeddedEditorExamples >> embeddedTextEditorElement [
 	"<gtExample>"
 	| anEditorElement |
@@ -82,12 +82,12 @@ BrEmbeddedEditorExamples >> embeddedTextEditorElement [
 	^ anEditorElement
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BrEmbeddedEditorExamples >> mainEditorText [
 	^ self newThreeLineText fontSize: 20
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrEmbeddedEditorExamples >> makeFixedMeasurement: aSegmentBuilder [
 
 	aSegmentBuilder
@@ -100,7 +100,7 @@ BrEmbeddedEditorExamples >> makeFixedMeasurement: aSegmentBuilder [
 			aTextElement ]
 ]
 
-{ #category : 'examples - embedded' }
+{ #category : #'examples - embedded' }
 BrEmbeddedEditorExamples >> textWithEmbeddedEditor [
 	<gtExample>
 	| aText |

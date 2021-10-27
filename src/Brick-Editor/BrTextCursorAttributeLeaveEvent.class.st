@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrTextCursorAttributeLeaveEvent',
-	#superclass : 'BrTextCursorAttributeEvent',
+	#name : #BrTextCursorAttributeLeaveEvent,
+	#superclass : #BrTextCursorAttributeEvent,
 	#category : 'Brick-Editor-Attributes - Support'
 }

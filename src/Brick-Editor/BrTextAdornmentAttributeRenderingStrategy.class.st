@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextAdornmentAttributeRenderingStrategy',
-	#superclass : 'Object',
+	#name : #BrTextAdornmentAttributeRenderingStrategy,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -9,20 +9,20 @@ Class {
 	#category : 'Brick-Editor-Attributes - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttributeRenderingStrategy >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #BlElement>
 	^ self subclassResponsibility 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttributeRenderingStrategy >> attribute [
 	<return: #BrTextAdornmentAttribute>
 	^ attribute
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttributeRenderingStrategy >> attribute: aBrTextAdornmentAttribute [
 	self 
 		assert: [ aBrTextAdornmentAttribute isNotNil ] 

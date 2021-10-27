@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrEditorSelectLineAfterCursorShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorSelectLineAfterCursorShortcut,
+	#superclass : #BrEditorShortcut,
 	#instVars : [
 		'combinationForUnix'
 	],
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'api - combination' }
+{ #category : #'api - combination' }
 BrEditorSelectLineAfterCursorShortcut >> combinationForUnix [
 	^ combinationForUnix
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorSelectLineAfterCursorShortcut >> description [
 	^ 'Extends the selection from the current cursor position to the end of a line.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorSelectLineAfterCursorShortcut >> initialize [
 	super initialize.
 	
@@ -25,12 +25,12 @@ BrEditorSelectLineAfterCursorShortcut >> initialize [
 	combinationForUnix := BlKeyCombination shiftEnd
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorSelectLineAfterCursorShortcut >> name [
 	^ 'Select to the end of a line'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorSelectLineAfterCursorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selecter
 		extendToLineEnd;

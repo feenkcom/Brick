@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTextEditorNavigatorAddAtScreenPositionOperation',
-	#superclass : 'BrTextEditorNavigatorOperation',
+	#name : #BrTextEditorNavigatorAddAtScreenPositionOperation,
+	#superclass : #BrTextEditorNavigatorOperation,
 	#instVars : [
 		'screenPosition'
 	],
 	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : 'matching' }
+{ #category : #matching }
 BrTextEditorNavigatorAddAtScreenPositionOperation >> performOn: aNavigator [
 	| aGlobalTextIndex |
 
@@ -19,12 +19,12 @@ BrTextEditorNavigatorAddAtScreenPositionOperation >> performOn: aNavigator [
 	aNavigator privateRegisterForAdd: self cursor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorNavigatorAddAtScreenPositionOperation >> screenPosition [
 	^ screenPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorNavigatorAddAtScreenPositionOperation >> screenPosition: anObject [
 	screenPosition := anObject
 ]

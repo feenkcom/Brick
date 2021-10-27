@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrInteractionExamples',
-	#superclass : 'Object',
+	#name : #BrInteractionExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Interaction'
 }
 
-{ #category : 'examples - propagation' }
+{ #category : #'examples - propagation' }
 BrInteractionExamples >> exampleWithPropagation [
 	<gtExample>
 	| parent expandable child |

@@ -1,30 +1,30 @@
 Class {
-	#name : 'BrLogicalZoomModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrLogicalZoomModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'levels'
 	],
 	#category : 'Brick-Logical Zooming - Model'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrLogicalZoomModel >> initialize [
 	super initialize.
 
 	levels := Stack with: BrDefaultLogicalZoomLevel new
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrLogicalZoomModel >> notifyZoomPopped: aZoomLevel [
 	self dispatchEvent: (BrLogicalZoomPopEvent new)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrLogicalZoomModel >> notifyZoomPushed: aZoomLevel [
 	self dispatchEvent: (BrLogicalZoomPushEvent new)
 ]
 
-{ #category : 'api - zooming' }
+{ #category : #'api - zooming' }
 BrLogicalZoomModel >> popZoom [
 	"Go to the previous zoom level"
 	
@@ -46,7 +46,7 @@ BrLogicalZoomModel >> popZoom [
 					whenFinished: [  ] ] ]
 ]
 
-{ #category : 'api - zooming' }
+{ #category : #'api - zooming' }
 BrLogicalZoomModel >> pushZoom: aZoomLevel [
 	"Change a current zoom level to the given one"
 	
@@ -65,7 +65,7 @@ BrLogicalZoomModel >> pushZoom: aZoomLevel [
 					whenFinished: [  ] ] ]
 ]
 
-{ #category : 'api - zooming' }
+{ #category : #'api - zooming' }
 BrLogicalZoomModel >> setZoom: aZoom [
 	"Replace the top zoom level with a given one"
 	
@@ -83,7 +83,7 @@ BrLogicalZoomModel >> setZoom: aZoom [
 					whenFinished: [  ] ] ]
 ]
 
-{ #category : 'api - zooming' }
+{ #category : #'api - zooming' }
 BrLogicalZoomModel >> topZoom [
 	<return: #BrLogicalZoomLevel>
 

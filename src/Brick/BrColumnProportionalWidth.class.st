@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrColumnProportionalWidth',
-	#superclass : 'BrColumnWidth',
+	#name : #BrColumnProportionalWidth,
+	#superclass : #BrColumnWidth,
 	#instVars : [
 		'weight'
 	],
 	#category : 'Brick-Column - Model'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrColumnProportionalWidth >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,7 +18,7 @@ BrColumnProportionalWidth >> = anObject [
 	^ weight = anObject weight
 ]
 
-{ #category : 'hook' }
+{ #category : #hook }
 BrColumnProportionalWidth >> applyOn: anElement [
 	anElement constraintsDo: [ :c |
 		c horizontal matchParent.
@@ -27,28 +27,28 @@ BrColumnProportionalWidth >> applyOn: anElement [
 	anElement states addState: (BrLayoutHorizontalResizerState matchParent)
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrColumnProportionalWidth >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ weight hash
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrColumnProportionalWidth >> initialize [
 	super initialize.
 	
 	weight := 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumnProportionalWidth >> weight [
 	<return: #Number>
 
 	^ weight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrColumnProportionalWidth >> weight: aNumber [
 	weight := aNumber
 ]

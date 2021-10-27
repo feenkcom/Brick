@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrScrollbarTrackChanged',
-	#superclass : 'BrChangeEvent',
+	#name : #BrScrollbarTrackChanged,
+	#superclass : #BrChangeEvent,
 	#instVars : [
 		'stencil'
 	],
 	#category : 'Brick-Scrollbar - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarTrackChanged >> stencil [
 	^ stencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarTrackChanged >> stencil: anObject [
 	stencil := anObject
 ]

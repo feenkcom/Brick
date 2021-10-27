@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrAccordionModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrAccordionModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'contentStencil',
 		'headerStencil'
@@ -8,33 +8,33 @@ Class {
 	#category : 'Brick-Accordion - Model'
 }
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAccordionModel >> contentStencil [
 	<return: #BrStencil>
 
 	^ contentStencil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAccordionModel >> contentStencil: aBrStencil [
 	contentStencil := aBrStencil asStencil.
 	self notifyContentStencilChanged
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAccordionModel >> headerStencil [
 	<return: #BrStencil>
 
 	^ headerStencil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrAccordionModel >> headerStencil: aBrStencil [
 	headerStencil := aBrStencil asStencil.
 	self notifyHeaderStencilChanged
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAccordionModel >> initialize [
 	super initialize.
 	
@@ -49,7 +49,7 @@ BrAccordionModel >> initialize [
 		yourself ] asStencil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAccordionModel >> initializeListeners [
 	super initializeListeners.
 
@@ -57,12 +57,12 @@ BrAccordionModel >> initializeListeners [
 	self when: BrAccordionHeaderStencilRequest reply: [ :aResponse | aResponse stencil: self headerStencil ]
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAccordionModel >> notifyContentStencilChanged [
 	self dispatchEvent: (BrAccordionContentStencilChanged stencil: self contentStencil)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAccordionModel >> notifyHeaderStencilChanged [
 	self dispatchEvent: (BrAccordionHeaderStencilChanged stencil: self headerStencil)
 ]

@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTextEditorSegmentCollectorExamples',
-	#superclass : 'Object',
+	#name : #BrTextEditorSegmentCollectorExamples,
+	#superclass : #Object,
 	#instVars : [
 		'largeFile'
 	],
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorSegmentCollectorExamples >> deleteLargeFile [
 
 	largeFile ifNotNil: 
@@ -15,7 +15,7 @@ BrTextEditorSegmentCollectorExamples >> deleteLargeFile [
 		largeFile := nil ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSegmentCollectorExamples >> largeFile [
 	<gtExample>
 
@@ -29,14 +29,14 @@ BrTextEditorSegmentCollectorExamples >> largeFile [
 		largeFile ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSegmentCollectorExamples >> largeFileRope [
 
 	^ BlRopedText file: self largeFile
 		"self largeFile contents asRopedText"
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSegmentCollectorExamples >> segmentAt142 [
 	"Retrieve the segment at 1.42 times the cache limit.
 	This tests accessing the cache outside its initial contents.
@@ -53,7 +53,7 @@ BrTextEditorSegmentCollectorExamples >> segmentAt142 [
 	self assert: actual equals: expected.
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSegmentCollectorExamples >> segmentAt200and262 [
 	"Retrieve the segment at line 200, followed by the segment at line 262.
 	This tests re-using part of the previously cached items where the index of the segments collection is not the same as the line number"
@@ -75,7 +75,7 @@ BrTextEditorSegmentCollectorExamples >> segmentAt200and262 [
 
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSegmentCollectorExamples >> segmentAt242and42 [
 	"Retrieve the segment at line 2.42 times the cache limit, followed by the segment at line 42.
 	This tests #computeBackwardAt:."
@@ -107,7 +107,7 @@ BrTextEditorSegmentCollectorExamples >> segmentAt242and42 [
 
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSegmentCollectorExamples >> segmentAt42 [
 	"Retrieve the segment at line 42.
 	Assumes the cache limit is always greater than 42."
@@ -120,7 +120,7 @@ BrTextEditorSegmentCollectorExamples >> segmentAt42 [
 	self assert: actual equals: expected.
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSegmentCollectorExamples >> segmentAt80and120 [
 	"Retrieve the segment at 0.8 times the cache limit, followed by the segment at 1.2 times the cache limit.
 	This tests re-using part of the previously cached items"
@@ -142,14 +142,18 @@ BrTextEditorSegmentCollectorExamples >> segmentAt80and120 [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSegmentCollectorExamples >> segmentCollector [
 
 	^ self textEditor segmentCollector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorSegmentCollectorExamples >> textEditor [ 
+	| aTextEditor |
 
-	^ BrTextEditor new text: self largeFileRope
+	aTextEditor := BrTextEditor new text: self largeFileRope.
+	aTextEditor segmentCollector cacheLimit: 500.
+		
+	^ aTextEditor
 ]

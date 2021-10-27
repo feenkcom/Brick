@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrAnchoredModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrAnchoredModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'content',
 		'handle'
@@ -8,12 +8,12 @@ Class {
 	#category : 'Brick-Anchored - Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredModel >> content [
 	^ content
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredModel >> content: anObject [
 	content = anObject
 		ifTrue: [ ^ self ].
@@ -21,22 +21,22 @@ BrAnchoredModel >> content: anObject [
 	self notifyContentChanged
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAnchoredModel >> contentChangedEvent [
 	self subclassResponsibility
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredModel >> contentRequestClass [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredModel >> handle [
 	^ handle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAnchoredModel >> handle: anObject [
 	handle = anObject
 		ifTrue: [ ^ self ].
@@ -44,17 +44,17 @@ BrAnchoredModel >> handle: anObject [
 	self notifyHandleChanged
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAnchoredModel >> handleChangedEvent [
 	self subclassResponsibility
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrAnchoredModel >> handleRequestClass [
 	self subclassResponsibility
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAnchoredModel >> initialize [
 	super initialize.
 	handle := BlElement new
@@ -64,7 +64,7 @@ BrAnchoredModel >> initialize [
 	content := BlElement new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAnchoredModel >> initializeListeners [
 	super initializeListeners.
 	self
@@ -80,7 +80,7 @@ BrAnchoredModel >> initializeListeners [
 				yourself ]
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAnchoredModel >> notifyContentChanged [
 	self
 		dispatchEvent:
@@ -89,7 +89,7 @@ BrAnchoredModel >> notifyContentChanged [
 				yourself)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrAnchoredModel >> notifyHandleChanged [
 	self
 		dispatchEvent:

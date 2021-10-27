@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTextEditorLineSegmentPieceDictionaryMap',
-	#superclass : 'BrTextEditorLineSegmentPieceMap',
+	#name : #BrTextEditorLineSegmentPieceDictionaryMap,
+	#superclass : #BrTextEditorLineSegmentPieceMap,
 	#instVars : [
 		'map'
 	],
 	#category : 'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> allPieces [
 	"Return all current line segment pieces"
 	<return: #Collection of: #BrTextEditorLineSegmentPiece>
@@ -15,7 +15,7 @@ BrTextEditorLineSegmentPieceDictionaryMap >> allPieces [
 	^ map keys
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> at: aBrTextEditorLineSegmentPiece pieceAndElementsDo: thePieceAndElementsBlock ifAbsent: anAbsentBlock [
 	^ map
 		associationAt: aBrTextEditorLineSegmentPiece
@@ -23,19 +23,19 @@ BrTextEditorLineSegmentPieceDictionaryMap >> at: aBrTextEditorLineSegmentPiece p
 		ifAbsent: anAbsentBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> atPiece: aBrTextEditorLineSegmentPiece putElements: aCollectionOfElements [
 	map at: aBrTextEditorLineSegmentPiece put: aCollectionOfElements
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorLineSegmentPieceDictionaryMap >> initialize [
 	super initialize.
 	
 	map := OrderedDictionary new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> pieceForElement: aBlElement ifAbsent: anAbsentBlock [
 	<return: #BrTextEditorLineSegmentPiece or: #Object>
 
@@ -46,7 +46,7 @@ BrTextEditorLineSegmentPieceDictionaryMap >> pieceForElement: aBlElement ifAbsen
 	^ anAbsentBlock value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> piecesAndTheirElementsDo: aBlock [
 	map associations do: [ :eachAssociation |
 		| aPiece thePieceElements |

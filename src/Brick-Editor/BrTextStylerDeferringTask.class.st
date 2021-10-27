@@ -2,8 +2,8 @@
 I defer the styling request until the corresponding editor element is added to the scene graph
 "
 Class {
-	#name : 'BrTextStylerDeferringTask',
-	#superclass : 'BlTask',
+	#name : #BrTextStylerDeferringTask,
+	#superclass : #BlTask,
 	#instVars : [
 		'stylerAsyncStrategy',
 		'textEditor',
@@ -12,17 +12,17 @@ Class {
 	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerDeferringTask >> afterBlock [
 	^ afterBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerDeferringTask >> afterBlock: anObject [
 	afterBlock := anObject
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BrTextStylerDeferringTask >> run [
 	self stylerAsyncStrategy
 		isStylingRequested: false.
@@ -31,22 +31,22 @@ BrTextStylerDeferringTask >> run [
 		thenDo: self afterBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerDeferringTask >> stylerAsyncStrategy [
 	^ stylerAsyncStrategy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerDeferringTask >> stylerAsyncStrategy: anObject [
 	stylerAsyncStrategy := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerDeferringTask >> textEditor [
 	^ textEditor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerDeferringTask >> textEditor: anObject [
 	textEditor := anObject
 ]

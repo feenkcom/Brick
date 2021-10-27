@@ -2,8 +2,8 @@
 I define the api of an object that should bind the actual node data to the reused node element
 "
 Class {
-	#name : 'BrTreeNodeDataBinder',
-	#superclass : 'BrStencilBuilder',
+	#name : #BrTreeNodeDataBinder,
+	#superclass : #BrStencilBuilder,
 	#instVars : [
 		'nodeElement',
 		'itemObject',
@@ -13,38 +13,38 @@ Class {
 	#category : 'Brick-Tree - Stencil'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrTreeNodeDataBinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 	
 	^ nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> itemObject [
 	<return: #Object>
 
 	^ itemObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> itemObject: anObject [
 	itemObject := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> nodeElement [
 	<return: #BlElement>
 
 	^ nodeElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> nodeElement: anElement [
 	nodeElement := anElement
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrTreeNodeDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self nodeElement;
@@ -53,17 +53,17 @@ BrTreeNodeDataBinder >> paramsOn: aStencilExecutor [
 		push: self payloads
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> payloads [
 	^ payloads
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> payloads: anObject [
 	payloads := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeNodeDataBinder >> reset [
 	super reset.
 
@@ -72,14 +72,14 @@ BrTreeNodeDataBinder >> reset [
 	treeNode := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> treeNode [
 	<return: #BrTreeNode>
 
 	^ treeNode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTreeNodeDataBinder >> treeNode: aBrTreeNode [
 	treeNode := aBrTreeNode
 ]

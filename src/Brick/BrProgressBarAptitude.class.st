@@ -6,8 +6,8 @@ ${example:BrProgressExamples>>#barOnly|codeExpanded=false|previewExpanded=true|p
 
 "
 Class {
-	#name : 'BrProgressBarAptitude',
-	#superclass : 'BrProgressAptitude',
+	#name : #BrProgressBarAptitude,
+	#superclass : #BrProgressAptitude,
 	#instVars : [
 		'container',
 		'bar'
@@ -15,29 +15,29 @@ Class {
 	#category : 'Brick-Progress - Look'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressBarAptitude >> bar [
 	<return: #BlElement>
 	^ bar
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrProgressBarAptitude >> barDo: aBlock [
 	aBlock value: self bar
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrProgressBarAptitude >> container [
 	<return: #BlElement>
 	^ container
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrProgressBarAptitude >> containerDo: aBlock [
 	aBlock value: self container
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrProgressBarAptitude >> initialize [
 	super initialize.
 	container := self newProgressContainerElement.
@@ -46,7 +46,7 @@ BrProgressBarAptitude >> initialize [
 	self addChangeAddChildAs: #(widgetContent) with: container.
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrProgressBarAptitude >> newProgressBarElement [
 	^ BlElement new
 		constraintsDo: [ :c | 
@@ -57,12 +57,12 @@ BrProgressBarAptitude >> newProgressBarElement [
 			c frame vertical alignCenter ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrProgressBarAptitude >> newProgressContainerElement [
 	^ BrFrame new matchParent
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrProgressBarAptitude >> onProgressChanged [
 	super onProgressChanged.
 	self widgetDo: [ :aWidget | 

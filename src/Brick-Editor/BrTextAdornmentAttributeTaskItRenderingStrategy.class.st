@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextAdornmentAttributeTaskItRenderingStrategy',
-	#superclass : 'BrTextAdornmentAttributeRenderingStrategy',
+	#name : #BrTextAdornmentAttributeTaskItRenderingStrategy,
+	#superclass : #BrTextAdornmentAttributeRenderingStrategy,
 	#category : 'Brick-Editor-Attributes - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextAdornmentAttributeTaskItRenderingStrategy >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #BlElement>

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorNavigatorMoveToLineStartOperation',
-	#superclass : 'BrTextEditorNavigatorOperation',
+	#name : #BrTextEditorNavigatorMoveToLineStartOperation,
+	#superclass : #BrTextEditorNavigatorOperation,
 	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : 'matching' }
+{ #category : #matching }
 BrTextEditorNavigatorMoveToLineStartOperation >> performOn: aNavigator [
 	| aDelta |	
 

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorClassNameInputFilter',
-	#superclass : 'BrTextEditorInputFilter',
+	#name : #BrTextEditorClassNameInputFilter,
+	#superclass : #BrTextEditorInputFilter,
 	#category : 'Brick-Editor-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorClassNameInputFilter >> filter: aString [
 	<return: #String>
 	

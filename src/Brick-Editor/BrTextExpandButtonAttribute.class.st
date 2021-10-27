@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextExpandButtonAttribute',
-	#superclass : 'BrTextAdornmentAttribute',
+	#name : #BrTextExpandButtonAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#instVars : [
 		'isExpanded',
 		'attributesCreatingBlock',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextExpandButtonAttribute >> applyExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece in: aTextEditor [
 	"Add attributes if expanded and remove if collapsed"
 	| aBrText |
@@ -22,17 +22,17 @@ BrTextExpandButtonAttribute >> applyExpandedOrCollapsedAttributesOn: aTBrTextEdi
 		ifTrue: [ self createAttributesAffect: aBrText in: aTextEditor ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextExpandButtonAttribute >> attributesCreatingBlock [
 	^ attributesCreatingBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextExpandButtonAttribute >> attributesCreatingBlock: aBlock [
 	attributesCreatingBlock := aBlock
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextExpandButtonAttribute >> createAttributesAffect: aBrText in: aTextEditor [
 	createdAttributes := (attributesCreatingBlock
 		cull: aBrText
@@ -40,17 +40,17 @@ BrTextExpandButtonAttribute >> createAttributesAffect: aBrText in: aTextEditor [
 	aBrText attributes: createdAttributes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextExpandButtonAttribute >> createdAttributes [
 	^ createdAttributes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextExpandButtonAttribute >> createdAttributes: aCollection [
 	createdAttributes := aCollection
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextExpandButtonAttribute >> initialize [
 	super initialize.
 	
@@ -61,17 +61,17 @@ BrTextExpandButtonAttribute >> initialize [
 	createdAttributes := OrderedCollection new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextExpandButtonAttribute >> isExpanded [
 	^ isExpanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextExpandButtonAttribute >> isExpanded: aBoolean [
 	isExpanded := aBoolean
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextExpandButtonAttribute >> toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece in: aTextEditor [
 	self isExpanded: isExpanded not.
 	self applyExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece in: aTextEditor

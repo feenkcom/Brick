@@ -1,11 +1,11 @@
-Extension { #name : 'BlElementState' }
+Extension { #name : #BlElementState }
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElementState class >> collapsed [
 	^ BrCollapsedState uniqueInstance
 ]
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 BlElementState class >> expanded [
 	^ BrExpandedState uniqueInstance
 ]

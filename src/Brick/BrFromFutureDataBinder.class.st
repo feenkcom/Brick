@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrFromFutureDataBinder',
-	#superclass : 'BrStencilBuilder',
+	#name : #BrFromFutureDataBinder,
+	#superclass : #BrStencilBuilder,
 	#instVars : [
 		'element',
 		'data'
@@ -8,26 +8,26 @@ Class {
 	#category : 'Brick-Future - Support'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrFromFutureDataBinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ element
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataBinder >> data: anObject [
 
 	data := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFromFutureDataBinder >> element: anObject [
 
 	element := anObject
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrFromFutureDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: element;

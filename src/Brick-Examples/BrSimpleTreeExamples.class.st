@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrSimpleTreeExamples',
-	#superclass : 'Object',
+	#name : #BrSimpleTreeExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Tree'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection [
 	<gtExample>
 	| aTree |
@@ -15,7 +15,7 @@ BrSimpleTreeExamples >> subclassesOfCollection [
 	^ aTree
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection_InefficientUse [
 	<gtExample>
 	| aTree |
@@ -29,7 +29,7 @@ BrSimpleTreeExamples >> subclassesOfCollection_InefficientUse [
 	^ aTree
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection_immediate [
 	<gtExample>
 	| aTree |
@@ -61,7 +61,7 @@ BrSimpleTreeExamples >> subclassesOfCollection_immediate [
 	^ aTree
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrSimpleTreeExamples >> subropesTree [
 	<gtExample>
 	| aRope aTree |

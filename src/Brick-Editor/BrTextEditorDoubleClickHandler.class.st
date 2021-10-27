@@ -1,25 +1,25 @@
 Class {
-	#name : 'BrTextEditorDoubleClickHandler',
-	#superclass : 'BlCustomEventHandler',
+	#name : #BrTextEditorDoubleClickHandler,
+	#superclass : #BlCustomEventHandler,
 	#classInstVars : [
 		'uniqueInstance'
 	],
 	#category : 'Brick-Editor-UI - Handlers'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDoubleClickHandler class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDoubleClickHandler class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 	| aScreenPosition aGlobalTextIndex aSelecter anEditorElement |
 	
@@ -45,12 +45,12 @@ BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 		select
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDoubleClickHandler >> eventsToHandle [
 	^ { BlDoubleClickEvent }
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorDoubleClickHandler >> wantsEvent: anEvent [
 	^ (super wantsEvent: anEvent) and: [ anEvent primaryButtonPressed ]
 ]

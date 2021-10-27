@@ -20,8 +20,8 @@ As part of initialisation the text editor provides the map with its cacheLimit. 
 
 "
 Class {
-	#name : 'BrTextLineMap',
-	#superclass : 'Object',
+	#name : #BrTextLineMap,
+	#superclass : #Object,
 	#instVars : [
 		'map',
 		'minEntrySpacing'
@@ -29,7 +29,7 @@ Class {
 	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 BrTextLineMap >> addLine: lineNumber offset: offsetNumber [
 	"Add the supplied known index."
 	| closestMapEntry |
@@ -41,14 +41,14 @@ BrTextLineMap >> addLine: lineNumber offset: offsetNumber [
 	map add: lineNumber -> offsetNumber.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextLineMap >> cacheLimit: aNumber [
 
 	minEntrySpacing := (aNumber * 0.25) rounded.
 	self assert: minEntrySpacing >= 10.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextLineMap >> initialize [ 
 
 	super initialize.
@@ -57,7 +57,7 @@ BrTextLineMap >> initialize [
 	minEntrySpacing := 10.
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextLineMap >> mapEntryFor: anInteger [
 	"Answer the map entry with largest line number less than or equal to anInteger"
 	| left right mid midVal |

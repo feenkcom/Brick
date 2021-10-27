@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrTextEditorTextStyleRequested',
-	#superclass : 'BrTextEditorEvent',
+	#name : #BrTextEditorTextStyleRequested,
+	#superclass : #BrTextEditorEvent,
 	#instVars : [
 		'afterAction'
 	],
 	#category : 'Brick-Editor-Model - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextStyleRequested >> afterAction [
 	^ afterAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorTextStyleRequested >> afterAction: anObject [
 	afterAction := anObject
 ]

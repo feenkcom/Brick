@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrBreadcrumbLinearAptitude',
-	#superclass : 'BrBreadcrumbAptitude',
+	#name : #BrBreadcrumbLinearAptitude,
+	#superclass : #BrBreadcrumbAptitude,
 	#instVars : [
 		'resizerLook'
 	],
 	#category : 'Brick-Breadcrumb - Look'
 }
 
-{ #category : 'private - update' }
+{ #category : #'private - update' }
 BrBreadcrumbLinearAptitude >> addItemsAndSeparators [
 	| currentItemElements currentSeparatorElements |
 	currentItemElements := self itemElements.
@@ -30,7 +30,7 @@ BrBreadcrumbLinearAptitude >> addItemsAndSeparators [
 			self widgetDo: [ :aWidget | aWidget requestStyle ] ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrBreadcrumbLinearAptitude >> initialize [
 	super initialize.
 
@@ -38,13 +38,13 @@ BrBreadcrumbLinearAptitude >> initialize [
 	self add: (BrLayoutAlignmentAptitude forHorizontalLinearLayout)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrBreadcrumbLinearAptitude >> onItemAttached: anItemElement at: anIndex [
 	self removeItemsAndSeparators.
 	self addItemsAndSeparators
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrBreadcrumbLinearAptitude >> onItemRemoved: aWidgetModel at: anIndex [
 	self
 		assert: [ self isAttachedToWidget ]
@@ -55,14 +55,14 @@ BrBreadcrumbLinearAptitude >> onItemRemoved: aWidgetModel at: anIndex [
 	self widgetDo: [ self addItemsAndSeparators ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrBreadcrumbLinearAptitude >> onSeparatorChanged: aSeparatorStencil [
 	self widgetDo: [
 		self removeItemsAndSeparators.
 		self addItemsAndSeparators ]
 ]
 
-{ #category : 'private - update' }
+{ #category : #'private - update' }
 BrBreadcrumbLinearAptitude >> removeItemsAndSeparators [
 	self itemElements do: [ :eachItem | eachItem removeFromParent ].
 	self separatorElements do: [ :eachSeparator | eachSeparator removeFromParent ]

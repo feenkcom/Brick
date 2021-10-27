@@ -3,15 +3,15 @@ I am a special type of selection recorder that always starts with empty selectio
 Basically, I am a single (monotone) selection strategy.
 "
 Class {
-	#name : 'BrTextEditorSelectionOverwriteRecorder',
-	#superclass : 'BrTextEditorSelectionRecorder',
+	#name : #BrTextEditorSelectionOverwriteRecorder,
+	#superclass : #BrTextEditorSelectionRecorder,
 	#instVars : [
 		'compositeSelection'
 	],
 	#category : 'Brick-Editor-Model - Selection'
 }
 
-{ #category : 'selection' }
+{ #category : #selection }
 BrTextEditorSelectionOverwriteRecorder >> commit: aTextEditor [
 	"Commit recorded selection intervals in a given text editor"
 	
@@ -21,7 +21,7 @@ BrTextEditorSelectionOverwriteRecorder >> commit: aTextEditor [
 	compositeSelection := BlCompositeSelection new
 ]
 
-{ #category : 'selection' }
+{ #category : #selection }
 BrTextEditorSelectionOverwriteRecorder >> deselect: aMonotoneTextSelection in: aTextEditor [
 
 	(BrTextEditorRecordDeselectionSignal new selection: aMonotoneTextSelection) emit.
@@ -30,14 +30,14 @@ BrTextEditorSelectionOverwriteRecorder >> deselect: aMonotoneTextSelection in: a
 	aTextEditor updateSelection: aMonotoneTextSelection from to: aMonotoneTextSelection to
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorSelectionOverwriteRecorder >> initialize [
 	super initialize.
 	
 	compositeSelection := BlCompositeSelection new
 ]
 
-{ #category : 'selection' }
+{ #category : #selection }
 BrTextEditorSelectionOverwriteRecorder >> prepare: aTextEditor [
 	
 	compositeSelection := BlCompositeSelection new.
@@ -45,7 +45,7 @@ BrTextEditorSelectionOverwriteRecorder >> prepare: aTextEditor [
 	aTextEditor selectNone
 ]
 
-{ #category : 'selection' }
+{ #category : #selection }
 BrTextEditorSelectionOverwriteRecorder >> select: aMonotoneTextSelection in: aTextEditor [
 	"Add a given selection to the list of recorded selections"
 	
@@ -55,7 +55,7 @@ BrTextEditorSelectionOverwriteRecorder >> select: aMonotoneTextSelection in: aTe
 	aTextEditor updateSelection: aMonotoneTextSelection from to: aMonotoneTextSelection to
 ]
 
-{ #category : 'selection' }
+{ #category : #selection }
 BrTextEditorSelectionOverwriteRecorder >> selection [
 	<return: #BlSelection>
 

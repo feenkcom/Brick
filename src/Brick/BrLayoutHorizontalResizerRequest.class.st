@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrLayoutHorizontalResizerRequest',
-	#superclass : 'BrLayoutResizerRequest',
+	#name : #BrLayoutHorizontalResizerRequest,
+	#superclass : #BrLayoutResizerRequest,
 	#category : 'Brick-! Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrLayoutHorizontalResizerRequest class >> isDeprecated [
 	^ true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrLayoutHorizontalResizerRequest >> responseClass [
 	^ BrLayoutHorizontalResizerChanged
 ]

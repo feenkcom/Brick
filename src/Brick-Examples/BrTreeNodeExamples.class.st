@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTreeNodeExamples',
-	#superclass : 'Object',
+	#name : #BrTreeNodeExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Tree'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTreeNodeExamples >> depth_2 [
 	<gtExample>
 	| aRope aNode |
@@ -49,7 +49,7 @@ BrTreeNodeExamples >> depth_2 [
 	^ aNode
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTreeNodeExamples >> depth_5_rope [
 	<gtExample>
 

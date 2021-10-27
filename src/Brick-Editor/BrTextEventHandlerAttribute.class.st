@@ -3,17 +3,17 @@
 Is the superclass of all attributes with the ability to handle some text events received by the visual text elements.
 "
 Class {
-	#name : 'BrTextEventHandlerAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #BrTextEventHandlerAttribute,
+	#superclass : #BlTextAttribute,
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'events' }
+{ #category : #events }
 BrTextEventHandlerAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	self subclassResponsibility
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEventHandlerAttribute >> isEventHandler [
 	"Return true if attribute is designed to handle UI events such as mouse,
 	false otherwise"
@@ -22,19 +22,19 @@ BrTextEventHandlerAttribute >> isEventHandler [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEventHandlerAttribute >> mayHaveExternalReferences [
 	"Answer if this attribute can have references to some external objects like AST nodes or computation results"
 
 	^ true
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrTextEventHandlerAttribute >> type [
 	^ self
 ]
 
-{ #category : 'events' }
+{ #category : #events }
 BrTextEventHandlerAttribute >> wantsEvent: anEvent in: aTextEditor [
 	"Return true if I am interested in a given event and want to handle it,
 	false otherwise"

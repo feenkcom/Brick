@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrDescriptionAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrDescriptionAptitude,
+	#superclass : #BrAptitude,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
@@ -12,26 +12,26 @@ Class {
 	#category : 'Brick-! Core - Looks'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDescriptionAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ attributesBuilder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDescriptionAptitude >> description [
 	<return: #BrEditorElement>
 	
 	^ descriptionElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDescriptionAptitude >> descriptionDo: aBlock [	
 	aBlock value: self description
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrDescriptionAptitude >> fitContent [
 	descriptionElement
 		constraintsDo: [ :c | 
@@ -39,7 +39,7 @@ BrDescriptionAptitude >> fitContent [
 			c horizontal fitContent ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrDescriptionAptitude >> initialize [
 	super initialize.
 	text := 'Description' asRopedText.
@@ -58,21 +58,21 @@ BrDescriptionAptitude >> initialize [
 		with: [ descriptionElement ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrDescriptionAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrDescriptionChanged do: [ :anEvent | self text: anEvent text ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrDescriptionAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrDescriptionRequest new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrDescriptionAptitude >> readonly [
 	editor segmentBuilder
 		wordStencil: [ :aTBrTextEditorTextualPiece |
@@ -84,14 +84,14 @@ BrDescriptionAptitude >> readonly [
 	descriptionElement preventMeAndChildrenMouseEvents
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDescriptionAptitude >> text [
 	<return: #BlText>
 
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDescriptionAptitude >> text: aTextOrString [
 	text := aTextOrString asRopedText.
 	

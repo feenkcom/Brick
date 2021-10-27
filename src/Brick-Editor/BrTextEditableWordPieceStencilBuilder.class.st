@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrTextEditableWordPieceStencilBuilder',
-	#superclass : 'BrTextWordPieceStencilBuilder',
+	#name : #BrTextEditableWordPieceStencilBuilder,
+	#superclass : #BrTextWordPieceStencilBuilder,
 	#classVars : [
 		'TextPiecePool'
 	],
 	#category : 'Brick-Editor-UI - Stencils'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BrTextEditableWordPieceStencilBuilder class >> cleanUp [
 	self initialize
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BrTextEditableWordPieceStencilBuilder class >> initialize [
 	TextPiecePool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000)
 ]
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrTextEditableWordPieceStencilBuilder >> createWordElement [
 	<return: #BrTextElementWithCursors>
 
@@ -57,7 +57,7 @@ BrTextEditableWordPieceStencilBuilder >> createWordElement [
 			yourself
 ]
 
-{ #category : 'private - pool' }
+{ #category : #'private - pool' }
 BrTextEditableWordPieceStencilBuilder >> pool [
 	^ TextPiecePool
 ]

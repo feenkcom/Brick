@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrEditorExamples',
-	#superclass : 'Object',
+	#name : #BrEditorExamples,
+	#superclass : #Object,
 	#category : 'Brick-Examples-Editor'
 }
 
-{ #category : 'examples - modes' }
+{ #category : #'examples - modes' }
 BrEditorExamples >> editableEditorWithGlamorousRegularLook [
 	<gtExample>
 	
@@ -14,7 +14,7 @@ BrEditorExamples >> editableEditorWithGlamorousRegularLook [
 		text: String loremIpsum
 ]
 
-{ #category : 'examples - input filter' }
+{ #category : #'examples - input filter' }
 BrEditorExamples >> editorWithAlphaNumericFilter [
 	<gtExample>
 
@@ -25,7 +25,7 @@ BrEditorExamples >> editorWithAlphaNumericFilter [
 		text: 'Only alpha-numeric chatacters are allowed'
 ]
 
-{ #category : 'examples - input filter' }
+{ #category : #'examples - input filter' }
 BrEditorExamples >> editorWithDigitFilter [
 	<gtExample>
 	
@@ -36,7 +36,7 @@ BrEditorExamples >> editorWithDigitFilter [
 		text: 'Only digits are allowed'
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrEditorExamples >> editorWithGlamorousRegularLook [
 	<gtExample>
 	
@@ -45,7 +45,7 @@ BrEditorExamples >> editorWithGlamorousRegularLook [
 		text: String loremIpsum
 ]
 
-{ #category : 'examples - modes look' }
+{ #category : #'examples - modes look' }
 BrEditorExamples >> editorWithGlamorousRegularLookAndModeLook [
 	<gtExample>
 	| aModeLook anEditor |
@@ -86,7 +86,7 @@ BrEditorExamples >> editorWithGlamorousRegularLookAndModeLook [
 		}
 ]
 
-{ #category : 'examples - input filter' }
+{ #category : #'examples - input filter' }
 BrEditorExamples >> editorWithNoFilter [
 	<gtExample>
 	
@@ -97,7 +97,7 @@ BrEditorExamples >> editorWithNoFilter [
 		text: 'All characters are allowed'
 ]
 
-{ #category : 'examples - modes' }
+{ #category : #'examples - modes' }
 BrEditorExamples >> readOnlyWithSelectionEditorWithGlamorousRegularLook [
 	<gtExample>
 	
@@ -107,7 +107,7 @@ BrEditorExamples >> readOnlyWithSelectionEditorWithGlamorousRegularLook [
 		text: String loremIpsum
 ]
 
-{ #category : 'examples - modes' }
+{ #category : #'examples - modes' }
 BrEditorExamples >> readOnlyWithoutSelectionEditorWithGlamorousRegularLook [
 	<gtExample>
 	

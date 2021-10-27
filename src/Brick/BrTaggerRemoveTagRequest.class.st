@@ -1,18 +1,18 @@
 Class {
-	#name : 'BrTaggerRemoveTagRequest',
-	#superclass : 'BrTaggerRequest',
+	#name : #BrTaggerRemoveTagRequest,
+	#superclass : #BrTaggerRequest,
 	#instVars : [
 		'tag'
 	],
 	#category : 'Brick-Tagger - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTaggerRemoveTagRequest >> tag [
 	^ tag
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTaggerRemoveTagRequest >> tag: anObject [
 	tag := anObject
 ]

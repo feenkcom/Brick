@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorSurroundMapExamples',
-	#superclass : 'Object',
+	#name : #BrTextEditorSurroundMapExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSurroundMapExamples >> surroundSet [
 	<gtExample>
 
@@ -24,7 +24,7 @@ BrTextEditorSurroundMapExamples >> surroundSet [
 
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSurroundMapExamples >> surroundSetClosing [
 	<gtExample>
 
@@ -38,7 +38,7 @@ BrTextEditorSurroundMapExamples >> surroundSetClosing [
 	^opening
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSurroundMapExamples >> surroundSetClosingAbsent [
 	<gtExample>
 
@@ -52,7 +52,7 @@ BrTextEditorSurroundMapExamples >> surroundSetClosingAbsent [
 	^definition
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSurroundMapExamples >> surroundSetOpeningAbsent [
 	<gtExample>
 
@@ -67,7 +67,7 @@ BrTextEditorSurroundMapExamples >> surroundSetOpeningAbsent [
 	^definition
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSurroundMapExamples >> surroundSetOpeningConditionRejects [
 	<gtExample>
 
@@ -82,7 +82,7 @@ BrTextEditorSurroundMapExamples >> surroundSetOpeningConditionRejects [
 	^definition
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrTextEditorSurroundMapExamples >> surroundSetOpeningPresent [
 	<gtExample>
 

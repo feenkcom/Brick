@@ -12,8 +12,8 @@ anEditor
 
 "
 Class {
-	#name : 'BrTextEditorInserter',
-	#superclass : 'BrTextEditorOperator',
+	#name : #BrTextEditorInserter,
+	#superclass : #BrTextEditorOperator,
 	#instVars : [
 		'insertionIndices',
 		'text',
@@ -26,7 +26,7 @@ Class {
 	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> at: anIndex [
 	"Add a given index as another text insertion location"
 
@@ -35,18 +35,18 @@ BrTextEditorInserter >> at: anIndex [
 		ifNone: [ insertionIndices add: (anIndex -> text) ]
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> atCursor [
 	self cursor do: [ :aCursor | self at: aCursor position ]
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> atEnd [
 	"Insert a text at the very end"
 	self at: self text size
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> beforeSelectedLines [
 	"We insert text at the beginning of all selected lines"
 	| aCollectionOfLineStarts |
@@ -60,7 +60,7 @@ BrTextEditorInserter >> beforeSelectedLines [
 	aCollectionOfLineStarts asSet do: [ :anIndex | self at: anIndex ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> computeIndexMovement: anIndex afterInserted: aText at: anInsertionIndex [
 	"Compute by how much a given text index should be moved after a privided text is inserted at a given insertion index"
 	<return: #Number>
@@ -70,7 +70,7 @@ BrTextEditorInserter >> computeIndexMovement: anIndex afterInserted: aText at: a
 		ifFalse: [ aText size ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> computeSelection: aSelection afterInserted: aText at: anInsertionIndex [
 	<return: #BlSelection>
 
@@ -87,7 +87,7 @@ BrTextEditorInserter >> computeSelection: aSelection afterInserted: aText at: an
 		to: aSelection to + aText size
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> crLineEndingWithWhitespace [
 	"Insert a Cr line ending
 	additionally adding a whitespace from the previous line according to a cursor"
@@ -97,7 +97,7 @@ BrTextEditorInserter >> crLineEndingWithWhitespace [
 		ifFalse: [ String cr, (self findWhitespaceOfLineBefore: self cursor first position) ])
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> deleteSelectedText [
 	| aDeleter newInsertionIndices |
 	
@@ -115,14 +115,14 @@ BrTextEditorInserter >> deleteSelectedText [
 	aDeleter delete
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> indentation [
 	"Insert an indentation (Tab)"
 
 	self text: String tab
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorInserter >> initialize [
 	super initialize.
 	
@@ -140,12 +140,12 @@ BrTextEditorInserter >> initialize [
 	inputFilter := BrTextEditorNoInputFilter new
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> inputFilter: aTextEditorInputFilter [
 	inputFilter := aTextEditorInputFilter
 ]
 
-{ #category : 'api - processing' }
+{ #category : #'api - processing' }
 BrTextEditorInserter >> insert [
 	| theFilteredTextMap theInsertions theCursorMovements |
 
@@ -287,19 +287,19 @@ BrTextEditorInserter >> insert [
 								at: (eachInsertion at: #requestedIndex) ] ] ] ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorInserter >> isInserter [
 	^ true
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> lineEnding [
 	"Insert a line ending (Cr, Lf or CrLf depending on the current platform)"
 
 	self text: OSPlatform current lineEnding
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> lineEndingWithWhitespace [
 	"Insert a line ending (Cr, Lf or CrLf depending on the current platform)
 	additionally  adding a whitespace from the previous line according to a cursor"
@@ -309,22 +309,22 @@ BrTextEditorInserter >> lineEndingWithWhitespace [
 		ifFalse: [ OSPlatform current lineEnding, (self findWhitespaceOfLineBefore: self cursor first position) ])
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> onlyAlphaNumeric [
 	self inputFilter: BrTextEditorAlphaNumericInputFilter new
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> onlyDigits [
 	self inputFilter: BrTextEditorDigitInputFilter new
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> onlyLetters [
 	self inputFilter: BrTextEditorLetterInputFilter new
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> privateComputeCursorIndices: aString withSurround: aSurroundString at: aTextIndex [
 	| aLeftIndex aRightIndex |
 
@@ -339,7 +339,7 @@ BrTextEditorInserter >> privateComputeCursorIndices: aString withSurround: aSurr
 	^ { aLeftIndex . aRightIndex }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> privateComputeInsertionIndices: aString withSurround: aSurroundString at: aTextIndex [
 	| aLeftIndex aRightIndex |
 
@@ -354,7 +354,7 @@ BrTextEditorInserter >> privateComputeInsertionIndices: aString withSurround: aS
 	^ { aLeftIndex . aRightIndex }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> privateComputeSelectionIndices: aString withSurround: aSurroundString at: aTextIndex [
 	| aLeftIndex aRightIndex |
 
@@ -369,7 +369,7 @@ BrTextEditorInserter >> privateComputeSelectionIndices: aString withSurround: aS
 	^ { aLeftIndex . aRightIndex }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> privateInsertStrings: aCollectionOfString atAll: aCollectionOfIndices [
 	| aCommand |
 
@@ -380,7 +380,7 @@ BrTextEditorInserter >> privateInsertStrings: aCollectionOfString atAll: aCollec
 	self editor enqueueCommand: aCommand
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> privateUpdateCursorsAfterInsertion: aText at: anIndex [
 	self cursor do: [ :aCursor |
 		| aCursorDelta |
@@ -407,7 +407,7 @@ BrTextEditorInserter >> privateUpdateCursorsAfterInsertion: aText at: anIndex [
 							apply ] ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> privateUpdateCursorsAfterInsertion: aText withSurround: aSurroundText at: aTextIndex [
 	| theIndices |
 
@@ -433,53 +433,53 @@ BrTextEditorInserter >> privateUpdateCursorsAfterInsertion: aText withSurround: 
 				apply ] ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorInserter >> shouldDeleteSelected [
 	^ shouldDeleteSelected
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorInserter >> shouldDeleteSelected: aBoolean [
 	shouldDeleteSelected := aBoolean
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorInserter >> shouldUpdateCursor [
 	^ shouldUpdateCursor
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorInserter >> shouldUpdateCursor: anObject [
 	shouldUpdateCursor := anObject
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorInserter >> shouldUpdateSelection [
 	^ shouldUpdateSelection
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrTextEditorInserter >> shouldUpdateSelection: anObject [
 	shouldUpdateSelection := anObject
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> string: aString [
 	self text: aString
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> surroundings: aSurroundMap [
 	surroundMap := aSurroundMap
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> text: aBlText [
 	text := aBlText asString.
 	insertionIndices do: [ :eachAssociation | eachAssociation value ifNil: [ eachAssociation value: text ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> updateSelectionAfterInsertion: aText at: anIndex [
 	| anExistingSelection |
 
@@ -494,7 +494,7 @@ BrTextEditorInserter >> updateSelectionAfterInsertion: aText at: anIndex [
 				self editor select: aNewSelection from to: aNewSelection to ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextEditorInserter >> updateSelectionAfterInsertion: aText withSurround: aSurroundText at: aTextIndex [
 	| anExistingSelection theIndices |
 	
@@ -512,22 +512,22 @@ BrTextEditorInserter >> updateSelectionAfterInsertion: aText withSurround: aSurr
 				self editor select: aNewSelection from to: aNewSelection to ] ]
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> withSelectionDelete [
 	shouldDeleteSelected := true
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> withoutCursorUpdate [
 	shouldUpdateCursor := false
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> withoutSelectionDelete [
 	shouldDeleteSelected := false
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BrTextEditorInserter >> withoutSelectionUpdate [
 	shouldUpdateSelection := false
 ]

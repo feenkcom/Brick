@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorCachingAdornmentsExamples',
-	#superclass : 'BrTextEditorAdornmentsExamples',
+	#name : #BrTextEditorCachingAdornmentsExamples,
+	#superclass : #BrTextEditorAdornmentsExamples,
 	#category : 'Brick-Editor-Examples-! Documentation'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 BrTextEditorCachingAdornmentsExamples >> cacheDictionaryExample [
 	<gtExample>
 	| cache attribute text |
@@ -24,7 +24,7 @@ BrTextEditorCachingAdornmentsExamples >> cacheDictionaryExample [
 	^ text
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BrTextEditorCachingAdornmentsExamples >> cacheValueHolderExample [
 	<gtExample>
 	| cache attribute text |

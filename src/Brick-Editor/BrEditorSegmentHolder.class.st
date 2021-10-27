@@ -3,12 +3,12 @@ I am a segment holder and is responsible for binding it to its visual representa
 I am also responsible for caching functionality in order to reduce amount of instantiated objects.
 "
 Class {
-	#name : 'BrEditorSegmentHolder',
-	#superclass : 'BlInfiniteHolder',
+	#name : #BrEditorSegmentHolder,
+	#superclass : #BlInfiniteHolder,
 	#category : 'Brick-Editor-Model - Segment'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorSegmentHolder >> createSegmentElement [
 	"Create and return an that should represent a segment that I will hold.
 	An element can be any of `BlElement withAllSubclasses`"
@@ -17,7 +17,7 @@ BrEditorSegmentHolder >> createSegmentElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorSegmentHolder >> editor [
 	"Return the attached text editor instance.
 	Editor can not be nil"
@@ -26,18 +26,18 @@ BrEditorSegmentHolder >> editor [
 	^ self infiniteElement editor
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorSegmentHolder >> initialize [
 	super initialize.
 
 	itemElement := self createSegmentElement
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrEditorSegmentHolder >> onRecycled [
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorSegmentHolder >> segment: aBrEditorSegment [
 	^ self subclassResponsibility
 ]

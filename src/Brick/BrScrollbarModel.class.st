@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrScrollbarModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrScrollbarModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'trackStencil',
 		'thumbStencil',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Brick-Scrollbar - Model'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrScrollbarModel >> initialize [
 	super initialize.
 	
@@ -17,7 +17,7 @@ BrScrollbarModel >> initialize [
 	thumbStencil := [ BlElement new ] asStencil.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrScrollbarModel >> initializeListeners [
 	super initializeListeners.
 	
@@ -34,27 +34,27 @@ BrScrollbarModel >> initializeListeners [
 		reply: [ :aResponse | aResponse stencil: trackStencil ].
 ]
 
-{ #category : 'private - notifying' }
+{ #category : #'private - notifying' }
 BrScrollbarModel >> notifyScrollableChanged: aTBlScrollable [
 	self dispatchEvent: (BrScrollbarScrollableChanged new scrollableElement: aTBlScrollable)
 ]
 
-{ #category : 'private - notifying' }
+{ #category : #'private - notifying' }
 BrScrollbarModel >> notifyThumbChanged: aStencil [
 	self dispatchEvent: (BrScrollbarThumbChanged new stencil: aStencil)
 ]
 
-{ #category : 'private - notifying' }
+{ #category : #'private - notifying' }
 BrScrollbarModel >> notifyTrackChanged: aStencil [
 	self dispatchEvent: (BrScrollbarTrackChanged new stencil: aStencil)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarModel >> scrollableElement [
 	^ scrollableElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarModel >> scrollableElement: aTBlScrollable [
 	scrollableElement == aTBlScrollable
 		ifTrue: [ ^ self ].
@@ -63,12 +63,12 @@ BrScrollbarModel >> scrollableElement: aTBlScrollable [
 	self notifyScrollableChanged: scrollableElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarModel >> thumbStencil [
 	^ thumbStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarModel >> thumbStencil: aStencil [
 	thumbStencil == aStencil
 		ifTrue: [ ^ self ].
@@ -77,12 +77,12 @@ BrScrollbarModel >> thumbStencil: aStencil [
 	self notifyThumbChanged: thumbStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarModel >> trackStencil [
 	^ trackStencil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrScrollbarModel >> trackStencil: aStencil [
 	trackStencil == aStencil
 		ifTrue: [ ^ self ].

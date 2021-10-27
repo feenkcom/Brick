@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrElementUpdater',
-	#superclass : 'Object',
+	#name : #BrElementUpdater,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -10,30 +10,30 @@ Class {
 		'action',
 		'postponedDuration'
 	],
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrElementUpdater >> action [
 	"Return a valuable object that understands #cull:, receiving [ :anElement | ... ]"
 	^ action 
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrElementUpdater >> action: anAction [
 	"Set an update action, an object that understands #cull:, receiving [ :anElement | ... ]"
 	self assertAction: anAction.
 	action := anAction.
 ]
 
-{ #category : 'private - asserting' }
+{ #category : #'private - asserting' }
 BrElementUpdater >> assertAction: anAction [ 
 	self 
 		assert: [ anAction isNotNil ] 
 		description: [ 'Update action must be non-nil' ].
 ]
 
-{ #category : 'private - asserting' }
+{ #category : #'private - asserting' }
 BrElementUpdater >> assertElement: anElement [ 
 	self 
 		assert: [ anElement isNotNil ] 
@@ -43,62 +43,62 @@ BrElementUpdater >> assertElement: anElement [
 		description: [ 'Element can be initialized only once' ].
 ]
 
-{ #category : 'private - asserting' }
+{ #category : #'private - asserting' }
 BrElementUpdater >> assertPostponedDuration: aDuration [
 	self 
 		assert: [ aDuration isNotNil ] 
 		description: [ 'Posponed duration must be non-nil' ].
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> beUpdateRequestedIfDoneEarlierDo: aBlock [
 	mutex critical: [ 
 		self isUpdateRequested ifTrue: aBlock.
 		isUpdateRequested := true. ]
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrElementUpdater >> defaultAction [
 	^ [ :anElement | "do nothing" ]
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrElementUpdater >> defaultPostponedDuration [
 	^ 100 milliSeconds
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrElementUpdater >> element [
 	<return: #BlElement>
 	^ element
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrElementUpdater >> element: anElement [
 	self assertElement: anElement.
 	element := anElement.
 	self subscribeToElement.
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrElementUpdater >> element: anElement selector: aSelector [
 	self element: anElement.
 	self action: (MessageSend receiver: anElement selector: aSelector).
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrElementUpdater >> elementDo: aBlock [
 	self element ifNotNil: aBlock
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> enqueueUpdate [
 	self elementDo: [ :anElement | 
 		anElement enqueueTask: (BlTaskAction new action: [
 			self updateNow ]) ].
 ]
 
-{ #category : 'gt-extensions' }
+{ #category : #'gt-extensions' }
 BrElementUpdater >> gtPreviewFor: aView [
 	<gtView>
 	self element ifNil: [ ^ aView empty ].
@@ -108,7 +108,7 @@ BrElementUpdater >> gtPreviewFor: aView [
 		view: #gtLiveFor:
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrElementUpdater >> initialize [
 	super initialize.
 	mutex := Mutex new.
@@ -117,25 +117,35 @@ BrElementUpdater >> initialize [
 	postponedDuration := self defaultPostponedDuration.
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BrElementUpdater >> isUpdateRequested [
 	<return: #Boolean>
 	^ isUpdateRequested
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> mayUpdateNow [
 	mutex critical: [ 
 		self isUpdateRequested ifFalse: [ ^ self ] ]. 
 	self updateNow
 ]
 
-{ #category : 'private - event handling' }
-BrElementUpdater >> onElementAddedTooSceneGraph [
+{ #category : #'private - event handling' }
+BrElementUpdater >> onElementAddedToSceneGraph [
 	self mayUpdateNow
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - event handling' }
+BrElementUpdater >> onElementAddedTooSceneGraph [
+
+	self
+		deprecated: 'typo, use #onElementAddedToSceneGraph instead'
+		transformWith: '`@receiver onElementAddedTooSceneGraph'
+			-> '`@receiver onElementAddedToSceneGraph'.
+	self onElementAddedToSceneGraph
+]
+
+{ #category : #'private - updating' }
 BrElementUpdater >> postponeUpdate [
 	self elementDo: [ :anElement | 
 		self beUpdateRequestedIfDoneEarlierDo: [ ^ self ].
@@ -166,19 +176,19 @@ BrElementUpdater >> postponeUpdate [
 			otherwise: [ self updateNow ] ]
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BrElementUpdater >> postponedDuration [
 	<return: #Duration>
 	^ postponedDuration ifNil: [ self defaultPostponedDuration ]
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BrElementUpdater >> postponedDuration: aDuration [
 	self assertPostponedDuration: aDuration.
 	postponedDuration := aDuration.
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> postponedTime [
 	| aNow |
 	self elementDo: [ :anElement | 
@@ -189,32 +199,33 @@ BrElementUpdater >> postponedTime [
 	^ aNow + self postponedDuration.
 ]
 
-{ #category : 'api - updating' }
+{ #category : #'api - updating' }
 BrElementUpdater >> requestUpdate [
 	self postponeUpdate.
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> resetUpdateRequested [
 	mutex critical: [ 
 		isUpdateRequested := false ].
 ]
 
-{ #category : 'private - subscriptions' }
+{ #category : #'private - subscriptions' }
 BrElementUpdater >> subscribeToElement [
+
 	self element
 		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | self onElementAddedTooSceneGraph ]
+		do: [ :anEvent | self onElementAddedToSceneGraph ]
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> updateElement [
 	"I should be called from a UI process."
 	self elementDo: [ :anElement | 
 		self action cull: anElement ]
 ]
 
-{ #category : 'private - updating' }
+{ #category : #'private - updating' }
 BrElementUpdater >> updateNow [
 	self resetUpdateRequested.
 	self updateElement.

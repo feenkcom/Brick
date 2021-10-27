@@ -1,27 +1,27 @@
 Class {
-	#name : 'BrEditorShiftRightShortcut',
-	#superclass : 'BrEditorShortcut',
+	#name : #BrEditorShiftRightShortcut,
+	#superclass : #BrEditorShortcut,
 	#category : 'Brick-Editor-Shortcuts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorShiftRightShortcut >> description [
 	^ 'Shift text at the cursor or if there is selection, the selected lines, one indetation to the right.'
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorShiftRightShortcut >> initialize [
 	super initialize.
 	
 	combination := BlKeyCombination tab
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorShiftRightShortcut >> name [
 	^ 'Shift right'
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BrEditorShiftRightShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	aBrTextEditor selection isEmpty
 		ifTrue: [

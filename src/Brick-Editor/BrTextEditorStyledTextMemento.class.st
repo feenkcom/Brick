@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEditorStyledTextMemento',
-	#superclass : 'BrTextEditorMemento',
+	#name : #BrTextEditorStyledTextMemento,
+	#superclass : #BrTextEditorMemento,
 	#instVars : [
 		'text',
 		'styler'
@@ -8,29 +8,29 @@ Class {
 	#category : 'Brick-Editor-Model - Memento'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextEditorStyledTextMemento >> initialize [
 	super initialize.
 	
 	text := '' asRopedText
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrTextEditorStyledTextMemento >> isTextMemento [
 	^ true
 ]
 
-{ #category : 'evaluating' }
+{ #category : #evaluating }
 BrTextEditorStyledTextMemento >> label [
 	^ 'Styled Text'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorStyledTextMemento >> order [
 	^ 60
 ]
 
-{ #category : 'memento' }
+{ #category : #memento }
 BrTextEditorStyledTextMemento >> restoreStateOf: aTextEditor [
 	aTextEditor
 		disableStyleTextWhenModifiedDuring: [
@@ -38,33 +38,33 @@ BrTextEditorStyledTextMemento >> restoreStateOf: aTextEditor [
 			aTextEditor restoreText: text copy ]
 ]
 
-{ #category : 'memento' }
+{ #category : #memento }
 BrTextEditorStyledTextMemento >> saveStateOf: aTextEditor [
 	text := aTextEditor text copy.
 	styler := aTextEditor styler
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorStyledTextMemento >> styler [
 	^ styler
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorStyledTextMemento >> styler: anObject [
 	styler := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorStyledTextMemento >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorStyledTextMemento >> text: anObject [
 	text := anObject
 ]
 
-{ #category : 'evaluating' }
+{ #category : #evaluating }
 BrTextEditorStyledTextMemento >> value [
 	^ text copyWithoutExternalReferences
 ]

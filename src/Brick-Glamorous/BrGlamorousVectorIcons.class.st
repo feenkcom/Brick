@@ -344,6 +344,35 @@ BrGlamorousVectorIcons class >> largeBook [
 		outskirts: (BlOutskirts centered) ] asStencil
 ]
 
+{ #category : #accessing }
+BrGlamorousVectorIcons class >> largeChanges [
+	<script: 'self largeChanges inspect'>
+	^ [
+		BlElement new
+			size: 64@64;
+			addChildren: { 
+				BlElement new
+					size: 24@32;
+					relocate: 10@26;
+					outskirts: BlOutskirts centered;
+					border: (BlBorder builder paint: Color black; width: 6; capSquare; build).
+				BlElement new
+					size: 64@64;
+					outskirts: BlOutskirts centered;
+					geometry: (BlSvgPath new
+						svg: 'M 20.1916 15.865 L 44.163646 15.915941 L 44.1916 47.865'
+						viewbox: (0@0 extent: 64@64));
+					border: (BlBorder builder paint: Color black; width: 5; capSquare; build).
+				BlElement new
+					size: 64@64;
+					geometry: (BlSvgPath new
+						svg: 'M 30 6 L 53.972046 6.050941 L 54 38'
+						viewbox: (0@0 extent: 64@64));
+					outskirts: BlOutskirts centered;
+					border: (BlBorder builder paint: Color black; width: 4; capSquare; build).
+			} ] asStencil
+]
+
 { #category : #icons }
 BrGlamorousVectorIcons class >> largeEg [
 	<script: 'self largeEg inspect'>

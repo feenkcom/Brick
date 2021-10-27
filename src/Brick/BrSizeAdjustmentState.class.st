@@ -1,65 +1,65 @@
 Class {
-	#name : 'BrSizeAdjustmentState',
-	#superclass : 'BlElementUniqueState',
+	#name : #BrSizeAdjustmentState,
+	#superclass : #BlElementUniqueState,
 	#category : 'Brick-! Core - Size Adjustment'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> huge [
 	^ BrSizeAdjustmentHugeState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> large [
 	^ BrSizeAdjustmentLargeState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> mini [
 	^ BrSizeAdjustmentMiniState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> none [
 	^ BrSizeAdjustmentNoneState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> normal [
 	^ BrSizeAdjustmentNormalState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> small [
 	^ BrSizeAdjustmentSmallState uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrSizeAdjustmentState class >> tiny [
 	^ BrSizeAdjustmentTinyState uniqueInstance
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrSizeAdjustmentState >> isNone [
 	^ false
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrSizeAdjustmentState >> printOn: aStream [
 	aStream nextPutAll: 'size adjustment - '
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSizeAdjustmentState >> priority [
 	^ UserPriority
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrSizeAdjustmentState >> shouldPropagateToChildren [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrSizeAdjustmentState >> type [
 	"Return an object used to compare two states when adding to the collection of states in order to prevent
 	elements from having duplicated states"

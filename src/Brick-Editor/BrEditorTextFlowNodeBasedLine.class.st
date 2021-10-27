@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrEditorTextFlowNodeBasedLine',
-	#superclass : 'Object',
+	#name : #BrEditorTextFlowNodeBasedLine,
+	#superclass : #Object,
 	#instVars : [
 		'nodes',
 		'maxWidth',
@@ -15,7 +15,7 @@ Class {
 	#category : 'Brick-Editor-Layout'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 BrEditorTextFlowNodeBasedLine >> add: aLayoutNode [
 	"Try to assign a given element to this line (if possible) or create a new line.
 	Return a line to which next element should be tried to added"
@@ -36,12 +36,12 @@ BrEditorTextFlowNodeBasedLine >> add: aLayoutNode [
 		ifFalse: [ currentLine ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> baseline [
 	^ baseline
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> count [
 	"Return how many lines there are in total"
 	<return: #Number>
@@ -51,7 +51,7 @@ BrEditorTextFlowNodeBasedLine >> count [
 		ifFalse: [ 0 ])
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> distanceTo: aPoint [
 	"Compute the vertical distance from me to a given point"
 	<return: #Number>
@@ -62,7 +62,7 @@ BrEditorTextFlowNodeBasedLine >> distanceTo: aPoint [
 	^ (aPoint y - aClampedCoordinate) abs
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrEditorTextFlowNodeBasedLine >> do: aBlock [
 	"Evaluate aBlock with each of my next lines as the argument"
 
@@ -71,7 +71,7 @@ BrEditorTextFlowNodeBasedLine >> do: aBlock [
 		ifTrue: [ nextLine do: aBlock ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> elements [
 	"Return a collection of all elements assigned to this line"
 	<return: #OrderedCollection>
@@ -79,7 +79,7 @@ BrEditorTextFlowNodeBasedLine >> elements [
 	^ nodes
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> findClosestChildOf: anElement to: aPoint [
 	<return: #BlElement>
 	
@@ -89,7 +89,7 @@ BrEditorTextFlowNodeBasedLine >> findClosestChildOf: anElement to: aPoint [
 		in: (anElement children select: [ :eachChild | eachChild constraints textFlow assignedLine = self ])
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> findClosestElementTo: aPoint in: aCollectionOfElements [
 	<return: #BlElement>
 	| aClosestElement aClosestDistance |
@@ -109,7 +109,7 @@ BrEditorTextFlowNodeBasedLine >> findClosestElementTo: aPoint in: aCollectionOfE
 	^ aClosestElement
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowNodeBasedLine >> hasNextLine [
 	"Return true if there is a next line, false otherwise"
 	<return: #Boolean>
@@ -117,7 +117,7 @@ BrEditorTextFlowNodeBasedLine >> hasNextLine [
 	^ nextLine isNotNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowNodeBasedLine >> hasSpaceFor: aLayoutNode [
 	"Return true if I am able to provide space for a given layout node.
 	By convention I always allow one node to take space if I am empty
@@ -136,7 +136,7 @@ BrEditorTextFlowNodeBasedLine >> hasSpaceFor: aLayoutNode [
 			ifFalse: [ availableWidth closeTo: aChildWidth epsilon: 0.5 ] ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> height [
 	"Return my height which is equal to the height of the highest element"
 	<return: #Number>
@@ -144,7 +144,7 @@ BrEditorTextFlowNodeBasedLine >> height [
 	^ height
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrEditorTextFlowNodeBasedLine >> initialize [
 	super initialize.
 	
@@ -161,7 +161,7 @@ BrEditorTextFlowNodeBasedLine >> initialize [
 	nextLine := nil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrEditorTextFlowNodeBasedLine >> isEmpty [
 	"Return true if I am an empty line without any element, false otherwise"
 	<return: #Boolean>
@@ -169,7 +169,7 @@ BrEditorTextFlowNodeBasedLine >> isEmpty [
 	^ nodes isEmpty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> maxWidth [
 	"Return maximal width limit for the current line"
 	<return: #Number>
@@ -177,7 +177,7 @@ BrEditorTextFlowNodeBasedLine >> maxWidth [
 	^ maxWidth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> maxWidth: aNumber [
 	"Limit maximal width to the given number"
 
@@ -185,7 +185,7 @@ BrEditorTextFlowNodeBasedLine >> maxWidth: aNumber [
 	availableWidth := maxWidth - width
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> nextLine [
 	"Return or create a new next line to which we should continue adding elements"
 	<return: #BrEditorTextFlowLine>
@@ -197,19 +197,19 @@ BrEditorTextFlowNodeBasedLine >> nextLine [
 			yourself ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> origin [
 	<return: #Point>
 
 	^ origin
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> origin: aPoint [
 	origin := aPoint
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrEditorTextFlowNodeBasedLine >> push: aLayoutNode [
 	"Push pushes given element to the end of element's collection
 	and update my geometry properties taking new element into account "
@@ -224,17 +224,17 @@ BrEditorTextFlowNodeBasedLine >> push: aLayoutNode [
 	baseline := baseline max: ("aLayoutNode baselineOffset + "aLayoutNode margin top)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> pushedQueue [
 	^ pushedQueue
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrEditorTextFlowNodeBasedLine >> pushedQueue: aQueue [
 	pushedQueue := aQueue
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> totalHeight [
 	"Return a total height taking into account all next lines"
 	<return: #Number>
@@ -247,7 +247,7 @@ BrEditorTextFlowNodeBasedLine >> totalHeight [
 	^ self height + aTotalHeight
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> totalWidth [
 	"Return a total width taking into account all next lines"
 	<return: #Number>
@@ -260,7 +260,7 @@ BrEditorTextFlowNodeBasedLine >> totalWidth [
 	^ self width max: aTotalWidth
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BrEditorTextFlowNodeBasedLine >> width [
 	"Return my width which is a sum of widths of all my elements"
 	<return: #Number>

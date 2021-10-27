@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrListItemToColumnCellDataBinderAdapter',
-	#superclass : 'BrColumnCellDataBinder',
+	#name : #BrListItemToColumnCellDataBinderAdapter,
+	#superclass : #BrColumnCellDataBinder,
 	#instVars : [
 		'listItemDataBinder'
 	],
 	#category : 'Brick-List - Stencil'
 }
 
-{ #category : 'api - instantiation' }
+{ #category : #'api - instantiation' }
 BrListItemToColumnCellDataBinderAdapter >> buildDefault [
 	^ listItemDataBinder
 		itemElement: cellElement;
@@ -17,7 +17,7 @@ BrListItemToColumnCellDataBinderAdapter >> buildDefault [
 		build
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrListItemToColumnCellDataBinderAdapter >> listItemDataBinder: aBrListItemDataBinder [
 	listItemDataBinder := aBrListItemDataBinder asStencilBuilder: BrListItemDataBinder
 ]

@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrResizerWeightedLength',
-	#superclass : 'BrResizerElementLength',
+	#name : #BrResizerWeightedLength,
+	#superclass : #BrResizerElementLength,
 	#instVars : [
 		'weight'
 	],
 	#category : 'Brick-Resizer - Support'
 }
 
-{ #category : 'api - size' }
+{ #category : #'api - size' }
 BrResizerWeightedLength >> adjustHeightFor: anElement [
 	"Set element height"
 	anElement
@@ -19,7 +19,7 @@ BrResizerWeightedLength >> adjustHeightFor: anElement [
 	anElement states addState: BrLayoutVerticalResizerState matchParent.
 ]
 
-{ #category : 'api - size' }
+{ #category : #'api - size' }
 BrResizerWeightedLength >> adjustWidthFor: anElement [
 	"Set element width"
 	anElement
@@ -31,7 +31,7 @@ BrResizerWeightedLength >> adjustWidthFor: anElement [
 	anElement states addState: BrLayoutHorizontalResizerState matchParent.
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BrResizerWeightedLength >> assertWeight: aNumber [
 	self 
 		assert: [ aNumber isNotNil ] 
@@ -41,24 +41,24 @@ BrResizerWeightedLength >> assertWeight: aNumber [
 		description: [ 'Weight must be non-negative' ].
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BrResizerWeightedLength >> defaultWeight [
 	^ 0.5
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrResizerWeightedLength >> initialize [
 	super initialize.
 	weight := self defaultWeight.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrResizerWeightedLength >> weight [
 	<return: #Number>
 	^ weight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrResizerWeightedLength >> weight: aNumber [
 	self assertWeight: aNumber.
 	weight := aNumber

@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrStyleTextNoViewSignal',
-	#superclass : 'BrTextStylerSignal',
+	#name : #BrStyleTextNoViewSignal,
+	#superclass : #BrTextStylerSignal,
 	#category : 'Brick-Editor-Signals'
 }

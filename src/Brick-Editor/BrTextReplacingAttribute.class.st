@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextReplacingAttribute',
-	#superclass : 'BrTextAdornmentAttribute',
+	#name : #BrTextReplacingAttribute,
+	#superclass : #BrTextAdornmentAttribute,
 	#instVars : [
 		'replacement',
 		'embellishment',
@@ -12,7 +12,7 @@ Class {
 	#category : 'Brick-Editor-Attributes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
 	<return: #SequenceableCollection of: #BlElement>
@@ -39,17 +39,17 @@ BrTextReplacingAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorEle
 	}
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextReplacingAttribute >> embellishment [
 	^ embellishment
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextReplacingAttribute >> embellishment: anObject [
 	embellishment := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextReplacingAttribute >> initialize [
 	super initialize.
 	
@@ -59,29 +59,29 @@ BrTextReplacingAttribute >> initialize [
 	margin := BlInsets empty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttribute >> margin [
 	^ margin
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttribute >> margin: anObject [
 	margin := anObject
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextReplacingAttribute >> padding [
 	<return: #BlInsets>
 
 	^ padding
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextReplacingAttribute >> padding: anObject [
 	padding := anObject
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextReplacingAttribute >> replaceTextInPiece: aTBrTextEditorTextualPiece [
 	| aNewText anOriginalText |
 	
@@ -98,19 +98,19 @@ BrTextReplacingAttribute >> replaceTextInPiece: aTBrTextEditorTextualPiece [
 	^ aTBrTextEditorTextualPiece copyWithText: aNewText
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttribute >> replacement [
 	<return: #BrTextReplacingAttributeStrategy>
 
 	^ replacement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextReplacingAttribute >> replacement: aBrTextReplacingAttributeStrategy [
 	replacement := aBrTextReplacingAttributeStrategy
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextReplacingAttribute >> swapString: aString [
 	<return: #String>
 	
@@ -123,12 +123,12 @@ BrTextReplacingAttribute >> swapString: aString [
 	^ replacementString
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextReplacingAttribute >> withCharacter: aCharacter [
 	self replacement: (BrTextReplacingAttributeWithCharacterStrategy new character: aCharacter)
 ]
 
-{ #category : 'api - attribute' }
+{ #category : #'api - attribute' }
 BrTextReplacingAttribute >> withRandomizing [
 	self replacement: (BrTextReplacingAttributeWithRandomizingStrategy new)
 ]

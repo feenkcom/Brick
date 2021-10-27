@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorNavigatorMoveToLineEndOperation',
-	#superclass : 'BrTextEditorNavigatorOperation',
+	#name : #BrTextEditorNavigatorMoveToLineEndOperation,
+	#superclass : #BrTextEditorNavigatorOperation,
 	#category : 'Brick-Editor-Model - Operators'
 }
 
-{ #category : 'matching' }
+{ #category : #matching }
 BrTextEditorNavigatorMoveToLineEndOperation >> performOn: aNavigator [
 	| aText aTextIterator foundLineBreak |
 	

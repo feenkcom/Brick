@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrColumnedTreeModel',
-	#superclass : 'BrAbstractTreeModel',
+	#name : #BrColumnedTreeModel,
+	#superclass : #BrAbstractTreeModel,
 	#category : 'Brick-Tree - Model'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrColumnedTreeModel >> defaultRowElementStencil [
 	^ BrColumnedTreeRowElementStencilBuilder new
 ]

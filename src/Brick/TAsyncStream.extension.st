@@ -1,6 +1,6 @@
-Extension { #name : 'TAsyncStream' }
+Extension { #name : #TAsyncStream }
 
-{ #category : '*Brick' }
+{ #category : #'*Brick' }
 TAsyncStream >> asBrItemsProvider [
 	^ BrListStreamItemsProvider forStream: self
 ]

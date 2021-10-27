@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTextEditorCommand',
-	#superclass : 'Object',
+	#name : #BrTextEditorCommand,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -9,22 +9,22 @@ Class {
 	#category : 'Brick-Editor-Commands'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCommand >> context [
 	^ context
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCommand >> context: anObject [
 	context := anObject
 ]
 
-{ #category : 'executing' }
+{ #category : #executing }
 BrTextEditorCommand >> executeOn: aTextEditor [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextEditorCommand >> telemetry [
 	<return: #BlTelemetry>
 

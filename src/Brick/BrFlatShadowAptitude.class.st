@@ -4,20 +4,20 @@ I add a simple flat shadow around an element.
 To work properly and element should have some margin in order for the shadow to not be clipped by the parent bounds
 "
 Class {
-	#name : 'BrFlatShadowAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrFlatShadowAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'shadow'
 	],
 	#category : 'Brick-! Core - Looks'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFlatShadowAptitude >> color: aColor [
 	self shadow: (self shadow copyWithColor: aColor)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFlatShadowAptitude >> initialize [
 	super initialize.
 
@@ -28,19 +28,19 @@ BrFlatShadowAptitude >> initialize [
 	self addChangeProperty: #(widget effect) withCopy: [ self shadow ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrFlatShadowAptitude >> offset: aColor [
 	self shadow: (self shadow copyWithOffset: aColor)
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFlatShadowAptitude >> shadow [
 	<return: #BlSimpleShadowEffect>
 
 	^ shadow
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFlatShadowAptitude >> shadow: aBlDropShadowEffect [
 	shadow := aBlDropShadowEffect.
 	self

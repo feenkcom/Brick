@@ -2,12 +2,12 @@
 I contain examples-tests of the editor backed up by line based segments
 "
 Class {
-	#name : 'BrTextEditorLineSegmentExamples',
-	#superclass : 'Object',
+	#name : #BrTextEditorLineSegmentExamples,
+	#superclass : #Object,
 	#category : 'Brick-Editor-Examples'
 }
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_0 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -36,7 +36,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_1 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -65,7 +65,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_2 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -94,7 +94,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_3 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -123,7 +123,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_4 [
 	"In this example cursor is nowhere to be found in UI(in fact it is between Cr and Lf)"
 	<gtExample>
@@ -153,7 +153,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_5 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -182,7 +182,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_6 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -211,7 +211,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_6 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_7 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -240,7 +240,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - cursor' }
+{ #category : #'examples - cursor' }
 BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_8 [
 	<gtExample>
 	| aTextEditor aSegment aCursor |
@@ -269,7 +269,7 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_8 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_ACrCr_in_HACrCrBA_at_2_4 [
 	<gtExample>
 	| aTextEditor |
@@ -285,7 +285,7 @@ BrTextEditorLineSegmentExamples >> delete_ACrCr_in_HACrCrBA_at_2_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_A_in_A_at_1_1 [
 	<gtExample>
 	| aTextEditor |
@@ -301,7 +301,7 @@ BrTextEditorLineSegmentExamples >> delete_A_in_A_at_1_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_A_in_BA_at_2_2 [
 	<gtExample>
 	| aTextEditor |
@@ -317,7 +317,7 @@ BrTextEditorLineSegmentExamples >> delete_A_in_BA_at_2_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_A_in_BCrA_at_3_3 [
 	<gtExample>
 	| aTextEditor |
@@ -334,7 +334,7 @@ BrTextEditorLineSegmentExamples >> delete_A_in_BCrA_at_3_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_BA_in_BA_at_1_2 [
 	<gtExample>
 	| aTextEditor |
@@ -350,7 +350,7 @@ BrTextEditorLineSegmentExamples >> delete_BA_in_BA_at_1_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_B_in_BA_at_1_1 [
 	<gtExample>
 	| aTextEditor theOldPieces theNewPieces |
@@ -371,7 +371,7 @@ BrTextEditorLineSegmentExamples >> delete_B_in_BA_at_1_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrB_in_HACrCrBA_at_4_5 [
 	<gtExample>
 	| aTextEditor |
@@ -387,7 +387,7 @@ BrTextEditorLineSegmentExamples >> delete_CrB_in_HACrCrBA_at_4_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_1 [
 	<gtExample>
 	| aTextEditor |
@@ -405,7 +405,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_2 [
 	<gtExample>
 	| aTextEditor |
@@ -422,7 +422,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_3 [
 	<gtExample>
 	| aTextEditor |
@@ -439,7 +439,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_4 [
 	<gtExample>
 	| aTextEditor |
@@ -456,7 +456,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_5 [
 	<gtExample>
 	| aTextEditor |
@@ -472,7 +472,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_6 [
 	<gtExample>
 	| aTextEditor |
@@ -488,7 +488,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_6 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_7 [
 	<gtExample>
 	| aTextEditor |
@@ -504,7 +504,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_1_7 [
 	<gtExample>
 	| aTextEditor |
@@ -521,7 +521,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_1_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_2_7 [
 	<gtExample>
 	| aTextEditor |
@@ -539,7 +539,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_2_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_3_7 [
 	<gtExample>
 	| aTextEditor |
@@ -557,7 +557,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_3_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_4_7 [
 	<gtExample>
 	| aTextEditor |
@@ -575,7 +575,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_4_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_5_7 [
 	<gtExample>
 	| aTextEditor |
@@ -594,7 +594,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_5_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_6_7 [
 	<gtExample>
 	| aTextEditor |
@@ -613,7 +613,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_6_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_7_7 [
 	<gtExample>
 	| aTextEditor |
@@ -632,7 +632,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_7_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_CrCr_in_HACrCrBA_at_3_4 [
 	<gtExample>
 	| aTextEditor |
@@ -648,7 +648,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCr_in_HACrCrBA_at_3_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_Cr_in_BACr_at_3_3 [
 	<gtExample>
 	| aTextEditor |
@@ -664,7 +664,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_BACr_at_3_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_Cr_in_BCrA_at_2_2 [
 	<gtExample>
 	| aTextEditor |
@@ -680,7 +680,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_BCrA_at_2_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_Cr_in_Cr_at_1_1 [
 	<gtExample>
 	| aTextEditor |
@@ -696,7 +696,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_Cr_at_1_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_Cr_in_HACrCrBA_at_3_3 [
 	<gtExample>
 	| aTextEditor aRemovedListener aRemovedEvent |
@@ -721,7 +721,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_HACrCrBA_at_3_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_Cr_in_HACrCrBA_at_4_4 [
 	<gtExample>
 	| aTextEditor |
@@ -738,7 +738,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_HACrCrBA_at_4_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_HACrCrBA_in_HACrCrBA_at_1_6 [
 	<gtExample>
 	| aTextEditor |
@@ -754,7 +754,7 @@ BrTextEditorLineSegmentExamples >> delete_HACrCrBA_in_HACrCrBA_at_1_6 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_HACrCrB_in_HACrCrBA_at_1_5 [
 	<gtExample>
 	| aTextEditor |
@@ -770,7 +770,7 @@ BrTextEditorLineSegmentExamples >> delete_HACrCrB_in_HACrCrBA_at_1_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BrTextEditorLineSegmentExamples >> delete_HACrCr_in_HACrCrBA_at_1_4 [
 	<gtExample>
 	| aTextEditor |
@@ -786,7 +786,7 @@ BrTextEditorLineSegmentExamples >> delete_HACrCr_in_HACrCrBA_at_1_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorLineSegmentExamples >> emptyEditor [
 	<gtExample>
 	| aTextEditor aTextEditorElement aSegmentElement aPieceElement |
@@ -813,7 +813,7 @@ BrTextEditorLineSegmentExamples >> emptyEditor [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_000_in_HABA_at_2 [
 	<gtExample>
 	| aTextEditor |
@@ -830,7 +830,7 @@ BrTextEditorLineSegmentExamples >> insert_000_in_HABA_at_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_A_inEmptyAt_0 [
 	<gtExample>
 	| aTextEditor |
@@ -848,7 +848,7 @@ BrTextEditorLineSegmentExamples >> insert_A_inEmptyAt_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_A_in_HACrBA_At_3 [
 	<gtExample>
 	| aTextEditor |
@@ -867,7 +867,7 @@ BrTextEditorLineSegmentExamples >> insert_A_in_HACrBA_At_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_A_in_HACrCrBA_At_3 [
 	<gtExample>
 	| aTextEditor |
@@ -888,7 +888,7 @@ BrTextEditorLineSegmentExamples >> insert_A_in_HACrCrBA_At_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_B_in_A_at_0 [
 	<gtExample>
 	| aTextEditor |
@@ -905,7 +905,7 @@ BrTextEditorLineSegmentExamples >> insert_B_in_A_at_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_C_in_CrBA_At_0 [
 	<gtExample>
 	| aTextEditor |
@@ -924,7 +924,7 @@ BrTextEditorLineSegmentExamples >> insert_C_in_CrBA_At_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_CrLf_in_Hello_At_5 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -949,7 +949,7 @@ BrTextEditorLineSegmentExamples >> insert_CrLf_in_Hello_At_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_D_in_CCrBA_At_1 [
 	<gtExample>
 	| aTextEditor |
@@ -968,7 +968,7 @@ BrTextEditorLineSegmentExamples >> insert_D_in_CCrBA_At_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_E_in_Hello_World_at_2 [
 	<gtExample>
 	| aTextEditor thePiecesBeforeInsertion |
@@ -1005,7 +1005,7 @@ BrTextEditorLineSegmentExamples >> insert_E_in_Hello_World_at_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_HABA_inEmptyAt_0 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -1025,7 +1025,7 @@ BrTextEditorLineSegmentExamples >> insert_HABA_inEmptyAt_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_Hello_World_inEmptyAt_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1041,7 +1041,7 @@ BrTextEditorLineSegmentExamples >> insert_Hello_World_inEmptyAt_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_Hello_inEmptyAt_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1057,7 +1057,7 @@ BrTextEditorLineSegmentExamples >> insert_Hello_inEmptyAt_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLineCrLf_in_HACrBA_At_3 [
 	<gtExample>
 	| aTextEditor |
@@ -1079,7 +1079,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLineCrLf_in_HACrBA_At_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_inCrAt_1 [
 	<gtExample>
 	| aTextEditor anInsertedListener anInsertedEvent |
@@ -1105,7 +1105,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_inCrAt_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_inEmptyAt_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1122,7 +1122,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_inEmptyAt_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1141,7 +1141,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_1 [
 	<gtExample>
 	| aTextEditor |
@@ -1160,7 +1160,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_2 [
 	<gtExample>
 	| aTextEditor |
@@ -1179,7 +1179,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_CDCrBA_At_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1200,7 +1200,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_CDCrBA_At_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_CrCDCrBA_At_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1223,7 +1223,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_CrCDCrBA_At_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_CrCDCrBA_At_1 [
 	<gtExample>
 	| aTextEditor |
@@ -1246,7 +1246,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_CrCDCrBA_At_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_0 [
 	<gtExample>
 	| aTextEditor |
@@ -1265,7 +1265,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_1 [
 	<gtExample>
 	| aTextEditor |
@@ -1284,7 +1284,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_2 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -1309,7 +1309,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_3 [
 	<gtExample>
 	| aTextEditor |
@@ -1328,7 +1328,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_4 [
 	<gtExample>
 	| aTextEditor |
@@ -1347,7 +1347,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HACrBA_At_2 [
 	<gtExample>
 	| aTextEditor |
@@ -1368,7 +1368,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HACrBA_At_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HACrBA_At_3 [
 	<gtExample>
 	| aTextEditor |
@@ -1389,7 +1389,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HACrBA_At_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HeCrllo_At_3 [
 	<gtExample>
 	| aTextEditor |
@@ -1410,7 +1410,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HeCrllo_At_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloCrWorldCr_WithAppendingAfterWorld_at_5 [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -1484,7 +1484,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloCrWorldCr_WithAppendin
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementAndAppendingOfWorld_at_0 [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -1542,7 +1542,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementA
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementOfWorld_at_0 [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -1595,7 +1595,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementO
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementOfWorld_at_5 [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -1648,7 +1648,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementO
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_2 [
 	<gtExample>
 	| aTextEditor |
@@ -1667,7 +1667,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_5 [
 	<gtExample>
 	| aTextEditor |
@@ -1686,7 +1686,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorLineSegmentExamples >> insert_haCrCrbaCr_inHelloAt_2 [
 	<gtExample>
 	| aTextEditor |
@@ -1711,14 +1711,14 @@ BrTextEditorLineSegmentExamples >> insert_haCrCrbaCr_inHelloAt_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorLineSegmentExamples >> lineSegmentBuilder [
 	<gtExample>
 	
 	^ BrTextEditorLineSegmentBuilder new
 ]
 
-{ #category : 'examples - overwrite' }
+{ #category : #'examples - overwrite' }
 BrTextEditorLineSegmentExamples >> overwrite_Hello_World_with_S_in_Hello_World [
 	<gtExample>
 	| aTextEditor aSegment theOldPieces theNewPieces |
@@ -1787,7 +1787,7 @@ BrTextEditorLineSegmentExamples >> overwrite_Hello_World_with_S_in_Hello_World [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - overwrite' }
+{ #category : #'examples - overwrite' }
 BrTextEditorLineSegmentExamples >> overwrite_World_with_S_in_Hello_World [
 	<gtExample>
 	| aTextEditor aSegment theOldPieces theNewPieces |
@@ -1864,7 +1864,7 @@ BrTextEditorLineSegmentExamples >> overwrite_World_with_S_in_Hello_World [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - overwrite' }
+{ #category : #'examples - overwrite' }
 BrTextEditorLineSegmentExamples >> overwrite_d_with_S_in_Hello_World [
 	<gtExample>
 	| aTextEditor aSegment theOldPieces theNewPieces |
@@ -1941,7 +1941,7 @@ BrTextEditorLineSegmentExamples >> overwrite_d_with_S_in_Hello_World [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - overwrite' }
+{ #category : #'examples - overwrite' }
 BrTextEditorLineSegmentExamples >> overwrite_llo_World_with_S_in_Hello_World [
 	<gtExample>
 	| aTextEditor aSegment theOldPieces theNewPieces |
@@ -2010,7 +2010,7 @@ BrTextEditorLineSegmentExamples >> overwrite_llo_World_with_S_in_Hello_World [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_HelloCr [
 	<gtExample>
 	| aTextEditor theFirstPieces theSecondPieces aPiece |
@@ -2043,7 +2043,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCr [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
 	<gtExample>
 	| aTextEditor theFirstPieces theSecondPieces aPiece |
@@ -2076,7 +2076,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -2140,7 +2140,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_1_WithAppending [
 	<gtExample>
 	| aTextEditor thePieces |
@@ -2172,7 +2172,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_1_WithAppending [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
 	<gtExample>
 	| aTextEditor thePieces |
@@ -2226,7 +2226,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_World [
 	<gtExample>
 	| aTextEditor thePieces |
@@ -2265,7 +2265,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementAndAppendingOfWorld [
 	<gtExample>
 	| aTextEditor thePieces aSegment |
@@ -2313,7 +2313,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementAndAppendin
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOf [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -2348,7 +2348,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOf [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfLineBreak [
 	<gtExample>
 	| aTextEditor thePieces |
@@ -2376,7 +2376,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfLineBreak
 	^ aTextEditor
 ]
 
-{ #category : 'examples - pieces' }
+{ #category : #'examples - pieces' }
 BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfWorld [
 	<gtExample>
 	| aTextEditor aSegment thePieces |
@@ -2416,7 +2416,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfWorld [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2433,7 +2433,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2450,7 +2450,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_6 [
 	<gtExample>
 	| aSegment |
@@ -2467,7 +2467,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_1_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2484,7 +2484,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_1_to_
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_3_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2501,7 +2501,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_3_to_
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_6_to_11_to_be_0_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2518,7 +2518,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_6_to_11_to_be_0_to
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_6_to_11_to_be_6_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2535,7 +2535,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_6_to_11_to_be_6_to
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_0_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2552,7 +2552,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_0
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_0_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2569,7 +2569,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_0
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_0_to_6 [
 	<gtExample>
 	| aSegment |
@@ -2586,7 +2586,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_0
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_1_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2603,7 +2603,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_1
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_3_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2620,7 +2620,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_0_to_5_to_be_3
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_6_to_11_to_be_0_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2637,7 +2637,7 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_6_to_11_to_be_
 	^ aSegment
 ]
 
-{ #category : 'examples - scope' }
+{ #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_6_to_11_to_be_6_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2654,14 +2654,14 @@ BrTextEditorLineSegmentExamples >> scope_segment_sub_HelloCrWorld_6_to_11_to_be_
 	^ aSegment
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BrTextEditorLineSegmentExamples >> segmentStream [
 	<gtExample>
 	
 	^ BrEditorSegmentStream new limit: Float infinity
 ]
 
-{ #category : 'instance creation - segment' }
+{ #category : #'instance creation - segment' }
 BrTextEditorLineSegmentExamples >> segment_HelloCrWorld_0_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2678,7 +2678,7 @@ BrTextEditorLineSegmentExamples >> segment_HelloCrWorld_0_to_5 [
 	^ aSegment
 ]
 
-{ #category : 'instance creation - segment' }
+{ #category : #'instance creation - segment' }
 BrTextEditorLineSegmentExamples >> segment_HelloCrWorld_6_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2695,7 +2695,7 @@ BrTextEditorLineSegmentExamples >> segment_HelloCrWorld_6_to_11 [
 	^ aSegment
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_Empty_at_0 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2712,7 +2712,7 @@ BrTextEditorLineSegmentExamples >> segment_in_Empty_at_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_0 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2729,7 +2729,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_0 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_1 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2746,7 +2746,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_1 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_2 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2763,7 +2763,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_2 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_3 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2780,7 +2780,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_3 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_4 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2797,7 +2797,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_4 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_5 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2814,7 +2814,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_5 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_6 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2831,7 +2831,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_6 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_7 [
 	<gtExample>
 	| aTextEditor aSegment |
@@ -2849,7 +2849,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_7 [
 	^ aTextEditor
 ]
 
-{ #category : 'examples - segments' }
+{ #category : #'examples - segments' }
 BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_8 [
 	<gtExample>
 	| aTextEditor notFoundFlag |
@@ -2868,7 +2868,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_8 [
 	^ aTextEditor
 ]
 
-{ #category : 'instance creation - segment' }
+{ #category : #'instance creation - segment' }
 BrTextEditorLineSegmentExamples >> segment_sub_HelloCrWorld_0_to_5 [
 	<gtExample>
 	| aSegment |
@@ -2885,7 +2885,7 @@ BrTextEditorLineSegmentExamples >> segment_sub_HelloCrWorld_0_to_5 [
 	^ aSegment
 ]
 
-{ #category : 'instance creation - segment' }
+{ #category : #'instance creation - segment' }
 BrTextEditorLineSegmentExamples >> segment_sub_HelloCrWorld_6_to_11 [
 	<gtExample>
 	| aSegment |
@@ -2902,105 +2902,105 @@ BrTextEditorLineSegmentExamples >> segment_sub_HelloCrWorld_6_to_11 [
 	^ aSegment
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_1234506789 [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: '1234506789')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_A [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'A')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACr [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'A', String cr)
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrB [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'A', String cr, 'B')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrBCrC [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'A', String cr, 'B', String cr, 'C')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrCr [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'A', String cr, String cr)
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrCrB [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'A', String cr, String cr, 'B')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_BA [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'BA')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_BCA [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'BCA')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Cr [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: String cr)
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_CrA [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: String cr, 'A')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HABA [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'HABA')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'Hello')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HelloCrWorld [
 	<gtExample>
 
 	^ ('Hello', String cr, 'World') asRopedText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HelloCrWorldCr_WithAppendingAfterWorld [
 	<gtExample>
 	| aText |
@@ -3012,7 +3012,7 @@ BrTextEditorLineSegmentExamples >> text_HelloCrWorldCr_WithAppendingAfterWorld [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HelloCrWorldCr_WithReplacementOfWorld [
 	<gtExample>
 	| aText |
@@ -3024,7 +3024,7 @@ BrTextEditorLineSegmentExamples >> text_HelloCrWorldCr_WithReplacementOfWorld [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HelloCrWorld_WithReplacementAndAppendingOfWorld [
 	<gtExample>
 	| aText |
@@ -3036,7 +3036,7 @@ BrTextEditorLineSegmentExamples >> text_HelloCrWorld_WithReplacementAndAppending
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HelloCrWorld_WithReplacementOfWorld [
 	<gtExample>
 	| aText |
@@ -3048,7 +3048,7 @@ BrTextEditorLineSegmentExamples >> text_HelloCrWorld_WithReplacementOfWorld [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HelloSpaceWorld_WithReplacementOfSpace [
 	<gtExample>
 	| aText |
@@ -3060,7 +3060,7 @@ BrTextEditorLineSegmentExamples >> text_HelloSpaceWorld_WithReplacementOfSpace [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_1_WithAppending [
 	<gtExample>
 	| aText |
@@ -3083,7 +3083,7 @@ BrTextEditorLineSegmentExamples >> text_Hello_1_WithAppending [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_Smart_World_WithAppending [
 	<gtExample>
 	| aText |
@@ -3124,14 +3124,14 @@ BrTextEditorLineSegmentExamples >> text_Hello_Smart_World_WithAppending [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_World [
 	<gtExample>
 
 	^ BlSubText text: (BlRopedText string: 'Hello World')
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_World_Cr_WithReplacement [
 	<gtExample>
 	| aText |
@@ -3143,7 +3143,7 @@ BrTextEditorLineSegmentExamples >> text_Hello_World_Cr_WithReplacement [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_World_WithReplacementAndAppendingOfLineBreak [
 	<gtExample>
 	| aText |
@@ -3155,7 +3155,7 @@ BrTextEditorLineSegmentExamples >> text_Hello_World_WithReplacementAndAppendingO
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_World_WithReplacementOfLineBreak [
 	<gtExample>
 	| aText |
@@ -3167,14 +3167,14 @@ BrTextEditorLineSegmentExamples >> text_Hello_World_WithReplacementOfLineBreak [
 	^ aText
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_empty [
 	<gtExample>
 
 	^ BlRopedText string: ''
 ]
 
-{ #category : 'instance creation - text' }
+{ #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_sub_HelloCrWorld [
 	<gtExample>
 

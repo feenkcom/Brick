@@ -1,13 +1,13 @@
 Class {
-	#name : 'BrTreeAptitude',
-	#superclass : 'BrAptitude',
+	#name : #BrTreeAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'treeElement'
 	],
 	#category : 'Brick-Tree - Aptitude'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeAptitude >> initialize [
 	super initialize.
 
@@ -27,7 +27,7 @@ BrTreeAptitude >> initialize [
 				yourself)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeAptitude >> initializeListeners [
 	super initializeListeners.
 	
@@ -39,7 +39,7 @@ BrTreeAptitude >> initializeListeners [
 	self initializeScrollListeners
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeAptitude >> initializeRequests [
 	super initializeRequests.
 	
@@ -49,7 +49,7 @@ BrTreeAptitude >> initializeRequests [
 	self request: BrSelectionRequest new.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeAptitude >> initializeScrollListeners [
 	self
 		when: BrScrollByWish
@@ -60,46 +60,46 @@ BrTreeAptitude >> initializeScrollListeners [
 		do: [ :aWish | self onScrollToItem: aWish ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeAptitude >> onNodeIdStencilChanged: aBrTreeNodeIdStencilBuilder [
 	treeElement dataSource nodeIdStencil: aBrTreeNodeIdStencilBuilder
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeAptitude >> onNodeTypeStencilChanged: aBrTreeNodeTypeStencilBuilder [
 	treeElement dataSource nodeTypeStencil: aBrTreeNodeTypeStencilBuilder
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeAptitude >> onScrollBy: aWish [
 	aWish smooth
 		ifTrue: [ treeElement smoothScrollBy: aWish delta ]
 		ifFalse: [ treeElement scrollBy: aWish delta ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeAptitude >> onScrollToItem: aWish [
 	aWish smooth
 		ifTrue: [ treeElement smoothScrollToPosition: aWish index ]
 		ifFalse: [ treeElement scrollToPosition: aWish index ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTreeAptitude >> onSelectionChanged: aCollectionOfIndices [
 	treeElement dataSource selection: (BlCompositeSelection fromIndices: aCollectionOfIndices)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeAptitude >> root: aTreeNode [
 	treeElement dataSource rootNode: aTreeNode
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTreeAptitude >> treeElement [
 	^ treeElement
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BrTreeAptitude >> withoutSelection [
 	self subclassResponsibility
 ]

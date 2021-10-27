@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrTextEditorInserterExamples',
-	#superclass : 'BrTextEditorOperatorExamples',
+	#name : #BrTextEditorInserterExamples,
+	#superclass : #BrTextEditorOperatorExamples,
 	#category : 'Brick-Editor-Examples-Operators'
 }
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> filter_insert_Hello123Symbols_onlyAlphaNumeric [
 	<gtExample>
 	| anEditor |
@@ -25,7 +25,7 @@ BrTextEditorInserterExamples >> filter_insert_Hello123Symbols_onlyAlphaNumeric [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> filter_insert_Hello123_onlyDigits [
 	<gtExample>
 	| anEditor |
@@ -46,7 +46,7 @@ BrTextEditorInserterExamples >> filter_insert_Hello123_onlyDigits [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> filter_insert_Hello123_onlyLetters [
 	<gtExample>
 	| anEditor |
@@ -67,7 +67,7 @@ BrTextEditorInserterExamples >> filter_insert_Hello123_onlyLetters [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_atCursorAt_0_and_1_selection_no [
 	<gtExample>
 	<description: '"Insertion at multiple cursors'>
@@ -93,7 +93,7 @@ BrTextEditorInserterExamples >> insert_Hello_atCursorAt_0_and_1_selection_no [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_0_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -114,7 +114,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_0_selection_0_to_0 [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_0_selection_0_to_1 [
 	<gtExample>
 	| anEditor |
@@ -135,7 +135,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_0_selection_0_to_1 [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_and_8_to_14 [
 	<gtExample>
 	| anEditor |
@@ -158,7 +158,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_a
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_and_8_to_14_no_delete [
 	<gtExample>
 	| anEditor |
@@ -184,7 +184,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_a
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_and_8_to_14_no_delete_no_selection [
 	<gtExample>
 	| anEditor |
@@ -211,7 +211,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_a
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_and_8_to_14_no_delete_no_selection_no_cursor [
 	<gtExample>
 	| anEditor |
@@ -239,7 +239,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_10_selection_0_to_1_a
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_5_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -260,7 +260,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_0_cursorAt_5_selection_0_to_0 [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_1_cursorAt_0_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -281,7 +281,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_1_cursorAt_0_selection_0_to_0 [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_Hello_at_1_cursorAt_1_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -302,7 +302,7 @@ BrTextEditorInserterExamples >> insert_Hello_at_1_cursorAt_1_selection_0_to_0 [
 	^ anEditor
 ]
 
-{ #category : 'examples - indentation' }
+{ #category : #'examples - indentation' }
 BrTextEditorInserterExamples >> insert_indentation_selection_0_to_1 [
 	<gtExample>
 	| anEditor |
@@ -326,7 +326,7 @@ BrTextEditorInserterExamples >> insert_indentation_selection_0_to_1 [
 	^ anEditor
 ]
 
-{ #category : 'examples - indentation' }
+{ #category : #'examples - indentation' }
 BrTextEditorInserterExamples >> insert_indentation_selection_0_to_41 [
 	<gtExample>
 	| anEditor |
@@ -350,7 +350,7 @@ BrTextEditorInserterExamples >> insert_indentation_selection_0_to_41 [
 	^ anEditor
 ]
 
-{ #category : 'examples - indentation' }
+{ #category : #'examples - indentation' }
 BrTextEditorInserterExamples >> insert_indentation_selection_1_to_2 [
 	<gtExample>
 	| anEditor |
@@ -374,7 +374,7 @@ BrTextEditorInserterExamples >> insert_indentation_selection_1_to_2 [
 	^ anEditor
 ]
 
-{ #category : 'examples - indentation' }
+{ #category : #'examples - indentation' }
 BrTextEditorInserterExamples >> insert_indentation_selection_29_to_67 [
 	<gtExample>
 	| anEditor |
@@ -401,7 +401,7 @@ BrTextEditorInserterExamples >> insert_indentation_selection_29_to_67 [
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_1_and_3_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -432,7 +432,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_1_and_3_s
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_1_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -458,7 +458,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_1_selecti
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_3_selection_0_to_1_withoutSelectionDelete [
 	<gtExample>
 	| anEditor |
@@ -493,7 +493,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_3_selecti
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_0_to_0 [
 	<gtExample>
 	| anEditor |
@@ -515,7 +515,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_0_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_0_to_1 [
 	<gtExample>
 	| anEditor |
@@ -537,7 +537,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_0_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_0_to_1_withoutSelectionDelete [
 	<gtExample>
 	| anEditor |
@@ -563,7 +563,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_0_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_2_to_8_withoutSelectionDelete [
 	<gtExample>
 	| anEditor |
@@ -590,7 +590,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_selection_2_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_10_selection_2_to_8_withoutSelectionDelete [
 	<gtExample>
 	| anEditor |
@@ -620,7 +620,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_10_selection_2_
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_1_selection_1_to_2_withOperatorAccountingSelection_withoutSelectionDelete [
 	"I make sure that selected text gets surrounded if it is described in condition"
 	<gtExample>
@@ -650,7 +650,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_1_selection_1_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_1_selection_1_to_2_withOperatorNotAccountingSelection_withoutSelectionDelete [
 	"I make sure that selected text is not surrounded if it is selected and when it is not described in operator"
 	<gtExample>
@@ -680,7 +680,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_1_selection_1_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_2_selection_2_to_8_withoutSelectionDelete [
 	<gtExample>
 	| anEditor |
@@ -710,7 +710,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_2_selection_2_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_8_selection_2_to_8_withoutSelectionDelete [
 	<gtExample>
 	| anEditor |
@@ -740,7 +740,7 @@ BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_8_selection_2_t
 	^ anEditor
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_open_close_parentheses_at_cursor_0_selection_0_to_0 [
 	<gtExample>
 	| anEditor |

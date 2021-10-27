@@ -11,12 +11,12 @@ ${example:BrGlamorousComponentsLists>>#listOfColors|previewShow=#gtLiveFor:|prev
 ${example:BrGlamorousComponentsLists>>#columnedListOfColors|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
 "
 Class {
-	#name : 'BrGlamorousComponentsLists',
-	#superclass : 'BrGlamorousComponents',
+	#name : #BrGlamorousComponentsLists,
+	#superclass : #BrGlamorousComponents,
 	#category : 'Brick-Examples-! Glamorous components'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrGlamorousComponentsLists >> columnedListOfColors [
 	<gtExample>
 	| aList |
@@ -45,7 +45,7 @@ BrGlamorousComponentsLists >> columnedListOfColors [
 	^ aList
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrGlamorousComponentsLists >> listOfClasses [
 	<gtExample>
 	^ BrSimpleList new
@@ -58,7 +58,7 @@ BrGlamorousComponentsLists >> listOfClasses [
 		items: (SystemNavigation new allClasses sorted: [ :a :b | a name < b name ])
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BrGlamorousComponentsLists >> listOfColors [
 	<gtExample>
 	^ BrSimpleList new

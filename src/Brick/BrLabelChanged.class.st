@@ -2,22 +2,22 @@
 I am sent when label in a view model is changed
 "
 Class {
-	#name : 'BrLabelChanged',
-	#superclass : 'BrChangeEvent',
+	#name : #BrLabelChanged,
+	#superclass : #BrChangeEvent,
 	#instVars : [
 		'text'
 	],
 	#category : 'Brick-! Core - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLabelChanged >> text [
 	<return: #BlText or: #String>
 
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLabelChanged >> text: aBrTextOrString [
 	self
 		assert: [ aBrTextOrString isNotNil ]

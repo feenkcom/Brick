@@ -1,41 +1,42 @@
 Class {
-	#name : 'BrFromFuture',
-	#superclass : 'BlElement',
+	#name : #BrFromFuture,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'future',
+		'futureExecution',
 		'dataSnapshot',
 		'elementStencil',
 		'elementDataBinder',
 		'element',
 		'updater'
 	],
-	#category : 'Brick-Future - Support'
+	#category : #'Brick-Future - Support'
 }
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> dataBinder: aFromFutureDataBinder [
 	elementDataBinder := aFromFutureDataBinder asStencilBuilder: BrFromFutureDataBinder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFuture >> defaultLayout [
 	^ BlFrameLayout new
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> future: aFuture [
 	self future: aFuture initialValue: nil
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> future: aFuture initialValue: anObject [
-	future := aFuture asFuture.
+	future := aFuture asAsyncFuture.
 	dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrFromFuture >> initialize [
 	super initialize.
 	
@@ -46,57 +47,54 @@ BrFromFuture >> initialize [
 	updater element: self selector: #privateUpdateElement.
 ]
 
-{ #category : 'hooks - children' }
+{ #category : #'hooks - children' }
 BrFromFuture >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
 	
 	dataSnapshot isPending
 		ifFalse: [ ^ self ].
-	
+
+	"the future is running"
+	futureExecution
+		ifNotNil: [ ^ self ].
+
 	element
 		ifNil: [
 			element := elementStencil asElement ].
-	
+
 	self privateUpdateElement.
 
-	future await
+	futureExecution := future await.
+	futureExecution
 		onSuccessDo: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ];
 		onFailureDo: [ :anError |
 			anError freeze.
 			self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFromFuture >> privateDataSnapshot: aDataSnapshot [
 	dataSnapshot := aDataSnapshot.
 	updater requestUpdate
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrFromFuture >> privateUpdateElement [
 	"Must be called from the UI thread"
-	| anEmbellishedElement aTargetElementToAdd |
 
-	anEmbellishedElement := elementDataBinder 
+	elementDataBinder 
 		element: element;
 		data: dataSnapshot;
 		build.
+	
+	(self hasChild: element)
+		ifTrue: [ ^ self ].
 
-	aTargetElementToAdd := (anEmbellishedElement isKindOf: BlElement)
-		ifTrue: [ anEmbellishedElement == element
-			ifTrue: [ element ]
-			ifFalse: [ anEmbellishedElement ] ]
-		ifFalse: [ element ].
-
-	(self hasChild: aTargetElementToAdd)
-		ifFalse: [
-			self removeChildren.
-			element removeFromParent.
-			aTargetElementToAdd removeFromParent.
-			self addChild: aTargetElementToAdd ].
+	element removeFromParent.
+	self addChild: element
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BrFromFuture >> stencil: aStencil [
 	elementStencil := aStencil asStencil
 ]

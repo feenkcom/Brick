@@ -9,8 +9,8 @@ Example: ${example:BrTextStylerExamples>>#editorWithAsyncStylerStrategy|codeExpa
 
 "
 Class {
-	#name : 'BrTextStylerAsyncStrategy',
-	#superclass : 'BrTextStylerCommonAsyncStrategy',
+	#name : #BrTextStylerAsyncStrategy,
+	#superclass : #BrTextStylerCommonAsyncStrategy,
 	#instVars : [
 		'backgroundProcess',
 		'delay'
@@ -18,13 +18,13 @@ Class {
 	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerAsyncStrategy >> delay [
 	<return: #Duration>
 	^ delay
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTextStylerAsyncStrategy >> delay: aDuration [
 	self 
 		assert: [ aDuration isNotNil ] 
@@ -32,20 +32,20 @@ BrTextStylerAsyncStrategy >> delay: aDuration [
 	delay := aDuration
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextStylerAsyncStrategy >> doStyle: aBlText afterDo: aBlock [
 	self delay isZero ifFalse: [ self delay wait ].
 	super doStyle: aBlText afterDo: aBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrTextStylerAsyncStrategy >> initialize [
 	super initialize.
 	backgroundProcess := nil.
 	delay := 200 milliSeconds.
 ]
 
-{ #category : 'styling' }
+{ #category : #styling }
 BrTextStylerAsyncStrategy >> style: aBlText afterDo: aBlock [
 	self view ifNil: [ 
 		"A graphical widget is not available, we therefore do not need to style the text"
@@ -60,7 +60,7 @@ BrTextStylerAsyncStrategy >> style: aBlText afterDo: aBlock [
 		otherwise: [ self doStyle: aBlText afterDo: aBlock ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BrTextStylerAsyncStrategy >> terminateBackgroundStylingProcess [
 	"Must be called in a monitor critical block."
 	backgroundProcess ifNotNil: [ :aProcess |

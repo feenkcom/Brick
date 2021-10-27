@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrTabModel',
-	#superclass : 'BrWidgetModel',
+	#name : #BrTabModel,
+	#superclass : #BrWidgetModel,
 	#instVars : [
 		'contentStencilBuilder',
 		'toolbarStencilBuilder',
@@ -10,7 +10,7 @@ Class {
 	#category : 'Brick-Tabs - Model'
 }
 
-{ #category : 'api - tab' }
+{ #category : #'api - tab' }
 BrTabModel >> actionbarStencil: anActionbarStencilBuilder [
 	"Set a stencil to be used to create an action bar for this tab.
 	An action bar is usually located inside of the tab itself, for example a close button"
@@ -19,14 +19,14 @@ BrTabModel >> actionbarStencil: anActionbarStencilBuilder [
 	self notifyActionbarChanged: actionbarStencilBuilder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabModel >> actionbarStencilBuilder [
 	<return: #BrStencilBuilder>
 
 	^ actionbarStencilBuilder
 ]
 
-{ #category : 'api - tab' }
+{ #category : #'api - tab' }
 BrTabModel >> actionsStencil: anActionStencilBuilder [
 	self
 		deprecated: 'Please use #toolbarStencil: instead'
@@ -36,7 +36,7 @@ BrTabModel >> actionsStencil: anActionStencilBuilder [
 	self toolbarStencil: anActionStencilBuilder
 ]
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BrTabModel >> clickEvent: anEvent [
 	(self widget states hasState: BlElementState disabled)
 		ifTrue: [ ^ self ].
@@ -45,14 +45,14 @@ BrTabModel >> clickEvent: anEvent [
 	self select
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabModel >> contentStencilBuilder [
 	<return: #BrTabStencilBuilder>
 	
 	^ contentStencilBuilder
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTabModel >> deselect [
 	self isSelected
 		ifFalse: [ ^ self ].
@@ -61,14 +61,14 @@ BrTabModel >> deselect [
 	self dispatchEvent: (BrTabDeselectedEvent new tab: self)
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTabModel >> initialize [
 	super initialize.
 	
 	selected := false
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BrTabModel >> initializeListeners [
 	super initializeListeners.
 
@@ -77,29 +77,29 @@ BrTabModel >> initializeListeners [
 	self when: BrTabToolbarRequest reply: [ :aResponse | aResponse stencil: toolbarStencilBuilder ].
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTabModel >> isSelected [
 	<return: #Boolean>
 
 	^ selected
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabModel >> notifyActionbarChanged: aStencil [
 	self dispatchEvent: (BrTabActionbarChangedEvent new tab: self; stencil: aStencil)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabModel >> notifyStencilChanged: aStencil [
 	self dispatchEvent: (BrTabStencilChangedEvent new tab: self; stencil: aStencil)
 ]
 
-{ #category : 'notifying' }
+{ #category : #notifying }
 BrTabModel >> notifyToolbarChanged: aStencil [
 	self dispatchEvent: (BrTabToolbarChangedEvent new tab: self; stencil: aStencil)
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTabModel >> select [
 	self isSelected
 		ifTrue: [ ^ self ].
@@ -108,14 +108,14 @@ BrTabModel >> select [
 	self dispatchEvent: (BrTabSelectedEvent new tab: self)
 ]
 
-{ #category : 'api - selection' }
+{ #category : #'api - selection' }
 BrTabModel >> selected: aBoolean [
 	aBoolean
 		ifTrue: [ self select ]
 		ifFalse: [ self deselect ]
 ]
 
-{ #category : 'api - tab' }
+{ #category : #'api - tab' }
 BrTabModel >> stencil: aStencilBuilder [
 	"Set a stencil to be used to create a content of a tab.
 	It should be computed lazily by the Tab widget on demand"
@@ -124,7 +124,7 @@ BrTabModel >> stencil: aStencilBuilder [
 	self notifyStencilChanged: contentStencilBuilder.
 ]
 
-{ #category : 'api - tab' }
+{ #category : #'api - tab' }
 BrTabModel >> toolbarStencil: aToolbarStencilBuilder [
 	"Set a stencil to be used to create a toolbar for this tab.
 	A toolbar is usually located on the right side of a tab group header and changes depending
@@ -134,7 +134,7 @@ BrTabModel >> toolbarStencil: aToolbarStencilBuilder [
 	self notifyToolbarChanged: toolbarStencilBuilder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrTabModel >> toolbarStencilBuilder [
 	<return: #BrStencilBuilder>
 

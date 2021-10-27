@@ -9,12 +9,12 @@ Example: ${example:BrTextStylerExamples>>#editorWithSyncStylerStrategy|codeExpan
 
 "
 Class {
-	#name : 'BrTextStylerSyncStrategy',
-	#superclass : 'BrTextStylerStrategy',
+	#name : #BrTextStylerSyncStrategy,
+	#superclass : #BrTextStylerStrategy,
 	#category : 'Brick-Editor-Styler'
 }
 
-{ #category : 'styling' }
+{ #category : #styling }
 BrTextStylerSyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: aBlock [
 	| aStyledText |
 
