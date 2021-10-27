@@ -1,14 +1,13 @@
 "
 I am a tab switcher look that position tabs at top-center part of container.
-
 I expect to be attached to a ${class:BrTabGroup}$ instance.
+#Examples 
+##With Labels
+{{gtExample:BrExamplesShowroom>>#glamorousTabsSwitcherWithLabels|codeExpanded=false|previewExpanded=true}}
 
-!! Examples 
-!!! With Labels
-${example:BrExamplesShowroom>>#glamorousTabsSwitcherWithLabels|codeExpanded=false|previewExpanded=true}$
+##With Icons
+{{gtExample:BrExamplesShowroom>>#glamorousTabsSwitcherWithIcons|codeExpanded=false|previewExpanded=true}}
 
-!!! With Icons
-${example:BrExamplesShowroom>>#glamorousTabsSwitcherWithIcons|codeExpanded=false|previewExpanded=true}$
 
 "
 Class {
@@ -17,7 +16,7 @@ Class {
 	#instVars : [
 		'headerLook'
 	],
-	#category : 'Brick-Glamorous-Tabs - Switcher'
+	#category : #'Brick-Glamorous-Tabs - Switcher'
 }
 
 { #category : #'api - style' }
