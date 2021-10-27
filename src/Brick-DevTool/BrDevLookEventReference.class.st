@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrDevLookEventReference',
-	#superclass : 'BrDevLookArtifactReference',
+	#name : #BrDevLookEventReference,
+	#superclass : #BrDevLookArtifactReference,
 	#category : 'Brick-DevTool'
 }

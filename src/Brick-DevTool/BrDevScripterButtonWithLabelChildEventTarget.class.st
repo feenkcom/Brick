@@ -1,50 +1,53 @@
 Class {
-	#name : 'BrDevScripterButtonWithLabelChildEventTarget',
-	#superclass : 'BlDevScripterEventTarget',
+	#name : #BrDevScripterButtonWithLabelChildEventTarget,
+	#superclass : #BlDevScripterEventTarget,
 	#instVars : [
 		'buttonLabel'
 	],
-	#category : 'Brick-DevTool'
+	#category : #'Brick-DevTool'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BrDevScripterButtonWithLabelChildEventTarget >> assertButtonLabel: aString [ 
 	self assert: aString isString description: 'Button label must be defined'.
 	self assert: aString isNotEmpty description: 'Button label must be non-empty string'.
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDevScripterButtonWithLabelChildEventTarget >> buttonLabel [
 	<return: #String>
 	^ buttonLabel
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDevScripterButtonWithLabelChildEventTarget >> buttonLabel: aString [
 	self assertButtonLabel: aString.
 	buttonLabel := aString
 ]
 
-{ #category : 'searching' }
+{ #category : #searching }
 BrDevScripterButtonWithLabelChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	self assertButtonLabel: self buttonLabel.
-
+	
 	^ BlDevScripterBlockSelectorEventTarget new 
-		block: [ :aChild | aChild class = BrButton and: [ aChild label asString = self buttonLabel ] ];
+		block: [ :parentElement | 
+			parentElement children 
+				detect: [ :aChild | 
+					aChild class = BrButton and: [ aChild label asString = self buttonLabel ] ] ];
 		findTargetIn: anElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrDevScripterButtonWithLabelChildEventTarget >> identifier [
 	^ self buttonLabel 
 		ifNotNil: [ BrButton name asString, ' label: ', self buttonLabel asString ]
 		ifNil: [ self ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrDevScripterButtonWithLabelChildEventTarget >> printOn: aStream [
 	self buttonLabel ifNil: [ ^ super printOn: aStream ].
 	aStream 

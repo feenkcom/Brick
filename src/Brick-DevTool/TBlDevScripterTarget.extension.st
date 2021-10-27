@@ -1,35 +1,35 @@
-Extension { #name : 'TBlDevScripterTarget' }
+Extension { #name : #TBlDevScripterTarget }
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onBrButtonName: aButtonLabel [
 	self updateTarget: (BrDevScripterButtonWithLabelChildEventTarget new buttonLabel: aButtonLabel)
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onBrPagerFirstPane [
 	self 
 		onChildOfClass: BrInfinitePagerElement;
 		onChildAt: 1
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onBrPagerSecondPane [
 	self 
 		onChildOfClass: BrInfinitePagerElement;
 		onChildAt: 2
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onBrTextEditor [
 	self onChildFromMessage: #editor
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onBrTextEditorText [
 	self onChildFromMessage: #text
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtInspectorViewsTabBar [
 	self
 		onGtInspectorViewsTabGroup
@@ -38,7 +38,7 @@ TBlDevScripterTarget >> onGtInspectorViewsTabBar [
 		onChildNamed: #tabbar
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtInspectorViewsTabGroup [
 	self
 		onChildOfClass: BrTabGroup;
@@ -47,7 +47,7 @@ TBlDevScripterTarget >> onGtInspectorViewsTabGroup [
 		onChildOfClass: BrTabGroup
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtMaximizedPagerContent [
 	self
 		onChildOfClass: BlOverlayElement;
@@ -57,28 +57,28 @@ TBlDevScripterTarget >> onGtMaximizedPagerContent [
 		onChildNamed: #tool
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtPagerFirstPaneContent [
 	self 
 		onBrPagerFirstPane;
 		onGtPagerWrappedPaneContent
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtPagerPaneCloseButton [
 	self 
 		onChildOfClass: BrPagerPageContentElement;
 		onChildAt: 2
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtPagerSecondPaneContent [
 	self 
 		onBrPagerSecondPane;
 		onGtPagerWrappedPaneContent
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtPagerWrappedPaneContent [
 	self 
 		onChildOfClass: BrPagerPageContentElement;
@@ -87,7 +87,7 @@ TBlDevScripterTarget >> onGtPagerWrappedPaneContent [
 		onChildNamed: #tool
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onGtPlaygroundPlayAllButton [
 	self 
 		onChildNamed: #pages; "BrTabGroup"
