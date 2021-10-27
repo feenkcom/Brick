@@ -1,1 +1,1 @@
-Package { #name : 'Brick-DevTool' }
+Package { #name : #'Brick-DevTool' }

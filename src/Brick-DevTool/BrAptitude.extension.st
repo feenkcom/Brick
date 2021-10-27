@@ -1,6 +1,6 @@
-Extension { #name : 'BrAptitude' }
+Extension { #name : #BrAptitude }
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> allRelatedViewModels [
 	"Find all potentially related view models based on requests"
 	<return: #Association>
@@ -8,7 +8,7 @@ BrAptitude class >> allRelatedViewModels [
 	^ self allRelatedViewModelsAndTheirRequests collect: [ :each | each key ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> allRelatedViewModelsAndTheirRequests [
 	"Find all potentially related view models based on requests"
 	<return: #Association>
@@ -24,7 +24,7 @@ BrAptitude class >> allRelatedViewModelsAndTheirRequests [
 			theReferencedRequests ifNotEmpty: [ aStream nextPut: aWidgetModelClass -> theReferencedRequests ] ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> gtCoderAptitudeGraphOverviewFor: aView context: aDictionary [
 	<gtClassView>
 	<gtView>
@@ -34,7 +34,7 @@ BrAptitude class >> gtCoderAptitudeGraphOverviewFor: aView context: aDictionary 
 		stencil: [ BrDevAptitudeGraphOverview new aptitudeClass: self ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> gtCoderAptitudeHierarchyFor: aView context: aDictionary [
 	<gtClassView>
 	<gtView>
@@ -51,7 +51,7 @@ BrAptitude class >> gtCoderAptitudeHierarchyFor: aView context: aDictionary [
 		expandAll
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> gtCoderAptitudeOverviewFor: aView context: aDictionary [
 	<gtClassView>
 	<gtView>
@@ -61,14 +61,14 @@ BrAptitude class >> gtCoderAptitudeOverviewFor: aView context: aDictionary [
 		stencil: [ BrDevAptitudeOverview new aptitudeClass: self ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassAndSubclassAptitudes [
 	^ self withAllSuperclassLooks
 		addAll: self withAllSubclasses;
 		yourself
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassChangeEvents [
 	<return: #Set of: #'BrChangeEvent class'>
 
@@ -77,7 +77,7 @@ BrAptitude class >> withAllSuperclassChangeEvents [
 			select: [ :eachReferencedClass | eachReferencedClass isKindOf: BrChangeEvent class ] ]) as: Set) asArray
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassEventReferences [
 	<return: #Association>
 
@@ -94,14 +94,14 @@ BrAptitude class >> withAllSuperclassEventReferences [
 					methods: (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachEventClass binding ]) ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassEvents [
 	<return: #Set of: #'BlEvent class'>
 
 	^ (self withAllSuperclassEventsAndTheirMethods collect: [ :each | each key ] as: Set) asArray
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassEventsAndTheirMethods [
 	<return: #Association>
 
@@ -114,7 +114,7 @@ BrAptitude class >> withAllSuperclassEventsAndTheirMethods [
 			thenCollect: [ :eachWishClass | eachWishClass -> (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachWishClass binding ]) ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassLooks [
 	| theLooks |
 	
@@ -130,7 +130,7 @@ BrAptitude class >> withAllSuperclassLooks [
 	^ theLooks
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassRequestReferences [
 	<return: #Collection of: #BrDevLookRequestReference>
 
@@ -144,14 +144,14 @@ BrAptitude class >> withAllSuperclassRequestReferences [
 					methods: (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachRequestClass binding ]) ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassRequests [
 	<return: #Set of: #'BrRequest class'>
 
 	^ (self withAllSuperclassRequestsAndTheirLooks collect: [ :each | each key ] as: Set) asArray
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassRequestsAndTheirLooks [
 	<return: #Association>
 
@@ -161,7 +161,7 @@ BrAptitude class >> withAllSuperclassRequestsAndTheirLooks [
 			thenCollect: [ :eachRequestClass | eachRequestClass -> eachLookClass ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassRequestsAndTheirMethods [
 	<return: #Association>
 
@@ -171,7 +171,7 @@ BrAptitude class >> withAllSuperclassRequestsAndTheirMethods [
 			thenCollect: [ :eachWishClass | eachWishClass -> (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachWishClass binding ]) ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassWishReferences [
 	<return: #Collection of: #BrDevLookWishReference>
 
@@ -185,7 +185,7 @@ BrAptitude class >> withAllSuperclassWishReferences [
 					methods: (eachLookClass methods select: [ :eachMethod | eachMethod hasLiteral: eachWishClass binding ]) ] ]
 ]
 
-{ #category : '*Brick-DevTool' }
+{ #category : #'*Brick-DevTool' }
 BrAptitude class >> withAllSuperclassWishes [
 	<return: #Set of: #'BrWish class'>
 
