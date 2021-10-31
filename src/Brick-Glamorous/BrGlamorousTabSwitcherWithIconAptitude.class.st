@@ -16,5 +16,5 @@ BrGlamorousTabSwitcherWithIconAptitude >> initialize [
 
 	self add: (BrGlamorousButtonIconAptitude new).
 	
-	self addChangeProperty: #(widget geometry) with: [ BlCircle new ].
+	self addChangeProperty: #(widget geometry) with: [ BlCircleGeometry new ].
 ]

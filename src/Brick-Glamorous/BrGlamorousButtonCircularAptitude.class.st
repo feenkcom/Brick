@@ -16,7 +16,7 @@ BrGlamorousButtonCircularAptitude >> initialize [
 
 	self
 		addChangeProperty: #(widgetContent geometry)
-		with: [ BlCircle new ].
+		with: [ BlCircleGeometry new ].
 
 	self add: (BrSizeAdjustmentAptitude new
 		tiny: [ :aStyle |

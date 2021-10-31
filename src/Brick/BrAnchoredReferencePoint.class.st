@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredReferencePoint,
 	#superclass : #Object,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #converting }
@@ -71,7 +71,7 @@ BrAnchoredReferencePoint >> gtPreviewFor: aView [
 					BlElement new
 						size: 8@8;
 						background: (Color gray alpha: 0.3);
-						geometry: (BlCircle new);
+						geometry: (BlCircleGeometry new);
 						relocate: thePoint - (4@4);
 						clipChildren: false;
 						layout: BlLinearLayout vertical alignCenter;
