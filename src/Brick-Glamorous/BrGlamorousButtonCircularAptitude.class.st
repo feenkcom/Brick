@@ -4,7 +4,7 @@ I define the circular exterior of the button. I am designed to be used with an i
 Class {
 	#name : #BrGlamorousButtonCircularAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #initialization }
@@ -16,7 +16,7 @@ BrGlamorousButtonCircularAptitude >> initialize [
 
 	self
 		addChangeProperty: #(widgetContent geometry)
-		with: [ BlCircle new ].
+		with: [ BlCircleGeometry new ].
 
 	self add: (BrSizeAdjustmentAptitude new
 		tiny: [ :aStyle |

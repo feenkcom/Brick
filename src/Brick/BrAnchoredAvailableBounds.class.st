@@ -28,7 +28,7 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #BrAnchoredAvailableBounds,
 	#superclass : #Object,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #converting }
@@ -93,7 +93,7 @@ BrAnchoredAvailableBounds >> gtPreviewFor: aView [
 					BlElement new
 						size: 8@8;
 						background: (Color gray alpha: 0.3);
-						geometry: (BlCircle new);
+						geometry: (BlCircleGeometry new);
 						relocate: thePoint - (4@4).
 					BlElement new
 						size: (theAvailableBounds) extent;

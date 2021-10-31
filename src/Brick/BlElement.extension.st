@@ -116,7 +116,7 @@ BlElement >> gtInspectorPaintModelAptitudeIn: aMondrianView [
 				padding: (BlInsets right: 5);
 				addChild: (BrHorizontalPane new 
 					background: Color veryLightGray;
-					geometry: BlCircle new;
+					geometry: BlCircleGeometry new;
 					padding: (BlInsets all: 5);
 					margin: (BlInsets right: 5);
 					fitContent;

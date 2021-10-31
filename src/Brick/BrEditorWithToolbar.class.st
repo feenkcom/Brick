@@ -8,7 +8,7 @@ Class {
 		'toolbar',
 		'editor'
 	],
-	#category : 'Brick-Editor - UI'
+	#category : #'Brick-Editor - UI'
 }
 
 { #category : #private }
@@ -61,7 +61,7 @@ BrEditorWithToolbar >> initialize [
 								beAppend;
 								stencil: [ BlElement new
 										size: 10 @ 10;
-										geometry: BlCircle new;
+										geometry: BlCircleGeometry new;
 										background: self theme default primaryBorderColor ]) ]).
 	toolbar
 		addItem:
@@ -75,7 +75,7 @@ BrEditorWithToolbar >> initialize [
 								beReplace;
 								stencil: [ BlElement new
 										size: 10 @ 10;
-										geometry: BlCircle new;
+										geometry: BlCircleGeometry new;
 										background: self theme default darkBorderColor ]) ]).
 	self
 		addAptitude:
