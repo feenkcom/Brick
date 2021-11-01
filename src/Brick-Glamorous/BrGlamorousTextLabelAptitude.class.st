@@ -1,14 +1,14 @@
 Class {
 	#name : #BrGlamorousTextLabelAptitude,
 	#superclass : #BrTextLabelAptitude,
-	#category : 'Brick-Glamorous-Label'
+	#category : #'Brick-Glamorous-Label'
 }
 
 { #category : #initialization }
 BrGlamorousTextLabelAptitude >> initialize [
 	super initialize.
 
-	self fontName: 'Source Sans Pro'.
+	self defaultFontName: 'Source Sans Pro'.
 
 	labelElement addAptitude: (BrSizeAdjustmentAptitude new
 		mini: [ :aStyle | aStyle fontSizeEm: 0.55 ];
