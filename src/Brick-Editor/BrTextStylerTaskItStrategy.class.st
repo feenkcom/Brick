@@ -12,9 +12,10 @@ Class {
 	#name : #BrTextStylerTaskItStrategy,
 	#superclass : #BrTextStylerCommonAsyncStrategy,
 	#instVars : [
-		'command'
+		'command',
+		'waitingTask'
 	],
-	#category : 'Brick-Editor-Styler'
+	#category : #'Brick-Editor-Styler'
 }
 
 { #category : #private }
@@ -37,6 +38,7 @@ BrTextStylerTaskItStrategy >> newStylingCommandFor: aBlText with: aStyler inEdit
 				text: aStyledText;
 				afterAction: aBlock;
 				editorElement: aBrEditorElement) ]).
+		waitingTask markAsFinished.
 		command := nil ] asBlTktTerminableCommand asBlTktLoggingCommand.
 	aCommand name: 'Text Styler for ''' , aName , ''''.
 	^ aCommand
@@ -53,6 +55,10 @@ BrTextStylerTaskItStrategy >> scheduleStyleTextInEditorElement: aBrEditorElement
 		ifEnabledDo: [ 
 			monitor critical: [ 
 				self terminateBackgroundStylingProcess.
+				
+				waitingTask ifNotNil: [ :aWaitingTask | aWaitingTask markAsFinished ].
+				waitingTask := BrEditorWaitingForStyledTextTask new.
+				aBrEditorElement enqueueTask: waitingTask.
 
 				BlTktWorkerProvider textStylerPool
 					schedule: (command := self
