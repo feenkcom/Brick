@@ -32,7 +32,7 @@ BaselineOfBrick >> baseline: spec [
 				spec repository: 'github://feenkcom/Bloc:v0.8.250/src' ].
 		spec
 			baseline: 'Futures' with: [
-				spec repository: 'github://feenkcom/pharo-futures:v0.6.8/src' ].
+				spec repository: 'github://feenkcom/pharo-futures:v0.6.9/src' ].
 		spec
 			baseline: 'BlocExamples' with: [
 				spec repository: 'github://feenkcom/Bloc:v0.8.250/src' ].
