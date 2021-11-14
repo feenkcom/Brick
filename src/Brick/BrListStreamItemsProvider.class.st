@@ -107,7 +107,7 @@ BrListStreamItemsProvider >> preloadAmount: aNumber [
 { #category : #'api - accessing' }
 BrListStreamItemsProvider >> requestNewItems [
 	mutex critical: [ 
-		promise := (self stream take: self preloadAmount) collect await.
+		promise := (self stream take: self preloadAmount) toArray await.
 		promise
 			onSuccessDo: [ :aResult |
 				mutex critical: [ items := items, aResult ].
