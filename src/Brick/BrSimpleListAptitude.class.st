@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'listElement'
 	],
-	#category : 'Brick-List - Look'
+	#category : #'Brick-List - Look'
 }
 
 { #category : #'api - orientation' }
@@ -69,7 +69,8 @@ BrSimpleListAptitude >> initializeListElement [
 BrSimpleListAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
+	self when: BrListModelItemsAddedEvent do: [ :anEvent | self onModelItemsAdded: anEvent ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
 	self when: BrListItemIdStencilChangedEvent do: [ :anEvent | self onItemIdStencilChanged: anEvent itemIdStencil ].
@@ -125,8 +126,13 @@ BrSimpleListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder 
 ]
 
 { #category : #hooks }
+BrSimpleListAptitude >> onModelItemsAdded: anEvent [
+	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyItemsInserted: anEvent insertedInterval ])
+]
+
+{ #category : #hooks }
 BrSimpleListAptitude >> onModelItemsChanged: anEvent [
-	self listElement dataSource notifyChanged
+	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ])
 ]
 
 { #category : #hooks }
