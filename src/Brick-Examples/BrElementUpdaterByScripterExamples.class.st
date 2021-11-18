@@ -9,12 +9,12 @@ Class {
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> basicUpdater [
 	<gtExample>
-	| aRequester |
-	aRequester := BrElementUpdater new.
-	self assert: aRequester element isNil.
-	self assert: aRequester action isNotNil.
-	self assert: aRequester isUpdateRequested not.
-	^ aRequester
+	| anUpdater |
+	anUpdater := BrElementUpdater new.
+	self assert: anUpdater element isNil.
+	self assert: anUpdater action isNotNil.
+	self assert: anUpdater isUpdateRequested not.
+	^ anUpdater
 ]
 
 { #category : #'examples - support' }
