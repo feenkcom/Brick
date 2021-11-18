@@ -29,33 +29,51 @@ BrFromPromise >> initialize [
 	super initialize.
 	
 	dataSnapshot := BrFromFutureDataSnapshot new setPending: nil.
-	elementStencil := [ BlElement new ] asStencil.
-	elementDataBinder := BrFromFutureDataBinder new.
+	elementStencil := nil.
+	elementDataBinder := nil.
 	updater := BrElementUpdater new.
 	updater element: self selector: #privateUpdateElement.
 ]
 
-{ #category : #'hooks - children' }
-BrFromPromise >> onAddedToSceneGraph [
-	super onAddedToSceneGraph.
+{ #category : #private }
+BrFromPromise >> privateDataSnapshot: aDataSnapshot synchronous: isSynchronous [
+	dataSnapshot := aDataSnapshot.
 	
-	dataSnapshot isPending
-		ifFalse: [ ^ self ].
-
-	element
-		ifNil: [ element := elementStencil asElement ].
-
-	self privateUpdateElement.
-	
-	promise
-		then: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ]
-		otherwise: [ :anError | self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ]
+	isSynchronous
+		ifTrue: [ self privateUpdateElement ]
+		ifFalse: [ updater requestUpdate ]
 ]
 
 { #category : #private }
-BrFromPromise >> privateDataSnapshot: aDataSnapshot [
-	dataSnapshot := aDataSnapshot.
-	updater requestUpdate
+BrFromPromise >> privateInitializeElement [
+	| aPromise isProcessed |
+
+	dataSnapshot isPending
+		ifFalse: [ ^ self ].
+	
+	element
+		ifNil: [ element := elementStencil asElement ].
+	
+	isProcessed := false.
+	
+	aPromise := promise.
+	aPromise
+		then: [ :aResult :isSynchronous |
+			isProcessed := true.
+			(promise == aPromise)
+				ifTrue: [
+					self
+						privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult)
+						synchronous: isSynchronous ] ]
+		otherwise: [ :anError |
+			isProcessed := true.
+			(promise == aPromise)
+				ifTrue: [
+					self
+						privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError)
+						synchronous: false ] ].
+	
+	isProcessed ifFalse: [ self privateUpdateElement ]
 ]
 
 { #category : #private }
@@ -81,8 +99,17 @@ BrFromPromise >> promise: aPromise [
 
 { #category : #'api - accessing' }
 BrFromPromise >> promise: aPromise initialValue: anObject [
+	self
+		assert: [ elementStencil notNil ]
+		description: [ 'Must configure element stencil before setting the promise' ].
+		
+	self
+		assert: [ elementDataBinder notNil ]
+		description: [ 'Must assign element data binder before setting the promise' ].
+
 	promise := aPromise asAsyncPromise.
-	dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject
+	dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject.
+	self privateInitializeElement
 ]
 
 { #category : #'api - accessing' }
