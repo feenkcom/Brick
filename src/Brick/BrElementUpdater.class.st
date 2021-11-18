@@ -1,3 +1,18 @@
+"
+I handle asynchronous {{gtClass:BlElement}} update requests.
+When {{gtMethod:BrElementUpdater>>#requestUpdate|label=#selector}} is called, I {{gtMethod:BrElementUpdater>>#postponeUpdate|label=schedule}} an update and execute an {{gtMethod:BrElementUpdater>>#action|label=#selector}}, when the {{gtClass:BlElement}} is  {{gtMethod:BlElement>>#isAttachedToSceneGraph|label=attached to a scene graph}}.
+# Public API
+- {{gtMethod:BrElementUpdater>>#element:|label=#selector}} a {{gtClass:BlElement}} on which updates are performed,
+- {{gtMethod:BrElementUpdater>>#action:|label=#selector}} a valuable which is evaluated when it is time to update the {{gtClass:BlElement}},
+- {{gtMethod:BrElementUpdater>>#element:selector:|label=#selector}} an utility method that combines the above two methods,
+- {{gtMethod:BrElementUpdater>>#requestUpdate|label=#selector}} schedules the {{gtClass:BlElement}} update.
+# Example
+### Requester Initialization
+The following example indicates how I can be initialized, having a {{gtClass:BlElement}} with a given background: {{gtExample:BrElementUpdaterByScripterExamples >> #updaterInScripterAndElementInSpace | codeExpanded=false | previewExpanded=true}}
+## Requesting Update
+The background is updated on the {{gtMethod:BrElementUpdater>>#requestUpdate|label=request}} when the {{gtClass:BlElement}} is attached to a scene graph: {{gtExample:BrElementUpdaterByScripterExamples >> #updateRequest_AfterElementAddedInSceneGraph | codeExpanded=false | previewExpanded=true}}  
+
+"
 Class {
 	#name : #BrElementUpdater,
 	#superclass : #Object,
