@@ -2,11 +2,7 @@ Class {
 	#name : #BrListStreamItemsProvider,
 	#superclass : #BrAbstractListItemsProvider,
 	#instVars : [
-		'items',
-		'mutex',
-		'stream',
-		'promise',
-		'preloadAmount'
+		'buffer'
 	],
 	#category : #'Brick-List - Model'
 }
@@ -25,119 +21,48 @@ BrListStreamItemsProvider class >> forStream: anAsyncStream [
 BrListStreamItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 	
-	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel).
-
-	(self shouldRequestNewItemsForIndex: 1)
-		ifTrue: [ self requestNewItems ]
+	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel)
 ]
 
 { #category : #accessing }
 BrListStreamItemsProvider >> currentItems [
-	^ items
-]
-
-{ #category : #testing }
-BrListStreamItemsProvider >> hasMoreItemsToLoad [
-	^ stream isDone not
-]
-
-{ #category : #initialization }
-BrListStreamItemsProvider >> initialize [
-	super initialize.
-	
-	items := #().
-	mutex := Monitor new.
-	stream := AsyncEmptyStream new.
-	preloadAmount := 100
-]
-
-{ #category : #testing }
-BrListStreamItemsProvider >> isBoundaryNearIndex: anIndex [
-	| itemsUntilEdge percentageLeftUntilEdge | 
-
-	itemsUntilEdge := self loadedItemsCount - anIndex.
-	(itemsUntilEdge > self preloadAmount)
-		ifTrue: [ ^ false ].
-
-	percentageLeftUntilEdge := (itemsUntilEdge / self preloadAmount) * 100.0.
-	^ percentageLeftUntilEdge < 20
-]
-
-{ #category : #testing }
-BrListStreamItemsProvider >> isRequestingItems [
-	^ mutex critical: [
-		promise notNil and: [ promise isFinished not ] ]
+	^ buffer
 ]
 
 { #category : #accessing }
 BrListStreamItemsProvider >> itemAt: anIndex [
-	| requestedItem |
-
-	requestedItem := items at: anIndex.
-
-	(self shouldRequestNewItemsForIndex: anIndex) ifTrue: [
-		self requestNewItems ].
-
-	^ requestedItem
+	^ buffer at: anIndex
 ]
 
 { #category : #accessing }
 BrListStreamItemsProvider >> itemCount [
 	<return: #Number>
 
-	^ items size
+	^ buffer size
 ]
 
-{ #category : #accessing }
-BrListStreamItemsProvider >> loadedItemsCount [
-	^ items size
+{ #category : #'private - event handling' }
+BrListStreamItemsProvider >> onBufferChanged: anAnnouncement [
+	listModel dispatchEvent: (BrListModelItemsAddedEvent new
+		addedItemsCount: anAnnouncement newItems size;
+		firstAddedItemIndex: anAnnouncement index)
 ]
 
 { #category : #accessing }
 BrListStreamItemsProvider >> preloadAmount [
-
-	^ preloadAmount
+	^ 20
 ]
 
 { #category : #initialization }
 BrListStreamItemsProvider >> preloadAmount: aNumber [
-	preloadAmount := aNumber
-]
-
-{ #category : #'api - accessing' }
-BrListStreamItemsProvider >> requestNewItems [
-	mutex critical: [ 
-		promise := (self stream take: self preloadAmount) toArray await.
-		promise
-			onSuccessDo: [ :aResult |
-				mutex critical: [ items := items, aResult ].
-				listModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: listModel). ];
-			onFailureDo: [ :anException |
-				"Logging the error on the transcript only shows the exception, not where it came from.
-				Emit the exception as well so that it can be found with a beacon logger (which includes the stack)."
-				anException emit.
-				NonInteractiveTranscript stderr
-					nextPutAll: anException printString;
-					cr;
-					flush ] ]
-]
-
-{ #category : #testing }
-BrListStreamItemsProvider >> shouldRequestNewItemsForIndex: anIndex [
-	self isRequestingItems
-		ifTrue: [ ^ false ].
 	
-	^ self hasMoreItemsToLoad
-		and: [ self isBoundaryNearIndex: anIndex ]
-]
-
-{ #category : #accessing }
-BrListStreamItemsProvider >> stream [
-
-	^ stream
 ]
 
 { #category : #initialization }
 BrListStreamItemsProvider >> stream: aStream [
-	stream := AsyncFuseStream stream: aStream
+	buffer := AsyncStreamBuffer forStream: aStream.
+	buffer
+		when: AsyncStreamBufferChanged
+		send: #onBufferChanged:
+		to: self
 ]

@@ -5,7 +5,7 @@ Class {
 		'firstAddedItemIndex',
 		'addedItemsCount'
 	],
-	#category : 'Brick-List - Events'
+	#category : #'Brick-List - Events'
 }
 
 { #category : #accessing }
@@ -26,4 +26,9 @@ BrListModelItemsAddedEvent >> firstAddedItemIndex [
 { #category : #accessing }
 BrListModelItemsAddedEvent >> firstAddedItemIndex: anInteger [
 	firstAddedItemIndex := anInteger
+]
+
+{ #category : #accessing }
+BrListModelItemsAddedEvent >> insertedInterval [
+	^ self firstAddedItemIndex to: (self firstAddedItemIndex + self addedItemsCount - 1)
 ]

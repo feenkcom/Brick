@@ -7,7 +7,7 @@ Class {
 		'listElement',
 		'rowStencil'
 	],
-	#category : 'Brick-List - Look'
+	#category : #'Brick-List - Look'
 }
 
 { #category : #initialization }
@@ -38,6 +38,7 @@ BrColumnedListAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
+	self when: BrListModelItemsAddedEvent do: [ :anEvent | self onModelItemsAdded: anEvent ].
 	self when: BrColumnsChanged do: [ :anEvent | self onColumnsChanged: anEvent columns ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
@@ -75,6 +76,11 @@ BrColumnedListAptitude >> onColumnsChanged: aCollectionOfBrListColumns [
 { #category : #hooks }
 BrColumnedListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder [
 	self listElement dataSource itemTypeStencil: aBrListItemTypeStencilBuilder
+]
+
+{ #category : #hooks }
+BrColumnedListAptitude >> onModelItemsAdded: anEvent [
+	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyItemsInserted: anEvent insertedInterval ])
 ]
 
 { #category : #hooks }
