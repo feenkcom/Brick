@@ -60,6 +60,14 @@ BrListStreamItemsProvider >> preloadAmount: aNumber [
 	
 ]
 
+{ #category : #'api - loading' }
+BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
+	<return: #TAsyncPromise>
+
+	^ (buffer preloadUntilFoundSuchThat: aBlock)
+		then: [ :anAsyncStreamBufferItem | anAsyncStreamBufferItem index ]
+]
+
 { #category : #initialization }
 BrListStreamItemsProvider >> stream: aStream [
 	buffer := AsyncStreamBuffer forStream: aStream.
