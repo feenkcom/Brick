@@ -6,7 +6,7 @@ Class {
 		'clickShowCondition',
 		'shouldHideWidget'
 	],
-	#category : 'Brick-Dropdown - Look'
+	#category : #'Brick-Dropdown - Look'
 }
 
 { #category : #accessing }
@@ -100,6 +100,25 @@ BrWithDropdownAptitude >> attachToCenter [
 { #category : #'api - displaying' }
 BrWithDropdownAptitude >> doNotHideWidget [
 	self shouldHideWidget: false
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> handleMouseUpEvent: anEvent [
+	
+	innerContainer ifNil: [ ^ self ].
+
+	"this checks whether this dropdown has nested dropdowns. if we do, we will not close the parent, since we might be in the child dropdown.
+	
+	problematic usecase: if you click outside all dropdowns, not all of them might be closed due to order of handling the click.
+	"
+	innerContainer withAllChildrenBreadthFirstDo: [ :eachChild | 
+		(eachChild aptitude notNil and: [eachChild aptitude hasActorOfKind: BrWithDropdownAptitude]) ifTrue: [ 
+			eachChild aptitude withAllChildren
+				detect: [ :each | each isKindOf: BrWithDropdownAptitude ]
+				ifFound: [ :aDropdownAptitude | 
+					aDropdownAptitude visible ifTrue: [ ^ self ] ] ] ].
+					
+	super handleMouseUpEvent: anEvent
 ]
 
 { #category : #'api - displaying' }
