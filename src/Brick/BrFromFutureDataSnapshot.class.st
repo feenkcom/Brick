@@ -9,7 +9,7 @@ Class {
 		'ErrorState',
 		'PendingState'
 	],
-	#category : 'Brick-Future - Support'
+	#category : #'Brick-Future - Support'
 }
 
 { #category : #initialization }
@@ -45,6 +45,12 @@ BrFromFutureDataSnapshot >> hasData [
 { #category : #testing }
 BrFromFutureDataSnapshot >> hasError [
 	^ state key = ErrorState
+]
+
+{ #category : #accessing }
+BrFromFutureDataSnapshot >> ifError: anErrorBlock [		
+	self hasError
+		ifTrue: [ ^ anErrorBlock cull: self error ]
 ]
 
 { #category : #accessing }
@@ -86,6 +92,11 @@ BrFromFutureDataSnapshot >> initialize [
 { #category : #testing }
 BrFromFutureDataSnapshot >> isPending [
 	^ state key = PendingState
+]
+
+{ #category : #testing }
+BrFromFutureDataSnapshot >> isSuccess [
+	^ state key = DataState
 ]
 
 { #category : #initialization }

@@ -91,6 +91,20 @@ BlElement >> asVerticallyResizableDo: aBlock [
 ]
 
 { #category : #'*Brick' }
+BlElement >> asyncPromise [
+	^ self userData
+		at: #asyncPromise
+		ifAbsentPut: [ BrAsyncElementPromise on: self ]
+]
+
+{ #category : #'*Brick' }
+BlElement >> asyncSink [
+	^ self userData
+		at: #asyncSink 
+		ifAbsentPut: [ BrAsyncElementSink on: self ]
+]
+
+{ #category : #'*Brick' }
 BlElement >> gtInspectorModelAptitudeGraphIn: aComposite [
 	<gtInspectorPresentationOrder: 30>
 	
@@ -222,4 +236,14 @@ BlElement >> viewModelDo: aBlock ifAbsent: anAbsentBlock [
 		at: #brickViewModel
 		ifPresent: aBlock
 		ifAbsent: anAbsentBlock
+]
+
+{ #category : #'*Brick' }
+BlElement >> withAsyncPromiseDo: aBlock [
+	aBlock value: self asyncPromise
+]
+
+{ #category : #'*Brick' }
+BlElement >> withAsyncSinkDo: aBlock [
+	aBlock value: self asyncSink
 ]
