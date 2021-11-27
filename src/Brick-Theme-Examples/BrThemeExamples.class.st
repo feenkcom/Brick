@@ -103,9 +103,9 @@ BrThemeExamples >> profile: anElement named: aString [
 	scripter := BlDevScripter new
 		element: anElement;
 		yourself.
-	telemetry := BlMemoryTelemetry new.
+	telemetry := MemoryTelemetry new.
 	scripter space telemetry: telemetry.
-	logger := BlTelemetryLogger named: aString.
+	logger := TelemetryLogger named: aString.
 	logger start.
 	scripter wait forEmptySpaceTaskQueue.
 	100

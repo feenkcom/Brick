@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : 'Brick-Editor-Commands'
+	#category : #'Brick-Editor-Commands'
 }
 
 { #category : #accessing }
@@ -26,9 +26,7 @@ BrTextEditorCommand >> executeOn: aTextEditor [
 
 { #category : #accessing }
 BrTextEditorCommand >> telemetry [
-	<return: #BlTelemetry>
+	<return: #Telemetry>
 
-	^ self context
-		ifNil: [ BlNullTelemetry uniqueInstance ]
-		ifNotNil: [ :aContext | aContext telemetry ]
+	^ BlFrameTelemetry
 ]

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : 'Brick-Editor-Commands-Holder'
+	#category : #'Brick-Editor-Commands-Holder'
 }
 
 { #category : #accessing }
@@ -32,9 +32,7 @@ BrTextEditorHolderCommand >> sendTo: aSegmentHolder [
 
 { #category : #accessing }
 BrTextEditorHolderCommand >> telemetry [
-	<return: #BlTelemetry>
+	<return: #Telemetry>
 
-	^ self context
-		ifNil: [ BlNullTelemetry uniqueInstance ]
-		ifNotNil: [ :aContext | aContext telemetry ]
+	^ BlFrameTelemetry
 ]

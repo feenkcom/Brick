@@ -11,7 +11,7 @@ Class {
 	#classInstVars : [
 		'defaultSegmentLayoutBlock'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #cleanup }
@@ -40,25 +40,25 @@ BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 	hasSelection := self hasSelection.
 	hasCursor := self hasCursor.
 	
-	self infiniteElement telemetry
-		timeSync: [ 'Update segment properties' ]
+	BlFrameTelemetry
+		time: [ 'Update segment properties' ]
 		during: [ segment updateSegmentProperties ].
 
 	pieceElements := self newPiecesMap.
 	newPieceElements := OrderedCollection new.
 
-	thePieces := self infiniteElement telemetry
-		timeSync: [ 'Get pieces' ]
+	thePieces := BlFrameTelemetry
+		time: [ 'Get pieces' ]
 		during: [ segment pieces ].
 	
-	self infiniteElement telemetry
-		timeSync: [ 'Create piece elements' ]
+	BlFrameTelemetry
+		time: [ 'Create piece elements' ]
 		during: [
 			thePieces withIndexDo: [ :aPiece :eachIndex | 
 				| thePieceElements |
 				
-				thePieceElements := self infiniteElement telemetry
-					timeSync: [ 'Create piece elements at {1}' format: { eachIndex } ]
+				thePieceElements := BlFrameTelemetry
+					time: [ 'Create piece elements at {1}' format: { eachIndex } ]
 					during: [ (aPiece createElement: self infiniteElement) asOrderedCollection ].
 				
 				newPieceElements addAll: thePieceElements.
@@ -66,31 +66,31 @@ BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 
 	(hasCursor or: [ hasSelection ])
 		ifTrue: [
-			self infiniteElement telemetry
+			BlFrameTelemetry
 				timeSync: [ 'Set cursor, selection' ]
 				during: [
 					pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
 						hasCursor
 							ifTrue: [
-								self infiniteElement telemetry
+								BlFrameTelemetry
 									timeSync: [ 'Set cursor' ]
 									during: [ aPiece setCursor: aPieceElement of: anEditorSegment in: self infiniteElement ] ].
 						
-						self infiniteElement telemetry
+						BlFrameTelemetry
 							timeSync: [ 'Set focus' ]
 							during: [ aPiece updateFocus: self infiniteElement isFocused of: aPieceElement in: self infiniteElement ].
 						
 						hasSelection
 							ifTrue: [
-								self infiniteElement telemetry
+								BlFrameTelemetry
 									timeSync: [ 'Set selection' ]
 									during: [ aPiece updateSelection: aPieceElement of: anEditorSegment in: self infiniteElement ] ] ] ] ].
 
-	self infiniteElement telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Remove segment children' ]
 		during: [ itemElement removeChildren ].
 
-	self infiniteElement telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Add segment children' ]
 		during: [ itemElement addChildren: newPieceElements ].
 
@@ -271,12 +271,12 @@ BrTextEditorLineSegmentHolder >> screenToCursor: aTransformation [
 BrTextEditorLineSegmentHolder >> segment: anEditorSegment [
 	segment == anEditorSegment
 		ifTrue: [
-			self infiniteElement telemetry
-				timeSync: [ 'Update segment at {1}' format: { anEditorSegment index } ]
+			BlFrameTelemetry
+				time: [ 'Update segment at {1}' format: { anEditorSegment index } ]
 				during: [ self updateSegment: anEditorSegment ] ]
 		ifFalse: [
-			self infiniteElement telemetry
-				timeSync: [ 'Build segment at {1}' format: { anEditorSegment index } ]
+			BlFrameTelemetry
+				time: [ 'Build segment at {1}' format: { anEditorSegment index } ]
 				during: [ self buildSegment: anEditorSegment ] ]
 ]
 
@@ -293,11 +293,11 @@ BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 	newPieceMap := self newPiecesMap.
 	newPieceElements := OrderedCollection new.
 	
-	self infiniteElement telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Update piece elements' ]
 		during: [
 			| thePieces |
-			self infiniteElement telemetry
+			BlFrameTelemetry
 				timeSync: [ 'Compute pieces' ]
 				during: [ thePieces := segment pieces ].
 			
@@ -314,12 +314,12 @@ BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 						eachSegmentPiece currentCursors: eachPiece currentCursors.
 
 						theSegmentElements do: [ :eachSegmentElement |
-							self infiniteElement telemetry
+							BlFrameTelemetry
 								timeSync: [ 'Update text of `{1}`' format: { eachPiece } ]
 								during: [ eachPiece updateText: eachSegmentElement of: segment in: self infiniteElement ] ].
 						theSegmentElements ]
 					ifAbsent: [ 
-							self infiniteElement telemetry
+							BlFrameTelemetry
 								timeSync: [ 'Create element for `{1}`' format: { eachSegmentPiece } ]
 								during: [ (eachSegmentPiece createElement: self infiniteElement) asOrderedCollection ] ].
 			
@@ -328,25 +328,25 @@ BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 
 	pieceElements := newPieceMap.
 
-	self infiniteElement telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Update cursor and selection' format: { anEditorSegment index } ]
 		during: [
 			pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-				self infiniteElement telemetry
+				BlFrameTelemetry
 					timeSync: [ 'Update cursor of {1}' format: { aPiece } ]
 					during: [ aPiece updateCursor: aPieceElement of: anEditorSegment in: self infiniteElement ].
-				self infiniteElement telemetry
+				BlFrameTelemetry
 					timeSync: [ 'Update selection of {1}' format: { aPiece } ]
 					during: [ aPiece updateSelection: aPieceElement of: anEditorSegment in: self infiniteElement ].
-				self infiniteElement telemetry
+				BlFrameTelemetry
 					timeSync: [ 'Update focus of {1}' format: { aPiece } ]
 					during: [ aPiece updateFocus: self infiniteElement isFocused of: aPieceElement in: self infiniteElement ]. ] ].
 
-	self infiniteElement telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Remove children' ]
 		during: [ itemElement removeChildren ].
 
-	self infiniteElement telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Add piece elements' ]
 		during: [ itemElement addChildren: newPieceElements ].
 

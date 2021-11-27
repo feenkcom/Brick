@@ -9,7 +9,7 @@ Class {
 		'cursorStencil',
 		'segmentPiece'
 	],
-	#category : 'Brick-Editor-UI'
+	#category : #'Brick-Editor-UI'
 }
 
 { #category : #'cursor - management' }
@@ -194,7 +194,7 @@ BrTextElementWithCursors >> segmentPiece: aSegmentPiece [
 	| isTextSame |
 	segmentPiece := aSegmentPiece.
 	
-	self telemetry
+	BlFrameTelemetry
 		timeSync: [ 'Compare text `{1}` with `{2}`' format: { self text . aSegmentPiece text } ]
 		during: [ isTextSame := self text equals: aSegmentPiece text ].
 
@@ -202,11 +202,11 @@ BrTextElementWithCursors >> segmentPiece: aSegmentPiece [
 		ifFalse: [
 			| aTextCopy |
 			
-			self telemetry
+			BlFrameTelemetry
 				timeSync: [ 'Copy text `{1}`' format: { aSegmentPiece text } ]
 				during: [ aTextCopy := aSegmentPiece text copyFrom: 1 to: aSegmentPiece text size ].
 
-			self telemetry
+			BlFrameTelemetry
 				timeSync: [ 'Set text `{1}`' format: { aTextCopy } ]
 				during: [ self text: aTextCopy ] ]
 ]

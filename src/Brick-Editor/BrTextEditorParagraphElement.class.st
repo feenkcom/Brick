@@ -14,7 +14,7 @@ Class {
 		'Slants',
 		'Stretches'
 	],
-	#category : 'Brick-Editor-UI'
+	#category : #'Brick-Editor-UI'
 }
 
 { #category : #'instance creation' }
@@ -313,22 +313,22 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 		self layout measureChildWithMargins: eachElement parentSpec: anExtentMeasurementSpec ].
 
 	(paragraph isNil or: [ paragraph isNull ])
-		ifTrue: [ self telemetry
-				timeSync: 'Build paragraph'
+		ifTrue: [ BlFrameTelemetry
+				time: 'Build paragraph'
 				during: [ paragraph := self buildParagraph ] ].
 
 	aParagraphLayoutWidth := anExtentMeasurementSpec widthSpec isUnspecified
 		ifTrue: [ SmallInteger maxVal ]
 		ifFalse: [ ((anExtentMeasurementSpec widthSpec size - self padding width) max: 0) ].
 
-	self telemetry
-		timeSync: 'Layout paragraph'
+	BlFrameTelemetry
+		time: 'Layout paragraph'
 		during: [ paragraph layoutWithWidth: aParagraphLayoutWidth ].
 
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: (paragraph longestLine @ paragraph height) + self padding extent).
 	
-	self telemetry
-		timeSync: 'Measure cursors'
+	BlFrameTelemetry
+		time: 'Measure cursors'
 		during: [ self cursorElements ifNotEmpty: [ :theCursors | self measureCursors: theCursors ] ]
 ]
 

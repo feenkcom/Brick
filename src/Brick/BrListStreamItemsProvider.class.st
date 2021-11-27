@@ -43,9 +43,11 @@ BrListStreamItemsProvider >> itemCount [
 
 { #category : #'private - event handling' }
 BrListStreamItemsProvider >> onBufferChanged: anAnnouncement [
-	listModel dispatchEvent: (BrListModelItemsAddedEvent new
-		addedItemsCount: anAnnouncement newItems size;
-		firstAddedItemIndex: anAnnouncement index)
+	listModel
+		ifNotNil: [ :aListModel |
+			aListModel dispatchEvent: (BrListModelItemsAddedEvent new
+				addedItemsCount: anAnnouncement newItems size;
+				firstAddedItemIndex: anAnnouncement index) ]
 ]
 
 { #category : #accessing }

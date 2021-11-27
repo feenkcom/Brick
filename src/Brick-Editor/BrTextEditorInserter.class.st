@@ -23,7 +23,7 @@ Class {
 		'inputFilter',
 		'surroundMap'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }
@@ -238,8 +238,8 @@ BrTextEditorInserter >> insert [
 				theMovements do: [ :eachMovement | aNavigator move: eachMovement key to: eachMovement value ].
 				aNavigator apply ].
 			
-			self telemetry
-				timeSync: [ 'Insert {1} at {2}' format: { theInsertionStrings asArray . theInsertionIndices asArray } ]
+			BlFrameTelemetry
+				time: [ 'Insert {1} at {2}' format: { theInsertionStrings asArray . theInsertionIndices asArray } ]
 				during: [ self privateInsertStrings: theInsertionStrings atAll: theInsertionIndices ] ] ].	
 	
 	theInsertions reverseDo: [ :eachInsertion | 
@@ -247,8 +247,8 @@ BrTextEditorInserter >> insert [
 			ifTrue: [
 				eachInsertion at: #surrounding
 					ifPresent: [ :aSurrounding |
-						self telemetry
-							timeSync: [ 'Update cursor {1} surrounding {2} at {3}' format: {
+						BlFrameTelemetry
+							time: [ 'Update cursor {1} surrounding {2} at {3}' format: {
 								(eachInsertion at: #string).
 								(aSurrounding at: #string).
 								(eachInsertion at: #requestedIndex)} ]
@@ -257,8 +257,8 @@ BrTextEditorInserter >> insert [
 								withSurround: (aSurrounding at: #string)
 								at: (eachInsertion at: #requestedIndex) ] ]
 					ifAbsent: [
-						self telemetry
-							timeSync: [ 'Update cursor {1} at {2}' format: {
+						BlFrameTelemetry
+							time: [ 'Update cursor {1} at {2}' format: {
 								(eachInsertion at: #string).
 								(eachInsertion at: #requestedIndex)} ]
 							during: [ self
@@ -268,8 +268,8 @@ BrTextEditorInserter >> insert [
 			ifTrue: [
 				eachInsertion at: #surrounding
 					ifPresent: [ :aSurrounding |
-						self telemetry
-							timeSync: [ 'Update selection {1} surrounding {2} at {3}' format: {
+						BlFrameTelemetry
+							time: [ 'Update selection {1} surrounding {2} at {3}' format: {
 								(eachInsertion at: #string).
 								(aSurrounding at: #string).
 								(eachInsertion at: #requestedIndex)} ]
@@ -278,8 +278,8 @@ BrTextEditorInserter >> insert [
 								withSurround: (aSurrounding at: #string)
 								at: (eachInsertion at: #requestedIndex) ] ]
 					ifAbsent: [
-						self telemetry
-							timeSync: [ 'Update selection {1} at {2}' format: {
+						BlFrameTelemetry
+							time: [ 'Update selection {1} at {2}' format: {
 								(eachInsertion at: #string).
 								(eachInsertion at: #requestedIndex)} ]
 							during: [ self
@@ -385,8 +385,8 @@ BrTextEditorInserter >> privateUpdateCursorsAfterInsertion: aText at: anIndex [
 	self cursor do: [ :aCursor |
 		| aCursorDelta |
 		
-		aCursorDelta := self telemetry
-			timeSync: [
+		aCursorDelta := BlFrameTelemetry
+			time: [
 				'Compute movement for {1} inserting {2} at {3}'
 					format: { aCursor position . aText . anIndex } ]
 			during: [
@@ -397,8 +397,8 @@ BrTextEditorInserter >> privateUpdateCursorsAfterInsertion: aText at: anIndex [
 
 		aCursorDelta isZero
 			ifFalse: [
-				self telemetry
-					timeSync: [ 'Move cursor at {1} by {2}' format: { aCursor position . aCursorDelta } ]
+				BlFrameTelemetry
+					time: [ 'Move cursor at {1} by {2}' format: { aCursor position . aCursorDelta } ]
 					during: [
 						self editor navigator
 							context: self context;

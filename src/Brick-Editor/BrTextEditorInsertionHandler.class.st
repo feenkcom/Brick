@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Brick-Editor-UI - Handlers'
+	#category : #'Brick-Editor-UI - Handlers'
 }
 
 { #category : #accessing }
@@ -65,8 +65,8 @@ BrTextEditorInsertionHandler >> textInputEvent: anEvent [
 
     anEvent consumed: true.
 
-	anEvent currentTarget telemetry
-		timeSync: [ 'Insert {1} at cursor' format: { anEvent text asString } ]
+	BlFrameTelemetry
+		time: [ 'Insert {1} at cursor' format: { anEvent text asString } ]
 		during: [
 			self
         		insert: anEvent text asString
