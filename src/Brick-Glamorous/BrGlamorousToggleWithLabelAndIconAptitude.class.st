@@ -1,15 +1,15 @@
 Class {
-	#name : #BrGlamorousToggleWithIconAptitude,
+	#name : #BrGlamorousToggleWithLabelAndIconAptitude,
 	#superclass : #BrAptitude,
 	#category : #'Brick-Glamorous-Toggle'
 }
 
 { #category : #initialization }
-BrGlamorousToggleWithIconAptitude >> initialize [
+BrGlamorousToggleWithLabelAndIconAptitude >> initialize [
 	super initialize.
 	
+	self add: BrGlamorousTextLabelAptitude new.
 	self add: BrGlamorousButtonIconAptitude new.
 	self add: (BrGlamorousToggleRectangularAptitude new cornerRadius: 0).
-	self add: BrGlamorousToggleBackgroundAptitude new.
-	self add: BrGlamorousButtonWithLabelTooltipAptitude new
+	self add: BrGlamorousToggleBackgroundAptitude new
 ]

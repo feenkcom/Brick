@@ -6,7 +6,7 @@ Class {
 		'subscriptions',
 		'context'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'private - asserting' }
@@ -457,11 +457,9 @@ BrTextEditorOperator >> subscribe: anEventHandler [
 
 { #category : #accessing }
 BrTextEditorOperator >> telemetry [
-	<return: #BlTelemetry>
+	<return: #Telemetry>
 
-	^ self context
-		ifNil: [ BlNullTelemetry uniqueInstance ]
-		ifNotNil: [ :aContext | aContext telemetry ]
+	^ BlFrameTelemetry
 ]
 
 { #category : #accessing }

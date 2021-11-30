@@ -21,7 +21,8 @@ BrListStreamItemsProvider class >> forStream: anAsyncStream [
 BrListStreamItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 	
-	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel)
+	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel).
+	aListModel dispatchEvent: (BrListModelPromiseEnqueuedEvent new promise: buffer bufferLoadingPromise).
 ]
 
 { #category : #accessing }
@@ -43,9 +44,11 @@ BrListStreamItemsProvider >> itemCount [
 
 { #category : #'private - event handling' }
 BrListStreamItemsProvider >> onBufferChanged: anAnnouncement [
-	listModel dispatchEvent: (BrListModelItemsAddedEvent new
-		addedItemsCount: anAnnouncement newItems size;
-		firstAddedItemIndex: anAnnouncement index)
+	listModel
+		ifNotNil: [ :aListModel |
+			aListModel dispatchEvent: (BrListModelItemsAddedEvent new
+				addedItemsCount: anAnnouncement newItems size;
+				firstAddedItemIndex: anAnnouncement index) ]
 ]
 
 { #category : #accessing }
@@ -56,6 +59,14 @@ BrListStreamItemsProvider >> preloadAmount [
 { #category : #initialization }
 BrListStreamItemsProvider >> preloadAmount: aNumber [
 	
+]
+
+{ #category : #'api - loading' }
+BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
+	<return: #TAsyncPromise>
+
+	^ (buffer preloadUntilFoundSuchThat: aBlock)
+		then: [ :anAsyncStreamBufferItem | anAsyncStreamBufferItem index ]
 ]
 
 { #category : #initialization }

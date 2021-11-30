@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'listModel'
 	],
-	#category : 'Brick-List - Model'
+	#category : #'Brick-List - Model'
 }
 
 { #category : #converting }
@@ -38,4 +38,11 @@ BrAbstractListItemsProvider >> itemCount [
 BrAbstractListItemsProvider >> listModel [
 
 	^ listModel
+]
+
+{ #category : #'api - loading' }
+BrAbstractListItemsProvider >> preloadUntilFoundSuchThat: aBlock [
+	<return: #TAsyncPromise>
+
+	^ self subclassResponsibility
 ]

@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
-	#category : 'Brick-List - UI'
+	#category : #'Brick-List - UI'
 }
 
 { #category : #initialization }
@@ -84,10 +84,18 @@ BrList >> maxSelectionIndex [
 { #category : #'api - scrolling' }
 BrList >> scrollToItem: anObject [
 	"Request a scrollable widget to scroll to a given item"
+	<return: #TAsyncPromise>
+		
+	^ self scrollToItemSuchThat: [ :eachItem | eachItem = anObject ]
+]
 
-	self viewModel items withIndexDo: [ :anItem :anIndex | 
-		anObject = anItem 
-			ifTrue: [ self scrollToIndex: anIndex ] ]
+{ #category : #'api - scrolling' }
+BrList >> scrollToItemSuchThat: aBlock [
+	<return: #TAsyncPromise>
+
+	^ (self viewModel itemsProvider preloadUntilFoundSuchThat: aBlock)
+		then: [ :anItemIndex | self enqueueTask: (BlTaskAction new
+			action: [ self scrollToIndex: anItemIndex ]) ]
 ]
 
 { #category : #'api - selection' }

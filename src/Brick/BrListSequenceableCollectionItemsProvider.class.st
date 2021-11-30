@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#category : 'Brick-List - Model'
+	#category : #'Brick-List - Model'
 }
 
 { #category : #'instance creation' }
@@ -59,4 +59,13 @@ BrListSequenceableCollectionItemsProvider >> itemCount [
 	<return: #Number>
 
 	^ self collection size
+]
+
+{ #category : #'api - loading' }
+BrListSequenceableCollectionItemsProvider >> preloadUntilFoundSuchThat: aBlock [
+	<return: #TAsyncPromise>
+
+	^ AsyncFulfilledPromise new value: (collection
+		detectIndex: aBlock
+		ifNone: [ 0 ])
 ]

@@ -16,7 +16,7 @@ Class {
 		'styles',
 		'currentStates'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }
@@ -69,7 +69,7 @@ BrInteractiveAptitude >> initializeRequests [
 { #category : #initialization }
 BrInteractiveAptitude >> requestStates [
 	self widgetDo: [ :aWidget |
-		aWidget telemetry
+		BlFrameTelemetry
 			timeSync: [ 'Request states for interactive look {1}' format: { aWidget } ]
 			during: [ self statesChanged: (self request: (BrInteractionRequest oneWay forceUpdate: true)) ] ]
 ]

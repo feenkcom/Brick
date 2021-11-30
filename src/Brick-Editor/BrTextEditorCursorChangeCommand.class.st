@@ -10,7 +10,7 @@ Class {
 		'position',
 		'cursor'
 	],
-	#category : 'Brick-Editor-Commands'
+	#category : #'Brick-Editor-Commands'
 }
 
 { #category : #accessing }
@@ -28,14 +28,14 @@ BrTextEditorCursorChangeCommand >> cursor: anObject [
 { #category : #executing }
 BrTextEditorCursorChangeCommand >> executeOn: aTextEditor [
 	
-	self telemetry
-		timeSync: [ 'Process attributes' ]
+	BlFrameTelemetry
+		time: [ 'Process attributes' ]
 		during: [ self processAttributesOn: aTextEditor ].
 
 	aTextEditor segmentCollector
 		cachedSegmentAt: self position
 		ifFound: [ :aSegment |
-			self telemetry
+			BlFrameTelemetry
 				timeSync: [ 'Enqueue cursor changed holder command {1}' format: { aSegment index to: aSegment index } ]
 				during: [
 					aTextEditor

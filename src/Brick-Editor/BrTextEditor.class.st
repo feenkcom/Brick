@@ -32,7 +32,7 @@ Class {
 	#classInstVars : [
 		'isDebug'
 	],
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #cleanup }
@@ -616,13 +616,13 @@ BrTextEditor >> onBindHolder: aSegmentHolder at: aPosition [
 	| aSegment previousLastIndex |
 
 	"First we want to acquire a segment for a given position"
-	aSegmentHolder infiniteElement telemetry
-		timeSync: [ 'Get segment at {1}' format: { aPosition } ]
+	BlFrameTelemetry
+		time: [ 'Get segment at {1}' format: { aPosition } ]
 		during: [ aSegment := segmentCollector segmentAt: aPosition. ].
 
 	"and then bind it to the holder"
-	aSegmentHolder infiniteElement telemetry
-		timeSync: [ 'Set segment at {1}' format: { aPosition } ]
+	BlFrameTelemetry
+		time: [ 'Set segment at {1}' format: { aPosition } ]
 		during: [ aSegmentHolder segment: aSegment ].
 
 	"If the last cached segment was requested, load more so that the editor knows there are more lines"
@@ -786,20 +786,20 @@ BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 		ifTrue: [
 			self text rope: aBlTextStyledEvent text text rope.
 			
-			aBlTextStyledEvent editorElement telemetry
-				timeSync: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
+			BlFrameTelemetry
+				time: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
 				during: [ aBlTextStyledEvent afterAction value: self text. ].
 			
-			aBlTextStyledEvent editorElement telemetry
-				timeSync: [ 'notifyTextStyled' ]
+			BlFrameTelemetry
+				time: [ 'notifyTextStyled' ]
 				during: [ self notifyTextStyled: self text ].
 			
-			aBlTextStyledEvent editorElement telemetry
-				timeSync: [ 'processCursorAttributes' ]
+			BlFrameTelemetry
+				time: [ 'processCursorAttributes' ]
 				during: [ self processCursorAttributes ].
 			
-			aBlTextStyledEvent editorElement telemetry
-				timeSync: [ 'Invalidate the whole text editor due to text change' ]
+			BlFrameTelemetry
+				time: [ 'Invalidate the whole text editor due to text change' ]
 				during: [
 					self updater
 						all;
