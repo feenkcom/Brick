@@ -37,8 +37,9 @@ BrColumnedListAptitude >> initialize [
 BrColumnedListAptitude >> initializeListeners [
 	super initializeListeners.
 	
-	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].	
+	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
 	self when: BrListModelItemsAddedEvent do: [ :anEvent | self onModelItemsAdded: anEvent ].
+	self when: BrListModelPromiseEnqueuedEvent do: [ :anEvent | self onModelPromiseEnqueued: anEvent ].
 	self when: BrColumnsChanged do: [ :anEvent | self onColumnsChanged: anEvent columns ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
@@ -86,6 +87,11 @@ BrColumnedListAptitude >> onModelItemsAdded: anEvent [
 { #category : #hooks }
 BrColumnedListAptitude >> onModelItemsChanged: anEvent [
 	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ])
+]
+
+{ #category : #hooks }
+BrColumnedListAptitude >> onModelPromiseEnqueued: anEvent [
+	self listElement enqueueTask: (BlPromiseTask new promise: anEvent promise)
 ]
 
 { #category : #hooks }

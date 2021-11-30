@@ -21,7 +21,8 @@ BrListStreamItemsProvider class >> forStream: anAsyncStream [
 BrListStreamItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 	
-	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel)
+	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel).
+	aListModel dispatchEvent: (BrListModelPromiseEnqueuedEvent new promise: buffer bufferLoadingPromise).
 ]
 
 { #category : #accessing }
