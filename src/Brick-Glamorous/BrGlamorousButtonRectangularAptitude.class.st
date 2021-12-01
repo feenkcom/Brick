@@ -13,6 +13,13 @@ Class {
 }
 
 { #category : #'instance creation' }
+BrGlamorousButtonRectangularAptitude class >> cornerRadius: aCornerRadius [
+	^ self basicNew
+		setCornerRadius: aCornerRadius;
+		initialize
+]
+
+{ #category : #'instance creation' }
 BrGlamorousButtonRectangularAptitude class >> paddingScale: aPaddingScale [
 	^ self basicNew
 		setPaddingScale: aPaddingScale;
