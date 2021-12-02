@@ -745,9 +745,33 @@ BrGlamorousVectorIcons class >> search [
 		background: Color black ] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> smallDownwards [
+	<script: 'self smallDownwards inspect'>
+
+	^ [ BlElement new
+		size: 8@4;
+		geometry: (BlSvgPath new
+			svg: 'M 8 0 L 4 4 L 0 0 Z'
+			viewbox: (0@0 extent: 8@4));
+		background: Color black ] asStencil
+]
+
 { #category : #'private - sizes' }
 BrGlamorousVectorIcons class >> smallSize [
 	^ 12@12
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> smallUpwards [
+	<script: 'self smallUpwards inspect'>
+
+	^ [ BlElement new
+		size: 8@4;
+		geometry: (BlSvgPath new
+			svg: 'M 8 4 L 4 0 L 0 4 Z'
+			viewbox: (0@0 extent: 8@4));
+		background: Color black ] asStencil
 ]
 
 { #category : #'private - sizes' }

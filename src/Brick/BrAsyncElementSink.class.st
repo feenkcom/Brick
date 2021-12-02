@@ -37,6 +37,17 @@ BrAsyncElementSink >> element: anElement [
 	isClosed := false
 ]
 
+{ #category : #'api - accessing' }
+BrAsyncElementSink >> forwardStream: anAsyncStream [
+	"Forward a given stream into the sink, closing the sink afterwards"
+	<return: #TAsyncPromise>
+	| aPromise |
+	
+	aPromise := (anAsyncStream forward: self) asAsyncPromise.
+	updater element enqueueTask: (BlPromiseTask new promise: aPromise).
+	^ aPromise
+]
+
 { #category : #initialization }
 BrAsyncElementSink >> initialize [
 	super initialize.

@@ -70,7 +70,10 @@ BrAsyncElementPromise >> privateInitializeElement [
 						privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError)
 						synchronous: false ] ].
 	
-	isProcessed ifFalse: [ self privateUpdateElement ]
+	isProcessed ifFalse: [
+		"To let the space know that we are waiting for a promise to finish"
+		updater element enqueueTask: (BlPromiseTask new promise: aPromise).
+		self privateUpdateElement ]
 ]
 
 { #category : #'private - update' }
