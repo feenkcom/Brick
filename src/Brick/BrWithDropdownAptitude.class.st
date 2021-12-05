@@ -102,6 +102,11 @@ BrWithDropdownAptitude >> doNotHideWidget [
 	self shouldHideWidget: false
 ]
 
+{ #category : #'api - displaying' }
+BrWithDropdownAptitude >> doNotShowOnClick [
+	clickShowCondition := [ :anEvent | false ]
+]
+
 { #category : #accessing }
 BrWithDropdownAptitude >> handleMouseUpEvent: anEvent [
 	
