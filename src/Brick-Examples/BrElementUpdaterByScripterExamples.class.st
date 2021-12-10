@@ -11,6 +11,7 @@ BrElementUpdaterByScripterExamples >> basicUpdater [
 	<gtExample>
 	| anUpdater |
 	anUpdater := BrElementUpdater new.
+	anUpdater postponedDuration: 100 milliSeconds.
 	self assert: anUpdater element isNil.
 	self assert: anUpdater action isNotNil.
 	self assert: anUpdater isUpdateRequested not.

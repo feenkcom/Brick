@@ -79,7 +79,7 @@ BrElementUpdater >> defaultAction [
 
 { #category : #defaults }
 BrElementUpdater >> defaultPostponedDuration [
-	^ 100 milliSeconds
+	^ 0 milliSeconds
 ]
 
 { #category : #'private - accessing' }
@@ -109,8 +109,8 @@ BrElementUpdater >> elementDo: aBlock [
 { #category : #'private - updating' }
 BrElementUpdater >> enqueueUpdate [
 	self elementDo: [ :anElement | 
-		anElement enqueueTask: (BlTaskAction new action: [
-			self updateNow ]) ].
+		(BrElementUpdaterEnqueueUpdateSignal forUpdater: self) emit.
+		anElement enqueueTask: (BlTaskAction new action: [ self updateNow ]) ].
 ]
 
 { #category : #'gt-extensions' }
