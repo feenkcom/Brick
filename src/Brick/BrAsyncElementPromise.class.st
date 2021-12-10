@@ -40,12 +40,14 @@ BrAsyncElementPromise >> privateDataSnapshot: aDataSnapshot synchronous: isSynch
 	
 	isSynchronous
 		ifTrue: [ self privateUpdateElement ]
-		ifFalse: [ updater requestUpdate ]
+		ifFalse: [
+			(BrAsyncElementPromiseRequestUpdateSignal forElement: updater element) emit.
+			updater requestUpdate ]
 ]
 
 { #category : #'private - update' }
 BrAsyncElementPromise >> privateInitializeElement [
-	| aPromise isProcessed |
+	| aPromise isProcessed aResultPromise |
 
 	"Do nothing if the data snaphot is not longer pending!"
 	dataSnapshot isPending
@@ -53,32 +55,51 @@ BrAsyncElementPromise >> privateInitializeElement [
 
 	isProcessed := false.
 
+	aResultPromise := AsyncPendingPromise new.
 	aPromise := promise.
 	aPromise
 		then: [ :aResult :isSynchronous |
 			isProcessed := true.
 			(promise == aPromise)
 				ifTrue: [
+					(BrAsyncElementPromiseInitializeElementSuccessSignal forElement: updater element)
+						promise: aPromise;
+						result: aResult;
+						isSynchronous: isSynchronous;
+						emit.
 					self
 						privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult)
-						synchronous: isSynchronous ] ]
+						synchronous: isSynchronous ].
+			aResultPromise fulfillWithValue: aResult ]
 		otherwise: [ :anError |
 			isProcessed := true.
 			(promise == aPromise)
 				ifTrue: [
+					(BrAsyncElementPromiseInitializeElementErrorSignal forElement: updater element)
+						error: anError;
+						promise: aPromise;
+						emit.
 					self
 						privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError)
-						synchronous: false ] ].
-	
+						synchronous: false ].
+			aResultPromise rejectWithError: anError ].
+
+	(BrAsyncElementPromiseInitializeElementSignal forElement: updater element)
+		promise: aPromise;
+		isProcessed: isProcessed;
+		emit.
+
 	isProcessed ifFalse: [
 		"To let the space know that we are waiting for a promise to finish"
-		updater element enqueueTask: (BlPromiseTask new promise: aPromise).
+		updater element enqueueTask: (BlPromiseTask new promise: aResultPromise).
 		self privateUpdateElement ]
 ]
 
 { #category : #'private - update' }
 BrAsyncElementPromise >> privateUpdateElement [
 	"Must be called from the UI thread"
+
+	(BrAsyncElementPromiseElementUpdateSignal forElement: updater element) emit.
 
 	dataSnapshot
 		ifSuccess: [ :aData | whenSuccess ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
