@@ -343,13 +343,16 @@ BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 { #category : #private }
 BrTextEditorOperator >> hasSpaceAroundCursor: aCursor [
 	"Answer a boolean indicating whether the characters either side of the cursor are separators (or end of string)"
-	| anIterator |
+	| anIterator start end |
 	
-	aCursor position isZero ifTrue: [ ^ true ].
+	self text isEmpty ifTrue: [ ^ true ].
+	
+	start := aCursor position max: 1.
+	end := aCursor position + 1 max: start.
 
 	anIterator := self text 
-			iterator: (aCursor position min: self text size)
-			to: ((aCursor position + 1) min: self text size).
+			iterator: (start min: self text size)
+			to: (end min: self text size).
 	2 timesRepeat:
 		[ (anIterator hasNext and:
 			[ anIterator next isSeparator not ]) ifTrue: [ ^false ] ].
