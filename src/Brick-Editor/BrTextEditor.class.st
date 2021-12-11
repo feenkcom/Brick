@@ -1149,9 +1149,6 @@ BrTextEditor >> surroundMap [
 	"When inserting some special symbols a text editor should surround a cursor or selection with that symbol"
 
 	| spaceBlock |
-
-	"disable for now"
-	true ifTrue: [ ^ BrTextEditorSurroundMap new ].	
 	
 	spaceBlock := [ :anOperator :anIndex |
 		(anOperator hasSpaceAroundIndex: anIndex)
