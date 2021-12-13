@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditableLabelExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Editor'
+	#category : #'Brick-Examples-Editor'
 }
 
 { #category : #'examples - actions' }
@@ -88,14 +88,9 @@ BrEditableLabelExamples >> scripter_01_initial [
 	| aScripter |
 	
 	aScripter := BlDevScripter new.
-	aScripter
-		substep: 'Add editable label'
-		do: [ :aStep | 
-			aStep set
-				label: 'Editable label';
-				element: [ self editableLabelWithGlamorousLook ] ].
+	aScripter element: self editableLabelWithGlamorousLook.
 	
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - scripter' }
