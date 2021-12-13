@@ -9,10 +9,21 @@ Class {
 		'errorBackgroundColor',
 		'failureBorderColor',
 		'paleErrorBackgroundColor',
-		'failureBackgroundColor'
+		'failureBackgroundColor',
+		'changesBackgroundColor'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> changesBackgroundColor [
+	^ changesBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> changesBackgroundColor: aColor [
+	changesBackgroundColor := aColor
+]
 
 { #category : #accessing }
 BrGlamorousStatusTheme >> errorBackgroundColor [
@@ -57,15 +68,16 @@ BrGlamorousStatusTheme >> failureBorderColor: anObject [
 { #category : #initialization }
 BrGlamorousStatusTheme >> initialize [
 	super initialize.
+
 	successBackgroundColor := BrGlamorousColors successBackgroundColor.
 	successBorderColor := BrGlamorousColors successBorderColor.
 	neutralBackgroundColor := BrGlamorousColors neutralBackgroundColor.
 	errorBorderColor := BrGlamorousColors errorBorderColor.
 	errorBackgroundColor := BrGlamorousColors errorBackgroundColor.
 	failureBorderColor := BrGlamorousColors failureBorderColor.
-	paleErrorBackgroundColor := BrGlamorousColors
-		paleErrorBackgroundColor.
-	failureBackgroundColor := BrGlamorousColors failureBackgroundColor
+	paleErrorBackgroundColor := BrGlamorousColors paleErrorBackgroundColor.
+	failureBackgroundColor := BrGlamorousColors failureBackgroundColor.
+	changesBackgroundColor := BrGlamorousColors failureBackgroundColor.
 ]
 
 { #category : #accessing }
