@@ -1150,9 +1150,7 @@ BrTextEditor >> surroundMap [
 
 	| spaceBlock |
 	
-	spaceBlock := [ :anOperator :anIndex |
-		(anOperator hasSpaceAroundIndex: anIndex)
-			or: [ anOperator selection contains: anIndex ] ].
+	spaceBlock := [ :anOperator :anIndex | anOperator selection contains: anIndex ].
 
 	^ BrTextEditorSurroundMap newFromArrays:
 		{ 
