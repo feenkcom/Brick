@@ -2,6 +2,7 @@ Class {
 	#name : #BrListStreamItemsProvider,
 	#superclass : #BrAbstractListItemsProvider,
 	#instVars : [
+		'monitor',
 		'buffer'
 	],
 	#category : #'Brick-List - Model'
@@ -28,6 +29,13 @@ BrListStreamItemsProvider >> attachToListModel: aListModel [
 { #category : #accessing }
 BrListStreamItemsProvider >> currentItems [
 	^ buffer
+]
+
+{ #category : #initialization }
+BrListStreamItemsProvider >> initialize [
+	super initialize.
+	
+	monitor := Monitor new
 ]
 
 { #category : #accessing }
@@ -69,11 +77,37 @@ BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 		then: [ :anAsyncStreamBufferItem | anAsyncStreamBufferItem index ]
 ]
 
+{ #category : #'private - accessing' }
+BrListStreamItemsProvider >> privateSetStreamBuffer: aStreamBuffer [
+	monitor critical: [
+		buffer := aStreamBuffer.
+		self notifyItemsChanged.		
+		buffer
+			when: AsyncStreamBufferChanged
+			send: #onBufferChanged:
+			to: self ]
+]
+
+{ #category : #'private - accessing' }
+BrListStreamItemsProvider >> privateSetTransitionBuffer: aStreamTransitionBuffer [
+	monitor critical: [
+		"We do not notify items changed because the transition buffer has the same items"
+		buffer := aStreamTransitionBuffer.
+
+		buffer bufferLoadingPromise then: [
+			monitor critical: [
+				buffer == aStreamTransitionBuffer
+					ifTrue: [ self privateSetStreamBuffer: buffer newBuffer ] ] ] ]
+]
+
 { #category : #initialization }
 BrListStreamItemsProvider >> stream: aStream [
-	buffer := AsyncStreamBuffer forStream: aStream.
-	buffer
-		when: AsyncStreamBufferChanged
-		send: #onBufferChanged:
-		to: self
+	"Change a stream to the given one"
+
+	monitor critical: [
+		buffer
+			ifNotNil: [ :aPreviousBuffer |
+				aPreviousBuffer unsubscribe: self.
+				self privateSetTransitionBuffer: (AsyncStreamTransitionBuffer forStream: aStream previousBuffer: aPreviousBuffer) ]
+			ifNil: [ self privateSetStreamBuffer: (AsyncStreamBuffer forStream: aStream) ] ]
 ]

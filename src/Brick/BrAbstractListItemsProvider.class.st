@@ -40,6 +40,11 @@ BrAbstractListItemsProvider >> listModel [
 	^ listModel
 ]
 
+{ #category : #'private - notifying' }
+BrAbstractListItemsProvider >> notifyItemsChanged [
+	listModel ifNotNil: [ :aListModel | aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel) ]
+]
+
 { #category : #'api - loading' }
 BrAbstractListItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 	<return: #TAsyncPromise>
