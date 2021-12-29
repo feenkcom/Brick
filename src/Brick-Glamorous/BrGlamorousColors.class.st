@@ -406,6 +406,11 @@ BrGlamorousColors class >> initialize [
 	LinkWithErrorColor := Color fromHexString: #cf1322.
 ]
 
+{ #category : #'changes - diff' }
+BrGlamorousColors class >> insertLineColor [
+	^ SuccessBackgroundColor
+]
+
 { #category : #accessing }
 BrGlamorousColors class >> lightBorderColor [
 	^ LightBorderColor
@@ -479,6 +484,11 @@ BrGlamorousColors class >> primaryBorderColor [
 { #category : #accessing }
 BrGlamorousColors class >> primaryBorderColor: anObject [
 	PrimaryBorderColor := anObject
+]
+
+{ #category : #'changes - diff' }
+BrGlamorousColors class >> removeLineColor [
+	^ ErrorBackgroundColor
 ]
 
 { #category : #'header - background' }
