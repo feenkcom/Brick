@@ -16,7 +16,7 @@ BrListSequenceableCollectionItemsProvider class >> forCollection: aSequenceableC
 BrListSequenceableCollectionItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 
-	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel).
+	self notifyItemsChangedSynchronously: true
 ]
 
 { #category : #accessing }

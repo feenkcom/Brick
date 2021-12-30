@@ -41,8 +41,11 @@ BrAbstractListItemsProvider >> listModel [
 ]
 
 { #category : #'private - notifying' }
-BrAbstractListItemsProvider >> notifyItemsChanged [
-	listModel ifNotNil: [ :aListModel | aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel) ]
+BrAbstractListItemsProvider >> notifyItemsChangedSynchronously: isSynchronous [
+	listModel ifNotNil: [ :aListModel |
+		aListModel dispatchEvent: (BrListModelItemsChangedEvent new
+			viewModel: aListModel;
+			isSynchronous: isSynchronous) ]
 ]
 
 { #category : #'api - loading' }

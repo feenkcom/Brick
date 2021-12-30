@@ -133,7 +133,9 @@ BrSimpleListAptitude >> onModelItemsAdded: anEvent [
 
 { #category : #hooks }
 BrSimpleListAptitude >> onModelItemsChanged: anEvent [
-	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ])
+	anEvent isSynchronous
+		ifTrue: [ self listElement dataSource notifyChanged ]
+		ifFalse: [ self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ]) ]
 ]
 
 { #category : #hooks }

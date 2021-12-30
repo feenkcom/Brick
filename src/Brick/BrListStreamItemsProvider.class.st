@@ -22,7 +22,7 @@ BrListStreamItemsProvider class >> forStream: anAsyncStream [
 BrListStreamItemsProvider >> attachToListModel: aListModel [
 	super attachToListModel: aListModel.
 	
-	aListModel dispatchEvent: (BrListModelItemsChangedEvent new viewModel: aListModel).
+	self notifyItemsChangedSynchronously: true.
 	aListModel dispatchEvent: (BrListModelPromiseEnqueuedEvent new promise: buffer bufferLoadingPromise).
 ]
 
@@ -81,7 +81,7 @@ BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 BrListStreamItemsProvider >> privateSetStreamBuffer: aStreamBuffer [
 	monitor critical: [
 		buffer := aStreamBuffer.
-		self notifyItemsChanged.		
+		self notifyItemsChangedSynchronously: false.		
 		buffer
 			when: AsyncStreamBufferChanged
 			send: #onBufferChanged:
