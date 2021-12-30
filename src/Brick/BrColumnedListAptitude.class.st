@@ -85,8 +85,10 @@ BrColumnedListAptitude >> onModelItemsAdded: anEvent [
 ]
 
 { #category : #hooks }
-BrColumnedListAptitude >> onModelItemsChanged: anEvent [
-	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ])
+BrColumnedListAptitude >> onModelItemsChanged: anEvent [	
+	anEvent isSynchronous
+		ifTrue: [ self listElement dataSource notifyChanged ]
+		ifFalse: [ self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ]) ]
 ]
 
 { #category : #hooks }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrColumnedListExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-List'
+	#category : #'Brick-Examples-List'
 }
 
 { #category : #'examples - model' }
@@ -107,6 +107,47 @@ BrColumnedListExamples >> columnedListModelWithColorAsItems [
 	aColumnedListModel items: (Color registeredColorNames collect: [ :aColorName | Color named: aColorName ]).
 
 	^ aColumnedListModel
+]
+
+{ #category : #'examples - performance' }
+BrColumnedListExamples >> columnedListWithItemsBindsOnce [
+	"This example makes sure that when the list is displayed for the first time, the items are created and bound just once."
+	<gtExample>
+	| aList aScripter aCreationAmount aBindingAmount theItemsChangedEvents |
+
+	aCreationAmount := 0.
+	aBindingAmount := 0.
+
+	aList := BrColumnedList new.
+	aList vExact: 300.
+	aList column
+		title: 'Class';
+		cellStencil: [
+			aCreationAmount := aCreationAmount + 1.
+			BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
+				hMatchParent;
+				vExact: 50 ];
+		dataBinder: [ :aCellElement :aClass |
+			aBindingAmount := aBindingAmount + 1.
+			aCellElement text: aClass name asString ].
+	
+	theItemsChangedEvents := OrderedCollection new.
+	aList when: BrListModelItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
+
+	aScripter := BlDevScripter new.
+	aScripter element: aList.
+
+	aScripter do
+		action: [ :anElement | anElement items: Smalltalk allClasses ];
+		play.
+
+	self assert: aCreationAmount equals: 6.
+	self assert: aBindingAmount equals: 6.
+	self assert: theItemsChangedEvents size equals: 1.
+	self assert: theItemsChangedEvents first isSynchronous.
+
+	^ aScripter
 ]
 
 { #category : #'examples - list' }
