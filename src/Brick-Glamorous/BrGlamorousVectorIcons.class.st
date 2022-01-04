@@ -746,6 +746,19 @@ BrGlamorousVectorIcons class >> search [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> signal [
+	<script: 'self signal inspect'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 1.198739625 8.3012085 C 1.198739625 8.3012085 3.0028635 8.27257175 3.0028635 8.27257175 C 3.0028635 8.27257175 4.002005 6.70246325 4.48883225 6.6738265 C 4.97565925 6.6451895 5.60567075 10.3393475 6.121135 10.3393475 C 6.6365985 10.3393475 7.7534375 3.9246855 8.35481175 3.9246855 C 8.95618625 3.9246855 9.700745 12.1721085 10.24484625 12.1721085 C 10.7889475 12.1721085 11.994845 8.04347675 11.994845 8.04347675 C 11.994845 8.04347675 14.80126 8.04347675 14.80126 8.04347675'
+			viewbox: (0@0 extent: 16@16));
+		border: (BlBorder builder capSquare paint: Color black; width: 1; build);
+		outskirts: (BlOutskirts centered) ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> smallDownwards [
 	<script: 'self smallDownwards inspect'>
 
