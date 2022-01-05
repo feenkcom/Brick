@@ -50,6 +50,13 @@ BrGlamorousVectorIcons class >> allIcons [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> branching [
+
+	^ [ self largebranching asElement asScalableElement size: 16 @ 16 ]
+		  asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> browse [
 	<script: 'self browse inspect'>
 
