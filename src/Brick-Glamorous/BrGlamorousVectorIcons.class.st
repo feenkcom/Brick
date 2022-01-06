@@ -50,6 +50,13 @@ BrGlamorousVectorIcons class >> allIcons [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> branching [
+
+	^ [ self largebranching asElement asScalableElement size: 16 @ 16 ]
+		  asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> browse [
 	<script: 'self browse inspect'>
 
@@ -743,6 +750,19 @@ BrGlamorousVectorIcons class >> search [
 			svg: 'M 8.972855 11.595775 L 11.208238 13.831159 L 13.329559 11.709838 L 11.252205 9.632485 C 12.448393 7.704032 12.209501 5.1384323 10.53553 3.46447 C 8.58291 1.51184 5.41709 1.51184 3.46447 3.46447 C 1.51184 5.41709 1.51184 8.58291 3.46447 10.53553 C 4.953712 12.02478 7.1486665 12.378195 8.972855 11.595775 Z M 9.739856 8.223948 L 8.223948 9.739856 C 7.1216205 10.232024 5.783204 10.025845 4.878682 9.121318 C 3.707104 7.949746 3.707104 6.050254 4.878682 4.878682 C 6.050254 3.707104 7.949746 3.707104 9.121318 4.878682 C 10.025845 5.783204 10.232024 7.1216205 9.739856 8.223948 Z'
 			viewbox: (0@0 extent: 16@16));
 		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> signal [
+	<script: 'self signal inspect'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 1.198739625 8.3012085 C 1.198739625 8.3012085 3.0028635 8.27257175 3.0028635 8.27257175 C 3.0028635 8.27257175 4.002005 6.70246325 4.48883225 6.6738265 C 4.97565925 6.6451895 5.60567075 10.3393475 6.121135 10.3393475 C 6.6365985 10.3393475 7.7534375 3.9246855 8.35481175 3.9246855 C 8.95618625 3.9246855 9.700745 12.1721085 10.24484625 12.1721085 C 10.7889475 12.1721085 11.994845 8.04347675 11.994845 8.04347675 C 11.994845 8.04347675 14.80126 8.04347675 14.80126 8.04347675'
+			viewbox: (0@0 extent: 16@16));
+		border: (BlBorder builder capSquare paint: Color black; width: 1; build);
+		outskirts: (BlOutskirts centered) ] asStencil
 ]
 
 { #category : #icons }
