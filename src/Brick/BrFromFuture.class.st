@@ -66,8 +66,8 @@ BrFromFuture >> onAddedToSceneGraph [
 
 	futureExecution := future await.
 	futureExecution
-		onSuccessDo: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ];
-		onFailureDo: [ :anError |
+		then: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ]
+		otherwise: [ :anError |
 			anError freeze.
 			self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ]
 ]

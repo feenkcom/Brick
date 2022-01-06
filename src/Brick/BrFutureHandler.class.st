@@ -6,7 +6,7 @@ Class {
 		'action',
 		'monitor'
 	],
-	#category : 'Brick-Future - Support'
+	#category : #'Brick-Future - Support'
 }
 
 { #category : #'api - initialization' }
@@ -38,11 +38,11 @@ BrFutureHandler >> updateWithFuture: aFuture [
 				action cull: theCurrentResult cull: true ]
 			ifFalse: [
 				future await
-					onSuccessDo: [ :aResult |
+					then: [ :aResult |
 						monitor critical: [
 							future == aFuture
-								ifTrue: [ action cull: aResult cull: false ] ] ];
-					onFailureDo: [ :anError |
+								ifTrue: [ action cull: aResult cull: false ] ] ]
+					otherwise: [ :anError |
 						NonInteractiveTranscript stdout
 							nextPutAll: anError printString;
 							cr ] ] ]
