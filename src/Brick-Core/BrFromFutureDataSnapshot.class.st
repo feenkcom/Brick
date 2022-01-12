@@ -9,7 +9,7 @@ Class {
 		'ErrorState',
 		'PendingState'
 	],
-	#category : #'Brick-Future - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #initialization }
@@ -17,6 +17,16 @@ BrFromFutureDataSnapshot class >> initialize [
 	DataState := #data.
 	ErrorState := #error.
 	PendingState := #pending
+]
+
+{ #category : #comparing }
+BrFromFutureDataSnapshot >> = anObject [
+
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ state = anObject state
 ]
 
 { #category : #accessing }
@@ -45,6 +55,14 @@ BrFromFutureDataSnapshot >> hasData [
 { #category : #testing }
 BrFromFutureDataSnapshot >> hasError [
 	^ state key = ErrorState
+]
+
+{ #category : #comparing }
+BrFromFutureDataSnapshot >> hash [
+
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ state hash
 ]
 
 { #category : #accessing }
@@ -112,4 +130,10 @@ BrFromFutureDataSnapshot >> setError: anError [
 { #category : #initialization }
 BrFromFutureDataSnapshot >> setPending: anInitialOrPreviousData [
 	state := PendingState -> anInitialOrPreviousData
+]
+
+{ #category : #accessing }
+BrFromFutureDataSnapshot >> state [
+
+	^ state
 ]

@@ -224,7 +224,7 @@ BrTextEditor >> defaultStylerEventHandler [
 
 { #category : #initialization }
 BrTextEditor >> defaultStylerStrategy [
-	^ BrTextStylerTaskItStrategy new
+	^ BrTextStylerAsyncStrategy new
 ]
 
 { #category : #initialization }
@@ -781,7 +781,7 @@ BrTextEditor >> onTextReplaced [
 { #category : #'hooks - text modifications' }
 BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 	self assertUIProcess.
-	
+
 	(aBlTextStyledEvent text isNextGenerationOf: self text)
 		ifTrue: [
 			self text rope: aBlTextStyledEvent text text rope.
@@ -1255,9 +1255,4 @@ BrTextEditor >> useDefaultStylerStrategy [
 { #category : #initialization }
 BrTextEditor >> useSyncStylerStrategy [
 	self stylerStrategy: BrTextStylerSyncStrategy new
-]
-
-{ #category : #initialization }
-BrTextEditor >> useTaskItStylerStrategy [
-	self stylerStrategy: BrTextStylerTaskItStrategy new
 ]

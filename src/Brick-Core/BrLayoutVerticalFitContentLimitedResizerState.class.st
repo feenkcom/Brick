@@ -1,25 +1,25 @@
 Class {
-	#name : 'BrLayoutVerticalFitContentLimitedResizerState',
-	#superclass : 'BrLayoutVerticalResizerState',
+	#name : #BrLayoutVerticalFitContentLimitedResizerState,
+	#superclass : #BrLayoutVerticalResizerState,
 	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrLayoutVerticalFitContentLimitedResizerState >> = anotherState [
 	^ anotherState isKindOf: BrLayoutVerticalFitContentLimitedResizerState
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrLayoutVerticalFitContentLimitedResizerState >> asPropagated [
 	^ BrLayoutVerticalFitContentLimitedResizerPropagatedState uniqueInstance
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BrLayoutVerticalFitContentLimitedResizerState >> hash [
 	^ BrLayoutVerticalFitContentLimitedResizerState hash
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrLayoutVerticalFitContentLimitedResizerState >> printOn: aStream [
 	super printOn: aStream.
 	aStream

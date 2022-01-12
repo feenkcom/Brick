@@ -1,15 +1,15 @@
 Class {
-	#name : 'BrLayoutVerticalLocalResizerState',
-	#superclass : 'BrLayoutVerticalResizerState',
+	#name : #BrLayoutVerticalLocalResizerState,
+	#superclass : #BrLayoutVerticalResizerState,
 	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrLayoutVerticalLocalResizerState >> asPropagated [
 	^ self shouldNotImplement
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrLayoutVerticalLocalResizerState >> printOn: aStream [
 	super printOn: aStream.
 	aStream

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'isProcessed'
 	],
-	#category : #'Brick-Future - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #'private - update' }

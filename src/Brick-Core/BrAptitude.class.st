@@ -7,35 +7,35 @@ Looks install themselves on Brick graphical widgets, and are able to modify the 
 - They should not be used to add or remove content in the widget.  Element composition is a better solution for this.
 "
 Class {
-	#name : 'BrAptitude',
-	#superclass : 'BrActor',
+	#name : #BrAptitude,
+	#superclass : #BrActor,
 	#instVars : [
 		'changes'
 	],
 	#category : 'Brick-Core-Core'
 }
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude class >> + anotherLook [
 	^ self asLook + anotherLook
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude class >> - anotherLook [
 	^ self asLook - anotherLook
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude class >> asLook [
 	^ self new
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude >> + anotherLook [
 	self add: anotherLook asLook
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude >> - aLookClass [
 	| toBeRemoved |
 	self
@@ -47,7 +47,7 @@ BrAptitude >> - aLookClass [
 	actors do: [ :eachLook | eachLook - aLookClass ]
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude >> add: aBrLook [
 	"Add a given look instance if it does not exist already"
 	| aLookInstance |
@@ -62,18 +62,18 @@ BrAptitude >> add: aBrLook [
 	self widgetDo: [ :anElement | aLookInstance onInstalledIn: anElement ]
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude >> addAll: aCollectionOfLooks [
 	aCollectionOfLooks do: [ :aLook | self add: aLook ]
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> addChange: aLookChange [
 	changes add: aLookChange.
 	widget ifNotNil: [ aLookChange upOn: self ]
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> addChangeAddChild: aCollection with: aBlock [
 	self
 		addChange:
@@ -83,7 +83,7 @@ BrAptitude >> addChangeAddChild: aCollection with: aBlock [
 				yourself)
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> addChangeAddChildAs: aCollection with: aBlock [
 	self
 		addChange:
@@ -93,7 +93,7 @@ BrAptitude >> addChangeAddChildAs: aCollection with: aBlock [
 				yourself)
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> addChangeAddChildFirst: aCollection with: aBlock [
 	"Add the supplied change, which will add an element as the first child of the target element"
 	self
@@ -104,7 +104,7 @@ BrAptitude >> addChangeAddChildFirst: aCollection with: aBlock [
 				yourself)
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> addChangeProperty: aCollection with: aBlock [
 	self
 		addChange:
@@ -114,7 +114,7 @@ BrAptitude >> addChangeProperty: aCollection with: aBlock [
 				yourself)
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> addChangeProperty: aCollection withCopy: aBlock [
 	self
 		addChange:
@@ -124,33 +124,33 @@ BrAptitude >> addChangeProperty: aCollection withCopy: aBlock [
 				yourself)
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude >> asLook [
 	^ self
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BrAptitude >> changes [
 	^ changes
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAptitude >> initialize [
 	super initialize.
 	changes := BrLookChanges new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrAptitude >> initializeRequests [
 	"Override me to implement requests to the view model to synchronise its properties"
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAptitude >> looks [
 	^ self children
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrAptitude >> onAttachedTo: anElement [
 	"Is sent when I am added to an element (or to the other actor which is added to the element)"
 
@@ -163,14 +163,14 @@ BrAptitude >> onAttachedTo: anElement [
 	self transferEventHandlersToWidget
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrAptitude >> onInstalledIn: anElement [
 	self withAllActorsBreadthFirstDo: [ :eachLook | eachLook onAttachedTo: anElement ].
 	self withAllActorsBreadthFirstDo: [ :eachLook | eachLook changes upOn: eachLook ].
 	self withAllActorsBreadthFirstDo: [ :eachLook | eachLook initializeRequests ]
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrAptitude >> onUninstalledIn: anElement [
 	super onUninstalledIn: anElement.
 
@@ -186,7 +186,7 @@ BrAptitude >> onUninstalledIn: anElement [
 	self initializeListeners
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BrAptitude >> remove: aBrLook [
 	"Remove a given look if it exists"
 	| aLookInstance |
@@ -200,7 +200,7 @@ BrAptitude >> remove: aBrLook [
 	aLookInstance widgetDo: [ :anElement | aLookInstance onUninstalledIn: anElement ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrAptitude >> widgetContent [
 	"Return widget's content container element"
 	<return: #BlElement>

@@ -10,7 +10,7 @@ Class {
 		'whenPending',
 		'isClosed'
 	],
-	#category : #'Brick-Future - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #'instance creation' }

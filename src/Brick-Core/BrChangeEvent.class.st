@@ -1,5 +1,5 @@
 Class {
-	#name : 'BrChangeEvent',
-	#superclass : 'BlEvent',
+	#name : #BrChangeEvent,
+	#superclass : #BlEvent,
 	#category : 'Brick-Core-Events'
 }

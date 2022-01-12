@@ -1,32 +1,32 @@
 Class {
-	#name : 'BrLayoutVerticalFitContentResizerPropagatedState',
-	#superclass : 'BrLayoutVerticalFitContentResizerState',
+	#name : #BrLayoutVerticalFitContentResizerPropagatedState,
+	#superclass : #BrLayoutVerticalFitContentResizerState,
 	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrLayoutVerticalFitContentResizerPropagatedState >> asNotPropagated [
 	^ BrLayoutVerticalResizerState fitContent
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrLayoutVerticalFitContentResizerPropagatedState >> asPropagated [
 	^ self
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrLayoutVerticalFitContentResizerPropagatedState >> optionalOnAddedTo: anElement [
 	anElement properties vFitContent
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrLayoutVerticalFitContentResizerPropagatedState >> printOn: aStream [
 	super printOn: aStream.
 	aStream space;
 		nextPutAll: '(propagated)'
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrLayoutVerticalFitContentResizerPropagatedState >> shouldOverwriteChildState [
 	^ true
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : 'BrLookPropertyCopyChange',
-	#superclass : 'BrLookPropertyChange',
+	#name : #BrLookPropertyCopyChange,
+	#superclass : #BrLookPropertyChange,
 	#category : 'Brick-Core-Changes'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrLookPropertyCopyChange >> initialize [
 	super initialize.
 	up := [ :e :f | 
@@ -17,7 +17,7 @@ BrLookPropertyCopyChange >> initialize [
 	down := [ :e :f :g | self writeOn: e value: f copy ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrLookPropertyCopyChange >> printOn: aStream [
 	aStream nextPutAll: 'copy '.
 	super printOn: aStream

@@ -5,7 +5,7 @@ Class {
 		'result',
 		'isSynchronous'
 	],
-	#category : #'Brick-Future - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #accessing }
