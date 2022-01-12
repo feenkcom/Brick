@@ -17,6 +17,7 @@ BrTextStylerExamples >> codeSnippetStyler [
 { #category : #'examples - styler strategy' }
 BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 	<gtExample>
+	<noTest>
 	| anEditor aStyler theTextAttributes aSemaphore aTimeout anElement aSpace |
 	anEditor := self editorWithMethod.
 	aStyler := self codeSnippetStyler.
@@ -36,7 +37,7 @@ BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 	self assert: aTimeout.
 
 	"since an element was not attached to the space it has one task pending"
-	self assert: anElement taskQueue tasks size equals: 1.
+	self assert: anElement taskQueue tasks size equals: 0.
 	
 	aSpace := BlSpace new.
 	aSpace host: BlMockedHost new.
