@@ -91,6 +91,13 @@ BlElement >> asVerticallyResizableDo: aBlock [
 ]
 
 { #category : #'*Brick' }
+BlElement >> asyncFuture [
+	^ self userData
+		at: #asyncFuture
+		ifAbsentPut: [ BrAsyncElementFuture on: self ]
+]
+
+{ #category : #'*Brick' }
 BlElement >> asyncPromise [
 	^ self userData
 		at: #asyncPromise
@@ -236,6 +243,11 @@ BlElement >> viewModelDo: aBlock ifAbsent: anAbsentBlock [
 		at: #brickViewModel
 		ifPresent: aBlock
 		ifAbsent: anAbsentBlock
+]
+
+{ #category : #'*Brick' }
+BlElement >> withAsyncFutureDo: aBlock [
+	aBlock value: self asyncFuture
 ]
 
 { #category : #'*Brick' }
