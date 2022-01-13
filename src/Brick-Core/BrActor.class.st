@@ -1,6 +1,6 @@
 Class {
-	#name : 'BrActor',
-	#superclass : 'Object',
+	#name : #BrActor,
+	#superclass : #Object,
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
@@ -11,33 +11,33 @@ Class {
 	#category : 'Brick-Core-Core'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> actors [
 	<return: #Collection of: #BrActor>
 
 	^ self children
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BrActor >> addEventHandler: anEventHandler [
 	self isAttachedToWidget
 		ifTrue: [ self widget addEventHandler: (BlEventForwarder forwardTo: anEventHandler from: self) ]
 		ifFalse: [ self eventDispatcher addEventHandler: anEventHandler ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> allActorsBreadthFirstDo: aBlock [ 
 	self actors do: aBlock.
 	self actors do: [ :each | each allActorsBreadthFirstDo: aBlock ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> allActorsDepthFirstDo: aBlock [
 	self actors do: [ :each | each allActorsDepthFirstDo: aBlock ].
 	self actors do: aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> allChildren [
 	<return: #Collection of: #BrActor>
 
@@ -47,14 +47,14 @@ BrActor >> allChildren [
 			aStream nextPutAll: each allChildren ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> children [
 	<return: #Collection of: #BrActor>
 
 	^ actors
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BrActor >> dispatchEvent: anEvent [
 	"If I am attached to the widget I dispatch event to the widget,
 	otherwise I dispatch a given event to myself and my children "
@@ -71,7 +71,7 @@ BrActor >> dispatchEvent: anEvent [
 		ifFalse: [ self children do: [ :anActor | anActor dispatchEvent: anEvent ] ]
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BrActor >> dispatchEventToMyself: anEvent [
 
 	anEvent target: self.
@@ -81,7 +81,7 @@ BrActor >> dispatchEventToMyself: anEvent [
 		ifTrue: [ self eventDispatcher dispatchEvent: anEvent ]
 ]
 
-{ #category : 'event management accessing' }
+{ #category : #'event management accessing' }
 BrActor >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 	<return: #BlDirectEventDispatcher>
@@ -89,7 +89,7 @@ BrActor >> eventDispatcher [
 	^ eventDispatcher
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> findActor: anActorClass [
 	<return: #BrActor>
 	
@@ -99,7 +99,7 @@ BrActor >> findActor: anActorClass [
 		ifNone: [ self error: 'Actor of type ', anActorClass name, ' is not found' ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> findActor: anActorClass ifFound: aFoundBlock [
 	"Return an actor that corresponds to a given class.
 	Throw error if it is not found"
@@ -110,7 +110,7 @@ BrActor >> findActor: anActorClass ifFound: aFoundBlock [
 	self actors do: [ :eachActor | eachActor findActor: anActorClass ifFound: [ :anActor | ^ aFoundBlock value: anActor ] ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> findActor: anActorClass ifFound: aFoundBlock ifNone: aNoneBlock [
 	"Return an actor that corresponds to a given class.
 	Throw error if it is not found"
@@ -122,7 +122,7 @@ BrActor >> findActor: anActorClass ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ aNoneBlock value
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BrActor >> fireEvent: anEvent [
 	"I fire provided event while building an event dispatcher chain
 	(from target to the root element) and dispatch the event with it.
@@ -140,7 +140,7 @@ BrActor >> fireEvent: anEvent [
 		ifFalse: [ self children do: [ :anActor | anActor fireEvent: anEvent ] ]
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BrActor >> fireEventToMyself: anEvent [
 	
 	anEvent forwardingTarget: self.
@@ -149,7 +149,7 @@ BrActor >> fireEventToMyself: anEvent [
 	BlEvent fireEvent: anEvent target: self
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrActor >> hasActor: anActorClass [
 	"Return true if I or any of my children is of the given type"
 	<return: #Boolean>
@@ -158,7 +158,7 @@ BrActor >> hasActor: anActorClass [
 		or: [ self actors anySatisfy: [ :eachActor | eachActor hasActor: anActorClass ] ]
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrActor >> hasActorOfKind: anActorClass [
 	"Return true if I or any of my children is of the given type"
 	<return: #Boolean>
@@ -167,7 +167,7 @@ BrActor >> hasActorOfKind: anActorClass [
 		or: [ self actors anySatisfy: [ :eachActor | eachActor hasActorOfKind: anActorClass ] ]
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrActor >> hasOwner [
 	"Utility #owner message makes it possible to have a polymorphic way to visualise a tree structure of the elements"
 	<return: #Boolean>
@@ -175,7 +175,7 @@ BrActor >> hasOwner [
 	^ self isAttachedToWidget
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrActor >> initialize [
 	super initialize.
 	
@@ -185,12 +185,12 @@ BrActor >> initialize [
 	self initializeListeners
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrActor >> initializeListeners [
 	"Override me to initialize event listeners such as property updates from the view model"
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BrActor >> isAttachedToWidget [
 	"Return true if I am attached to a widget element, false otherwise.
 	When an actor (look or model) is not attached to the element it can not send or receive events"
@@ -199,7 +199,7 @@ BrActor >> isAttachedToWidget [
 	^ widget isNotNil
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrActor >> onInstalledIn: anElement [
 	"Is sent when I am added to an element (or to the other actor which is added to the element)"
 
@@ -212,14 +212,14 @@ BrActor >> onInstalledIn: anElement [
 	self transferEventHandlersToWidget
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BrActor >> onUninstalledIn: anElement [
 	"Is sent when I am removed from an element (or from the other actor which was part of the element)"
 	
 	self removeEventHandlersFromWidget
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> owner [
 	"Utility #owner message makes it possible to have a polymorphic way to visualise a tree structure of the elements"
 	<return: #BlElement>
@@ -227,13 +227,13 @@ BrActor >> owner [
 	^ self widget
 ]
 
-{ #category : 'private - event management' }
+{ #category : #'private - event management' }
 BrActor >> removeEventHandlersFromWidget [
 	self widget removeEventHandlersSuchThat: [ :eachEventHandler |
 		(eachEventHandler isKindOf: BlEventForwarder) and: [ eachEventHandler eventTarget == self ] ]
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BrActor >> request: aBrRequest [
 
 	aBrRequest canBePropagated
@@ -243,7 +243,7 @@ BrActor >> request: aBrRequest [
 	^ aBrRequest response
 ]
 
-{ #category : 'private - event management' }
+{ #category : #'private - event management' }
 BrActor >> transferEventHandlersToWidget [
 	| theEventHandlers |
 	
@@ -253,7 +253,7 @@ BrActor >> transferEventHandlersToWidget [
 	theEventHandlers do: [ :eachHandler | self widget addEventHandler: (BlEventForwarder forwardTo: eachHandler from: self) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> widget [
 	<return: #BlElement>
 	
@@ -264,24 +264,24 @@ BrActor >> widget [
 	^ widget
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> widgetDo: aBlockClosure [
 	widget ifNotNil: aBlockClosure
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> withAllActorsBreadthFirstDo: aBlock [
 	aBlock value: self.
 	self allActorsBreadthFirstDo: aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> withAllActorsDepthFirstDo: aBlock [
 	self allActorsDepthFirstDo: aBlock.
 	aBlock value: self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrActor >> withAllChildren [
 	<return: #Collection of: #BrActor>
 

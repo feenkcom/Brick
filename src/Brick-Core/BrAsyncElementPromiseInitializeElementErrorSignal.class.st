@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'error'
 	],
-	#category : #'Brick-Future - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #accessing }

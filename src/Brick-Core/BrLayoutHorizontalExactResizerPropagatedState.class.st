@@ -1,52 +1,52 @@
 Class {
-	#name : 'BrLayoutHorizontalExactResizerPropagatedState',
-	#superclass : 'BrLayoutHorizontalExactResizerState',
+	#name : #BrLayoutHorizontalExactResizerPropagatedState,
+	#superclass : #BrLayoutHorizontalExactResizerState,
 	#instVars : [
 		'width'
 	],
 	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrLayoutHorizontalExactResizerPropagatedState >> asNotPropagated [
 	^ BrLayoutHorizontalResizerState exact
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BrLayoutHorizontalExactResizerPropagatedState >> asPropagated [
 	^ self
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BrLayoutHorizontalExactResizerPropagatedState >> initialize [
 	super initialize.
 	
 	width := 50
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BrLayoutHorizontalExactResizerPropagatedState >> optionalOnAddedTo: anElement [
 	anElement properties hExact: self width
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BrLayoutHorizontalExactResizerPropagatedState >> printOn: aStream [
 	super printOn: aStream.
 	aStream space;
 		nextPutAll: '(propagated)'
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BrLayoutHorizontalExactResizerPropagatedState >> shouldOverwriteChildState [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutHorizontalExactResizerPropagatedState >> width [
 	^ width
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutHorizontalExactResizerPropagatedState >> width: anObject [
 	width := anObject
 ]

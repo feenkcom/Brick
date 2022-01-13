@@ -1,5 +1,5 @@
 Class {
 	#name : #BrElementUpdaterEnqueueUpdateSignal,
 	#superclass : #BrElementUpdaterSignal,
-	#category : #'Brick-! Core - Support'
+	#category : #'Brick-Core-Futures'
 }

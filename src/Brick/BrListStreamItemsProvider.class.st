@@ -109,5 +109,7 @@ BrListStreamItemsProvider >> stream: aStream [
 			ifNotNil: [ :aPreviousBuffer |
 				aPreviousBuffer unsubscribe: self.
 				self privateSetTransitionBuffer: (AsyncStreamTransitionBuffer forStream: aStream previousBuffer: aPreviousBuffer) ]
-			ifNil: [ self privateSetStreamBuffer: (AsyncStreamBuffer forStream: aStream) ] ]
+			ifNil: [ self privateSetStreamBuffer: (AsyncStreamBuffer new
+				executionConfiguration: (AsyncFutureExecutionConfiguration new highPriority; customGroup: #ScrollingList);
+				stream: aStream) ] ]
 ]

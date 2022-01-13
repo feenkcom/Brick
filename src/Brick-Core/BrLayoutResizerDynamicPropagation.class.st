@@ -1,23 +1,23 @@
 Class {
-	#name : 'BrLayoutResizerDynamicPropagation',
-	#superclass : 'BrLayoutResizerPropagation',
+	#name : #BrLayoutResizerDynamicPropagation,
+	#superclass : #BrLayoutResizerPropagation,
 	#instVars : [
 		'childrenBlock'
 	],
 	#category : 'Brick-Core-Layout Resizer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutResizerDynamicPropagation >> childrenBlock [
 	^ childrenBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutResizerDynamicPropagation >> childrenBlock: anObject [
 	childrenBlock := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BrLayoutResizerDynamicPropagation >> childrenToPropagateFrom: aParentElement do: aBlockClosure [
 	childrenBlock argumentCount isZero
 		ifTrue: [

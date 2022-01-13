@@ -1,69 +1,50 @@
 "
-I am a text styler strategy used by ${class:BrTextEditor}$.
-I style a text in a bacground process using ${method:BlockClosure>>#forkAt:named:}$.
+I am an abstract text styler strategy used by ${class:BrTextEditor}$.
+My concrete subclass strategies should style text in a background process.
+The common styling logic, that should be executed in the background process is implemented in ${method:BrTextStylerCommonAsyncStrategy>>#doStyle:afterDo:}$ and should be called from concete 
+The subclasses should implement ${method:BrTextStylerStrategy>>#style:afterDo:}$ implementations.
 
 See ${class:BrTextStylerStrategy}$ for futher explanation.
 
-Example: ${example:BrTextStylerExamples>>#editorWithAsyncStylerStrategy|codeExpanded=false|previewExpanded=true}$
-
+See my subclasses for concrete async strategies: ${class:BrTextStylerCommonAsyncStrategy|expanded=true|show=gtSubclassesFor:}$
 
 "
 Class {
 	#name : #BrTextStylerAsyncStrategy,
-	#superclass : #BrTextStylerCommonAsyncStrategy,
+	#superclass : #BrTextStylerStrategy,
 	#instVars : [
-		'backgroundProcess',
-		'delay'
+		'editorStylingFuture'
 	],
-	#category : 'Brick-Editor-Styler'
+	#category : #'Brick-Editor-Styler'
 }
-
-{ #category : #accessing }
-BrTextStylerAsyncStrategy >> delay [
-	<return: #Duration>
-	^ delay
-]
-
-{ #category : #accessing }
-BrTextStylerAsyncStrategy >> delay: aDuration [
-	self 
-		assert: [ aDuration isNotNil ] 
-		description: [ 'Style text delay must be non-nil' ].
-	delay := aDuration
-]
-
-{ #category : #private }
-BrTextStylerAsyncStrategy >> doStyle: aBlText afterDo: aBlock [
-	self delay isZero ifFalse: [ self delay wait ].
-	super doStyle: aBlText afterDo: aBlock
-]
 
 { #category : #initialization }
 BrTextStylerAsyncStrategy >> initialize [
 	super initialize.
-	backgroundProcess := nil.
-	delay := 200 milliSeconds.
+
+	editorStylingFuture := BrAsyncElementFuture new
+		cancelSoft;
+		executionConfiguration: (AsyncFutureExecutionConfiguration new customGroup: #TextStyler);
+		whenSuccess: [ :anEditorElement :aStyledEvent | anEditorElement editor dispatchEvent: aStyledEvent ]
 ]
 
 { #category : #styling }
-BrTextStylerAsyncStrategy >> style: aBlText afterDo: aBlock [
-	self view ifNil: [ 
-		"A graphical widget is not available, we therefore do not need to style the text"
-		^ self ].
-	BlUseAsyncFeatures 
-		ifEnabledDo: [  
-			monitor critical: [ 
-				self terminateBackgroundStylingProcess.
-				backgroundProcess := [
-					self doStyle: aBlText afterDo: aBlock 
-				] forkAt: Processor userBackgroundPriority named: 'Text Styler Async Task' ] ]
-		otherwise: [ self doStyle: aBlText afterDo: aBlock ]
-]
+BrTextStylerAsyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: aBlock [
+	| aTextStylingFuture |
 
-{ #category : #private }
-BrTextStylerAsyncStrategy >> terminateBackgroundStylingProcess [
-	"Must be called in a monitor critical block."
-	backgroundProcess ifNotNil: [ :aProcess |
-		aProcess terminate.
-		backgroundProcess := nil ]
+	aTextStylingFuture := [
+		| aStyledText |
+
+		aStyledText := self
+			doStyleText: aBrEditorElement editor textSnapshot with: aBrEditorElement editor styler
+			afterDo: aBlock.
+
+		(BrTextStyledEvent new
+				text: aStyledText;
+				afterAction: aBlock;
+				editorElement: aBrEditorElement) ] asAsyncFuture.
+
+	editorStylingFuture
+		element: aBrEditorElement;
+		future: aTextStylingFuture
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'updater'
 	],
-	#category : #'Brick-! Core - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #'instance creation' }

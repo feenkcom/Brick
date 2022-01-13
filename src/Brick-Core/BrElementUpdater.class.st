@@ -25,7 +25,7 @@ Class {
 		'action',
 		'postponedDuration'
 	],
-	#category : #'Brick-! Core - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #'private - accessing' }

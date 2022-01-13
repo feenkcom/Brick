@@ -8,7 +8,7 @@ Class {
 		'elementTasks',
 		'dataSnapshot'
 	],
-	#category : #'Brick-Future - Support'
+	#category : #'Brick-Core-Futures'
 }
 
 { #category : #'instance creation' }
