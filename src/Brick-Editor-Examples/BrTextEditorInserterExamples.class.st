@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorInserterExamples,
 	#superclass : #BrTextEditorOperatorExamples,
-	#category : 'Brick-Editor-Examples-Operators'
+	#category : #'Brick-Editor-Examples-Operators'
 }
 
 { #category : #'examples - insertion' }
@@ -766,4 +766,33 @@ BrTextEditorInserterExamples >> insert_open_close_parentheses_at_cursor_0_select
 	self assert: anEditor selection isEmpty.
 
 	^ anEditor
+]
+
+{ #category : #'examples - insertion' }
+BrTextEditorInserterExamples >> insert_open_close_parentheses_with_selection_and_undo [
+	<gtExample>
+	
+	| editorElement editor |
+	editorElement := self editorOnEmptyText.
+	editor := editorElement editor.
+	(editor inserter)
+		at: 0;
+		string: 'abc';
+		insert.
+	editor selecter all select.
+	(editor inserter)
+		atCursor;
+		string: '(';
+		withoutSelectionDelete;
+		surroundings:
+				(BrTextEditorSurroundMap
+						newFromArray:
+							{'('.
+								')'.
+								nil});
+		insert.
+	self assert: editor text asString equals: '(abc)'.
+	editor undo.
+	self assert: editor text asString equals: 'abc'.
+	^ editorElement
 ]
