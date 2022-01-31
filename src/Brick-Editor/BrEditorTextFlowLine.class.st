@@ -17,7 +17,7 @@ Class {
 		'origin',
 		'baseline'
 	],
-	#category : 'Brick-Editor-Layout'
+	#category : #'Brick-Editor-Layout'
 }
 
 { #category : #adding }
@@ -71,9 +71,10 @@ BrEditorTextFlowLine >> distanceTo: aPoint [
 BrEditorTextFlowLine >> do: aBlock [
 	"Evaluate aBlock with each of my next lines as the argument"
 
-	aBlock value: self.
-	self hasNextLine
-		ifTrue: [ nextLine do: aBlock ]
+	| current |
+	current := self.
+	[ aBlock value: current.
+	current hasNextLine ] whileTrue: [ current := current nextLine ]
 ]
 
 { #category : #accessing }
