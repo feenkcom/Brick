@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorByScripterExamples,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples-By scripter'
+	#category : #'Brick-Editor-Examples-By scripter'
 }
 
 { #category : #'click - adornment element' }
@@ -12,22 +12,24 @@ BrTextEditorByScripterExamples >> click_adornment_element [
 	aScripter := self scripterWithElement.
 	aScripter do
 		action: [ :aBrEditor | aBrEditor text: self textWithAdornment ];
-		onSelf.
+		onSelf;
+		play.
 	
-	aScripter wait forEmptySpaceTaskQueue.
-	
-	aScripter click id: #adornment.
-	aScripter wait forEmptySpaceTaskQueue.
+	aScripter click
+		id: #adornment;
+		play.
 
 	aScripter check
 		value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #();
-		onBrTextEditor.
+		onBrTextEditor;
+		play.
 
 	aScripter check
 		satisfies: [ :aBrEditor | aBrEditor isFocused not ];
-		onSelf.
+		onSelf;
+		play.
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'click - empty' }
@@ -37,18 +39,19 @@ BrTextEditorByScripterExamples >> click_empty [
 
 	aScripter := self scripterWithElement.
 
-	aScripter click onSelf.
-	aScripter wait forEmptySpaceTaskQueue.
+	aScripter click onSelf; play.
 
 	aScripter check
 		value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #(0);
-		onBrTextEditor.
+		onBrTextEditor;
+		play.
 
 	aScripter check
 		satisfies: [ :aBrEditor | aBrEditor isFocused ];
-		onSelf.
+		onSelf;
+		play.
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'instance creation' }
@@ -75,17 +78,18 @@ BrTextEditorByScripterExamples >> scripterWithElement [
 
 	aScripter := self scripter.
 	aScripter element: self scripterElement.
-	aScripter wait forEmptySpaceTaskQueue.
 	
 	aScripter check
 		value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #();
-		onBrTextEditor.
+		onBrTextEditor;
+		play.
 
 	aScripter check
 		satisfies: [ :aBrEditor | aBrEditor isFocused not ];
-		onSelf.
+		onSelf;
+		play.
 	
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'click - adornment element' }
