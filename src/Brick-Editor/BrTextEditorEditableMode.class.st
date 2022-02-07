@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorEditableMode,
 	#superclass : #BrTextEditorBasicMode,
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #initialization }
@@ -23,6 +23,7 @@ BrTextEditorEditableMode >> initialize [
 		BrEditorDeleteOneLetterAfterCursorShortcut new.
 		BrEditorDeleteOneLetterBeforeCursorShortcut new.
 		BrEditorShiftRightShortcut new.
+		BrEditorShiftLeftShortcut new.
 		BrEditorCutShortcut new.
 		BrEditorCopyShortcut new.
 		BrEditorPasteShortcut new.
