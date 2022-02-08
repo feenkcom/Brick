@@ -10,7 +10,7 @@ Class {
 		'shouldDeselectExisting',
 		'commands'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }
@@ -27,6 +27,42 @@ BrTextEditorSelecter >> all [
 BrTextEditorSelecter >> all: aCompositeSelection [
 	aCompositeSelection do: [ :eachMonotoneSelection |
 		self from: eachMonotoneSelection from to: eachMonotoneSelection to ]
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorSelecter >> extendToBeginning [
+	"Extend selection to the start of the editor"
+	|  theCommands |
+	self assertUIProcess.
+
+	theCommands := self cursors collect: [ :aCursor |
+		| aDelta |
+		aDelta := aCursor position.
+		(self
+			privateExtendSelectionLeftAt: aCursor position
+			by: aDelta)
+				toMoveCursor: aCursor
+				by: aDelta negated ].
+
+	commands addAll: theCommands
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorSelecter >> extendToEnd [
+
+	"Extend selection to the end of the editor"
+
+	| theCommands |
+	self assertUIProcess.
+
+	theCommands := self cursors collect: [ :aCursor | 
+		               | aDelta |
+		               aDelta := self text size - aCursor position.
+		               (self
+			                privateExtendSelectionRightAt: aCursor position
+			                by: aDelta) toMoveCursor: aCursor by: aDelta ].
+
+	commands addAll: theCommands
 ]
 
 { #category : #'api - configuration' }

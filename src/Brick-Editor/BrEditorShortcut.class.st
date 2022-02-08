@@ -251,6 +251,42 @@ BrEditorShortcut class >> moveCursorRight [
 ]
 
 { #category : #'shortcut creation' }
+BrEditorShortcut class >> moveCursorToBeginning [
+
+	^ self new
+		  name: 'Move beginning';
+		  description:
+			  'Moves the cursor to the beginning of the current editor and deselects any selected text.';
+		  combination: BlKeyCombination builder primary home build;
+		  performBlock: [ :aBrTextEditor | 
+			  aBrTextEditor deselecter
+				  all;
+				  deselect.
+			  aBrTextEditor navigator
+				  moveTo: 0;
+				  apply ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
+BrEditorShortcut class >> moveCursorToEnd [
+
+	^ self new
+		  name: 'Move end';
+		  description:
+			  'Moves the cursor to the end of the current editor and deselects any selected text.';
+		  combination: BlKeyCombination builder primary end build;
+		  performBlock: [ :aBrTextEditor | 
+			  aBrTextEditor deselecter
+				  all;
+				  deselect.
+			  aBrTextEditor navigator
+				  moveToEnd;
+				  apply ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorToLineEnd [
 
 	^ self new
@@ -441,8 +477,9 @@ BrEditorShortcut class >> selectLineAfterCursor [
 		  name: 'Select to the end of a line';
 		  description:
 			  'Extends the selection from the current cursor position to the end of a line.';
-		  combination: BlKeyCombination primaryShiftArrowRight;
-		  combinationForUnix: BlKeyCombination shiftEnd;
+		  combination:
+			  (BlKeyCombination primaryShiftArrowRight or:
+					   BlKeyCombination shiftEnd);
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  extendToLineEnd;
@@ -457,8 +494,9 @@ BrEditorShortcut class >> selectLineBeforeCursor [
 		  name: 'Select to the beginning of a line';
 		  description:
 			  'Extends the selection from the current cursor position to the beginning of a line.';
-		  combination: BlKeyCombination primaryShiftArrowLeft;
-		  combinationForUnix: BlKeyCombination shiftHome;
+		  combination:
+			  (BlKeyCombination primaryShiftArrowLeft or:
+					   BlKeyCombination shiftHome);
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  extendToLineStart;
@@ -476,6 +514,36 @@ BrEditorShortcut class >> selectLineBelowCursor [
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  moveOneDown;
+				  select ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
+BrEditorShortcut class >> selectToBeginning [
+
+	^ self new
+		  name: 'Select to the beginning of the editor';
+		  description:
+			  'Extends the selection from the current cursor position to the beginning of the editor.';
+		  combination: BlKeyCombination builder primary shift home build;
+		  performBlock: [ :aBrTextEditor | 
+			  aBrTextEditor selecter
+				  extendToBeginning;
+				  select ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
+BrEditorShortcut class >> selectToEnd [
+
+	^ self new
+		  name: 'Select to the end of the editor';
+		  description:
+			  'Extends the selection from the current cursor position to the end of the editor.';
+		  combination: BlKeyCombination builder primary shift end build;
+		  performBlock: [ :aBrTextEditor | 
+			  aBrTextEditor selecter
+				  extendToEnd;
 				  select ];
 		  yourself
 ]

@@ -40,6 +40,8 @@ BrTextEditorEditableMode >> initialize [
 		BrEditorShortcut moveCursorToNextWord.
 		BrEditorShortcut moveCursorToLineStart.
 		BrEditorShortcut moveCursorToLineEnd.
+		BrEditorShortcut moveCursorToBeginning.
+		BrEditorShortcut moveCursorToEnd.
 		
 		BrEditorShortcut selectAll.
 		BrEditorShortcut deselectAll.
@@ -51,6 +53,8 @@ BrTextEditorEditableMode >> initialize [
 		BrEditorShortcut selectLineAfterCursor.
 		BrEditorShortcut selectLineBelowCursor.
 		BrEditorShortcut selectLineAboveCursor.
+		BrEditorShortcut selectToBeginning.
+		BrEditorShortcut selectToEnd.
 	}
 ]
 
