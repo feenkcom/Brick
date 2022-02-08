@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditorShortcutExamples,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples-Shortcuts'
+	#category : #'Brick-Editor-Examples-Shortcuts'
 }
 
 { #category : #accessing }
@@ -22,7 +22,7 @@ BrEditorShortcutExamples >> deleteOneLetterAfterCursorWithSelection [
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 3 to: 7).
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 3 }).
 	
-	BrEditorDeleteOneLetterAfterCursorShortcut new
+	BrEditorShortcut deleteOneLetterAfterCursor
 		performOnEditor: anEditor element: anEditorElement dueTo: nil.
 	
 	self assert: (anEditor text from: 3 to: 4) asString equals: 'sr'.
@@ -47,7 +47,7 @@ BrEditorShortcutExamples >> deleteOneLetterAfterCursorWithSelectionBeforeCursor 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 3 to: 7).
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 7 }).
 	
-	BrEditorDeleteOneLetterAfterCursorShortcut new
+	BrEditorShortcut deleteOneLetterAfterCursor
 		performOnEditor: anEditor element: anEditorElement dueTo: nil.
 	
 	self assert: (anEditor text from: 3 to: 4) asString equals: 'sr'.
@@ -72,7 +72,7 @@ BrEditorShortcutExamples >> deleteOneLetterBeforeCursorWithSelection [
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 3 to: 7).
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 7 }).
 	
-	BrEditorDeleteOneLetterBeforeCursorShortcut new
+	BrEditorShortcut deleteOneLetterBeforeCursor
 		performOnEditor: anEditor element: anEditorElement dueTo: nil.
 	
 	self assert: (anEditor text from: 3 to: 4) asString equals: 'sr'.
@@ -100,7 +100,7 @@ BrEditorShortcutExamples >> deleteOneLetterBeforeCursorWithSelectionAfterCursor 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 3 to: 7).
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 3 }).
 	
-	BrEditorDeleteOneLetterBeforeCursorShortcut new
+	BrEditorShortcut deleteOneLetterBeforeCursor
 		performOnEditor: anEditor element: anEditorElement dueTo: nil.
 	
 	self assert: (anEditor text from: 3 to: 4) asString equals: 'sr'.

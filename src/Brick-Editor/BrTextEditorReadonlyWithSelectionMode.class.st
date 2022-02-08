@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorReadonlyWithSelectionMode,
 	#superclass : #BrTextEditorBasicMode,
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #initialization }
@@ -19,9 +19,9 @@ BrTextEditorReadonlyWithSelectionMode >> initialize [
 	super initialize.
 	
 	shortcuts := {
-		BrEditorCopyShortcut new.
-		BrEditorSelectAllShortcut new.
-		BrEditorDeselectAllShortcut new.
+		BrEditorShortcut copy.
+		BrEditorShortcut selectAll.
+		BrEditorShortcut deselectAll.
 	}
 ]
 

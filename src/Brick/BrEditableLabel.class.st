@@ -5,7 +5,7 @@ Class {
 		'editorShortcuts',
 		'labelShortcuts'
 	],
-	#category : 'Brick-Editor - UI'
+	#category : #'Brick-Editor - UI'
 }
 
 { #category : #'api - editor' }
@@ -45,9 +45,9 @@ BrEditableLabel >> defaultEditorShortcuts [
 { #category : #initialization }
 BrEditableLabel >> defaultLabelShortcuts [
 	^ {
-		BrEditorLoseFocusShortcut new.
-		BrEditorFocusPreviousShortcut new.
-		BrEditorFocusNextShortcut new.
+		BrEditorShortcut loseFocus.
+		BrEditorShortcut focusPrevious.
+		BrEditorShortcut focusNext.
 		BrEditableLabelSwitchToEditorShortcut new
 	}
 ]
