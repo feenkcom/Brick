@@ -25,7 +25,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Brick-Theme'
+	#category : #'Brick-Theme-Core'
 }
 
 { #category : #initialization }

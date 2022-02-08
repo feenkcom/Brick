@@ -8,7 +8,8 @@ Class {
 		'editor',
 		'button',
 		'item',
-		'header'
+		'header',
+		'propertiesById'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -62,7 +63,9 @@ BrGlamorousTheme >> initialize [
 	editor := BrGlamorousEditorTheme new.
 	button := BrGlamorousButtonTheme new.
 	item := BrGlamorousItemTheme new.
-	header := BrGlamorousHeaderTheme new
+	header := BrGlamorousHeaderTheme new.
+	
+	propertiesById := OrderedDictionary new.
 ]
 
 { #category : #accessing }
