@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'textPosition'
 	],
-	#category : 'Brick-Editor-UI'
+	#category : #'Brick-Editor-UI'
 }
 
 { #category : #initialization }
@@ -22,5 +22,6 @@ BrCursorElement >> textPosition [
 
 { #category : #accessing }
 BrCursorElement >> textPosition: aNumber [
-	textPosition := aNumber
+	textPosition := aNumber.
+	self requestLayout
 ]
