@@ -359,7 +359,7 @@ BrEditorShortcut class >> moveCursorToPreviousWord [
 				  all;
 				  deselect.
 
-			  aBrTextEditor navigato
+			  aBrTextEditor navigator
 				  moveToStartPreviousWord;
 				  apply ];
 		  yourself
