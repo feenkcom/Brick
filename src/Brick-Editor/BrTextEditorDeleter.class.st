@@ -6,7 +6,7 @@ Class {
 		'shouldUpdateCursor',
 		'shouldUpdateSelection'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }
@@ -20,6 +20,19 @@ BrTextEditorDeleter >> afterCursor [
 ]
 
 { #category : #'api - configuration' }
+BrTextEditorDeleter >> beforeCurrentLineIfIndent [
+	"We delete indents at the beginning of lines"
+
+	self cursor
+		do:
+			[ :aCursor | 
+			| start aPosition |
+			aPosition := aCursor position.
+			start := self findLineStartBefore: aPosition.
+			self ifIndentAfter: start ]
+]
+
+{ #category : #'api - configuration' }
 BrTextEditorDeleter >> beforeCursor [
 	"Delete all text before the cursors"
 		
@@ -27,6 +40,20 @@ BrTextEditorDeleter >> beforeCursor [
 		self
 			from: 0
 			to: aCursor position ]
+]
+
+{ #category : #accessing }
+BrTextEditorDeleter >> beforeSelectedLinesIfIndent [
+	"We delete indents at the beginning of all selected lines"
+
+	| aCollectionOfLineStarts |
+	aCollectionOfLineStarts := OrderedCollection new.
+	self selection
+		do:
+			[ :aMonotoneSelection | 
+			aCollectionOfLineStarts add: (self findLineStartBefore: aMonotoneSelection from + 1).
+			aCollectionOfLineStarts addAll: (self findLineStartsBetween: aMonotoneSelection from + 1 and: aMonotoneSelection to) ].
+	aCollectionOfLineStarts asSet do: [ :start | self ifIndentAfter: start ]
 ]
 
 { #category : #private }
@@ -90,6 +117,11 @@ BrTextEditorDeleter >> from: aFromIndex to: aToIndex [
 		ifTrue: [ ^ self ].
 
 	deletionIntervals select: aFromIndex to: aToIndex
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> ifIndentAfter: start [
+	^ (self text at: start + 1) == Character tab ifTrue: [ self from: start to: start + 1 ]
 ]
 
 { #category : #initialization }
