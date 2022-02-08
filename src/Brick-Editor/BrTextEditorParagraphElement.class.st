@@ -442,11 +442,11 @@ BrTextEditorParagraphElement >> removeCursors [
 ]
 
 { #category : #layout }
-BrTextEditorParagraphElement >> requestLayout: anElement [
-	super requestLayout: anElement.
-	
-	anElement == self
+BrTextEditorParagraphElement >> requestLayout: aSourceElement [
+	aSourceElement == self
 		ifFalse: [ paragraph := nil ].
+		
+	^ super requestLayout: aSourceElement
 ]
 
 { #category : #'api - cursor' }
