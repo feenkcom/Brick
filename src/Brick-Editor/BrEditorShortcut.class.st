@@ -100,6 +100,44 @@ BrEditorShortcut class >> deselectAll [
 ]
 
 { #category : #'shortcut creation' }
+BrEditorShortcut class >> editableLabelAccept [
+
+	^ self new
+		  name: 'Accept';
+		  description: 'Accepts changes make to the text.';
+		  combination: BlKeyCombination return;
+		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			  aBrEditorElement acceptEdition ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
+BrEditorShortcut class >> editableLabelCancel [
+
+	^ self new
+		  name: 'Cancel';
+		  description:
+			  'Cancels changes and brings back the state of the editor.';
+		  combination: BlKeyCombination escape;
+		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			  aBrEditorElement cancelEdition ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
+BrEditorShortcut class >> editableLabelSwitchToEditor [
+
+	^ self new
+		  name: 'Switch to editor';
+		  description:
+			  'Switches the label into an editor allowing users to edit it.';
+		  combination: BlKeyCombination return;
+		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			  aBrEditorElement switchToEditor ];
+		  yourself
+]
+
+{ #category : #'shortcut creation' }
 BrEditorShortcut class >> focusNext [
 
 	^ self new

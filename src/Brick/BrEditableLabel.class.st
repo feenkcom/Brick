@@ -37,8 +37,8 @@ BrEditableLabel >> cancelEdition [
 { #category : #initialization }
 BrEditableLabel >> defaultEditorShortcuts [
 	^ {
-		BrEditableLabelAcceptShortcut new.
-		BrEditableLabelCancelShortcut new
+		BrEditorShortcut editableLabelAccept.
+		BrEditorShortcut editableLabelCancel
 	}
 ]
 
@@ -48,7 +48,7 @@ BrEditableLabel >> defaultLabelShortcuts [
 		BrEditorShortcut loseFocus.
 		BrEditorShortcut focusPrevious.
 		BrEditorShortcut focusNext.
-		BrEditableLabelSwitchToEditorShortcut new
+		BrEditorShortcut editableLabelSwitchToEditor
 	}
 ]
 
