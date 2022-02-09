@@ -308,35 +308,43 @@ BrTextEditorOperator >> findWordAt: aTextIndex [
 
 { #category : #private }
 BrTextEditorOperator >> findWordEndAfter: aTextIndex [
-	"Find a text index of the end of the next word after a given text index"
-	| textIterator newPosition aText |
 
+	"Find a text index of the end of the next word after a given text index"
+
+	| textIterator newPosition aText |
 	newPosition := aTextIndex.
 	aText := self text.
-
-	textIterator := aText iterator: (newPosition max: 1) to: aText size.
-	[ textIterator hasNext and: [ newPosition = aTextIndex ] ] whileTrue: [
-		| skip |
-		skip := textIterator peek isSeparator.
-		textIterator nextWord.
-		skip ifFalse: [ newPosition := textIterator position ] ].
+	textIterator := aText iterator: newPosition + 1 to: aText size.
+	[ textIterator hasNext and: [ newPosition = aTextIndex ] ] 
+		whileTrue: [ 
+			| skip ch |
+			ch := textIterator peek.
+			skip := ch isSeparator or: [ ch isLetter and: [ ch isUppercase ] ].
+			textIterator nextWord.
+			skip ifFalse: [ newPosition := textIterator position ] ].
 
 	^ newPosition
 ]
 
 { #category : #private }
 BrTextEditorOperator >> findWordStartBefore: aTextIndex [
-	"Find a text index of start of the previous word before a given text index"
-	| newPosition aText |
-	
+
+	"Find a text index of the start of the previous word before a given text index"
+
+	| textIterator newPosition aText test_variable_for_hyphens |
+	newPosition := aTextIndex.
 	aText := self text.
-	newPosition := aTextIndex - 1.
-	newPosition := newPosition max: 0.
-	[ newPosition > 0 and: [ (aText at: newPosition) isSeparator ] ] whileTrue:
-		[ newPosition := newPosition - 1 ].
-	[ newPosition = 0 or: [ (aText at: newPosition) isSeparator ] ] whileFalse:
-		[ newPosition := newPosition - 1 ].
-	
+	textIterator := aText iterator.
+	textIterator position: newPosition.
+	[ textIterator hasPrevious and: [ newPosition = aTextIndex ] ] 
+		whileTrue: [ 
+			| skip ch |
+			textIterator prevWord.
+			textIterator hasPrevious ifFalse: [ ^ textIterator position ].
+			ch := textIterator peer.
+			skip := ch isLetter and: [ ch isUppercase ].
+			skip ifFalse: [ newPosition := textIterator position ] ].
+
 	^ newPosition
 ]
 
