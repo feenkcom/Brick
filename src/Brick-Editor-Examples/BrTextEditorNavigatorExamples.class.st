@@ -569,6 +569,32 @@ BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	^ anEditor
 ]
 
+{ #category : #'examples - showroom' }
+BrTextEditorNavigatorExamples >> cursor_movePreviousWord_in_something [
+
+	<gtExample>
+	| anEditor |
+	anEditor := self editorOnSomeThing.
+	anEditor navigator
+		moveTo: 9;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 9) }.
+
+	anEditor navigator
+		moveToStartPreviousWord;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 4) }.
+	^ anEditor
+]
+
 { #category : #'examples - move to line end' }
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_0 [
 	<gtExample>
@@ -1840,13 +1866,7 @@ BrTextEditorNavigatorExamples >> cursor_remove_at_1_in_cursors_at_0_and_1 [
 ]
 
 { #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> where_is_the_mouse [
-	<gtExample>
-	| anEditor |
-	
-	anEditor := self editorFor: 'where is the mouse over
-the text editor?'.
-	anEditor matchParent.
-	
-	^ anEditor
+BrTextEditorNavigatorExamples >> editorOnSomeThing [
+
+	^ self editorFor: 'SomeThing'
 ]
