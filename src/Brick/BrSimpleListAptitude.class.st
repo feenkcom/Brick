@@ -56,8 +56,8 @@ BrSimpleListAptitude >> initialize [
 				yourself).
 	
 	self add: (BrListOrientationAptitude new
-		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] ];
-		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
+		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] after: [  ] ];
+		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] after: [  ] ])
 ]
 
 { #category : #initialization }

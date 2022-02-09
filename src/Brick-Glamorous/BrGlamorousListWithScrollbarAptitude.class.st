@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scrollableHandler'
 	],
-	#category : 'Brick-Glamorous-Scrollbar'
+	#category : #'Brick-Glamorous-Scrollbar'
 }
 
 { #category : #'api - orientation' }
@@ -26,8 +26,8 @@ BrGlamorousListWithScrollbarAptitude >> initialize [
 		do: [ :anEvent | self onScrollableRemovedFromParent: anEvent ].
 
 	self add: (BrListOrientationAptitude new
-		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] ];
-		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
+		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] after: [  ] ];
+		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] after: [  ] ])
 ]
 
 { #category : #'private - event handling' }
