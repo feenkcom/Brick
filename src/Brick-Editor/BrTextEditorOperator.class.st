@@ -340,6 +340,7 @@ BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 		whileTrue: [ 
 			| skip ch |
 			textIterator prevWord.
+			textIterator hasPrevious ifFalse: [ ^ textIterator position ].
 			ch := textIterator peer.
 			skip := ch isLetter and: [ ch isUppercase ].
 			skip ifFalse: [ newPosition := textIterator position ] ].
