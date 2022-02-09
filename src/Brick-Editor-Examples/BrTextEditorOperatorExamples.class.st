@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBrTextEditorFixedMeasurerExamples',
 	#classTraits : 'TBrTextEditorFixedMeasurerExamples classTrait',
-	#category : 'Brick-Editor-Examples-Operators'
+	#category : #'Brick-Editor-Examples-Operators'
 }
 
 { #category : #'focus - examples' }
@@ -100,6 +100,12 @@ BrTextEditorOperatorExamples >> editorOnMultilineText [
 	self assert: anEditor selection isEmpty.
 	
 	^ anEditorElement
+]
+
+{ #category : #'examples - showroom' }
+BrTextEditorOperatorExamples >> editorOnSomeThing [
+
+	^ self editorFor: 'SomeThing'
 ]
 
 { #category : #'utility - examples' }

@@ -4,6 +4,95 @@ Class {
 	#category : #'Brick-Editor-Examples-Operators'
 }
 
+{ #category : #'examples - showroom' }
+BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
+
+	<gtExample>
+	| anEditor |
+	anEditor := self editorOnSomeThing.
+	anEditor navigator
+		moveTo: 0;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 0) }.
+
+	anEditor navigator
+		moveToEndNextWord;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 4) }.
+	^ anEditor
+]
+
+{ #category : #'examples - showroom' }
+BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_twice_in_something [
+
+	<gtExample>
+	| anEditor |
+	anEditor := self cursor_addAt0_moveNextWord_in_something.
+		
+	anEditor navigator
+		moveToEndNextWord;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 9) }.
+		
+	^ anEditor
+]
+
+{ #category : #'examples - showroom' }
+BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
+
+	<gtExample>
+	| anEditor |
+	anEditor := self editorOnSomeThing.
+	anEditor navigator
+		moveTo: 9;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 9) }.
+
+	anEditor navigator
+		moveToStartPreviousWord;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 4) }.
+	^ anEditor
+]
+
+{ #category : #'examples - showroom' }
+BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_something [
+
+	<gtExample>
+	| anEditor |
+	anEditor := self cursor_addAt9_movePreviousWord_in_something.
+
+	anEditor navigator
+		moveToStartPreviousWord;
+		apply;
+		unsubscribe.
+
+	self
+		assert: anEditor cursors allCursors
+		equals: { (BrTextEditorSingleCursor new position: 0) }.
+	^ anEditor
+]
+
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_0_and_0_in_empty [
 	<gtExample>
@@ -566,32 +655,6 @@ BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	self assert: theReachBoudnaryEvents first cursor equals: (BrTextEditorSingleCursor new position: 202).
 	self assert: theReachBoudnaryEvents first isBottom.
 	
-	^ anEditor
-]
-
-{ #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> cursor_movePreviousWord_in_something [
-
-	<gtExample>
-	| anEditor |
-	anEditor := self editorOnSomeThing.
-	anEditor navigator
-		moveTo: 9;
-		apply;
-		unsubscribe.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 9) }.
-
-	anEditor navigator
-		moveToStartPreviousWord;
-		apply;
-		unsubscribe.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 4) }.
 	^ anEditor
 ]
 
@@ -1863,10 +1926,4 @@ BrTextEditorNavigatorExamples >> cursor_remove_at_1_in_cursors_at_0_and_1 [
 	}.
 	
 	^ anEditor
-]
-
-{ #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> editorOnSomeThing [
-
-	^ self editorFor: 'SomeThing'
 ]
