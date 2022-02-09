@@ -8,7 +8,7 @@ Class {
 		'text',
 		'styler'
 	],
-	#category : 'Brick-Editor - Look'
+	#category : #'Brick-Editor - Look'
 }
 
 { #category : #accessing }
@@ -27,9 +27,6 @@ BrEditorAptitude >> initialize [
 	
 	attributesBuilder := BlTextDelegatedAttributesBuilder new attributesTarget: text.
 	attributesBuilder beNotOverwritableByStyler.
-	attributesBuilder whenAdded: [  ].
-	
-	self add: BrLayoutResizerAptitude inherit
 ]
 
 { #category : #initialization }

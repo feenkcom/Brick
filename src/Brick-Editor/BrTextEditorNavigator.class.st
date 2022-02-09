@@ -182,6 +182,11 @@ BrTextEditorNavigator >> moveTo: aTextPosition [
 ]
 
 { #category : #'api - configuration' }
+BrTextEditorNavigator >> moveToEnd [
+	self moveTo: self text size
+]
+
+{ #category : #'api - configuration' }
 BrTextEditorNavigator >> moveToEndNextWord [
 	"Move all cursors to the end of the next word"
 

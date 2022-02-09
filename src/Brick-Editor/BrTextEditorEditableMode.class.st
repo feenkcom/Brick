@@ -20,37 +20,41 @@ BrTextEditorEditableMode >> initialize [
 	super initialize.
 
 	shortcuts := shortcuts, {
-		BrEditorDeleteOneLetterAfterCursorShortcut new.
-		BrEditorDeleteOneLetterBeforeCursorShortcut new.
-		BrEditorShiftRightShortcut new.
-		BrEditorShiftLeftShortcut new.
-		BrEditorCutShortcut new.
-		BrEditorCopyShortcut new.
-		BrEditorPasteShortcut new.
-		BrEditorUndoShortcut new.
-		BrEditorRedoShortcut new.
+		BrEditorShortcut deleteOneLetterAfterCursor.
+		BrEditorShortcut deleteOneLetterBeforeCursor.
+		BrEditorShortcut shiftRight.
+		BrEditorShortcut shiftLeft.
+		BrEditorShortcut cut.
+		BrEditorShortcut copy.
+		BrEditorShortcut paste.
+		BrEditorShortcut undo.
+		BrEditorShortcut redo.
 	
 		self returnKeyAndAction.
 		
-		BrEditorMoveCursorLeftShortcut new.
-		BrEditorMoveCursorRightShortcut new.
-		BrEditorMoveCursorUpShortcut new.
-		BrEditorMoveCursorDownShortcut new.
-		BrEditorMoveCursorToPreviousWordShortcut new.
-		BrEditorMoveCursorToNextWordShortcut new.
-		BrEditorMoveCursorToLineStartShortcut new.
-		BrEditorMoveCursorToLineEndShortcut new.
+		BrEditorShortcut moveCursorLeft.
+		BrEditorShortcut moveCursorRight.
+		BrEditorShortcut moveCursorUp.
+		BrEditorShortcut moveCursorDown.
+		BrEditorShortcut moveCursorToPreviousWord.
+		BrEditorShortcut moveCursorToNextWord.
+		BrEditorShortcut moveCursorToLineStart.
+		BrEditorShortcut moveCursorToLineEnd.
+		BrEditorShortcut moveCursorToBeginning.
+		BrEditorShortcut moveCursorToEnd.
 		
-		BrEditorSelectAllShortcut new.
-		BrEditorDeselectAllShortcut new.
-		BrEditorSelectLetterAfterCursorShortcut new.
-		BrEditorSelectLetterBeforeCursorShortcut new.
-		BrEditorSelectWordBeforeCursorShortcut new.
-		BrEditorSelectWordAfterCursorShortcut new.
-		BrEditorSelectLineBeforeCursorShortcut new.
-		BrEditorSelectLineAfterCursorShortcut new.
-		BrEditorSelectLineBelowCursorShortcut new.
-		BrEditorSelectLineAboveCursorShortcut new.
+		BrEditorShortcut selectAll.
+		BrEditorShortcut deselectAll.
+		BrEditorShortcut selectLetterAfterCursor.
+		BrEditorShortcut selectLetterBeforeCursor.
+		BrEditorShortcut selectWordBeforeCursor.
+		BrEditorShortcut selectWordAfterCursor.
+		BrEditorShortcut selectLineBeforeCursor.
+		BrEditorShortcut selectLineAfterCursor.
+		BrEditorShortcut selectLineBelowCursor.
+		BrEditorShortcut selectLineAboveCursor.
+		BrEditorShortcut selectToBeginning.
+		BrEditorShortcut selectToEnd.
 	}
 ]
 
@@ -68,5 +72,5 @@ BrTextEditorEditableMode >> isEditable [
 
 { #category : #defaults }
 BrTextEditorEditableMode >> returnKeyAndAction [
-	^ BrEditorLineEndingShortcut new
+	^ BrEditorShortcut lineEnding
 ]

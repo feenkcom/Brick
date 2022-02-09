@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'theme'
 	],
-	#category : #'Brick-Theme'
+	#category : #'Brick-Theme-Core'
 }
 
 { #category : #accessing }
@@ -19,6 +19,7 @@ BrThemeElementProperty >> = anObject [
 { #category : #accessing }
 BrThemeElementProperty >> applyOnElement: anElement [
 	anElement userData at: #brickTheme put: theme.	
+	anElement dispatchEvent: BrThemeChanged new.
 ]
 
 { #category : #accessing }

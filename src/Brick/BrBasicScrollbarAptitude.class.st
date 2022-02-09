@@ -7,7 +7,7 @@ Class {
 		'thumbStencil',
 		'trackStencil'
 	],
-	#category : 'Brick-Scrollbar - Look'
+	#category : #'Brick-Scrollbar - Look'
 }
 
 { #category : #initialization }
@@ -40,8 +40,8 @@ BrBasicScrollbarAptitude >> initialize [
 	self addChangeAddChildAs: #(content scrollbar) with: [ scrollbar ].
 	
 	self add: (BrScrollbarOrientationAptitude new
-		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] ];
-		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
+		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] after: [  ] ];
+		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] after: [  ] ])
 ]
 
 { #category : #initialization }

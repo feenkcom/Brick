@@ -5,7 +5,7 @@ Class {
 		'editorShortcuts',
 		'labelShortcuts'
 	],
-	#category : 'Brick-Editor - UI'
+	#category : #'Brick-Editor - UI'
 }
 
 { #category : #'api - editor' }
@@ -37,18 +37,18 @@ BrEditableLabel >> cancelEdition [
 { #category : #initialization }
 BrEditableLabel >> defaultEditorShortcuts [
 	^ {
-		BrEditableLabelAcceptShortcut new.
-		BrEditableLabelCancelShortcut new
+		BrEditorShortcut editableLabelAccept.
+		BrEditorShortcut editableLabelCancel
 	}
 ]
 
 { #category : #initialization }
 BrEditableLabel >> defaultLabelShortcuts [
 	^ {
-		BrEditorLoseFocusShortcut new.
-		BrEditorFocusPreviousShortcut new.
-		BrEditorFocusNextShortcut new.
-		BrEditableLabelSwitchToEditorShortcut new
+		BrEditorShortcut loseFocus.
+		BrEditorShortcut focusPrevious.
+		BrEditorShortcut focusNext.
+		BrEditorShortcut editableLabelSwitchToEditor
 	}
 ]
 
