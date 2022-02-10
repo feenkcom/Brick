@@ -12,8 +12,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
 	anEditor := self editorOnSomeThing.
 	anEditor navigator
 		moveTo: 0;
-		apply;
-		unsubscribe.
+		apply.
 
 	self
 		assert: anEditor cursors allCursors
@@ -21,8 +20,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
 
 	anEditor navigator
 		moveToEndNextWord;
-		apply;
-		unsubscribe.
+		apply.
 
 	self
 		assert: anEditor cursors allCursors
@@ -32,15 +30,13 @@ BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
 
 { #category : #'examples - showroom' }
 BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_twice_in_something [
-
 	<gtExample>
 	| anEditor |
 	anEditor := self cursor_addAt0_moveNextWord_in_something.
 		
 	anEditor navigator
 		moveToEndNextWord;
-		apply;
-		unsubscribe.
+		apply.
 
 	self
 		assert: anEditor cursors allCursors
@@ -57,8 +53,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
 	anEditor := self editorOnSomeThing.
 	anEditor navigator
 		moveTo: 9;
-		apply;
-		unsubscribe.
+		apply.
 
 	self
 		assert: anEditor cursors allCursors
@@ -66,8 +61,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
 
 	anEditor navigator
 		moveToStartPreviousWord;
-		apply;
-		unsubscribe.
+		apply.
 
 	self
 		assert: anEditor cursors allCursors
@@ -84,8 +78,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_somethi
 
 	anEditor navigator
 		moveToStartPreviousWord;
-		apply;
-		unsubscribe.
+		apply.
 
 	self
 		assert: anEditor cursors allCursors
