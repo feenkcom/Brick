@@ -314,7 +314,7 @@ BrTextEditorOperator >> findWordEndAfter: aTextIndex [
 	| textIterator newPosition aText |
 	newPosition := aTextIndex.
 	aText := self text.
-	textIterator := aText iterator: newPosition + 1 to: aText size.
+	textIterator := aText iterator: (newPosition max: 1) to: aText size.
 	[ textIterator hasNext and: [ newPosition = aTextIndex ] ] 
 		whileTrue: [ 
 			| skip ch |
