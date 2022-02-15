@@ -36,10 +36,11 @@ BrTaggerExamples >> newGlamorousTaggerWithDropdown [
 
 					   fileBrowser vExact: 250.
 					   fileBrowser hExact: 400.
+					   fileBrowser padding: (BlInsets all: 10).
 
 					   fileBrowser buttonLabel: 'Add'.
 					   fileBrowser okAction: [ :filePath | 
-							   anAcceptAction value: filePath pathString ].
+							   anAcceptAction value: filePath basename ].
 					   fileBrowser ]);
 		  namedTags: { '.'. '..' };
 		  when: BrTaggerAddTagRequest do: [ :aRequest | 
