@@ -60,9 +60,7 @@ BrGlamorousTaggerEditableDropdownAptitude >> newAddTagButton [
 							           + (BrInteractiveCommonAptitude new
 									            default: [ :aWidget | 
 										            aWidget
-											            border: BlBorder empty;
-											            background:
-												            self theme status neutralBackgroundColor ];
+											            border: BlBorder empty ];
 									            hovered: [ :aWidget | 
 										            aWidget background:
 											            self theme status neutralBackgroundColor darker ];
@@ -80,7 +78,7 @@ BrGlamorousTaggerEditableDropdownAptitude >> newAddTagButton [
 						           label: 'Add';
 						           beSmallSize;
 						           hExact: 20;
-						           margin: margin;
+						           margin: (margin withBottom: 0);
 						           constraintsDo: [ :c | c flow vertical alignCenter ] ]
 				           content: [ self content value: button value: acceptAction ]);
 		          icon: BrGlamorousVectorIcons add;
