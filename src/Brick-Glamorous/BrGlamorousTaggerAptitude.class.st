@@ -144,6 +144,7 @@ BrGlamorousTaggerAptitude >> onTagRenamed: aTaggerTag to: aNewName [
 { #category : #hooks }
 BrGlamorousTaggerAptitude >> onTagsChanged: theTags [
 	tags removeChildren: self tagElements.
+	tagElements := OrderedCollection new.
 	theTags withIndexDo: [ :eachTag :eachIndex | self onTagAdded: eachTag at: eachIndex ]
 ]
 
