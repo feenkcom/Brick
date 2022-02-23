@@ -230,7 +230,8 @@ BrTextEditor >> defaultStylerStrategy [
 { #category : #initialization }
 BrTextEditor >> defaultText [
 	<return: #BlText>
-	^ BlRopedText string: ''
+	
+	^ '' asRopedText
 ]
 
 { #category : #'private - text' }

@@ -97,7 +97,8 @@ BrTextStylerExamples >> newEditor [
 { #category : #'instance creation' }
 BrTextStylerExamples >> newMethodText [
 	<gtExample>
-	^ BlRopedText string: (BlElement>>#applyLayoutSafelyIn:context:) sourceCode
+	
+	^ (BlElement >> #applyLayoutSafelyIn:context:) sourceCode asRopedText
 ]
 
 { #category : #defaults }

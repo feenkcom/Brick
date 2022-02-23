@@ -36,7 +36,7 @@ Class {
 	#classInstVars : [
 		'loremIpsum'
 	],
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
 
 { #category : #cleanup }
@@ -49,18 +49,16 @@ BrTextEditorExamples class >> cleanUp [
 { #category : #'examples - comparison' }
 BrTextEditorExamples class >> exampleEditor [
 	| space editorElement editor text |
-
 	editorElement := BrEditorElement new.
-	editorElement constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
-	
+	editorElement
+		constraintsDo:
+			[ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ].
 	editor := BrTextEditor new.
-	text := BlRopedText string: self loremIpsum.
-	
+	text := self loremIpsum asRopedText.
 	editor text: text.
 	editorElement editor: editor.
-
 	space := BlSpace new.
 	space extent: self extent.
 	space root addChild: editorElement.
@@ -423,19 +421,19 @@ BrTextEditorExamples >> newElement [
 BrTextEditorExamples >> newMethodText [
 	<gtExample>
 	
-	^ BlRopedText string: (BrTextEditorExamples>>#fullDrawOn:) sourceCode
+	^ (BrTextEditorExamples >> #fullDrawOn:) sourceCode asRopedText
 ]
 
 { #category : #'instance creation' }
 BrTextEditorExamples >> newText [
 	<gtExample>
 	
-	^ BlRopedText string: (String loremIpsum: 2000000)
+	^ (String loremIpsum: 2000000) asRopedText
 ]
 
 { #category : #'instance creation' }
 BrTextEditorExamples >> newThreeLineText [
 	<gtExample>
 	
-	^ BlRopedText string: 'first', String cr, 'second', String cr, 'third'
+	^ ('first' , String cr , 'second' , String cr , 'third') asRopedText
 ]
