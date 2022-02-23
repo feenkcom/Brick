@@ -784,7 +784,7 @@ BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 
 	(aBlTextStyledEvent text isNextGenerationOf: self text)
 		ifTrue: [
-			self text rope: aBlTextStyledEvent text text rope.
+			self text updateFrom: aBlTextStyledEvent text text.
 			
 			BlFrameTelemetry
 				time: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
