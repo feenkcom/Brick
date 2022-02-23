@@ -4,7 +4,7 @@ I contain examples-tests of the editor backed up by line based segments
 Class {
 	#name : #BrTextEditorLineSegmentExamples,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
 
 { #category : #'examples - cursor' }
@@ -2905,92 +2905,92 @@ BrTextEditorLineSegmentExamples >> segment_sub_HelloCrWorld_6_to_11 [
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_1234506789 [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: '1234506789')
+	
+	^ BlSubText text: '1234506789' asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_A [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'A')
+	
+	^ BlSubText text: 'A' asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACr [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'A', String cr)
+	
+	^ BlSubText text: ('A' , String cr) asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrB [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'A', String cr, 'B')
+	
+	^ BlSubText text: ('A' , String cr , 'B') asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrBCrC [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'A', String cr, 'B', String cr, 'C')
+	
+	^ BlSubText text: ('A' , String cr , 'B' , String cr , 'C') asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrCr [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'A', String cr, String cr)
+	
+	^ BlSubText text: ('A' , String cr , String cr) asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_ACrCrB [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'A', String cr, String cr, 'B')
+	
+	^ BlSubText text: ('A' , String cr , String cr , 'B') asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_BA [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'BA')
+	
+	^ BlSubText text: 'BA' asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_BCA [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'BCA')
+	
+	^ BlSubText text: 'BCA' asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Cr [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: String cr)
+	
+	^ BlSubText text: String cr asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_CrA [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: String cr, 'A')
+	
+	^ BlSubText text: (String cr , 'A') asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_HABA [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'HABA')
+	
+	^ BlSubText text: 'HABA' asRopedText
 ]
 
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'Hello')
+	
+	^ BlSubText text: 'Hello' asRopedText
 ]
 
 { #category : #'instance creation - text' }
@@ -3127,8 +3127,8 @@ BrTextEditorLineSegmentExamples >> text_Hello_Smart_World_WithAppending [
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_Hello_World [
 	<gtExample>
-
-	^ BlSubText text: (BlRopedText string: 'Hello World')
+	
+	^ BlSubText text: 'Hello World' asRopedText
 ]
 
 { #category : #'instance creation - text' }
@@ -3170,8 +3170,8 @@ BrTextEditorLineSegmentExamples >> text_Hello_World_WithReplacementOfLineBreak [
 { #category : #'instance creation - text' }
 BrTextEditorLineSegmentExamples >> text_empty [
 	<gtExample>
-
-	^ BlRopedText string: ''
+	
+	^ '' asRopedText
 ]
 
 { #category : #'instance creation - text' }
