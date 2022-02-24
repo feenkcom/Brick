@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorParagraphAttributesExamples,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
 
 { #category : #'instance creation' }
@@ -55,7 +55,7 @@ BrTextEditorParagraphAttributesExamples >> helloText [
 		paragraphMargin: (BlInsets top: 15 left: 20 bottom: 15 right: 20).
 
 	self
-		assert: aText rope attributes
+		assert: aText iterator attributes
 		equals: {
 			BlFontSizeAttribute size: 20.
 			BrTextParagraphLineSpacingAttribute lineSpacing: 20.
