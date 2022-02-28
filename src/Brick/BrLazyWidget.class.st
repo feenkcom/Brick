@@ -7,7 +7,14 @@ Class {
 { #category : #accessing }
 BrLazyWidget >> content: aBlock [
 
-	(self successBlock: aBlock) asyncFuture future: (AsyncCachedFuture
+	| oldBlock |
+	oldBlock := aBlock.
+
+	self successBlock: aBlock.
+
+	oldBlock ifNotNil: [ self setup ].
+
+	self asyncFuture future: (AsyncCachedFuture
 			 forFuture: [  ] asAsyncFuture
 			 cache: AsyncFutureCache new)
 ]
