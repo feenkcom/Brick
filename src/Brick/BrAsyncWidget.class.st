@@ -4,10 +4,17 @@ Class {
 	#instVars : [
 		'pendingBlock',
 		'errorBlock',
-		'successBlock'
+		'successBlock',
+		'beLazy'
 	],
 	#category : #'Brick-Async-Widget'
 }
+
+{ #category : #accessing }
+BrAsyncWidget >> beEager [
+	beLazy := false.
+	self setup
+]
 
 { #category : #accessing }
 BrAsyncWidget >> defaultErrorBlock [
@@ -45,6 +52,30 @@ BrAsyncWidget >> initialize [
 	super initialize.
 
 	self fitContent.
+	
+	beLazy := true
+]
+
+{ #category : #accessing }
+BrAsyncWidget >> onLayoutDone [
+
+	super onLayoutDone.
+
+	beLazy ifTrue: [ self setup ]
+]
+
+{ #category : #accessing }
+BrAsyncWidget >> pendingBlock [
+	^ pendingBlock ifNil: [ self defaultPendingBlock ]
+]
+
+{ #category : #accessing }
+BrAsyncWidget >> pendingBlock: aBlock [
+	pendingBlock := aBlock
+]
+
+{ #category : #accessing }
+BrAsyncWidget >> setup [
 
 	self withAsyncFutureDo: [ :anElementFuture | 
 		anElementFuture
@@ -64,17 +95,7 @@ BrAsyncWidget >> initialize [
 			whenSuccess: [ :theFrame :aValue | 
 				| aStencil aContainer |
 				theFrame removeChildren.
-				self successBlock value: theFrame value: aValue ] ]
-]
-
-{ #category : #accessing }
-BrAsyncWidget >> pendingBlock [
-	^ pendingBlock ifNil: [ self defaultPendingBlock ]
-]
-
-{ #category : #accessing }
-BrAsyncWidget >> pendingBlock: aBlock [
-	pendingBlock := aBlock
+				self successBlock cull: theFrame cull: aValue ] ]
 ]
 
 { #category : #accessing }
