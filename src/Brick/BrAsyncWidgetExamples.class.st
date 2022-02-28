@@ -18,6 +18,18 @@ BrAsyncWidgetExamples >> asyncWidgetWithContents [
 ]
 
 { #category : #accessing }
+BrAsyncWidgetExamples >> asyncWidgetWithContents_eager [
+
+	<gtExample>
+	| widget |
+	widget := self asyncWidgetWithContents beEager.
+	widget asyncFuture future: [ 
+		1 seconds wait.
+		'hi' ].
+	^ widget
+]
+
+{ #category : #accessing }
 BrAsyncWidgetExamples >> asyncWidgetWithContents_withFuture [
 
 	<gtExample>
