@@ -5,16 +5,12 @@ Class {
 		'pendingBlock',
 		'errorBlock',
 		'successBlock',
-		'beLazy'
+		'beLazy',
+		'strategy',
+		'postAction'
 	],
 	#category : #'Brick-Async-Widget'
 }
-
-{ #category : #accessing }
-BrAsyncWidget >> beEager [
-	beLazy := false.
-	self setup
-]
 
 { #category : #accessing }
 BrAsyncWidget >> defaultErrorBlock [
@@ -37,6 +33,11 @@ BrAsyncWidget >> defaultPendingBlock [
 ]
 
 { #category : #accessing }
+BrAsyncWidget >> defaultStrategy [
+	^ BrAsyncElementFutureWhenInSceneStrategy new
+]
+
+{ #category : #accessing }
 BrAsyncWidget >> errorBlock [
 	^ errorBlock ifNil: [ self defaultErrorBlock ]
 ]
@@ -53,15 +54,7 @@ BrAsyncWidget >> initialize [
 
 	self fitContent.
 	
-	beLazy := true
-]
-
-{ #category : #accessing }
-BrAsyncWidget >> onLayoutDone [
-
-	super onLayoutDone.
-
-	beLazy ifTrue: [ self setup ]
+	strategy := self defaultStrategy
 ]
 
 { #category : #accessing }
@@ -75,10 +68,20 @@ BrAsyncWidget >> pendingBlock: aBlock [
 ]
 
 { #category : #accessing }
+BrAsyncWidget >> postAction [
+]
+
+{ #category : #accessing }
+BrAsyncWidget >> postAction: anAction [
+	postAction := anAction
+]
+
+{ #category : #accessing }
 BrAsyncWidget >> setup [
 
 	self withAsyncFutureDo: [ :anElementFuture | 
 		anElementFuture
+			strategy: strategy;
 			whenPending: [ :theContainer | 
 				theContainer
 					addChild: self pendingBlock value;
@@ -92,18 +95,21 @@ BrAsyncWidget >> setup [
 					constraintsDo: [ :c | 
 						c frame horizontal alignCenter.
 						c frame vertical alignCenter ] ];
-			whenSuccess: [ :theFrame :aValue | 
+			whenSuccess: [ :theFrame :theElement | 
 				| aStencil aContainer |
 				theFrame removeChildren.
-				self successBlock cull: theFrame cull: aValue ] ]
+				theFrame addChild: theElement.
+				postAction ifNotNil: [ postAction value: theFrame ] ] ]
 ]
 
 { #category : #accessing }
-BrAsyncWidget >> successBlock [
-	^ successBlock
+BrAsyncWidget >> stencil: aBlock [
+
+	self setup.
+	self asyncFuture future: [ aBlock asStencil asElement ] asAsyncFuture
 ]
 
 { #category : #accessing }
-BrAsyncWidget >> successBlock: aBlock [
-	successBlock := aBlock
+BrAsyncWidget >> strategy: aStrategy [
+	strategy := aStrategy
 ]

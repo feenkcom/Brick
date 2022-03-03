@@ -13,7 +13,8 @@ Class {
 		'previousDataSnapshot',
 		'eventHandler',
 		'futureExecutionConfiguration',
-		'futureCancellation'
+		'futureCancellation',
+		'strategy'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -33,6 +34,11 @@ BrAsyncElementFuture >> cancelSoft [
 	futureCancellation := AsyncFutureExecutionSoftCancellation uniqueInstance
 ]
 
+{ #category : #initialization }
+BrAsyncElementFuture >> defaultStrategy [
+	^ BrAsyncElementFutureWhenInSceneStrategy new
+]
+
 { #category : #accessing }
 BrAsyncElementFuture >> element: anElement [
 	updater ifNotNil: [ :anUpdater |
@@ -43,12 +49,8 @@ BrAsyncElementFuture >> element: anElement [
 	updater := BrElementUpdater new
 		element: anElement;
 		action: (MessageSend receiver: self selector: #privateUpdateElement).
-
-	eventHandler := BlEventHandler new
-		eventClass: BlElementAddedToSceneGraphEvent;
-		action: (MessageSend receiver: self selector: #onElementAddedToSceneGraph:).
-
-	anElement addEventHandler: eventHandler
+	
+	strategy addEventHandlersOn: anElement withFuture: self
 ]
 
 { #category : #'api - accessing' }
@@ -88,6 +90,7 @@ BrAsyncElementFuture >> initialize [
 	previousDataSnapshot := nil.
 	futureExecutionConfiguration := AsyncFutureExecutionConfiguration default.
 	futureCancellation := AsyncFutureExecutionSoftCancellation uniqueInstance.
+	strategy := self defaultStrategy
 ]
 
 { #category : #'private - update' }
@@ -119,11 +122,14 @@ BrAsyncElementFuture >> privateInitializeElement [
 		dataSnapshot isPending
 			ifFalse: [ ^ self ].
 
-		updater element isAttachedToSceneGraph
+		(strategy needsUpdate: updater element)
 			ifFalse: [ ^ self ].
+			
+		promise ifNotNil: [ ^self ].
 		
 		isFinished := false.
 		promise := aPromise := future await: futureExecutionConfiguration.
+		(BrFutureScheduledSignal new future: future) emit.
 		promise
 			then: [ :aResult |
 				isFinished := true.
@@ -152,6 +158,11 @@ BrAsyncElementFuture >> privateUpdateElement [
 		ifSuccess: [ :aData | whenSuccess ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
 		ifError: [ :anError | whenError ifNotNil: [ :aBlock | aBlock cull: updater element cull: anError ] ]
 		ifPending: [ :aData | whenPending ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
+]
+
+{ #category : #accessing }
+BrAsyncElementFuture >> strategy: aStrategy [
+	strategy := aStrategy
 ]
 
 { #category : #'api - accessing' }
