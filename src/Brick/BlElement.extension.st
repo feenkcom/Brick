@@ -222,7 +222,7 @@ BlElement >> viewModel [
 
 { #category : #'*Brick' }
 BlElement >> viewModel: aBrViewModel [
-	self aptitudeDo: [ :aLook | self error: 'View model must be added before look' ].
+	self aptitudeDo: [ :aLook | self halt. self error: 'View model must be added before look' ].
 
 	self viewModelDo: [ :aCurrentModel |
 		aCurrentModel onUninstalledIn: self.
