@@ -4,11 +4,14 @@ Class {
 	#instVars : [
 		'pages'
 	],
-	#category : 'Brick-Pager - Model'
+	#category : #'Brick-Pager - Model'
 }
 
 { #category : #'api - adding / removing' }
 BrPagerModel >> addPage: aPageModel [
+	(self pages includes: aPageModel)
+		ifTrue: [ ^ self ].
+
 	self pages add: aPageModel.
 	self onPageAdded: aPageModel
 ]
@@ -98,7 +101,10 @@ BrPagerModel >> removeAllPages [
 BrPagerModel >> removePage: aPageModel [
 	| aPageIndex |
 	
-	aPageIndex := self pages indexOf: aPageModel.
+	aPageIndex := self pages
+		indexOf: aPageModel
+		ifAbsent: [ ^ self ].
+
 	self removePageAt: aPageIndex
 ]
 
