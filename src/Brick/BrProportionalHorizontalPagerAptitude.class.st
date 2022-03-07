@@ -5,7 +5,7 @@ Class {
 		'pagesListElement',
 		'resizers'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #initialization }
@@ -41,7 +41,7 @@ BrProportionalHorizontalPagerAptitude >> onPage: aPageModel elementAttached: aPa
 				beRight;
 				when: BlResizerResizedEvent
 					do: [ :anEvent | self onResized: aResizerTarget to: anEvent extent and: aPageElement ].
-			resizers at: aResizerTarget put: aResizer.
+			resizers at: aPageElement put: aResizer.
 			pagesListElement addChild: aResizer ].
 
 	pagesListElement addChild: aPageElement
@@ -49,7 +49,8 @@ BrProportionalHorizontalPagerAptitude >> onPage: aPageModel elementAttached: aPa
 
 { #category : #hooks }
 BrProportionalHorizontalPagerAptitude >> onPage: aPageModel elementDetached: aPageElement [
-	pagesListElement removeChild: aPageElement
+	pagesListElement removeChild: aPageElement.
+	resizers at: aPageElement ifPresent: [ :aResizer | aResizer removeFromParent ]
 ]
 
 { #category : #hooks }
