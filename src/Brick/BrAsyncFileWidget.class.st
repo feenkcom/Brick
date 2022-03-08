@@ -8,7 +8,7 @@ Class {
 BrAsyncFileWidget >> file: aFile [
 
 	self stencil: [ 
-		(SkiaImage fromForm: (Form fromBinaryStream: aFile binaryReadStream))
+		(SkiaImage fromFile: aFile asFileReference)
 			asElement constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ] ]
@@ -17,11 +17,16 @@ BrAsyncFileWidget >> file: aFile [
 { #category : #accessing }
 BrAsyncFileWidget >> url: aUrl [
 
+	| realUrl |
+	realUrl := aUrl asZnUrl.
+
+	realUrl scheme = #file ifTrue: [ 
+		^ self file: realUrl asFileReference ].
+
 	self stencil: [ 
 		(SkiaImage fromForm:
-			 (Form fromBase64String:
-				  aUrl asZnUrl retrieveContents base64Encoded)) asElement 
-			constraintsDo: [ :c | 
-				c horizontal matchParent.
-				c vertical matchParent ] ]
+			 (Form fromBase64String: realUrl retrieveContents base64Encoded))
+			asElement constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ] ]
 ]
