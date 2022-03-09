@@ -9,6 +9,12 @@ Class {
 	#category : #'Brick-Core-Futures'
 }
 
+{ #category : #testing }
+BrFuturePolledSignal class >> gtNormalOperationSignal [
+
+	^ true
+]
+
 { #category : #accessing }
 BrFuturePolledSignal >> pendingQueue: aQueue [
 	pendingQueue := aQueue
