@@ -7,6 +7,12 @@ Class {
 	#category : #'Brick-Core-Futures'
 }
 
+{ #category : #testing }
+BrFutureScheduledSignal class >> gtNormalOperationSignal [
+
+	^ true
+]
+
 { #category : #accessing }
 BrFutureScheduledSignal >> future [
 	^ future
