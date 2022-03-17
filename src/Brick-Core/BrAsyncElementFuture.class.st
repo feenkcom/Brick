@@ -93,6 +93,13 @@ BrAsyncElementFuture >> initialize [
 	strategy := self defaultStrategy
 ]
 
+{ #category : #accessing }
+BrAsyncElementFuture >> interrupt [
+
+	mutex critical: [ 
+		promise ifNotNil: [ promise cancel: futureCancellation ] ]
+]
+
 { #category : #'private - update' }
 BrAsyncElementFuture >> onElementAddedToSceneGraph: anEvent [
 	self privateInitializeElement
