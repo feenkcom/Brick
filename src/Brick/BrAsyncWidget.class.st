@@ -15,21 +15,24 @@ Class {
 { #category : #accessing }
 BrAsyncWidget >> defaultErrorBlock [
 
-	^ [ :anError | 
-	  anError asDebuggableElement
-		  hFitContentLimited;
-		  vFitContent ]
+	^ [ :anError | anError asDebuggableElement matchParent ]
 ]
 
 { #category : #accessing }
 BrAsyncWidget >> defaultPendingBlock [
 
-	^ [ 
+	^ [ :aFuture | 
 	  BrLabel new
-		  fitContent;
+		  matchParent;
+		  alignCenter;
 		  aptitude: (BrGlamorousLabelAptitude new foreground:
 					   BrGlamorousColors disabledButtonTextColor);
-		  text: 'Rendering...' ]
+		  text: 'Rendering...';
+		  addChild: (BrButton new
+				   aptitude: BrGlamorousButtonWithIconAptitude;
+				   beSmallSize;
+				   icon: BrGlamorousVectorIcons cancel;
+				   action: [ aFuture cancelHard interrupt ]) ]
 ]
 
 { #category : #accessing }
@@ -84,7 +87,7 @@ BrAsyncWidget >> setup [
 			strategy: strategy;
 			whenPending: [ :theContainer | 
 				theContainer
-					addChild: self pendingBlock value;
+					addChild: (self pendingBlock value: anElementFuture);
 					constraintsDo: [ :c | 
 						c frame horizontal alignCenter.
 						c frame vertical alignCenter ] ];
