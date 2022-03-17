@@ -21,7 +21,7 @@ BrAsyncWidget >> defaultErrorBlock [
 { #category : #accessing }
 BrAsyncWidget >> defaultPendingBlock [
 
-	^ [ :aFuture |
+	^ [ :aFuture | 
 	  BrLabel new
 		  matchParent;
 		  alignCenter;
@@ -30,8 +30,9 @@ BrAsyncWidget >> defaultPendingBlock [
 		  text: 'Rendering...';
 		  addChild: (BrButton new
 				   aptitude: BrGlamorousButtonWithIconAptitude;
+				   beSmallSize;
 				   icon: BrGlamorousVectorIcons cancel;
-				   action: [  aFuture cancelHard interrupt ]) ]
+				   action: [ aFuture cancelHard interrupt ]) ]
 ]
 
 { #category : #accessing }
