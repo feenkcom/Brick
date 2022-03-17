@@ -15,10 +15,7 @@ Class {
 { #category : #accessing }
 BrAsyncWidget >> defaultErrorBlock [
 
-	^ [ :anError | 
-	  anError asDebuggableElement
-		  hFitContentLimited;
-		  vFitContent ]
+	^ [ :anError | anError asDebuggableElement matchParent ]
 ]
 
 { #category : #accessing }
