@@ -11,12 +11,15 @@ Example: ${example:BrTextStylerExamples>>#editorWithSyncStylerStrategy|codeExpan
 Class {
 	#name : #BrTextStylerSyncStrategy,
 	#superclass : #BrTextStylerStrategy,
-	#category : 'Brick-Editor-Styler'
+	#category : #'Brick-Editor-Styler'
 }
 
 { #category : #styling }
 BrTextStylerSyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: aBlock [
 	| aStyledText |
+
+	aBrEditorElement editor styler affectsText
+		ifFalse: [ ^ self ].
 
 	aStyledText := self
 		doStyleText: aBrEditorElement editor text
