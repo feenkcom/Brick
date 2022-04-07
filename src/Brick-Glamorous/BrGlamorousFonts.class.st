@@ -85,7 +85,13 @@ BrGlamorousFonts class >> initialize [
 BrGlamorousFonts class >> initializeFonts [
 	<script: 'self initializeFonts'>
 
-	self initializeFontsOn: Bloc preferableSpartaCanvas offscreen.
+	[ self initializeFontsOn: Bloc preferableSpartaCanvas offscreen ]
+		on: Error
+		do: [ :anError |
+			NonInteractiveTranscript stderr
+				nextPutAll: 'Failed to initialize fonts. ';
+				nextPutAll: anError description;
+				cr ]
 ]
 
 { #category : #initialization }

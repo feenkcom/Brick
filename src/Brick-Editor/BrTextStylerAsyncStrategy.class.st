@@ -30,7 +30,10 @@ BrTextStylerAsyncStrategy >> initialize [
 
 { #category : #styling }
 BrTextStylerAsyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: aBlock [
-	| aTextStylingFuture |
+	| aTextStylingFuture aStyler |
+	
+	aBrEditorElement editor styler affectsText
+		ifFalse: [ ^ self ].
 
 	aTextStylingFuture := [
 		| aStyledText |
