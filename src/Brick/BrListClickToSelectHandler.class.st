@@ -4,14 +4,20 @@ Class {
 	#instVars : [
 		'listWidget'
 	],
-	#category : 'Brick-List - Support'
+	#category : #'Brick-List - Support'
 }
 
 { #category : #'api - accessing' }
 BrListClickToSelectHandler >> clickEvent: aBlClickEvent [
-	aBlClickEvent consumed: true.
+	| anItemIndex |
 
-	listWidget selectOne: (aBlClickEvent currentTarget constraints infinite holder dataSourcePosition) dueTo: aBlClickEvent.
+	anItemIndex := aBlClickEvent currentTarget constraints infinite holder dataSourcePosition.
+	anItemIndex <= 0
+		ifTrue: [ ^ self ].
+
+	aBlClickEvent consumed: true.
+	
+	listWidget selectOne: anItemIndex dueTo: aBlClickEvent.
 	listWidget requestFocus
 ]
 
