@@ -43,8 +43,8 @@ BrSlideWidget >> slide [
 
 { #category : #accessing }
 BrSlideWidget >> slide: aSlide [
-	slide := aSlide.
-	strategy := self defaultStrategy
+
+	slide := aSlide
 ]
 
 { #category : #accessing }

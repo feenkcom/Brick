@@ -58,8 +58,7 @@ BrAsyncWidget >> initialize [
 	super initialize.
 
 	self fitContent.
-	
-	strategy := self defaultStrategy
+	self setup
 ]
 
 { #category : #accessing }
@@ -81,12 +80,12 @@ BrAsyncWidget >> postAction: anAction [
 	postAction := anAction
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAsyncWidget >> setup [
 
 	self withAsyncFutureDo: [ :anElementFuture | 
 		anElementFuture
-			strategy: strategy;
+			strategy: self defaultStrategy;
 			whenPending: [ :theContainer | 
 				theContainer
 					addChild: (self pendingBlock value: anElementFuture);
@@ -101,7 +100,6 @@ BrAsyncWidget >> setup [
 						c frame horizontal alignCenter.
 						c frame vertical alignCenter ] ];
 			whenSuccess: [ :theFrame :theElement | 
-				| aStencil aContainer |
 				session := Smalltalk session.
 				theFrame removeChildren.
 				theFrame addChild: theElement.
@@ -112,12 +110,13 @@ BrAsyncWidget >> setup [
 BrAsyncWidget >> stencil: aBlock [
 
 	| aStencil |
-	self setup.
 	stencil := aStencil := aBlock asStencil.
 	self asyncFuture future: [ aStencil asElement ] asAsyncFuture
 ]
 
 { #category : #accessing }
 BrAsyncWidget >> strategy: aStrategy [
-	strategy := aStrategy
+
+	self withAsyncFutureDo: [ :anElementFuture | 
+		anElementFuture strategy: aStrategy ]
 ]
