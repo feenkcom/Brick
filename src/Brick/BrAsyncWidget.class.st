@@ -102,6 +102,7 @@ BrAsyncWidget >> setup [
 						c frame vertical alignCenter ] ];
 			whenSuccess: [ :theFrame :theElement | 
 				| aStencil aContainer |
+				session := Smalltalk session.
 				theFrame removeChildren.
 				theFrame addChild: theElement.
 				postAction ifNotNil: [ postAction value: theFrame ] ] ]

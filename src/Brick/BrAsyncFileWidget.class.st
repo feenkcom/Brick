@@ -4,6 +4,12 @@ Class {
 	#category : #'Brick-Async-Widget'
 }
 
+{ #category : #accessing }
+BrAsyncFileWidget class >> initialize [
+
+	SessionManager default registerGuiClassNamed: self name
+]
+
 { #category : #'system startup' }
 BrAsyncFileWidget class >> startUp: resuming [
 
@@ -26,11 +32,13 @@ BrAsyncFileWidget >> file: aFile [
 BrAsyncFileWidget >> resumeOnStartUp [
 
 	session ifNil: [ ^ self ].
-	session == Smalltalk session ifTrue: [ ^ self ].
 
-	self removeChildren.
+	self enqueueTask: (BlTaskAction new action: [ 
+			 (session isNotNil and: [ session == Smalltalk session ]) ifFalse: [ 
+				 session := nil.
+				 self removeChildren.
 
-	stencil ifNotNil: [ :aStencil | self stencil: aStencil ]
+				 stencil ifNotNil: [ :aStencil | self stencil: aStencil ] ] ])
 ]
 
 { #category : #accessing }
