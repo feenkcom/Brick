@@ -7,7 +7,9 @@ Class {
 		'successBlock',
 		'beLazy',
 		'strategy',
-		'postAction'
+		'postAction',
+		'stencil',
+		'session'
 	],
 	#category : #'Brick-Async-Widget'
 }
@@ -108,8 +110,10 @@ BrAsyncWidget >> setup [
 { #category : #accessing }
 BrAsyncWidget >> stencil: aBlock [
 
+	| aStencil |
 	self setup.
-	self asyncFuture future: [ aBlock asStencil asElement ] asAsyncFuture
+	stencil := aStencil := aBlock asStencil.
+	self asyncFuture future: [ aStencil asElement ] asAsyncFuture
 ]
 
 { #category : #accessing }
