@@ -5,6 +5,20 @@ Class {
 }
 
 { #category : #accessing }
+BrAsyncFileWidget class >> initialize [
+
+	SessionManager default registerGuiClassNamed: self name
+]
+
+{ #category : #'system startup' }
+BrAsyncFileWidget class >> startUp: resuming [
+
+	resuming ifFalse: [ ^ self ].
+
+	self allInstancesDo: [ :eachInstance | eachInstance resumeOnStartUp ]
+]
+
+{ #category : #accessing }
 BrAsyncFileWidget >> file: aFile [
 
 	self stencil: [ 
@@ -12,6 +26,19 @@ BrAsyncFileWidget >> file: aFile [
 			asElement constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ] ]
+]
+
+{ #category : #'system startup' }
+BrAsyncFileWidget >> resumeOnStartUp [
+
+	session ifNil: [ ^ self ].
+
+	self enqueueTask: (BlTaskAction new action: [ 
+			 (session isNotNil and: [ session == Smalltalk session ]) ifFalse: [ 
+				 session := nil.
+				 self removeChildren.
+
+				 stencil ifNotNil: [ :aStencil | self stencil: aStencil ] ] ])
 ]
 
 { #category : #accessing }
