@@ -6,14 +6,13 @@ Class {
 
 { #category : #accessing }
 BrAsyncElementFutureWhenVisibleStrategy >> addEventHandlersOn: anElement onFuture: aFuture [
-
 	| eventHandler |
+
 	eventHandler := BlEventHandler new
-		                eventClass: BlElementLayoutChangedEvent;
-		                action:
-			                (MessageSend
-				                 receiver: aFuture
-				                 selector: #onElementAddedToSceneGraph:).
+		eventClass: BlElementLayoutChangedEvent;
+		action: (MessageSend
+			receiver: aFuture
+			selector: #onElementAddedToSceneGraph:).
 
 	anElement addEventHandler: eventHandler
 ]

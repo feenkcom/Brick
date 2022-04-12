@@ -10,7 +10,7 @@ Class {
 
 { #category : #accessing }
 BrSlideWidget >> defaultStrategy [
-	^ BrAsyncElementFutureSlideStrategy new slide: self slide
+	^ BrAsyncElementFutureWhenVisibleStrategy new
 ]
 
 { #category : #accessing }

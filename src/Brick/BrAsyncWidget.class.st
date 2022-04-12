@@ -6,7 +6,6 @@ Class {
 		'errorBlock',
 		'successBlock',
 		'beLazy',
-		'strategy',
 		'postAction',
 		'stencil',
 		'session'
@@ -14,13 +13,13 @@ Class {
 	#category : #'Brick-Async-Widget'
 }
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAsyncWidget >> defaultErrorBlock [
 
 	^ [ :anError | anError asDebuggableElement matchParent ]
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAsyncWidget >> defaultPendingBlock [
 
 	^ [ :aFuture | 
@@ -37,7 +36,7 @@ BrAsyncWidget >> defaultPendingBlock [
 				   action: [ aFuture cancelHard interrupt ]) ]
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAsyncWidget >> defaultStrategy [
 	^ BrAsyncElementFutureWhenInSceneStrategy new
 ]
@@ -52,13 +51,33 @@ BrAsyncWidget >> errorBlock: aBlock [
 	errorBlock := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAsyncWidget >> initialize [
-
 	super initialize.
 
 	self fitContent.
-	self setup
+
+	self withAsyncFutureDo: [ :anElementFuture | 
+		anElementFuture
+			strategy: self defaultStrategy;
+			whenPending: [ :theContainer | 
+				theContainer
+					addChild: (self pendingBlock value: anElementFuture);
+					constraintsDo: [ :c | 
+						c frame horizontal alignCenter.
+						c frame vertical alignCenter ] ];
+			whenError: [ :theContainer :anError | 
+				theContainer
+					removeChildren;
+					addChild: (self errorBlock value: anError);
+					constraintsDo: [ :c | 
+						c frame horizontal alignCenter.
+						c frame vertical alignCenter ] ];
+			whenSuccess: [ :theContainer :theElement | 
+				session := Smalltalk session.
+				theContainer removeChildren.
+				theContainer addChild: theElement.
+				postAction ifNotNil: [ postAction value: theContainer ] ] ]
 ]
 
 { #category : #accessing }
@@ -80,43 +99,15 @@ BrAsyncWidget >> postAction: anAction [
 	postAction := anAction
 ]
 
-{ #category : #initialization }
-BrAsyncWidget >> setup [
-
-	self withAsyncFutureDo: [ :anElementFuture | 
-		anElementFuture
-			strategy: self defaultStrategy;
-			whenPending: [ :theContainer | 
-				theContainer
-					addChild: (self pendingBlock value: anElementFuture);
-					constraintsDo: [ :c | 
-						c frame horizontal alignCenter.
-						c frame vertical alignCenter ] ];
-			whenError: [ :theContainer :anError | 
-				theContainer
-					removeChildren;
-					addChild: (self errorBlock value: anError);
-					constraintsDo: [ :c | 
-						c frame horizontal alignCenter.
-						c frame vertical alignCenter ] ];
-			whenSuccess: [ :theFrame :theElement | 
-				session := Smalltalk session.
-				theFrame removeChildren.
-				theFrame addChild: theElement.
-				postAction ifNotNil: [ postAction value: theFrame ] ] ]
-]
-
 { #category : #accessing }
 BrAsyncWidget >> stencil: aBlock [
-
 	| aStencil |
+
 	stencil := aStencil := aBlock asStencil.
 	self asyncFuture future: [ aStencil asElement ] asAsyncFuture
 ]
 
 { #category : #accessing }
 BrAsyncWidget >> strategy: aStrategy [
-
-	self withAsyncFutureDo: [ :anElementFuture | 
-		anElementFuture strategy: aStrategy ]
+	self asyncFuture strategy: aStrategy
 ]
