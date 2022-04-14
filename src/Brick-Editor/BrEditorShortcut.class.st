@@ -472,36 +472,32 @@ BrEditorShortcut class >> selectLineAboveCursor [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> selectLineAfterCursor [
-
-	^ self new
-		  name: 'Select to the end of a line';
-		  description:
-			  'Extends the selection from the current cursor position to the end of a line.';
-		  combination:
-			  (BlKeyCombination primaryShiftArrowRight or:
-					   BlKeyCombination shiftEnd);
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor selecter
-				  extendToLineEnd;
-				  select ];
-		  yourself
+	^ (self new)
+		name: 'Select to the end of a line';
+		description: 'Extends the selection from the current cursor position to the end of a line.';
+		combination: BlKeyCombination shiftEnd;
+		combinationForMacOS: (BlKeyCombination primaryShiftArrowRight or: BlKeyCombination shiftEnd);
+		performBlock:
+				[ :aBrTextEditor | 
+					(aBrTextEditor selecter)
+						extendToLineEnd;
+						select ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> selectLineBeforeCursor [
-
-	^ self new
-		  name: 'Select to the beginning of a line';
-		  description:
-			  'Extends the selection from the current cursor position to the beginning of a line.';
-		  combination:
-			  (BlKeyCombination primaryShiftArrowLeft or:
-					   BlKeyCombination shiftHome);
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor selecter
-				  extendToLineStart;
-				  select ];
-		  yourself
+	^ (self new)
+		name: 'Select to the beginning of a line';
+		description: 'Extends the selection from the current cursor position to the beginning of a line.';
+		combination: BlKeyCombination shiftHome;
+		combinationForMacOS: (BlKeyCombination primaryShiftArrowLeft or: BlKeyCombination shiftHome);
+		performBlock:
+				[ :aBrTextEditor | 
+					(aBrTextEditor selecter)
+						extendToLineStart;
+						select ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
