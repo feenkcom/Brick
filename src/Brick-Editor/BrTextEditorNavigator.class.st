@@ -157,14 +157,24 @@ BrTextEditorNavigator >> moveDown [
 BrTextEditorNavigator >> moveLeft [
 	"Move all cursors to the left"
 
-	self cursor do: [ :aCursor | operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ]
+	self cursor
+		do:
+			[ :aCursor | 
+			(self hasString: String crlf beforeCursor: aCursor)
+				ifTrue: [ operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ].
+			operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ]
 ]
 
 { #category : #'api - configuration' }
 BrTextEditorNavigator >> moveRight [
 	"Move all cursors one to the right"
 
-	self cursor do: [ :aCursor | operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ]
+	self cursor
+		do:
+			[ :aCursor | 
+			(self hasString: String crlf afterCursor: aCursor)
+				ifTrue: [ operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ].
+			operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ]
 ]
 
 { #category : #'api - configuration' }
@@ -392,7 +402,10 @@ BrTextEditorNavigator >> privateRegisterForAdd: aCursor [
 
 { #category : #'private - registration' }
 BrTextEditorNavigator >> privateRegisterForMove: aCursor by: aDelta [
-	cursorsToMove at: aCursor put: aDelta
+	cursorsToMove
+		at: aCursor
+		update: [ :pos | pos + aDelta ]
+		initial: [ aDelta ]
 ]
 
 { #category : #'private - registration' }
