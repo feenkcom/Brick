@@ -614,6 +614,26 @@ BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_before_the_first_ch
 	^ anEditor
 ]
 
+{ #category : #'examples - crlf handling' }
+BrTextEditorNavigatorExamples >> cursor_moveAcrossCRLF [
+	<gtExample>
+	
+	| anEditor |
+	anEditor := self editorOnCrlfText.
+	(anEditor navigator)
+		moveTo: 2;
+		apply.
+	(anEditor navigator)
+		moveRight;
+		apply.
+	self assert: anEditor cursors allCursors equals: {BrTextEditorSingleCursor new position: 4}.
+	(anEditor navigator)
+		moveLeft;
+		apply.
+	self assert: anEditor cursors allCursors equals: {BrTextEditorSingleCursor new position: 2}.
+	^ anEditor
+]
+
 { #category : #'examples - move down' }
 BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	<gtExample>
