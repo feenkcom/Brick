@@ -1,8 +1,24 @@
 Class {
 	#name : #BrTextEditorDeleterExamples,
 	#superclass : #BrTextEditorOperatorExamples,
-	#category : 'Brick-Editor-Examples-Operators'
+	#category : #'Brick-Editor-Examples-Operators'
 }
+
+{ #category : #'examples - deletion special' }
+BrTextEditorDeleterExamples >> backwardsDeleteCrlf [
+	<gtExample>
+	
+	| anEditor |
+	anEditor := self editorOnCrlfText.
+	(anEditor navigator)
+		moveTo: 4;
+		apply.
+	(anEditor deleter)
+		oneBeforeCursor;
+		delete.
+	self assert: anEditor text asString equals: '1234'.
+	^ anEditor
+]
 
 { #category : #'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_0_cursorAt_0_selection_0_to_0 [
@@ -258,6 +274,22 @@ BrTextEditorDeleterExamples >> delete_0_to_5_from_HelloCr [
 
 	self assert: anEditor text asString equals: String cr.
 
+	^ anEditor
+]
+
+{ #category : #'examples - deletion special' }
+BrTextEditorDeleterExamples >> forwardDeleteCrlf [
+	<gtExample>
+	
+	| anEditor |
+	anEditor := self editorOnCrlfText.
+	(anEditor navigator)
+		moveTo: 2;
+		apply.
+	(anEditor deleter)
+		oneAfterCursor;
+		delete.
+	self assert: anEditor text asString equals: '1234'.
 	^ anEditor
 ]
 

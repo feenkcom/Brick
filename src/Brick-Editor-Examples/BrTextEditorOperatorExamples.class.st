@@ -6,6 +6,13 @@ Class {
 	#category : #'Brick-Editor-Examples-Operators'
 }
 
+{ #category : #'instance creation' }
+BrTextEditorOperatorExamples >> crlfText [
+	<gtExample>
+	
+	^ ('12' , String crlf , '34') asRopedText
+]
+
 { #category : #'focus - examples' }
 BrTextEditorOperatorExamples >> editorCreatesOneCursorOnFocus [
 	<gtExample>
@@ -72,6 +79,20 @@ BrTextEditorOperatorExamples >> editorHasNoFocusByDefault [
 	self assert: anEditor hasFocus not.
 	
 	^ anEditor
+]
+
+{ #category : #'instance creation' }
+BrTextEditorOperatorExamples >> editorOnCrlfText [
+	<gtExample>
+	| anEditor anEditorElement |
+	
+	anEditorElement := self editorFor: self crlfText.
+	anEditor := anEditorElement editor.
+	
+	self assert: anEditor cursors isEmpty.
+	self assert: anEditor selection isEmpty.
+	
+	^ anEditorElement
 ]
 
 { #category : #'instance creation' }

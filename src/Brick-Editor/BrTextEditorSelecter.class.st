@@ -241,32 +241,30 @@ BrTextEditorSelecter >> moveOneDown [
 { #category : #'api - configuration' }
 BrTextEditorSelecter >> moveOneToLeft [
 	"Select and move a cursor one character to the left"
-	|  theCommands |
-	self assertUIProcess.
 
-	theCommands := self cursors collect: [ :aCursor |
-		(self
-			privateExtendSelectionLeftAt: aCursor position
-			by: 1)
-				toMoveCursor: aCursor
-				by: -1 ].
-			
+	| theCommands |
+	self assertUIProcess.
+	theCommands := self cursors
+		collect:
+			[ :aCursor | 
+			| dist |
+			dist := (self hasString: String crlf beforeCursor: aCursor) ifTrue: [ 2 ] ifFalse: [ 1 ].
+			(self privateExtendSelectionLeftAt: aCursor position by: dist) toMoveCursor: aCursor by: dist negated ].
 	commands addAll: theCommands
 ]
 
 { #category : #'api - configuration' }
 BrTextEditorSelecter >> moveOneToRight [
 	"Select and move a cursor one character to the right"
-	|  theCommands |
-	self assertUIProcess.
 
-	theCommands := self cursors collect: [ :aCursor |
-		(self
-			privateExtendSelectionRightAt: aCursor position
-			by: 1)
-				toMoveCursor: aCursor
-				by: 1 ].
-	
+	| theCommands |
+	self assertUIProcess.
+	theCommands := self cursors
+		collect:
+			[ :aCursor | 
+			| dist |
+			dist := (self hasString: String crlf afterCursor: aCursor) ifTrue: [ 2 ] ifFalse: [ 1 ].
+			(self privateExtendSelectionRightAt: aCursor position by: dist) toMoveCursor: aCursor by: dist ].
 	commands addAll: theCommands
 ]
 

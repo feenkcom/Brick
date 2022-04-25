@@ -141,23 +141,22 @@ BrTextEditorDeleter >> isDeleter [
 { #category : #'api - configuration' }
 BrTextEditorDeleter >> oneAfterCursor [
 	"Delete one symbol after the cursors"
-		
-	self cursor do: [ :aCursor |
-		self
-			from: aCursor position
-			to: ((aCursor position + 1) min: self text size) ]
+
+	self cursor do: [ :aCursor | self oneAfterCursor: aCursor ]
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> oneAfterCursor: aCursor [
+	| dist | 
+	dist := (self hasString: String crlf afterCursor: aCursor) ifTrue: [ 2 ] ifFalse: [ 1 ].
+	^ self from: aCursor position to: (aCursor position + dist min: self text size)
 ]
 
 { #category : #'api - configuration' }
 BrTextEditorDeleter >> oneAfterCursorIfOutsideOfSelection [
 	"Delete one symbol after the cursors but only if there is no selection nearby"
-		
-	self cursor do: [ :aCursor |
-		(self selection contains: aCursor position)
-			ifFalse: [
-				self
-					from: aCursor position
-					to: ((aCursor position + 1) min: self text size) ] ]
+
+	self cursor do: [ :aCursor | (self selection contains: aCursor position) ifFalse: [ self oneAfterCursor: aCursor ] ]
 ]
 
 { #category : #'api - configuration' }
@@ -171,9 +170,9 @@ BrTextEditorDeleter >> oneBeforeCursor [
 BrTextEditorDeleter >> oneBeforeCursor: aCursor [
 	"Delete one symbol before the specified cursor "
 
-	self
-		from: ((aCursor position - 1) max: 0)
-		to: aCursor position
+	| dist |
+	dist := (self hasString: String crlf beforeCursor: aCursor) ifTrue: [ 2 ] ifFalse: [ 1 ].
+	self from: (aCursor position - dist max: 0) to: aCursor position
 ]
 
 { #category : #'api - configuration' }
