@@ -56,6 +56,18 @@ BrWithAnchoredAptitude >> handleMouseUpEvent: e [
 		ifTrue: [ self hide ]
 ]
 
+{ #category : #initialization }
+BrWithAnchoredAptitude >> hasModifiers: anEvent [
+
+	"Return true if any modifiers are pressed"
+
+	<return: #Boolean>
+	^ anEvent modifiers isAlt or: [ 
+		  anEvent modifiers isCmd or: [ 
+			  anEvent modifiers isCtrl or: [ 
+				  anEvent modifiers isShift ] ] ]
+]
+
 { #category : #'api - displaying' }
 BrWithAnchoredAptitude >> hide [
 	self canHide
@@ -94,7 +106,8 @@ BrWithAnchoredAptitude >> initialize [
 	clickOutsideEventHandler := BlEventHandler
 		                            on: BlMouseUpEvent
 		                            do: [ :e | 
-			                            self handleMouseUpEvent: e ].
+			                            (self hasModifiers: e) ifFalse: [
+			                            		self handleMouseUpEvent: e ] ].
 
 	pressEscEventHandler := BlShortcutWithAction new
 		                        combination: BlKeyCombination escape;

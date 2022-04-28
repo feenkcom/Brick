@@ -16,7 +16,7 @@ Class {
 	#instVars : [
 		'action'
 	],
-	#category : 'Brick-Button - Model'
+	#category : #'Brick-Button - Model'
 }
 
 { #category : #printing }
@@ -74,6 +74,18 @@ BrButtonModel >> gtActionFor: aView [
 ]
 
 { #category : #initialization }
+BrButtonModel >> hasModifiers: anEvent [
+
+	"Return true if any modifiers are pressed"
+
+	<return: #Boolean>
+	^ anEvent modifiers isAlt or: [ 
+		  anEvent modifiers isCmd or: [ 
+			  anEvent modifiers isCtrl or: [ 
+				  anEvent modifiers isShift ] ] ]
+]
+
+{ #category : #initialization }
 BrButtonModel >> initialize [
 	super initialize.
 
@@ -82,5 +94,7 @@ BrButtonModel >> initialize [
 
 { #category : #initialization }
 BrButtonModel >> initializeListeners [
-	self when: BlClickEvent do: [ :anEvent | self clickEvent: anEvent ]
+
+	self when: BlClickEvent do: [ :anEvent | 
+		(self hasModifiers: anEvent) ifFalse: [ self clickEvent: anEvent ] ]
 ]

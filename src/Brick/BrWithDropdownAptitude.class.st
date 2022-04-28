@@ -142,7 +142,7 @@ BrWithDropdownAptitude >> initialize [
 		on: BrDropdownHideWish
 		do: [ :aWish | self onHideWish: aWish ].
 
-	clickShowCondition := [ :aClickEvent | true ].
+	clickShowCondition := [ :aClickEvent | (self hasModifiers: aClickEvent) not ].
 	
 	"when true, the widget under the dropdown will be hidden"
 	shouldHideWidget := true.
