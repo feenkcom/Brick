@@ -23,6 +23,12 @@ BrAbstractListItemsProvider >> currentItems [
 ]
 
 { #category : #accessing }
+BrAbstractListItemsProvider >> isDone [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 BrAbstractListItemsProvider >> itemAt: anIndex [
 	^ self subclassResponsibility
 ]

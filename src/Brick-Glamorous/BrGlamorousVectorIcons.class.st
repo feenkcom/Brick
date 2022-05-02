@@ -583,6 +583,18 @@ BrGlamorousVectorIcons class >> note [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> pause [
+	<script: 'self pause inspect'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 7 2 v 14 h -4 v -14 z M 14 2 v 14 h -4 v -14 z'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> performance [
 	<script: 'self performance inspect'>
 

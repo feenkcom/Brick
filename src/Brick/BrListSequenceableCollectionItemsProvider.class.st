@@ -50,6 +50,11 @@ BrListSequenceableCollectionItemsProvider >> initialize [
 ]
 
 { #category : #accessing }
+BrListSequenceableCollectionItemsProvider >> isDone [
+	^ true
+]
+
+{ #category : #accessing }
 BrListSequenceableCollectionItemsProvider >> itemAt: anIndex [
 	^ self collection at: anIndex
 ]
