@@ -3,7 +3,9 @@ Class {
 	#superclass : #BrAbstractListItemsProvider,
 	#instVars : [
 		'monitor',
-		'buffer'
+		'buffer',
+		'preloadAmount',
+		'loadSinglesUntil'
 	],
 	#category : #'Brick-List - Model'
 }
@@ -32,10 +34,25 @@ BrListStreamItemsProvider >> currentItems [
 ]
 
 { #category : #initialization }
+BrListStreamItemsProvider >> defaultLoadSinglesUntil [
+	^ 0
+]
+
+{ #category : #accessing }
+BrListStreamItemsProvider >> defaultPreloadAmount [	
+	^ 20
+]
+
+{ #category : #initialization }
 BrListStreamItemsProvider >> initialize [
 	super initialize.
 	
 	monitor := Monitor new
+]
+
+{ #category : #accessing }
+BrListStreamItemsProvider >> isDone [
+	^ buffer isDone
 ]
 
 { #category : #accessing }
@@ -50,23 +67,47 @@ BrListStreamItemsProvider >> itemCount [
 	^ buffer size
 ]
 
+{ #category : #initialization }
+BrListStreamItemsProvider >> loadSinglesUntil [
+	^ loadSinglesUntil ifNil: [ loadSinglesUntil := self defaultLoadSinglesUntil]
+]
+
+{ #category : #initialization }
+BrListStreamItemsProvider >> loadSinglesUntil: aNumber [
+	loadSinglesUntil := aNumber
+]
+
 { #category : #'private - event handling' }
 BrListStreamItemsProvider >> onBufferChanged: anAnnouncement [
-	listModel
-		ifNotNil: [ :aListModel |
-			aListModel dispatchEvent: (BrListModelItemsAddedEvent new
-				addedItemsCount: anAnnouncement newItems size;
-				firstAddedItemIndex: anAnnouncement index) ]
+
+	listModel ifNotNil: [ :aListModel | 
+		aListModel dispatchEvent: (BrListModelItemsAddedEvent new
+				 addedItemsCount: anAnnouncement newItems size;
+				 firstAddedItemIndex: anAnnouncement index) ]
+]
+
+{ #category : #'private - event handling' }
+BrListStreamItemsProvider >> onBufferDone: anAnnouncement [
+
+	listModel dispatchEvent: BrListItemsProviderDoneEvent new
+]
+
+{ #category : #'private - event handling' }
+BrListStreamItemsProvider >> onBufferStartedLoading: anAnnouncement [
+
+	listModel ifNotNil: [ :aListModel | 
+		aListModel dispatchEvent: BrListItemsProviderStartedLoadingEvent new ]
 ]
 
 { #category : #accessing }
 BrListStreamItemsProvider >> preloadAmount [
-	^ 20
+
+	^ preloadAmount ifNil: [ preloadAmount := self defaultPreloadAmount ]
 ]
 
 { #category : #initialization }
 BrListStreamItemsProvider >> preloadAmount: aNumber [
-	
+	preloadAmount := aNumber
 ]
 
 { #category : #'api - loading' }
@@ -79,13 +120,25 @@ BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 
 { #category : #'private - accessing' }
 BrListStreamItemsProvider >> privateSetStreamBuffer: aStreamBuffer [
-	monitor critical: [
+
+	monitor critical: [ 
 		buffer := aStreamBuffer.
-		self notifyItemsChangedSynchronously: false.		
+		self notifyItemsChangedSynchronously: false.
+		buffer
+			when: AsyncStreamBufferStartedLoading
+			send: #onBufferStartedLoading:
+			to: self.
 		buffer
 			when: AsyncStreamBufferChanged
 			send: #onBufferChanged:
-			to: self ]
+			to: self.
+		buffer
+			when: AsyncStreamBufferDone
+			send: #onBufferDone:
+			to: self.
+		self isDone ifTrue: [ 
+			listModel ifNotNil: [ 
+				listModel dispatchEvent: BrListItemsProviderDoneEvent new ] ] ]
 ]
 
 { #category : #'private - accessing' }
@@ -111,5 +164,7 @@ BrListStreamItemsProvider >> stream: aStream [
 				self privateSetTransitionBuffer: (AsyncStreamTransitionBuffer forStream: aStream previousBuffer: aPreviousBuffer) ]
 			ifNil: [ self privateSetStreamBuffer: (AsyncStreamBuffer new
 				executionConfiguration: (AsyncFutureExecutionConfiguration new highPriority; customGroup: #ScrollingList);
+				preloadAmount: self preloadAmount;
+				loadSinglesUntil: self loadSinglesUntil;
 				stream: aStream) ] ]
 ]

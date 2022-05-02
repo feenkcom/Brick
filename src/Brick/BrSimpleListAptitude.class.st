@@ -70,6 +70,7 @@ BrSimpleListAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrListModelItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
+	self when: BrListItemsProviderDoneEvent do: [ :anEvent | self onItemsProviderDone: anEvent ].
 	self when: BrListModelItemsAddedEvent do: [ :anEvent | self onModelItemsAdded: anEvent ].
 	self when: BrListModelPromiseEnqueuedEvent do: [ :anEvent | self onModelPromiseEnqueued: anEvent ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
@@ -124,6 +125,11 @@ BrSimpleListAptitude >> onItemIdStencilChanged: aBrListItemIdStencilBuilder [
 { #category : #hooks }
 BrSimpleListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder [
 	self listElement dataSource itemTypeStencil: aBrListItemTypeStencilBuilder
+]
+
+{ #category : #initialization }
+BrSimpleListAptitude >> onItemsProviderDone: anEvent [ 
+	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyItemsProviderDone ])
 ]
 
 { #category : #hooks }

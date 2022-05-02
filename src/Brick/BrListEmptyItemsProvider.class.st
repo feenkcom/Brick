@@ -10,6 +10,11 @@ BrListEmptyItemsProvider >> currentItems [
 ]
 
 { #category : #accessing }
+BrListEmptyItemsProvider >> isDone [
+	^ true
+]
+
+{ #category : #accessing }
 BrListEmptyItemsProvider >> itemAt: anIndex [
 	^ self currentItems at: anIndex
 ]
