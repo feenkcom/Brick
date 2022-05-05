@@ -530,25 +530,25 @@ BrTextEditor >> newUpdateCommand [
 
 { #category : #'private - cursor' }
 BrTextEditor >> notifyAttributesWithinCursor: aCollectionOfAttributes [
+
 	"I select and notify those attributes in the given collection that are within any of the cursors"
+
 	| theEventHandlingAttributes anEvent |
-	
-	self isFocused
-		ifFalse: [ ^ self ].
+	self isFocused ifFalse: [ ^ self ].
 
 	anEvent := BrTextCursorAttributeEnterEvent new.
-	
-	theEventHandlingAttributes := (aCollectionOfAttributes select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
-	
-	self text
-		findAttributesSuchThat: [ :eachAttribute | theEventHandlingAttributes includes:  eachAttribute ]
-		indicesDo: [ :aStart :anEnd :eachAttribute |
-			(self cursors anySatisfy: [ :eachCursor |
-					eachCursor position between: aStart and: anEnd ])
-						ifTrue: [
-							anEvent interval: (aStart to: anEnd).
-							(eachAttribute wantsEvent: anEvent in: self)
-								ifTrue: [ eachAttribute handleEvent: anEvent in: self on: nil ] ] ]
+
+	theEventHandlingAttributes := (aCollectionOfAttributes select: [ 
+		                               :eachAttribute | 
+		                               eachAttribute isEventHandler ]) asSet.
+
+	self cursors do: [ :eachCursor | 
+		| atts |
+		atts := self text attributesAt: eachCursor position.
+		atts do: [ :eachAttribute | 
+			(theEventHandlingAttributes includes: eachAttribute) ifTrue: [ 
+				(eachAttribute wantsEvent: anEvent in: self) ifTrue: [ 
+					eachAttribute handleEvent: anEvent in: self on: nil ] ] ] ]
 ]
 
 { #category : #'event firing' }
