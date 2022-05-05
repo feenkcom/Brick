@@ -254,17 +254,15 @@ BrTextEditorParagraphSegmentHolder >> screenToCursor: aTransformation [
 
 { #category : #accessing }
 BrTextEditorParagraphSegmentHolder >> segment: anEditorSegment [
-	segment == anEditorSegment
-		ifTrue: [
-			BlFrameTelemetry
-				timeSync: [ 'Update segment at {1}' format: { anEditorSegment index } ]
-				during: [
-					self infiniteElement ignoreRequestLayoutDuring: [ self updateSegment: anEditorSegment ] ] ]
-		ifFalse: [
-			BlFrameTelemetry
-				timeSync: [ 'Build segment at {1}' format: { anEditorSegment index } ]
-				during: [
-					self infiniteElement ignoreRequestLayoutDuring: [ self buildSegment: anEditorSegment ] ] ]
+	self infiniteElement
+		ignoreRequestLayoutDuring:
+			[ segment == anEditorSegment
+				ifTrue:
+					[ BlFrameTelemetry timeSync: [ 'Update segment at {1}' format: {anEditorSegment index} ] during: [ self updateSegment ] ]
+				ifFalse:
+					[ BlFrameTelemetry
+						timeSync: [ 'Build segment at {1}' format: {anEditorSegment index} ]
+						during: [ self buildSegment: anEditorSegment ] ] ]
 ]
 
 { #category : #'private - accessing' }
@@ -289,16 +287,12 @@ BrTextEditorParagraphSegmentHolder >> selectionIn: aTextEditor [
 ]
 
 { #category : #'private - segment' }
-BrTextEditorParagraphSegmentHolder >> updateSegment: anEditorSegment [
+BrTextEditorParagraphSegmentHolder >> updateSegment [
 	| newPieceElements newPieceMap hasCursor hasSelection |
-	self
-		assert: [ segment == anEditorSegment ]
-		description: [ 'Can only update the same segment!' ].
 
 	hasSelection := self hasSelection.
 	hasCursor := self hasCursor.
 
-	segment := anEditorSegment.
 	segment updateSegmentProperties.
 	
 	newPieceMap := self newPiecesMap.
@@ -365,5 +359,5 @@ BrTextEditorParagraphSegmentHolder >> updateSegment: anEditorSegment [
 	
 	itemElement
 		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
-		padding: anEditorSegment paragraphMargin
+		padding: segment paragraphMargin
 ]
