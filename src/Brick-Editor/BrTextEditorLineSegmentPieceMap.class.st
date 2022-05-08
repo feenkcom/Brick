@@ -1,7 +1,10 @@
 Class {
 	#name : #BrTextEditorLineSegmentPieceMap,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#instVars : [
+		'map'
+	],
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #accessing }
@@ -9,27 +12,45 @@ BrTextEditorLineSegmentPieceMap >> allPieces [
 	"Return all current line segment pieces"
 	<return: #Collection of: #BrTextEditorLineSegmentPiece>
 	
-	^ self subclassResponsibility
+	^ map keys
 ]
 
 { #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> at: aBrTextEditorLineSegmentPiece pieceAndElementsDo: thePieceAndElementsBlock ifAbsent: anAbsentBlock [
-	^ self subclassResponsibility
+	^ map
+		associationAt: aBrTextEditorLineSegmentPiece
+		ifPresent: [ :anAssociation | thePieceAndElementsBlock value: anAssociation key value: anAssociation value ]
+		ifAbsent: anAbsentBlock
 ]
 
 { #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> atPiece: aBrTextEditorLineSegmentPiece putElements: aCollectionOfElements [
-	self subclassResponsibility
+	map at: aBrTextEditorLineSegmentPiece put: aCollectionOfElements
+]
+
+{ #category : #initialization }
+BrTextEditorLineSegmentPieceMap >> initialize [
+	super initialize.
+	
+	map := Dictionary new
 ]
 
 { #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> pieceForElement: aBlElement ifAbsent: anAbsentBlock [
 	<return: #BrTextEditorLineSegmentPiece or: #Object>
-	
-	^ self subclassResponsibility
+
+	map associations do: [ :eachAssociation |
+		(eachAssociation value includes: aBlElement) 
+			ifTrue: [ ^ eachAssociation key ] ].
+
+	^ anAbsentBlock value
 ]
 
 { #category : #accessing }
 BrTextEditorLineSegmentPieceMap >> piecesAndTheirElementsDo: aBlock [
-	self subclassResponsibility
+	map associations do: [ :eachAssociation |
+		| aPiece thePieceElements |
+		aPiece := eachAssociation key.
+		thePieceElements := eachAssociation value.
+		thePieceElements do: [ :aPieceElement | aBlock value: aPiece value: aPieceElement ] ]
 ]

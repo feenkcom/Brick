@@ -188,7 +188,7 @@ BrTextEditorLineSegmentHolder >> hasSelection [
 
 { #category : #'private - segment' }
 BrTextEditorLineSegmentHolder >> newPiecesMap [
-	^ BrTextEditorLineSegmentPieceCollectionMap new
+	^ BrTextEditorLineSegmentPieceMap new
 ]
 
 { #category : #updating }
@@ -270,24 +270,18 @@ BrTextEditorLineSegmentHolder >> screenToCursor: aTransformation [
 { #category : #accessing }
 BrTextEditorLineSegmentHolder >> segment: anEditorSegment [
 	segment == anEditorSegment
-		ifTrue: [
-			BlFrameTelemetry
-				time: [ 'Update segment at {1}' format: { anEditorSegment index } ]
-				during: [ self updateSegment: anEditorSegment ] ]
-		ifFalse: [
-			BlFrameTelemetry
-				time: [ 'Build segment at {1}' format: { anEditorSegment index } ]
+		ifTrue:
+			[ BlFrameTelemetry time: [ 'Update segment at {1}' format: {anEditorSegment index} ] during: [ self updateSegment ] ]
+		ifFalse:
+			[ BlFrameTelemetry
+				time: [ 'Build segment at {1}' format: {anEditorSegment index} ]
 				during: [ self buildSegment: anEditorSegment ] ]
 ]
 
 { #category : #'private - segment' }
-BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
+BrTextEditorLineSegmentHolder >> updateSegment [
 	| newPieceElements newPieceMap |
-	self
-		assert: [ segment == anEditorSegment ]
-		description: [ 'Can only update the same segment!' ].
 
-	segment := anEditorSegment.
 	segment updateSegmentProperties.
 	
 	newPieceMap := self newPiecesMap.
@@ -329,15 +323,15 @@ BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 	pieceElements := newPieceMap.
 
 	BlFrameTelemetry
-		timeSync: [ 'Update cursor and selection' format: { anEditorSegment index } ]
+		timeSync: [ 'Update cursor and selection' format: { segment index } ]
 		during: [
 			pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
 				BlFrameTelemetry
 					timeSync: [ 'Update cursor of {1}' format: { aPiece } ]
-					during: [ aPiece updateCursor: aPieceElement of: anEditorSegment in: self infiniteElement ].
+					during: [ aPiece updateCursor: aPieceElement of: segment in: self infiniteElement ].
 				BlFrameTelemetry
 					timeSync: [ 'Update selection of {1}' format: { aPiece } ]
-					during: [ aPiece updateSelection: aPieceElement of: anEditorSegment in: self infiniteElement ].
+					during: [ aPiece updateSelection: aPieceElement of: segment in: self infiniteElement ].
 				BlFrameTelemetry
 					timeSync: [ 'Update focus of {1}' format: { aPiece } ]
 					during: [ aPiece updateFocus: self infiniteElement isFocused of: aPieceElement in: self infiniteElement ]. ] ].
@@ -352,5 +346,5 @@ BrTextEditorLineSegmentHolder >> updateSegment: anEditorSegment [
 
 	itemElement
 		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
-		padding: anEditorSegment paragraphMargin
+		padding: segment paragraphMargin
 ]
