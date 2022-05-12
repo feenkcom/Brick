@@ -9,7 +9,7 @@ Class {
 		'itemStencilBuilder',
 		'selection'
 	],
-	#category : 'Brick-List - Look'
+	#category : #'Brick-List - Look'
 }
 
 { #category : #accessing }
@@ -20,21 +20,28 @@ BrGridListAptitude >> columnCount: aNumber [
 { #category : #initialization }
 BrGridListAptitude >> initialize [
 	super initialize.
+	
 	items := #().
 	itemElements := #().
 	selection := BlSelection empty.
+	
 	listElement := BlElement new.
 	listElement layout: (BlGridLayout horizontal columnCount: 2).
 	listElement
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical fitContent ].
+	
 	scrollableElement := BlScrollableElement new.
 	scrollableElement
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ].
 	scrollableElement addChild: listElement as: #list.
+	
+	self add: (BrLayoutResizerAptitude new inherit: scrollableElement).
+	scrollableElement addAptitude: (BrLayoutResizerAptitude new hInherit: listElement).
+	
 	self itemStencilBuilder: BrSimpleListRowStencilBuilder new.
 	self
 		addChangeAddChildAs: #(content scrollable)

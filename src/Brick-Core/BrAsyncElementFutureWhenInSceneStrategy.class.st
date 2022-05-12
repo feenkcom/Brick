@@ -1,19 +1,19 @@
 Class {
 	#name : #BrAsyncElementFutureWhenInSceneStrategy,
 	#superclass : #BrAsyncElementFutureUpdateStrategy,
+	#instVars : [
+		'eventHandler'
+	],
 	#category : #'Brick-Core-Futures'
 }
 
 { #category : #accessing }
 BrAsyncElementFutureWhenInSceneStrategy >> addEventHandlersOn: anElement withFuture: aFuture [
-
-	| eventHandler |
 	eventHandler := BlEventHandler new
-		                eventClass: BlElementAddedToSceneGraphEvent;
-		                action:
-			                (MessageSend
-				                 receiver: aFuture
-				                 selector: #onElementAddedToSceneGraph:).
+		eventClass: BlElementAddedToSceneGraphEvent;
+		action: (MessageSend 
+			receiver: aFuture
+			selector: #onElementAddedToSceneGraph:).
 
 	anElement addEventHandler: eventHandler
 ]
@@ -21,4 +21,9 @@ BrAsyncElementFutureWhenInSceneStrategy >> addEventHandlersOn: anElement withFut
 { #category : #accessing }
 BrAsyncElementFutureWhenInSceneStrategy >> needsUpdate: anElement [
 	^ anElement isAttachedToSceneGraph
+]
+
+{ #category : #accessing }
+BrAsyncElementFutureWhenInSceneStrategy >> removeEventHandlersFrom: anElement withFuture: aFuture [
+	anElement removeEventHandler: eventHandler
 ]

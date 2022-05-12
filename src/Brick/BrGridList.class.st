@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGridList,
 	#superclass : #BrList,
-	#category : 'Brick-List - UI'
+	#category : #'Brick-List - UI'
 }
 
 { #category : #initialization }
@@ -10,9 +10,7 @@ BrGridList >> initialize [
 
 	self aptitude: BrGridListAptitude new.
 	self layout: BlFrameLayout new.
-	self constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	self matchParent
 ]
 
 { #category : #accessing }
