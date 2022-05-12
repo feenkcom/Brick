@@ -11,10 +11,10 @@ Class {
 		'whenPending',
 		'dataSnapshot',
 		'previousDataSnapshot',
-		'eventHandler',
 		'futureExecutionConfiguration',
 		'futureCancellation',
-		'strategy'
+		'strategy',
+		'whenDonePromise'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -69,6 +69,7 @@ BrAsyncElementFuture >> future: anAsyncFuture initialValue: anObject [
 		| aPreviousDataSnapshot aNewDataSnapshot |
 		promise ifNotNil: [ :aPromise | aPromise cancel: futureCancellation ].
 		promise := nil.
+		whenDonePromise := AsyncPendingPromise new.
 		future := anAsyncFuture asAsyncFuture.
 		aPreviousDataSnapshot := dataSnapshot.		
 		aNewDataSnapshot := dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject.
@@ -105,6 +106,13 @@ BrAsyncElementFuture >> onElementAddedToSceneGraph: anEvent [
 	self privateInitializeElement
 ]
 
+{ #category : #accessing }
+BrAsyncElementFuture >> pendingPromise [
+	"Return a promise that resolves when the current future is computed"
+	
+	^ mutex critical: [ whenDonePromise ifNil: [ AsyncFulfilledPromise new value: true ] ]
+]
+
 { #category : #'private - update' }
 BrAsyncElementFuture >> privateDataSnapshot: aDataSnapshot [
 	dataSnapshot = aDataSnapshot
@@ -132,7 +140,7 @@ BrAsyncElementFuture >> privateInitializeElement [
 		(strategy needsUpdate: updater element)
 			ifFalse: [ ^ self ].
 			
-		promise ifNotNil: [ ^self ].
+		promise ifNotNil: [ ^ self ].
 		
 		isFinished := false.
 		promise := aPromise := future await: futureExecutionConfiguration.
@@ -141,11 +149,15 @@ BrAsyncElementFuture >> privateInitializeElement [
 			then: [ :aResult |
 				isFinished := true.
 				(promise == aPromise)
-					ifTrue: [ self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ] ]
+					ifTrue: [
+						whenDonePromise fulfillWithValue: true.
+						self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ] ]
 			otherwise: [ :anError |
 				isFinished := true.
 				(promise == aPromise)
-					ifTrue: [ self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ].
+					ifTrue: [
+						whenDonePromise rejectWithError: anError.
+						self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ].
 
 	isFinished
 		ifFalse: [ updater element enqueueTask: (BlPromiseTask new promise: aPromise) ]
@@ -169,7 +181,9 @@ BrAsyncElementFuture >> privateUpdateElement [
 
 { #category : #accessing }
 BrAsyncElementFuture >> strategy: aStrategy [
-	strategy := aStrategy
+	strategy removeEventHandlersFrom: updater element withFuture: self.
+	strategy := aStrategy.
+	strategy addEventHandlersOn: updater element withFuture: self
 ]
 
 { #category : #'api - accessing' }

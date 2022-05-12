@@ -40,7 +40,6 @@ BrSimpleListAptitude >> initialize [
 	self initializeListElement.
 	
 	self add: (BrLayoutResizerAptitude new
-		inherit;
 		inherit: [ self listElement ]).
 	
 	self addChangeAddChildAs: #(content scrollable) with: [ self listElement ].

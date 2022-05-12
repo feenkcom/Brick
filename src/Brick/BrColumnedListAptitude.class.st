@@ -17,8 +17,8 @@ BrColumnedListAptitude >> initialize [
 	listElement := BrInfiniteListElement new.
 	listElement dataSource: BrColumnedListDataSource new.
 	
-	self add: (BrLayoutResizerAptitude inherit inherit: listElement).
-				
+	self add: (BrLayoutResizerAptitude new inherit: listElement).
+
 	self addChangeAddChildAs: #(content scrollable) with: [ listElement ].
 
 	self
