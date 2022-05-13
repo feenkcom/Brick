@@ -12,3 +12,7 @@ BrAsyncElementFutureUpdateStrategy >> addEventHandlersOn: anElement withFuture: 
 BrAsyncElementFutureUpdateStrategy >> needsUpdate: anElement [
 	self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BrAsyncElementFutureUpdateStrategy >> removeEventHandlersFrom: anElement withFuture: aFuture [
+]
