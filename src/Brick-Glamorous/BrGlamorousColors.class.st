@@ -22,6 +22,7 @@ Class {
 		'ErrorBackgroundColor',
 		'ErrorBorderColor',
 		'ExpandCollapseTriangleBackgroundColor',
+		'FadedTextColor',
 		'FailureBackgroundColor',
 		'FailureBorderColor',
 		'FocusedEditorBorderColor',
@@ -48,7 +49,7 @@ Class {
 		'TextHighlightColor',
 		'TextMarkupColor'
 	],
-	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
+	#category : #'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
 { #category : #accessing }
@@ -278,6 +279,13 @@ BrGlamorousColors class >> expandCollapseTriangleBackgroundColor: aColor [
 	ExpandCollapseTriangleBackgroundColor := aColor
 ]
 
+{ #category : #'button - border' }
+BrGlamorousColors class >> fadedTextColor [
+	"Faded text is typically used where a portion of the text is less important than what is considered the main information, or where different fields are close together and would benefit from being visually distinguished."
+
+	^ FadedTextColor
+]
+
 { #category : #'status - background' }
 BrGlamorousColors class >> failureBackgroundColor [
 	^ FailureBackgroundColor
@@ -373,6 +381,7 @@ BrGlamorousColors class >> initialize [
 	HoveredButtonTextColor := PrimaryBorderColor.
 	PressedButtonTextColor := ActiveColor.
 	DisabledButtonTextColor := Color black alpha: 0.25.
+	FadedTextColor := Color gray.
 
 	"background"
 	BackdropColor := Color r: 240 g: 240 b: 240 range: 255.
