@@ -681,7 +681,7 @@ BrTextEditor >> onGotFocus [
 	self cursors isEmpty
 		ifTrue: [ self navigator moveTo: 0; apply ].
 
-	self processCursorAttributes.
+	self processCursorEnterEvents.
 	self enqueueCommand: (self newFocusChangedCommand hasFocus: true)
 ]
 
@@ -700,7 +700,7 @@ BrTextEditor >> onInteractionRemoved: anInteraction from: anEditorElement [
 BrTextEditor >> onLostFocus [
 	isFocused := false.
 
-	self processCursorAttributes.
+	self processCursorLeaveEvents.
 	self enqueueCommand: (self newFocusChangedCommand hasFocus: false).
 ]
 
@@ -775,7 +775,7 @@ BrTextEditor >> onTextReplaced [
 	"Is sent after a text instance is replaced with a new one"
 	self assertUIProcess.
 
-	self processCursorAttributes.
+	self processCursorEnterEvents.
 	self notifyTextReplaced: self text
 ]
 
@@ -797,7 +797,7 @@ BrTextEditor >> onTextStyled: aBlTextStyledEvent [
 			
 			BlFrameTelemetry
 				time: [ 'processCursorAttributes' ]
-				during: [ self processCursorAttributes ].
+				during: [ self processCursorEnterEvents  ].
 			
 			BlFrameTelemetry
 				time: [ 'Invalidate the whole text editor due to text change' ]
@@ -861,43 +861,57 @@ BrTextEditor >> prepareSelection [
 ]
 
 { #category : #'private - cursor' }
-BrTextEditor >> processCursorAttributes [
-	"I search for the attributes within the whole text that contain (or not contain) any of the cursors and notify about it"
-	| anEnteredEvent aLeavedEvent eventHandlingAttributesOutside eventHandlingAttributesInside |
-
+BrTextEditor >> processCursorEnterEvents [
+	| anEnteredEvent eventHandlingAttributesInside |
 	anEnteredEvent := BrTextCursorAttributeEnterEvent new.
-	aLeavedEvent := BrTextCursorAttributeLeaveEvent new.
-
-	eventHandlingAttributesOutside := OrderedCollection new.
 	eventHandlingAttributesInside := OrderedCollection new.
 
 	self text
 		findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
-		indicesDo: [ :aStart :anEnd :anAttribute |
-			(self isFocused and: [
-				self cursors anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
-					ifTrue: [ eventHandlingAttributesInside add: anAttribute -> (aStart to: anEnd) ]
-					ifFalse: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ].
+		indicesDo: [ :aStart :anEnd :anAttribute | 
+			(self isFocused
+				and: [ self cursors
+						anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
+				ifTrue: [ eventHandlingAttributesInside add: anAttribute -> (aStart to: anEnd) ] ].
 
-	eventHandlingAttributesOutside do: [ :eachEventHandlerAttributeAndInterval |
-		| eachAttribute eachInterval |
-		
-		eachAttribute := eachEventHandlerAttributeAndInterval key.
-		eachInterval := eachEventHandlerAttributeAndInterval value.
-		aLeavedEvent interval: eachInterval.
-		
-		(eachAttribute wantsEvent: aLeavedEvent in: self)
-			ifTrue: [ eachAttribute handleEvent: aLeavedEvent in: self on: nil ] ].
 
-	eventHandlingAttributesInside do: [ :eachEventHandlerAttributeAndInterval |
-		| eachAttribute eachInterval |
-		
-		eachAttribute := eachEventHandlerAttributeAndInterval key.
-		eachInterval := eachEventHandlerAttributeAndInterval value.
-		anEnteredEvent interval: eachInterval.
-		
-		(eachAttribute wantsEvent: anEnteredEvent in: self)
-			ifTrue: [ eachAttribute handleEvent: anEnteredEvent in: self on: nil ] ]
+	eventHandlingAttributesInside
+		do: [ :eachEventHandlerAttributeAndInterval | 
+			| eachAttribute eachInterval |
+			eachAttribute := eachEventHandlerAttributeAndInterval key.
+			eachInterval := eachEventHandlerAttributeAndInterval value.
+			anEnteredEvent interval: eachInterval.
+
+			(eachAttribute wantsEvent: anEnteredEvent in: self)
+				ifTrue: [ eachAttribute
+						handleEvent: anEnteredEvent
+						in: self
+						on: nil ] ]
+]
+
+{ #category : #'private - cursor' }
+BrTextEditor >> processCursorLeaveEvents [
+	| aLeavedEvent eventHandlingAttributesOutside |
+	aLeavedEvent := BrTextCursorAttributeLeaveEvent new.
+	eventHandlingAttributesOutside := OrderedCollection new.
+	self text
+		findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
+		indicesDo: [ :aStart :anEnd :anAttribute | 
+			(self isFocused
+				and: [ self cursors
+						anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
+				ifFalse: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ].
+	eventHandlingAttributesOutside
+		do: [ :eachEventHandlerAttributeAndInterval | 
+			| eachAttribute eachInterval |
+			eachAttribute := eachEventHandlerAttributeAndInterval key.
+			eachInterval := eachEventHandlerAttributeAndInterval value.
+			aLeavedEvent interval: eachInterval.
+			(eachAttribute wantsEvent: aLeavedEvent in: self)
+				ifTrue: [ eachAttribute
+						handleEvent: aLeavedEvent
+						in: self
+						on: nil ] ]
 ]
 
 { #category : #'private - selection' }
