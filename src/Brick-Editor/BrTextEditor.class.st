@@ -863,16 +863,16 @@ BrTextEditor >> prepareSelection [
 { #category : #'private - cursor' }
 BrTextEditor >> processCursorEnterEvents [
 	| anEnteredEvent eventHandlingAttributesInside |
+	self isFocused ifFalse: [ ^ self ].
 	anEnteredEvent := BrTextCursorAttributeEnterEvent new.
 	eventHandlingAttributesInside := OrderedCollection new.
-
-	self text
-		findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
-		indicesDo: [ :aStart :anEnd :anAttribute | 
-			(self isFocused
-				and: [ self cursors
-						anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
-				ifTrue: [ eventHandlingAttributesInside add: anAttribute -> (aStart to: anEnd) ] ].
+	self cursors
+		do: [ :eachCursor | 
+			self text
+				findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
+				indicesDo: [ :aStart :anEnd :anAttribute | 
+					(eachCursor position between: aStart and: anEnd)
+						ifTrue: [ eventHandlingAttributesInside add: anAttribute -> (aStart to: anEnd) ] ] ].
 
 
 	eventHandlingAttributesInside
@@ -892,15 +892,16 @@ BrTextEditor >> processCursorEnterEvents [
 { #category : #'private - cursor' }
 BrTextEditor >> processCursorLeaveEvents [
 	| aLeavedEvent eventHandlingAttributesOutside |
+	self isFocused ifFalse: [ ^ self ].
 	aLeavedEvent := BrTextCursorAttributeLeaveEvent new.
 	eventHandlingAttributesOutside := OrderedCollection new.
-	self text
-		findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
-		indicesDo: [ :aStart :anEnd :anAttribute | 
-			(self isFocused
-				and: [ self cursors
-						anySatisfy: [ :eachCursor | eachCursor position between: aStart and: anEnd ] ])
-				ifFalse: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ].
+	self cursors
+		do: [ :eachCursor | 
+			self text
+				findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
+				indicesDo: [ :aStart :anEnd :anAttribute | 
+					(eachCursor position between: aStart and: anEnd)
+						ifFalse: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ] ].
 	eventHandlingAttributesOutside
 		do: [ :eachEventHandlerAttributeAndInterval | 
 			| eachAttribute eachInterval |
