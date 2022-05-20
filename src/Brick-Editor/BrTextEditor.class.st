@@ -69,17 +69,17 @@ BrTextEditor >> addEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 { #category : #asserting }
 BrTextEditor >> assertUIProcess [
 	"I check if the current process is a UI process of all attached editor elements"
-	| aCurrentProcess allUIProcesses |
-	
-	aCurrentProcess := Processor activeProcess.	
-	allUIProcesses := self uiProcesses.
-	
-	(allUIProcesses size <= 1)
-		ifFalse: [ BrEditorWrongThreadError signal: 'The editor is attached to multiple elements from different UI processes' ].
-		
-	(allUIProcesses isEmpty or: [ allUIProcesses anyOne == aCurrentProcess ])
-		ifFalse: [ BrEditorWrongThreadError signal: ('I am running from a non-UI process ({1}) expected ({2})'
-				format: { aCurrentProcess asString . allUIProcesses anyOne asString }) ].
+
+	attachedElements
+		do: [ :eachElement | 
+			eachElement isAttachedToSceneGraph
+				ifTrue: [ eachElement space host
+						uiProcessDo: [ :aProcess | 
+							aProcess == Processor activeProcess
+								ifFalse: [ BrEditorWrongThreadError
+										signal: ('I am running from a non-UI process ({1}) expected ({2})'
+												format: {Processor activeProcess asString.
+														aProcess asString}) ] ] ] ]
 ]
 
 { #category : #'api - mode' }
@@ -1215,24 +1215,6 @@ BrTextEditor >> textSnapshot [
 	<return: #BlText>
 
 	^ text copy
-]
-
-{ #category : #asserting }
-BrTextEditor >> uiProcesses [
-	| theElementGroupedByProcess allUIProcesses |
-
-	theElementGroupedByProcess := attachedElements groupedBy: [ :eachElement |
-		| eachSpace eachUIProcess |
-		eachSpace := eachElement isAttachedToSceneGraph
-			ifTrue: [ eachElement space ]
-			ifFalse: [ nil ].
-		eachUIProcess := nil.
-		eachSpace ifNotNil: [ eachSpace host uiProcessDo: [ :aProcess | eachUIProcess := aProcess ] ].
-		eachUIProcess ].
-	
-	allUIProcesses := theElementGroupedByProcess keys reject: #isNil.
-
-	^ allUIProcesses
 ]
 
 { #category : #'text - undo/redo' }

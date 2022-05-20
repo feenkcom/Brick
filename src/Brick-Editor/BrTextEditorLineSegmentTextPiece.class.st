@@ -1,14 +1,14 @@
 Class {
 	#name : #BrTextEditorLineSegmentTextPiece,
 	#superclass : #BrTextEditorLineSegmentPiece,
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #comparing }
 BrTextEditorLineSegmentTextPiece >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	(anotherObject == self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject text = self text

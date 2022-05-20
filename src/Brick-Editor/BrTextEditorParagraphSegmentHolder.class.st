@@ -164,7 +164,7 @@ BrTextEditorParagraphSegmentHolder >> hasSelection [
 
 { #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> newPiecesMap [
-	^ BrTextEditorLineSegmentPieceCollectionMap new
+	^ BrTextEditorLineSegmentPieceDictionaryMap new
 ]
 
 { #category : #updating }

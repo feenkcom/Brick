@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'map'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #accessing }
@@ -32,7 +32,7 @@ BrTextEditorLineSegmentPieceDictionaryMap >> atPiece: aBrTextEditorLineSegmentPi
 BrTextEditorLineSegmentPieceDictionaryMap >> initialize [
 	super initialize.
 	
-	map := OrderedDictionary new
+	map := Dictionary new
 ]
 
 { #category : #accessing }
