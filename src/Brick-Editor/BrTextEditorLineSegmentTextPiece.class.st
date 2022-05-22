@@ -8,7 +8,7 @@ Class {
 BrTextEditorLineSegmentTextPiece >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject == self class)
+	(anotherObject class == self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject text = self text
