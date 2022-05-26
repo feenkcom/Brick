@@ -3,39 +3,8 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBrTextEditorFixedMeasurerExamples',
 	#classTraits : 'TBrTextEditorFixedMeasurerExamples classTrait',
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
-
-{ #category : #'instance creation' }
-BrTextEditorLayoutMeasurementExamples >> editorFor: aText [
-	<return: #BrEditor>
-	| anEditor aRopedText |
-
-	aRopedText := aText asRopedText lineSpacing: self lineSpacing; paragraphMargin: self paragraphMargin; wordPadding: self wordPadding.
-
-	anEditor := BrEditor new.
-	anEditor aptitude: BrEditorAptitude new.
-	anEditor padding: BlInsets empty.
-	anEditor fitContent.
-	anEditor text: aRopedText.
-	
-	BlDevCrossover on: anEditor.
-	
-	anEditor editor segmentBuilder
-		wordStencil: [ :aTBrTextEditorTextualPiece |
-			| aTextElement |
-			aTextElement := BrTextEditableWordPieceStencilBuilder new
-				segmentPiece: aTBrTextEditorTextualPiece;
-				asElement.
-			aTextElement measurer: self fixedMeasurer.
-			aTextElement measurer textOffset: aTBrTextEditorTextualPiece textStart.
-			aTextElement ].
-	
-	anEditor requestFocus.
-	anEditor forceLayout.
-
-	^ anEditor
-]
 
 { #category : #'examples - measurement' }
 BrTextEditorLayoutMeasurementExamples >> fit_content_Hello [
