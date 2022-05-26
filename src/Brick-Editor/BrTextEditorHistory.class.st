@@ -8,7 +8,7 @@ Class {
 		'shouldGroup',
 		'currentGroup'
 	],
-	#category : 'Brick-Editor-History'
+	#category : #'Brick-Editor-History'
 }
 
 { #category : #private }
@@ -96,6 +96,14 @@ BrTextEditorHistory >> insertedStrings: aCollectionOfStrings undo: aCollectionOf
 BrTextEditorHistory >> redoOn: aBrTextEditor [
 	redoCommands ifNotEmpty: [ :theCommands |
 		self disableDuring: [ undoCommands add: (theCommands removeLast redoOn: aBrTextEditor) ] ]
+]
+
+{ #category : #'api - history' }
+BrTextEditorHistory >> replaceText: newText oldText: oldText [
+	self
+		addCommand: (BrTextEditorHistoryReplaceTextCommand new
+				newText: newText;
+				oldText: oldText)
 ]
 
 { #category : #'api - undo/redo' }
