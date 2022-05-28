@@ -58,7 +58,7 @@ BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 				| thePieceElements |
 				
 				thePieceElements := BlFrameTelemetry
-					time: [ 'Create piece elements at {1}' format: { eachIndex } ]
+					time: [ 'Create piece elements at {1} for {2}' format: { eachIndex. aPiece class name } ]
 					during: [ (aPiece createElement: self infiniteElement) asOrderedCollection ].
 				
 				newPieceElements addAll: thePieceElements.

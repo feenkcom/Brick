@@ -7,7 +7,7 @@ Class {
 		'segmentPiece',
 		'shouldUsePool'
 	],
-	#category : 'Brick-Editor-UI - Stencils'
+	#category : #'Brick-Editor-UI - Stencils'
 }
 
 { #category : #'private - pool' }
@@ -24,15 +24,25 @@ BrTextWordPieceStencilBuilder >> acquire [
 BrTextWordPieceStencilBuilder >> buildDefault [
 	| aTextElement |
 	
-	aTextElement := (self acquire ifNil: [ self createWordElement ])
-		segmentPiece: self segmentPiece;
+	aTextElement := BlFrameTelemetry
+		time: [ 'Try to acquire a word element from a pool' ]
+		during: [ self acquire ].
+	
+	aTextElement := (aTextElement ifNil: [
+		BlFrameTelemetry
+			time: [ 'Create new word element' ]
+			during: [ self createWordElement ] ]).
+
+	BlFrameTelemetry
+			time: [ 'Assign segment piece to the word element' ]
+			during: [ aTextElement segmentPiece: self segmentPiece ].
+			
+	aTextElement
 		padding: self wordPadding;
 		margin: self wordMargin.
 		
 	aTextElement userData at: #editorPool put: self pool.
 
-	self reset.
-	
 	^ aTextElement
 ]
 

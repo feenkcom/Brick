@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorParagraphSegmentTextPiece,
 	#superclass : #BrTextEditorParagraphSegmentPiece,
-	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
 { #category : #comparing }
@@ -22,7 +22,8 @@ BrTextEditorParagraphSegmentTextPiece >> createElement: anEditorElement [
 	anElement := (anEditorElement editor segmentBuilder wordStencilBuilder
 		wordPadding: self wordPadding;
 		wordMargin: self wordMargin;
-		segmentPiece: self) asElement.
+		segmentPiece: self;
+		shouldUsePool: false) asElement.
 		
 	anElement userData removeKey: #brickEditorAdornment ifAbsent: [  ].
 	^ anElement

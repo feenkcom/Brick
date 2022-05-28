@@ -771,10 +771,12 @@ BrTextEditor >> onTextAttributesRemoved: aBlTextAttributesRemoved [
 ]
 
 { #category : #'hooks - text modifications' }
-BrTextEditor >> onTextReplaced [
+BrTextEditor >> onTextReplaced: oldText [
 	"Is sent after a text instance is replaced with a new one"
+
 	self assertUIProcess.
 
+	history replaceText: self text oldText: oldText.
 	self processCursorEnterEvents.
 	self notifyTextReplaced: self text
 ]
@@ -967,7 +969,9 @@ BrTextEditor >> restoreState: aBrTextEditorMemento [
 
 { #category : #accessing }
 BrTextEditor >> restoreText: aBrText [
+	| oldText |
 	"before changing the text we must unsubscribe from existing one"	
+	oldText := text.
 	text unsubscribe: self.
 
 	text := aBrText.
@@ -979,7 +983,7 @@ BrTextEditor >> restoreText: aBrText [
 	segmentCollector editor: self.
 	segmentCollector text: text.
 
-	self onTextReplaced.
+	self onTextReplaced: oldText.
 
 	"notify UI about structural update"
 	self notifyChanged.
