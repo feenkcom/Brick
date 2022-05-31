@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSimpleTreeExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Tree'
+	#category : #'Brick-Examples-Tree'
 }
 
 { #category : #examples }
@@ -65,7 +65,7 @@ BrSimpleTreeExamples >> subclassesOfCollection_immediate [
 BrSimpleTreeExamples >> subropesTree [
 	<gtExample>
 	| aRope aTree |
-	aRope := BlConcatenationRopeExamples new attributes_small_2_to_3.
+	aRope := BlConcatenationRopeExamples new small_from_1_to_2.
 	
 	aTree := BrSimpleTree new
 		nodeStencil: [ 
