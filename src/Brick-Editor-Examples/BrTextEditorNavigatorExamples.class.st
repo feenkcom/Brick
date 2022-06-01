@@ -345,7 +345,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_in_empty [
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
 	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 0.
+	self assert: addedCursorElements first textPosition equals: 1.
 	self assert: removedCursorElements isEmpty.
 	
 	^ anEditor
@@ -390,7 +390,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_2_in_empty [
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
 	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 0.
+	self assert: addedCursorElements first textPosition equals: 1.
 	self assert: removedCursorElements isEmpty.
 	
 	^ anEditor
@@ -484,7 +484,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated [
 	anEditor := self editorFor: 'Hello World'.
 	
 	anEditor navigator
-		moveTo: 5;
+		moveTo: 6;
 		apply.
 	anEditor forceLayout.
 	
@@ -499,7 +499,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated [
 	
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
-	self assert: thePiecesWithCursor first text asString equals: ' '.
+	self assert: thePiecesWithCursor first text asString equals: 'HelloWorld'.
 	
 	anEditor inserter
 		atCursor;
@@ -509,7 +509,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated [
 	
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
-	self assert: thePiecesWithCursor first text asString equals: ' '.
+	self assert: thePiecesWithCursor first text asString equals: 'HelloOWorld'.
 	
 	^ anEditor
 ]
@@ -522,7 +522,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk [
 	anEditor := self editorFor: 'Hello World'.
 	
 	anEditor navigator
-		moveTo: 5;
+		moveTo: 6;
 		apply.
 	
 	anEditor deleter
@@ -532,7 +532,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk [
 	
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
-	self assert: thePiecesWithCursor first text asString equals: ' '.
+	self assert: thePiecesWithCursor first text asString equals: 'HelloWorld'.
 	
 	anEditor inserter
 		atCursor;
@@ -542,7 +542,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk [
 	
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
-	self assert: thePiecesWithCursor first text asString equals: ' '.
+	self assert: thePiecesWithCursor first text asString equals: 'HelloOWorld'.
 	
 	^ anEditor
 ]
@@ -555,7 +555,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk_full [
 	anEditor := self editorFor: 'Hello World'.
 	
 	anEditor navigator
-		moveTo: 5;
+		moveTo: 6;
 		apply.
 	
 	anEditor deleter
@@ -570,7 +570,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk_full [
 	
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
-	self assert: thePiecesWithCursor first text asString equals: ' '.
+	self assert: thePiecesWithCursor first text asString equals: 'HelloOWorld'.
 	
 	^ anEditor
 ]
