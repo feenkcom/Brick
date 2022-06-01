@@ -64,11 +64,6 @@ BrTextElementWithCursors >> cursorStencil [
 	^ cursorStencil
 ]
 
-{ #category : #accessing }
-BrTextElementWithCursors >> cursorStencil: aStencil [
-	cursorStencil := aStencil
-]
-
 { #category : #'geometry bounds' }
 BrTextElementWithCursors >> focusedBounds: aBlBounds [
 	"My focused bounds should be focused bounds of a cursor if it exists or my own otherwise"

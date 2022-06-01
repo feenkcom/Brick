@@ -7,7 +7,7 @@ Class {
 		'wordPadding',
 		'paragraphMargin'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #'pieces - computation' }
@@ -44,6 +44,15 @@ BrTextEditorLineSegment >> initialize [
 	super initialize.
 
 	self resetProperties
+]
+
+{ #category : #testing }
+BrTextEditorLineSegment >> isFirstTextPiece: aSegmentPiece [
+	<return: #Boolean>
+	
+	self hasPieces ifFalse: [ ^ false ].
+
+	^ self pieces first == aSegmentPiece
 ]
 
 { #category : #testing }
