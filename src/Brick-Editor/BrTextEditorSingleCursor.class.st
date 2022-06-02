@@ -6,7 +6,7 @@ Class {
 		'isVisible',
 		'desiredCoordinate'
 	],
-	#category : 'Brick-Editor-Model - Cursor'
+	#category : #'Brick-Editor-Model - Cursor'
 }
 
 { #category : #accessing }
@@ -74,12 +74,14 @@ BrTextEditorSingleCursor >> insideSegment: aSegment [
 { #category : #testing }
 BrTextEditorSingleCursor >> insideSubText: aBrTextEditorSegmentPiece of: aSegment [
 	"Return true if I am inside a given subtext, false otherwise"
+
 	<return: #Boolean>
 	
 	^ (self position
 		between: aBrTextEditorSegmentPiece textStart
-		and: aBrTextEditorSegmentPiece textEnd - (aSegment isLastTextPiece: aBrTextEditorSegmentPiece) not asBit)
-			and: [ self position between: aSegment textStart and: aSegment textEnd ]
+				+ (aSegment isFirstTextPiece: aBrTextEditorSegmentPiece) not asBit
+		and: aBrTextEditorSegmentPiece textEnd)
+		and: [ self position between: aSegment textStart and: aSegment textEnd ]
 ]
 
 { #category : #accessing }
