@@ -5,7 +5,7 @@ Class {
 		'element',
 		'data'
 	],
-	#category : 'Brick-Future - Support'
+	#category : #'Brick-Future - Support'
 }
 
 { #category : #'api - instantiation' }
@@ -32,4 +32,10 @@ BrFromFutureDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: element;
 		push: data
+]
+
+{ #category : #accessing }
+BrFromFutureDataBinder >> reset [
+	data := nil.
+	element := nil
 ]

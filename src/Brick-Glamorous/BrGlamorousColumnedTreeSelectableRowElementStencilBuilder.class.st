@@ -14,6 +14,11 @@ Class {
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
+{ #category : #accessing }
+BrGlamorousColumnedTreeSelectableRowElementStencilBuilder class >> stencilProperties [
+	^ #(cellSpacing padding)
+]
+
 { #category : #'api - instantiation' }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> buildDefault [
 	^ super buildDefault

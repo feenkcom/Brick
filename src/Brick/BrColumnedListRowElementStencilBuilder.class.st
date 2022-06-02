@@ -8,6 +8,11 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
+{ #category : #accessing }
+BrColumnedListRowElementStencilBuilder class >> stencilProperties [
+	^ #(cellSpacing padding)
+]
+
 { #category : #'api - instantiation' }
 BrColumnedListRowElementStencilBuilder >> buildDefault [
 	^ BlElement new

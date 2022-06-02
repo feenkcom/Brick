@@ -8,6 +8,11 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
+{ #category : #accessing }
+BrListClickableRowStencilBuilder class >> stencilProperties [
+	^ #(cellSpacing padding)
+]
+
 { #category : #'api - instantiation' }
 BrListClickableRowStencilBuilder >> buildDefault [
 	| aList anIndex |
