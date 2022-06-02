@@ -9,7 +9,7 @@ Class {
 		'columnIndex',
 		'itemObject'
 	],
-	#category : 'Brick-Column - Stencil'
+	#category : #'Brick-Column - Stencil'
 }
 
 { #category : #'api - instantiation' }
@@ -65,7 +65,8 @@ BrColumnCellDataBinder >> reset [
 	columnIndex := nil.
 	rowIndex := nil.
 	rowObject := nil.
-	rowHolder := nil
+	rowHolder := nil.
+	itemObject := nil.
 ]
 
 { #category : #accessing }

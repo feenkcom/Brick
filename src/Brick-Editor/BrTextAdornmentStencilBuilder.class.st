@@ -30,7 +30,7 @@ Class {
 		'editorElement',
 		'segmentPiece'
 	],
-	#category : 'Brick-Editor-UI - Stencils'
+	#category : #'Brick-Editor-UI - Stencils'
 }
 
 { #category : #'api - instantiation' }
@@ -57,6 +57,12 @@ BrTextAdornmentStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self segmentPiece;
 		push: self editor
+]
+
+{ #category : #initialization }
+BrTextAdornmentStencilBuilder >> reset [	
+	editorElement := nil.
+	segmentPiece := nil.
 ]
 
 { #category : #accessing }

@@ -10,7 +10,7 @@ Class {
 		'itemElement',
 		'rowObject'
 	],
-	#category : 'Brick-List - Stencil'
+	#category : #'Brick-List - Stencil'
 }
 
 { #category : #converting }
@@ -69,7 +69,8 @@ BrListItemDataBinder >> paramsOn: aStencilExecutor [
 BrListItemDataBinder >> reset [
 	itemObject := nil.
 	itemPosition := nil.
-	itemElement := nil
+	itemElement := nil.
+	rowObject := nil
 ]
 
 { #category : #accessing }

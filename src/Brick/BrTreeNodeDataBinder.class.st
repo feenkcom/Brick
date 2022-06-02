@@ -10,7 +10,7 @@ Class {
 		'treeNode',
 		'payloads'
 	],
-	#category : 'Brick-Tree - Stencil'
+	#category : #'Brick-Tree - Stencil'
 }
 
 { #category : #'api - instantiation' }
@@ -65,11 +65,10 @@ BrTreeNodeDataBinder >> payloads: anObject [
 
 { #category : #initialization }
 BrTreeNodeDataBinder >> reset [
-	super reset.
-
 	nodeElement := nil.
 	itemObject := nil.
-	treeNode := nil
+	treeNode := nil.
+	payloads := nil
 ]
 
 { #category : #accessing }

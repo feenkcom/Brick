@@ -7,6 +7,11 @@ Class {
 	#category : 'Brick-List - Stencil'
 }
 
+{ #category : #accessing }
+BrListItemToColumnCellDataBinderAdapter class >> stencilProperties [
+	^ #(listItemDataBinder)
+]
+
 { #category : #'api - instantiation' }
 BrListItemToColumnCellDataBinderAdapter >> buildDefault [
 	^ listItemDataBinder

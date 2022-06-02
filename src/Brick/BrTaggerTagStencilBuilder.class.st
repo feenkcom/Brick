@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tag'
 	],
-	#category : 'Brick-Tagger - Model'
+	#category : #'Brick-Tagger - Model'
 }
 
 { #category : #'api - instantiation' }
@@ -17,6 +17,11 @@ BrTaggerTagStencilBuilder >> buildDefault [
 { #category : #'api - instantiation' }
 BrTaggerTagStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor push: self tag
+]
+
+{ #category : #accessing }
+BrTaggerTagStencilBuilder >> reset [
+	tag := nil
 ]
 
 { #category : #accessing }

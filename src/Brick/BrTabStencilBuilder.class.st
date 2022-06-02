@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tabModel'
 	],
-	#category : 'Brick-Tabs - Model'
+	#category : #'Brick-Tabs - Model'
 }
 
 { #category : #'api - instantiation' }
@@ -18,6 +18,11 @@ BrTabStencilBuilder >> buildDefault [
 BrTabStencilBuilder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self tabModel
+]
+
+{ #category : #accessing }
+BrTabStencilBuilder >> reset [
+	tabModel := nil
 ]
 
 { #category : #accessing }
