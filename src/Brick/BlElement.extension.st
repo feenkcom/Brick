@@ -112,15 +112,6 @@ BlElement >> asyncSink [
 ]
 
 { #category : #'*Brick' }
-BlElement >> gtInspectorModelAptitudeGraphIn: aComposite [
-	<gtInspectorPresentationOrder: 30>
-	
-	^ aComposite blocMondrian
-		title: 'Widget';
-		painting: [ :view | self gtInspectorPaintModelAptitudeIn: view ] 
-]
-
-{ #category : #'*Brick' }
 BlElement >> gtInspectorPaintModelAptitudeIn: aMondrianView [
 	| nodes |
 
