@@ -66,11 +66,6 @@ TBlTextStyleable >> replacingText: aCharacter [
 ]
 
 { #category : #'*Brick-Editor' }
-TBlTextStyleable >> roundedBackground: aPaint [
-	self attributesBuilder attribute: (BrTextEmbellishmentAttribute new roundedBackground: aPaint)
-]
-
-{ #category : #'*Brick-Editor' }
 TBlTextStyleable >> wordPadding: anInsets [
 	self attributesBuilder attribute: (BrTextParagraphWordPaddingAttribute wordPadding: anInsets)
 ]
