@@ -103,7 +103,8 @@ BrListStreamItemsProvider >> onBufferDone: anAnnouncement [
 BrListStreamItemsProvider >> onBufferStartedLoading: anAnnouncement [
 
 	listModel ifNotNil: [ :aListModel | 
-		aListModel dispatchEvent: BrListItemsProviderStartedLoadingEvent new ]
+		aListModel dispatchEvent: BrListItemsProviderStartedLoadingEvent new.
+		aListModel dispatchEvent: (BrListModelPromiseEnqueuedEvent new promise: buffer bufferLoadingPromise). ]
 ]
 
 { #category : #accessing }
@@ -141,9 +142,7 @@ BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 BrListStreamItemsProvider >> privateSetStreamBuffer: aStreamBuffer [
 
 	monitor critical: [ 
-		buffer := aStreamBuffer
-			          preloadAmount: self preloadAmount;
-			          loadSinglesUntil: self loadSinglesUntil.
+		buffer := aStreamBuffer.
 		self notifyItemsChangedSynchronously: false.
 		buffer
 			when: AsyncStreamBufferStartedLoading
