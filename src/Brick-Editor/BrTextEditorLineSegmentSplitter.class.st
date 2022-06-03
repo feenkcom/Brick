@@ -86,15 +86,15 @@ BrTextEditorLineSegmentSplitter >> processSegment: aTextIterator in: aStream off
 
 { #category : #splitting }
 BrTextEditorLineSegmentSplitter >> processStartingAdornments: aText in: aStream offset: offset [
-	(aText attributesAt: offset)
+	(aText attributesAt: 0)
 		select: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldAppend ] ]
 		thenDo: [ :eachAttribute | 
 			self
 				processAdornmentAttribute: eachAttribute
-				of: '' asRopedText
+				of: '' asRopedText 
 				in: aStream
-				from: offset
-				to: offset
+				from: 0
+				to: 0
 				virtual: true ]
 ]
 
@@ -208,10 +208,10 @@ BrTextEditorLineSegmentSplitter >> split: aText from: aStartIndex to: anEndIndex
 	thePieces := Array
 			streamContents: [ :aStream | 
 				| lineIterator |
-				"self
+				self
 					processStartingAdornments: aText
 					in: aStream
-					offset: aStartIndex."
+					offset: aStartIndex.
 				lineIterator := aText iterator.
 				[ lineIterator hasNext ]
 					whileTrue: [ self
