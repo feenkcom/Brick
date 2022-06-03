@@ -8,7 +8,7 @@ TBlTextStyleable >> appendingAdornment: aBrTextAdornmentStencilBuilder [
 
 	self attributesBuilder attribute: (BrTextAdornmentDynamicAttribute new
 		beAppend;
-		stencil: aBrTextAdornmentStencilBuilder)
+		stencil: aBrTextAdornmentStencilBuilder) from: 1 to: self size
 ]
 
 { #category : #'*Brick-Editor' }
