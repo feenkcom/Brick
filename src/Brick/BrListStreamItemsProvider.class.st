@@ -5,7 +5,8 @@ Class {
 		'monitor',
 		'buffer',
 		'preloadAmount',
-		'loadSinglesUntil'
+		'loadSinglesUntil',
+		'preloadDuration'
 	],
 	#category : #'Brick-List - Model'
 }
@@ -41,6 +42,11 @@ BrListStreamItemsProvider >> defaultLoadSinglesUntil [
 { #category : #accessing }
 BrListStreamItemsProvider >> defaultPreloadAmount [	
 	^ 20
+]
+
+{ #category : #accessing }
+BrListStreamItemsProvider >> defaultPreloadDuration [
+	^ 300 milliseconds
 ]
 
 { #category : #initialization }
@@ -112,6 +118,17 @@ BrListStreamItemsProvider >> preloadAmount: aNumber [
 	buffer ifNotNil: [ buffer preloadAmount: aNumber ]
 ]
 
+{ #category : #accessing }
+BrListStreamItemsProvider >> preloadDuration [
+	^ preloadDuration ifNil: [ preloadDuration := self defaultPreloadDuration ]
+]
+
+{ #category : #accessing }
+BrListStreamItemsProvider >> preloadDuration: aDuration [
+	preloadDuration := aDuration.
+	buffer ifNotNil: [ buffer preloadDuration: aDuration ]
+]
+
 { #category : #'api - loading' }
 BrListStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 	<return: #TAsyncPromise>
@@ -171,6 +188,7 @@ BrListStreamItemsProvider >> stream: aStream [
 				ifNil: [ self
 						privateSetStreamBuffer: (AsyncStreamBuffer new
 								preloadAmount: self preloadAmount;
+								preloadDuration: self preloadDuration;
 								loadSinglesUntil: self loadSinglesUntil;
 								executionConfiguration: (AsyncFutureExecutionConfiguration new
 										highPriority;
