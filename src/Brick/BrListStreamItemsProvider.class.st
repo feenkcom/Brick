@@ -73,7 +73,7 @@ BrListStreamItemsProvider >> itemCount [
 	^ buffer size
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 BrListStreamItemsProvider >> loadSinglesUntil [
 	^ loadSinglesUntil ifNil: [ loadSinglesUntil := self defaultLoadSinglesUntil]
 ]
@@ -123,7 +123,7 @@ BrListStreamItemsProvider >> preloadDuration [
 	^ preloadDuration ifNil: [ preloadDuration := self defaultPreloadDuration ]
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrListStreamItemsProvider >> preloadDuration: aDuration [
 	preloadDuration := aDuration.
 	buffer ifNotNil: [ buffer preloadDuration: aDuration ]
@@ -182,9 +182,7 @@ BrListStreamItemsProvider >> stream: aStream [
 					self
 						privateSetTransitionBuffer: (AsyncStreamTransitionBuffer
 								forStream: aStream
-								previousBuffer: (aPreviousBuffer
-										preloadAmount: self preloadAmount;
-										loadSinglesUntil: self loadSinglesUntil)) ]
+								previousBuffer: aPreviousBuffer) ]
 				ifNil: [ self
 						privateSetStreamBuffer: (AsyncStreamBuffer new
 								preloadAmount: self preloadAmount;
