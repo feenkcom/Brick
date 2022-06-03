@@ -74,7 +74,8 @@ BrListStreamItemsProvider >> loadSinglesUntil [
 
 { #category : #initialization }
 BrListStreamItemsProvider >> loadSinglesUntil: aNumber [
-	loadSinglesUntil := aNumber
+	loadSinglesUntil := aNumber.
+	buffer ifNotNil: [ buffer loadSinglesUntil: aNumber ]
 ]
 
 { #category : #'private - event handling' }
@@ -107,7 +108,8 @@ BrListStreamItemsProvider >> preloadAmount [
 
 { #category : #initialization }
 BrListStreamItemsProvider >> preloadAmount: aNumber [
-	preloadAmount := aNumber
+	preloadAmount := aNumber.
+	buffer ifNotNil: [ buffer preloadAmount: aNumber ]
 ]
 
 { #category : #'api - loading' }
@@ -154,22 +156,24 @@ BrListStreamItemsProvider >> privateSetTransitionBuffer: aStreamTransitionBuffer
 
 { #category : #initialization }
 BrListStreamItemsProvider >> stream: aStream [
-
 	"Change a stream to the given one"
 
-	monitor critical: [ 
-		buffer
-			ifNotNil: [ :aPreviousBuffer | 
-				aPreviousBuffer unsubscribe: self.
-				self privateSetTransitionBuffer: (AsyncStreamTransitionBuffer
-						 forStream: aStream
-						 previousBuffer: (aPreviousBuffer 
-			          preloadAmount: self preloadAmount;
-			          loadSinglesUntil: self loadSinglesUntil)) ]
-			ifNil: [ 
-				self privateSetStreamBuffer: (AsyncStreamBuffer new
-						 executionConfiguration: (AsyncFutureExecutionConfiguration new
-								  highPriority;
-								  customGroup: #ScrollingList);
-						 stream: aStream) ] ]
+	monitor
+		critical: [ buffer
+				ifNotNil: [ :aPreviousBuffer | 
+					aPreviousBuffer unsubscribe: self.
+					self
+						privateSetTransitionBuffer: (AsyncStreamTransitionBuffer
+								forStream: aStream
+								previousBuffer: (aPreviousBuffer
+										preloadAmount: self preloadAmount;
+										loadSinglesUntil: self loadSinglesUntil)) ]
+				ifNil: [ self
+						privateSetStreamBuffer: (AsyncStreamBuffer new
+								preloadAmount: self preloadAmount;
+								loadSinglesUntil: self loadSinglesUntil;
+								executionConfiguration: (AsyncFutureExecutionConfiguration new
+										highPriority;
+										customGroup: #ScrollingList);
+								stream: aStream) ] ]
 ]
