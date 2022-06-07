@@ -4,7 +4,7 @@ I split a piece of text behind a ${class:BrTextEditorLineSegment}$ into pieces $
 Class {
 	#name : #BrTextEditorLineSegmentSplitter,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #'instance creation' }
@@ -82,6 +82,20 @@ BrTextEditorLineSegmentSplitter >> processSegment: aTextIterator in: aStream off
 					hasReplacements
 						ifTrue: [ self processWithReplacements: aSpanIterator in: aStream offset: anOffset + aDelta ]
 						ifFalse: [ self processWithoutReplacements: aSpanIterator in: aStream offset: anOffset + aDelta ] ] ]
+]
+
+{ #category : #splitting }
+BrTextEditorLineSegmentSplitter >> processStartingAdornments: aText in: aStream offset: offset [
+	(aText attributesAt: 0)
+		select: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldAppend ] ]
+		thenDo: [ :eachAttribute | 
+			self
+				processAdornmentAttribute: eachAttribute
+				of: '' asRopedText 
+				in: aStream
+				from: 0
+				to: 0
+				virtual: true ]
 ]
 
 { #category : #'private - pieces computation' }
@@ -189,18 +203,28 @@ BrTextEditorLineSegmentSplitter >> processWithoutReplacements: aTextIterator in:
 { #category : #splitting }
 BrTextEditorLineSegmentSplitter >> split: aText from: aStartIndex to: anEndIndex [
 	"aStartIndex and anEndIndex are given in cursor coordinates"
+
 	| thePieces |
-
-	thePieces := Array streamContents: [ :aStream |
-		| lineIterator |
-
-		lineIterator := aText iterator.
-		[ lineIterator hasNext ] whileTrue: [
-			self processSegment: lineIterator in: aStream offset: aStartIndex ] ].
+	thePieces := Array
+			streamContents: [ :aStream | 
+				| lineIterator |
+				self
+					processStartingAdornments: aText
+					in: aStream
+					offset: aStartIndex.
+				lineIterator := aText iterator.
+				[ lineIterator hasNext ]
+					whileTrue: [ self
+							processSegment: lineIterator
+							in: aStream
+							offset: aStartIndex ] ].
 
 	thePieces := thePieces
-		ifEmpty:[ { self textPiece: (aText from: 1 to: aText size) from: aStartIndex to: anEndIndex } ]
-		ifNotEmpty: #yourself.
+			ifEmpty: [ {self
+						textPiece: (aText from: 1 to: aText size)
+						from: aStartIndex
+						to: anEndIndex} ]
+			ifNotEmpty: #yourself.
 
 	^ thePieces
 ]

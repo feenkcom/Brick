@@ -8,7 +8,7 @@ TBlTextStyleable >> appendingAdornment: aBrTextAdornmentStencilBuilder [
 
 	self attributesBuilder attribute: (BrTextAdornmentDynamicAttribute new
 		beAppend;
-		stencil: aBrTextAdornmentStencilBuilder)
+		stencil: aBrTextAdornmentStencilBuilder) from: 1 to: self size
 ]
 
 { #category : #'*Brick-Editor' }
@@ -63,11 +63,6 @@ TBlTextStyleable >> replacingText: aCharacter [
 	"Visually replace a piece of text with a repeating aCharacter"
 
 	self attributesBuilder attribute: (BrTextReplacingAttribute new withCharacter: aCharacter)
-]
-
-{ #category : #'*Brick-Editor' }
-TBlTextStyleable >> roundedBackground: aPaint [
-	self attributesBuilder attribute: (BrTextEmbellishmentAttribute new roundedBackground: aPaint)
 ]
 
 { #category : #'*Brick-Editor' }

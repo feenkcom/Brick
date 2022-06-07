@@ -151,7 +151,7 @@ BrTextEditorSegmentCollector >> cacheLimit: aNumber [
 BrTextEditorSegmentCollector >> cachedAt: anIndex [
 	"Return a cached segment at an absolute index within editor
 	(I must convert index from editor coordiantes to my local cache coordinates)"
-	<return: #BrEditorSegment>
+	<return: #BrTextEditorSegment>
 	| aCachedIndex |
 
 	aCachedIndex := anIndex - segmentsInterval first + 1.
@@ -311,7 +311,7 @@ BrTextEditorSegmentCollector >> computeInterval: anIndex [
 
 { #category : #accessing }
 BrTextEditorSegmentCollector >> computeSegmentAt: anIndex [
-	<return: #BrEditorSegment>
+	<return: #BrTextEditorSegment>
 
 	self
 		assert: [ (self isCachedAt: anIndex) not ]
@@ -417,7 +417,7 @@ BrTextEditorSegmentCollector >> firstIndex [
 BrTextEditorSegmentCollector >> forwardSegments: aNewCachedInterval [
 	"Create and return a collection which will be used to collect segments for a given new cached interval.
 	If existing cached interval overlaps with the new one, we should copy already cached segments to reduce amount of work"
-	<return: #SequenceableCollection of: #BrEditorSegment>
+	<return: #SequenceableCollection of: #BrTextEditorSegment>
 	| startIndex |
 
 	startIndex := aNewCachedInterval first - segmentsInterval first + 1.
@@ -560,7 +560,7 @@ BrTextEditorSegmentCollector >> resetCache [
 { #category : #accessing }
 BrTextEditorSegmentCollector >> segmentAt: anIndex [
 	"Return segment at given index"
-	<return: #BrEditorSegment>
+	<return: #BrTextEditorSegment>
 	
 	^ (self isCachedAt: anIndex)
 		ifTrue: [ self cachedAt: anIndex ]
@@ -569,7 +569,7 @@ BrTextEditorSegmentCollector >> segmentAt: anIndex [
 
 { #category : #accessing }
 BrTextEditorSegmentCollector >> segments [
-	<return: #SequenceableCollection of: #BrEditorSegment>
+	<return: #SequenceableCollection of: #BrTextEditorSegment>
 
 	^ segments
 ]

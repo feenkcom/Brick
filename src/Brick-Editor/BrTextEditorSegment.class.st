@@ -6,15 +6,41 @@ By default segment is a single line: a piece of text between new line characters
 "
 Class {
 	#name : #BrTextEditorSegment,
-	#superclass : #BrEditorSegment,
-	#traits : 'TBrTextEditorTextualPiece',
-	#classTraits : 'TBrTextEditorTextualPiece classTrait',
-	#category : 'Brick-Editor-Model - Segment-Text'
+	#superclass : #Object,
+	#traits : 'TBrTextEditorTextualPiece + TBlDebug',
+	#classTraits : 'TBrTextEditorTextualPiece classTrait + TBlDebug classTrait',
+	#instVars : [
+		'index'
+	],
+	#category : #'Brick-Editor-Model - Segment-Text'
 }
+
+{ #category : #'pieces - computation' }
+BrTextEditorSegment >> clearCache [
+	"Clear all caches and make this segment fresh as if it would just be created and initalized"
+]
 
 { #category : #printing }
 BrTextEditorSegment >> gtDisplayOn: aStream [
 	self printOn: aStream
+]
+
+{ #category : #accessing }
+BrTextEditorSegment >> index [
+	"Return segment index within BrEditor.
+	Note: index can not be nil"
+	<return: #Number>
+	
+	self
+		assert: [ index isNotNil ]
+		description: [ 'Index can not be nil' ].
+
+	^ index
+]
+
+{ #category : #accessing }
+BrTextEditorSegment >> index: aNumber [
+	index := aNumber
 ]
 
 { #category : #initialization }
@@ -63,6 +89,20 @@ BrTextEditorSegment >> isAllLineBreak [
 	<return: #Boolean>
 	
 	^ self text allSatisfy: #isLineBreak
+]
+
+{ #category : #testing }
+BrTextEditorSegment >> isFirstIn: aTextEditor [
+	"Return true if I am absolutely the very first segment (not first cached) in a given text editor"
+
+	^ self index = 1
+]
+
+{ #category : #testing }
+BrTextEditorSegment >> isLastIn: aTextEditor [
+	"Return true if I am absolutely the very last segment (not last cached) in a given text editor"
+
+	^ self index = aTextEditor segmentCollector segments size
 ]
 
 { #category : #testing }
