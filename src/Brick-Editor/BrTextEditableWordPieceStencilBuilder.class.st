@@ -4,6 +4,11 @@ Class {
 	#category : #'Brick-Editor-UI - Stencils'
 }
 
+{ #category : #initialization }
+BrTextEditableWordPieceStencilBuilder class >> initialize [
+	TextPiecePool := BlObjectPool new: 1000
+]
+
 { #category : #'api - instantiation' }
 BrTextEditableWordPieceStencilBuilder >> createWordElement [
 	<return: #BrTextElementWithCursors>
