@@ -1,20 +1,12 @@
 Class {
 	#name : #BrTextReadonlyWordPieceStencilBuilder,
 	#superclass : #BrTextWordPieceStencilBuilder,
-	#classVars : [
-		'TextPiecePool'
-	],
-	#category : 'Brick-Editor-UI - Stencils'
+	#category : #'Brick-Editor-UI - Stencils'
 }
 
-{ #category : #cleanup }
-BrTextReadonlyWordPieceStencilBuilder class >> cleanUp [
-	self initialize
-]
-
-{ #category : #cleanup }
+{ #category : #initialization }
 BrTextReadonlyWordPieceStencilBuilder class >> initialize [
-	TextPiecePool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000)
+	TextPiecePool := BlObjectPool new: 1000
 ]
 
 { #category : #'api - instantiation' }
@@ -49,9 +41,4 @@ BrTextReadonlyWordPieceStencilBuilder >> createWordElement [
 			addEventHandler: BrTextWordPieceSelectionLostHandler uniqueInstance;
 
 			yourself
-]
-
-{ #category : #'private - pool' }
-BrTextReadonlyWordPieceStencilBuilder >> pool [
-	^ TextPiecePool
 ]
