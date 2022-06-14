@@ -1013,7 +1013,7 @@ BrTextEditor >> saveState: aBrTextEditorMemento [
 
 { #category : #accessing }
 BrTextEditor >> segmentBuilder [
-	<return: #BrTextEditorSegmentBuilder>
+	<return: #BrTextEditorLineSegmentBuilder>
 
 	^ segmentBuilder
 ]
