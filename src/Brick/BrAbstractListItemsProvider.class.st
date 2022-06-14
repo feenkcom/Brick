@@ -1,6 +1,6 @@
 Class {
 	#name : #BrAbstractListItemsProvider,
-	#superclass : #BrWidgetModel,
+	#superclass : #Object,
 	#instVars : [
 		'listModel'
 	],

@@ -7,8 +7,26 @@ Class {
 		'segmentPiece',
 		'shouldUsePool'
 	],
+	#classInstVars : [
+		'TextPiecePool'
+	],
 	#category : #'Brick-Editor-UI - Stencils'
 }
+
+{ #category : #'class initialization' }
+BrTextWordPieceStencilBuilder class >> cleanUp [
+	self initialize
+]
+
+{ #category : #initialization }
+BrTextWordPieceStencilBuilder class >> initialize [
+	TextPiecePool := BlObjectPool new: 1000
+]
+
+{ #category : #accessing }
+BrTextWordPieceStencilBuilder class >> pool [
+	^TextPiecePool 
+]
 
 { #category : #'private - pool' }
 BrTextWordPieceStencilBuilder >> acquire [
@@ -67,7 +85,7 @@ BrTextWordPieceStencilBuilder >> paramsOn: aStencilExecutor [
 
 { #category : #'private - pool' }
 BrTextWordPieceStencilBuilder >> pool [
-	^ self subclassResponsibility
+	^ self class pool
 ]
 
 { #category : #'private - pool' }
