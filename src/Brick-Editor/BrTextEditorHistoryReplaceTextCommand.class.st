@@ -8,6 +8,16 @@ Class {
 	#category : #'Brick-Editor-History'
 }
 
+{ #category : #printing }
+BrTextEditorHistoryReplaceTextCommand >> gtDisplayOn: aStream [
+	
+	aStream 
+		<< 'Replace'; space;
+		<< ''''; print: oldText; << ''''; space;
+		<< 'with'; space;
+		<< ''''; print: newText; << ''''
+]
+
 { #category : #accessing }
 BrTextEditorHistoryReplaceTextCommand >> newText: aText [
 	newText := aText
