@@ -10,7 +10,7 @@ Class {
 		'listWidget',
 		'itemIdStencil'
 	],
-	#category : 'Brick-List - Support'
+	#category : #'Brick-List - Support'
 }
 
 { #category : #private }
@@ -122,12 +122,11 @@ BrListDataSource >> onElementAttached: anElementHolder [
 	anItemElement := anElementHolder itemElement.
 	anItemPosition := anElementHolder position.
 	anItemValue := self listModel itemAt: anItemPosition.
-
-	self listElement enqueueTask: (BlTaskAction new action: [
-		self listElement dispatchEvent: (BrListItemElementAttached new
-			itemElement: anItemElement;
-			rowIndex: anItemPosition;
-			rowValue: anItemValue) ])
+		
+	self listElement dispatchEvent: (BrListItemElementAttached new
+		itemElement: anItemElement;
+		rowIndex: anItemPosition;
+		rowValue: anItemValue)
 ]
 
 { #category : #hooks }
