@@ -110,7 +110,10 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 								ifFalse: [ aTextStyle color: self defaultTextColor ].
 
 							aFontAndStyleBuilder hasCustomBackground
-								ifTrue: [ aTextStyle background: aFontAndStyleBuilder background ].
+								ifTrue: [
+									SkiaPaint newDuring: [ :aSkiaPaint |
+										aSkiaPaint color: aFontAndStyleBuilder background.
+										aTextStyle background: aSkiaPaint ] ].
 
 							aFontAndStyleBuilder hasCustomDecoration
 								ifTrue: [ SkiaTextDecoration
