@@ -413,7 +413,7 @@ BrTextEditor >> initialize [
 	shouldStyleWhenTextModified := true.
 
 	self beEditable.
-	"self beParagraphBased"
+	self beParagraphBased
 ]
 
 { #category : #initialization }

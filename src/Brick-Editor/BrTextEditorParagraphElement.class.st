@@ -321,9 +321,10 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 		ifTrue: [ SmallInteger maxVal ]
 		ifFalse: [ ((anExtentMeasurementSpec widthSpec size - self padding width) max: 0) ].
 
+	"Add a 1 pixel fudge-factor to the width to deal with re-measuring the paragraph at the exact width"
 	BlFrameTelemetry
 		time: 'Layout paragraph'
-		during: [ paragraph layoutWithWidth: aParagraphLayoutWidth ].
+		during: [ paragraph layoutWithWidth: (aParagraphLayoutWidth + 1.0) ].
 
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: (paragraph longestLine @ paragraph height) + self padding extent).
 	
