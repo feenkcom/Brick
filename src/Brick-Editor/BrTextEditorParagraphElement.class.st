@@ -136,7 +136,7 @@ BrTextEditorParagraphElement >> buildParagraph [
 
 	aBuilder := SkiaParagraphBuilder
 		style: (SkiaParagraphStyle new textStyle: (SkiaParagraphTextStyle new color: Color black; fontSize: self defaultFontSize))
-		fontCollection: (SkiaFontCollection new defaultFontManager: SkiaFontManager default)
+		fontCollection: SkiaFontCollection default
 		tabSize: 4.
 
 	self childrenDo: [ :eachElement |
