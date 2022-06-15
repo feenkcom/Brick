@@ -4,12 +4,15 @@ I split a piece of text into line segments ${class:BrTextEditorLineSegment}$
 Class {
 	#name : #BrTextEditorLineSplitter,
 	#superclass : #BrTextEditorSplitter,
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#instVars : [
+		'segmentClass'
+	],
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #'instance creation' }
 BrTextEditorLineSplitter >> newSegment [
-	^ BrTextEditorLineSegment new
+	^ segmentClass new
 ]
 
 { #category : #'instance creation' }
@@ -29,6 +32,11 @@ BrTextEditorLineSplitter >> newSegment: aBlText from: aStartIndex to: anEndIndex
 		from: anAbsoluteTextStart + anOffset
 		to: anAbsoluteTextEnd + anOffset
 		delimiter: aDelimiterIndex - anEndIndex
+]
+
+{ #category : #'instance creation' }
+BrTextEditorLineSplitter >> segmentClass: aClass [
+	segmentClass := aClass
 ]
 
 { #category : #'api - splitting' }
