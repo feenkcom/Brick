@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTextEditorLineSegmentPieceDictionaryMap,
-	#superclass : #BrTextEditorLineSegmentPieceMap,
+	#superclass : #Object,
 	#instVars : [
 		'map'
 	],

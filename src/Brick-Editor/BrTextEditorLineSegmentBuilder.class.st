@@ -5,12 +5,15 @@ Note: I do not support embedded elements
 "
 Class {
 	#name : #BrTextEditorLineSegmentBuilder,
-	#superclass : #BrTextEditorSegmentBuilder,
+	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'lineStencilBuilder',
-		'wordStencilBuilder'
+		'wordStencilBuilder',
+		'lineSplitter'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #'text - modifications' }
@@ -138,7 +141,7 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 { #category : #initialization }
 BrTextEditorLineSegmentBuilder >> initialize [
 	super initialize.
-
+	lineSplitter := self defaultSplitter.
 	wordStencilBuilder := BrTextEditableWordPieceStencilBuilder new
 ]
 
@@ -243,6 +246,32 @@ BrTextEditorLineSegmentBuilder >> shouldMergeDeletingFrom: aFromIndex segment: a
 	our deletion interval is 1 it means that we are trying to delete a line break symbol
 	which is preceded by another line break"
 	^ (aFromIndex - aPreviousSegment textEnd) = 1
+]
+
+{ #category : #splitting }
+BrTextEditorLineSegmentBuilder >> split: aBrText in: aStream [
+	self splitter split: aBrText in: aStream
+]
+
+{ #category : #splitting }
+BrTextEditorLineSegmentBuilder >> split: aBrText in: aBrEditorSegmentStream offset: anOffset [
+	self splitter split: aBrText in: aBrEditorSegmentStream offset: anOffset
+]
+
+{ #category : #accessing }
+BrTextEditorLineSegmentBuilder >> splitter [
+	<return: #BrTextEditorSplitter>
+
+	^ lineSplitter
+]
+
+{ #category : #accessing }
+BrTextEditorLineSegmentBuilder >> splitter: aBrTextEditorSplitter [
+	self
+		assert: [ aBrTextEditorSplitter isNotNil ]
+		description: [ 'Splitter must not be nil' ].
+
+	lineSplitter := aBrTextEditorSplitter
 ]
 
 { #category : #private }

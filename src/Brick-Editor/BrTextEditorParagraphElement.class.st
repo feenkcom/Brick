@@ -63,71 +63,66 @@ BrTextEditorParagraphElement >> addCursorAt: aTextPosition [
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 	| anIterator |
-	
 	anIterator := aBlText iterator.
-	[ anIterator hasNext ] whileTrue: [
-		| eachSpan |
-		
-		eachSpan := anIterator nextSpan.
-		
-		eachSpan attributes ifNotEmpty: [ :theAttributes |
-			| aFontAndStyleBuilder |
-			
-			"we first collect font properties and text style from the attributes"
-			aFontAndStyleBuilder := BlTextFontAndStyleBuilder new.
-			theAttributes do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: aFontAndStyleBuilder ].
-		
-			SkiaParagraphTextStyle newDuring: [ :aTextStyle |		
-		
-				aFontAndStyleBuilder hasCustomFontStyle
-					ifTrue: [
-						| aFontWeight aFontStretch aFontSlant |
-						
-						aFontWeight := aFontAndStyleBuilder hasCustomFontWeight
-							ifTrue: [ aFontAndStyleBuilder fontWeight ]
-							ifFalse: [ BlFontWeight normal ].
-							
-						aFontStretch := aFontAndStyleBuilder hasCustomFontStretch
-							ifTrue: [ aFontAndStyleBuilder fontStretch ]
-							ifFalse: [ BlFontStretch normal ].
-							
-						aFontSlant := aFontAndStyleBuilder hasCustomFontSlant
-							ifTrue: [ aFontAndStyleBuilder fontSlant ]
-							ifFalse: [ BlFontSlant normal ].
-						
-						SkiaFontStyle
-							weight: aFontWeight value
-							width: (self class fontStretchToSkia: aFontStretch)
-							slant: (self class fontSlantToSkia: aFontSlant)
-							during: [ :aSkiaFontStyle | aTextStyle fontStyle: aSkiaFontStyle ] ].
+	[ anIterator hasNext ]
+		whileTrue: [ | eachSpan |
+			eachSpan := anIterator nextSpan.
 
-				aFontAndStyleBuilder hasCustomFontSize
-					ifTrue: [ aTextStyle fontSize: aFontAndStyleBuilder resolvedFontSize value asFloat ]
-					ifFalse: [ aTextStyle fontSize: self defaultFontSize ].
-					
-				aFontAndStyleBuilder hasCustomFamilyName
-					ifTrue: [ aTextStyle fontFamily: aFontAndStyleBuilder resolvedFontFamilyName ].
+			eachSpan attributes
+				ifNotEmpty: [ :theAttributes | 
+					| aFontAndStyleBuilder |
+					"we first collect font properties and text style from the attributes"
+					aFontAndStyleBuilder := BlTextFontAndStyleBuilder new.
+					theAttributes
+						do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: aFontAndStyleBuilder ].
 
-				aFontAndStyleBuilder hasCustomColor
-					ifTrue: [ aTextStyle color: aFontAndStyleBuilder color ]
-					ifFalse: [ aTextStyle color: self defaultTextColor ].
-					
-				aFontAndStyleBuilder hasCustomDecoration
-					ifTrue: [
-						SkiaTextDecoration newDuring: [ :aSkiaDecoration |
-							aFontAndStyleBuilder decoration applyOnSkiaDecoration: aSkiaDecoration.
-							aTextStyle decoration: aSkiaDecoration ] ].
+					SkiaParagraphTextStyle
+						newDuring: [ :aTextStyle | 
+							aFontAndStyleBuilder hasCustomFontStyle
+								ifTrue: [ | aFontWeight aFontStretch aFontSlant |
+									aFontWeight := aFontAndStyleBuilder hasCustomFontWeight
+											ifTrue: [ aFontAndStyleBuilder fontWeight ]
+											ifFalse: [ BlFontWeight normal ].
 
-				aParagraphBuilder
-					pushStyle: aTextStyle;
-					addString: eachSpan asString;
-					popStyle
-				
-			].
-		]
-		ifEmpty: [ aParagraphBuilder addString: eachSpan asString ].
-		
-	]
+									aFontStretch := aFontAndStyleBuilder hasCustomFontStretch
+											ifTrue: [ aFontAndStyleBuilder fontStretch ]
+											ifFalse: [ BlFontStretch normal ].
+
+									aFontSlant := aFontAndStyleBuilder hasCustomFontSlant
+											ifTrue: [ aFontAndStyleBuilder fontSlant ]
+											ifFalse: [ BlFontSlant normal ].
+
+									SkiaFontStyle
+										weight: aFontWeight value
+										width: (self class fontStretchToSkia: aFontStretch)
+										slant: (self class fontSlantToSkia: aFontSlant)
+										during: [ :aSkiaFontStyle | aTextStyle fontStyle: aSkiaFontStyle ] ].
+
+							aFontAndStyleBuilder hasCustomFontSize
+								ifTrue: [ aTextStyle fontSize: aFontAndStyleBuilder resolvedFontSize value asFloat ]
+								ifFalse: [ aTextStyle fontSize: self defaultFontSize ].
+
+							aFontAndStyleBuilder hasCustomFamilyName
+								ifTrue: [ aTextStyle fontFamily: aFontAndStyleBuilder resolvedFontFamilyName ].
+
+							aFontAndStyleBuilder hasCustomColor
+								ifTrue: [ aTextStyle color: aFontAndStyleBuilder color ]
+								ifFalse: [ aTextStyle color: self defaultTextColor ].
+
+							aFontAndStyleBuilder hasCustomBackground
+								ifTrue: [ aTextStyle background: aFontAndStyleBuilder background ].
+
+							aFontAndStyleBuilder hasCustomDecoration
+								ifTrue: [ SkiaTextDecoration
+										newDuring: [ :aSkiaDecoration | 
+											aFontAndStyleBuilder decoration applyOnSkiaDecoration: aSkiaDecoration.
+											aTextStyle decoration: aSkiaDecoration ] ].
+
+							aParagraphBuilder
+								pushStyle: aTextStyle;
+								addString: eachSpan asString;
+								popStyle ] ]
+				ifEmpty: [ aParagraphBuilder addString: eachSpan asString ] ]
 ]
 
 { #category : #'private - paragraph' }
@@ -321,9 +316,10 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 		ifTrue: [ SmallInteger maxVal ]
 		ifFalse: [ ((anExtentMeasurementSpec widthSpec size - self padding width) max: 0) ].
 
+	"Add a 1 pixel fudge-factor to the width to deal with re-measuring the paragraph at the exact width"
 	BlFrameTelemetry
 		time: 'Layout paragraph'
-		during: [ paragraph layoutWithWidth: aParagraphLayoutWidth ].
+		during: [ paragraph layoutWithWidth: (aParagraphLayoutWidth + 1.0) ].
 
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: (paragraph longestLine @ paragraph height) + self padding extent).
 	
