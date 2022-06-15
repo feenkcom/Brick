@@ -128,21 +128,25 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> buildParagraph [
 	| aBuilder |
-
 	aBuilder := SkiaParagraphBuilder
-		style: (SkiaParagraphStyle new textStyle: (SkiaParagraphTextStyle new color: Color black; fontSize: self defaultFontSize))
-		fontCollection: SkiaFontCollection default
-		tabSize: 4.
+			style: (SkiaParagraphStyle new
+					textStyle: (SkiaParagraphTextStyle new
+							color: Color black;
+							fontSize: self defaultFontSize))
+			fontCollection: SkiaFontCollection default
+			tabSize: 4.
 
-	self childrenDo: [ :eachElement |
-		(eachElement isKindOf: BlTextElement)
-			ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
-			ifFalse: [
-				(eachElement isKindOf: BrCursorElement)
-					ifFalse: [
-						aBuilder
-							addPlaceholder: (SkiaParagraphPlaceholderStyle new alignMiddle extent: eachElement measuredExtent)
-							charLength: (eachElement userData at: #brickEditorCharLength ifAbsent: [ 0 ]) ] ] ].
+	self
+		childrenDo: [ :eachElement | 
+			(eachElement isKindOf: BlTextElement)
+				ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
+				ifFalse: [ (eachElement isKindOf: BrCursorElement)
+						ifFalse: [ aBuilder
+								addPlaceholder: (SkiaParagraphPlaceholderStyle new alignMiddle
+										extent: eachElement measuredExtent)
+								charLength: (eachElement userData
+										at: #brickEditorCharLength
+										ifAbsent: [ 0 ]) ] ] ].
 	^ aBuilder build
 ]
 
