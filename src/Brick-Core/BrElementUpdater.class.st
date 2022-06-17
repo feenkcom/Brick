@@ -185,7 +185,7 @@ BrElementUpdater >> postponeUpdate [
 				self postponedDuration isZero
 					ifTrue: [ self enqueueUpdate ]
 					ifFalse: [
-						BlTaskAtQueue default
+						TaskAtQueue default
 							schedule: [ self enqueueUpdate ]
 							at: self postponedTime ] ]
 			otherwise: [ self updateNow ] ]

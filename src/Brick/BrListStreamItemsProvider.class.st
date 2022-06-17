@@ -104,7 +104,7 @@ BrListStreamItemsProvider >> onBufferStartedLoading: anAnnouncement [
 
 	listModel ifNotNil: [ :aListModel | 
 		aListModel dispatchEvent: BrListItemsProviderStartedLoadingEvent new.
-		aListModel dispatchEvent: (BrListModelPromiseEnqueuedEvent new promise: buffer bufferLoadingPromise). ]
+		aListModel dispatchEvent: (BrListModelPromiseEnqueuedEvent new promise: anAnnouncement bufferLoadingPromise). ]
 ]
 
 { #category : #accessing }

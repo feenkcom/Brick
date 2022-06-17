@@ -178,7 +178,7 @@ BrElementUpdaterByScripterExamples >> updateRequest_ElementNotInSceneGraph [
 	aSemaphore := Semaphore new.
 	anUpdater := self updaterWithElementAndAction.
 	anUpdater requestUpdate.
-	BlTaskAtQueue default
+	TaskAtQueue default
 		schedule: [ 
 			100 milliSeconds wait. 
 			aSemaphore signal ]

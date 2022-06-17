@@ -94,12 +94,18 @@ BrTextEditor >> beEditableCode [
 
 { #category : #accessing }
 BrTextEditor >> beLineBased [
-	segmentBuilder := BrTextEditorLineSegmentBuilder new splitter: BrTextEditorLineSplitter new
+	segmentBuilder := BrTextEditorLineSegmentBuilder new
+			splitter: (BrTextEditorLineSplitter new
+					segmentClass: BrTextEditorLineSegment;
+					yourself)
 ]
 
 { #category : #accessing }
 BrTextEditor >> beParagraphBased [
-	segmentBuilder := BrTextEditorLineSegmentBuilder new splitter: BrTextEditorParagraphSplitter new
+	segmentBuilder := BrTextEditorLineSegmentBuilder new
+			splitter: (BrTextEditorLineSplitter new
+					segmentClass: BrTextEditorParagraphSegment;
+					yourself)
 ]
 
 { #category : #'api - mode' }
