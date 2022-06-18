@@ -104,7 +104,7 @@ BrTextEditorOperatorExamples >> findWhitespaceInEmptyAt_0 [
 	| text editor whitespace |
 	
 	text := '' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 0.
 	
 	self assert: whitespace = ''.
@@ -118,7 +118,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_0 [
 	| text editor whitespace |
 	
 	text := 'Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 0.
 	
 	self assert: whitespace = ''.
@@ -132,7 +132,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_1 [
 	| text editor whitespace |
 	
 	text := 'Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 1.
 
 	self assert: whitespace = ''.
@@ -146,7 +146,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_2 [
 	| text editor whitespace |
 	
 	text := 'Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 2.
 
 	self assert: whitespace = ''.
@@ -160,7 +160,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_3 [
 	| text editor whitespace |
 	
 	text := 'Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 3.
 
 	self assert: whitespace = ''.
@@ -174,7 +174,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_4 [
 	| text editor whitespace |
 	
 	text := 'Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 4.
 
 	self assert: whitespace = ''.
@@ -188,7 +188,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_at_5 [
 	| text editor whitespace |
 	
 	text := 'Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 5.
 
 	self assert: whitespace = ''.
@@ -202,7 +202,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_6 [
 	| text editor whitespace |
 	
 	text := ('Hello', String cr, 'World') asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 6.
 	
 	self assert: whitespace = ''.
@@ -216,7 +216,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_7 [
 	| text editor whitespace |
 	
 	text := ('Hello', String cr, 'World') asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 7.
 	
 	self assert: whitespace = ''.
@@ -230,7 +230,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_World_at_8 [
 	| text editor whitespace |
 	
 	text := ('Hello', String cr, 'World') asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 8.
 	
 	self assert: whitespace = ''.
@@ -244,7 +244,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_6 [
 	| text editor whitespace |
 	
 	text := ('Hello', String cr, ' World') asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 6.
 	
 	self assert: whitespace = ''.
@@ -258,7 +258,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_7 [
 	| text editor whitespace |
 	
 	text := ('Hello', String cr, ' World') asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 7.
 	
 	self assert: whitespace = ' '.
@@ -272,7 +272,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_Hello_cr_space_World_at_8 [
 	| text editor whitespace |
 	
 	text := ('Hello', String cr, ' World') asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 8.
 	
 	self assert: whitespace = ' '.
@@ -286,7 +286,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_0 [
 	| text editor whitespace |
 	
 	text := ' Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 0.
 	
 	self assert: whitespace = ''.
@@ -300,7 +300,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_1 [
 	| text editor whitespace |
 	
 	text := ' Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 1.
 	
 	self assert: whitespace = ' '.
@@ -314,7 +314,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_Hello_at_2 [
 	| text editor whitespace |
 	
 	text := ' Hello' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 2.
 	
 	self assert: whitespace = ' '.
@@ -328,7 +328,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_at_0 [
 	| text editor whitespace |
 	
 	text := ' ' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 0.
 	
 	self assert: whitespace = ''.
@@ -342,7 +342,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_at_1 [
 	| text editor whitespace |
 	
 	text := ' ' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 1.
 	
 	self assert: whitespace = ' '.
@@ -356,7 +356,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_0 [
 	| text editor whitespace |
 	
 	text := '  ' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 0.
 	
 	self assert: whitespace = ''.
@@ -370,7 +370,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_1 [
 	| text editor whitespace |
 	
 	text := '  ' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 1.
 	
 	self assert: whitespace = ' '.
@@ -384,7 +384,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_space_at_2 [
 	| text editor whitespace |
 	
 	text := '  ' asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 2.
 	
 	self assert: whitespace = '  '.
@@ -398,7 +398,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_0 [
 	| text editor whitespace |
 	
 	text := (' ', String tab) asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 0.
 	
 	self assert: whitespace = ''.
@@ -412,7 +412,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_1 [
 	| text editor whitespace |
 	
 	text := (' ', String tab) asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 1.
 	
 	self assert: whitespace = ' '.
@@ -426,7 +426,7 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_2 [
 	| text editor whitespace |
 	
 	text := (' ', String tab) asRopedText.
-	editor := BrTextEditor new text: text.
+	editor := BrTextEditorModel new text: text.
 	whitespace := editor inserter findWhitespaceOfLineBefore: 2.
 	
 	self assert: whitespace = (' ', String tab).

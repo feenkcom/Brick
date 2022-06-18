@@ -791,7 +791,7 @@ BrTextEditorLineSegmentExamples >> emptyEditor [
 	<gtExample>
 	| aTextEditor aTextEditorElement aSegmentElement aPieceElement |
 	
-	aTextEditor := BrTextEditor new segmentBuilder: self lineSegmentBuilder.
+	aTextEditor := BrTextEditorModel new segmentBuilder: self lineSegmentBuilder.
 	
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.

@@ -1,6 +1,6 @@
-Extension { #name : 'BrTextEditorSegmentCollector' }
+Extension { #name : #BrTextEditorSegmentCollector }
 
-{ #category : '*Brick-Editor-Extensions' }
+{ #category : #'*Brick-Editor-Extensions' }
 BrTextEditorSegmentCollector >> gtSegmentsFor: aView [
 	<gtView>
 

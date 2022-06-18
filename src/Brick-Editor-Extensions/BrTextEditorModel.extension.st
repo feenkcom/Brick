@@ -1,7 +1,7 @@
-Extension { #name : 'BrTextEditor' }
+Extension { #name : #BrTextEditorModel }
 
-{ #category : '*Brick-Editor-Extensions' }
-BrTextEditor >> gtHistoryFor: aView [
+{ #category : #'*Brick-Editor-Extensions' }
+BrTextEditorModel >> gtHistoryFor: aView [
 	<gtView>
 
 	^ (self history gtHistoryFor: aView)
@@ -9,8 +9,8 @@ BrTextEditor >> gtHistoryFor: aView [
 		priority: 2
 ]
 
-{ #category : '*Brick-Editor-Extensions' }
-BrTextEditor >> gtLiveFor: aView [
+{ #category : #'*Brick-Editor-Extensions' }
+BrTextEditorModel >> gtLiveFor: aView [
 	<gtView>
 
 	^ aView explicit
@@ -26,8 +26,8 @@ BrTextEditor >> gtLiveFor: aView [
 				requestFocus ]
 ]
 
-{ #category : '*Brick-Editor-Extensions' }
-BrTextEditor >> gtSegmentsFor: aView [
+{ #category : #'*Brick-Editor-Extensions' }
+BrTextEditorModel >> gtSegmentsFor: aView [
 	<gtView>
 
 	^ (self segmentCollector gtSegmentsFor: aView)
@@ -35,8 +35,8 @@ BrTextEditor >> gtSegmentsFor: aView [
 		priority: 3
 ]
 
-{ #category : '*Brick-Editor-Extensions' }
-BrTextEditor >> gtSelectionTreeFor: aView [
+{ #category : #'*Brick-Editor-Extensions' }
+BrTextEditorModel >> gtSelectionTreeFor: aView [
 	<gtView>
 
 	^ (selection gtTreeFor: aView)
@@ -44,8 +44,8 @@ BrTextEditor >> gtSelectionTreeFor: aView [
 		title: 'Selection'
 ]
 
-{ #category : '*Brick-Editor-Extensions' }
-BrTextEditor >> gtTextFor: aView [
+{ #category : #'*Brick-Editor-Extensions' }
+BrTextEditorModel >> gtTextFor: aView [
 	<gtView>
 	^ (self text 
 		gtTextFor: aView)

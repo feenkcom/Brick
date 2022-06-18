@@ -5,7 +5,7 @@ I am also responsible for caching functionality in order to reduce amount of ins
 Class {
 	#name : #BrEditorSegmentHolder,
 	#superclass : #BlInfiniteHolder,
-	#category : 'Brick-Editor-Model - Segment'
+	#category : #'Brick-Editor-Model - Segment'
 }
 
 { #category : #initialization }
@@ -21,7 +21,7 @@ BrEditorSegmentHolder >> createSegmentElement [
 BrEditorSegmentHolder >> editor [
 	"Return the attached text editor instance.
 	Editor can not be nil"
-	<return: #BrTextEditor>
+	<return: #BrTextEditorModel>
 
 	^ self infiniteElement editor
 ]

@@ -8,7 +8,7 @@ Class {
 		'hasFocus',
 		'textStyleHandler'
 	],
-	#category : 'Brick-Editor-UI'
+	#category : #'Brick-Editor-UI'
 }
 
 { #category : #conversion }
@@ -23,7 +23,7 @@ BrEditorElement >> defaultLayout [
 
 { #category : #accessing }
 BrEditorElement >> editor [
-	<return: #BrTextEditor>
+	<return: #BrTextEditorModel>
 
 	^ self dataSource
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrExpanderExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Expander'
+	#category : #'Brick-Examples-Expander'
 }
 
 { #category : #'examples - with text' }
@@ -17,8 +17,8 @@ BrExpanderExamples >> expanderWithText [
 		collapse;
 		margin: (BlInsets all: 10);
 		aptitude: BrGlamorousExpanderAptitude new;
-		header: [ BrEditorElement new editor: (BrTextEditor new text: aText lines first asRopedText) ];
-		content: [ BrEditorElement new editor: (BrTextEditor new text: aText asRopedText) ].
+		header: [ BrEditorElement new editor: (BrTextEditorModel new text: aText lines first asRopedText) ];
+		content: [ BrEditorElement new editor: (BrTextEditorModel new text: aText asRopedText) ].
 
 	^ anExpander
 ]

@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'textReplacedHandler'
 	],
-	#category : 'Brick-Editor - UI'
+	#category : #'Brick-Editor - UI'
 }
 
 { #category : #'api - editor' }
@@ -75,7 +75,7 @@ BrEditor >> initialize [
 		to prevent any possible #asRopedText convertion"
 		do: [ :anEvent | self viewModel text: anEvent text ].
 
-	self editor: BrTextEditor new.
+	self editor: BrTextEditorModel new.
 	self padding: (BlInsets all: 5).
 	
 	self viewModel: BrEditorModel new

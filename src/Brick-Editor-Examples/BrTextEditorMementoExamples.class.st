@@ -65,7 +65,7 @@ BrTextEditorMementoExamples >> newTextEditor [
 	<gtExample>
 	| aTextEditor |
 
-	aTextEditor := BrTextEditor new.
+	aTextEditor := BrTextEditorModel new.
 	^ aTextEditor
 ]
 
@@ -74,7 +74,7 @@ BrTextEditorMementoExamples >> textEditorWithState [
 	<gtExample>
 	| aTextEditor |
 
-	aTextEditor := BrTextEditor new
+	aTextEditor := BrTextEditorModel new
 		text: 'Hello world' asRopedText glamorousCodeFontAndSize.
 	
 	aTextEditor navigator

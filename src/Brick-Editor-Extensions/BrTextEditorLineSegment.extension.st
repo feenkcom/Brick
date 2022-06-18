@@ -1,6 +1,6 @@
-Extension { #name : 'BrTextEditorLineSegment' }
+Extension { #name : #BrTextEditorLineSegment }
 
-{ #category : '*Brick-Editor-Extensions' }
+{ #category : #'*Brick-Editor-Extensions' }
 BrTextEditorLineSegment >> gtInfoFor: aView [
 	<gtView>
 
@@ -18,7 +18,7 @@ BrTextEditorLineSegment >> gtInfoFor: aView [
 			priority: 2
 ]
 
-{ #category : '*Brick-Editor-Extensions' }
+{ #category : #'*Brick-Editor-Extensions' }
 BrTextEditorLineSegment >> gtPiecesFor: aView [
 	<gtView>
 

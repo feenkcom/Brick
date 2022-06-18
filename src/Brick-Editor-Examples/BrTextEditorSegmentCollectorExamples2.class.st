@@ -16,7 +16,7 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveLimitPlusOne [
 		 	<< 'Line ';
 		 	<< (i printPaddedWith: $0 to: 3);
 		 	lf ] ].
-	editor := BrTextEditor new.
+	editor := BrTextEditorModel new.
 	editor text: string asRopedText.
 	collector := editor segmentCollector.
 	collector cacheLimit: limit.
@@ -39,7 +39,7 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveWithinLimit [
 
 	cacheLimit := 500.
 	
-	editor := BrTextEditor new.
+	editor := BrTextEditorModel new.
 
 	limit := cacheLimit // 2.
 	string := String streamContents: [ :stream |

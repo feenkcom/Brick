@@ -1,1 +1,1 @@
-Package { #name : 'Brick-Editor-Extensions' }
+Package { #name : #'Brick-Editor-Extensions' }

@@ -152,7 +152,7 @@ BrTextEditorSegmentCollectorExamples >> segmentCollector [
 BrTextEditorSegmentCollectorExamples >> textEditor [ 
 	| aTextEditor |
 
-	aTextEditor := BrTextEditor new text: self largeFileRope.
+	aTextEditor := BrTextEditorModel new text: self largeFileRope.
 	aTextEditor segmentCollector cacheLimit: 500.
 		
 	^ aTextEditor

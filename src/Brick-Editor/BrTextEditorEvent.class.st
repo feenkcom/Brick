@@ -7,12 +7,12 @@ Class {
 	#instVars : [
 		'editor'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
 
 { #category : #accessing }
 BrTextEditorEvent >> editor [
-	<return: #BrTextEditor>
+	<return: #BrTextEditorModel>
 
 	^ editor
 ]
