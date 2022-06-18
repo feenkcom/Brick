@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorLineSplitterExamples,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
 
 { #category : #'examples - split' }
@@ -643,8 +643,9 @@ BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 { #category : #'examples - instance creation' }
 BrTextEditorLineSplitterExamples >> textLineSplitter [
 	<gtExample>
-
 	^ BrTextEditorLineSplitter new
+		segmentClass: BrTextEditorLineSegment;
+		yourself
 ]
 
 { #category : #'examples - instance creation' }
