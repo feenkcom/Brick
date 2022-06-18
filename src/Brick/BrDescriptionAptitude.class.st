@@ -9,7 +9,7 @@ Class {
 		'descriptionElement',
 		'text'
 	],
-	#category : 'Brick-! Core - Looks'
+	#category : #'Brick-! Core - Looks'
 }
 
 { #category : #accessing }
@@ -43,7 +43,7 @@ BrDescriptionAptitude >> fitContent [
 BrDescriptionAptitude >> initialize [
 	super initialize.
 	text := 'Description' asRopedText.
-	editor := BrTextEditor new.
+	editor := BrTextEditorModel new.
 	descriptionElement := BrEditorElement new.
 	descriptionElement editor: editor.
 	descriptionElement

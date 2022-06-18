@@ -1,6 +1,6 @@
-Extension { #name : 'BrTextEditorHistory' }
+Extension { #name : #BrTextEditorHistory }
 
-{ #category : '*Brick-Editor-Extensions' }
+{ #category : #'*Brick-Editor-Extensions' }
 BrTextEditorHistory >> gtHistoryFor: aView [
 	<gtView>
 	

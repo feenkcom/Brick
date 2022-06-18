@@ -9,7 +9,7 @@ BrTextEditorParagraphAttributesExamples >> editorElement [
 	<gtExample>
 	| textEditor editorElement |
 	
-	textEditor := BrTextEditor new.
+	textEditor := BrTextEditorModel new.
 	editorElement := BrEditorElement new.
 	editorElement editor: textEditor.
 	editorElement constraintsDo: [ :c |

@@ -8,7 +8,7 @@ Example:
 Class {
 	#name : #BrUmlClassElement,
 	#superclass : #BlElement,
-	#category : 'Brick-UML - Stencil'
+	#category : #'Brick-UML - Stencil'
 }
 
 { #category : #'instance creation' }
@@ -85,7 +85,7 @@ BrUmlClassElement >> newContainers: aCollectionOfSymbols [
 		anEditor constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical fitContent ].
-		anEditor editor: (BrTextEditor new).
+		anEditor editor: (BrTextEditorModel new).
 		aContainer addChild: anEditor as: #editor.
 
 		aSeparator := BlElement new.

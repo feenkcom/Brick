@@ -379,7 +379,7 @@ BrTextEditorSegmentCollector >> computedSegmentsCount [
 
 { #category : #accessing }
 BrTextEditorSegmentCollector >> editor [
-	<return: #BrTextEditor>
+	<return: #BrTextEditorModel>
 
 	^ editor
 ]

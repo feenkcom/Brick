@@ -1,6 +1,6 @@
-Extension { #name : 'BrEditorElement' }
+Extension { #name : #BrEditorElement }
 
-{ #category : '*Brick-Editor-Extensions' }
+{ #category : #'*Brick-Editor-Extensions' }
 BrEditorElement >> gtHistoryFor: aView [
 	<gtView>
 
@@ -9,7 +9,7 @@ BrEditorElement >> gtHistoryFor: aView [
 		priority: 1
 ]
 
-{ #category : '*Brick-Editor-Extensions' }
+{ #category : #'*Brick-Editor-Extensions' }
 BrEditorElement >> gtSegmentsFor: aView [
 	<gtView>
 

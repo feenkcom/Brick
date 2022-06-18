@@ -55,7 +55,7 @@ BrTextEditorExamples class >> exampleEditor [
 			[ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ].
-	editor := BrTextEditor new.
+	editor := BrTextEditorModel new.
 	text := self loremIpsum asRopedText.
 	editor text: text.
 	editorElement editor: editor.
@@ -403,7 +403,7 @@ BrTextEditorExamples >> newBeReplaceTextAttribute [
 BrTextEditorExamples >> newEditor [
 	<gtExample>
 
-	^ BrTextEditor new beLineBased
+	^ BrTextEditorModel new beLineBased
 ]
 
 { #category : #'instance creation' }

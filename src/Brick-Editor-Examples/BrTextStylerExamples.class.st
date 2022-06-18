@@ -91,7 +91,7 @@ BrTextStylerExamples >> editorWithSyncStylerStrategy [
 BrTextStylerExamples >> newEditor [
 	<gtExample>
 
-	^ BrTextEditor new
+	^ BrTextEditorModel new
 ]
 
 { #category : #'instance creation' }
