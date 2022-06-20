@@ -91,7 +91,7 @@ BrTextEditorLineSegmentSplitter >> processStartingAdornments: aText in: aStream 
 		thenDo: [ :eachAttribute | 
 			self
 				processAdornmentAttribute: eachAttribute
-				of: '' asRopedText 
+				of: (aText from: 1 to: 0) 
 				in: aStream
 				from: 0
 				to: 0
