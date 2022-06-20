@@ -1,11 +1,43 @@
 Class {
-	#name : #BrTextEditorSelecterExamples,
+	#name : #BrTextEditorParagraphBasedSelecterExamples,
 	#superclass : #BrTextEditorOperatorExamples,
-	#category : 'Brick-Editor-Examples-Operators'
+	#category : #'Brick-Editor-Examples-Operators'
 }
 
+{ #category : #'examples - word' }
+BrTextEditorParagraphBasedSelecterExamples >> editorFor: aText [
+	<return: #BrEditor>
+	| anEditor aRopedText |
+
+	aRopedText := aText asRopedText lineSpacing: self lineSpacing; paragraphMargin: self paragraphMargin; wordPadding: self wordPadding.
+
+	anEditor := BrEditor new.
+	anEditor editor beParagraphBased.
+	anEditor aptitude: BrEditorAptitude new.
+	anEditor padding: BlInsets empty.
+	anEditor fitContent.
+	anEditor text: aRopedText.
+	
+	BlDevCrossover on: anEditor.
+	
+	anEditor editor segmentBuilder
+		wordStencil: [ :aTBrTextEditorTextualPiece |
+			| aTextElement |
+			aTextElement := BrTextEditableWordPieceStencilBuilder new
+				segmentPiece: aTBrTextEditorTextualPiece;
+				asElement.
+			aTextElement measurer: self fixedMeasurer.
+			aTextElement measurer textOffset: aTBrTextEditorTextualPiece textStart.
+			aTextElement ].
+	
+	anEditor requestFocus.
+	anEditor forceLayout.
+
+	^ anEditor
+]
+
 { #category : #'examples - all' }
-BrTextEditorSelecterExamples >> select_all_in_empty [
+BrTextEditorParagraphBasedSelecterExamples >> select_all_in_empty [
 	<gtExample>
 	| anEditor |
 
@@ -20,7 +52,7 @@ BrTextEditorSelecterExamples >> select_all_in_empty [
 ]
 
 { #category : #'examples - all' }
-BrTextEditorSelecterExamples >> select_all_in_empty_with_curor [
+BrTextEditorParagraphBasedSelecterExamples >> select_all_in_empty_with_curor [
 	<gtExample>
 	| anEditor |
 
@@ -44,7 +76,7 @@ BrTextEditorSelecterExamples >> select_all_in_empty_with_curor [
 ]
 
 { #category : #'examples - all' }
-BrTextEditorSelecterExamples >> select_all_reduced [
+BrTextEditorParagraphBasedSelecterExamples >> select_all_reduced [
 	"There was a bug, that if a new text is smaller than the existing selection, then things can go wrong"
 	<gtExample>
 	| anEditor |
@@ -75,7 +107,7 @@ BrTextEditorSelecterExamples >> select_all_reduced [
 ]
 
 { #category : #'examples - from to' }
-BrTextEditorSelecterExamples >> select_from_0_to_5 [
+BrTextEditorParagraphBasedSelecterExamples >> select_from_0_to_5 [
 	<gtExample>
 	| anEditor |
 
@@ -92,7 +124,7 @@ BrTextEditorSelecterExamples >> select_from_0_to_5 [
 ]
 
 { #category : #'examples - from to' }
-BrTextEditorSelecterExamples >> select_from_0_to_5_in_steps [
+BrTextEditorParagraphBasedSelecterExamples >> select_from_0_to_5_in_steps [
 	<gtExample>
 	| anEditor |
 
@@ -117,47 +149,7 @@ BrTextEditorSelecterExamples >> select_from_0_to_5_in_steps [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
-	<gtExample>
-	| anEditor |
-
-	anEditor := self editorOnMultilineText.
-	anEditor editor moveCursorTo: 6.
-	
-	anEditor selecter
-		moveOneDown;
-		select.
-	
-	self 
-		assert: anEditor selection 
-		equals: (BlCompositeSelection new select: 6 to: 35).
-	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(35)).
-	
-	^ anEditor
-]
-
-{ #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneDown_at_6_thenUp [
-	<gtExample>
-	| anEditor |
-
-	anEditor := self select_moveOneDown_at_6.
-	
-	anEditor selecter
-		moveOneUp;
-		select.
-	
-	self 
-		assert: anEditor selection isEmpty.
-	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(6)).
-	
-	^ anEditor
-]
-
-{ #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneLeft_at_0 [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneLeft_at_0 [
 	<gtExample>
 	| anEditor |
 
@@ -175,7 +167,7 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_0 [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneLeft_at_4 [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneLeft_at_4 [
 	<gtExample>
 	| anEditor |
 
@@ -199,7 +191,7 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_4 [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneLeft_at_4_extendToNextWordEnd [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneLeft_at_4_extendToNextWordEnd [
 	<gtExample>
 	| anEditor |
 	anEditor := self select_moveOneLeft_at_4.
@@ -219,7 +211,7 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_4_extendToNextWordEnd [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneRight_at_6 [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneRight_at_6 [
 	<gtExample>
 	| anEditor |
 
@@ -243,7 +235,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6 [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd [
 	<gtExample>
 	| anEditor |
 
@@ -266,7 +258,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd_twice [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd_twice [
 	<gtExample>
 	| anEditor |
 	
@@ -288,7 +280,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd_twi
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordStart [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordStart [
 	<gtExample>
 	| anEditor |
 	
@@ -310,7 +302,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordSta
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordStart_twice [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordStart_twice [
 	<gtExample>
 	| anEditor |
 	
@@ -332,7 +324,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordSta
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneRight_at_End [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveOneRight_at_End [
 	<gtExample>
 	| anEditor |
 
@@ -350,47 +342,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_End [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneUp_at_35 [
-	<gtExample>
-	| anEditor |
-
-	anEditor := self editorOnMultilineText.
-	anEditor editor moveCursorTo: 35.
-	
-	anEditor selecter
-		moveOneUp;
-		select.
-	
-	self 
-		assert: anEditor selection 
-		equals: (BlCompositeSelection new select: 6 to: 35).
-	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(6)).
-	
-	^ anEditor
-]
-
-{ #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveOneUp_at_35_thenDown [
-	<gtExample>
-	| anEditor |
-
-	anEditor := self select_moveOneUp_at_35.
-	
-	anEditor selecter
-		moveOneDown;
-		select.
-	
-	self 
-		assert: anEditor selection  isEmpty.
-	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(35)).
-	
-	^ anEditor
-]
-
-{ #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveTwiceLeft_at_1 [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveTwiceLeft_at_1 [
 	<gtExample>
 	| anEditor |
 
@@ -418,7 +370,7 @@ BrTextEditorSelecterExamples >> select_moveTwiceLeft_at_1 [
 ]
 
 { #category : #'examples - move' }
-BrTextEditorSelecterExamples >> select_moveTwiceRight_at_End [
+BrTextEditorParagraphBasedSelecterExamples >> select_moveTwiceRight_at_End [
 	<gtExample>
 	| anEditor |
 
@@ -444,7 +396,7 @@ BrTextEditorSelecterExamples >> select_moveTwiceRight_at_End [
 ]
 
 { #category : #'examples - word' }
-BrTextEditorSelecterExamples >> select_word_at_0 [
+BrTextEditorParagraphBasedSelecterExamples >> select_word_at_0 [
 	<gtExample>
 	| anEditor |
 
@@ -462,7 +414,7 @@ BrTextEditorSelecterExamples >> select_word_at_0 [
 ]
 
 { #category : #'examples - word' }
-BrTextEditorSelecterExamples >> select_word_at_1 [
+BrTextEditorParagraphBasedSelecterExamples >> select_word_at_1 [
 	<gtExample>
 	| anEditor |
 
@@ -480,7 +432,7 @@ BrTextEditorSelecterExamples >> select_word_at_1 [
 ]
 
 { #category : #'examples - word' }
-BrTextEditorSelecterExamples >> select_word_at_2 [
+BrTextEditorParagraphBasedSelecterExamples >> select_word_at_2 [
 	<gtExample>
 	| anEditor |
 
@@ -498,7 +450,7 @@ BrTextEditorSelecterExamples >> select_word_at_2 [
 ]
 
 { #category : #'examples - word' }
-BrTextEditorSelecterExamples >> select_word_at_2_and_10 [
+BrTextEditorParagraphBasedSelecterExamples >> select_word_at_2_and_10 [
 	<gtExample>
 	| anEditor |
 
