@@ -9,12 +9,12 @@ Class {
 		'formatOptionsCollection',
 		'rangeInputField'
 	],
-	#category : 'Brick-File - UI'
+	#category : #'Brick-File - UI'
 }
 
 { #category : #accessing }
 BrSlideImageExport >> buildUI [
-	| alignedButton fileInputFieldLabel fileInputFieldContainer formatSection resolutionSection rangeSection imageDetailsContainer |
+	| alignedButton fileInputFieldContainer formatSection resolutionSection rangeSection imageDetailsContainer |
 	
 	formatOptionsCollection := {'JPEG'. 'PNG'} asOrderedCollection.
 	exportOptionsCollection := {'All'. 'Current Slide'. 'Range'} asOrderedCollection.
@@ -153,7 +153,7 @@ BrSlideImageExport >> createLabelWithText: aString [
 
 { #category : #accessing }
 BrSlideImageExport >> createRangeSection [
-	| rangeLabel rangeDropdown |
+	| rangeLabel |
 	rangeLabel := self createLabelWithText: 'Export: '.
 	"rangeInputField := self createDropdownFieldFor: exportOptionsCollection."
 	rangeInputField := self createEditableField text: 'All' asString.

@@ -41,7 +41,7 @@ Class {
 		'okButton',
 		'okAction'
 	],
-	#category : 'Brick-File - UI'
+	#category : #'Brick-File - UI'
 }
 
 { #category : #initialization }
@@ -257,7 +257,6 @@ BrFileSelector >> folder: aFileReference [
 
 { #category : #initialization }
 BrFileSelector >> initialize [
-	| alignedButton |
 
 	super initialize.
 	fileFilterBlock := [ :entry | true ].

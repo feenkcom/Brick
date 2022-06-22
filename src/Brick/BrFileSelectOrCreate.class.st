@@ -4,12 +4,12 @@ Class {
 	#instVars : [
 		'fileInputField'
 	],
-	#category : 'Brick-File - UI'
+	#category : #'Brick-File - UI'
 }
 
 { #category : #accessing }
 BrFileSelectOrCreate >> buildUI [
-	| alignedButton fileInputFieldLabel fileInputFieldContainer|
+	| alignedButton fileInputFieldContainer|
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	table
