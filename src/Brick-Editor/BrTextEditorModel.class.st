@@ -29,28 +29,8 @@ Class {
 		'isFocused',
 		'shouldStyleWhenTextModified'
 	],
-	#classInstVars : [
-		'isDebug'
-	],
 	#category : #'Brick-Editor-Model'
 }
-
-{ #category : #cleanup }
-BrTextEditorModel class >> cleanUp [
-	super cleanUp.
-	
-	isDebug := nil
-]
-
-{ #category : #accessing }
-BrTextEditorModel class >> isDebug [
-	^ isDebug ifNil: [ false ]
-]
-
-{ #category : #accessing }
-BrTextEditorModel class >> isDebug: aBoolean [
-	isDebug := aBoolean
-]
 
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
@@ -186,58 +166,8 @@ BrTextEditorModel >> cutSelected [
 ]
 
 { #category : #initialization }
-BrTextEditorModel >> defaultCursors [
-	<return: #BrTextEditorCursor>
-
-	^ BrTextEditorMultipleCursor new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultSegmentBuilder [
-	^ BrTextEditorLineSegmentBuilder new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultSegmentCollector [
-	^ BrTextEditorSegmentCollector new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultSelection [
-	<return: #BlSelection>
-
-	^ BlCompositeSelection new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultSelectionRecorder [
-	<return: #BrTextEditorSelectionRecorder>
-
-	^ BrTextEditorSelectionOverwriteRecorder new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultStyler [
-	^ BlTextNullStyler new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultStylerEventHandler [
-	^ BlEventHandler
-		on: BrTextStyledEvent
-		do: [ :anEvent | self onTextStyled: anEvent ]
-]
-
-{ #category : #initialization }
 BrTextEditorModel >> defaultStylerStrategy [
 	^ BrTextStylerAsyncStrategy new
-]
-
-{ #category : #initialization }
-BrTextEditorModel >> defaultText [
-	<return: #BlText>
-	
-	^ '' asRopedText
 ]
 
 { #category : #'private - text' }
@@ -274,11 +204,6 @@ BrTextEditorModel >> deselecter [
 	<return: #BrTextEditorDeselecter>
 
 	^ BrTextEditorDeselecter new editor: self
-]
-
-{ #category : #'text - styling' }
-BrTextEditorModel >> disableStyleTextWhenModified [
-	shouldStyleWhenTextModified := false
 ]
 
 { #category : #'text - styling' }
@@ -389,32 +314,34 @@ BrTextEditorModel >> history: aBrTextEditorHistory [
 { #category : #initialization }
 BrTextEditorModel >> initialize [
 	super initialize.
-	
+
 	mode := BrTextEditorNullMode new.
-	
+
 	attachedElements := Set new.
-	
+
 	filter := BrTextEditorNoInputFilter new.
-	cursors := self defaultCursors.
-	selection := self defaultSelection.
-	selectionRecorder := self defaultSelectionRecorder.
-	
-	text := self defaultText.
+	cursors := BrTextEditorMultipleCursor new.
+	selection := BlCompositeSelection new.
+	selectionRecorder := BrTextEditorSelectionOverwriteRecorder new.
+
+	text := '' asRopedText.
 	self initializeText: text.
-	
-	segmentCollector := self defaultSegmentCollector.
+
+	segmentCollector := BrTextEditorSegmentCollector new.
 	segmentCollector editor: self.
 	segmentCollector text: text.
-	segmentBuilder := self defaultSegmentBuilder.
+	segmentBuilder := BrTextEditorLineSegmentBuilder new.
 
-	styler := self defaultStyler.
-	stylerEventHandler := self defaultStylerEventHandler.
+	styler := BlTextNullStyler new.
+	stylerEventHandler := BlEventHandler
+			on: BrTextStyledEvent
+			do: [ :anEvent | self onTextStyled: anEvent ].
 	self addEventHandler: stylerEventHandler.
 	self useDefaultStylerStrategy.
-	
+
 	shortcuts := BrTextEditorShortcuts new.
 	history := BrTextEditorHistory new.
-	
+
 	isFocused := false.
 	shouldStyleWhenTextModified := true.
 
@@ -978,27 +905,20 @@ BrTextEditorModel >> restoreState: aBrTextEditorMemento [
 { #category : #accessing }
 BrTextEditorModel >> restoreText: aBrText [
 	| oldText |
-	"before changing the text we must unsubscribe from existing one"	
+	"before changing the text we must unsubscribe from existing one"
 	oldText := text.
 	text unsubscribe: self.
 
 	text := aBrText.
-	self initializeText: text.
-
-	"Replacing text instance means that we can not guarantee structural integrity
+	self initializeText: text.	"Replacing text instance means that we can not guarantee structural integrity
 	of existing cache and have to rebuild it invalidating the whole underlying model structure"
-	segmentCollector := self defaultSegmentCollector.
+	segmentCollector := BrTextEditorSegmentCollector new.
 	segmentCollector editor: self.
 	segmentCollector text: text.
 
-	self onTextReplaced: oldText.
-
-	"notify UI about structural update"
-	self notifyChanged.
-
-	"text changed, we should style it"
-	shouldStyleWhenTextModified
-		ifTrue: [ self styleText ]
+	self onTextReplaced: oldText.	"notify UI about structural update"
+	self notifyChanged.	"text changed, we should style it"
+	shouldStyleWhenTextModified ifTrue: [ self styleText ]
 ]
 
 { #category : #'api - save state' }
@@ -1030,11 +950,6 @@ BrTextEditorModel >> segmentBuilder: aTextSegmentBuilder [
 	
 	segmentBuilder := aTextSegmentBuilder.
 	self notifyChanged
-]
-
-{ #category : #accessing }
-BrTextEditorModel >> segmentBuilderDo: aBlock [
-	aBlock value: segmentBuilder
 ]
 
 { #category : #accessing }

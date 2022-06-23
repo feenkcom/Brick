@@ -9,10 +9,10 @@ Class {
 { #category : #'examples - embedded' }
 BrEmbeddedEditorExamples >> editorWithEmbeddedEditor [
 	<gtExample>
-
-	^ self newEditor
-		text: self textWithEmbeddedEditor;
-		segmentBuilderDo: [ :aSegmentBuilder | self makeFixedMeasurement: aSegmentBuilder ]
+	| editor |
+	editor := self newEditor text: self textWithEmbeddedEditor.
+	self makeFixedMeasurement: editor segmentBuilder.
+	^ editor
 ]
 
 { #category : #'examples - embedded' }
