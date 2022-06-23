@@ -33,7 +33,7 @@ Class {
 		'breadcrumb',
 		'fileFilterBlock'
 	],
-	#category : 'Brick-File - UI'
+	#category : #'Brick-File - UI'
 }
 
 { #category : #private }
@@ -158,7 +158,6 @@ BrFileBrowser >> folder: aFileReference [
 
 { #category : #initialization }
 BrFileBrowser >> initialize [
-	| alignedButton |
 
 	super initialize.
 

@@ -331,7 +331,7 @@ BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 
 	"Find a text index of the start of the previous word before a given text index"
 
-	| textIterator newPosition aText test_variable_for_hyphens |
+	| textIterator newPosition aText |
 	newPosition := aTextIndex.
 	aText := self text.
 	textIterator := aText iterator.
