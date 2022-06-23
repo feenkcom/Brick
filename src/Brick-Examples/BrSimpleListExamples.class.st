@@ -21,7 +21,7 @@ BrSimpleListExamples >> allClasses [
 { #category : #'examples - horizontal list' }
 BrSimpleListExamples >> horizontalAllClasses [
 	<gtExample>
-	| aList aResult |
+	| aList |
 	aList := self allClasses.
 	aList beHorizontal.
 	

@@ -85,6 +85,7 @@ BrTextEditorOperatorExamples >> editorOnMultilineText [
 	
 	anEditorElement := self editorFor: self multilineText.
 	anEditor := anEditorElement editor.
+	anEditor beLineBased.
 	
 	self assert: anEditor cursors isEmpty.
 	self assert: anEditor selection isEmpty.

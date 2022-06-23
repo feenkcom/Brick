@@ -3,7 +3,7 @@ I add utility methods related to fixed text measurer
 "
 Trait {
 	#name : #TBrTextEditorFixedMeasurerExamples,
-	#category : 'Brick-Editor-Examples'
+	#category : #'Brick-Editor-Examples'
 }
 
 { #category : #'private - font metrics' }
@@ -24,6 +24,7 @@ TBrTextEditorFixedMeasurerExamples >> editorFor: aText [
 	aRopedText := aText asRopedText lineSpacing: self lineSpacing; paragraphMargin: self paragraphMargin; wordPadding: self wordPadding.
 
 	anEditor := BrEditor new.
+	anEditor editor beLineBased.
 	anEditor aptitude: BrEditorAptitude new.
 	anEditor padding: BlInsets empty.
 	anEditor fitContent.
