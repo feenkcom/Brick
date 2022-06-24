@@ -15,6 +15,5 @@ BrTextWordPieceHideCursorHandler >> handleEvent: anEvent [
 	aTextElement := anEvent currentTarget.
 
 	(aTextElement hasCursorAt: anEvent cursorPosition) ifFalse: [ ^ self ].
-
 	aCursorElement := aTextElement removeCursorAt: anEvent cursorPosition
 ]
