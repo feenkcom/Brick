@@ -1,10 +1,6 @@
 Class {
 	#name : #BrTextEditorParagraphSegmentHolder,
 	#superclass : #BrTextEditorSegmentHolder,
-	#instVars : [
-		'segment',
-		'pieceElements'
-	],
 	#classInstVars : [
 		'defaultSegmentLayoutBlock'
 	],
@@ -287,77 +283,15 @@ BrTextEditorParagraphSegmentHolder >> selectionIn: aTextEditor [
 ]
 
 { #category : #'private - segment' }
-BrTextEditorParagraphSegmentHolder >> updateSegment [
-	| newPieceElements newPieceMap hasCursor hasSelection |
+BrTextEditorParagraphSegmentHolder >> updateCursorPresent: hasCursor selectionPresent: hasSelection [
+	hasCursor
+		ifTrue: [ BlFrameTelemetry timeSync: [ 'Set cursor' ] during: [ self onCursorChanged ].
+			hasSelection
+				ifTrue: [ BlFrameTelemetry
+						timeSync: [ 'Set selection' ]
+						during: [ self onSelectionChanged ] ] ].
 
-	hasSelection := self hasSelection.
-	hasCursor := self hasCursor.
-
-	segment updateSegmentProperties.
-	
-	newPieceMap := self newPiecesMap.
-	newPieceElements := OrderedCollection new.
-	
-	BlFrameTelemetry
-		timeSync: [ 'Update piece elements' ]
-		during: [
-			| thePieces |
-			BlFrameTelemetry
-				timeSync: [ 'Compute pieces' ]
-				during: [ thePieces := segment pieces ].
-			
-			thePieces do: [ :eachSegmentPiece | 
-				| thePieceElements |
-				
-				thePieceElements := pieceElements
-					at: eachSegmentPiece
-					pieceAndElementsDo: [ :eachPiece :theSegmentElements |
-						
-						theSegmentElements do: [ :eachSegmentElement |
-							BlFrameTelemetry
-								timeSync: [ 'Update text of `{1}`' format: { eachPiece } ]
-								during: [ eachPiece updateText: eachSegmentElement of: segment in: self infiniteElement ] ].
-						theSegmentElements ]
-					ifAbsent: [ 
-							BlFrameTelemetry
-								timeSync: [ 'Create element for `{1}`' format: { eachSegmentPiece } ]
-								during: [ (eachSegmentPiece createElement: self infiniteElement) asOrderedCollection ] ].
-			
-				newPieceElements addAll: thePieceElements.
-				newPieceMap atPiece: eachSegmentPiece putElements: thePieceElements ] ].
-
-	pieceElements := newPieceMap.
-
-	BlFrameTelemetry
-		timeSync: [ 'Remove children' ]
-		during: [ itemElement removeChildren ].
-
-	BlFrameTelemetry
-		timeSync: [ 'Add piece elements' ]
-		during: [ itemElement addChildren: newPieceElements ].
-		
-	(hasCursor or: [ hasSelection ])
-		ifTrue: [
-			BlFrameTelemetry
-				timeSync: [ 'Set cursor, selection' ]
-				during: [
-						hasCursor
-							ifTrue: [
-								BlFrameTelemetry
-									timeSync: [ 'Set cursor' ]
-									during: [ self onCursorChanged ].
-						
-						hasSelection
-							ifTrue: [
-								BlFrameTelemetry
-									timeSync: [ 'Set selection' ]
-									during: [ self onSelectionChanged ] ] ] ] ].
-	
 	BlFrameTelemetry
 		timeSync: [ 'Set cursor' ]
-		during: [ self onFocusChanged: self infiniteElement isFocused ].
-	
-	itemElement
-		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
-		padding: segment paragraphMargin
+		during: [ self onFocusChanged: self infiniteElement isFocused ]
 ]
