@@ -215,11 +215,13 @@ BrTextEditorLineSegmentHolder >> onFocusChanged: aBoolean [
 
 { #category : #updating }
 BrTextEditorLineSegmentHolder >> onRecycled [
-
 	itemElement removeChildren.
-	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement | aPiece onRecycled: aPieceElement in: self infiniteElement ].
+	pieceElements
+		piecesAndTheirElementsDo: [ :aPiece :aPieceElement | 
+			self infiniteElement editor segmentBuilder wordStencilBuilder
+				recycle: aPieceElement ].
 	pieceElements := nil.
-	segment := nil.
+	segment := nil
 ]
 
 { #category : #updating }

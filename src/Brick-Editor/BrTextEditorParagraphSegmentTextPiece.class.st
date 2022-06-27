@@ -4,42 +4,13 @@ Class {
 	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
-{ #category : #comparing }
-BrTextEditorParagraphSegmentTextPiece >> = anotherObject [
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
-		ifFalse: [ ^ false ].
-	
-	^ anotherObject text = self text
-]
-
 { #category : #'instance creation' }
 BrTextEditorParagraphSegmentTextPiece >> createElement: anEditorElement [
 	<return: #BlElement>
-	| anElement |
-
-	anElement := (anEditorElement editor segmentBuilder wordStencilBuilder
-		wordPadding: self wordPadding;
-		wordMargin: self wordMargin;
-		segmentPiece: self;
-		shouldUsePool: false) asElement.
-		
-	anElement userData removeKey: #brickEditorAdornment ifAbsent: [  ].
-	^ anElement
-]
-
-{ #category : #comparing }
-BrTextEditorParagraphSegmentTextPiece >> hash [
-	^ self class hash bitXor: self text hash
+	^ self createTextElement: anEditorElement
 ]
 
 { #category : #testing }
 BrTextEditorParagraphSegmentTextPiece >> isText [
 	^ true
-]
-
-{ #category : #'instance creation' }
-BrTextEditorParagraphSegmentTextPiece >> onRecycled: aPieceElement in: anEditorElement [
-	anEditorElement editor segmentBuilder wordStencilBuilder recycle: aPieceElement
 ]
