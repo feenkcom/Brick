@@ -1,11 +1,11 @@
 Class {
-	#name : #BrTextEditorNavigatorExamples,
+	#name : #BrTextEditorLineBasedNavigatorExamples,
 	#superclass : #BrTextEditorOperatorExamples,
 	#category : #'Brick-Editor-Examples-Operators'
 }
 
 { #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
+BrTextEditorLineBasedNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
 
 	<gtExample>
 	| anEditor |
@@ -29,7 +29,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
 ]
 
 { #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_twice_in_something [
+BrTextEditorLineBasedNavigatorExamples >> cursor_addAt0_moveNextWord_twice_in_something [
 	<gtExample>
 	| anEditor |
 	anEditor := self cursor_addAt0_moveNextWord_in_something.
@@ -46,7 +46,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_twice_in_something [
 ]
 
 { #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
+BrTextEditorLineBasedNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
 
 	<gtExample>
 	| anEditor |
@@ -70,7 +70,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
 ]
 
 { #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_something [
+BrTextEditorLineBasedNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_something [
 
 	<gtExample>
 	| anEditor |
@@ -87,7 +87,7 @@ BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_somethi
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_0_and_0_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_0_and_0_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -120,7 +120,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_0_and_0_in_empty [
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_0_and_1_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_0_and_1_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -156,20 +156,14 @@ BrTextEditorNavigatorExamples >> cursor_add_at_0_and_1_in_empty [
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_0_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_0_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents addedCursorElements removedCursorElements |
-	
+	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self editorOnMultilineText.
-	
+
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
-	addedCursorElements := OrderedCollection new.
-	removedCursorElements := OrderedCollection new.
-	
-	self subscribe: BrTextEditorCursorElementAddedEvent do: [ :anEvent | addedCursorElements add: anEvent cursorElement ] for: anEditor.
-	self subscribe: BrTextEditorCursorElementRemovedEvent do: [ :anEvent | removedCursorElements add: anEvent cursorElement ] for: anEditor.
 
 	anEditor navigator
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
@@ -178,30 +172,26 @@ BrTextEditorNavigatorExamples >> cursor_add_at_0_in_empty [
 		addAt: 0;
 		apply;
 		unsubscribe.
-		
+
 	anEditor forceLayout.
-		
-	self unsubscribe: BrTextEditorCursorElementAddedEvent from: anEditor.
-	self unsubscribe: BrTextEditorCursorElementRemovedEvent from: anEditor.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 0}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 0}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 0.
-	self assert: removedCursorElements isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_1_and_0_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_1_and_0_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 
@@ -237,7 +227,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_and_0_in_empty [
 ]
 
 { #category : #'examples - performance' }
-BrTextEditorNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 	<gtExample>
 	| anEditor thePreviousSegments theNewSegments thePreviousTextPieces theNewTextPieces |
 	
@@ -272,7 +262,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_1_in_cursors_at_0 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_1_in_cursors_at_0 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -307,20 +297,14 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_in_cursors_at_0 [
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_1_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_1_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents addedCursorElements removedCursorElements |
-	
+	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self editorOnMultilineText.
 
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
-	addedCursorElements := OrderedCollection new.
-	removedCursorElements := OrderedCollection new.
-
-	self subscribe: BrTextEditorCursorElementAddedEvent do: [ :anEvent | addedCursorElements add: anEvent cursorElement ] for: anEditor.
-	self subscribe: BrTextEditorCursorElementRemovedEvent do: [ :anEvent | removedCursorElements add: anEvent cursorElement ] for: anEditor.
 
 	anEditor navigator
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
@@ -332,40 +316,30 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_in_empty [
 
 	anEditor forceLayout.
 
-	self unsubscribe: BrTextEditorCursorElementAddedEvent from: anEditor.
-	self unsubscribe: BrTextEditorCursorElementRemovedEvent from: anEditor.
-
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 1 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 1}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 1.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 1}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 1.
-	self assert: removedCursorElements isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_2_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_2_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents addedCursorElements removedCursorElements |
-	
+	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self editorOnMultilineText.
 
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
-	addedCursorElements := OrderedCollection new.
-	removedCursorElements := OrderedCollection new.
-
-	self subscribe: BrTextEditorCursorElementAddedEvent do: [ :anEvent | addedCursorElements add: anEvent cursorElement ] for: anEditor.
-	self subscribe: BrTextEditorCursorElementRemovedEvent do: [ :anEvent | removedCursorElements add: anEvent cursorElement ] for: anEditor.
 
 	anEditor navigator
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
@@ -377,40 +351,30 @@ BrTextEditorNavigatorExamples >> cursor_add_at_2_in_empty [
 
 	anEditor forceLayout.
 
-	self unsubscribe: BrTextEditorCursorElementAddedEvent from: anEditor.
-	self unsubscribe: BrTextEditorCursorElementRemovedEvent from: anEditor.
-
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 2 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 2}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 2.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 2}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 1.
-	self assert: removedCursorElements isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_68_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_68_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents addedCursorElements removedCursorElements |
-	
+	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self editorOnMultilineText.
-	
+
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
-	addedCursorElements := OrderedCollection new.
-	removedCursorElements := OrderedCollection new.
-	
-	self subscribe: BrTextEditorCursorElementAddedEvent do: [ :anEvent | addedCursorElements add: anEvent cursorElement ] for: anEditor.
-	self subscribe: BrTextEditorCursorElementRemovedEvent do: [ :anEvent | removedCursorElements add: anEvent cursorElement ] for: anEditor.
 
 	anEditor navigator
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
@@ -419,30 +383,26 @@ BrTextEditorNavigatorExamples >> cursor_add_at_68_in_empty [
 		addAt: 68;
 		apply;
 		unsubscribe.
-		
+
 	anEditor forceLayout.
-		
-	self unsubscribe: BrTextEditorCursorElementAddedEvent from: anEditor.
-	self unsubscribe: BrTextEditorCursorElementRemovedEvent from: anEditor.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 68 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 68}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 68.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 68}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 0.
-	self assert: removedCursorElements isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
-BrTextEditorNavigatorExamples >> cursor_add_at_8_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_add_at_8_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -477,7 +437,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_8_in_empty [
 ]
 
 { #category : #'examples - no duplication' }
-BrTextEditorNavigatorExamples >> cursor_is_not_duplicated [
+BrTextEditorLineBasedNavigatorExamples >> cursor_is_not_duplicated [
 	<gtExample>
 	| anEditor thePiecesWithCursor |
 	
@@ -515,7 +475,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated [
 ]
 
 { #category : #'examples - no duplication' }
-BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk [
+BrTextEditorLineBasedNavigatorExamples >> cursor_is_not_duplicated_bulk [
 	<gtExample>
 	| anEditor thePiecesWithCursor |
 	
@@ -548,7 +508,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk [
 ]
 
 { #category : #'examples - no duplication' }
-BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk_full [
+BrTextEditorLineBasedNavigatorExamples >> cursor_is_not_duplicated_bulk_full [
 	<gtExample>
 	| anEditor thePiecesWithCursor |
 	
@@ -576,7 +536,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_duplicated_bulk_full [
 ]
 
 { #category : #accessing }
-BrTextEditorNavigatorExamples >> cursor_is_not_on_last_line [
+BrTextEditorLineBasedNavigatorExamples >> cursor_is_not_on_last_line [
 	<gtExample>
 	| anEditor aNavigator |
 	anEditor := self editorOnMultilineText.
@@ -589,7 +549,7 @@ BrTextEditorNavigatorExamples >> cursor_is_not_on_last_line [
 ]
 
 { #category : #accessing }
-BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_at_the_end [
+BrTextEditorLineBasedNavigatorExamples >> cursor_is_on_last_line_when_at_the_end [
 	<gtExample>
 	| anEditor aNavigator |
 	anEditor := self editorOnMultilineText.
@@ -602,7 +562,7 @@ BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_at_the_end [
 ]
 
 { #category : #accessing }
-BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_before_the_first_character [
+BrTextEditorLineBasedNavigatorExamples >> cursor_is_on_last_line_when_before_the_first_character [
 	<gtExample>
 	| anEditor aNavigator |
 	anEditor := self editorOnMultilineText.
@@ -615,7 +575,7 @@ BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_before_the_first_ch
 ]
 
 { #category : #'examples - crlf handling' }
-BrTextEditorNavigatorExamples >> cursor_moveAcrossCRLF [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveAcrossCRLF [
 	<gtExample>
 	
 	| anEditor |
@@ -635,7 +595,7 @@ BrTextEditorNavigatorExamples >> cursor_moveAcrossCRLF [
 ]
 
 { #category : #'examples - move down' }
-BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents theReachBoudnaryEvents |
 	
@@ -672,7 +632,7 @@ BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_0 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_0 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -705,7 +665,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_0 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor after the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -741,7 +701,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_1 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_201 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_201 [
 	<gtExample>
 	<label: 'Cursor before the last character of the whole text should not move'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -777,7 +737,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_201 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_202 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_202 [
 	<gtExample>
 	<label: 'Cursor after the last character of the whole text should not move'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -810,7 +770,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_202 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_27 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_27 [
 	<gtExample>
 	<label: 'Cursor before the last character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -846,7 +806,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_27 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_28 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_28 [
 	<gtExample>
 	<label: 'Cursor after the last character of the line should not move'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -879,7 +839,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_28 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineEnd_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -907,7 +867,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_empty [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_0 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_0 [
 	<gtExample>
 	<label: 'Cursor before the first character should not be moved'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -937,7 +897,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_0 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor after the first character moves before the start of the text'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -970,7 +930,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_1 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_27 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_27 [
 	<gtExample>
 	<label: 'Cursor before the last character of the line should move to the start'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1006,7 +966,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_27 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_28 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_28 [
 	<gtExample>
 	<label: 'Cursor after the last character of the line should move to to the start'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1042,7 +1002,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_28 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_29 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_29 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should not move'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1075,7 +1035,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_29 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_30 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_30 [
 	<gtExample>
 	<label: 'Cursor after the first character of the line should move to the start of that line'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1111,7 +1071,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_30 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_40 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_40 [
 	<gtExample>
 	<label: 'Cursor before the last character of the line should move to the start of that line'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1147,7 +1107,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_40 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_41 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_41 [
 	<gtExample>
 	<label: 'Cursor after the last character of the line should move to the start of that line'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1183,7 +1143,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_41 [
 ]
 
 { #category : #'examples - move to line start' }
-BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToLineStart_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1211,7 +1171,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_empty [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1244,7 +1204,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1277,7 +1237,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1310,7 +1270,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_1 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_2 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_2 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1343,7 +1303,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_2 [
 ]
 
 { #category : #'examples - move to line end' }
-BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_8 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_8 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1379,7 +1339,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_8 [
 ]
 
 { #category : #'examples - move to screen' }
-BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_half_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToScreen_1_left_half_in_empty [
 	<gtExample>
 	<label: 'Click on the left half of the first character'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1410,7 +1370,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_half_in_empty [
 ]
 
 { #category : #'examples - move to screen' }
-BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToScreen_1_left_in_empty [
 	<gtExample>
 	<label: 'Click on a whitespace to the left from the first character'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1441,7 +1401,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_in_empty [
 ]
 
 { #category : #'examples - move to screen' }
-BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_middle_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToScreen_1_middle_in_empty [
 	<gtExample>
 	<label: 'Click right in the middle of the first character'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1472,7 +1432,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_middle_in_empty [
 ]
 
 { #category : #'examples - move to screen' }
-BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
 	<gtExample>
 	<label: 'Click on the right half of the first character'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1503,7 +1463,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
 ]
 
 { #category : #'examples - move to screen' }
-BrTextEditorNavigatorExamples >> cursor_moveToScreen_41_right_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveToScreen_41_right_in_empty [
 	<gtExample>
 	<label: 'Click on the right half of the 41th character'>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
@@ -1534,7 +1494,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_41_right_in_empty [
 ]
 
 { #category : #'examples - move to' }
-BrTextEditorNavigatorExamples >> cursor_moveTo_0_in_cursors_at_0_and_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveTo_0_in_cursors_at_0_and_1 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1567,7 +1527,7 @@ BrTextEditorNavigatorExamples >> cursor_moveTo_0_in_cursors_at_0_and_1 [
 ]
 
 { #category : #'examples - move to' }
-BrTextEditorNavigatorExamples >> cursor_moveTo_0_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveTo_0_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1599,7 +1559,7 @@ BrTextEditorNavigatorExamples >> cursor_moveTo_0_in_empty [
 ]
 
 { #category : #'examples - move to' }
-BrTextEditorNavigatorExamples >> cursor_moveTo_190_in_empty [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveTo_190_in_empty [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1631,7 +1591,7 @@ BrTextEditorNavigatorExamples >> cursor_moveTo_190_in_empty [
 ]
 
 { #category : #'examples - move to' }
-BrTextEditorNavigatorExamples >> cursor_moveTo_1_in_cursors_at_0 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveTo_1_in_cursors_at_0 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1663,7 +1623,7 @@ BrTextEditorNavigatorExamples >> cursor_moveTo_1_in_cursors_at_0 [
 ]
 
 { #category : #'examples - move to' }
-BrTextEditorNavigatorExamples >> cursor_moveTo_2_in_cursors_at_0_and_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveTo_2_in_cursors_at_0_and_1 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 
@@ -1698,20 +1658,14 @@ BrTextEditorNavigatorExamples >> cursor_moveTo_2_in_cursors_at_0_and_1 [
 ]
 
 { #category : #'examples - move to' }
-BrTextEditorNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents addedCursorElements removedCursorElements |
-	
+	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self cursor_add_at_68_in_empty.
-	
+
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
-	addedCursorElements := OrderedCollection new.
-	removedCursorElements := OrderedCollection new.
-	
-	self subscribe: BrTextEditorCursorElementAddedEvent do: [ :anEvent | addedCursorElements add: anEvent cursorElement ] for: anEditor.
-	self subscribe: BrTextEditorCursorElementRemovedEvent do: [ :anEvent | removedCursorElements add: anEvent cursorElement ] for: anEditor.
 
 	anEditor navigator
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
@@ -1720,32 +1674,28 @@ BrTextEditorNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68 [
 		moveTo: 67;
 		apply;
 		unsubscribe.
-	
+
 	anEditor forceLayout.
 
-	self unsubscribe: BrTextEditorCursorElementAddedEvent from: anEditor.
-	self unsubscribe: BrTextEditorCursorElementRemovedEvent from: anEditor.
-	
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 67 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 67}.
+
 	self assert: theAddedEvents isEmpty.
 	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 67).
+	self
+		assert: theMovedEvents first cursor
+		equals: (BrTextEditorSingleCursor new position: 67).
 	self assert: theMovedEvents first oldIndex equals: 68.
 	self assert: theMovedEvents first newIndex equals: 67.
 	self assert: theRemovedEvents isEmpty.
-	
-	self assert: addedCursorElements size equals: 1.
-	self assert: addedCursorElements first textPosition equals: 6.
-	self assert: removedCursorElements size equals: 1.
-	self assert: removedCursorElements first textPosition equals: 0.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - move up' }
-BrTextEditorNavigatorExamples >> cursor_moveUp_in_cursors_at_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_moveUp_in_cursors_at_1 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents theReachBoudnaryEvents |
 	
@@ -1782,7 +1732,7 @@ BrTextEditorNavigatorExamples >> cursor_moveUp_in_cursors_at_1 [
 ]
 
 { #category : #'examples - performance' }
-BrTextEditorNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor [
+BrTextEditorLineBasedNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor [
 	<gtExample>
 	| anEditor thePreviousSegments theNewSegments thePreviousTextPieces theNewTextPieces |
 
@@ -1817,7 +1767,7 @@ BrTextEditorNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor
 ]
 
 { #category : #'examples - remove' }
-BrTextEditorNavigatorExamples >> cursor_removeAll_in_cursors_at_0_and_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_removeAll_in_cursors_at_0_and_1 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1849,7 +1799,7 @@ BrTextEditorNavigatorExamples >> cursor_removeAll_in_cursors_at_0_and_1 [
 ]
 
 { #category : #'examples - remove' }
-BrTextEditorNavigatorExamples >> cursor_remove_at_0_in_cursors_at_0 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_remove_at_0_in_cursors_at_0 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1880,7 +1830,7 @@ BrTextEditorNavigatorExamples >> cursor_remove_at_0_in_cursors_at_0 [
 ]
 
 { #category : #'examples - remove' }
-BrTextEditorNavigatorExamples >> cursor_remove_at_1_and_0_in_cursors_at_0_and_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_remove_at_1_and_0_in_cursors_at_0_and_1 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1913,7 +1863,7 @@ BrTextEditorNavigatorExamples >> cursor_remove_at_1_and_0_in_cursors_at_0_and_1 
 ]
 
 { #category : #'examples - remove' }
-BrTextEditorNavigatorExamples >> cursor_remove_at_1_in_cursors_at_0_and_1 [
+BrTextEditorLineBasedNavigatorExamples >> cursor_remove_at_1_in_cursors_at_0_and_1 [
 	<gtExample>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	
@@ -1941,5 +1891,37 @@ BrTextEditorNavigatorExamples >> cursor_remove_at_1_in_cursors_at_0_and_1 [
 		BrTextEditorSingleCursor new position: 1.
 	}.
 	
+	^ anEditor
+]
+
+{ #category : #accessing }
+BrTextEditorLineBasedNavigatorExamples >> editorFor: aText [
+	<return: #BrEditor>
+	| anEditor aRopedText |
+
+	aRopedText := aText asRopedText lineSpacing: self lineSpacing; paragraphMargin: self paragraphMargin; wordPadding: self wordPadding.
+
+	anEditor := BrEditor new.
+	anEditor editor beLineBased.
+	anEditor aptitude: BrEditorAptitude new.
+	anEditor padding: BlInsets empty.
+	anEditor fitContent.
+	anEditor text: aRopedText.
+	
+	BlDevCrossover on: anEditor.
+	
+	anEditor editor segmentBuilder
+		wordStencil: [ :aTBrTextEditorTextualPiece |
+			| aTextElement |
+			aTextElement := BrTextEditableWordPieceStencilBuilder new
+				segmentPiece: aTBrTextEditorTextualPiece;
+				asElement.
+			aTextElement measurer: self fixedMeasurer.
+			aTextElement measurer textOffset: aTBrTextEditorTextualPiece textStart.
+			aTextElement ].
+	
+	anEditor requestFocus.
+	anEditor forceLayout.
+
 	^ anEditor
 ]

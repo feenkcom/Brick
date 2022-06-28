@@ -4,7 +4,11 @@ I am a text segment holder (===BrTextEditorSegment===) designed to be used by ==
 Class {
 	#name : #BrTextEditorSegmentHolder,
 	#superclass : #BrEditorSegmentHolder,
-	#category : 'Brick-Editor-Model - Segment-Text'
+	#instVars : [
+		'segment',
+		'pieceElements'
+	],
+	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #updating }
@@ -37,4 +41,75 @@ BrTextEditorSegmentHolder >> onTextChanged [
 	Segment holder should update text elements accordingly"
 	
 	self subclassResponsibility
+]
+
+{ #category : #'private - segment' }
+BrTextEditorSegmentHolder >> updateConstraints [
+	itemElement
+		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
+		padding: segment paragraphMargin
+]
+
+{ #category : #'private - segment' }
+BrTextEditorSegmentHolder >> updateCursorPresent: hasCursor selectionPresent: hasSelection [ 
+	self subclassResponsibility
+]
+
+{ #category : #'private - segment' }
+BrTextEditorSegmentHolder >> updatePieceElements [
+	| newPieceElements newPieceMap |
+	newPieceMap := self newPiecesMap.
+	newPieceElements := OrderedCollection new.
+
+	BlFrameTelemetry
+		timeSync: [ 'Update piece elements' ]
+		during: [ | thePieces |
+			BlFrameTelemetry
+				timeSync: [ 'Compute pieces' ]
+				during: [ thePieces := segment pieces ].
+
+			thePieces
+				do: [ :eachSegmentPiece | 
+					| thePieceElements |
+					thePieceElements := pieceElements
+							at: eachSegmentPiece
+							pieceAndElementsDo: [  "We should transfer the knowledge of the cursors to the new segment piece,
+						otherwise cursors may not be removed from the corresponding elements
+						https://github.com/feenkcom/gtoolkit/issues/892":eachPiece :theSegmentElements | 
+								eachSegmentPiece currentCursors: eachPiece currentCursors.
+
+								theSegmentElements
+									do: [ :eachSegmentElement | 
+										BlFrameTelemetry
+											timeSync: [ 'Update text of `{1}`' format: {eachPiece} ]
+											during: [ eachPiece
+													updateText: eachSegmentElement
+													of: segment
+													in: self infiniteElement ] ].
+								theSegmentElements ]
+							ifAbsent: [ BlFrameTelemetry
+									timeSync: [ 'Create element for `{1}`' format: {eachSegmentPiece} ]
+									during: [ (eachSegmentPiece createElement: self infiniteElement) asOrderedCollection ] ].
+
+					newPieceElements addAll: thePieceElements.
+					newPieceMap atPiece: eachSegmentPiece putElements: thePieceElements ] ].
+
+	pieceElements := newPieceMap.
+	^ newPieceElements
+]
+
+{ #category : #'private - segment' }
+BrTextEditorSegmentHolder >> updateSegment [
+	| newPieceElements hasCursor hasSelection |
+	hasSelection := self hasSelection.
+	hasCursor := self hasCursor.
+
+	segment updateSegmentProperties.
+
+	newPieceElements := self updatePieceElements.
+
+	itemElement removeChildren.
+	itemElement addChildren: newPieceElements.
+	self updateCursorPresent: hasCursor selectionPresent: hasSelection.
+	self updateConstraints
 ]

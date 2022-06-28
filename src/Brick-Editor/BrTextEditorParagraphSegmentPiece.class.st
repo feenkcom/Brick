@@ -4,9 +4,10 @@ Class {
 	#traits : 'TBrTextEditorTextualPiece',
 	#classTraits : 'TBrTextEditorTextualPiece classTrait',
 	#instVars : [
-		'segment'
+		'segment',
+		'currentCursors'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
 { #category : #'instance creation' }
@@ -14,6 +15,19 @@ BrTextEditorParagraphSegmentPiece >> createElement: anEditorElement [
 	<return: #BlElement>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+BrTextEditorParagraphSegmentPiece >> currentCursors [
+	"To maintain API with line segments pieces"
+	^#()
+]
+
+{ #category : #accessing }
+BrTextEditorParagraphSegmentPiece >> currentCursors: aCollection [
+	"To maintain API with line segments pieces"
+
+	
 ]
 
 { #category : #printing }
