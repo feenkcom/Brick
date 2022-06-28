@@ -46,7 +46,7 @@ BrListStreamItemsProvider >> defaultPreloadAmount [
 
 { #category : #accessing }
 BrListStreamItemsProvider >> defaultPreloadDuration [
-	^ 300 milliseconds
+	^ 300 milliSeconds
 ]
 
 { #category : #initialization }
