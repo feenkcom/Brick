@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSimpleTree,
 	#superclass : #BrTree,
-	#category : 'Brick-Tree - UI'
+	#category : #'Brick-Tree - UI'
 }
 
 { #category : #initialization }
@@ -85,7 +85,7 @@ BrSimpleTree >> stencil: aBlock [
 
 	self nodeDataBinder: [ :aWrapperElement :anItemObject :aTreeNode :thePayload |
 		| aNodeStencil |
-		aNodeStencil := aBlock glamourValueWithArgs: { anItemObject. aTreeNode indexInTree }.
+		aNodeStencil := aBlock gtValueWithArgs: { anItemObject. aTreeNode indexInTree }.
 		aWrapperElement
 			removeChildren;
 			addChild: aNodeStencil asElement ]

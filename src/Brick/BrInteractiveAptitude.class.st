@@ -111,6 +111,6 @@ BrInteractiveAptitude >> styles [
 BrInteractiveAptitude >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	
-	aTargetState := aStateBlock glamourValueWithArgs: { self state }.
+	aTargetState := aStateBlock gtValueWithArgs: { self state }.
 	self styles add: (BrInteractiveStyle new state: aTargetState; action: aStyleBlock)
 ]
