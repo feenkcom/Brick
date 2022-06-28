@@ -52,7 +52,7 @@ BrButtonModel >> clickEvent: anEvent [
 	anEvent consumed: true.
 	
 	(self widget states hasState: BlElementState disabled)
-		ifFalse: [ self action glamourValueWithArgs: { self widget . self . anEvent } ]
+		ifFalse: [ self action gtValueWithArgs: { self widget . self . anEvent } ]
 ]
 
 { #category : #'gt-extension' }

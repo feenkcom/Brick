@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'styles'
 	],
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
 { #category : #'instance creation' }
@@ -45,6 +45,6 @@ BrInteractiveStyler >> styles: theStyles [
 BrInteractiveStyler >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	
-	aTargetState := aStateBlock glamourValueWithArgs: { self state }.
+	aTargetState := aStateBlock gtValueWithArgs: { self state }.
 	self addState: aTargetState action: aStyleBlock
 ]

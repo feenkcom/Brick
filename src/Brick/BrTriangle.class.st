@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrExpandable + TBrEnableable + TBrSizeAdjustable',
 	#classTraits : 'TBrExpandable classTrait + TBrEnableable classTrait + TBrSizeAdjustable classTrait',
-	#category : 'Brick-Triangle - UI'
+	#category : #'Brick-Triangle - UI'
 }
 
 { #category : #'api - actions' }
@@ -61,7 +61,7 @@ BrTriangle >> toggleAction: aBlock [
 
 	self viewModel action: [ :aWidget :aButtonModel :anEvent |
 		self toggleExpanded.
-		aBlock glamourValueWithArgs: {
+		aBlock gtValueWithArgs: {
 			aWidget.
 			aButtonModel.
 			anEvent

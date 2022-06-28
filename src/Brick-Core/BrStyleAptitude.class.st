@@ -7,7 +7,7 @@ Class {
 		'styles',
 		'target'
 	],
-	#category : 'Brick-Core-Core'
+	#category : #'Brick-Core-Core'
 }
 
 { #category : #'private - adding' }
@@ -75,6 +75,6 @@ BrStyleAptitude >> target: aSelectorPath [
 BrStyleAptitude >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	
-	aTargetState := aStateBlock glamourValueWithArgs: { self state }.
+	aTargetState := aStateBlock gtValueWithArgs: { self state }.
 	aStyleBlock value: (self styleFor: aTargetState)
 ]

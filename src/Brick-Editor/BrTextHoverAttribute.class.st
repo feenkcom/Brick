@@ -6,7 +6,7 @@ Class {
 		'leaveAction',
 		'isHovered'
 	],
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }
@@ -60,7 +60,7 @@ BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
 		
 	isHovered := true.
 
-	self enterAction glamourValueWithArgs: {
+	self enterAction gtValueWithArgs: {
 		anEvent currentTarget text. "first we pass text"
 		anEvent currentTarget. "then the text piece (word) element"
 		aTextEditor. "then the whole editor element"
@@ -75,7 +75,7 @@ BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [
 
 	isHovered := false.
 	
-	self leaveAction glamourValueWithArgs: {
+	self leaveAction gtValueWithArgs: {
 		anEvent currentTarget text. "first we pass text"
 		anEvent currentTarget. "then the text piece (word) element"
 		aTextEditor. "then the whole editor element"

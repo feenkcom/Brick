@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'action'
 	],
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }
@@ -35,7 +35,7 @@ BrTextClickAttribute >> initialize [
 
 { #category : #private }
 BrTextClickAttribute >> performAction: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
-	self action glamourValueWithArgs: {
+	self action gtValueWithArgs: {
 		aTBrTextEditorTextualPiece. "first we pass text"
 		anEvent currentTarget. "then the text piece (word) element"
 		aTextEditor. "then the whole text editor"
