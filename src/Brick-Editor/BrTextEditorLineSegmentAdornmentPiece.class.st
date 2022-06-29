@@ -10,7 +10,7 @@ Class {
 		'adornmentAttribute',
 		'isVirtual'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
 { #category : #comparing }
@@ -43,30 +43,7 @@ BrTextEditorLineSegmentAdornmentPiece >> adornmentAttribute: aBrTextAdornmentAtt
 
 { #category : #'instance creation' }
 BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
-	| theAdornmentElements |
-
-	theAdornmentElements := (self adornmentAttribute affect: self in: anEditorElement) asOrderedCollection.
-	theAdornmentElements ifEmpty: [
-		theAdornmentElements := OrderedCollection with: (BlElement new size: 0@0) ]. 
-	theAdornmentElements do: [ :eachElement |
-		eachElement mouseCursor ifNil: [ eachElement mouseCursor: BlCursor default ].
-		eachElement userData at: #brickEditorAdornment put: true.
-		self adornmentAttribute isFocusable
-			ifFalse: [ eachElement focusability: BlFocusabilityNone new ] ].
-	
-	theAdornmentElements withIndexDo: [ :eachAdornmentElement :eachIndex |
-		| aCharLength |
-		
-		aCharLength := self isVirtual
-			ifTrue: [ 0 ]
-			ifFalse: [ eachIndex = theAdornmentElements size
-				ifTrue: [ self textLength ]
-				ifFalse: [ 0 ] ].
-		
-		eachAdornmentElement userData at: #brickEditorCharLength put: aCharLength.
-		eachAdornmentElement userData at: #brickEditorTextPiece put: self ].
-	
-	^ theAdornmentElements
+	^ self createAdornmentElement: anEditorElement
 ]
 
 { #category : #comparing }

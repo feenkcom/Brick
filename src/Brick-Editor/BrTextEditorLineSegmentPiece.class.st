@@ -1,36 +1,8 @@
 Class {
 	#name : #BrTextEditorLineSegmentPiece,
-	#superclass : #Object,
-	#traits : 'TBrTextEditorTextualPiece',
-	#classTraits : 'TBrTextEditorTextualPiece classTrait',
-	#instVars : [
-		'segment',
-		'currentCursors'
-	],
-	#category : 'Brick-Editor-Model - Segment-Text-Line'
+	#superclass : #BrTextEditorAbstractSegmentPiece,
+	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
-
-{ #category : #'instance creation' }
-BrTextEditorLineSegmentPiece >> createElement: anEditorElement [
-	<return: #BlElement>
-
-	^ self subclassResponsibility
-]
-
-{ #category : #'api - cursor' }
-BrTextEditorLineSegmentPiece >> currentCursors [
-	"Return a collection of known unique cursors within this segment piece.
-	It is important to remember cursors in order to send fine grained events when cursor's location changes
-	or new cursors are added"
-	<return: #Set of: #BrTextEditorSingleCursor>
-	
-	^ currentCursors
-]
-
-{ #category : #'api - cursor' }
-BrTextEditorLineSegmentPiece >> currentCursors: aSetOfCursors [	
-	currentCursors := aSetOfCursors asSet
-]
 
 { #category : #'api - cursor' }
 BrTextEditorLineSegmentPiece >> findAddedCursors: theUpdatedCursors to: theCurrentCursors [
@@ -71,23 +43,6 @@ BrTextEditorLineSegmentPiece >> globalTextIndexToLocal: aTextIndex [
 		ifFalse: [ aTextIndex - self textStart ]
 ]
 
-{ #category : #printing }
-BrTextEditorLineSegmentPiece >> gtDisplayOn: aStream [
-	self printOn: aStream
-]
-
-{ #category : #initialization }
-BrTextEditorLineSegmentPiece >> initialize [
-	super initialize.
-	
-	currentCursors := Set new
-]
-
-{ #category : #testing }
-BrTextEditorLineSegmentPiece >> isText [
-	^ false
-]
-
 { #category : #'cursor - hooks' }
 BrTextEditorLineSegmentPiece >> onCursorAdded: aCursor to: aPieceElement in: anEditorElement [
 	"Is sent when a cursor is added to a given piece element within provided editor element"
@@ -109,15 +64,6 @@ BrTextEditorLineSegmentPiece >> onCursorRemoved: aCursor from: aPieceElement in:
 			cursorPosition: aCursor position)
 ]
 
-{ #category : #updating }
-BrTextEditorLineSegmentPiece >> onRecycled: aPieceElement in: anEditorElement [
-]
-
-{ #category : #printing }
-BrTextEditorLineSegmentPiece >> printOn: aStream [
-	self text printOn: aStream
-]
-
 { #category : #'api - cursor' }
 BrTextEditorLineSegmentPiece >> screenToCursor: aTransformation of: anEditorElement in: aPieceElement [
 
@@ -125,16 +71,6 @@ BrTextEditorLineSegmentPiece >> screenToCursor: aTransformation of: anEditorElem
 		(BrTextEditorScreenToCursorRequest new
 			transformation: aTransformation;
 			editorElement: anEditorElement)
-]
-
-{ #category : #accessing }
-BrTextEditorLineSegmentPiece >> segment [
-	^ segment
-]
-
-{ #category : #accessing }
-BrTextEditorLineSegmentPiece >> segment: anObject [
-	segment := anObject
 ]
 
 { #category : #updating }
@@ -185,17 +121,6 @@ BrTextEditorLineSegmentPiece >> updateCursor: aPieceElement of: aLineSegment in:
 ]
 
 { #category : #updating }
-BrTextEditorLineSegmentPiece >> updateFocus: hasFocus of: aTextPieceElement in: anEditorElement [
-	| aRequest |
-
-	aRequest := hasFocus
-		ifTrue: [ BrTextEditorFocusRequest new ]
-		ifFalse: [ BrTextEditorBlurRequest new ].
-
-	aTextPieceElement dispatchEvent: (aRequest editorElement: anEditorElement)
-]
-
-{ #category : #updating }
 BrTextEditorLineSegmentPiece >> updateSelection: aTextElement of: aLineSegment in: anEditorElement [
 	| aTextEditor |
 
@@ -220,33 +145,4 @@ BrTextEditorLineSegmentPiece >> updateSelection: aTextElement of: aLineSegment i
 					editorElement: anEditorElement;
 					fromIndex: localFrom;
 					toIndex: localTo) ] ]
-]
-
-{ #category : #updating }
-BrTextEditorLineSegmentPiece >> updateText: aTextElement of: aLineSegment in: anEditorElement [
-	aTextElement dispatchEvent: (BrTextEditorTextChangedRequest new
-		editorElement: anEditorElement;
-		segmentPiece: self;
-		text: self text;
-		textStart: self textStart;
-		textEnd: self textEnd)
-]
-
-{ #category : #'api - geometry' }
-BrTextEditorLineSegmentPiece >> wordMargin [
-	<return: #BlInsets>
-	| aHalfOfLineSpacing |
-	
-	aHalfOfLineSpacing := (self segment lineSpacing / 2.0) floor.
-
-	^ BlInsets
-		top: aHalfOfLineSpacing
-		bottom: (self segment lineSpacing - aHalfOfLineSpacing)
-]
-
-{ #category : #'api - geometry' }
-BrTextEditorLineSegmentPiece >> wordPadding [
-	<return: #BlInsets>
-		
-	^ self segment wordPadding
 ]
