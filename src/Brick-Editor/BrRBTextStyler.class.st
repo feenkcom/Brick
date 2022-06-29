@@ -29,7 +29,7 @@ Class {
 		'parentheseLevel',
 		'bracketLevel'
 	],
-	#category : 'Brick-Editor-Styler'
+	#category : #'Brick-Editor-Styler'
 }
 
 { #category : #formatting }
@@ -210,26 +210,14 @@ BrRBTextStyler >> privateStyle: aText [
 { #category : #private }
 BrRBTextStyler >> resolveStyleFor: aVariableNode [
 
-	self
-		forPharo8: [ 
-			aVariableNode binding isUndeclared ifTrue: [ 
-				| var |
-				var := aVariableNode scope
-					       findVariable: [ :varS | 
-					       varS name beginsWith: aVariableNode name ]
-					       ifNone: [ nil ].
-				^ var ifNil: [ #default ] ifNotNil: [ #incompleteIdentifier ] ] ]
-		forPharo9: [ 
-			aVariableNode binding isUndeclaredVariable ifTrue: [ 
-				^ (aVariableNode scope hasBindingThatBeginsWith:
-					   aVariableNode name)
-					  ifTrue: [ #default ]
-					  ifFalse: [ #incompleteIdentifier ] ] ].
+	aVariableNode binding isUndeclaredVariable ifTrue: [ 
+		^ (aVariableNode scope hasBindingThatBeginsWith:
+			 aVariableNode name)
+				ifTrue: [ #default ]
+				ifFalse: [ #incompleteIdentifier ] ].
+					  
 	aVariableNode binding ifNil: [ ^ #default ].
-	self
-		forPharo8: [ aVariableNode isArgument ifTrue: [ ^ #methodArg ] ]
-		forPharo9: [ 
-		aVariableNode isArgumentVariable ifTrue: [ ^ #methodArg ] ].
+	aVariableNode isArgumentVariable ifTrue: [ ^ #methodArg ].
 	aVariableNode isTemp ifTrue: [ ^ #tempVar ].
 	aVariableNode isGlobal ifTrue: [ ^ #globalVar ].
 	aVariableNode isInstanceVariable ifTrue: [ ^ #instVar ].
