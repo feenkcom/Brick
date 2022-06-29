@@ -17,21 +17,7 @@ BrTextEditorLineSegmentTextPiece >> = anotherObject [
 { #category : #'instance creation' }
 BrTextEditorLineSegmentTextPiece >> createElement: anEditorElement [
 	<return: #BlElement>
-	| aWordStencil anElement |
-
-	aWordStencil := anEditorElement editor segmentBuilder wordStencilBuilder
-		wordPadding: self wordPadding;
-		wordMargin: self wordMargin;
-		shouldUsePool: false;
-		segmentPiece: self.
-
-	anElement := BlFrameTelemetry
-		time: [ 'Create element from ', aWordStencil printString ]
-		during: [ aWordStencil asElement ].
-
-	anElement userData removeKey: #brickEditorAdornment ifAbsent: [  ].
-
-	^ anElement
+	^ self createTextElement: anEditorElement
 ]
 
 { #category : #comparing }
