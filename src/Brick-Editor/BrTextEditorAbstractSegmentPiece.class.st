@@ -53,19 +53,6 @@ BrTextEditorAbstractSegmentPiece >> createElement: anEditorElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'instance creation' }
-BrTextEditorAbstractSegmentPiece >> createTextElement: anEditorElement [
-	| anElement |
-	anElement := (anEditorElement editor segmentBuilder wordStencilBuilder
-			wordPadding: self wordPadding;
-			wordMargin: self wordMargin;
-			segmentPiece: self;
-			shouldUsePool: false) asElement.
-
-	anElement userData removeKey: #brickEditorAdornment ifAbsent: [  ].
-	^ anElement
-]
-
 { #category : #'api - cursor' }
 BrTextEditorAbstractSegmentPiece >> currentCursors [
 	"Return a collection of known unique cursors within this segment piece.

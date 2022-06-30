@@ -7,10 +7,9 @@ Class {
 { #category : #accessing }
 BrTextEditorLineSegmentSplitterExamples >> noAttributes [
 	<gtExample>
-	
 	| text pieces |
 	text := 'Hello World' asRopedText.
-	pieces := self splitterClass new
+	pieces := BrTextEditorLineSegmentSplitter new
 			split: text
 			from: 0
 			to: text size.
@@ -19,22 +18,19 @@ BrTextEditorLineSegmentSplitterExamples >> noAttributes [
 ]
 
 { #category : #accessing }
-BrTextEditorLineSegmentSplitterExamples >> splitterClass [
-	^ BrTextEditorLineSegmentSplitter
-]
-
-{ #category : #accessing }
 BrTextEditorLineSegmentSplitterExamples >> withAdornments [
 	<gtExample>
-	
 	| text pieces |
 	text := 'Hello World' asRopedText.
-	text attributes: {BrTextAdornmentDynamicAttribute new
-				beAppend;
-				stencil: [ BlElement new
-						size: 10 @ 10;
-						background: Color red ]} from: 3 to: 3.
-	pieces := self splitterClass new
+	text
+		attributes: {BrTextAdornmentDynamicAttribute new
+					beAppend;
+					stencil: [ BlElement new
+							size: 10 @ 10;
+							background: Color red ]}
+		from: 3
+		to: 3.
+	pieces := BrTextEditorLineSegmentSplitter new
 			split: text
 			from: 0
 			to: text size.
@@ -45,11 +41,13 @@ BrTextEditorLineSegmentSplitterExamples >> withAdornments [
 { #category : #accessing }
 BrTextEditorLineSegmentSplitterExamples >> withAttributes [
 	<gtExample>
-	
 	| text pieces |
 	text := 'Hello World' asRopedText.
-	text attributes: { BlTextForegroundAttribute color: Color red } from: 3 to: 5.
-	pieces := self splitterClass new
+	text
+		attributes: {BlTextForegroundAttribute color: Color red}
+		from: 3
+		to: 5.
+	pieces := BrTextEditorLineSegmentSplitter new
 			split: text
 			from: 0
 			to: text size.
@@ -60,15 +58,17 @@ BrTextEditorLineSegmentSplitterExamples >> withAttributes [
 { #category : #accessing }
 BrTextEditorLineSegmentSplitterExamples >> withStartingAdornment [
 	<gtExample>
-	
 	| text pieces |
 	text := 'Hello World' asRopedText.
-	text attributes: {BrTextAdornmentDynamicAttribute new
-				beAppend;
-				stencil: [ BlElement new
-						size: 10 @ 10;
-						background: Color red ]} from: 0 to: 0.
-	pieces := self splitterClass new
+	text
+		attributes: {BrTextAdornmentDynamicAttribute new
+					beAppend;
+					stencil: [ BlElement new
+							size: 10 @ 10;
+							background: Color red ]}
+		from: 0
+		to: 0.
+	pieces := BrTextEditorLineSegmentSplitter new
 			split: text
 			from: 0
 			to: text size.

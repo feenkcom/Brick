@@ -1,12 +1,12 @@
 Class {
 	#name : #BrTextEditorParagraphSegmentSplitter,
-	#superclass : #BrTextEditorLineSegmentSplitter,
-	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
+	#superclass : #BrTextEditorAbstractSegmentSplitter,
+	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
 { #category : #accessing }
 BrTextEditorParagraphSegmentSplitter >> adornmentPieceClass [
-	^ BrTextEditorParagraphSegmentAdornmentPiece
+	^ BrTextEditorLineSegmentAdornmentPiece
 ]
 
 { #category : #'private - pieces computation' }
@@ -21,5 +21,5 @@ BrTextEditorParagraphSegmentSplitter >> itemValueType: anObject [
 
 { #category : #accessing }
 BrTextEditorParagraphSegmentSplitter >> textPieceClass [
-	^ BrTextEditorParagraphSegmentTextPiece
+	^ BrTextEditorSegmentTextPiece
 ]

@@ -1447,21 +1447,21 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloCrWorldCr_WithAppendin
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
 	thePieces := aTextEditor segmentCollector segments second pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 6.
 	self assert: thePieces first textEnd equals: 6.
 	
 	thePieces := aTextEditor segmentCollector segments third pieces.
 	self assert: thePieces size equals: 2.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 7.
 	self assert: thePieces first textEnd equals: 12.
 	
@@ -1475,7 +1475,7 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloCrWorldCr_WithAppendin
 	thePieces := aTextEditor segmentCollector segments fourth pieces.
 	self assert: thePieces size equals: 1.
 
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 13.
 	self assert: thePieces first textEnd equals: 13.
 	
@@ -1515,14 +1515,14 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementA
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 0.
 	
 	thePieces := aTextEditor segmentCollector segments second pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 1.
 	self assert: thePieces first textEnd equals: 6.
 	
@@ -1573,14 +1573,14 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementO
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 0.
 	
 	thePieces := aTextEditor segmentCollector segments second pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 1.
 	self assert: thePieces first textEnd equals: 6.
 	
@@ -1626,14 +1626,14 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementO
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
 	thePieces := aTextEditor segmentCollector segments second pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 6.
 	self assert: thePieces first textEnd equals: 6.
 	
@@ -1735,15 +1735,15 @@ BrTextEditorLineSegmentExamples >> overwrite_Hello_World_with_S_in_Hello_World [
 	theOldPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theOldPieces size equals: 3.
 	
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 5.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 5.
 	self assert: theOldPieces second textEnd equals: 6.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 6.
 	self assert: theOldPieces third textEnd equals: 11.
 	
@@ -1767,20 +1767,20 @@ BrTextEditorLineSegmentExamples >> overwrite_Hello_World_with_S_in_Hello_World [
 	theNewPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theNewPieces size equals: 1.
 	
-	self assert: (theNewPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces first textStart equals: 0.
 	self assert: theNewPieces first textEnd equals: 1.
 	
 	"the state of old pieces should be at the moment of deletion, right before insertion"
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 0.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 0.
 	self assert: theOldPieces second textEnd equals: 0.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 0.
 	self assert: theOldPieces third textEnd equals: 0.
 	
@@ -1804,15 +1804,15 @@ BrTextEditorLineSegmentExamples >> overwrite_World_with_S_in_Hello_World [
 	theOldPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theOldPieces size equals: 3.
 	
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 5.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 5.
 	self assert: theOldPieces second textEnd equals: 6.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 6.
 	self assert: theOldPieces third textEnd equals: 11.
 	
@@ -1836,28 +1836,28 @@ BrTextEditorLineSegmentExamples >> overwrite_World_with_S_in_Hello_World [
 	theNewPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theNewPieces size equals: 3.
 	
-	self assert: (theNewPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces first textStart equals: 0.
 	self assert: theNewPieces first textEnd equals: 5.
 	
-	self assert: (theNewPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces second textStart equals: 5.
 	self assert: theNewPieces second textEnd equals: 6.
 	
-	self assert: (theNewPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces third textStart equals: 6.
 	self assert: theNewPieces third textEnd equals: 7.
 	
 	"the state of old pieces should be at the moment of deletion, right before insertion"
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 5.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 5.
 	self assert: theOldPieces second textEnd equals: 6.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 6.
 	self assert: theOldPieces third textEnd equals: 6.
 	
@@ -1881,15 +1881,15 @@ BrTextEditorLineSegmentExamples >> overwrite_d_with_S_in_Hello_World [
 	theOldPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theOldPieces size equals: 3.
 	
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 5.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 5.
 	self assert: theOldPieces second textEnd equals: 6.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 6.
 	self assert: theOldPieces third textEnd equals: 11.
 	
@@ -1913,28 +1913,28 @@ BrTextEditorLineSegmentExamples >> overwrite_d_with_S_in_Hello_World [
 	theNewPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theNewPieces size equals: 3.
 	
-	self assert: (theNewPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces first textStart equals: 0.
 	self assert: theNewPieces first textEnd equals: 5.
 	
-	self assert: (theNewPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces second textStart equals: 5.
 	self assert: theNewPieces second textEnd equals: 6.
 	
-	self assert: (theNewPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces third textStart equals: 6.
 	self assert: theNewPieces third textEnd equals: 11.
 	
 	"the state of old pieces should be at the moment of deletion, right before insertion"
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 5.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 5.
 	self assert: theOldPieces second textEnd equals: 6.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 6.
 	self assert: theOldPieces third textEnd equals: 10.
 	
@@ -1958,15 +1958,15 @@ BrTextEditorLineSegmentExamples >> overwrite_llo_World_with_S_in_Hello_World [
 	theOldPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theOldPieces size equals: 3.
 	
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 5.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 5.
 	self assert: theOldPieces second textEnd equals: 6.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 6.
 	self assert: theOldPieces third textEnd equals: 11.
 	
@@ -1990,20 +1990,20 @@ BrTextEditorLineSegmentExamples >> overwrite_llo_World_with_S_in_Hello_World [
 	theNewPieces := aTextEditor segmentCollector segments first pieces.
 	self assert: theNewPieces size equals: 1.
 	
-	self assert: (theNewPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theNewPieces first textStart equals: 0.
 	self assert: theNewPieces first textEnd equals: 3.
 	
 	"the state of old pieces should be at the moment of deletion, right before insertion"
-	self assert: (theOldPieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces first textStart equals: 0.
 	self assert: theOldPieces first textEnd equals: 2.
 	
-	self assert: (theOldPieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces second textStart equals: 2.
 	self assert: theOldPieces second textEnd equals: 2.
 	
-	self assert: (theOldPieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (theOldPieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: theOldPieces third textStart equals: 2.
 	self assert: theOldPieces third textEnd equals: 2.
 	
@@ -2021,7 +2021,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCr [
 	self assert: theFirstPieces size equals: 1.
 	
 	aPiece := theFirstPieces first.
-	self assert: (aPiece isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (aPiece isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: aPiece textStart equals: 0.
 	self assert: aPiece textEnd equals: 5.
 	self assert: (aPiece globalTextIndexToLocal: 0) equals: 0.
@@ -2035,7 +2035,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCr [
 	self assert: theSecondPieces size equals: 1.
 	
 	aPiece := theSecondPieces first.
-	self assert: (aPiece isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (aPiece isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: aPiece textStart equals: 6.
 	self assert: aPiece textEnd equals: 6.
 	self assert: (aPiece globalTextIndexToLocal: 6) equals: 0.
@@ -2054,7 +2054,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
 	self assert: theFirstPieces size equals: 1.
 	
 	aPiece := theFirstPieces first.
-	self assert: (aPiece isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (aPiece isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: aPiece textStart equals: 0.
 	self assert: aPiece textEnd equals: 5.
 	self assert: (aPiece globalTextIndexToLocal: 0) equals: 0.
@@ -2068,7 +2068,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
 	self assert: theSecondPieces size equals: 1.
 	
 	aPiece := theSecondPieces first.
-	self assert: (aPiece isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (aPiece isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: aPiece textStart equals: 7.
 	self assert: aPiece textEnd equals: 7.
 	self assert: (aPiece globalTextIndexToLocal: 6) equals: 0.
@@ -2107,7 +2107,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 
@@ -2116,7 +2116,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld
 	thePieces := aTextEditor segmentCollector segments second pieces.
 	self assert: thePieces size equals: 2.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 6.
 	self assert: thePieces first textEnd equals: 11.
 	
@@ -2131,7 +2131,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld
 	thePieces := aTextEditor segmentCollector segments third pieces.
 	self assert: thePieces size equals: 1.
 
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 12.
 	self assert: thePieces first textEnd equals: 12.
 	
@@ -2153,15 +2153,15 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_1_WithAppending [
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 4.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
-	self assert: (thePieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces second textStart equals: 5.
 	self assert: thePieces second textEnd equals: 6.
 
-	self assert: (thePieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces third textStart equals: 6.
 	self assert: thePieces third textEnd equals: 7.
 	
@@ -2185,7 +2185,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 8.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
@@ -2195,11 +2195,11 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
 	
 	self assert: thePieces first text ~~ thePieces second text.
 	
-	self assert: (thePieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces third textStart equals: 5.
 	self assert: thePieces third textEnd equals: 6.
 	
-	self assert: (thePieces fourth isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces fourth isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces fourth textStart equals: 6.
 	self assert: thePieces fourth textEnd equals: 11.
 	
@@ -2209,11 +2209,11 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
 	
 	self assert: thePieces fourth text ~~ thePieces fifth text.
 	
-	self assert: (thePieces sixth isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces sixth isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces sixth textStart equals: 11.
 	self assert: thePieces sixth textEnd equals: 12.
 	
-	self assert: (thePieces seventh isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces seventh isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces seventh textStart equals: 12.
 	self assert: thePieces seventh textEnd equals: 17.
 	
@@ -2236,7 +2236,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World [
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 3.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	self assert: (thePieces first globalTextIndexToLocal: 0) equals: 0.
@@ -2246,13 +2246,13 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World [
 	self assert: (thePieces first globalTextIndexToLocal: 4) equals: 4.
 	self assert: (thePieces first globalTextIndexToLocal: 5) equals: 5.
 	
-	self assert: (thePieces second isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces second isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces second textStart equals: 5.
 	self assert: thePieces second textEnd equals: 6.
 	self assert: (thePieces second globalTextIndexToLocal: 5) equals: 0.
 	self assert: (thePieces second globalTextIndexToLocal: 6) equals: 1.
 
-	self assert: (thePieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces third textStart equals: 6.
 	self assert: thePieces third textEnd equals: 11.
 	self assert: (thePieces third globalTextIndexToLocal: 6) equals: 0.
@@ -2290,7 +2290,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementAndAppendin
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
@@ -2332,7 +2332,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOf [
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 3.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
@@ -2341,7 +2341,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOf [
 	self assert: thePieces second textEnd equals: 6.
 	self assert: thePieces second adornmentAttribute shouldReplace.
 	
-	self assert: (thePieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces third textStart equals: 6.
 	self assert: thePieces third textEnd equals: 11.
 	
@@ -2361,7 +2361,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfLineBreak
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 3.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 3.
 	
@@ -2369,7 +2369,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfLineBreak
 	self assert: thePieces second textStart equals: 3.
 	self assert: thePieces second textEnd equals: 8.
 
-	self assert: (thePieces third isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces third isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces third textStart equals: 8.
 	self assert: thePieces third textEnd equals: 11.
 	
@@ -2401,7 +2401,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfWorld [
 	thePieces := aTextEditor segmentCollector segments first pieces.
 	self assert: thePieces size equals: 1.
 	
-	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentTextPiece).
+	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
