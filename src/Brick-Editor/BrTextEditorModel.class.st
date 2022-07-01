@@ -29,6 +29,9 @@ Class {
 		'isFocused',
 		'shouldStyleWhenTextModified'
 	],
+	#classVars : [
+		'UseParagraphEditor'
+	],
 	#category : #'Brick-Editor-Model'
 }
 
@@ -346,7 +349,7 @@ BrTextEditorModel >> initialize [
 	shouldStyleWhenTextModified := true.
 
 	self beEditable.
-	"self beParagraphBased"
+	UseParagraphEditor ifNotNil: [ self beParagraphBased ]
 ]
 
 { #category : #initialization }
