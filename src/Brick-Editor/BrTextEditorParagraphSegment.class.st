@@ -7,7 +7,7 @@ Class {
 		'wordPadding',
 		'paragraphMargin'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
 { #category : #'pieces - computation' }
@@ -20,7 +20,7 @@ BrTextEditorParagraphSegment >> clearCache [
 
 { #category : #'pieces - computation' }
 BrTextEditorParagraphSegment >> computedPieces [
-	<return: #SequenceableCollection of: #BrTextEditorLineSegmentPiece>
+	<return: #SequenceableCollection of: #BrTextEditorAbstractSegmentPiece>
 	| thePieces |
 
 	thePieces := BrTextEditorParagraphSegmentSplitter new
@@ -171,7 +171,7 @@ BrTextEditorParagraphSegment >> paragraphMargin: aBlInsets [
 
 { #category : #accessing }
 BrTextEditorParagraphSegment >> pieces [
-	<return: #Array of: #BrTextEditorLineSegmentPiece>
+	<return: #Array of: #BrTextEditorAbstractSegmentPiece>
 
 	^ self hasPieces
 		ifTrue: [ pieces ]

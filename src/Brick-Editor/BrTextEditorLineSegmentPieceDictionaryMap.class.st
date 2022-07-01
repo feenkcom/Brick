@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> allPieces [
 	"Return all current line segment pieces"
-	<return: #Collection of: #BrTextEditorLineSegmentPiece>
+	<return: #Collection of: #BrTextEditorAbstractSegmentPiece>
 	
 	^ map keys
 ]
@@ -37,7 +37,7 @@ BrTextEditorLineSegmentPieceDictionaryMap >> initialize [
 
 { #category : #accessing }
 BrTextEditorLineSegmentPieceDictionaryMap >> pieceForElement: aBlElement ifAbsent: anAbsentBlock [
-	<return: #BrTextEditorLineSegmentPiece or: #Object>
+	<return: #BrTextEditorAbstractSegmentPiece or: #Object>
 
 	map associations do: [ :eachAssociation |
 		(eachAssociation value includes: aBlElement) 
