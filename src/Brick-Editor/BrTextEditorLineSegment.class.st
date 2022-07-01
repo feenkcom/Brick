@@ -20,7 +20,7 @@ BrTextEditorLineSegment >> clearCache [
 
 { #category : #'pieces - computation' }
 BrTextEditorLineSegment >> computedPieces [
-	<return: #SequenceableCollection of: #BrTextEditorLineSegmentPiece>
+	<return: #SequenceableCollection of: #BrTextEditorAbstractSegmentPiece>
 	| thePieces |
 
 	thePieces := BrTextEditorLineSegmentSplitter new
@@ -151,7 +151,7 @@ BrTextEditorLineSegment >> paragraphMargin: aBlInsets [
 
 { #category : #accessing }
 BrTextEditorLineSegment >> pieces [
-	<return: #Array of: #BrTextEditorLineSegmentPiece>
+	<return: #Array of: #BrTextEditorAbstractSegmentPiece>
 
 	^ self hasPieces
 		ifTrue: [ pieces ]

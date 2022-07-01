@@ -97,7 +97,7 @@ BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 
 { #category : #'private - accessing' }
 BrTextEditorLineSegmentHolder >> cachedPieces [
-	<return: #Collection of: #BrTextEditorLineSegmentPiece>
+	<return: #Collection of: #BrTextEditorAbstractSegmentPiece>
 	
 	^ pieceElements allPieces
 ]
