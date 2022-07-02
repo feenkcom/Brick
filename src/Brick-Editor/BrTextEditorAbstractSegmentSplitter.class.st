@@ -7,7 +7,7 @@ Class {
 { #category : #'instance creation' }
 BrTextEditorAbstractSegmentSplitter >> adornmentPiece: aBlText with: anAdornmentAttribute from: aTextStart to: aTextEnd [
 	"Create and return a segment piece with adornment"
-	<return: #BrTextEditorLineSegmentPiece>
+	<return: #BrTextEditorAbstractSegmentPiece>
 
 	^ self adornmentPieceClass new
 		initializeWith: aBlText
@@ -217,7 +217,7 @@ BrTextEditorAbstractSegmentSplitter >> split: aText from: aStartIndex to: anEndI
 { #category : #'instance creation' }
 BrTextEditorAbstractSegmentSplitter >> textPiece: aBlText from: aTextStart to: aTextEnd [
 	"Create and return a text segment piece"
-	<return: #BrTextEditorLineSegmentPiece>
+	<return: #BrTextEditorAbstractSegmentPiece>
 
 	^ self textPieceClass new
 		initializeWith: aBlText

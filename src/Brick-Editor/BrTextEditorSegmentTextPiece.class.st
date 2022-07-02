@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTextEditorSegmentTextPiece,
-	#superclass : #BrTextEditorLineSegmentPiece,
+	#superclass : #BrTextEditorAbstractSegmentPiece,
 	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
