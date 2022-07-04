@@ -35,6 +35,11 @@ Class {
 	#category : #'Brick-Editor-Model'
 }
 
+{ #category : #accessing }
+BrTextEditorModel class >> useParagraphEditor: anObject [
+	UseParagraphEditor := anObject 
+]
+
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
 	self editorShortcuts
