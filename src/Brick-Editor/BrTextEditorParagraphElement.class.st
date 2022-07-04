@@ -141,7 +141,7 @@ BrTextEditorParagraphElement >> buildParagraph [
 
 	self
 		childrenDo: [ :eachElement | 
-			(eachElement isKindOf: BlTextElement)
+			(self canAddToParagraph: eachElement)
 				ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
 				ifFalse: [ (eachElement isKindOf: BrCursorElement)
 						ifFalse: [ aBuilder
@@ -151,6 +151,11 @@ BrTextEditorParagraphElement >> buildParagraph [
 										at: #brickEditorCharLength
 										ifAbsent: [ 0 ]) ] ] ].
 	^ aBuilder build
+]
+
+{ #category : #'private - paragraph' }
+BrTextEditorParagraphElement >> canAddToParagraph: eachElement [
+	^ (eachElement isKindOf: BlTextElement) and: [ eachElement aptitude isNil ]
 ]
 
 { #category : #private }
@@ -199,12 +204,11 @@ BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 	aCanvas clip
 		when: [ self clipChildren ]
 		by: [ self geometry pathOnSpartaCanvas: aCanvas of: self ]
-		during: [
-			paragraph
+		during: [ paragraph
 				ifNotNil: [ :aParagraph | aParagraph paintOn: aCanvas at: self padding topLeft ].
 			self children sortedByElevation
-				do: [ :anElement |
-					(anElement isKindOf: BlTextElement)
+				do: [ :anElement | 
+					(self canAddToParagraph: anElement)
 						ifFalse: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ] ]
 ]
 
@@ -337,18 +341,21 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 
 { #category : #drawing }
 BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
-
 	paragraph
-		ifNotNil: [ :aParagraph |
-			aParagraph paintOn: aCompositorPainter canvas at: anOffset + self padding topLeft.
-			self paintSelectionOn: aCompositorPainter offset: anOffset + self padding topLeft ].
+		ifNotNil: [ :aParagraph | 
+			aParagraph
+				paintOn: aCompositorPainter canvas
+				at: anOffset + self padding topLeft.
+			self
+				paintSelectionOn: aCompositorPainter
+				offset: anOffset + self padding topLeft ].
 
 	aCompositorPainter
 		pushChildren: self children sortedByElevation
 		offset: anOffset
 		compositing: self compositingMode
-		thenPaint: [ :aChildElement :aChildPainter :aChildOffset |
-			(aChildElement isKindOf: BlTextElement)
+		thenPaint: [ :aChildElement :aChildPainter :aChildOffset | 
+			(self canAddToParagraph: aChildElement)
 				ifFalse: [ aChildElement fullPaintOn: aChildPainter offset: aChildOffset ] ]
 ]
 
@@ -369,12 +376,12 @@ BrTextEditorParagraphElement >> pieces: aCollectionOfPieces [
 
 { #category : #private }
 BrTextEditorParagraphElement >> placeholderAndCursorElements [
-	^ self children reject: [ :each | (each isKindOf: BlTextElement) ]
+	^ self children reject: [ :each | self canAddToParagraph: each ]
 ]
 
 { #category : #private }
 BrTextEditorParagraphElement >> placeholderElements [
-	^ self children reject: [ :each | (each isKindOf: BlTextElement) or: [ each isKindOf: BrCursorElement ] ]
+	^ self children reject: [ :each | (self canAddToParagraph: each) or: [ each isKindOf: BrCursorElement ] ]
 ]
 
 { #category : #'api - cursor' }
