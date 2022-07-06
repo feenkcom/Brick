@@ -377,8 +377,7 @@ BrTextEditorParagraphElement >> paintSelectionOn: aCompositorPainter offset: anO
 { #category : #accessing }
 BrTextEditorParagraphElement >> paragraph [
 	(paragraph isNil or: [ session ~~ Smalltalk session ])
-		ifTrue: [ session := Smalltalk session.
-			paragraph := self buildParagraph ].
+		ifTrue: [ paragraph := self buildParagraph ].
 	^ paragraph
 ]
 
