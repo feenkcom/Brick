@@ -8,7 +8,7 @@ Class {
 		'cursorStencil',
 		'selection',
 		'segment',
-		'pieces'
+		'session'
 	],
 	#classVars : [
 		'Slants',
@@ -131,6 +131,7 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> buildParagraph [
 	| aBuilder |
+	session := Smalltalk session.
 	aBuilder := SkiaParagraphBuilder
 			style: (SkiaParagraphStyle new
 					textStyle: (SkiaParagraphTextStyle new
@@ -201,11 +202,12 @@ BrTextEditorParagraphElement >> defaultTextColor [
 
 { #category : #drawing }
 BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
+	(paragraph isNil or: [ session ~~ Smalltalk session ])
+		ifTrue: [ paragraph := self buildParagraph ].
 	aCanvas clip
 		when: [ self clipChildren ]
 		by: [ self geometry pathOnSpartaCanvas: aCanvas of: self ]
-		during: [ paragraph
-				ifNotNil: [ :aParagraph | aParagraph paintOn: aCanvas at: self padding topLeft ].
+		during: [ paragraph paintOn: aCanvas at: self padding topLeft.
 			self children sortedByElevation
 				do: [ :anElement | 
 					(self canAddToParagraph: anElement)
@@ -215,23 +217,22 @@ BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 { #category : #drawing }
 BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 	| aPathBuilder |
-	
-	selection isEmpty
-		ifTrue: [ ^ self ].
-
 	aPathBuilder := aCanvas path.
 
-	selection do: [ :eachMonotoneSelection |		
-		(paragraph rectanglesForChars: (eachMonotoneSelection from to: eachMonotoneSelection to)
-			width: SkiaParagraphRectWidthStyle Max
-			height: SkiaParagraphRectHeightStyle Max) do: [ :eachRectangle |
-				aPathBuilder
-					moveTo: eachRectangle topLeft;
-					lineTo: eachRectangle topRight;
-					lineTo: eachRectangle bottomRight;
-					lineTo: eachRectangle bottomLeft;
-					lineTo: eachRectangle topLeft;
-					close ] ].
+	selection
+		do: [ :eachMonotoneSelection | 
+			(paragraph
+				rectanglesForChars: (eachMonotoneSelection from to: eachMonotoneSelection to)
+				width: SkiaParagraphRectWidthStyle Max
+				height: SkiaParagraphRectHeightStyle Max)
+				do: [ :eachRectangle | 
+					aPathBuilder
+						moveTo: eachRectangle topLeft;
+						lineTo: eachRectangle topRight;
+						lineTo: eachRectangle bottomRight;
+						lineTo: eachRectangle bottomLeft;
+						lineTo: eachRectangle topLeft;
+						close ] ].
 
 	aCanvas fill
 		path: aPathBuilder build;
@@ -315,40 +316,46 @@ BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdat
 { #category : #layout }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 	| aParagraphLayoutWidth |
-	self placeholderElements do:  [ :eachElement |
-		self layout measureChildWithMargins: eachElement parentSpec: anExtentMeasurementSpec ].
+	self placeholderElements
+		do: [ :eachElement | 
+			self layout
+				measureChildWithMargins: eachElement
+				parentSpec: anExtentMeasurementSpec ].
 
-	(paragraph isNil or: [ paragraph isNull ])
+	(paragraph isNil or: [ paragraph isNull or: [ session ~~ Smalltalk session ] ])
 		ifTrue: [ BlFrameTelemetry
 				time: 'Build paragraph'
 				during: [ paragraph := self buildParagraph ] ].
 
 	aParagraphLayoutWidth := anExtentMeasurementSpec widthSpec isUnspecified
-		ifTrue: [ SmallInteger maxVal ]
-		ifFalse: [ ((anExtentMeasurementSpec widthSpec size - self padding width) max: 0) ].
-
-	"Add a 1 pixel fudge-factor to the width to deal with re-measuring the paragraph at the exact width"
+			ifTrue: [ SmallInteger maxVal ]
+			ifFalse: [ anExtentMeasurementSpec widthSpec size - self padding width max: 0 ].	"Add a 1 pixel fudge-factor to the width to deal with re-measuring the paragraph at the exact width"
 	BlFrameTelemetry
 		time: 'Layout paragraph'
-		during: [ paragraph layoutWithWidth: (aParagraphLayoutWidth + 1.0) ].
+		during: [ paragraph layoutWithWidth: aParagraphLayoutWidth + 1.0 ].
 
-	self measuredExtent: (anExtentMeasurementSpec sizeFor: (paragraph longestLine @ paragraph height) + self padding extent).
-	
+	self
+		measuredExtent: (anExtentMeasurementSpec
+				sizeFor: paragraph longestLine @ paragraph height + self padding extent).
+
 	BlFrameTelemetry
 		time: 'Measure cursors'
-		during: [ self cursorElements ifNotEmpty: [ :theCursors | self measureCursors: theCursors ] ]
+		during: [ self cursorElements
+				ifNotEmpty: [ :theCursors | self measureCursors: theCursors ] ]
 ]
 
 { #category : #drawing }
 BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
+	(paragraph isNil or: [ session ~~ Smalltalk session ])
+		ifTrue: [ 
+		Transcript show: 'REBUILDING!'; cr.
+		paragraph := self buildParagraph ].
 	paragraph
-		ifNotNil: [ :aParagraph | 
-			aParagraph
-				paintOn: aCompositorPainter canvas
-				at: anOffset + self padding topLeft.
-			self
-				paintSelectionOn: aCompositorPainter
-				offset: anOffset + self padding topLeft ].
+		paintOn: aCompositorPainter canvas
+		at: anOffset + self padding topLeft.
+	self
+		paintSelectionOn: aCompositorPainter
+		offset: anOffset + self padding topLeft.
 
 	aCompositorPainter
 		pushChildren: self children sortedByElevation
@@ -367,11 +374,6 @@ BrTextEditorParagraphElement >> paintSelectionOn: aCompositorPainter offset: anO
 	aCompositorPainter canvas transform
 		by: [ :t | t translateBy: anOffset ]
 		during: [ self drawSelectionOnSpartaCanvas: aCompositorPainter canvas ]
-]
-
-{ #category : #accessing }
-BrTextEditorParagraphElement >> pieces: aCollectionOfPieces [
-	pieces := aCollectionOfPieces.
 ]
 
 { #category : #private }
