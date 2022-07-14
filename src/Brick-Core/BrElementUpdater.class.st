@@ -107,9 +107,20 @@ BrElementUpdater >> elementDo: aBlock [
 ]
 
 { #category : #'private - updating' }
+BrElementUpdater >> emitEnqueueUpdateSignal [
+	(BrElementUpdaterEnqueueUpdateSignal forUpdater: self) emit.
+]
+
+{ #category : #'private - updating' }
+BrElementUpdater >> emitPerformUpdateSignal [
+	(BrElementUpdaterPerformUpdateSignal forUpdater: self) emit.
+]
+
+{ #category : #'private - updating' }
 BrElementUpdater >> enqueueUpdate [
 	self elementDo: [ :anElement | 
-		(BrElementUpdaterEnqueueUpdateSignal forUpdater: self) emit.
+		self emitEnqueueUpdateSignal.
+		
 		anElement enqueueTask: (BlTaskAction new action: [ self updateNow ]) ].
 ]
 
@@ -242,6 +253,8 @@ BrElementUpdater >> updateElement [
 
 { #category : #'private - updating' }
 BrElementUpdater >> updateNow [
+	self emitPerformUpdateSignal.
+	
 	self resetUpdateRequested.
 	self updateElement.
 ]
