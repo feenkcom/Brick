@@ -1,34 +1,10 @@
 Class {
 	#name : #BrListEmptyItemsProvider,
-	#superclass : #BrAbstractListItemsProvider,
-	#category : #'Brick-List - Model'
+	#superclass : #BrEmptyItemsProvider,
+	#category : #'Brick-! Core - Item Providers'
 }
 
-{ #category : #accessing }
-BrListEmptyItemsProvider >> currentItems [
-	^ #()
-]
-
-{ #category : #accessing }
-BrListEmptyItemsProvider >> isDone [
+{ #category : #testing }
+BrListEmptyItemsProvider class >> isDeprecated [
 	^ true
-]
-
-{ #category : #accessing }
-BrListEmptyItemsProvider >> itemAt: anIndex [
-	^ self currentItems at: anIndex
-]
-
-{ #category : #accessing }
-BrListEmptyItemsProvider >> itemCount [
-	<return: #Number>
-
-	^ 0
-]
-
-{ #category : #'api - loading' }
-BrListEmptyItemsProvider >> preloadUntilFoundSuchThat: aBlock [
-	<return: #TAsyncPromise>
-
-	^ AsyncFulfilledPromise new value: 0
 ]

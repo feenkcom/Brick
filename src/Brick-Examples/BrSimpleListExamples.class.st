@@ -127,7 +127,7 @@ BrSimpleListExamples >> simpleListWithItemsBindsOnce [
 			aCellElement text: aClass name asString ].
 	
 	theItemsChangedEvents := OrderedCollection new.
-	aList when: BrListModelItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
+	aList when: BrItemsProviderItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
 
 	aScripter := BlDevScripter new.
 	aScripter element: aList.
@@ -172,7 +172,7 @@ BrSimpleListExamples >> streamingList [
 	stream := stream take: 50.
 
 	^ BrSimpleList new
-		itemsProvider: (BrListStreamItemsProvider new
+		itemsProvider: (BrStreamItemsProvider new
 			stream: stream;
 			preloadAmount: 1);
 		stencil: [ :eachImage | eachImage asElement ]
