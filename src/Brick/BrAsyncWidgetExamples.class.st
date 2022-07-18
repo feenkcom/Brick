@@ -10,9 +10,11 @@ BrAsyncWidgetExamples >> asyncWidgetWithContents [
 	<gtExample>
 	| widget |
 	widget := self basicAsyncWidget.
-	widget
-		stencil: [ 1 seconds wait.
-			BrLabel new text: 'hi' ].
+	widget stencil: [ 
+		1 seconds wait.
+		BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'hi' ].
 	^ widget
 ]
 

@@ -276,11 +276,13 @@ BrGlamorousVectorIcons class >> folder [
 { #category : #icons }
 BrGlamorousVectorIcons class >> gt [
 	<script: 'self gt inspect'>
+
 	^ [ BlElement new
-		size: 16 @ 16;
-		layout: BlFrameLayout new;
-		addChild: ((BrLabel new text: ('g' asRopedText weight: 100) , 't' asRopedText bold)
-				asScalableElement margin: (BlInsets top: -4 left: -1)) ] asStencil
+	size: 16@16;
+	layout: BlFrameLayout new;
+	addChild: 
+		((BrLabel new text: ('g' asRopedText weight: 100), ('t' asRopedText bold); aptitude: BrGlamorousLabelAptitude) asScalableElement margin: (BlInsets top: -4 left: -1))
+	] asStencil
 ]
 
 { #category : #icons }
@@ -371,11 +373,12 @@ BrGlamorousVectorIcons class >> largeEg [
 { #category : #icons }
 BrGlamorousVectorIcons class >> largeGt [
 	<script: 'self largeGt inspect'>
+
 	^ [ BlElement new
-		size: 250 @ 250;
-		layout: BlFrameLayout new;
-		addChild: ((BrLabel new text: ('g' asRopedText weight: 100) , 't' asRopedText bold)
-				asScalableElement margin: (BlInsets top: -4 left: -1)) ] asStencil
+	size: 250@250;
+	layout: BlFrameLayout new;
+	addChild: 
+		((BrLabel new text: ('g' asRopedText weight: 100), ('t' asRopedText bold); aptitude: BrGlamorousLabelAptitude) asScalableElement margin: (BlInsets top: -4 left: -1)) ] asStencil
 ]
 
 { #category : #icons }

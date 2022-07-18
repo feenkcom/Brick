@@ -148,10 +148,12 @@ BrFileSelector >> createOkButton [
 BrFileSelector >> createTable [
 	| aTable |
 	aTable := BrColumnedList new.
-	aTable
-		rowStencil: BrGlamorousColumnedListSelectableRowElementStencilBuilder new;
+	aTable 
+		rowStencil: (BrGlamorousColumnedListSelectableRowElementStencilBuilder new);
 		padding: (BlInsets top: 5);
-		matchParent.	"icon column"
+		matchParent.
+
+	"icon column"
 	aTable column
 		title: 'Icon' translated;
 		width: 40;
@@ -162,35 +164,35 @@ BrFileSelector >> createTable [
 	aTable column
 		title: 'Name' translated;
 		matchParent;
-		cellStencil: [ :each | BrLabel new ];
+		"width: 200;"
+		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :aLabel :eachItem | 
 			aLabel
-				text: ((folder isChildOf: eachItem)
+				text:
+					((folder isChildOf: eachItem)
 						ifTrue: [ '..' ]
-						ifFalse: [ eachItem basename asString ]) ].	"width: 200;"
-	aTable column
+						ifFalse: [ eachItem basename asString ]) ].
+	aTable column 
 		title: 'Size' translated;
 		width: 100;
-		cellStencil: [ :each | BrLabel new ];
-		dataBinder: [ :aLabel :eachItem | 
-			aLabel
-				text: (eachItem isDirectory
-						ifTrue: [ '-' ]
-						ifFalse: [ [ eachItem humanReadableSize ]
-								on: FileException
-								do: [ :anException | anException return: '? B' ] ]) ].
-	aTable column
+		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
+		dataBinder: [ :aLabel :eachItem |
+			aLabel text: (eachItem isDirectory
+				ifTrue: [ '-' ]
+				ifFalse: [ [ eachItem humanReadableSize ] 
+					on: FileException 
+					do: [ :anException | anException return: '? B' ] ])].
+	aTable column 
 		title: 'Modified' translated;
-		cellStencil: [ :each | BrLabel new ];
-		dataBinder: [ :aLabel :eachItem | 
-			aLabel
-				text: ([ String
-						streamContents: [ :s | 
-							eachItem creationTime printYMDOn: s.
-							s nextPut: Character space.
-							eachItem creationTime printHMSOn: s ] ]
-						on: FileException
-						do: [ :anException | anException return: '?' ]) ].
+		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
+		dataBinder: [ :aLabel :eachItem |
+			aLabel text: ([ String
+					streamContents: [ :s | 
+						eachItem creationTime printYMDOn: s.
+						s nextPut: Character space.
+						eachItem creationTime printHMSOn: s ] ] 
+					on: FileException 
+					do: [ :anException | anException return: '?' ]) ].
 
 	aTable
 		when: BrSelectionDoubleClicked
@@ -199,9 +201,12 @@ BrFileSelector >> createTable [
 				ifNotEmpty: [ :theIndices | 
 					| aWidgetElement selectedObject |
 					aWidgetElement := anEvent currentTarget.
-					selectedObject := aWidgetElement viewModel itemAt: theIndices first.
+					selectedObject := aWidgetElement viewModel
+						itemAt: theIndices first.
 					self folder: selectedObject ] ].
-	aTable when: BrSelectionChanged do: [ :anEvent | okButton enable ].
+	aTable
+		when: BrSelectionChanged 
+		do: [ :anEvent | okButton enable ].
 	aTable addAptitude: BrColumnedListHeaderAptitude.
 
 	^ aTable

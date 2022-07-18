@@ -15,15 +15,17 @@ Class {
 BrColumnedListHeaderAptitude >> headerPane [
 	| headerPane |
 	headerPane := BrHorizontalPane new
-			padding: (BlInsets bottom: 5);
-			hMatchParent;
-			vFitContent.
+		padding: (BlInsets bottom: 5);
+		hMatchParent;
+		vFitContent.
 	widget viewModel
 		columnsDo: [ :aColumn | 
 			| label |
-			label := BrLabel new.
+			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
 			label
-				text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
+				text:
+					(aColumn title asRopedText
+						foreground: self theme button defaultTextColor).
 			aColumn width applyOn: label.
 			headerPane addChild: label ].
 	^ headerPane

@@ -73,9 +73,11 @@ BrFileBrowser >> createBreadcrumb [
 BrFileBrowser >> createTable [
 	| aTable |
 	aTable := BrColumnedList new.
-	aTable
+	aTable 
 		padding: (BlInsets top: 5);
-		matchParent.	"icon column"
+		matchParent.
+
+	"icon column"
 	aTable column
 		title: 'Icon' translated;
 		width: 40;
@@ -86,29 +88,30 @@ BrFileBrowser >> createTable [
 	aTable column
 		title: 'Name' translated;
 		matchParent;
-		cellStencil: [ :each | BrLabel new ];
+		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :aLabel :eachItem | 
 			aLabel
-				text: ((folder isChildOf: eachItem)
+				text:
+					((folder isChildOf: eachItem)
 						ifTrue: [ '..' ]
 						ifFalse: [ eachItem basename asString ]) ].
-	aTable column
+	aTable column 
 		title: 'Size' translated;
 		width: 100;
-		cellStencil: [ :each | BrLabel new ];
-		dataBinder: [ :aLabel :eachItem | 
-			aLabel
-				text: (eachItem isDirectory ifTrue: [ '-' ] ifFalse: [ eachItem humanReadableSize ]) ].
-	aTable column
+		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
+		dataBinder: [ :aLabel :eachItem |
+			aLabel text: (eachItem isDirectory
+				ifTrue: [ '-' ]
+				ifFalse: [ eachItem humanReadableSize ])].
+	aTable column 
 		title: 'Modified' translated;
-		cellStencil: [ :each | BrLabel new ];
-		dataBinder: [ :aLabel :eachItem | 
-			aLabel
-				text: (String
-						streamContents: [ :s | 
-							eachItem creationTime printYMDOn: s.
-							s nextPut: Character space.
-							eachItem creationTime printHMSOn: s ]) ].
+		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
+		dataBinder: [ :aLabel :eachItem |
+			aLabel text: (String
+					streamContents: [ :s | 
+						eachItem creationTime printYMDOn: s.
+						s nextPut: Character space.
+						eachItem creationTime printHMSOn: s ]) ].
 
 	aTable
 		when: BrSelectionDoubleClicked
@@ -117,7 +120,8 @@ BrFileBrowser >> createTable [
 				ifNotEmpty: [ :theIndices | 
 					| aWidgetElement selectedObject |
 					aWidgetElement := anEvent currentTarget.
-					selectedObject := aWidgetElement viewModel itemAt: theIndices first.
+					selectedObject := aWidgetElement viewModel
+						itemAt: theIndices first.
 					self folder: selectedObject ] ].
 	aTable addAptitude: BrColumnedListHeaderAptitude.
 

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'aptitudeClass'
 	],
-	#category : #'Brick-DevTool'
+	#category : 'Brick-DevTool'
 }
 
 { #category : #accessing }
@@ -80,11 +80,12 @@ BrDevAptitudeOverview >> buildCoderArtifactReferenceList: aListOfWishReferences 
 { #category : #'private - instance creation' }
 BrDevAptitudeOverview >> buildEventsList [
 	| aList |
+	
 	aList := BrSimpleList new
-			matchParent;
-			items: self aptitudeClass withAllSuperclassEvents;
-			itemStencil: [ BrLabel new hMatchParent beSmallSize ];
-			itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
+		matchParent;
+		items: (self aptitudeClass withAllSuperclassEvents);
+		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
+		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
 
 	^ aList
 ]
@@ -136,27 +137,25 @@ BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
 BrDevAptitudeOverview >> buildLookHierarchy [
 	^ BrSimpleTree new
 		matchParent;
-		nodeStencil: [ BrLabel new beSmallSize ];
-		nodeDataBinder: [ :anItemElement :anItem | 
-			anItemElement
-				text: (anItem rootClass = self aptitudeClass
-						ifTrue: [ anItem rootClass name asRopedText bold ]
-						ifFalse: [ anItem rootClass name ]) ];
-		items: (GtCoderClassesHierarchyTree
-					fromClasses: self aptitudeClass withAllSuperclassAndSubclassAptitudes)
-					sortByClassName subclassTrees
-			children: [ :anItem | anItem subclassTrees ];
+		nodeStencil: [ BrLabel new beSmallSize aptitude: BrGlamorousLabelAptitude ];
+		nodeDataBinder: [ :anItemElement :anItem |
+			anItemElement text: (anItem rootClass = self aptitudeClass
+				ifTrue: [ anItem rootClass name asRopedText bold ]
+				ifFalse: [ anItem rootClass name ]) ];
+		items: (GtCoderClassesHierarchyTree fromClasses: self aptitudeClass withAllSuperclassAndSubclassAptitudes) sortByClassName subclassTrees
+		children: [ :anItem | anItem subclassTrees ];
 		expandAll
 ]
 
 { #category : #'private - instance creation' }
 BrDevAptitudeOverview >> buildRequestsList [
 	| aList |
+	
 	aList := BrSimpleList new
-			matchParent;
-			items: self aptitudeClass withAllSuperclassRequests;
-			itemStencil: [ BrLabel new hMatchParent beSmallSize ];
-			itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
+		matchParent;
+		items: (self aptitudeClass withAllSuperclassRequests);
+		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
+		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
 
 	^ aList
 ]
@@ -194,7 +193,9 @@ BrDevAptitudeOverview >> buildRequestsSection [
 BrDevAptitudeOverview >> buildSectionLabel: aString [
 	^ BrLabel new
 		beHugeSize;
-		margin: (BlInsets
+		aptitude: BrGlamorousLabelAptitude;
+		margin:
+			(BlInsets
 				top: 15
 				right: 0
 				bottom: 0
@@ -222,11 +223,12 @@ BrDevAptitudeOverview >> buildSmallReferencesList: aListOfLookArtifactReferences
 { #category : #'private - instance creation' }
 BrDevAptitudeOverview >> buildWishesList [
 	| aList |
+	
 	aList := BrSimpleList new
-			matchParent;
-			items: self aptitudeClass withAllSuperclassWishes;
-			itemStencil: [ BrLabel new hMatchParent beSmallSize ];
-			itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
+		matchParent;
+		items: (self aptitudeClass withAllSuperclassWishes);
+		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
+		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
 
 	^ aList
 ]
