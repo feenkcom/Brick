@@ -1,13 +1,12 @@
 Class {
 	#name : #BrGlamorousWithLabelTooltipAptitude,
 	#superclass : #BrWithTooltipAptitude,
-	#category : 'Brick-Glamorous-Buttons'
+	#category : #'Brick-Glamorous-Buttons'
 }
 
 { #category : #'instance creation' }
 BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 	^ BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
 		text: aTextOrString;
 		padding: (BlInsets all: 5)
 ]

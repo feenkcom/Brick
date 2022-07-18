@@ -6,7 +6,7 @@ Class {
 		'targetElement',
 		'statusElement'
 	],
-	#category : 'Brick-DevTool'
+	#category : #'Brick-DevTool'
 }
 
 { #category : #'instance creation' }
@@ -55,14 +55,14 @@ BrDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 
 { #category : #initialization }
 BrDevScripterStepElement >> initializeLabelElement [
-	labelElement := BrLabel new 
-		zIndex: 10;
-		aptitude: BrGlamorousLabelAptitude;
-		addEventHandlerOn: BlClickEvent do: [ :anEvent | BlEvent fireEvent: anEvent target: self ];
-		constraintsDo: [ :c | 
-			c vertical fitContent.
-			c horizontal fitContent. ];
-		text: 'Step' asRopedText
+	labelElement := BrLabel new
+			zIndex: 10;
+			addEventHandlerOn: BlClickEvent
+				do: [ :anEvent | BlEvent fireEvent: anEvent target: self ];
+			constraintsDo: [ :c | 
+				c vertical fitContent.
+				c horizontal fitContent ];
+			text: 'Step' asRopedText
 ]
 
 { #category : #accessing }

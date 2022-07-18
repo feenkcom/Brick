@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousSimpleContextMenuContent,
 	#superclass : #BrSimpleList,
-	#category : 'Brick-Glamorous-Context Menu'
+	#category : #'Brick-Glamorous-Context Menu'
 }
 
 { #category : #initialization }
@@ -10,12 +10,10 @@ BrGlamorousSimpleContextMenuContent >> initialize [
 	self
 		stencil: [ :e | 
 			BlElement new
-				viewModel:
-					(BrInteractiveModel new
+				viewModel: (BrInteractiveModel new
 						withHover;
 						yourself);
-				aptitude:
-					(BrInteractiveCommonAptitude new
+				aptitude: (BrInteractiveCommonAptitude new
 						default: [ :f | f background: Color transparent ];
 						hovered: [ :f | f background: self theme button defaultBorderColor ];
 						yourself);
@@ -26,14 +24,11 @@ BrGlamorousSimpleContextMenuContent >> initialize [
 				padding: (BlInsets all: 5);
 				when: BlClickEvent
 					do: [ e value cull: self anchor.
-					self anchor
-						dispatchEvent:
-							(BrContextMenuHideWish new
-								anchor: self anchor;
-								yourself) ];
-				addChild:
-					(BrLabel new
-						aptitude: BrGlamorousLabelAptitude;
+						self anchor
+							dispatchEvent: (BrContextMenuHideWish new
+									anchor: self anchor;
+									yourself) ];
+				addChild: (BrLabel new
 						text: e key;
 						yourself);
 				yourself ];

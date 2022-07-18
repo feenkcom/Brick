@@ -114,47 +114,38 @@ BlElement >> asyncSink [
 { #category : #'*Brick' }
 BlElement >> gtInspectorPaintModelAptitudeIn: aMondrianView [
 	| nodes |
-
-	nodes := { self }.
-	self viewModelDo: [ :aViewModel | nodes := nodes, aViewModel withAllChildren ].
-	self aptitudeDo: [ :aLook | nodes := nodes, aLook withAllChildren ].
+	nodes := {self}.
+	self viewModelDo: [ :aViewModel | nodes := nodes , aViewModel withAllChildren ].
+	self aptitudeDo: [ :aLook | nodes := nodes , aLook withAllChildren ].
 	nodes := nodes asSet asArray.
-	
+
 	aMondrianView nodes
-		stencil: [ :each |
+		stencil: [ :each | 
 			BrHorizontalPane new
 				fitContent;
 				alignCenter;
 				padding: (BlInsets right: 5);
-				addChild: (BrHorizontalPane new 
-					background: Color veryLightGray;
-					geometry: BlCircleGeometry new;
-					padding: (BlInsets all: 5);
-					margin: (BlInsets right: 5);
-					fitContent;
-					addChild: (BrLabel new
-						aptitude: (BrGlamorousLabelAptitude new fontSize: 10);
-						text: (((each isKindOf: BlElement)
-							ifTrue: [ 'W' ]
-							ifFalse: [ (each isKindOf: BrAptitude)
-								ifTrue: [ 'A' ]
-								ifFalse: [ 'M' ] ]))));
-				addChild: (BrLabel new
-					aptitude: (BrGlamorousLabelAptitude new);
-					text: each class name )
-				 ];
+				addChild: (BrHorizontalPane new
+						background: Color veryLightGray;
+						geometry: BlCircleGeometry new;
+						padding: (BlInsets all: 5);
+						margin: (BlInsets right: 5);
+						fitContent;
+						addChild: (BrLabel new
+								aptitude: (BrGlamorousLabelAptitude new fontSize: 10);
+								text: ((each isKindOf: BlElement)
+										ifTrue: [ 'W' ]
+										ifFalse: [ (each isKindOf: BrAptitude) ifTrue: [ 'A' ] ifFalse: [ 'M' ] ])));
+				addChild: (BrLabel new text: each class name) ];
 		with: nodes.
-	
-	aMondrianView edges 
-		stencil: [ :x | 
-			"BlSigmoidElement new 
-				beHorizontal;"
-			BlLineElement new
-				border: (BlBorder paint: (Color gray alpha: 0.5))];
+
+	aMondrianView edges
+		stencil: [  "BlSigmoidElement new 
+				beHorizontal;":x | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5)) ];
 		fromRightCenter;
 		toLeftCenter;
 		connectToAll: #actors.
-	
+
 	aMondrianView layout horizontalTree nodeDistance: 20
 ]
 
