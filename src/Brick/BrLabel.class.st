@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable + TBrSizeAdjustable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait + TBrSizeAdjustable classTrait',
-	#category : 'Brick-Label - UI'
+	#category : #'Brick-Label - UI'
 }
 
 { #category : #layout }
@@ -23,14 +23,15 @@ BrLabel >> gtDisplayString [
 { #category : #initialization }
 BrLabel >> initialize [
 	super initialize.
-	
+
 	self
 		fitContent;
 		beNormalSize.
 
-	self viewModel: (BrLabelModel new add: (BrInteractiveModel withAll: {
-		BrLayoutAlignmentModel new centerLeft.
-	}))
+	self
+		viewModel: (BrLabelModel new
+				add: (BrInteractiveModel withAll: {BrLayoutAlignmentModel new centerLeft})).
+	self aptitude: BrGlamorousLabelAptitude
 ]
 
 { #category : #accessing }

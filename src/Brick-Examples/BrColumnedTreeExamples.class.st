@@ -12,18 +12,15 @@ BrColumnedTreeExamples >> subclassesOfCollection [
 	aTree column
 		title: 'Class';
 		cellStencil: [ BrLabel new
-				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vFitContent ];
 		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass name asString ].
 	aTree column
 		title: 'Package';
 		cellStencil: [ BrLabel new
-				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vFitContent ];
-		dataBinder:
-				[ :aCellElement :aClass | aCellElement text: aClass package name asString ].
+		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass package name asString ].
 	aTree items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
 	^ aTree
 ]
@@ -33,27 +30,21 @@ BrColumnedTreeExamples >> subropesTree [
 	<gtExample>
 	| aRope aTree |
 	aRope := BlConcatenationRopeExamples new small_from_1_to_2.
-	
+
 	aTree := BrColumnedTree new.
 	aTree column
 		title: 'Text';
 		width: 150;
-		cellStencil: [ 
-			BrLabel new 
-				aptitude: BrGlamorousLabelAptitude new ];
+		cellStencil: [ BrLabel new ];
 		dataBinder: [ :eachLabel :eachRope | eachLabel text: eachRope ].
-		
+
 	aTree column
 		title: 'Length';
 		weight: 2;
-		cellStencil: [ 
-			BrLabel new 
-				aptitude: BrGlamorousLabelAptitude new ];
+		cellStencil: [ BrLabel new ];
 		dataBinder: [ :eachLabel :eachRope | eachLabel text: eachRope size asString ].
-		
-	aTree 
-		items: {aRope} 
-		lazy: [ :eachRope | eachRope children ].
-	
+
+	aTree items: {aRope} lazy: [ :eachRope | eachRope children ].
+
 	^ aTree
 ]

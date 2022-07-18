@@ -95,11 +95,15 @@ BrSimpleListExamples >> horizontalNumbers [
 BrSimpleListExamples >> label [
 	<gtExample>
 	| aLabel |
-	aLabel := BrLabel new
-		beHugeSize;
-		aptitude: BrGlamorousLabelAptitude.
+	aLabel := BrLabel new beHugeSize.
 	aLabel margin: aLabel margin + (BlInsets all: 5).
-	aLabel padding: aLabel padding + (BlInsets top: 5 right: 10 bottom: 5 left: 10).
+	aLabel
+		padding: aLabel padding
+				+ (BlInsets
+						top: 5
+						right: 10
+						bottom: 5
+						left: 10).
 	aLabel border: (BlBorder paint: Color lightGray width: 1).
 	aLabel geometry: (BlRoundedRectangleGeometry cornerRadius: 4).
 	^ aLabel
@@ -108,26 +112,27 @@ BrSimpleListExamples >> label [
 { #category : #'examples - performance' }
 BrSimpleListExamples >> simpleListWithItemsBindsOnce [
 	"This example makes sure that when the list is displayed for the first time, the items are created and bound just once."
+
 	<gtExample>
 	| aList aScripter aCreationAmount aBindingAmount theItemsChangedEvents |
-
 	aCreationAmount := 0.
 	aBindingAmount := 0.
 
 	aList := BrSimpleList new.
 	aList vExact: 300.
-	aList itemStencil: [
-			aCreationAmount := aCreationAmount + 1.
+	aList
+		itemStencil: [ aCreationAmount := aCreationAmount + 1.
 			BrLabel new
-				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vExact: 50 ];
-		itemDataBinder: [ :aCellElement :aClass |
+		itemDataBinder: [ :aCellElement :aClass | 
 			aBindingAmount := aBindingAmount + 1.
 			aCellElement text: aClass name asString ].
-	
+
 	theItemsChangedEvents := OrderedCollection new.
-	aList when: BrItemsProviderItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
+	aList
+		when: BrItemsProviderItemsChangedEvent
+		do: [ :anEvent | theItemsChangedEvents add: anEvent ].
 
 	aScripter := BlDevScripter new.
 	aScripter element: aList.

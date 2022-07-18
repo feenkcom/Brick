@@ -7,7 +7,6 @@ Class {
 { #category : #'instance creation' }
 BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 	^ BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
 		text: aTextOrString;
 		padding: (BlInsets all: 5)
 ]

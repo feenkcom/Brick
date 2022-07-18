@@ -182,27 +182,28 @@ BrGlamorousTaggerSelectableAptitude >> newBasicAddTagButton [
 { #category : #'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newTagCreatorElement: aTagPrototype [
 	| aNewTagCreator aNewTagEditor |
-
 	aNewTagCreator := BrHorizontalPane new
-		addChild: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude new;
-			text: aTagPrototype).
+			addChild: (BrLabel new text: aTagPrototype).
 
 	aNewTagEditor := (tagLabelStencil tag: aTagPrototype) asElement
-		requestFocus;
-		switchToEditor;
-		padding: (BlInsets top: 5 left: 6 bottom: 5 right: 6);
-		margin: margin;
-		constraintsDo: [ :c | c flow vertical alignCenter ];
-		when: BrEditorAcceptWish do: [ :aWish |
-			self
-				requestAddTag: (BrTaggerTag named: aWish text asString)
-				from: aNewTagCreator ];
-		when: BrEditorCancelWish do: [ :anEvent |
-			anEvent currentTarget focusPrevious.
-			self
-				removeTagElement: aNewTagCreator
-				withSeparatorAt: tagElements size + 1 ].
+			requestFocus;
+			switchToEditor;
+			padding: (BlInsets
+					top: 5
+					left: 6
+					bottom: 5
+					right: 6);
+			margin: margin;
+			constraintsDo: [ :c | c flow vertical alignCenter ];
+			when: BrEditorAcceptWish
+				do: [ :aWish | 
+					self
+						requestAddTag: (BrTaggerTag named: aWish text asString)
+						from: aNewTagCreator ];
+			when: BrEditorCancelWish
+				do: [ :anEvent | 
+					anEvent currentTarget focusPrevious.
+					self removeTagElement: aNewTagCreator withSeparatorAt: tagElements size + 1 ].
 
 	aNewTagEditor navigator
 		moveTo: 0;
@@ -211,7 +212,7 @@ BrGlamorousTaggerSelectableAptitude >> newTagCreatorElement: aTagPrototype [
 	aNewTagCreator
 		addChild: aNewTagEditor;
 		fitContent.
-		
+
 	^ aNewTagCreator
 ]
 

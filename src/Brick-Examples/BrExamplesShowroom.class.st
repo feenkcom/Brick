@@ -77,7 +77,7 @@ ${example:BrExamplesShowroom>>#columnedList|noCode}$
 Class {
 	#name : #BrExamplesShowroom,
 	#superclass : #Object,
-	#category : 'Brick-Examples-! Showroom'
+	#category : #'Brick-Examples-! Showroom'
 }
 
 { #category : #buttons }
@@ -203,26 +203,20 @@ BrExamplesShowroom >> glamorousBreadcrumb [
 	<gtExample>
 	<description: 'Breadcrumb with glamorous look'>
 	| aBreadcrumb |
-
 	aBreadcrumb := BrBreadcrumb new.
-	aBreadcrumb aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
-		BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-			text: '>';
-			margin: (BlInsets left: 5 right: 5) ]).
+	aBreadcrumb
+		aptitude: (BrGlamorousBreadcrumbAptitude new
+				separator: [ BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+						text: '>';
+						margin: (BlInsets left: 5 right: 5) ]).
 
-	aBreadcrumb addItem: (BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		text: 'Home').
+	aBreadcrumb addItem: (BrLabel new text: 'Home').
 
-	aBreadcrumb addItem: (BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		text: 'Store').
-	
-	aBreadcrumb addItem: (BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		text: 'T-Shirt').
-	
+	aBreadcrumb addItem: (BrLabel new text: 'Store').
+
+	aBreadcrumb addItem: (BrLabel new text: 'T-Shirt').
+
 	^ aBreadcrumb
 ]
 
