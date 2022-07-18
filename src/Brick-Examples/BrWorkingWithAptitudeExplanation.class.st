@@ -11,7 +11,7 @@ ${example:BrWorkingWithAptitudeExplanation>>#labelWithoutAptitude|previewExpande
 Class {
 	#name : #BrWorkingWithAptitudeExplanation,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Explanations'
+	#category : #'Brick-Examples-Explanations'
 }
 
 { #category : #accessing }
@@ -68,6 +68,7 @@ BrWorkingWithAptitudeExplanation >> labelWithoutAptitude [
 		padding: (BlInsets all: 20);
 		alignCenter;
 		relocate: 20@30.
+	label removeAptitude: label aptitude.
 	self assert: label hasChildren not.
 	self assert: label effect isNullEffect.
 	^ label
