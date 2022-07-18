@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLookChangeExamples,
 	#superclass : #Object,
-	#category : #'Brick-Examples-Look'
+	#category : 'Brick-Examples-Look'
 }
 
 { #category : #buttons }
@@ -25,56 +25,60 @@ BrLookChangeExamples >> buttonLookPropertyChange [
 	<gtExample>
 	| blue wide notSoWide fat pointy round roundish changes label |
 	blue := BrLookPropertyChange new
-			path: #(widget background);
-			value: [ BrGlamorousColors hoveredButtonTextColor asBlBackground ];
-			yourself.
+		path: #(widget background);
+		value: [ BrGlamorousColors hoveredButtonTextColor asBlBackground ];
+		yourself.
 	wide := BrLookPropertyChange new
-			path: #(widget width);
-			value: [ 500 ];
-			yourself.
+		path: #(widget width);
+		value: [ 500 ];
+		yourself.
 	notSoWide := BrLookPropertyChange new
-			path: #(widget width);
-			value: [ 350 ];
-			yourself.
+		path: #(widget width);
+		value: [ 350 ];
+		yourself.
 	fat := BrLookPropertyChange new
-			path: #(widget padding);
-			value: [ BlInsets all: 50 ];
-			yourself.
+		path: #(widget padding);
+		value: [ BlInsets all: 50 ];
+		yourself.
 	pointy := BrLookPropertyChange new
-			path: #(widget geometry);
-			value: [ BlRoundedRectangleGeometry new ];
-			yourself.
+		path: #(widget geometry);
+		value: [ BlRoundedRectangleGeometry new ];
+		yourself.
 	round := BrLookPropertyChange new
-			path: #(widget geometry);
-			value: [ BlEllipseGeometry new ];
-			yourself.
+		path: #(widget geometry);
+		value: [ BlEllipseGeometry new ];
+		yourself.
 	roundish := BrLookPropertyChange new
-			path: #(widget geometry);
-			value: [ BlRoundedRectangleGeometry cornerRadius: 10 ];
-			yourself.
-	changes := {#blue -> blue.
-			#wide -> wide.
-			#notSoWide -> notSoWide.
-			#fat -> fat.
-			#pointy -> pointy.
-			#round -> round.
-			#roundish -> roundish}.
+		path: #(widget geometry);
+		value: [ BlRoundedRectangleGeometry cornerRadius: 10 ];
+		yourself.
+	changes := {(#blue -> blue).
+	(#wide -> wide).
+	(#notSoWide -> notSoWide).
+	(#fat -> fat).
+	(#pointy -> pointy).
+	(#round -> round).
+	(#roundish -> roundish)}.
 	label := BrLabel new
-			border: (BlBorder paint: Color black width: 1);
-			padding: (BlInsets all: 25);
-			geometry: (BlRoundedRectangleGeometry cornerRadius: 20);
-			text: 'Click me to change!' asRopedText;
-			yourself.
+		border: (BlBorder paint: Color black width: 1);
+		padding: (BlInsets all: 25);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 20);
+		aptitude: BrGlamorousLabelAptitude;
+		text: 'Click me to change!' asRopedText;
+		yourself.
 	label
 		addEventHandlerOn: BlClickEvent
 		do: [ | random look text |
-			random := changes shuffled copyFrom: 1 to: (0 to: changes size) atRandom.
+			random := changes shuffled
+				copyFrom: 1
+				to: (0 to: changes size) atRandom.
 			look := BrAptitude new.
 			text := ' '
-					join: (random
-							collect: [ :f | 
-								look changes add: f value.
-								f key ]).
+				join:
+					(random
+						collect: [ :f | 
+							look changes add: f value.
+							f key ]).
 			label aptitude: BrGlamorousLabelAptitude + look.
 			label text: text asRopedText ].
 	^ label

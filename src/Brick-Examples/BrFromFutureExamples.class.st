@@ -1,19 +1,20 @@
 Class {
 	#name : #BrFromFutureExamples,
 	#superclass : #Object,
-	#category : #'Brick-Examples-Future'
+	#category : 'Brick-Examples-Future'
 }
 
 { #category : #examples }
 BrFromFutureExamples >> fromFutureLabel [
 	<gtExample>
+	
 	^ BrFromFuture new
 		fitContent;
-		future: [ 0.5 seconds wait.
-				'Alice' ]
+		future: [ 0.5 seconds wait . 'Alice' ]
 			initialValue: 'placeholder';
-		stencil: [ BrLabel new ];
-		dataBinder: [ :aLabel :aDataSnapshot | 
+		stencil: [ BrLabel new
+			aptitude: BrGlamorousLabelAptitude ];
+		dataBinder: [ :aLabel :aDataSnapshot |
 			aDataSnapshot
 				ifSuccess: [ :aName | aLabel text: aName ]
 				ifError: [ :anError | aLabel text: (anError description asRopedText foreground: Color red) ]
@@ -23,13 +24,14 @@ BrFromFutureExamples >> fromFutureLabel [
 { #category : #examples }
 BrFromFutureExamples >> fromFutureLabelWithError [
 	<gtExample>
+	
 	^ BrFromFuture new
 		fitContent;
-		future: [ 0.5 seconds wait.
-				1 / 0 ]
+		future: [ 0.5 seconds wait . 1/0 ]
 			initialValue: 'placeholder';
-		stencil: [ BrLabel new ];
-		dataBinder: [ :aLabel :aDataSnapshot | 
+		stencil: [ BrLabel new
+			aptitude: BrGlamorousLabelAptitude ];
+		dataBinder: [ :aLabel :aDataSnapshot |
 			aDataSnapshot
 				ifSuccess: [ :aName | aLabel text: aName ]
 				ifError: [ :anError | aLabel text: (anError description asRopedText foreground: Color red) ]

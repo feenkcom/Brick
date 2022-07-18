@@ -112,9 +112,9 @@ BrColumnedListExamples >> columnedListModelWithColorAsItems [
 { #category : #'examples - performance' }
 BrColumnedListExamples >> columnedListWithItemsBindsOnce [
 	"This example makes sure that when the list is displayed for the first time, the items are created and bound just once."
-
 	<gtExample>
 	| aList aScripter aCreationAmount aBindingAmount theItemsChangedEvents |
+
 	aCreationAmount := 0.
 	aBindingAmount := 0.
 
@@ -122,18 +122,18 @@ BrColumnedListExamples >> columnedListWithItemsBindsOnce [
 	aList vExact: 300.
 	aList column
 		title: 'Class';
-		cellStencil: [ aCreationAmount := aCreationAmount + 1.
+		cellStencil: [
+			aCreationAmount := aCreationAmount + 1.
 			BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vExact: 50 ];
-		dataBinder: [ :aCellElement :aClass | 
+		dataBinder: [ :aCellElement :aClass |
 			aBindingAmount := aBindingAmount + 1.
 			aCellElement text: aClass name asString ].
-
+	
 	theItemsChangedEvents := OrderedCollection new.
-	aList
-		when: BrItemsProviderItemsChangedEvent
-		do: [ :anEvent | theItemsChangedEvents add: anEvent ].
+	aList when: BrItemsProviderItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
 
 	aScripter := BlDevScripter new.
 	aScripter element: aList.
@@ -172,13 +172,17 @@ BrColumnedListExamples >> compositeAllClassesAndPackage [
 	aList := BrColumnedList new.
 	aList column
 		title: 'Class';
-		cellStencil: [ BrLabel new
+		cellStencil: [
+			BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vFitContent ];
 		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass name asString ].
 	aList column
 		title: 'Package';
-		cellStencil: [ BrLabel new
+		cellStencil: [
+			BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vFitContent ];
 		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass package name asString ].

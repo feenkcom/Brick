@@ -11,7 +11,7 @@ ${example:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithoutSeparator|previewS
 Class {
 	#name : #BrGlamorousComponentsBreadcrumbs,
 	#superclass : #BrGlamorousComponents,
-	#category : #'Brick-Examples-! Glamorous components'
+	#category : 'Brick-Examples-! Glamorous components'
 }
 
 { #category : #breacrumb }
@@ -38,23 +38,37 @@ BrGlamorousComponentsBreadcrumbs >> breadcrumbWithButtons [
 { #category : #breacrumb }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithLabels [
 	<gtExample>
+
 	^ BrBreadcrumb new
-		aptitude: (BrGlamorousBreadcrumbAptitude new
-				separator: [ BrLabel new
-						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-						text: '>';
-						margin: (BlInsets left: 5 right: 5) ]);
-		addItem: (BrLabel new text: 'Home');
-		addItem: (BrLabel new text: 'Store');
-		addItem: (BrLabel new text: 'T-Shirt')
+		aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
+			BrLabel new
+				aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+				text: '>';
+				margin: (BlInsets left: 5 right: 5) ]);
+		addItem: (BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'Home');
+		addItem: (BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'Store');
+		addItem: (BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'T-Shirt')
 ]
 
 { #category : #breacrumb }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithoutSeparator [
 	<gtExample>
+
 	^ BrBreadcrumb new
 		aptitude: BrGlamorousBreadcrumbAptitude;
-		addItem: (BrLabel new text: 'Home');
-		addItem: (BrLabel new text: 'Store');
-		addItem: (BrLabel new text: 'T-Shirt')
+		addItem: (BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'Home');
+		addItem: (BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'Store');
+		addItem: (BrLabel new
+			aptitude: BrGlamorousLabelAptitude;
+			text: 'T-Shirt')
 ]
