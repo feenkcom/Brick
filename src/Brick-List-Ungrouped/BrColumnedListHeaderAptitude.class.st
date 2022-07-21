@@ -8,7 +8,7 @@ BrColumnedListHeaderLook adds a header row to a BrColumnedList.
 Class {
 	#name : #BrColumnedListHeaderAptitude,
 	#superclass : #BrAptitude,
-	#category : #'Brick-List-Aptitudes'
+	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
 { #category : #private }

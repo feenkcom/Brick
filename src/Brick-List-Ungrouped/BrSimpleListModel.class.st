@@ -1,12 +1,12 @@
 Class {
 	#name : #BrSimpleListModel,
-	#superclass : #BrAbstractListModel,
+	#superclass : #BrUngroupedListModel,
 	#instVars : [
 		'itemElementStencil',
 		'itemDataBinder',
 		'itemDataUnbinder'
 	],
-	#category : #'Brick-List-Models'
+	#category : #'Brick-List-Ungrouped-Models'
 }
 
 { #category : #initialization }

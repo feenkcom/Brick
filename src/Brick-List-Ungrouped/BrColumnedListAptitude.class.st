@@ -7,7 +7,7 @@ Class {
 		'listElement',
 		'rowStencil'
 	],
-	#category : #'Brick-List-Aptitudes'
+	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
 { #category : #initialization }

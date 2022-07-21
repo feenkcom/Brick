@@ -1,10 +1,10 @@
 Class {
 	#name : #BrColumnedList,
-	#superclass : #BrList,
+	#superclass : #BrUngroupedList,
 	#instVars : [
 		'columnedModel'
 	],
-	#category : #'Brick-List-Elements'
+	#category : #'Brick-List-Ungrouped-Elements'
 }
 
 { #category : #'api - scripting' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrFlowList,
-	#superclass : #BrList,
-	#category : #'Brick-List-Elements'
+	#superclass : #BrUngroupedList,
+	#category : #'Brick-List-Ungrouped-Elements'
 }
 
 { #category : #initialization }

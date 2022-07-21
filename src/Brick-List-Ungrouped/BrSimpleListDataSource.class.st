@@ -1,11 +1,11 @@
 Class {
 	#name : #BrSimpleListDataSource,
-	#superclass : #BrListDataSource,
+	#superclass : #BrUngroupedListDataSource,
 	#instVars : [
 		'itemDataBinder',
 		'itemDataUnbinder'
 	],
-	#category : #'Brick-List-Support'
+	#category : #'Brick-List-Ungrouped-Support'
 }
 
 { #category : #'accessing - stencils' }

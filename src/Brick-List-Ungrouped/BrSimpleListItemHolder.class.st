@@ -1,5 +1,5 @@
 Class {
 	#name : #BrSimpleListItemHolder,
 	#superclass : #BrListItemHolder,
-	#category : #'Brick-List-Support'
+	#category : #'Brick-List-Ungrouped-Support'
 }

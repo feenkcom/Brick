@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'itemElementStencil'
 	],
-	#category : #'Brick-List-Events'
+	#category : #'Brick-List-Ungrouped-Events'
 }
 
 { #category : #accessing }

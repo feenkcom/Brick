@@ -1,10 +1,10 @@
 Class {
 	#name : #BrColumnedListModel,
-	#superclass : #BrAbstractListModel,
+	#superclass : #BrUngroupedListModel,
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-List-Models'
+	#category : #'Brick-List-Ungrouped-Models'
 }
 
 { #category : #accessing }

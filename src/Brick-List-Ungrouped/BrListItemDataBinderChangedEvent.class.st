@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'itemDataBinder'
 	],
-	#category : #'Brick-List-Events'
+	#category : #'Brick-List-Ungrouped-Events'
 }
 
 { #category : #accessing }
