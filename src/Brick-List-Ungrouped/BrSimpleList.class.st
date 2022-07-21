@@ -5,8 +5,8 @@ I am a simple list that displays a large amount of items in a vertical orientati
 "
 Class {
 	#name : #BrSimpleList,
-	#superclass : #BrList,
-	#category : #'Brick-List-Elements'
+	#superclass : #BrUngroupedList,
+	#category : #'Brick-List-Ungrouped-Elements'
 }
 
 { #category : #factory }

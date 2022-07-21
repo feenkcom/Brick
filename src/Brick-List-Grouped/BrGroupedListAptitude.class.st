@@ -1,16 +1,16 @@
 Class {
-	#name : #BrSimpleListAptitude,
+	#name : #BrGroupedListAptitude,
 	#superclass : #BrAptitude,
 	#traits : 'TBrListInfiniteElementScroll',
 	#classTraits : 'TBrListInfiniteElementScroll classTrait',
 	#instVars : [
 		'listElement'
 	],
-	#category : #'Brick-List-Aptitudes'
+	#category : #'Brick-List-Grouped-Aptitudes'
 }
 
 { #category : #'api - orientation' }
-BrSimpleListAptitude >> beHorizontal [
+BrGroupedListAptitude >> beHorizontal [
 	| anOldListElement |
 	self listElement class = BrHorizontalInfiniteListElement ifTrue: [ ^ self ].
 	anOldListElement := self listElement.
@@ -22,7 +22,7 @@ BrSimpleListAptitude >> beHorizontal [
 ]
 
 { #category : #'api - orientation' }
-BrSimpleListAptitude >> beVertical [
+BrGroupedListAptitude >> beVertical [
 	| anOldListElement |
 	self listElement class = BrInfiniteListElement ifTrue: [ ^ self ].
 	anOldListElement := self listElement.
@@ -34,7 +34,7 @@ BrSimpleListAptitude >> beVertical [
 ]
 
 { #category : #initialization }
-BrSimpleListAptitude >> initialize [
+BrGroupedListAptitude >> initialize [
 	super initialize.
 
 	self initializeListElement.
@@ -60,101 +60,94 @@ BrSimpleListAptitude >> initialize [
 ]
 
 { #category : #initialization }
-BrSimpleListAptitude >> initializeListElement [
+BrGroupedListAptitude >> initializeListElement [
 	listElement := BrInfiniteListElement new.
+	listElement dataSource: BrGroupedListDataSource new.
 ]
 
 { #category : #initialization }
-BrSimpleListAptitude >> initializeListeners [
+BrGroupedListAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrItemsProviderItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
-	self when: BrItemsProviderDoneEvent do: [ :anEvent | self onItemsProviderDone: anEvent ].
-	self when: BrListModelItemsAddedEvent do: [ :anEvent | self onModelItemsAdded: anEvent ].
-	self when: BrItemsProviderPromiseEnqueuedEvent do: [ :anEvent | self onModelPromiseEnqueued: anEvent ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
 	self when: BrListItemIdStencilChangedEvent do: [ :anEvent | self onItemIdStencilChanged: anEvent itemIdStencil ].
-	self when: BrListItemElementStencilChangedEvent do: [ :anEvent | self onItemElementStencilChanged: anEvent itemElementStencil ].
-	self when: BrListItemDataBinderChangedEvent do: [ :anEvent | self onItemDataBinderChanged: anEvent itemDataBinder ].
-	self when: BrListItemDataUnbinderChangedEvent do: [ :anEvent | self onItemDataUnbinderChanged: anEvent itemDataUnbinder ].
+
+	self when: BrGroupedListHeaderElementStencilChangedEvent do: [ :anEvent | self onHeaderElementStencilChanged: anEvent headerElementStencil ].
+	self when: BrGroupedListHeaderDataBinderChangedEvent do: [ :anEvent | self onHeaderDataBinderChanged: anEvent headerDataBinder ].
 	
 	self initializeScrollListeners
 ]
 
 { #category : #initialization }
-BrSimpleListAptitude >> initializeRequests [
+BrGroupedListAptitude >> initializeRequests [
 	super initializeRequests.
 	self requestListConfiguration
 ]
 
 { #category : #'private - accessing' }
-BrSimpleListAptitude >> listElement [
+BrGroupedListAptitude >> listElement [
 	^ listElement
 ]
 
 { #category : #'api - hooks' }
-BrSimpleListAptitude >> onAttachedTo: anElement [
+BrGroupedListAptitude >> onAttachedTo: anElement [
 	super onAttachedTo: anElement.
 
 	self listElement dataSource 
 		listModel: anElement viewModel
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onItemDataBinderChanged: aBrListItemDataBinder [
-	self listElement dataSource itemDataBinder: aBrListItemDataBinder
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onHeaderDataBinderChanged: aBrListItemDataBinder [
+	self listElement dataSource headerDataBinder: aBrListItemDataBinder
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onItemDataUnbinderChanged: aBrListItemDataUnbinder [
-	self listElement dataSource itemDataUnbinder: aBrListItemDataUnbinder
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onHeaderElementStencilChanged: aBrListItemElementStencilBuilder [
+	self listElement dataSource headerElementStencil: aBrListItemElementStencilBuilder
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onItemElementStencilChanged: aBrListItemElementStencilBuilder [
-	self listElement dataSource itemElementStencil: aBrListItemElementStencilBuilder
-]
-
-{ #category : #hooks }
-BrSimpleListAptitude >> onItemIdStencilChanged: aBrListItemIdStencilBuilder [
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onItemIdStencilChanged: aBrListItemIdStencilBuilder [
 	self listElement dataSource itemIdStencil: aBrListItemIdStencilBuilder
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder [
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onItemTypeStencilChanged: aBrListItemTypeStencilBuilder [
 	self listElement dataSource itemTypeStencil: aBrListItemTypeStencilBuilder
 ]
 
 { #category : #initialization }
-BrSimpleListAptitude >> onItemsProviderDone: anEvent [ 
-	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyItemsProviderDone ])
+BrGroupedListAptitude >> onItemsProviderDone: anEvent [ 
+	
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onModelItemsAdded: anEvent [
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onModelItemsAdded: anEvent [
 	self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyItemsInserted: anEvent insertedInterval ])
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onModelItemsChanged: anEvent [
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onModelItemsChanged: anEvent [
 	anEvent isSynchronous
 		ifTrue: [ self listElement dataSource notifyChanged ]
 		ifFalse: [ self listElement enqueueTask: (BlTaskAction new action: [ self listElement dataSource notifyChanged ]) ]
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onModelPromiseEnqueued: anEvent [
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onModelPromiseEnqueued: anEvent [
 	self listElement enqueueTask: (BlPromiseTask new promise: anEvent promise)
 ]
 
-{ #category : #hooks }
-BrSimpleListAptitude >> onSelectionChanged: aCollectionOfIndices [
+{ #category : #'private - event handling' }
+BrGroupedListAptitude >> onSelectionChanged: aCollectionOfIndices [
 	self listElement dataSource selection: (BlCompositeSelection fromIndices: aCollectionOfIndices)
 ]
 
 { #category : #'private - updating' }
-BrSimpleListAptitude >> replaceListElement: anOldListElement by: aNewListElement [
+BrGroupedListAptitude >> replaceListElement: anOldListElement by: aNewListElement [
 	self widgetDo: [ :aWidget |
 		| aParent |
 		aParent := anOldListElement parent.
@@ -163,16 +156,15 @@ BrSimpleListAptitude >> replaceListElement: anOldListElement by: aNewListElement
 ]
 
 { #category : #initialization }
-BrSimpleListAptitude >> requestListConfiguration [
+BrGroupedListAptitude >> requestListConfiguration [
 	self request: BrSelectionRequest new.
 	self request: BrListItemTypeStencilRequest new.
 	self request: BrListItemIdStencilRequest new.
-	self request: BrListItemElementStencilRequest new.
-	self request: BrListItemDataBinderRequest new.
-	self request: BrListItemDataUnbinderRequest new
+	self request: BrGroupedListHeaderElementStencilRequest new.
+	self request: BrGroupedListHeaderDataBinderRequest new.
 ]
 
 { #category : #'private - updating' }
-BrSimpleListAptitude >> updateListElementParent [
+BrGroupedListAptitude >> updateListElementParent [
 	self listElement dataSource listElement: self widgetContent
 ]

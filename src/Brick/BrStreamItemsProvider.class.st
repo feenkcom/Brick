@@ -86,6 +86,9 @@ BrStreamItemsProvider >> loadSinglesUntil: aNumber [
 
 { #category : #'private - event handling' }
 BrStreamItemsProvider >> onBufferChanged: anAnnouncement [
+	self
+		notifyItemsLoaded: anAnnouncement newItems size
+		at: anAnnouncement index.
 
 	listModel ifNotNil: [ :aListModel | 
 		aListModel dispatchEvent: (BrListModelItemsAddedEvent new
@@ -95,8 +98,7 @@ BrStreamItemsProvider >> onBufferChanged: anAnnouncement [
 
 { #category : #'private - event handling' }
 BrStreamItemsProvider >> onBufferDone: anAnnouncement [
-
-	listModel dispatchEvent: BrItemsProviderDoneEvent new
+	listModel ifNotNil: [ :aListModel | aListModel dispatchEvent: BrItemsProviderDoneEvent new ]
 ]
 
 { #category : #'private - event handling' }

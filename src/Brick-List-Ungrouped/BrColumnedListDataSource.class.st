@@ -1,10 +1,10 @@
 Class {
 	#name : #BrColumnedListDataSource,
-	#superclass : #BrListDataSource,
+	#superclass : #BrUngroupedListDataSource,
 	#instVars : [
 		'columns'
 	],
-	#category : #'Brick-List-Support'
+	#category : #'Brick-List-Ungrouped-Support'
 }
 
 { #category : #accessing }

@@ -5,7 +5,7 @@ Class {
 		'columns',
 		'columnElements'
 	],
-	#category : #'Brick-List-Support'
+	#category : #'Brick-List-Ungrouped-Support'
 }
 
 { #category : #accessing }

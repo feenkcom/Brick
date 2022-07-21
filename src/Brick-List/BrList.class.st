@@ -11,17 +11,6 @@ BrList >> defaultListModel [
 	^ BrAbstractListModel new
 ]
 
-{ #category : #'api - scripting' }
-BrList >> display: aCollectionOfValues [
-	self
-		deprecated: 'Please use items: method instead.'
-		transformWith:
-			'`@receiver display: `@statements1'
-				-> '`@receiver items: `@statements1'.
-
-	self items: aCollectionOfValues value
-]
-
 { #category : #initialization }
 BrList >> initialize [
 	super initialize.
@@ -59,43 +48,11 @@ BrList >> initializeEventHandlers [
 			action: [ self selectPrevious ] )
 ]
 
-{ #category : #'api - accessing' }
-BrList >> items [
-	^ self viewModel items
-]
-
-{ #category : #'api - accessing' }
-BrList >> items: aCollectionOfValues [
-	self itemsProvider: (BrSequenceableCollectionItemsProvider new collection: aCollectionOfValues)
-]
-
-{ #category : #'api - accessing' }
-BrList >> itemsProvider: aBrAbstractListItemsProvider [
-	self viewModel itemsProvider: aBrAbstractListItemsProvider
-]
-
 { #category : #'api - selection' }
 BrList >> maxSelectionIndex [
 	<return: #Number>
 	
-	^ self items size
-]
-
-{ #category : #'api - scrolling' }
-BrList >> scrollToItem: anObject [
-	"Request a scrollable widget to scroll to a given item"
-	<return: #TAsyncPromise>
-		
-	^ self scrollToItemSuchThat: [ :eachItem | eachItem = anObject ]
-]
-
-{ #category : #'api - scrolling' }
-BrList >> scrollToItemSuchThat: aBlock [
-	<return: #TAsyncPromise>
-
-	^ (self viewModel itemsProvider preloadUntilFoundSuchThat: aBlock)
-		then: [ :anItemIndex | self enqueueTask: (BlTaskAction new
-			action: [ self scrollToIndex: anItemIndex ]) ]
+	^ self viewModel entityCount
 ]
 
 { #category : #'api - selection' }
@@ -104,13 +61,8 @@ BrList >> selectedItemDo: aBlock [
 	
 	self selectedIndices
 		ifNotEmpty: [ :theIndices |
-			(theIndices first between: 1 and: self viewModel itemCount)
+			(theIndices first between: 1 and: self maxSelectionIndex)
 				ifTrue: [ aBlock 
 					cull: (self viewModel itemAt: theIndices first) 
 					cull: theIndices first ] ]
-]
-
-{ #category : #'api - accessing' }
-BrList >> stream: anAsyncStream [
-	self itemsProvider: (BrStreamItemsProvider new stream: anAsyncStream)
 ]

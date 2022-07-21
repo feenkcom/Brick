@@ -1,7 +1,7 @@
 Class {
 	#name : #BrListItemDataBinderRequest,
 	#superclass : #BrRequest,
-	#category : #'Brick-List-Events'
+	#category : #'Brick-List-Ungrouped-Events'
 }
 
 { #category : #initialization }

@@ -1,5 +1,5 @@
 Class {
-	#name : #BrFlowListAptitude,
+	#name : #BrGridListAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
 		'items',
@@ -9,27 +9,39 @@ Class {
 		'itemStencilBuilder',
 		'selection'
 	],
-	#category : #'Brick-List-Aptitudes'
+	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
+{ #category : #accessing }
+BrGridListAptitude >> columnCount: aNumber [
+	listElement layoutDo: [ :l | l columnCount: aNumber ]
+]
+
 { #category : #initialization }
-BrFlowListAptitude >> initialize [
+BrGridListAptitude >> initialize [
 	super initialize.
+	
 	items := #().
 	itemElements := #().
 	selection := BlSelection empty.
+	
 	listElement := BlElement new.
-	listElement layout: BlFlowLayout horizontal.
+	listElement layout: (BlGridLayout horizontal columnCount: 2).
 	listElement
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical fitContent ].
+	
 	scrollableElement := BlScrollableElement new.
 	scrollableElement
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ].
 	scrollableElement addChild: listElement as: #list.
+	
+	self add: (BrLayoutResizerAptitude new inherit: scrollableElement).
+	scrollableElement addAptitude: (BrLayoutResizerAptitude new hInherit: listElement).
+	
 	self itemStencilBuilder: BrSimpleListRowStencilBuilder new.
 	self
 		addChangeAddChildAs: #(content scrollable)
@@ -37,7 +49,7 @@ BrFlowListAptitude >> initialize [
 ]
 
 { #category : #initialization }
-BrFlowListAptitude >> initializeListeners [
+BrGridListAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrItemsProviderItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
@@ -45,7 +57,7 @@ BrFlowListAptitude >> initializeListeners [
 ]
 
 { #category : #accessing }
-BrFlowListAptitude >> itemStencilBuilder: aStencilBuilder [
+BrGridListAptitude >> itemStencilBuilder: aStencilBuilder [
 	"aStencilBuilder is expected to be a subclass of BrListRowStencil or a valuable"
 	itemStencilBuilder := aStencilBuilder asStencilBuilder: BrListRowStencilBuilder.
 
@@ -53,25 +65,25 @@ BrFlowListAptitude >> itemStencilBuilder: aStencilBuilder [
 ]
 
 { #category : #accessing }
-BrFlowListAptitude >> listElement [
+BrGridListAptitude >> listElement [
 	^ listElement
 ]
 
 { #category : #'event handling' }
-BrFlowListAptitude >> onModelItemsChanged: anEvent [
+BrGridListAptitude >> onModelItemsChanged: anEvent [
 
 	items := anEvent viewModel items.
 	self updateList
 ]
 
 { #category : #hooks }
-BrFlowListAptitude >> onSelectionChanged: aCollectionOfIndices [
+BrGridListAptitude >> onSelectionChanged: aCollectionOfIndices [
 	selection := BlCompositeSelection fromIndices: aCollectionOfIndices.
 	self updateSelection
 ]
 
 { #category : #updating }
-BrFlowListAptitude >> updateList [
+BrGridListAptitude >> updateList [
 	listElement removeChildren.
 	
 	itemElements := items withIndexCollect: [ :eachItem :eachIndex |
@@ -85,7 +97,7 @@ BrFlowListAptitude >> updateList [
 ]
 
 { #category : #updating }
-BrFlowListAptitude >> updateSelection [
+BrGridListAptitude >> updateSelection [
 	"itemElements withIndexDo: [ :eachItemElement :eachIndex |
 		(selection contains: eachIndex)
 			ifTrue: [ eachItemElement effect: (BlOverlayAboveEffect new paint: (Color gray alpha: 0.15)) ]

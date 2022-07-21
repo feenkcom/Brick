@@ -51,6 +51,10 @@ BaselineOfBrick >> baseline: spec [
 				spec requires: #(#'Brick-Core' #'Brick-Editor' 'Futures'). ];
 			package: #'Brick-List' with: [
 				spec requires: #(#'Brick'). ];
+			package: #'Brick-List-Ungrouped' with: [
+				spec requires: #(#'Brick' 'Brick-List'). ];
+			package: #'Brick-List-Grouped' with: [
+				spec requires: #(#'Brick' 'Brick-List'). ];
 			package: #'Brick-Theme' with: [
 				spec requires: #(#Brick ). ];
 			package: #'Brick-Glamorous' with: [
