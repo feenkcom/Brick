@@ -7,14 +7,6 @@ Class {
 	#category : #'Brick-Editor-Model - Segment-Text-Line'
 }
 
-{ #category : #accessing }
-BrTextEditorLineSegmentSplitter >> adornmentPieceClass [
-	"Create and return a segment piece with adornment"
-	<return: #TBrTextEditorTextualPiece>
-
-	^ BrTextEditorLineSegmentAdornmentPiece
-]
-
 { #category : #'private - pieces computation' }
 BrTextEditorLineSegmentSplitter >> itemValueType: anObject [
 	"Return a type of an item within a segment.
@@ -27,12 +19,4 @@ BrTextEditorLineSegmentSplitter >> itemValueType: anObject [
 			ifTrue: [ #separator ]
 			ifFalse: [ #letter ] ]
 		ifFalse: [ #object ]
-]
-
-{ #category : #accessing }
-BrTextEditorLineSegmentSplitter >> textPieceClass [
-	"Create and return a text segment piece"
-	<return: #TBrTextEditorTextualPiece>
-
-	^ BrTextEditorSegmentTextPiece
 ]
