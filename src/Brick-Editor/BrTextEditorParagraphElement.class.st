@@ -157,7 +157,7 @@ BrTextEditorParagraphElement >> buildParagraph [
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> canAddToParagraph: eachElement [
 	^ (eachElement isKindOf: BlTextElement)
-		and: [ eachElement class ~= GtSourceErrorTextElement
+		and: [ (eachElement userData includesKey: #sourceError) not
 				and: [ eachElement aptitude isNil ] ]
 ]
 
