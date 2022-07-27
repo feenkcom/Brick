@@ -72,19 +72,19 @@ BrGroupedListDataSource >> itemTypeAt: anItemPosition [
 ]
 
 { #category : #'instance creation' }
-BrGroupedListDataSource >> onBindHeader: aGroupObject holder: anElementHolder at: aPosition [
+BrGroupedListDataSource >> onBindHeader: aBrGroup holder: anElementHolder at: aPosition [
 	| anItemElementWithBindedData |
 
 	anItemElementWithBindedData := headerDataBinder
 		itemElement: anElementHolder itemElement;
-		itemObject: aGroupObject;
-		rowObject: aGroupObject;
+		itemObject: aBrGroup;
+		rowObject: aBrGroup;
 		itemPosition: aPosition;
 		asElement.
 
 	anElementHolder
 		itemElement: anItemElementWithBindedData;
-		rowValue: aGroupObject
+		rowValue: aBrGroup
 ]
 
 { #category : #'instance creation' }
@@ -93,7 +93,7 @@ BrGroupedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 
 	anEntityObject := self listModel entityAt: aPosition.
 	anEntityObject
-		ifHeader: [ self onBindHeader: anEntityObject groupObject holder: anElementHolder at: aPosition ]
+		ifHeader: [ self onBindHeader: anEntityObject group holder: anElementHolder at: aPosition ]
 		ifItem: [ self onBindItem: anEntityObject holder: anElementHolder at: aPosition ]
 ]
 
