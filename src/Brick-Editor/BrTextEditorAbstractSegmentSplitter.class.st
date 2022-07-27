@@ -7,19 +7,14 @@ Class {
 { #category : #'instance creation' }
 BrTextEditorAbstractSegmentSplitter >> adornmentPiece: aBlText with: anAdornmentAttribute from: aTextStart to: aTextEnd [
 	"Create and return a segment piece with adornment"
-	<return: #BrTextEditorAbstractSegmentPiece>
 
-	^ self adornmentPieceClass new
+	<return: #BrTextEditorAbstractSegmentPiece>
+	^ BrTextEditorLineSegmentAdornmentPiece new
 		initializeWith: aBlText
 			from: aTextStart
 			to: aTextEnd
 			delimiter: 0;
 		adornmentAttribute: anAdornmentAttribute
-]
-
-{ #category : #accessing }
-BrTextEditorAbstractSegmentSplitter >> adornmentPieceClass [
-	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -217,16 +212,11 @@ BrTextEditorAbstractSegmentSplitter >> split: aText from: aStartIndex to: anEndI
 { #category : #'instance creation' }
 BrTextEditorAbstractSegmentSplitter >> textPiece: aBlText from: aTextStart to: aTextEnd [
 	"Create and return a text segment piece"
-	<return: #BrTextEditorAbstractSegmentPiece>
 
-	^ self textPieceClass new
+	<return: #BrTextEditorAbstractSegmentPiece>
+	^ BrTextEditorSegmentTextPiece new
 		initializeWith: aBlText
 		from: aTextStart
 		to: aTextEnd
 		delimiter: 0
-]
-
-{ #category : #accessing }
-BrTextEditorAbstractSegmentSplitter >> textPieceClass [
-	^ self subclassResponsibility
 ]
