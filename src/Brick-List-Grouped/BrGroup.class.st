@@ -6,7 +6,8 @@ Class {
 		'itemsProvider',
 		'itemStencil',
 		'itemDataBinder',
-		'shouldShowWithoutItems'
+		'shouldShowWithoutItems',
+		'itemsLimit'
 	],
 	#category : #'Brick-List-Grouped-Models'
 }
@@ -28,8 +29,9 @@ BrGroup >> initialize [
 	super initialize.
 	
 	domainObject := nil.
+	itemsProvider := BrEmptyItemsProvider new.
 	shouldShowWithoutItems := false.
-	itemsProvider := BrEmptyItemsProvider new
+	itemsLimit := Float infinity
 ]
 
 { #category : #accessing }
@@ -61,6 +63,18 @@ BrGroup >> itemStencil: aBrListItemElementStencilBuilderOrBlock [
 { #category : #accessing }
 BrGroup >> items: aCollectionOfItems [
 	self itemsProvider: (BrSequenceableCollectionItemsProvider new collection: aCollectionOfItems)
+]
+
+{ #category : #accessing }
+BrGroup >> itemsLimit [
+
+	^ itemsLimit
+]
+
+{ #category : #accessing }
+BrGroup >> itemsLimit: anObject [
+
+	itemsLimit := anObject
 ]
 
 { #category : #accessing }

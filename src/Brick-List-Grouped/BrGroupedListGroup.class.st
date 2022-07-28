@@ -96,7 +96,7 @@ BrGroupedListGroup >> onItemsLoaded: anAnnouncement [
 
 { #category : #'private - cache' }
 BrGroupedListGroup >> processLoadedData [
-	amountOfItems := group itemsProvider itemCount
+	amountOfItems := group itemsProvider itemCount min: group itemsLimit
 ]
 
 { #category : #'private - cache' }
