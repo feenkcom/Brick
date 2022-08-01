@@ -6,7 +6,7 @@ Class {
 		'undoIndices',
 		'redoIndices'
 	],
-	#category : 'Brick-Editor-History'
+	#category : #'Brick-Editor-History'
 }
 
 { #category : #printing }
@@ -37,12 +37,12 @@ BrTextEditorHistoryDeletionCommand >> redoIndices: anObject [
 BrTextEditorHistoryDeletionCommand >> redoOn: aBrTextEditor [
 	| aDeleter |
 	aBrTextEditor deselecter all deselect.
-	
+
 	aDeleter := aBrTextEditor deleter.
 	texts
 		with: redoIndices
-		do: [ :eachText :eachIndex | aDeleter from: eachIndex to: eachIndex + eachText size ].
-	
+		do: [ :eachText :eachIndex | aDeleter from: eachIndex - 1 to: eachIndex - 1 + eachText size ].
+
 	aDeleter delete
 ]
 
@@ -69,11 +69,15 @@ BrTextEditorHistoryDeletionCommand >> undoIndices: anObject [
 { #category : #'api - undo/redo' }
 BrTextEditorHistoryDeletionCommand >> undoOn: aBrTextEditor [
 	| anInserter |
+
 	aBrTextEditor deselecter all deselect.
-	
+
 	anInserter := aBrTextEditor inserter.
 	texts
 		with: undoIndices
-		do: [ :eachText :eachIndex | anInserter text: eachText characters asString; at: eachIndex - 1 ].
+		do: [ :eachText :eachIndex | 
+			anInserter
+				text: eachText characters asString;
+				at: eachIndex - 1 ].
 	anInserter insert
 ]
