@@ -926,6 +926,7 @@ BrTextEditorModel >> restoreText: aBrText [
 	segmentCollector text: text.
 
 	self onTextReplaced: oldText.	"notify UI about structural update"
+	history := BrTextEditorHistory new.
 	self notifyChanged.	"text changed, we should style it"
 	shouldStyleWhenTextModified ifTrue: [ self styleText ]
 ]

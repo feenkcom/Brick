@@ -23,7 +23,8 @@ Class {
 { #category : #'api - configuration' }
 BrTextEditorNavigator >> add: aCursor [
 	"Add a given cursor at the position specified in the added cursor"
-	self privateAssertPosition: aCursor position.
+
+	(self privateAssertPosition: aCursor position) ifFalse: [ ^ self ].
 
 	operations add: (BrTextEditorNavigatorAddCursorOperation cursor: aCursor)
 ]
@@ -36,9 +37,8 @@ BrTextEditorNavigator >> addAll: aBrTextEditorCursors [
 { #category : #'api - configuration' }
 BrTextEditorNavigator >> addAt: aTextPosition [
 	"Add a cursor at a given text position"
-	self privateAssertPosition: aTextPosition.
 
-	operations add: (BrTextEditorNavigatorAddCursorOperation cursor: (self privateNewCursorAt: aTextPosition))
+	self add: (self privateNewCursorAt: aTextPosition)
 ]
 
 { #category : #'api - configuration' }
@@ -134,9 +134,11 @@ BrTextEditorNavigator >> move: aCursor by: aDelta [
 { #category : #'api - configuration' }
 BrTextEditorNavigator >> move: aCursor to: aTextPosition [
 	"Move a given cursor to a provided position"
-	self privateAssertPosition: aTextPosition.
 
-	operations add: ((BrTextEditorNavigatorMoveToOperation cursor: aCursor) position: aTextPosition)
+	(self privateAssertPosition: aTextPosition) ifFalse: [ ^ self ].
+
+	operations
+		add: ((BrTextEditorNavigatorMoveToOperation cursor: aCursor) position: aTextPosition)
 ]
 
 { #category : #'api - configuration' }
@@ -180,15 +182,21 @@ BrTextEditorNavigator >> moveRight [
 { #category : #'api - configuration' }
 BrTextEditorNavigator >> moveTo: aTextPosition [
 	"Move all cursors to a given position (basically, remove all cursors except one)"
+
 	| allCursors |
-	self privateAssertPosition: aTextPosition.
+	(self privateAssertPosition: aTextPosition) ifFalse: [ ^ self ].
 
 	allCursors := self cursor allCursors.
-	allCursors allButFirstDo: [ :aCursor | operations add: (BrTextEditorNavigatorRemoveCursorOperation cursor: aCursor) ].
-	
 	allCursors
-		ifEmpty: [ operations add: (BrTextEditorNavigatorAddCursorOperation cursor: (self privateNewCursorAt: aTextPosition)) ]
-		ifNotEmpty: [ operations add: ((BrTextEditorNavigatorMoveToOperation cursor: allCursors first) position: aTextPosition) ].
+		allButFirstDo: [ :aCursor | operations add: (BrTextEditorNavigatorRemoveCursorOperation cursor: aCursor) ].
+
+	allCursors
+		ifEmpty: [ operations
+				add: (BrTextEditorNavigatorAddCursorOperation
+						cursor: (self privateNewCursorAt: aTextPosition)) ]
+		ifNotEmpty: [ operations
+				add: ((BrTextEditorNavigatorMoveToOperation cursor: allCursors first)
+						position: aTextPosition) ]
 ]
 
 { #category : #'api - configuration' }
@@ -312,9 +320,10 @@ BrTextEditorNavigator >> privateAddRegisteredIn: aSet [
 
 { #category : #'private - accessing' }
 BrTextEditorNavigator >> privateAssertPosition: aTextPosition [
-	self
-		assert: [ aTextPosition between: 0 and: self text size ]
-		description: [ 'Cursor position ({1}) must be within the interval [0.. {2}]' format: { aTextPosition . self text size } ].
+	(aTextPosition between: 0 and: self text size)
+		ifFalse: [ BrCursorOutOfRangeSignal new emit.
+			^ false ].
+	^ true
 ]
 
 { #category : #'private - accessing' }
@@ -457,9 +466,12 @@ BrTextEditorNavigator >> removeAll [
 { #category : #'api - configuration' }
 BrTextEditorNavigator >> removeAt: aTextPosition [
 	"Remove a cursor at a given text position"
-	self privateAssertPosition: aTextPosition.
 
-	operations add: (BrTextEditorNavigatorRemoveCursorOperation cursor: (self privateNewCursorAt: aTextPosition))
+	(self privateAssertPosition: aTextPosition) ifFalse: [ ^ self ].
+
+	operations
+		add: (BrTextEditorNavigatorRemoveCursorOperation
+				cursor: (self privateNewCursorAt: aTextPosition))
 ]
 
 { #category : #'api - events' }
