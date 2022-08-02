@@ -1,20 +1,20 @@
 "
-! ToolbarLook
+# ToolbarLook
 
-!! Toolbar Order-Independent Item Binding 
+## Toolbar Order-Independent Item Binding 
 
-You may noticed that ${method:BrToolbarLook>>#initialize}$ initialize ==item== instance variable as an ${class:OrderedDictionary}$. The reason for the ordered dictionary is to allow order-independent binding of toolbar view to the tab model. To understand it easily, let's check the following excercise: 
+You may noticed that {{gtMethod:BrToolbarAptitude>>#initialize}} initialize `item` instance variable as an {{gtClass:OrderedDictionary}}. The reason for the ordered dictionary is to allow order-independent binding of toolbar view to the tab model. To understand it easily, let's check the following excercise: 
 
-First, we create and inspect a ${class:BrToolbar}$ instance:
+First, we create and inspect a {{gtClass:BrToolbar}} instance:
 
-[[[
+```
 toolbar := BrToolbar new.
 toolbar look: BrMaterialToolbarLook.
-]]]
+```
 
 Second, we create three toolbar items:
 
-[[[
+```
 toolbar addItem: (BrButton new 
 		border: (BlBorder paint: Color red);
 		look: BrMaterialToggleLabelledLook;
@@ -32,11 +32,12 @@ toolbar addItem: ((BrButton new
 		look: BrMaterialToggleLabelledLook;
 		label: 'Hello'; 
 		action: [ self inform: 'Blue' ])).
-]]]
+```
 
 
 So, you should end up with three toolbar item views with the the following order: red, green, blue. 
 NOTE: It would be nice to explain, why this order-independed feature is important.
+
 
 "
 Class {
@@ -45,7 +46,7 @@ Class {
 	#instVars : [
 		'items'
 	],
-	#category : 'Brick-Toolbar - Look'
+	#category : #'Brick-Toolbar - Look'
 }
 
 { #category : #initialization }

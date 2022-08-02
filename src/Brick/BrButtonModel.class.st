@@ -1,14 +1,15 @@
 "
-! Button model
+# Button model
 
 Button - An element of a graphical user interface which a user can select to perform a particular action.
 (https://en.oxforddictionaries.com/definition/button)
 
-I know how to react on a typical user action such as click or touch event. My reaction is defined by an ==#action== which can be any valuable:  ${class:BlockClosure}$, ${class:Symbol}$ or any object that responds to ==#value==
+I know how to react on a typical user action such as click or touch event. My reaction is defined by an `#action` which can be any valuable:  {{gtClass:BlockClosure}}, {{gtClass:Symbol}} or any object that responds to `#value`
 
 I am not responsible for labels or icons since buttons not necessarily have them.
 
-See ${class:BrButtonModelExamples}$ for examples
+See {{gtClass:BrButtonModelExamples}} for examples
+
 "
 Class {
 	#name : #BrButtonModel,

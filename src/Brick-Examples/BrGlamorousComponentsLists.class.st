@@ -1,19 +1,20 @@
 "
-!List
+# List
 Use lists to display large datasets.
-!!Simple
-!!!!List of all classes
-${example:BrGlamorousComponentsLists>>#listOfClasses|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
-!!!!List of colors
-${example:BrGlamorousComponentsLists>>#listOfColors|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
-!!Columned
-!!!! Columned list of colors
-${example:BrGlamorousComponentsLists>>#columnedListOfColors|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
+## Simple
+#### List of all classes
+{{gtExample:BrGlamorousComponentsLists>>#listOfClasses|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
+#### List of colors
+{{gtExample:BrGlamorousComponentsLists>>#listOfColors|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
+## Columned
+#### Columned list of colors
+{{gtExample:BrGlamorousComponentsLists>>#columnedListOfColors|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
+
 "
 Class {
 	#name : #BrGlamorousComponentsLists,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #examples }

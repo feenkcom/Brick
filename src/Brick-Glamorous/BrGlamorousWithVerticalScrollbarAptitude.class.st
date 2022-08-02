@@ -1,6 +1,7 @@
 "
-! Glamorous vertical scrollbar look
-Is designed to add a vertical ${class:BrScrollbar}$ to a widget with a ${class:TBlScrollable}$ content. Due to the fact that the scrollbar should be above the scrollable content it should be added """"after"""" a look that adds a scrollable content.
+# Glamorous vertical scrollbar look
+Is designed to add a vertical {{gtClass:BrScrollbar}} to a widget with a {{gtClass:TBlScrollable}} content. Due to the fact that the scrollbar should be above the scrollable content it should be added **after** a look that adds a scrollable content.
+
 "
 Class {
 	#name : #BrGlamorousWithVerticalScrollbarAptitude,

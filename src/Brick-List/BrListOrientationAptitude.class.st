@@ -1,6 +1,7 @@
 "
-I am a ${class:BrStyleCommonLook}$.
-I provide API to define how a ${class:BrSimpleList}$ should look like when in vertical or horizontal state.
+I am a {{gtClass:BrStyleCommonAptitude}}.
+I provide API to define how a {{gtClass:BrSimpleList}} should look like when in vertical or horizontal state.
+
 "
 Class {
 	#name : #BrListOrientationAptitude,

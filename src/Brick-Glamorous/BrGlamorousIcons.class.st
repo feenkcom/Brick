@@ -1,13 +1,13 @@
 "
-I am a Glamorous icons container. You can import new icons using ${method:name=BrGlamorousIcons class>>#importIconsFromDirectory:}$ using the script below. It imports all ==PNG== files and creates class methods with the same name.
+I am a Glamorous icons container. You can import new icons using {{gtMethod:name=BrGlamorousIcons class>>#importIconsFromDirectory:}} using the script below. It imports all `PNG` files and creates class methods with the same name.
 
-[[[
+```
 BrGlamorousIcons importIconsFromDirectory: './gt-icons' asFileReference
-]]]
+```
 
 Here is a list of available icons:
 
-${class:BrGlamorousIcons|show=gtIconsFor:|expanded=}$
+{{gtClass:BrGlamorousIcons|show=gtIconsFor:|expanded=}}
 
 
 

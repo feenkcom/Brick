@@ -1,13 +1,14 @@
 "
-! Progress bar
-I exemplify ${class:BrProgress}$ with glamorous looks.
-!! Progress Bar Only 
-${example:BrGlamorousProgressExamples>>#barOnly_MainUsage|codeExpanded=false|previewExpanded=true|previewHeight=180}$
-!! Progress Bar With Text Above 
-${example:BrGlamorousProgressExamples>>#barAndTextAbove_MainUsage|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+# Progress bar
+I exemplify {{gtClass:BrProgress}} with glamorous looks.
+## Progress Bar Only 
+{{gtExample:BrGlamorousProgressExamples>>#barOnly_MainUsage|codeExpanded=false|previewExpanded=true|previewHeight=180}}
+## Progress Bar With Text Above 
+{{gtExample:BrGlamorousProgressExamples>>#barAndTextAbove_MainUsage|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-!! Progress Bar With Text Below 
-${example:BrGlamorousProgressExamples>>#barAndTextBelow_MainUsage|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+## Progress Bar With Text Below 
+{{gtExample:BrGlamorousProgressExamples>>#barAndTextBelow_MainUsage|codeExpanded=false|previewExpanded=true|previewHeight=180}}
+
 
 "
 Class {
@@ -16,7 +17,7 @@ Class {
 	#instVars : [
 		'progressExamples'
 	],
-	#category : 'Brick-Examples-Progress'
+	#category : #'Brick-Examples-Progress'
 }
 
 { #category : #'examples - basic compositions' }

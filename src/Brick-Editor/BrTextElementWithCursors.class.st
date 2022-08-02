@@ -1,5 +1,6 @@
 "
-I am extended version of the ${class:BlTextElement}$ with support of multiple cursors.
+I am extended version of the {{gtClass:BlTextElement}} with support of multiple cursors.
+
 "
 Class {
 	#name : #BrTextElementWithCursors,

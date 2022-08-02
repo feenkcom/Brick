@@ -1,7 +1,8 @@
 "
 I am a tab switcher look that position tabs header at top-center part of container.
-I hide a selected ${class:BrTab}$ header element.
-I am used by ${class:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabLook}$ where you can find examples.
+I hide a selected {{gtClass:BrTab}} header element.
+I am used by {{gtClass:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude}} where you can find examples.
+
 
 "
 Class {

@@ -1,7 +1,8 @@
 "
-!Cursor attribute
+# Cursor attribute
 Allows users to react to the cursor movement within the editor. 
-${example:BrTextCursorAttributeExamples>>#changingForeground|previewExpanded=true|previewShow=#gtTextFor:|previewHeight=100}$
+{{gtExample:BrTextCursorAttributeExamples>>#changingForeground|previewExpanded=true|previewShow=#gtTextFor:|previewHeight=100}}
+
 "
 Class {
 	#name : #BrTextCursorAttribute,

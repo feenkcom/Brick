@@ -1,21 +1,21 @@
 "
 I am a progress bar widget. 
-I use ${class:BrProgressWithLabelModel}$ to keep progress information.
+I use {{gtClass:BrProgressWithLabelModel}} to keep progress information.
 
-You can attach ${class:BrProgressLook}$ and ${class:BrTextLabelLook}$ to display progress bar and a description text.
+You can attach {{gtClass:BrProgressAptitude}} and {{gtClass:BrTextLabelAptitude}} to display progress bar and a description text.
 
-See ${class:BrProgressExamples}$ and ${class:BrGlamorousProgressExamples}$ examples.
+See {{gtClass:BrProgressExamples}} and {{gtClass:BrGlamorousProgressExamples}} examples.
 
-!! Animated Progress Bar With Text Above
+## Animated Progress Bar With Text Above
 
-${example:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
 
 "
 Class {
 	#name : #BrProgress,
 	#superclass : #BlElement,
-	#category : 'Brick-Progress - UI'
+	#category : #'Brick-Progress - UI'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 "
-I am an abstract class. I am a basic ${class:BrProgress}$ look. I listen to progress changes from ${class:BrProgressModel}$ and trigger ${method:BrProgressLook>>#onProgressChanged|label=#selector}$ on progress status changes.
+I am an abstract class. I am a basic {{gtClass:BrProgress}} look. I listen to progress changes from {{gtClass:BrProgressModel}} and trigger {{gtMethod:BrProgressAptitude>>#onProgressChanged|label=#selector}} on progress status changes.
 
-See my subclasses for specific use cases: ${class:BrProgressLook|show=#gtSubclassesFor:|expanded=true|height=200}$
+See my subclasses for specific use cases: {{gtClass:BrProgressAptitude|show=#gtSubclassesFor:|expanded=true|height=200}}
 
 
 "
@@ -12,7 +12,7 @@ Class {
 		'amount',
 		'total'
 	],
-	#category : 'Brick-Progress - Look'
+	#category : #'Brick-Progress - Look'
 }
 
 { #category : #accessing }

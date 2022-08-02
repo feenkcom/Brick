@@ -1,10 +1,11 @@
 "
-I am sent to the ${class:BrExpandableModel}$ to receive its state (expanded / collapsed)
+I am sent to the {{gtClass:BrExpandableModel}} to receive its state (expanded / collapsed)
+
 "
 Class {
 	#name : #BrExpansionStateRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

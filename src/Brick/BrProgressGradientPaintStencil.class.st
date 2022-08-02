@@ -1,17 +1,17 @@
 "
-I define an animated tool bar background. My subclasses return ${class:BlLinearGradientPaint}$ object on every ${method:BrProgressPaintStencil>>#create|label=#selector}$ call.
+I define an animated tool bar background. My subclasses return {{gtClass:BlLinearGradientPaint}} object on every {{gtMethod:BrProgressPaintStencil>>#create|label=#selector}} call.
 
-!! Default Gradients
+## Default Gradients
 
-${example:BrProgressExamples>>#basicGradientPaintStencil|codeExpanded=false|previewExpanded=true}$
+{{gtExample:BrProgressExamples>>#basicGradientPaintStencil|codeExpanded=false|previewExpanded=true}}
 
-!! Green and Blue Gradients
+## Green and Blue Gradients
 
-${example:BrProgressExamples>>#blueGradientPaintStencil|codeExpanded=false|previewExpanded=true}$
+{{gtExample:BrProgressExamples>>#blueGradientPaintStencil|codeExpanded=false|previewExpanded=true}}
 
-!! Animated Progress Bar With Gradients
+## Animated Progress Bar With Gradients
 
-${example:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
 
 "
@@ -24,7 +24,7 @@ Class {
 		'startColor',
 		'stopColor'
 	],
-	#category : 'Brick-Progress - Look'
+	#category : #'Brick-Progress - Look'
 }
 
 { #category : #'api - instantiation' }

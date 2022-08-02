@@ -1,7 +1,8 @@
 "
 I am an abstract class.
 I am a tab switcher look.
-My subclasses expect to be attached to ${class:BrTab}$ instances.
+My subclasses expect to be attached to {{gtClass:BrTab}} instances.
+
 
 "
 Class {

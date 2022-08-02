@@ -1,6 +1,7 @@
 "
-I am basic ${class:BrProgress}$ label glamorous look.
-See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
+I am basic {{gtClass:BrProgress}} label glamorous look.
+See {{gtClass:BrGlamorousProgressExamples}} class comment for spefic glamorous examples.
+
 "
 Class {
 	#name : #BrGlamorousProgressLabelAptitude,

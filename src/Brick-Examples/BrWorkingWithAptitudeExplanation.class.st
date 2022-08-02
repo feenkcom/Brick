@@ -1,17 +1,17 @@
 "
-!Working with Aptitude
-${class:BrAptitude|label=Aptitudes}$ affect and endow an element with looks and behavior. They can be dynamically added and removed. They can be composed. In short, a powerful mechanism for dynamic scenes.
+# Working with Aptitude
+{{gtClass:BrAptitude|label=Aptitudes}} affect and endow an element with looks and behavior. They can be dynamically added and removed. They can be composed. In short, a powerful mechanism for dynamic scenes.
 
 Let's consider an example: a simple label. Constructing 
 
-${example:BrWorkingWithAptitudeExplanation>>#labelWithoutAptitude|previewExpanded=|previewShow=#gtLiveFor:|previewHeight=100}$
+{{gtExample:BrWorkingWithAptitudeExplanation>>#labelWithoutAptitude|previewExpanded=|previewShow=#gtLiveFor:|previewHeight=100}}
 
 
 "
 Class {
 	#name : #BrWorkingWithAptitudeExplanation,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Explanations'
+	#category : #'Brick-Examples-Explanations'
 }
 
 { #category : #accessing }

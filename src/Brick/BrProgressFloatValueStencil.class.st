@@ -1,7 +1,8 @@
 "
-I convert ${method:BrProgressModel>>#amount|label=#selector}$ and ${method:BrProgressModel>>#total|label=#selector}$ values to an ${class:Float}$ with a given number of decimals defined using ${method:BrProgressFloatValueStencil>>#numberOfDecimals:|label=#selector}$:
+I convert {{gtMethod:BrProgressModel>>#amount|label=#selector}} and {{gtMethod:BrProgressModel>>#total|label=#selector}} values to an {{gtClass:Float}} with a given number of decimals defined using {{gtMethod:BrProgressFloatValueStencil>>#numberOfDecimals:|label=#selector}}:
 
-${example:BrProgressExamples>>#floatValues|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#floatValues|codeExpanded=false|previewExpanded=true|previewHeight=180}}
+
 
 "
 Class {
@@ -10,7 +11,7 @@ Class {
 	#instVars : [
 		'numberOfDecimals'
 	],
-	#category : 'Brick-Progress - Model'
+	#category : #'Brick-Progress - Model'
 }
 
 { #category : #'api - instantiation' }

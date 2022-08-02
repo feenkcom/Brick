@@ -1,13 +1,14 @@
 "
-!Tab
+# Tab
 Tab is a graphical control element that allows multiple documents or panels to be contained within a single window, using tabs as a navigational widget for switching between sets of documents.
-!!!! Default tabbable region
-${example:BrGlamorousComponentsTabs>>#defaultTabs|previewShow=#gtLiveFor:|previewHeight=200|previewExpanded=true|codeExpanded=false}$
+#### Default tabbable region
+{{gtExample:BrGlamorousComponentsTabs>>#defaultTabs|previewShow=#gtLiveFor:|previewHeight=200|previewExpanded=true|codeExpanded=false}}
+
 "
 Class {
 	#name : #BrGlamorousComponentsTabs,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #examples }

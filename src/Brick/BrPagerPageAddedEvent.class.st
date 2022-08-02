@@ -1,5 +1,6 @@
 "
-I am sent by ${class:BrPagerModel}$ when a new ${class:BrPagerPageModel}$ is added to the pager
+I am sent by {{gtClass:BrPagerModel}} when a new {{gtClass:BrPagerPageModel}} is added to the pager
+
 "
 Class {
 	#name : #BrPagerPageAddedEvent,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'page'
 	],
-	#category : 'Brick-Pager - Events'
+	#category : #'Brick-Pager - Events'
 }
 
 { #category : #'instance creation' }

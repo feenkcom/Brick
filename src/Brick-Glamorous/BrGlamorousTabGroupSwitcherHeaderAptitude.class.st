@@ -1,6 +1,7 @@
 "
 I am a tab switcher look that position tabs header at top-center part of container.
-I am used by ${class:BrGlamorousTabGroupSwitcherLook}$ where you can find examples.
+I am used by {{gtClass:BrGlamorousTabGroupSwitcherAptitude}} where you can find examples.
+
 
 "
 Class {

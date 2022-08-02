@@ -1,6 +1,7 @@
 "
-!Widget with dropdown look
+# Widget with dropdown look
 Adds the dropdown functionality to an element
+
 "
 Class {
 	#name : #BrGlamorousWithDropdownAptitude,

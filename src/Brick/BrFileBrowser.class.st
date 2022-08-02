@@ -3,16 +3,16 @@ BrFileSelector provides a widget for displaying the contents of a folder.
 
 The list of files displayed, folder and a fileFilterBlock can be specified, see key messages below.
 
-!!Public API and Key Messages
+## Public API and Key Messages
 
 - fileFilterBlock: 	A one-parameter block that is passed in as the argument to the #select: for filtering the displayed files.  Default = display all files.
 - folder: 	The initial directory to display.  Default = working directory. 
 
    One simple example is simply gorgeous.
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	breadcrumb:			<BrBreadcrumb>
 	fileFilterBlock:	<BlockClosure>
@@ -21,7 +21,8 @@ The list of files displayed, folder and a fileFilterBlock can be specified, see 
 	table:					<BrColumnedList>
 
 
-!!!Implementation Points
+### Implementation Points
+
 "
 Class {
 	#name : #BrFileBrowser,

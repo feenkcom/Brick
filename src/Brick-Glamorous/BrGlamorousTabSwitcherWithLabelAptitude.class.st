@@ -1,7 +1,8 @@
 "
 I am a tab switcher look with an icon.
-I expect to be attached to ${class:BrTab}$.
-See examples at ${class:BrGlamorousTabGroupSwitcherLook}$ and ${class:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabLook}$.
+I expect to be attached to {{gtClass:BrTab}}.
+See examples at {{gtClass:BrGlamorousTabGroupSwitcherAptitude}} and {{gtClass:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude}}.
+
 
 "
 Class {

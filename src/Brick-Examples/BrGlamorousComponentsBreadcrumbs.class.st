@@ -1,17 +1,18 @@
 "
-!Breadcrumb
+# Breadcrumb
 Indicate the current location within a navigational hierarchy that automatically adds separators between items.
-!!!!With labels
-${example:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithLabels|previewShow=#gtLiveFor:|previewHeight=65|previewExpanded=true|codeExpanded=false}$
-!!!!With buttons
-${example:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithButtons|previewShow=#gtLiveFor:|previewHeight=65|previewExpanded=true|codeExpanded=false}$
-!!!!Without separator
-${example:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithoutSeparator|previewShow=#gtLiveFor:|previewHeight=85|previewExpanded=true|codeExpanded=false}$
+#### With labels
+{{gtExample:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithLabels|previewShow=#gtLiveFor:|previewHeight=65|previewExpanded=true|codeExpanded=false}}
+#### With buttons
+{{gtExample:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithButtons|previewShow=#gtLiveFor:|previewHeight=65|previewExpanded=true|codeExpanded=false}}
+#### Without separator
+{{gtExample:BrGlamorousComponentsBreadcrumbs>>#breadcrumbWithoutSeparator|previewShow=#gtLiveFor:|previewHeight=85|previewExpanded=true|codeExpanded=false}}
+
 "
 Class {
 	#name : #BrGlamorousComponentsBreadcrumbs,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #breacrumb }
