@@ -1,6 +1,7 @@
 "
-I am a ${class:BlElementUniqueState}$.
-I define whether a ${class:BrSimpleList}$ should be displayed either vertically or horizontally.
+I am a {{gtClass:BlElementUniqueState}}.
+I define whether a {{gtClass:BrSimpleList}} should be displayed either vertically or horizontally.
+
 "
 Class {
 	#name : #BrListOrientationState,

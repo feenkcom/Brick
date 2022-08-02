@@ -1,5 +1,6 @@
 "
-I am sent by ${class:BrPagerModel}$ when a ${class:BrPagerPageModel}$ is removed from the pager
+I am sent by {{gtClass:BrPagerModel}} when a {{gtClass:BrPagerPageModel}} is removed from the pager
+
 "
 Class {
 	#name : #BrPagerPageRemovedEvent,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'page'
 	],
-	#category : 'Brick-Pager - Events'
+	#category : #'Brick-Pager - Events'
 }
 
 { #category : #'instance creation' }

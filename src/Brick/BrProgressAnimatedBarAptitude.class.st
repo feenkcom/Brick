@@ -1,9 +1,10 @@
 "
-I am an animated ${class:BrProgressBarLook}$. I add an animated background to the progress bar widget: 
+I am an animated {{gtClass:BrProgressBarLook}}. I add an animated background to the progress bar widget: 
 
-${example:BrProgressExamples>>#animatedBar|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#animatedBar|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-I use ${class:BrProgressPaintStencil}$ to compute new progress bar background on every animation step.
+I use {{gtClass:BrProgressPaintStencil}} to compute new progress bar background on every animation step.
+
 
 "
 Class {
@@ -12,7 +13,7 @@ Class {
 	#instVars : [
 		'paintStencil'
 	],
-	#category : 'Brick-Progress - Look'
+	#category : #'Brick-Progress - Look'
 }
 
 { #category : #accessing }

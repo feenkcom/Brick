@@ -1,7 +1,8 @@
 "
 My subclasses create a specific progress label content (string).
 
-See my subclasses for specific examples: ${class:BrProgressLabelStencil|show=#gtSubclassesFor:|expanded=true|height=150}$
+See my subclasses for specific examples: {{gtClass:BrProgressLabelStencil|show=#gtSubclassesFor:|expanded=true|height=150}}
+
 
 "
 Class {
@@ -11,7 +12,7 @@ Class {
 		'amount',
 		'total'
 	],
-	#category : 'Brick-Progress - Model'
+	#category : #'Brick-Progress - Model'
 }
 
 { #category : #testing }

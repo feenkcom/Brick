@@ -1,5 +1,7 @@
 "
 I define a set of events that are sent by ${class:BrTabGroupModel}
+
+
 "
 Class {
 	#name : #BrTabEvent,
@@ -7,7 +9,7 @@ Class {
 	#instVars : [
 		'tab'
 	],
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #'instance creation' }

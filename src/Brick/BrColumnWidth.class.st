@@ -1,14 +1,15 @@
 "
-! Column width
+# Column width
 
 A column, while being abstract entity, should know how much of the available space it should take.
 
-See ${class:BrColumnWidthExamples}$ for examples
+See {{gtClass:BrColumnWidthExamples}} for examples
+
 "
 Class {
 	#name : #BrColumnWidth,
 	#superclass : #Object,
-	#category : 'Brick-Column - Model'
+	#category : #'Brick-Column - Model'
 }
 
 { #category : #testing }

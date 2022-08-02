@@ -1,5 +1,6 @@
 "
 I am sent when an existing tab is moved to another position in ${class:BrTabGroupModel}
+
 "
 Class {
 	#name : #BrTabMovedEvent,
@@ -8,7 +9,7 @@ Class {
 		'oldPosition',
 		'newPosition'
 	],
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #accessing }

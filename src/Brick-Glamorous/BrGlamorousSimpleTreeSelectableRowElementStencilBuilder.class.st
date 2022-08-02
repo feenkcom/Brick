@@ -1,8 +1,9 @@
 "
-! Glamorous selectable tree row
+# Glamorous selectable tree row
 
 Makes rows in the simple tree have selection, hover and press visual effects.
-${example:BrGlamorousSimpleTreeSelectableRowElementStencilBuilder class>>#simpleTreeExample}$
+{{gtExample:BrGlamorousSimpleTreeSelectableRowElementStencilBuilder class>>#simpleTreeExample}}
+
 "
 Class {
 	#name : #BrGlamorousSimpleTreeSelectableRowElementStencilBuilder,
@@ -11,7 +12,7 @@ Class {
 		'cellSpacing',
 		'padding'
 	],
-	#category : 'Brick-Glamorous-List, Tree'
+	#category : #'Brick-Glamorous-List, Tree'
 }
 
 { #category : #accessing }

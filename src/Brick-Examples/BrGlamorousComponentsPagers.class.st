@@ -1,18 +1,18 @@
 "
-!Pager
+# Pager
 Use pager to display a horizontally scrollable list of pages.
-!!!!Simple three page pager
-The following example displays three predefined pages that occupy all available space within the pager (${method:BrPagerPageElement>>#weight:}$is set to ==1==). 
-${example:BrGlamorousComponentsPagers>>#threeFullPagePager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
-!!!!Two page pager with custom weight
-It is possible, however, to set a different ${method:BrPagerPageElement>>#weight:}$ which will make pages share the space within their pager.
-${example:BrGlamorousComponentsPagers>>#twoHalfPagePager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
-!!!!Dynamically adding a page
-If needed, pages can be added dynamically with the same api as we used in the previous examples ${method:BrPager>>#addPage:}$. However, it is usually required to scroll to a newly created page which can be achieved with the help of the ${method:BrPager>>#scrollToLast}$method.
-${example:BrGlamorousComponentsPagers>>#dynamicPager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
-!!!!Infinite pager
+#### Simple three page pager
+The following example displays three predefined pages that occupy all available space within the pager ({{gtMethod:BrPagerPageElement>>#weight:}}is set to `1`). 
+{{gtExample:BrGlamorousComponentsPagers>>#threeFullPagePager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
+#### Two page pager with custom weight
+It is possible, however, to set a different {{gtMethod:BrPagerPageElement>>#weight:}} which will make pages share the space within their pager.
+{{gtExample:BrGlamorousComponentsPagers>>#twoHalfPagePager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
+#### Dynamically adding a page
+If needed, pages can be added dynamically with the same api as we used in the previous examples {{gtMethod:BrPager>>#addPage:}}. However, it is usually required to scroll to a newly created page which can be achieved with the help of the {{gtMethod:BrPager>>#scrollToLast}}method.
+{{gtExample:BrGlamorousComponentsPagers>>#dynamicPager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
+#### Infinite pager
 We can build on the previous example to create an ""infinite"" pager by using a stencil to recursively build new pages:
-${example:BrGlamorousComponentsPagers>>#infinitePager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}$
+{{gtExample:BrGlamorousComponentsPagers>>#infinitePager|previewShow=#gtLiveFor:|previewHeight=250|previewExpanded=true|codeExpanded=false}}
 
 
 
@@ -23,7 +23,7 @@ ${example:BrGlamorousComponentsPagers>>#infinitePager|previewShow=#gtLiveFor:|pr
 Class {
 	#name : #BrGlamorousComponentsPagers,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #'pager - examples' }

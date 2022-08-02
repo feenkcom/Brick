@@ -1,9 +1,9 @@
 "
-!! Source Sans Pro 
+## Source Sans Pro 
 
 Script used to load Source Sans Pro fonts in the image from their corresponding ttf files
 
-[[[
+```
 BrGlamorousFonts load: './Source Sans Pro 200.ttf' as: 'sourceSansPro200ExtraLight'.
 BrGlamorousFonts load: './Source Sans Pro 200italic.ttf' as: 'sourceSansPro200italicExtraLight'.
 BrGlamorousFonts load: './Source Sans Pro 300.ttf' as: 'sourceSansPro300Light'.
@@ -16,13 +16,13 @@ BrGlamorousFonts load: './Source Sans Pro 900.ttf' as: 'sourceSansPro900Black'.
 BrGlamorousFonts load: './Source Sans Pro 900italic.ttf' as: 'sourceSansPro900italicBlack'.
 BrGlamorousFonts load: './Source Sans Pro regular.ttf' as: 'sourceSansPro400Regular'.
 BrGlamorousFonts load: './Source Sans Pro italic.ttf' as: 'sourceSansPro400Italic'.
-]]]
+```
 
-!! Source Code Pro
+## Source Code Pro
 
 Script used to load Source Code Pro fonts in the image from their corresponding ttf files
 
-[[[
+```
 BrGlamorousFonts load: './Source Code Pro 200.ttf' as: 'sourceCodePro200ExtraLight'.
 BrGlamorousFonts load: './Source Code Pro 200italic.ttf' as: 'sourceCodePro200italicExtraLight'.
 BrGlamorousFonts load: './Source Code Pro 300.ttf' as: 'sourceCodePro300Light'.
@@ -37,7 +37,8 @@ BrGlamorousFonts load: './Source Code Pro 900.ttf' as: 'sourceCodePro900Black'.
 BrGlamorousFonts load: './Source Code Pro 900italic.ttf' as: 'sourceCodePro900italicBlack'.
 BrGlamorousFonts load: './Source Code Pro regular.ttf' as: 'sourceCodeProRegular'.
 BrGlamorousFonts load: './Source Code Pro italic.ttf' as: 'sourceCodeProItalic'.
-]]]
+```
+
 "
 Class {
 	#name : #BrGlamorousFonts,

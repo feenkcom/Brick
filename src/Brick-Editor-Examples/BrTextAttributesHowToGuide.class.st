@@ -1,14 +1,15 @@
 "
-! Text attributes 
-!! How to create a link in a text?
-${example:BrTextAttributesHowToGuide>>#linkInText|previewExpanded}$
-!! How to create a hide-able markup in a text?
-${example:BrTextAttributesHowToGuide>>#hideMarkupInText|previewExpanded}$
+# Text attributes 
+## How to create a link in a text?
+{{gtExample:BrTextAttributesHowToGuide>>#linkInText|previewExpanded}}
+## How to create a hide-able markup in a text?
+{{gtExample:BrTextAttributesHowToGuide>>#hideMarkupInText|previewExpanded}}
+
 "
 Class {
 	#name : #BrTextAttributesHowToGuide,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples-! Documentation'
+	#category : #'Brick-Editor-Examples-! Documentation'
 }
 
 { #category : #examples }

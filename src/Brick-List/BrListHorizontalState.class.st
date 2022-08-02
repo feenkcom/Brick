@@ -1,7 +1,8 @@
 "
-I am a ${class:BrListHorizontalState}$.
-I define a horizontal ${class:BrSimpleList}$ representation.
-Use ${class:BrListOrientationLook}$ to define how a ${class:BrSimpleList}$ should look like in the horizontal state.
+I am a {{gtClass:BrListHorizontalState}}.
+I define a horizontal {{gtClass:BrSimpleList}} representation.
+Use {{gtClass:BrListOrientationLook}} to define how a {{gtClass:BrSimpleList}} should look like in the horizontal state.
+
 "
 Class {
 	#name : #BrListHorizontalState,

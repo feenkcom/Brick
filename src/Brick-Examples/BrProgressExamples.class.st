@@ -1,36 +1,37 @@
 "
-I exemplify ${class:BrProgress}$.
-See also ${class:BrGlamorousProgressExamples}$ for glamorous examples.
+I exemplify {{gtClass:BrProgress}}.
+See also {{gtClass:BrGlamorousProgressExamples}} for glamorous examples.
 
-!! Static Progress Bar
+## Static Progress Bar
 
-${example:BrProgressExamples>>#barOnly|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#barOnly|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-!! Animated Progress Bar
+## Animated Progress Bar
 
-${example:BrProgressExamples>>#animatedBar|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#animatedBar|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-!! Progress Bar With Text Above
+## Progress Bar With Text Above
 
-${example:BrProgressExamples>>#barAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#barAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-!! Animated Progress Bar With Text Above
+## Animated Progress Bar With Text Above
 
-${example:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-!! Progress Bar With Text Inside
+## Progress Bar With Text Inside
 
-${example:BrProgressExamples>>#barAndTextInside|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#barAndTextInside|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-!! Progress Bar With Text Below
+## Progress Bar With Text Below
 
-${example:BrProgressExamples>>#barAndTextBelow|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#barAndTextBelow|codeExpanded=false|previewExpanded=true|previewHeight=180}}
+
 
 "
 Class {
 	#name : #BrProgressExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Progress'
+	#category : #'Brick-Examples-Progress'
 }
 
 { #category : #'examples - bar and text compositions' }

@@ -1,12 +1,13 @@
 "
-I am a ${class:BrProgress}$ glamorous look.
+I am a {{gtClass:BrProgress}} glamorous look.
 I display a progress bar only. 
-See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
+See {{gtClass:BrGlamorousProgressExamples}} class comment for spefic glamorous examples.
+
 "
 Class {
 	#name : #BrGlamorousProgressWithBarAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Glamorous-Progress'
+	#category : #'Brick-Glamorous-Progress'
 }
 
 { #category : #initialization }

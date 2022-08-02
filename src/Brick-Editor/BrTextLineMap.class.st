@@ -6,17 +6,18 @@ Public API and Key Messages
 - addLine:offset: 	Add the supplied line number to character offset mapping
 - mapEntryFor: 		Answer the map entry for the supplied line number
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	map:					<SortedCollection>
 	minEntrySpacing:	<Integer>
 
 
-!!!Implementation Points
+### Implementation Points
 
 As part of initialisation the text editor provides the map with its cacheLimit.  This is used to determine the minimum spacing between map entries to avoid growing the map unreasonably.
+
 
 "
 Class {
@@ -26,7 +27,7 @@ Class {
 		'map',
 		'minEntrySpacing'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text'
+	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #adding }

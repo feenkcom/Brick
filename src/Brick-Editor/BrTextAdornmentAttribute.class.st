@@ -1,9 +1,10 @@
 "
-! Adornments
+# Adornments
 
 I am an attribute which when applied on a text visually replaces some parts of it with other items (not neccessarily character). Such attribtues requires complex text rendering system and currently only supported by the Moldable Editor.
 
-See ${class:BrTextEditorAdornmentsExamples}$
+See {{gtClass:BrTextEditorAdornmentsExamples}}
+
 "
 Class {
 	#name : #BrTextAdornmentAttribute,
@@ -13,7 +14,7 @@ Class {
 		'renderingStrategy',
 		'cache'
 	],
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }

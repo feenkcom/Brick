@@ -1,7 +1,8 @@
 "
 I am a model for expandable / collapsable widgets.
 
-Users can send me a ${class:BrExpansionStateRequest}$ to know whether I am expanded or collapses. 
+Users can send me a {{gtClass:BrExpansionStateRequest}} to know whether I am expanded or collapses. 
+
 "
 Class {
 	#name : #BrExpandableModel,
@@ -9,7 +10,7 @@ Class {
 	#instVars : [
 		'expanded'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

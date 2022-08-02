@@ -1,67 +1,67 @@
 "
 I am a collection of ""showroom"" examples.
 
-! Buttons
+# Buttons
 
 In the example below we show all existing button styles
-${example:BrExamplesShowroom class>>#allButtons|expanded|noCode}$
+{{gtExample:BrExamplesShowroom class>>#allButtons|expanded|noCode}}
 
 The following glamorous button reacts to various UI interaction events and changes its style according the state (pressed, hovered)
-${example:BrExamplesShowroom>>#glamorousButton}$
+{{gtExample:BrExamplesShowroom>>#glamorousButton}}
 
 Button can also be disabled to prevent click events
-${example:BrExamplesShowroom>>#glamorousDisabledButton}$
+{{gtExample:BrExamplesShowroom>>#glamorousDisabledButton}}
 
-! Toggles
+# Toggles
 
 Toggle buttons can have radically different look, while the behaviour of all of them is exactly the same.
-${example:BrExamplesShowroom class>>#allToggles|noCode}$
+{{gtExample:BrExamplesShowroom class>>#allToggles|noCode}}
 
-!! Labelled toggle
+## Labelled toggle
 
-To create a toggle button with a label user should the corresponding  ${class:BrMaterialToggleWithIconLook}$
+To create a toggle button with a label user should the corresponding  {{gtClass:BrMaterialToggleWithIconLook}}
 
-${example:BrExamplesShowroom>>#materialLabelToggle}$
+{{gtExample:BrExamplesShowroom>>#materialLabelToggle}}
 
-!! Iconified toggle
+## Iconified toggle
 
 Similarly we can use the icon look to build an iconified toggle:
-${example:BrExamplesShowroom>>#materialIconToggle}$
+{{gtExample:BrExamplesShowroom>>#materialIconToggle}}
 
-!! Iconified labelled toggle
+## Iconified labelled toggle
 
 We can compose label and icon looks to create a toggle button with both label and the icon. Note that the order of looks defines the visual order of the label and icon:
 
-${example:BrExamplesShowroom>>#materialToggle}$
+{{gtExample:BrExamplesShowroom>>#materialToggle}}
 
 Thus being said by swapping the label and icon look we can move the icon to the right from the label:
 
-${example:BrExamplesShowroom>>#materialReversedToggle}$
+{{gtExample:BrExamplesShowroom>>#materialReversedToggle}}
 
-! Accordion
+# Accordion
 
-Accordion is the exandable and collapsable widget that consists of a header and a content. Any visual ${class:BlElement}$ can be a header of the accordion. The following example shows how a ${class:BrButton}$ can be used an accordion header:
+Accordion is the exandable and collapsable widget that consists of a header and a content. Any visual {{gtClass:BlElement}} can be a header of the accordion. The following example shows how a {{gtClass:BrButton}} can be used an accordion header:
 
-${example:BrExamplesShowroom>>#accordion}$
+{{gtExample:BrExamplesShowroom>>#accordion}}
 
-! Tabs
+# Tabs
 
 The following example shows how to create a tab group widget with 3 tabs. The content of each tab is defined with the help of a stencil.
 
-${example:BrExamplesShowroom>>#glamorousTabs}$
+{{gtExample:BrExamplesShowroom>>#glamorousTabs}}
 
-! Toolbar
+# Toolbar
 
 The toolbar is a logical set of action buttons (either labelled or iconified).
-${example:BrExamplesShowroom>>#glamorousToolbar}$
-${example:BrExamplesShowroom>>#materialToolbar}$
+{{gtExample:BrExamplesShowroom>>#glamorousToolbar}}
+{{gtExample:BrExamplesShowroom>>#materialToolbar}}
 
-! List
+# List
 
 The example below describes how to instantiate a new instance of the simple list that only has one column:
-${example:BrExamplesShowroom>>#simpleList|noCode}$
+{{gtExample:BrExamplesShowroom>>#simpleList|noCode}}
 
-${example:BrExamplesShowroom>>#columnedList|noCode}$
+{{gtExample:BrExamplesShowroom>>#columnedList|noCode}}
 
 
 
@@ -77,7 +77,7 @@ ${example:BrExamplesShowroom>>#columnedList|noCode}$
 Class {
 	#name : #BrExamplesShowroom,
 	#superclass : #Object,
-	#category : 'Brick-Examples-! Showroom'
+	#category : #'Brick-Examples-! Showroom'
 }
 
 { #category : #buttons }

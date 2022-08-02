@@ -4,15 +4,16 @@ BrTextEditorSurroundSet provides dictionary like lookup for opening and closing 
 See BrTextEditorSurroundDefinition for more information. 
 
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 	definitions:		<Array>
 
 
-!!!Implementation Points
+### Implementation Points
 
 The size of the collection is assumed to be small, so a simple search is done instead of using a Dictionary.
+
 "
 Class {
 	#name : #BrTextEditorSurroundMap,
@@ -20,7 +21,7 @@ Class {
 	#instVars : [
 		'definitions'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'instance creation' }

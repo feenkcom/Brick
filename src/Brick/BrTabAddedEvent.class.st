@@ -1,5 +1,6 @@
 "
 I am sent when a new tab is added to ${class:BrTabGroupModel}
+
 "
 Class {
 	#name : #BrTabAddedEvent,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'position'
 	],
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #accessing }

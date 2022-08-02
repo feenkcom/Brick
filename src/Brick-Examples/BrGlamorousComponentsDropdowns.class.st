@@ -1,19 +1,20 @@
 "
-!Dropdown
+# Dropdown
 Use Glamorous dropdowns to show a contextual popup associated with a UI element on click.
-This can be achieved by adding ${class:BrGlamorousWithDropdownLook}$ look to any visual component, such as ${class:BrButton|label=Button}$
-!!!!Dropdown for a button with a label
-${example:BrGlamorousComponentsDropdowns>>#buttonWithLabel|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}$
-!!!!Dropdown for a button with an icon
-${example:BrGlamorousComponentsDropdowns>>#buttonWithIcon|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}$
-!!!!Programmatically hide a dropdown
-Sometimes it is necessary to hide a dropdown due to some user action, this can be achieved by firing ${class:BrDropdownHideWish}$ wish: 
-${example:BrGlamorousComponentsDropdowns>>#hideDropdown|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}$
+This can be achieved by adding {{gtClass:BrGlamorousWithDropdownLook}} look to any visual component, such as {{gtClass:BrButton|label=Button}}
+#### Dropdown for a button with a label
+{{gtExample:BrGlamorousComponentsDropdowns>>#buttonWithLabel|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}}
+#### Dropdown for a button with an icon
+{{gtExample:BrGlamorousComponentsDropdowns>>#buttonWithIcon|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}}
+#### Programmatically hide a dropdown
+Sometimes it is necessary to hide a dropdown due to some user action, this can be achieved by firing {{gtClass:BrDropdownHideWish}} wish: 
+{{gtExample:BrGlamorousComponentsDropdowns>>#hideDropdown|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}}
+
 "
 Class {
 	#name : #BrGlamorousComponentsDropdowns,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #button }

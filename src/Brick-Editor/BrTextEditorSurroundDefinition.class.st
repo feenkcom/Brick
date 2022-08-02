@@ -3,15 +3,16 @@ BrTextEditorSurroundDefinition defines a character that the text editor will aut
 
 Some characters, e.g. quotes, should only be inserted if surrounded by spaces.  The optional condition can be specified to allow this.
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 	closeCharacter:		<Character>
 	condition:			<BlockClosure>
 	openCharacter:		<Character>
 
 
-!!!Implementation Points
+### Implementation Points
+
 "
 Class {
 	#name : #BrTextEditorSurroundDefinition,
@@ -21,7 +22,7 @@ Class {
 		'closeCharacter',
 		'condition'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #accessing }
