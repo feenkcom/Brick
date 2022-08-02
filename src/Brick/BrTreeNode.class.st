@@ -1,17 +1,18 @@
 "
-BrTreeNode represents a single node in a tree in a ${class:name=BrTree}$.
+BrTreeNode represents a single node in a tree in a {{gtClass:name=BrTree}}.
 
-BrTreeNode's don't have direct access to their UI element.  To update the element, send ${method:name=BrTreeNode>>#update:} with the payload.  The payload may be any object, and will be passed to the ${method:name=BrSimpleTree>>#nodeDataBinder:}.
+BrTreeNode's don't have direct access to their UI element.  To update the element, send {{gtMethod:name=BrTreeNode>>#update:}} with the payload.  The payload may be any object, and will be passed to the {{gtMethod:name=BrSimpleTree>>#nodeDataBinder:}}.
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	isExpanded: 	<Boolean> flags whether the receiver displays its children or not.  
-!!!Implementation Points
+### Implementation Points
 
 The isExpanded flag can only be set once the receiver has children.  However once set, it will remain set even if all children are removed.
 This also has the side effect that if #expandAll is sent to the tree, only those items that have children at the time will actually be expanded.  Other items will remain collapsed when children are added.
+
 "
 Class {
 	#name : #BrTreeNode,
@@ -27,7 +28,7 @@ Class {
 		'childrenNodes',
 		'indexInTree'
 	],
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #enumeration }

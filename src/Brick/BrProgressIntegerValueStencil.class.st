@@ -1,13 +1,14 @@
 "
-I convert ${method:BrProgressModel>>#amount|label=#selector}$ and ${method:BrProgressModel>>#total|label=#selector}$ values to an ${class:Integer}$:
+I convert {{gtMethod:BrProgressModel>>#amount|label=#selector}} and {{gtMethod:BrProgressModel>>#total|label=#selector}} values to an {{gtClass:Integer}}:
 
-${example:BrProgressExamples>>#integerValues|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#integerValues|codeExpanded=false|previewExpanded=true|previewHeight=180}}
+
 
 "
 Class {
 	#name : #BrProgressIntegerValueStencil,
 	#superclass : #BrProgressValueStencil,
-	#category : 'Brick-Progress - Model'
+	#category : #'Brick-Progress - Model'
 }
 
 { #category : #'api - instantiation' }

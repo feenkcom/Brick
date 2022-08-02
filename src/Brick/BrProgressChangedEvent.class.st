@@ -1,5 +1,6 @@
 "
-I inform about progress status changes. I am triggered by ${class:BrProgressModel}$ and received by ${class:BrProgressLook}$.
+I inform about progress status changes. I am triggered by {{gtClass:BrProgressModel}} and received by {{gtClass:BrProgressAptitude}}.
+
 
 "
 Class {
@@ -9,7 +10,7 @@ Class {
 		'amount',
 		'total'
 	],
-	#category : 'Brick-Progress - Events'
+	#category : #'Brick-Progress - Events'
 }
 
 { #category : #accessing }

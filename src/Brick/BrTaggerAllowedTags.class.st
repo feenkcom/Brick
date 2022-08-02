@@ -1,11 +1,12 @@
 "
-!Allowed tags
+# Allowed tags
 Describes what kind of tags are allowed
+
 "
 Class {
 	#name : #BrTaggerAllowedTags,
 	#superclass : #Object,
-	#category : 'Brick-Tagger - Model'
+	#category : #'Brick-Tagger - Model'
 }
 
 { #category : #testing }

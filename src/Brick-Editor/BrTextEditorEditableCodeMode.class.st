@@ -1,6 +1,7 @@
 "
-I am same editable mode as ${class:BrTextEditorEditableMode}$.
-I always insert ==CR== line ending when a user presses the ==return== key.
+I am same editable mode as {{gtClass:BrTextEditorEditableMode}}.
+I always insert `CR` line ending when a user presses the `return` key.
+
 
 "
 Class {

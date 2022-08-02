@@ -5,7 +5,7 @@ Each of my icon is a stencil that creates an actual element. It means that some 
 
 Here is a list of available icons:
 
-${class:BrGlamorousVectorIcons|show=gtIconsFor:|expanded=}$
+{{gtClass:BrGlamorousVectorIcons|show=gtIconsFor:|expanded=}}
 
 
 
@@ -13,7 +13,7 @@ ${class:BrGlamorousVectorIcons|show=gtIconsFor:|expanded=}$
 Class {
 	#name : #BrGlamorousVectorIcons,
 	#superclass : #Object,
-	#category : 'Brick-Glamorous-Colors, Icons, Fonts'
+	#category : #'Brick-Glamorous-Colors, Icons, Fonts'
 }
 
 { #category : #icons }

@@ -1,7 +1,8 @@
 "
-My subclasses convert ${method:BrProgressModel>>#amount|label=#selector}$ and ${method:BrProgressModel>>#total|label=#selector}$ values to ${class:String}$ using different strategies.
+My subclasses convert {{gtMethod:BrProgressModel>>#amount|label=#selector}} and {{gtMethod:BrProgressModel>>#total|label=#selector}} values to {{gtClass:String}} using different strategies.
 
-See my subclasses for specific examples: ${class:BrProgressValueStencil|show=#gtSubclassesFor:|expanded=true|height=200}$
+See my subclasses for specific examples: {{gtClass:BrProgressValueStencil|show=#gtSubclassesFor:|expanded=true|height=200}}
+
 
 "
 Class {
@@ -10,7 +11,7 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : 'Brick-Progress - Model'
+	#category : #'Brick-Progress - Model'
 }
 
 { #category : #testing }

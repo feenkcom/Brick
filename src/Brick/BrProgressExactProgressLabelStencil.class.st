@@ -1,15 +1,16 @@
 "
 I return a progress label that includes exact status information (amount and total values):
 
-${example:BrProgressExamples>>#fileSizeValues|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#fileSizeValues|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-The pattern can be defined as follows: ${method:BrProgressExactProgressLabelStencil>>#pattern:|expanded=true}$.
+The pattern can be defined as follows: {{gtMethod:BrProgressExactProgressLabelStencil>>#pattern:|expanded=true}}.
 
-The default pattern is ${method:BrProgressExactProgressLabelStencil>>#defaultPattern|expanded=true|expanded=true}$}$
+The default pattern is {{gtMethod:BrProgressExactProgressLabelStencil>>#defaultPattern|expanded=true|expanded=true}}}$
 
-!! Human Readable Progress Status 
+## Human Readable Progress Status 
 
-${example:BrProgressExamples>>#fileSizeValues|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+{{gtExample:BrProgressExamples>>#fileSizeValues|codeExpanded=false|previewExpanded=true|previewHeight=180}}
+
 
 "
 Class {
@@ -18,7 +19,7 @@ Class {
 	#instVars : [
 		'pattern'
 	],
-	#category : 'Brick-Progress - Model'
+	#category : #'Brick-Progress - Model'
 }
 
 { #category : #'api - instantiation' }

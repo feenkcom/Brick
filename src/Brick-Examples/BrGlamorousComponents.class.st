@@ -1,16 +1,17 @@
 "
-! Components
+# Components
 
-Buttons ${class:BrGlamorousComponentsButtons}$
+Buttons {{gtClass:BrGlamorousComponentsButtons}}
 
-Breadcrumb ${class:BrGlamorousComponentsBreadcrumbs}$
+Breadcrumb {{gtClass:BrGlamorousComponentsBreadcrumbs}}
 
-Checkbox ${class:BrGlamorousComponentsCheckboxes}$
+Checkbox {{gtClass:BrGlamorousComponentsCheckboxes}}
 
-Lists ${class:BrGlamorousComponentsLists}$
+Lists {{gtClass:BrGlamorousComponentsLists}}
+
 "
 Class {
 	#name : #BrGlamorousComponents,
 	#superclass : #Object,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }

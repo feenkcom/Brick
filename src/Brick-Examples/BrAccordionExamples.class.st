@@ -1,21 +1,22 @@
 "
-! Accordion
+# Accordion
 
 The accordion is a graphical control element that can be ""expanded"" or ""collapsed"" to reveal the content associated with that element. 
 
 By default an accordion is collapsed:
-${example:name=BrAccordionExamples>>#glamorousWithEditor|noCode|previewShow=#gtLiveFor:|previewHeight=140}$
+{{gtExample:name=BrAccordionExamples>>#glamorousWithEditor|noCode|previewShow=#gtLiveFor:|previewHeight=140}}
 and users are required to click on the header to expand it:
-${example:name=BrAccordionExamples>>#glamorousWithEditorExpanded|noCode|previewShow=#gtLiveFor:|previewHeight=140}$
+{{gtExample:name=BrAccordionExamples>>#glamorousWithEditorExpanded|noCode|previewShow=#gtLiveFor:|previewHeight=140}}
 the color of the vertical bar on the left side changes when the accordion receives keyboard focus:
-${example:name=BrAccordionExamples>>#glamorousWithEditorExpandedWithFocus|noCode|previewShow=#gtLiveFor:|previewHeight=140}$
+{{gtExample:name=BrAccordionExamples>>#glamorousWithEditorExpandedWithFocus|noCode|previewShow=#gtLiveFor:|previewHeight=140}}
 
-!! Resizing
+## Resizing
+
 "
 Class {
 	#name : #BrAccordionExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Accordion'
+	#category : #'Brick-Examples-Accordion'
 }
 
 { #category : #examples }

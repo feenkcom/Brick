@@ -1,6 +1,7 @@
 "
-I am a ${class:BlInfiniteElement}$
+I am a {{gtClass:BlInfiniteElement}}
 I am a vertical infinite list.
+
 
 "
 Class {

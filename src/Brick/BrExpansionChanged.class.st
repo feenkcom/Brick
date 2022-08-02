@@ -1,6 +1,7 @@
 "
-I am sent by ${class:BrExpandableModel}$ when its expansion state changes.
-I am also a respose to the ${class:BrExpansionStateRequest}$
+I am sent by {{gtClass:BrExpandableModel}} when its expansion state changes.
+I am also a respose to the {{gtClass:BrExpansionStateRequest}}
+
 "
 Class {
 	#name : #BrExpansionChanged,
@@ -8,7 +9,7 @@ Class {
 	#instVars : [
 		'expanded'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #'instance creation' }

@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #initialization }
+BrFlowList >> defaultListModel [
+	^ BrSimpleListModel new
+]
+
+{ #category : #initialization }
 BrFlowList >> initialize [
 	super initialize.
 

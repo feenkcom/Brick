@@ -1,14 +1,15 @@
 "
-!Accordion
+# Accordion
 The accordion is a graphical control element that can be ""expanded"" or ""collapsed"" to reveal the content associated with that element. 
-See ${class:BrAccordionExamples|label=Accordion examples}$ for a deeper dive into the api.
-!!!!With editor
-${example:BrGlamorousComponentsAccordions>>#withEditor|previewShow=#gtLiveFor:|previewHeight=150|previewExpanded=true|codeExpanded=false}$
+See {{gtClass:BrAccordionExamples|label=Accordion examples}} for a deeper dive into the api.
+#### With editor
+{{gtExample:BrGlamorousComponentsAccordions>>#withEditor|previewShow=#gtLiveFor:|previewHeight=150|previewExpanded=true|codeExpanded=false}}
+
 "
 Class {
 	#name : #BrGlamorousComponentsAccordions,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #examples }

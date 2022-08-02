@@ -1,20 +1,21 @@
 "
-I a ${class:BrProgress}$ view model. I keep information about a progress status.
-In the following example, I know that ${example:BrProgressExamples>>#barOnly|label=#amount}$ out of ${example:BrProgressExamples>>#barOnly|label=#total}$ is finished:
-${example:BrProgressExamples>>#barOnly|codeExpanded=false|previewExpanded=true|previewHeight=180}$
+I a {{gtClass:BrProgress}} view model. I keep information about a progress status.
+In the following example, I know that {{gtExample:BrProgressExamples>>#barOnly|label=#amount}} out of {{gtExample:BrProgressExamples>>#barOnly|label=#total}} is finished:
+{{gtExample:BrProgressExamples>>#barOnly|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
 
 The progress status can be set using
-- ${method:BrProgressModel>>#amount:total:}$,
-- ${method:BrProgressModel>>#percentage:}$, a value between 0 and 100, or
-- ${method:BrProgressModel>>#fraction:}$, a value between 0.0 and 1.0.
+- {{gtMethod:BrProgressModel>>#amount:total:}},
+- {{gtMethod:BrProgressModel>>#percentage:}}, a value between 0 and 100, or
+- {{gtMethod:BrProgressModel>>#fraction:}}, a value between 0.0 and 1.0.
 
-${class:BrProgress}$ has same methods to easily update the progress status.
-I inform about progress changes using ${class:BrProgressChangedEvent}$.
-The information can be requested using ${class:BrProgressStatusRequest}$.
+{{gtClass:BrProgress}} has same methods to easily update the progress status.
+I inform about progress changes using {{gtClass:BrProgressChangedEvent}}.
+The information can be requested using {{gtClass:BrProgressStatusRequest}}.
 
-See ${class:BrProgress}$ for examples.
-See also ${class:BrProgressWithLabelModel}$ that also handles progress description.
+See {{gtClass:BrProgress}} for examples.
+See also {{gtClass:BrProgressWithLabelModel}} that also handles progress description.
+
 
 "
 Class {
@@ -24,7 +25,7 @@ Class {
 		'amount',
 		'total'
 	],
-	#category : 'Brick-Progress - Model'
+	#category : #'Brick-Progress - Model'
 }
 
 { #category : #accessing }

@@ -1,9 +1,10 @@
 "
-I add API that allows users to expand and collapse widgets that support it, for example ${class:BrTriangle}$.
+I add API that allows users to expand and collapse widgets that support it, for example {{gtClass:BrTriangle}}.
+
 "
 Trait {
 	#name : #TBrExpandable,
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
 { #category : #'api - expandable' }

@@ -1,6 +1,6 @@
 "
 I am a tab switcher look that position tabs at top-center part of container.
-I expect to be attached to a ${class:BrTabGroup}$ instance.
+I expect to be attached to a {{gtClass:BrTabGroup}} instance.
 #Examples 
 ##With Labels
 {{gtExample:BrExamplesShowroom>>#glamorousTabsSwitcherWithLabels|codeExpanded=false|previewExpanded=true}}

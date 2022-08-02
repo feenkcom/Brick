@@ -5,7 +5,7 @@ The list of files displayed, button label and selection action can all be specif
 
 While the default label of the accept button is 'OK', this should be changed to indicate the actual action that will be taken, e.g. 'Load file'.
 
-!!Public API and Key Messages
+## Public API and Key Messages
 
 - fileFilterBlock: 	A one-parameter block that is passed in as the argument to the #select: for filtering the displayed files.  Default = display all files.
 - folder: 	The initial directory to display.  Default = working directory. 
@@ -14,9 +14,9 @@ While the default label of the accept button is 'OK', this should be changed to 
 
    One simple example is simply gorgeous.
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	breadcrumb:			<BrBreadcrumb>
 	fileFilterBlock:	<BlockClosure>
@@ -27,7 +27,8 @@ While the default label of the accept button is 'OK', this should be changed to 
 	table:					<BrColumnedList>
 
 
-!!!Implementation Points
+### Implementation Points
+
 "
 Class {
 	#name : #BrFileSelector,

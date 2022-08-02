@@ -1,11 +1,12 @@
 "
-I am basic ${class:BrProgress}$ bar glamorous look.
-See ${class:BrGlamorousProgressExamples}$ class comment for spefic glamorous examples.
+I am basic {{gtClass:BrProgress}} bar glamorous look.
+See {{gtClass:BrGlamorousProgressExamples}} class comment for spefic glamorous examples.
+
 "
 Class {
 	#name : #BrGlamorousProgressBarAptitude,
 	#superclass : #BrProgressAnimatedBarAptitude,
-	#category : 'Brick-Glamorous-Progress'
+	#category : #'Brick-Glamorous-Progress'
 }
 
 { #category : #'instance creation' }

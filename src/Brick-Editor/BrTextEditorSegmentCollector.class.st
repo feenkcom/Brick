@@ -1,9 +1,9 @@
 "
 I collect and cache text line segments for fast access by index.
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	editor 				<BrTextEditor>	The editor that owns this cache
 	limit 					<Integer> The (soft) maximum number of segments in the cache, see below.
@@ -13,12 +13,13 @@ I collect and cache text line segments for fast access by index.
 	subText 				<BlSubText>
 	text      			<BlText>		The text being edited
 
-!!!Implementation Points
+### Implementation Points
 
 To facilitate jumping backwards quickly the the manager builds a map of line number to charcter offset of the string being edited.  When the target line number is earlier than the cache start the map can be used as a known point to start parsing forward from.
 
 
-The limit represents the maximum number of items held by the receiver when an uncached segment is requested (${method:name=BrTextEditorSegmentCollector>>#segmentAt:}$).  If segments are added via ${method:name=BrTextEditorSegmentCollector>>#addSegments:after:}$ or ${method:name=BrTextEditorSegmentCollector>>#addSegments:before:}$ the limit may be safely exceeded.
+The limit represents the maximum number of items held by the receiver when an uncached segment is requested ({{gtMethod:name=BrTextEditorSegmentCollector>>#segmentAt:}}).  If segments are added via {{gtMethod:name=BrTextEditorSegmentCollector>>#addSegments:after:}} or {{gtMethod:name=BrTextEditorSegmentCollector>>#addSegments:before:}} the limit may be safely exceeded.
+
 "
 Class {
 	#name : #BrTextEditorSegmentCollector,

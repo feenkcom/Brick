@@ -1,5 +1,6 @@
 "
-I split a piece of text into line segments ${class:BrTextEditorLineSegment}$
+I split a piece of text into line segments {{gtClass:BrTextEditorLineSegment}}
+
 "
 Class {
 	#name : #BrTextEditorLineSplitter,
