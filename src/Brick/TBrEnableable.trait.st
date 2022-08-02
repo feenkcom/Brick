@@ -1,9 +1,10 @@
 "
-I add API that allows users to enable/disable widgets that support it, for example ${class:BrButton}$ or ${class:BrToggle}$
+I add API that allows users to enable/disable widgets that support it, for example {{gtClass:BrButton}} or {{gtClass:BrToggle}}
+
 "
 Trait {
 	#name : #TBrEnableable,
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
 { #category : #'api - enablement' }
