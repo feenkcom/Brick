@@ -1,5 +1,5 @@
 "
-I define a set of events that are sent by ${class:BrTabGroupModel}
+I define a set of events that are sent by {{gtClass:BrTabGroupModel}}.
 
 
 "

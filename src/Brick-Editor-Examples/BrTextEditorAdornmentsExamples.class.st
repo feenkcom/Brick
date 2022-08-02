@@ -5,11 +5,11 @@ The editor supports ''adornment'' attributes that visually influence the content
 
 Adornment attribute can replace a piece of text with arbitrary visual elements or simply append them after a piece of text. Therefore we define two groups of adornments:
 
-# replacing ${class:BrTextEditorReplacingAdornmentsExamples}$
-# appending ${class:BrTextEditorAppendingAdornmentsExamples}$
+- replacing ${class:BrTextEditorReplacingAdornmentsExamples}$
+- appending ${class:BrTextEditorAppendingAdornmentsExamples}$
 "
 Class {
 	#name : #BrTextEditorAdornmentsExamples,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Examples-! Documentation'
+	#category : #'Brick-Editor-Examples-! Documentation'
 }

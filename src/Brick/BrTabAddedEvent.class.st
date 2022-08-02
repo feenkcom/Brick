@@ -1,5 +1,5 @@
 "
-I am sent when a new tab is added to ${class:BrTabGroupModel}
+I am sent when a new tab is added to {{gtClass:BrTabGroupModel}}.
 
 "
 Class {

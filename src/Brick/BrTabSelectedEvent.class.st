@@ -1,5 +1,5 @@
 "
-I am sent when a tab is selected in ${class:BrTabGroupModel}
+I am sent when a tab is selected in {{gtClass:BrTabGroupModel}}
 
 "
 Class {

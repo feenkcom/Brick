@@ -1,7 +1,7 @@
 "
 BrTreeNode represents a single node in a tree in a {{gtClass:name=BrTree}}.
 
-BrTreeNode's don't have direct access to their UI element.  To update the element, send ${method:name=BrTreeNode>>#update:} with the payload.  The payload may be any object, and will be passed to the ${method:name=BrSimpleTree>>#nodeDataBinder:}.
+BrTreeNode's don't have direct access to their UI element.  To update the element, send {{gtMethod:name=BrTreeNode>>#update:}} with the payload.  The payload may be any object, and will be passed to the {{gtMethod:name=BrSimpleTree>>#nodeDataBinder:}}.
 
 ## Internal Representation and Key Implementation Points.
 

@@ -1,5 +1,5 @@
 "
-I am sent when a tab is removed from ${class:BrTabGroupModel}
+I am sent when a tab is removed from {{gtClass:BrTabGroupModel}}
 
 "
 Class {

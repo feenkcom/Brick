@@ -1,5 +1,5 @@
 "
-I split a piece of text behind a {{gtClass:BrTextEditorLineSegment}} into pieces ${class:BrTextEditorLineSegmentPiece}
+I split a piece of text behind a {{gtClass:BrTextEditorLineSegment}} into pieces {{gtClass:BrTextEditorLineSegmentPiece}}
 
 "
 Class {

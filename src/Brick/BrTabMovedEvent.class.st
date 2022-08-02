@@ -1,5 +1,5 @@
 "
-I am sent when an existing tab is moved to another position in ${class:BrTabGroupModel}
+I am sent when an existing tab is moved to another position in {{gtClass:BrTabGroupModel}}.
 
 "
 Class {
