@@ -19,7 +19,7 @@ Toggle buttons can have radically different look, while the behaviour of all of 
 
 ## Labelled toggle
 
-To create a toggle button with a label user should the corresponding  {{gtClass:BrMaterialToggleWithIconLook}}
+To create a toggle button with a label user should the corresponding  {{gtClass:BrMaterialToggleWithIconAptitude}}
 
 {{gtExample:BrExamplesShowroom>>#materialLabelToggle}}
 

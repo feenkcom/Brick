@@ -1,5 +1,5 @@
 "
-I inform about progress status changes. I am triggered by {{gtClass:BrProgressModel}} and received by {{gtClass:BrProgressLook}}.
+I inform about progress status changes. I am triggered by {{gtClass:BrProgressModel}} and received by {{gtClass:BrProgressAptitude}}.
 
 
 "

@@ -3,7 +3,7 @@
 
 ## Toolbar Order-Independent Item Binding 
 
-You may noticed that {{gtMethod:BrToolbarLook>>#initialize}} initialize `item` instance variable as an {{gtClass:OrderedDictionary}}. The reason for the ordered dictionary is to allow order-independent binding of toolbar view to the tab model. To understand it easily, let's check the following excercise: 
+You may noticed that {{gtMethod:BrToolbarAptitude>>#initialize}} initialize `item` instance variable as an {{gtClass:OrderedDictionary}}. The reason for the ordered dictionary is to allow order-independent binding of toolbar view to the tab model. To understand it easily, let's check the following excercise: 
 
 First, we create and inspect a {{gtClass:BrToolbar}} instance:
 

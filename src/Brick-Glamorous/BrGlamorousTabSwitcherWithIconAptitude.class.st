@@ -1,7 +1,7 @@
 "
 I am a tab switcher look with a label.
 I expect to be attached to {{gtClass:BrTab}}.
-See examples at {{gtClass:BrGlamorousTabGroupSwitcherLook}} and {{gtClass:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabLook}}.
+See examples at {{gtClass:BrGlamorousTabGroupSwitcherAptitude}} and {{gtClass:BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude}}.
 
 
 "

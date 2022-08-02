@@ -1,5 +1,5 @@
 "
-I request current progress status. I am triggered by {{gtClass:BrProgressLook}} and {{gtClass:BrProgressModel}} answers the request by {{gtClass:BrProgressChangedEvent}} object.
+I request current progress status. I am triggered by {{gtClass:BrProgressAptitude}} and {{gtClass:BrProgressModel}} answers the request by {{gtClass:BrProgressChangedEvent}} object.
 
 
 "

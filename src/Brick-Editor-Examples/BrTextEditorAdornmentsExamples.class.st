@@ -6,7 +6,7 @@ The editor supports *adornment* attributes that visually influence the content o
 Adornment attribute can replace a piece of text with arbitrary visual elements or simply append them after a piece of text. Therefore we define two groups of adornments:
 
 - replacing {{gtClass:BrTextEditorReplacingAdornmentsExamples}}
-- appending {{gtClass:BrTextEditorAppendingAdornmentsExamples}}
+- appending {gtClass:BrTextEditorAppendingAdornmentsExamples}}
 
 "
 Class {

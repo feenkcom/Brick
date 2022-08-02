@@ -1,14 +1,8 @@
 "
-I am an abstract text styler strategy used by {{gtClass:BrTextEditor}}.
-My concrete subclass strategies should style text in a background process.
-The common styling logic, that should be executed in the background process is implemented in {{gtMethod:BrTextStylerCommonAsyncStrategy>>#doStyle:afterDo:}} and should be called from concete 
-The subclasses should implement {{gtMethod:BrTextStylerStrategy>>#style:afterDo:}} implementations.
+I am a text styler strategy used by {{gtClass:BrTextEditor}}.
+I style a text in a background process, using {{gtClass:TAsyncFuture}}.
 
 See {{gtClass:BrTextStylerStrategy}} for futher explanation.
-
-See my subclasses for concrete async strategies: {{gtClass:BrTextStylerCommonAsyncStrategy|expanded=true|show=gtSubclassesFor:}}
-
-
 "
 Class {
 	#name : #BrTextStylerAsyncStrategy,

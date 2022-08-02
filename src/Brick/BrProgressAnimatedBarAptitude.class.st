@@ -1,5 +1,5 @@
 "
-I am an animated {{gtClass:BrProgressBarLook}}. I add an animated background to the progress bar widget: 
+I am an animated {{gtClass:BrProgressBarAptitude}}. I add an animated background to the progress bar widget: 
 
 {{gtExample:BrProgressExamples>>#animatedBar|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 

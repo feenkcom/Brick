@@ -1,7 +1,7 @@
 "
 I am an abstract class. I define an animated tool bar background. My subclasses return {{gtClass:BlPaint}} objects on every {{gtMethod:BrProgressPaintStencil>>#create|label=#selector}} call. The subclasses should return different {{gtClass:BlPaint}} objects on every call in order to generate an animated background effect.
 
-I am used by {{gtClass:BrProgressAnimatedBarLook}}.
+I am used by {{gtClass:BrProgressAnimatedBarAptitude}}.
 
 See my subclasses for specific use cases: {{gtClass:BrProgressPaintStencil|show=#gtSubclassesFor:|expanded=true|height=150}}
 

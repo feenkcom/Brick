@@ -1,9 +1,9 @@
 "
 I am an abstract text styler strategy used by {{gtClass:BrTextEditor}}.
 My subclasses are responsible for the text style request executions.
-For example, one strategy could perform styling in a background process, another in a UI process (and being therefore blocking).
+For example, one strategy could perform styling in a background process, another in a UI process (and therefore being blocking).
 
-The common methods are {{gtMethod:BrTextStylerStrategy>>#style:}} and {{gtMethod:BrTextStylerStrategy>>#style:afterDo:}}.
+The common method is {{gtMethod:BrTextStylerStrategy>>#styleTextInEditorElement:thenDo:}}.
 
 See my subclasses for concrete strategies: {{gtClass:BrTextStylerStrategy|expanded=true|show=gtSubclassesFor:}}
 

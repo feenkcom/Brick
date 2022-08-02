@@ -1,5 +1,5 @@
 "
-I am a basic {{gtClass:BrProgress}} bar look. I create a progress bar widget and keep it updated, see the {{gtMethod:BrProgressBarLook>>#onProgressChanged|label=#selector|expanded=false}} method:
+I am a basic {{gtClass:BrProgress}} bar look. I create a progress bar widget and keep it updated, see the {{gtMethod:BrProgressBarAptitude>>#onProgressChanged|label=#selector|expanded=false}} method:
 
 {{gtExample:BrProgressExamples>>#barOnly|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 

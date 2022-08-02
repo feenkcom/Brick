@@ -2,7 +2,7 @@
 I am a progress bar widget. 
 I use {{gtClass:BrProgressWithLabelModel}} to keep progress information.
 
-You can attach {{gtClass:BrProgressLook}} and {{gtClass:BrTextLabelLook}} to display progress bar and a description text.
+You can attach {{gtClass:BrProgressAptitude}} and {{gtClass:BrTextLabelAptitude}} to display progress bar and a description text.
 
 See {{gtClass:BrProgressExamples}} and {{gtClass:BrGlamorousProgressExamples}} examples.
 

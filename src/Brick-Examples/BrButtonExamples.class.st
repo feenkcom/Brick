@@ -21,13 +21,13 @@ A button widget is composed of multiple view models that add important functiona
 ## Building a button
 Button's look can be implemented by composing existing looks or implementing a new one.
 ### Adding and styling a label
-Having {{gtClass:BrLabelModel}} view model is not enough to create a button with a label. For that we would need to add {{gtClass:BrTextLabelLook}}:
+Having {{gtClass:BrLabelModel}} view model is not enough to create a button with a label. For that we would need to add {{gtClass:BrTextLabelAptitude}}:
 {{gtExample:BrButtonExamples>>#buttonWithLabelLook|previewShow=#gtLiveFor:|previewHeight=55|previewExpanded=true}}
 
 Of course, a text style can be customized to match user's preference:
 {{gtExample:BrButtonExamples>>#buttonWithLabelLookAndCustomFont|previewShow=#gtLiveFor:|previewHeight=70|previewExpanded=true}}
 
-Quite often though, it may be needed to change label's style when users hover a button. {{gtClass:BrHoverModel}} handles widget hover state change. To style the text accordingly we can add {{gtClass:BrInteractiveCommonLook}} to the previosly created {{gtClass:BrTextLabelLook}}. Please note that we should also provide default values for all button properties that change due to interactivity in a `default:` style:
+Quite often though, it may be needed to change label's style when users hover a button. {{gtClass:BrHoverModel}} handles widget hover state change. To style the text accordingly we can add {{gtClass:BrInteractiveCommonAptitude}} to the previosly created {{gtClass:BrTextLabelAptitude}}. Please note that we should also provide default values for all button properties that change due to interactivity in a `default:` style:
 {{gtExample:BrButtonExamples>>#buttonWithLabelLookReactingToHover|previewShow=#gtLiveFor:|previewHeight=70|previewExpanded=true}}
 
 In a similar fashing we can also change the text style on a button press which is managed by {{gtClass:BrPressModel}}:
@@ -36,7 +36,7 @@ In a similar fashing we can also change the text style on a button press which i
 One more common use-case is to provide a text style for a disabled button which is modelled by {{gtClass:BrInteractiveModel}}. Please note that disabled button does not react to click and hover events:
 {{gtExample:BrButtonExamples>>#buttonWithLabelLookReactingToHoverAndPressAndDisabled|previewShow=#gtLiveFor:|previewHeight=70|previewExpanded=true}}
 
-Sometimes users may want to create a look that depends on a logical button size modelled by {{gtClass:BrSizeAdjustmentModel}}. For example a button can be made huge `beHuge` or tiny `beTiny`. To style a label based on the logical widget size we can use {{gtClass:BrSizeAdjustmentLook}} which provides a fluent api for variuos sizes. Click on the label to randomly change its logial size:
+Sometimes users may want to create a look that depends on a logical button size modelled by {{gtClass:BrSizeAdjustmentModel}}. For example a button can be made huge `beHuge` or tiny `beTiny`. To style a label based on the logical widget size we can use {{gtClass:BrSizeAdjustmentAptitude}} which provides a fluent api for variuos sizes. Click on the label to randomly change its logial size:
 {{gtExample:BrButtonExamples>>#buttonWithLabelLookOfDifferentSizes|previewShow=#gtLiveFor:|previewHeight=70|previewExpanded=true}}
 
 Now lets put together the final label look that we will use later to build our custom button:

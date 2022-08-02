@@ -1,7 +1,7 @@
 "
 # Dropdown
 Use Glamorous dropdowns to show a contextual popup associated with a UI element on click.
-This can be achieved by adding {{gtClass:BrGlamorousWithDropdownLook}} look to any visual component, such as {{gtClass:BrButton|label=Button}}
+This can be achieved by adding {{gtClass:BrGlamorousWithDropdownAptitude}} look to any visual component, such as {{gtClass:BrButton|label=Button}}
 #### Dropdown for a button with a label
 {{gtExample:BrGlamorousComponentsDropdowns>>#buttonWithLabel|previewShow=#gtLiveFor:|previewHeight=66|previewExpanded=true|codeExpanded=false}}
 #### Dropdown for a button with an icon
