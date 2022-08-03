@@ -35,10 +35,10 @@ BrMaterialToggleBackgroundAptitude >> defaultNormalBackground [
 BrMaterialToggleBackgroundAptitude >> initialize [
 	super initialize.
 	
-	self add: (BrInteractiveAptitude new
-		style: [ :aStyler |
-			aStyler default: [ :aWidget | aWidget background: self defaultNormalBackground ].
-			aStyler pressed: [ :aWidget | aWidget background: self defaultCheckedBackground slightlyLighter ] ]).
+	self add: (BrStyleCommonAptitude new
+		default: [ :aWidget | aWidget background: self defaultNormalBackground ];
+		pressed: [ :aWidget | 
+			aWidget background: self defaultCheckedBackground slightlyLighter ]).
 
 	normalBackground := self defaultNormalBackground.
 	checkedBackground := self defaultCheckedBackground
