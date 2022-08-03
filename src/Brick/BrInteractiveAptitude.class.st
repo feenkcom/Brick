@@ -1,13 +1,13 @@
 "
 Example:
 
-[[[
- BrInteractiveLook new style: [ :aStyler |
+```
+ BrInteractiveAptitude new style: [ :aStyler |
 	aStyler default: [ self foreground: BrGlamorousColors defaultButtonTextColor ].
 	aStyler hovered: [ self foreground: BrGlamorousColors hoveredButtonTextColor ].
 	aStyler pressed: [ self foreground: BrGlamorousColors pressedButtonTextColor ].
 	aStyler disabled: [ self foreground: BrGlamorousColors disabledButtonTextColor ] ]
-]]]
+```
 "
 Class {
 	#name : #BrInteractiveAptitude,
