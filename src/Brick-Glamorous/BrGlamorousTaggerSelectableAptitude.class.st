@@ -5,7 +5,7 @@ Class {
 		'allowedTags',
 		'addButton'
 	],
-	#category : 'Brick-Glamorous-Tagger'
+	#category : #'Brick-Glamorous-Tagger'
 }
 
 { #category : #private }
@@ -91,7 +91,7 @@ BrGlamorousTaggerSelectableAptitude >> newAddAnyTagButton [
 	^ self newBasicAddTagButton
 		action: [ :aButton | self addTagCreatorElement: (BrTaggerTag new) ];
 		addShortcut: (BlShortcutWithAction new
-			combination: BlKeyCombination return;
+			combination: BlKeyCombination enter;
 			action: [ :anEvent | self addTagCreatorElement: (BrTaggerTag new) ])
 ]
 
