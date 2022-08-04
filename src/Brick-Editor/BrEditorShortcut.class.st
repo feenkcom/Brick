@@ -22,7 +22,7 @@ BrEditorShortcut class >> carriageReturn [
 		  name: 'Insert carriage return';
 		  description:
 			  'Inserts a carriage return (cr) at the cursor location and indents the new line to match the indentation of the previous line.';
-		  combination: BlKeyCombination return;
+		  combination: BlKeyCombination enter;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor inserter
 				  inputFilter: aBrTextEditor inputFilter;
@@ -105,7 +105,7 @@ BrEditorShortcut class >> editableLabelAccept [
 	^ self new
 		  name: 'Accept';
 		  description: 'Accepts changes make to the text.';
-		  combination: BlKeyCombination return;
+		  combination: BlKeyCombination enter;
 		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
 			  aBrEditorElement acceptEdition ];
 		  yourself
@@ -131,7 +131,7 @@ BrEditorShortcut class >> editableLabelSwitchToEditor [
 		  name: 'Switch to editor';
 		  description:
 			  'Switches the label into an editor allowing users to edit it.';
-		  combination: BlKeyCombination return;
+		  combination: BlKeyCombination enter;
 		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
 			  aBrEditorElement switchToEditor ];
 		  yourself
@@ -173,7 +173,7 @@ BrEditorShortcut class >> lineEnding [
 		  name: 'Insert line ending';
 		  description:
 			  'Inserts a platform specific line ending at the cursor location and indents the new line to match the indentation of the previous line.';
-		  combination: BlKeyCombination return;
+		  combination: BlKeyCombination enter;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor inserter
 				  inputFilter: aBrTextEditor inputFilter;

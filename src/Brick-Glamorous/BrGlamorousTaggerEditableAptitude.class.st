@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousTaggerEditableAptitude,
 	#superclass : #BrGlamorousTaggerAptitude,
-	#category : 'Brick-Glamorous-Tagger'
+	#category : #'Brick-Glamorous-Tagger'
 }
 
 { #category : #private }
@@ -109,7 +109,7 @@ BrGlamorousTaggerEditableAptitude >> newAddTagButton [
 						previousSiblingDo: [ :anElement | anElement requestFocus ] ]);
 		addShortcut:
 			(BlShortcutWithAction new
-				combination: BlKeyCombination return;
+				combination: BlKeyCombination enter;
 				action: [ :anEvent | self addTagCreatorElement ])
 ]
 
