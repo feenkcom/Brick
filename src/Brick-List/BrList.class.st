@@ -6,9 +6,15 @@ Class {
 	#category : #'Brick-List-Elements'
 }
 
+{ #category : #accessing }
+BrList class >> isAbstract [
+
+	^ self == BrList
+]
+
 { #category : #initialization }
 BrList >> defaultListModel [
-	^ BrAbstractListModel new
+	self subclassResponsibility 
 ]
 
 { #category : #initialization }
