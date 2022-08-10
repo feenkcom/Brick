@@ -4,6 +4,11 @@ Class {
 	#category : #'Brick-List-Ungrouped-Elements'
 }
 
+{ #category : #accessing }
+BrUngroupedList >> defaultListModel [
+	^ BrUngroupedListModel new
+]
+
 { #category : #'api - accessing' }
 BrUngroupedList >> items [
 	^ self viewModel items
