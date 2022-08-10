@@ -8,7 +8,7 @@ Class {
 
 { #category : #initialization }
 BrList >> defaultListModel [
-	^ BrUngroupedListModel new
+	^ BrAbstractListModel new
 ]
 
 { #category : #initialization }
