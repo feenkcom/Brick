@@ -537,6 +537,18 @@ BrTextEditorSelecter >> select [
 			ifTrue: [ self privateSelect: aMonotoneSelection from to: aMonotoneSelection to ] ]
 ]
 
+{ #category : #'api - configuration' }
+BrTextEditorSelecter >> selectionUnitAt: aTextIndex [
+	"Select a word or a whitespace or delimiter pair at a given text index"
+
+	| aUnitInterval |
+	self assertUIProcess.
+
+	aUnitInterval := self findDelimitedUnitAt: aTextIndex.
+	aUnitInterval isEmpty ifTrue: [ aUnitInterval := self findWordAt: aTextIndex ].
+	self from: aUnitInterval first to: aUnitInterval last
+]
+
 { #category : #private }
 BrTextEditorSelecter >> updateCursors [
 	| aNavigator |
@@ -551,14 +563,4 @@ BrTextEditorSelecter >> updateCursors [
 { #category : #'api - configuration' }
 BrTextEditorSelecter >> withoutCursorUpdate [
 	shouldUpdateCursor := false
-]
-
-{ #category : #'api - configuration' }
-BrTextEditorSelecter >> wordAt: aTextIndex [
-	"Select a word or a whitespace at a given text index"
-	| aWordInterval |
-	self assertUIProcess.
-	
-	aWordInterval := self findWordAt: aTextIndex.
-	self from: aWordInterval first to: aWordInterval last
 ]

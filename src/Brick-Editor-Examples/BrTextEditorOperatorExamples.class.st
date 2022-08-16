@@ -13,6 +13,11 @@ BrTextEditorOperatorExamples >> crlfText [
 	^ ('12' , String crlf , '34') asRopedText
 ]
 
+{ #category : #'instance creation' }
+BrTextEditorOperatorExamples >> delimiterText [
+	^'He said, "Hello, world", (really, he did). ((nesting should work, also) (really)), ''single quotes also'', [brackets too], and #(literal arrays) {also braces}' asRopedText 
+]
+
 { #category : #'focus - examples' }
 BrTextEditorOperatorExamples >> editorCreatesOneCursorOnFocus [
 	<gtExample>
@@ -97,6 +102,21 @@ BrTextEditorOperatorExamples >> editorOnMultilineText [
 BrTextEditorOperatorExamples >> editorOnSomeThing [
 
 	^ self editorFor: 'SomeThing'
+]
+
+{ #category : #'instance creation' }
+BrTextEditorOperatorExamples >> editorOnTextWithDelimiters [
+	<gtExample>
+	| anEditor anEditorElement |
+	
+	anEditorElement := self editorFor: self delimiterText.
+	anEditor := anEditorElement editor.
+	anEditor beLineBased.
+	
+	self assert: anEditor cursors isEmpty.
+	self assert: anEditor selection isEmpty.
+	
+	^ anEditorElement
 ]
 
 { #category : #'utility - examples' }

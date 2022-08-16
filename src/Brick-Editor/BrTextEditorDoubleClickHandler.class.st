@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Brick-Editor-UI - Handlers'
+	#category : #'Brick-Editor-UI - Handlers'
 }
 
 { #category : #accessing }
@@ -41,7 +41,7 @@ BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 		ifTrue: [ aSelecter withoutCursorUpdate ].
 
 	aSelecter
-		wordAt: aGlobalTextIndex;
+		selectionUnitAt: aGlobalTextIndex;
 		select
 ]
 

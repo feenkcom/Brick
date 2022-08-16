@@ -402,7 +402,7 @@ BrTextEditorParagraphBasedSelecterExamples >> select_word_at_0 [
 
 	anEditor := self editorOnMultilineText.
 	anEditor selecter
-		wordAt: 0;
+		selectionUnitAt: 0;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 0 to: 1).
@@ -420,7 +420,7 @@ BrTextEditorParagraphBasedSelecterExamples >> select_word_at_1 [
 
 	anEditor := self editorOnMultilineText.
 	anEditor selecter
-		wordAt: 1;
+		selectionUnitAt: 1;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 0 to: 1).
@@ -438,7 +438,7 @@ BrTextEditorParagraphBasedSelecterExamples >> select_word_at_2 [
 
 	anEditor := self editorOnMultilineText.
 	anEditor selecter
-		wordAt: 2;
+		selectionUnitAt: 2;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 2 to: 8).
@@ -456,8 +456,8 @@ BrTextEditorParagraphBasedSelecterExamples >> select_word_at_2_and_10 [
 
 	anEditor := self editorOnMultilineText.
 	anEditor selecter
-		wordAt: 2;
-		wordAt: 10;
+		selectionUnitAt: 2;
+		selectionUnitAt: 10;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 2 to: 8; select: 9 to: 14).
