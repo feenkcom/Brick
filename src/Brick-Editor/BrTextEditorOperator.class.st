@@ -71,19 +71,27 @@ BrTextEditorOperator >> editor: aBrTextEditor [
 { #category : #private }
 BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
 	<return: #Interval>
-	| aTextIterator shouldBeWord aUnitStart aUnitEnd aDesiredType delims emptyInterval endingDelimiter |
+	| aTextIterator aUnitStart delims emptyInterval endingDelimiter startingDelimiter level |
 	emptyInterval := 0 to: -1.
 	aTextIterator := self text iterator skip: aTextIndex.
 	aTextIterator hasPrevious ifFalse: [ ^ emptyInterval ].
 	delims := self delimiters.
+	level := 0.
 
 	endingDelimiter := delims at: aTextIterator peer ifAbsent: [ ^ emptyInterval ].
+	startingDelimiter := aTextIterator peer.
 
 	aUnitStart := aTextIndex.
 
 	[ aTextIterator hasNext ]
-		whileTrue: [ aTextIterator next = endingDelimiter
-				ifTrue: [ ^ aUnitStart to: aTextIterator position - 1 ] ].
+		whileTrue: [ | ch |
+			ch := aTextIterator next.
+			(startingDelimiter isOpenPunctuation and: [ ch = startingDelimiter ])
+				ifTrue: [ level := level + 1 ].
+			ch = endingDelimiter
+				ifTrue: [ level = 0
+						ifTrue: [ ^ aUnitStart to: aTextIterator position - 1 ]
+						ifFalse: [ level := level - 1 ] ] ].
 	^ emptyInterval
 ]
 

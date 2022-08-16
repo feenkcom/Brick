@@ -462,6 +462,42 @@ BrTextEditorLineBasedSelecterExamples >> select_moveTwiceRight_at_End [
 ]
 
 { #category : #'examples - word' }
+BrTextEditorLineBasedSelecterExamples >> select_nested_parentheses [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 44;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 44 to: 80).
+	self assert: anEditor editor selectedText asString equals: '(nesting should work, also) (really)'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(80)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - word' }
+BrTextEditorLineBasedSelecterExamples >> select_parentheses [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 26;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 26 to: 40).
+	self assert: anEditor editor selectedText asString equals: 'really, he did'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(40)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - word' }
 BrTextEditorLineBasedSelecterExamples >> select_word_at_0 [
 	<gtExample>
 	| anEditor |
