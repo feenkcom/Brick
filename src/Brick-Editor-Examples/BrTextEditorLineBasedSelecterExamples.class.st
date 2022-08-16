@@ -75,6 +75,42 @@ BrTextEditorLineBasedSelecterExamples >> select_all_reduced [
 ]
 
 { #category : #'examples - word' }
+BrTextEditorLineBasedSelecterExamples >> select_braces [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 126;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 126 to: 137).
+	self assert: anEditor editor selectedText asString equals: 'also braces'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(137)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - word' }
+BrTextEditorLineBasedSelecterExamples >> select_brackets [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 106;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 106 to: 118).
+	self assert: anEditor editor selectedText asString equals: 'brackets too'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(118)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - word' }
 BrTextEditorLineBasedSelecterExamples >> select_double_quotes [
 	<gtExample>
 	| anEditor |
@@ -493,6 +529,24 @@ BrTextEditorLineBasedSelecterExamples >> select_parentheses [
 	self assert: anEditor editor selectedText asString equals: 'really, he did'.
 
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(40)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - word' }
+BrTextEditorLineBasedSelecterExamples >> select_single_quotes [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 84;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 84 to: 102).
+	self assert: anEditor editor selectedText asString equals: 'single quotes also'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(102)).
 
 	^ anEditor
 ]
