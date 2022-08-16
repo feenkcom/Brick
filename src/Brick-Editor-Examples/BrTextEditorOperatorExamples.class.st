@@ -15,7 +15,7 @@ BrTextEditorOperatorExamples >> crlfText [
 
 { #category : #'instance creation' }
 BrTextEditorOperatorExamples >> delimiterText [
-	^'He said, "Hello, world", (really, he did). ((nesting should work, also) (really)), ''single quotes also'', [brackets too], and #(literal arrays) {also braces}' asRopedText 
+	^'He said, "Hello, world", (really, he did). ((nesting should work, also) (really)), ''single quotes also'', [brackets too], and {also braces}' asRopedText 
 ]
 
 { #category : #'focus - examples' }
