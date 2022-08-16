@@ -48,6 +48,16 @@ BrTextEditorOperator >> cursors [
 	^ self editor cursors
 ]
 
+{ #category : #private }
+BrTextEditorOperator >> delimiters [
+	^{
+		$' -> $' .
+		$" -> $" . 
+		$( -> $) .
+		$[ -> $] .
+		${ -> $} } asDictionary
+]
+
 { #category : #accessing }
 BrTextEditorOperator >> editor [
 	^ editor
@@ -56,6 +66,25 @@ BrTextEditorOperator >> editor [
 { #category : #accessing }
 BrTextEditorOperator >> editor: aBrTextEditor [
 	editor := aBrTextEditor
+]
+
+{ #category : #private }
+BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
+	<return: #Interval>
+	| aTextIterator shouldBeWord aUnitStart aUnitEnd aDesiredType delims emptyInterval endingDelimiter |
+	emptyInterval := 0 to: -1.
+	aTextIterator := self text iterator skip: aTextIndex.
+	aTextIterator hasPrevious ifFalse: [ ^ emptyInterval ].
+	delims := self delimiters.
+
+	endingDelimiter := delims at: aTextIterator peer ifAbsent: [ ^ emptyInterval ].
+
+	aUnitStart := aTextIndex.
+
+	[ aTextIterator hasNext ]
+		whileTrue: [ aTextIterator next = endingDelimiter
+				ifTrue: [ ^ aUnitStart to: aTextIterator position - 1 ] ].
+	^ emptyInterval
 ]
 
 { #category : #private }
