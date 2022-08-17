@@ -92,6 +92,24 @@ BrTextEditorSelecterExamples >> select_braces [
 	^ anEditor
 ]
 
+{ #category : #'examples - word' }
+BrTextEditorSelecterExamples >> select_braces_end [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 137;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 126 to: 137).
+	self assert: anEditor editor selectedText asString equals: 'also braces'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(137)).
+
+	^ anEditor
+]
+
 { #category : #'examples - all' }
 BrTextEditorSelecterExamples >> select_brackets [
 	<gtExample>
@@ -111,6 +129,24 @@ BrTextEditorSelecterExamples >> select_brackets [
 ]
 
 { #category : #'examples - all' }
+BrTextEditorSelecterExamples >> select_brackets_end [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 118;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 106 to: 118).
+	self assert: anEditor editor selectedText asString equals: 'brackets too'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(118)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - all' }
 BrTextEditorSelecterExamples >> select_double_quotes [
 	<gtExample>
 	| anEditor |
@@ -118,6 +154,24 @@ BrTextEditorSelecterExamples >> select_double_quotes [
 	anEditor := self editorOnTextWithDelimiters.
 	anEditor selecter
 		selectionUnitAt: 10;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 10 to: 22).
+	self assert: anEditor editor selectedText asString equals: 'Hello, world'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(22)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - all' }
+BrTextEditorSelecterExamples >> select_double_quotes_end [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 22;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 10 to: 22).
@@ -516,13 +570,31 @@ BrTextEditorSelecterExamples >> select_nested_parentheses [
 ]
 
 { #category : #'examples - all' }
+BrTextEditorSelecterExamples >> select_nested_parentheses_end [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 80;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 44 to: 80).
+	self assert: anEditor editor selectedText asString equals: '(nesting should work, also) (really)'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(80)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - all' }
 BrTextEditorSelecterExamples >> select_parentheses [
 	<gtExample>
 	| anEditor |
 
 	anEditor := self editorOnTextWithDelimiters.
 	anEditor selecter
-		selectionUnitAt: 26;
+		selectionUnitAt: 40;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 26 to: 40).
@@ -541,6 +613,24 @@ BrTextEditorSelecterExamples >> select_single_quotes [
 	anEditor := self editorOnTextWithDelimiters.
 	anEditor selecter
 		selectionUnitAt: 84;
+		select.
+
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 84 to: 102).
+	self assert: anEditor editor selectedText asString equals: 'single quotes also'.
+
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(102)).
+
+	^ anEditor
+]
+
+{ #category : #'examples - all' }
+BrTextEditorSelecterExamples >> select_single_quotes_end [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnTextWithDelimiters.
+	anEditor selecter
+		selectionUnitAt: 102;
 		select.
 
 	self assert: anEditor selection equals: (BlCompositeSelection new select: 84 to: 102).

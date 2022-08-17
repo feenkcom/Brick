@@ -78,7 +78,7 @@ BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
 	delims := self delimiters.
 	level := 0.
 
-	endingDelimiter := delims at: aTextIterator peer ifAbsent: [ ^ emptyInterval ].
+	endingDelimiter := delims at: aTextIterator peer ifAbsent: [ ^ self reverseFindDelimitedUnitAt: aTextIndex ].
 	startingDelimiter := aTextIterator peer.
 
 	aUnitStart := aTextIndex.
@@ -489,6 +489,35 @@ BrTextEditorOperator >> isWordChar: aCharacter [
 	<return: #Number>
 
 	^ aCharacter isAlphaNumeric
+]
+
+{ #category : #private }
+BrTextEditorOperator >> reverseFindDelimitedUnitAt: aTextIndex [
+	<return: #Interval>
+	| aTextIterator aUnitEnd delims emptyInterval endingDelimiter startingDelimiter level |
+	emptyInterval := 0 to: -1.
+	aTextIterator := self text iterator skip: aTextIndex.
+	aTextIterator hasNext ifFalse: [ ^ emptyInterval ].
+	delims := self delimiters.
+	level := 0.
+
+	startingDelimiter := delims
+			keyAtValue: aTextIterator peek
+			ifAbsent: [ ^ emptyInterval ].
+	endingDelimiter := aTextIterator peek.
+
+	aUnitEnd := aTextIndex.
+
+	[ aTextIterator hasPrevious ]
+		whileTrue: [ | ch |
+			ch := aTextIterator previous.
+			(endingDelimiter isClosePunctuation and: [ ch = endingDelimiter ])
+				ifTrue: [ level := level + 1 ].
+			ch = startingDelimiter
+				ifTrue: [ level = 0
+						ifTrue: [ ^ aTextIterator position + 1 to: aUnitEnd ]
+						ifFalse: [ level := level - 1 ] ] ].
+	^ emptyInterval
 ]
 
 { #category : #accessing }
