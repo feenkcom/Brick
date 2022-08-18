@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Brick-Editor-UI - Handlers'
+	#category : #'Brick-Editor-UI - Handlers'
 }
 
 { #category : #cleanup }
@@ -29,32 +29,37 @@ BrTextEditorMouseDownHandler >> eventsToHandle [
 
 { #category : #'api - event managing' }
 BrTextEditorMouseDownHandler >> mouseDownEvent: anEvent [
-	| aNavigator aScreenPosition anEditorElement |
-	
+	| aNavigator aScreenPosition anEditorElement aTextIndex |
 	"To not create an instance of me for each tiny text element"
 	anEditorElement := anEvent currentTarget
-		withAllParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
-		ifFound: #yourself
-		ifNone: [ ^ self ].
+			withAllParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
+			ifFound: #yourself
+			ifNone: [ ^ self ].
 
 	anEvent target
 		withAllParentsUpTo: anEditorElement
 		detect: [ :anElement | anElement userData at: #brickEditorAdornment ifAbsent: [ false ] ]
-		ifFound:  [ :anAdornmentElement | ^ self ]
+		ifFound: [ :anAdornmentElement | ^ self ]
 		ifNone: #yourself.
 
 	anEvent consumed: true.
-	aScreenPosition := (anEditorElement localBoundsToMine: (BlBounds origin: anEvent localPosition extent: 0.0@0.0) fromChild: anEvent currentTarget) center.
-	
-	anEditorElement editor deselecter all deselect.
-	
+	aScreenPosition := (anEditorElement
+			localBoundsToMine: (BlBounds origin: anEvent localPosition extent: 0.0 @ 0.0)
+			fromChild: anEvent currentTarget) center.
+
 	aNavigator := anEditorElement editor navigator.
+	aTextIndex := aNavigator
+			findTextIndexAtScreenPosition: aScreenPosition
+			ifAbsent: [ nil ].
+	anEvent modifiers isShift
+		ifTrue: [ aTextIndex
+				ifNotNil: [ anEditorElement editor selecter extendToIndex: aTextIndex; select ] ]
+		ifFalse: [ anEditorElement editor deselecter all deselect ].
+
 	anEvent modifiers isPrimaryModifier
 		ifTrue: [ aNavigator addAtScreenPosition: aScreenPosition ]
 		ifFalse: [ aNavigator moveToScreenPosition: aScreenPosition ].
-	aNavigator apply.
-
-	"it is important to request focus *after* we add a cursor, otherwise it would jump to the 0 position when
+	aNavigator apply.	"it is important to request focus *after* we add a cursor, otherwise it would jump to the 0 position when
 	handling focus event"
 	anEditorElement requestFocus
 ]

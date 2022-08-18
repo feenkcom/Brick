@@ -65,6 +65,15 @@ BrTextEditorSelecter >> extendToEnd [
 	commands addAll: theCommands
 ]
 
+{ #category : #accessing }
+BrTextEditorSelecter >> extendToIndex: anIndex [
+	| cursorPosition |
+	cursorPosition := self cursors first position.
+	anIndex > cursorPosition
+		ifTrue: [ self from: cursorPosition to: anIndex ]
+		ifFalse: [ self from: anIndex to: cursorPosition ]
+]
+
 { #category : #'api - configuration' }
 BrTextEditorSelecter >> extendToLineEnd [
 	"Extend selection to the end of the line"
