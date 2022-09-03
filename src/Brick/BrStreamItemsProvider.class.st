@@ -103,9 +103,16 @@ BrStreamItemsProvider >> onBufferDone: anAnnouncement [
 
 { #category : #'private - event handling' }
 BrStreamItemsProvider >> onBufferStartedLoading: anAnnouncement [
-
+	| anEvent |
+	
+	anEvent := BrItemsProviderStartedLoadingEvent new
+		itemsProvider: self;
+		initialAmountOfItems: anAnnouncement initialAmountOfItems.
+	
+	self announce: anEvent.
+	
 	listModel ifNotNil: [ :aListModel | 
-		aListModel dispatchEvent: BrItemsProviderStartedLoadingEvent new.
+		aListModel dispatchEvent: anEvent.
 		aListModel dispatchEvent: (BrItemsProviderPromiseEnqueuedEvent new promise: anAnnouncement bufferLoadingPromise). ]
 ]
 
@@ -172,8 +179,24 @@ BrStreamItemsProvider >> privateSetTransitionBuffer: aStreamTransitionBuffer [
 					ifTrue: [ self privateSetStreamBuffer: buffer newBuffer ] ] ] ]
 ]
 
+{ #category : #accessing }
+BrStreamItemsProvider >> sinks [
+	^ buffer
+		ifNil: [ #() ]
+		ifNotNil: [ :aBuffer | aBuffer sinks ]
+]
+
 { #category : #initialization }
 BrStreamItemsProvider >> stream: aStream [
+	"Change a stream to the given one"
+
+	self
+		stream: aStream
+		sinks: #()
+]
+
+{ #category : #initialization }
+BrStreamItemsProvider >> stream: aStream sinks: aCollectionOfSinks [
 	"Change a stream to the given one"
 
 	monitor
@@ -185,12 +208,13 @@ BrStreamItemsProvider >> stream: aStream [
 								forStream: aStream
 								previousBuffer: aPreviousBuffer) ]
 				ifNil: [ self
-						privateSetStreamBuffer: (AsyncStreamBuffer new
+						privateSetStreamBuffer: (AsyncSinkStreamBuffer new
 								preloadAmount: self preloadAmount;
 								preloadDuration: self preloadDuration;
 								loadSinglesUntil: self loadSinglesUntil;
 								executionConfiguration: (AsyncFutureExecutionConfiguration new
 										highPriority;
 										customGroup: #ScrollingList);
-								stream: aStream) ] ]
+								stream: aStream
+									sinks: aCollectionOfSinks) ] ]
 ]

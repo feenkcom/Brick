@@ -2,6 +2,7 @@ Class {
 	#name : #BrItemsProviderNewItemsLoadedEvent,
 	#superclass : #Announcement,
 	#instVars : [
+		'itemsProvider',
 		'newItems',
 		'index'
 	],
@@ -18,6 +19,18 @@ BrItemsProviderNewItemsLoadedEvent >> index [
 BrItemsProviderNewItemsLoadedEvent >> index: anObject [
 
 	index := anObject
+]
+
+{ #category : #accessing }
+BrItemsProviderNewItemsLoadedEvent >> itemsProvider [
+
+	^ itemsProvider
+]
+
+{ #category : #accessing }
+BrItemsProviderNewItemsLoadedEvent >> itemsProvider: anObject [
+
+	itemsProvider := anObject
 ]
 
 { #category : #accessing }

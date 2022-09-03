@@ -23,6 +23,11 @@ BrGroupedListGroups >> amountOfEntities [
 	^ amountOfEntities
 ]
 
+{ #category : #initialization }
+BrGroupedListGroups >> detachFromGroupedList [
+	groupsProvider unsubscribe: self
+]
+
 { #category : #'api - accessing' }
 BrGroupedListGroups >> entityAt: anIndex [
 	<return: #BrGroupedListEntity>
