@@ -67,6 +67,8 @@ BrGroup >> items: aCollectionOfItems [
 
 { #category : #accessing }
 BrGroup >> itemsLimit [
+	"Return a maximum amount of items a group should display"
+	<return: #Number>
 
 	^ itemsLimit
 ]

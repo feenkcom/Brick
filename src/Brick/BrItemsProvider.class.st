@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'listModel',
-		'announcer'
+		'announcer',
+		'userData'
 	],
 	#category : #'Brick-! Core - Item Providers'
 }
@@ -64,6 +65,7 @@ BrItemsProvider >> notifyItemsChangedSynchronously: isSynchronous [
 { #category : #'private - notifying' }
 BrItemsProvider >> notifyItemsLoaded: aCollectionOfNewItems at: anIndexOfTheFirstLoadedItem [
 	self announce: (BrItemsProviderNewItemsLoadedEvent new
+		itemsProvider: self;
 		newItems: aCollectionOfNewItems;
 		index: anIndexOfTheFirstLoadedItem)
 ]
@@ -81,6 +83,11 @@ BrItemsProvider >> unsubscribe: anObject [
 
 	<generatedFrom: #'TGtRobocoderAnnouncerTemplate>>#unsubscribeTemplate'>
 	^ announcer ifNotNil: [ :anAnnouncer | anAnnouncer unsubscribe: anObject ]
+]
+
+{ #category : #accessing }
+BrItemsProvider >> userData [
+	^ userData ifNil: [ userData := Dictionary new ]
 ]
 
 { #category : #'api - announcer' }
