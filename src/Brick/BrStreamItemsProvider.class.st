@@ -6,7 +6,8 @@ Class {
 		'buffer',
 		'preloadAmount',
 		'loadSinglesUntil',
-		'preloadDuration'
+		'preloadDuration',
+		'executionConfiguration'
 	],
 	#category : #'Brick-! Core - Item Providers'
 }
@@ -35,6 +36,13 @@ BrStreamItemsProvider >> currentItems [
 ]
 
 { #category : #initialization }
+BrStreamItemsProvider >> defaultExecutionConfiguration [
+	^ AsyncFutureExecutionConfiguration new
+			highPriority;
+			customGroup: #ScrollingList
+]
+
+{ #category : #initialization }
 BrStreamItemsProvider >> defaultLoadSinglesUntil [
 	^ 0
 ]
@@ -49,11 +57,24 @@ BrStreamItemsProvider >> defaultPreloadDuration [
 	^ 300 milliSeconds
 ]
 
+{ #category : #accessing }
+BrStreamItemsProvider >> executionConfiguration [
+
+	^ executionConfiguration
+]
+
+{ #category : #initialization }
+BrStreamItemsProvider >> executionConfiguration: anObject [
+	executionConfiguration := anObject.
+	buffer ifNotNil: [ buffer executionConfiguration: anObject ]
+]
+
 { #category : #initialization }
 BrStreamItemsProvider >> initialize [
 	super initialize.
 	
-	monitor := Monitor new
+	monitor := Monitor new.
+	executionConfiguration := self defaultExecutionConfiguration
 ]
 
 { #category : #accessing }
@@ -210,9 +231,6 @@ BrStreamItemsProvider >> stream: aStream sinks: aCollectionOfSinks [
 								preloadAmount: self preloadAmount;
 								preloadDuration: self preloadDuration;
 								loadSinglesUntil: self loadSinglesUntil;
-								executionConfiguration: (AsyncFutureExecutionConfiguration new
-										highPriority;
-										customGroup: #ScrollingList);
-								stream: aStream
-									sinks: aCollectionOfSinks) ] ]
+								executionConfiguration: self executionConfiguration;
+								stream: aStream sinks: aCollectionOfSinks) ] ]
 ]
