@@ -98,7 +98,7 @@ BrStreamItemsProvider >> onBufferChanged: anAnnouncement [
 
 { #category : #'private - event handling' }
 BrStreamItemsProvider >> onBufferDone: anAnnouncement [
-	listModel ifNotNil: [ :aListModel | aListModel dispatchEvent: BrItemsProviderDoneEvent new ]
+	self notifyItemsDone
 ]
 
 { #category : #'private - event handling' }
@@ -162,9 +162,7 @@ BrStreamItemsProvider >> privateSetStreamBuffer: aStreamBuffer [
 			send: #onBufferChanged:
 			to: self.
 		buffer when: AsyncStreamBufferDone send: #onBufferDone: to: self.
-		self isDone ifTrue: [ 
-			listModel ifNotNil: [ 
-				listModel dispatchEvent: BrItemsProviderDoneEvent new ] ] ]
+		self isDone ifTrue: [ self notifyItemsDone ] ]
 ]
 
 { #category : #'private - accessing' }

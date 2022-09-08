@@ -63,6 +63,12 @@ BrItemsProvider >> notifyItemsChangedSynchronously: isSynchronous [
 ]
 
 { #category : #'private - notifying' }
+BrItemsProvider >> notifyItemsDone [
+	self announce: (BrItemsProviderDoneEvent new itemsProvider: self).
+	listModel ifNotNil: [ :aListModel | aListModel dispatchEvent: (BrItemsProviderDoneEvent new itemsProvider: self) ]
+]
+
+{ #category : #'private - notifying' }
 BrItemsProvider >> notifyItemsLoaded: aCollectionOfNewItems at: anIndexOfTheFirstLoadedItem [
 	self announce: (BrItemsProviderNewItemsLoadedEvent new
 		itemsProvider: self;
