@@ -255,6 +255,10 @@ BrElementUpdater >> updateElement [
 BrElementUpdater >> updateNow [
 	self emitPerformUpdateSignal.
 	
-	self resetUpdateRequested.
-	self updateElement.
+	BrElementUpdaterTelemetry
+		rootTimeSync: [ 
+			Processor activeProcess name, ' - ', self class name]
+		during: [
+			self resetUpdateRequested.
+			self updateElement ]
 ]
