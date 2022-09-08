@@ -231,9 +231,6 @@ BrStreamItemsProvider >> stream: aStream sinks: aCollectionOfSinks [
 								preloadAmount: self preloadAmount;
 								preloadDuration: self preloadDuration;
 								loadSinglesUntil: self loadSinglesUntil;
-								executionConfiguration: (AsyncFutureExecutionConfiguration new
-										highPriority;
-										customGroup: #ScrollingList);
-								stream: aStream
-									sinks: aCollectionOfSinks) ] ]
+								executionConfiguration: self executionConfiguration;
+								stream: aStream sinks: aCollectionOfSinks) ] ]
 ]
