@@ -25,7 +25,9 @@ BrGroupedListGroups >> amountOfEntities [
 
 { #category : #initialization }
 BrGroupedListGroups >> detachFromGroupedList [
-	groupsProvider unsubscribe: self
+	groupsProvider finish.
+	loadedGroups do: [ :eachGroup | eachGroup group itemsProvider finish ].
+	groupsProvider unsubscribe: self.
 ]
 
 { #category : #'api - accessing' }
