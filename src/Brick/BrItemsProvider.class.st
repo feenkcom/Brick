@@ -30,6 +30,10 @@ BrItemsProvider >> currentItems [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - loading' }
+BrItemsProvider >> finish [
+]
+
 { #category : #accessing }
 BrItemsProvider >> isDone [
 

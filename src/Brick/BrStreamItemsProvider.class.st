@@ -69,6 +69,11 @@ BrStreamItemsProvider >> executionConfiguration: anObject [
 	buffer ifNotNil: [ buffer executionConfiguration: anObject ]
 ]
 
+{ #category : #'api - loading' }
+BrStreamItemsProvider >> finish [
+	buffer ifNotNil: [ buffer stop ]
+]
+
 { #category : #initialization }
 BrStreamItemsProvider >> initialize [
 	super initialize.
