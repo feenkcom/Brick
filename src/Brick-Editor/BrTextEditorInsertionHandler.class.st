@@ -60,9 +60,6 @@ BrTextEditorInsertionHandler >> textInputEvent: anEvent [
 	(anEvent text allSatisfy: [ :aCharacter | Unicode isPrintable: aCharacter ])
 		ifFalse: [ ^ self ].
 
-    (anEvent modifiers isPrimaryModifier)
-        ifTrue: [ ^ self ].
-
     anEvent consumed: true.
 
 	BlFrameTelemetry
