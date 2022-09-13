@@ -8,6 +8,9 @@ BrColumnedListHeaderLook adds a header row to a BrColumnedList.
 Class {
 	#name : #BrColumnedListHeaderAptitude,
 	#superclass : #BrAptitude,
+	#instVars : [
+		'labelStencil'
+	],
 	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
@@ -15,26 +18,29 @@ Class {
 BrColumnedListHeaderAptitude >> headerPane [
 	| headerPane |
 	headerPane := BrHorizontalPane new
-		padding: (BlInsets bottom: 5);
-		hMatchParent;
-		vFitContent.
+			padding: (BlInsets bottom: 5);
+			hMatchParent;
+			vFitContent.
 	widget viewModel
-		columnsDo: [ :aColumn | 
-			| label |
-			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
-			label
-				text:
-					(aColumn title asRopedText
-						foreground: self theme button defaultTextColor).
-			aColumn width applyOn: label.
-			headerPane addChild: label ].
+		columnsDo: [ :aColumn | headerPane addChild: (labelStencil value: aColumn) ].
 	^ headerPane
 ]
 
 { #category : #initialization }
-BrColumnedListHeaderAptitude >> initialize [ 
-
+BrColumnedListHeaderAptitude >> initialize [
 	super initialize.
-	self addChangeAddChildFirst: #() with: 
-		[ self headerPane ].
+	self
+		labelStencil: [ :aColumn | 
+			| label |
+			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
+			label
+				text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
+			aColumn width applyOn: label.
+			label ].
+	self addChangeAddChildFirst: #() with: [ self headerPane ]
+]
+
+{ #category : #accessing }
+BrColumnedListHeaderAptitude >> labelStencil: aBlock [
+	labelStencil := aBlock 
 ]
