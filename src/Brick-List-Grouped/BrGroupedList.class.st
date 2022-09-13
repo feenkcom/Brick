@@ -69,6 +69,18 @@ BrGroupedList >> onGroupsChanged [
 	self viewModel processLoadedData
 ]
 
+{ #category : #'api - selection' }
+BrGroupedList >> selectedEntityDo: aBlock [
+	"Evaluate aBlock with the currently selected entity and index"
+
+	self selectedIndices
+		ifNotEmpty: [ :theIndices |
+			(theIndices first between: 1 and: self maxSelectionIndex)
+				ifTrue: [ aBlock 
+					cull: (self viewModel entityAt: theIndices first) 
+					cull: theIndices first ] ]
+]
+
 { #category : #'api - accessing' }
 BrGroupedList >> stream: anAsyncStream [
 	self groupsProvider: (BrStreamItemsProvider new stream: anAsyncStream)
