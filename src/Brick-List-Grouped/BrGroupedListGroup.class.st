@@ -96,7 +96,14 @@ BrGroupedListGroup >> onItemsLoaded: anAnnouncement [
 
 { #category : #'private - cache' }
 BrGroupedListGroup >> processLoadedData [
-	amountOfItems := group itemsProvider itemCount min: group itemsLimit
+	<return: #Boolean>
+	| anOldAmountOfItems |
+	"Recompute an amount of loaded data and return true if it changed, false otherwise"
+
+	anOldAmountOfItems := amountOfItems.
+	amountOfItems := group itemsProvider itemCount min: group itemsLimit.
+
+	^ anOldAmountOfItems ~= amountOfItems
 ]
 
 { #category : #'private - cache' }

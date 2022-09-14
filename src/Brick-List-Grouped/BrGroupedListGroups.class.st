@@ -53,11 +53,15 @@ BrGroupedListGroups >> entityAt: anIndex [
 
 { #category : #'private - cache' }
 BrGroupedListGroups >> fetchLoadedGroups [
-	| amountOfLoadedGroups |
+	"Fetch newly loaded groups if any and return true if we detected new groups"
+	<return: #Boolean>
+	| amountOfLoadedGroups hasNewGroups |
+
 	"if there are new loaded groups we should wrap them in the list specific group wrapper that
 	takes care of managing indices for quick access"
 	amountOfLoadedGroups := groupsProvider itemCount.
-	(amountOfLoadedGroups > loadedGroups size)
+
+	(hasNewGroups := amountOfLoadedGroups > loadedGroups size)
 		ifTrue: [
 			loadedGroups size + 1 to: amountOfLoadedGroups do: [ :eachGroupIndex |
 				| eachGroup eachLoadedGroup |
@@ -65,7 +69,9 @@ BrGroupedListGroups >> fetchLoadedGroups [
 				eachLoadedGroup := BrGroupedListGroup new
 					group: eachGroup
 					groups: self.
-				loadedGroups add: eachLoadedGroup ] ]
+				loadedGroups add: eachLoadedGroup ] ].
+	
+	^ hasNewGroups
 ]
 
 { #category : #'private - cache' }
@@ -137,21 +143,29 @@ BrGroupedListGroups >> onGroupsLoaded: anAnnouncement [
 
 { #category : #'private - cache' }
 BrGroupedListGroups >> processLoadedData [
-	"Should be executed at most once per frame from the UI thread once one of the groups pre-loaded more items"
-	| currentIndex |
+	"Should be executed at most once per frame from the UI thread once one of the groups pre-loaded more items.
+	Return true if the structure have changed."
+	<return: #Boolean>
+	| currentIndex didAnythingChange |
 	
-	self fetchLoadedGroups.
+	didAnythingChange := self fetchLoadedGroups.
 
 	currentIndex := 0.
 	loadedGroups do: [ :eachLoadedGroup |
-		| anAmountOfItems |
+		| anAmountOfItems aNewHeaderIndex |
 
-		eachLoadedGroup processLoadedData.
+		didAnythingChange := eachLoadedGroup processLoadedData | didAnythingChange.
 		anAmountOfItems := eachLoadedGroup amountOfItemsIncludingHeader.	
-
-		eachLoadedGroup headerIndex: currentIndex + eachLoadedGroup shouldShowHeader asBit.
+	
+		aNewHeaderIndex := currentIndex + eachLoadedGroup shouldShowHeader asBit.
+		didAnythingChange := (eachLoadedGroup headerIndex ~= aNewHeaderIndex) | didAnythingChange.
+		eachLoadedGroup headerIndex: aNewHeaderIndex.
+	
 		currentIndex := currentIndex + anAmountOfItems ].
 
+	didAnythingChange := (amountOfEntities ~= currentIndex) | didAnythingChange.
 	"total amount of items"
-	amountOfEntities := currentIndex
+	amountOfEntities := currentIndex.
+	
+	^ didAnythingChange
 ]
