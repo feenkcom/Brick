@@ -82,10 +82,15 @@ BrGroupedListModel >> notifyGroupsChanged [
 { #category : #'private - cache' }
 BrGroupedListModel >> processLoadedData [
 	"Should be executed at most once per frame from the UI thread once one of the groups pre-loaded more items"
+	| didDataChange |
 	
-	groups processLoadedData.
+	didDataChange := groups processLoadedData.
+	didDataChange
+		ifFalse: [ ^ didDataChange ].
 
 	self dispatchEvent: (BrItemsProviderItemsChangedEvent new
 		viewModel: self;
-		isSynchronous: true)
+		isSynchronous: true).
+		
+	^ didDataChange
 ]

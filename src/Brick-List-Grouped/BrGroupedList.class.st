@@ -66,7 +66,7 @@ BrGroupedList >> onGroupsChanged [
 	"Is sent when the structure of the groups has been changed.
 	This event handler is called at most once per frame from a UI process"
 	
-	self viewModel processLoadedData
+	^ self viewModel processLoadedData
 ]
 
 { #category : #'api - selection' }
