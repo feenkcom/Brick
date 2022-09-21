@@ -103,15 +103,15 @@ BrGroupedListDataSource >> onBindItem: anItemEntity holder: anElementHolder at: 
 
 	anItemObject := anItemEntity itemObject.
 
-	anItemElementWithBindedData := anItemEntity group itemDataBinder
+	anItemEntity group itemDataBinder
 		itemElement: anElementHolder itemElement;
 		itemObject: anItemObject;
 		rowObject: anItemObject;
 		itemPosition: aPosition;
-		asElement.
+		build.
 
 	anElementHolder
-		itemElement: anItemElementWithBindedData;
+		itemElement: anElementHolder itemElement;
 		rowValue: anItemObject.
 
 	anElementHolder itemElement states removeState: BlElementState hovered.
