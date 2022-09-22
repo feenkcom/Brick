@@ -99,7 +99,7 @@ BrProgressWithLabelModel >> integerLabelValues [
 
 { #category : #accessing }
 BrProgressWithLabelModel >> label [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ labelStencil 
 		amount: self amountString; 
 		total: self totalString;
