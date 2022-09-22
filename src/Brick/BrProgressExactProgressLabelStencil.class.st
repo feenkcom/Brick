@@ -24,7 +24,7 @@ Class {
 
 { #category : #'api - instantiation' }
 BrProgressExactProgressLabelStencil >> create [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ (self pattern format: { self amount. self total }) asRopedText
 ]
 
