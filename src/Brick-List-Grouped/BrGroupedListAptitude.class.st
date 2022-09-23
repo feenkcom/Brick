@@ -70,6 +70,7 @@ BrGroupedListAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self when: BrItemsProviderItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
+	self when: BrItemsProviderPromiseEnqueuedEvent do: [ :anEvent | self onModelPromiseEnqueued: anEvent ].
 	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
 	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
 	self when: BrListItemIdStencilChangedEvent do: [ :anEvent | self onItemIdStencilChanged: anEvent itemIdStencil ].

@@ -16,7 +16,7 @@ Class {
 
 { #category : #'api - instantiation' }
 BrProgressFixedLabelStencil >> create [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ self label
 ]
 
@@ -28,7 +28,7 @@ BrProgressFixedLabelStencil >> initialize [
 
 { #category : #accessing }
 BrProgressFixedLabelStencil >> label [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ label
 ]
 

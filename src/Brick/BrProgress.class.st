@@ -76,7 +76,7 @@ BrProgress >> integerLabelValues [
 
 { #category : #accessing }
 BrProgress >> label [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ self viewModel label
 ]
 

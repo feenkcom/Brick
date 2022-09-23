@@ -32,7 +32,7 @@ BrProgressLabelStencil >> amount: anObject [
 
 { #category : #'api - instantiation' }
 BrProgressLabelStencil >> create [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ self subclassResponsibility
 ]
 

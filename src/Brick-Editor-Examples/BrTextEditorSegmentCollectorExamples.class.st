@@ -32,7 +32,7 @@ BrTextEditorSegmentCollectorExamples >> largeFile [
 { #category : #accessing }
 BrTextEditorSegmentCollectorExamples >> largeFileRope [
 
-	^ BlRopedText file: self largeFile
+	^ BlRunRopedText file: self largeFile
 		"self largeFile contents asRopedText"
 ]
 
