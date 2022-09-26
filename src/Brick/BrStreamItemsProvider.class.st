@@ -6,7 +6,6 @@ Class {
 		'buffer',
 		'preloadAmount',
 		'loadSinglesUntil',
-		'preloadDuration',
 		'executionConfiguration'
 	],
 	#category : #'Brick-! Core - Item Providers'
@@ -47,14 +46,9 @@ BrStreamItemsProvider >> defaultLoadSinglesUntil [
 	^ 0
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrStreamItemsProvider >> defaultPreloadAmount [	
 	^ 20
-]
-
-{ #category : #accessing }
-BrStreamItemsProvider >> defaultPreloadDuration [
-	^ 300 milliSeconds
 ]
 
 { #category : #accessing }
@@ -154,17 +148,6 @@ BrStreamItemsProvider >> preloadAmount: aNumber [
 	buffer ifNotNil: [ buffer preloadAmount: aNumber ]
 ]
 
-{ #category : #accessing }
-BrStreamItemsProvider >> preloadDuration [
-	^ preloadDuration ifNil: [ preloadDuration := self defaultPreloadDuration ]
-]
-
-{ #category : #initialization }
-BrStreamItemsProvider >> preloadDuration: aDuration [
-	preloadDuration := aDuration.
-	buffer ifNotNil: [ buffer preloadDuration: aDuration ]
-]
-
 { #category : #'api - loading' }
 BrStreamItemsProvider >> preloadUntilFoundSuchThat: aBlock [
 	<return: #TAsyncPromise>
@@ -232,9 +215,8 @@ BrStreamItemsProvider >> stream: aStream sinks: aCollectionOfSinks [
 								forStream: aStream
 								previousBuffer: aPreviousBuffer) ]
 				ifNil: [ self
-						privateSetStreamBuffer: (AsyncSinkStreamBuffer new
+						privateSetStreamBuffer: (AsyncStreamBuffer new
 								preloadAmount: self preloadAmount;
-								preloadDuration: self preloadDuration;
 								loadSinglesUntil: self loadSinglesUntil;
 								executionConfiguration: self executionConfiguration;
 								stream: aStream sinks: aCollectionOfSinks) ] ]
