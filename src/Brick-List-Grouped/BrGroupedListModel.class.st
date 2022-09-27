@@ -21,10 +21,6 @@ BrGroupedListModel >> entityCount [
 
 { #category : #'api - accessing' }
 BrGroupedListModel >> groupsProvider: aBrAbstractListItemsProvider [
-
-	"stop the preloading of the previous groups"
-	self flag: #TODO.
-	
 	groups ifNotNil: [ :thePreviousGroups | thePreviousGroups detachFromGroupedList ].
 	groups := BrGroupedListGroups new
 		groupsProvider: aBrAbstractListItemsProvider asBrItemsProvider

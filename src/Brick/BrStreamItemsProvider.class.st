@@ -31,7 +31,7 @@ BrStreamItemsProvider >> attachToListModel: aListModel [
 
 { #category : #accessing }
 BrStreamItemsProvider >> currentItems [
-	^ buffer
+	^ buffer loadedItems
 ]
 
 { #category : #initialization }
@@ -65,7 +65,7 @@ BrStreamItemsProvider >> executionConfiguration: anObject [
 
 { #category : #'api - loading' }
 BrStreamItemsProvider >> finish [
-	buffer ifNotNil: [ buffer stop ]
+	buffer ifNotNil: [ :aBuffer | aBuffer stop ]
 ]
 
 { #category : #initialization }
