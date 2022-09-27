@@ -58,7 +58,7 @@ BrTextEditorByScripterExamples >> click_empty [
 BrTextEditorByScripterExamples >> scripter [
 	<gtExample>
 	
-	^ BlDevScripter new
+	^ BlScripter new
 ]
 
 { #category : #'instance creation' }

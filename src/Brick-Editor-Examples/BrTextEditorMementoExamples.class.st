@@ -30,7 +30,7 @@ BrTextEditorMementoExamples >> editorRestoreStateWithShorterText [
 		moveToEnd;
 		apply.
 
-	aScripter := BlDevScripter new element: anEditor.
+	aScripter := BlScripter new element: anEditor.
 	aScripter requestFocus play.
 	
 	aMemento := BrTextEditorCompositeMemento new.
