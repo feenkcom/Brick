@@ -87,7 +87,7 @@ BrEditableLabelExamples >> scripter_01_initial [
 	<gtExample>
 	| aScripter |
 	
-	aScripter := BlDevScripter new.
+	aScripter := BlScripter new.
 	aScripter element: self editableLabelWithGlamorousLook.
 	
 	^ aScripter

@@ -135,7 +135,7 @@ BrColumnedListExamples >> columnedListWithItemsBindsOnce [
 	theItemsChangedEvents := OrderedCollection new.
 	aList when: BrItemsProviderItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
 
-	aScripter := BlDevScripter new.
+	aScripter := BlScripter new.
 	aScripter element: aList.
 
 	aScripter do

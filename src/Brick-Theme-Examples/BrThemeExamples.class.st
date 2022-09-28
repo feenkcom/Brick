@@ -100,7 +100,7 @@ BrThemeExamples >> listProperty [
 BrThemeExamples >> profile: anElement named: aString [
 	<gtExample>
 	| scripter telemetry logger |
-	scripter := BlDevScripter new
+	scripter := BlScripter new
 		element: anElement;
 		yourself.
 	telemetry := MemoryTelemetry new.
