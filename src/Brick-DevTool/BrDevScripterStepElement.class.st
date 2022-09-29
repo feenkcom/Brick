@@ -6,7 +6,7 @@ Class {
 		'targetElement',
 		'statusElement'
 	],
-	#category : 'Brick-DevTool'
+	#category : #'Brick-DevTool'
 }
 
 { #category : #'instance creation' }
@@ -45,12 +45,15 @@ BrDevScripterStepElement >> initialize [
 BrDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 	| aStepText aTargetStep |
 	statusElement background: aBlDevScripterStep stateColor.
+	statusElement removeChildren.
+	aBlDevScripterStep stepIcon
+		ifNotNil: [ :anIcon | statusElement addChild: (anIcon asElement background: Color white) ].
 	aStepText := aBlDevScripterStep gtDisplayText foreground: Color black.
 	labelElement text: aStepText.
-	aTargetStep := aBlDevScripterStep realTarget gtDisplayText 
-		foreground: Color gray;
-		fontSize: 10.
-	targetElement text: aTargetStep.
+	aTargetStep := aBlDevScripterStep realTarget gtDisplayText
+			foreground: Color gray;
+			fontSize: 10.
+	targetElement text: aTargetStep
 ]
 
 { #category : #initialization }
