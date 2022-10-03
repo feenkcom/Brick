@@ -68,7 +68,7 @@ BrFromStream >> privateDataSnapshot: aDataSnapshot [
 
 { #category : #'private - update' }
 BrFromStream >> privateInitializeElement [
-	| aPromise |
+	| aPromise isProcessed |
 
 	dataSnapshot isPending
 		ifFalse: [ ^ self ].
@@ -78,9 +78,12 @@ BrFromStream >> privateInitializeElement [
 
 	self privateUpdateElement.
 
+	isProcessed := false.
+	
 	aPromise := promise := future asAsyncPromise.
 	aPromise
 		then: [ :aResult |
+			isProcessed := true.
 			promise == aPromise
 				ifTrue: [
 					| aFinalData |
@@ -90,10 +93,15 @@ BrFromStream >> privateInitializeElement [
 					recent := OrderedCollection new.
 					self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aFinalData) ] ]
 		otherwise: [ :anError |
+			isProcessed := true.
 			promise == aPromise
 				ifTrue: [
 					anError freeze.
-					self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ]
+					self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ].
+			
+	isProcessed ifFalse: [
+		"To let the space know that we are waiting for a promise to finish"
+		self enqueueTask: (BlPromiseTask new promise: aPromise) ]
 ]
 
 { #category : #'private - update' }
