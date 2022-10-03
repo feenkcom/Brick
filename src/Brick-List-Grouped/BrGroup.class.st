@@ -7,7 +7,8 @@ Class {
 		'itemStencil',
 		'itemDataBinder',
 		'shouldShowWithoutItems',
-		'itemsLimit'
+		'itemsLimit',
+		'itemTypeStencil'
 	],
 	#category : #'Brick-List-Grouped-Models'
 }
@@ -31,7 +32,8 @@ BrGroup >> initialize [
 	domainObject := nil.
 	itemsProvider := BrEmptyItemsProvider new.
 	shouldShowWithoutItems := false.
-	itemsLimit := Float infinity
+	itemsLimit := Float infinity.
+	itemTypeStencil := [ :anItemTypeFactory | anItemTypeFactory default ] asStencilBuilder: BrListItemTypeStencilBuilder
 ]
 
 { #category : #accessing }
@@ -58,6 +60,18 @@ BrGroup >> itemStencil: aBrListItemElementStencilBuilderOrBlock [
 	"An item element stencil can be a #value-able of the form [ :anItemType :aListWidget | ]"
 
 	itemStencil := aBrListItemElementStencilBuilderOrBlock asStencilBuilder: BrListItemElementStencilBuilder.
+]
+
+{ #category : #accessing }
+BrGroup >> itemType: aBrListItemTypeStencilBuilderOrBlock [
+	"Set a stencil that will be used to create an item element of a given type"
+
+	itemTypeStencil := aBrListItemTypeStencilBuilderOrBlock asStencilBuilder: BrListItemTypeStencilBuilder
+]
+
+{ #category : #accessing }
+BrGroup >> itemTypeStencil [
+	^ itemTypeStencil
 ]
 
 { #category : #accessing }

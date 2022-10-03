@@ -62,7 +62,7 @@ BrGroupedListDataSource >> itemTypeAt: anItemPosition [
 		ifItem: [
 			| anItemType |
 	
-			anItemType := itemTypeStencil
+			anItemType := anEntity group itemTypeStencil
 				itemPosition: anItemPosition;
 				itemObject: anEntity itemObject;
 				build.
@@ -137,7 +137,7 @@ BrGroupedListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 			| anItemElement |
 
 			anItemElement := anItemType group itemStencil
-				itemType: anItemType;
+				itemType: anItemType itemType;
 				asElement.
 
 			anItemElement addEventHandler: clickToSelectHandler.
