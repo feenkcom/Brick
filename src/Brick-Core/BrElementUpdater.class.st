@@ -161,16 +161,6 @@ BrElementUpdater >> onElementAddedToSceneGraph [
 	self mayUpdateNow
 ]
 
-{ #category : #'private - event handling' }
-BrElementUpdater >> onElementAddedTooSceneGraph [
-
-	self
-		deprecated: 'typo, use #onElementAddedToSceneGraph instead'
-		transformWith: '`@receiver onElementAddedTooSceneGraph'
-			-> '`@receiver onElementAddedToSceneGraph'.
-	self onElementAddedToSceneGraph
-]
-
 { #category : #'private - updating' }
 BrElementUpdater >> postponeUpdate [
 	self elementDo: [ :anElement | 
