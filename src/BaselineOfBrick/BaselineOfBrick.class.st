@@ -44,7 +44,7 @@ BaselineOfBrick >> baseline: spec [
 				spec repository: 'github://feenkcom/bloc-pac:v0.6.334/src' ].
 		spec
 			baseline: 'GToolkitResourcesUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.150/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.151/src' ].
 
 		spec package: 'Brick-Core' with: [
 			spec requires: #('Bloc' 'BlocPac') ].
