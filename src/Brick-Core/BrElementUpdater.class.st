@@ -5,6 +5,7 @@ When {{gtMethod:BrElementUpdater>>#requestUpdate|label=#selector}} is called, I 
 - {{gtMethod:BrElementUpdater>>#element:|label=#selector}} a {{gtClass:BlElement}} on which updates are performed,
 - {{gtMethod:BrElementUpdater>>#action:|label=#selector}} a valuable which is evaluated when it is time to update the {{gtClass:BlElement}},
 - {{gtMethod:BrElementUpdater>>#element:selector:|label=#selector}} an utility method that combines the above two methods,
+- {{gtMethod:BrElementUpdater >> #postponedDuration: | label=#selector}} a {{gtClass:Duration}} value defining how long to delay {{gtClass:BlElement}} updates,
 - {{gtMethod:BrElementUpdater>>#requestUpdate|label=#selector}} schedules the {{gtClass:BlElement}} update.
 # Example
 ### Requester Initialization
@@ -23,8 +24,7 @@ Class {
 		'mutex',
 		'isUpdateRequested',
 		'action',
-		'postponedDuration',
-		'updaterTask'
+		'postponedDuration'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -121,10 +121,13 @@ BrElementUpdater >> emitPerformUpdateSignal [
 BrElementUpdater >> enqueuePostponedUpdate [
 	self
 		elementDo: [ :anElement | 
+			| aTask |
 			anElement
-				enqueueTask: (updaterTask := BrElementUpdaterPendingUpdateTask new updater: self).
+				enqueueTask: (aTask := BrElementUpdaterPendingUpdateTask new updater: self).
 
-			TaskAtQueue default schedule: [ self enqueueUpdate ] at: self postponedTime ]
+			TaskAtQueue default 
+				schedule: [ self enqueueUpdate. aTask beUpdated ] 
+				at: self postponedTime ]
 ]
 
 { #category : #'private - updating' }
@@ -133,11 +136,7 @@ BrElementUpdater >> enqueueUpdate [
 		elementDo: [ :anElement | 
 			self emitEnqueueUpdateSignal.
 
-			anElement enqueueTask: (BrElementUpdaterUpdateTask new updater: self).
-			updaterTask
-				ifNotNil: [ :aTask | 
-					aTask beUpdated.
-					updaterTask := nil ] ]
+			anElement enqueueTask: (BrElementUpdaterUpdateTask new updater: self) ]
 ]
 
 { #category : #'gt-extensions' }
