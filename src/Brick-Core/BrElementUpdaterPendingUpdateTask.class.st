@@ -43,9 +43,7 @@ BrElementUpdaterPendingUpdateTask >> requeueTaskAfterExecution [
 BrElementUpdaterPendingUpdateTask >> run: aWaker [
 	"do nothing, just wait"
 
-	NonInteractiveTranscript stdout
-		show: 'BrElementUpdaterPendingUpdateTask >> #run:';
-		cr
+	
 ]
 
 { #category : #accessing }
