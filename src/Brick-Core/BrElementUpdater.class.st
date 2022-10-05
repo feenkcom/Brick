@@ -23,7 +23,8 @@ Class {
 		'mutex',
 		'isUpdateRequested',
 		'action',
-		'postponedDuration'
+		'postponedDuration',
+		'updaterTask'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -117,11 +118,26 @@ BrElementUpdater >> emitPerformUpdateSignal [
 ]
 
 { #category : #'private - updating' }
+BrElementUpdater >> enqueuePostponedUpdate [
+	self
+		elementDo: [ :anElement | 
+			anElement
+				enqueueTask: (updaterTask := BrElementUpdaterPendingUpdateTask new updater: self).
+
+			TaskAtQueue default schedule: [ self enqueueUpdate ] at: self postponedTime ]
+]
+
+{ #category : #'private - updating' }
 BrElementUpdater >> enqueueUpdate [
-	self elementDo: [ :anElement | 
-		self emitEnqueueUpdateSignal.
-		
-		anElement enqueueTask: (BlTaskAction new action: [ self updateNow ]) ].
+	self
+		elementDo: [ :anElement | 
+			self emitEnqueueUpdateSignal.
+
+			anElement enqueueTask: (BrElementUpdaterUpdateTask new updater: self).
+			updaterTask
+				ifNotNil: [ :aTask | 
+					aTask beUpdated.
+					updaterTask := nil ] ]
 ]
 
 { #category : #'gt-extensions' }
@@ -163,13 +179,11 @@ BrElementUpdater >> onElementAddedToSceneGraph [
 
 { #category : #'private - updating' }
 BrElementUpdater >> postponeUpdate [
-	self elementDo: [ :anElement | 
-		self beUpdateRequestedIfDoneEarlierDo: [ ^ self ].
-		BlUseAsyncFeatures 
-			ifEnabledDo: [ 
-				anElement isAttachedToSceneGraph
-					ifFalse: [ ^ self ].
-				
+	self
+		elementDo: [ :anElement | 
+			self beUpdateRequestedIfDoneEarlierDo: [ ^ self ].
+			BlUseAsyncFeatures
+				ifEnabledDo: [ anElement isAttachedToSceneGraph ifFalse: [ ^ self ].	
 				"Update requester should perform an update as soon as possible, especially if
 				postponed delay (duration) is zero. It means that there should be no unnecessary skipped frames.
 				What does it mean? Let's take a look at the frame phase order, roughly:
@@ -183,13 +197,10 @@ BrElementUpdater >> postponeUpdate [
 				We explicitly handle zero delay case by instantly enqueuing an update task to the element so that it can be processed
 				as soon as possible. If there is a non-zero delay we schedule an update with the help of a TaskAt queue which may skip
 				an undefined amount of frames."
-				self postponedDuration isZero
-					ifTrue: [ self enqueueUpdate ]
-					ifFalse: [
-						TaskAtQueue default
-							schedule: [ self enqueueUpdate ]
-							at: self postponedTime ] ]
-			otherwise: [ self updateNow ] ]
+					self postponedDuration isZero
+						ifTrue: [ self enqueueUpdate ]
+						ifFalse: [ self enqueuePostponedUpdate ] ]
+				otherwise: [ self updateNow ] ]
 ]
 
 { #category : #'private - accessing' }
@@ -250,5 +261,5 @@ BrElementUpdater >> updateNow [
 			Processor activeProcess name, ' - ', self class name]
 		during: [
 			self resetUpdateRequested.
-			self updateElement ]
+			self updateElement. ]
 ]
