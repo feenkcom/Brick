@@ -1,3 +1,7 @@
+"
+I exemplify {{gtClass:BrElementUpdater}}.
+
+"
 Class {
 	#name : #BrElementUpdaterByScripterExamples,
 	#superclass : #Object,

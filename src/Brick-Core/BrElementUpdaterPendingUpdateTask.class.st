@@ -1,3 +1,11 @@
+"
+I am used by {{gtClass:BrElementUpdater}} to explicitly inform {{gtClass:BlScripter}} that there is a pending and postponed update task.
+Once, the pending action is scheduled, I am removed from the space task queue ({{gtClass:BlSpaceTaskQueue}}) and a {{gtClass:BrElementUpdaterUpdateTask}} is enqueued. 
+
+See method {{gtMethod:BrElementUpdater>>#enqueuePostponedUpdate}} for more details.
+
+
+"
 Class {
 	#name : #BrElementUpdaterPendingUpdateTask,
 	#superclass : #BlTask,
