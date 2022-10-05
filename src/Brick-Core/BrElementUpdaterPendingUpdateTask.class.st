@@ -8,7 +8,7 @@ Class {
 	#category : #'Brick-Core-Futures'
 }
 
-{ #category : #accessing }
+{ #category : #'api - running' }
 BrElementUpdaterPendingUpdateTask >> beUpdated [
 	isUpdated := true
 ]
@@ -19,7 +19,7 @@ BrElementUpdaterPendingUpdateTask >> initialize [
 	isUpdated := false
 ]
 
-{ #category : #testing }
+{ #category : #'private - testing' }
 BrElementUpdaterPendingUpdateTask >> isUpdated [
 	^ isUpdated ifNil: [ false ]
 ]
@@ -33,13 +33,12 @@ BrElementUpdaterPendingUpdateTask >> printOn: aStream [
 		print: (self updater ifNotNil: #element)
 ]
 
-{ #category : #accessing }
+{ #category : #'private - testing' }
 BrElementUpdaterPendingUpdateTask >> requeueTaskAfterExecution [
 	^ self isUpdated not
-		and: [ self updater ifNotNil: #isUpdateRequested ifNil: [ false ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #'api - running' }
 BrElementUpdaterPendingUpdateTask >> run: aWaker [
 	"do nothing, just wait"
 

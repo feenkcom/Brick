@@ -16,7 +16,7 @@ BrElementUpdaterUpdateTask >> printOn: aStream [
 		print: (self updater ifNotNil: #element)
 ]
 
-{ #category : #accessing }
+{ #category : #'api - running' }
 BrElementUpdaterUpdateTask >> run: aWaker [
 	self updater ifNotNil: [ :anUpdater | anUpdater updateNow ]
 ]
