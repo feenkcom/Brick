@@ -183,7 +183,8 @@ BrElementUpdater >> postponeUpdate [
 		elementDo: [ :anElement | 
 			self beUpdateRequestedIfDoneEarlierDo: [ ^ self ].
 			BlUseAsyncFeatures
-				ifEnabledDo: [ anElement isAttachedToSceneGraph ifFalse: [ ^ self ].	"Update requester should perform an update as soon as possible, especially if
+				ifEnabledDo: [ anElement isAttachedToSceneGraph ifFalse: [ ^ self ].	
+				"Update requester should perform an update as soon as possible, especially if
 				postponed delay (duration) is zero. It means that there should be no unnecessary skipped frames.
 				What does it mean? Let's take a look at the frame phase order, roughly:
 					- handle events
