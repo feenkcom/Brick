@@ -23,8 +23,7 @@ Class {
 		'mutex',
 		'isUpdateRequested',
 		'action',
-		'postponedDuration',
-		'updaterTask'
+		'postponedDuration'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -121,10 +120,13 @@ BrElementUpdater >> emitPerformUpdateSignal [
 BrElementUpdater >> enqueuePostponedUpdate [
 	self
 		elementDo: [ :anElement | 
+			| aTask |
 			anElement
-				enqueueTask: (updaterTask := BrElementUpdaterPendingUpdateTask new updater: self).
+				enqueueTask: (aTask := BrElementUpdaterPendingUpdateTask new updater: self).
 
-			TaskAtQueue default schedule: [ self enqueueUpdate ] at: self postponedTime ]
+			TaskAtQueue default 
+				schedule: [ self enqueueUpdate. aTask beUpdated ] 
+				at: self postponedTime ]
 ]
 
 { #category : #'private - updating' }
@@ -133,11 +135,7 @@ BrElementUpdater >> enqueueUpdate [
 		elementDo: [ :anElement | 
 			self emitEnqueueUpdateSignal.
 
-			anElement enqueueTask: (BrElementUpdaterUpdateTask new updater: self).
-			updaterTask
-				ifNotNil: [ :aTask | 
-					aTask beUpdated.
-					updaterTask := nil ] ]
+			anElement enqueueTask: (BrElementUpdaterUpdateTask new updater: self) ]
 ]
 
 { #category : #'gt-extensions' }
