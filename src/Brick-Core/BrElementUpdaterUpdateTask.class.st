@@ -1,3 +1,9 @@
+"
+I am used by {{gtClass:BrElementUpdater}}  which enqueues me to trigger an {{gtClass:BlElement | label=element}} update in a next {{gtMethod:BlSpace>>#pulse|label=space pulse}}.
+
+See method {{gtMethod:BrElementUpdater>>#enqueueUpdate}} for more details.
+
+"
 Class {
 	#name : #BrElementUpdaterUpdateTask,
 	#superclass : #BlTask,
@@ -16,7 +22,7 @@ BrElementUpdaterUpdateTask >> printOn: aStream [
 		print: (self updater ifNotNil: #element)
 ]
 
-{ #category : #accessing }
+{ #category : #'api - running' }
 BrElementUpdaterUpdateTask >> run: aWaker [
 	self updater ifNotNil: [ :anUpdater | anUpdater updateNow ]
 ]

@@ -1,3 +1,7 @@
+"
+I exemplify {{gtClass:BrElementUpdater}}.
+
+"
 Class {
 	#name : #BrElementUpdaterByScripterExamples,
 	#superclass : #Object,
@@ -11,10 +15,12 @@ BrElementUpdaterByScripterExamples >> basicUpdater [
 	<gtExample>
 	| anUpdater |
 	anUpdater := BrElementUpdater new.
-	anUpdater postponedDuration: 100 milliSeconds.
 	self assert: anUpdater element isNil.
 	self assert: anUpdater action isNotNil.
 	self assert: anUpdater isUpdateRequested not.
+	self assert: anUpdater postponedDuration equals: 0 seconds.
+	self assert: anUpdater postponedDuration isZero.
+
 	^ anUpdater
 ]
 
@@ -35,161 +41,240 @@ BrElementUpdaterByScripterExamples >> element [
 ]
 
 { #category : #'examples - updater' }
-BrElementUpdaterByScripterExamples >> updateRequest_AfterElementAddedInSceneGraph [
+BrElementUpdaterByScripterExamples >> postponedDuration [
+	<gtExample>
+	^ 300 milliSeconds
+]
 
+{ #category : #'examples - updater' }
+BrElementUpdaterByScripterExamples >> postponedUpdateRequest_AfterElementAddedInSceneGraph [
+	<gtExample>
+	| aScripter |
+	aScripter := self postponedUpdaterInScripterAndElementInSpace.
+
+	aScripter
+		substep: 'Request update'
+		do: [ :aStep | 
+			aStep assert
+				label: 'Assert inactive update request';
+				do: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
+
+			aStep do
+				label: 'Send request';
+				block: [ :anUpdater | anUpdater requestUpdate ];
+				onModel;
+				play.
+				
+			aStep assert
+				label: 'Assert inactive update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert element background';
+				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+				onSelf;
+				play ].
+
+	^ aScripter
+]
+
+{ #category : #'examples - updater' }
+BrElementUpdaterByScripterExamples >> postponedUpdateRequest_BeforeElementAddedInSceneGraph [
+	<gtExample>
+	| aScripter |
+	aScripter := self postponedUpdaterInScripterAndElementNotInSpace.
+
+	aScripter
+		substep: 'Request update'
+		do: [ :aStep | 
+			aStep assert
+				label: 'Assert inactive update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
+
+			aStep do
+				label: 'Send request';
+				block: [ :anUpdater | anUpdater requestUpdate ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert active update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert element does not include a task';
+				satisfies: [ :anUpdater | anUpdater element taskQueue isEmpty ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert element not in space';
+				satisfies: [ :anUpdater | anUpdater element space isNil ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert element background color';
+				satisfies: [ :anUpdater | anUpdater element background = self defaultBackgroundColor asBlBackground ];
+				onModel;
+				play ].
+
+	aScripter
+		substep: 'Add element into space'
+		do: [ :aStep | 
+			aStep set
+				label: 'Add element into space';
+				element: [ :aModel | aModel element ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert inactive update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
+
+			aStep assert
+				label: 'Assert element background color';
+				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+				onSelf;
+				play ].
+
+	^ aScripter
+]
+
+{ #category : #'examples - updater' }
+BrElementUpdaterByScripterExamples >> postponedUpdaterInScripterAndElementInSpace [
+	<gtExample>
+	| aScripter |
+	aScripter := self
+			scripterWithModel: [ :aTarget :theScripter | self updaterWithElementAndPostponedAction ]
+			element: [ :aModel | aModel element ].
+
+	^ aScripter
+]
+
+{ #category : #'examples - updater' }
+BrElementUpdaterByScripterExamples >> postponedUpdaterInScripterAndElementNotInSpace [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripter.
+	aScripter
+		substep: 'Initialize Model and UI'
+		do: [ :aStep | 
+			aStep set
+				label: 'Initialize Model';
+				model: [ self updaterWithElementAndPostponedAction ];
+				onScripter;
+				play ].
+
+	^ aScripter
+]
+
+{ #category : #'examples - updater' }
+BrElementUpdaterByScripterExamples >> updateRequest_AfterElementAddedInSceneGraph [
 	<gtExample>
 	| aScripter |
 	aScripter := self updaterInScripterAndElementInSpace.
 
-	aScripter substep: 'Request update' do: [ :aStep | 
-	
-		aStep check
-			label: 'Check inactive update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested not ];
-			onModel;
-			play.
+	aScripter
+		substep: 'Request update'
+		do: [ :aStep | 
+			aStep assert
+				label: 'Assert inactive update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
 
-		aStep do
-			label: 'Send request';
-			block: [ :anUpdater | anUpdater requestUpdate ];
-			onModel;
-			play.
+			aStep do
+				label: 'Send request';
+				block: [ :anUpdater | anUpdater requestUpdate ];
+				onModel;
+				play.
 
-		aStep check
-			label: 'Check active update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested ];
-			onModel;
-			play.
+			aStep assert
+				label: 'Assert active update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
 
-		aStep wait
-			forEnqueuedSpaceTaskTimeout: 5 seconds;
-			play.
+			aStep assert
+				label: 'Assert element background color';
+				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+				onSelf;
+				play ].
 
-		aStep wait
-			forSemaphore: (aScripter userData at: #updaterSemaphore)
-			timeoutSeconds: 5;
-			play.
-
-		aStep wait
-			forEmptySpaceTaskQueueTimeout: 5 seconds;
-			play.
-
-		aStep check
-			label: 'Check inactive update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested not ];
-			onModel;
-			play.
-
-		aStep check
-			label: 'Check empty element task queue';
-			do: [ :anElement | anElement taskQueue tasks size isZero ];
-			onSelf;
-			play ].
-
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updateRequest_BeforeElementAddedInSceneGraph [
-
 	<gtExample>
 	| aScripter |
 	aScripter := self updaterInScripterAndElementNotInSpace.
 
-	aScripter substep: 'Request update' do: [ :aStep | 
-		aStep check
-			label: 'Check inactive update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested not ];
-			onModel;
-			play.
+	aScripter
+		substep: 'Request update'
+		do: [ :aStep | 
+			aStep assert
+				label: 'Assert inactive update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
 
-		aStep do
-			label: 'Send request';
-			block: [ :anUpdater | anUpdater requestUpdate ];
-			onModel;
-			play.
+			aStep do
+				label: 'Send request';
+				block: [ :anUpdater | anUpdater requestUpdate ];
+				onModel;
+				play.
 
-		aStep wait
-			forEnqueuedSpaceTaskTimeout: 5 seconds;
-			play.
+			aStep assert
+				label: 'Assert active update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested ];
+				onModel;
+				play.
 
-		aStep check
-			label: 'Check active update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested ];
-			onModel;
-			play.
+			aStep assert
+				label: 'Assert element not in space';
+				satisfies: [ :anUpdater | anUpdater element space isNil ];
+				onModel;
+				play.
 
-		aStep check
-			label: 'Check element does not include a task';
-			do: [ :anUpdater | anUpdater element taskQueue isEmpty ];
-			onModel;
-			play.
+			aStep assert
+				label: 'Assert element background color';
+				satisfies: [ :anUpdater | anUpdater element background = self defaultBackgroundColor asBlBackground ];
+				onModel;
+				play ].
 
-		aStep check
-			label: 'Check element not in space';
-			do: [ :anUpdater | anUpdater element space isNil ];
-			onModel;
-			play ].
+	aScripter
+		substep: 'Add element into space'
+		do: [ :aStep | 
+			aStep set
+				element: [ :aModel | aModel element ];
+				onModel;
+				play.
 
-	aScripter substep: 'Add element into space' do: [ :aStep | 
-		aStep set
-			element: [ :aModel | aModel element ];
-			onModel;
-			play.
+			aStep assert
+				label: 'Assert inactive update request';
+				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+				onModel;
+				play.
 
-		aStep check
-			label: 'Check active update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested ];
-			onModel;
-			play.
+			aStep assert
+				label: 'Assert element background color';
+				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+				onSelf;
+				play ].
 
-		aStep wait
-			forEnqueuedSpaceTaskTimeout: 5 seconds;
-			play.
-
-		aStep wait
-			forSemaphore: (aScripter userData at: #updaterSemaphore)
-			timeoutSeconds: 5;
-			play.
-
-		aStep wait
-			forEmptySpaceTaskQueueTimeout: 5 seconds;
-			play.
-
-		aStep check
-			label: 'Check inactive update request';
-			do: [ :anUpdater | anUpdater isUpdateRequested not ];
-			onModel;
-			play.
-
-		aStep check
-			label: 'Check empty element task queue';
-			do: [ :anElement | anElement taskQueue tasks size isZero ];
-			onSelf;
-			play ].
-
-	^ aScripter syncContinue
-]
-
-{ #category : #'examples - updater' }
-BrElementUpdaterByScripterExamples >> updateRequest_ElementNotInSceneGraph [
-	<gtExample>
-	| anUpdater aSemaphore aTimeout |
-	aSemaphore := Semaphore new.
-	anUpdater := self updaterWithElementAndAction.
-	anUpdater requestUpdate.
-	TaskAtQueue default
-		schedule: [ 
-			100 milliSeconds wait. 
-			aSemaphore signal ]
-		at: anUpdater postponedTime.
-	aTimeout := aSemaphore waitTimeoutSeconds: 5.
-	self 
-		assert: aTimeout not 
-		description: 'Semaphore was not signaled on time'.
-	self assert: anUpdater isUpdateRequested.
-	self assert: anUpdater element taskQueue tasks size equals: 0.
-	^ anUpdater
+	^ aScripter
 ]
 
 { #category : #'examples - support' }
@@ -199,48 +284,30 @@ BrElementUpdaterByScripterExamples >> updatedBackgroundColor [
 
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updaterInScripterAndElementInSpace [
-
 	<gtExample>
 	| aScripter |
 	aScripter := self
-		             scripterWithModel: [ :aTarget :theScripter |
-		             	| anUpdater anOriginAction aSemaphore |
-		             	aSemaphore := Semaphore new.
-		             	theScripter userData at: #updaterSemaphore put: aSemaphore.
-		             	anUpdater := self updaterWithElementAndAction.
-		             	anOriginAction := anUpdater action.
-		             	anUpdater action: [ :theElement | 
-		             		anOriginAction cull: theElement.
-		             		aSemaphore signal ].
-		             	anUpdater ]
-		             element: [ :aModel | aModel element ].
+			scripterWithModel: [ :aTarget :theScripter | self updaterWithElementAndAction ]
+			element: [ :aModel | aModel element ].
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updaterInScripterAndElementNotInSpace [
-
 	<gtExample>
 	| aScripter |
 	aScripter := self scripter.
-	aScripter substep: 'Initialize Model and UI' do: [ :aStep | 
-		aStep set
-			label: 'Initialize Model';
-			model: [ :aTarget :theScripter | 
-				| anUpdater anOriginAction aSemaphore |
-				aSemaphore := Semaphore new.
-				theScripter userData at: #updaterSemaphore put: aSemaphore.
-				anUpdater := self updaterWithElementAndAction.
-				anOriginAction := anUpdater action.
-				anUpdater action: [ :theElement | 
-						anOriginAction cull: theElement.
-						aSemaphore signal ].
-				anUpdater ];
-			onScripter;
-			play ].
+	aScripter
+		substep: 'Initialize Model and UI'
+		do: [ :aStep | 
+			aStep set
+				label: 'Initialize Model';
+				model: [ self updaterWithElementAndAction ];
+				onScripter;
+				play ].
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - updater' }
@@ -261,5 +328,21 @@ BrElementUpdaterByScripterExamples >> updaterWithElementAndAction [
 	self assert: anUpdater isUpdateRequested not.
 	self assert: anElement taskQueue tasks size equals: 0.
 	
+	^ anUpdater
+]
+
+{ #category : #'examples - updater' }
+BrElementUpdaterByScripterExamples >> updaterWithElementAndPostponedAction [
+	<gtExample>
+	| anUpdater |
+	anUpdater := self updaterWithElementAndAction.
+
+	anUpdater := anUpdater postponedDuration: self postponedDuration.
+
+	self assert: anUpdater postponedDuration equals: self postponedDuration.
+	self assert: anUpdater postponedDuration isZero not.
+	self assert: anUpdater isUpdateRequested not.
+	self assert: anUpdater element taskQueue tasks size equals: 0.
+
 	^ anUpdater
 ]

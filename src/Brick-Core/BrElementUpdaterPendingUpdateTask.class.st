@@ -1,3 +1,11 @@
+"
+I am used by {{gtClass:BrElementUpdater}} to explicitly inform {{gtClass:BlScripter}} that there is a pending and postponed update task.
+Once, the pending action is scheduled, I am removed from the space task queue ({{gtClass:BlSpaceTaskQueue}}) and a {{gtClass:BrElementUpdaterUpdateTask}} is enqueued. 
+
+See method {{gtMethod:BrElementUpdater>>#enqueuePostponedUpdate}} for more details.
+
+
+"
 Class {
 	#name : #BrElementUpdaterPendingUpdateTask,
 	#superclass : #BlTask,
@@ -8,7 +16,7 @@ Class {
 	#category : #'Brick-Core-Futures'
 }
 
-{ #category : #accessing }
+{ #category : #'api - running' }
 BrElementUpdaterPendingUpdateTask >> beUpdated [
 	isUpdated := true
 ]
@@ -19,7 +27,7 @@ BrElementUpdaterPendingUpdateTask >> initialize [
 	isUpdated := false
 ]
 
-{ #category : #testing }
+{ #category : #'private - testing' }
 BrElementUpdaterPendingUpdateTask >> isUpdated [
 	^ isUpdated ifNil: [ false ]
 ]
@@ -33,13 +41,12 @@ BrElementUpdaterPendingUpdateTask >> printOn: aStream [
 		print: (self updater ifNotNil: #element)
 ]
 
-{ #category : #accessing }
+{ #category : #'private - testing' }
 BrElementUpdaterPendingUpdateTask >> requeueTaskAfterExecution [
 	^ self isUpdated not
-		and: [ self updater ifNotNil: #isUpdateRequested ifNil: [ false ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #'api - running' }
 BrElementUpdaterPendingUpdateTask >> run: aWaker [
 	"do nothing, just wait"
 
