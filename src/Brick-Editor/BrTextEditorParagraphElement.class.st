@@ -7,8 +7,7 @@ Class {
 		'cursorElements',
 		'cursorStencil',
 		'selection',
-		'segment',
-		'session'
+		'segment'
 	],
 	#classVars : [
 		'Slants',
@@ -131,7 +130,9 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> buildParagraph [
 	| aBuilder |
-	session := Smalltalk session.
+	
+	"NonInteractiveTranscript stdout nextPutAll: '#buildParagraph'; cr."
+	
 	aBuilder := SkiaParagraphBuilder
 			style: (SkiaParagraphStyle new
 					textStyle: (SkiaParagraphTextStyle new
@@ -204,12 +205,13 @@ BrTextEditorParagraphElement >> defaultTextColor [
 
 { #category : #drawing }
 BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
-	(paragraph isNil or: [ session ~~ Smalltalk session ])
-		ifTrue: [ paragraph := self buildParagraph ].
 	aCanvas clip
 		when: [ self clipChildren ]
 		by: [ self geometry pathOnSpartaCanvas: aCanvas of: self ]
-		during: [ paragraph paintOn: aCanvas at: self padding topLeft.
+		during: [
+			paragraph
+				valueDo: [ :aParagraph | aParagraph paintOn: aCanvas at: self padding topLeft ]
+				ifNone: [ self requestLayout ].
 			self children sortedByElevation
 				do: [ :anElement | 
 					(self canAddToParagraph: anElement)
@@ -221,20 +223,21 @@ BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 	| aPathBuilder |
 	aPathBuilder := aCanvas path.
 
-	selection
-		do: [ :eachMonotoneSelection | 
-			(paragraph
-				rectanglesForChars: (eachMonotoneSelection from to: eachMonotoneSelection to)
-				width: SkiaParagraphRectWidthStyle Max
-				height: SkiaParagraphRectHeightStyle Max)
-				do: [ :eachRectangle | 
-					aPathBuilder
-						moveTo: eachRectangle topLeft;
-						lineTo: eachRectangle topRight;
-						lineTo: eachRectangle bottomRight;
-						lineTo: eachRectangle bottomLeft;
-						lineTo: eachRectangle topLeft;
-						close ] ].
+	paragraph valueDo: [ :aParagraph |
+		selection
+			do: [ :eachMonotoneSelection | 
+				(aParagraph
+					rectanglesForChars: (eachMonotoneSelection from to: eachMonotoneSelection to)
+					width: SkiaParagraphRectWidthStyle Max
+					height: SkiaParagraphRectHeightStyle Max)
+					do: [ :eachRectangle | 
+						aPathBuilder
+							moveTo: eachRectangle topLeft;
+							lineTo: eachRectangle topRight;
+							lineTo: eachRectangle bottomRight;
+							lineTo: eachRectangle bottomLeft;
+							lineTo: eachRectangle topLeft;
+							close ] ] ].
 
 	aCanvas fill
 		path: aPathBuilder build;
@@ -250,7 +253,8 @@ BrTextEditorParagraphElement >> hideCursors [
 { #category : #initialization }
 BrTextEditorParagraphElement >> initialize [
 	super initialize.
-
+	
+	paragraph := BlSessionValueHolder new.
 	cursorElements := OrderedCollection new.
 	cursorStencil := BrCursorStencil uniqueInstance.
 	text := BlText empty.
@@ -258,13 +262,13 @@ BrTextEditorParagraphElement >> initialize [
 ]
 
 { #category : #layout }
-BrTextEditorParagraphElement >> measureCursors: aCollectionOfCursorElements [
+BrTextEditorParagraphElement >> measureCursors: aCollectionOfCursorElements paragraph: aParagraph [
 	aCollectionOfCursorElements do: [ :eachCursor |
 		| aTextPosition eachCursorRectangle |
 		
 		aTextPosition := eachCursor textPosition.
 		
-		eachCursorRectangle := paragraph cursorRectangleForCharacter: aTextPosition.
+		eachCursorRectangle := aParagraph cursorRectangleForCharacter: aTextPosition.
 		eachCursorRectangle := eachCursorRectangle expandBy: 0.5@0.
 		eachCursorRectangle := eachCursorRectangle translateBy: ((eachCursorRectangle left min: 0) abs @ 0).
 		eachCursorRectangle := eachCursorRectangle translateBy: ((self measuredWidth - eachCursorRectangle right) min: 0) @ 0.
@@ -295,13 +299,18 @@ BrTextEditorParagraphElement >> newCursor [
 ]
 
 { #category : #'hooks - children' }
+BrTextEditorParagraphElement >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+
+	paragraph ifNone: [ self requestLayout ]
+]
+
+{ #category : #'hooks - children' }
 BrTextEditorParagraphElement >> onChildAdded: anElement [
 	super onChildAdded: anElement.
 	
 	(anElement isKindOf: BrCursorElement)
-		ifFalse: [ paragraph := nil ]
-	
-	
+		ifFalse: [ paragraph value: nil ]
 ]
 
 { #category : #layout }
@@ -309,52 +318,59 @@ BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdat
 	| placeholders |
 	
 	placeholders := self placeholderElements.
-	placeholders with: paragraph placeholderRectangles do: [ :eachElement :eachBounds |
-		eachElement applyLayoutIn: (eachBounds translateBy: self padding topLeft) context: aBlElementBoundsUpdateContext ].
 	
-	self cursorElements do: [ :eachCursor | eachCursor applyLayoutIn: eachCursor measuredBounds asRectangle context: aBlElementBoundsUpdateContext ].
+	paragraph valueDo: [ :aParagraph |
+		placeholders with: aParagraph placeholderRectangles do: [ :eachElement :eachBounds |
+			eachElement applyLayoutIn: (eachBounds translateBy: self padding topLeft) context: aBlElementBoundsUpdateContext ] ].
+
+	self cursorElements do: [ :eachCursor |
+		eachCursor
+			applyLayoutIn: eachCursor measuredBounds asRectangle
+			context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #layout }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
-	| aParagraphLayoutWidth |
+	| aParagraphLayoutWidth aParagraph |
+
 	self placeholderElements
 		do: [ :eachElement | 
 			self layout
 				measureChildWithMargins: eachElement
 				parentSpec: anExtentMeasurementSpec ].
 
-	(paragraph isNil or: [ paragraph isNull or: [ session ~~ Smalltalk session ] ])
-		ifTrue: [ BlFrameTelemetry
-				time: 'Build paragraph'
-				during: [ paragraph := self buildParagraph ] ].
+	aParagraph := paragraph
+		ifNonePut: [
+			self invalidate.
+			self buildParagraph ].
 
 	aParagraphLayoutWidth := anExtentMeasurementSpec widthSpec isUnspecified
 			ifTrue: [ SmallInteger maxVal ]
 			ifFalse: [ anExtentMeasurementSpec widthSpec size - self padding width max: 0 ].	"Add a 1 pixel fudge-factor to the width to deal with re-measuring the paragraph at the exact width"
 	BlFrameTelemetry
 		time: 'Layout paragraph'
-		during: [ paragraph layoutWithWidth: aParagraphLayoutWidth + 1.0 ].
+		during: [ aParagraph layoutWithWidth: aParagraphLayoutWidth + 1.0 ].
 
 	self
 		measuredExtent: (anExtentMeasurementSpec
-				sizeFor: paragraph longestLine @ paragraph height + self padding extent).
+				sizeFor: aParagraph longestLine @ aParagraph height + self padding extent).
 
 	BlFrameTelemetry
 		time: 'Measure cursors'
 		during: [ self cursorElements
-				ifNotEmpty: [ :theCursors | self measureCursors: theCursors ] ]
+				ifNotEmpty: [ :theCursors | self measureCursors: theCursors paragraph: aParagraph ] ]
 ]
 
 { #category : #drawing }
 BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
-	(paragraph isNil or: [ session ~~ Smalltalk session ])
-		ifTrue: [ 
-		Transcript show: 'REBUILDING!'; cr.
-		paragraph := self buildParagraph ].
+		
 	paragraph
-		paintOn: aCompositorPainter canvas
-		at: anOffset + self padding topLeft.
+		valueDo: [ :aParagraph |
+			aParagraph
+				paintOn: aCompositorPainter canvas
+				at: anOffset + self padding topLeft ]
+		ifNone: [ self requestLayout ].
+
 	self
 		paintSelectionOn: aCompositorPainter
 		offset: anOffset + self padding topLeft.
@@ -391,22 +407,21 @@ BrTextEditorParagraphElement >> placeholderElements [
 { #category : #'api - cursor' }
 BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEditorElement [
 	"trying to find a segment that actually contains a given position"
-	| aCursor aFocusFinder aDirection aLocalTextPositionOfThisCursor aLocalPositionOfThisCursor aDesiredBounds aScreenPositionOfThisCursor |
+	| aCursor aFocusFinder aDirection aLocalTextPositionOfThisCursor aLocalPositionOfThisCursor aDesiredBounds aScreenPositionOfThisCursor aParagraph |
 
-	paragraph
-		ifNil: [ ^ self ].
+	aParagraph := paragraph ifNone: [ ^ self ].
 
 	aCursor := aTransformation cursor.
 	aLocalTextPositionOfThisCursor := aCursor position - self segment textStart.
 
 	aTransformation isUp
 		ifTrue: [
-			paragraph
+			aParagraph
 				charOffsetAbove: aLocalTextPositionOfThisCursor
 				ifFound: [ :aNewCursorPosition | ^ aTransformation transformed: self segment textStart + aNewCursorPosition ]
 				ifNone: [  ] ]
 		ifFalse: [ 
-			paragraph
+			aParagraph
 				charOffsetBelow: aLocalTextPositionOfThisCursor
 				ifFound: [ :aNewCursorPosition | ^ aTransformation transformed: self segment textStart + aNewCursorPosition ]
 				ifNone: [  ]	 ].
@@ -415,7 +430,7 @@ BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEd
 		ifTrue: [ BlFocusSearchDirectionUp new ]
 		ifFalse: [ BlFocusSearchDirectionDown new ].
 
-	aLocalPositionOfThisCursor := (paragraph cursorRectangleForCharacter: aLocalTextPositionOfThisCursor) center + self padding topLeft.
+	aLocalPositionOfThisCursor := (aParagraph cursorRectangleForCharacter: aLocalTextPositionOfThisCursor) center + self padding topLeft.
 
 	aDesiredBounds := anEditorElement localBoundsToMine: (BlBounds origin: aLocalPositionOfThisCursor extent: 0.0@0.0) fromChild: self.
 	aScreenPositionOfThisCursor := aDesiredBounds center.
@@ -458,8 +473,8 @@ BrTextEditorParagraphElement >> removeCursors [
 { #category : #layout }
 BrTextEditorParagraphElement >> requestLayout: aSourceElement [
 	aSourceElement == self
-		ifFalse: [ paragraph := nil ].
-		
+		ifFalse: [ paragraph value: nil ].
+
 	^ super requestLayout: aSourceElement
 ]
 
@@ -468,17 +483,15 @@ BrTextEditorParagraphElement >> screenToCursor: aTransformation of: anEditorElem
 	"trying to find a segment that actually contains a given position"
 	| theBoundsInLocal aCharOffsetInParagraph |
 
-	paragraph
-		ifNil: [ ^ self ].
+	paragraph valueDo: [ :aParagraph |
+		theBoundsInLocal := self
+			globalBoundsToMine: (BlBounds origin: aCursorInEditorPosition extent: 0@0)
+			fromParent: anEditorElement.
+			
+		aCharOffsetInParagraph := aParagraph
+			charOffsetAt: theBoundsInLocal center - self padding topLeft.
 
-	theBoundsInLocal := self
-		globalBoundsToMine: (BlBounds origin: aCursorInEditorPosition extent: 0@0)
-		fromParent: anEditorElement.
-		
-	aCharOffsetInParagraph := paragraph
-		charOffsetAt: theBoundsInLocal center - self padding topLeft.
-
-	aTransformation transformed: aCharOffsetInParagraph + self segment textStart
+		aTransformation transformed: aCharOffsetInParagraph + self segment textStart ]
 ]
 
 { #category : #accessing }
