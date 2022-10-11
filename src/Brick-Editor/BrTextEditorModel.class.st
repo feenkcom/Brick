@@ -30,16 +30,8 @@ Class {
 		'isFocused',
 		'shouldStyleWhenTextModified'
 	],
-	#classVars : [
-		'UseParagraphEditor'
-	],
 	#category : #'Brick-Editor-Model'
 }
-
-{ #category : #accessing }
-BrTextEditorModel class >> useParagraphEditor: anObject [
-	UseParagraphEditor := anObject 
-]
 
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
@@ -355,7 +347,7 @@ BrTextEditorModel >> initialize [
 	shouldStyleWhenTextModified := true.
 
 	self beEditable.
-	UseParagraphEditor ifNotNil: [ self beParagraphBased ]
+	self beParagraphBased
 ]
 
 { #category : #initialization }
