@@ -141,6 +141,7 @@ BrTextEditorAbstractSegmentPiece >> segment: anObject [
 BrTextEditorAbstractSegmentPiece >> setCursor: aPieceElement of: aLineSegment in: anEditorElement [
 	| theUpdatedCursors aFocusRequest |
 	"select text editor cursors that are currently within this segment piece and convert them to local ones"
+	
 	theUpdatedCursors := (anEditorElement editor cursors allCursors
 		select: [ :aCursor | aCursor insideSubText: self of: aLineSegment ]
 		thenCollect: [ :aCursor | self globalCursorToLocal: aCursor ]) asSet.

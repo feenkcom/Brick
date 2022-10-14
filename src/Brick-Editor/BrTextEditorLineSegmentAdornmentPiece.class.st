@@ -57,8 +57,7 @@ BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 				ifFalse: [ eachElement focusability: BlFocusabilityNone new ] ].
 	self
 		assert: [ self isVirtual
-				or: [  "only replacement attribute can be non-virtual"self isVirtual not
-						and: [ self adornmentAttribute shouldReplace ] ] ]
+				or: [ self isVirtual not and: [ self adornmentAttribute shouldReplace ] ] ]
 		description: [ 'Only replacement attribute can be non-virtual' ].
 	theAdornmentElements
 		withIndexDo: [ :eachAdornmentElement :eachIndex | 
