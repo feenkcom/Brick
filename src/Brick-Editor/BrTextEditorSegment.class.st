@@ -10,7 +10,11 @@ Class {
 	#traits : 'TBrTextEditorTextualPiece + TBlDebug',
 	#classTraits : 'TBrTextEditorTextualPiece classTrait + TBlDebug classTrait',
 	#instVars : [
-		'index'
+		'index',
+		'pieces',
+		'lineSpacing',
+		'wordPadding',
+		'paragraphMargin'
 	],
 	#category : #'Brick-Editor-Model - Segment-Text'
 }
@@ -18,11 +22,34 @@ Class {
 { #category : #'pieces - computation' }
 BrTextEditorSegment >> clearCache [
 	"Clear all caches and make this segment fresh as if it would just be created and initalized"
+
+	pieces := nil
+]
+
+{ #category : #'pieces - computation' }
+BrTextEditorSegment >> computedPieces [
+	<return: #SequenceableCollection of: #BrTextEditorAbstractSegmentPiece>
+	| thePieces |
+
+	thePieces := self splitterClass new
+		split: self text
+		from: self textStart
+		to: self textEnd.
+	thePieces do: [ :eachPiece | eachPiece segment: self ].
+
+	^ thePieces
 ]
 
 { #category : #printing }
 BrTextEditorSegment >> gtDisplayOn: aStream [
 	self printOn: aStream
+]
+
+{ #category : #testing }
+BrTextEditorSegment >> hasPieces [
+	<return: #Boolean>
+
+	^ pieces isNotNil
 ]
 
 { #category : #accessing }
@@ -41,6 +68,13 @@ BrTextEditorSegment >> index [
 { #category : #accessing }
 BrTextEditorSegment >> index: aNumber [
 	index := aNumber
+]
+
+{ #category : #accessing }
+BrTextEditorSegment >> initialize [
+	super initialize.
+
+	self resetProperties
 ]
 
 { #category : #initialization }
@@ -99,10 +133,32 @@ BrTextEditorSegment >> isFirstIn: aTextEditor [
 ]
 
 { #category : #testing }
+BrTextEditorSegment >> isFirstTextPiece: aSegmentPiece [
+	<return: #Boolean>
+	
+	self hasPieces ifFalse: [ ^ false ].
+
+	^ self pieces first == aSegmentPiece
+]
+
+{ #category : #testing }
 BrTextEditorSegment >> isLastIn: aTextEditor [
 	"Return true if I am absolutely the very last segment (not last cached) in a given text editor"
 
 	^ self index = aTextEditor segmentCollector segments size
+]
+
+{ #category : #testing }
+BrTextEditorSegment >> isLastTextPiece: aSegmentPiece [
+	<return: #Boolean>
+	
+	self hasPieces
+		ifFalse: [ ^ false ].
+
+	self pieces reverseDo: [ :eachPiece |
+		eachPiece isText ifTrue: [ ^ eachPiece == aSegmentPiece ] ].
+	
+	^ false
 ]
 
 { #category : #testing }
@@ -113,6 +169,18 @@ BrTextEditorSegment >> isLineBreak [
 	^ self text anySatisfy: #isLineBreak
 ]
 
+{ #category : #'attributes - paragraph' }
+BrTextEditorSegment >> lineSpacing [
+	<return: #Number>
+
+	^ lineSpacing
+]
+
+{ #category : #'attributes - paragraph' }
+BrTextEditorSegment >> lineSpacing: aNumber [
+	lineSpacing := aNumber
+]
+
 { #category : #'text - modifications' }
 BrTextEditorSegment >> moveTextBy: aNumber [
 	"Move all sub-text pieces (#start and #end) known by the segment by a given amount of indicies.
@@ -120,16 +188,91 @@ BrTextEditorSegment >> moveTextBy: aNumber [
 	If aNumber is positive sub-texts will be moved to the right (maybe this is a result of an insertion).
 	aNumber must not be zero - undefined behaviour (nothing was inserted but the message is sent? Probably a bug)"
 
-	self start: textStart + aNumber end: textEnd + aNumber
+	self start: textStart + aNumber end: textEnd + aNumber.
+
+	"no pieces created (they were not requested yet so no need to move them)"
+	self hasPieces
+		ifFalse: [ ^ self ].
+
+	self pieces
+		do: [ :aTextPiece | aTextPiece start: aTextPiece textStart + aNumber end: aTextPiece textEnd + aNumber ]
 ]
 
 { #category : #'text - modifications' }
 BrTextEditorSegment >> moveTextPiecesBy: aNumber at: aTextIndex [
+	"aTextIndex is a Text index, not a cursor one!"
+	| aCursorIndex |
+	
+	aCursorIndex := (aTextIndex - 1) max: 0.
+
+	"no pieces created (they were not requested yet so no need to move them)"
+	self hasPieces
+		ifFalse: [ ^ self ].
+
+	self pieces
+		do: [ :aTextPiece |
+			
+			aNumber > 0
+				ifTrue: [
+					aTextPiece textEnd > aCursorIndex
+						ifTrue: [
+							aTextPiece textStart > aCursorIndex
+								ifTrue: [ aTextPiece
+									start: aTextPiece textStart + aNumber
+									end: aTextPiece textEnd + aNumber ]
+								ifFalse: [ aTextPiece
+									start: aTextPiece textStart
+									end: aTextPiece textEnd + aNumber ] ] ]
+				ifFalse: [
+					aTextPiece textEnd > aCursorIndex
+						ifTrue: [
+							"deletion happened before this text piece"
+							aTextPiece textStart > aCursorIndex
+								ifTrue: [
+									| aLastDeletedIndex |
+									aLastDeletedIndex := aCursorIndex + aNumber abs.
+									aTextPiece
+										start: aCursorIndex
+										end: ((aTextPiece textEnd - aLastDeletedIndex) max: aCursorIndex) ]
+								"deletion happened inside of this text piece"
+								ifFalse: [
+									aTextPiece
+										start: aTextPiece textStart
+										"end is start + how many left after deletion"
+										end: aCursorIndex + ((aTextPiece textEnd - aCursorIndex - aNumber abs) max: 0) ] ] ] ]
+]
+
+{ #category : #'attributes - paragraph' }
+BrTextEditorSegment >> paragraphMargin [
+	<return: #BlInsets>
+
+	^ paragraphMargin
+]
+
+{ #category : #'attributes - paragraph' }
+BrTextEditorSegment >> paragraphMargin: aBlInsets [
+	paragraphMargin := aBlInsets
+]
+
+{ #category : #accessing }
+BrTextEditorSegment >> pieces [
+	<return: #Array of: #BrTextEditorAbstractSegmentPiece>
+
+	^ self hasPieces
+		ifTrue: [ pieces ]
+		ifFalse: [ pieces := self computedPieces ]
 ]
 
 { #category : #printing }
 BrTextEditorSegment >> printOn: aStream [
 	self text printOn: aStream
+]
+
+{ #category : #initialization }
+BrTextEditorSegment >> resetProperties [
+	lineSpacing := 0.
+	wordPadding := BlInsets empty.
+	paragraphMargin := BlInsets empty.
 ]
 
 { #category : #accessing }
@@ -143,4 +286,23 @@ BrTextEditorSegment >> segmentType [
 
 { #category : #'text - modifications' }
 BrTextEditorSegment >> updateSegmentProperties [
+	| theParagraphAttributes |
+	
+	self resetProperties.
+	
+	theParagraphAttributes := text iterator selectAttributes: #isParagraphAttribute.
+	theParagraphAttributes do: [ :aParagraphAttribute |
+		aParagraphAttribute applyOn: self ]
+]
+
+{ #category : #'attributes - paragraph' }
+BrTextEditorSegment >> wordPadding [
+	<return: #BlInsets>
+
+	^ wordPadding
+]
+
+{ #category : #'attributes - paragraph' }
+BrTextEditorSegment >> wordPadding: aBlInsets [
+	wordPadding := aBlInsets
 ]

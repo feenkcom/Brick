@@ -27,7 +27,6 @@ BrTextEditorParagraphSegmentHolder class >> defaultSegmentLayout: aBlock [
 { #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 	| newPieceElements thePieces hasSelection hasCursor |
-
 	segment := anEditorSegment.
 	itemElement segment: segment.
 
@@ -35,54 +34,28 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 	hasCursor := self hasCursor.
 	itemElement text: segment text.
 
-	BlFrameTelemetry
-		timeSync: [ 'Update segment properties' ]
-		during: [ segment updateSegmentProperties ].
+	segment updateSegmentProperties.
 
 	pieceElements := self newPiecesMap.
 	newPieceElements := OrderedCollection new.
 
-	thePieces := BlFrameTelemetry
-		timeSync: [ 'Get pieces' ]
-		during: [ segment pieces ].
-	
-	BlFrameTelemetry
-		timeSync: [ 'Create piece elements' ]
-		during: [
-			thePieces withIndexDo: [ :aPiece :eachIndex | 
-				| thePieceElements |
-				
-				thePieceElements := BlFrameTelemetry
-					timeSync: [ 'Create piece elements at {1}' format: { eachIndex } ]
-					during: [ (aPiece createElement: self infiniteElement) asOrderedCollection ].
-				
-				newPieceElements addAll: thePieceElements.
-				pieceElements atPiece: aPiece putElements: thePieceElements ] ].
+	thePieces := segment pieces.
 
-	BlFrameTelemetry
-		timeSync: [ 'Remove segment children' ]
-		during: [ itemElement removeChildren ].
+	thePieces
+		withIndexDo: [ :aPiece :eachIndex | 
+			| thePieceElements |
+			thePieceElements := (aPiece createElement: self infiniteElement)
+					asOrderedCollection.
 
-	BlFrameTelemetry
-		timeSync: [ 'Add segment children' ]
-		during: [ itemElement addChildren: newPieceElements ].
-		
+			newPieceElements addAll: thePieceElements.
+			pieceElements atPiece: aPiece putElements: thePieceElements ].
+
+	itemElement removeChildren.
+	itemElement addChildren: newPieceElements.
+
 	(hasCursor or: [ hasSelection ])
-		ifTrue: [
-			BlFrameTelemetry
-				timeSync: [ 'Set cursor, selection' ]
-				during: [
-						hasCursor
-							ifTrue: [
-								BlFrameTelemetry
-									timeSync: [ 'Set cursor' ]
-									during: [ self onCursorChanged ].
-						
-						hasSelection
-							ifTrue: [
-								BlFrameTelemetry
-									timeSync: [ 'Set selection' ]
-									during: [ self onSelectionChanged ] ] ] ] ].
+		ifTrue: [ hasCursor ifTrue: [ self onCursorChanged ].
+			hasSelection ifTrue: [ self onSelectionChanged ] ].
 
 	itemElement
 		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
