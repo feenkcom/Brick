@@ -7,7 +7,7 @@ TBlTextStyleable >> expanded: aBoolean adornment: aBrTextAdornmentStencilBuilder
 	[ :aTBrTextEditorTextualPiece :anEditorElement | ] - where aText represents a piece of text after which an element should be append"
 
 	self attributesBuilder attribute: (
-		BrGlamorousTrangleExpanderTextAttribute new 
+		BrGlamorousTriangleExpanderTextAttribute new 
 			isExpanded: aBoolean;
 			attributesCreatingBlock: [
 				BrTextAdornmentDynamicAttribute new 	

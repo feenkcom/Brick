@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'aptitudeClass'
 	],
-	#category : 'Brick-DevTool'
+	#category : #'Brick-DevTool'
 }
 
 { #category : #accessing }
@@ -121,7 +121,7 @@ BrDevAptitudeOverview >> buildEventsSection [
 
 { #category : #'private - references' }
 BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
-	^ BrGlamorousTrangleExpanderTextAttribute new 
+	^ BrGlamorousTriangleExpanderTextAttribute new 
 		attributesCreatingBlock: [
 			BrTextAdornmentDynamicAttribute new 	
 				beAppend;
