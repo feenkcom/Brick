@@ -39,7 +39,7 @@ BrAsyncElementFuture >> defaultStrategy [
 	^ BrAsyncElementFutureWhenInSceneStrategy new
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAsyncElementFuture >> element: anElement [
 	updater ifNotNil: [ :anUpdater |
 		anUpdater element == anElement
@@ -58,24 +58,51 @@ BrAsyncElementFuture >> executionConfiguration: anAsyncFutureExecutionConfigurat
 	futureExecutionConfiguration := anAsyncFutureExecutionConfiguration
 ]
 
-{ #category : #accessing }
+{ #category : #'api - future' }
 BrAsyncElementFuture >> future: anAsyncFuture [
-	self future: anAsyncFuture initialValue: nil
+	"Assign and run a given future cancelling an already running future if it exists"
+	self
+		future: anAsyncFuture
+		initialValue: nil
+		shouldCancel: true
 ]
 
-{ #category : #accessing }
+{ #category : #'api - future' }
 BrAsyncElementFuture >> future: anAsyncFuture initialValue: anObject [
+	self
+		future: anAsyncFuture
+		initialValue: anObject
+		shouldCancel: true
+]
+
+{ #category : #'api - future' }
+BrAsyncElementFuture >> future: anAsyncFuture initialValue: anObject shouldCancel: shouldCancel [
+	"Cancel the previous future if shouldCancel is true,
+	otherwise do not assign a new future if there is one already running"
 	mutex critical: [
 		| aPreviousDataSnapshot aNewDataSnapshot |
-		promise ifNotNil: [ :aPromise | aPromise cancel: futureCancellation ].
+		
+		promise ifNotNil: [ :aPromise |
+			shouldCancel
+				ifTrue: [ aPromise cancel: futureCancellation ]
+				ifFalse: [ ^ self ] ].
 		promise := nil.
 		whenDonePromise := AsyncPendingPromise new.
 		future := anAsyncFuture asAsyncFuture.
-		aPreviousDataSnapshot := dataSnapshot.		
+		aPreviousDataSnapshot := dataSnapshot.
 		aNewDataSnapshot := dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject.
 		self privateInitializeElement.
 		aPreviousDataSnapshot = aNewDataSnapshot
 			ifFalse: [ updater requestUpdate ] ]
+]
+
+{ #category : #'api - future' }
+BrAsyncElementFuture >> futureIfNotRunning: anAsyncFuture [
+	"Assign and run a given future only when there is no already running future"
+	self
+		future: anAsyncFuture
+		initialValue: nil
+		shouldCancel: false
 ]
 
 { #category : #initialization }
@@ -148,16 +175,20 @@ BrAsyncElementFuture >> privateInitializeElement [
 		promise
 			then: [ :aResult |
 				isFinished := true.
-				(promise == aPromise)
-					ifTrue: [
-						whenDonePromise fulfillWithValue: true.
-						self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ] ]
+				mutex critical: [
+					(promise == aPromise)
+						ifTrue: [
+							promise := nil.
+							whenDonePromise fulfillWithValue: true.
+							self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ] ] ]
 			otherwise: [ :anError |
 				isFinished := true.
-				(promise == aPromise)
-					ifTrue: [
-						whenDonePromise rejectWithError: anError.
-						self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ].
+				mutex critical: [
+					(promise == aPromise)
+						ifTrue: [
+							promise := nil.
+							whenDonePromise rejectWithError: anError.
+							self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ] ].
 
 	isFinished
 		ifFalse: [ updater element enqueueTask: (BlPromiseTask new promise: aPromise) ]
