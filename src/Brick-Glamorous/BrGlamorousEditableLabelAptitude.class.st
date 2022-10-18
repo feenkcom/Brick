@@ -26,6 +26,11 @@ BrGlamorousEditableLabelAptitude >> defaultBackground: anObject [
 ]
 
 { #category : #accessing }
+BrGlamorousEditableLabelAptitude >> defaultBorder: aBlBorder [
+	styleLook default: [ :aStyle | aStyle border: aBlBorder ]
+]
+
+{ #category : #accessing }
 BrGlamorousEditableLabelAptitude >> defaultForeground [
 	^ defaultForeground
 ]
