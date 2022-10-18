@@ -130,9 +130,6 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> buildParagraph [
 	| aBuilder |
-	
-	"NonInteractiveTranscript stdout nextPutAll: '#buildParagraph'; cr."
-	
 	aBuilder := SkiaParagraphBuilder
 			style: (SkiaParagraphStyle new
 					textStyle: (SkiaParagraphTextStyle new
@@ -316,23 +313,41 @@ BrTextEditorParagraphElement >> onChildAdded: anElement [
 { #category : #layout }
 BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	| placeholders |
-	
 	placeholders := self placeholderElements.
-	
-	paragraph valueDo: [ :aParagraph |
-		placeholders with: aParagraph placeholderRectangles do: [ :eachElement :eachBounds |
-			eachElement applyLayoutIn: (eachBounds translateBy: self padding topLeft) context: aBlElementBoundsUpdateContext ] ].
 
-	self cursorElements do: [ :eachCursor |
-		eachCursor
-			applyLayoutIn: eachCursor measuredBounds asRectangle
-			context: aBlElementBoundsUpdateContext ]
+	paragraph
+		valueDo: [ :aParagraph | 
+			placeholders
+				with: aParagraph placeholderRectangles
+				do: [ :eachElement :eachBounds | 
+					eachElement
+						applyLayoutIn: (eachBounds translateBy: self padding topLeft)
+						context: aBlElementBoundsUpdateContext ].
+
+			self textElements
+				do: [ :each | 
+					| rectangles offset |
+					each
+						applyLayoutIn: each measuredBounds asRectangle
+						context: aBlElementBoundsUpdateContext.
+					offset := self segment textStart.
+					rectangles := aParagraph
+							rectanglesForChars: (each textStart - offset to: each textEnd - offset)
+							width: SkiaParagraphRectWidthStyle Tight
+							height: SkiaParagraphRectHeightStyle Max.
+					rectangles notEmpty ifTrue: [ each relocate: rectangles last topLeft ] ] ].
+
+	self cursorElements
+		do: [ :eachCursor | 
+			eachCursor
+				applyLayoutIn: eachCursor measuredBounds asRectangle
+				context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #layout }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 	| aParagraphLayoutWidth aParagraph |
-
+	super onMeasure: anExtentMeasurementSpec.
 	self placeholderElements
 		do: [ :eachElement | 
 			self layout
@@ -340,9 +355,8 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 				parentSpec: anExtentMeasurementSpec ].
 
 	aParagraph := paragraph
-		ifNonePut: [
-			self invalidate.
-			self buildParagraph ].
+			ifNonePut: [ self invalidate.
+				self buildParagraph ].
 
 	aParagraphLayoutWidth := anExtentMeasurementSpec widthSpec isUnspecified
 			ifTrue: [ SmallInteger maxVal ]
