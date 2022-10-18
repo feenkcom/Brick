@@ -1,12 +1,5 @@
 "
-# The Moldable Editor
-
-I edit text and provide high level abstractions of essential text editor functionality such as selection, cursor, text insertions and deletions.
-
-I make use of {{gtClass:BrTextAdornmentAttribute}} to augment text with visual elements. 
-
-I subclass infinite data source in order to be able to smoothly display practically infinite amounts of text.
-
+nil
 "
 Class {
 	#name : #BrTextEditorModel,
@@ -31,14 +24,15 @@ Class {
 		'shouldStyleWhenTextModified'
 	],
 	#classVars : [
-		'UseParagraphEditor'
+		'DontUseParagraphEditor'
 	],
 	#category : #'Brick-Editor-Model'
 }
 
 { #category : #accessing }
-BrTextEditorModel class >> useParagraphEditor: anObject [
-	UseParagraphEditor := anObject 
+BrTextEditorModel class >> dontUseParagraphEditor: anObject [
+
+	DontUseParagraphEditor := anObject
 ]
 
 { #category : #'api - shortcuts' }
@@ -355,7 +349,9 @@ BrTextEditorModel >> initialize [
 	shouldStyleWhenTextModified := true.
 
 	self beEditable.
-	UseParagraphEditor ifNotNil: [ self beParagraphBased ]
+	DontUseParagraphEditor
+		ifNil: [ self beParagraphBased ]
+		ifNotNil: [ self beLineBased ]
 ]
 
 { #category : #initialization }

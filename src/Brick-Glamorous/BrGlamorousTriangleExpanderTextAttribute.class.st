@@ -2,7 +2,7 @@
 I am a text attribute that adds a small expand button that when clicked may apply further attributes on the text
 "
 Class {
-	#name : #BrGlamorousTrangleExpanderTextAttribute,
+	#name : #BrGlamorousTriangleExpanderTextAttribute,
 	#superclass : #BrTextExpandButtonAttribute,
 	#instVars : [
 		'id'
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #accessing }
-BrGlamorousTrangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
+BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| aToggle |
 
 	aToggle := BrTriangle new
@@ -34,19 +34,19 @@ BrGlamorousTrangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece 
 ]
 
 { #category : #accessing }
-BrGlamorousTrangleExpanderTextAttribute >> id [
+BrGlamorousTriangleExpanderTextAttribute >> id [
 	<return: #BlElementId>
 	
 	^ id
 ]
 
 { #category : #accessing }
-BrGlamorousTrangleExpanderTextAttribute >> id: anElementId [
+BrGlamorousTriangleExpanderTextAttribute >> id: anElementId [
 	id := anElementId
 ]
 
 { #category : #accessing }
-BrGlamorousTrangleExpanderTextAttribute >> initialize [
+BrGlamorousTriangleExpanderTextAttribute >> initialize [
 	super initialize.
 	
 	id := BlElementId noId
