@@ -7,7 +7,7 @@ Class {
 		'minWidth',
 		'styleLook'
 	],
-	#category : 'Brick-Glamorous-Editor'
+	#category : #'Brick-Glamorous-Editor'
 }
 
 { #category : #accessing }
@@ -23,6 +23,11 @@ BrGlamorousEditableLabelAptitude >> defaultBackground: anObject [
 			aStyle background: self defaultBackground ];
 		when: [ :aState | aState hovered and: BrEditorModeState readOnly ]
 			style: [ :aStyle | aStyle background: self defaultBackground darker ].
+]
+
+{ #category : #accessing }
+BrGlamorousEditableLabelAptitude >> defaultBorder: aBlBorder [
+	styleLook default: [ :aStyle | aStyle border: aBlBorder ]
 ]
 
 { #category : #accessing }
