@@ -322,20 +322,7 @@ BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdat
 				do: [ :eachElement :eachBounds | 
 					eachElement
 						applyLayoutIn: (eachBounds translateBy: self padding topLeft)
-						context: aBlElementBoundsUpdateContext ].
-
-			self textElements
-				do: [ :each | 
-					| rectangles offset |
-					each
-						applyLayoutIn: each measuredBounds asRectangle
-						context: aBlElementBoundsUpdateContext.
-					offset := self segment textStart.
-					rectangles := aParagraph
-							rectanglesForChars: (each textStart - offset to: each textEnd - offset)
-							width: SkiaParagraphRectWidthStyle Tight
-							height: SkiaParagraphRectHeightStyle Max.
-					rectangles notEmpty ifTrue: [ each relocate: rectangles last topLeft ] ] ].
+						context: aBlElementBoundsUpdateContext ] ].
 
 	self cursorElements
 		do: [ :eachCursor | 
@@ -347,7 +334,7 @@ BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdat
 { #category : #layout }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 	| aParagraphLayoutWidth aParagraph |
-	super onMeasure: anExtentMeasurementSpec.
+	
 	self placeholderElements
 		do: [ :eachElement | 
 			self layout
