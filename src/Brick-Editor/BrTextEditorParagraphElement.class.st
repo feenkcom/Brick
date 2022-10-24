@@ -59,6 +59,34 @@ BrTextEditorParagraphElement >> addCursorAt: aTextPosition [
 			aCursorElement ]
 ]
 
+{ #category : #accessing }
+BrTextEditorParagraphElement >> addMouseHandler [
+	"Add a custom mouse handler that checks for event handler attributes in the underlying text"
+
+	self
+		addEventHandler: (BlEventHandler
+				on: BlMouseEvent
+				do: [ :evt | 
+					paragraph
+						valueDo: [ :aParagraph | 
+							| aCharOffsetInParagraph atts anEditorElement |
+							anEditorElement := self
+									allParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
+									ifFound: #yourself
+									ifNone: [ nil ].
+
+							aCharOffsetInParagraph := aParagraph
+									charOffsetAt: evt localPosition - self padding topLeft.
+							atts := (self text attributesAt: aCharOffsetInParagraph) select: #isEventHandler.
+							atts
+								do: [ :anAttribute | 
+									(anAttribute wantsEvent: evt in: anEditorElement editor)
+										ifTrue: [ anAttribute
+												handleEvent: evt
+												in: anEditorElement editor
+												on: self segment ] ] ] ])
+]
+
 { #category : #'private - paragraph' }
 BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 	| anIterator |
@@ -255,7 +283,8 @@ BrTextEditorParagraphElement >> initialize [
 	cursorElements := OrderedCollection new.
 	cursorStencil := BrCursorStencil uniqueInstance.
 	text := BlText empty.
-	selection := BlSelection empty
+	selection := BlSelection empty.
+	self addMouseHandler
 ]
 
 { #category : #layout }
