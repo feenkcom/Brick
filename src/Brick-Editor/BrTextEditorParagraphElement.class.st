@@ -68,23 +68,7 @@ BrTextEditorParagraphElement >> addMouseHandler [
 				on: BlMouseEvent
 				do: [ :evt | 
 					paragraph
-						valueDo: [ :aParagraph | 
-							| aCharOffsetInParagraph atts anEditorElement |
-							anEditorElement := self
-									allParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
-									ifFound: #yourself
-									ifNone: [ nil ].
-
-							aCharOffsetInParagraph := aParagraph
-									charOffsetAt: evt localPosition - self padding topLeft.
-							atts := (self text attributesAt: aCharOffsetInParagraph) select: #isEventHandler.
-							atts
-								do: [ :anAttribute | 
-									(anAttribute wantsEvent: evt in: anEditorElement editor)
-										ifTrue: [ anAttribute
-												handleEvent: evt
-												in: anEditorElement editor
-												on: self segment ] ] ] ])
+						valueDo: [ :aParagraph | self handleMouseEvent: evt paragraph: aParagraph ] ])
 ]
 
 { #category : #'private - paragraph' }
@@ -268,6 +252,27 @@ BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 		path: aPathBuilder build;
 		paint: self defaultSelectionColor;
 		draw
+]
+
+{ #category : #accessing }
+BrTextEditorParagraphElement >> handleMouseEvent: evt paragraph: aParagraph [
+	| atts aCharOffsetInParagraph anEditorElement |
+	anEditorElement := self
+			allParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
+			ifFound: #yourself
+			ifNone: [ ^self ].
+
+	aCharOffsetInParagraph := aParagraph
+			charOffsetAt: evt localPosition - self padding topLeft.
+	atts := (self text attributesAt: aCharOffsetInParagraph)
+			select: #isEventHandler.
+	^ atts
+		do: [ :anAttribute | 
+			(anAttribute wantsEvent: evt in: anEditorElement editor)
+				ifTrue: [ anAttribute
+						handleEvent: evt
+						in: anEditorElement editor
+						on: self segment ] ]
 ]
 
 { #category : #'api - cursor' }
