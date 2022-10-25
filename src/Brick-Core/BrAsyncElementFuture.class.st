@@ -34,6 +34,11 @@ BrAsyncElementFuture >> cancelSoft [
 	futureCancellation := AsyncFutureExecutionSoftCancellation uniqueInstance
 ]
 
+{ #category : #'api - configuring' }
+BrAsyncElementFuture >> configureWithPassExceptionHandler [
+	futureExecutionConfiguration errorHandler: AsyncPassExceptionHandler new
+]
+
 { #category : #initialization }
 BrAsyncElementFuture >> defaultStrategy [
 	^ BrAsyncElementFutureWhenInSceneStrategy new
