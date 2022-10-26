@@ -7,9 +7,7 @@ Class {
 { #category : #initialization }
 BrGlamorousScrollbarTrackAptitude >> initialize [
 	super initialize.
-	self
-		default:
-			[ :aStyle | aStyle background: self theme header defaultBackgroundColor ].
+
 	self
 		add:
 			(BrScrollbarOrientationAptitude new

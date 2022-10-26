@@ -9,7 +9,6 @@ BrGlamorousScrollbarThumbAptitude >> initialize [
 	super initialize.
 	self
 		default: [ :aStyle | 
-			aStyle background: self theme header defaultBackgroundColor.
 			aStyle geometry: (BlRoundedRectangleGeometry cornerRadius: 3) ].
 	self
 		add:
