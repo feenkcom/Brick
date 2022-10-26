@@ -1,15 +1,13 @@
 Class {
 	#name : #BrGlamorousScrollbarTrackAptitude,
 	#superclass : #BrStyleCommonAptitude,
-	#category : 'Brick-Glamorous-Scrollbar'
+	#category : #'Brick-Glamorous-Scrollbar'
 }
 
 { #category : #initialization }
 BrGlamorousScrollbarTrackAptitude >> initialize [
 	super initialize.
-	self
-		default:
-			[ :aStyle | aStyle background: self theme header defaultBackgroundColor ].
+
 	self
 		add:
 			(BrScrollbarOrientationAptitude new

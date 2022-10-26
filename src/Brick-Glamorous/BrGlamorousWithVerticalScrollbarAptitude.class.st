@@ -17,16 +17,27 @@ BrGlamorousWithVerticalScrollbarAptitude >> initialize [
 	super initialize.
 
 	scrollbar := BrScrollbar new
-		aptitude: BrScrollbarAptitude new;
-		thumb: (BrScrollbarThumb new aptitude: BrGlamorousScrollbarThumbAptitude new);
-		track: (BrScrollbarTrack new aptitude: BrGlamorousScrollbarTrackAptitude new);
-		constraintsDo: [ :c |
-			c ignoreByLayout.
-			c margin: (BlInsets right: 2).
-			c ignored horizontal alignRight.
-			c ignored vertical alignBottom ].
+			thumb: (BrScrollbarThumb new aptitude: BrGlamorousScrollbarThumbAptitude new);
+			track: (BrScrollbarTrack new aptitude: BrGlamorousScrollbarTrackAptitude new);
+			aptitude: BrScrollbarAptitude new + (self scrollBarHoverAptitude // #track)
+					+ (self scrollBarHoverAptitude // #thumb);
+			constraintsDo: [ :c | 
+				c ignoreByLayout.
+				c margin: (BlInsets right: 2).
+				c ignored horizontal alignRight.
+				c ignored vertical alignBottom ].
 
-	self addChangeAddChildAs: #(content verticalScrollbar) with: [ self updateScrollable. scrollbar ]
+	self
+		addChangeAddChildAs: #(content verticalScrollbar)
+		with: [ self updateScrollable.
+			scrollbar ]
+]
+
+{ #category : #initialization }
+BrGlamorousWithVerticalScrollbarAptitude >> scrollBarHoverAptitude [
+	^ BrStyleCommonAptitude new
+		default: [ :s | s background: self theme header defaultBackgroundColor ];
+		hovered: [ :s | s background: BrGlamorousColors hoveredButtonBorderColor ]
 ]
 
 { #category : #'private - accessing' }
