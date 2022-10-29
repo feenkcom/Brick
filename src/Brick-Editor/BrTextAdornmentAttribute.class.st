@@ -10,9 +10,9 @@ Class {
 	#name : #BrTextAdornmentAttribute,
 	#superclass : #BlTextAttribute,
 	#instVars : [
-		'shouldAppend',
 		'renderingStrategy',
-		'cache'
+		'cache',
+		'alignmentMode'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
@@ -27,7 +27,7 @@ BrTextAdornmentAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorEleme
 
 { #category : #accessing }
 BrTextAdornmentAttribute >> beAppend [
-	shouldAppend := true
+	alignmentMode := #append
 ]
 
 { #category : #accessing }
@@ -37,7 +37,7 @@ BrTextAdornmentAttribute >> beLazy [
 
 { #category : #accessing }
 BrTextAdornmentAttribute >> beReplace [
-	shouldAppend := false
+	alignmentMode := #replace
 ]
 
 { #category : #accessing }
@@ -68,8 +68,8 @@ BrTextAdornmentAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorEle
 { #category : #initialization }
 BrTextAdornmentAttribute >> initialize [
 	super initialize.
-	
-	shouldAppend := false.
+
+	self beReplace.
 	self renderingStrategy: BrTextAdornmentAttributeSyncRenderingStrategy new.
 	cache := BrTextAdornmentAttributeNoCache uniqueInstance
 ]
@@ -132,12 +132,12 @@ BrTextAdornmentAttribute >> renderingStrategy: aBrTextAdornmentAttributeRenderin
 
 { #category : #testing }
 BrTextAdornmentAttribute >> shouldAppend [
-	^ shouldAppend
+	^ alignmentMode == #append
 ]
 
 { #category : #testing }
 BrTextAdornmentAttribute >> shouldReplace [
-	^ shouldAppend not
+	^ alignmentMode == #replace
 ]
 
 { #category : #printing }
@@ -145,7 +145,7 @@ BrTextAdornmentAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	
 	aStream nextPutAll: ' '.
-	aStream nextPutAll: (shouldAppend
+	aStream nextPutAll: (self shouldAppend
 		ifTrue: [ #beAppend ]
 		ifFalse: [ #beReplace ]) asString
 ]
