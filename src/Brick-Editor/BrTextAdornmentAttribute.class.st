@@ -1,10 +1,5 @@
 "
-# Adornments
-
-I am an attribute which when applied on a text visually replaces some parts of it with other items (not neccessarily character). Such attribtues requires complex text rendering system and currently only supported by the Moldable Editor.
-
-See {{gtClass:BrTextEditorAdornmentsExamples}}
-
+nil
 "
 Class {
 	#name : #BrTextAdornmentAttribute,
@@ -33,6 +28,11 @@ BrTextAdornmentAttribute >> beAppend [
 { #category : #accessing }
 BrTextAdornmentAttribute >> beLazy [
 	self renderingStrategy: BrTextAdornmentAttributeTaskItRenderingStrategy new.
+]
+
+{ #category : #accessing }
+BrTextAdornmentAttribute >> beOverlay [
+	alignmentMode := #overlay
 ]
 
 { #category : #accessing }
