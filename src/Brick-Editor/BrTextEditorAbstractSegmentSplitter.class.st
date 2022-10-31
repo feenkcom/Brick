@@ -51,7 +51,7 @@ BrTextEditorAbstractSegmentSplitter >> processPureWords: aTextIterator in: aStre
 BrTextEditorAbstractSegmentSplitter >> processSegment: aTextIterator in: aStream offset: anOffset [
 	
 	aTextIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldReplace ] ]
+		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldAppend not ] ]
 		indicesDo: [ :aStart :anEnd :hasReplacements | 
 			| aSpanIterator aDelta |
 			

@@ -55,10 +55,10 @@ BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 			eachElement userData at: #brickEditorAdornment put: true.
 			self adornmentAttribute isFocusable
 				ifFalse: [ eachElement focusability: BlFocusabilityNone new ] ].
-	self
+	"self
 		assert: [ self isVirtual
 				or: [ self isVirtual not and: [ self adornmentAttribute shouldReplace ] ] ]
-		description: [ 'Only replacement attribute can be non-virtual' ].
+		description: [ 'Only replacement attribute can be non-virtual' ]."
 	theAdornmentElements
 		withIndexDo: [ :eachAdornmentElement :eachIndex | 
 			| aCharLength |

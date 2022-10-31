@@ -43,6 +43,17 @@ TBlTextStyleable >> onCursorEnter: anEnterAction leave: aLeaveAction [
 ]
 
 { #category : #'*Brick-Editor' }
+TBlTextStyleable >> overlayingAdornment: aBrTextAdornmentStencilBuilder [
+	"Visually replace a piece of text with an element defined by a given stencil builder.
+	A stencil builder can also be a block in the following form:
+	[ :aTBrTextEditorTextualPiece :anEditorElement | ] - where aText represents a piece of text that should be replaced"
+
+	self attributesBuilder attribute: (BrTextAdornmentDynamicAttribute new
+		beOverlay;
+		stencil: aBrTextAdornmentStencilBuilder)
+]
+
+{ #category : #'*Brick-Editor' }
 TBlTextStyleable >> paragraphMargin: anInsets [
 	self attributesBuilder attribute: (BrTextParagraphMarginAttribute paragraphMargin: anInsets)
 ]
