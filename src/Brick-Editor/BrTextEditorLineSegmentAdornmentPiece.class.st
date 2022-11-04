@@ -55,14 +55,10 @@ BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 			eachElement userData at: #brickEditorAdornment put: true.
 			self adornmentAttribute isFocusable
 				ifFalse: [ eachElement focusability: BlFocusabilityNone new ] ].
-	"self
-		assert: [ self isVirtual
-				or: [ self isVirtual not and: [ self adornmentAttribute shouldReplace ] ] ]
-		description: [ 'Only replacement attribute can be non-virtual' ]."
 	theAdornmentElements
 		withIndexDo: [ :eachAdornmentElement :eachIndex | 
 			| aCharLength |
-			aCharLength := self isVirtual
+			aCharLength := isVirtual
 					ifTrue: [ 0 ]
 					ifFalse: [ eachIndex = theAdornmentElements size
 							ifTrue: [ self textLength ]
@@ -83,11 +79,6 @@ BrTextEditorLineSegmentAdornmentPiece >> initialize [
 
 	"means I do not count for representing an actual text"
 	isVirtual := true
-]
-
-{ #category : #accessing }
-BrTextEditorLineSegmentAdornmentPiece >> isVirtual [
-	^ isVirtual
 ]
 
 { #category : #'api - cursor' }

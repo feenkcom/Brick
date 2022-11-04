@@ -284,6 +284,11 @@ BrTextEditorSegment >> segmentType [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'pieces - computation' }
+BrTextEditorSegment >> splitterClass [
+	self subclassResponsibility
+]
+
 { #category : #'text - modifications' }
 BrTextEditorSegment >> updateSegmentProperties [
 	| theParagraphAttributes |
