@@ -79,26 +79,25 @@ BrTextEditorNewSegmentSplitter >> split: aText from: aStartIndex to: anEndIndex 
 				offset: aStartIndex.
 			aText
 				attributeRunsDo: [ :start :end :atts | 
-					start = 0
-						ifFalse: [ atts
-								detect: [ :att | att isAdornment and: [ att shouldReplace ] ]
-								ifFound: [ :att | 
-									self
-										processAdornmentAttribute: att
-										of: (aText from: start to: end)
-										in: aStream
+					atts
+						detect: [ :att | att isAdornment and: [ att shouldReplace ] ]
+						ifFound: [ :att | 
+							self
+								processAdornmentAttribute: att
+								of: (aText from: start to: end)
+								in: aStream
+								from: start
+								to: end
+								virtual: false ]
+						ifNone: [ aStream
+								nextPut: (self
+										textPiece: (aText from: (start max: 1) to: end)
 										from: start
-										to: end
-										virtual: false ]
-								ifNone: [ aStream
-										nextPut: (self
-												textPiece: (aText from: start to: end)
-												from: start
-												to: end).
-									atts
-										detect: [ :att | att isAdornment ]
-										ifFound: [ :att | 
-											self
+										to: end).
+							atts
+								do: [ :att | 
+									att isAdornment
+										ifTrue: [ self
 												processAdornmentAttribute: att
 												of: (aText from: start to: end)
 												in: aStream
