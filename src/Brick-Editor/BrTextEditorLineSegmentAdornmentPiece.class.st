@@ -53,6 +53,9 @@ BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 		do: [ :eachElement | 
 			eachElement mouseCursor ifNil: [ eachElement mouseCursor: BlCursor default ].
 			eachElement userData at: #brickEditorAdornment put: true.
+			eachElement userData
+				at: #brickEditorOverlay
+				put: self adornmentAttribute shouldOverlay.
 			self adornmentAttribute isFocusable
 				ifFalse: [ eachElement focusability: BlFocusabilityNone new ] ].
 	theAdornmentElements
