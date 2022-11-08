@@ -6,7 +6,7 @@ Trait {
 		'textEnd',
 		'delimiterLength'
 	],
-	#category : 'Brick-Editor-Model - Segment-Text'
+	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'text - copying' }
@@ -57,17 +57,11 @@ TBrTextEditorTextualPiece >> scopeText: aStartIndex end: anEndIndex [
 { #category : #'private - text' }
 TBrTextEditorTextualPiece >> start: aStartIndex end: anEndIndex [
 	"aStartIndex and anEndIndex are given in cursor coordinates"
-	| aDelta |
-	
-	aDelta := (text textOffset - textStart) max: 0.
-	
-	self
-		assert: [ aStartIndex <= anEndIndex ]
-		description: [ 'Start must be less than end' ].
 
-	text
-		start: (aStartIndex + 1) + aDelta
-		end: anEndIndex + aDelta.
+	| aDelta |
+	aDelta := text textOffset - textStart max: 0.
+
+	text start: aStartIndex + 1 + aDelta end: anEndIndex + aDelta.	
 
 	"text start and end are given in cursor coordinates of the text editor which may be opened on a subtext"
 	textStart := aStartIndex.
