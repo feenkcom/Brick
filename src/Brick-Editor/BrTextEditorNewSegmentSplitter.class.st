@@ -57,7 +57,7 @@ BrTextEditorNewSegmentSplitter >> split: aText from: aStartIndex to: anEndIndex 
 								thenDo: [ :att | 
 									self
 										processAdornmentAttribute: att
-										of: (aText from: start to: end)
+										of: (aText from: (start max: 1) to: end)
 										in: aStream
 										from: start
 										to: end
