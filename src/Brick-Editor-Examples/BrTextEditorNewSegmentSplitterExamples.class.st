@@ -1,6 +1,8 @@
 Class {
 	#name : #BrTextEditorNewSegmentSplitterExamples,
 	#superclass : #Object,
+	#traits : 'TCoderByScripterExamples',
+	#classTraits : 'TCoderByScripterExamples classTrait',
 	#category : #'Brick-Editor-Examples-Model'
 }
 
@@ -14,6 +16,21 @@ BrTextEditorNewSegmentSplitterExamples >> noAttributes [
 			from: 0
 			to: text size.
 	self assert: pieces size = 1.
+	^ pieces
+]
+
+{ #category : #accessing }
+BrTextEditorNewSegmentSplitterExamples >> styledSourceSplitting [
+	<gtExample>
+	| scripter text pieces |
+	scripter := self
+			scripterForBlock: [ | aCoder |
+				aCoder := GtPharoMethodCoderByScripterExamples new
+						coderOnMethod: BrTextEditorNewSegmentSplitterExamples >> #withAttributes.
+				aCoder ].
+	text := (scripter elementWithoutParent query // GtSourceCoderEditorElement) anyOne text.
+	pieces := BrTextEditorNewSegmentSplitter new split: text from: 0 to: text size.
+	self assert: pieces size equals: 62.
 	^ pieces
 ]
 
