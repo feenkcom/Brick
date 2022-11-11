@@ -182,8 +182,9 @@ BrTextEditorParagraphSegmentHolder >> onFocusChanged: aBoolean [
 { #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onRecycled [
 
-	itemElement removeChildren.
+	itemElement removeChildren. 
 	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement | aPiece onRecycled: aPieceElement in: self infiniteElement ].
+	itemElement selection: BlSelection empty.
 	pieceElements := nil.
 	segment := nil.
 ]
