@@ -156,7 +156,8 @@ BrTextEditorParagraphElement >> buildParagraph [
 				ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
 				ifFalse: [ (eachElement userData at: #brickEditorOverlay ifAbsent: [ false ])
 						ifTrue: [ aBuilder
-								addPlaceholder: (SkiaParagraphPlaceholderStyle new alignBelowBaseline extent: 0 @ (eachElement measuredExtent y))
+								addPlaceholder: (SkiaParagraphPlaceholderStyle new alignTop
+										extent: 0 @ eachElement measuredExtent y)
 								charLength: 0 ]
 						ifFalse: [ (eachElement isKindOf: BrCursorElement)
 								ifFalse: [ aBuilder
