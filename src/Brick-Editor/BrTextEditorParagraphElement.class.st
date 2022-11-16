@@ -160,12 +160,13 @@ BrTextEditorParagraphElement >> buildParagraph [
 										extent: 0 @ eachElement measuredExtent y)
 								charLength: 0 ]
 						ifFalse: [ (eachElement isKindOf: BrCursorElement)
-								ifFalse: [ aBuilder
-										addPlaceholder: (SkiaParagraphPlaceholderStyle new alignMiddle
-												extent: eachElement measuredExtent)
-										charLength: (eachElement userData
-												at: #brickEditorCharLength
-												ifAbsent: [ 0 ]) ] ] ] ].
+								ifFalse: [ | placeholder |
+									placeholder := SkiaParagraphPlaceholderStyle new.
+									placeholder perform: eachElement placeholderAlignment.
+									placeholder extent: eachElement measuredExtent.
+									aBuilder
+										addPlaceholder: placeholder
+										charLength: (eachElement userData at: #brickEditorCharLength ifAbsent: [ 0 ]) ] ] ] ].
 	^ aBuilder build
 ]
 
