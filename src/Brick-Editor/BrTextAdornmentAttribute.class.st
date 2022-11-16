@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'renderingStrategy',
 		'cache',
-		'alignmentMode'
+		'alignmentMode',
+		'placeholderAlignment'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
@@ -113,6 +114,16 @@ BrTextAdornmentAttribute >> mayHaveExternalReferences [
 { #category : #private }
 BrTextAdornmentAttribute >> newPooledCache [
 	^ BrTextAdornmentAttributePooledCache new
+]
+
+{ #category : #accessing }
+BrTextAdornmentAttribute >> placeholderAlignment [
+	^ placeholderAlignment
+]
+
+{ #category : #accessing }
+BrTextAdornmentAttribute >> placeholderAlignment: aSymbol [
+	placeholderAlignment := aSymbol
 ]
 
 { #category : #accessing }

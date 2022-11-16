@@ -52,6 +52,8 @@ BrTextEditorLineSegmentAdornmentPiece >> createElement: anEditorElement [
 	theAdornmentElements
 		do: [ :eachElement | 
 			eachElement mouseCursor ifNil: [ eachElement mouseCursor: BlCursor default ].
+			self adornmentAttribute placeholderAlignment
+				ifNotNil: [ :symbol | eachElement placeholderAlignment: symbol ].
 			eachElement userData at: #brickEditorAdornment put: true.
 			eachElement userData
 				at: #brickEditorOverlay
