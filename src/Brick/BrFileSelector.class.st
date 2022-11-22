@@ -66,6 +66,13 @@ BrFileSelector >> buildUI [
 ]
 
 { #category : #accessing }
+BrFileSelector >> buttonId: anId [
+	"Set the button's ID"
+
+	okButton id: anId
+]
+
+{ #category : #accessing }
 BrFileSelector >> buttonLabel: aString [
 	"Set the button's label"
 
