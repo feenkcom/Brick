@@ -17,6 +17,9 @@ BrColumnedListAptitude >> initialize [
 	listElement := BrInfiniteListElement new.
 	listElement dataSource: BrColumnedListDataSource new.
 	
+	listElement dataSource
+		rowDataBinder: BrDefaultListRowDataBinder new.
+	
 	self add: (BrLayoutResizerAptitude new inherit: listElement).
 
 	self addChangeAddChildAs: #(content scrollable) with: [ listElement ].
@@ -36,14 +39,29 @@ BrColumnedListAptitude >> initialize [
 { #category : #initialization }
 BrColumnedListAptitude >> initializeListeners [
 	super initializeListeners.
-	
-	self when: BrItemsProviderItemsChangedEvent do: [ :anEvent | self onModelItemsChanged: anEvent ].
-	self when: BrListModelItemsAddedEvent do: [ :anEvent | self onModelItemsAdded: anEvent ].
-	self when: BrItemsProviderPromiseEnqueuedEvent do: [ :anEvent | self onModelPromiseEnqueued: anEvent ].
-	self when: BrColumnsChanged do: [ :anEvent | self onColumnsChanged: anEvent columns ].
-	self when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent indices ].
-	self when: BrListItemTypeStencilChangedEvent do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
-	
+
+	self
+		when: BrItemsProviderItemsChangedEvent
+		do: [ :anEvent | self onModelItemsChanged: anEvent ].
+	self
+		when: BrListModelItemsAddedEvent
+		do: [ :anEvent | self onModelItemsAdded: anEvent ].
+	self
+		when: BrItemsProviderPromiseEnqueuedEvent
+		do: [ :anEvent | self onModelPromiseEnqueued: anEvent ].
+	self
+		when: BrColumnsChanged
+		do: [ :anEvent | self onColumnsChanged: anEvent columns ].
+	self
+		when: BrSelectionChanged
+		do: [ :anEvent | self onSelectionChanged: anEvent indices ].
+	self
+		when: BrListItemTypeStencilChangedEvent
+		do: [ :anEvent | self onItemTypeStencilChanged: anEvent itemTypeStencil ].
+	self
+		when: BrListRowDataBinderChangedEvent
+		do: [ :anEvent | self onRowDataBinderChanged: anEvent rowDataBinder ].
+
 	self initializeScrollListeners
 ]
 
@@ -94,6 +112,11 @@ BrColumnedListAptitude >> onModelItemsChanged: anEvent [
 { #category : #hooks }
 BrColumnedListAptitude >> onModelPromiseEnqueued: anEvent [
 	self listElement enqueueTask: (BlPromiseTask new promise: anEvent promise)
+]
+
+{ #category : #hooks }
+BrColumnedListAptitude >> onRowDataBinderChanged: aBrListRowDataBinder [
+	listElement dataSource rowDataBinder: aBrListRowDataBinder
 ]
 
 { #category : #hooks }

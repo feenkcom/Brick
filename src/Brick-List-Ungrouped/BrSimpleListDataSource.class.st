@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrUngroupedListDataSource,
 	#instVars : [
 		'itemDataBinder',
-		'itemDataUnbinder'
+		'itemDataUnbinder',
+		'rowDataBinder'
 	],
 	#category : #'Brick-List-Ungrouped-Support'
 }
@@ -32,7 +33,7 @@ BrSimpleListDataSource >> onBindHolder: anElementHolder at: aPosition [
 		rowObject: anItemObject;
 		itemPosition: aPosition;
 		asElement.
-
+				
 	anElementHolder
 		itemElement: anItemElementWithBindedData;
 		rowValue: anItemObject.

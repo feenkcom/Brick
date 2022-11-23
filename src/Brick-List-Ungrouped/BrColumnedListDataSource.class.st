@@ -2,7 +2,8 @@ Class {
 	#name : #BrColumnedListDataSource,
 	#superclass : #BrUngroupedListDataSource,
 	#instVars : [
-		'columns'
+		'columns',
+		'rowDataBinder'
 	],
 	#category : #'Brick-List-Ungrouped-Support'
 }
@@ -48,7 +49,14 @@ BrColumnedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 				rowHolder: anElementHolder;
 				columnIndex: eachColumnIndex;
 				build ].
-	
+			
+	"Bind node data to the row element"
+	rowDataBinder
+		rowElement: anElementHolder itemElement;
+		itemNode: anItemObject;
+		itemPosition: aPosition;
+		build.
+		
 	anElementHolder rowValue: anItemObject.	
 
 	anElementHolder itemElement states removeState: BlElementState hovered.
@@ -86,6 +94,14 @@ BrColumnedListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 		itemElement: aRowElement;
 		columns: self columns;
 		columnElements: theColumnElements
+]
+
+{ #category : #accessing }
+BrColumnedListDataSource >> rowDataBinder: aBrListRowDataBinder [
+	"Set a data binder that should bind node data to the whole tree row element"
+
+	rowDataBinder := aBrListRowDataBinder asStencilBuilder: BrListRowDataBinder.
+	self notifyChanged
 ]
 
 { #category : #'accessing - stencils' }
