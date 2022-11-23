@@ -109,6 +109,7 @@ BrTextEditorLineSegmentBuilder >> deleteFrom: aFromIndex segment: aFromSegment t
 { #category : #'text - modifications' }
 BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
 	| aFromSegment aToSegment aTargetSegment |
+
 	self
 		assert: [ aFromIndex <= aToIndex ]
 		description: [ '`From` index must be less or equal to `to` index' ].
@@ -116,17 +117,14 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 	aBrTextEditor segmentCollector
 		cachedSegmentAt: aFromIndex
 		ifFound: [ :aSegment | aFromSegment := aSegment ]
-		ifNotFound: [  ].
+		ifNotFound: [ ].
 
 	aBrTextEditor segmentCollector
 		cachedSegmentAt: aToIndex
 		ifFound: [ :aSegment | aToSegment := aSegment ]
-		ifNotFound: [  ].
+		ifNotFound: [ ].
 
-	(aFromSegment isNil
-		or: [ aToSegment isNil
-				or: [ aFromSegment text isNotValid or: [ aToSegment text isNotValid ] ] ])
-		ifTrue: [ | interval |
+	(aFromSegment isNil or: [ aToSegment isNil ])	ifTrue: [ | interval |
 			"Either aFromIndex or aToIndex are outside the segment collector's cache.
 			It looks like the text editor's text has already been updated, 
 			simply reset the cache and notify the editor"
@@ -135,12 +133,7 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 			aBrTextEditor notifyItemsRemoved: interval.
 			^ self ].
 
-	aTargetSegment := self
-			deleteFrom: aFromIndex
-			segment: aFromSegment
-			to: aToIndex
-			segment: aToSegment
-			in: aBrTextEditor.
+	aTargetSegment := self deleteFrom: aFromIndex segment: aFromSegment to: aToIndex segment: aToSegment in: aBrTextEditor.
 
 	aBrTextEditor updater
 		from: aTargetSegment textStart to: aTargetSegment textEnd;
