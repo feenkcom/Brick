@@ -28,6 +28,16 @@ BrAsyncFileWidget >> file: aFile [
 			c vertical matchParent ] ]
 ]
 
+{ #category : #accessing }
+BrAsyncFileWidget >> formBlock: aBlock [
+
+	self stencil: [ 
+		(SkiaImage fromForm: aBlock value)
+			asElement constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical matchParent ] ]
+]
+
 { #category : #'system startup' }
 BrAsyncFileWidget >> resumeOnStartUp [
 

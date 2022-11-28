@@ -26,6 +26,13 @@ BrColumnedList >> initialize [
 	self aptitude: BrColumnedListAptitude + BrGlamorousWithVerticalScrollbarAptitude
 ]
 
+{ #category : #initialization }
+BrColumnedList >> rowDataBinder: aBrListRowDataBinderOrBlock [
+	"An item type stencil can be a #value-able of the form [ :aRowElement :aTreeNode :aRowPosition | ]"
+
+	self viewModel rowDataBinder: aBrListRowDataBinderOrBlock
+]
+
 { #category : #'api - scripting' }
 BrColumnedList >> rowStencil: aRowStencil [
 	self aptitude rowStencilBuilder: aRowStencil

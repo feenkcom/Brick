@@ -7,7 +7,7 @@ Class {
 		'rowElementStencil',
 		'rowDataBinder'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #accessing }
@@ -41,6 +41,7 @@ BrColumnedTreeDataSource >> onBindHolder: anElementHolder at: aPosition [
 		with: anElementHolder columnElements
 		do: [ :eachColumn :eachCellElement |
 			eachColumnIndex := eachColumnIndex + 1.
+			
 			
 			eachColumn dataBinder
 				cellElement: eachCellElement;

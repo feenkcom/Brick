@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrWidgetModel,
 	#instVars : [
 		'itemTypeStencil',
-		'itemIdStencil'
+		'itemIdStencil',
+		'rowDataBinder'
 	],
 	#category : #'Brick-List-Models'
 }
@@ -28,6 +29,8 @@ BrAbstractListModel >> initializeListeners [
 	"answer if somebody is interested in what items I have"
 	self when: BrListItemTypeStencilRequest reply: [ :aResponse | aResponse itemTypeStencil: self itemTypeStencil ].
 	self when: BrListItemIdStencilRequest reply: [ :aResponse | aResponse itemIdStencil: self itemIdStencil ].
+	
+	self when: BrTreeRowDataBinderRequest reply: [ :aResponse | aResponse rowDataBinder: self rowDataBinder ].
 ]
 
 { #category : #'api - accessing' }
@@ -60,4 +63,20 @@ BrAbstractListModel >> itemTypeStencil: aStencil [
 
 	itemTypeStencil := aStencil asStencilBuilder: BrListItemTypeStencilBuilder.
 	self dispatchEvent: (BrListItemTypeStencilChangedEvent new itemTypeStencil: itemTypeStencil)
+]
+
+{ #category : #accessing }
+BrAbstractListModel >> rowDataBinder [
+	"Return a stencil that is used to bind row data to a given row element"
+
+	<return: #BrListRowDataBinder>
+	^ rowDataBinder
+]
+
+{ #category : #accessing }
+BrAbstractListModel >> rowDataBinder: aStencil [
+	"Set a stencil that will be used to bind row data to a given row element"
+
+	rowDataBinder := aStencil asStencilBuilder: BrListRowDataBinder.
+	self dispatchEvent: (BrListRowDataBinderChangedEvent new rowDataBinder: rowDataBinder)
 ]
