@@ -5,10 +5,33 @@ Class {
 		'defaultBackground',
 		'defaultForeground',
 		'minWidth',
-		'styleLook'
+		'styleLook',
+		'focusedBackground',
+		'defaultBorderColor',
+		'focusedBorderColor'
 	],
 	#category : #'Brick-Glamorous-Editor'
 }
+
+{ #category : #'instance creation' }
+BrGlamorousEditableLabelAptitude class >> background: aDefaultBackgrounds focused: aFocusedBackground [
+	^ self basicNew
+		setDefaultBackground: aDefaultBackgrounds;
+		setFocusedBackground: aFocusedBackground;
+		initialize;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BrGlamorousEditableLabelAptitude class >> background: aDefaultBackgrounds focused: aFocusedBackground border: aDefaultBorderColor focused: aFocusedBorderColor [
+	^ self basicNew
+		setDefaultBackground: aDefaultBackgrounds;
+		setFocusedBackground: aFocusedBackground;
+		setDefaultBorderColor: aDefaultBorderColor;
+		setFocusedBorderColor: aFocusedBorderColor;
+		initialize;
+		yourself
+]
 
 { #category : #accessing }
 BrGlamorousEditableLabelAptitude >> defaultBackground [
@@ -43,7 +66,12 @@ BrGlamorousEditableLabelAptitude >> defaultForeground: anObject [
 { #category : #initialization }
 BrGlamorousEditableLabelAptitude >> initialize [
 	super initialize.
-	defaultBackground := self theme status neutralBackgroundColor.
+
+	defaultBackground ifNil: [ defaultBackground := self theme status neutralBackgroundColor ].
+	focusedBackground ifNil: [ focusedBackground := self theme editor focusedBorderColor ].
+	defaultBorderColor ifNil: [ defaultBorderColor := self theme editor borderColor ].
+	focusedBorderColor ifNil: [ focusedBorderColor := self theme editor focusedBorderColor ].
+	
 	defaultForeground := Color black.
 	minWidth := 20.
 	self
@@ -54,23 +82,23 @@ BrGlamorousEditableLabelAptitude >> initialize [
 			(styleLook := BrStyleCommonAptitude new
 				default: [ :aStyle | 
 					aStyle geometry: (BlRoundedRectangleGeometry cornerRadius: 4).
-					aStyle background: self defaultBackground.
+					aStyle background: defaultBackground.
 					aStyle border: BlBorder empty ];
 				when: BrEditorModeState editable
 					style: [ :aStyle | aStyle background: Color white ];
 				when: [ :aState | aState focused not and: BrEditorModeState editable ]
 					style: [ :aStyle | 
 					aStyle
-						border: (BlBorder paint: self theme editor borderColor width: 1) ];
+						border: (BlBorder paint: defaultBorderColor width: 1) ];
 				when: [ :aState | aState focused and: BrEditorModeState editable ]
 					style: [ :aStyle | 
 					aStyle
-						border: (BlBorder paint: self theme editor focusedBorderColor width: 1) ];
+						border: (BlBorder paint: focusedBorderColor width: 1) ];
 				when: [ :aState | aState hovered and: BrEditorModeState readOnly ]
-					style: [ :aStyle | aStyle background: self defaultBackground darker ];
+					style: [ :aStyle | aStyle background: defaultBackground darker ];
 				when: [ :aState | aState focused and: BrEditorModeState readOnly ]
 					style: [ :aStyle | 
-					aStyle background: self theme editor focusedBorderColor.
+					aStyle background: focusedBackground.
 					aStyle
 						do: [ self foreground: Color white ]
 						after: [ self foreground: self defaultForeground ] ])
@@ -91,4 +119,24 @@ BrGlamorousEditableLabelAptitude >> minWidth [
 { #category : #accessing }
 BrGlamorousEditableLabelAptitude >> minWidth: anObject [
 	minWidth := anObject
+]
+
+{ #category : #initialization }
+BrGlamorousEditableLabelAptitude >> setDefaultBackground: aBackground [
+	defaultBackground := aBackground
+]
+
+{ #category : #initialization }
+BrGlamorousEditableLabelAptitude >> setDefaultBorderColor: aBorderColor [
+	defaultBorderColor := aBorderColor
+]
+
+{ #category : #initialization }
+BrGlamorousEditableLabelAptitude >> setFocusedBackground: aBackground [
+	focusedBackground := aBackground
+]
+
+{ #category : #initialization }
+BrGlamorousEditableLabelAptitude >> setFocusedBorderColor: aBorderColor [
+	focusedBorderColor := aBorderColor
 ]

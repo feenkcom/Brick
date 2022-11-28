@@ -1,6 +1,6 @@
 Class {
 	#name : #BrDevScripterButtonWithLabelChildEventTarget,
-	#superclass : #BlDevScripterEventTarget,
+	#superclass : #BlScripterElementTarget,
 	#instVars : [
 		'buttonLabel'
 	],
