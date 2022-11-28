@@ -4,11 +4,31 @@ I define the circular exterior of the button. I am designed to be used with an i
 Class {
 	#name : #BrGlamorousButtonCircularAptitude,
 	#superclass : #BrAptitude,
+	#instVars : [
+		'paddingScale',
+		'heightScale'
+	],
 	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
+{ #category : #'instance creation' }
+BrGlamorousButtonCircularAptitude class >> paddingScale: aPaddingScale [
+	^ self basicNew
+		setPaddingScale: aPaddingScale;
+		initialize
+]
+
+{ #category : #'instance creation' }
+BrGlamorousButtonCircularAptitude class >> paddingScale: aPaddingScale heightScale: aHeightScale [
+	^ self basicNew
+		setPaddingScale: aPaddingScale;
+		setHeightScale: aHeightScale;
+		initialize
+]
+
 { #category : #initialization }
 BrGlamorousButtonCircularAptitude >> initialize [
+	| miniPadding tinyPadding smallPadding normalPadding largePadding hugePadding miniHeight tinyHeight smallHeight normalHeight largeHeight hugeHeight |
 	super initialize.
 	self
 		addChangeProperty: #(widgetContent layout)
@@ -18,25 +38,57 @@ BrGlamorousButtonCircularAptitude >> initialize [
 		addChangeProperty: #(widgetContent geometry)
 		with: [ BlCircleGeometry new ].
 
+	paddingScale := paddingScale ifNil: [ 1.0 ].
+	heightScale := heightScale ifNil: [ 1.0 ].
+	
+	miniPadding := 4 * paddingScale.
+	tinyPadding := 6 * paddingScale.
+	smallPadding := 6 * paddingScale.
+	normalPadding := 8 * paddingScale.
+	largePadding := 10 * paddingScale.
+	hugePadding := 16 * paddingScale.
+	
+	miniHeight := 12 * heightScale.
+	tinyHeight := 16 * heightScale.
+	smallHeight := 20 * heightScale.
+	normalHeight := 24 * heightScale.
+	largeHeight := 30 * heightScale.
+	hugeHeight := 48 * heightScale.
+	
 	self add: (BrSizeAdjustmentAptitude new
+		mini: [ :aStyle |
+			aStyle
+				vExact: miniHeight;
+				padding: (BlInsets left: miniPadding right: miniPadding) ];
 		tiny: [ :aStyle |
 			aStyle
-				vExact: 16;
-				padding: (BlInsets left: 6 right: 6) ];
-		small: [ :aStyle |
+				vExact: tinyHeight;
+				padding: (BlInsets left: tinyPadding right: tinyPadding) ];
+		small: [ :aStyle | 
 			aStyle
-				vExact: 20;
-				padding: (BlInsets left: 8 right: 8) ];
-		normal: [ :aStyle |
+				vExact: smallHeight;
+				padding: (BlInsets left: smallPadding right: smallPadding) ];
+		normal: [ :aStyle | 
 			aStyle
-				vExact: 24;
-				padding: (BlInsets left: 10 right: 10) ];
+				vExact: normalHeight;
+				padding: (BlInsets left: normalPadding right: normalPadding) ];
 		large: [ :aStyle |
 			aStyle
-				vExact: 30;
-				padding: (BlInsets left: 10 right: 10) ];
+				vExact: largeHeight;
+				padding: (BlInsets left: largePadding right: largePadding) ];
 		huge: [ :aStyle |
 			aStyle
-				vExact: 48;
-				padding: (BlInsets left: 16 right: 16) ])
+				vExact: hugeHeight;
+				padding: (BlInsets left: hugePadding right: hugePadding) ]).
+
+]
+
+{ #category : #initialization }
+BrGlamorousButtonCircularAptitude >> setHeightScale: aNumber [
+	heightScale := aNumber
+]
+
+{ #category : #initialization }
+BrGlamorousButtonCircularAptitude >> setPaddingScale: aNumber [
+	paddingScale := aNumber
 ]

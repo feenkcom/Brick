@@ -1,10 +1,5 @@
-"
-# Glamorous vertical scrollbar look
-Is designed to add a vertical {{gtClass:BrScrollbar}} to a widget with a {{gtClass:TBlScrollable}} content. Due to the fact that the scrollbar should be above the scrollable content it should be added **after** a look that adds a scrollable content.
-
-"
 Class {
-	#name : #BrGlamorousWithVerticalScrollbarAptitude,
+	#name : #BrGlamorousWithHorizontalScrollbarAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
 		'scrollbar'
@@ -13,11 +8,11 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousWithVerticalScrollbarAptitude >> initialize [
+BrGlamorousWithHorizontalScrollbarAptitude >> initialize [
 	super initialize.
 
 	scrollbar := BrScrollbar new
-			beVertical;
+			beHorizontal;
 			thumb: (BrScrollbarThumb new aptitude: BrGlamorousScrollbarThumbAptitude new);
 			track: (BrScrollbarTrack new aptitude: BrGlamorousScrollbarTrackAptitude new);
 			aptitude: BrScrollbarAptitude new + (self scrollBarHoverAptitude // #track)
@@ -29,24 +24,24 @@ BrGlamorousWithVerticalScrollbarAptitude >> initialize [
 				c ignored vertical alignBottom ].
 
 	self
-		addChangeAddChildAs: #(content verticalScrollbar)
+		addChangeAddChildAs: #(content horizontalScrollbar)
 		with: [ self updateScrollable.
 			scrollbar ]
 ]
 
 { #category : #initialization }
-BrGlamorousWithVerticalScrollbarAptitude >> scrollBarHoverAptitude [
+BrGlamorousWithHorizontalScrollbarAptitude >> scrollBarHoverAptitude [
 	^ BrStyleCommonAptitude new
 		default: [ :s | s background: self theme header defaultBackgroundColor ];
 		hovered: [ :s | s background: BrGlamorousColors hoveredButtonBorderColor ]
 ]
 
 { #category : #'private - accessing' }
-BrGlamorousWithVerticalScrollbarAptitude >> scrollable [
+BrGlamorousWithHorizontalScrollbarAptitude >> scrollable [
 	^ self widget childNamed: #scrollable
 ]
 
 { #category : #'private - updating' }
-BrGlamorousWithVerticalScrollbarAptitude >> updateScrollable [
+BrGlamorousWithHorizontalScrollbarAptitude >> updateScrollable [
 	scrollbar scrollable: self scrollable.
 ]

@@ -19,7 +19,11 @@ BrTextEditorEditableMode >> createEventHandlers [
 BrTextEditorEditableMode >> initialize [
 	super initialize.
 
-	shortcuts := shortcuts, {
+	shortcuts := shortcuts, 
+		(self returnKeyAndAction
+			ifNil: [ #() ]
+			ifNotNil: [ :anAction | { anAction } ]),
+	{
 		BrEditorShortcut deleteOneLetterAfterCursor.
 		BrEditorShortcut deleteOneLetterBeforeCursor.
 		BrEditorShortcut shiftRight.
@@ -29,8 +33,6 @@ BrTextEditorEditableMode >> initialize [
 		BrEditorShortcut paste.
 		BrEditorShortcut undo.
 		BrEditorShortcut redo.
-	
-		self returnKeyAndAction.
 		
 		BrEditorShortcut moveCursorLeft.
 		BrEditorShortcut moveCursorRight.
