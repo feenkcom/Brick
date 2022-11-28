@@ -17,6 +17,7 @@ BrGlamorousWithVerticalScrollbarAptitude >> initialize [
 	super initialize.
 
 	scrollbar := BrScrollbar new
+			beVertical;
 			thumb: (BrScrollbarThumb new aptitude: BrGlamorousScrollbarThumbAptitude new);
 			track: (BrScrollbarTrack new aptitude: BrGlamorousScrollbarTrackAptitude new);
 			aptitude: BrScrollbarAptitude new + (self scrollBarHoverAptitude // #track)
