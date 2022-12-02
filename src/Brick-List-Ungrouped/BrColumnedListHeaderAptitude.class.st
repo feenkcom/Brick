@@ -9,16 +9,28 @@ Class {
 	#name : #BrColumnedListHeaderAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
-		'labelStencil'
+		'labelStencil',
+		'cellSpacing'
 	],
 	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
 { #category : #private }
+BrColumnedListHeaderAptitude >> cellSpacing [
+	^ cellSpacing
+]
+
+{ #category : #private }
+BrColumnedListHeaderAptitude >> cellSpacing: aNumber [
+	cellSpacing := aNumber
+]
+
+{ #category : #private }
 BrColumnedListHeaderAptitude >> headerPane [
 	| headerPane |
 	headerPane := BrHorizontalPane new
-			padding: (BlInsets bottom: 5);
+			cellSpacing: self cellSpacing;
+			padding: (BlInsets top: 5 bottom: 5);
 			hMatchParent;
 			vFitContent.
 	widget viewModel
@@ -29,12 +41,16 @@ BrColumnedListHeaderAptitude >> headerPane [
 { #category : #initialization }
 BrColumnedListHeaderAptitude >> initialize [
 	super initialize.
+	
+	self cellSpacing: 0.
 	self
 		labelStencil: [ :aColumn | 
 			| label |
-			label := BrLabel new aptitude: BrGlamorousLabelAptitude.
-			label
-				text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
+			label := BrLabel new 
+				aptitude: BrGlamorousLabelAptitude;
+				padding: self newCellPaddingInsets;
+				text: (aColumn title asRopedText 
+					foreground: self theme button defaultTextColor).
 			aColumn width applyOn: label.
 			label ].
 	self addChangeAddChildFirst: #() with: [ self headerPane ]
@@ -43,4 +59,9 @@ BrColumnedListHeaderAptitude >> initialize [
 { #category : #accessing }
 BrColumnedListHeaderAptitude >> labelStencil: aBlock [
 	labelStencil := aBlock 
+]
+
+{ #category : #private }
+BrColumnedListHeaderAptitude >> newCellPaddingInsets [
+	^ BlInsets empty
 ]
