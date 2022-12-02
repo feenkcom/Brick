@@ -49,7 +49,7 @@ BrBasicScrollbarAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrScrollbarScrollableChanged do: [ :anEvent |
-		"by defualt is not assigned in the model"
+		"by default is not assigned in the model"
 		anEvent scrollableElement
 			ifNotNil: [ :aScrollable | self scrollableChanged: aScrollable ] ].
 	self when: BrScrollbarThumbChanged do: [ :anEvent | self thumbChanged: anEvent stencil ].
