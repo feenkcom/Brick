@@ -75,7 +75,7 @@ BrTextEditorSegmentSplitterObject >> outputAdornment: anAdornment from: from to:
 		outputAdornment: anAdornment
 		from: from
 		to: to
-		virtual: self hasReplacement not
+		virtual: anAdornment shouldReplace not
 ]
 
 { #category : #accessing }
