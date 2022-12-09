@@ -9,7 +9,19 @@ Class {
 
 { #category : #'instance creation' }
 BrEditorModeState class >> editable [
-	^ self new mode: BrTextEditorEditableMode
+	^ ((self mode: BrTextEditorEditableMode)
+		or: self editableSingleLine)
+			or: self editableCode
+]
+
+{ #category : #'instance creation' }
+BrEditorModeState class >> editableCode [
+	^ self mode: BrTextEditorEditableCodeMode
+]
+
+{ #category : #'instance creation' }
+BrEditorModeState class >> editableSingleLine [
+	^ self mode: BrTextEditorEditableSingleLineMode
 ]
 
 { #category : #'instance creation' }
