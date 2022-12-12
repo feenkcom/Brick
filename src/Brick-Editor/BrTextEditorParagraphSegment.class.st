@@ -15,5 +15,5 @@ BrTextEditorParagraphSegment >> segmentType [
 
 { #category : #'pieces - computation' }
 BrTextEditorParagraphSegment >> splitterClass [
-	^ BrTextEditorParagraphSegmentSplitter
+	^ BrTextEditorSegmentSplitter
 ]
