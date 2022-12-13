@@ -102,6 +102,11 @@ BrAsyncElementSink >> privateUpdateElement [
 ]
 
 { #category : #'api - accessing' }
+BrAsyncElementSink >> sink [
+	^ sink
+]
+
+{ #category : #'api - accessing' }
 BrAsyncElementSink >> sink: anAsyncSink [
 	sink := anAsyncSink
 ]
