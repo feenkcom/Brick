@@ -176,29 +176,6 @@ BrElementUpdater >> onElementAddedToSceneGraph [
 	self mayUpdateNow
 ]
 
-{ #category : #'private - accessing' }
-BrElementUpdater >> postponedDuration [
-	<return: #Duration>
-	^ postponedDuration ifNil: [ self defaultPostponedDuration ]
-]
-
-{ #category : #'api - initialization' }
-BrElementUpdater >> postponedDuration: aDuration [
-	self assertPostponedDuration: aDuration.
-	postponedDuration := aDuration.
-]
-
-{ #category : #'private - updating' }
-BrElementUpdater >> postponedTime [
-	| aNow |
-	self elementDo: [ :anElement | 
-		aNow := anElement space 
-			ifNotNil: [ :aSpace | aSpace time now ] 
-			ifNil: [ BlTime real now ] ].
-	aNow ifNil: [ aNow := BlTime real now ].
-	^ aNow + self postponedDuration.
-]
-
 { #category : #'private - updating' }
 BrElementUpdater >> postponeUpdate [
 	self
@@ -223,6 +200,29 @@ BrElementUpdater >> postponeUpdate [
 						ifTrue: [ self enqueueUpdate ]
 						ifFalse: [ self enqueuePostponedUpdate ] ]
 				otherwise: [ self updateNow ] ]
+]
+
+{ #category : #'private - accessing' }
+BrElementUpdater >> postponedDuration [
+	<return: #Duration>
+	^ postponedDuration ifNil: [ self defaultPostponedDuration ]
+]
+
+{ #category : #'api - initialization' }
+BrElementUpdater >> postponedDuration: aDuration [
+	self assertPostponedDuration: aDuration.
+	postponedDuration := aDuration.
+]
+
+{ #category : #'private - updating' }
+BrElementUpdater >> postponedTime [
+	| aNow |
+	self elementDo: [ :anElement | 
+		aNow := anElement space 
+			ifNotNil: [ :aSpace | aSpace time now ] 
+			ifNil: [ BlTime real now ] ].
+	aNow ifNil: [ aNow := BlTime real now ].
+	^ aNow + self postponedDuration.
 ]
 
 { #category : #'api - updating' }
