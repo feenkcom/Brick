@@ -50,8 +50,8 @@ BrThemeMigration >> methodToSelector: aMethod inTheme: aString [
 			selector := selector copyReplaceAll: aString with: '' ].
 	aString = 'item'
 		ifTrue: [ selector := selector copyReplaceAll: 'List' with: '' ].
-	selector := selector removePrefix: 'link'.
-	selector := selector removePrefix: 'With'.
+	selector := selector withoutPrefix: 'link'.
+	selector := selector withoutPrefix: 'With'.
 	selector := selector uncapitalized.
 	selector = 'color'
 		ifTrue: [ ^ selector ].
