@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextAdornmentAttributeTaskItRenderingStrategy,
 	#superclass : #BrTextAdornmentAttributeRenderingStrategy,
-	#category : #'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor - UI'
 }
 
 { #category : #accessing }

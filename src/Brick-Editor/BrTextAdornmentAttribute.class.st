@@ -27,11 +27,6 @@ BrTextAdornmentAttribute >> beAppend [
 ]
 
 { #category : #accessing }
-BrTextAdornmentAttribute >> beLazy [
-	self renderingStrategy: BrTextAdornmentAttributeTaskItRenderingStrategy new.
-]
-
-{ #category : #accessing }
 BrTextAdornmentAttribute >> beOverlay [
 	alignmentMode := #overlay
 ]
