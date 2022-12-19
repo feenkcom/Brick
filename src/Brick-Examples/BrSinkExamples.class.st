@@ -67,7 +67,7 @@ BrSinkExamples >> foldSink [
 ]
 
 { #category : #examples }
-BrSinkExamples >> peakSink [
+BrSinkExamples >> peekSink [
 	<gtExample>
 	| stream |
 
@@ -77,7 +77,7 @@ BrSinkExamples >> peakSink [
 		aptitude: BrGlamorousLabelAptitude;
 		withAsyncSinkDo: [ :anElementSink |
 			anElementSink
-				sink: AsyncPeakSink new;
-				whenUpdate: [ :aLabel :aPeakSink | aPeakSink peak ifSome: [ :aBehavior | aLabel text: aBehavior name ] ];
+				sink: AsyncPeekSink new;
+				whenUpdate: [ :aLabel :aPeakSink | aPeakSink peek ifSome: [ :aBehavior | aLabel text: aBehavior name ] ];
 				forwardStream: stream ]
 ]
