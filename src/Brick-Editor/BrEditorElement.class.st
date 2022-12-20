@@ -44,6 +44,8 @@ BrEditorElement >> hasFocus [
 BrEditorElement >> initialize [
 	super initialize.
 
+	self beFocusable.
+	
 	hasFocus := false.
 	self when: BlFocusInEvent do: [ hasFocus := true ].
 	self when: BlFocusOutEvent do: [ hasFocus := false ].

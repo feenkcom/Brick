@@ -22,6 +22,7 @@ BrList >> initialize [
 	super initialize.
 	
 	self matchParent.
+	self beFocusable.
 	
 	self viewModel: (self defaultListModel
 		add: (selectionModel := BrSelectionModel new)).
