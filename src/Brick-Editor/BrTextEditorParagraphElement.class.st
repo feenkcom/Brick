@@ -482,6 +482,7 @@ BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEd
 
 	aFocusFinder := BlFocusFinder new.
 	(aFocusFinder
+		includeChildren;
 		root: anEditorElement;
 		referenceArea: aDesiredBounds;
 		direction: aDirection)
