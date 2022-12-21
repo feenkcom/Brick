@@ -19,7 +19,7 @@ ManifestBrickEditor class >> ruleRBCollectionProtocolRuleV1FalsePositive [
 	^ #(#(#(#RGClassDefinition #(#BrTextEditorNavigator)) #'2018-12-14T14:42:28.622334+01:00') )
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 ManifestBrickEditor class >> shouldValidateBaseline [
 	^ true
 ]

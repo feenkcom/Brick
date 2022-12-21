@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
-	#category : 'Brick-Tree - UI'
+	#category : #'Brick-Tree - UI'
 }
 
 { #category : #'api - tree' }
@@ -46,7 +46,8 @@ BrTree >> initialize [
 
 	self viewModel: (self defaultListModel
 		add: (selectionModel := BrSelectionModel new)).
-
+	
+	self beFocusable.
 	self initializeEventHandlers
 ]
 

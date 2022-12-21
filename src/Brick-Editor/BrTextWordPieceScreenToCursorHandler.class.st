@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextWordPieceScreenToCursorHandler,
 	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : 'Brick-Editor-UI - Word'
+	#category : #'Brick-Editor-UI - Word'
 }
 
 { #category : #accessing }
@@ -55,6 +55,7 @@ BrTextWordPieceScreenToCursorHandler >> relativeScreenToCursor: aTransformation 
 
 	aFocusFinder := BlFocusFinder new.
 	(aFocusFinder
+		includeChildren;
 		root: anEvent editorElement;
 		referenceArea: aDesiredBounds;
 		direction: aDirection)

@@ -15,6 +15,7 @@ BrTextReadonlyWordPieceStencilBuilder >> createWordElement [
 
 	^ BrTextElementWithCursors new
 			editorMeasurement;
+			beFocusable;
 
 			"to support event-handling attributes"
 			addEventHandler: BrTextEditorLineSegmentTextListener uniqueInstance;
