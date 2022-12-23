@@ -95,7 +95,16 @@ BrButtonModel >> initialize [
 
 { #category : #initialization }
 BrButtonModel >> initializeListeners [
+	self
+		when: BlClickEvent
+		do: [ :anEvent | (self hasModifiers: anEvent) ifFalse: [ self clickEvent: anEvent ] ].
+	self
+		when: BlFocusInEvent
+		do: [ self
+				when: BlKeyDownEvent
+				do: [ :anEvent | anEvent key isReturn ifTrue: [ self clickEvent: anEvent ] ] ].
 
-	self when: BlClickEvent do: [ :anEvent | 
-		(self hasModifiers: anEvent) ifFalse: [ self clickEvent: anEvent ] ]
+	self
+		when: BlFocusOutEvent
+		do: [ self when: BlKeyDownEvent do: [ :anEvent |  ] ]
 ]
