@@ -43,5 +43,7 @@ BrUngroupedList >> scrollToItemSuchThat: aBlock [
 
 { #category : #'api - accessing' }
 BrUngroupedList >> stream: anAsyncStream [
-	self itemsProvider: (BrStreamItemsProvider new stream: anAsyncStream)
+	(self viewModel itemsProvider isKindOf: BrStreamItemsProvider)
+		ifTrue: [ self viewModel itemsProvider stream: anAsyncStream ]
+		ifFalse: [ self itemsProvider: (BrStreamItemsProvider new stream: anAsyncStream) ]
 ]

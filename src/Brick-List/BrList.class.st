@@ -23,6 +23,7 @@ BrList >> initialize [
 	
 	self matchParent.
 	self beFocusable.
+	self beInSeparateCompositionLayer.
 	
 	self viewModel: (self defaultListModel
 		add: (selectionModel := BrSelectionModel new)).
