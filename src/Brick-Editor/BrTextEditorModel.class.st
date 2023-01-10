@@ -834,16 +834,13 @@ BrTextEditorModel >> processCursorEnterEvents [
 { #category : #'private - cursor' }
 BrTextEditorModel >> processCursorLeaveEvents [
 	| aLeavedEvent eventHandlingAttributesOutside |
-	self isFocused ifFalse: [ ^ self ].
 	aLeavedEvent := BrTextCursorAttributeLeaveEvent new.
 	eventHandlingAttributesOutside := OrderedCollection new.
 	self cursors
 		do: [ :eachCursor | 
 			self text
 				findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
-				indicesDo: [ :aStart :anEnd :anAttribute | 
-					(eachCursor position between: aStart and: anEnd)
-						ifFalse: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ] ].
+				indicesDo: [ :aStart :anEnd :anAttribute | eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ].
 	eventHandlingAttributesOutside
 		do: [ :eachEventHandlerAttributeAndInterval | 
 			| eachAttribute eachInterval |
