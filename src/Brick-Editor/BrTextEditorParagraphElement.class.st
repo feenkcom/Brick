@@ -156,14 +156,18 @@ BrTextEditorParagraphElement >> buildParagraph [
 				ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
 				ifFalse: [ (eachElement userData at: #brickEditorOverlay ifAbsent: [ false ])
 						ifTrue: [ aBuilder
-								addPlaceholder: (SkiaParagraphPlaceholderStyle new alignTop
-										extent: 0 @ eachElement measuredExtent y)
+								addPlaceholder: (SkiaParagraphPlaceholderStyle new
+									alignTop;
+									extent: 0 @ eachElement measuredExtent y)
 								charLength: 0 ]
 						ifFalse: [ (eachElement isKindOf: BrCursorElement)
 								ifFalse: [ | placeholder |
 									placeholder := SkiaParagraphPlaceholderStyle new.
-									placeholder perform: eachElement placeholderAlignment.
+									eachElement supportsBaseline
+										ifTrue: [ placeholder baselineOffset: eachElement baselineOffset. ]
+										ifFalse: [ placeholder perform: eachElement placeholderAlignment. ].
 									placeholder extent: eachElement measuredExtent.
+									
 									aBuilder
 										addPlaceholder: placeholder
 										charLength: (eachElement userData at: #brickEditorCharLength ifAbsent: [ 0 ]) ] ] ] ].
