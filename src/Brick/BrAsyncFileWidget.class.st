@@ -62,7 +62,7 @@ BrAsyncFileWidget >> url: aUrl [
 
 	self stencil: [ 
 		(SkiaImage fromForm:
-			 (Form fromBase64String: realUrl retrieveContents base64Encoded))
+			 (Form fromBase64String: realUrl retrieveContents asByteArray base64Encoded))
 			asElement constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ] ]
