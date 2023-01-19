@@ -6,6 +6,7 @@ Class {
 
 { #category : #testing }
 BrInteractiveCommonAptitude class >> isDeprecated [
+	"This class is deprecated. Use BrStyleCommonAptitude instead."
 	^ true
 ]
 
