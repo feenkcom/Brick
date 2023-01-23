@@ -267,13 +267,17 @@ BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 { #category : #accessing }
 BrTextEditorParagraphElement >> handleMouseEvent: evt paragraph: aParagraph [
 	| atts aCharOffsetInParagraph anEditorElement |
+	
+	evt isMouseMove
+		ifTrue: [ ^ self ].
+	
 	anEditorElement := self
 			allParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
 			ifFound: #yourself
 			ifNone: [ ^self ].
 
 	aCharOffsetInParagraph := aParagraph
-			charOffsetAt: evt localPosition - self padding topLeft.
+			charOffsetForPoint: evt localPosition - self padding topLeft.
 	atts := (self text attributesAt: aCharOffsetInParagraph)
 			select: #isEventHandler.
 	^ atts
@@ -535,7 +539,7 @@ BrTextEditorParagraphElement >> screenToCursor: aTransformation of: anEditorElem
 			fromParent: anEditorElement.
 			
 		aCharOffsetInParagraph := aParagraph
-			charOffsetAt: theBoundsInLocal center - self padding topLeft.
+			charOffsetForPoint: theBoundsInLocal center - self padding topLeft.
 
 		aTransformation transformed: aCharOffsetInParagraph + self segment textStart ]
 ]
