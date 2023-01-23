@@ -21,7 +21,7 @@ BrTextEditorHistoryExamples >> assertNoHistoryForEditor: aTextEditor [
 	self assert: aTextEditor history redoCommands isEmpty.
 ]
 
-{ #category : #accessing }
+{ #category : #examples }
 BrTextEditorHistoryExamples >> deleteSingleCharacterInEditor [
 	<gtExample>
 	| textEditor |
@@ -38,7 +38,7 @@ BrTextEditorHistoryExamples >> deleteSingleCharacterInEditor [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #examples }
 BrTextEditorHistoryExamples >> deleteSingleCharacterInEditor_command [
 	<gtExample>
 	| textEditor command |
@@ -54,7 +54,7 @@ BrTextEditorHistoryExamples >> deleteSingleCharacterInEditor_command [
 	^ command
 ]
 
-{ #category : #accessing }
+{ #category : #examples }
 BrTextEditorHistoryExamples >> deleteSingleCharacterInEditor_hasUndoCommand [
 	<gtExample>
 	| textEditor |
@@ -66,7 +66,7 @@ BrTextEditorHistoryExamples >> deleteSingleCharacterInEditor_hasUndoCommand [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #examples }
 BrTextEditorHistoryExamples >> insertSingleCharacterInEmptyEditor [
 	<gtExample>
 	| textEditor |
@@ -84,7 +84,7 @@ BrTextEditorHistoryExamples >> insertSingleCharacterInEmptyEditor [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #examples }
 BrTextEditorHistoryExamples >> insertSingleCharacterInEmptyEditor_command [
 	<gtExample>
 	| textEditor command |
@@ -99,7 +99,7 @@ BrTextEditorHistoryExamples >> insertSingleCharacterInEmptyEditor_command [
 	^ command
 ]
 
-{ #category : #accessing }
+{ #category : #examples }
 BrTextEditorHistoryExamples >> insertSingleCharacterInEmptyEditor_hasUndoCommand [
 	<gtExample>
 	| textEditor |
@@ -112,7 +112,7 @@ BrTextEditorHistoryExamples >> insertSingleCharacterInEmptyEditor_hasUndoCommand
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - setup' }
 BrTextEditorHistoryExamples >> newTextEditor [
 	<gtExample>
 	| textEditor |
@@ -124,7 +124,7 @@ BrTextEditorHistoryExamples >> newTextEditor [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - setup' }
 BrTextEditorHistoryExamples >> newTextEditorWithInitialText [
 	<gtExample>
 	| textEditor |
@@ -138,7 +138,7 @@ BrTextEditorHistoryExamples >> newTextEditorWithInitialText [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - setup' }
 BrTextEditorHistoryExamples >> newTextEditorWithInitialText_noInitialHistory [
 	<gtExample>
 	| textEditor |
@@ -149,7 +149,7 @@ BrTextEditorHistoryExamples >> newTextEditorWithInitialText_noInitialHistory [
 	^ textEditor
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - setup' }
 BrTextEditorHistoryExamples >> newTextEditor_noInitialHistory [
 	<gtExample>
 	| textEditor |
