@@ -2,10 +2,21 @@ Class {
 	#name : #BrTextEditorModifiedEvent,
 	#superclass : #BrTextEditorEvent,
 	#instVars : [
-		'text'
+		'text',
+		'editCommand'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
+
+{ #category : #accessing }
+BrTextEditorModifiedEvent >> editCommand [
+	^ editCommand
+]
+
+{ #category : #accessing }
+BrTextEditorModifiedEvent >> editCommand: anEditCommand [
+	editCommand := anEditCommand
+]
 
 { #category : #accessing }
 BrTextEditorModifiedEvent >> text [
