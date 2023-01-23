@@ -92,6 +92,16 @@ BrTextEditorHistory >> insertedStrings: aCollectionOfStrings undo: aCollectionOf
 		redoIndices: aCollectionOfRedoIndices)
 ]
 
+{ #category : #testing }
+BrTextEditorHistory >> isEnabled [
+	^ isEnabled
+]
+
+{ #category : #accessing }
+BrTextEditorHistory >> redoCommands [
+	^ redoCommands
+]
+
 { #category : #'api - undo/redo' }
 BrTextEditorHistory >> redoOn: aBrTextEditor [
 	redoCommands ifNotEmpty: [ :theCommands |
@@ -104,6 +114,16 @@ BrTextEditorHistory >> replaceText: newText oldText: oldText [
 		addCommand: (BrTextEditorHistoryReplaceTextCommand new
 				newText: newText;
 				oldText: oldText)
+]
+
+{ #category : #testing }
+BrTextEditorHistory >> shouldGroup [
+	^ shouldGroup
+]
+
+{ #category : #accessing }
+BrTextEditorHistory >> undoCommands [
+	^ undoCommands
 ]
 
 { #category : #'api - undo/redo' }
