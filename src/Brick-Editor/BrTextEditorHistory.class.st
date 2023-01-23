@@ -31,10 +31,12 @@ BrTextEditorHistory >> cursorsMovedFrom: aCollectionOfFromIndices to: aCollectio
 
 { #category : #'api - history' }
 BrTextEditorHistory >> deletedTexts: aCollectionOfTexts undo: aCollectionOfUndoIndices redo: aCollectionOfRedoIndices [
-	self addCommand: (BrTextEditorHistoryDeletionCommand new
+	| deleteCommand |
+	self addCommand: (deleteCommand := BrTextEditorHistoryDeletionCommand new
 		texts: aCollectionOfTexts;
 		undoIndices: aCollectionOfUndoIndices;
-		redoIndices: aCollectionOfRedoIndices)
+		redoIndices: aCollectionOfRedoIndices).
+	^ deleteCommand
 ]
 
 { #category : #'api - history' }
@@ -86,10 +88,12 @@ BrTextEditorHistory >> initialize [
 
 { #category : #'api - history' }
 BrTextEditorHistory >> insertedStrings: aCollectionOfStrings undo: aCollectionOfUndoIndices redo: aCollectionOfRedoIndices [
-	self addCommand: (BrTextEditorHistoryInsertionCommand new
+	| insertCommand |
+	self addCommand: (insertCommand := BrTextEditorHistoryInsertionCommand new
 		strings: aCollectionOfStrings;
 		undoIndices: aCollectionOfUndoIndices;
-		redoIndices: aCollectionOfRedoIndices)
+		redoIndices: aCollectionOfRedoIndices).
+	^ insertCommand
 ]
 
 { #category : #testing }

@@ -516,7 +516,14 @@ BrTextEditorModel >> notifyInteractionRemoved: anInteraction [
 
 { #category : #'event firing' }
 BrTextEditorModel >> notifyModified: aText [
-	self dispatchEvent: (BrTextEditorModifiedEvent new text: aText)
+	self notifyModified: aText fromCommand: nil
+]
+
+{ #category : #'event firing' }
+BrTextEditorModel >> notifyModified: aText fromCommand: anEditCommand [
+	self dispatchEvent: (BrTextEditorModifiedEvent new 
+		text: aText;
+		editCommand: anEditCommand)
 ]
 
 { #category : #'event firing' }
@@ -658,6 +665,7 @@ BrTextEditorModel >> onShortcutRemoved: anInteraction [
 
 { #category : #'hooks - text modifications' }
 BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
+	| insertCommand |
 	"Is sent after a few strings (or one) are inserted in a text model"
 	self assertUIProcess.
 	
@@ -669,7 +677,7 @@ BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
 				at: anIndex
 				in: self ].
 
-	history
+	insertCommand := history
 		insertedStrings: aBlTextStringsInserted strings
 		undo: aBlTextStringsInserted finalIndices
 		redo: aBlTextStringsInserted requestedIndices.
@@ -681,7 +689,9 @@ BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
 				notifyInserted: aString asRopedText
 				at: anIndex ].
 
-	self notifyModified: self text.
+	self 
+		notifyModified: self text 
+		fromCommand: insertCommand.
 
 	shouldStyleWhenTextModified
 		ifTrue: [ self styleText ]
@@ -753,6 +763,7 @@ BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
 { #category : #'hooks - text modifications' }
 BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 	"Is sent after a piece of text was deleted in a text model"
+	| deleteCommand |
 	self assertUIProcess.
 
 	aBlTextsDeleted finalIntervals
@@ -762,10 +773,11 @@ BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 				to:  eachInterval last
 				in: self ].
 
-	history
+	deleteCommand := history
 		"text attributes may reference objects such as computation results in the editor and therefore we
 		should remove such attributes"
-		deletedTexts: (aBlTextsDeleted texts collect: [ :eachText | eachText copyWithoutExternalReferences ])
+		deletedTexts: (aBlTextsDeleted texts collect: [ :eachText | 
+			eachText copyWithoutExternalReferences ])
 		undo: (aBlTextsDeleted finalIntervals collect: #first)
 		redo: (aBlTextsDeleted requestedIntervals collect: #first).
 
@@ -775,7 +787,9 @@ BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 				notifyDeletedFrom: eachInterval first
 				to:  eachInterval last ].
 
-	self notifyModified: self text.
+	self 
+		notifyModified: self text
+		fromCommand: deleteCommand.
 	
 	shouldStyleWhenTextModified
 		ifTrue: [ self styleText ]
