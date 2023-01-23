@@ -216,38 +216,36 @@ BrEditorShortcut class >> moveCursorDown [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorLeft [
-
 	^ self new
-		  name: 'Move cursor left';
-		  description:
-			  'Moves the cursor one letter at a time to the left from the current position and deselects any selected text.';
-		  combination: BlKeyCombination arrowLeft;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deselecter
-				  all;
-				  deselect.
-			  aBrTextEditor navigator
-				  moveLeft;
-				  apply ];
-		  yourself
+		name: 'Move cursor left';
+		description: 'Moves the cursor one letter at a time to the left from the current position and deselects any selected text.';
+		combination: BlKeyCombination arrowLeft;
+		performBlock: [ :aBrTextEditor | 
+			aBrTextEditor selection isEmpty
+				ifTrue: [ aBrTextEditor navigator
+						moveLeft;
+						apply ]
+				ifFalse: [ aBrTextEditor deselecter
+						all;
+						deselect ] ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorRight [
-
 	^ self new
-		  name: 'Move cursor right';
-		  description:
-			  'Moves the cursor one letter at a time to the right from the current position and deselects any selected text.';
-		  combination: BlKeyCombination arrowRight;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deselecter
-				  all;
-				  deselect.
-			  aBrTextEditor navigator
-				  moveRight;
-				  apply ];
-		  yourself
+		name: 'Move cursor right';
+		description: 'Moves the cursor one letter at a time to the right from the current position and deselects any selected text.';
+		combination: BlKeyCombination arrowRight;
+		performBlock: [ :aBrTextEditor | 
+			aBrTextEditor selection isEmpty
+				ifTrue: [ aBrTextEditor navigator
+						moveRight;
+						apply ]
+				ifFalse: [ aBrTextEditor deselecter
+						all;
+						deselect ] ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
