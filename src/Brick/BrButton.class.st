@@ -95,5 +95,8 @@ BrButton >> model: anObject [
 
 { #category : #layout }
 BrButton >> supportsBaseline [
-	^ true
+	^ self
+		childWithId: #label
+		ifFound: [ :aLabel | true ]
+		ifNone: [ false ]
 ]
