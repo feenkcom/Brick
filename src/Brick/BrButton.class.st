@@ -8,7 +8,7 @@ Class {
 		'iconModel',
 		'interactiveModel'
 	],
-	#category : 'Brick-Button - UI'
+	#category : #'Brick-Button - UI'
 }
 
 { #category : #'api - widget' }
@@ -26,6 +26,14 @@ BrButton >> action: aValuable [
 	Button action must not be nil"
 
 	self viewModel action: aValuable
+]
+
+{ #category : #layout }
+BrButton >> baselineOffset [
+	^ self
+		childWithId: #label
+		ifFound: [ :aTextElement | aTextElement baselineOffset + self padding top + aTextElement margin top ]
+		ifNone: [ 0 ]
 ]
 
 { #category : #accessing }
@@ -83,4 +91,9 @@ BrButton >> model [
 { #category : #'api - widget' }
 BrButton >> model: anObject [
 	self viewModel model: anObject
+]
+
+{ #category : #layout }
+BrButton >> supportsBaseline [
+	^ true
 ]
