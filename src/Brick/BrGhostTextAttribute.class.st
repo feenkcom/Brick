@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : #'Brick-Attributes'
 }
 
 { #category : #accessing }
