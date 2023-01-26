@@ -13,19 +13,18 @@ Class {
 { #category : #accessing }
 BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| aToggle |
-
 	aToggle := BrTriangle new
-		id: self id;
-		aptitude: BrGlamorousTriangleInCircleAptitude;
-		expanded: self isExpanded;
-		padding: (BlInsets all: 2);
-		margin: (BlInsets top: 2);
-		mouseCursor: BlCursor default;
-		toggleAction: [
-			self
-				toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece
-				in: anEditorElement editor ].
-		
+			id: self id;
+			aptitude: BrGlamorousTriangleInCircleAptitude;
+			expanded: self isExpanded;
+			padding: (BlInsets all: 2);
+			margin: (BlInsets top: 2);
+			mouseCursor: BlCursor default;
+			placeholderAlignment: #alignMiddle;
+			toggleAction: [ self
+					toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece
+					in: anEditorElement editor ].
+
 	self
 		applyExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece
 		in: anEditorElement editor.
