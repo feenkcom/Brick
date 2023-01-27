@@ -7,5 +7,5 @@ BlElement >> placeholderAlignment [
 
 { #category : #'*Brick-Editor' }
 BlElement >> placeholderAlignment: aSymbol [
-	^ self userData at: #brickPlaceholderAlignment put: aSymbol
+	self userData at: #brickPlaceholderAlignment put: aSymbol
 ]

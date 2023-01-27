@@ -152,33 +152,34 @@ BrTextEditorParagraphElement >> buildParagraph [
 
 	self
 		childrenDo: [ :eachElement | 
-			(self canAddToParagraph: eachElement)
-				ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
-				ifFalse: [ (eachElement userData at: #brickEditorOverlay ifAbsent: [ false ])
-						ifTrue: [ aBuilder
-								addPlaceholder: (SkiaParagraphPlaceholderStyle new
-									alignTop;
-									extent: 0 @ eachElement measuredExtent y)
-								charLength: 0 ]
-						ifFalse: [ (eachElement isKindOf: BrCursorElement)
-								ifFalse: [ | placeholder |
-									placeholder := SkiaParagraphPlaceholderStyle new.
-									eachElement supportsBaseline
-										ifTrue: [ placeholder baselineOffset: eachElement baselineOffset. ]
-										ifFalse: [ placeholder perform: eachElement placeholderAlignment. ].
-									placeholder extent: eachElement measuredExtent.
-									
-									aBuilder
-										addPlaceholder: placeholder
-										charLength: (eachElement userData at: #brickEditorCharLength ifAbsent: [ 0 ]) ] ] ] ].
+			eachElement visibility isGone
+				ifFalse: [ (self canAddTextToParagraph: eachElement)
+						ifTrue: [ self addText: eachElement text toBuilder: aBuilder ]
+						ifFalse: [ (eachElement userData at: #brickEditorOverlay ifAbsent: [ false ])
+								ifTrue: [ aBuilder
+										addPlaceholder: (SkiaParagraphPlaceholderStyle new
+												alignTop;
+												extent: 0 @ eachElement measuredExtent y)
+										charLength: 0 ]
+								ifFalse: [ (eachElement isKindOf: BrCursorElement)
+										ifFalse: [ | placeholder |
+											placeholder := SkiaParagraphPlaceholderStyle new.
+											eachElement supportsBaseline
+												ifTrue: [ placeholder baselineOffset: eachElement baselineOffset ]
+												ifFalse: [ placeholder perform: eachElement placeholderAlignment ].
+											placeholder extent: eachElement measuredExtent.
+
+											aBuilder
+												addPlaceholder: placeholder
+												charLength: (eachElement userData at: #brickEditorCharLength ifAbsent: [ 0 ]) ] ] ] ] ].
 	^ aBuilder build
 ]
 
 { #category : #'private - paragraph' }
-BrTextEditorParagraphElement >> canAddToParagraph: eachElement [
+BrTextEditorParagraphElement >> canAddTextToParagraph: eachElement [
 	^ (eachElement isKindOf: BlTextElement)
 		and: [ (eachElement userData includesKey: #sourceError) not
-				and: [ eachElement aptitude isNil ] ]
+				and: [ eachElement aptitude isNil and: [ eachElement visibility isGone not ] ] ]
 ]
 
 { #category : #private }
@@ -233,7 +234,7 @@ BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 				ifNone: [ self requestLayout ].
 			self children sortedByElevation
 				do: [ :anElement | 
-					(self canAddToParagraph: anElement)
+					(self canAddTextToParagraph: anElement)
 						ifFalse: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ] ]
 ]
 
@@ -429,7 +430,7 @@ BrTextEditorParagraphElement >> paintChildrenOn: aCompositorPainter offset: anOf
 		offset: anOffset
 		compositing: self compositingMode
 		thenPaint: [ :aChildElement :aChildPainter :aChildOffset | 
-			(self canAddToParagraph: aChildElement)
+			(self canAddTextToParagraph: aChildElement)
 				ifFalse: [ aChildElement fullPaintOn: aChildPainter offset: aChildOffset ] ]
 ]
 
@@ -445,12 +446,15 @@ BrTextEditorParagraphElement >> paintSelectionOn: aCompositorPainter offset: anO
 
 { #category : #private }
 BrTextEditorParagraphElement >> placeholderAndCursorElements [
-	^ self children reject: [ :each | self canAddToParagraph: each ]
+	^ self children reject: [ :each | self canAddTextToParagraph: each ]
 ]
 
 { #category : #private }
 BrTextEditorParagraphElement >> placeholderElements [
-	^ self children reject: [ :each | (self canAddToParagraph: each) or: [ each isKindOf: BrCursorElement ] ]
+	^ self children
+		reject: [ :each | 
+			(self canAddTextToParagraph: each)
+				or: [ (each isKindOf: BrCursorElement) or: [ each visibility isGone ] ] ]
 ]
 
 { #category : #'api - cursor' }

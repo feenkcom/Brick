@@ -20,7 +20,6 @@ BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece
 			padding: (BlInsets all: 2);
 			margin: (BlInsets top: 2);
 			mouseCursor: BlCursor default;
-			placeholderAlignment: #alignMiddle;
 			toggleAction: [ self
 					toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece
 					in: anEditorElement editor ].
@@ -47,6 +46,8 @@ BrGlamorousTriangleExpanderTextAttribute >> id: anElementId [
 { #category : #accessing }
 BrGlamorousTriangleExpanderTextAttribute >> initialize [
 	super initialize.
-	
+
+	self placeholderAlignment: #alignMiddle.
+
 	id := BlElementId noId
 ]
