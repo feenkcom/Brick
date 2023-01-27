@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : #'Brick-Attributes'
 }
 
 { #category : #accessing }
@@ -20,15 +20,15 @@ BrGhostTextAttribute class >> for: aText [
 { #category : #accessing }
 BrGhostTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| element |
-	element := BlElement new
-		layout: BlFrameLayout new;
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical fitContent ]; 
-		preventMeAndChildrenMouseEvents;
-		addChild: (BlTextElement new
+	element := BrLabel new
+			aptitude: (BrGlamorousLabelAptitude new
+					labelDo: [ :aLabel | 
+						aLabel
+							editorMeasurement;
+							padding: BlInsets empty ]);
+			preventMeAndChildrenMouseEvents;
 			text: text;
-			yourself).
+			yourself.
 
 	self updateVisibilityOf: element in: anEditorElement.
 	element
