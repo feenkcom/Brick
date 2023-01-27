@@ -10,7 +10,7 @@ See {{gtClass:BrProgressExamples}} and {{gtClass:BrGlamorousProgressExamples}} e
 
 {{gtExample:BrProgressExamples>>#animatedBarAndTextAbove|codeExpanded=false|previewExpanded=true|previewHeight=180}}
 
-
+See {{gtMethod:name=BrProgressExamples>>demo}} for  an example of how to use it.
 "
 Class {
 	#name : #BrProgress,
