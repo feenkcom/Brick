@@ -215,6 +215,27 @@ BrProgressExamples >> blueGradientPaintStencil [
 	^ aPaint
 ]
 
+{ #category : #accessing }
+BrProgressExamples >> demo [
+	"A demo of how to use it."
+
+	<gtExample>
+	<noTest>
+	| progressBar |
+	progressBar := BrProgress new.
+	progressBar
+		percentage: 0;
+		constraintsDo: [ :c | c horizontal matchParent ];
+		patternLabel: '{1}% out of {2}% is finished';
+		aptitude: BrGlamorousProgressWithLabelAndBarAptitude.
+	[ 1
+		to: 20
+		do: [ :n | 
+			(n * 20) milliSeconds asDelay wait.
+			progressBar percentage: n * 5 ] ] fork.
+	^ progressBar
+]
+
 { #category : #'examples - text formats' }
 BrProgressExamples >> fileSizeValues [
 	<gtExample>
