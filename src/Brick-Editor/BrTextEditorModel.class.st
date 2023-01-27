@@ -527,6 +527,14 @@ BrTextEditorModel >> notifyModified: aText fromCommand: anEditCommand [
 ]
 
 { #category : #'event firing' }
+BrTextEditorModel >> notifyModified: aText fromCommand: anEditCommand dueTo: aReasonEvent [
+	self dispatchEvent: (BrTextEditorModifiedEvent new 
+		text: aText;
+		editCommand: anEditCommand;
+		reason: aReasonEvent)
+]
+
+{ #category : #'event firing' }
 BrTextEditorModel >> notifySelectionChanged: aSelection [
 	self dispatchEvent: (BrTextEditorSelectionChangedEvent new selection: aSelection)
 ]
@@ -691,7 +699,8 @@ BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
 
 	self 
 		notifyModified: self text 
-		fromCommand: insertCommand.
+		fromCommand: insertCommand
+		dueTo: aBlTextStringsInserted.
 
 	shouldStyleWhenTextModified
 		ifTrue: [ self styleText ]
