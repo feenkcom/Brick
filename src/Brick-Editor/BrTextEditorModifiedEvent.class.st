@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrTextEditorEvent,
 	#instVars : [
 		'text',
-		'editCommand'
+		'editCommand',
+		'reason'
 	],
 	#category : #'Brick-Editor-Model - Events'
 }
@@ -16,6 +17,16 @@ BrTextEditorModifiedEvent >> editCommand [
 { #category : #accessing }
 BrTextEditorModifiedEvent >> editCommand: anEditCommand [
 	editCommand := anEditCommand
+]
+
+{ #category : #accessing }
+BrTextEditorModifiedEvent >> reason [
+	^ reason
+]
+
+{ #category : #accessing }
+BrTextEditorModifiedEvent >> reason: anObject [
+	reason := anObject
 ]
 
 { #category : #accessing }
