@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextStreamExamples,
 	#superclass : #Object,
-	#category : #'Brick-Glamorous-Text Stream'
+	#category : #'Brick-Examples-Text Stream'
 }
 
 { #category : #accessing }
