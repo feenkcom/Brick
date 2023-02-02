@@ -106,6 +106,36 @@ BrTextEditorSegmentSplitterExamples >> appendingInReplacingAdornmentTextSplit [
 ]
 
 { #category : #accessing }
+BrTextEditorSegmentSplitterExamples >> cursorTextSplit [
+	<gtExample>
+	| segments text |
+	text := self simpleText.
+	text
+		attributes: {BrTextCursorAttribute new enterAction: [ :editor |  ]}
+		from: 1
+		to: 1.
+	text
+		attributes: {BrTextCursorAttribute new enterAction: [ :editor |  ]}
+		from: text size
+		to: text size.
+	segments := self splitterClass new
+			split: text
+			from: 1
+			to: text size.
+	self assert: segments size equals: 3.
+	self
+		assert: segments first text asString
+		equals: (self simpleText asString first: 1).
+	self
+		assert: segments second text asString
+		equals: self simpleText asString allButFirst allButLast.
+	self
+		assert: segments third text asString
+		equals: (self simpleText asString last: 1).
+	^ segments
+]
+
+{ #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> emptyTextSplit [
 	<gtExample>
 	| segments |
@@ -193,6 +223,33 @@ BrTextEditorSegmentSplitterExamples >> replacingAdornmentTextSplit [
 	self assert: segments last textStart equals: 5.
 	self assert: segments last textEnd equals: 11.
 	self assert: segments last text asString equals: '567890'.
+	^ segments
+]
+
+{ #category : #accessing }
+BrTextEditorSegmentSplitterExamples >> replacingAdornmentWithCursorTextSplit [
+	<gtExample>
+	| segments text attr |
+	text := self simpleText.
+	text
+		attributes: {attr := BrTextAdornmentDynamicAttribute new
+						beReplace;
+						stencil: [ BlElement new
+								size: 10 @ 10;
+								background: Color red ]}
+		from: 1
+		to: text size.
+	text
+		attributes: {BrTextCursorAttribute new enterAction: [ :editor |  ]}
+		from: text size
+		to: text size.
+	segments := self splitterClass new
+			split: text
+			from: 1
+			to: text size.
+	self assert: segments size equals: 1.
+	self assert: (segments first isKindOf: BrTextEditorLineSegmentAdornmentPiece).
+	self assert: segments first adornmentAttribute equals: attr.
 	^ segments
 ]
 
