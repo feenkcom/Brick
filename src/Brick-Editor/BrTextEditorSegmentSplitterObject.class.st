@@ -106,11 +106,16 @@ BrTextEditorSegmentSplitterObject >> start: anInteger [
 
 { #category : #accessing }
 BrTextEditorSegmentSplitterObject >> startIntervalWith: startingAttributes [
-	(startingAttributes
-		anySatisfy: [ :each | 
-			each isEventHandler
-				or: [ each isAdornment and: [ each shouldOverlay or: [ each shouldReplace ] ] ] ])
-		ifFalse: [ ^ self ].
+	| startingAttributesThatNeedSplit |
+	startingAttributesThatNeedSplit := startingAttributes
+			select: [ :each | 
+				each isEventHandler
+					or: [ each isAdornment and: [ each shouldOverlay or: [ each shouldReplace ] ] ] ].
+	startingAttributesThatNeedSplit notEmpty ifFalse: [ ^ self ].
+	((startingAttributesThatNeedSplit allSatisfy: [ :each | each isEventHandler ])
+		and: [ interestingAttributes
+				anySatisfy: [ :each | each isAdornment and: [ each shouldReplace ] ] ])
+		ifTrue: [ ^ self ].
 	self outputTextTo: intervalFirst - 1.
 	startingAttributes
 		do: [ :each | 
