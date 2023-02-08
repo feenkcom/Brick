@@ -67,6 +67,16 @@ BrFolderCreateWidget >> initialize [
 ]
 
 { #category : #accessing }
+BrFolderCreateWidget >> label [
+	^ label
+]
+
+{ #category : #accessing }
+BrFolderCreateWidget >> label: anObject [
+	label := anObject
+]
+
+{ #category : #accessing }
 BrFolderCreateWidget >> onFolderCreated: aBlock [
 	onFolderCreated := aBlock.
 ]
