@@ -48,21 +48,21 @@ Class {
 { #category : #initialization }
 BrFileSelector >> buildUI [
 	| alignedButton |
-
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	alignedButton := self createOkButton.
 
 	self matchParent.
-	self addChildren: {	
-		"scrollable horizontally only to accomodate the breadcrumb"
-		BrScrollPane new
-			aptitude: BrScrollPaneAptitude;
-			hMatchParent;
-			vFitContent;
-			content: breadcrumb.
-		table.
-		alignedButton. }.
+	self
+		addChildren: {BrScrollPane new
+					aptitude: BrScrollPaneAptitude;
+					hMatchParent;
+					vFitContent;
+					content: breadcrumb;
+					when: BlElementLayoutComputedEvent
+						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ].
+				table.
+				alignedButton}	"scrollable horizontally only to accomodate the breadcrumb"
 ]
 
 { #category : #accessing }
@@ -286,13 +286,16 @@ BrFileSelector >> okAction: anObject [
 
 { #category : #private }
 BrFileSelector >> replaceAddFolderWithEditor [
-	|folderCreator|
-	breadcrumb removeItemAt:  breadcrumb numberOfItems.
+	| folderCreator |
+	breadcrumb removeItemAt: breadcrumb numberOfItems.
 	folderCreator := BrFolderCreateWidget new folder: self folder.
 	folderCreator defaultFolderName: ''.
-	folderCreator onFolderCreated: [self updateDisplay].
+	folderCreator
+		onFolderCreated: [ :aFolder | 
+			self folder: aFolder.
+			self updateDisplay ].
 	breadcrumb addItem: folderCreator.
-	folderCreator requestLabelFocus.
+	folderCreator requestLabelFocus
 ]
 
 { #category : #private }
