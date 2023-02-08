@@ -40,7 +40,8 @@ Class {
 		'breadcrumb',
 		'fileFilterBlock',
 		'okButton',
-		'okAction'
+		'okAction',
+		'scrollbar'
 	],
 	#category : #'Brick-File - UI'
 }
@@ -51,16 +52,10 @@ BrFileSelector >> buildUI [
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	alignedButton := self createOkButton.
-
+	scrollbar := self createScrollPane.
 	self matchParent.
 	self
-		addChildren: {BrScrollPane new
-					aptitude: BrScrollPaneAptitude;
-					hMatchParent;
-					vFitContent;
-					content: breadcrumb;
-					when: BlElementLayoutComputedEvent
-						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ].
+		addChildren: {scrollbar.
 				table.
 				alignedButton}	"scrollable horizontally only to accomodate the breadcrumb"
 ]
@@ -126,11 +121,11 @@ BrFileSelector >> createBasicFileBrowser [
 BrFileSelector >> createBreadcrumb [
 	^ BrBreadcrumb new
 		fitContent;
-		aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
-			BrLabel new
-				aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-				text: '/';
-				margin: (BlInsets left: 5 right: 5) ]).
+		aptitude: (BrGlamorousBreadcrumbAptitude new
+				separator: [ BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+						text: '/';
+						margin: (BlInsets left: 5 right: 5) ])
 ]
 
 { #category : #private }
@@ -150,6 +145,17 @@ BrFileSelector >> createOkButton [
 			c vertical exact: 40 ];
 		addChild: okButton.
 	^ alignedButton
+]
+
+{ #category : #initialization }
+BrFileSelector >> createScrollPane [
+	^ BrScrollPane new
+		aptitude: BrScrollPaneAptitude;
+		hFitContentLimited;
+		vFitContent;
+		content: breadcrumb;
+		when: BlElementLayoutComputedEvent
+			doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ]
 ]
 
 { #category : #private }
@@ -295,7 +301,13 @@ BrFileSelector >> replaceAddFolderWithEditor [
 			self folder: aFolder.
 			self updateDisplay ].
 	breadcrumb addItem: folderCreator.
-	folderCreator requestLabelFocus
+	folderCreator requestLabelFocus.
+	folderCreator label editor
+		when: BrTextEditorModifiedEvent
+		do: [ :anEvent | scrollbar scrollBy: Float infinity negated @ 0 ].
+	folderCreator
+		when: BlElementLayoutComputedEvent
+		doOnce: [ :anEvent | scrollbar scrollBy: Float infinity negated @ 0 ]
 ]
 
 { #category : #private }
