@@ -286,13 +286,16 @@ BrFileSelector >> okAction: anObject [
 
 { #category : #private }
 BrFileSelector >> replaceAddFolderWithEditor [
-	|folderCreator|
-	breadcrumb removeItemAt:  breadcrumb numberOfItems.
+	| folderCreator |
+	breadcrumb removeItemAt: breadcrumb numberOfItems.
 	folderCreator := BrFolderCreateWidget new folder: self folder.
 	folderCreator defaultFolderName: ''.
-	folderCreator onFolderCreated: [self updateDisplay].
+	folderCreator
+		onFolderCreated: [ :aFolder | 
+			self folder: aFolder.
+			self updateDisplay ].
 	breadcrumb addItem: folderCreator.
-	folderCreator requestLabelFocus.
+	folderCreator requestLabelFocus
 ]
 
 { #category : #private }
