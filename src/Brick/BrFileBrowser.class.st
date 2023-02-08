@@ -175,7 +175,7 @@ BrFileBrowser >> initialize [
 					vFitContent;
 					content: breadcrumb;
 					when: BlElementLayoutComputedEvent
-						doOnce: [ :anEvent | anEvent currentTarget scrollBy: 0 @ Float infinity ].
+						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ].
 				table}
 ]
 

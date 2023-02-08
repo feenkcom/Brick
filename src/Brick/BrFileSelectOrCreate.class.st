@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 BrFileSelectOrCreate >> buildUI [
-	| alignedButton fileInputFieldContainer|
+	| alignedButton fileInputFieldContainer |
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	table
@@ -19,20 +19,21 @@ BrFileSelectOrCreate >> buildUI [
 				ifNotEmpty: [ :theIndices | 
 					| aWidgetElement selectedObject |
 					aWidgetElement := anEvent currentTarget.
-					selectedObject := aWidgetElement viewModel
-						itemAt: theIndices first.
+					selectedObject := aWidgetElement viewModel itemAt: theIndices first.
 					fileInputField text: selectedObject basename ] ].
 	alignedButton := self createOkButton.
 	fileInputFieldContainer := self createFileInputField.
-	self addChildren: {
-		BrScrollPane new
-			aptitude: BrScrollPaneAptitude;
-			hMatchParent;
-			vFitContent;
-			content: breadcrumb.
-		table.
-		fileInputFieldContainer.
-		alignedButton. }.
+	self
+		addChildren: {BrScrollPane new
+					aptitude: BrScrollPaneAptitude;
+					hMatchParent;
+					vFitContent;
+					content: breadcrumb;
+					when: BlElementLayoutComputedEvent
+						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ]
+				table.
+				fileInputFieldContainer.
+				alignedButton}
 ]
 
 { #category : #accessing }
