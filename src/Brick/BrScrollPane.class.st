@@ -1,12 +1,12 @@
 Class {
 	#name : #BrScrollPane,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutResizable',
-	#classTraits : 'TBrLayoutResizable classTrait',
+	#traits : 'TBrLayoutResizable + TBrScrollable',
+	#classTraits : 'TBrLayoutResizable classTrait + TBrScrollable classTrait',
 	#instVars : [
 		'scrollable'
 	],
-	#category : 'Brick-Scrollable - UI'
+	#category : #'Brick-Scrollable - UI'
 }
 
 { #category : #'api - scrollpane' }
