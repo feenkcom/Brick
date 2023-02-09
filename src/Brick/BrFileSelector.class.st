@@ -103,14 +103,11 @@ BrFileSelector >> computeFolderParents [
 
 { #category : #private }
 BrFileSelector >> createAddFolderButton [
-	|plusButton|
-	plusButton := BrButton new.
-	plusButton aptitude: BrGlamorousButtonIconAptitude + BrGlamorousButtonRectangularAptitude.
-	plusButton icon: BrGlamorousIcons add.
-	plusButton action: [self replaceAddFolderWithEditor].
-	^ plusButton
-	
-	
+	^ BrButton new
+		aptitude: BrGlamorousButtonWithIconAptitude;
+		icon: BrGlamorousIcons add;
+		action: [ self replaceAddFolderWithEditor ];
+		label: 'Add directory'
 ]
 
 { #category : #initialization }
@@ -125,7 +122,7 @@ BrFileSelector >> createBreadcrumb [
 				separator: [ BrLabel new
 						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
 						text: '/';
-						margin: (BlInsets left: 5 right: 5) ])
+						margin: (BlInsets left: 2 right: 2) ])
 ]
 
 { #category : #private }
@@ -198,6 +195,7 @@ BrFileSelector >> createTable [
 					do: [ :anException | anException return: '? B' ] ])].
 	aTable column 
 		title: 'Modified' translated;
+		width: 100;
 		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :aLabel :eachItem |
 			aLabel text: ([ String
@@ -312,15 +310,27 @@ BrFileSelector >> replaceAddFolderWithEditor [
 
 { #category : #private }
 BrFileSelector >> updateDisplay [
-
 	table items: (items := self computeFolderItems).
 
 	breadcrumb removeAllItems.
-	self computeFolderParents do: [ :eachSegment |
-		breadcrumb addItem: (BrButton new
-			aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
-			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-			label: eachSegment basename;
-			action: [ self folder: eachSegment ]) ].
-	breadcrumb addItem: self createAddFolderButton.
+	self computeFolderParents
+		do: [ :eachSegment | 
+			breadcrumb
+				addItem: (BrEditor new
+						aptitude: BrGlamorousRegularEditorAptitude new
+								+ (BrStyleCommonAptitude new
+										default: [ :aStyle | aStyle border: BlBorder empty ];
+										hovered: [ :aStyle | 
+											aStyle
+												border: (BlBorder paint: BrGlamorousColors focusedEditorBorderColor width: 1) ]);
+						padding: (BlInsets top: 2 left: 5 bottom: 2 right: 5);
+						geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+						text: eachSegment basename;
+						beReadOnlyWithoutSelection;
+						when: BlClickEvent
+							do: [ :anEvent | 
+								anEvent modifiers isPrimaryModifier
+									ifFalse: [ anEvent consumed: true.
+										self folder: eachSegment ] ]) ].
+	breadcrumb addItem: self createAddFolderButton
 ]
