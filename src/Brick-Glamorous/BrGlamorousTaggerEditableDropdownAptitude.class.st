@@ -24,74 +24,37 @@ BrGlamorousTaggerEditableDropdownAptitude >> handleAcceptError: anError from: aT
 
 { #category : #accessing }
 BrGlamorousTaggerEditableDropdownAptitude >> newAddTagButton [
+	| button acceptAction |
+	acceptAction := [ :aValue | self requestAddTag: (BrTaggerTag named: aValue) from: button ].
 
-	| button acceptAction|
-	acceptAction := [:aValue | 
-			self
-				requestAddTag: (BrTaggerTag named: aValue)
-				from: button ].
-	
 	button := BrButton new
-		          aptitude: BrGlamorousButtonRectangularAptitude new
-			          + BrGlamorousButtonIconAptitude new
-			          + BrGlamorousButtonWithLabelTooltipAptitude new
-			          + (BrInteractiveCommonAptitude new
-					           default: [ :aWidget | 
-						           aWidget
-							           border: BlBorder empty;
-							           background: self theme status neutralBackgroundColor ];
-					           hovered: [ :aWidget | 
-						           aWidget background:
-							           self theme status neutralBackgroundColor darker ];
-					           pressed: [ :aWidget | 
-						           aWidget background:
-							           self theme status neutralBackgroundColor darker
-								           darker ];
-					           focused: [ :aWidget | 
-						           aWidget border:
-							           (BlBorder
-								            paint: self theme editor focusedBorderColor
-								            width: 1) ]) + (BrGlamorousWithDropdownAptitude
-				           handle: [ 
-					           BrButton new
-						           aptitude: BrGlamorousButtonRectangularAptitude new
-							           + BrGlamorousButtonIconAptitude new
-							           + BrGlamorousButtonWithLabelTooltipAptitude new
-							           + (BrInteractiveCommonAptitude new
-									            default: [ :aWidget | 
-										            aWidget
-											            border: BlBorder empty ];
-									            hovered: [ :aWidget | 
-										            aWidget background:
-											            self theme status neutralBackgroundColor darker ];
-									            pressed: [ :aWidget | 
-										            aWidget background:
-											            self theme status neutralBackgroundColor darker
-												            darker ];
-									            focused: [ :aWidget | 
-										            aWidget border:
-											            (BlBorder
-												             paint: self theme editor focusedBorderColor
-												             width: 1) ])
-							           - BrGlamorousButtonExteriorAptitude;
-						           icon: BrGlamorousVectorIcons add;
-						           label: 'Add';
-						           beSmallSize;
-						           hExact: 20;
-						           margin: (margin withBottom: 0);
-						           constraintsDo: [ :c | c flow vertical alignCenter ] ]
-				           content: [ self content value: button value: acceptAction ]);
-		          icon: BrGlamorousVectorIcons add;
-		          label: 'Add';
-		          beSmallSize;
-		          hExact: 20;
-		          margin: margin;
-		          constraintsDo: [ :c | c flow vertical alignCenter ];
-		          addShortcut: (BlShortcutWithAction new
-				           combination: BlKeyCombination arrowLeft;
-				           action: [ :anEvent | 
-					           anEvent currentTarget previousSiblingDo: [ :anElement | 
-							           anElement requestFocus ] ]).
+			aptitude: BrGlamorousButtonWithIconAptitude new
+					+ (BrGlamorousWithDropdownAptitude
+							handle: [ BrButton new
+									aptitude: BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonIconAptitude new
+											+ BrGlamorousButtonWithLabelTooltipAptitude new
+											+ (BrInteractiveCommonAptitude new
+													default: [ :aWidget | aWidget border: BlBorder empty ];
+													hovered: [ :aWidget | aWidget background: self theme status neutralBackgroundColor darker ];
+													pressed: [ :aWidget | aWidget background: self theme status neutralBackgroundColor darker darker ];
+													focused: [ :aWidget | aWidget border: (BlBorder paint: self theme editor focusedBorderColor width: 1) ])
+											- BrGlamorousButtonExteriorAptitude;
+									icon: BrGlamorousVectorIcons add;
+									label: 'Add';
+									beSmallSize;
+									hExact: 20;
+									margin: (margin withBottom: 0);
+									constraintsDo: [ :c | c flow vertical alignCenter ] ]
+							content: [ self content value: button value: acceptAction ]);
+			icon: BrGlamorousVectorIcons add;
+			label: 'Add';
+			beSmallSize;
+			hExact: 20;
+			margin: margin;
+			constraintsDo: [ :c | c flow vertical alignCenter ];
+			addShortcut: (BlShortcutWithAction new
+					combination: BlKeyCombination arrowLeft;
+					action: [ :anEvent | anEvent currentTarget previousSiblingDo: [ :anElement | anElement requestFocus ] ]).
 	^ button
 ]
 
