@@ -61,3 +61,11 @@ BrEditorElement >> scrollToLast [
 	
 	self scrollToPosition: self editor segmentCollector computedSegmentsCount
 ]
+
+{ #category : #accessing }
+BrEditorElement >> scrollToPosition: aPosition [
+	(self editor segmentCollector end < self editor segmentCollector text size
+		and: [ self editor segmentCollector cachedInterval last < aPosition ])
+		ifTrue: [ self editor segmentCollector computeForwardAt: aPosition ].
+	^ super scrollToPosition: aPosition
+]

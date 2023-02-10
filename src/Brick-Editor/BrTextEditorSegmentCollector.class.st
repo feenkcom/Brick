@@ -233,8 +233,8 @@ BrTextEditorSegmentCollector >> computeBackwardAt: anIndex [
 
 	"Look for the map entry just earlier than anIndex
 	(removing the need to parse the text from the beginning of the string to the found mapEntry"
-	mapEntry := map mapEntryFor: anIndex.
 	cachedInterval := self computeInterval: anIndex.
+	mapEntry := map mapEntryFor: cachedInterval first.
 	newSubText := text from: mapEntry value to: text size.
 	newSegments := OrderedCollection new.
 
@@ -243,6 +243,7 @@ BrTextEditorSegmentCollector >> computeBackwardAt: anIndex [
 		ifTrue: [ overlap ]
 		ifFalse: [ self cacheLimit ].
 	stream := BrEditorSegmentStream new.
+	stream skip: cachedInterval first - mapEntry key.
 	stream limit: streamLimit.
 	builder := self editor segmentBuilder.
 	
@@ -263,8 +264,13 @@ BrTextEditorSegmentCollector >> computeBackwardAt: anIndex [
 
 { #category : #'cache - computation' }
 BrTextEditorSegmentCollector >> computeForwardAt: anIndex [
-	| intervalEnd cachedInterval actualStart skip forwardText stream builder  |
+	| intervalEnd cachedInterval actualStart skip forwardText stream builder  position length |
 
+	position := (map mapEntryFor: anIndex) key.
+	length := (self cacheLimit / 2) rounded.
+	[(position := position + length) < anIndex] 
+		whileTrue: [self computeForwardAt: position].
+	
 	"the index of the last already cached segment"
 	intervalEnd := segmentsInterval last.
 
@@ -453,7 +459,7 @@ BrTextEditorSegmentCollector >> hasCached [
 { #category : #initialization }
 BrTextEditorSegmentCollector >> initialize [
 	super initialize.	
-	limit := 10000.
+	limit := 500.
 	subText := BlSubText text: '' asRopedText from: 1 to: 0.
 	self resetCache.
 ]
