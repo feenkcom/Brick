@@ -232,6 +232,9 @@ BrTextEditorParagraphElement >> drawChildrenOnSpartaCanvas: aCanvas [
 			paragraph
 				valueDo: [ :aParagraph | aParagraph paintOn: aCanvas at: self padding topLeft ]
 				ifNone: [ self requestLayout ].
+
+			self drawSelectionOnSpartaCanvas: aCanvas.
+
 			self children sortedByElevation
 				do: [ :anElement | 
 					(self canAddTextToParagraph: anElement)
