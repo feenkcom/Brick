@@ -15,10 +15,12 @@ Class {
 { #category : #accessing }
 BrSlideImageExport >> buildUI [
 	| alignedButton fileInputFieldContainer formatSection resolutionSection rangeSection imageDetailsContainer |
-	
-	formatOptionsCollection := {'JPEG'. 'PNG'} asOrderedCollection.
-	exportOptionsCollection := {'All'. 'Current Slide'. 'Range'} asOrderedCollection.
-	
+	formatOptionsCollection := {'JPEG'.
+			'PNG'} asOrderedCollection.
+	exportOptionsCollection := {'All'.
+			'Current Slide'.
+			'Range'} asOrderedCollection.
+
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	table
@@ -28,33 +30,40 @@ BrSlideImageExport >> buildUI [
 				ifNotEmpty: [ :theIndices | 
 					| aWidgetElement selectedObject |
 					aWidgetElement := anEvent currentTarget.
-					selectedObject := aWidgetElement viewModel
-						itemAt: theIndices first.
+					selectedObject := aWidgetElement viewModel itemAt: theIndices first.
 					fileInputField text: selectedObject basename ] ].
 	fileInputFieldContainer := self createFileInputField.
-	
+
 	formatSection := self createFormatInputSection.
 	resolutionSection := self createResolutionSection.
 	rangeSection := self createRangeSection.
 	imageDetailsContainer := BlElement new
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [:c |
-			c vertical fitContent.
-			c horizontal matchParent];
-		margin: (BlInsets top: 20 right: 5 bottom: 5 left: 0);
-		addChildren: {formatSection. resolutionSection. rangeSection}.
-		
+			layout: BlLinearLayout horizontal;
+			constraintsDo: [ :c | 
+				c vertical fitContent.
+				c horizontal matchParent ];
+			margin: (BlInsets
+					top: 20
+					right: 5
+					bottom: 5
+					left: 0);
+			addChildren: {formatSection.
+					resolutionSection.
+					rangeSection}.
+
 	alignedButton := self createOkButton.
-	self addChildren: {
-		BrScrollPane new
-			aptitude: BrScrollPaneAptitude;
-			hMatchParent;
-			vFitContent;
-			content: breadcrumb.
-		table.
-		fileInputFieldContainer.
-		imageDetailsContainer.
-		alignedButton }.
+	self
+		addChildren: {BrScrollPane new
+					aptitude: BrScrollPaneAptitude;
+					hMatchParent;
+					vFitContent;
+					content: breadcrumb;
+					when: BlElementLayoutComputedEvent
+						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ]
+				table.
+				fileInputFieldContainer.
+				imageDetailsContainer.
+				alignedButton}
 ]
 
 { #category : #accessing }

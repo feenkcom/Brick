@@ -40,7 +40,8 @@ Class {
 		'breadcrumb',
 		'fileFilterBlock',
 		'okButton',
-		'okAction'
+		'okAction',
+		'scrollbar'
 	],
 	#category : #'Brick-File - UI'
 }
@@ -48,21 +49,15 @@ Class {
 { #category : #initialization }
 BrFileSelector >> buildUI [
 	| alignedButton |
-
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	alignedButton := self createOkButton.
-
+	scrollbar := self createScrollPane.
 	self matchParent.
-	self addChildren: {	
-		"scrollable horizontally only to accomodate the breadcrumb"
-		BrScrollPane new
-			aptitude: BrScrollPaneAptitude;
-			hMatchParent;
-			vFitContent;
-			content: breadcrumb.
-		table.
-		alignedButton. }.
+	self
+		addChildren: {scrollbar.
+				table.
+				alignedButton}	"scrollable horizontally only to accomodate the breadcrumb"
 ]
 
 { #category : #accessing }
@@ -108,14 +103,11 @@ BrFileSelector >> computeFolderParents [
 
 { #category : #private }
 BrFileSelector >> createAddFolderButton [
-	|plusButton|
-	plusButton := BrButton new.
-	plusButton aptitude: BrGlamorousButtonIconAptitude + BrGlamorousButtonRectangularAptitude.
-	plusButton icon: BrGlamorousIcons add.
-	plusButton action: [self replaceAddFolderWithEditor].
-	^ plusButton
-	
-	
+	^ BrButton new
+		aptitude: BrGlamorousButtonWithIconAptitude;
+		icon: BrGlamorousIcons add;
+		action: [ self replaceAddFolderWithEditor ];
+		label: 'Add directory'
 ]
 
 { #category : #initialization }
@@ -126,11 +118,11 @@ BrFileSelector >> createBasicFileBrowser [
 BrFileSelector >> createBreadcrumb [
 	^ BrBreadcrumb new
 		fitContent;
-		aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
-			BrLabel new
-				aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-				text: '/';
-				margin: (BlInsets left: 5 right: 5) ]).
+		aptitude: (BrGlamorousBreadcrumbAptitude new
+				separator: [ BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+						text: '/';
+						margin: (BlInsets left: 2 right: 2) ])
 ]
 
 { #category : #private }
@@ -150,6 +142,17 @@ BrFileSelector >> createOkButton [
 			c vertical exact: 40 ];
 		addChild: okButton.
 	^ alignedButton
+]
+
+{ #category : #initialization }
+BrFileSelector >> createScrollPane [
+	^ BrScrollPane new
+		aptitude: BrScrollPaneAptitude;
+		hFitContentLimited;
+		vFitContent;
+		content: breadcrumb;
+		when: BlElementLayoutComputedEvent
+			doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ]
 ]
 
 { #category : #private }
@@ -192,6 +195,7 @@ BrFileSelector >> createTable [
 					do: [ :anException | anException return: '? B' ] ])].
 	aTable column 
 		title: 'Modified' translated;
+		width: 100;
 		cellStencil: [ :each | BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :aLabel :eachItem |
 			aLabel text: ([ String
@@ -286,26 +290,47 @@ BrFileSelector >> okAction: anObject [
 
 { #category : #private }
 BrFileSelector >> replaceAddFolderWithEditor [
-	|folderCreator|
-	breadcrumb removeItemAt:  breadcrumb numberOfItems.
+	| folderCreator |
+	breadcrumb removeItemAt: breadcrumb numberOfItems.
 	folderCreator := BrFolderCreateWidget new folder: self folder.
 	folderCreator defaultFolderName: ''.
-	folderCreator onFolderCreated: [self updateDisplay].
+	folderCreator
+		onFolderCreated: [ :aFolder | 
+			self folder: aFolder.
+			self updateDisplay ].
 	breadcrumb addItem: folderCreator.
 	folderCreator requestLabelFocus.
+	folderCreator label editor
+		when: BrTextEditorModifiedEvent
+		do: [ :anEvent | scrollbar scrollBy: Float infinity negated @ 0 ].
+	folderCreator
+		when: BlElementLayoutComputedEvent
+		doOnce: [ :anEvent | scrollbar scrollBy: Float infinity negated @ 0 ]
 ]
 
 { #category : #private }
 BrFileSelector >> updateDisplay [
-
 	table items: (items := self computeFolderItems).
 
 	breadcrumb removeAllItems.
-	self computeFolderParents do: [ :eachSegment |
-		breadcrumb addItem: (BrButton new
-			aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
-			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-			label: eachSegment basename;
-			action: [ self folder: eachSegment ]) ].
-	breadcrumb addItem: self createAddFolderButton.
+	self computeFolderParents
+		do: [ :eachSegment | 
+			breadcrumb
+				addItem: (BrEditor new
+						aptitude: BrGlamorousRegularEditorAptitude new
+								+ (BrStyleCommonAptitude new
+										default: [ :aStyle | aStyle border: BlBorder empty ];
+										hovered: [ :aStyle | 
+											aStyle
+												border: (BlBorder paint: BrGlamorousColors focusedEditorBorderColor width: 1) ]);
+						padding: (BlInsets top: 2 left: 5 bottom: 2 right: 5);
+						geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+						text: eachSegment basename;
+						beReadOnlyWithoutSelection;
+						when: BlClickEvent
+							do: [ :anEvent | 
+								anEvent modifiers isPrimaryModifier
+									ifFalse: [ anEvent consumed: true.
+										self folder: eachSegment ] ]) ].
+	breadcrumb addItem: self createAddFolderButton
 ]

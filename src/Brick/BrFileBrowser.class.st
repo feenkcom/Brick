@@ -159,25 +159,24 @@ BrFileBrowser >> folder: aFileReference [
 
 { #category : #initialization }
 BrFileBrowser >> initialize [
-
 	super initialize.
 
 	fileFilterBlock := [ :entry | true ].
 	breadcrumb := self createBreadcrumb.
 	table := self createTable.
 	self folder: '.' asFileReference.
-	
-	self matchParent.
-	self padding: (BlInsets all:10).
-	self addChildren: {
-		BrScrollPane new
-			aptitude: BrScrollPaneAptitude;
-			hMatchParent;
-			vFitContent;
-			content: breadcrumb.
-		table.
-	 }.
 
+	self matchParent.
+	self padding: (BlInsets all: 10).
+	self
+		addChildren: {BrScrollPane new
+					aptitude: BrScrollPaneAptitude;
+					hMatchParent;
+					vFitContent;
+					content: breadcrumb;
+					when: BlElementLayoutComputedEvent
+						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ].
+				table}
 ]
 
 { #category : #private }
