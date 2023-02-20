@@ -86,6 +86,21 @@ TBlTextStyleable >> glamorousCodeTinySize [
 ]
 
 { #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> glamorousFormEditorCodeFontAndSize [
+	self 
+		glamorousCodeFont;
+		glamorousCodeTinySize
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> glamorousFormLabelStyle [
+	self 
+		glamorousRegularFont;
+		glamorousRegularSmallSize;
+		foreground: BrGlamorousColors formLabelTextColor
+]
+
+{ #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousMonospace [
 	self glamorousCodeFont
 ]

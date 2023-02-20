@@ -27,6 +27,7 @@ Class {
 		'FailureBackgroundColor',
 		'FailureBorderColor',
 		'FocusedEditorBorderColor',
+		'FormLabelTextColor',
 		'HeaderBackgroundColor',
 		'HeaderTextColor',
 		'HoveredButtonBorderColor',
@@ -317,6 +318,11 @@ BrGlamorousColors class >> focusedListItemBorder [
 	^ self primaryBorderColor
 ]
 
+{ #category : #'form - text' }
+BrGlamorousColors class >> formLabelTextColor [
+	^ FormLabelTextColor
+]
+
 { #category : #'button - border' }
 BrGlamorousColors class >> hoveredButtonBorderColor [
 	^ HoveredButtonBorderColor
@@ -410,6 +416,9 @@ BrGlamorousColors class >> initialize [
 	"editors"
 	EditorBorderColor := LightBorderColor.
 	FocusedEditorBorderColor := PrimaryBorderColor.
+	
+	"forms"
+	FormLabelTextColor := Color gray.
 	
 	"others"
 	LinkColor := Color fromHexString: #'096dd9'.
