@@ -7,7 +7,7 @@ Class {
 		'actionbarStencilBuilder',
 		'selected'
 	],
-	#category : 'Brick-Tabs - Model'
+	#category : #'Brick-Tabs - Model'
 }
 
 { #category : #'api - tab' }
@@ -122,6 +122,11 @@ BrTabModel >> stencil: aStencilBuilder [
 
 	contentStencilBuilder := aStencilBuilder asStencilBuilder: BrTabStencilBuilder.
 	self notifyStencilChanged: contentStencilBuilder.
+]
+
+{ #category : #accessing }
+BrTabModel >> tabLabel [
+	^ self findActor: BrLabelModel
 ]
 
 { #category : #'api - tab' }
