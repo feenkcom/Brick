@@ -40,9 +40,14 @@ BrTreeNode >> allChildrenNodesBreadthFirst [
 ]
 
 { #category : #enumeration }
-BrTreeNode >> allChildrenNodesBreadthFirstDo: aBlock [ 
-	self childrenNodesDo: aBlock.
-	self childrenNodesDo: [ :eachNode | eachNode allChildrenNodesBreadthFirstDo: aBlock ].
+BrTreeNode >> allChildrenNodesBreadthFirstDo: aBlock [
+	| queue next |
+	queue := LinkedList new.
+	queue addAll: self childrenNodes.
+	[ queue notEmpty ]
+		whileTrue: [ next := queue removeFirst.
+			aBlock value: next.
+			queue addAll: next childrenNodes ]
 ]
 
 { #category : #enumeration }
