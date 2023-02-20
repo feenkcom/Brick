@@ -8,7 +8,7 @@ Class {
 		'actors',
 		'eventDispatcher'
 	],
-	#category : 'Brick-Core-Core'
+	#category : #'Brick-Core-Core'
 }
 
 { #category : #accessing }
@@ -26,9 +26,14 @@ BrActor >> addEventHandler: anEventHandler [
 ]
 
 { #category : #accessing }
-BrActor >> allActorsBreadthFirstDo: aBlock [ 
-	self actors do: aBlock.
-	self actors do: [ :each | each allActorsBreadthFirstDo: aBlock ]
+BrActor >> allActorsBreadthFirstDo: aBlock [
+	| queue next |
+	queue := LinkedList new.
+	queue addAll: self actors.
+	[ queue notEmpty ]
+		whileTrue: [ next := queue removeFirst.
+			aBlock value: next.
+			queue addAll: next actors ]
 ]
 
 { #category : #accessing }
