@@ -72,10 +72,10 @@ BrTabGroup >> selectTabToTheRight [
 ]
 
 { #category : #accessing }
-BrTabGroup >> selectTabWithLabel: aString [
+BrTabGroup >> selectTabWithLabelString: aString [
 	(self viewModel tabs
-		detect: [ :each | (each findActor: BrLabelModel) text asString = aString ]
-		ifNone: [ ^self ]) select
+		detect: [ :each | each tabLabel text asString = aString ]
+		ifNone: [ ^ self ]) select
 ]
 
 { #category : #accessing }
