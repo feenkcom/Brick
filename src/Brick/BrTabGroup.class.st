@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : 'Brick-Tabs - UI'
+	#category : #'Brick-Tabs - UI'
 }
 
 { #category : #accessing }
@@ -69,6 +69,13 @@ BrTabGroup >> selectTabToTheLeft [
 { #category : #accessing }
 BrTabGroup >> selectTabToTheRight [
 	self viewModel selectTabToTheRight
+]
+
+{ #category : #accessing }
+BrTabGroup >> selectTabWithLabel: aString [
+	(self viewModel tabs
+		detect: [ :each | (each findActor: BrLabelModel) text asString = aString ]
+		ifNone: [ ^self ]) select
 ]
 
 { #category : #accessing }
