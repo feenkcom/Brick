@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lookClass'
 	],
-	#category : 'Brick-DevTool'
+	#category : #'Brick-DevTool'
 }
 
 { #category : #accessing }
@@ -27,77 +27,69 @@ BrDevAptitudeGraphOverview >> buildLookAndModelGraph [
 		stencil: [ :eachClass | self buildNodeForClass: eachClass ];
 		with: {self aptitudeClass};
 		forEach: [ :eachLookClass | 
-			aMondrian nodes
-				stencil: [ :eachRequestClass | 
-					BrLabel new
-						beTinySize;
-						aptitude: BrGlamorousLabelAptitude new;
-						text: eachRequestClass value name ];
-				with:
-					((eachLookClass withAllSuperclassRequests
-						sorted: [ :a :b | a name < b name ])
-						collect: [ :aRequest | #aptitude -> aRequest ]).
-			aMondrian layout explicit: BlLinearLayout vertical ]
+				aMondrian nodes
+					stencil: [ :eachRequestClass | 
+						BrLabel new
+							beTinySize;
+							aptitude: BrGlamorousLabelAptitude new;
+							text: eachRequestClass value name ];
+					with: ((eachLookClass withAllSuperclassRequests sorted: [ :a :b | a name < b name ])
+							collect: [ :aRequest | #aptitude -> aRequest ]).
+				aMondrian layout explicit: BlLinearLayout vertical ]
 			in: #requests;
 		forEach: [ :eachLookClass | 
-			aMondrian nodes
-				stencil: [ :eachRequestClass | 
-					BrLabel new
-						beTiny;
-						aptitude: BrGlamorousLabelAptitude new;
-						text: eachRequestClass value name ];
-				with:
-					((eachLookClass withAllSuperclassChangeEvents
-						sorted: [ :a :b | a name < b name ])
-						collect: [ :aChangeEvent | #aptitude -> aChangeEvent ]).
-			aMondrian layout explicit: BlLinearLayout vertical ]
+				aMondrian nodes
+					stencil: [ :eachRequestClass | 
+						BrLabel new
+							beTinySize;
+							aptitude: BrGlamorousLabelAptitude new;
+							text: eachRequestClass value name ];
+					with: ((eachLookClass withAllSuperclassChangeEvents
+							sorted: [ :a :b | a name < b name ])
+							collect: [ :aChangeEvent | #aptitude -> aChangeEvent ]).
+				aMondrian layout explicit: BlLinearLayout vertical ]
 			in: #changeEvents.
 	aMondrian nodes
 		stencil: [ :eachClass | self buildNodeForClass: eachClass ];
 		with: self aptitudeClass allRelatedViewModels;
 		forEach: [ :eachModelClass | 
-			aMondrian nodes
-				stencil: [ :eachRequestClass | 
-					BrLabel new
-						beTinySize;
-						aptitude: BrGlamorousLabelAptitude new;
-						text: eachRequestClass value name ];
-				with:
-					((eachModelClass withAllSuperclassRequests
-						sorted: [ :a :b | a name < b name ])
-						collect: [ :aRequest | #model -> aRequest ]).
-			aMondrian layout explicit: BlLinearLayout vertical ]
+				aMondrian nodes
+					stencil: [ :eachRequestClass | 
+						BrLabel new
+							beTinySize;
+							aptitude: BrGlamorousLabelAptitude new;
+							text: eachRequestClass value name ];
+					with: ((eachModelClass withAllSuperclassRequests sorted: [ :a :b | a name < b name ])
+							collect: [ :aRequest | #model -> aRequest ]).
+				aMondrian layout explicit: BlLinearLayout vertical ]
 			in: #requests;
 		forEach: [ :eachModelClass | 
-			aMondrian nodes
-				stencil: [ :eachRequestClass | 
-					BrLabel new
-						beTiny;
-						aptitude: BrGlamorousLabelAptitude new;
-						text: eachRequestClass value name ];
-				with:
-					((eachModelClass withAllSuperclassChangeEvents
-						sorted: [ :a :b | a name < b name ])
-						collect: [ :aChangeEvent | #model -> aChangeEvent ]).
-			aMondrian layout explicit: BlLinearLayout vertical ]
+				aMondrian nodes
+					stencil: [ :eachRequestClass | 
+						BrLabel new
+							beTinySize;
+							aptitude: BrGlamorousLabelAptitude new;
+							text: eachRequestClass value name ];
+					with: ((eachModelClass withAllSuperclassChangeEvents
+							sorted: [ :a :b | a name < b name ])
+							collect: [ :aChangeEvent | #model -> aChangeEvent ]).
+				aMondrian layout explicit: BlLinearLayout vertical ]
 			in: #changeEvents;
 		forEach: [ :eachModelClass | 
-			aMondrian edges
-				passive;
-				fromRightCenter;
-				toRightCenter;
-				stencil: [ :x | 
-					BlParabollaArcElement new
-						border: (BlBorder paint: (Color blue alpha: 0.5) width: 2);
-						toHead:
-							(BlArrowheadSimpleArrow new
-								border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
-				connect:
-					(eachModelClass withAllSuperclassRequests
-						collect: [ :eachRequest | eachRequest -> eachRequest new responseClass ])
-					from: [ :each | #model -> each key ]
-					to: [ :each | #model -> each value ].
-			aMondrian layout explicit: BlLinearLayout vertical ]
+				aMondrian edges
+					passive;
+					fromRightCenter;
+					toRightCenter;
+					stencil: [ :x | 
+						BlParabollaArcElement new
+							border: (BlBorder paint: (Color blue alpha: 0.5) width: 2);
+							toHead: (BlArrowheadSimpleArrow new
+									border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
+					connect: (eachModelClass withAllSuperclassRequests
+								collect: [ :eachRequest | eachRequest -> eachRequest new responseClass ])
+						from: [ :each | #model -> each key ]
+						to: [ :each | #model -> each value ].
+				aMondrian layout explicit: BlLinearLayout vertical ]
 			in: #default.
 	aMondrian layout explicit: BlLinearLayout vertical.
 	aMondrian edges
@@ -111,8 +103,7 @@ BrDevAptitudeGraphOverview >> buildLookAndModelGraph [
 			BlSigmoidElement new
 				beHorizontal;
 				border: (BlBorder paint: (Color red alpha: 0.5) width: 2);
-				toHead:
-					(BlArrowheadSimpleArrow new
+				toHead: (BlArrowheadSimpleArrow new
 						border: (BlBorder paint: (Color red alpha: 0.5) width: 2)) ];
 		connect: self aptitudeClass withAllSuperclassRequests
 			from: [ :eachRequest | #aptitude -> eachRequest ]
@@ -125,8 +116,7 @@ BrDevAptitudeGraphOverview >> buildLookAndModelGraph [
 			BlSigmoidElement new
 				beHorizontal;
 				border: (BlBorder paint: (Color blue alpha: 0.5) width: 2);
-				toHead:
-					(BlArrowheadSimpleArrow new
+				toHead: (BlArrowheadSimpleArrow new
 						border: (BlBorder paint: (Color blue alpha: 0.5) width: 2)) ];
 		connect: self aptitudeClass withAllSuperclassChangeEvents
 			from: [ :eachEvent | #model -> eachEvent ]
