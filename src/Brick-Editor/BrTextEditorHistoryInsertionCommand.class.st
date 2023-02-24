@@ -6,7 +6,7 @@ Class {
 		'undoIndices',
 		'redoIndices'
 	],
-	#category : 'Brick-Editor-History'
+	#category : #'Brick-Editor-History'
 }
 
 { #category : #printing }
@@ -37,13 +37,22 @@ BrTextEditorHistoryInsertionCommand >> redoIndices: anObject [
 { #category : #'api - undo/redo' }
 BrTextEditorHistoryInsertionCommand >> redoOn: aBrTextEditor [
 	| anInserter |
+	
 	aBrTextEditor deselecter all deselect.
 	
 	anInserter := aBrTextEditor inserter.
-	strings
-		with: redoIndices
-		do: [ :eachString :eachIndex | anInserter text: eachString; at: eachIndex ].
+	self strings
+		with: self redoIndices
+		do: [ :eachString :eachIndex | 
+			anInserter text: eachString; at: eachIndex ].
 	anInserter insert
+]
+
+{ #category : #'api - undo/redo' }
+BrTextEditorHistoryInsertionCommand >> redoTextChangeOn: aBlText [
+	aBlText
+		insertStrings: self strings
+		atAll: self redoIndices.
 ]
 
 { #category : #accessing }
@@ -69,9 +78,27 @@ BrTextEditorHistoryInsertionCommand >> undoIndices: anObject [
 { #category : #'api - undo/redo' }
 BrTextEditorHistoryInsertionCommand >> undoOn: aBrTextEditor [
 	| aDeleter |
+	
 	aBrTextEditor deselecter all deselect.
+	
 	aDeleter := aBrTextEditor deleter.
-	strings with: undoIndices do: [ :eachString :eachIndex | 
-		aDeleter from: eachIndex to: eachIndex + eachString size ].
+	self strings 
+		with: self undoIndices 
+		do: [ :eachString :eachIndex | 
+			aDeleter from: eachIndex to: eachIndex + eachString size ].
+		
 	aDeleter delete
+]
+
+{ #category : #'api - undo/redo' }
+BrTextEditorHistoryInsertionCommand >> undoTextChangeOn: aBlText [
+	| toDeleteIntervals |
+	
+	toDeleteIntervals := self strings 
+		with: self undoIndices 
+		collect: [ :eachString :eachIndex | 
+			eachIndex + 1
+				to: eachIndex + eachString size ].
+	
+	aBlText deleteAll: toDeleteIntervals
 ]
