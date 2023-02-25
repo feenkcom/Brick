@@ -37,13 +37,29 @@ BrTextEditorHistoryDeletionCommand >> redoIndices: anObject [
 BrTextEditorHistoryDeletionCommand >> redoOn: aBrTextEditor [
 	| aDeleter |
 	aBrTextEditor deselecter all deselect.
-
+	
 	aDeleter := aBrTextEditor deleter.
 	texts
 		with: redoIndices
-		do: [ :eachText :eachIndex | aDeleter from: eachIndex - 1 to: eachIndex - 1 + eachText size ].
+		do: [ :eachText :eachIndex | 
+			aDeleter 
+				from: eachIndex - 1 
+				to: eachIndex - 1 + eachText size ].
 
 	aDeleter delete
+]
+
+{ #category : #'api - undo/redo' }
+BrTextEditorHistoryDeletionCommand >> redoTextChangeOn: aBlText [
+	| toDeleteIntervals |
+	
+	toDeleteIntervals := self texts 
+		with: self undoIndices 
+		collect: [ :eachString :eachIndex | 
+			eachIndex
+				to: eachIndex + eachString size - 1 ].
+
+	aBlText deleteAll: toDeleteIntervals
 ]
 
 { #category : #accessing }
@@ -73,11 +89,21 @@ BrTextEditorHistoryDeletionCommand >> undoOn: aBrTextEditor [
 	aBrTextEditor deselecter all deselect.
 
 	anInserter := aBrTextEditor inserter.
-	texts
-		with: undoIndices
+	self texts
+		with: self undoIndices
 		do: [ :eachText :eachIndex | 
 			anInserter
 				text: eachText characters asString;
 				at: eachIndex - 1 ].
+	
 	anInserter insert
+]
+
+{ #category : #'api - undo/redo' }
+BrTextEditorHistoryDeletionCommand >> undoTextChangeOn: aBlText [
+	aBlText
+		insertStrings: (self texts collect: [ :aText |
+			aText characters asString ])
+		atAll: (self redoIndices collect: [ :anIndex |
+			anIndex - 1 ])
 ]
