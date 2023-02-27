@@ -2,7 +2,7 @@
 # Button
 Use Glamorous buttons for actions in forms, popups or other views with support for multiple styles, sizes, states and more.
 ### Relevant documents
-{{gtClass:BrButtonExamples|label=Building a custom button look}}, {{gtClass:BrButtonModelExamples|label=Learning how button model works}}, {{gtClass:BrButtonLabelLookExamples|label=Playing with button label look}}
+{{gtClass:BrButtonExamples|label=Building a custom button look}}, {{gtClass:BrButtonModelExamples|label=Learning how button model works}}, {{gtClass:BrButtonLabelAptitudeExamples|label=Playing with button label look}}
 ## With label
 #### Default labelled button
 {{gtExample:BrGlamorousComponentsButtons>>#withLabel|previewShow=#gtLiveFor:|previewHeight=65|previewExpanded=true|codeExpanded=false}}
