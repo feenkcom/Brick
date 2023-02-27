@@ -10,14 +10,21 @@ Class {
 }
 
 { #category : #'api - cursors' }
-BrTextEditorHistoryInsertionCommand >> cursorForRedoEdit [
-	^ BrTextEditorCursor 
-		at: self redoIndices last + self strings last size
+BrTextEditorHistoryInsertionCommand >> cursorForRedoEdit [	
+	| cursorPositions |
+	cursorPositions := OrderedCollection new.
+	
+	self strings
+		with: self undoIndices
+		do: [ :eachString :eachIndex | 
+			cursorPositions add: eachIndex + eachString size ].
+	
+	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions
 ]
 
 { #category : #'api - cursors' }
 BrTextEditorHistoryInsertionCommand >> cursorForUndoEdit [
-	^ BrTextEditorCursor at: self undoIndices last
+	^ BrTextEditorCursor singleOrMultipleFor: self redoIndices
 ]
 
 { #category : #printing }

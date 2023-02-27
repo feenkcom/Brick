@@ -18,6 +18,13 @@ BrTextEditorCursor class >> atAll: aCollectionOfTextIndices [
 	^ BrTextEditorMultipleCursor new addAll: (aCollectionOfTextIndices collect: [ :aTextIndex | BrTextEditorSingleCursor at: aTextIndex ])
 ]
 
+{ #category : #'instance creation' }
+BrTextEditorCursor class >> singleOrMultipleFor: aCollectionOfTextIndices [
+	^ aCollectionOfTextIndices size = 1 
+		ifTrue: [ self at: aCollectionOfTextIndices first ]
+		ifFalse: [ self atAll: aCollectionOfTextIndices ]
+]
+
 { #category : #accessing }
 BrTextEditorCursor >> allCursors [
 	^ Array streamContents: [ :aStream | self do: [ :aCursor | aStream nextPut: aCursor ] ]

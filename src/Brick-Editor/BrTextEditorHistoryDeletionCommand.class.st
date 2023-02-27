@@ -11,12 +11,23 @@ Class {
 
 { #category : #'api - cursors' }
 BrTextEditorHistoryDeletionCommand >> cursorForRedoEdit [
-	^ BrTextEditorCursor at: self redoIndices last - 1
+	| cursorPositions |
+	cursorPositions := self undoIndices 
+		collect: [ :anIndex | anIndex - 1 ].
+	
+	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions first 
 ]
 
 { #category : #'api - cursors' }
 BrTextEditorHistoryDeletionCommand >> cursorForUndoEdit [
-	^ BrTextEditorCursor at: self undoIndices last + self texts last size - 1
+	| cursorPositions |
+	cursorPositions := OrderedCollection new.
+	self texts
+		with: self redoIndices
+		do: [ :eachText :eachIndex | 
+			cursorPositions add: eachIndex + eachText - 1 ].
+			
+	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions first 
 ]
 
 { #category : #printing }
