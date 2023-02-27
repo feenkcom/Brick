@@ -9,6 +9,24 @@ Class {
 	#category : #'Brick-Editor-History'
 }
 
+{ #category : #'api - cursors' }
+BrTextEditorHistoryInsertionCommand >> cursorForRedoEdit [	
+	| cursorPositions |
+	cursorPositions := OrderedCollection new.
+	
+	self strings
+		with: self undoIndices
+		do: [ :eachString :eachIndex | 
+			cursorPositions add: eachIndex + eachString size ].
+	
+	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions
+]
+
+{ #category : #'api - cursors' }
+BrTextEditorHistoryInsertionCommand >> cursorForUndoEdit [
+	^ BrTextEditorCursor singleOrMultipleFor: self redoIndices
+]
+
 { #category : #printing }
 BrTextEditorHistoryInsertionCommand >> gtDisplayOn: aStream [
 	
