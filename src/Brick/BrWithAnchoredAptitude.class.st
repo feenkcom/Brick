@@ -250,25 +250,21 @@ BrWithAnchoredAptitude >> root: anElement [
 
 { #category : #'api - displaying' }
 BrWithAnchoredAptitude >> show [
-	self canShow
-		ifFalse: [ ^ self ].
-	
+	self canShow ifFalse: [ ^ self ].
+
 	self flag: 'TODO extentChangedEventHandler really needed on inner container?'.
-	innerContainer := stencil asElement
-		addEventHandler: extentChangedEventHandler;
-		yourself.
-	
-	self onAnchoredElementCreated: innerContainer.	
-	
-	watchDog isRunning ifFalse:
-		[ innerContainer enqueueTask: watchDog ].
-	
+	innerContainer := stencil asElement addEventHandler: extentChangedEventHandler.
+
+	self onAnchoredElementCreated: innerContainer.
+
+	watchDog isRunning ifFalse: [ innerContainer enqueueTask: watchDog ].
+
 	self flag: 'TODO get rid of having to set anchor'.
-	innerContainer anchor: widget.	
-	
+	innerContainer anchor: widget.
+
 	outerContainer := BrAnchoredOuterContainer new
-		addChild: innerContainer;
-		yourself.
+			addChild: innerContainer;
+			yourself.
 	self root
 		addChild: outerContainer;
 		addEventFilter: clickOutsideEventHandler;

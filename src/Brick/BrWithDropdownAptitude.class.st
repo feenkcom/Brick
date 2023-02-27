@@ -21,12 +21,12 @@ BrWithDropdownAptitude class >> anchoredAptitudeClass [
 
 { #category : #accessing }
 BrWithDropdownAptitude class >> content: anObject [
-	^ self stencil: [
-		BrAnchoredElement new
-			aptitude: (self anchoredAptitude
-				content: anObject asStencil asElement;
-				yourself);
-			yourself ]
+	^ self
+		stencil: [ BrAnchoredElement new
+				aptitude: (self anchoredAptitude
+						content: (self withResizingContainer: anObject asStencil asElement);
+						yourself);
+				yourself ]
 ]
 
 { #category : #'instance creation' }
@@ -42,13 +42,26 @@ BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitude
 	^ self
 		stencil: [ | anAnchoredLook |
 			anAnchoredLook := self anchoredAptitude
-				handle: anObject asStencil asElement;
-				content: anotherObject asStencil asElement;
-				yourself.
+					handle: anObject asStencil asElement;
+					content: (self withResizingContainer: anotherObject asStencil asElement);
+					yourself.
 			aBlock value: anAnchoredLook.
 			BrAnchoredElement new
 				aptitude: anAnchoredLook;
 				yourself ]
+]
+
+{ #category : #'instance creation' }
+BrWithDropdownAptitude class >> withResizingContainer: anElement [
+	^ BlElement new
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c | 
+			c horizontal fitContent.
+			c vertical fitContent ];
+		addChild: anElement;
+		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
+				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
+				+ BrGlamorousWithVerticalResizerAptitude new
 ]
 
 { #category : #'api - displaying' }
