@@ -9,6 +9,17 @@ Class {
 	#category : #'Brick-Editor-History'
 }
 
+{ #category : #'api - cursors' }
+BrTextEditorHistoryInsertionCommand >> cursorForRedoEdit [
+	^ BrTextEditorCursor 
+		at: self redoIndices last + self strings last size
+]
+
+{ #category : #'api - cursors' }
+BrTextEditorHistoryInsertionCommand >> cursorForUndoEdit [
+	^ BrTextEditorCursor at: self undoIndices last
+]
+
 { #category : #printing }
 BrTextEditorHistoryInsertionCommand >> gtDisplayOn: aStream [
 	

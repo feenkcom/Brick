@@ -9,6 +9,16 @@ Class {
 	#category : #'Brick-Editor-History'
 }
 
+{ #category : #'api - cursors' }
+BrTextEditorHistoryDeletionCommand >> cursorForRedoEdit [
+	^ BrTextEditorCursor at: self redoIndices last - 1
+]
+
+{ #category : #'api - cursors' }
+BrTextEditorHistoryDeletionCommand >> cursorForUndoEdit [
+	^ BrTextEditorCursor at: self undoIndices last + self texts last size - 1
+]
+
 { #category : #printing }
 BrTextEditorHistoryDeletionCommand >> gtDisplayOn: aStream [
 	aStream nextPutAll: 'Delete'.
