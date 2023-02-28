@@ -5,7 +5,8 @@ Class {
 		'hideWishHandler',
 		'clickShowCondition',
 		'shouldHideWidget',
-		'isResizable'
+		'isResizable',
+		'whenResizedHandler'
 	],
 	#category : #'Brick-Dropdown - Look'
 }
@@ -109,12 +110,18 @@ BrWithDropdownAptitude >> beResizable [
 ]
 
 { #category : #private }
+BrWithDropdownAptitude >> createResizeAptitudeWith: anAptitude [
+	whenResizedHandler ifNotNil: [ anAptitude whenResizedDo: whenResizedHandler ].
+	^ anAptitude
+]
+
+{ #category : #private }
 BrWithDropdownAptitude >> createResizerOn: anElement [
 	self isResizable ifFalse: [ ^ anElement ].
 	^ anElement
-		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
-				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
-				+ BrGlamorousWithVerticalResizerAptitude new
+		addAptitude: (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new)
+				+ (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
 ]
 
 { #category : #'api - displaying' }
@@ -315,4 +322,9 @@ BrWithDropdownAptitude >> stencil: aValuable [
 	stencil := BrDropdownContentStencil new
 			contentStencil: aValuable;
 			decorator: [ :anElement | self createResizerOn: anElement ]
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> whenResizedDo: aBlock [
+	whenResizedHandler := aBlock
 ]
