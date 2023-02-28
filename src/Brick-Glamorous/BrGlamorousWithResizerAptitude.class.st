@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : 'Brick-Glamorous-Resizer'
+	#category : #'Brick-Glamorous-Resizer'
 }
 
 { #category : #'api - visibility' }
@@ -41,4 +41,9 @@ BrGlamorousWithResizerAptitude >> resizerDo: aBlock [
 { #category : #'api - visibility' }
 BrGlamorousWithResizerAptitude >> showResizer [
 	self resizerDo: [ :aResizer | aResizer visibility: BlVisibility visible ]
+]
+
+{ #category : #'api - event handlers' }
+BrGlamorousWithResizerAptitude >> whenResizedDo: aBlock [
+	self resizerDo: [ :aResizer | aResizer when: BlResizerResizedEvent do: aBlock ]
 ]

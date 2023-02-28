@@ -22,9 +22,9 @@ BrWithDropdownAptitude class >> anchoredAptitudeClass [
 { #category : #accessing }
 BrWithDropdownAptitude class >> content: anObject [
 	^ self
-		stencil: [ BrAnchoredElement new
+		stencil: [ :aDecorator | BrAnchoredElement new
 				aptitude: (self anchoredAptitude
-						content: (self withResizingContainer: anObject asStencil asElement);
+						content: (aDecorator value: anObject asStencil asElement);
 						yourself);
 				yourself ]
 ]
@@ -40,28 +40,15 @@ BrWithDropdownAptitude class >> handle: anObject content: anotherObject [
 { #category : #'instance creation' }
 BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitudeDo: aBlock [
 	^ self
-		stencil: [ | anAnchoredLook |
+		stencil: [ :aDecorator | | anAnchoredLook |
 			anAnchoredLook := self anchoredAptitude
 					handle: anObject asStencil asElement;
-					content: (self withResizingContainer: anotherObject asStencil asElement);
+					content: (aDecorator value: anotherObject asStencil asElement);
 					yourself.
 			aBlock value: anAnchoredLook.
 			BrAnchoredElement new
 				aptitude: anAnchoredLook;
 				yourself ]
-]
-
-{ #category : #'instance creation' }
-BrWithDropdownAptitude class >> withResizingContainer: anElement [
-	^ BlElement new
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c | 
-			c horizontal fitContent.
-			c vertical fitContent ];
-		addChild: anElement;
-		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
-				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
-				+ BrGlamorousWithVerticalResizerAptitude new
 ]
 
 { #category : #'api - displaying' }
@@ -108,6 +95,14 @@ BrWithDropdownAptitude >> attachToCenter [
 						removeAptitude: BrDropdownTopLeftAptitude;
 						addAptitude: BrDropdownTopRightAptitude ] ];
 		build.
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> createResizerOn: anElement [
+	^ anElement
+		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
+				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
+				+ BrGlamorousWithVerticalResizerAptitude new
 ]
 
 { #category : #'api - displaying' }
@@ -294,4 +289,11 @@ BrWithDropdownAptitude >> show [
 
 	self shouldHideWidget
 		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ]
+]
+
+{ #category : #'api - displaying' }
+BrWithDropdownAptitude >> stencil: aValuable [
+	stencil := BrDropdownContentStencil new
+			contentStencil: aValuable;
+			decorator: [ :anElement | self createResizerOn: anElement ]
 ]
