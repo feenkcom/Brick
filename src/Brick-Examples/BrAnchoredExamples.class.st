@@ -1,26 +1,27 @@
 Class {
 	#name : #BrAnchoredExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Anchored'
+	#category : #'Brick-Examples-Anchored'
 }
 
 { #category : #accessing }
 BrAnchoredExamples >> contextMenu [
 	<gtExample>
-	| handle content container anchor anchorContainer |
-	handle := BlElement new
-		size: 8 @ 8;
-		yourself.
-	content := (BrLabel new
+	| handleSize handle content container anchor anchorContainer |
+	handleSize := 8 @ 8.
+	handle := [ BlElement new
+		size: handleSize;
+		yourself ] asStencil.
+	content := [ (BrLabel new
 		aptitude:
 			(BrGlamorousLabelAptitude new
 				glamorousRegularFontAndSize;
 				yourself);
-		padding: (BlInsets all: handle width);
+		padding: (BlInsets all: handleSize x);
 		text: 'look at me!';
 		yourself) asScrollableElement
 		alignCenter;
-		yourself.
+		yourself ] asStencil.
 	container := BlElement new
 		background: Color gray muchLighter;
 		layout: BlLinearLayout vertical;
@@ -56,20 +57,21 @@ BrAnchoredExamples >> contextMenu [
 { #category : #accessing }
 BrAnchoredExamples >> dropdown [
 	<gtExample>
-	| handle content container anchor anchorContainer |
-	handle := BlElement new
-		size: 50 @ 50;
-		yourself.
-	content := (BrLabel new
+	| handleSize handle content container anchor anchorContainer |
+	handleSize := 50 @ 50.
+	handle := [ BlElement new
+		size: handleSize;
+		yourself ] asStencil.
+	content := [ (BrLabel new
 		aptitude:
 			(BrGlamorousLabelAptitude new
 				glamorousRegularFontAndSize;
 				yourself);
-		padding: (BlInsets all: handle width);
+		padding: (BlInsets all: handleSize x);
 		text: 'look at me!';
 		yourself) asScrollableElement
 		alignCenter;
-		yourself.
+		yourself ] asStencil.
 	container := BlElement new
 		background: Color gray muchLighter;
 		layout: BlLinearLayout vertical;
@@ -109,13 +111,13 @@ BrAnchoredExamples >> dropdown [
 BrAnchoredExamples >> tooltip [
 	<gtExample>
 	| tip |
-	tip := BrLabel new
+	tip := [ BrLabel new
 		aptitude: (BrGlamorousLabelAptitude new glamorousRegularFontAndSize);
 		padding: (BlInsets all: 20);
 		text: 'no transformation affects me!';
-		alignCenter.
+		alignCenter ] asStencil.
 	^ BlElement new
-		aptitude: (BrGlamorousWithTooltipAptitude2 content: tip);
+		aptitude: (BrGlamorousWithTooltipAptitude content: tip);
 		background: Color red;
 		size: 80 @ 100;
 		addEventHandler: BlPullHandler new.
