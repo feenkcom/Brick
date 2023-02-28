@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'hideWishHandler',
 		'clickShowCondition',
-		'shouldHideWidget'
+		'shouldHideWidget',
+		'isResizable'
 	],
 	#category : #'Brick-Dropdown - Look'
 }
@@ -22,9 +23,9 @@ BrWithDropdownAptitude class >> anchoredAptitudeClass [
 { #category : #accessing }
 BrWithDropdownAptitude class >> content: anObject [
 	^ self
-		stencil: [ BrAnchoredElement new
+		stencil: [ :aDecorator | BrAnchoredElement new
 				aptitude: (self anchoredAptitude
-						content: (self withResizingContainer: anObject asStencil asElement);
+						content: (aDecorator value: anObject asStencil asElement);
 						yourself);
 				yourself ]
 ]
@@ -40,28 +41,15 @@ BrWithDropdownAptitude class >> handle: anObject content: anotherObject [
 { #category : #'instance creation' }
 BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitudeDo: aBlock [
 	^ self
-		stencil: [ | anAnchoredLook |
+		stencil: [ :aDecorator | | anAnchoredLook |
 			anAnchoredLook := self anchoredAptitude
 					handle: anObject asStencil asElement;
-					content: (self withResizingContainer: anotherObject asStencil asElement);
+					content: (aDecorator value: anotherObject asStencil asElement);
 					yourself.
 			aBlock value: anAnchoredLook.
 			BrAnchoredElement new
 				aptitude: anAnchoredLook;
 				yourself ]
-]
-
-{ #category : #'instance creation' }
-BrWithDropdownAptitude class >> withResizingContainer: anElement [
-	^ BlElement new
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c | 
-			c horizontal fitContent.
-			c vertical fitContent ];
-		addChild: anElement;
-		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
-				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
-				+ BrGlamorousWithVerticalResizerAptitude new
 ]
 
 { #category : #'api - displaying' }
@@ -110,6 +98,25 @@ BrWithDropdownAptitude >> attachToCenter [
 		build.
 ]
 
+{ #category : #accessing }
+BrWithDropdownAptitude >> beNotResizable [
+	isResizable := false
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> beResizable [
+	isResizable := true
+]
+
+{ #category : #private }
+BrWithDropdownAptitude >> createResizerOn: anElement [
+	self isResizable ifFalse: [ ^ anElement ].
+	^ anElement
+		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
+				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
+				+ BrGlamorousWithVerticalResizerAptitude new
+]
+
 { #category : #'api - displaying' }
 BrWithDropdownAptitude >> doNotHideWidget [
 	self shouldHideWidget: false
@@ -150,6 +157,8 @@ BrWithDropdownAptitude >> hide [
 { #category : #initialization }
 BrWithDropdownAptitude >> initialize [
 	super initialize.
+	
+	isResizable := true.
 	
 	hideWishHandler := BlEventHandler
 		on: BrDropdownHideWish
@@ -247,6 +256,11 @@ BrWithDropdownAptitude >> initializeRequests [
 	self request: BrDropdownVisibleRequest new
 ]
 
+{ #category : #accessing }
+BrWithDropdownAptitude >> isResizable [
+	^ isResizable
+]
+
 { #category : #'private - testing' }
 BrWithDropdownAptitude >> isWidgetEnabled [	
 	self widgetDo: [ :aWidget | ^ (aWidget states hasState: BlElementState disabled) not ].
@@ -294,4 +308,11 @@ BrWithDropdownAptitude >> show [
 
 	self shouldHideWidget
 		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ]
+]
+
+{ #category : #'api - displaying' }
+BrWithDropdownAptitude >> stencil: aValuable [
+	stencil := BrDropdownContentStencil new
+			contentStencil: aValuable;
+			decorator: [ :anElement | self createResizerOn: anElement ]
 ]

@@ -42,3 +42,8 @@ BrGlamorousWithResizerAptitude >> resizerDo: aBlock [
 BrGlamorousWithResizerAptitude >> showResizer [
 	self resizerDo: [ :aResizer | aResizer visibility: BlVisibility visible ]
 ]
+
+{ #category : #'api - event handlers' }
+BrGlamorousWithResizerAptitude >> whenResizedDo: aBlock [
+	self resizerDo: [ :aResizer | aResizer when: BlResizerResizedEvent do: aBlock ]
+]
