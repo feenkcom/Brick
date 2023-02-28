@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'hideWishHandler',
 		'clickShowCondition',
-		'shouldHideWidget'
+		'shouldHideWidget',
+		'isResizable'
 	],
 	#category : #'Brick-Dropdown - Look'
 }
@@ -98,7 +99,18 @@ BrWithDropdownAptitude >> attachToCenter [
 ]
 
 { #category : #accessing }
+BrWithDropdownAptitude >> beNotResizable [
+	isResizable := false
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> beResizable [
+	isResizable := true
+]
+
+{ #category : #private }
 BrWithDropdownAptitude >> createResizerOn: anElement [
+	self isResizable ifFalse: [ ^ anElement ].
 	^ anElement
 		addAptitude: BrGlamorousWithHorizontalResizerAptitude new
 				+ BrGlamorousWithHorizontalResizerAptitude new beLeft
@@ -145,6 +157,8 @@ BrWithDropdownAptitude >> hide [
 { #category : #initialization }
 BrWithDropdownAptitude >> initialize [
 	super initialize.
+	
+	isResizable := true.
 	
 	hideWishHandler := BlEventHandler
 		on: BrDropdownHideWish
@@ -240,6 +254,11 @@ BrWithDropdownAptitude >> initializeRequests [
 
 	self request: BrDropdownStencilRequest new.
 	self request: BrDropdownVisibleRequest new
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> isResizable [
+	^ isResizable
 ]
 
 { #category : #'private - testing' }
