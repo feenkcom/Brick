@@ -30,8 +30,7 @@ BrAnchoredPositionerByScripterExamples >> addLegend: anElement label: label into
 BrAnchoredPositionerByScripterExamples >> anchorPosition: aBlock relocateAnchored: anotherBlock assertAnchoredMaxBounds: yetAnotherBlock [
 	<gtExample>
 	| aScripter |
-	aScripter := self
-			scripterWithElement: [ :aModel :theScripter | self rootContainerWithUserData: theScripter userData ].
+	aScripter := self scripterWithElement: [ :aModel | self rootContainer ].
 	aScripter do
 		label: 'Define space extent';
 		block: [ :aSpace | aSpace extent: 800 @ 600 ];
@@ -40,73 +39,58 @@ BrAnchoredPositionerByScripterExamples >> anchorPosition: aBlock relocateAnchore
 
 	aScripter do
 		label: 'Relocate anchor';
-		block: [ :theScripter | 
+		block: [ :theRootContainer | 
 			| positioner |
-			positioner := theScripter userData at: #container_positioner.
+			positioner := theRootContainer userData at: #anchoredPositioner.
 			positioner anchor
-				relocate: (aBlock 
-					cull: positioner target 
-					cull: positioner anchor) ];
-		onScripter;
+				relocate: (aBlock cull: positioner target cull: positioner anchor) ];
 		play.
 
 	aScripter do
 		label: 'Resize and relocate popup';
-		block: [ :theScripter | 
+		block: [ :theRootContainer | 
 			| positioner popupSize popupPreferredMaxBoundsInTarget popup |
-			positioner := theScripter userData at: #container_positioner.
+			positioner := theRootContainer userData at: #anchoredPositioner.
 			popupSize := positioner target size / 4.
 			popupPreferredMaxBoundsInTarget := positioner
 					maxBoundsPreferredInTarget: popupSize.
-			theScripter userData
+			theRootContainer userData
 				at: #popupPreferredMaxBoundsInTarget
 				put: popupPreferredMaxBoundsInTarget.
 
-			popup := theScripter userData at: #container_popup.
+			popup := (theRootContainer query // #popup) result first.
 			popup
 				size: popupSize;
-				relocate: (anotherBlock 
-					cull: popupPreferredMaxBoundsInTarget 
-					cull: popupSize) ];
-		onScripter;
+				relocate: (anotherBlock cull: popupPreferredMaxBoundsInTarget cull: popupSize) ];
 		play.
 
 	aScripter assert
 		label: 'Assert popup bounds in target';
-		value: [ :theScripter | theScripter userData at: #popupPreferredMaxBoundsInTarget ]
-			equals: [ :theScripter | 
+		value: [ :theRootContainer | theRootContainer userData at: #popupPreferredMaxBoundsInTarget ]
+			equals: [ :theRootContainer | 
 				| positioner popup |
-				positioner := theScripter userData at: #container_positioner.
-				popup := theScripter userData at: #container_popup.
+				positioner := theRootContainer userData at: #anchoredPositioner.
+				popup := (theRootContainer query // #popup) result first.
 
 				yetAnotherBlock
 					cull: positioner target
 					cull: positioner anchor
 					cull: popup ];
-		onScripter;
 		play.
 
 	^ aScripter
 ]
 
-{ #category : #'examples  - anchor' }
+{ #category : #'examples - element' }
 BrAnchoredPositionerByScripterExamples >> rootContainer [
 	<gtExample>
-	^ self rootContainerWithUserData: nil
-]
-
-{ #category : #'examples  - anchor' }
-BrAnchoredPositionerByScripterExamples >> rootContainerWithUserData: aUserData [
-	<gtExample>
-	| screenContainer targetContainer example positioner anchor target anchorContainer popup rootContainer legendContainer |
-	example := self.
-
-	positioner := example anchoredPositioner.
+	| screenContainer targetContainer positioner anchor target anchorContainer popup rootContainer legendContainer |
+	positioner := self anchoredPositioner.
 	anchor := positioner anchor.
 	target := positioner target.
-	anchorContainer := example anchorContainer.
-	targetContainer := example targetContainer.
-	popup := example popup.
+	anchorContainer := self anchorContainer.
+	targetContainer := self targetContainer.
+	popup := self popup.
 	anchor constraintsDo: [ :c | c ignoreByLayout ].
 	popup constraintsDo: [ :c | c ignoreByLayout ].
 	targetContainer addChild: target as: #target.
@@ -120,10 +104,6 @@ BrAnchoredPositionerByScripterExamples >> rootContainerWithUserData: aUserData [
 				c horizontal matchParent.
 				c vertical matchParent ].
 	screenContainer addChild: targetContainer as: #targetContainer.
-
-	aUserData
-		ifNotNil: [ aUserData at: #container_positioner put: positioner.
-			aUserData at: #container_popup put: popup ].
 
 	legendContainer := BlElement new
 			layout: BlLinearLayout horizontal;
@@ -161,6 +141,8 @@ BrAnchoredPositionerByScripterExamples >> rootContainerWithUserData: aUserData [
 			addChild: screenContainer as: #screenContainer;
 			addChild: legendContainer as: #legendContainer;
 			id: #rootContainer.
+
+	rootContainer userData at: #anchoredPositioner put: positioner.
 
 	^ rootContainer
 ]
