@@ -9,7 +9,7 @@ BrAnchoredPositionerExamples >> anchor [
 	<gtExample>
 	^ BlElement new
 		size: 30 @ 20;
-		background: Color green;
+		background: (Color purple);
 		yourself
 ]
 
@@ -18,7 +18,7 @@ BrAnchoredPositionerExamples >> anchorContainer [
 	<gtExample>
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
-		background: Color yellow;
+		background: Color tan;
 		padding:
 			(BlInsets
 				top: 5
@@ -118,7 +118,7 @@ BrAnchoredPositionerExamples >> popup [
 	<gtExample>
 	^ BlElement new
 		background: Color white;
-		border: (BlBorder paint: Color blue asBlPaint width: 1);
+		border: (BlBorder paint: Color purple asBlPaint width: 1);
 		yourself
 ]
 
@@ -129,7 +129,7 @@ BrAnchoredPositionerExamples >> target [
 		layout: BlLinearLayout horizontal;
 		size: 300 @ 200;
 		transformDo: [ :t | t scaleBy: 0.5 @ 0.5 ];
-		background: Color orange;
+		background: Color gray;
 		padding:
 			(BlInsets
 				top: 5
@@ -144,7 +144,7 @@ BrAnchoredPositionerExamples >> targetContainer [
 	<gtExample>
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
-		background: Color red;
+		background: Color veryVeryLightGray;
 		padding:
 			(BlInsets
 				top: 5
