@@ -61,48 +61,36 @@ BrWithContextMenuAptitude >> initialize [
 				referencePoint: [ position + (4 negated @ 4 negated) ];
 				availableBounds: BrAnchoredBottomRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
-						remove: BrContextMenuBottomLeftAptitude;
-						remove: BrContextMenuTopRightAptitude;
-						remove: BrContextMenuTopLeftAptitude;
-						remove: BrContextMenuRightAptitude ].
-						innerContainer addAptitude: BrContextMenuBottomRightAptitude ] ];
+				apply: [
+					self removeInnerContainerContextMenuAptitudes.
+					innerContainer addAptitude: BrContextMenuBottomRightAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: [ position + (4 @ 4 negated) ];
 				availableBounds: BrAnchoredBottomLeftAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
-						remove: BrContextMenuBottomRightAptitude;
-						remove: BrContextMenuTopRightAptitude;
-						remove: BrContextMenuTopLeftAptitude;
-						remove: BrContextMenuRightAptitude ].
-						innerContainer addAptitude: BrContextMenuBottomLeftAptitude ] ];
+				apply: [
+					self removeInnerContainerContextMenuAptitudes.
+					innerContainer addAptitude: BrContextMenuBottomLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: [ position + (4 negated @ 4) ];
 				availableBounds: BrAnchoredTopRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
-						remove: BrContextMenuBottomRightAptitude;
-						remove: BrContextMenuBottomLeftAptitude;
-						remove: BrContextMenuTopLeftAptitude;
-						remove: BrContextMenuRightAptitude ].
-						innerContainer addAptitude: BrContextMenuTopRightAptitude ] ];
+				apply: [
+					self removeInnerContainerContextMenuAptitudes.
+					innerContainer addAptitude: BrContextMenuTopRightAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: [ position + (4 @ 4) ];
 				availableBounds: BrAnchoredTopLeftAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
-						remove: BrContextMenuBottomRightAptitude;
-						remove: BrContextMenuBottomLeftAptitude;
-						remove: BrContextMenuTopRightAptitude;
-						remove: BrContextMenuRightAptitude ].
-						innerContainer addAptitude: BrContextMenuTopLeftAptitude ] ];
+				apply: [ 
+					self removeInnerContainerContextMenuAptitudes.
+					innerContainer addAptitude: BrContextMenuTopLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
@@ -110,14 +98,10 @@ BrWithContextMenuAptitude >> initialize [
 				availableBounds: BrAnchoredRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
 				apply: [
-					innerContainer aptitudeDo: [ :anAptitude | anAptitude
-						remove: BrContextMenuBottomRightAptitude;
-						remove: BrContextMenuBottomLeftAptitude;
-						remove: BrContextMenuTopRightAptitude;
-						remove: BrContextMenuRightAptitude ].
-						innerContainer addAptitude: (BrContextMenuRightAptitude new 
-							position: position;
-							element: self root) ] ];
+					self removeInnerContainerContextMenuAptitudes.
+					innerContainer addAptitude: (BrContextMenuRightAptitude new 
+						position: position;
+						element: self root) ] ];
 		build.
 ]
 
@@ -191,6 +175,18 @@ BrWithContextMenuAptitude >> onMouseUp: anEvent [
 
 	position := self root globalPointToLocal: anEvent position.
 	self show
+]
+
+{ #category : #private }
+BrWithContextMenuAptitude >> removeInnerContainerContextMenuAptitudes [
+	innerContainer
+		aptitudeDo: [ :anAptitude | 
+			anAptitude 
+				- BrContextMenuTopLeftAptitude 
+				- BrContextMenuTopRightAptitude
+				- BrContextMenuBottomLeftAptitude 
+				- BrContextMenuBottomRightAptitude
+				- BrContextMenuRightAptitude ]
 ]
 
 { #category : #'api - context menu' }
