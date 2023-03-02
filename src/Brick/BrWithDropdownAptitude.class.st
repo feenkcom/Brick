@@ -183,41 +183,29 @@ BrWithDropdownAptitude >> initialize [
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredTopLeftReferencePoint;
 				availableBounds: BrAnchoredBottomRightAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomLeftAptitude;
-						removeAptitude: BrDropdownTopLeftAptitude;
-						removeAptitude: BrDropdownTopRightAptitude;
-						addAptitude: BrDropdownBottomRightAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownBottomRightAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredTopRightReferencePoint;
 				availableBounds: BrAnchoredBottomLeftAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownTopLeftAptitude;
-						removeAptitude: BrDropdownTopRightAptitude;
-						addAptitude: BrDropdownBottomLeftAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownBottomLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredBottomLeftReferencePoint;
 				availableBounds: BrAnchoredTopRightAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownBottomLeftAptitude;
-						removeAptitude: BrDropdownTopRightAptitude;
-						addAptitude: BrDropdownTopLeftAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownTopLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredBottomRightReferencePoint;
 				availableBounds: BrAnchoredTopLeftAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownBottomLeftAptitude;
-						removeAptitude: BrDropdownTopLeftAptitude;
-						addAptitude: BrDropdownTopRightAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownTopRightAptitude ] ];
 		build.
 ]
 
@@ -292,6 +280,19 @@ BrWithDropdownAptitude >> onControlClick [
 { #category : #'api - displaying' }
 BrWithDropdownAptitude >> onPrimaryClick [
 	clickShowCondition := [ :anEvent | anEvent modifiers isPrimaryModifier ]
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> removeInnerContainerDropdownAptitudes [
+	innerContainer
+		aptitudeDo: [ :anAptitude | 
+			anAptitude 
+				- BrDropdownBottomLeftAptitude 
+				- BrDropdownBottomRightAptitude
+				- BrDropdownTopLeftAptitude 
+				- BrDropdownTopRightAptitude
+				- BrDropdownBottomLeftAptitude 
+				- BrDropdownBottomRightAptitude ]
 ]
 
 { #category : #'api - displaying' }

@@ -6,7 +6,91 @@ Class {
 	#category : #'Brick-Examples-Anchored'
 }
 
-{ #category : #'examples - element' }
+{ #category : #'examples - context menu' }
+BrAnchoredByScripterExamples >> dropdownBottomRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithDropdown ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+
+	aScripter click
+		label: 'Open dropdown';
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown extent';
+		value: [ :aContentElement | aContentElement extent ]
+			equals: [ :aContentElement | 
+				| aChild |
+				aChild := (aContentElement childWithId: #labelContent).
+				aChild extent + aChild margin extent ];
+		onSpaceRoot;
+		onBreadthFirstChildOfClass: BrAnchoredOuterContainer;
+		onChildOfClass: BrAnchoredElement;
+		id: #content;
+		play.
+
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrAnchoredByScripterExamples >> elementWithDropdown [
+	<gtExample>
+	| handleSize handle content container anchor anchorContainer |
+	handleSize := 50 @ 50.
+	handle := [ BlElement new
+		size: handleSize;
+		yourself ] asStencil.
+	content := [ (BrLabel new
+		id: #labelContent;
+		aptitude:
+			(BrGlamorousLabelAptitude new
+				glamorousRegularFontAndSize;
+				yourself);
+		padding: (BlInsets all: handleSize x);
+		text: 'look at me!';
+		yourself) asScrollableElement
+		alignCenter;
+		yourself ] asStencil.
+	container := BlElement new
+		background: Color gray muchLighter;
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ];
+		yourself.
+	anchor := BlElement new
+		id: #dropdownAnchor;
+		aptitude:
+			((BrGlamorousWithDropdownAptitude handle: handle content: content)
+				root: container;
+				yourself);
+		background: Color red;
+		size: 40 @ 80;
+		addEventHandler: BlPullHandler new;
+		yourself.
+	anchorContainer := BlElement new
+		id: #contextMenuAnchor;
+		background: Color red muchLighter;
+		relocate: 200 @ 250;
+		size: 400 @ 200;
+		constraintsDo: [ :c | c ignoreByLayout ];
+		clipChildren: false;
+		addChild: anchor;
+		yourself.
+	^ container
+		addChild: anchorContainer;
+		yourself
+]
+
+{ #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 	<gtExample>
 	| handleSize handle content container anchor anchorContainer |
@@ -57,7 +141,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 		yourself
 ]
 
-{ #category : #'examples - in scripter' }
+{ #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	<gtExample>
 	| aScripter |
@@ -94,7 +178,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	^ aScripter
 ]
 
-{ #category : #'examples - in scripter' }
+{ #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> longContextMenuTheRight [
 	<gtExample>
 	| aScripter |
