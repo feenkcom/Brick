@@ -6,7 +6,7 @@ Class {
 	#category : #'Brick-Examples-Anchored'
 }
 
-{ #category : #'examples - context menu' }
+{ #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> dropdownBottomRight [
 	<gtExample>
 	| aScripter |
@@ -110,7 +110,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 											glamorousRegularFontAndSize;
 											yourself);
 									padding: (BlInsets all: handleSize x);
-									text: 'item ' , anIndex asString;
+									text: anIndex asString, ' - item with some extra text';
 									yourself) ] ];
 			yourself) asScrollableElement
 			alignCenter;
@@ -152,10 +152,10 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 		block: [ :aSpace | aSpace extent: 300 @ 500 ];
 		onSpace;
 		play.
-		
-	aScripter do 
+
+	aScripter do
 		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 300@0 ];
+		block: [ :anAnchor | anAnchor relocate: 300 @ 0 ];
 		id: #contextMenuAnchor;
 		play.
 
@@ -165,14 +165,73 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 		play.
 
 	aScripter assert
-		label: 'Assert context menu height';
-		value: [ :aPane | aPane height ]
+		label: 'Assert context menu extent';
+		value: [ :aPane | aPane extent ]
+			equals: [ :aPane | 
+				| aChild |
+				aChild := aPane childWithId: #itemsContainer.
+				aChild extent + aChild margin extent ];
+		onSpaceRoot;
+		id: #itemsScrollableContainer;
+		play.
+
+	aScripter assert
+		label: 'Assert anchored element height';
+		value: [ :anInnerContainer | anInnerContainer height ]
+			equals: [ :anInnerContainer | 
+				| aChild |
+				aChild := anInnerContainer childWithId: #itemsScrollableContainer.
+				aChild height + aChild margin height ];
+		onSpaceRoot;
+		// BrAnchoredElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 500 ];
+		onSpace;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 310@0 ];
+		id: #contextMenuAnchor;
+		play.
+
+	aScripter secondaryClick
+		label: 'Open context menu';
+		id: #contextMenuAnchor;
+		play.
+
+	aScripter assert
+		label: 'Assert context menu extent';
+		value: [ :aPane | aPane extent ]
 			equals: [ :aPane | 
 				| aChild |
 				aChild := (aPane childWithId: #itemsContainer).
-				aChild height + aChild margin height ];
+				aChild extent + aChild margin extent ];
 		onSpaceRoot;
 		id: #itemsScrollableContainer;
+		play.
+		
+	aScripter assert
+		label: 'Assert anchored element height';
+		value: [ :anInnerContainer | anInnerContainer height ]
+			equals: [ :anInnerContainer | 
+				| aChild |
+				aChild := (anInnerContainer childWithId: #itemsScrollableContainer).
+				aChild height + aChild margin height ];
+		onSpaceRoot;
+		// BrAnchoredElement;
 		play.
 
 	^ aScripter
@@ -196,14 +255,73 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 		play.
 
 	aScripter assert
-		label: 'Assert context menu height';
-		value: [ :aPane | aPane height ]
+		label: 'Assert context menu extent';
+		value: [ :aPane | aPane extent ]
 			equals: [ :aPane | 
 				| aChild |
 				aChild := (aPane childWithId: #itemsContainer).
-				aChild height + aChild margin height ];
+				aChild extent + aChild margin extent ];
 		onSpaceRoot;
 		id: #itemsScrollableContainer;
+		play.
+		
+	aScripter assert
+		label: 'Assert anchored element height';
+		value: [ :anInnerContainer | anInnerContainer height ]
+			equals: [ :anInnerContainer | 
+				| aChild |
+				aChild := (anInnerContainer childWithId: #itemsScrollableContainer).
+				aChild height + aChild margin height ];
+		onSpaceRoot;
+		// BrAnchoredElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 500 ];
+		onSpace;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 309@0 ];
+		id: #contextMenuAnchor;
+		play.
+
+	aScripter secondaryClick
+		label: 'Open context menu';
+		id: #contextMenuAnchor;
+		play.
+
+	aScripter assert
+		label: 'Assert context menu extent';
+		value: [ :aPane | aPane extent ]
+			equals: [ :aPane | 
+				| aChild |
+				aChild := (aPane childWithId: #itemsContainer).
+				aChild extent + aChild margin extent ];
+		onSpaceRoot;
+		id: #itemsScrollableContainer;
+		play.
+		
+	aScripter assert
+		label: 'Assert anchored element height';
+		value: [ :anInnerContainer | anInnerContainer height ]
+			equals: [ :anInnerContainer | 
+				| aChild |
+				aChild := (anInnerContainer childWithId: #itemsScrollableContainer).
+				aChild height + aChild margin height ];
+		onSpaceRoot;
+		// BrAnchoredElement;
 		play.
 
 	^ aScripter
