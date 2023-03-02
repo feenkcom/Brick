@@ -1,10 +1,10 @@
 "
-Display a context menu to the right of an anchor.
+Display a context menu to the left of an anchor.
 #Example
-{{gtExample: BrAnchoredByScripterExamples >> #longContextMenuTheRight | codeExpanded=false | previewExpanded=true | previewShow=#gtSpaceFor: | previewHeight=600}}
+{{gtExample: BrAnchoredByScripterExamples >> #longContextMenuTheLeft | codeExpanded=false | previewExpanded=true | previewShow=#gtSpaceFor: | previewHeight=600}}
 "
 Class {
-	#name : #BrContextMenuRightAptitude,
+	#name : #BrContextMenuLeftAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
 		'element',
@@ -14,12 +14,12 @@ Class {
 }
 
 { #category : #accessing }
-BrContextMenuRightAptitude >> element: anObject [
+BrContextMenuLeftAptitude >> element: anObject [
 	element := anObject
 ]
 
 { #category : #initialization }
-BrContextMenuRightAptitude >> initialize [
+BrContextMenuLeftAptitude >> initialize [
 	super initialize.
 	self
 		addChange: (BrLookChange new
@@ -32,7 +32,7 @@ BrContextMenuRightAptitude >> initialize [
 						constraintsDo: [ :c | 
 							c horizontal fitContentLimited.
 							c vertical fitContentLimited.
-							c frame horizontal alignLeft.
+							c frame horizontal alignRight.
 							c frame vertical alignCenter ];
 						padding: (BlInsets
 								top: 0
@@ -40,7 +40,7 @@ BrContextMenuRightAptitude >> initialize [
 								bottom: 0
 								right: 0);
 						removeChild: handle;
-						addChildFirst: handle.
+						addChild: handle.
 					content
 						constraintsDo: [ :c | 
 							c horizontal fitContentLimited.
@@ -67,6 +67,6 @@ BrContextMenuRightAptitude >> initialize [
 ]
 
 { #category : #accessing }
-BrContextMenuRightAptitude >> position: anEventPointInSpaceRoot [
+BrContextMenuLeftAptitude >> position: anEventPointInSpaceRoot [
 	positionInElement := anEventPointInSpaceRoot
 ]

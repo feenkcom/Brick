@@ -94,12 +94,23 @@ BrWithContextMenuAptitude >> initialize [
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 @ 0) ];
+				referencePoint: [ position + (4 negated @ 0) ];
 				availableBounds: BrAnchoredRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
 				apply: [
 					self removeInnerContainerContextMenuAptitudes.
 					innerContainer addAptitude: (BrContextMenuRightAptitude new 
+						position: position;
+						element: self root) ] ];
+		single: [ :e | 
+			e
+				anchorBounds: [ :f | widget bounds inParent: f ];
+				referencePoint: [ position + (4 @ 0) ];
+				availableBounds: BrAnchoredLeftAvailableBounds;
+				scaleFactor: BrAnchoredGlobalScaleFactor;
+				apply: [
+					self removeInnerContainerContextMenuAptitudes.
+					innerContainer addAptitude: (BrContextMenuLeftAptitude new 
 						position: position;
 						element: self root) ] ];
 		build.
@@ -186,7 +197,8 @@ BrWithContextMenuAptitude >> removeInnerContainerContextMenuAptitudes [
 				- BrContextMenuTopRightAptitude
 				- BrContextMenuBottomLeftAptitude 
 				- BrContextMenuBottomRightAptitude
-				- BrContextMenuRightAptitude ]
+				- BrContextMenuRightAptitude
+				- BrContextMenuLeftAptitude ]
 ]
 
 { #category : #'api - context menu' }

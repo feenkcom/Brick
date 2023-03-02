@@ -58,7 +58,44 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 ]
 
 { #category : #'examples - in scripter' }
-BrAnchoredByScripterExamples >> longContextMenu [
+BrAnchoredByScripterExamples >> longContextMenuTheLeft [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 300 @ 500 ];
+		onSpace;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 300@0 ];
+		id: #contextMenuAnchor;
+		play.
+
+	aScripter secondaryClick
+		label: 'Open context menu';
+		id: #contextMenuAnchor;
+		play.
+
+	aScripter assert
+		label: 'Assert context menu height';
+		value: [ :aPane | aPane height ]
+			equals: [ :aPane | 
+				| aChild |
+				aChild := (aPane childWithId: #itemsContainer).
+				aChild height + aChild margin height ];
+		onSpaceRoot;
+		id: #itemsScrollableContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - in scripter' }
+BrAnchoredByScripterExamples >> longContextMenuTheRight [
 	<gtExample>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
