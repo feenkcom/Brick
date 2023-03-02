@@ -290,9 +290,7 @@ BrWithDropdownAptitude >> removeInnerContainerDropdownAptitudes [
 				- BrDropdownBottomLeftAptitude 
 				- BrDropdownBottomRightAptitude
 				- BrDropdownTopLeftAptitude 
-				- BrDropdownTopRightAptitude
-				- BrDropdownBottomLeftAptitude 
-				- BrDropdownBottomRightAptitude ]
+				- BrDropdownTopRightAptitude ]
 ]
 
 { #category : #'api - displaying' }
