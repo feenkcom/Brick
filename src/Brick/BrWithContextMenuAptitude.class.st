@@ -7,7 +7,7 @@ Class {
 		'modifiersMatcher',
 		'hideWishHandler'
 	],
-	#category : 'Brick-Context Menu - Look'
+	#category : #'Brick-Context Menu - Look'
 }
 
 { #category : #'instance creation' }
@@ -64,7 +64,8 @@ BrWithContextMenuAptitude >> initialize [
 				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
 						remove: BrContextMenuBottomLeftAptitude;
 						remove: BrContextMenuTopRightAptitude;
-						remove: BrContextMenuTopLeftAptitude ].
+						remove: BrContextMenuTopLeftAptitude;
+						remove: BrContextMenuRightAptitude ].
 						innerContainer addAptitude: BrContextMenuBottomRightAptitude ] ];
 		single: [ :e | 
 			e
@@ -75,7 +76,8 @@ BrWithContextMenuAptitude >> initialize [
 				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
 						remove: BrContextMenuBottomRightAptitude;
 						remove: BrContextMenuTopRightAptitude;
-						remove: BrContextMenuTopLeftAptitude ].
+						remove: BrContextMenuTopLeftAptitude;
+						remove: BrContextMenuRightAptitude ].
 						innerContainer addAptitude: BrContextMenuBottomLeftAptitude ] ];
 		single: [ :e | 
 			e
@@ -86,7 +88,8 @@ BrWithContextMenuAptitude >> initialize [
 				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
 						remove: BrContextMenuBottomRightAptitude;
 						remove: BrContextMenuBottomLeftAptitude;
-						remove: BrContextMenuTopLeftAptitude ].
+						remove: BrContextMenuTopLeftAptitude;
+						remove: BrContextMenuRightAptitude ].
 						innerContainer addAptitude: BrContextMenuTopRightAptitude ] ];
 		single: [ :e | 
 			e
@@ -97,8 +100,24 @@ BrWithContextMenuAptitude >> initialize [
 				apply: [ innerContainer aptitudeDo: [ :anAptitude | anAptitude
 						remove: BrContextMenuBottomRightAptitude;
 						remove: BrContextMenuBottomLeftAptitude;
-						remove: BrContextMenuTopRightAptitude ].
+						remove: BrContextMenuTopRightAptitude;
+						remove: BrContextMenuRightAptitude ].
 						innerContainer addAptitude: BrContextMenuTopLeftAptitude ] ];
+		single: [ :e | 
+			e
+				anchorBounds: [ :f | widget bounds inParent: f ];
+				referencePoint: [ position + (4 @ 0) ];
+				availableBounds: BrAnchoredRightAvailableBounds;
+				scaleFactor: BrAnchoredGlobalScaleFactor;
+				apply: [
+					innerContainer aptitudeDo: [ :anAptitude | anAptitude
+						remove: BrContextMenuBottomRightAptitude;
+						remove: BrContextMenuBottomLeftAptitude;
+						remove: BrContextMenuTopRightAptitude;
+						remove: BrContextMenuRightAptitude ].
+						innerContainer addAptitude: (BrContextMenuRightAptitude new 
+							position: position;
+							element: self root) ] ];
 		build.
 ]
 
