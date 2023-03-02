@@ -1,24 +1,24 @@
 Class {
 	#name : #BrAnchoredPositionerExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Anchored'
+	#category : #'Brick-Examples-Anchored'
 }
 
-{ #category : #accessing }
+{ #category : #'examples - element' }
 BrAnchoredPositionerExamples >> anchor [
 	<gtExample>
 	^ BlElement new
 		size: 30 @ 20;
-		background: Color green;
+		background: (Color purple);
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - element' }
 BrAnchoredPositionerExamples >> anchorContainer [
 	<gtExample>
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
-		background: Color yellow;
+		background: Color tan;
 		padding:
 			(BlInsets
 				top: 5
@@ -31,7 +31,7 @@ BrAnchoredPositionerExamples >> anchorContainer [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples - support' }
 BrAnchoredPositionerExamples >> anchorPosition: aBlock relocateAnchored: anotherBlock assertAnchoredMaxBounds: yetAnotherBlock [
 	| space positioner anchor anchorContainer target targetContainer popup popupSize popupPreferredMaxBoundsInTarget |
 	space := BlSpace new
@@ -71,13 +71,13 @@ BrAnchoredPositionerExamples >> anchorPosition: aBlock relocateAnchored: another
 	^ space
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples - positioner' }
 BrAnchoredPositionerExamples >> anchoredPositioner [
 	<gtExample>
 	^ BrAnchoredPositioner anchor: self anchor target: self target
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples  - anchor' }
 BrAnchoredPositionerExamples >> bottomLeft [
 	<gtExample>
 	^ self
@@ -91,7 +91,7 @@ BrAnchoredPositionerExamples >> bottomLeft [
 				corner: (anchor bounds inSpace inChild: target) right @ target height ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples  - anchor' }
 BrAnchoredPositionerExamples >> bottomRight [
 	<gtExample>
 	^ self
@@ -102,7 +102,7 @@ BrAnchoredPositionerExamples >> bottomRight [
 			[ :target :anchor :popup | BlBounds origin: (anchor bounds inSpace inChild: target) bottomLeft corner: target size ]
 ]
 
-{ #category : #accessing }
+{ #category : #'examples  - anchor' }
 BrAnchoredPositionerExamples >> defaultToBottomRight [
 	<gtExample>
 	^ self
@@ -113,23 +113,23 @@ BrAnchoredPositionerExamples >> defaultToBottomRight [
 			[ :target :anchor :popup | BlBounds origin: (anchor bounds inSpace inChild: target) bottomLeft corner: target size ]
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - element' }
 BrAnchoredPositionerExamples >> popup [
 	<gtExample>
 	^ BlElement new
 		background: Color white;
-		border: (BlBorder paint: Color blue asBlPaint width: 1);
+		border: (BlBorder paint: Color purple asBlPaint width: 1);
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - element' }
 BrAnchoredPositionerExamples >> target [
 	<gtExample>
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
 		size: 300 @ 200;
 		transformDo: [ :t | t scaleBy: 0.5 @ 0.5 ];
-		background: Color orange;
+		background: Color gray;
 		padding:
 			(BlInsets
 				top: 5
@@ -139,12 +139,12 @@ BrAnchoredPositionerExamples >> target [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'examples - element' }
 BrAnchoredPositionerExamples >> targetContainer [
 	<gtExample>
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
-		background: Color red;
+		background: Color veryVeryLightGray;
 		padding:
 			(BlInsets
 				top: 5
@@ -157,7 +157,7 @@ BrAnchoredPositionerExamples >> targetContainer [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples  - anchor' }
 BrAnchoredPositionerExamples >> topLeft [
 	<gtExample>
 	^ self
@@ -168,7 +168,7 @@ BrAnchoredPositionerExamples >> topLeft [
 			[ :target :anchor :popup | BlBounds origin: 0 @ 0 corner: (anchor bounds inSpace inChild: target) topRight ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples  - anchor' }
 BrAnchoredPositionerExamples >> topRight [
 	<gtExample>
 	^ self

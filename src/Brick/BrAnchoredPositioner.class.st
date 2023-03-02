@@ -6,9 +6,10 @@ Class {
 		'anchor',
 		'anchorBoundsInTarget',
 		'popupPreferredMaxBoundsInTarget',
-		'popupPreferredPosition'
+		'popupPreferredPosition',
+		'extent'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #'as yet unclassified' }
@@ -39,14 +40,64 @@ BrAnchoredPositioner >> anchor: anObject [
 
 { #category : #accessing }
 BrAnchoredPositioner >> anchorBoundsInTarget [
-	^ anchorBoundsInTarget
-		ifNil: [ anchor
-				ifNotNil: [ anchorBoundsInTarget := anchor bounds inSpace inChild: target ] ]
+	^ anchorBoundsInTarget ifNil: [ self computeAnchorBoundsInTarget ]
 ]
 
 { #category : #accessing }
 BrAnchoredPositioner >> anchorBoundsInTarget: anObject [
 	anchorBoundsInTarget := anObject
+]
+
+{ #category : #private }
+BrAnchoredPositioner >> computeAnchorBoundsInTarget [
+	^ anchor
+		ifNotNil: [ anchorBoundsInTarget := anchor bounds inSpace inChild: target ]
+]
+
+{ #category : #accessing }
+BrAnchoredPositioner >> computePopupPreferredMaxBoundsInTarget: anExtent [
+	<return: #BrAnchoredPositionerPopupPreferredMaxBounds>
+
+	| newBounds allPopupBounds fallback |
+	newBounds := self maxBoundsBottomRightInTarget.
+	newBounds extent >= anExtent
+		ifTrue: [ ^ BrAnchoredPositionerPopupPreferredMaxBounds
+				position: #bottom -> #right
+				bounds: newBounds ].
+
+	allPopupBounds := OrderedCollection new.
+	allPopupBounds add: #bottom -> #right -> newBounds.
+
+	newBounds := self maxBoundsBottomLeftInTarget.
+	newBounds extent >= anExtent
+		ifTrue: [ ^ BrAnchoredPositionerPopupPreferredMaxBounds
+				position: #bottom -> #left
+				bounds: newBounds ].
+
+	allPopupBounds add: #bottom -> #left -> newBounds.
+
+	newBounds := self maxBoundsTopRightInTarget.
+	newBounds extent >= anExtent
+		ifTrue: [ ^ BrAnchoredPositionerPopupPreferredMaxBounds
+				position: #top -> #right
+				bounds: newBounds ].
+
+	allPopupBounds add: #top -> #right -> newBounds.
+
+	newBounds := self maxBoundsTopLeftInTarget.
+	newBounds extent >= anExtent
+		ifTrue: [ ^ BrAnchoredPositionerPopupPreferredMaxBounds
+				position: #top -> #left
+				bounds: newBounds ].
+	allPopupBounds add: #top -> #left -> newBounds.
+
+	fallback := (allPopupBounds
+			sorted: [ :a :b | a value asRectangle area >= b value asRectangle area ])
+			first.
+
+	^ BrAnchoredPositionerPopupPreferredMaxBounds
+		position: fallback key
+		bounds: fallback value
 ]
 
 { #category : #'as yet unclassified' }
@@ -63,47 +114,19 @@ BrAnchoredPositioner >> maxBoundsBottomRightInTarget [
 		corner: target size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrAnchoredPositioner >> maxBoundsPreferredInTarget: anExtent [
 	"Initializes #popupPreferredMaxBoundsInTarget and #popupPreferredPosition"
 
+	| aResult |
+	popupPreferredMaxBoundsInTarget ifNotNil: [ ^ popupPreferredMaxBoundsInTarget ].
+
+	aResult := self computePopupPreferredMaxBoundsInTarget: anExtent.
+	popupPreferredMaxBoundsInTarget := aResult bounds.
+	popupPreferredPosition := aResult position.
+	extent := anExtent.
+
 	^ popupPreferredMaxBoundsInTarget
-		ifNil: [ | allPopupBounds fallback |
-			popupPreferredMaxBoundsInTarget := self
-				maxBoundsBottomRightInTarget.
-			popupPreferredMaxBoundsInTarget extent >= anExtent
-				ifTrue: [ popupPreferredPosition := #bottom -> #right.
-					^ popupPreferredMaxBoundsInTarget ].
-			allPopupBounds := OrderedCollection new.
-			allPopupBounds
-				add: #bottom -> #right -> popupPreferredMaxBoundsInTarget.
-			popupPreferredMaxBoundsInTarget := self
-				maxBoundsBottomLeftInTarget.
-			popupPreferredMaxBoundsInTarget extent >= anExtent
-				ifTrue: [ popupPreferredPosition := #bottom -> #left.
-					^ popupPreferredMaxBoundsInTarget ].
-			allPopupBounds
-				add: #bottom -> #left -> popupPreferredMaxBoundsInTarget.
-			popupPreferredMaxBoundsInTarget := self
-				maxBoundsTopRightInTarget.
-			popupPreferredMaxBoundsInTarget extent >= anExtent
-				ifTrue: [ popupPreferredPosition := #top -> #right.
-					^ popupPreferredMaxBoundsInTarget ].
-			allPopupBounds
-				add: #top -> #right -> popupPreferredMaxBoundsInTarget.
-			popupPreferredMaxBoundsInTarget := self
-				maxBoundsTopLeftInTarget.
-			popupPreferredMaxBoundsInTarget extent >= anExtent
-				ifTrue: [ popupPreferredPosition := #top -> #left.
-					^ popupPreferredMaxBoundsInTarget ].
-			allPopupBounds
-				add: #top -> #left -> popupPreferredMaxBoundsInTarget.
-			fallback := (allPopupBounds
-				sorted: [ :a :b | a value asRectangle area >= b value asRectangle area ])
-				first.
-			popupPreferredPosition := fallback key.
-			popupPreferredMaxBoundsInTarget := fallback value.
-			^ popupPreferredMaxBoundsInTarget ]
 ]
 
 { #category : #'as yet unclassified' }
