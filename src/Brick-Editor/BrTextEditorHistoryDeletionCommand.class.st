@@ -15,7 +15,7 @@ BrTextEditorHistoryDeletionCommand >> cursorForRedoEdit [
 	cursorPositions := self undoIndices 
 		collect: [ :anIndex | anIndex - 1 ].
 	
-	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions first 
+	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions 
 ]
 
 { #category : #'api - cursors' }
@@ -25,9 +25,9 @@ BrTextEditorHistoryDeletionCommand >> cursorForUndoEdit [
 	self texts
 		with: self redoIndices
 		do: [ :eachText :eachIndex | 
-			cursorPositions add: eachIndex + eachText - 1 ].
+			cursorPositions add: eachIndex + eachText size - 1 ].
 			
-	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions first 
+	^ BrTextEditorCursor singleOrMultipleFor: cursorPositions 
 ]
 
 { #category : #printing }
