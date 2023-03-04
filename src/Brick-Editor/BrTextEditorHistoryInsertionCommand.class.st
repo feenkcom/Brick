@@ -63,7 +63,10 @@ BrTextEditorHistoryInsertionCommand >> redoOn: aBrTextEditor [
 		with: self redoIndices
 		do: [ :eachString :eachIndex | 
 			anInserter text: eachString; at: eachIndex ].
-	anInserter insert
+			
+	anInserter insert.
+	
+	self updateCursorAfterRedoForEditor: aBrTextEditor
 ]
 
 { #category : #'api - undo/redo' }
@@ -104,8 +107,10 @@ BrTextEditorHistoryInsertionCommand >> undoOn: aBrTextEditor [
 		with: self undoIndices 
 		do: [ :eachString :eachIndex | 
 			aDeleter from: eachIndex to: eachIndex + eachString size ].
-		
-	aDeleter delete
+	
+	aDeleter delete.
+	
+	self updateCursorAfterUndoForEditor: aBrTextEditor.
 ]
 
 { #category : #'api - undo/redo' }
@@ -119,4 +124,22 @@ BrTextEditorHistoryInsertionCommand >> undoTextChangeOn: aBlText [
 				to: eachIndex + eachString size ].
 	
 	aBlText deleteAll: toDeleteIntervals
+]
+
+{ #category : #'api - cursors' }
+BrTextEditorHistoryInsertionCommand >> updateCursorAfterRedoForEditor: aBrTextEditor [
+	aBrTextEditor navigator
+		withoutResettingDesiredCoordinate;
+		removeAll;
+		addAll: self cursorForRedoEdit;
+		apply 
+]
+
+{ #category : #'api - cursors' }
+BrTextEditorHistoryInsertionCommand >> updateCursorAfterUndoForEditor: aBrTextEditor [ 
+	aBrTextEditor navigator
+		withoutResettingDesiredCoordinate;
+		removeAll;
+		addAll: self cursorForUndoEdit;
+		apply
 ]
