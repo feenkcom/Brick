@@ -30,7 +30,7 @@ BrFileSelectOrCreate >> buildUI [
 					vFitContent;
 					content: breadcrumb;
 					when: BlElementLayoutComputedEvent
-						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ]
+						doOnce: [ :anEvent | anEvent currentTarget scrollBy: Float infinity negated @ 0 ].
 				table.
 				fileInputFieldContainer.
 				alignedButton}
