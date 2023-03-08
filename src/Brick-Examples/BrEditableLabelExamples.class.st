@@ -132,7 +132,7 @@ BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 	aScripter
 		substep: 'Switch back to readonly'
 		do: [ :aStep |
-			aStep keyClick: BlKeyboardKey escape.
+			aStep keyPress: BlKeyboardKey escape.
 
 			aStep check
 				label: 'Check readonly mode';
