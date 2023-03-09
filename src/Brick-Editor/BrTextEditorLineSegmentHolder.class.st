@@ -157,44 +157,10 @@ BrTextEditorLineSegmentHolder >> explicitScreenToCursor: aTransformation [
 	aClosestPiece screenToCursor: aTransformation of: self infiniteElement in: aClosestPieceElement
 ]
 
-{ #category : #'private - testing' }
-BrTextEditorLineSegmentHolder >> hasCursor [
-	| aTextEditor |
-	aTextEditor := self infiniteElement editor.
-	aTextEditor cursors
-		do: [ :aCursor | 
-			(aCursor insideSegment: segment)
-				ifTrue: [ ^ true ] ].
-	^ false
-]
-
-{ #category : #'private - testing' }
-BrTextEditorLineSegmentHolder >> hasSelection [
-	| aTextEditor textInterval |
-
-	aTextEditor := self infiniteElement editor.
-	textInterval := BlSelection from: (segment textStart + 1 min: segment textEnd) to: segment textEnd.
-	
-	(aTextEditor selection + aTextEditor selectionRecorder selection) do: [ :aSelection |
-		(aSelection overlaps: textInterval)
-			ifTrue: [ ^ true ] ].
-
-	^ false
-]
-
-{ #category : #'private - segment' }
-BrTextEditorLineSegmentHolder >> newPiecesMap [
-	^ BrTextEditorLineSegmentPieceDictionaryMap new
-]
-
 { #category : #updating }
 BrTextEditorLineSegmentHolder >> onCursorChanged [
 	"Is sent when text editor's cursor changes.
 	Segment holder should update text elements accordingly"
-
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
 
 	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
 		aPiece updateCursor: aPieceElement of: segment in: self infiniteElement ]
@@ -235,19 +201,6 @@ BrTextEditorLineSegmentHolder >> onSelectionChanged [
 		aPiece updateSelection: aPieceElement of: segment in: self infiniteElement ]
 ]
 
-{ #category : #updating }
-BrTextEditorLineSegmentHolder >> onTextChanged [
-	"Is sent when text changed in the editor (for example style attributes).
-	Segment holder should update text elements accordingly"
-
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
-
-	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-		aPiece updateText: aPieceElement of: segment in: self infiniteElement ]
-]
-
 { #category : #cursor }
 BrTextEditorLineSegmentHolder >> relativeScreenToCursor: aTransformation [	
 	"trying to find a segment that actually contains a given position"
@@ -256,11 +209,6 @@ BrTextEditorLineSegmentHolder >> relativeScreenToCursor: aTransformation [
 		(aTransformation cursor insideSubText: aPiece of: segment)
 			ifTrue: [
 				^ aPiece screenToCursor: aTransformation of: self infiniteElement in: aPieceElement ] ]
-]
-
-{ #category : #cursor }
-BrTextEditorLineSegmentHolder >> screenToCursor: aTransformation [
-	aTransformation evaluateOn: self
 ]
 
 { #category : #accessing }
