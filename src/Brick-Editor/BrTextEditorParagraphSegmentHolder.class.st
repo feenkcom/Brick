@@ -106,36 +106,6 @@ BrTextEditorParagraphSegmentHolder >> explicitScreenToCursor: aTransformation [
 		at: aTransformation screenPosition
 ]
 
-{ #category : #'private - testing' }
-BrTextEditorParagraphSegmentHolder >> hasCursor [
-	| aTextEditor |
-	aTextEditor := self infiniteElement editor.
-	aTextEditor cursors
-		do: [ :aCursor | 
-			(aCursor insideSegment: segment)
-				ifTrue: [ ^ true ] ].
-	^ false
-]
-
-{ #category : #'private - testing' }
-BrTextEditorParagraphSegmentHolder >> hasSelection [
-	| aTextEditor textInterval |
-
-	aTextEditor := self infiniteElement editor.
-	textInterval := BlSelection from: (segment textStart + 1 min: segment textEnd) to: segment textEnd.
-	
-	(aTextEditor selection + aTextEditor selectionRecorder selection) do: [ :aSelection |
-		(aSelection overlaps: textInterval)
-			ifTrue: [ ^ true ] ].
-
-	^ false
-]
-
-{ #category : #'private - segment' }
-BrTextEditorParagraphSegmentHolder >> newPiecesMap [
-	^ BrTextEditorLineSegmentPieceDictionaryMap new
-]
-
 { #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onCursorChanged [
 	"Is sent when text editor's cursor changes.
@@ -203,16 +173,7 @@ BrTextEditorParagraphSegmentHolder >> onSelectionChanged [
 
 { #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onTextChanged [
-	"Is sent when text changed in the editor (for example style attributes).
-	Segment holder should update text elements accordingly"
-
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
-
-	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-		aPiece updateText: aPieceElement of: segment in: self infiniteElement ].
-	
+	super onTextChanged.
 	itemElement text: segment text
 ]
 
@@ -221,11 +182,6 @@ BrTextEditorParagraphSegmentHolder >> relativeScreenToCursor: aTransformation [
 	"trying to find a segment that actually contains a given position"
 		
 	itemElement relativeScreenToCursor: aTransformation of: self infiniteElement
-]
-
-{ #category : #cursor }
-BrTextEditorParagraphSegmentHolder >> screenToCursor: aTransformation [
-	aTransformation evaluateOn: self
 ]
 
 { #category : #accessing }
