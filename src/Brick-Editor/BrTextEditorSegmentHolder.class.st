@@ -11,36 +11,6 @@ Class {
 	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : #'private - testing' }
-BrTextEditorSegmentHolder >> hasCursor [
-	| aTextEditor |
-	aTextEditor := self infiniteElement editor.
-	aTextEditor cursors
-		do: [ :aCursor | 
-			(aCursor insideSegment: segment)
-				ifTrue: [ ^ true ] ].
-	^ false
-]
-
-{ #category : #'private - testing' }
-BrTextEditorSegmentHolder >> hasSelection [
-	| aTextEditor textInterval |
-
-	aTextEditor := self infiniteElement editor.
-	textInterval := BlSelection from: (segment textStart + 1 min: segment textEnd) to: segment textEnd.
-	
-	(aTextEditor selection + aTextEditor selectionRecorder selection) do: [ :aSelection |
-		(aSelection overlaps: textInterval)
-			ifTrue: [ ^ true ] ].
-
-	^ false
-]
-
-{ #category : #'private - segment' }
-BrTextEditorSegmentHolder >> newPiecesMap [
-	^ BrTextEditorLineSegmentPieceDictionaryMap new
-]
-
 { #category : #updating }
 BrTextEditorSegmentHolder >> onCursorChanged [
 	"Is sent when text editor's cursor changes.
@@ -69,18 +39,8 @@ BrTextEditorSegmentHolder >> onSelectionChanged [
 BrTextEditorSegmentHolder >> onTextChanged [
 	"Is sent when text changed in the editor (for example style attributes).
 	Segment holder should update text elements accordingly"
-
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
-
-	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-		aPiece updateText: aPieceElement of: segment in: self infiniteElement ]
-]
-
-{ #category : #cursor }
-BrTextEditorSegmentHolder >> screenToCursor: aTransformation [
-	aTransformation evaluateOn: self
+	
+	self subclassResponsibility
 ]
 
 { #category : #'private - segment' }

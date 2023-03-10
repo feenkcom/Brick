@@ -72,7 +72,6 @@ BrEditableLabel >> initialize [
 
 	labelShortcuts := self defaultLabelShortcuts.
 	editorShortcuts := self defaultEditorShortcuts.
-	self editor: BrEditableLabelModel new.
 
 	self fitContent.
 
