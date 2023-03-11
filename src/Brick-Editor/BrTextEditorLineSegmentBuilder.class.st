@@ -9,7 +9,6 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'lineStencilBuilder',
 		'wordStencilBuilder',
 		'lineSplitter'
 	],
@@ -184,16 +183,6 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 	aBrTextEditor updater
 		from: aCurrentSegment textStart to: aCurrentSegment textEnd;
 		update
-]
-
-{ #category : #'api - accessing' }
-BrTextEditorLineSegmentBuilder >> lineStencil: aLineStencilBuilder [
-	lineStencilBuilder := aLineStencilBuilder asStencilBuilder: BrTextEditableWordPieceStencilBuilder
-]
-
-{ #category : #accessing }
-BrTextEditorLineSegmentBuilder >> lineStencilBuilder [
-	^ lineStencilBuilder
 ]
 
 { #category : #'text - modifications' }
