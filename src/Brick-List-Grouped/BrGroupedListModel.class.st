@@ -19,6 +19,11 @@ BrGroupedListModel >> entityCount [
 	^ groups amountOfEntities
 ]
 
+{ #category : #accessing }
+BrGroupedListModel >> groups [
+	^ groups
+]
+
 { #category : #'api - accessing' }
 BrGroupedListModel >> groupsProvider: aBrAbstractListItemsProvider [
 	groups ifNotNil: [ :thePreviousGroups | thePreviousGroups detachFromGroupedList ].
