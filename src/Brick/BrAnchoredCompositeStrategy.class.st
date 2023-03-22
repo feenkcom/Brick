@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'strategies'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #accessing }
@@ -19,7 +19,7 @@ BrAnchoredCompositeStrategy class >> strategies: anOrderedCollection [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrAnchoredCompositeStrategy >> availableBoundsIn: aReferenceElement forPreferredExtent: aPoint [
 	^ (self strategyIn: aReferenceElement forPreferredExtent: aPoint)
 		availableBoundsIn: aReferenceElement
@@ -40,22 +40,11 @@ BrAnchoredCompositeStrategy >> invalidate: anElement forPreferredExtent: aPoint 
 		forPreferredExtent: aPoint
 ]
 
-{ #category : #'as yet unclassified' }
-BrAnchoredCompositeStrategy >> strategyIn: aReferenceElement forPreferredExtent: aPoint [
-	| preferredRectangle maxAreaBounds maxAreaStrategy |
-	preferredRectangle := Rectangle origin: 0.0@0.0 extent: aPoint.
-	maxAreaBounds := nil.
-	^ strategies
-		detect: [ :e | 
-			| bounds rectangle |
-			bounds := e
-				availableBoundsIn: aReferenceElement
-				forPreferredExtent: aPoint.
-			rectangle := Rectangle origin: 0.0@0.0 extent: bounds extent.
-			(maxAreaBounds isNil
-				or: [ rectangle area > maxAreaBounds asRectangle area ])
-				ifTrue: [ maxAreaBounds := bounds.
-					maxAreaStrategy := e ].
-			(rectangle intersect: preferredRectangle) = preferredRectangle ]
-		ifNone: [ maxAreaStrategy ]
+{ #category : #accessing }
+BrAnchoredCompositeStrategy >> strategyIn: aReferenceElement forPreferredExtent: aPreferredExtent [
+	^ BrAnchoredCompositeStrategyFinder new 
+		strategies: strategies;
+		referenceElement: aReferenceElement;
+		preferredExtent: aPreferredExtent;
+		find
 ]
