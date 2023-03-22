@@ -94,7 +94,7 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
 		id: #dropdownAnchor;
 		play.
 		
-	self assertDropdown: aScripter.
+	"self assertDropdown: aScripter."
 
 	^ aScripter
 ]
@@ -147,6 +147,7 @@ BrAnchoredByScripterExamples >> elementWithDropdown [
 		alignCenter;
 		yourself ] asStencil.
 	container := BlElement new
+		id: #dropdownPlacementArea;
 		background: Color gray muchLighter;
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 

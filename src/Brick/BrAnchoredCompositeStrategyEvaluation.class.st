@@ -1,3 +1,8 @@
+"
+I am a result of an {{gtClass: BrAnchoredSingleStrategy}} evaluation.
+I am created and used by {{gtClass: BrAnchoredCompositeStrategyFinder}}. 
+
+"
 Class {
 	#name : #BrAnchoredCompositeStrategyEvaluation,
 	#superclass : #Object,

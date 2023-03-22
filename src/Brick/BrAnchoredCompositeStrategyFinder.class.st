@@ -1,3 +1,10 @@
+"
+I find an appropriate {{gtClass: BrAnchoredSingleStrategy}} based on a {{gtMethod: BrAnchoredCompositeStrategyFinder >> #preferredExtent: | label=preferred extent}} and {{gtMethod: BrAnchoredCompositeStrategyFinder >> #referenceElement | label=reference element}}.
+I am created and used by {{gtClass: BrAnchoredCompositeStrategy}}. 
+#Example
+For a given dropdown: {{gtExample: BrAnchoredByScripterExamples >> #dropdownBottomRight | noCode | previewHeight = 660 | previewShow = #gtSpaceFor:}}
+The composite strategies are as follows: {{gtExample: BrAnchoredCompositeStrategyFinderExamples >> #finder | noCode | previewExpanded=true | previewHeight=230}}
+"
 Class {
 	#name : #BrAnchoredCompositeStrategyFinder,
 	#superclass : #Object,

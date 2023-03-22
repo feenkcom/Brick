@@ -26,6 +26,14 @@ BrAnchoredCompositeStrategy >> availableBoundsIn: aReferenceElement forPreferred
 		forPreferredExtent: aPoint
 ]
 
+{ #category : #'private - finding' }
+BrAnchoredCompositeStrategy >> finderWithElement: aReferenceElement andPreferredExtent: aPreferredExtent [
+	^ BrAnchoredCompositeStrategyFinder new 
+		strategies: strategies;
+		referenceElement: aReferenceElement;
+		preferredExtent: aPreferredExtent
+]
+
 { #category : #initialization }
 BrAnchoredCompositeStrategy >> initializeStrategies: anOrderedCollection [
 	self assert: [ strategies isNil ].
@@ -40,11 +48,10 @@ BrAnchoredCompositeStrategy >> invalidate: anElement forPreferredExtent: aPoint 
 		forPreferredExtent: aPoint
 ]
 
-{ #category : #accessing }
+{ #category : #'private - finding' }
 BrAnchoredCompositeStrategy >> strategyIn: aReferenceElement forPreferredExtent: aPreferredExtent [
-	^ BrAnchoredCompositeStrategyFinder new 
-		strategies: strategies;
-		referenceElement: aReferenceElement;
-		preferredExtent: aPreferredExtent;
-		find
+	^ (self
+		finderWithElement: aReferenceElement
+		andPreferredExtent: aPreferredExtent) 
+			find
 ]
