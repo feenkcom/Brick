@@ -6,7 +6,7 @@ Class {
 		'artifact',
 		'methods'
 	],
-	#category : 'Brick-DevTool'
+	#category : #'Brick-DevTool-Aptitude'
 }
 
 { #category : #accessing }

@@ -66,7 +66,7 @@ BaselineOfBrick >> baseline: spec [
 			package: #'Brick-DevTool' with: [
 				spec requires: #(#Brick 'Bloc' 'BlocPac' ). ];
 			package: #'Brick-Examples' with: [
-				spec requires: #('BlocExamples' #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra' ). ];
+				spec requires: #('BlocExamples' #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra' #'Brick-Examples' ). ];
 			package: #'Brick-Theme-Examples' with: [
 				spec requires: #(#'Brick-Theme' ). ];
 			package: #'Brick-Theme-Migration' with: [

@@ -13,11 +13,3 @@ BrAnchoredTopCenterReferencePoint class >> label [
 BrAnchoredTopCenterReferencePoint >> from: aBounds [
 	^ aBounds topCenter
 ]
-
-{ #category : #accessing }
-BrAnchoredTopCenterReferencePoint >> gtConfigurePreferredExtentPreviewElement: anElement [
-	anElement constraintsDo: [ :c | 
-		c frame horizontal alignCenter.
-		c frame vertical alignTop.
-	]
-]
