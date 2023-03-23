@@ -10,6 +10,11 @@ BrAnchoredStrategy >> availableBoundsIn: aReferenceElement forPreferredExtent: a
 ]
 
 { #category : #'gt - extensions' }
+BrAnchoredStrategy >> gtConfigurePreferredExtentPreviewElement: anElement [
+	"do nothing"
+]
+
+{ #category : #'gt - extensions' }
 BrAnchoredStrategy >> gtStrategiesNameText [
 	^ self printString
 ]

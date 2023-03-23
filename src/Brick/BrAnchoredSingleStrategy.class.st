@@ -35,6 +35,11 @@ BrAnchoredSingleStrategy >> availableBoundsIn: aReferenceElement forPreferredExt
 ]
 
 { #category : #'gt - extensions' }
+BrAnchoredSingleStrategy >> gtConfigurePreferredExtentPreviewElement: anElement [
+	^ referencePoint gtConfigurePreferredExtentPreviewElement: anElement
+]
+
+{ #category : #'gt - extensions' }
 BrAnchoredSingleStrategy >> gtStrategiesNameText [
 	^ availableBounds
 		ifNil: [ self printString ]

@@ -31,6 +31,11 @@ BrAnchoredCompositeStrategyEvaluation >> extent [
 ]
 
 { #category : #'gt - extensions' }
+BrAnchoredCompositeStrategyEvaluation >> gtConfigurePreferredExtentPreviewElement: anElement [
+	self strategy gtConfigurePreferredExtentPreviewElement: anElement
+]
+
+{ #category : #'gt - extensions' }
 BrAnchoredCompositeStrategyEvaluation >> gtStrategiesNameText [
 	^ self strategy gtStrategiesNameText
 ]
@@ -43,6 +48,11 @@ BrAnchoredCompositeStrategyEvaluation >> isAppropriate [
 { #category : #accessing }
 BrAnchoredCompositeStrategyEvaluation >> isAppropriate: anObject [
 	isAppropriate := anObject
+]
+
+{ #category : #accessing }
+BrAnchoredCompositeStrategyEvaluation >> origin [
+	^ self bounds origin
 ]
 
 { #category : #accessing }

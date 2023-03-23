@@ -25,7 +25,7 @@ BrAnchoredByScripterExamples >> assertDropdown: aScripter [
 		label: 'Assert dropdown bounds';
 		satisfies: [ :aContentElement | 
 			| aParentQuery |
-			aParentQuery := aContentElement topMostParent query // #contextMenuAnchor.
+			aParentQuery := aContentElement topMostParent query // #dropdownPlacementArea.
 			self assert: aParentQuery result size equals: 1.
 
 			aParentQuery result first bounds inSpace asRectangle
@@ -51,6 +51,16 @@ BrAnchoredByScripterExamples >> dropdownBottomRight [
 
 	aScripter click
 		label: 'Open dropdown';
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredContainerOverview put: (
+				BrAnchoredContainerOverview new
+				scripter: aScripter;
+				elementWithDropdown: aButton) ];
 		id: #dropdownAnchor;
 		play.
 		
@@ -94,7 +104,17 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
 		id: #dropdownAnchor;
 		play.
 		
-	"self assertDropdown: aScripter."
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredContainerOverview put: (
+				BrAnchoredContainerOverview new
+				scripter: aScripter;
+				elementWithDropdown: aButton) ];
+		id: #dropdownAnchor;
+		play.
+		
+	self assertDropdown: aScripter.
 
 	^ aScripter
 ]
@@ -119,6 +139,16 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight_ByOnePi
 		
 	aScripter click
 		label: 'Open dropdown';
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredContainerOverview put: (
+				BrAnchoredContainerOverview new
+				scripter: aScripter;
+				elementWithDropdown: aButton) ];
 		id: #dropdownAnchor;
 		play.
 		

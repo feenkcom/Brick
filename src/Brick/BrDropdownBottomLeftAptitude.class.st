@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDropdownBottomLeftAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Dropdown - Look'
+	#category : #'Brick-Dropdown - Look'
 }
 
 { #category : #initialization }
@@ -24,15 +24,15 @@ BrDropdownBottomLeftAptitude >> initialize [
 						padding:
 							(BlInsets
 								top: 0
-								left: handle width
-								bottom: handle height
+								left: 0 "handle width"
+								bottom: 0 "handle height"
 								right: 0);
 						removeChild: handle;
 						addChildFirst: handle.
 					content
 						constraintsDo: [ :c | 
 							c horizontal fitContent.
-							c vertical fitContentLimitedOffset: handle height ].
+							c vertical fitContentLimitedOffset: 0 "handle height" ].
 					handle
 						constraintsDo: [ :c | 
 							c linear horizontal alignRight.

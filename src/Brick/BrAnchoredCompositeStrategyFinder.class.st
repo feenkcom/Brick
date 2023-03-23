@@ -19,6 +19,85 @@ Class {
 	#category : #'Brick-Anchored - Support'
 }
 
+{ #category : #converting }
+BrAnchoredCompositeStrategyFinder >> asStrategyBoundsPreviewElement [
+	| theEvaluations aMinOriginX aMinOriginY aMaxCornerX aMaxCornerY |
+	theEvaluations := self strategies
+			collect: [ :aStrategy | self evaluateStrategy: aStrategy ].
+
+	aMinOriginX := (theEvaluations
+			detectMin: [ :anEvaluation | anEvaluation bounds origin x ]) bounds origin x.
+	aMinOriginY := (theEvaluations
+			detectMin: [ :anEvaluation | anEvaluation bounds origin y ]) bounds origin y.
+	aMaxCornerX := (theEvaluations
+			detectMax: [ :anEvaluation | anEvaluation bounds corner x ]) bounds corner x.
+	aMaxCornerY := (theEvaluations
+			detectMax: [ :anEvaluation | anEvaluation bounds corner y ]) bounds corner y.
+
+	^ BlElement new
+		size: referenceElement extent;
+		border: (BlBorder paint: Color veryLightGray);
+		clipChildren: false;
+		in: [ :aContainer | 
+			theEvaluations
+				do: [ :anEvaluation | 
+					aContainer
+						addChild: (BrFrame new
+								border: (BlBorder paint: Color veryLightGray);
+								exact: anEvaluation extent;
+								clipChildren: false;
+								addAptitude: (BrStyleCommonAptitude new
+										default: [ :s | s background: BlBackground transparent ];
+										hovered: [ :s | 
+											s
+												background: (anEvaluation isAppropriate
+														ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.2 ]
+														ifFalse: [ BrGlamorousColors errorBackgroundColor alpha: 0.2 ]).
+											s 
+												do: [ :aWidget | aWidget
+													zIndex: 10; 
+													addChild: (BrFrame new 
+														border: (BlBorder paint: Color black width: 1);
+														background: (anEvaluation isAppropriate
+															ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.3 ]
+															ifFalse: [ BrGlamorousColors errorBackgroundColor alpha: 0.3 ]);
+														exact: preferredExtent;
+														id: #preferredExtentPreview;
+														in: [ :aFrame | anEvaluation gtConfigurePreferredExtentPreviewElement: aFrame  ];
+														addChild: ((BrLabel new
+															fitContent;
+															aptitude: (BrGlamorousLabelAptitude new 
+																foreground: Color white);
+															text: 'Preferred extent';
+															constraintsDo: [ :c | 
+																c frame horizontal alignCenter.
+																c frame vertical alignCenter ]) asScalableElement maxScale: 1)) ] 
+												after: [ :aWidget | aWidget 
+													elevation: aWidget defaultElevation;
+													childWithId: #preferredExtentPreview 
+													ifFound: [ :aChild | aChild removeFromParent ] ] ];
+										pressed: [ :s | 
+											s
+												background: (anEvaluation isAppropriate
+														ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.4 ]
+														ifFalse: [ BrGlamorousColors errorBackgroundColor alpha: 0.4 ]) ]);
+								when: BlClickEvent
+									do: [ :anEvent | anEvent currentTarget phlow spawnObject: anEvaluation ];
+								relocate: (anEvaluation bounds origin x + aMinOriginX)
+										@ (anEvaluation bounds origin y + aMinOriginY);
+								addChild: (BrLabel new
+										fitContent;
+										aptitude: (BrGlamorousLabelAptitude new
+												foreground: (anEvaluation isAppropriate
+														ifTrue: [ BrGlamorousColors successBackgroundColor ]
+														ifFalse: [ BrGlamorousColors errorBackgroundColor ]));
+										text: anEvaluation gtStrategiesNameText;
+										constraintsDo: [ :c | 
+											c frame horizontal alignCenter.
+											c frame vertical alignCenter ])) ] ];
+		yourself
+]
+
 { #category : #'private - finding' }
 BrAnchoredCompositeStrategyFinder >> evaluateStrategy: aStrategy [
 	<return: #BrAnchoredCompositeStrategyEvaluation>
@@ -55,7 +134,7 @@ BrAnchoredCompositeStrategyFinder >> gtStrategiesFor: aView [
 		column: 'Name' text: #gtStrategiesNameText weight: 1;
 		column: 'Available Bounds' text: [ :anEvaluation | anEvaluation bounds ] weight: 2;
 		column: 'Available Extent'
-			text: [ :anEvaluation | anEvaluation extent ];
+			text: [ :anEvaluation | (anEvaluation extent x printShowingDecimalPlaces: 2), ' @ ', (anEvaluation extent y printShowingDecimalPlaces: 2) ];
 		column: 'Extra Space'
 			text: [ :anEvaluation | 
 				| aText anExtraExtent |
@@ -64,18 +143,18 @@ BrAnchoredCompositeStrategyFinder >> gtStrategiesFor: aView [
 				anExtraExtent := anEvaluation extent - preferredExtent.
 				
 				anExtraExtent x < 0  ifTrue: [ 
-					aText append: (anExtraExtent x asRopedText foreground: BrGlamorousColors errorBackgroundColor) ].
+					aText append: ((anExtraExtent x printShowingDecimalPlaces: 2) asRopedText foreground: BrGlamorousColors errorBackgroundColor) ].
 				anExtraExtent x > 0 ifTrue: [ 
-					aText append: (anExtraExtent x asRopedText foreground: BrGlamorousColors successBackgroundColor) ].
+					aText append: ((anExtraExtent x printShowingDecimalPlaces: 2) asRopedText foreground: BrGlamorousColors successBackgroundColor) ].
 				anExtraExtent x isZero ifTrue: [ 
 					aText append: (anExtraExtent x asRopedText) ].
 					
 				aText append: (' @ ' asRopedText foreground: BrGlamorousColors disabledButtonTextColor).
 					
 				anExtraExtent y < 0  ifTrue: [ 
-					aText append: (anExtraExtent y asRopedText foreground: BrGlamorousColors errorBackgroundColor) ].
+					aText append: ((anExtraExtent y printShowingDecimalPlaces: 2) asRopedText foreground: BrGlamorousColors errorBackgroundColor) ].
 				anExtraExtent y > 0 ifTrue: [ 
-					aText append: (anExtraExtent y asRopedText foreground: BrGlamorousColors successBackgroundColor) ].
+					aText append: ((anExtraExtent y printShowingDecimalPlaces: 2) asRopedText foreground: BrGlamorousColors successBackgroundColor) ].
 				anExtraExtent y isZero ifTrue: [ 
 					aText append: (anExtraExtent y asRopedText foreground: BrGlamorousColors disabledButtonTextColor) ].
 					
@@ -95,55 +174,14 @@ BrAnchoredCompositeStrategyFinder >> gtStrategiesFor: aView [
 BrAnchoredCompositeStrategyFinder >> gtStrategyBoundsFor: aView [
 	<gtView>
 	self strategies ifEmpty: [ ^ aView empty ].
-	
+	self referenceElement ifNil: [ ^ aView empty ].
+
 	^ aView explicit
 		title: 'Strategy Bounds';
 		priority: 2;
-		stencil: [
-			| theEvaluations aMinOriginX aMinOriginY aMaxCornerX aMaxCornerY |
-			theEvaluations := self strategies collect: [ :aStrategy | 
-				self evaluateStrategy: aStrategy ].
-				
-			aMinOriginX := (theEvaluations detectMin: [ :anEvaluation | anEvaluation bounds origin x ]) bounds origin x.
-			aMinOriginY := (theEvaluations detectMin: [ :anEvaluation | anEvaluation bounds origin y ]) bounds origin y.
-			aMaxCornerX := (theEvaluations detectMax: [ :anEvaluation | anEvaluation bounds corner x ]) bounds corner x.
-			aMaxCornerY := (theEvaluations detectMax: [ :anEvaluation | anEvaluation bounds corner y ]) bounds corner y.
-		
-			(BlElement new 
-				size: (aMaxCornerX - aMinOriginX) @ (aMaxCornerY - aMinOriginY);
-				border:(BlBorder paint: Color veryLightGray);
-				in: [ :aContainer |
-					theEvaluations do: [ :anEvaluation | 
-						aContainer addChild: (
-							BrFrame new
-								border: (BlBorder paint: Color veryLightGray);
-								exact: (anEvaluation extent);
-								addAptitude: (BrStyleCommonAptitude new
-								   default: [ :s | s background: (BlBackground transparent) ];
-								   hovered: [ :s | s background: (anEvaluation isAppropriate 
-										ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.2 ] 
-										ifFalse: [ BrGlamorousColors errorBackgroundColor  alpha: 0.2]) ];
-								   pressed: [ :s | s background: (anEvaluation isAppropriate 
-										ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.3 ] 
-										ifFalse: [ BrGlamorousColors errorBackgroundColor  alpha: 0.3]) ]);
-								when: BlClickEvent do: [ :anEvent | 
-									anEvent currentTarget phlow spawnObject: anEvaluation ];
-								relocate: (anEvaluation bounds origin x + aMinOriginX) @ (anEvaluation bounds origin y + aMinOriginY);
-								addChild: (BrLabel new 
-									fitContent;
-									aptitude: (BrGlamorousLabelAptitude new foreground: (anEvaluation isAppropriate 
-										ifTrue: [ BrGlamorousColors successBackgroundColor ] 
-										ifFalse: [ BrGlamorousColors errorBackgroundColor ]));
-									text: anEvaluation gtStrategiesNameText;
-									constraintsDo: [ :c | 
-										c frame horizontal alignCenter.
-										c frame vertical alignCenter ])
-						)
-					]
-				 ];
-				asScalableElement)
-					margin: (BlInsets all: 10)				
-		]
+		stencil: [ self asStrategyBoundsPreviewElement asScalableElement
+				margin: (BlInsets all: 20);
+				clipChildren: false ]
 ]
 
 { #category : #'private - finding' }
