@@ -348,12 +348,12 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	aScripter do
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 300 @ 0 ];
-		id: #anchorContainer;
+		id: #anchorElement;
 		play.
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #anchorContainer;
+		id: #anchorElement;
 		play.
 
 	aScripter assert
@@ -396,12 +396,12 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 	aScripter do 
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 310@0 ];
-		id: #anchorContainer;
+		id: #anchorElement;
 		play.
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #anchorContainer;
+		id: #anchorElement;
 		play.
 
 	aScripter assert
@@ -443,7 +443,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #anchorContainer;
+		id: #anchorElement;
 		play.
 
 	aScripter assert
