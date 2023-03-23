@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredTopCenterReferencePoint,
 	#superclass : #BrAnchoredReferencePoint,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #accessing }
@@ -12,4 +12,12 @@ BrAnchoredTopCenterReferencePoint class >> label [
 { #category : #'as yet unclassified' }
 BrAnchoredTopCenterReferencePoint >> from: aBounds [
 	^ aBounds topCenter
+]
+
+{ #category : #accessing }
+BrAnchoredTopCenterReferencePoint >> gtConfigurePreferredExtentPreviewElement: anElement [
+	anElement constraintsDo: [ :c | 
+		c frame horizontal alignCenter.
+		c frame vertical alignTop.
+	]
 ]

@@ -11,7 +11,7 @@ Class {
 		'hideDelay',
 		'hoverShowCondition'
 	],
-	#category : 'Brick-Tooltip - Look'
+	#category : #'Brick-Tooltip - Look'
 }
 
 { #category : #'instance creation' }
@@ -53,42 +53,29 @@ BrWithTooltipAptitude >> attachToLeftAndRight [
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredCenterRightReferencePoint;
 				availableBounds: BrAnchoredCenterRightAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomLeftAptitude;
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownTopLeftAptitude;
-						removeAptitude: BrDropdownTopRightAptitude;
-						addAptitude: BrDropdownCenterLeftAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownCenterLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredCenterLeftReferencePoint;
 				availableBounds: BrAnchoredBottomLeftAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownTopLeftAptitude;
-						removeAptitude: BrDropdownTopRightAptitude;
-						addAptitude: BrDropdownBottomLeftAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownBottomLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredCenterRightReferencePoint;
 				availableBounds: BrAnchoredTopRightAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownBottomLeftAptitude;
-						removeAptitude: BrDropdownTopRightAptitude;
-						addAptitude: BrDropdownTopLeftAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownTopLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredCenterLeftReferencePoint;
 				availableBounds: BrAnchoredTopLeftAvailableBounds;
-				apply: [ innerContainer
-						removeAptitude: BrDropdownBottomRightAptitude;
-						removeAptitude: BrDropdownBottomLeftAptitude;
-						removeAptitude: BrDropdownTopLeftAptitude;
-						addAptitude: BrDropdownTopRightAptitude ] ];
+				apply: [ self removeInnerContainerDropdownAptitudes. 
+					innerContainer addAptitude: BrDropdownTopRightAptitude ] ];
 		build.
 ]
 
@@ -362,6 +349,18 @@ BrWithTooltipAptitude >> onPrimaryHover [
 { #category : #'api - displaying' }
 BrWithTooltipAptitude >> onShiftHover [
 	hoverShowCondition := [ :anEvent | anEvent modifiers isShift ]
+]
+
+{ #category : #private }
+BrWithTooltipAptitude >> removeInnerContainerDropdownAptitudes [
+	innerContainer
+		aptitudeDo: [ :anAptitude | 
+			anAptitude 
+				- BrDropdownBottomLeftAptitude 
+				- BrDropdownBottomRightAptitude
+				- BrDropdownTopLeftAptitude 
+				- BrDropdownTopRightAptitude
+				- BrDropdownCenterLeftAptitude ]
 ]
 
 { #category : #'private - testing' }
