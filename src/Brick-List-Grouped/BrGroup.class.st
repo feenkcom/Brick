@@ -121,5 +121,7 @@ BrGroup >> shouldShowWithoutItems: anObject [
 
 { #category : #accessing }
 BrGroup >> stream: anAsyncStream [
-	self itemsProvider: (BrStreamItemsProvider new stream: anAsyncStream)
+	self itemsProvider: (BrStreamItemsProvider new
+		executionConfiguration: (AsyncFutureExecutionConfiguration new defaultPriority);
+		stream: anAsyncStream)
 ]

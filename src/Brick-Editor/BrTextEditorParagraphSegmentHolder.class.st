@@ -155,6 +155,7 @@ BrTextEditorParagraphSegmentHolder >> onRecycled [
 	itemElement removeChildren. 
 	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement | aPiece onRecycled: aPieceElement in: self infiniteElement ].
 	itemElement selection: BlSelection empty.
+	itemElement removeCursors.
 	pieceElements := nil.
 	segment := nil.
 ]
