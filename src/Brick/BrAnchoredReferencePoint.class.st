@@ -23,13 +23,14 @@ BrAnchoredReferencePoint class >> gtAllTypesFor: aView [
 { #category : #'gt-extension' }
 BrAnchoredReferencePoint class >> gtPreviewFor: aView [
 	<gtView>
+	<gtClassView>
 	
 	self = BrAnchoredReferencePoint
 		ifTrue: [ ^ aView empty ].
 	
 	^ aView forward
 		title: 'Preview';
-		priority: -10;
+		priority: 20;
 		object: [ self asBrAnchoredReferencePoint ];
 		view: #gtPreviewFor:
 ]
@@ -49,7 +50,14 @@ BrAnchoredReferencePoint >> from: aBounds [
 	self subclassResponsibility
 ]
 
-{ #category : #'gt-extension' }
+{ #category : #'gt - extensions' }
+BrAnchoredReferencePoint >> gtConfigurePreferredExtentPreviewElement: anElement [
+	"Configure element constraints"
+
+	self subclassResponsibility
+]
+
+{ #category : #'gt - extensions' }
 BrAnchoredReferencePoint >> gtPreviewFor: aView [
 	<gtView>
 	

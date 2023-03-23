@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pages'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #initialization }
@@ -53,12 +53,17 @@ BrPagerAptitude >> onPageAdded: aPageModel [
 
 { #category : #hooks }
 BrPagerAptitude >> onPageContentAttached: aPageContentElement [
-	| aPageModel aPageElement |
+	| aPageModel aPageElement anIndex |
 
 	aPageModel := aPageContentElement viewModel.
+	anIndex := self pages 
+		indexOfKey: aPageModel 
+		ifAbsent: [ self pages size + 1 ].
 
 	aPageContentElement removeFromParent.
-	aPageElement := (aPageModel embellisher contentElement: aPageContentElement) asElement.	
+	aPageElement := (aPageModel embellisher
+		contentElement: aPageContentElement;
+		index: anIndex) asElement.	
 	self pages at: aPageModel put: aPageElement.
 
 	self onPage: aPageModel elementAttached: aPageElement

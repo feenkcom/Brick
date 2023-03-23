@@ -1,12 +1,22 @@
 Class {
 	#name : #BrAnchoredStrategy,
 	#superclass : #Object,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrAnchoredStrategy >> availableBoundsIn: aReferenceElement forPreferredExtent: aPoint [
 	self subclassResponsibility
+]
+
+{ #category : #'gt - extensions' }
+BrAnchoredStrategy >> gtConfigurePreferredExtentPreviewElement: anElement [
+	"do nothing"
+]
+
+{ #category : #'gt - extensions' }
+BrAnchoredStrategy >> gtStrategiesNameText [
+	^ self printString
 ]
 
 { #category : #accessing }

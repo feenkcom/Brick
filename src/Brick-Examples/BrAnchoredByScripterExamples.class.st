@@ -7,6 +7,37 @@ Class {
 }
 
 { #category : #'examples - dropdown' }
+BrAnchoredByScripterExamples >> assertDropdown: aScripter [
+	aScripter assert
+		label: 'Assert dropdown extent';
+		value: [ :aContentElement | aContentElement extent ]
+			equals: [ :aContentElement | 
+				| aChild |
+				aChild := aContentElement childWithId: #labelContent.
+				aChild extent + aChild margin extent ];
+		onSpaceRoot;
+		// BrAnchoredOuterContainer;
+		// BrAnchoredElement;
+		/ #content asBlocElementId;
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown bounds';
+		satisfies: [ :aContentElement | 
+			| aParentQuery |
+			aParentQuery := aContentElement topMostParent query // #dropdownPlacementArea.
+			self assert: aParentQuery result size equals: 1.
+
+			aParentQuery result first bounds inSpace asRectangle
+				containsRect: aContentElement bounds inSpace asRectangle ];
+		onSpaceRoot;
+		// BrAnchoredOuterContainer;
+		// BrAnchoredElement;
+		/ #content asBlocElementId;
+		play
+]
+
+{ #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> dropdownBottomRight [
 	<gtExample>
 	| aScripter |
@@ -20,6 +51,16 @@ BrAnchoredByScripterExamples >> dropdownBottomRight [
 
 	aScripter click
 		label: 'Open dropdown';
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredContainerOverview put: (
+				BrAnchoredContainerOverview new
+				scripter: aScripter;
+				elementWithDropdown: aButton) ];
 		id: #dropdownAnchor;
 		play.
 		
@@ -37,6 +78,82 @@ BrAnchoredByScripterExamples >> dropdownBottomRight [
 		play.
 
 
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithDropdown ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 250@0 ];
+		id: #dropdownAnchor;
+		play.
+
+	aScripter click
+		label: 'Open dropdown';
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredContainerOverview put: (
+				BrAnchoredContainerOverview new
+				scripter: aScripter;
+				elementWithDropdown: aButton) ];
+		id: #dropdownAnchor;
+		play.
+		
+	self assertDropdown: aScripter.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight_ByOnePixel [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithDropdown ].
+	
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+		
+	aScripter do
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 251 @ 0 ];
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter click
+		label: 'Open dropdown';
+		id: #dropdownAnchor;
+		play.
+		
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredContainerOverview put: (
+				BrAnchoredContainerOverview new
+				scripter: aScripter;
+				elementWithDropdown: aButton) ];
+		id: #dropdownAnchor;
+		play.
+		
+	self assertDropdown: aScripter.
+	
 	^ aScripter
 ]
 
@@ -60,6 +177,7 @@ BrAnchoredByScripterExamples >> elementWithDropdown [
 		alignCenter;
 		yourself ] asStencil.
 	container := BlElement new
+		id: #dropdownPlacementArea;
 		background: Color gray muchLighter;
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 

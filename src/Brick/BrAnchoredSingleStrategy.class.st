@@ -8,10 +8,10 @@ Class {
 		'scaleFactor',
 		'apply'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BrAnchoredSingleStrategy class >> anchorBounds: anAnchorBounds referencePoint: aReferencePoint availableBounds: anAvailableBounds scaleFactor: aScaleFactor apply: aBlock [
 	^ self new
 		initializeAnchorBounds: anAnchorBounds
@@ -32,6 +32,18 @@ BrAnchoredSingleStrategy >> availableBoundsIn: aReferenceElement forPreferredExt
 	^ availableBounds
 		in: aReferenceElement bounds inLocal
 		from: (referencePoint from: (anchorBounds boundsIn: aReferenceElement))
+]
+
+{ #category : #'gt - extensions' }
+BrAnchoredSingleStrategy >> gtConfigurePreferredExtentPreviewElement: anElement [
+	^ referencePoint gtConfigurePreferredExtentPreviewElement: anElement
+]
+
+{ #category : #'gt - extensions' }
+BrAnchoredSingleStrategy >> gtStrategiesNameText [
+	^ availableBounds
+		ifNil: [ self printString ]
+		ifNotNil: [ :aBounds | aBounds class label asString ]
 ]
 
 { #category : #initialization }
@@ -69,4 +81,18 @@ BrAnchoredSingleStrategy >> invalidate: anElement forPreferredExtent: aPoint [
 				parentBoundsToLocal: (BlBounds origin: bounds referencePoint corner: bounds referencePoint))
 				topLeft
 		cull: anElement
+]
+
+{ #category : #printing }
+BrAnchoredSingleStrategy >> printOn: aStream [
+	super printOn: aStream.
+
+	availableBounds ifNil: [ ^ self ].
+
+	aStream
+		nextPut: $(;
+		nextPutAll: availableBounds class label asString;
+		space;
+		nextPutAll: 'bounds';
+		nextPut: $)
 ]
