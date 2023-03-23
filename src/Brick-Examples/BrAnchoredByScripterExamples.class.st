@@ -529,36 +529,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 ]
 
 { #category : #'examples - tooltip' }
-BrAnchoredByScripterExamples >> tooltipBottomRight [
-	<gtExample>
-	| aScripter |
-	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
-
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
-
-	aScripter mouseMoveOver
-		label: 'Open tooltip';
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup tooltip overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithTooltip: aButton) ];
-		id: #anchorElement;
-		play.
-
-	^ aScripter
-]
-
-{ #category : #'examples - tooltip' }
-BrAnchoredByScripterExamples >> tooltipBottomRight_AnchorMoreToTheRight [
+BrAnchoredByScripterExamples >> tooltipLongLabelBottomCenter_AnchorMoreToTheRight [
 	<gtExample>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongLabelTooltip ].
@@ -577,6 +548,35 @@ BrAnchoredByScripterExamples >> tooltipBottomRight_AnchorMoreToTheRight [
 	aScripter do 
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 330@0 ];
+		id: #anchorElement;
+		play.
+		
+	aScripter do
+		label: 'Setup tooltip overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithTooltip: aButton) ];
+		id: #anchorElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+
+	aScripter mouseMoveOver
+		label: 'Open tooltip';
 		id: #anchorElement;
 		play.
 		
