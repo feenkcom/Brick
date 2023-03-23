@@ -24,7 +24,8 @@ Class {
 		'mutex',
 		'isUpdateRequested',
 		'action',
-		'postponedDuration'
+		'postponedDuration',
+		'payload'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -156,6 +157,7 @@ BrElementUpdater >> initialize [
 	isUpdateRequested := false.
 	action := self defaultAction.
 	postponedDuration := self defaultPostponedDuration.
+	payload := AsyncMutex for: nil
 ]
 
 { #category : #'private - testing' }
@@ -230,6 +232,15 @@ BrElementUpdater >> requestUpdate [
 	self postponeUpdate.
 ]
 
+{ #category : #'api - updating' }
+BrElementUpdater >> requestUpdate: aPayloadObject [
+	payload
+		lock: [ :anExistingValue |
+			payload value: aPayloadObject.
+			self postponeUpdate ]
+		ifNilPut: [ aPayloadObject ]
+]
+
 { #category : #'private - updating' }
 BrElementUpdater >> resetUpdateRequested [
 	mutex critical: [ 
@@ -247,8 +258,8 @@ BrElementUpdater >> subscribeToElement [
 { #category : #'private - updating' }
 BrElementUpdater >> updateElement [
 	"I should be called from a UI process."
-	self elementDo: [ :anElement | 
-		self action cull: anElement ]
+	self elementDo: [ :anElement |
+		self action cull: anElement cull: payload value ]
 ]
 
 { #category : #'private - updating' }

@@ -121,13 +121,19 @@ BrTree >> scrollTo: anIndex [
 
 { #category : #'api - scrolling' }
 BrTree >> scrollToItem: anObject [
-	"Request a scrollable widget to scroll to a given item"
-
+	"Request a scrollable widget to scroll to a given item and return true if the item was found
+	and scrolling request registered, false otherwise"
+	<return: #Boolean>
+	
 	self viewModel root
 		allChildrenNodesBreadthFirstDo: [ :treeNode | 
 			treeNode ensureChildrenNodes.
 			anObject = treeNode value
-				ifTrue: [ self scrollToIndex: treeNode indexInTree ] ]
+				ifTrue: [
+					self scrollToIndex: treeNode indexInTree.
+					^ true ] ].
+			
+	^ false
 ]
 
 { #category : #'api - selection' }
