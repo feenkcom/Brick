@@ -591,3 +591,38 @@ BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
 
 	^ aScripter
 ]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter_AnchorMoreToTheRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+
+	aScripter mouseMoveOver
+		label: 'Open tooltip';
+		id: #anchorElement;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 337@0 ];
+		id: #anchorElement;
+		play.
+		
+	aScripter do
+		label: 'Setup tooltip overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithTooltip: aButton) ];
+		id: #anchorElement;
+		play.
+
+	^ aScripter
+]
