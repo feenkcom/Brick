@@ -18,6 +18,30 @@ Class {
 }
 
 { #category : #'private - updating' }
+BrAnchoredVisualAnalysisElement >> descriptionText [
+	| aText |
+	aText := '' asRopedText.
+
+	self hasOneEvaluation
+		ifTrue: [ aText
+				append: 'The preview below displays two colored rectangles in the preview part.'
+						asRopedText ]
+		ifFalse: [ aText
+				append: 'Mouse hovering strategy buttons below displays two colored rectangles in the preview part.'
+						asRopedText ].
+
+	aText
+		append: ' Darker rectangles are preferred extents for which a decision to place or to not place an anchored widget (e.g., dropdown, tooltip, context menu) is made. Lighter rectangles represent provided bounds for such placement strategy. The green color means that a strategy is suitable. The red color means that the strategy is not appropriate.'
+				asRopedText.
+
+	self hasOneEvaluation
+		ifFalse: [ aText
+				append: ' You can also click on the strategy buttons to get futher details.' asRopedText ].
+
+	^ aText
+]
+
+{ #category : #'private - updating' }
 BrAnchoredVisualAnalysisElement >> evaluationBackgroundColorFor: anEvaluation [
 	^ anEvaluation isAppropriate
 		ifTrue: [ BrGlamorousColors successBackgroundColor ]
@@ -75,10 +99,10 @@ BrAnchoredVisualAnalysisElement >> initialize [
 	self addChild: scalableScenePreview
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAnchoredVisualAnalysisElement >> initializeDescription [
 	| aText |
-	aText := 'Mouse hovering strategy buttons below displays two colored rectangles in the preview part. Darker rectangles are preferred extents for which a decision to place or to not place an anchored widget (e.g., dropdown, tooltip, context menu) is made. Lighter rectangles are provided bounds for such placement strategy. The green color means that a strategy is suitable. The red color means that the strategy is not appropriate. You can also click on the strategy buttons to get futher details.' asRopedText "foreground: BrGlamorousColors disabledButtonTextColor".
+	aText := self descriptionText.
 	
 	descriptionElement := BrEditor new
 			aptitude: BrGlamorousRegularEditorAptitude;
@@ -89,7 +113,7 @@ BrAnchoredVisualAnalysisElement >> initializeDescription [
 			vFitContentLimited.
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAnchoredVisualAnalysisElement >> initializeScenePreview [
 	scenePreview := BrFrame new
 			fitContent;
@@ -109,7 +133,7 @@ BrAnchoredVisualAnalysisElement >> initializeScenePreview [
 			clipChildren: false
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrAnchoredVisualAnalysisElement >> initializeStrategyItems [
 	strategyItems := BrHorizontalFlow new
 			hFitContentLimited;
@@ -153,7 +177,9 @@ BrAnchoredVisualAnalysisElement >> newStrategyItemElementFor: anEvaluation [
 					s
 						do: [ :aWidget | self showStrategyPreviewFor: anEvaluation ]
 						after: [ :aWidget | ] ];
-				pressed: [ :s |  ]).
+				pressed: [ :s | 
+					s background: aBackgroundColor muchDarker.
+					s border: (BlBorder paint: aBorderColor muchDarker width: 1). ]).
 
 	aContainer
 		when: BlClickEvent
@@ -210,6 +236,23 @@ BrAnchoredVisualAnalysisElement >> newStrategySceneElementFor: anEvaluation [
 			addChild: aStrategyLabel;
 			addChild: aPreferredExtent;
 			relocate: anEvaluation bounds origin x @ anEvaluation bounds origin y.
+			
+	self hasOneEvaluation ifFalse: [
+		aContainer
+			addAptitude: (BrStyleCommonAptitude new
+					default: [ :s | 
+						s background: (aBackgroundColor alpha: 0.2).
+						s border: (BlBorder paint: (aBorderColor alpha: 0.2) width: 1) ];
+					hovered: [ :s | 
+						s background: (aBackgroundColor alpha: 0.2) darker.
+						s border: (BlBorder paint: (aBorderColor alpha: 0.2) darker width: 1) ];
+					pressed: [ :s | 
+						s background: (aBackgroundColor alpha: 0.2) muchDarker.
+						s border: (BlBorder paint: (aBorderColor alpha: 0.2) muchDarker width: 1) ]).
+	
+		aContainer
+			when: BlClickEvent
+			do: [ :anEvent | anEvent currentTarget phlow spawnObject: anEvaluation ] ].
 
 	self hasOneEvaluation ifFalse: [ aContainer visibility: BlVisibility hidden ].
 
@@ -220,11 +263,8 @@ BrAnchoredVisualAnalysisElement >> newStrategySceneElementFor: anEvaluation [
 BrAnchoredVisualAnalysisElement >> onValuesChanched [
 	self updateStragetyItems.
 	self updateScenePreview.
-
-	self evaluations
-		detect: #isAppropriate
-		ifFound: [ :anEvaluation | self showStrategyPreviewFor: anEvaluation ]
-		ifNone: [ "ignore" ]
+	self updateDescriptionText.
+	self updateDisplayedEvaluation
 ]
 
 { #category : #accessing }
@@ -261,6 +301,19 @@ BrAnchoredVisualAnalysisElement >> showStrategyPreviewFor: anEvaluation [
 					aChild id = anId
 						ifTrue: [ aChild visibility: BlVisibility visible ]
 						ifFalse: [ aChild visibility: BlVisibility hidden ] ] ]
+]
+
+{ #category : #'private - updating' }
+BrAnchoredVisualAnalysisElement >> updateDescriptionText [
+	descriptionElement text: self descriptionText
+]
+
+{ #category : #'private - updating' }
+BrAnchoredVisualAnalysisElement >> updateDisplayedEvaluation [
+	self evaluations
+		detect: #isAppropriate
+		ifFound: [ :anEvaluation | self showStrategyPreviewFor: anEvaluation ]
+		ifNone: [ "ignore" ]
 ]
 
 { #category : #'private - updating' }
