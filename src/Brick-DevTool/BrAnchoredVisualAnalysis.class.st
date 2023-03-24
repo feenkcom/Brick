@@ -2,7 +2,7 @@
 I am used to overview and easily analyze dropdown positions.
 Look at a [feenkcom/gtoolkit#3116](https://github.com/feenkcom/gtoolkit/issues/3116#issuecomment-1480435360) issue comment where we describe how we used it to understand dropdown misplacement issues.
 #Example
-The following example shows analysis of used dropdown placement strategies. Use your mose to hover individual placement sectors: {{gtExample: BrAnchoredCompositeStrategyFinderExamples>>#finder_AnchorMoreToTheRight_ByOnePixel | noCode | previewHeight=500}} 
+The following example shows analysis of used dropdown placement strategies. Use your mose to hover individual placement sectors: {{gtExample: BrAnchoredCompositeStrategyFinderExamples>>#finder_AnchorMoreToTheRight_ByOnePixel | noCode | previewHeight=570}} 
 "
 Class {
 	#name : #BrAnchoredVisualAnalysis,

@@ -11,7 +11,8 @@ Class {
 		'evaluations',
 		'visualAnalysis',
 		'referenceElement',
-		'preferredExtent'
+		'preferredExtent',
+		'descriptionElement'
 	],
 	#category : #'Brick-DevTool-Anchored'
 }
@@ -65,11 +66,27 @@ BrAnchoredVisualAnalysisElement >> initialize [
 	super initialize.
 	self matchParent.
 
+	self initializeDescription.
 	self initializeStrategyItems.
 	self initializeScenePreview.
 
+	self addChild: descriptionElement.
 	self addChild: strategyItems.
 	self addChild: scalableScenePreview
+]
+
+{ #category : #accessing }
+BrAnchoredVisualAnalysisElement >> initializeDescription [
+	| aText |
+	aText := 'Mouse hovering strategy buttons below displays two colored rectangles in the preview part. Darker rectangles are preferred extents for which a decision to place or to not place an anchored widget (e.g., dropdown, tooltip, context menu) is made. Lighter rectangles are provided bounds for such placement strategy. The green color means that a strategy is suitable. The red color means that the strategy is not appropriate. You can also click on the strategy buttons to get futher details.' asRopedText "foreground: BrGlamorousColors disabledButtonTextColor".
+	
+	descriptionElement := BrEditor new
+			aptitude: BrGlamorousRegularEditorAptitude;
+			text: aText;
+			beReadOnlyWithoutSelection;
+			margin: (BlInsets top: 10 right: 30 bottom: 10 left: 30);
+			hFitContentLimited;
+			vFitContentLimited.
 ]
 
 { #category : #accessing }
@@ -203,6 +220,11 @@ BrAnchoredVisualAnalysisElement >> newStrategySceneElementFor: anEvaluation [
 BrAnchoredVisualAnalysisElement >> onValuesChanched [
 	self updateStragetyItems.
 	self updateScenePreview.
+
+	self evaluations
+		detect: #isAppropriate
+		ifFound: [ :anEvaluation | self showStrategyPreviewFor: anEvaluation ]
+		ifNone: [ "ignore" ]
 ]
 
 { #category : #accessing }
