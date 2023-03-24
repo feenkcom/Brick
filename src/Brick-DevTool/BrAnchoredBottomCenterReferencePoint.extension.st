@@ -11,7 +11,7 @@ BrAnchoredBottomCenterReferencePoint >> gtConfigureDropdownPreferredExtentPrevie
 { #category : #'*Brick-DevTool' }
 BrAnchoredBottomCenterReferencePoint >> gtConfigureTooltipPreferredExtentPreviewElement: anElement [
 	anElement constraintsDo: [ :c | 
-		c frame horizontal alignLeft.
+		c frame horizontal alignCenter.
 		c frame vertical alignTop.
 	]
 ]

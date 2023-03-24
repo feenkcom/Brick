@@ -37,6 +37,40 @@ BrAnchoredByScripterExamples >> assertDropdown: aScripter [
 		play
 ]
 
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> assertTooltip: aScripter [
+	aScripter assert
+		label: 'Assert tooltip extent';
+		value: [ :aContentElement | aContentElement extent ]
+			equals: [ :aContentElement | 
+				| aQuery aChild |
+				aQuery := aContentElement query // BrLabel.
+				self assert: aQuery result size equals: 1.
+				
+				aChild := aQuery result first.
+				aChild extent + aChild margin extent ];
+		onSpaceRoot;
+		// BrAnchoredOuterContainer;
+		// BrAnchoredElement;
+		/ #content asBlocElementId;
+		play.
+
+	aScripter assert
+		label: 'Assert tooltip bounds';
+		satisfies: [ :aContentElement | 
+			| aParentQuery |
+			aParentQuery := aContentElement topMostParent query // #placementArea.
+			self assert: aParentQuery result size equals: 1.
+
+			aParentQuery result first bounds inSpace asRectangle
+				containsRect: aContentElement bounds inSpace asRectangle ];
+		onSpaceRoot;
+		// BrAnchoredOuterContainer;
+		// BrAnchoredElement;
+		/ #content asBlocElementId;
+		play
+]
+
 { #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> dropdownBottomRight [
 	<gtExample>
@@ -529,7 +563,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 ]
 
 { #category : #'examples - tooltip' }
-BrAnchoredByScripterExamples >> tooltipLongLabelBottomCenter_AnchorMoreToTheRight [
+BrAnchoredByScripterExamples >> tooltipLongLabelCenterLeft_AnchorMoreToTheRight [
 	<gtExample>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongLabelTooltip ].
@@ -559,6 +593,8 @@ BrAnchoredByScripterExamples >> tooltipLongLabelBottomCenter_AnchorMoreToTheRigh
 					elementWithTooltip: aButton) ];
 		id: #anchorElement;
 		play.
+		
+	self assertTooltip: aScripter.
 
 	^ aScripter
 ]
@@ -588,6 +624,8 @@ BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
 					elementWithTooltip: aButton) ];
 		id: #anchorElement;
 		play.
+
+	self assertTooltip: aScripter.
 
 	^ aScripter
 ]
@@ -623,6 +661,8 @@ BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter_AnchorMoreToTheRig
 					elementWithTooltip: aButton) ];
 		id: #anchorElement;
 		play.
+		
+	self assertTooltip: aScripter.
 
 	^ aScripter
 ]
