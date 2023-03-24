@@ -13,11 +13,3 @@ BrAnchoredBottomLeftReferencePoint class >> label [
 BrAnchoredBottomLeftReferencePoint >> from: aBounds [
 	^ aBounds bottomLeft
 ]
-
-{ #category : #'gt - extensions' }
-BrAnchoredBottomLeftReferencePoint >> gtConfigurePreferredExtentPreviewElement: anElement [
-	anElement constraintsDo: [ :c | 
-		c frame horizontal alignLeft.
-		c frame vertical alignBottom.
-	]
-]

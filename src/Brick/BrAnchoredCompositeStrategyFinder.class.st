@@ -14,88 +14,24 @@ Class {
 		'preferredExtent',
 		'preferredRectangle',
 		'maxAreaBounds',
-		'maxAreaStrategy'
+		'maxAreaStrategy',
+		'visualAnalysis'
 	],
 	#category : #'Brick-Anchored - Support'
 }
 
-{ #category : #converting }
-BrAnchoredCompositeStrategyFinder >> asStrategyBoundsPreviewElement [
-	| theEvaluations aMinOriginX aMinOriginY aMaxCornerX aMaxCornerY |
-	theEvaluations := self strategies
-			collect: [ :aStrategy | self evaluateStrategy: aStrategy ].
+{ #category : #'api - visual analysis' }
+BrAnchoredCompositeStrategyFinder >> beForDropdown [
+	"I am used for visual user analysis.
+	It does not affect computation."
+	visualAnalysis := BrAnchoredDropdownVisualAnalysis new
+]
 
-	aMinOriginX := (theEvaluations
-			detectMin: [ :anEvaluation | anEvaluation bounds origin x ]) bounds origin x.
-	aMinOriginY := (theEvaluations
-			detectMin: [ :anEvaluation | anEvaluation bounds origin y ]) bounds origin y.
-	aMaxCornerX := (theEvaluations
-			detectMax: [ :anEvaluation | anEvaluation bounds corner x ]) bounds corner x.
-	aMaxCornerY := (theEvaluations
-			detectMax: [ :anEvaluation | anEvaluation bounds corner y ]) bounds corner y.
-
-	^ BlElement new
-		size: referenceElement extent;
-		border: (BlBorder paint: Color veryLightGray);
-		clipChildren: false;
-		in: [ :aContainer | 
-			theEvaluations
-				do: [ :anEvaluation | 
-					aContainer
-						addChild: (BrFrame new
-								border: (BlBorder paint: Color veryLightGray);
-								exact: anEvaluation extent;
-								clipChildren: false;
-								addAptitude: (BrStyleCommonAptitude new
-										default: [ :s | s background: BlBackground transparent ];
-										hovered: [ :s | 
-											s
-												background: (anEvaluation isAppropriate
-														ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.2 ]
-														ifFalse: [ BrGlamorousColors errorBackgroundColor alpha: 0.2 ]).
-											s 
-												do: [ :aWidget | aWidget
-													zIndex: 10; 
-													addChild: (BrFrame new 
-														border: (BlBorder paint: Color black width: 1);
-														background: (anEvaluation isAppropriate
-															ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.3 ]
-															ifFalse: [ BrGlamorousColors errorBackgroundColor alpha: 0.3 ]);
-														exact: preferredExtent;
-														id: #preferredExtentPreview;
-														in: [ :aFrame | anEvaluation gtConfigurePreferredExtentPreviewElement: aFrame  ];
-														addChild: ((BrLabel new
-															fitContent;
-															aptitude: (BrGlamorousLabelAptitude new 
-																foreground: Color white);
-															text: 'Preferred extent';
-															constraintsDo: [ :c | 
-																c frame horizontal alignCenter.
-																c frame vertical alignCenter ]) asScalableElement maxScale: 1)) ] 
-												after: [ :aWidget | aWidget 
-													elevation: aWidget defaultElevation;
-													childWithId: #preferredExtentPreview 
-													ifFound: [ :aChild | aChild removeFromParent ] ] ];
-										pressed: [ :s | 
-											s
-												background: (anEvaluation isAppropriate
-														ifTrue: [ BrGlamorousColors successBackgroundColor alpha: 0.4 ]
-														ifFalse: [ BrGlamorousColors errorBackgroundColor alpha: 0.4 ]) ]);
-								when: BlClickEvent
-									do: [ :anEvent | anEvent currentTarget phlow spawnObject: anEvaluation ];
-								relocate: (anEvaluation bounds origin x + aMinOriginX)
-										@ (anEvaluation bounds origin y + aMinOriginY);
-								addChild: (BrLabel new
-										fitContent;
-										aptitude: (BrGlamorousLabelAptitude new
-												foreground: (anEvaluation isAppropriate
-														ifTrue: [ BrGlamorousColors successBackgroundColor ]
-														ifFalse: [ BrGlamorousColors errorBackgroundColor ]));
-										text: anEvaluation gtStrategiesNameText;
-										constraintsDo: [ :c | 
-											c frame horizontal alignCenter.
-											c frame vertical alignCenter ])) ] ];
-		yourself
+{ #category : #'api - visual analysis' }
+BrAnchoredCompositeStrategyFinder >> beForTooltip [
+	"I am used for visual user analysis.
+	It does not affect computation."
+	visualAnalysis := BrAnchoredTooltipVisualAnalysis new
 ]
 
 { #category : #'private - finding' }
@@ -111,7 +47,16 @@ BrAnchoredCompositeStrategyFinder >> evaluateStrategy: aStrategy [
 		strategy: aStrategy;
 		bounds: aBounds;
 		rectangle: aRectangle;
-		isAppropriate: (aRectangle intersect: preferredRectangle) = preferredRectangle
+		isAppropriate: (aRectangle intersect: preferredRectangle) = preferredRectangle;
+		referenceElement: self referenceElement;
+		preferredExtent: self preferredExtent;
+		visualAnalysis: self visualAnalysis.
+]
+
+{ #category : #'api - finding' }
+BrAnchoredCompositeStrategyFinder >> evaluations [
+	^ self strategies collect: [ :aStrategy | 
+		self evaluateStrategy: aStrategy ]
 ]
 
 { #category : #'api - finding' }
@@ -129,9 +74,9 @@ BrAnchoredCompositeStrategyFinder >> gtStrategiesFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Strategies';
-		priority: 1;
-		items: [ self strategies collect: [ :aStrategy | self evaluateStrategy: aStrategy ] ];
-		column: 'Name' text: #gtStrategiesNameText weight: 1;
+		priority: 2;
+		items: [ self evaluations ];
+		column: 'Name' text: #name weight: 1;
 		column: 'Available Bounds' text: [ :anEvaluation | anEvaluation bounds ] weight: 2;
 		column: 'Available Extent'
 			text: [ :anEvaluation | (anEvaluation extent x printShowingDecimalPlaces: 2), ' @ ', (anEvaluation extent y printShowingDecimalPlaces: 2) ];
@@ -178,10 +123,10 @@ BrAnchoredCompositeStrategyFinder >> gtStrategyBoundsFor: aView [
 
 	^ aView explicit
 		title: 'Strategy Bounds';
-		priority: 2;
-		stencil: [ self asStrategyBoundsPreviewElement asScalableElement
-				margin: (BlInsets all: 20);
-				clipChildren: false ]
+		priority: 1;
+		stencil: [ BrAnchoredVisualAnalysisElement new
+				finder: self;
+				margin: (BlInsets all: 10) ]
 ]
 
 { #category : #'private - finding' }
@@ -244,4 +189,9 @@ BrAnchoredCompositeStrategyFinder >> strategies [
 { #category : #accessing }
 BrAnchoredCompositeStrategyFinder >> strategies: anObject [
 	strategies := anObject
+]
+
+{ #category : #'api - visual analysis' }
+BrAnchoredCompositeStrategyFinder >> visualAnalysis [
+	^ visualAnalysis
 ]

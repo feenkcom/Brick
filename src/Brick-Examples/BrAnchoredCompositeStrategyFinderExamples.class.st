@@ -13,7 +13,7 @@ BrAnchoredCompositeStrategyFinderExamples >> finder [
 	| aScripter |
 	aScripter := BrAnchoredByScripterExamples new dropdownBottomRight.
 	
-	^ aScripter userData at: BrAnchoredContainerOverview
+	^ aScripter userData at: BrAnchoredVisualAnalysis
 ]
 
 { #category : #'examples - finder' }
@@ -22,7 +22,7 @@ BrAnchoredCompositeStrategyFinderExamples >> finder_AnchorMoreToTheRight [
 	| aScripter  |
 	aScripter := BrAnchoredByScripterExamples new dropdownBottomRight_AnchorMoreToTheRight.
 	
-	^ aScripter userData at: BrAnchoredContainerOverview
+	^ aScripter userData at: BrAnchoredVisualAnalysis
 ]
 
 { #category : #'examples - finder' }
@@ -31,5 +31,5 @@ BrAnchoredCompositeStrategyFinderExamples >> finder_AnchorMoreToTheRight_ByOnePi
 	| aScripter |
 	aScripter := BrAnchoredByScripterExamples new dropdownBottomRight_AnchorMoreToTheRight_ByOnePixel.
 	
-	^ aScripter userData at: BrAnchoredContainerOverview
+	^ aScripter userData at: BrAnchoredVisualAnalysis
 ]
