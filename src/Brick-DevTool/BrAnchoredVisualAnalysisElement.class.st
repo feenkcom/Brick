@@ -27,16 +27,16 @@ BrAnchoredVisualAnalysisElement >> descriptionText [
 				append: 'The preview below displays two colored rectangles in the preview part.'
 						asRopedText ]
 		ifFalse: [ aText
-				append: 'Mouse hovering strategy buttons below displays two colored rectangles in the preview part.'
+				append: 'Hover over the buttons below to preview the placement strategy.'
 						asRopedText ].
 
 	aText
-		append: ' Darker rectangles are preferred extents for which a decision to place or to not place an anchored widget (e.g., dropdown, tooltip, context menu) is made. Lighter rectangles represent provided bounds for such placement strategy. The green color means that a strategy is suitable. The red color means that the strategy is not appropriate.'
+		append: ' Darker rectangles denote preferred extents for which a decision to place or not an anchored widget (e.g., dropdown, tooltip, context menu) is made. Lighter rectangles represent the provided bounds for such placement strategy. Green denotes a strategy that is suitable. Red means that the strategy is not appropriate.'
 				asRopedText.
 
 	self hasOneEvaluation
 		ifFalse: [ aText
-				append: ' You can also click on the strategy buttons to get futher details.' asRopedText ].
+				append: ' Click on the strategy buttons to get futher details.' asRopedText ].
 
 	^ aText
 ]
