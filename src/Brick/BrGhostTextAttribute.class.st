@@ -43,6 +43,11 @@ BrGhostTextAttribute >> for: aText [
 ]
 
 { #category : #accessing }
+BrGhostTextAttribute >> mayHaveExternalReferences [
+	^ false
+]
+
+{ #category : #accessing }
 BrGhostTextAttribute >> updateVisibilityOf: element in: anEditorElement [
 	^ anEditorElement text isEmpty
 		ifTrue: [ element visibility: BlVisibility visible ]
