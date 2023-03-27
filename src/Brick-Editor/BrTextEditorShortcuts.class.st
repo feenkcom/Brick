@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'shortcuts'
 	],
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #'adding / removing' }
@@ -20,6 +20,15 @@ BrTextEditorShortcuts >> add: aNewEditorShortcut ifAdded: anAddedBlock ifReplace
 		ifAbsent: [
 			shortcuts at: aNewEditorShortcut combinationForPlatform put: aNewEditorShortcut.
 			anAddedBlock value: aNewEditorShortcut ]
+]
+
+{ #category : #enumerating }
+BrTextEditorShortcuts >> detectShortcutLike: anEditorShortcut ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	^ shortcuts
+		at: anEditorShortcut combinationForPlatform
+		ifPresent: [ :aShortcut | 
+			aPresentBlock cull: aShortcut ]
+		ifAbsent: [ anAbsentBlock value ]
 ]
 
 { #category : #enumerating }

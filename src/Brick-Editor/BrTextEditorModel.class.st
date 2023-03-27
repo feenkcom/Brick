@@ -278,6 +278,20 @@ BrTextEditorModel >> enqueueHolderCommand: aBrTextEditorHolderCommand interval: 
 		event: aBrTextEditorHolderCommand
 ]
 
+{ #category : #'api - shortcuts' }
+BrTextEditorModel >> ensureNoUndoRedoShortcuts [
+	"Temporary method needed until all Lepiter snippets support undo."
+	self editorShortcuts
+		detectShortcutLike: BrEditorShortcut undo 
+			ifPresent: [ :aShortcut | 
+				self removeEditorShortcut: aShortcut ] 
+			ifAbsent: [];
+		detectShortcutLike: BrEditorShortcut redo 
+			ifPresent: [ :aShortcut | 
+				self removeEditorShortcut: aShortcut ] 
+			ifAbsent: [] 
+]
+
 { #category : #accessing }
 BrTextEditorModel >> gtStringFor: aView [
 	<gtView>
