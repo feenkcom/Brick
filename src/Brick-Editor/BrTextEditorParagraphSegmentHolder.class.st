@@ -26,12 +26,18 @@ BrTextEditorParagraphSegmentHolder class >> defaultSegmentLayout: aBlock [
 
 { #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
-	| newPieceElements thePieces hasSelection hasCursor |
+	| newPieceElements thePieces hasSelection hasCursor hasFocus |
+	"Initialize an itemElement for a given editor segment.
+	Please note, that itemElement may be reused from a previous segment, which means it is
+	important to also assign defaults such as empty selection or no cursors"
+	
 	segment := anEditorSegment.
 	itemElement segment: segment.
 
 	hasSelection := self hasSelection.
 	hasCursor := self hasCursor.
+	hasFocus := self infiniteElement isFocused.
+
 	itemElement text: segment text.
 
 	segment updateSegmentProperties.
@@ -53,9 +59,17 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 	itemElement removeChildren.
 	itemElement addChildren: newPieceElements.
 
-	(hasCursor or: [ hasSelection ])
-		ifTrue: [ hasCursor ifTrue: [ self onCursorChanged ].
-			hasSelection ifTrue: [ self onSelectionChanged ] ].
+	hasCursor
+		ifTrue: [ self onCursorChanged ]
+		ifFalse: [ itemElement removeCursors ].
+
+	hasSelection
+		ifTrue: [ self onSelectionChanged ]
+		ifFalse: [ itemElement selection: BlSelection empty ].
+
+	hasFocus
+		ifTrue: [ itemElement showCursors ]
+		ifFalse: [ itemElement hideCursors ].
 
 	itemElement
 		constraintsDo: [ :c | c horizontal resizer: infiniteElement constraints horizontal resizer ];
@@ -221,14 +235,12 @@ BrTextEditorParagraphSegmentHolder >> selectionIn: aTextEditor [
 
 { #category : #'private - segment' }
 BrTextEditorParagraphSegmentHolder >> updateCursorPresent: hasCursor selectionPresent: hasSelection [
-	hasCursor
-		ifTrue: [ BlFrameTelemetry timeSync: [ 'Set cursor' ] during: [ self onCursorChanged ].
-			hasSelection
-				ifTrue: [ BlFrameTelemetry
-						timeSync: [ 'Set selection' ]
-						during: [ self onSelectionChanged ] ] ].
 
-	BlFrameTelemetry
-		timeSync: [ 'Set cursor' ]
-		during: [ self onFocusChanged: self infiniteElement isFocused ]
+	hasCursor
+		ifTrue: [ self onCursorChanged ].
+	
+	hasSelection
+		ifTrue: [ self onSelectionChanged ].
+
+	self onFocusChanged: self infiniteElement isFocused
 ]
