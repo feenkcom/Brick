@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'selectionModel'
 	],
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
 { #category : #'api - selection' }
@@ -30,6 +30,11 @@ TBrSelectable >> maxSelectionIndex [
 	<return: #Number>
 	
 	^ self explicitRequirement
+]
+
+{ #category : #'api - selection' }
+TBrSelectable >> select: anIndex to: anotherIndex dueTo: aSourceEvent [
+	selectionModel select: anIndex to: anotherIndex dueTo: aSourceEvent
 ]
 
 { #category : #'api - selection' }

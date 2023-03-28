@@ -8,15 +8,15 @@ Class {
 		'path',
 		'value'
 	],
-	#category : 'Brick-Core-Changes'
+	#category : #'Brick-Core-Changes'
 }
 
 { #category : #initialization }
 BrLookPropertyChange >> downOn: aLook [
 	self assert: [ initialized ].
-	down value: aLook value: old value: new.
 	old := nil.
 	new := nil.
+	down value: aLook value: old value: new.
 	initialized := false
 ]
 

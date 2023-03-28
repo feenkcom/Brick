@@ -6,7 +6,8 @@ Class {
 		'clickShowCondition',
 		'shouldHideWidget',
 		'isResizable',
-		'whenResizedHandler'
+		'whenResizedHandler',
+		'resizerAptitudes'
 	],
 	#category : #'Brick-Dropdown - Look'
 }
@@ -106,10 +107,11 @@ BrWithDropdownAptitude >> createResizeAptitudeWith: anAptitude [
 { #category : #private }
 BrWithDropdownAptitude >> createResizerOn: anElement [
 	self isResizable ifFalse: [ ^ anElement ].
-	^ anElement
-		addAptitude: (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new)
-				+ (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+
+	self resizerAptitudes isAttachedToWidget
+		ifTrue: [ self resizerAptitudes widget removeAptitude: self resizerAptitudes ].
+
+	^ anElement addAptitude: self resizerAptitudes
 ]
 
 { #category : #'api - displaying' }
@@ -152,49 +154,52 @@ BrWithDropdownAptitude >> hide [
 { #category : #initialization }
 BrWithDropdownAptitude >> initialize [
 	super initialize.
-	
-	isResizable := true.
-	
-	hideWishHandler := BlEventHandler
-		on: BrDropdownHideWish
-		do: [ :aWish | self onHideWish: aWish ].
 
-	clickShowCondition := [ :aClickEvent | (self hasModifiers: aClickEvent) not ].
-	
-	"when true, the widget under the dropdown will be hidden"
+	isResizable := true.
+	self resizersOnBottom.
+
+	hideWishHandler := BlEventHandler
+			on: BrDropdownHideWish
+			do: [ :aWish | self onHideWish: aWish ].
+
+	clickShowCondition := [ :aClickEvent | (self hasModifiers: aClickEvent) not ].	"when true, the widget under the dropdown will be hidden"
 	shouldHideWidget := true.
 
 	preferredExtent := 200 @ 300.
 	strategy := BrAnchoredCompositeStrategy builder
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: BrAnchoredTopLeftReferencePoint;
-				availableBounds: BrAnchoredBottomRightAvailableBounds;
-				apply: [ self removeInnerContainerDropdownAptitudes. 
-					innerContainer addAptitude: BrDropdownBottomRightAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: BrAnchoredTopRightReferencePoint;
-				availableBounds: BrAnchoredBottomLeftAvailableBounds;
-				apply: [ self removeInnerContainerDropdownAptitudes. 
-					innerContainer addAptitude: BrDropdownBottomLeftAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: BrAnchoredBottomLeftReferencePoint;
-				availableBounds: BrAnchoredTopRightAvailableBounds;
-				apply: [ self removeInnerContainerDropdownAptitudes. 
-					innerContainer addAptitude: BrDropdownTopLeftAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: BrAnchoredBottomRightReferencePoint;
-				availableBounds: BrAnchoredTopLeftAvailableBounds;
-				apply: [ self removeInnerContainerDropdownAptitudes. 
-					innerContainer addAptitude: BrDropdownTopRightAptitude ] ];
-		build.
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: BrAnchoredTopLeftReferencePoint;
+					availableBounds: BrAnchoredBottomRightAvailableBounds;
+					apply: [ self removeInnerContainerDropdownAptitudes.
+						innerContainer addAptitude: BrDropdownBottomRightAptitude.
+						self resizersOnBottom ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: BrAnchoredTopRightReferencePoint;
+					availableBounds: BrAnchoredBottomLeftAvailableBounds;
+					apply: [ self removeInnerContainerDropdownAptitudes.
+						innerContainer addAptitude: BrDropdownBottomLeftAptitude.
+						self resizersOnBottom ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: BrAnchoredBottomLeftReferencePoint;
+					availableBounds: BrAnchoredTopRightAvailableBounds;
+					apply: [ self removeInnerContainerDropdownAptitudes.
+						innerContainer addAptitude: BrDropdownTopLeftAptitude.
+						self resizersOnTop ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: BrAnchoredBottomRightReferencePoint;
+					availableBounds: BrAnchoredTopLeftAvailableBounds;
+					apply: [ self removeInnerContainerDropdownAptitudes.
+						innerContainer addAptitude: BrDropdownTopRightAptitude.
+						self resizersOnTop ] ];
+			build
 ]
 
 { #category : #initialization }
@@ -280,6 +285,39 @@ BrWithDropdownAptitude >> removeInnerContainerDropdownAptitudes [
 				- BrDropdownTopLeftAptitude 
 				- BrDropdownTopRightAptitude 
 				- BrDropdownCenterLeftAptitude]
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizerAptitudes [
+	^ resizerAptitudes
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizerAptitudes: anObject [
+	(resizerAptitudes isNotNil and: [ resizerAptitudes isAttachedToWidget ])
+		ifTrue: [ | aWidget |
+			aWidget := resizerAptitudes widget.
+			aWidget removeAptitude: resizerAptitudes.
+			aWidget addAptitude: anObject ].
+	resizerAptitudes := anObject
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizersOnBottom [
+	self
+		resizerAptitudes: (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new)
+				+ (self
+						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizersOnTop [
+	self
+		resizerAptitudes: (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new)
+				+ (self
+						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
 ]
 
 { #category : #'api - displaying' }
