@@ -25,7 +25,41 @@ BrAnchoredByScripterExamples >> assertDropdown: aScripter [
 		label: 'Assert dropdown bounds';
 		satisfies: [ :aContentElement | 
 			| aParentQuery |
-			aParentQuery := aContentElement topMostParent query // #dropdownPlacementArea.
+			aParentQuery := aContentElement topMostParent query // #placementArea.
+			self assert: aParentQuery result size equals: 1.
+
+			aParentQuery result first bounds inSpace asRectangle
+				containsRect: aContentElement bounds inSpace asRectangle ];
+		onSpaceRoot;
+		// BrAnchoredOuterContainer;
+		// BrAnchoredElement;
+		/ #content asBlocElementId;
+		play
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> assertTooltip: aScripter [
+	aScripter assert
+		label: 'Assert tooltip extent';
+		value: [ :aContentElement | aContentElement extent ]
+			equals: [ :aContentElement | 
+				| aQuery aChild |
+				aQuery := aContentElement query // BrLabel.
+				self assert: aQuery result size equals: 1.
+				
+				aChild := aQuery result first.
+				aChild extent + aChild margin extent ];
+		onSpaceRoot;
+		// BrAnchoredOuterContainer;
+		// BrAnchoredElement;
+		/ #content asBlocElementId;
+		play.
+
+	aScripter assert
+		label: 'Assert tooltip bounds';
+		satisfies: [ :aContentElement | 
+			| aParentQuery |
+			aParentQuery := aContentElement topMostParent query // #placementArea.
 			self assert: aParentQuery result size equals: 1.
 
 			aParentQuery result first bounds inSpace asRectangle
@@ -51,17 +85,16 @@ BrAnchoredByScripterExamples >> dropdownBottomRight [
 
 	aScripter click
 		label: 'Open dropdown';
-		id: #dropdownAnchor;
+		id: #anchorElement;
 		play.
 		
 	aScripter do
 		label: 'Setup dropdown overview';
 		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredContainerOverview put: (
-				BrAnchoredContainerOverview new
-				scripter: aScripter;
-				elementWithDropdown: aButton) ];
-		id: #dropdownAnchor;
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithDropdown: aButton) ];
+		id: #anchorElement;
 		play.
 		
 	aScripter assert
@@ -96,22 +129,21 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
 	aScripter do 
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 250@0 ];
-		id: #dropdownAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter click
 		label: 'Open dropdown';
-		id: #dropdownAnchor;
+		id: #anchorElement;
 		play.
 		
 	aScripter do
 		label: 'Setup dropdown overview';
 		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredContainerOverview put: (
-				BrAnchoredContainerOverview new
-				scripter: aScripter;
-				elementWithDropdown: aButton) ];
-		id: #dropdownAnchor;
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithDropdown: aButton) ];
+		id: #anchorElement;
 		play.
 		
 	self assertDropdown: aScripter.
@@ -134,22 +166,21 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight_ByOnePi
 	aScripter do
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 251 @ 0 ];
-		id: #dropdownAnchor;
+		id: #anchorElement;
 		play.
 		
 	aScripter click
 		label: 'Open dropdown';
-		id: #dropdownAnchor;
+		id: #anchorElement;
 		play.
 		
 	aScripter do
 		label: 'Setup dropdown overview';
 		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredContainerOverview put: (
-				BrAnchoredContainerOverview new
-				scripter: aScripter;
-				elementWithDropdown: aButton) ];
-		id: #dropdownAnchor;
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithDropdown: aButton) ];
+		id: #anchorElement;
 		play.
 		
 	self assertDropdown: aScripter.
@@ -177,7 +208,7 @@ BrAnchoredByScripterExamples >> elementWithDropdown [
 		alignCenter;
 		yourself ] asStencil.
 	container := BlElement new
-		id: #dropdownPlacementArea;
+		id: #placementArea;
 		background: Color gray muchLighter;
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 
@@ -185,7 +216,7 @@ BrAnchoredByScripterExamples >> elementWithDropdown [
 			c vertical matchParent ];
 		yourself.
 	anchor := BlElement new
-		id: #dropdownAnchor;
+		id: #anchorElement;
 		aptitude:
 			((BrGlamorousWithDropdownAptitude handle: handle content: content)
 				root: container;
@@ -195,7 +226,7 @@ BrAnchoredByScripterExamples >> elementWithDropdown [
 		addEventHandler: BlPullHandler new;
 		yourself.
 	anchorContainer := BlElement new
-		id: #contextMenuAnchor;
+		id: #anchorContainer;
 		background: Color red muchLighter;
 		relocate: 200 @ 250;
 		size: 400 @ 200;
@@ -243,17 +274,94 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 			yourself.
 	anchor := BlElement new
 			aptitude: (BrGlamorousWithContextMenuAptitude handle: handle content: content);
-			id: #contextMenuAnchor;
+			id: #anchorElement;
 			background: Color red;
 			size: 40 @ 80;
 			addEventHandler: BlPullHandler new;
 			yourself.
 	anchorContainer := BlElement new
+			id: #anchorContainer;
 			background: Color red muchLighter;
 			size: 400 @ 200;
 			clipChildren: false;
 			addChild: anchor;
 			yourself.
+	^ container
+		addChild: anchorContainer;
+		yourself
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> elementWithLongLabelTooltip [
+	<gtExample>
+	| container anchor anchorContainer |
+
+	container := BlElement new
+		id: #placementArea;
+		background: Color gray muchLighter;
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ];
+		yourself.
+	anchor := BlElement new
+		id: #anchorElement;
+		aptitude:
+			(BrGlamorousWithLabelTooltipAptitude new
+				text: 'I am a very loooooooong label tooltip';
+				root: container;
+				yourself);
+		background: Color red;
+		size: 40 @ 80;
+		addEventHandler: BlPullHandler new;
+		yourself.
+	anchorContainer := BlElement new
+		id: #anchorContainer;
+		background: Color red muchLighter;
+		relocate: 200 @ 250;
+		size: 400 @ 200;
+		constraintsDo: [ :c | c ignoreByLayout ];
+		clipChildren: false;
+		addChild: anchor;
+		yourself.
+	^ container
+		addChild: anchorContainer;
+		yourself
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> elementWithShortLabelTooltip [
+	<gtExample>
+	| container anchor anchorContainer |
+
+	container := BlElement new
+		id: #placementArea;
+		background: Color gray muchLighter;
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ];
+		yourself.
+	anchor := BlElement new
+		id: #anchorElement;
+		aptitude:
+			(BrGlamorousWithLabelTooltipAptitude new
+				text: 'I am a tooltip';
+				root: container;
+				yourself);
+		background: Color red;
+		size: 40 @ 80;
+		addEventHandler: BlPullHandler new;
+		yourself.
+	anchorContainer := BlElement new
+		id: #anchorContainer;
+		background: Color red muchLighter;
+		relocate: 200 @ 250;
+		size: 400 @ 200;
+		constraintsDo: [ :c | c ignoreByLayout ];
+		clipChildren: false;
+		addChild: anchor;
+		yourself.
 	^ container
 		addChild: anchorContainer;
 		yourself
@@ -274,12 +382,12 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	aScripter do
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 300 @ 0 ];
-		id: #contextMenuAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #contextMenuAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter assert
@@ -322,12 +430,12 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 	aScripter do 
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 310@0 ];
-		id: #contextMenuAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #contextMenuAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter assert
@@ -369,7 +477,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #contextMenuAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter assert
@@ -412,12 +520,21 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 	aScripter do 
 		label: 'Relocate anchor';
 		block: [ :anAnchor | anAnchor relocate: 309@0 ];
-		id: #contextMenuAnchor;
+		id: #anchorElement;
 		play.
 
 	aScripter secondaryClick
 		label: 'Open context menu';
-		id: #contextMenuAnchor;
+		id: #anchorElement;
+		play.
+		
+	aScripter do
+		label: 'Setup dropdown overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithDropdown: aButton) ];
+		id: #anchorElement;
 		play.
 
 	aScripter assert
@@ -441,6 +558,111 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 		onSpaceRoot;
 		// BrAnchoredElement;
 		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> tooltipLongLabelCenterLeft_AnchorMoreToTheRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithLongLabelTooltip ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+
+	aScripter mouseMoveOver
+		label: 'Open tooltip';
+		id: #anchorElement;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 330@0 ];
+		id: #anchorElement;
+		play.
+		
+	aScripter do
+		label: 'Setup tooltip overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithTooltip: aButton) ];
+		id: #anchorElement;
+		play.
+		
+	self assertTooltip: aScripter.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+
+	aScripter mouseMoveOver
+		label: 'Open tooltip';
+		id: #anchorElement;
+		play.
+		
+	aScripter do
+		label: 'Setup tooltip overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithTooltip: aButton) ];
+		id: #anchorElement;
+		play.
+
+	self assertTooltip: aScripter.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter_AnchorMoreToTheRight [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
+
+	aScripter do
+		label: 'Set space extent';
+		block: [ :aSpace | aSpace extent: 650 @ 600 ];
+		onSpace;
+		play.
+
+	aScripter mouseMoveOver
+		label: 'Open tooltip';
+		id: #anchorElement;
+		play.
+		
+	aScripter do 
+		label: 'Relocate anchor';
+		block: [ :anAnchor | anAnchor relocate: 337@0 ];
+		id: #anchorElement;
+		play.
+		
+	aScripter do
+		label: 'Setup tooltip overview';
+		block: [ :aButton :aUserData | 
+			aUserData at: BrAnchoredVisualAnalysis put: (
+				BrAnchoredVisualAnalysis new
+					elementWithTooltip: aButton) ];
+		id: #anchorElement;
+		play.
+		
+	self assertTooltip: aScripter.
 
 	^ aScripter
 ]

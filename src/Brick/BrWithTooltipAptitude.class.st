@@ -143,120 +143,64 @@ BrWithTooltipAptitude >> initialize [
 				referencePoint: BrAnchoredBottomCenterReferencePoint;
 				availableBounds: BrAnchoredBottomCenterAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipBottomCenterAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipBottomCenterAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredTopCenterReferencePoint;
 				availableBounds: BrAnchoredTopCenterAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipTopCenterAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipTopCenterAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredCenterRightReferencePoint;
 				availableBounds: BrAnchoredCenterRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipCenterRightAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipCenterRightAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredCenterLeftReferencePoint;
 				availableBounds: BrAnchoredCenterLeftAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipCenterLeftAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipCenterLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredBottomLeftReferencePoint;
 				availableBounds: BrAnchoredBottomLeftAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipBottomLeftAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipBottomLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredBottomRightReferencePoint;
 				availableBounds: BrAnchoredBottomRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipBottomRightAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipBottomRightAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredTopLeftReferencePoint;
 				availableBounds: BrAnchoredTopLeftAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopRightAptitude;
-						add: BrTooltipTopLeftAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipTopLeftAptitude ] ];
 		single: [ :e | 
 			e
 				anchorBounds: [ :f | widget bounds inParent: f ];
 				referencePoint: BrAnchoredTopRightReferencePoint;
 				availableBounds: BrAnchoredTopRightAvailableBounds;
 				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ innerContainer aptitude
-						remove: BrTooltipBottomCenterAptitude;
-						remove: BrTooltipTopCenterAptitude;
-						remove: BrTooltipCenterLeftAptitude;
-						remove: BrTooltipCenterRightAptitude;
-						remove: BrTooltipBottomLeftAptitude;
-						remove: BrTooltipBottomRightAptitude;
-						remove: BrTooltipTopLeftAptitude;
-						add: BrTooltipTopRightAptitude ] ];
+				apply: [ self removeInnerContainerTooltipAptitudes.
+					innerContainer addAptitude: BrTooltipTopRightAptitude ] ];
 		build.
 	clickEventHandler := BlEventHandler
 		on: BlClickEvent
@@ -361,6 +305,22 @@ BrWithTooltipAptitude >> removeInnerContainerDropdownAptitudes [
 				- BrDropdownTopLeftAptitude 
 				- BrDropdownTopRightAptitude
 				- BrDropdownCenterLeftAptitude ]
+]
+
+{ #category : #initialization }
+BrWithTooltipAptitude >> removeInnerContainerTooltipAptitudes [
+
+	innerContainer
+		aptitudeDo: [ :anAptitude | 
+			anAptitude 
+				- BrTooltipTopCenterAptitude 
+				- BrTooltipCenterLeftAptitude
+				- BrTooltipCenterRightAptitude 
+				- BrTooltipBottomLeftAptitude 
+				- BrTooltipBottomRightAptitude
+				- BrTooltipTopLeftAptitude
+				- BrTooltipTopRightAptitude
+				- BrTooltipBottomCenterAptitude ]
 ]
 
 { #category : #'private - testing' }

@@ -707,3 +707,12 @@ BrEditorShortcut >> performDueTo: aShortcutEvent [
 BrEditorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
 	performBlock cull: aBrTextEditor cull: aBrEditorElement cull: aShortcutEvent
 ]
+
+{ #category : #printing }
+BrEditorShortcut >> printOn: aStream [
+	super printOn: aStream.
+	
+	self name ifNil: [ ^ self ].
+	aStream parenthesize: [
+		aStream << self name ]
+]

@@ -51,13 +51,6 @@ BrAnchoredReferencePoint >> from: aBounds [
 ]
 
 { #category : #'gt - extensions' }
-BrAnchoredReferencePoint >> gtConfigurePreferredExtentPreviewElement: anElement [
-	"Configure element constraints"
-
-	self subclassResponsibility
-]
-
-{ #category : #'gt - extensions' }
 BrAnchoredReferencePoint >> gtPreviewFor: aView [
 	<gtView>
 	

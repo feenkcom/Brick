@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'shortcuts'
 	],
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #'adding / removing' }
@@ -23,8 +23,31 @@ BrTextEditorShortcuts >> add: aNewEditorShortcut ifAdded: anAddedBlock ifReplace
 ]
 
 { #category : #enumerating }
+BrTextEditorShortcuts >> detectShortcutLike: anEditorShortcut ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	^ shortcuts
+		at: anEditorShortcut combinationForPlatform
+		ifPresent: [ :aShortcut | 
+			aPresentBlock cull: aShortcut ]
+		ifAbsent: [ anAbsentBlock value ]
+]
+
+{ #category : #enumerating }
 BrTextEditorShortcuts >> do: aBlock [
 	shortcuts do: aBlock
+]
+
+{ #category : #'gt - extensions' }
+BrTextEditorShortcuts >> gtViewShortcutsFor: aView [
+	<gtView>
+	
+	shortcuts ifNil: [ ^ aView empty ].
+	
+	^ aView columnedList
+		title: 'Shortcuts';
+		items: [ shortcuts associations ];
+		column: 'Key Combinatio' text: [ :assoc | assoc key ];
+		column: 'Key Combinatio' text: [ :assoc | assoc value ];
+		send: [ :assoc | assoc value ]
 ]
 
 { #category : #initialization }

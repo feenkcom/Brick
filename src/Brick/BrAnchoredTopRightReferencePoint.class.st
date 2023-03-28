@@ -13,11 +13,3 @@ BrAnchoredTopRightReferencePoint class >> label [
 BrAnchoredTopRightReferencePoint >> from: aBounds [
 	^ aBounds topRight
 ]
-
-{ #category : #'gt - extensions' }
-BrAnchoredTopRightReferencePoint >> gtConfigurePreferredExtentPreviewElement: anElement [
-	anElement constraintsDo: [ :c | 
-		c frame horizontal alignRight.
-		c frame vertical alignTop.
-	]
-]

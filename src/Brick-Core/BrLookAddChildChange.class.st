@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'child'
 	],
-	#category : 'Brick-Core-Changes'
+	#category : #'Brick-Core-Changes'
 }
 
 { #category : #initialization }
@@ -41,7 +41,7 @@ BrLookAddChildChange >> writeOn: aLook value: anObject [
 	| container |
 	container := self containerOn: aLook.
 	^ anObject
-		ifNil: [ container removeChild: child ]
+		ifNil: [ child parent = container ifTrue: [ container removeChild: child ] ]
 		ifNotNil: [ child := anObject.
 			container addChild: anObject ]
 ]

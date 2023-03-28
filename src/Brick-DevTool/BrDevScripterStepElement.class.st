@@ -6,7 +6,7 @@ Class {
 		'targetElement',
 		'statusElement'
 	],
-	#category : #'Brick-DevTool'
+	#category : #'Brick-DevTool-Scripter'
 }
 
 { #category : #'instance creation' }

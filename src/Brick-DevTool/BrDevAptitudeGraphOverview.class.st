@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lookClass'
 	],
-	#category : #'Brick-DevTool'
+	#category : #'Brick-DevTool-Aptitude'
 }
 
 { #category : #accessing }
