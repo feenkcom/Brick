@@ -7,6 +7,11 @@ Trait {
 }
 
 { #category : #'api - selection' }
+TBrSelectable >> addToSelection: anIndex dueTo: aSourceEvent [
+	selectionModel addToSelection: anIndex dueTo: aSourceEvent
+]
+
+{ #category : #'api - selection' }
 TBrSelectable >> deselectAll [
 	"Deselect all items"
 
@@ -30,6 +35,11 @@ TBrSelectable >> maxSelectionIndex [
 	<return: #Number>
 	
 	^ self explicitRequirement
+]
+
+{ #category : #'api - selection' }
+TBrSelectable >> removeFromSelection: anIndex dueTo: aSourceEvent [
+	selectionModel removeFromSelection: anIndex dueTo: aSourceEvent
 ]
 
 { #category : #'api - selection' }
