@@ -14,31 +14,21 @@ BrListMultiClickSelectHandler >> clickEvent: aBlClickEvent [
 			dataSourcePosition.
 	anItemIndex <= 0 ifTrue: [ ^ self ].
 
-	self selectionStart
-		ifNotNil: [ aBlClickEvent consumed: true.
-			listWidget requestFocus.
-			listWidget
-				select: (self selectionStart min: anItemIndex)
-				to: (self selectionStart max: anItemIndex)
-				dueTo: aBlClickEvent.
-			self selectionStart: nil.
-			^ self ].
-
 	aBlClickEvent modifiers isEmpty ifTrue: [ ^ super clickEvent: aBlClickEvent ].
 
-
-	aBlClickEvent modifiers isCtrl
+	aBlClickEvent modifiers isCmd
 		ifTrue: [ aBlClickEvent consumed: true.
 			listWidget requestFocus.
-			self selectionStart: anItemIndex ]
-]
+			listWidget addToSelection: anItemIndex dueTo: aBlClickEvent ].
 
-{ #category : #accessing }
-BrListMultiClickSelectHandler >> selectionStart [
-	^ selectionStart
-]
-
-{ #category : #accessing }
-BrListMultiClickSelectHandler >> selectionStart: anObject [
-	selectionStart := anObject
+	aBlClickEvent modifiers isShift
+		ifTrue: [ | selectedIndex |
+			aBlClickEvent consumed: true.
+			listWidget requestFocus.
+			selectedIndex := listWidget selectedIndices min.
+			listWidget deselectAll.
+			listWidget
+				select: (selectedIndex min: anItemIndex)
+				to: (selectedIndex max: anItemIndex)
+				dueTo: aBlClickEvent ]
 ]

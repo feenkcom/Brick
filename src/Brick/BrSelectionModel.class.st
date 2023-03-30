@@ -4,12 +4,22 @@ Class {
 	#instVars : [
 		'selection'
 	],
-	#category : 'Brick-! Core - Models'
+	#category : #'Brick-! Core - Models'
 }
 
 { #category : #printing }
 BrSelectionModel class >> modelName [
 	^ 'Selection'
+]
+
+{ #category : #'api - selection' }
+BrSelectionModel >> addToSelection: anIndex dueTo: aSourceEvent [
+	"Add an item at a given index to the selection"
+	(self contains: anIndex)
+		ifTrue: [ ^ self ].
+
+	selection select: anIndex - 1 to: anIndex.
+	self notifySelected: (anIndex to: anIndex) dueTo: aSourceEvent
 ]
 
 { #category : #'api - testing' }
@@ -85,6 +95,16 @@ BrSelectionModel >> notifySelected: anInterval [
 { #category : #notifying }
 BrSelectionModel >> notifySelected: anInterval dueTo: aSourceEvent [
 	self dispatchEvent: (BrSelectionChanged new selection: selection; selectedInterval: anInterval; sourceEvent: aSourceEvent)
+]
+
+{ #category : #'api - selection' }
+BrSelectionModel >> removeFromSelection: anIndex dueTo: aSourceEvent [
+	"Remove an item at a given index from the selection"
+	(self contains: anIndex)
+		ifTrue: [ ^ self ].
+
+	selection deselect: anIndex - 1 to: anIndex.
+	self notifySelected: (anIndex to: anIndex) dueTo: aSourceEvent
 ]
 
 { #category : #'api - selection' }
