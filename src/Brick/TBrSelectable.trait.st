@@ -48,6 +48,13 @@ TBrSelectable >> select: anIndex to: anotherIndex dueTo: aSourceEvent [
 ]
 
 { #category : #'api - selection' }
+TBrSelectable >> selectAll [
+	"Select all items"
+
+	selectionModel select: 1 to: self maxSelectionIndex
+]
+
+{ #category : #'api - selection' }
 TBrSelectable >> selectNext [
 	self selectedIndices
 		ifEmpty: [ self selectOne: 1  ]
