@@ -21,7 +21,10 @@ BrListMultiClickSelectHandler >> clickEvent: aBlClickEvent [
 	aBlClickEvent modifiers isCmd
 		ifTrue: [ aBlClickEvent consumed: true.
 			listWidget requestFocus.
-			listWidget addToSelection: anItemIndex dueTo: aBlClickEvent ].
+
+			(listWidget isSelectedAt: anItemIndex)
+				ifTrue: [ listWidget removeFromSelection: anItemIndex dueTo: aBlClickEvent ]
+				ifFalse: [ listWidget addToSelection: anItemIndex dueTo: aBlClickEvent ] ].
 
 	aBlClickEvent modifiers isShift
 		ifTrue: [ aBlClickEvent consumed: true.

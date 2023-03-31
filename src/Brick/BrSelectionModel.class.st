@@ -101,7 +101,7 @@ BrSelectionModel >> notifySelected: anInterval dueTo: aSourceEvent [
 BrSelectionModel >> removeFromSelection: anIndex dueTo: aSourceEvent [
 	"Remove an item at a given index from the selection"
 	(self contains: anIndex)
-		ifTrue: [ ^ self ].
+		ifFalse: [ ^ self ].
 
 	selection deselect: anIndex - 1 to: anIndex.
 	self notifySelected: (anIndex to: anIndex) dueTo: aSourceEvent
