@@ -3,6 +3,9 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
+	#instVars : [
+		'selectionCallback'
+	],
 	#category : #'Brick-Tree - UI'
 }
 
@@ -19,6 +22,14 @@ BrTree >> collapseAt: aLevelIndex [
 { #category : #initialization }
 BrTree >> defaultListModel [
 	^ BrAbstractTreeModel new
+]
+
+{ #category : #accessing }
+BrTree >> defaultSelectionCallback [
+	^ [ :indices | 
+	indices size = 1
+		ifTrue: [ self viewModel itemAt: indices first ]
+		ifFalse: [ indices collect: [ :anIndex | self viewModel itemAt: anIndex ] ] ]
 ]
 
 { #category : #'api - tree' }
@@ -46,6 +57,8 @@ BrTree >> initialize [
 
 	self viewModel: (self defaultListModel
 		add: (selectionModel := BrSelectionModel new)).
+		
+	self selectionCallback: self defaultSelectionCallback.
 	
 	self beFocusable.
 	self initializeEventHandlers
@@ -157,4 +170,14 @@ BrTree >> selectedNodeDo: aBlock [
 		ifNotEmpty: [ :theIndices |
 			(theIndices first between: 1 and: self viewModel itemCount)
 				ifTrue: [ aBlock value: (self viewModel itemAt: theIndices first) ] ]
+]
+
+{ #category : #accessing }
+BrTree >> selectionCallback [
+	^ selectionCallback
+]
+
+{ #category : #accessing }
+BrTree >> selectionCallback: aBlock [
+	selectionCallback := aBlock
 ]
