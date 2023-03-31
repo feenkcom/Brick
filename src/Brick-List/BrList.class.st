@@ -3,6 +3,9 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
+	#instVars : [
+		'selectionCallback'
+	],
 	#category : #'Brick-List-Elements'
 }
 
@@ -17,6 +20,14 @@ BrList >> defaultListModel [
 	self subclassResponsibility 
 ]
 
+{ #category : #accessing }
+BrList >> defaultSelectionCallback [
+	^ [ :indices | 
+	indices size = 1
+		ifTrue: [ self viewModel itemAt: indices first ]
+		ifFalse: [ indices collect: [ :anIndex | self viewModel itemAt: anIndex ] ] ]
+]
+
 { #category : #initialization }
 BrList >> initialize [
 	super initialize.
@@ -24,6 +35,8 @@ BrList >> initialize [
 	self matchParent.
 	self beFocusable.
 	self beInSeparateCompositionLayer.
+	
+	self selectionCallback: self defaultSelectionCallback.
 	
 	self viewModel: (self defaultListModel
 		add: (selectionModel := BrSelectionModel new)).
@@ -73,4 +86,14 @@ BrList >> selectedItemDo: aBlock [
 				ifTrue: [ aBlock 
 					cull: (self viewModel itemAt: theIndices first) 
 					cull: theIndices first ] ]
+]
+
+{ #category : #accessing }
+BrList >> selectionCallback [
+	^ selectionCallback
+]
+
+{ #category : #accessing }
+BrList >> selectionCallback: anObject [
+	selectionCallback := anObject
 ]
