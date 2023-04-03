@@ -77,8 +77,9 @@ BrLookPropertyChange >> value: anObject [
 { #category : #initialization }
 BrLookPropertyChange >> writeOn: aLook value: anObject [
 	| receiver |
+	anObject ifNil: [ ^ self ].
 	receiver := (path copyFrom: 1 to: path size - 1)
-		inject: aLook
-		into: [ :e :f | e perform: f ].
+			inject: aLook
+			into: [ :e :f | e perform: f ].
 	^ receiver perform: (path last asString , ':') asSymbol with: anObject
 ]
