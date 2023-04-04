@@ -29,6 +29,14 @@ BrColumnedTreeExamples >> subclassesOfCollection [
 ]
 
 { #category : #examples }
+BrColumnedTreeExamples >> subclassesOfCollectionMultiSelect [
+	<gtExample>
+	^ self subclassesOfCollection
+		rowStencil: BrGlamorousColumnedTreeSelectableRowElementStencilBuilder new;
+		aptitude: BrColumnedMultiTreeAptitude
+]
+
+{ #category : #examples }
 BrColumnedTreeExamples >> subropesTree [
 	<gtExample>
 	| aRope aTree |
