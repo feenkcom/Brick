@@ -16,6 +16,14 @@ BrSimpleTreeExamples >> subclassesOfCollection [
 ]
 
 { #category : #examples }
+BrSimpleTreeExamples >> subclassesOfCollectionMultiSelect [
+	<gtExample>
+	 ^ self subclassesOfCollection
+		rowStencil: BrGlamorousSimpleTreeSelectableRowElementStencilBuilder new;
+		aptitude: BrMultiTreeAptitude
+]
+
+{ #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection_InefficientUse [
 	<gtExample>
 	| aTree |
