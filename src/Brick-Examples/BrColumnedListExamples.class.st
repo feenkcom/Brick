@@ -366,7 +366,7 @@ BrColumnedListExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDis
 		label: 'Select discontinuous item in list';
 		id: #scrollable;
 		onChildAt: 7;
-		modifiers: BlKeyModifiers cmd;
+		modifiers: BlKeyModifiers primary;
 		play.
 
 	aScripter check

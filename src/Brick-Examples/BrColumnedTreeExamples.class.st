@@ -78,7 +78,7 @@ BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDis
 		label: 'Select items in tree';
 		id: #scrollable;
 		onChildAt: 7;
-		modifiers: BlKeyModifiers cmd;
+		modifiers: BlKeyModifiers primary;
 		play.
 
 	aScripter check
