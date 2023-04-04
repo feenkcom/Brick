@@ -2,7 +2,9 @@ Class {
 	#name : #BrElementUpdaterSignal,
 	#superclass : #BeaconSignal,
 	#instVars : [
-		'updater'
+		'updater',
+		'element',
+		'elementSpace'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -23,13 +25,42 @@ BrElementUpdaterSignal class >> gtNormalOperationSignal [
 ]
 
 { #category : #accessing }
+BrElementUpdaterSignal >> element [
+	^ element
+]
+
+{ #category : #accessing }
+BrElementUpdaterSignal >> elementSpace [
+	^ elementSpace
+]
+
+{ #category : #accessing }
+BrElementUpdaterSignal >> isElementInSpace [
+	^ elementSpace isNotNil
+]
+
+{ #category : #printing }
+BrElementUpdaterSignal >> printOneLineContentsOn: stream [
+	stream print: element.
+	self isElementInSpace ifFalse: [
+		stream nextPutAll: ' is not in space' ].
+	stream nextPutAll: ', updaterID: '.
+	stream print: updater identityHash.
+	super printOneLineContentsOn: stream
+]
+
+{ #category : #accessing }
 BrElementUpdaterSignal >> updater [
 
 	^ updater
 ]
 
 { #category : #accessing }
-BrElementUpdaterSignal >> updater: anObject [
+BrElementUpdaterSignal >> updater: anUpdater [
 
-	updater := anObject
+	anUpdater ifNil: [ ^ self ].
+
+	updater := anUpdater.
+	element := anUpdater element.
+	elementSpace := anUpdater element ifNotNil: #space.
 ]
