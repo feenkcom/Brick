@@ -191,6 +191,13 @@ BrColumnedListExamples >> compositeAllClassesAndPackage [
 ]
 
 { #category : #'examples - scripting' }
+BrColumnedListExamples >> compositeAllClassesAndPackageMultiSelect [
+	<gtExample>
+	^ self compositeAllClassesAndPackage
+		aptitude: BrColumnedMultiListAptitude new
+]
+
+{ #category : #'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithIndex [
 	<gtExample>
 	| aList |
@@ -304,4 +311,68 @@ BrColumnedListExamples >> listColumnWithTitle [
 	self assert: aListColumn title equals: 'Custom property'.
 	
 	^ aListColumn
+]
+
+{ #category : #'examples - scripting' }
+BrColumnedListExamples >> scripterOnCompositeAllClassesAndPackageMultiSelect [
+	<gtExample>
+	| aScripter |
+	aScripter := BlScripter new element: self compositeAllClassesAndPackageMultiSelect.
+	
+	aScripter check
+		label: 'Check that nothing is selected';
+		satisfies: [:anElement | anElement selectedIndices isEmpty ];
+		play.
+	
+	^ aScripter
+]
+
+{ #category : #'examples - scripting' }
+BrColumnedListExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterOnCompositeAllClassesAndPackageMultiSelect.
+
+	aScripter click
+		label: 'Select items in list';
+		id: #scrollable;
+		onChildAt: 2;
+		play.
+
+
+	aScripter click
+		label: 'Select items in list';
+		id: #scrollable;
+		onChildAt: 5;
+		modifiers: BlKeyModifiers shift;
+		play.
+
+	aScripter check
+		label: 'Check that selection works';
+		satisfies: [ :anElement | anElement selectedIndices size = 4 ];
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - scripting' }
+BrColumnedListExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDiscontinuous [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterOnSubclassesOfCollectionMultiSelectSelected.
+
+
+	aScripter click
+		label: 'Select discontinuous item in list';
+		id: #scrollable;
+		onChildAt: 7;
+		modifiers: BlKeyModifiers cmd;
+		play.
+
+	aScripter check
+		label: 'Check that discontinuous selection works';
+		satisfies: [ :anElement | anElement selectedIndices size = 5 ];
+		play.
+
+	^ aScripter
 ]

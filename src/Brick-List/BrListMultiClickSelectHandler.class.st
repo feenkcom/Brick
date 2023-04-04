@@ -18,7 +18,7 @@ BrListMultiClickSelectHandler >> clickEvent: aBlClickEvent [
 		ifTrue: [ self selectionStart: anItemIndex.
 			^ super clickEvent: aBlClickEvent ].
 
-	aBlClickEvent modifiers isCmd
+	aBlClickEvent modifiers isPrimaryModifier
 		ifTrue: [ aBlClickEvent consumed: true.
 			listWidget requestFocus.
 
