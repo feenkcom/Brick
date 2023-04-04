@@ -1,14 +1,14 @@
 Class {
-	#name : #BrListMultiClickSelectHandler,
-	#superclass : #BrListClickToSelectHandler,
+	#name : #BrMultiTreeClickToSelectHandler,
+	#superclass : #BrTreeClickToSelectHandler,
 	#instVars : [
 		'selectionStart'
 	],
-	#category : #'Brick-List-Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #accessing }
-BrListMultiClickSelectHandler >> clickEvent: aBlClickEvent [
+BrMultiTreeClickToSelectHandler >> clickEvent: aBlClickEvent [
 	| anItemIndex |
 	anItemIndex := aBlClickEvent currentTarget constraints infinite holder
 			dataSourcePosition.
@@ -20,33 +20,28 @@ BrListMultiClickSelectHandler >> clickEvent: aBlClickEvent [
 
 	aBlClickEvent modifiers isPrimaryModifier
 		ifTrue: [ aBlClickEvent consumed: true.
-			listWidget requestFocus.
+			treeWidget requestFocus.
 
-			(listWidget isSelectedAt: anItemIndex)
-				ifTrue: [ listWidget removeFromSelection: anItemIndex dueTo: aBlClickEvent ]
-				ifFalse: [ listWidget addToSelection: anItemIndex dueTo: aBlClickEvent ] ].
+			(treeWidget isSelectedAt: anItemIndex)
+				ifTrue: [ treeWidget removeFromSelection: anItemIndex dueTo: aBlClickEvent ]
+				ifFalse: [ treeWidget addToSelection: anItemIndex dueTo: aBlClickEvent ] ].
 
 	aBlClickEvent modifiers isShift
 		ifTrue: [ aBlClickEvent consumed: true.
-			listWidget requestFocus.
-			listWidget deselectAll.
-			listWidget
+			treeWidget requestFocus.
+			treeWidget deselectAll.
+			treeWidget
 				select: (self selectionStart min: anItemIndex)
 				to: (self selectionStart max: anItemIndex)
 				dueTo: aBlClickEvent ]
 ]
 
 { #category : #accessing }
-BrListMultiClickSelectHandler >> initialize [
-	self selectionStart: 1
-]
-
-{ #category : #accessing }
-BrListMultiClickSelectHandler >> selectionStart [
+BrMultiTreeClickToSelectHandler >> selectionStart [
 	^ selectionStart
 ]
 
 { #category : #accessing }
-BrListMultiClickSelectHandler >> selectionStart: anObject [
+BrMultiTreeClickToSelectHandler >> selectionStart: anObject [
 	selectionStart := anObject
 ]

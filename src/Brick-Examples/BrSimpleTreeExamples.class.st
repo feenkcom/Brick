@@ -5,6 +5,91 @@ Class {
 }
 
 { #category : #examples }
+BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelect [
+	<gtExample>
+	| aScripter |
+	aScripter := BlScripter new element: self subclassesOfCollectionMultiSelect fitContent.
+	
+	aScripter check
+		label: 'Check that nothing is selected';
+		satisfies: [:anElement | anElement selectedIndices isEmpty ];
+		play.
+	
+	^ aScripter
+]
+
+{ #category : #examples }
+BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectExpanded [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterOnSubclassesOfCollectionMultiSelect.
+
+	aScripter click
+		label: 'Expand tree';
+		onChildAt: 1;
+		onChildAt: 1;
+		id: #toggle;
+		play.
+
+	aScripter check
+		label: 'Check that expansion works';
+		satisfies: [ :anElement | anElement viewModel root isExpanded ];
+		play.
+
+	^ aScripter
+]
+
+{ #category : #examples }
+BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterOnSubclassesOfCollectionMultiSelectExpanded.
+
+	aScripter click
+		label: 'Select items in tree';
+		id: #scrollable;
+		onChildAt: 2;
+		play.
+
+
+	aScripter click
+		label: 'Select items in tree';
+		id: #scrollable;
+		onChildAt: 5;
+		modifiers: BlKeyModifiers shift;
+		play.
+
+	aScripter check
+		label: 'Check that selection works';
+		satisfies: [ :anElement | anElement selectedIndices size = 4 ];
+		play.
+
+	^ aScripter
+]
+
+{ #category : #examples }
+BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDiscontinuous [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterOnSubclassesOfCollectionMultiSelectSelected.
+
+
+	aScripter click
+		label: 'Select items in tree';
+		id: #scrollable;
+		onChildAt: 7;
+		modifiers: BlKeyModifiers primary;
+		play.
+
+	aScripter check
+		label: 'Check that selection works';
+		satisfies: [ :anElement | anElement selectedIndices size = 5 ];
+		play.
+
+	^ aScripter
+]
+
+{ #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection [
 	<gtExample>
 	| aTree |
@@ -13,6 +98,14 @@ BrSimpleTreeExamples >> subclassesOfCollection [
 		nodeDataBinder: [ :aNodeElement :aClass | aNodeElement text: aClass name ];
 		items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
 	^ aTree
+]
+
+{ #category : #examples }
+BrSimpleTreeExamples >> subclassesOfCollectionMultiSelect [
+	<gtExample>
+	 ^ self subclassesOfCollection
+		rowStencil: BrGlamorousSimpleTreeSelectableRowElementStencilBuilder new;
+		aptitude: BrMultiTreeAptitude
 ]
 
 { #category : #examples }

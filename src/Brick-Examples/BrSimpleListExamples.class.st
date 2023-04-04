@@ -18,6 +18,13 @@ BrSimpleListExamples >> allClasses [
 		items: (SystemNavigation new allClasses sorted: [ :a :b | a name < b name ])
 ]
 
+{ #category : #'examples - vertical list' }
+BrSimpleListExamples >> allClassesMultiSelect [
+	<gtExample>
+	^ self allClasses
+		aptitude: BrMultiListAptitude new
+]
+
 { #category : #'examples - horizontal list' }
 BrSimpleListExamples >> horizontalAllClasses [
 	<gtExample>
@@ -103,6 +110,70 @@ BrSimpleListExamples >> label [
 	aLabel border: (BlBorder paint: Color lightGray width: 1).
 	aLabel geometry: (BlRoundedRectangleGeometry cornerRadius: 4).
 	^ aLabel
+]
+
+{ #category : #'examples - vertical list' }
+BrSimpleListExamples >> scripterAllClassesMultiSelect [
+	<gtExample>
+	| aScripter |
+	aScripter := BlScripter new element: self allClassesMultiSelect.
+	
+	aScripter check
+		label: 'Check that nothing is selected';
+		satisfies: [:anElement | anElement selectedIndices isEmpty ];
+		play.
+	
+	^ aScripter
+]
+
+{ #category : #'examples - vertical list' }
+BrSimpleListExamples >> scripterAllClassesMultiSelectSelected [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterAllClassesMultiSelect.
+
+	aScripter click
+		label: 'Select items in list';
+		id: #scrollable;
+		onChildAt: 2;
+		play.
+
+
+	aScripter click
+		label: 'Select items in list';
+		id: #scrollable;
+		onChildAt: 5;
+		modifiers: BlKeyModifiers shift;
+		play.
+
+	aScripter check
+		label: 'Check that selection works';
+		satisfies: [ :anElement | anElement selectedIndices size = 4 ];
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - vertical list' }
+BrSimpleListExamples >> scripterAllClassesMultiSelectSelectedDiscontinuous [
+	<gtExample>
+	| aScripter |
+	aScripter := self scripterAllClassesMultiSelectSelected.
+
+
+	aScripter click
+		label: 'Select discontinuous item in list';
+		id: #scrollable;
+		onChildAt: 7;
+		modifiers: BlKeyModifiers primary;
+		play.
+
+	aScripter check
+		label: 'Check that discontinuous selection works';
+		satisfies: [ :anElement | anElement selectedIndices size = 5 ];
+		play.
+
+	^ aScripter
 ]
 
 { #category : #'examples - performance' }
