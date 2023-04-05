@@ -173,8 +173,21 @@ BrAsyncElementFuture >> privateDataSnapshot: aDataSnapshot [
 BrAsyncElementFuture >> privateInitializeElement [
 	"May be called from any process"
 	| aPromise isFinished |
-
-	mutex critical: [	
+	
+	mutex critical: [
+		| isPending needsUpdate |
+	
+		BrAsyncElementFutureReceivedSignal new 
+			elementFuture: self;
+			elementUpdater: updater;
+			future: future;
+			existingPromise: promise;
+			dataSnapshot: dataSnapshot;
+			isPending: (isPending := dataSnapshot ifNotNil: #isPending);
+			strategy: strategy;
+			needsUpdate: (needsUpdate := strategy needsUpdate: updater element);
+			emit.
+	
 		future
 			ifNil: [ ^ self ].
 		
@@ -182,21 +195,35 @@ BrAsyncElementFuture >> privateInitializeElement [
 			ifNil: [ ^ self ].
 		
 		"Do nothing if the data snaphot is no longer pending!"
-		dataSnapshot isPending
+		isPending
 			ifFalse: [ ^ self ].
 
-		(strategy needsUpdate: updater element)
+		needsUpdate
 			ifFalse: [ ^ self ].
-
+			
 		promise ifNotNil: [ ^ self ].
-
+		
 		isFinished := false.
 		promise := aPromise := future await: futureExecutionConfiguration.
-		(BrFutureScheduledSignal new future: future) emit.
+		BrAsyncElementFutureScheduledSignal new 
+			elementFuture: self;
+			elementUpdater: updater;
+			future: future;
+			promise: aPromise;
+			emit.
 		promise
 			then: [ :aResult |
 				isFinished := true.
 				mutex critical: [
+					BrAsyncElementFutureCompletedSuccessfullySignal new
+						elementFuture: self;
+						elementUpdater: updater;
+						future: future;
+						promise: aPromise;
+						isCurrentPromise: promise == aPromise;
+						result: aResult;
+						emit.
+				
 					(promise == aPromise)
 						ifTrue: [
 							promise := nil.
@@ -205,6 +232,15 @@ BrAsyncElementFuture >> privateInitializeElement [
 			otherwise: [ :anError |
 				isFinished := true.
 				mutex critical: [
+					BrAsyncElementFutureTerminatedUnsuccessfullySignal new
+						elementFuture: self;
+						elementUpdater: updater;
+						future: future;
+						promise: aPromise;
+						isCurrentPromise: promise == aPromise;
+						exception: anError copy freeze;
+						emit.
+				
 					(promise == aPromise)
 						ifTrue: [
 							promise := nil.
