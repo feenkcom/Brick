@@ -104,7 +104,9 @@ BrAsyncWidget >> stencil: aBlock [
 	| aStencil |
 
 	stencil := aStencil := aBlock asStencil.
-	self asyncFuture future: [ aStencil asElement ] asAsyncFuture
+	self asyncFuture
+		shouldFireScheduledEvent: true;
+		future: [ aStencil asElement ] asAsyncFuture
 ]
 
 { #category : #accessing }

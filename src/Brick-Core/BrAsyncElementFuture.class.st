@@ -14,7 +14,8 @@ Class {
 		'futureExecutionConfiguration',
 		'futureCancellation',
 		'strategy',
-		'whenDonePromise'
+		'whenDonePromise',
+		'shouldFireScheduledEvent'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -137,7 +138,8 @@ BrAsyncElementFuture >> initialize [
 	previousDataSnapshot := nil.
 	futureExecutionConfiguration := AsyncFutureExecutionConfiguration default.
 	futureCancellation := AsyncFutureExecutionSoftCancellation uniqueInstance.
-	strategy := self defaultStrategy
+	strategy := self defaultStrategy.
+	shouldFireScheduledEvent := false
 ]
 
 { #category : #accessing }
@@ -246,7 +248,15 @@ BrAsyncElementFuture >> privateInitializeElement [
 							self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ] ].
 
 	isFinished
-		ifFalse: [ updater element enqueueTask: (BlPromiseTask new promise: aPromise) ]
+		ifFalse: [
+		| anElement |
+		anElement := updater element.
+			anElement enqueueTask: (BlPromiseTask new promise: aPromise).
+			
+			"users have to opt-in to fire future scheduled events"
+			shouldFireScheduledEvent ifTrue: [
+				anElement enqueueTask: (BlTaskAction new action: [
+					anElement fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: aPromise) ]) ] ]
 ]
 
 { #category : #'private - update' }
@@ -276,6 +286,14 @@ BrAsyncElementFuture >> privateUpdateElement [
 		ifSuccess: [ :aData | whenSuccess ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
 		ifError: [ :anError | whenError ifNotNil: [ :aBlock | aBlock cull: updater element cull: anError ] ]
 		ifPending: [ :aData | whenPending ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
+]
+
+{ #category : #'api - configuring' }
+BrAsyncElementFuture >> shouldFireScheduledEvent: aBoolean [
+	"Set to true if an element should fire an event when a future is scheduled for execution.
+	false by default"
+
+	shouldFireScheduledEvent := aBoolean
 ]
 
 { #category : #accessing }
