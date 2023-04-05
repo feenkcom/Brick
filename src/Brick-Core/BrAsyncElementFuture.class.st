@@ -90,8 +90,22 @@ BrAsyncElementFuture >> future: anAsyncFuture initialValue: anObject shouldCance
 		
 		promise ifNotNil: [ :aPromise |
 			shouldCancel
-				ifTrue: [ aPromise cancel: futureCancellation ]
-				ifFalse: [ ^ self ] ].
+				ifTrue: [ 
+					BrAsyncElementFutureAboutToCancelPromiseSignal new 
+						elementFuture: self;
+						elementUpdater: updater;
+						promise: aPromise;
+						emit.
+					aPromise cancel: futureCancellation ]
+				ifFalse: [ 
+					BrAsyncElementFutureSkippedFutureSignal new 
+						elementFuture: self;
+						elementUpdater: updater;
+						future: future;
+						promise: aPromise;
+						skippedFuture: anAsyncFuture asAsyncFuture;
+						emit.
+					^ self ] ].
 		promise := nil.
 		whenDonePromise := AsyncPendingPromise new.
 		future := anAsyncFuture asAsyncFuture.
@@ -216,8 +230,21 @@ BrAsyncElementFuture >> privateUpdateElement [
 
 	mutex critical: [
 		previousDataSnapshot = dataSnapshot
-			ifTrue: [ ^ self ].
+			ifTrue: [ 
+				BrAsyncElementFutureUpdateElementSkippedSignal new
+					elementFuture: self;
+					elementUpdater: updater;
+					dataSnapshot: dataSnapshot;
+					previousDataSnapshot: previousDataSnapshot;
+					emit.
+				^ self ].
 		previousDataSnapshot := aNewDataSnapshot := dataSnapshot ].
+		
+	BrAsyncElementFutureUpdateElementSignal new
+		elementFuture: self;
+		elementUpdater: updater;
+		dataSnapshot: aNewDataSnapshot;
+		emit.
 	
 	aNewDataSnapshot
 		ifSuccess: [ :aData | whenSuccess ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]

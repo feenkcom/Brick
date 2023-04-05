@@ -31,17 +31,40 @@ BrTextStylerAsyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: 
 		ifFalse: [ ^ self ].
 
 	aTextStylingFuture := [
-		| aStyledText |
+		| anUnstyledText aStyler aStyledText |
+		
+		anUnstyledText := aBrEditorElement editor textSnapshot.
+		aStyler := aBrEditorElement editor styler.
+		
+		BrTextStylerAsyncStylingStarted new
+			element: aBrEditorElement;
+			future: aTextStylingFuture;
+			unstyledText: anUnstyledText;
+			styler: aStyler;
+			emit.
 
 		aStyledText := self
-			doStyleText: aBrEditorElement editor textSnapshot with: aBrEditorElement editor styler
+			doStyleText: anUnstyledText with: aStyler
 			afterDo: aBlock.
+			
+		BrTextStylerAsyncStylingFinished new
+			element: aBrEditorElement;
+			future: aTextStylingFuture;
+			styledText: aStyledText copy;
+			styler: aStyler;
+			emit.
 
 		(BrTextStyledEvent new
-				text: aStyledText;
-				afterAction: aBlock;
-				editorElement: aBrEditorElement) ] asAsyncFuture.
+			text: aStyledText;
+			afterAction: aBlock;
+			editorElement: aBrEditorElement) ] asAsyncFuture.
 
+	BrTextStylerAsyncStylingSubmitted new
+		editorStylingFuture: editorStylingFuture;
+		element: aBrEditorElement;
+		future: aTextStylingFuture;
+		emit.
+				
 	editorStylingFuture
 		element: aBrEditorElement;
 		future: aTextStylingFuture
