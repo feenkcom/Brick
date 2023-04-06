@@ -55,6 +55,9 @@ BrElementUpdater >> assertElement: anElement [
 	self 
 		assert: [ anElement isNotNil ] 
 		description: [ 'Element must be non-nil' ].
+	self
+		assert: [ anElement isKindOf: BlElement ]
+		description: [ 'anElement must be a BlElement' ].
 	self 
 		assert: [ element isNil ] 
 		description: [ 'Element can be initialized only once' ].
