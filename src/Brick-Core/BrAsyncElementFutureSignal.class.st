@@ -5,7 +5,6 @@ Class {
 		'element',
 		'elementFuture',
 		'future',
-		'elementSpace',
 		'isElementAttachedToSpace',
 		'elementUpdater'
 	],
@@ -28,11 +27,6 @@ BrAsyncElementFutureSignal >> elementFuture: aFuture [
 ]
 
 { #category : #accessing }
-BrAsyncElementFutureSignal >> elementSpace [
-	^ elementSpace
-]
-
-{ #category : #accessing }
 BrAsyncElementFutureSignal >> elementUpdater [
 	^ elementUpdater
 ]
@@ -41,7 +35,6 @@ BrAsyncElementFutureSignal >> elementUpdater [
 BrAsyncElementFutureSignal >> elementUpdater: anUpdater [
 	elementUpdater := anUpdater.
 	element := anUpdater ifNotNil: #element.
-	elementSpace := element ifNotNil: #space.
 	isElementAttachedToSpace := element
 		ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
 		ifNil: [ false ]
@@ -58,14 +51,14 @@ BrAsyncElementFutureSignal >> future: anObject [
 ]
 
 { #category : #testing }
-BrAsyncElementFutureSignal >> isElementInSpace [
-	^ elementSpace isNotNil
+BrAsyncElementFutureSignal >> isElementAttachedToSpace [
+	^ isElementAttachedToSpace
 ]
 
 { #category : #printing }
 BrAsyncElementFutureSignal >> printOneLineContentsOn: stream [
 	stream print: element.
-	self isElementInSpace ifFalse: [ 
+	self isElementAttachedToSpace ifFalse: [ 
 		stream nextPutAll: ' is not in space' ].
 	stream nextPutAll: ', updaterID: '.
 	stream print: elementUpdater identityHash.
