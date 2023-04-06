@@ -26,7 +26,7 @@ BlMouseProcessor >> gtLastClickEventTargetsFor: aView [
 							ifNil: [ 'nil' asRopedText foreground: BrGlamorousColors failureBackgroundColor ]
 							ifNotNil: [ :aPickedElement | 
 								aPickedElement == anElement
-									ifTrue: [ 'itself' asRopedText foreground: BrGlamorousColors successBackgroundColor ]
+									ifTrue: [ 'picked' asRopedText foreground: BrGlamorousColors successBackgroundColor ]
 									ifFalse: [ 'child' asRopedText foreground: BrGlamorousColors disabledButtonTextColor ] ] ]
 					ifNil: [ '' ] ]
 			width: 60;
