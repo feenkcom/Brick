@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'updater',
 		'element',
-		'elementSpace'
+		'isElementAttachedToSpace'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -30,19 +30,14 @@ BrElementUpdaterSignal >> element [
 ]
 
 { #category : #accessing }
-BrElementUpdaterSignal >> elementSpace [
-	^ elementSpace
-]
-
-{ #category : #accessing }
-BrElementUpdaterSignal >> isElementInSpace [
-	^ elementSpace isNotNil
+BrElementUpdaterSignal >> isElementAttachedToSpace [
+	^ isElementAttachedToSpace
 ]
 
 { #category : #printing }
 BrElementUpdaterSignal >> printOneLineContentsOn: stream [
 	stream print: element.
-	self isElementInSpace ifFalse: [
+	self isElementAttachedToSpace ifFalse: [
 		stream nextPutAll: ' is not in space' ].
 	stream nextPutAll: ', updaterID: '.
 	stream print: updater identityHash.
@@ -62,5 +57,7 @@ BrElementUpdaterSignal >> updater: anUpdater [
 
 	updater := anUpdater.
 	element := anUpdater element.
-	elementSpace := anUpdater element ifNotNil: #space.
+	isElementAttachedToSpace := element
+		ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
+		ifNil: [ false ]
 ]

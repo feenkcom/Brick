@@ -3,6 +3,9 @@ Extension { #name : #BlMouseProcessor }
 { #category : #'*Brick-DevTool' }
 BlMouseProcessor >> gtLastClickEventTargetsFor: aView [
 	<gtView>
+	
+	lastClickEvent ifNil: [ ^ aView empty ].
+	
 	^ aView columnedTree
 		title: 'Last Click Event Targets';
 		priority: 15;
