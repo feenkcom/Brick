@@ -187,7 +187,7 @@ BrAsyncElementFuture >> privateInitializeElement [
 			strategy: strategy;
 			needsUpdate: (needsUpdate := strategy needsUpdate: updater element);
 			emit.
-	
+
 		future
 			ifNil: [ ^ self ].
 		

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrElementUpdaterSignal,
-	#superclass : #BeaconSignal,
+	#superclass : #ContextStackSignal,
 	#instVars : [
 		'updater',
 		'element',

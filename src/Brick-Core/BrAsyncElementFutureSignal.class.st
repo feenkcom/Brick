@@ -1,11 +1,12 @@
 Class {
 	#name : #BrAsyncElementFutureSignal,
-	#superclass : #BeaconSignal,
+	#superclass : #ContextStackSignal,
 	#instVars : [
 		'element',
 		'elementFuture',
 		'future',
 		'elementSpace',
+		'isElementAttachedToSpace',
 		'elementUpdater'
 	],
 	#category : #'Brick-Core-Futures'
@@ -40,7 +41,10 @@ BrAsyncElementFutureSignal >> elementUpdater [
 BrAsyncElementFutureSignal >> elementUpdater: anUpdater [
 	elementUpdater := anUpdater.
 	element := anUpdater ifNotNil: #element.
-	elementSpace := element ifNotNil: #space
+	elementSpace := element ifNotNil: #space.
+	isElementAttachedToSpace := element
+		ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
+		ifNil: [ false ]
 ]
 
 { #category : #accessing }

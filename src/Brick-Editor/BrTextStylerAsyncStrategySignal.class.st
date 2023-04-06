@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTextStylerAsyncStrategySignal,
-	#superclass : #BeaconSignal,
+	#superclass : #ContextStackSignal,
 	#instVars : [
 		'element',
 		'elementSpace',
