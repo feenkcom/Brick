@@ -45,41 +45,6 @@ BlMouseProcessorExaminedTargetElement >> gtLastClickEventPickedElementFor: aView
 		stencil: [ self spacePreview ]
 ]
 
-{ #category : #ui }
-BlMouseProcessorExaminedTargetElement >> previewElement [
-	| aContainer aPickedElement anElementPosition aClickPosition aTopContainer |
-	aTopContainer := BlElement new
-			layout: BlFrameLayout new;
-			padding: (BlInsets all: 10);
-			constraintsDo: [ :c | 
-				c horizontal fitContent.
-				c vertical fitContent ].
-	aContainer := BlElement new
-			layout: BlFrameLayout new;
-			background: Color white;
-			aptitude: BrShadowAptitude new;
-			constraintsDo: [ :c | 
-				c horizontal fitContent.
-				c vertical fitContent ].
-
-	aPickedElement := self element.
-	anElementPosition := aPickedElement bounds inSpace position.
-	aClickPosition := self event position - anElementPosition - (6 @ 6).
-
-	aContainer addChild: aPickedElement gtPreviewElement.
-	aContainer
-		addChild: (BlElement new
-				geometry: BlCircleGeometry new;
-				size: 12 @ 12;
-				constraintsDo: [ :c | c ignoreByLayout ];
-				background: (Color white alpha: 0.25);
-				border: (BlBorder paint: (Color blue alpha: 0.5) width: 1);
-				relocate: aClickPosition).
-
-	aTopContainer addChild: aContainer.
-	^ aTopContainer asScalableElement maxScale: 1.0
-]
-
 { #category : #accessing }
 BlMouseProcessorExaminedTargetElement >> space [
 	^ space
@@ -117,7 +82,9 @@ BlMouseProcessorExaminedTargetElement >> spacePreview [
 			border: (BlBorder paint: (Color gray alpha: 0.5) width: 1);
 			size: anElementSize;
 			relocate: anElementPosition.
-	aSpacePreview addChild: anElementBoundsPreview.
+	aSpacePreview 
+		addChild: anElementBoundsPreview
+		as: #'element-preview--bounds'.
 
 	aGeomertyBounds := aPickedElement geometryBoundsInSpace.
 	aBounds := aPickedElement bounds.
@@ -128,17 +95,24 @@ BlMouseProcessorExaminedTargetElement >> spacePreview [
 			size: aGeomertyBounds extent;
 			relocate: aGeomertyBounds origin.
 
-	aSpacePreview addChild: aGeometryBoundsPreview.
+	aSpacePreview 
+		addChild: aGeometryBoundsPreview 
+		as: #'element-preview--geometry-bounds'.
 
+	aPointPreview := BlElement new
+		geometry: BlCircleGeometry new;
+		size: 12 @ 12;
+		background: (Color white alpha: 0.25);
+		border: (BlBorder paint: (Color blue alpha: 0.5) width: 1);
+		relocate: aClickPosition.
+		
 	aSpacePreview
-		addChild: (aPointPreview := BlElement new
-				geometry: BlCircleGeometry new;
-				size: 12 @ 12;
-				background: (Color white alpha: 0.25);
-				border: (BlBorder paint: (Color blue alpha: 0.5) width: 1);
-				relocate: aClickPosition).
+		addChild: aPointPreview 
+		as: #'element-preview--event-position'.
 
-	aTopContainer addChild: aSpacePreview.
+	aTopContainer 
+		addChild: aSpacePreview
+		as: #'element-preview--space-bounds'.
 
 	aLegend := BrHorizontalFlow new
 			padding: (BlInsets top: 10);
@@ -190,7 +164,9 @@ BlMouseProcessorExaminedTargetElement >> spacePreview [
 				margin: (BlInsets left: 5);
 				constraintsDo: [ :c | c flow vertical alignCenter ]).
 
-	aTopContainer addChild: aLegend.
+	aTopContainer 
+		addChild: aLegend 
+		as: #'element-preview--legend'.
 
 	^ aTopContainer asScalableElement maxScale: 1.0
 ]
