@@ -1,10 +1,10 @@
 Class {
 	#name : #BrTextStylerAsyncStrategySignal,
-	#superclass : #BeaconSignal,
+	#superclass : #ContextStackSignal,
 	#instVars : [
 		'element',
-		'elementSpace',
-		'future'
+		'future',
+		'isElementAttachedToSpace'
 	],
 	#category : #'Brick-Editor-Styler'
 }
@@ -17,12 +17,9 @@ BrTextStylerAsyncStrategySignal >> element [
 { #category : #accessing }
 BrTextStylerAsyncStrategySignal >> element: anElement [
 	element := anElement.
-	elementSpace := anElement ifNotNil: #space
-]
-
-{ #category : #accessing }
-BrTextStylerAsyncStrategySignal >> elementSpace [
-	^ elementSpace
+	isElementAttachedToSpace := element
+		ifNotNil: [ :theElement | theElement isAttachedToSceneGraph ]
+		ifNil: [ false ]
 ]
 
 { #category : #accessing }
@@ -36,8 +33,8 @@ BrTextStylerAsyncStrategySignal >> future: anObject [
 ]
 
 { #category : #testing }
-BrTextStylerAsyncStrategySignal >> isElementInSpace [
-	^ elementSpace isNotNil
+BrTextStylerAsyncStrategySignal >> isElementAttachedToSpace [
+	^ isElementAttachedToSpace
 ]
 
 { #category : #accessing }
@@ -46,6 +43,6 @@ BrTextStylerAsyncStrategySignal >> printOneLineContentsOn: stream [
 
 	stream print: element.
 
-	self isElementInSpace ifFalse: [ 
+	self isElementAttachedToSpace ifFalse: [ 
 		stream nextPutAll: ' is not in space' ]
 ]

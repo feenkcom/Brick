@@ -118,7 +118,7 @@ BrAsyncElementFutureReceivedSignal >> skipReason [
 { #category : #accessing }
 BrAsyncElementFutureReceivedSignal >> skipReasonDictionary [
 	| anUpdateName |
-	anUpdateName := self isElementInSpace
+	anUpdateName := self isElementAttachedToSpace
 		ifTrue: [ 'Due to requested update' ]
 		ifFalse: [ 'Due to requested update (element not in space)' ].
 

@@ -20,7 +20,7 @@ BrAsyncElementFutureWhenInSceneStrategy >> addEventHandlersOn: anElement withFut
 
 { #category : #accessing }
 BrAsyncElementFutureWhenInSceneStrategy >> needsUpdate: anElement [
-	^ anElement isAttachedToSceneGraph
+	^ anElement isAddedToSceneGraph
 ]
 
 { #category : #accessing }

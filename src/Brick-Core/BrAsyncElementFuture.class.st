@@ -94,6 +94,7 @@ BrAsyncElementFuture >> future: anAsyncFuture initialValue: anObject shouldCance
 					BrAsyncElementFutureAboutToCancelPromiseSignal new 
 						elementFuture: self;
 						elementUpdater: updater;
+						future: future;
 						promise: aPromise;
 						emit.
 					aPromise cancel: futureCancellation ]
@@ -187,7 +188,7 @@ BrAsyncElementFuture >> privateInitializeElement [
 			strategy: strategy;
 			needsUpdate: (needsUpdate := strategy needsUpdate: updater element);
 			emit.
-	
+
 		future
 			ifNil: [ ^ self ].
 		
@@ -270,6 +271,7 @@ BrAsyncElementFuture >> privateUpdateElement [
 				BrAsyncElementFutureUpdateElementSkippedSignal new
 					elementFuture: self;
 					elementUpdater: updater;
+					future: future;
 					dataSnapshot: dataSnapshot;
 					previousDataSnapshot: previousDataSnapshot;
 					emit.
@@ -279,6 +281,7 @@ BrAsyncElementFuture >> privateUpdateElement [
 	BrAsyncElementFutureUpdateElementSignal new
 		elementFuture: self;
 		elementUpdater: updater;
+		future: future;
 		dataSnapshot: aNewDataSnapshot;
 		emit.
 	

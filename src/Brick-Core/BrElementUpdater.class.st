@@ -55,6 +55,9 @@ BrElementUpdater >> assertElement: anElement [
 	self 
 		assert: [ anElement isNotNil ] 
 		description: [ 'Element must be non-nil' ].
+	self
+		assert: [ anElement isKindOf: BlElement ]
+		description: [ 'anElement must be a BlElement' ].
 	self 
 		assert: [ element isNil ] 
 		description: [ 'Element can be initialized only once' ].
@@ -199,7 +202,7 @@ BrElementUpdater >> postponeUpdate [
 			self beUpdateRequestedIfDoneEarlierDo: [ ^ self ].
 			BlUseAsyncFeatures
 				ifEnabledDo: [ 
-					anElement isAttachedToSceneGraph ifFalse: [ ^ self ].	
+					anElement isAddedToSceneGraph ifFalse: [ ^ self ].	
 					"Update requester should perform an update as soon as possible, especially if
 					postponed delay (duration) is zero. It means that there should be no unnecessary skipped frames.
 					What does it mean? Let's take a look at the frame phase order, roughly:
