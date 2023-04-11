@@ -16,6 +16,14 @@ BrPagerModel >> addPage: aPageModel [
 	self onPageAdded: aPageModel
 ]
 
+{ #category : #'api - futures' }
+BrPagerModel >> cancelPendingFuturePromises [
+	"Cancel all pending future promises scheduled inside of all pages.
+	Can't be undone, cancelled futures can not be re-scheduled."
+
+	pages do: [ :eachPage | eachPage cancelPendingFuturePromises ]
+]
+
 { #category : #testing }
 BrPagerModel >> hasPageAfter: aPageModel [
 	| aPageIndex |
@@ -62,6 +70,8 @@ BrPagerModel >> onPageAdded: aPageModel [
 
 { #category : #hooks }
 BrPagerModel >> onPageRemoved: aPageModel [
+	aPageModel onRemovedFromPager: self.
+
 	self notifyPageRemoved: aPageModel
 ]
 
