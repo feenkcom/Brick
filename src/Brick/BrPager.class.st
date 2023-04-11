@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : 'Brick-Pager - UI'
+	#category : #'Brick-Pager - UI'
 }
 
 { #category : #'api - adding / removing' }
@@ -46,7 +46,7 @@ BrPager >> newPagerModel [
 	^ BrPagerModel new
 ]
 
-{ #category : #accessing }
+{ #category : #'api - accessing' }
 BrPager >> pageAfter: aBlElement ifFound: aFoundBlock ifNone: aNoneBlock [ 
 	self viewModel 
 		pageAfter: aBlElement viewModel 
@@ -56,6 +56,8 @@ BrPager >> pageAfter: aBlElement ifFound: aFoundBlock ifNone: aNoneBlock [
 
 { #category : #'api - accessing' }
 BrPager >> pages [
+	<return: #Collection of: #BrPagerPageModel>
+
 	^ self viewModel pages
 ]
 
