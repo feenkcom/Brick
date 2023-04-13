@@ -5,7 +5,7 @@ Class {
 		'content',
 		'contentElementsCache'
 	],
-	#category : 'Brick-Tabs - Look'
+	#category : #'Brick-Tabs - Look'
 }
 
 { #category : #'api - accessing' }
@@ -58,7 +58,11 @@ BrTabGroupContentAptitude >> onTabDeselected: aTabModel [
 
 { #category : #hooks }
 BrTabGroupContentAptitude >> onTabRemoved: aTabModel [
-	contentElementsCache removeKey: aTabModel ifAbsent: [  ]
+	| aRemovedContentElement |
+
+	aRemovedContentElement := (contentElementsCache removeKey: aTabModel ifAbsent: [ ^ self ]).
+	aRemovedContentElement withAllChildrenBreadthFirstDo: [ :anElement |
+		anElement dispatchEvent: BrWidgetPermanentlyRemovedEvent new ]
 ]
 
 { #category : #hooks }
