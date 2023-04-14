@@ -10,5 +10,5 @@ BrPackageNameInputFilter >> filter: aString [
 		select: [ :eachCharacter | 
 			eachCharacter isAlphaNumeric
 				or: [ eachCharacter = $_
-						or: [ eachCharacter = $- or: [ eachCharacter isSeparator ] ] ] ]
+						or: [ eachCharacter = $- or: [ eachCharacter = Character space ] ] ] ]
 ]
