@@ -1,11 +1,11 @@
 Class {
-	#name : #PackageTagNameInputFilterExamples,
+	#name : #BrPackageTagNameInputFilterExamples,
 	#superclass : #Object,
 	#category : #'Brick-Editor-Examples-Model'
 }
 
 { #category : #accessing }
-PackageTagNameInputFilterExamples >> simpleInputFilter [
+BrPackageTagNameInputFilterExamples >> simpleInputFilter [
 	<gtExample>
 	| filter |
 	filter := BrPackageTagNameInputFilter new.
@@ -20,7 +20,8 @@ PackageTagNameInputFilterExamples >> simpleInputFilter [
 	self
 		assert: (filter filter: 'Α Ωαλιδ Θνιψοδε Ταγ')
 		equals: 'Α Ωαλιδ Θνιψοδε Ταγ'.
-	self assert: (filter filter: '$AnInvalid%Tαg$') equals: 'AnInvalidTαg'.
+	self assert: (filter filter: '$AnInvalid%
+	Tαg$') equals: 'AnInvalidTαg'.
 
 	^ filter
 ]

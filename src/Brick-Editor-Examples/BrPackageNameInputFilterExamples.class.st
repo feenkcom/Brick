@@ -20,7 +20,8 @@ BrPackageNameInputFilterExamples >> simpleInputFilter [
 	self
 		assert: (filter filter: 'Α Ωαλιδ Θνιψοδε Παψκαγε')
 		equals: 'Α Ωαλιδ Θνιψοδε Παψκαγε'.
-	self assert: (filter filter: '$AnInvalid%Pαckage$') equals: 'AnInvalidPαckage'.
+	self assert: (filter filter: '$AnInvalid%
+	Pαckage$') equals: 'AnInvalidPαckage'.
 
 	^ filter
 ]
