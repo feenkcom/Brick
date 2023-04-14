@@ -21,7 +21,9 @@ BrPager >> initialize [
 	super initialize.
 	self initializeViewModel.
 	self initializeAptitude.
-	self initializeLayout
+	self initializeLayout.
+	
+	self when: BrWidgetPermanentlyRemovedEvent do: [ :anEvent | self viewModel cancelPendingFuturePromises ]
 ]
 
 { #category : #initialization }
