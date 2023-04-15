@@ -39,7 +39,8 @@ BrUngroupedList >> scrollToItemSuchThat: aBlock [
 	| aPromise |
 	aPromise := (self viewModel itemsProvider preloadUntilFoundSuchThat: aBlock)
 		then: [ :anItemIndex | self enqueueTask: (BlTaskAction new
-			action: [ self scrollToIndex: anItemIndex ]) ].
+			action: [ self scrollToIndex: anItemIndex ]).
+			anItemIndex ].
 	
 	self enqueueTask: (BlPromiseTask new promise: aPromise).
 	
