@@ -183,7 +183,9 @@ BrStreamItemsProvider >> privateSetTransitionBuffer: aStreamTransitionBuffer [
 		buffer bufferLoadingPromise then: [
 			monitor critical: [
 				buffer == aStreamTransitionBuffer
-					ifTrue: [ self privateSetStreamBuffer: buffer newBuffer ] ] ] ]
+					ifTrue: [ 
+						self privateSetStreamBuffer: buffer newBuffer.
+						aStreamTransitionBuffer fulfillPendingScanPromises ] ] ] ]
 ]
 
 { #category : #accessing }
