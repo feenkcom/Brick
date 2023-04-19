@@ -30,5 +30,10 @@ TBrListInfiniteElementScroll >> onScrollBy: aWish [
 TBrListInfiniteElementScroll >> onScrollToItem: aWish [
 	aWish smooth
 		ifTrue: [ self listElement smoothScrollToPosition: aWish index ]
-		ifFalse: [ self listElement scrollToPosition: aWish index ]
+		ifFalse: [ 
+			aWish hasOffset
+				ifFalse: [
+					self listElement scrollToPosition: aWish index ]
+				ifTrue: [
+					self listElement scrollToPosition: aWish index offset: aWish offset ] ]
 ]

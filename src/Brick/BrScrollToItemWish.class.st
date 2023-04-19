@@ -2,10 +2,18 @@ Class {
 	#name : #BrScrollToItemWish,
 	#superclass : #BrScrollWish,
 	#instVars : [
-		'index'
+		'index',
+		'offset'
 	],
-	#category : 'Brick-Scrollable - Events'
+	#category : #'Brick-Scrollable - Events'
 }
+
+{ #category : #testing }
+BrScrollToItemWish >> hasOffset [
+	<return: #Boolean>
+	
+	^ offset ~= BlInfiniteLinearLayout invalidOffset
+]
 
 { #category : #accessing }
 BrScrollToItemWish >> index [
@@ -15,4 +23,21 @@ BrScrollToItemWish >> index [
 { #category : #accessing }
 BrScrollToItemWish >> index: anObject [
 	index := anObject
+]
+
+{ #category : #initialization }
+BrScrollToItemWish >> initialize [
+	super initialize.
+	
+	offset := BlInfiniteLinearLayout invalidOffset
+]
+
+{ #category : #accessing }
+BrScrollToItemWish >> offset [
+	^ offset
+]
+
+{ #category : #accessing }
+BrScrollToItemWish >> offset: anObject [
+	offset := anObject
 ]

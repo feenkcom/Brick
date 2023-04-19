@@ -47,6 +47,24 @@ BrUngroupedList >> scrollToItemSuchThat: aBlock [
 	^ aPromise
 ]
 
+{ #category : #'api - scrolling' }
+BrUngroupedList >> scrollToItemSuchThat: aBlock offset: anOffset [
+	"Scroll the InfiniteELement to make the datasource position visible 
+	with the given offset from resolved layout start.
+	See {{gtMethod:BlInfiniteLinearLayout>>#scrollToPosition:offset:}}"
+	<return: #TAsyncPromise>
+
+	| aPromise |
+	aPromise := (self viewModel itemsProvider preloadUntilFoundSuchThat: aBlock)
+		then: [ :anItemIndex | self enqueueTask: (BlTaskAction new
+			action: [ self scrollToIndex: anItemIndex offset: anOffset ]).
+			anItemIndex ].
+	
+	self enqueueTask: (BlPromiseTask new promise: aPromise).
+	
+	^ aPromise
+]
+
 { #category : #'api - accessing' }
 BrUngroupedList >> stream: anAsyncStream [
 	(self viewModel itemsProvider isKindOf: BrStreamItemsProvider)
