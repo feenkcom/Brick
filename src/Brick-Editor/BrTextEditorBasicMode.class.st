@@ -5,11 +5,16 @@ Class {
 		'eventHandlers',
 		'shortcuts'
 	],
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #initialization }
 BrTextEditorBasicMode >> createEventHandlers [
+	^ #()
+]
+
+{ #category : #initialization }
+BrTextEditorBasicMode >> createShortcuts [
 	^ #()
 ]
 
@@ -25,14 +30,15 @@ BrTextEditorBasicMode >> initialize [
 	"initialized lazily"
 	eventHandlers := nil.
 
-	shortcuts := {}
+	"initialized lazily"
+	shortcuts := nil
 ]
 
 { #category : #'api - hooks' }
 BrTextEditorBasicMode >> installOnEditor: aTextEditor [
 	super installOnEditor: aTextEditor.
 	
-	shortcuts do: [ :eachInteraction |
+	self shortcuts do: [ :eachInteraction |
 		aTextEditor addEditorShortcut: eachInteraction ]
 ]
 
@@ -51,11 +57,16 @@ BrTextEditorBasicMode >> postCopy [
 	shortcuts := shortcuts copy
 ]
 
+{ #category : #initialization }
+BrTextEditorBasicMode >> shortcuts [
+	^ shortcuts ifNil: [ shortcuts := self createShortcuts ]
+]
+
 { #category : #'api - hooks' }
 BrTextEditorBasicMode >> uninstallFromEditor: aTextEditor [
 	super uninstallFromEditor: aTextEditor.
 	
-	shortcuts do: [ :eachInteraction |
+	self shortcuts do: [ :eachInteraction |
 		aTextEditor removeEditorShortcut: eachInteraction ]
 ]
 
@@ -69,5 +80,5 @@ BrTextEditorBasicMode >> uninstallFromEditorElement: anEditorElement [
 
 { #category : #initialization }
 BrTextEditorBasicMode >> withShortcuts: aCollectionOfShortcuts [
-	shortcuts := shortcuts, aCollectionOfShortcuts
+	shortcuts := self shortcuts, aCollectionOfShortcuts
 ]

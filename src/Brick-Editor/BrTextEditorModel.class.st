@@ -35,6 +35,14 @@ BrTextEditorModel class >> dontUseParagraphEditor: anObject [
 	DontUseParagraphEditor := anObject
 ]
 
+{ #category : #'instance creation' }
+BrTextEditorModel class >> withEditorMode: anEditorMode [
+	^ self basicNew
+		initializeWithEditorMode: anEditorMode;
+		initialize;
+		yourself
+]
+
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
 	self editorShortcuts
@@ -169,6 +177,11 @@ BrTextEditorModel >> cutSelected [
 ]
 
 { #category : #initialization }
+BrTextEditorModel >> defaultEditorMode [
+	^ BrTextEditorEditableMode new
+]
+
+{ #category : #initialization }
 BrTextEditorModel >> defaultStylerStrategy [
 	^ BrTextStylerAsyncStrategy new
 ]
@@ -239,10 +252,7 @@ BrTextEditorModel >> editorMode: aBrTextEditorMode [
 	attachedElements do: [ :eachElement | mode uninstallFromEditorElement: eachElement ].
 
 	mode := aBrTextEditorMode.
-	mode installOnEditor: self.
-	attachedElements do: [ :eachElement | mode installOnEditorElement: eachElement ].
-	
-	self notifyChanged
+	self installEditorMode: mode
 ]
 
 { #category : #'api - shortcuts' }
@@ -332,7 +342,8 @@ BrTextEditorModel >> history: aBrTextEditorHistory [
 BrTextEditorModel >> initialize [
 	super initialize.
 
-	mode := BrTextEditorNullMode new.
+	"We might set the mode before #initialize. See class side #withEditorMode:"
+	mode ifNil: [ mode := BrTextEditorNullMode new ].
 
 	attachedElements := Set new.
 
@@ -362,7 +373,13 @@ BrTextEditorModel >> initialize [
 	isFocused := false.
 	shouldStyleWhenTextModified := true.
 
-	self beEditable.
+	"only when the editor mode is null, set an actual mode.
+	Setting an editor mode can be slow therefore we provide a class side
+	method to customize the editor mode before initialization"
+	mode = BrTextEditorNullMode new
+		ifTrue: [ self editorMode: self defaultEditorMode ]
+		ifFalse: [ self installEditorMode: mode ].
+
 	DontUseParagraphEditor
 		ifNil: [ self beParagraphBased ]
 		ifNotNil: [ self beLineBased ]
@@ -374,6 +391,11 @@ BrTextEditorModel >> initializeText: aBrText [
 	aBrText when: BlTextsDeleted send: #onTextsDeleted: to: self.
 	aBrText when: BlTextAttributeAdded send: #onTextAttributeAdded: to: self.
 	aBrText when: BlTextAttributesRemoved send: #onTextAttributesRemoved: to: self.
+]
+
+{ #category : #initialization }
+BrTextEditorModel >> initializeWithEditorMode: anEditorMode [
+	mode := anEditorMode
 ]
 
 { #category : #'api - filter' }
@@ -403,6 +425,18 @@ BrTextEditorModel >> insertString: aString at: aTextIndex [
 { #category : #'api - modification' }
 BrTextEditorModel >> inserter [
 	^ BrTextEditorInserter new editor: self
+]
+
+{ #category : #initialization }
+BrTextEditorModel >> installEditorMode: aBrTextEditorMode [
+	self
+		assert: [ aBrTextEditorMode isNotNil ]
+		description: [ 'Mode must not be nil' ].
+
+	aBrTextEditorMode installOnEditor: self.
+	attachedElements do: [ :eachElement | aBrTextEditorMode installOnEditorElement: eachElement ].
+	
+	self notifyChanged
 ]
 
 { #category : #accessing }
@@ -516,16 +550,6 @@ BrTextEditorModel >> notifyDeletedFrom: aFromIndex to: aToIndex [
 { #category : #'event firing' }
 BrTextEditorModel >> notifyInserted: aText at: aTextIndex [
 	self dispatchEvent: (BrTextEditorInsertedEvent text: aText at: aTextIndex)
-]
-
-{ #category : #'event firing' }
-BrTextEditorModel >> notifyInteractionAdded: anInteraction [
-	self dispatchEvent: (BrTextEditorInteractionAddedEvent new interaction: anInteraction)
-]
-
-{ #category : #'event firing' }
-BrTextEditorModel >> notifyInteractionRemoved: anInteraction [
-	self dispatchEvent: (BrTextEditorInteractionRemovedEvent new interaction: anInteraction)
 ]
 
 { #category : #'event firing' }
@@ -675,14 +699,12 @@ BrTextEditorModel >> onLostFocus [
 
 { #category : #hooks }
 BrTextEditorModel >> onShortcutAdded: anInteraction [
-	attachedElements do: [ :eachElement | self onInteractionAdded: anInteraction to: eachElement ].
-	self notifyInteractionAdded: anInteraction
+	attachedElements do: [ :eachElement | self onInteractionAdded: anInteraction to: eachElement ]
 ]
 
 { #category : #hooks }
 BrTextEditorModel >> onShortcutRemoved: anInteraction [
-	attachedElements do: [ :eachElement | self onInteractionRemoved: anInteraction from: eachElement ].
-	self notifyInteractionRemoved: anInteraction
+	attachedElements do: [ :eachElement | self onInteractionRemoved: anInteraction from: eachElement ]
 ]
 
 { #category : #'hooks - text modifications' }

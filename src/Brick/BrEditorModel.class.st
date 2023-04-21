@@ -6,12 +6,17 @@ Class {
 		'text',
 		'mode'
 	],
-	#category : 'Brick-Editor - Model'
+	#category : #'Brick-Editor - Model'
 }
 
 { #category : #accessing }
 BrEditorModel >> beEditable [
 	self mode: BrTextEditorEditableMode new
+]
+
+{ #category : #accessing }
+BrEditorModel >> beEditableCode [
+	self mode: BrTextEditorEditableCodeMode new
 ]
 
 { #category : #initialization }
