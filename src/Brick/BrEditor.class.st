@@ -40,6 +40,21 @@ BrEditor >> cursors [
 	^ self editor cursors
 ]
 
+{ #category : #initialization }
+BrEditor >> defaultEditorModel [
+	^ BrEditorModel new mode: self defaultTextEditorMode
+]
+
+{ #category : #initialization }
+BrEditor >> defaultTextEditorMode [
+	^ BrTextEditorEditableMode new
+]
+
+{ #category : #initialization }
+BrEditor >> defaultTextEditorModel [
+	^ BrTextEditorModel withEditorMode: self defaultTextEditorMode
+]
+
 { #category : #'editor - operations' }
 BrEditor >> deleter [
 	<return: #BrTextEditorDeleter>
@@ -75,10 +90,10 @@ BrEditor >> initialize [
 		to prevent any possible #asRopedText convertion"
 		do: [ :anEvent | self viewModel text: anEvent text ].
 
-	self editor: BrTextEditorModel new.
+	self editor: self defaultTextEditorModel.
 	self padding: (BlInsets all: 5).
-	
-	self viewModel: BrEditorModel new
+
+	self viewModel: self defaultEditorModel
 ]
 
 { #category : #'api - editor' }

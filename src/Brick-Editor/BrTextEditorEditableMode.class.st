@@ -16,11 +16,8 @@ BrTextEditorEditableMode >> createEventHandlers [
 ]
 
 { #category : #initialization }
-BrTextEditorEditableMode >> initialize [
-	super initialize.
-
-	shortcuts := shortcuts, 
-		(self returnKeyAndAction
+BrTextEditorEditableMode >> createShortcuts [
+	^ super createShortcuts, (self returnKeyAndAction
 			ifNil: [ #() ]
 			ifNotNil: [ :anAction | { anAction } ]),
 	{

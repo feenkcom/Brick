@@ -15,10 +15,8 @@ BrTextEditorReadonlyWithSelectionMode >> createEventHandlers [
 ]
 
 { #category : #initialization }
-BrTextEditorReadonlyWithSelectionMode >> initialize [
-	super initialize.
-	
-	shortcuts := {
+BrTextEditorReadonlyWithSelectionMode >> createShortcuts [
+	^ super createShortcuts, {
 		BrEditorShortcut copy.
 		BrEditorShortcut selectAll.
 		BrEditorShortcut deselectAll.
