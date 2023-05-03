@@ -1,43 +1,37 @@
 Class {
 	#name : #BrGlamorousButtonExteriorAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#superclass : #BrLazyStyleCommonAptitude,
 	#instVars : [
 		'backgroundPaint',
 		'borderWidth',
 		'borderPaint'
 	],
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #accessing }
 BrGlamorousButtonExteriorAptitude >> backgroundPaint [
-	^ backgroundPaint
+	^ backgroundPaint ifNil: [ self theme button defaultBackgroundColor ]
 ]
 
 { #category : #accessing }
 BrGlamorousButtonExteriorAptitude >> backgroundPaint: aPaint [
-	backgroundPaint := aPaint.
-	
-	self default
-		background: self backgroundPaint
+	backgroundPaint := aPaint
 ]
 
 { #category : #accessing }
 BrGlamorousButtonExteriorAptitude >> borderPaint [
-	^ borderPaint
+	^ borderPaint ifNil: [ self theme button defaultBorderColor ]
 ]
 
 { #category : #accessing }
 BrGlamorousButtonExteriorAptitude >> borderPaint: aColor [
-	borderPaint := aColor.
-	
-	self default
-		border: (BlBorder paint: self borderPaint width: self borderWidth)
+	borderPaint := aColor
 ]
 
 { #category : #accessing }
 BrGlamorousButtonExteriorAptitude >> borderWidth [
-	^ borderWidth
+	^ borderWidth ifNil: [ 1 ]
 ]
 
 { #category : #accessing }
@@ -48,31 +42,35 @@ BrGlamorousButtonExteriorAptitude >> borderWidth: anInteger [
 { #category : #initialization }
 BrGlamorousButtonExteriorAptitude >> initialize [
 	super initialize.
-	backgroundPaint := self theme button defaultBackgroundColor.
-	borderPaint := self theme button defaultBorderColor.
-	borderWidth := 1.
-	self default
-		background: self backgroundPaint;
-		border: (BlBorder paint: self borderPaint width: self borderWidth).
-	self focused
-		border:
+
+	self default: [ :aStyle |
+		aStyle
+			background: self backgroundPaint;
+			border: (BlBorder paint: self borderPaint width: self borderWidth) ].
+
+	self focused: [ :aStyle |
+		aStyle border:
 			(BlBorder
 				paint: self theme button hoveredBorderColor
-				width: self borderWidth).
-	self hovered
-		border:
+				width: self borderWidth) ].
+	
+	self hovered: [ :aStyle |
+		aStyle border:
 			(BlBorder
 				paint: self theme button hoveredBorderColor
-				width: self borderWidth).
-	self pressed
-		border:
+				width: self borderWidth) ].
+
+	self pressed: [ :aStyle |
+		aStyle border:
 			(BlBorder
 				paint: self theme button pressedBorderColor
-				width: self borderWidth).
-	self disabled
-		background: self theme button disabledBackgroundColor;
-		border:
-			(BlBorder
-				paint: self theme button disabledBorderColor
-				width: self borderWidth)
+				width: self borderWidth) ].
+
+	self disabled: [ :aSyle |
+		aSyle
+			background: self theme button disabledBackgroundColor;
+			border:
+				(BlBorder
+					paint: self theme button disabledBorderColor
+					width: self borderWidth) ]
 ]

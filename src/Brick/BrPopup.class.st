@@ -17,7 +17,7 @@ Class {
 	#instVars : [
 		'expandedModel'
 	],
-	#category : 'Brick-Popup - UI'
+	#category : #'Brick-Popup - UI'
 }
 
 { #category : #'api - popup' }
@@ -29,9 +29,7 @@ BrPopup >> hide [
 BrPopup >> initialize [
 	super initialize.
 
-	self viewModel: (BrPopupModel new addAll: {
-		BrInteractiveModel withAll: {
-			BrLayoutAlignmentModel new } })
+	self viewModel: BrPopupModel new
 ]
 
 { #category : #'api - popup' }

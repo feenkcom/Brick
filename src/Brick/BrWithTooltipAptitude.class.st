@@ -257,14 +257,6 @@ BrWithTooltipAptitude >> initializeListeners [
 	super initializeListeners.
 
 	self
-		when: BrTooltipStencilChanged
-		do: [ :anEvent | self stencil: anEvent stencil ].
-
-	self
-		when: BrTooltipVisibleChanged
-		do: [ :anEvent | self visible: anEvent visible ].
-
-	self
 		when: BrTooltipRelocateWish
 		do: [ :aWish | self onRelocateWish: aWish ].
 		
@@ -275,14 +267,6 @@ BrWithTooltipAptitude >> initializeListeners [
 	self
 		when: BrTooltipHideWish
 		do: [ :aWish | self onHideWish: aWish ]
-]
-
-{ #category : #initialization }
-BrWithTooltipAptitude >> initializeRequests [
-	super initializeRequests.
-
-	self request: BrTooltipStencilRequest new.
-	self request: BrTooltipVisibleRequest new
 ]
 
 { #category : #'api - displaying' }

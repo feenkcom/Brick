@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'resizerLook'
 	],
-	#category : 'Brick-Breadcrumb - Look'
+	#category : #'Brick-Breadcrumb - Look'
 }
 
 { #category : #'private - update' }
@@ -35,7 +35,10 @@ BrBreadcrumbLinearAptitude >> initialize [
 	super initialize.
 
 	self add: (resizerLook := BrLayoutResizerAptitude new inherit vInherit: [ :aBlock | self itemElements do: aBlock ]).
-	self add: (BrLayoutAlignmentAptitude forHorizontalLinearLayout)
+	self add: BrLayoutAlignmentAptitude new.
+	self
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout horizontal ]
 ]
 
 { #category : #hooks }

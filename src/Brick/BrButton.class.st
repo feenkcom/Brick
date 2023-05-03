@@ -58,19 +58,16 @@ BrButton >> icon: anElement [
 { #category : #initialization }
 BrButton >> initialize [
 	super initialize.
-	
+
 	self
 		hFitContent;
 		vLocal;
-		beNormalSize.
+		beNormalSize;
+		alignCenter.
 	
 	self viewModel: (BrButtonModel new +
 		(labelModel := BrLabelModel new) +
-		(iconModel := BrIconModel new) + 
-		(BrInteractiveModel new
-			addStates: {
-				BrLayoutAlignmentModel center.
-			}))
+		(iconModel := BrIconModel new))
 ]
 
 { #category : #'api - widget' }

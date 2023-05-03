@@ -5,9 +5,9 @@ Class {
 		'alignment'
 	],
 	#pools : [
-		'BrLayoutAlignmentTypes'
+		'AnObsoleteBrLayoutAlignmentTypes'
 	],
-	#category : 'Brick-Layout Alignment - Model'
+	#category : #'Brick-Layout Alignment - Model'
 }
 
 { #category : #'instance creation' }
@@ -136,9 +136,7 @@ BrLayoutAlignmentModel >> stateChangedEventClass [
 
 { #category : #'state - streaming' }
 BrLayoutAlignmentModel >> streamStateIn: aBrInteractionStatesMapping [
-	aBrInteractionStatesMapping
-		addState: (BrLayoutAlignmentState alignment: self alignment)
-		model: self
+	
 ]
 
 { #category : #accessing }

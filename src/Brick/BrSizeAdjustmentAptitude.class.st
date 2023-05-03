@@ -1,65 +1,47 @@
 Class {
 	#name : #BrSizeAdjustmentAptitude,
-	#superclass : #BrStyleAptitude,
-	#category : 'Brick-! Core - Size Adjustment'
+	#superclass : #BrLazyStyleAptitude,
+	#category : #'Brick-! Core - Size Adjustment'
 }
 
 { #category : #accessing }
-BrSizeAdjustmentAptitude >> huge [
-	^ self styleFor: BrSizeAdjustmentState huge
-]
-
-{ #category : #accessing }
 BrSizeAdjustmentAptitude >> huge: aBlock [
-	aBlock value: self huge
-]
-
-{ #category : #accessing }
-BrSizeAdjustmentAptitude >> large [
-	^ self styleFor: BrSizeAdjustmentState large
+	self
+		when: BrSizeAdjustmentState huge
+		style: aBlock
 ]
 
 { #category : #accessing }
 BrSizeAdjustmentAptitude >> large: aBlock [
-	aBlock value: self large
-]
-
-{ #category : #accessing }
-BrSizeAdjustmentAptitude >> mini [
-	^ self styleFor: BrSizeAdjustmentState mini
+	self
+		when: BrSizeAdjustmentState large
+		style: aBlock
 ]
 
 { #category : #accessing }
 BrSizeAdjustmentAptitude >> mini: aBlock [
-	aBlock value: self mini
-]
-
-{ #category : #accessing }
-BrSizeAdjustmentAptitude >> normal [
-	^ self styleFor: BrSizeAdjustmentState normal
+	self
+		when: BrSizeAdjustmentState mini
+		style: aBlock
 ]
 
 { #category : #accessing }
 BrSizeAdjustmentAptitude >> normal: aBlock [
-	aBlock value: self normal
-]
-
-{ #category : #accessing }
-BrSizeAdjustmentAptitude >> small [
-	^ self styleFor: BrSizeAdjustmentState small
+	self
+		when: BrSizeAdjustmentState normal
+		style: aBlock
 ]
 
 { #category : #accessing }
 BrSizeAdjustmentAptitude >> small: aBlock [
-	aBlock value: self small
-]
-
-{ #category : #accessing }
-BrSizeAdjustmentAptitude >> tiny [
-	^ self styleFor: BrSizeAdjustmentState tiny
+	self
+		when: BrSizeAdjustmentState small
+		style: aBlock
 ]
 
 { #category : #accessing }
 BrSizeAdjustmentAptitude >> tiny: aBlock [
-	aBlock value: self tiny
+	self
+		when: BrSizeAdjustmentState tiny
+		style: aBlock
 ]

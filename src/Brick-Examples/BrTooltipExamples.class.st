@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTooltipExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Tooltip'
+	#category : #'Brick-Examples-Tooltip'
 }
 
 { #category : #accessing }
@@ -25,35 +25,13 @@ BrTooltipExamples >> element [
 { #category : #accessing }
 BrTooltipExamples >> elementWithModelAndLook [
 	<gtExample>
-	| element model look |
+	| element look |
 	element := self element.
-	model := self model.
 	look := self aptitude.
-	element
-		viewModel:
-			model
-				+
-					(BrInteractiveModel new
-						addState: BrHoverModel new;
-						yourself).
+
 	element aptitude: look.
 	"self assert: look stencil equals: model stencil."
 	^ element
-]
-
-{ #category : #'as yet unclassified' }
-BrTooltipExamples >> model [
-	<gtExample>
-	| model tooltip |
-	tooltip := BlElement new
-		background: Color blue;
-		yourself.
-	model := BrTooltipModel new
-		content: [ tooltip ];
-		yourself.
-	"self assert: model visible equals: false.
-	self assert: model stencil asElement equals: tooltip."
-	^ model
 ]
 
 { #category : #accessing }

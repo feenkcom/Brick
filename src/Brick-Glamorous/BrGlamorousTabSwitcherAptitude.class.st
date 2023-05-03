@@ -16,7 +16,10 @@ BrGlamorousTabSwitcherAptitude >> initialize [
 	super initialize.
 
 	self add: BrLayoutResizerAptitude new inherit.
-	self add: (BrLayoutAlignmentAptitude forHorizontalLinearLayout).
+	self add: BrLayoutAlignmentAptitude new.
+	self
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout horizontal ].
 
 	self addChangeProperty: #(widget padding) with: [ BlInsets top: 2 left: 2 bottom: 2 right: 2 ].
 

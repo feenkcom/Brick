@@ -9,7 +9,7 @@ Class {
 		'buttonModel',
 		'titleModel'
 	],
-	#category : 'Brick-Card - UI'
+	#category : #'Brick-Card - UI'
 }
 
 { #category : #accessing }
@@ -36,16 +36,14 @@ BrCard >> description: aStringOrBrText [
 BrCard >> initialize [
 	super initialize.
 	
-	self fitContent.
+	self
+		fitContent;
+		alignCenter.
 	
 	self viewModel: (buttonModel := BrButtonModel new +
 		(titleModel := BrLabelModel new) +
 		(pictureModel := BrIconModel new) + 
-		(descriptionModel := BrDescriptionModel new) +
-		(BrInteractiveModel new
-			addStates: {
-				BrLayoutAlignmentModel center.
-			}))
+		(descriptionModel := BrDescriptionModel new))
 ]
 
 { #category : #accessing }

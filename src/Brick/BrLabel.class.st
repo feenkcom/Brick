@@ -26,11 +26,10 @@ BrLabel >> initialize [
 	
 	self
 		fitContent;
-		beNormalSize.
+		beNormalSize;
+		alignCenterLeft.
 
-	self viewModel: (BrLabelModel new add: (BrInteractiveModel withAll: {
-		BrLayoutAlignmentModel new centerLeft.
-	}))
+	self viewModel: BrLabelModel new
 ]
 
 { #category : #layout }

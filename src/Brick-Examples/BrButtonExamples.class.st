@@ -85,7 +85,10 @@ BrButtonExamples >> buttonAndLookWithLabelAndExterior [
 		disabled: [ :aWidget | aWidget background: Color veryVeryLightGray ].
 		
 	anExteriorLook add: (BrLayoutResizerAptitude inherit).
-	anExteriorLook add: (BrLayoutAlignmentAptitude forHorizontalLinearLayout).
+	anExteriorLook add: (BrLayoutAlignmentAptitude new).
+	anExteriorLook
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout horizontal ].
 	anExteriorLook add: (BrFlatShadowAptitude new offset: 3@3).
 		
 	aButtonLook := BrAptitude new.

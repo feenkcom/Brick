@@ -5,9 +5,9 @@ Class {
 		'alignment'
 	],
 	#pools : [
-		'BrLayoutAlignmentTypes'
+		'AnObsoleteBrLayoutAlignmentTypes'
 	],
-	#category : 'Brick-Layout Alignment - Events'
+	#category : #'Brick-Layout Alignment - Events'
 }
 
 { #category : #'instance creation' }
