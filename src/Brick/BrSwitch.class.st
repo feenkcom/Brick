@@ -7,18 +7,19 @@ Class {
 		'labelModel',
 		'iconModel'
 	],
-	#category : 'Brick-Switch - UI'
+	#category : #'Brick-Switch - UI'
 }
 
 { #category : #initialization }
 BrSwitch >> initialize [
 	super initialize.
+	
+	self alignCenter.
 
 	self viewModel: ((labelModel := BrLabelModel new) +
 		(iconModel := BrIconModel new) + 
 		(BrInteractiveModel new
 			addStates: {
 				BrSwitchModel new.
-				BrLayoutAlignmentModel center.
 			}))
 ]
