@@ -11,13 +11,10 @@ A button widget is composed of multiple view models that add important functiona
 
 {{gtClass:BrLabelModel}} is responsible for button's label
 {{gtClass:BrIconModel}} adds support of an icon
-{{gtClass:BrInteractiveModel}} lets users to enable or disable a button (make it non-interactable)
-{{gtClass:BrPressModel}} provides support of handling press state
-{{gtClass:BrHoverModel}} adds support of mouse hover events
-{{gtClass:BrSizeAdjustmentModel}} is responsible for managing the logical size of a button (tiny, small, large etc)
-{{gtClass:BrLayoutAlignmentModel}} lets users to align a button's content within the button itself (center, top-right, etc)
-{{gtClass:BrLayoutHorizontalResizerModel}} provides support for horizontal resizing strategies (fit content, match parent, exact size)
-{{gtClass:BrLayoutVerticalResizerModel}} is similar to horizontal resizer but controls a vertical resizing strategy
+{{gtClass:TBrSizeAdjustable}} is responsible for managing the logical size of a button (tiny, small, large etc)
+{{gtClass:TBrLayoutAlignable}} lets users to align a button's content within the button itself (center, top-right, etc)
+{{gtClass:TBrLayoutResizable}} provides support for horizontal and vertical resizing strategies (fit content, match parent, exact size)
+
 ## Building a button
 Button's look can be implemented by composing existing looks or implementing a new one.
 ### Adding and styling a label
