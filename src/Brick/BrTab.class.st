@@ -7,7 +7,7 @@ Class {
 		'labelModel',
 		'iconModel'
 	],
-	#category : 'Brick-Tabs - UI'
+	#category : #'Brick-Tabs - UI'
 }
 
 { #category : #'api - accessing' }
@@ -48,14 +48,13 @@ BrTab >> icon: anElement [
 BrTab >> initialize [
 	super initialize.
 	
-	self fitContent.
+	self
+		fitContent;
+		alignCenter.
 
 	self viewModel: (BrTabModel new + 
 		(labelModel := BrLabelModel new) +
-		(iconModel := BrIconModel new) +
-		(BrInteractiveModel withAll: {
-			BrLayoutAlignmentModel new center.
-	}))
+		(iconModel := BrIconModel new))
 ]
 
 { #category : #'api - accessing' }

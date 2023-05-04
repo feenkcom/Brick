@@ -1,8 +1,5 @@
-"
-I arrange my children in one vertical column, one by one
-"
 Class {
-	#name : #BrVerticalPane,
+	#name : #BrHorizontalPane3,
 	#superclass : #BrWidgetContainer,
 	#traits : 'TBrLayoutAlignable',
 	#classTraits : 'TBrLayoutAlignable classTrait',
@@ -10,19 +7,19 @@ Class {
 }
 
 { #category : #accessing }
-BrVerticalPane >> cellSpacing: aNumber [
+BrHorizontalPane3 >> cellSpacing: aNumber [
 	self layoutDo: [ :l | l cellSpacing: aNumber ]
 ]
 
 { #category : #initialization }
-BrVerticalPane >> initialize [
+BrHorizontalPane3 >> initialize [
 	super initialize.
 	
-	self layout: BlLinearLayout vertical.
-	self aptitude: BrVerticalPaneAptitude new
+	self layout: BlLinearLayout horizontal.
+	self aptitude: BrLayoutAlignmentAptitude3 new
 ]
 
 { #category : #accessing }
-BrVerticalPane >> weightSum: aNumber [
+BrHorizontalPane3 >> weightSum: aNumber [
 	self layoutDo: [ :l | l weightSum: aNumber ]
 ]

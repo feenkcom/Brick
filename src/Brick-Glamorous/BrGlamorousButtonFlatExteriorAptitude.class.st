@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousButtonFlatExteriorAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#superclass : #BrLazyStyleCommonAptitude,
 	#instVars : [
 		'backgroundPaint'
 	],
@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> backgroundPaint [
-	^ backgroundPaint
+	^ backgroundPaint ifNil: [ Color transparent ]
 ]
 
 { #category : #accessing }
@@ -30,11 +30,11 @@ BrGlamorousButtonFlatExteriorAptitude >> hoveredBackgroundPaint [
 { #category : #initialization }
 BrGlamorousButtonFlatExteriorAptitude >> initialize [
 	super initialize.
-	backgroundPaint := Color transparent.
+
 	self
 		default: [ :aStyle | 
 			aStyle
-				background: backgroundPaint;
+				background: self backgroundPaint;
 				border: BlBorder empty ];
 		focused: [ :aStyle | 
 			aStyle

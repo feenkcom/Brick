@@ -1,42 +1,40 @@
 Class {
 	#name : #BrStyleAptitude,
 	#superclass : #BrAptitude,
-	#traits : 'TBlElementStyles + TBlElementQuery',
-	#classTraits : 'TBlElementStyles classTrait + TBlElementQuery classTrait',
+	#traits : 'TBlElementQuery',
+	#classTraits : 'TBlElementQuery classTrait',
 	#instVars : [
 		'styles',
-		'target'
+		'targetQuery'
 	],
 	#category : #'Brick-Core-Core'
 }
-
-{ #category : #'private - adding' }
-BrStyleAptitude >> basicAddStyle: aStyle [
-	styles basicAddStyle: aStyle
-]
-
-{ #category : #'private - adding' }
-BrStyleAptitude >> for: aTargetObject [
-	^ styles for: aTargetObject
-]
 
 { #category : #initialization }
 BrStyleAptitude >> initialize [
 	super initialize.
 
-	styles := BlStyles new.
+	styles := BlEagerStyles new.
 
-	"empty selector, means we apply it on the widget itself"
-	target := BlElementLazyQuery new.
+	"empty selector, which means we apply it on the widget itself"
+	targetQuery := BlElementLazyQuery new
+]
 
-	self addChange:
-		(BrLookChange new
-			up: [ :thisLook |
-				target isEmpty
-					ifFalse: [ styles := styles asForwarded: target ].
-				thisLook widget styles addStyles: styles styles ];
-			down: [ :thisLook | thisLook widget styles removeStyles: styles styles ];
-			yourself)
+{ #category : #'api - hooks' }
+BrStyleAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+	
+	targetQuery isEmpty
+		ifFalse: [ styles := styles asForwarded: targetQuery ].
+
+	anElement styles addStyles: styles styles
+]
+
+{ #category : #'api - hooks' }
+BrStyleAptitude >> onUninstalledIn: anElement [
+	super onUninstalledIn: anElement.
+	
+	anElement styles removeStyles: styles styles
 ]
 
 { #category : #initialization }
@@ -50,7 +48,7 @@ BrStyleAptitude >> propagateStylesToWidget [
 
 { #category : #accessing }
 BrStyleAptitude >> queryStep: aBlElementStep [
-	target queryStep: aBlElementStep
+	targetQuery queryStep: aBlElementStep
 ]
 
 { #category : #accessing }
@@ -59,16 +57,8 @@ BrStyleAptitude >> state [
 ]
 
 { #category : #'private - adding' }
-BrStyleAptitude >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
-	^ styles
-		styleForState: aState
-		ifFound: aFoundBlock
-		ifNone: aNoneBlock
-]
-
-{ #category : #accessing }
-BrStyleAptitude >> target: aSelectorPath [	
-	self deprecated: 'Use Element Query Api instead'.
+BrStyleAptitude >> styleFor: anElementState [
+	^ styles styleFor: anElementState
 ]
 
 { #category : #'private - adding' }

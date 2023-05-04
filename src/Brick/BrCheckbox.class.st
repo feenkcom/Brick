@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrCheckable + TBrEnableable + TBrLayoutResizable + TBrLayoutAlignable + TBrSizeAdjustable',
 	#classTraits : 'TBrCheckable classTrait + TBrEnableable classTrait + TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait + TBrSizeAdjustable classTrait',
-	#category : 'Brick-Checkbox - UI'
+	#category : #'Brick-Checkbox - UI'
 }
 
 { #category : #'api - button' }
@@ -30,16 +30,13 @@ BrCheckbox >> initialize [
 	self
 		vLocal;
 		hLocal;
-		beNormalSize.
+		beNormalSize;
+		alignCenter.
 
 	self viewModel: (
 		BrButtonModel new
-			addAll: {
-				BrCheckboxModel new.
-				(BrInteractiveModel new
-					addStates: {
-						BrLayoutAlignmentModel center.
-					}) } ).
-					
+			add: BrCheckboxModel new;
+			yourself).
+
 	self uncheck
 ]

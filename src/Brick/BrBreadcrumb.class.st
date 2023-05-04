@@ -27,12 +27,11 @@ BrBreadcrumb >> hasItems [
 { #category : #initialization }
 BrBreadcrumb >> initialize [
 	super initialize.
+	
+	self alignCenterLeft.
+	self fitContent.
 
-	self
-		viewModel: (BrBreadcrumbModel new
-				add: (BrInteractiveModel withAll: {BrLayoutAlignmentModel centerLeft})).
-
-	self fitContent
+	self viewModel: BrBreadcrumbModel new
 ]
 
 { #category : #accessing }

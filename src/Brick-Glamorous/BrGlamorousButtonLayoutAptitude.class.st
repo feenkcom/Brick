@@ -9,5 +9,8 @@ BrGlamorousButtonLayoutAptitude >> initialize [
 	super initialize.
 	
 	self add: BrLayoutResizerAptitude inherit.
-	self add: BrLayoutAlignmentAptitude forHorizontalLinearLayout
+	self add: BrLayoutAlignmentAptitude new.
+	self
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout horizontal ]
 ]

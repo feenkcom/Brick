@@ -9,7 +9,10 @@ BrGlamorousSpaceTabBasicAptitude >> initialize [
 	super initialize.
 	self add: BrGlamorousSpaceTabActionbarAptitude new.
 	self add: BrLayoutResizerAptitude inherit.
-	self add: BrLayoutAlignmentAptitude forHorizontalLinearLayout.
+	self add: BrLayoutAlignmentAptitude new.
+	self
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout horizontal ].
 	self
 		add:
 			(BrStyleCommonAptitude new

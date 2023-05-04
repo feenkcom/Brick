@@ -7,7 +7,7 @@ Class {
 		'labelModel',
 		'iconModel'
 	],
-	#category : 'Brick-Toggle - UI'
+	#category : #'Brick-Toggle - UI'
 }
 
 { #category : #'api - toggle' }
@@ -45,16 +45,15 @@ BrToggle >> icon: anElement [
 BrToggle >> initialize [
 	super initialize.
 	
-	self hFitContent; vLocal.
-	self beNormalSize.
+	self
+		hFitContent;
+		vLocal;
+		alignCenter;
+		beNormalSize.
 	
 	self viewModel: (BrToggleModel new +
 		(labelModel := BrLabelModel new) +
-		(iconModel := BrIconModel new) +
-		(BrInteractiveModel new
-			addStates: {
-				BrLayoutAlignmentModel center.
-			}))
+		(iconModel := BrIconModel new))
 ]
 
 { #category : #'api - toggle' }
