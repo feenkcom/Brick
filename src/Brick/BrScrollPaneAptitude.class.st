@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scrollable'
 	],
-	#category : 'Brick-Scrollable - Look'
+	#category : #'Brick-Scrollable - Look'
 }
 
 { #category : #initialization }
@@ -12,7 +12,7 @@ BrScrollPaneAptitude >> initialize [
 	super initialize.
 
 	scrollable := BlScrollableElement new.
-	self add: (BrLayoutResizerAptitude inherit inherit: scrollable).
+	self add: (BrLayoutResizerAptitude new inherit: scrollable).
 
 	self addChangeAddChildAs: #(content scrollable) with: [ scrollable ].
 

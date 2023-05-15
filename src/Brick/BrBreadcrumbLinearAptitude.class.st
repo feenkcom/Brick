@@ -34,7 +34,7 @@ BrBreadcrumbLinearAptitude >> addItemsAndSeparators [
 BrBreadcrumbLinearAptitude >> initialize [
 	super initialize.
 
-	self add: (resizerLook := BrLayoutResizerAptitude new inherit vInherit: [ :aBlock | self itemElements do: aBlock ]).
+	self add: (resizerLook := BrLayoutResizerAptitude new vInherit: [ :aBlock | self itemElements do: aBlock ]).
 	self add: BrLayoutAlignmentAptitude new.
 	self
 		addChangeProperty: #(widget layout)

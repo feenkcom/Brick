@@ -19,7 +19,7 @@ BrHorizontalPane >> initialize [
 	super initialize.
 	
 	self layout: BlLinearLayout horizontal.
-	self aptitude: BrHorizontalPaneAptitude new
+	self aptitude: BrLayoutAlignmentStatelessAptitude new
 ]
 
 { #category : #accessing }

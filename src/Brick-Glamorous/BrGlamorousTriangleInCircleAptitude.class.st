@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousTriangleInCircleAptitude,
 	#superclass : #BrTriangleAptitude,
-	#category : 'Brick-Glamorous-List, Tree'
+	#category : #'Brick-Glamorous-List, Tree'
 }
 
 { #category : #initialization }
@@ -17,7 +17,7 @@ BrGlamorousTriangleInCircleAptitude >> initialize [
 			with: [ BlLayoutResizer exact: 16.0 ].
 	self
 		add:
-			(BrStyleCommonAptitude new
+			(BrLazyStyleCommonAptitude new
 				default:
 						[ :aStyle | aStyle background: self theme item deselectedColor ];
 				hovered:

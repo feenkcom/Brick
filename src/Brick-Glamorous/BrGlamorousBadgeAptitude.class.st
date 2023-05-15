@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'contentContainer'
 	],
-	#category : 'Brick-Glamorous-Badge'
+	#category : #'Brick-Glamorous-Badge'
 }
 
 { #category : #initialization }
@@ -16,8 +16,6 @@ BrGlamorousBadgeAptitude >> initialize [
 	self default: [ :aStyle | aStyle background: Color orange ].
 	
 	self add: (BrLayoutResizerAptitude new
-		inherit;
-		"for myself"
 		inherit: contentContainer;
 		exactDo: [ :aStyle | aStyle do: [ :aWidget | aWidget layoutDo: [ :aLayout | aLayout beLoose ] ] after: [  ] ];
 		fitContentDo: [ :aStyle | aStyle do: [ :aWidget | aWidget layoutDo: [ :aLayout | aLayout beLoose ] ] after: [  ] ];

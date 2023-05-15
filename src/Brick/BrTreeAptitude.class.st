@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'treeElement'
 	],
-	#category : 'Brick-Tree - Aptitude'
+	#category : #'Brick-Tree - Aptitude'
 }
 
 { #category : #initialization }
@@ -12,7 +12,7 @@ BrTreeAptitude >> initialize [
 	super initialize.
 
 	treeElement := BrInfiniteTreeElement new.
-	self add: (BrLayoutResizerAptitude inherit inherit: treeElement).
+	self add: (BrLayoutResizerAptitude new inherit: treeElement).
 
 	self addChangeAddChildAs: #(content scrollable) with: [ treeElement ].
 	

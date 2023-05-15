@@ -8,14 +8,13 @@ Class {
 BrGlamorousSpaceTabBasicAptitude >> initialize [
 	super initialize.
 	self add: BrGlamorousSpaceTabActionbarAptitude new.
-	self add: BrLayoutResizerAptitude inherit.
 	self add: BrLayoutAlignmentAptitude new.
 	self
 		addChangeProperty: #(widget layout)
 		with: [ BlLinearLayout horizontal ].
 	self
 		add:
-			(BrStyleCommonAptitude new
+			(BrLazyStyleCommonAptitude new
 				default: [ :aStyle | 
 					aStyle margin: (BlInsets top: 0 right: 1).
 					aStyle
@@ -34,10 +33,9 @@ BrGlamorousSpaceTabBasicAptitude >> initialize [
 								left: 10
 								bottom: 4
 								right: 10) ];
-				deselected: [ :aStyle | 
-					aStyle background:
-						self theme default backdropColor darker ];
-				when: [ :aState | aState deselected & aState hovered ]
+				when: (BlElementState deselected & BlElementState hovered not)
+					style: [ :aStyle | aStyle background: self theme default backdropColor darker ];
+				when: (BlElementState deselected & BlElementState hovered)
 					style: [ :aStyle | aStyle background: self theme default backdropColor ];
 				selected: [ :aStyle | aStyle background: self theme default backdropColor ])
 ]

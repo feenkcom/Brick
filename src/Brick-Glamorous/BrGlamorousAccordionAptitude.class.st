@@ -25,7 +25,7 @@ Class {
 		'headerBar',
 		'contentBar'
 	],
-	#category : 'Brick-Glamorous-Accordion'
+	#category : #'Brick-Glamorous-Accordion'
 }
 
 { #category : #accessing }
@@ -82,7 +82,6 @@ BrGlamorousAccordionAptitude >> initialize [
 	self
 		add:
 			(BrLayoutResizerAptitude new
-				inherit;
 				inherit: wrapper;
 				inherit: contentContainer).
 	self

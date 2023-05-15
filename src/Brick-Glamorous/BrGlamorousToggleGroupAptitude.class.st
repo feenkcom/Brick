@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousToggleGroupAptitude,
 	#superclass : #BrToggleGroupAptitude,
-	#category : 'Brick-Glamorous-Toggle'
+	#category : #'Brick-Glamorous-Toggle'
 }
 
 { #category : #initialization }
@@ -17,5 +17,4 @@ BrGlamorousToggleGroupAptitude >> initialize [
 		addChangeProperty: #(widget border)
 		with:
 			[ BlBorder paint: self theme button defaultBorderColor width: 1 ].
-	self add: BrLayoutResizerAptitude inherit
 ]

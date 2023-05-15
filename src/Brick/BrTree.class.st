@@ -57,7 +57,9 @@ BrTree >> initialize [
 
 	self viewModel: (self defaultListModel
 		add: (selectionModel := BrSelectionModel new)).
-		
+	
+	self matchParent.
+	
 	self selectionCallback: self defaultSelectionCallback.
 	
 	self beFocusable.

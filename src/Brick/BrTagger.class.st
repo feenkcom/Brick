@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : 'Brick-Tagger - UI'
+	#category : #'Brick-Tagger - UI'
 }
 
 { #category : #'api - tags' }
@@ -30,7 +30,10 @@ BrTagger >> explicitAllowedTags: aCollectionOfTags [
 BrTagger >> initialize [
 	super initialize.
 
-	self viewModel: BrTaggerModel new
+	self viewModel: BrTaggerModel new.
+
+	self hMatchParent.
+	self vFitContent
 ]
 
 { #category : #'api - tags' }

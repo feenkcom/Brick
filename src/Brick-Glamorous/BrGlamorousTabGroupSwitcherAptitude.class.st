@@ -30,8 +30,7 @@ BrGlamorousTabGroupSwitcherAptitude >> initialize [
 
 	self addAll: {
 		BrTabGroupContentAptitude new.
-		headerLook := self newHeaderLook.
-		BrLayoutResizerAptitude inherit }.
+		headerLook := self newHeaderLook }.
 	
 	headerLook headerDo: [ :aHeader | 
 		aHeader 

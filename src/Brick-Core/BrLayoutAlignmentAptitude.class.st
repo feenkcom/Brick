@@ -1,37 +1,49 @@
 Class {
 	#name : #BrLayoutAlignmentAptitude,
-	#superclass : #BrStyleAptitude,
+	#superclass : #BrLazyStyleAptitude,
 	#category : #'Brick-Core-Layout Alignment'
 }
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> bottomCenter: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState center and: BrLayoutVerticalAlignmentState end))
+	self
+		when: (BrLayoutHorizontalAlignmentState center and: BrLayoutVerticalAlignmentState end)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> bottomLeft: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState start and: BrLayoutVerticalAlignmentState end))
+	self
+		when: (BrLayoutHorizontalAlignmentState start and: BrLayoutVerticalAlignmentState end)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> bottomRight: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState end and: BrLayoutVerticalAlignmentState end))
+	self
+		when: (BrLayoutHorizontalAlignmentState end and: BrLayoutVerticalAlignmentState end)
+		style: aBlock
 ]
 
 { #category : #geometry }
-BrLayoutAlignmentAptitude >> center: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState center and: BrLayoutVerticalAlignmentState center))
+BrLayoutAlignmentAptitude >> center: aBlock [	
+	self
+		when: (BrLayoutHorizontalAlignmentState center and: BrLayoutVerticalAlignmentState center)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> centerLeft: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState start and: BrLayoutVerticalAlignmentState center))
+	self
+		when: (BrLayoutHorizontalAlignmentState start and: BrLayoutVerticalAlignmentState center)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> centerRight: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState end and: BrLayoutVerticalAlignmentState center))
+	self
+		when: (BrLayoutHorizontalAlignmentState end and: BrLayoutVerticalAlignmentState center)
+		style: aBlock
 ]
 
 { #category : #initialization }
@@ -53,20 +65,28 @@ BrLayoutAlignmentAptitude >> initialize [
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> none: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState none and: BrLayoutVerticalAlignmentState none))
+	self
+		when: (BrLayoutHorizontalAlignmentState none and: BrLayoutVerticalAlignmentState none)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> topCenter: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState center and: BrLayoutVerticalAlignmentState start))
+	self
+		when: (BrLayoutHorizontalAlignmentState center and: BrLayoutVerticalAlignmentState start)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> topLeft: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState start and: BrLayoutVerticalAlignmentState start))
+	self
+		when: (BrLayoutHorizontalAlignmentState start and: BrLayoutVerticalAlignmentState start)
+		style: aBlock
 ]
 
 { #category : #geometry }
 BrLayoutAlignmentAptitude >> topRight: aBlock [
-	aBlock value: (self styleFor: (BrLayoutHorizontalAlignmentState end and: BrLayoutVerticalAlignmentState start))
+	self
+		when: (BrLayoutHorizontalAlignmentState end and: BrLayoutVerticalAlignmentState start)
+		style: aBlock
 ]
