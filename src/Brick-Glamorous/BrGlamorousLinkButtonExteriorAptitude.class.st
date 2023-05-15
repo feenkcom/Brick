@@ -3,33 +3,27 @@ I define the rectangular exterior of the link button.
 "
 Class {
 	#name : #BrGlamorousLinkButtonExteriorAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#superclass : #BrLazyStyleCommonAptitude,
 	#instVars : [
 		'backgroundPaint'
 	],
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #accessing }
 BrGlamorousLinkButtonExteriorAptitude >> backgroundPaint [
-	^ backgroundPaint
+	^ backgroundPaint ifNil: [ backgroundPaint := self theme button disabledBackgroundColor ]
 ]
 
 { #category : #accessing }
 BrGlamorousLinkButtonExteriorAptitude >> backgroundPaint: anObject [
-	backgroundPaint := anObject.
-	
-	self default background: self backgroundPaint.
+	backgroundPaint := anObject
 ]
 
 { #category : #initialization }
 BrGlamorousLinkButtonExteriorAptitude >> initialize [
 	super initialize.
-	backgroundPaint := self theme button disabledBackgroundColor.
-	self default background: self backgroundPaint.
-	self hovered background: self theme button hoveredTextColor.
-	self pressed background: self theme button pressedTextColor.
-	self disabled background: self theme button disabledTextColor.
+
 	self
 		addChangeProperty: #(widgetContent layout)
 		with: [ BlLinearLayout horizontal alignCenter ].
@@ -44,5 +38,10 @@ BrGlamorousLinkButtonExteriorAptitude >> initialize [
 		with: BlLayoutResizer fitContent.
 	self
 		addChangeProperty: #(widgetContent padding)
-		with: [ BlInsets all: 3 ]
+		with: [ BlInsets all: 3 ].
+	
+	self default: [ :aStyle | aStyle background: self backgroundPaint ].
+	self hovered: [ :aStyle | aStyle background: self theme button hoveredTextColor ].
+	self pressed: [ :aStyle | aStyle background: self theme button pressedTextColor ].
+	self disabled: [ :aStyle | aStyle background: self theme button disabledTextColor ]
 ]
