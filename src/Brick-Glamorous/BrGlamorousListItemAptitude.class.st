@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousListItemAptitude,
-	#superclass : #BrStyleCommonAptitude,
+	#superclass : #BrLazyStyleCommonAptitude,
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
@@ -8,15 +8,9 @@ Class {
 BrGlamorousListItemAptitude >> initialize [
 	super initialize.
 	self
-		default:
-				[ :aStyle | aStyle background: self theme item deselectedColor ];
-		hovered:
-				[ :aStyle | aStyle background: self theme item hoveredColor ];
-		pressed:
-				[ :aStyle | aStyle background: self theme item pressedColor ];
-		focused: [ :aStyle | 
-			aStyle
-				border: (BlBorder paint: self theme item focusedBorderColor width: 1) ];
-		selected:
-				[ :aStyle | aStyle background: self theme item selectedColor ]
+		default: [ :aStyle | aStyle background: self theme item deselectedColor ];
+		hovered: [ :aStyle | aStyle background: self theme item hoveredColor ];
+		pressed: [ :aStyle | aStyle background: self theme item pressedColor ];
+		focused: [ :aStyle | aStyle border: (BlBorder paint: self theme item focusedBorderColor width: 1) ];
+		selected: [ :aStyle | aStyle background: self theme item selectedColor ]
 ]

@@ -17,7 +17,7 @@ BrGlamorousTriangleInCircleAptitude >> initialize [
 			with: [ BlLayoutResizer exact: 16.0 ].
 	self
 		add:
-			(BrStyleCommonAptitude new
+			(BrLazyStyleCommonAptitude new
 				default:
 						[ :aStyle | aStyle background: self theme item deselectedColor ];
 				hovered:

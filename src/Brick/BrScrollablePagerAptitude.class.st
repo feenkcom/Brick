@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pagesListElement'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #initialization }
@@ -14,10 +14,10 @@ BrScrollablePagerAptitude >> initialize [
 	pagesListElement := BrInfinitePagerElement new.
 
 	self add: (BrLayoutResizerAptitude new inherit: pagesListElement).
-	pagesListElement addAptitude: (BrLayoutResizerAptitude new inherit; inherit: [ pagesListElement children ]).
+	pagesListElement addAptitude: (BrLayoutResizerAptitude new inherit: [ pagesListElement children ]).
 
 	self addChangeAddChildAs: #(content list) with: [ pagesListElement ].
-	self add: (BrLayoutResizerAptitude inherit inherit: pagesListElement)
+	self add: (BrLayoutResizerAptitude new inherit: pagesListElement)
 ]
 
 { #category : #initialization }

@@ -17,5 +17,4 @@ BrGlamorousToggleGroupAptitude >> initialize [
 		addChangeProperty: #(widget border)
 		with:
 			[ BlBorder paint: self theme button defaultBorderColor width: 1 ].
-	self add: BrLayoutResizerAptitude inherit
 ]

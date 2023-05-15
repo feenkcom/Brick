@@ -8,7 +8,6 @@ Class {
 BrLabelAptitude >> initialize [
 	super initialize.
 
-	self add: BrLayoutResizerAptitude new inherit.
 	self add: (BrLayoutAlignmentAptitude new).
 	self
 		addChangeProperty: #(widget layout)

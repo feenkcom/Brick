@@ -82,7 +82,6 @@ BrGlamorousAccordionAptitude >> initialize [
 	self
 		add:
 			(BrLayoutResizerAptitude new
-				inherit;
 				inherit: wrapper;
 				inherit: contentContainer).
 	self

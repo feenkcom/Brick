@@ -7,7 +7,6 @@ Class {
 { #category : #initialization }
 BrGlamorousBreadcrumbAptitude >> initialize [
 	super initialize.
-	self add: BrLayoutResizerAptitude inherit.
 	self
 		addChangeProperty: #(widget layout)
 		with: [ BlLinearLayout horizontal alignCenterLeft ]

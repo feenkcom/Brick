@@ -10,11 +10,11 @@ BrGlamorousSpaceTabActionbarAptitude >> initialize [
 
 	actionbarContainer padding: actionbarContainer padding + (BlInsets top: 2).
 
-	self add: (BrStyleCommonAptitude new
+	self add: (BrLazyStyleCommonAptitude new
 		@ actionbarContainer;
-		deselected: [ :aStyle | 
-			aStyle visibility: BlVisibility hidden ];
-		when: [ :aState | aState deselected & aState hovered ]
+		when: (BlElementState deselected & BlElementState hovered not)
+			style: [ :aStyle | aStyle visibility: BlVisibility hidden ];
+		when: (BlElementState deselected & BlElementState hovered)
 			style: [ :aStyle | aStyle visibility: BlVisibility visible ];
-		selected: [ :aStyle | aStyle visibility: BlVisibility visible ]).
+		selected: [ :aStyle | aStyle visibility: BlVisibility visible ])
 ]

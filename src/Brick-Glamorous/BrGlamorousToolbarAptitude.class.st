@@ -23,7 +23,6 @@ BrGlamorousToolbarAptitude >> initialize [
 	
 	spacing := 4.
 
-	self add: BrLayoutResizerAptitude inherit.
 	self add: BrLayoutAlignmentAptitude new.	
 	self
 		addChangeProperty: #(widget layout)

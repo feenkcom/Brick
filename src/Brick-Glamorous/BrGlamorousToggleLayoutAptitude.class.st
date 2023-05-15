@@ -8,7 +8,6 @@ Class {
 BrGlamorousToggleLayoutAptitude >> initialize [
 	super initialize.
 	
-	self add: BrLayoutResizerAptitude inherit.
 	self add: BrLayoutAlignmentAptitude new.
 	self
 		addChangeProperty: #(widget layout)

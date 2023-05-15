@@ -6,7 +6,7 @@ Class {
 		'popupStencil',
 		'resizerLook'
 	],
-	#category : 'Brick-Popup - Look'
+	#category : #'Brick-Popup - Look'
 }
 
 { #category : #private }
@@ -34,7 +34,7 @@ BrPopupAptitude >> initialize [
 	self expanded: [ self openPopup ].
 	self collapsed: [ self closePopup ].
 	
-	self add: (resizerLook := BrLayoutResizerAptitude inherit
+	self add: (resizerLook := BrLayoutResizerAptitude new
 		inherit: [ :aBlock | aBlock value: (self isAttachedToWidget
 			ifTrue: [ self widgetContent childNamed: #popupContent ifFound: #yourself ifNone: [ BlElement new ] ]
 			ifFalse: [ BlElement new ])])

@@ -12,7 +12,6 @@ BrGlamorousTabAptitude >> initialize [
 	super initialize.
 	self add: (BrGlamorousTextLabelAptitude new foreground: Color black).
 	self add: BrGlamorousTabActionbarAptitude new.
-	self add: BrLayoutResizerAptitude inherit.
 	self add: BrLayoutAlignmentAptitude new.
 	self
 		addChangeProperty: #(widget layout)

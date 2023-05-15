@@ -80,7 +80,6 @@ BrGlamorousTaggerAptitude >> initialize [
 	
 	self add: BrHorizontalPaneAptitude new.
 	self add: (BrLayoutResizerAptitude new
-		inherit;
 		inherit: tags)
 ]
 

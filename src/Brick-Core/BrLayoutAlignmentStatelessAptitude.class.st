@@ -1,5 +1,5 @@
 Class {
-	#name : #BrLayoutAlignmentAptitude3,
+	#name : #BrLayoutAlignmentStatelessAptitude,
 	#superclass : #BrStatelessStyleAptitude,
 	#classVars : [
 		'Styles'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #initialization }
-BrLayoutAlignmentAptitude3 class >> initialize [	
+BrLayoutAlignmentStatelessAptitude class >> initialize [	
 	Styles := BrLayoutAlignmentStyles new
 		none: [ :aStyle | aStyle alignNone ];
 		topLeft: [ :aStyle | aStyle alignTopLeft ];
@@ -23,6 +23,6 @@ BrLayoutAlignmentAptitude3 class >> initialize [
 ]
 
 { #category : #initialization }
-BrLayoutAlignmentAptitude3 >> statelessStyles [
+BrLayoutAlignmentStatelessAptitude >> statelessStyles [
 	^ Styles
 ]

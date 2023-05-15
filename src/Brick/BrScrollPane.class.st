@@ -18,5 +18,6 @@ BrScrollPane >> content: aStencil [
 BrScrollPane >> initialize [
 	super initialize.
 	
-	self viewModel: (BrScrollableModel new).
+	self matchParent.
+	self viewModel: BrScrollableModel new
 ]

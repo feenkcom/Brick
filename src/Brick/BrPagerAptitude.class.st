@@ -11,9 +11,7 @@ Class {
 BrPagerAptitude >> initialize [
 	super initialize.
 
-	pages := OrderedDictionary new.
-	
-	self add: BrLayoutResizerAptitude inherit
+	pages := OrderedDictionary new
 ]
 
 { #category : #initialization }

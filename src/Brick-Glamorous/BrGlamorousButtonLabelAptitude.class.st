@@ -6,7 +6,6 @@ Class {
 	#superclass : #BrTextLabelAptitude,
 	#instVars : [
 		'selectedColor',
-		'labelLook',
 		'hoveredColor',
 		'defaultColor',
 		'pressedColor'
@@ -21,8 +20,7 @@ BrGlamorousButtonLabelAptitude >> defaultColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> defaultColor: aPaint [
-	defaultColor := aPaint.
-	labelLook default foreground: defaultColor
+	defaultColor := aPaint
 ]
 
 { #category : #accessing }
@@ -32,20 +30,22 @@ BrGlamorousButtonLabelAptitude >> hoveredColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> hoveredColor: aPaint [
-	hoveredColor := aPaint.
-	labelLook hovered foreground: hoveredColor
+	hoveredColor := aPaint
 ]
 
 { #category : #initialization }
 BrGlamorousButtonLabelAptitude >> initialize [
 	super initialize.
+
+	self
+		weight: 400;
+		fontName: 'Source Sans Pro'.
+
 	defaultColor := self theme button defaultTextColor.
 	selectedColor := self theme button hoveredTextColor.
 	hoveredColor := self theme button hoveredTextColor.
 	pressedColor := self theme button pressedTextColor.
-	self
-		weight: 400;
-		fontName: 'Source Sans Pro'.
+
 	labelElement
 		addAptitude:
 			(BrSizeAdjustmentAptitude new
@@ -57,13 +57,12 @@ BrGlamorousButtonLabelAptitude >> initialize [
 				huge: [ :aStyle | aStyle fontSizeEm: 1.55 ]).
 	self
 		add:
-			(labelLook := BrStyleCommonAptitude new
+			(BrLazyStyleCommonAptitude new
 				@ labelElement;
 				default: [ :aStyle | aStyle foreground: defaultColor ];
 				hovered: [ :aStyle | aStyle foreground: hoveredColor ];
 				pressed: [ :aStyle | aStyle foreground: pressedColor ];
-				disabled:
-						[ :aStyle | aStyle foreground: self theme button disabledTextColor ];
+				disabled: [ :aStyle | aStyle foreground: self theme button disabledTextColor ];
 				selected: [ :aStyle | aStyle foreground: selectedColor ])
 ]
 
@@ -74,8 +73,7 @@ BrGlamorousButtonLabelAptitude >> pressedColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> pressedColor: aPaint [
-	pressedColor := aPaint.
-	labelLook pressed foreground: pressedColor
+	pressedColor := aPaint
 ]
 
 { #category : #accessing }
@@ -85,6 +83,5 @@ BrGlamorousButtonLabelAptitude >> selectedColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> selectedColor: aPaint [
-	selectedColor := aPaint.
-	labelLook selected foreground: selectedColor
+	selectedColor := aPaint
 ]
