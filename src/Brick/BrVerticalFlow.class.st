@@ -13,5 +13,6 @@ Class {
 BrVerticalFlow >> initialize [
 	super initialize.
 
+	self layout: BlFlowLayout vertical.
 	self aptitude: BrVerticalFlowAptitude new
 ]

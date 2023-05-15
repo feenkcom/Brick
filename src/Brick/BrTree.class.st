@@ -41,6 +41,11 @@ BrTree >> expandAll [
 ]
 
 { #category : #'api - tree' }
+BrTree >> expandOneLevel [
+	self expandUpTo: 1
+]
+
+{ #category : #'api - tree' }
 BrTree >> expandSuchThat: anOneArgBlock [
 	"It stops expanding children if a parent node does not satisfy the condition."
 	self viewModel expandSuchThat: anOneArgBlock
