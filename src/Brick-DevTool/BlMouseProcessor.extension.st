@@ -7,7 +7,7 @@ BlMouseProcessor >> gtLastClickEventTargetsFor: aView [
 	lastClickEvent ifNil: [ ^ aView empty ].
 	
 	^ aView columnedTree
-		title: 'Last Click Event Targets';
+		title: 'Last click event targets';
 		priority: 15;
 		items: [ lastClickEvent
 				ifNotNil: [ :anEvent | 

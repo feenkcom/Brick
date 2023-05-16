@@ -6,7 +6,7 @@ BlScripter >> gtAnchoredContainerOverviewFor: aView [
 	self userData at: BrAnchoredVisualAnalysis ifAbsent: [ ^ aView empty ].
 
 	^ aView forward
-		title: 'Dropdown Analysis';
+		title: 'Dropdown analysis';
 		priority: -1;
 		object: [ self userData at: BrAnchoredVisualAnalysis ];
 		view: #gtSpaceFor:;

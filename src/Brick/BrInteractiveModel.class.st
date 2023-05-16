@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'stateModels'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }
@@ -54,7 +54,7 @@ BrInteractiveModel >> gtLocalStatesFor: aView [
 	
 	^ aView forward
 		priority: 1;
-		title: 'Local States';
+		title: 'Local states';
 		object: [ self statesMapping ];
 		view: #gtStatesFor:
 ]
