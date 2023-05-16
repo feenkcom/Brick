@@ -302,7 +302,7 @@ BrTreeNode >> gtRawNodesFor: aView [
 	<gtView>
 	
 	^ aView columnedTree
-		title: 'Raw Nodes';
+		title: 'Raw nodes';
 		priority: 2;
 		items: [ { self } ];
 		children: [ :anItem | (anItem instVarNamed: #childrenNodes) ifNil: [ #() ] ];

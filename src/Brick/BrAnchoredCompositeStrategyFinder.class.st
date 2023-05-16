@@ -122,7 +122,7 @@ BrAnchoredCompositeStrategyFinder >> gtStrategyBoundsFor: aView [
 	self referenceElement ifNil: [ ^ aView empty ].
 
 	^ aView explicit
-		title: 'Strategy Bounds';
+		title: 'Strategy bounds';
 		priority: 1;
 		stencil: [ BrAnchoredVisualAnalysisElement new
 				finder: self;

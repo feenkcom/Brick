@@ -12,7 +12,7 @@ Class {
 BrTextStylerAsyncStylingFinished >> gtInnerTextFor: aView [
 	<gtView>
 	^ aView forward
-		title: 'Inner Text';
+		title: 'Inner text';
 		priority: 0;
 		object: [ self styledText ];
 		view: #gtInnerTextFor:
