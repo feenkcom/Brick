@@ -147,14 +147,13 @@ BrTextEditorInserter >> inputFilter: aTextEditorInputFilter [
 
 { #category : #'api - processing' }
 BrTextEditorInserter >> insert [
-	| theFilteredTextMap theInsertions theCursorMovements |
+	| theFilteredTextMap theInsertions |
 
 	shouldDeleteSelected
 		ifTrue: [ self deleteSelectedText ].
 		
 	theFilteredTextMap := Dictionary new.
 	theInsertions := OrderedCollection new.
-	theCursorMovements := OrderedCollection new.
 
 	insertionIndices do: [ :eachAssociation |
 		| anIndex aFilteredText |
@@ -193,19 +192,12 @@ BrTextEditorInserter >> insert [
 				surroundMap
 					openingFor: eachAssociation value
 					ifPresent: [ :aLeftSurroundText |
-						(self hasString: eachAssociation value afterCursor: (BrTextEditorSingleCursor at: anIndex))
-							ifTrue: [
-								shouldUpdateCursor
-									ifTrue: [
-										self cursors do: [ :eachCursor |
-											(eachCursor position = anIndex) ifTrue: [ theCursorMovements add: (eachCursor -> (anIndex + eachAssociation value size)) ] ] ]]
-							ifFalse: [
-								theInsertions add: { 
-									#index -> anIndex.
-									#requestedIndex -> anIndex.
-									#string -> aFilteredText.
-								} asDictionary
-					] ]
+						theInsertions add: { 
+							#index -> anIndex.
+							#requestedIndex -> anIndex.
+							#string -> aFilteredText.
+						} asDictionary
+					 ]
 					ifAbsent: [
 						theInsertions add: { 
 							#index -> anIndex.
@@ -231,13 +223,6 @@ BrTextEditorInserter >> insert [
 							theInsertionIndices add: (aSurrounding at: #index) ] ] ].
 
 		self editor history groupDuring: [
-			theCursorMovements ifNotEmpty: [ :theMovements |
-				| aNavigator |
-				aNavigator := self editor navigator.
-				aNavigator withHistorization.
-				theMovements do: [ :eachMovement | aNavigator move: eachMovement key to: eachMovement value ].
-				aNavigator apply ].
-			
 			BlFrameTelemetry
 				time: [ 'Insert {1} at {2}' format: { theInsertionStrings asArray . theInsertionIndices asArray } ]
 				during: [ self privateInsertStrings: theInsertionStrings atAll: theInsertionIndices ] ] ].	
