@@ -820,6 +820,19 @@ BrGlamorousVectorIcons class >> smallUpwards [
 		background: Color black ] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> spawn [
+	<script: 'self spawn inspect'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 5 12 L 3 12 C 3 8 4 7 8 7 L 8 4 L 13 8 L 8 12 L 8 9 C 5 9 5 9 5 12 Z'
+			viewbox: (0@0 extent: 16@16));
+		containerName: #'icon--spawn';
+		background: Color black ] asStencil
+]
+
 { #category : #'private - sizes' }
 BrGlamorousVectorIcons class >> standardSize [
 	^ 16@16
