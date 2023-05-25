@@ -240,6 +240,20 @@ BrFileSelector >> executeAction [
 ]
 
 { #category : #accessing }
+BrFileSelector >> file: aFileReference [
+	(folder = aFileReference or: [ aFileReference isDirectory ]) ifTrue: [ ^ self ].
+
+	folder := aFileReference asAbsolute canonicalize parent.
+	self clearSelection.
+	self updateDisplay.
+	table items
+		withIndexDo: [ :anItem :anIndex | 
+			anItem = aFileReference
+				ifTrue: [ table selectOne: anIndex.
+					table scrollToIndex: anIndex ] ]
+]
+
+{ #category : #accessing }
 BrFileSelector >> fileFilterBlock [
 	^ fileFilterBlock
 ]
@@ -297,7 +311,11 @@ BrFileSelector >> okAction: anObject [
 
 { #category : #accessing }
 BrFileSelector >> onPaste [
-	self okAction cull: Clipboard default clipboardText asString asFileReference cull: okButton
+	| fileReference |
+	fileReference := Clipboard default clipboardText asString asFileReference.
+	fileReference isDirectory
+		ifTrue: [ self folder: fileReference ]
+		ifFalse: [ self file: fileReference ]
 ]
 
 { #category : #private }
