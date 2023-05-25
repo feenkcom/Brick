@@ -269,13 +269,20 @@ BrFileSelector >> folder: aFileReference [
 
 { #category : #initialization }
 BrFileSelector >> initialize [
-
 	super initialize.
 	fileFilterBlock := [ :entry | true ].
-	okAction := [ :anElement | ].
-	self buildUI. 
+	okAction := [ :anElement |  ].
+	self buildUI.
 	self matchParent.
 	self folder: '.' asFileReference.
+	self beFocusable.
+	self requestFocus.
+
+	self
+		addShortcut: (BlShortcutWithAction new
+				description: 'Paste path';
+				combination: BlKeyCombination primaryV;
+				action: [ self onPaste ])
 ]
 
 { #category : #accessing }
@@ -286,6 +293,11 @@ BrFileSelector >> okAction [
 { #category : #accessing }
 BrFileSelector >> okAction: anObject [
 	okAction := anObject
+]
+
+{ #category : #accessing }
+BrFileSelector >> onPaste [
+	self okAction cull: Clipboard default clipboardText asString asFileReference cull: okButton
 ]
 
 { #category : #private }
