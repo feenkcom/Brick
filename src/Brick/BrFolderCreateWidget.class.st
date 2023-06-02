@@ -1,6 +1,8 @@
 Class {
 	#name : #BrFolderCreateWidget,
-	#superclass : #BrHorizontalPane,
+	#superclass : #BrWidgetContainer,
+	#traits : 'TBrLayoutAlignable',
+	#classTraits : 'TBrLayoutAlignable classTrait',
 	#instVars : [
 		'folder',
 		'container',
@@ -46,9 +48,15 @@ BrFolderCreateWidget >> folder: aFolderReference [
 { #category : #accessing }
 BrFolderCreateWidget >> initialize [
 	super initialize.
+	
+	self viewModel: BrWidgetModel new.
+	self layout: BlLinearLayout horizontal.
+	self aptitude: BrLayoutAlignmentStatelessAptitude new.
+
 	self hMatchParent.
 	self vFitContent.
 	self alignCenter.
+
 	label := self createLabel.
 	button := self createButton.
 	self addChild: label.
