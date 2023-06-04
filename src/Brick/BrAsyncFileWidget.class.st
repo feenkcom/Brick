@@ -19,6 +19,18 @@ BrAsyncFileWidget class >> startUp: resuming [
 ]
 
 { #category : #accessing }
+BrAsyncFileWidget >> contents: aByteArray [
+	self
+		stencil: [ (SkiaImage
+				fromBuffer: aByteArray
+				start: 0
+				end: aByteArray size - 1) asElement
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ] ]
+]
+
+{ #category : #accessing }
 BrAsyncFileWidget >> file: aFile [
 
 	self stencil: [ 
