@@ -41,17 +41,16 @@ BrColumnedListHeaderAptitude >> headerPane [
 { #category : #initialization }
 BrColumnedListHeaderAptitude >> initialize [
 	super initialize.
-	
+
 	self cellSpacing: 0.
 	self
 		labelStencil: [ :aColumn | 
 			| label |
-			label := BrLabel new 
-				aptitude: BrGlamorousLabelAptitude;
-				padding: self newCellPaddingInsets;
-				text: (aColumn title asRopedText 
-					foreground: self theme button defaultTextColor).
-			aColumn width applyOn: label.
+			label := BrLabel new
+					aptitude: BrGlamorousLabelAptitude;
+					padding: self newCellPaddingInsets;
+					text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
+			aColumn columnWidth applyOn: label.
 			label ].
 	self addChangeAddChildFirst: #() with: [ self headerPane ]
 ]

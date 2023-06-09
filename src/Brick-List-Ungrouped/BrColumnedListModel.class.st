@@ -12,6 +12,11 @@ BrColumnedListModel >> column [
 	^ columns column
 ]
 
+{ #category : #accessing }
+BrColumnedListModel >> columns [
+	^ columns columns
+]
+
 { #category : #enumerating }
 BrColumnedListModel >> columnsDo: aBlock [ 
 

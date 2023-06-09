@@ -69,27 +69,34 @@ BrColumnedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 { #category : #'instance creation' }
 BrColumnedListDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 	| aRowElement theColumnElements |
-
 	aRowElement := itemElementStencil
-		itemType: anItemType;
-		asElement.
-
-	theColumnElements := self columns withIndexCollect: [ :eachColumn :eachIndex |
-		| eachColumnElement |
-		
-		eachColumnElement := eachColumn cellStencil
 			itemType: anItemType;
-			column: eachColumn;
-			columnIndex: eachIndex;
 			asElement.
 
-		eachColumn width applyOn: eachColumnElement.
-		
-		eachColumnElement ].
+	theColumnElements := self columns
+			withIndexCollect: [ :eachColumn :eachIndex | 
+				| eachCellElement eachSubscription |
+				eachCellElement := eachColumn cellStencil
+						itemType: anItemType;
+						column: eachColumn;
+						columnIndex: eachIndex;
+						asElement.
+
+				eachColumn columnWidth applyOn: eachCellElement.
+
+				eachSubscription := WeakAnnouncementSubscription new 
+					announcer: eachColumn announcer;
+					announcementClass: BrColumnWidthChanged;
+					action: (BrColumnWidthChangeAction new cellElement: eachCellElement);
+					subscriber: eachCellElement.
 	
+				eachColumn announcer basicSubscribe: eachSubscription.
+
+				eachCellElement ].
+
 	aRowElement addChildren: theColumnElements.
 	aRowElement addEventHandler: clickToSelectHandler.
-	
+
 	^ BrColumnedListItemHolder new
 		itemElement: aRowElement;
 		columns: self columns;

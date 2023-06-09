@@ -5,46 +5,24 @@ I am useful to let resizer widgets style themselves based on the location. For e
 "
 Class {
 	#name : #BrResizerLocationState,
-	#superclass : #BrInteractionState,
+	#superclass : #BlElementUniqueState,
 	#instVars : [
 		'location'
 	],
-	#category : 'Brick-Resizer - State'
+	#category : #'Brick-Resizer - State'
 }
 
 { #category : #accessing }
-BrResizerLocationState class >> bottom [
-	^ self location: BrResizerBottomLocation new
-]
-
-{ #category : #accessing }
-BrResizerLocationState class >> left [
-	^ self location: BrResizerLeftLocation new
-]
-
-{ #category : #'instance creation' }
-BrResizerLocationState class >> location: aBrResizerLocation [
-	^ self new location: aBrResizerLocation
-]
-
-{ #category : #accessing }
-BrResizerLocationState class >> right [
-	^ self location: BrResizerRightLocation new
-]
-
-{ #category : #accessing }
-BrResizerLocationState class >> top [
-	^ self location: BrResizerTopLocation new
+BrResizerLocationState class >> location: aResizerLocation [
+	^ self new location: aResizerLocation
 ]
 
 { #category : #comparing }
 BrResizerLocationState >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
 	^ location = anObject location
 ]
 
@@ -52,17 +30,20 @@ BrResizerLocationState >> = anObject [
 BrResizerLocationState >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
-	^ self class hash bitXor: location hash
+	^ location hash
 ]
 
 { #category : #accessing }
 BrResizerLocationState >> location [
-	<return: #BrResizerLocation>
-
 	^ location
 ]
 
 { #category : #accessing }
-BrResizerLocationState >> location: aBrResizerLocation [
-	location := aBrResizerLocation
+BrResizerLocationState >> location: aResizerLocation [
+	location := aResizerLocation
+]
+
+{ #category : #accessing }
+BrResizerLocationState >> priority [
+	^ UserPriority
 ]
