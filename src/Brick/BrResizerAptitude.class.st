@@ -1,72 +1,50 @@
+"
+Allows developers to define a style of the resizer for its various orientations
+"
 Class {
 	#name : #BrResizerAptitude,
-	#superclass : #BrAptitude,
-	#instVars : [
-		'resizerListener',
-		'location',
-		'target'
-	],
-	#category : 'Brick-Resizer - Look'
+	#superclass : #BrLazyStyleCommonAptitude,
+	#category : #'Brick-Resizer - Aptitude'
 }
 
-{ #category : #initialization }
-BrResizerAptitude >> initialize [
-	super initialize.
-	location := BrResizerBottomLocation new.
+{ #category : #accessing }
+BrResizerAptitude >> bottom: aBlock [	
 	self
-		addChange:
-			(BrLookChange new
-				up: [ :e | self updateListener ];
-				down: [ :e |  ];
-				yourself)
-]
-
-{ #category : #initialization }
-BrResizerAptitude >> initializeListeners [
-	super initializeListeners.
-
-	self when: BrResizerLocationChanged do: [ :anEvent | self location: anEvent location ].
-	self when: BrResizerTargetChanged do: [ :anEvent | self target: anEvent targetElement ]
-]
-
-{ #category : #initialization }
-BrResizerAptitude >> initializeRequests [
-	super initializeRequests.
-	
-	self request: BrResizerLocationRequest new.
-	self request: BrResizerTargetRequest new
+		when: (BrResizerLocationState location: BrResizerBottomLocation new)
+		style: aBlock
 ]
 
 { #category : #accessing }
-BrResizerAptitude >> location [
-	^ location
+BrResizerAptitude >> horizontal: aBlock [	
+	self
+		when: ((BrResizerLocationState location: BrResizerLeftLocation new) or: (BrResizerLocationState location: BrResizerRightLocation new))
+		style: aBlock
 ]
 
 { #category : #accessing }
-BrResizerAptitude >> location: aBrResizerLocation [
-	"When location changes we should recreate an event listener"
-
-	location := aBrResizerLocation.
-	self updateListener
+BrResizerAptitude >> left: aBlock [	
+	self
+		when: (BrResizerLocationState location: BrResizerLeftLocation new)
+		style: aBlock
 ]
 
 { #category : #accessing }
-BrResizerAptitude >> target [
-	^ target
+BrResizerAptitude >> right: aBlock [	
+	self
+		when: (BrResizerLocationState location: BrResizerRightLocation new)
+		style: aBlock
 ]
 
 { #category : #accessing }
-BrResizerAptitude >> target: anElement [
-	target := anElement.
-	resizerListener resizeTarget: self target
+BrResizerAptitude >> top: aBlock [	
+	self
+		when: (BrResizerLocationState location: BrResizerTopLocation new)
+		style: aBlock
 ]
 
-{ #category : #private }
-BrResizerAptitude >> updateListener [
-	self widgetDo: [ :aWidget | aWidget removeEventHandler: resizerListener ].
-
-	resizerListener := self location newResizerListener.
-	resizerListener resizeTarget: self target.
-
-	self widgetDo: [ :aWidget | aWidget addEventHandler: resizerListener ]
+{ #category : #accessing }
+BrResizerAptitude >> vertical: aBlock [	
+	self
+		when: ((BrResizerLocationState location: BrResizerTopLocation new) or: (BrResizerLocationState location: BrResizerBottomLocation new))
+		style: aBlock
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'columnedModel'
 	],
-	#category : 'Brick-Tree - UI'
+	#category : #'Brick-Tree - UI'
 }
 
 { #category : #'api - scripting' }
@@ -12,6 +12,13 @@ BrColumnedTree >> column [
 	<return: #BrColumn>
 
 	^ columnedModel column
+]
+
+{ #category : #'api - scripting' }
+BrColumnedTree >> columns [
+	<return: #BrColumn>
+
+	^ columnedModel columns
 ]
 
 { #category : #initialization }

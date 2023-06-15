@@ -3,9 +3,10 @@ Class {
 	#superclass : #BrResizerAptitude,
 	#instVars : [
 		'thickness',
-		'borderSeparation'
+		'borderSeparation',
+		'weight'
 	],
-	#category : 'Brick-Glamorous-Resizer'
+	#category : #'Brick-Glamorous-Resizer'
 }
 
 { #category : #accessing }
@@ -14,96 +15,59 @@ BrGlamorousResizerAptitude >> borderSeparation [
 ]
 
 { #category : #accessing }
-BrGlamorousResizerAptitude >> borderSeparation: anObject [
-	borderSeparation := anObject
+BrGlamorousResizerAptitude >> borderSeparation: aNumber [
+	borderSeparation := aNumber
 ]
 
 { #category : #initialization }
 BrGlamorousResizerAptitude >> initialize [
 	super initialize.
+
 	thickness := 3.
 	borderSeparation := 0.
-	self add: self newResizerInteractiveLook.
-	self add: self newInteractiveCommonLook.
+	weight := 0.4.
+	
 	self
 		addChangeProperty: #(widget geometry)
-		with: [ BlRoundedRectangleGeometry cornerRadius: 2 ]
-]
-
-{ #category : #'private - instance creation' }
-BrGlamorousResizerAptitude >> newInteractiveCommonLook [
-	^ BrInteractiveCommonAptitude new
-		default:
-				[ :aWidget | aWidget background: self theme button defaultBorderColor ];
-		hovered:
-				[ :aWidget | aWidget background: self theme button hoveredBorderColor ];
-		pressed:
-				[ :aWidget | aWidget background: self theme button pressedBorderColor ]
-]
-
-{ #category : #'private - instance creation' }
-BrGlamorousResizerAptitude >> newResizerInteractiveLook [
-	^ BrResizerInteractiveAptitude new
-		top: [ :aWidget | 
-			aWidget
+		with: [ BlRoundedRectangleGeometry cornerRadius: 2 ].
+	
+	self
+		default: [ :aStyle | aStyle background: self theme button defaultBorderColor ];
+		hovered: [ :aStyle | aStyle background: self theme button hoveredBorderColor ];
+		pressed: [ :aStyle | aStyle background: self theme button pressedBorderColor ].
+	
+	self
+		vertical: [ :aStyle | 
+			aStyle
+				vExact: thickness;
+				hMatchParent;
 				constraintsDo: [ :c | 
 					c ignored horizontal alignCenter.
-					c ignored vertical alignTop.
-					c
-						margin:
-							(BlInsets
-								top: self borderSeparation
-								right: 0
-								bottom: 0
-								left: 0) ] ];
-		bottom: [ :aWidget | 
-			aWidget
+					c ignored horizontal weight: weight ] ];
+		top: [ :aStyle |
+			aStyle
+				margin: (BlInsets top: borderSeparation);
 				constraintsDo: [ :c | 
-					c ignored horizontal alignCenter.
-					c ignored vertical alignBottom.
-					c
-						margin:
-							(BlInsets
-								top: 0
-								right: 0
-								bottom: self borderSeparation
-								left: 0) ] ];
-		left: [ :aWidget | 
-			aWidget
+					c ignored vertical alignTop ] ];
+		bottom: [ :aStyle | 
+			aStyle margin: (BlInsets bottom: borderSeparation).
+			aStyle constraintsDo: [ :c | 
+				c ignored vertical alignBottom. ] ];
+		horizontal: [ :aStyle | 
+			aStyle
+				hExact: thickness;
+				vMatchParent;
 				constraintsDo: [ :c | 
-					c ignored horizontal alignLeft.
 					c ignored vertical alignCenter.
-					c
-						margin:
-							(BlInsets
-								top: 0
-								right: 0
-								bottom: 0
-								left: self borderSeparation) ] ];
-		right: [ :aWidget | 
-			aWidget
-				constraintsDo: [ :c | 
-					c ignored horizontal alignRight.
-					c ignored vertical alignCenter.
-					c
-						margin:
-							(BlInsets
-								top: 0
-								right: self borderSeparation
-								bottom: 0
-								left: 0) ] ];
-		vertical: [ :aWidget | 
-			aWidget
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical exact: self thickness.
-					c ignored horizontal weight: 0.4 ] ];
-		horizontal: [ :aWidget | 
-			aWidget
-				constraintsDo: [ :c | 
-					c horizontal exact: self thickness.
-					c vertical matchParent.
-					c ignored vertical weight: 0.4 ] ]
+					c ignored vertical weight: weight ] ];
+		left: [ :aStyle | 
+			aStyle margin: (BlInsets left: borderSeparation).
+			aStyle constraintsDo: [ :c | 
+				c ignored horizontal alignLeft ] ];
+		right: [ :aStyle | 
+			aStyle margin: (BlInsets right: borderSeparation).
+			aStyle constraintsDo: [ :c | 
+				c ignored horizontal alignRight ] ].
 ]
 
 { #category : #accessing }
@@ -112,6 +76,16 @@ BrGlamorousResizerAptitude >> thickness [
 ]
 
 { #category : #accessing }
-BrGlamorousResizerAptitude >> thickness: anObject [
-	thickness := anObject
+BrGlamorousResizerAptitude >> thickness: aNumber [
+	thickness := aNumber
+]
+
+{ #category : #accessing }
+BrGlamorousResizerAptitude >> weight [
+	^ weight
+]
+
+{ #category : #accessing }
+BrGlamorousResizerAptitude >> weight: aNumber [
+	weight := aNumber
 ]

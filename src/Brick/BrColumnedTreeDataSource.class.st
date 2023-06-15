@@ -74,27 +74,25 @@ BrColumnedTreeDataSource >> onBindHolder: anElementHolder at: aPosition [
 { #category : #'instance creation' }
 BrColumnedTreeDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 	"aNodeElement is the element that should represent the data of each tree node"
+
 	| theColumnElements aRowElement |
+	theColumnElements := self columns
+			withIndexCollect: [ :eachColumn :eachIndex | 
+				| eachColumnElement |
+				eachColumnElement := eachColumn cellStencil
+						itemType: anItemType;
+						column: eachColumn;
+						columnIndex: eachIndex;
+						asElement.
 
-	theColumnElements := self columns withIndexCollect: [ :eachColumn :eachIndex |
-		| eachColumnElement |
-		
-		eachColumnElement := eachColumn cellStencil
-			itemType: anItemType;
-			column: eachColumn;
-			columnIndex: eachIndex;
-			asElement.
+				eachColumn columnWidth applyOn: eachColumnElement.
 
-		eachColumn width applyOn: eachColumnElement.
-
-		eachColumnElement ].
-
-	"now wrap the column elements in a row element with adornments"
+				eachColumnElement ].	"now wrap the column elements in a row element with adornments"
 	aRowElement := rowElementStencil
-		itemType: anItemType;
-		columns: self columns;
-		columnElements: theColumnElements;
-		asElement.
+			itemType: anItemType;
+			columns: self columns;
+			columnElements: theColumnElements;
+			asElement.
 
 	aRowElement addEventHandler: clickToSelectHandler.
 
