@@ -55,6 +55,17 @@ BrLazyStyleAptitude >> state [
 ]
 
 { #category : #'private - adding' }
+BrLazyStyleAptitude >> updateWith: aBlock [
+	"Evaluate a given block that is suppose to change aptitude properties that are used to define styles and attempt to dynamically update an element"
+
+	aBlock ensure: [
+		self widgetDo: [ :anElement |
+			styles clearCache.
+			"plaese note that we should request the style recomputation of the widget itself and we shouldn't compute the target element (query) manually because they are forwarded from the widget itself"
+			anElement requestStyle ] ]
+]
+
+{ #category : #'private - adding' }
 BrLazyStyleAptitude >> when: aStateBlock style: aStyleBlock [
 	| aTargetState |
 	
