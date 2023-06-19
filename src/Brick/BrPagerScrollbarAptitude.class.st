@@ -3,9 +3,10 @@ Class {
 	#superclass : #BrAptitude,
 	#instVars : [
 		'pages',
+		'pagesElement',
 		'scrollbarElement'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #'instance creation' }
@@ -35,18 +36,42 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 
 { #category : #initialization }
 BrPagerScrollbarAptitude >> initialize [
+	| wrapperElement containerElement |
 	super initialize.
+
 	pages := OrderedDictionary new.
-	scrollbarElement := BlElement new.
-	scrollbarElement margin: (BlInsets top: 5).
-	scrollbarElement layout: BlLinearLayout horizontal alignCenter.
-	scrollbarElement
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical fitContent ].
+
+	pagesElement := BrHorizontalPane new.
+	pagesElement
+		alignCenter;
+		fitContent.
+
+	scrollbarElement := BlHorizontalScrollbarElement new
+		constraintsDo: [ :c | c vertical matchParent ];
+		track: (BlElement new size: 0@0);
+		thumb: (BlElement new
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent.
+				c frame horizontal weight: 0.25.
+				c frame vertical alignCenter ];
+			background: (Color gray alpha: 0.35)).
+
+	wrapperElement := BrFrame new
+		fitContent;
+		addChild: pagesElement;
+		addChild: scrollbarElement.
+
+	containerElement := BrHorizontalPane new
+		margin: (BlInsets top: 5);
+		alignCenter;
+		hMatchParent;
+		vFitContent;
+		addChild: wrapperElement.
+
 	self
 		addChangeAddChildAs: #(content preview)
-		with: [ scrollbarElement ]
+		with: [ containerElement ]
 ]
 
 { #category : #initialization }
@@ -55,7 +80,11 @@ BrPagerScrollbarAptitude >> initializeListeners [
 
 	self when: BrPagerPagesChanged do: [ :anEvent | self onPagesChanged: anEvent pages ].
 	self when: BrPagerPageAddedEvent do: [ :anEvent | self onPageAdded: anEvent page ].
-	self when: BrPagerPageRemovedEvent do: [ :anEvent | self onPageRemoved: anEvent page ]
+	self when: BrPagerPageRemovedEvent do: [ :anEvent | self onPageRemoved: anEvent page ].
+	self when: BrScrollbarScrollableChanged do: [ :anEvent |
+		"by default is not assigned in the model"
+		anEvent scrollableElement
+			ifNotNil: [ :aScrollable | self scrollableChanged: aScrollable ] ]
 ]
 
 { #category : #initialization }
@@ -112,11 +141,16 @@ BrPagerScrollbarAptitude >> pages [
 	^ pages
 ]
 
+{ #category : #hooks }
+BrPagerScrollbarAptitude >> scrollableChanged: aScrollable [
+	scrollbarElement attachTo: aScrollable
+]
+
 { #category : #'as yet unclassified' }
 BrPagerScrollbarAptitude >> updatePagePreviews [
 
-	scrollbarElement removeChildren.
+	pagesElement removeChildren.
 
 	self pageElements do: [ :aPageContentElement |
-		scrollbarElement addChild: (self buildPreviewOfThePage: aPageContentElement) ]
+		pagesElement addChild: (self buildPreviewOfThePage: aPageContentElement) ]
 ]
