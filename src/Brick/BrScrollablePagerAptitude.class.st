@@ -31,6 +31,13 @@ BrScrollablePagerAptitude >> initializeListeners [
 			ifFalse: [ self scrollTo: anEvent pageIndex ] ]
 ]
 
+{ #category : #'api - hooks' }
+BrScrollablePagerAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+
+	self dispatchEvent: (BrScrollbarScrollableChanged new scrollableElement: pagesListElement)
+]
+
 { #category : #hooks }
 BrScrollablePagerAptitude >> onPage: aPageModel elementAttached: aPageElement [
 	pagesListElement dataSource pageElements: self pageElements
