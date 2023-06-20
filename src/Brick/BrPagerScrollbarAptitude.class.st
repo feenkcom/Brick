@@ -12,21 +12,19 @@ Class {
 { #category : #'instance creation' }
 BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 	| aPreviewElement |
+
 	aPageContentElement removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewResizeListener ].
+	aPageContentElement removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewFocusListener ].
 
 	aPreviewElement := BrButton new
 		margin: (BlInsets all: 3);
-		border: (BlBorder paint: Color gray width: 2);
-		aptitude: (BrInteractiveCommonAptitude new
-			default: [ :aWidget | aWidget
-				border: (aWidget border copyWithOpacity: 0.4);
-				background: Color transparent ];
-			hovered: [ :aWidget | aWidget background: (Color gray alpha: 0.4) ];
-			pressed: [ :aWidget | aWidget
-				border: (aWidget border copyWithOpacity: 0.5);
-				background: (Color gray alpha: 0.5) ]).
-		
+		aptitude: (BrLazyStyleCommonAptitude new
+			default: [ :aStyle | aStyle border: (BlBorder paint: Color gray width: 2) ];
+			selected: [ :aStyle | aStyle border: (BlBorder paint: self theme editor focusedBorderColor width: 2) ]).
+
 	aPageContentElement addEventHandler: (BrPagerPagePreviewResizeListener new previewElement: aPreviewElement).
+	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new previewElement: aPreviewElement).
+	
 	aPreviewElement when: BlClickEvent do: [ :anEvent |
 		anEvent consumed: true.
 		self widget smoothScrollTo: (self pageElements indexOf: aPageContentElement) ].
