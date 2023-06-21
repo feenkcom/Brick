@@ -45,6 +45,8 @@ BrPagerScrollbarAptitude >> initialize [
 		fitContent.
 
 	scrollbarElement := BlHorizontalScrollbarElement new
+		disableClickToScroll;
+		beAlwaysVisible;
 		constraintsDo: [ :c | c vertical matchParent ];
 		track: (BlElement new size: 0@0);
 		thumb: (BlElement new
