@@ -9,7 +9,7 @@ BrGlamorousScrollbarThumbAptitude >> initialize [
 	super initialize.
 	self
 		default: [ :aStyle | 
-			aStyle geometry: (BlRoundedRectangleGeometry cornerRadius: 3) ].
+			aStyle geometry: (BlStadiumGeometry new) ].
 	self
 		add:
 			(BrScrollbarOrientationAptitude new
