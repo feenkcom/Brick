@@ -12,7 +12,9 @@ Class {
 		'pressedTextColor',
 		'defaultBackgroundColor',
 		'hoveredTextColor',
-		'textHighlightColor'
+		'textHighlightColor',
+		'fadedBackgroundColor',
+		'focusedFadedBackgroundColor'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -78,6 +80,26 @@ BrGlamorousButtonTheme >> disabledTextColor: anObject [
 ]
 
 { #category : #accessing }
+BrGlamorousButtonTheme >> fadedBackgroundColor [
+	^ fadedBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousButtonTheme >> fadedBackgroundColor: anObject [
+	fadedBackgroundColor := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousButtonTheme >> focusedFadedBackgroundColor [
+	^ focusedFadedBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousButtonTheme >> focusedFadedBackgroundColor: anObject [
+	focusedFadedBackgroundColor := anObject
+]
+
+{ #category : #accessing }
 BrGlamorousButtonTheme >> hoveredBorderColor [
 	^ hoveredBorderColor
 ]
@@ -107,6 +129,8 @@ BrGlamorousButtonTheme >> initialize [
 	pressedBorderColor := BrGlamorousColors pressedButtonBorderColor.
 	defaultBorderColor := BrGlamorousColors defaultButtonBorderColor.
 	defaultTextColor := BrGlamorousColors defaultButtonTextColor.
+	fadedBackgroundColor := BrGlamorousColors fadedButtonBackgroundColor.
+	focusedFadedBackgroundColor := BrGlamorousColors hoveredButtonBorderColor.
 	hoveredBorderColor := BrGlamorousColors hoveredButtonBorderColor.
 	pressedTextColor := BrGlamorousColors pressedButtonTextColor.
 	defaultBackgroundColor := BrGlamorousColors
