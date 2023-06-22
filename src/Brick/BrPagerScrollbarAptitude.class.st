@@ -24,9 +24,21 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 	aPageContentElement addEventHandler: (BrPagerPagePreviewResizeListener new previewElement: aPreviewElement).
 	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new previewElement: aPreviewElement).
 	
-	aPreviewElement when: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
-		self widget smoothScrollTo: (self pageElements indexOf: aPageContentElement) ].
+	aPreviewElement action: [
+		| aFocusTarget |
+		self widget smoothScrollTo: (self pageElements indexOf: aPageContentElement).
+		aFocusTarget := aPreviewElement userData
+			at: #previousFocusedElement
+			ifPresent: [ :aWeakReference |
+				(aWeakReference at: 1)
+					ifNotNil: [ :aPreviouslyFocusedElement |
+						(aPreviouslyFocusedElement hasParent: aPageContentElement)
+							ifTrue: [ aPreviouslyFocusedElement ]
+							ifFalse: [ aPageContentElement ] ]
+					ifNil: [ aPageContentElement ] ]
+			ifAbsent: [ aPageContentElement ].
+		
+		aFocusTarget requestFocus ].
 
 	^ aPreviewElement
 ]
