@@ -321,8 +321,9 @@ BrFileSelector >> replaceAddFolderWithEditor [
 	folderCreator := BrFolderCreateWidget new folder: self folder.
 	folderCreator defaultFolderName: ''.
 	folderCreator
-		onFolderCreated: [ :aFolder | 
+		onFolderCreated: [ :aFolder |
 			self folder: aFolder.
+			okButton enable.
 			self updateDisplay ].
 	breadcrumb addItem: folderCreator.
 	folderCreator requestLabelFocus.
