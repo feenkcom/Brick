@@ -9,7 +9,7 @@ Class {
 	#category : #'Brick-Pager - Look'
 }
 
-{ #category : #'instance creation' }
+{ #category : #private }
 BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 	| aPreviewElement |
 
@@ -18,17 +18,28 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 
 	aPreviewElement := BrButton new
 		margin: (BlInsets all: 3);
-		aptitude: (BrLazyStyleCommonAptitude new
-			default: [ :aStyle | aStyle border: (BlBorder paint: Color gray width: 2) ];
-			selected: [ :aStyle | aStyle border: (BlBorder paint: self theme editor focusedBorderColor width: 2) ]).
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
+		aptitude: BrGlamorousFadedButtonExteriourAptitude.
 
 	aPageContentElement addEventHandler: (BrPagerPagePreviewResizeListener new previewElement: aPreviewElement).
 	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new previewElement: aPreviewElement).
 	
-	aPreviewElement when: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
-		self widget smoothScrollTo: (self pageElements indexOf: aPageContentElement) ].
-	
+	aPreviewElement action: [
+		| aFocusTarget |
+		self widget smoothScrollTo: (self pageElements indexOf: aPageContentElement).
+		aFocusTarget := aPreviewElement userData
+			at: #previousFocusedElement
+			ifPresent: [ :aWeakReference |
+				(aWeakReference at: 1)
+					ifNotNil: [ :aPreviouslyFocusedElement |
+						(aPreviouslyFocusedElement hasParent: aPageContentElement)
+							ifTrue: [ aPreviouslyFocusedElement ]
+							ifFalse: [ aPageContentElement ] ]
+					ifNil: [ aPageContentElement ] ]
+			ifAbsent: [ aPageContentElement ].
+		
+		aFocusTarget requestFocus ].
+
 	^ aPreviewElement
 ]
 
@@ -45,17 +56,20 @@ BrPagerScrollbarAptitude >> initialize [
 		fitContent.
 
 	scrollbarElement := BlHorizontalScrollbarElement new
-		constraintsDo: [ :c | c vertical matchParent ];
+		disableClickToScroll;
+		beAlwaysVisible;
+		constraintsDo: [ :c | c vertical exact: 6 ];
 		track: (BlElement new size: 0@0);
 		thumb: (BlElement new
+			geometry: (BlStadiumGeometry new beHorizontal);
 			constraintsDo: [ :c |
 				c horizontal matchParent.
 				c vertical matchParent.
 				c frame horizontal weight: 0.25.
 				c frame vertical alignCenter ];
-			background: (Color gray alpha: 0.35)).
+			aptitude: BrGlamorousFadedButtonExteriourAptitude).
 
-	wrapperElement := BrFrame new
+	wrapperElement := BrVerticalPane new
 		fitContent;
 		addChild: pagesElement;
 		addChild: scrollbarElement.
@@ -144,7 +158,7 @@ BrPagerScrollbarAptitude >> scrollableChanged: aScrollable [
 	scrollbarElement attachTo: aScrollable
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 BrPagerScrollbarAptitude >> updatePagePreviews [
 
 	pagesElement removeChildren.
