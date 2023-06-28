@@ -23,7 +23,11 @@ BrPagerPagePreviewFocusListener >> focusInEvent: anEvent [
 
 { #category : #'element handlers' }
 BrPagerPagePreviewFocusListener >> focusOutEvent: anEvent [
-	self selectPreview: false
+	self selectPreview: false.
+	
+	previewElement userData
+		at: #previousFocusedElement
+		put: anEvent target asWeakReference
 ]
 
 { #category : #'api - hooks' }
