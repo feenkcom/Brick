@@ -58,11 +58,6 @@ BrPagerModel >> notifyPageRemoved: aPageModel [
 	self dispatchEvent: (BrPagerPageRemovedEvent page: aPageModel)
 ]
 
-{ #category : #notifying }
-BrPagerModel >> notifyPagesChanged [
-	self dispatchEvent: (BrPagerPagesChanged pages: self pages)
-]
-
 { #category : #hooks }
 BrPagerModel >> onPageAdded: aPageModel [
 	self notifyPageAdded: aPageModel
@@ -93,13 +88,6 @@ BrPagerModel >> pages [
 	<return: #Collection of: #BrPagerPageModel>
 
 	^ pages
-]
-
-{ #category : #'api - adding / removing' }
-BrPagerModel >> pages: aCollectionOfPages [
-	pages := aCollectionOfPages asOrderedCollection.
-
-	self notifyPagesChanged
 ]
 
 { #category : #'api - adding / removing' }

@@ -2,7 +2,7 @@ Class {
 	#name : #BrPagerScrollbarAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
-		'pages',
+		'pageModelsAndElements',
 		'pagesElement',
 		'scrollbarElement'
 	],
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #private }
-BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
+BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement model: aPageModel [
 	| aPreviewElement |
 
 	aPageContentElement removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewResizeListener ].
@@ -23,10 +23,10 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 
 	aPageContentElement addEventHandler: (BrPagerPagePreviewResizeListener new previewElement: aPreviewElement).
 	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new previewElement: aPreviewElement).
-	
+
 	aPreviewElement action: [
 		| aFocusTarget |
-		self widget smoothScrollTo: (self pageElements indexOf: aPageContentElement).
+		self widget smoothScrollTo: (self pageIndexOf: aPageModel).
 		aFocusTarget := aPreviewElement userData
 			at: #previousFocusedElement
 			ifPresent: [ :aWeakReference |
@@ -37,7 +37,7 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement [
 							ifFalse: [ aPageContentElement ] ]
 					ifNil: [ aPageContentElement ] ]
 			ifAbsent: [ aPageContentElement ].
-		
+
 		aFocusTarget requestFocus ].
 
 	^ aPreviewElement
@@ -48,7 +48,7 @@ BrPagerScrollbarAptitude >> initialize [
 	| wrapperElement containerElement |
 	super initialize.
 
-	pages := OrderedDictionary new.
+	pageModelsAndElements := OrderedCollection new.
 
 	pagesElement := BrHorizontalPane new.
 	pagesElement
@@ -112,11 +112,20 @@ BrPagerScrollbarAptitude >> onPageAdded: aPageModel [
 		assert: [ self isAttachedToWidget ]
 		description: [ 'I can not receive the page added event without being attached to a widget' ].
 
-	self pages at: aPageModel put: nil.
+	pageModelsAndElements add: (aPageModel -> nil).
 
 	aPageModel whenAttachedDo: [ :aPageContentElement |
-		self pages at: aPageModel put: aPageContentElement.
-		self updatePagePreviews ]
+		pageModelsAndElements
+			detect: [ :eachAssociation | eachAssociation key = aPageModel ]
+			ifFound: [ :anAssociation |
+				self
+					pageIndexOf: aPageModel
+					ifFound: [ :anIndex |
+						| aPreviewElement |
+						
+						aPreviewElement := self buildPreviewOfThePage: aPageContentElement model: aPageModel.
+						anAssociation value: { aPageContentElement . aPreviewElement }.
+						pagesElement addChild: aPreviewElement at: anIndex ] ] ]
 ]
 
 { #category : #hooks }
@@ -125,44 +134,60 @@ BrPagerScrollbarAptitude >> onPageRemoved: aPageModel [
 		assert: [ self isAttachedToWidget ]
 		description: [ 'I can not receive the page removed event without being attached to a widget' ].
 	
-	(self pages at: aPageModel) removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewResizeListener ].
-	self pages removeKey: aPageModel.
-	self updatePagePreviews
+	self
+		pageElementAndPreviewOf: aPageModel
+		ifFound: [ :aPageElement :aPreviewElement |
+			aPageElement removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewResizeListener ].
+			aPageElement removeEventHandlersSuchThat: [ :each | each isKindOf: BrPagerPagePreviewFocusListener ].
+
+			aPreviewElement removeFromParent.
+
+			self
+				pageIndexOf: aPageModel
+				ifFound: [ :anIndex | pageModelsAndElements removeIndex: anIndex ] ]
 ]
 
 { #category : #hooks }
 BrPagerScrollbarAptitude >> onPagesChanged: aCollectionOfModels [
 
-	self pages removeAll.
-	aCollectionOfModels do: [ :aPageModel |
-		self pages at: aPageModel put: nil ].
+	pageModelsAndElements copy
+		do: [ :eachAssociation | self onPageRemoved: eachAssociation key ].
+		
+	aCollectionOfModels do: [ :eachPageModel | self onPageAdded: eachPageModel ]
+]
 
-	aCollectionOfModels do: [ :aPageModel |
-		aPageModel whenAttachedDo: [ :aPageElement |
-			self pages at: aPageModel put: aPageElement.
-			self updatePagePreviews ] ]
+{ #category : #private }
+BrPagerScrollbarAptitude >> pageElementAndPreviewOf: aPageModel ifFound: aBlock [
+	pageModelsAndElements
+		detect: [ :eachAssociation | eachAssociation key = aPageModel ]
+		ifFound: [ :anAssociation |
+			anAssociation value ifNotNil: [ :anArray |
+				aBlock value: anArray first value: anArray second ] ]
 ]
 
 { #category : #accessing }
 BrPagerScrollbarAptitude >> pageElements [
-	^ self pages values select: #isNotNil
+	^ pageModelsAndElements
+		collect: [ :eachAssociation | eachAssociation value ]
+		thenSelect: #isNotNil
 ]
 
-{ #category : #accessing }
-BrPagerScrollbarAptitude >> pages [
-	^ pages
+{ #category : #private }
+BrPagerScrollbarAptitude >> pageIndexOf: aPageModel [
+	^ pageModelsAndElements
+		detectIndex: [ :eachAssociation | eachAssociation key = aPageModel ]
+		ifNone: [ 0 ]
+]
+
+{ #category : #private }
+BrPagerScrollbarAptitude >> pageIndexOf: aPageModel ifFound: aBlock [
+	| anIndex |
+	anIndex := self pageIndexOf: aPageModel.
+	anIndex > 0
+		ifTrue: [ aBlock value: anIndex ]
 ]
 
 { #category : #hooks }
 BrPagerScrollbarAptitude >> scrollableChanged: aScrollable [
 	scrollbarElement attachTo: aScrollable
-]
-
-{ #category : #private }
-BrPagerScrollbarAptitude >> updatePagePreviews [
-
-	pagesElement removeChildren.
-
-	self pageElements do: [ :aPageContentElement |
-		pagesElement addChild: (self buildPreviewOfThePage: aPageContentElement) ]
 ]
