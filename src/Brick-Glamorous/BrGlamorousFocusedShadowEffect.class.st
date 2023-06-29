@@ -6,5 +6,5 @@ Class {
 
 { #category : #initialization }
 BrGlamorousFocusedShadowEffect >> defaultColor [
-	^ BrGlamorousColors primaryBorderColor alpha: 0.4
+	^ BrGlamorousColors primaryBorderColor
 ]

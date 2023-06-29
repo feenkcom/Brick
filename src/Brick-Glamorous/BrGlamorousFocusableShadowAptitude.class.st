@@ -12,6 +12,6 @@ BrGlamorousFocusableShadowAptitude >> initialize [
 			(BrStyleCommonAptitude new
 				focused: [ :aStyle | 
 					aStyle
-						do: [ self color: (self theme default primaryBorderColor alpha: 0.75) ]
+						do: [ self color: (self theme default primaryBorderColor) ]
 						after: [ self color: (self theme default darkBorderColor alpha: 0.5) ] ])
 ]
