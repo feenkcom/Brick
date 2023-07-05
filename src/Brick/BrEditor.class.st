@@ -1,10 +1,11 @@
 Class {
 	#name : #BrEditor,
-	#superclass : #BrEditorElement,
+	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
-		'textReplacedHandler'
+		'textReplacedHandler',
+		'editorElement'
 	],
 	#category : #'Brick-Editor - UI'
 }
@@ -70,18 +71,37 @@ BrEditor >> deselecter [
 ]
 
 { #category : #accessing }
+BrEditor >> editor [
+	^ editorElement editor
+]
+
+{ #category : #accessing }
 BrEditor >> editor: aBrTextEditor [
-	self editor removeEventHandler: textReplacedHandler.
-
-	super editor: aBrTextEditor.
-
+	editorElement editor removeEventHandler: textReplacedHandler.
+	editorElement editor: aBrTextEditor.
 	aBrTextEditor addEventHandler: textReplacedHandler
+]
+
+{ #category : #accessing }
+BrEditor >> editorElement [
+	^ editorElement
+]
+
+{ #category : #'focus requesting' }
+BrEditor >> focusTarget [
+	^ editorElement
 ]
 
 { #category : #initialization }
 BrEditor >> initialize [
 	super initialize.
 	
+	self layout: BlFrameLayout new.
+	
+	editorElement := BrEditorElement new
+		aptitude: BrLayoutResizerAptitude inherit.
+	self addChild: editorElement as: #scrollable.
+
 	self matchParent.
 
 	textReplacedHandler := BlEventHandler

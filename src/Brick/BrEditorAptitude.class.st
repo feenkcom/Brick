@@ -27,6 +27,9 @@ BrEditorAptitude >> initialize [
 	
 	attributesBuilder := BlTextDelegatedAttributesBuilder new attributesTarget: text.
 	attributesBuilder beNotOverwritableByStyler.
+	
+	self add: (BrLayoutResizerAptitude inherit inherit: #scrollable).
+	self add: (BrGlamorousWithVerticalScrollbarAptitude new)
 ]
 
 { #category : #initialization }
