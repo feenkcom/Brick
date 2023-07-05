@@ -22,7 +22,9 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement model: aP
 		aptitude: BrGlamorousFadedButtonExteriourAptitude.
 
 	aPageContentElement addEventHandler: (BrPagerPagePreviewResizeListener new previewElement: aPreviewElement).
-	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new previewElement: aPreviewElement).
+	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new
+		previewElement: aPreviewElement;
+		scrollbarAptitude: self).
 
 	aPreviewElement action: [
 		| aFocusTarget |
@@ -165,7 +167,7 @@ BrPagerScrollbarAptitude >> pageElementAndPreviewOf: aPageModel ifFound: aBlock 
 				aBlock value: anArray first value: anArray second ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 BrPagerScrollbarAptitude >> pageElements [
 	^ pageModelsAndElements
 		collect: [ :eachAssociation | eachAssociation value ]
@@ -187,7 +189,24 @@ BrPagerScrollbarAptitude >> pageIndexOf: aPageModel ifFound: aBlock [
 		ifTrue: [ aBlock value: anIndex ]
 ]
 
+{ #category : #private }
+BrPagerScrollbarAptitude >> previewElements [
+	^ (pageModelsAndElements
+		collect: [ :eachAssociation | eachAssociation value ]
+		thenSelect: #isNotNil)
+			collect: #second
+			thenSelect: #isNotNil
+]
+
 { #category : #hooks }
 BrPagerScrollbarAptitude >> scrollableChanged: aScrollable [
 	scrollbarElement attachTo: aScrollable
+]
+
+{ #category : #private }
+BrPagerScrollbarAptitude >> selectPreviewElement: aPreviewElement [	
+	self previewElements do: [ :eachBubble |
+		eachBubble dispatchEvent: (BlElementSelectedStateWish selected: false) ].
+
+	aPreviewElement dispatchEvent: (BlElementSelectedStateWish selected: true)
 ]
