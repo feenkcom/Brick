@@ -34,7 +34,7 @@ BrTextEditorOperatorExamples >> editorCreatesOneCursorOnFocus [
 	anEditor requestFocus.
 	aSpace pulse.
 	
-	self assert: anEditor isFocused.
+	self assert: anEditor isFocused not.
 	self assert: anEditor hasFocus.
 	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
 	

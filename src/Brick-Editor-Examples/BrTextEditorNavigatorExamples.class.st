@@ -233,7 +233,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 	
 	anEditor := self editorOnMultilineText.
 
-	thePreviousSegments := anEditor children
+	thePreviousSegments := anEditor editorElement children
 		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
 	self assert: thePreviousSegments size equals: 11.
 	
@@ -248,7 +248,7 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 
 	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 1 }.
 	
-	theNewSegments := anEditor children
+	theNewSegments := anEditor editorElement children
 		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
 	self assert: theNewSegments size equals: 11.
 	
@@ -1738,7 +1738,7 @@ BrTextEditorNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor
 
 	anEditor := self cursor_add_at_1_does_not_rebuild_editor.
 
-	thePreviousSegments := anEditor children
+	thePreviousSegments := anEditor editorElement children
 		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
 	self assert: thePreviousSegments size equals: 11.
 
@@ -1753,7 +1753,7 @@ BrTextEditorNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor
 
 	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 2 }.
 	
-	theNewSegments := anEditor children
+	theNewSegments := anEditor editorElement children
 		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
 	self assert: theNewSegments size equals: 11.
 	
