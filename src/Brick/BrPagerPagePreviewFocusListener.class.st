@@ -2,19 +2,20 @@ Class {
 	#name : #BrPagerPagePreviewFocusListener,
 	#superclass : #BlCustomEventHandler,
 	#instVars : [
-		'previewElement'
+		'previewElement',
+		'scrollbarAptitude'
 	],
 	#category : #'Brick-Pager - Look'
 }
 
 { #category : #'api - accessing' }
 BrPagerPagePreviewFocusListener >> eventsToHandle [
-	^ { BlFocusInEvent . BlFocusOutEvent }
+	^ { BlFocusInEvent . BlFocusOutEvent . BrPagerPageBoundEvent }
 ]
 
 { #category : #'element handlers' }
 BrPagerPagePreviewFocusListener >> focusInEvent: anEvent [
-	self selectPreview: true.
+	scrollbarAptitude selectPreviewElement: previewElement.	
 	
 	previewElement userData
 		at: #previousFocusedElement
@@ -23,8 +24,6 @@ BrPagerPagePreviewFocusListener >> focusInEvent: anEvent [
 
 { #category : #'element handlers' }
 BrPagerPagePreviewFocusListener >> focusOutEvent: anEvent [
-	self selectPreview: false.
-
 	previewElement userData
 		at: #previousFocusedElement
 		put: anEvent target asWeakReference
@@ -34,13 +33,34 @@ BrPagerPagePreviewFocusListener >> focusOutEvent: anEvent [
 BrPagerPagePreviewFocusListener >> onInstalledIn: aPageElement [
 	super onInstalledIn: aPageElement.
 	
-	self selectPreview: aPageElement hasFocus.
+	aPageElement hasFocus
+		ifTrue: [ scrollbarAptitude selectPreviewElement: previewElement ].
 	
 	aPageElement deepestFocusedChild
 		ifNotNil: [ :aFocusedElement |
 			previewElement userData
 				at: #previousFocusedElement
 				put: aFocusedElement asWeakReference ]
+]
+
+{ #category : #'element handlers' }
+BrPagerPagePreviewFocusListener >> pageBoundEvent: anEvent [
+	| aFocusTarget |
+	previewElement states isSelected
+		ifFalse: [ ^ self ].
+
+	aFocusTarget := previewElement userData
+		at: #previousFocusedElement
+		ifPresent: [ :aWeakReference |
+			(aWeakReference at: 1)
+				ifNotNil: [ :aPreviouslyFocusedElement |
+					(aPreviouslyFocusedElement hasParent: anEvent currentTarget)
+						ifTrue: [ aPreviouslyFocusedElement ]
+						ifFalse: [ anEvent currentTarget ] ]
+				ifNil: [ anEvent currentTarget ] ]
+		ifAbsent: [ anEvent currentTarget ].
+
+	aFocusTarget requestFocus
 ]
 
 { #category : #'api - accessing' }
@@ -53,7 +73,7 @@ BrPagerPagePreviewFocusListener >> previewElement: anObject [
 	previewElement := anObject
 ]
 
-{ #category : #'element handlers' }
-BrPagerPagePreviewFocusListener >> selectPreview: aBoolean [
-	previewElement dispatchEvent: (BlElementSelectedStateWish selected: aBoolean)
+{ #category : #accessing }
+BrPagerPagePreviewFocusListener >> scrollbarAptitude: anObject [
+	scrollbarAptitude := anObject
 ]
