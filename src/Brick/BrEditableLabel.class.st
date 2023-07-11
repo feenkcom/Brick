@@ -72,7 +72,7 @@ BrEditableLabel >> initialize [
 
 	labelShortcuts := self defaultLabelShortcuts.
 	editorShortcuts := self defaultEditorShortcuts.
-	self editor: (BrEditableLabelModel new consumeClickEvent: false).
+	self editor: BrEditableLabelModel new.
 
 	self fitContent.
 
@@ -81,7 +81,7 @@ BrEditableLabel >> initialize [
 		do: [ :anEvent |
 			anEvent consumed: true.
 			anEvent currentTarget switchToEditor ].
-
+		
 	self
 		when: BlClickEvent
 		do: [ :anEvent |
@@ -89,7 +89,7 @@ BrEditableLabel >> initialize [
 			anEvent currentTarget requestFocus ].
 
 	self
-		when: BlFocusOutEvent
+		when: BlBlurEvent
 		do: [ :anEvent |
 			anEvent isDueToRemoval
 				ifFalse: [ anEvent currentTarget acceptEdition ] ].
@@ -116,7 +116,7 @@ BrEditableLabel >> switchToEditor [
 	self selecter
 		all;
 		select.
-
+		
 	self viewModel model: self text copy.
 	self beMode: (BrTextEditorEditableMode new withShortcuts: editorShortcuts)
 ]
@@ -129,7 +129,7 @@ BrEditableLabel >> switchToLabel [
 		all;
 		deselect.
 
-	self beMode: (BrTextEditorReadonlyWithoutSelectionMode new withShortcuts: labelShortcuts).
+	self beMode: (BrTextEditorReadonlyWithoutSelectionMode new withShortcuts: labelShortcuts)
 ]
 
 { #category : #'api - interactions' }

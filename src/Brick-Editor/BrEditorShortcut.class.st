@@ -39,7 +39,7 @@ BrEditorShortcut class >> copy [
 		  name: 'Copy';
 		  description: 'Copies the selection text into the clipboard.';
 		  combination: BlKeyCombination primaryC;
-		  performBlock: [ :aBrTextEditor | aBrTextEditor copySelected ];
+		  performBlock: #copySelected;
 		  yourself
 ]
 
@@ -51,7 +51,7 @@ BrEditorShortcut class >> cut [
 		  description:
 			  'Cut selected text and save it to the clipboard ready to paste elsewhere.';
 		  combination: BlKeyCombination primaryX;
-		  performBlock: [ :aBrTextEditor | aBrTextEditor cutSelected ];
+		  performBlock: #cutSelected;
 		  yourself
 ]
 
@@ -95,7 +95,7 @@ BrEditorShortcut class >> deselectAll [
 		  name: 'Deselect';
 		  description: 'Deselects any currently selected text.';
 		  combination: BlKeyCombination escape;
-		  performBlock: [ :aBrTextEditor | aBrTextEditor selectNone ];
+		  performBlock: #selectNone;
 		  yourself
 ]
 
@@ -106,7 +106,8 @@ BrEditorShortcut class >> editableLabelAccept [
 		  name: 'Accept';
 		  description: 'Accepts changes make to the text.';
 		  combination: BlKeyCombination enter;
-		  performBlock: [ :aBrTextEditor :aBrEditorElement | aBrEditorElement acceptEdition ];
+		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			  aBrEditorElement acceptEdition ];
 		  yourself
 ]
 
@@ -405,7 +406,7 @@ BrEditorShortcut class >> redo [
 		  name: 'Redo';
 		  description: 'Reverses the undo or advances the document to a more recent state.';
 		  combination: BlKeyCombination primaryShiftZ;
-		  performBlock: [ :aBrTextEditor | aBrTextEditor redo ];
+		  performBlock: #redo;
 		  yourself
 ]
 
@@ -630,7 +631,7 @@ BrEditorShortcut class >> undo [
 		  name: 'Undo';
 		  description: 'Erases the last change done to the document, reverting it to an older state.';
 		  combination: BlKeyCombination primaryZ;
-		  performBlock: [ :aBrTextEditor | aBrTextEditor undo ];
+		  performBlock: #undo;
 		  yourself
 ]
 
@@ -686,12 +687,8 @@ BrEditorShortcut >> name: aString [
 
 { #category : #evaluation }
 BrEditorShortcut >> performBlock: aBlock [
-	"To make it easier to track from where action block comes from we disallow symbols"
-	self
-		assert: [ aBlock isSymbol not ]
-		description: [ 'Shortcut action must not be a symbol' ].
-
 	performBlock := aBlock
+	
 ]
 
 { #category : #evaluation }
@@ -708,10 +705,7 @@ BrEditorShortcut >> performDueTo: aShortcutEvent [
 
 { #category : #evaluation }
 BrEditorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
-	performBlock
-		cull: aBrTextEditor
-		cull: aBrEditorElement
-		cull: aShortcutEvent
+	performBlock cull: aBrTextEditor cull: aBrEditorElement cull: aShortcutEvent
 ]
 
 { #category : #printing }

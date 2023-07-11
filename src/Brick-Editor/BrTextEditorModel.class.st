@@ -21,8 +21,7 @@ Class {
 		'filter',
 		'shortcuts',
 		'isFocused',
-		'shouldStyleWhenTextModified',
-		'shouldConsumeClickEvent'
+		'shouldStyleWhenTextModified'
 	],
 	#classVars : [
 		'DontUseParagraphEditor'
@@ -113,11 +112,6 @@ BrTextEditorModel >> beReadOnlyWithoutSelection [
 { #category : #'private - selection' }
 BrTextEditorModel >> commitSelection [
 	self selectionRecorder commit: self
-]
-
-{ #category : #accessing }
-BrTextEditorModel >> consumeClickEvent: aBoolean [
-	shouldConsumeClickEvent := aBoolean
 ]
 
 { #category : #'text - copy/paste' }
@@ -378,7 +372,6 @@ BrTextEditorModel >> initialize [
 
 	isFocused := false.
 	shouldStyleWhenTextModified := true.
-	shouldConsumeClickEvent := true.
 
 	"only when the editor mode is null, set an actual mode.
 	Setting an editor mode can be slow therefore we provide a class side
@@ -604,7 +597,7 @@ BrTextEditorModel >> onAttached: anEditorElement [
 	shortcuts do: [ :eachInteraction | self onInteractionAdded: eachInteraction to: anEditorElement ].
 
 	anEditorElement when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
-	anEditorElement when: BlClickEvent do: [ :anEvent | anEvent consumed: self shouldConsumeClickEvent ].
+	anEditorElement when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
 	anEditorElement when: BlFocusEvent do: [ self onGotFocus ].
 	anEditorElement when: BlBlurEvent do: [ self onLostFocus ].
 
@@ -1107,11 +1100,6 @@ BrTextEditorModel >> setEditorShortcuts: aBrTextEditorShortcuts [
 	
 	shortcuts := aBrTextEditorShortcuts.
 	shortcuts do: [ :aNewEditorShortcut | self onShortcutAdded: aNewEditorShortcut ]
-]
-
-{ #category : #accessing }
-BrTextEditorModel >> shouldConsumeClickEvent [
-	^ shouldConsumeClickEvent ifNil: [ shouldConsumeClickEvent := true ]
 ]
 
 { #category : #'text - styling' }
