@@ -69,8 +69,3 @@ BrEditorElement >> scrollToPosition: aPosition [
 		ifTrue: [ self editor segmentCollector computeForwardAt: aPosition ].
 	^ super scrollToPosition: aPosition
 ]
-
-{ #category : #accessing }
-BrEditorElement >> text [
-	^ self editor text
-]
