@@ -129,11 +129,6 @@ BrEditor >> navigator [
 	^ self editor navigator
 ]
 
-{ #category : #'api - editor' }
-BrEditor >> scrollToPosition: newPosition [
-	self editorElement scrollToPosition: newPosition
-]
-
 { #category : #'editor - operations' }
 BrEditor >> selecter [
 	<return: #BrTextEditorSelecter>
