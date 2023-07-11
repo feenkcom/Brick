@@ -47,7 +47,7 @@ BrTextEditorByScripterExamples >> click_empty [
 		play.
 
 	aScripter check
-		satisfies: [ :aBrEditor | aBrEditor hasFocus ];
+		satisfies: [ :aBrEditor | aBrEditor isFocused ];
 		onSelf;
 		play.
 
