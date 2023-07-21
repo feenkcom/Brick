@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditorExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Editor'
+	#category : #'Brick-Examples-Editor'
 }
 
 { #category : #'examples - modes' }
@@ -12,6 +12,30 @@ BrEditorExamples >> editableEditorWithGlamorousRegularLook [
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		beEditable;
 		text: String loremIpsum
+]
+
+{ #category : #accessing }
+BrEditorExamples >> editorClickToFocus [
+	<gtExample>
+	| aScripter |
+
+	aScripter := BlScripter new.
+	aScripter element: (BrEditor new
+		aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
+		text: 'Hello';
+		fitContent).
+
+	aScripter assert
+		satisfies: [ :anEditor | anEditor hasFocus not ];
+		play.
+
+	aScripter click play.
+
+	aScripter assert
+		satisfies: [ :anEditor | anEditor hasFocus ];
+		play.
+		
+	^ aScripter	
 ]
 
 { #category : #'examples - input filter' }
@@ -115,4 +139,36 @@ BrEditorExamples >> readOnlyWithoutSelectionEditorWithGlamorousRegularLook [
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		beReadOnlyWithoutSelection;
 		text: String loremIpsum
+]
+
+{ #category : #accessing }
+BrEditorExamples >> wrappedEditorClickToFocus [
+	<gtExample>
+	| aScripter |
+
+	aScripter := BlScripter new.
+	aScripter element: (BrFrame new
+		fitContent;
+		when: BlClickEvent do: [ :anEvent | anEvent currentTarget requestFocus ];
+		addChild: (BrEditor new
+			aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
+			text: 'Hello';
+			fitContent;
+			id: #editor)).
+
+	aScripter assert
+		// #editor;
+		satisfies: [ :anEditor | anEditor hasFocus not ];
+		play.
+
+	aScripter click 
+		// #editor;
+		play.
+
+	aScripter assert
+		// #editor;
+		satisfies: [ :anEditor | anEditor hasFocus ];
+		play.
+
+	^ aScripter	
 ]
