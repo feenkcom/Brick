@@ -75,7 +75,8 @@ BrEditor >> editor: aBrTextEditor [
 
 	super editor: aBrTextEditor.
 
-	aBrTextEditor addEventHandler: textReplacedHandler
+	aBrTextEditor addEventHandler: textReplacedHandler.
+	aBrTextEditor consumeClickEvent: false
 ]
 
 { #category : #initialization }
@@ -93,7 +94,10 @@ BrEditor >> initialize [
 	self editor: self defaultTextEditorModel.
 	self padding: (BlInsets all: 5).
 
-	self viewModel: self defaultEditorModel
+	self viewModel: self defaultEditorModel.
+	
+	self when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
+	self when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
 ]
 
 { #category : #'api - editor' }
