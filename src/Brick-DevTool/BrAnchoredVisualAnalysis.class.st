@@ -43,7 +43,7 @@ BrAnchoredVisualAnalysis >> elementWithDropdown: anElement [
 	dropdownAptitude ifNotNil: [ ^ self ].
 	anElement aptitude
 		withAllActorsBreadthFirstDo: [ :anAptitude | 
-			(anAptitude isKindOf: BrWithAnchoredAptitude)
+			(anAptitude isKindOf: BrWithDropdownAptitude)
 				ifTrue: [ self anchoredAptitude: anAptitude.
 					finder beForDropdown.
 					^ self ] ]
@@ -56,10 +56,11 @@ BrAnchoredVisualAnalysis >> elementWithTooltip: anElement [
 	dropdownAptitude ifNotNil: [ ^ self ].
 	anElement aptitude
 		withAllActorsBreadthFirstDo: [ :anAptitude | 
-			(anAptitude isKindOf: BrWithAnchoredAptitude)
-				ifTrue: [ self anchoredAptitude: anAptitude.
-					finder beForTooltip.
-					^ self ] ]
+			((anAptitude isKindOf: BrWithAnchoredAptitude) and: [
+				(anAptitude isKindOf: BrWithDropdownAptitude) not ])
+					ifTrue: [ self anchoredAptitude: anAptitude.
+						finder beForTooltip.
+						^ self ] ]
 ]
 
 { #category : #'gt - extensions' }
