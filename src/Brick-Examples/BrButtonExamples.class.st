@@ -96,6 +96,45 @@ BrButtonExamples >> buttonAndLookWithLabelAndExterior [
 		aptitude: aButtonLook
 ]
 
+{ #category : #accessing }
+BrButtonExamples >> buttonWithAsyncBehavior [
+	"Demonstrate the use of Async behavior with buttons.
+	The example button:
+	- initially has a label of 'Initial Label'.
+	- when pressed the label changes to 'Pending...'.
+	- If the current minute number is odd, an error is raised and the button label is changed to display it.
+	- If the current minute number is even, the action waits 5 seconds and completes successfully."
+	<gtExample>
+	| button |
+
+	button := BrButton new
+		label: 'Initial Label';
+		aptitude: BrGlamorousButtonWithLabelAptitude;
+		size: 200@100.
+	button action: [ :aButton |
+		aButton withAsyncFutureDo: [ :anElementFuture |
+			anElementFuture
+				whenSuccess: [ :currentButton |
+					currentButton
+						enable;
+						label: 'Success'];
+				whenError: [ :currentButton :anError |
+					currentButton
+						enable;
+						label: 'Error: ', anError printString ];
+				whenPending: [ :currentButton |
+					currentButton
+						disable;
+						label: ('Pending...' asRopedText foreground: Color gray)].
+			aButton asyncFuture future: 
+				[ self inform: 'Starting wait'.
+				Time now minutes odd ifTrue: 
+					[ self error: 'You got unlucky' ].
+				5 seconds wait.
+				self inform: 'Completed wait' ] asAsyncFuture] ].
+	^ button
+]
+
 { #category : #'instance creation' }
 BrButtonExamples >> buttonWithExteriorLook [
 	<gtExample>
