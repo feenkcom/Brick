@@ -30,7 +30,9 @@ BrDebuggableElementStencil >> create [
 		addChildren: {aLabel. aButton}.
 	^ BrFrame new
 		matchParent;
-		addChild: aContainer
+		addChild: aContainer;
+		in: [ :anElement | anElement userData at: #exception put: self exception ];
+		yourself
 ]
 
 { #category : #'api - instantiation' }
