@@ -7,26 +7,39 @@ Class {
 	#category : #'Brick-Editor-Examples'
 }
 
-{ #category : #private }
-BrTextEditorSegmentCollectorExamples >> deleteLargeFile [
+{ #category : #examples }
+BrTextEditorSegmentCollectorExamples >> cachedSegmentAt142 [
+	"Retrieve the segment at 1.42 times the cache limit.
+	This tests accessing the cache outside its initial contents.
+	Assumptions:
+	- The test file size has at least twice the number of lines in the cache"
 
-	largeFile ifNotNil: 
-		[ largeFile ensureDelete.
-		largeFile := nil ].
+	<gtExample>
+	| segmentCollector segment limit |
+	segmentCollector := self segmentCollector.
+	limit := (segmentCollector cacheLimit * 1.42) rounded.
+	segment := segmentCollector segmentAt: limit.
+	^ segmentCollector
+		cachedSegmentAt: (limit - 1) * 100	"each line is 100 characters"
+		ifFound: [ :seg | self assert: seg = segment ]
+		ifNotFound: [ self error: 'Segment not found' ]
 ]
 
 { #category : #accessing }
 BrTextEditorSegmentCollectorExamples >> largeFile [
 	<gtExample>
-
-	^largeFile ifNil: 
-		[ largeFile := FileReference newTempFilePrefix: 'BlRopeableCollectionFileExamples-' suffix: '-largeFile'.
-		largeFile writeStreamDo: [ :stream |
-			1 to: 10000 do: [ :l |
-				1 to: 9 do: [ :i |
-					stream << (((l-1)*10 + i-1) printPaddedWith: $0 to: 10) ].
-				stream << 'abcdefghi'; lf. ] ].
-		largeFile ].
+	^ largeFile
+		ifNil: [ largeFile := FileSystem memory / 'BlRopeableCollectionFileExamples'.
+			largeFile
+				writeStreamDo: [ :stream | 
+					1
+						to: 10000
+						do: [ :l | 
+							1 to: 9 do: [ :i | stream << ((l - 1) * 10 + i - 1 printPaddedWith: $0 to: 10) ].
+							stream
+								<< 'abcdefghi';
+								lf ] ].
+			largeFile ]
 ]
 
 { #category : #accessing }
@@ -43,7 +56,6 @@ BrTextEditorSegmentCollectorExamples >> segmentAt142 [
 	Assumptions:
 	- The test file size has at least twice the number of lines in the cache"
 	<gtExample>
-	<after: #deleteLargeFile>
 	| segmentCollector limit expected actual |
 
 	segmentCollector := self segmentCollector.
@@ -58,7 +70,6 @@ BrTextEditorSegmentCollectorExamples >> segmentAt200and262 [
 	"Retrieve the segment at line 200, followed by the segment at line 262.
 	This tests re-using part of the previously cached items where the index of the segments collection is not the same as the line number"
 	<gtExample>
-	<after: #deleteLargeFile>
 	| segmentCollector expected actual limit |
 
 	segmentCollector := self segmentCollector.
@@ -80,7 +91,6 @@ BrTextEditorSegmentCollectorExamples >> segmentAt242and42 [
 	"Retrieve the segment at line 2.42 times the cache limit, followed by the segment at line 42.
 	This tests #computeBackwardAt:."
 	<gtExample>
-	<after: #deleteLargeFile>
 	| expected actual segmentCollector limit |
 
 	segmentCollector := self segmentCollector.
@@ -112,7 +122,6 @@ BrTextEditorSegmentCollectorExamples >> segmentAt42 [
 	"Retrieve the segment at line 42.
 	Assumes the cache limit is always greater than 42."
 	<gtExample>
-	<after: #deleteLargeFile>
 	| expected actual |
 
 	expected := '0000000410'.
@@ -125,7 +134,6 @@ BrTextEditorSegmentCollectorExamples >> segmentAt80and120 [
 	"Retrieve the segment at 0.8 times the cache limit, followed by the segment at 1.2 times the cache limit.
 	This tests re-using part of the previously cached items"
 	<gtExample>
-	<after: #deleteLargeFile>
 	| segmentCollector expected actual limit |
 
 	segmentCollector := self segmentCollector.
