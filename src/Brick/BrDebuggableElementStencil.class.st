@@ -12,12 +12,14 @@ BrDebuggableElementStencil >> create [
 	<return: #BlElement>
 	| aLabel aButton aContainer |
 	aLabel := BrButton new
-		hMatchParent;
+		hFitContentLimited;
+		vFitContent;
 		label: self newTextLabel;
 		aptitude: BrGlamorousLabelAptitude new;
 		margin: (BlInsets right: 6);
 		constraintsDo: [ :c | 
-			c linear vertical alignCenter ];
+			c linear vertical alignCenter.
+			c linear horizontal alignLeft ];
 		action: self newDebugAction.
 	aButton := self createDebugButton.
 	aContainer := BlElement new
@@ -39,6 +41,7 @@ BrDebuggableElementStencil >> create [
 BrDebuggableElementStencil >> createDebugButton [
 	^ BrButton new
 		hFitContent;
+		vFitContent;
 		aptitude: BrGlamorousButtonWithIconAptitude new;
 		icon: BrGlamorousVectorIcons debug;
 		label: 'Open debugger';
