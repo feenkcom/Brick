@@ -84,7 +84,8 @@ BrDebuggableElementStencil >> newDebugAction [
 			   self exception signalContext ])
 		  label: self exception description
 		  fullView: true
-		  notification: nil ] forkNamed: 'Debug' ]
+		  notification: nil
+		  forException: self exception ] forkNamed: 'Debug' ]
 ]
 
 { #category : #'instance creation' }
