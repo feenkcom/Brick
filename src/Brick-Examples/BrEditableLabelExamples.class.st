@@ -97,30 +97,35 @@ BrEditableLabelExamples >> scripter_01_initial [
 BrEditableLabelExamples >> scripter_02_double_click_to_edit [
 	<gtExample>
 	| aScripter |
-	
 	aScripter := self scripter_01_initial.
 	aScripter
 		substep: 'Switch to the edit mode'
-		do: [ :aStep |
+		do: [ :aStep | 
 			aStep check
 				label: 'Check read-only state';
-				satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState readOnlyWithoutSelection ].
-			
-			aStep doubleClick.
-			
+				satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState readOnlyWithoutSelection ];
+				play.
+
+			aStep
+				doubleClick
+				play.
+
 			aStep check
 				label: 'Check edit mode';
-				satisfies: [ :anEditableLabel | anEditableLabel isEditable ].
-				
+				satisfies: [ :anEditableLabel | anEditableLabel isEditable ];
+				play.
+
 			aStep check
 				label: 'Check edit state';
-				satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState editableOnly ].
-				
+				satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState editableOnly ];
+				play.
+
 			aStep check
 				label: 'Check has focus';
-				satisfies: [ :anEditableLabel | anEditableLabel isFocused ] ].
+				satisfies: [ :anEditableLabel | anEditableLabel isFocused ];
+				play ].
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - scripter' }
@@ -132,17 +137,20 @@ BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 	aScripter
 		substep: 'Switch back to readonly'
 		do: [ :aStep |
-			aStep keyPress: BlKeyboardKey escape.
+			aStep keyPress: (BlKeyboardKey escape);
+			play.
 
 			aStep check
 				label: 'Check readonly mode';
-				satisfies: [ :anEditableLabel | anEditableLabel isReadOnly ].
+				satisfies: [ :anEditableLabel | anEditableLabel isReadOnly ];
+			play.
 
 			aStep check
 				label: 'Check still has focus';
-				satisfies: [ :anEditableLabel | anEditableLabel isFocused ] ].
+				satisfies: [ :anEditableLabel | anEditableLabel isFocused ];
+			play ].
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - actions' }

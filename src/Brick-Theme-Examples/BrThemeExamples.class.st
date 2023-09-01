@@ -109,10 +109,12 @@ BrThemeExamples >> profile: anElement named: aString [
 	logger start.
 	scripter wait forEmptySpaceTaskQueue.
 	100
-		timesRepeat: [ scripter mouseWheel downBy: 25.
-			scripter wait waitingBlock: [ :e | 8 milliSeconds wait ] ].
-	scripter wait forEmptySpaceTaskQueue.
-	scripter syncContinue.
+		timesRepeat: [ scripter mouseWheel downBy: 25;
+			play.
+			scripter wait waitingBlock: [ :e | 8 milliSeconds wait ];
+			play ].
+	scripter wait forEmptySpaceTaskQueue;
+			play.
 	logger stop.
 	^ logger
 ]
