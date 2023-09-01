@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDevScripterExamples',
 	#classTraits : 'TBlDevScripterExamples classTrait',
-	#category : 'Brick-Examples-List'
+	#category : #'Brick-Examples-List'
 }
 
 { #category : #'examples - nested lists' }
@@ -19,9 +19,10 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists [
 		equals: '0';
 		onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
 		onBreadthFirstChildOfClass: BrInfiniteListElement;
-		onChildAt: 1.
+		onChildAt: 1;
+			play.
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -35,9 +36,11 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_DownBy [
 		aStep mouseWheel
 			downBy: 5;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onBreadthFirstChildOfClass: BrInfiniteListElement.
+			onBreadthFirstChildOfClass: BrInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number one';
@@ -45,11 +48,12 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_DownBy [
 			equals: '1';
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onChildAt: 1.
+			onChildAt: 1;
+			play.
 	
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -63,9 +67,11 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_LeftBy [
 		aStep mouseWheel
 			leftBy: 6;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onBreadthFirstChildOfClass: BrInfiniteListElement.
+			onBreadthFirstChildOfClass: BrInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number zero';
@@ -73,11 +79,12 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_LeftBy [
 			equals: '0';
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onChildAt: 1.
+			onChildAt: 1;
+			play.
 	
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -91,9 +98,11 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_RightBy [
 		aStep mouseWheel
 			rightBy: 6;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onBreadthFirstChildOfClass: BrInfiniteListElement.
+			onBreadthFirstChildOfClass: BrInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number hundred';
@@ -101,11 +110,12 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_RightBy [
 			equals: '100';
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onChildAt: 1.
+			onChildAt: 1;
+			play.
 	
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -119,9 +129,11 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_UpBy [
 		aStep mouseWheel
 			upBy: 5;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onBreadthFirstChildOfClass: BrInfiniteListElement.
+			onBreadthFirstChildOfClass: BrInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number zero';
@@ -129,11 +141,12 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_UpBy [
 			equals: '0';
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onChildAt: 1.
+			onChildAt: 1;
+			play.
 	
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - horizontal list' }
@@ -148,9 +161,10 @@ BrSimpleListByScripterExamples >> horizontalList [
 		value: [ :aLabel | aLabel text asString ]
 		equals: '1';
 		onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-		onChildAt: 1.
+		onChildAt: 1;
+			play.
 		
-	^ aScripter syncContinue 
+	^ aScripter 
 ]
 
 { #category : #'examples - horizontal list' }
@@ -163,20 +177,23 @@ BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_LeftBy [
 
 		aStep mouseWheel
 			leftBy: 5;
-			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement.
+			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number one';
 			value: [ :aLabel | aLabel text asString ]
 			equals: '1';
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onChildAt: 1.
+			onChildAt: 1;
+			play.
 	
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - horizontal list' }
@@ -189,20 +206,23 @@ BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_RightBy [
 
 		aStep mouseWheel
 			rightBy: 5;
-			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement.
+			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number two';
 			value: [ :aLabel | aLabel text asString ]
 			equals: '2';
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onChildAt: 1.
+			onChildAt: 1;
+			play.
 		
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - vertical list' }
@@ -215,20 +235,22 @@ BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_DownBy [
 
 		aStep mouseWheel
 			downBy: 5;
-			onBreadthFirstChildOfClass: BrInfiniteListElement.
+			onBreadthFirstChildOfClass: BrInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number two';
 			value: [ :aLabel | aLabel text asString ]
 			equals: '2';
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onChildAt: 1.
-		
+			onChildAt: 1;
+			play.
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - vertical list' }
@@ -241,20 +263,22 @@ BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_UpBy [
 
 		aStep mouseWheel
 			upBy: 5;
-			onBreadthFirstChildOfClass: BrInfiniteListElement.
+			onBreadthFirstChildOfClass: BrInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number one';
 			value: [ :aLabel | aLabel text asString ]
 			equals: '1';
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onChildAt: 1.
-		
+			onChildAt: 1;
+			play.
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -270,9 +294,10 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists [
 		equals: '0';
 		onBreadthFirstChildOfClass: BrInfiniteListElement;
 		onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-		onChildAt: 1.
+		onChildAt: 1;
+			play.
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -286,9 +311,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_DownBy [
 		aStep mouseWheel
 			downBy: 7;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement.
+			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number hundred';
@@ -296,11 +323,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_DownBy [
 			equals: '100';
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onChildAt: 1.
-	
+			onChildAt: 1;
+			play.
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -314,9 +341,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_LeftBy [
 		aStep mouseWheel
 			leftBy: 5;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement.
+			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number zero';
@@ -324,11 +353,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_LeftBy [
 			equals: '0';
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onChildAt: 1.
-	
+			onChildAt: 1;
+			play.
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -342,9 +371,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_RightBy [
 		aStep mouseWheel
 			rightBy: 5;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement.
+			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number one';
@@ -352,11 +383,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_RightBy [
 			equals: '1';
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onChildAt: 1.
-	
+			onChildAt: 1;
+			play.
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - nested lists' }
@@ -370,9 +401,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_UpBy [
 		aStep mouseWheel
 			upBy: 7;
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
-			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement.
+			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
+			play.
 			
-		aStep wait forEmptySpaceTaskQueueTimeout: 1 second.
+		aStep wait forEmptySpaceTaskQueueTimeout: 1 second;
+			play.
 		
 		aStep check 
 			label: 'Check the first item is number zero';
@@ -380,11 +413,11 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_UpBy [
 			equals: '0';
 			onBreadthFirstChildOfClass: BrInfiniteListElement;
 			onBreadthFirstChildOfClass: BrHorizontalInfiniteListElement;
-			onChildAt: 1.
-	
+			onChildAt: 1;
+			play.
 	].
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - vertical list' }
@@ -399,7 +432,8 @@ BrSimpleListByScripterExamples >> verticalList [
 		value: [ :aLabel | aLabel text asString ]
 		equals: '1';
 		onBreadthFirstChildOfClass: BrInfiniteListElement;
-		onChildAt: 1.
+		onChildAt: 1;
+			play.
 		
-	^ aScripter syncContinue
+	^ aScripter
 ]
