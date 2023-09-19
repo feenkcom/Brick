@@ -33,7 +33,8 @@ BrDebuggableElementStencil >> create [
 	^ BrFrame new
 		matchParent;
 		addChild: aContainer;
-		in: [ :anElement | anElement userData at: #exception put: self exception ];
+		in: [ :anElement | 
+			anElement userData at: #exception put: self exception ];
 		yourself
 ]
 
