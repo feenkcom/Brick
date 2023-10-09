@@ -8,26 +8,29 @@ Class {
 BrTextEditorByScripterExamples >> click_adornment_element [
 	<gtExample>
 	| aScripter |
-
 	aScripter := self scripterWithElement.
-	aScripter do
-		action: [ :aBrEditor | aBrEditor text: self textWithAdornment ];
-		onSelf;
-		play.
-	
-	aScripter click
-		id: #adornment;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				action: [ :aBrEditor | aBrEditor text: self textWithAdornment ];
+				onSelf ].
 
-	aScripter check
-		value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #();
-		onBrTextEditor;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				id: #adornment ].
 
-	aScripter check
-		satisfies: [ :aBrEditor | aBrEditor isFocused not ];
-		onSelf;
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #();
+				onBrTextEditor ].
+
+	aScripter
+		checkStep: [ :s | 
+			s
+				satisfies: [ :aBrEditor | aBrEditor isFocused not ];
+				onSelf ].
 
 	^ aScripter
 ]
@@ -36,20 +39,24 @@ BrTextEditorByScripterExamples >> click_adornment_element [
 BrTextEditorByScripterExamples >> click_empty [
 	<gtExample>
 	| aScripter |
-
 	aScripter := self scripterWithElement.
 
-	aScripter click onSelf; play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				onSelf ].
 
-	aScripter check
-		value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #(0);
-		onBrTextEditor;
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #(0);
+				onBrTextEditor ].
 
-	aScripter check
-		satisfies: [ :aBrEditor | aBrEditor isFocused ];
-		onSelf;
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				satisfies: [ :aBrEditor | aBrEditor isFocused ];
+				onSelf ].
 
 	^ aScripter
 ]
@@ -75,20 +82,21 @@ BrTextEditorByScripterExamples >> scripterElement [
 BrTextEditorByScripterExamples >> scripterWithElement [
 	<gtExample>
 	| aScripter |
-
 	aScripter := self scripter.
 	aScripter element: self scripterElement.
-	
-	aScripter check
-		value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #();
-		onBrTextEditor;
-		play.
 
-	aScripter check
-		satisfies: [ :aBrEditor | aBrEditor isFocused not ];
-		onSelf;
-		play.
-	
+	aScripter
+		checkStep: [ :s | 
+			s
+				value: [ :aBrTextEditor | aBrTextEditor cursors positions ] equals: #();
+				onBrTextEditor ].
+
+	aScripter
+		checkStep: [ :s | 
+			s
+				satisfies: [ :aBrEditor | aBrEditor isFocused not ];
+				onSelf ].
+
 	^ aScripter
 ]
 

@@ -21,10 +21,10 @@ BrTextEditorMementoExamples >> editorRestoreState [
 BrTextEditorMementoExamples >> editorRestoreStateWithShorterText [
 	<gtExample>
 	| anEditor aScripter aMemento |
-	
 	anEditor := BrEditor new.
 	anEditor aptitude: BrEditorAptitude new glamorousRegularFont.
-	anEditor text: 'test12
+	anEditor
+		text: 'test12
 ^ 22'.
 	anEditor navigator
 		moveToEnd;
@@ -32,19 +32,24 @@ BrTextEditorMementoExamples >> editorRestoreStateWithShorterText [
 
 	aScripter := BlScripter new element: anEditor.
 	aScripter requestFocus play.
-	
-	aMemento := BrTextEditorCompositeMemento new.
-	aMemento addMemento: (BrTextEditorCursorsMemento new cursors: (BrTextEditorCursor at: 4)).
-	aMemento addMemento: (BrTextEditorTextMemento new text: 'haba' asRopedText).
-	
-	aScripter do
-		action: [ :anEditorInScripter | anEditorInScripter editor restoreState: aMemento ];
-		play.
 
-	aScripter check
-		value: [ :anEditorInScripter | anEditorInScripter text asString ] equals: 'haba';
-		value: [ :anEditorInScripter | anEditorInScripter cursors ] equals: (BrTextEditorCursor atAll: #(4));
-		play.
+	aMemento := BrTextEditorCompositeMemento new.
+	aMemento
+		addMemento: (BrTextEditorCursorsMemento new cursors: (BrTextEditorCursor at: 4)).
+	aMemento addMemento: (BrTextEditorTextMemento new text: 'haba' asRopedText).
+
+	aScripter
+		doStep: [ :s | 
+			s
+				action: [ :anEditorInScripter | anEditorInScripter editor restoreState: aMemento ] ].
+
+	aScripter
+		checkStep: [ :s | 
+			s
+				value: [ :anEditorInScripter | anEditorInScripter text asString ]
+					equals: 'haba';
+				value: [ :anEditorInScripter | anEditorInScripter cursors ]
+					equals: (BrTextEditorCursor atAll: #(4)) ].
 
 	^ aScripter
 ]

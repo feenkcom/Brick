@@ -33,31 +33,33 @@ BrAnchoredPositionerByScripterExamples >> anchorPosition: anchorPositionBlock re
 	aScripter := self rootContainerWithDefinedExtent.
 	self scripter: aScripter relocateAnchor: anchorPositionBlock.
 
-	aScripter do
-		label: 'Resize popup';
-		block: [ :theRootContainer | 
-			| positioner popupSize popup |
-			positioner := theRootContainer userData at: #anchoredPositioner.
-			popupSize := positioner target size / 4.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Resize popup';
+				block: [ :theRootContainer | 
+					| positioner popupSize popup |
+					positioner := theRootContainer userData at: #anchoredPositioner.
+					popupSize := positioner target size / 4.
 
-			popup := (theRootContainer query // #popup) result first.
-			popup size: popupSize ];
-		play.
-		
+					popup := (theRootContainer query // #popup) result first.
+					popup size: popupSize ] ].
+
 	self scripter: aScripter relocatePopup: popupRelocationBlock.
-	
-	aScripter assert
-		label: 'Assert popup bounds in target';
-		value: [ :theRootContainer | theRootContainer userData at: #popupPreferredMaxBoundsInTarget ]
-			equals: [ :theRootContainer | 
-				| positioner popup |
-				positioner := theRootContainer userData at: #anchoredPositioner.
-				popup := (theRootContainer query // #popup) result first.
-				popupMaxBoundsBlock
-					cull: positioner target
-					cull: positioner anchor
-					cull: popup ];
-		play.
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert popup bounds in target';
+				value: [ :theRootContainer | theRootContainer userData at: #popupPreferredMaxBoundsInTarget ]
+					equals: [ :theRootContainer | 
+						| positioner popup |
+						positioner := theRootContainer userData at: #anchoredPositioner.
+						popup := (theRootContainer query // #popup) result first.
+						popupMaxBoundsBlock
+							cull: positioner target
+							cull: positioner anchor
+							cull: popup ] ].
 	^ aScripter
 ]
 
@@ -159,56 +161,61 @@ BrAnchoredPositionerByScripterExamples >> rootContainer [
 BrAnchoredPositionerByScripterExamples >> rootContainerWithDefinedExtent [
 	| aScripter |
 	aScripter := self scripterWithElement: [ :aModel | self rootContainer ].
-	aScripter do
-		label: 'Define space extent';
-		block: [ :aSpace | aSpace extent: 800 @ 600 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Define space extent';
+				block: [ :aSpace | aSpace extent: 800 @ 600 ];
+				onSpace ].
 	^ aScripter
 ]
 
 { #category : #'examples - support' }
 BrAnchoredPositionerByScripterExamples >> scripter: aScripter relocateAnchor: anchorPositionBlock [
 	<gtExample>
-	aScripter do
-		label: 'Relocate anchor';
-		block: [ :theRootContainer | 
-			| positioner |
-			positioner := theRootContainer userData at: #anchoredPositioner.
-			positioner anchor
-				relocate: (anchorPositionBlock cull: positioner target cull: positioner anchor) ];
-		play
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :theRootContainer | 
+					| positioner |
+					positioner := theRootContainer userData at: #anchoredPositioner.
+					positioner anchor
+						relocate: (anchorPositionBlock cull: positioner target cull: positioner anchor) ] ]
 ]
 
 { #category : #'examples - support' }
 BrAnchoredPositionerByScripterExamples >> scripter: aScripter relocatePopup: popupRelocationBlock [
 	<gtExample>
-	aScripter do
-		label: 'Relocate popup';
-		block: [ :theRootContainer | 
-			| positioner popupSize popupPreferredMaxBoundsInTarget popup |
-			positioner := theRootContainer userData at: #anchoredPositioner.
-			popup := (theRootContainer query // #popup) result first.
-			popupSize := popup size.
-			popupPreferredMaxBoundsInTarget := positioner
-					maxBoundsPreferredInTarget: popupSize.
-			theRootContainer userData
-				at: #popupPreferredMaxBoundsInTarget
-				put: popupPreferredMaxBoundsInTarget.
-			popup
-				relocate: (popupRelocationBlock cull: popupPreferredMaxBoundsInTarget cull: popupSize) ];
-		play
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate popup';
+				block: [ :theRootContainer | 
+					| positioner popupSize popupPreferredMaxBoundsInTarget popup |
+					positioner := theRootContainer userData at: #anchoredPositioner.
+					popup := (theRootContainer query // #popup) result first.
+					popupSize := popup size.
+					popupPreferredMaxBoundsInTarget := positioner
+							maxBoundsPreferredInTarget: popupSize.
+					theRootContainer userData
+						at: #popupPreferredMaxBoundsInTarget
+						put: popupPreferredMaxBoundsInTarget.
+					popup
+						relocate: (popupRelocationBlock cull: popupPreferredMaxBoundsInTarget cull: popupSize) ] ]
 ]
 
 { #category : #'examples - support' }
 BrAnchoredPositionerByScripterExamples >> scripter: aScripter resizePopup: popupSizeBlock [
 	<gtExample>
-	aScripter do
-		label: 'Resize popup';
-		block: [ :theRootContainer | 
-			| positioner popup |
-			positioner := theRootContainer userData at: #anchoredPositioner.
-			popup := (theRootContainer query // #popup) result first.
-			popup size: (popupSizeBlock cull: positioner target cull: positioner anchor) ];
-		play
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Resize popup';
+				block: [ :theRootContainer | 
+					| positioner popup |
+					positioner := theRootContainer userData at: #anchoredPositioner.
+					popup := (theRootContainer query // #popup) result first.
+					popup
+						size: (popupSizeBlock cull: positioner target cull: positioner anchor) ] ]
 ]
