@@ -18,24 +18,26 @@ BrEditorExamples >> editableEditorWithGlamorousRegularLook [
 BrEditorExamples >> editorClickToFocus [
 	<gtExample>
 	| aScripter |
-
 	aScripter := BlScripter new.
-	aScripter element: (BrEditor new
-		aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
-		text: 'Hello';
-		fitContent).
+	aScripter
+		element: (BrEditor new
+				aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
+				text: 'Hello';
+				fitContent).
 
-	aScripter assert
-		satisfies: [ :anEditor | anEditor hasFocus not ];
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				satisfies: [ :anEditor | anEditor hasFocus not ] ].
 
 	aScripter click play.
 
-	aScripter assert
-		satisfies: [ :anEditor | anEditor hasFocus ];
-		play.
-		
-	^ aScripter	
+	aScripter
+		assertStep: [ :s | 
+			s
+				satisfies: [ :anEditor | anEditor hasFocus ] ].
+
+	^ aScripter
 ]
 
 { #category : #'examples - input filter' }
@@ -145,30 +147,33 @@ BrEditorExamples >> readOnlyWithoutSelectionEditorWithGlamorousRegularLook [
 BrEditorExamples >> wrappedEditorClickToFocus [
 	<gtExample>
 	| aScripter |
-
 	aScripter := BlScripter new.
-	aScripter element: (BrFrame new
-		fitContent;
-		when: BlClickEvent do: [ :anEvent | anEvent currentTarget requestFocus ];
-		addChild: (BrEditor new
-			aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
-			text: 'Hello';
-			fitContent;
-			id: #editor)).
+	aScripter
+		element: (BrFrame new
+				fitContent;
+				when: BlClickEvent do: [ :anEvent | anEvent currentTarget requestFocus ];
+				addChild: (BrEditor new
+						aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
+						text: 'Hello';
+						fitContent;
+						id: #editor)).
 
-	aScripter assert
-		// #editor;
-		satisfies: [ :anEditor | anEditor hasFocus not ];
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				// #editor;
+				satisfies: [ :anEditor | anEditor hasFocus not ] ].
 
-	aScripter click 
-		// #editor;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				// #editor ].
 
-	aScripter assert
-		// #editor;
-		satisfies: [ :anEditor | anEditor hasFocus ];
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				// #editor;
+				satisfies: [ :anEditor | anEditor hasFocus ] ].
 
-	^ aScripter	
+	^ aScripter
 ]

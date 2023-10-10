@@ -13,37 +13,41 @@ BrTabGroupByScripterExamples >> clickOnButton: aScripter [
 		substeps: 'Click and assert click events'
 		do: [ :aStep | 
 			| aClickCount |
-			aStep assert
-				label: 'Assert has click button';
-				exists;
-				// BlClicksElementId;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert has click button';
+						exists;
+						// BlClicksElementId ].
 
-			aStep do
-				label: 'Get number of existing clicks';
-				block: [ :aButton | 
-					aClickCount := aButton userData
-							at: BlClicksElementId
-							ifPresent: #size
-							ifAbsent: [ 0 ] ];
-				// BlClicksElementId;
-				play.
+			aStep
+				doStep: [ :s | 
+					s
+						label: 'Get number of existing clicks';
+						block: [ :aButton | 
+							aClickCount := aButton userData
+									at: BlClicksElementId
+									ifPresent: #size
+									ifAbsent: [ 0 ] ];
+						// BlClicksElementId ].
 
-			aStep click
-				label: 'Click on the click button';
-				// BlClicksElementId;
-				play.
+			aStep
+				clickStep: [ :s | 
+					s
+						label: 'Click on the click button';
+						// BlClicksElementId ].
 
-			aStep assert
-				label: 'Assert number of click events';
-				value: [ :aButton | 
-						aButton userData
-							at: BlClicksElementId
-							ifPresent: #size
-							ifAbsent: [ 0 ] ]
-					equals: [ aClickCount + 1 ];
-				// BlClicksElementId;
-				play ]
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert number of click events';
+						value: [ :aButton | 
+								aButton userData
+									at: BlClicksElementId
+									ifPresent: #size
+									ifAbsent: [ 0 ] ]
+							equals: [ aClickCount + 1 ];
+						// BlClicksElementId ] ]
 ]
 
 { #category : #'examples - scripter actions' }
@@ -58,42 +62,47 @@ BrTabGroupByScripterExamples >> clickThenDisplayTabTwoThenMoveTabGroupThenClickT
 	aScripter
 		substeps: 'Display the second tab'
 		do: [ :aStep | 
-			aStep click
-				label: 'Click on the second tab';
-				// BrTabGroup;
-				/ #header;
-				// #tabbar;
-				onChildAt: 2;
-				play.
+			aStep
+				clickStep: [ :s | 
+					s
+						label: 'Click on the second tab';
+						// BrTabGroup;
+						/ #header;
+						// #tabbar;
+						onChildAt: 2 ].
 
-			aStep assert
-				label: 'Assert has NOT click button';
-				notExists;
-				// BlClicksElementId;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert has NOT click button';
+						notExists;
+						// BlClicksElementId ] ].
 
 	aScripter
 		substeps: 'Relocate tab group'
 		do: [ :aStep | 
-			aStep do
-				label: 'Relocate';
-				block: [ :aTabGroup | aTabGroup relocate: 150 @ 150 ];
-				// BrTabGroup;
-				play.
+			aStep
+				doStep: [ :s | 
+					s
+						label: 'Relocate';
+						block: [ :aTabGroup | aTabGroup relocate: 150 @ 150 ];
+						// BrTabGroup ].
 
-			aStep assert
-				label: 'Assert tab group position';
-				value: [ :aTabGroup | aTabGroup position ] equals: [ 150 @ 150 ];
-				// BrTabGroup;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert tab group position';
+						value: [ :aTabGroup | aTabGroup position ] equals: [ 150 @ 150 ];
+						// BrTabGroup ] ].
 
-	aScripter click
-		label: 'Display the first tab';
-		// BrTabGroup;
-		/ #header;
-		// #tabbar;
-		onChildAt: 1;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Display the first tab';
+				// BrTabGroup;
+				/ #header;
+				// #tabbar;
+				onChildAt: 1 ].
 
 	self clickOnButton: aScripter.
 
@@ -106,11 +115,12 @@ BrTabGroupByScripterExamples >> displayTabGroupContainer [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self tabGroupContainer ].
 
-	aScripter assert
-		label: 'Assert tab group position';
-		value: [ :aTabGroup | aTabGroup position ] equals: [ 0 @ 0 ];
-		// BrTabGroup;
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert tab group position';
+				value: [ :aTabGroup | aTabGroup position ] equals: [ 0 @ 0 ];
+				// BrTabGroup ].
 
 	self clickOnButton: aScripter.
 

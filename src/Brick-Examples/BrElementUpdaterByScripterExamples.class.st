@@ -55,29 +55,33 @@ BrElementUpdaterByScripterExamples >> postponedUpdateRequest_AfterElementAddedIn
 	aScripter
 		substep: 'Request update'
 		do: [ :aStep | 
-			aStep assert
-				label: 'Assert inactive update request';
-				do: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						do: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep do
-				label: 'Send request';
-				block: [ :anUpdater | anUpdater requestUpdate ];
-				onModel;
-				play.
-				
-			aStep assert
-				label: 'Assert inactive update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				doStep: [ :s | 
+					s
+						label: 'Send request';
+						block: [ :anUpdater | anUpdater requestUpdate ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element background';
-				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
-				onSelf;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
+
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element background';
+						satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+						onSelf ] ].
 
 	^ aScripter
 ]
@@ -91,41 +95,47 @@ BrElementUpdaterByScripterExamples >> postponedUpdateRequest_BeforeElementAddedI
 	aScripter
 		substep: 'Request update'
 		do: [ :aStep | 
-			aStep assert
-				label: 'Assert inactive update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep do
-				label: 'Send request';
-				block: [ :anUpdater | anUpdater requestUpdate ];
-				onModel;
-				play.
+			aStep
+				doStep: [ :s | 
+					s
+						label: 'Send request';
+						block: [ :anUpdater | anUpdater requestUpdate ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert active update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert active update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element does not include a task';
-				satisfies: [ :anUpdater | anUpdater element taskQueue isEmpty ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element does not include a task';
+						satisfies: [ :anUpdater | anUpdater element taskQueue isEmpty ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element not in space';
-				satisfies: [ :anUpdater | anUpdater element space isNil ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element not in space';
+						satisfies: [ :anUpdater | anUpdater element space isNil ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element background color';
-				satisfies: [ :anUpdater | anUpdater element background = self defaultBackgroundColor asBlBackground ];
-				onModel;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element background color';
+						satisfies: [ :anUpdater | anUpdater element background = self defaultBackgroundColor asBlBackground ];
+						onModel ] ].
 
 	aScripter
 		substep: 'Add element into space'
@@ -136,17 +146,19 @@ BrElementUpdaterByScripterExamples >> postponedUpdateRequest_BeforeElementAddedI
 				onModel;
 				play.
 
-			aStep assert
-				label: 'Assert inactive update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element background color';
-				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
-				onSelf;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element background color';
+						satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+						onSelf ] ].
 
 	^ aScripter
 ]
@@ -188,29 +200,33 @@ BrElementUpdaterByScripterExamples >> updateRequest_AfterElementAddedInSceneGrap
 	aScripter
 		substep: 'Request update'
 		do: [ :aStep | 
-			aStep assert
-				label: 'Assert inactive update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep do
-				label: 'Send request';
-				block: [ :anUpdater | anUpdater requestUpdate ];
-				onModel;
-				play.
+			aStep
+				doStep: [ :s | 
+					s
+						label: 'Send request';
+						block: [ :anUpdater | anUpdater requestUpdate ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert active update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert active update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element background color';
-				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
-				onSelf;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element background color';
+						satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+						onSelf ] ].
 
 	^ aScripter
 ]
@@ -224,35 +240,40 @@ BrElementUpdaterByScripterExamples >> updateRequest_BeforeElementAddedInSceneGra
 	aScripter
 		substep: 'Request update'
 		do: [ :aStep | 
-			aStep assert
-				label: 'Assert inactive update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep do
-				label: 'Send request';
-				block: [ :anUpdater | anUpdater requestUpdate ];
-				onModel;
-				play.
+			aStep
+				doStep: [ :s | 
+					s
+						label: 'Send request';
+						block: [ :anUpdater | anUpdater requestUpdate ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert active update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert active update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element not in space';
-				satisfies: [ :anUpdater | anUpdater element space isNil ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element not in space';
+						satisfies: [ :anUpdater | anUpdater element space isNil ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element background color';
-				satisfies: [ :anUpdater | anUpdater element background = self defaultBackgroundColor asBlBackground ];
-				onModel;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element background color';
+						satisfies: [ :anUpdater | anUpdater element background = self defaultBackgroundColor asBlBackground ];
+						onModel ] ].
 
 	aScripter
 		substep: 'Add element into space'
@@ -262,17 +283,19 @@ BrElementUpdaterByScripterExamples >> updateRequest_BeforeElementAddedInSceneGra
 				onModel;
 				play.
 
-			aStep assert
-				label: 'Assert inactive update request';
-				satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
-				onModel;
-				play.
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert inactive update request';
+						satisfies: [ :anUpdater | anUpdater isUpdateRequested not ];
+						onModel ].
 
-			aStep assert
-				label: 'Assert element background color';
-				satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
-				onSelf;
-				play ].
+			aStep
+				assertStep: [ :s | 
+					s
+						label: 'Assert element background color';
+						satisfies: [ :anElement | anElement background = self updatedBackgroundColor asBlBackground ];
+						onSelf ] ].
 
 	^ aScripter
 ]
