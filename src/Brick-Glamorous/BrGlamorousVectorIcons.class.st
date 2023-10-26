@@ -839,6 +839,18 @@ BrGlamorousVectorIcons class >> standardSize [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> stop [
+	<script: 'self stop inspect'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 4.5 4.5 L 4.5 12.5 L 12.5 12.5 L 12.5 4.5 Z'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> transcript [
 	<script: 'self transcript inspect'>
 
