@@ -14,6 +14,7 @@ Class {
 		'ButtonBorderColor',
 		'ButtonTextColor',
 		'DarkBorderColor',
+		'DebuggerTextHighlightColor',
 		'DeselectedListItemBackgroundColor',
 		'DisabledButtonBackgroundColor',
 		'DisabledButtonBorderColor',
@@ -68,6 +69,16 @@ BrGlamorousColors class >> darkBorderColor [
 { #category : #accessing }
 BrGlamorousColors class >> darkBorderColor: anObject [
 	DarkBorderColor := anObject
+]
+
+{ #category : #'button - border' }
+BrGlamorousColors class >> debuggerTextHighlightColor [
+	^ DebuggerTextHighlightColor
+]
+
+{ #category : #'button - background' }
+BrGlamorousColors class >> debuggerTextHighlightColor: aColor [
+	DebuggerTextHighlightColor := aColor
 ]
 
 { #category : #'button - background' }
@@ -412,7 +423,8 @@ BrGlamorousColors class >> initialize [
 	"highlighting - text"
 	TextHighlightColor := Color fromHexString: #ffd666.
 	TextMarkupColor := Color black alpha: 0.6.
-	
+	DebuggerTextHighlightColor := TextHighlightColor alpha: 0.6.
+	 
 	"list and tree items"
 	DeselectedListItemBackgroundColor := Color transparent.
 	HoveredListItemBackgroundColor := Color gray alpha: 0.1.
