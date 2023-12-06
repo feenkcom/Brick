@@ -324,22 +324,26 @@ BrGlamorousIcons class >> icons [
 ]
 
 { #category : #initialization }
+BrGlamorousIcons class >> importIconFromFile: aFileReference [
+	| form anIconName method |
+	form := PNGReadWriter formFromFileNamed: aFileReference fullName.
+	anIconName := aFileReference basenameWithoutExtension.
+	(anIconName beginsWith: 'gt-')
+		ifTrue: [ anIconName := anIconName copyFrom: 4 to: anIconName size ].
+	method := anIconName , Character cr asString
+			, (String tab
+					, '^ self icons
+		at: #' , anIconName , ' ifAbsentPut: [') , form storeString , ']'.
+	^ self class compile: method classified: 'icons'
+]
+
+{ #category : #initialization }
 BrGlamorousIcons class >> importIconsFromDirectory: aFileReference [
 	"self importIconsFromDirectory: './gt-icons' asFileReference"
 
 	self initialize.
 	^ (aFileReference files select: [ :each | each extension = 'png' ])
-		collect: [ :each | 
-			| method form anIconName |
-			form := PNGReadWriter formFromFileNamed: each fullName.
-			anIconName := each basenameWithoutExtension.
-			(anIconName beginsWith: 'gt-') ifTrue: [ 
-				anIconName := anIconName copyFrom: 4 to: anIconName size ].
-			method := anIconName , Character cr asString ,
-					(String tab ,
-							'^ self icons
-		at: #' , anIconName , ' ifAbsentPut: [') , form storeString , ']'.
-			self class compile: method classified: 'icons' ]
+		collect: [ :each | self importIconFromFile: each ]
 ]
 
 { #category : #initialization }
