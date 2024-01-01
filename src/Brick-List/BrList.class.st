@@ -88,6 +88,11 @@ BrList >> selectedItemDo: aBlock [
 					cull: theIndices first ] ]
 ]
 
+{ #category : #'api - selection' }
+BrList >> selectedItems [
+	^ self selectedIndices collect: [ :anIndex | self viewModel itemAt: anIndex ]
+]
+
 { #category : #accessing }
 BrList >> selectionCallback [
 	^ selectionCallback
