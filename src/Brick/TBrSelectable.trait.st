@@ -55,6 +55,16 @@ TBrSelectable >> selectAll [
 ]
 
 { #category : #'api - selection' }
+TBrSelectable >> selectFirst [
+	self selectOne: 1
+]
+
+{ #category : #'api - selection' }
+TBrSelectable >> selectLast [
+	self selectOne: self maxSelectionIndex
+]
+
+{ #category : #'api - selection' }
 TBrSelectable >> selectNext [
 	self selectedIndices
 		ifEmpty: [ self selectOne: 1  ]
