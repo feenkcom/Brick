@@ -155,6 +155,12 @@ BrSimpleListExamples >> scripterAllClassesMultiSelectSelected [
 				label: 'Check that selection works';
 				satisfies: [ :anElement | anElement selectedIndices size = 4 ] ].
 
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that selected items are correct';
+				satisfies: [ :anElement | anElement selectedItems includes: AIBFS ] ].
+
 	^ aScripter
 ]
 
