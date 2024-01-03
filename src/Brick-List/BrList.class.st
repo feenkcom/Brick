@@ -62,11 +62,17 @@ BrList >> initializeEventHandlers [
 					rowIndex: anEvent rowIndex;
 					rowValue: anEvent rowValue) ] ];
 		addShortcut: (BlShortcutWithAction new
-			combination: (BlKeyCombination builder arrowDown build);
-			action: [ self selectNext ] );
+			combination: BlKeyCombination builder arrowDown build;
+			action: [ self selectNext; scrollToSelection ]);
 		addShortcut: (BlShortcutWithAction new
-			combination: (BlKeyCombination builder arrowUp build);
-			action: [ self selectPrevious ] )
+			combination: BlKeyCombination builder arrowUp build;
+			action: [ self selectPrevious; scrollToSelection ]);
+		addShortcut: (BlShortcutWithAction new
+			combination: BlKeyCombination builder primary home build;
+			action: [ self selectFirst; scrollToSelection ]);
+		addShortcut: (BlShortcutWithAction new
+			combination: BlKeyCombination builder primary end build;
+			action: [ self selectLast; scrollToSelection ] )
 ]
 
 { #category : #'api - selection' }
@@ -74,6 +80,12 @@ BrList >> maxSelectionIndex [
 	<return: #Number>
 	
 	^ self viewModel entityCount
+]
+
+{ #category : #'api - scrolling' }
+BrList >> scrollToSelection [
+	self selectedIndices
+		ifNotEmpty: [ :theIndices | self scrollToIndex: theIndices first ]
 ]
 
 { #category : #'api - selection' }
