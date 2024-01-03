@@ -212,38 +212,36 @@ BrEditorShortcut class >> moveCursorRight [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorToBeginning [
-
 	^ self new
-		  name: 'Move beginning';
-		  description:
-			  'Moves the cursor to the beginning of the current editor and deselects any selected text.';
-		  combination: BlKeyCombination builder primary home build;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deselecter
-				  all;
-				  deselect.
-			  aBrTextEditor navigator
-				  moveTo: 0;
-				  apply ];
-		  yourself
+		name: 'Move beginning';
+		description: 'Moves the cursor to the beginning of the current editor and deselects any selected text.';
+		combination: BlKeyCombination builder primary home build;
+		performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			aBrTextEditor deselecter
+				all;
+				deselect.
+			aBrTextEditor navigator
+				moveTo: 0;
+				apply.
+			aBrEditorElement scrollToFirst ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorToEnd [
-
 	^ self new
-		  name: 'Move end';
-		  description:
-			  'Moves the cursor to the end of the current editor and deselects any selected text.';
-		  combination: BlKeyCombination builder primary end build;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deselecter
-				  all;
-				  deselect.
-			  aBrTextEditor navigator
-				  moveToEnd;
-				  apply ];
-		  yourself
+		name: 'Move end';
+		description: 'Moves the cursor to the end of the current editor and deselects any selected text.';
+		combination: BlKeyCombination builder primary end build;
+		performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			aBrTextEditor deselecter
+				all;
+				deselect.
+			aBrTextEditor navigator
+				moveToEnd;
+				apply.
+			aBrEditorElement scrollToLast ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
