@@ -110,10 +110,6 @@ BrFileSelector >> createAddFolderButton [
 		label: 'Add directory'
 ]
 
-{ #category : #initialization }
-BrFileSelector >> createBasicFileBrowser [
-]
-
 { #category : #private }
 BrFileSelector >> createBreadcrumb [
 	^ BrBreadcrumb new
@@ -148,7 +144,7 @@ BrFileSelector >> createOkButton [
 BrFileSelector >> createScrollPane [
 	^ BrScrollPane new
 		aptitude: BrScrollPaneAptitude;
-		hFitContentLimited;
+		hMatchParent;
 		vFitContent;
 		content: breadcrumb;
 		when: BlElementLayoutComputedEvent
@@ -325,8 +321,9 @@ BrFileSelector >> replaceAddFolderWithEditor [
 	folderCreator := BrFolderCreateWidget new folder: self folder.
 	folderCreator defaultFolderName: ''.
 	folderCreator
-		onFolderCreated: [ :aFolder | 
+		onFolderCreated: [ :aFolder |
 			self folder: aFolder.
+			okButton enable.
 			self updateDisplay ].
 	breadcrumb addItem: folderCreator.
 	folderCreator requestLabelFocus.

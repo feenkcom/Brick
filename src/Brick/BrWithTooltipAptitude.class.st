@@ -314,6 +314,8 @@ BrWithTooltipAptitude >> shouldShowDueToHover: aMouseOverEvent [
 
 { #category : #'host space - displaying' }
 BrWithTooltipAptitude >> show [
+
+	self canShow ifFalse: [ ^ self ].
 	super show.
 	self willShowLater
 		ifTrue: [ self cancelShowLater ].

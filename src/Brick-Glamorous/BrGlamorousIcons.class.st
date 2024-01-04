@@ -141,6 +141,19 @@ BrGlamorousIcons class >> cloud [
 ]
 
 { #category : #icons }
+BrGlamorousIcons class >> database [
+	"Source: https://icons8.com/icons/set/database"
+
+	^ self icons
+		at: #database
+		ifAbsentPut: [ Form
+				extent: 16 @ 16
+				depth: 32
+				fromArray: #(0 0 0 721420288 2063597568 2818572288 2734686208 2768240640 2768240640 2734686208 2818572288 2063597568 721420288 0 0 0 0 134217728 2667577344 2382364672 805306368 0 0 0 0 0 0 805306368 2382364672 2650800128 134217728 0 0 2164260864 1073741824 0 0 0 0 0 0 0 0 0 0 1090519040 2164260864 0 0 2952790016 218103808 0 0 0 0 0 0 0 0 0 0 234881024 2952790016 0 0 2952790016 3053453312 704643072 0 0 0 0 0 0 0 0 704643072 3036676096 2952790016 0 0 2734686208 452984832 2399141888 2868903936 2164260864 1610612736 1241513984 1241513984 1610612736 2181038080 2868903936 2399141888 452984832 2734686208 0 0 2885681152 50331648 0 0 671088640 1124073472 1526726656 1526726656 1107296256 654311424 0 0 50331648 2885681152 0 0 3019898880 2617245696 218103808 0 0 0 0 0 0 0 0 218103808 2617245696 3019898880 0 0 2734686208 1056964608 2868903936 2483027968 1308622848 754974720 385875968 385875968 754974720 1325400064 2499805184 2868903936 1040187392 2734686208 0 0 2818572288 0 0 369098752 1526726656 1979711488 2382364672 2382364672 1979711488 1509949440 369098752 0 0 2818572288 0 0 3070230528 1879048192 16777216 0 0 0 0 0 0 0 0 16777216 1879048192 3070230528 0 0 2751463424 1845493760 2969567232 1677721600 469762048 0 0 0 0 469762048 1677721600 2969567232 1828716544 2751463424 0 0 2734686208 16777216 117440512 1191182336 2365587456 2717908992 2768240640 2768240640 2717908992 2365587456 1191182336 117440512 16777216 2734686208 0 0 1426063360 2365587456 117440512 0 0 0 0 0 0 0 0 117440512 2365587456 1426063360 0 0 0 1342177280 2986344448 2197815296 973078528 436207616 67108864 67108864 436207616 973078528 2197815296 2986344448 1342177280 0 0 0 0 0 0 671088640 1828716544 2332033024 2701131776 2701131776 2332033024 1828716544 671088640 0 0 0 0)
+				offset: 0 @ 0 ]
+]
+
+{ #category : #icons }
 BrGlamorousIcons class >> debug [
 	^ self icons
 		at: #debug ifAbsentPut: [(Form
@@ -311,22 +324,26 @@ BrGlamorousIcons class >> icons [
 ]
 
 { #category : #initialization }
+BrGlamorousIcons class >> importIconFromFile: aFileReference [
+	| form anIconName method |
+	form := PNGReadWriter formFromFileNamed: aFileReference fullName.
+	anIconName := aFileReference basenameWithoutExtension.
+	(anIconName beginsWith: 'gt-')
+		ifTrue: [ anIconName := anIconName copyFrom: 4 to: anIconName size ].
+	method := anIconName , Character cr asString
+			, (String tab
+					, '^ self icons
+		at: #' , anIconName , ' ifAbsentPut: [') , form storeString , ']'.
+	^ self class compile: method classified: 'icons'
+]
+
+{ #category : #initialization }
 BrGlamorousIcons class >> importIconsFromDirectory: aFileReference [
 	"self importIconsFromDirectory: './gt-icons' asFileReference"
 
 	self initialize.
 	^ (aFileReference files select: [ :each | each extension = 'png' ])
-		collect: [ :each | 
-			| method form anIconName |
-			form := PNGReadWriter formFromFileNamed: each fullName.
-			anIconName := each basenameWithoutExtension.
-			(anIconName beginsWith: 'gt-') ifTrue: [ 
-				anIconName := anIconName copyFrom: 4 to: anIconName size ].
-			method := anIconName , Character cr asString ,
-					(String tab ,
-							'^ self icons
-		at: #' , anIconName , ' ifAbsentPut: [') , form storeString , ']'.
-			self class compile: method classified: 'icons' ]
+		collect: [ :each | self importIconFromFile: each ]
 ]
 
 { #category : #initialization }

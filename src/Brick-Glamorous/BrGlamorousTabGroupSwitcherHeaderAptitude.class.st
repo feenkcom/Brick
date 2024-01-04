@@ -24,7 +24,7 @@ BrGlamorousTabGroupSwitcherHeaderAptitude >> initialize [
 	
 	self header addAptitude: BrGlamorousFocusableShadowAptitude.
 
-	self addChangeProperty: #(header geometry) with: [ BlStadium new ].
+	self addChangeProperty: #(header geometry) with: [ BlStadiumGeometry new ].
 	self addChangeProperty: #(header background) with: [ Color white ]. 
 	self addChangeProperty: #(header layout) with: [ BlLinearLayout horizontal alignCenter ].
 	

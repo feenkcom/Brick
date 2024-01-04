@@ -14,7 +14,7 @@ BrGlamorousProgressBarAptitude >> newProgressBarElement [
 	^ super newProgressBarElement
 		background: self theme button defaultTextColor;
 		margin: (BlInsets all: 1);
-		geometry: BlStadium new
+		geometry: BlStadiumGeometry new
 ]
 
 { #category : #'instance creation' }
@@ -22,6 +22,6 @@ BrGlamorousProgressBarAptitude >> newProgressContainerElement [
 	^ super newProgressContainerElement
 		background: self theme button defaultBackgroundColor;
 		border: (BlBorder paint: self theme button defaultBorderColor width: 1);
-		geometry: BlStadium new;
+		geometry: BlStadiumGeometry new;
 		margin: (BlInsets left: 4)
 ]

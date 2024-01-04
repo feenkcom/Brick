@@ -14,6 +14,13 @@ BrColumnedList >> column [
 	^ self viewModel column
 ]
 
+{ #category : #'api - scripting' }
+BrColumnedList >> columns [
+	<return: #Collection of: #BrColumn>
+
+	^ self viewModel columns
+]
+
 { #category : #initialization }
 BrColumnedList >> defaultListModel [
 	^ BrColumnedListModel new

@@ -56,6 +56,13 @@ BrEditorElement >> initialize [
 ]
 
 { #category : #scrolling }
+BrEditorElement >> scrollToFirst [
+	"Scroll instantly to the first position"
+	
+	self scrollToPosition: 1
+]
+
+{ #category : #scrolling }
 BrEditorElement >> scrollToLast [
 	"Scroll instantly to the last segment"
 	

@@ -117,12 +117,13 @@ BrSimpleListExamples >> scripterAllClassesMultiSelect [
 	<gtExample>
 	| aScripter |
 	aScripter := BlScripter new element: self allClassesMultiSelect.
-	
-	aScripter check
-		label: 'Check that nothing is selected';
-		satisfies: [:anElement | anElement selectedIndices isEmpty ];
-		play.
-	
+
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that nothing is selected';
+				satisfies: [ :anElement | anElement selectedIndices isEmpty ] ].
+
 	^ aScripter
 ]
 
@@ -132,24 +133,33 @@ BrSimpleListExamples >> scripterAllClassesMultiSelectSelected [
 	| aScripter |
 	aScripter := self scripterAllClassesMultiSelect.
 
-	aScripter click
-		label: 'Select items in list';
-		id: #scrollable;
-		onChildAt: 2;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Select items in list';
+				id: #scrollable;
+				onChildAt: 2 ].
 
 
-	aScripter click
-		label: 'Select items in list';
-		id: #scrollable;
-		onChildAt: 5;
-		modifiers: BlKeyModifiers shift;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Select items in list';
+				id: #scrollable;
+				onChildAt: 5;
+				modifiers: BlKeyModifiers shift ].
 
-	aScripter check
-		label: 'Check that selection works';
-		satisfies: [ :anElement | anElement selectedIndices size = 4 ];
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that selection works';
+				satisfies: [ :anElement | anElement selectedIndices size = 4 ] ].
+
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that selected items are correct';
+				satisfies: [ :anElement | anElement selectedItems includes: AIBFS ] ].
 
 	^ aScripter
 ]
@@ -161,17 +171,19 @@ BrSimpleListExamples >> scripterAllClassesMultiSelectSelectedDiscontinuous [
 	aScripter := self scripterAllClassesMultiSelectSelected.
 
 
-	aScripter click
-		label: 'Select discontinuous item in list';
-		id: #scrollable;
-		onChildAt: 7;
-		modifiers: BlKeyModifiers primary;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Select discontinuous item in list';
+				id: #scrollable;
+				onChildAt: 7;
+				modifiers: BlKeyModifiers primary ].
 
-	aScripter check
-		label: 'Check that discontinuous selection works';
-		satisfies: [ :anElement | anElement selectedIndices size = 5 ];
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that discontinuous selection works';
+				satisfies: [ :anElement | anElement selectedIndices size = 5 ] ].
 
 	^ aScripter
 ]
@@ -179,33 +191,36 @@ BrSimpleListExamples >> scripterAllClassesMultiSelectSelectedDiscontinuous [
 { #category : #'examples - performance' }
 BrSimpleListExamples >> simpleListWithItemsBindsOnce [
 	"This example makes sure that when the list is displayed for the first time, the items are created and bound just once."
+
 	<gtExample>
 	| aList aScripter aCreationAmount aBindingAmount theItemsChangedEvents |
-
 	aCreationAmount := 0.
 	aBindingAmount := 0.
 
 	aList := BrSimpleList new.
 	aList vExact: 300.
-	aList itemStencil: [
-			aCreationAmount := aCreationAmount + 1.
+	aList
+		itemStencil: [ aCreationAmount := aCreationAmount + 1.
 			BrLabel new
 				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vExact: 50 ];
-		itemDataBinder: [ :aCellElement :aClass |
+		itemDataBinder: [ :aCellElement :aClass | 
 			aBindingAmount := aBindingAmount + 1.
 			aCellElement text: aClass name asString ].
-	
+
 	theItemsChangedEvents := OrderedCollection new.
-	aList when: BrItemsProviderItemsChangedEvent do: [ :anEvent | theItemsChangedEvents add: anEvent ].
+	aList
+		when: BrItemsProviderItemsChangedEvent
+		do: [ :anEvent | theItemsChangedEvents add: anEvent ].
 
 	aScripter := BlScripter new.
 	aScripter element: aList.
 
-	aScripter do
-		action: [ :anElement | anElement items: Smalltalk allClasses ];
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				action: [ :anElement | anElement items: Smalltalk allClasses ] ].
 
 	self assert: aCreationAmount equals: 6.
 	self assert: aBindingAmount equals: 6.

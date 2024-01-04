@@ -330,23 +330,18 @@ BrTextEditorSelecterExamples >> select_moveOneLeft_at_4_extendToNextWordEnd [
 BrTextEditorSelecterExamples >> select_moveOneRight_at_6 [
 	<gtExample>
 	| anEditor |
-
 	anEditor := self editorOnMultilineText.
 	anEditor editor moveCursorTo: 6.
-	
 	anEditor selecter
 		moveOneToRight;
 		select.
-	
 	self 
 		assert: anEditor selection 
 		equals: (BlCompositeSelection new select: 6 to: 7).
 	self 
 		assert: anEditor editor selectedText asString 
 		equals: 'e'.
-	
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(7)).
-	
 	^ anEditor
 ]
 

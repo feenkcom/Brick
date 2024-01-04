@@ -8,67 +8,71 @@ Class {
 
 { #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> assertDropdown: aScripter [
-	aScripter assert
-		label: 'Assert dropdown extent';
-		value: [ :aContentElement | aContentElement extent ]
-			equals: [ :aContentElement | 
-				| aChild |
-				aChild := aContentElement childWithId: #labelContent.
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		// BrAnchoredOuterContainer;
-		// BrAnchoredElement;
-		/ #content asBlocElementId;
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert dropdown extent';
+				value: [ :aContentElement | aContentElement extent ]
+					equals: [ :aContentElement | 
+						| aChild |
+						aChild := aContentElement childWithId: #labelContent.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				// BrAnchoredOuterContainer;
+				// BrAnchoredElement;
+				/ #content asBlocElementId ].
 
-	aScripter assert
-		label: 'Assert dropdown bounds';
-		satisfies: [ :aContentElement | 
-			| aParentQuery |
-			aParentQuery := aContentElement topMostParent query // #placementArea.
-			self assert: aParentQuery result size equals: 1.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert dropdown bounds';
+				satisfies: [ :aContentElement | 
+					| aParentQuery |
+					aParentQuery := aContentElement topMostParent query // #placementArea.
+					self assert: aParentQuery result size equals: 1.
 
-			aParentQuery result first bounds inSpace asRectangle
-				containsRect: aContentElement bounds inSpace asRectangle ];
-		onSpaceRoot;
-		// BrAnchoredOuterContainer;
-		// BrAnchoredElement;
-		/ #content asBlocElementId;
-		play
+					aParentQuery result first bounds inSpace asRectangle
+						containsRect: aContentElement bounds inSpace asRectangle ];
+				onSpaceRoot;
+				// BrAnchoredOuterContainer;
+				// BrAnchoredElement;
+				/ #content asBlocElementId ]
 ]
 
 { #category : #'examples - tooltip' }
 BrAnchoredByScripterExamples >> assertTooltip: aScripter [
-	aScripter assert
-		label: 'Assert tooltip extent';
-		value: [ :aContentElement | aContentElement extent ]
-			equals: [ :aContentElement | 
-				| aQuery aChild |
-				aQuery := aContentElement query // BrLabel.
-				self assert: aQuery result size equals: 1.
-				
-				aChild := aQuery result first.
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		// BrAnchoredOuterContainer;
-		// BrAnchoredElement;
-		/ #content asBlocElementId;
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert tooltip extent';
+				value: [ :aContentElement | aContentElement extent ]
+					equals: [ :aContentElement | 
+						| aQuery aChild |
+						aQuery := aContentElement query // BrLabel.
+						self assert: aQuery result size equals: 1.
 
-	aScripter assert
-		label: 'Assert tooltip bounds';
-		satisfies: [ :aContentElement | 
-			| aParentQuery |
-			aParentQuery := aContentElement topMostParent query // #placementArea.
-			self assert: aParentQuery result size equals: 1.
+						aChild := aQuery result first.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				// BrAnchoredOuterContainer;
+				// BrAnchoredElement;
+				/ #content asBlocElementId ].
 
-			aParentQuery result first bounds inSpace asRectangle
-				containsRect: aContentElement bounds inSpace asRectangle ];
-		onSpaceRoot;
-		// BrAnchoredOuterContainer;
-		// BrAnchoredElement;
-		/ #content asBlocElementId;
-		play
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert tooltip bounds';
+				satisfies: [ :aContentElement | 
+					| aParentQuery |
+					aParentQuery := aContentElement topMostParent query // #placementArea.
+					self assert: aParentQuery result size equals: 1.
+
+					aParentQuery result first bounds inSpace asRectangle
+						containsRect: aContentElement bounds inSpace asRectangle ];
+				onSpaceRoot;
+				// BrAnchoredOuterContainer;
+				// BrAnchoredElement;
+				/ #content asBlocElementId ]
 ]
 
 { #category : #'examples - dropdown' }
@@ -77,38 +81,42 @@ BrAnchoredByScripterExamples >> dropdownBottomRight [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithDropdown ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 600 ];
+				onSpace ].
 
-	aScripter click
-		label: 'Open dropdown';
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup dropdown overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithDropdown: aButton) ];
-		id: #anchorElement;
-		play.
-		
-	aScripter assert
-		label: 'Assert dropdown extent';
-		value: [ :aContentElement | aContentElement extent ]
-			equals: [ :aContentElement | 
-				| aChild |
-				aChild := (aContentElement childWithId: #labelContent).
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		onBreadthFirstChildOfClass: BrAnchoredOuterContainer;
-		onChildOfClass: BrAnchoredElement;
-		id: #content;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Open dropdown';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup dropdown overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithDropdown: aButton) ];
+				id: #anchorElement ].
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert dropdown extent';
+				value: [ :aContentElement | aContentElement extent ]
+					equals: [ :aContentElement | 
+						| aChild |
+						aChild := aContentElement childWithId: #labelContent.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				onBreadthFirstChildOfClass: BrAnchoredOuterContainer;
+				onChildOfClass: BrAnchoredElement;
+				id: #content ].
 
 
 	^ aScripter
@@ -120,32 +128,36 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithDropdown ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
-		
-	aScripter do 
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 250@0 ];
-		id: #anchorElement;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 600 ];
+				onSpace ].
 
-	aScripter click
-		label: 'Open dropdown';
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup dropdown overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithDropdown: aButton) ];
-		id: #anchorElement;
-		play.
-		
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 250 @ 0 ];
+				id: #anchorElement ].
+
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Open dropdown';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup dropdown overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithDropdown: aButton) ];
+				id: #anchorElement ].
+
 	self assertDropdown: aScripter.
 
 	^ aScripter
@@ -156,35 +168,39 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight_ByOnePi
 	<gtExample>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithDropdown ].
-	
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
-		
-	aScripter do
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 251 @ 0 ];
-		id: #anchorElement;
-		play.
-		
-	aScripter click
-		label: 'Open dropdown';
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup dropdown overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithDropdown: aButton) ];
-		id: #anchorElement;
-		play.
-		
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 600 ];
+				onSpace ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 251 @ 0 ];
+				id: #anchorElement ].
+
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Open dropdown';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup dropdown overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithDropdown: aButton) ];
+				id: #anchorElement ].
+
 	self assertDropdown: aScripter.
-	
+
 	^ aScripter
 ]
 
@@ -373,44 +389,49 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 300 @ 500 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 300 @ 500 ];
+				onSpace ].
 
-	aScripter do
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 300 @ 0 ];
-		id: #anchorElement;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 300 @ 0 ];
+				id: #anchorElement ].
 
-	aScripter secondaryClick
-		label: 'Open context menu';
-		id: #anchorElement;
-		play.
+	aScripter
+		secondaryClickStep: [ :s | 
+			s
+				label: 'Open context menu';
+				id: #anchorElement ].
 
-	aScripter assert
-		label: 'Assert context menu extent';
-		value: [ :aPane | aPane extent ]
-			equals: [ :aPane | 
-				| aChild |
-				aChild := aPane childWithId: #itemsContainer.
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		id: #itemsScrollableContainer;
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert context menu extent';
+				value: [ :aPane | aPane extent ]
+					equals: [ :aPane | 
+						| aChild |
+						aChild := aPane childWithId: #itemsContainer.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				id: #itemsScrollableContainer ].
 
-	aScripter assert
-		label: 'Assert anchored element height';
-		value: [ :anInnerContainer | anInnerContainer height ]
-			equals: [ :anInnerContainer | 
-				| aChild |
-				aChild := anInnerContainer childWithId: #itemsScrollableContainer.
-				aChild height + aChild margin height ];
-		onSpaceRoot;
-		// BrAnchoredElement;
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert anchored element height';
+				value: [ :anInnerContainer | anInnerContainer height ]
+					equals: [ :anInnerContainer | 
+						| aChild |
+						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
+						aChild height + aChild margin height ];
+				onSpaceRoot;
+				// BrAnchoredElement ].
 
 	^ aScripter
 ]
@@ -421,44 +442,49 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 500 ];
-		onSpace;
-		play.
-		
-	aScripter do 
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 310@0 ];
-		id: #anchorElement;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 500 ];
+				onSpace ].
 
-	aScripter secondaryClick
-		label: 'Open context menu';
-		id: #anchorElement;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 310 @ 0 ];
+				id: #anchorElement ].
 
-	aScripter assert
-		label: 'Assert context menu extent';
-		value: [ :aPane | aPane extent ]
-			equals: [ :aPane | 
-				| aChild |
-				aChild := (aPane childWithId: #itemsContainer).
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		id: #itemsScrollableContainer;
-		play.
-		
-	aScripter assert
-		label: 'Assert anchored element height';
-		value: [ :anInnerContainer | anInnerContainer height ]
-			equals: [ :anInnerContainer | 
-				| aChild |
-				aChild := (anInnerContainer childWithId: #itemsScrollableContainer).
-				aChild height + aChild margin height ];
-		onSpaceRoot;
-		// BrAnchoredElement;
-		play.
+	aScripter
+		secondaryClickStep: [ :s | 
+			s
+				label: 'Open context menu';
+				id: #anchorElement ].
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert context menu extent';
+				value: [ :aPane | aPane extent ]
+					equals: [ :aPane | 
+						| aChild |
+						aChild := aPane childWithId: #itemsContainer.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				id: #itemsScrollableContainer ].
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert anchored element height';
+				value: [ :anInnerContainer | anInnerContainer height ]
+					equals: [ :anInnerContainer | 
+						| aChild |
+						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
+						aChild height + aChild margin height ];
+				onSpaceRoot;
+				// BrAnchoredElement ].
 
 	^ aScripter
 ]
@@ -469,38 +495,42 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 500 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 500 ];
+				onSpace ].
 
-	aScripter secondaryClick
-		label: 'Open context menu';
-		id: #anchorElement;
-		play.
+	aScripter
+		secondaryClickStep: [ :s | 
+			s
+				label: 'Open context menu';
+				id: #anchorElement ].
 
-	aScripter assert
-		label: 'Assert context menu extent';
-		value: [ :aPane | aPane extent ]
-			equals: [ :aPane | 
-				| aChild |
-				aChild := (aPane childWithId: #itemsContainer).
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		id: #itemsScrollableContainer;
-		play.
-		
-	aScripter assert
-		label: 'Assert anchored element height';
-		value: [ :anInnerContainer | anInnerContainer height ]
-			equals: [ :anInnerContainer | 
-				| aChild |
-				aChild := (anInnerContainer childWithId: #itemsScrollableContainer).
-				aChild height + aChild margin height ];
-		onSpaceRoot;
-		// BrAnchoredElement;
-		play.
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert context menu extent';
+				value: [ :aPane | aPane extent ]
+					equals: [ :aPane | 
+						| aChild |
+						aChild := aPane childWithId: #itemsContainer.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				id: #itemsScrollableContainer ].
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert anchored element height';
+				value: [ :anInnerContainer | anInnerContainer height ]
+					equals: [ :anInnerContainer | 
+						| aChild |
+						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
+						aChild height + aChild margin height ];
+				onSpaceRoot;
+				// BrAnchoredElement ].
 
 	^ aScripter
 ]
@@ -511,53 +541,59 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 500 ];
-		onSpace;
-		play.
-		
-	aScripter do 
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 309@0 ];
-		id: #anchorElement;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 500 ];
+				onSpace ].
 
-	aScripter secondaryClick
-		label: 'Open context menu';
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup dropdown overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithDropdown: aButton) ];
-		id: #anchorElement;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 309 @ 0 ];
+				id: #anchorElement ].
 
-	aScripter assert
-		label: 'Assert context menu extent';
-		value: [ :aPane | aPane extent ]
-			equals: [ :aPane | 
-				| aChild |
-				aChild := (aPane childWithId: #itemsContainer).
-				aChild extent + aChild margin extent ];
-		onSpaceRoot;
-		id: #itemsScrollableContainer;
-		play.
-		
-	aScripter assert
-		label: 'Assert anchored element height';
-		value: [ :anInnerContainer | anInnerContainer height ]
-			equals: [ :anInnerContainer | 
-				| aChild |
-				aChild := (anInnerContainer childWithId: #itemsScrollableContainer).
-				aChild height + aChild margin height ];
-		onSpaceRoot;
-		// BrAnchoredElement;
-		play.
+	aScripter
+		secondaryClickStep: [ :s | 
+			s
+				label: 'Open context menu';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup dropdown overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithDropdown: aButton) ];
+				id: #anchorElement ].
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert context menu extent';
+				value: [ :aPane | aPane extent ]
+					equals: [ :aPane | 
+						| aChild |
+						aChild := aPane childWithId: #itemsContainer.
+						aChild extent + aChild margin extent ];
+				onSpaceRoot;
+				id: #itemsScrollableContainer ].
+
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert anchored element height';
+				value: [ :anInnerContainer | anInnerContainer height ]
+					equals: [ :anInnerContainer | 
+						| aChild |
+						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
+						aChild height + aChild margin height ];
+				onSpaceRoot;
+				// BrAnchoredElement ].
 
 	^ aScripter
 ]
@@ -568,32 +604,36 @@ BrAnchoredByScripterExamples >> tooltipLongLabelCenterLeft_AnchorMoreToTheRight 
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongLabelTooltip ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 600 ];
+				onSpace ].
 
-	aScripter mouseMoveOver
-		label: 'Open tooltip';
-		id: #anchorElement;
-		play.
-		
-	aScripter do 
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 330@0 ];
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup tooltip overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithTooltip: aButton) ];
-		id: #anchorElement;
-		play.
-		
+	aScripter
+		mouseMoveOverStep: [ :s | 
+			s
+				label: 'Open tooltip';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 330 @ 0 ];
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup tooltip overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithTooltip: aButton) ];
+				id: #anchorElement ].
+
 	self assertTooltip: aScripter.
 
 	^ aScripter
@@ -605,25 +645,28 @@ BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 600 ];
+				onSpace ].
 
-	aScripter mouseMoveOver
-		label: 'Open tooltip';
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup tooltip overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithTooltip: aButton) ];
-		id: #anchorElement;
-		play.
+	aScripter
+		mouseMoveOverStep: [ :s | 
+			s
+				label: 'Open tooltip';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup tooltip overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithTooltip: aButton) ];
+				id: #anchorElement ].
 
 	self assertTooltip: aScripter.
 
@@ -636,32 +679,36 @@ BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter_AnchorMoreToTheRig
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
 
-	aScripter do
-		label: 'Set space extent';
-		block: [ :aSpace | aSpace extent: 650 @ 600 ];
-		onSpace;
-		play.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Set space extent';
+				block: [ :aSpace | aSpace extent: 650 @ 600 ];
+				onSpace ].
 
-	aScripter mouseMoveOver
-		label: 'Open tooltip';
-		id: #anchorElement;
-		play.
-		
-	aScripter do 
-		label: 'Relocate anchor';
-		block: [ :anAnchor | anAnchor relocate: 337@0 ];
-		id: #anchorElement;
-		play.
-		
-	aScripter do
-		label: 'Setup tooltip overview';
-		block: [ :aButton :aUserData | 
-			aUserData at: BrAnchoredVisualAnalysis put: (
-				BrAnchoredVisualAnalysis new
-					elementWithTooltip: aButton) ];
-		id: #anchorElement;
-		play.
-		
+	aScripter
+		mouseMoveOverStep: [ :s | 
+			s
+				label: 'Open tooltip';
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Relocate anchor';
+				block: [ :anAnchor | anAnchor relocate: 337 @ 0 ];
+				id: #anchorElement ].
+
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Setup tooltip overview';
+				block: [ :aButton :aUserData | 
+					aUserData
+						at: BrAnchoredVisualAnalysis
+						put: (BrAnchoredVisualAnalysis new elementWithTooltip: aButton) ];
+				id: #anchorElement ].
+
 	self assertTooltip: aScripter.
 
 	^ aScripter

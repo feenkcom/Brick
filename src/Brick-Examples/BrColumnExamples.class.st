@@ -1,7 +1,7 @@
 Class {
 	#name : #BrColumnExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-! Model - Column'
+	#category : #'Brick-Examples-! Model - Column'
 }
 
 { #category : #accessing }
@@ -10,7 +10,7 @@ BrColumnExamples >> default [
 	| aColumn |
 	aColumn := BrColumn new.
 	self assert: aColumn title equals: 'Column'.
-	self assert: aColumn width equals: BrColumnUndefinedWidth new.
+	self assert: aColumn columnWidth equals: BrColumnUndefinedWidth new.
 	^ aColumn
 ]
 
@@ -18,14 +18,11 @@ BrColumnExamples >> default [
 BrColumnExamples >> setFixed [
 	<gtExample>
 	| aColumn |
-	
 	aColumn := self default.
 	aColumn width: 300.
-	
-	self
-		assert: aColumn width
-		equals: (BrColumnFixedWidth new width: 300).
-	
+
+	self assert: aColumn columnWidth equals: (BrColumnFixedWidth new width: 300).
+
 	^ aColumn
 ]
 
@@ -46,11 +43,12 @@ BrColumnExamples >> setTitle [
 BrColumnExamples >> setWeight [
 	<gtExample>
 	| aColumn |
-
 	aColumn := self default.
 	aColumn weight: 0.5.
 
-	self assert: aColumn width equals: (BrColumnProportionalWidth new weight: 0.5).
+	self
+		assert: aColumn columnWidth
+		equals: (BrColumnProportionalWidth new weight: 0.5).
 
 	^ aColumn
 ]

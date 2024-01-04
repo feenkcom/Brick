@@ -8,41 +8,46 @@ Class {
 BrPagerExamples >> closePageWithPendingFuture [
 	<gtExample>
 	| scripter firstPage future futureStarted futureScheduled futureResult |
-
 	scripter := BlScripter new element: self example.
-	
+
 	futureResult := nil.
 	futureStarted := false.
 	futureScheduled := false.
 
-	future := [ futureStarted := true. 5 seconds wait. true ] asAsyncFuture.
-	firstPage := scripter element query // (#page asBlocElementId indexed: 1); anyOne.
-	
-	firstPage withAsyncFutureDo: [ :anElementFuture |
-		anElementFuture
-			shouldFireScheduledEvent: true;
-			whenSuccess: [ :anElement :aFutureResult | futureResult := aFutureResult ];
-			whenPending: [ :anElement :anInitialValue | futureResult := anInitialValue ];
-			whenError: [ :anElement :anError | futureResult := anError ] ].
+	future := [ futureStarted := true.
+		5 seconds wait.
+		true ] asAsyncFuture.
+	firstPage := scripter element query
+			// (#page asBlocElementId indexed: 1);
+			anyOne.
 
-	firstPage when: BrAsyncElementFutureScheduledEvent do: [ futureScheduled := true ].
-	
+	firstPage
+		withAsyncFutureDo: [ :anElementFuture | 
+			anElementFuture
+				shouldFireScheduledEvent: true;
+				whenSuccess: [ :anElement :aFutureResult | futureResult := aFutureResult ];
+				whenPending: [ :anElement :anInitialValue | futureResult := anInitialValue ];
+				whenError: [ :anElement :anError | futureResult := anError ] ].
+
+	firstPage
+		when: BrAsyncElementFutureScheduledEvent
+		do: [ futureScheduled := true ].
+
 	scripter do
 		action: [ firstPage asyncFuture future: future ];
 		playNoPulse.
 
-	[ 20 milliSeconds wait. futureStarted and: [ futureScheduled ] ]
-		whileFalse: [ scripter pulse ].
+	[ 20 milliSeconds wait.
+	futureStarted and: [ futureScheduled ] ] whileFalse: [ scripter pulse ].
 
 	self assert: firstPage viewModel pendingFuturePromises size equals: 1.
 
-	scripter do
-		action: [ :anElement | anElement removePageAt: 1 ];
-		play.
+	scripter
+		doStep: [ :s | 
+			s
+				action: [ :anElement | anElement removePageAt: 1 ] ].
 
-	self assert: firstPage viewModel pendingFuturePromises size equals: 0.
-	
-	"because an element was removed from the scene graph, an update is not sceduled, therefore
+	self assert: firstPage viewModel pendingFuturePromises size equals: 0.	"because an element was removed from the scene graph, an update is not sceduled, therefore
 	whenError: block is not executed, it is expected and actually quite nice"
 	self assert: futureResult isNil.
 

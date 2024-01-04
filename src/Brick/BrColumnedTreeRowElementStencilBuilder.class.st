@@ -5,40 +5,38 @@ Class {
 		'columns',
 		'columnElements'
 	],
-	#category : 'Brick-Tree - Stencil'
+	#category : #'Brick-Tree - Stencil'
 }
 
 { #category : #'api - instantiation' }
 BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 	| aRowElement theCellElements |
-
 	aRowElement := self createRowElement.
 
-	theCellElements := OrderedCollection new: self columns size.
+	theCellElements := OrderedCollection new: self columns size.	"we should wrap the first column element into another element in order to add a toggle button"
+	self columnElements
+		ifNotEmpty: [ :theColumnElements | 
+			| aFirstColumnWrapper aToggleButton |
+			aFirstColumnWrapper := BlElement new
+					layout: BlLinearLayout horizontal alignCenterLeft;
+					constraintsDo: [ :c | 
+						c horizontal matchParent.
+						c vertical fitContent ].
 
-	"we should wrap the first column element into another element in order to add a toggle button"
-	self columnElements ifNotEmpty: [ :theColumnElements |
-		| aFirstColumnWrapper aToggleButton |
+			self columns first columnWidth applyOn: aFirstColumnWrapper.
 
-		aFirstColumnWrapper := BlElement new
-			layout: BlLinearLayout horizontal alignCenterLeft;
-			constraintsDo: [ :c | 
-				c horizontal matchParent.
-				c vertical fitContent ].
+			aToggleButton := self createExpandCollapseElement
+					toggleAction: [ :aToggleElement :aToggleModel | aToggleModel model toggle ].
 
-		self columns first width applyOn: aFirstColumnWrapper.
-		
-		aToggleButton := self createExpandCollapseElement
-			toggleAction: [ :aToggleElement :aToggleModel | aToggleModel model toggle ].
+			aFirstColumnWrapper
+				addChild: aToggleButton as: #toggle;
+				addChild: theColumnElements first.
 
-		aFirstColumnWrapper
-			addChild: aToggleButton as: #toggle;
-			addChild: theColumnElements first.
+			theCellElements add: aFirstColumnWrapper ].
 
-		theCellElements add: aFirstColumnWrapper ].
-
-	self columnElements allButFirstDo: [ :eachCellElement | theCellElements add: eachCellElement ].
+	self columnElements
+		allButFirstDo: [ :eachCellElement | theCellElements add: eachCellElement ].
 
 	aRowElement addChildren: theCellElements.
 

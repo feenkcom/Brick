@@ -39,7 +39,7 @@ BrEditorShortcut class >> copy [
 		  name: 'Copy';
 		  description: 'Copies the selection text into the clipboard.';
 		  combination: BlKeyCombination primaryC;
-		  performBlock: #copySelected;
+		  performBlock: [ :aBrTextEditor | aBrTextEditor copySelected ];
 		  yourself
 ]
 
@@ -51,7 +51,7 @@ BrEditorShortcut class >> cut [
 		  description:
 			  'Cut selected text and save it to the clipboard ready to paste elsewhere.';
 		  combination: BlKeyCombination primaryX;
-		  performBlock: #cutSelected;
+		  performBlock: [ :aBrTextEditor | aBrTextEditor cutSelected ];
 		  yourself
 ]
 
@@ -95,45 +95,7 @@ BrEditorShortcut class >> deselectAll [
 		  name: 'Deselect';
 		  description: 'Deselects any currently selected text.';
 		  combination: BlKeyCombination escape;
-		  performBlock: #selectNone;
-		  yourself
-]
-
-{ #category : #'shortcut creation' }
-BrEditorShortcut class >> editableLabelAccept [
-
-	^ self new
-		  name: 'Accept';
-		  description: 'Accepts changes make to the text.';
-		  combination: BlKeyCombination enter;
-		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
-			  aBrEditorElement acceptEdition ];
-		  yourself
-]
-
-{ #category : #'shortcut creation' }
-BrEditorShortcut class >> editableLabelCancel [
-
-	^ self new
-		  name: 'Cancel';
-		  description:
-			  'Cancels changes and brings back the state of the editor.';
-		  combination: BlKeyCombination escape;
-		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
-			  aBrEditorElement cancelEdition ];
-		  yourself
-]
-
-{ #category : #'shortcut creation' }
-BrEditorShortcut class >> editableLabelSwitchToEditor [
-
-	^ self new
-		  name: 'Switch to editor';
-		  description:
-			  'Switches the label into an editor allowing users to edit it.';
-		  combination: BlKeyCombination enter;
-		  performBlock: [ :aBrTextEditor :aBrEditorElement | 
-			  aBrEditorElement switchToEditor ];
+		  performBlock: [ :aBrTextEditor | aBrTextEditor selectNone ];
 		  yourself
 ]
 
@@ -250,38 +212,36 @@ BrEditorShortcut class >> moveCursorRight [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorToBeginning [
-
 	^ self new
-		  name: 'Move beginning';
-		  description:
-			  'Moves the cursor to the beginning of the current editor and deselects any selected text.';
-		  combination: BlKeyCombination builder primary home build;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deselecter
-				  all;
-				  deselect.
-			  aBrTextEditor navigator
-				  moveTo: 0;
-				  apply ];
-		  yourself
+		name: 'Move beginning';
+		description: 'Moves the cursor to the beginning of the current editor and deselects any selected text.';
+		combination: BlKeyCombination builder primary home build;
+		performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			aBrTextEditor deselecter
+				all;
+				deselect.
+			aBrTextEditor navigator
+				moveTo: 0;
+				apply.
+			aBrEditorElement scrollToFirst ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> moveCursorToEnd [
-
 	^ self new
-		  name: 'Move end';
-		  description:
-			  'Moves the cursor to the end of the current editor and deselects any selected text.';
-		  combination: BlKeyCombination builder primary end build;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deselecter
-				  all;
-				  deselect.
-			  aBrTextEditor navigator
-				  moveToEnd;
-				  apply ];
-		  yourself
+		name: 'Move end';
+		description: 'Moves the cursor to the end of the current editor and deselects any selected text.';
+		combination: BlKeyCombination builder primary end build;
+		performBlock: [ :aBrTextEditor :aBrEditorElement | 
+			aBrTextEditor deselecter
+				all;
+				deselect.
+			aBrTextEditor navigator
+				moveToEnd;
+				apply.
+			aBrEditorElement scrollToLast ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
@@ -406,7 +366,7 @@ BrEditorShortcut class >> redo [
 		  name: 'Redo';
 		  description: 'Reverses the undo or advances the document to a more recent state.';
 		  combination: BlKeyCombination primaryShiftZ;
-		  performBlock: #redo;
+		  performBlock: [ :aBrTextEditor | aBrTextEditor redo ];
 		  yourself
 ]
 
@@ -631,7 +591,7 @@ BrEditorShortcut class >> undo [
 		  name: 'Undo';
 		  description: 'Erases the last change done to the document, reverting it to an older state.';
 		  combination: BlKeyCombination primaryZ;
-		  performBlock: #undo;
+		  performBlock: [ :aBrTextEditor | aBrTextEditor undo ];
 		  yourself
 ]
 
@@ -687,8 +647,12 @@ BrEditorShortcut >> name: aString [
 
 { #category : #evaluation }
 BrEditorShortcut >> performBlock: aBlock [
+	"To make it easier to track from where action block comes from we disallow symbols"
+	self
+		assert: [ aBlock isSymbol not ]
+		description: [ 'Shortcut action must not be a symbol' ].
+
 	performBlock := aBlock
-	
 ]
 
 { #category : #evaluation }
@@ -705,7 +669,10 @@ BrEditorShortcut >> performDueTo: aShortcutEvent [
 
 { #category : #evaluation }
 BrEditorShortcut >> performOnEditor: aBrTextEditor element: aBrEditorElement dueTo: aShortcutEvent [
-	performBlock cull: aBrTextEditor cull: aBrEditorElement cull: aShortcutEvent
+	performBlock
+		cull: aBrTextEditor
+		cull: aBrEditorElement
+		cull: aShortcutEvent
 ]
 
 { #category : #printing }

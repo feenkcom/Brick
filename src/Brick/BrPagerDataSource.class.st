@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pageElements'
 	],
-	#category : 'Brick-Pager - Support'
+	#category : #'Brick-Pager - Support'
 }
 
 { #category : #initialization }
@@ -21,7 +21,11 @@ BrPagerDataSource >> itemCount [
 
 { #category : #'instance creation' }
 BrPagerDataSource >> onBindHolder: anElementHolder at: aPosition [
-	anElementHolder pageElement: (self pageElements at: aPosition)
+	| aPageElement |
+	
+	aPageElement := self pageElements at: aPosition.
+	anElementHolder pageElement: aPageElement.
+	aPageElement dispatchEvent: (BrPagerPageBoundEvent new)
 ]
 
 { #category : #'instance creation' }

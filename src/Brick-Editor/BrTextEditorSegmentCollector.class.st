@@ -170,24 +170,9 @@ BrTextEditorSegmentCollector >> cachedInterval [
 { #category : #'cache - accessing' }
 BrTextEditorSegmentCollector >> cachedSegmentAt: aTextIndex ifFound: aFoundBlock ifNotFound: aNotFoundBlock [
 	| segmentIndex segment |
-
 	segmentIndex := self cachedSegmentIndexAt: aTextIndex.
-	
-	"if segment index is zero it means that text was modified outsize of currently cached elements"
-	segmentIndex isZero
-		"we should handle the case when text was inserted at index before a #start
-		of the first segment. when it happens we need to move all cached segments"
-		ifTrue: [ ^ aNotFoundBlock cull: self ].
-
-	(self isCachedAt: segmentIndex) ifFalse:
-		[ ^ aNotFoundBlock cull: self ].
-
-	segment := self cachedAt: segmentIndex.
-	
-	self
-		assert: [ segment index = segmentIndex ]
-		description: [ 'Segment must have a valid index' ].
-		
+	segmentIndex = 0 ifTrue: [ ^ aNotFoundBlock cull: self ].
+	segment := self segments at: segmentIndex.
 	aFoundBlock cull: segment
 ]
 

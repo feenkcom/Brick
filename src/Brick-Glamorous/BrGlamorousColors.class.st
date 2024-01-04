@@ -14,6 +14,7 @@ Class {
 		'ButtonBorderColor',
 		'ButtonTextColor',
 		'DarkBorderColor',
+		'DebuggerTextHighlightColor',
 		'DeselectedListItemBackgroundColor',
 		'DisabledButtonBackgroundColor',
 		'DisabledButtonBorderColor',
@@ -23,6 +24,7 @@ Class {
 		'ErrorBackgroundColor',
 		'ErrorBorderColor',
 		'ExpandCollapseTriangleBackgroundColor',
+		'FadedBackgroundColor',
 		'FadedTextColor',
 		'FailureBackgroundColor',
 		'FailureBorderColor',
@@ -67,6 +69,16 @@ BrGlamorousColors class >> darkBorderColor [
 { #category : #accessing }
 BrGlamorousColors class >> darkBorderColor: anObject [
 	DarkBorderColor := anObject
+]
+
+{ #category : #'button - border' }
+BrGlamorousColors class >> debuggerTextHighlightColor [
+	^ DebuggerTextHighlightColor
+]
+
+{ #category : #'button - background' }
+BrGlamorousColors class >> debuggerTextHighlightColor: aColor [
+	DebuggerTextHighlightColor := aColor
 ]
 
 { #category : #'button - background' }
@@ -281,6 +293,11 @@ BrGlamorousColors class >> expandCollapseTriangleBackgroundColor: aColor [
 	ExpandCollapseTriangleBackgroundColor := aColor
 ]
 
+{ #category : #'button - background' }
+BrGlamorousColors class >> fadedButtonBackgroundColor [
+	^ FadedBackgroundColor
+]
+
 { #category : #'button - border' }
 BrGlamorousColors class >> fadedTextColor [
 	"Faded text is typically used where a portion of the text is less important than what is considered the main information, or where different fields are close together and would benefit from being visually distinguished."
@@ -374,6 +391,7 @@ BrGlamorousColors class >> initialize [
 	"buttons - background"
 	ButtonBackgroundColor := Color white.
 	DisabledButtonBackgroundColor := Color fromHexString: #f5f5f5 "grey-3".
+	FadedBackgroundColor := Color fromHexString: #'d9d9d9' "gray-5".
 
 	"status - background"
 	PaleErrorBackgroundColor := Color fromHexString: #'#ffccc7' "red-2".
@@ -405,7 +423,8 @@ BrGlamorousColors class >> initialize [
 	"highlighting - text"
 	TextHighlightColor := Color fromHexString: #ffd666.
 	TextMarkupColor := Color black alpha: 0.6.
-	
+	DebuggerTextHighlightColor := TextHighlightColor alpha: 0.6.
+	 
 	"list and tree items"
 	DeselectedListItemBackgroundColor := Color transparent.
 	HoveredListItemBackgroundColor := Color gray alpha: 0.1.

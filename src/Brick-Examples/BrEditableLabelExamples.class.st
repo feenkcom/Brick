@@ -97,52 +97,64 @@ BrEditableLabelExamples >> scripter_01_initial [
 BrEditableLabelExamples >> scripter_02_double_click_to_edit [
 	<gtExample>
 	| aScripter |
-	
 	aScripter := self scripter_01_initial.
 	aScripter
 		substep: 'Switch to the edit mode'
-		do: [ :aStep |
-			aStep check
-				label: 'Check read-only state';
-				satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState readOnlyWithoutSelection ].
-			
-			aStep doubleClick.
-			
-			aStep check
-				label: 'Check edit mode';
-				satisfies: [ :anEditableLabel | anEditableLabel isEditable ].
-				
-			aStep check
-				label: 'Check edit state';
-				satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState editableOnly ].
-				
-			aStep check
-				label: 'Check has focus';
-				satisfies: [ :anEditableLabel | anEditableLabel isFocused ] ].
+		do: [ :aStep | 
+			aStep
+				checkStep: [ :s | 
+					s
+						label: 'Check read-only state';
+						satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState readOnlyWithoutSelection ] ].
 
-	^ aScripter syncContinue
+			aStep doubleClick play.
+
+			aStep
+				checkStep: [ :s | 
+					s
+						label: 'Check edit mode';
+						satisfies: [ :anEditableLabel | anEditableLabel isEditable ] ].
+
+			aStep
+				checkStep: [ :s | 
+					s
+						label: 'Check edit state';
+						satisfies: [ :anEditableLabel | anEditableLabel states hasState: BrEditorModeState editableOnly ] ].
+
+			aStep
+				checkStep: [ :s | 
+					s
+						label: 'Check has focus';
+						satisfies: [ :anEditableLabel | anEditableLabel isFocused ] ] ].
+
+	^ aScripter
 ]
 
 { #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 	<gtExample>
 	| aScripter |
-	
 	aScripter := self scripter_02_double_click_to_edit.
 	aScripter
 		substep: 'Switch back to readonly'
-		do: [ :aStep |
-			aStep keyPress: BlKeyboardKey escape.
+		do: [ :aStep | 
+			aStep
+				keyPress: BlKeyboardKey escape;
+				play.
 
-			aStep check
-				label: 'Check readonly mode';
-				satisfies: [ :anEditableLabel | anEditableLabel isReadOnly ].
+			aStep
+				checkStep: [ :s | 
+					s
+						label: 'Check readonly mode';
+						satisfies: [ :anEditableLabel | anEditableLabel isReadOnly ] ].
 
-			aStep check
-				label: 'Check still has focus';
-				satisfies: [ :anEditableLabel | anEditableLabel isFocused ] ].
+			aStep
+				checkStep: [ :s | 
+					s
+						label: 'Check still has focus';
+						satisfies: [ :anEditableLabel | anEditableLabel isFocused ] ] ].
 
-	^ aScripter syncContinue
+	^ aScripter
 ]
 
 { #category : #'examples - actions' }

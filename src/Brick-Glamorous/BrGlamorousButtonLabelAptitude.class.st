@@ -8,7 +8,8 @@ Class {
 		'selectedColor',
 		'hoveredColor',
 		'defaultColor',
-		'pressedColor'
+		'pressedColor',
+		'foregroundAptitude'
 	],
 	#category : #'Brick-Glamorous-Buttons - Support'
 }
@@ -20,7 +21,7 @@ BrGlamorousButtonLabelAptitude >> defaultColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> defaultColor: aPaint [
-	defaultColor := aPaint
+	foregroundAptitude updateWith: [ defaultColor := aPaint ]
 ]
 
 { #category : #accessing }
@@ -30,7 +31,7 @@ BrGlamorousButtonLabelAptitude >> hoveredColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> hoveredColor: aPaint [
-	hoveredColor := aPaint
+	foregroundAptitude updateWith: [ hoveredColor := aPaint ]
 ]
 
 { #category : #initialization }
@@ -57,7 +58,7 @@ BrGlamorousButtonLabelAptitude >> initialize [
 				huge: [ :aStyle | aStyle fontSizeEm: 1.55 ]).
 	self
 		add:
-			(BrLazyStyleCommonAptitude new
+			(foregroundAptitude := BrLazyStyleCommonAptitude new
 				@ labelElement;
 				default: [ :aStyle | aStyle foreground: defaultColor ];
 				hovered: [ :aStyle | aStyle foreground: hoveredColor ];
@@ -73,7 +74,7 @@ BrGlamorousButtonLabelAptitude >> pressedColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> pressedColor: aPaint [
-	pressedColor := aPaint
+	foregroundAptitude updateWith: [ pressedColor := aPaint ]
 ]
 
 { #category : #accessing }
@@ -83,5 +84,5 @@ BrGlamorousButtonLabelAptitude >> selectedColor [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> selectedColor: aPaint [
-	selectedColor := aPaint
+	foregroundAptitude updateWith: [ selectedColor := aPaint ]
 ]

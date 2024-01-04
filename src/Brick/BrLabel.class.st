@@ -15,9 +15,9 @@ BrLabel >> baselineOffset [
 ]
 
 { #category : #printing }
-BrLabel >> gtDisplayString [ 
+BrLabel >> gtDisplayOn: aStream [ 
 
-	^self text asString
+	aStream nextPutAll: self text asString
 ]
 
 { #category : #initialization }

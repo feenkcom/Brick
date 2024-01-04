@@ -67,7 +67,7 @@ BrGlamorousAccordionAptitude >> initialize [
 				@ headerBar;
 				default: [ :aStyle | aStyle background: (Color gray alpha: 0.4) ];
 				focused:
-						[ :aStyle | aStyle background: (self theme default primaryBorderColor alpha: 0.4) ]).
+						[ :aStyle | aStyle background: (self theme default primaryBorderColor) ]).
 	self
 		add:
 			(BrStyleCommonAptitude new
@@ -77,7 +77,7 @@ BrGlamorousAccordionAptitude >> initialize [
 						gone;
 						background: (Color gray alpha: 0.2) ];
 				focused:
-						[ :aStyle | aStyle background: (self theme default primaryBorderColor alpha: 0.2) ];
+						[ :aStyle | aStyle background: (self theme default primaryBorderColor) ];
 				expanded: [ :aStyle | aStyle visible ]).
 	self
 		add:

@@ -8,13 +8,15 @@ Class {
 BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelect [
 	<gtExample>
 	| aScripter |
-	aScripter := BlScripter new element: self subclassesOfCollectionMultiSelect fitContent.
-	
-	aScripter check
-		label: 'Check that nothing is selected';
-		satisfies: [:anElement | anElement selectedIndices isEmpty ];
-		play.
-	
+	aScripter := BlScripter new
+			element: self subclassesOfCollectionMultiSelect fitContent.
+
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that nothing is selected';
+				satisfies: [ :anElement | anElement selectedIndices isEmpty ] ].
+
 	^ aScripter
 ]
 
@@ -24,17 +26,19 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectExpanded [
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelect.
 
-	aScripter click
-		label: 'Expand tree';
-		onChildAt: 1;
-		onChildAt: 1;
-		id: #toggle;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Expand tree';
+				onChildAt: 1;
+				onChildAt: 1;
+				id: #toggle ].
 
-	aScripter check
-		label: 'Check that expansion works';
-		satisfies: [ :anElement | anElement viewModel root isExpanded ];
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that expansion works';
+				satisfies: [ :anElement | anElement viewModel root isExpanded ] ].
 
 	^ aScripter
 ]
@@ -45,24 +49,27 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelectExpanded.
 
-	aScripter click
-		label: 'Select items in tree';
-		id: #scrollable;
-		onChildAt: 2;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Select items in tree';
+				id: #scrollable;
+				onChildAt: 2 ].
 
 
-	aScripter click
-		label: 'Select items in tree';
-		id: #scrollable;
-		onChildAt: 5;
-		modifiers: BlKeyModifiers shift;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Select items in tree';
+				id: #scrollable;
+				onChildAt: 5;
+				modifiers: BlKeyModifiers shift ].
 
-	aScripter check
-		label: 'Check that selection works';
-		satisfies: [ :anElement | anElement selectedIndices size = 4 ];
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that selection works';
+				satisfies: [ :anElement | anElement selectedIndices size = 4 ] ].
 
 	^ aScripter
 ]
@@ -74,17 +81,19 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDisco
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelectSelected.
 
 
-	aScripter click
-		label: 'Select items in tree';
-		id: #scrollable;
-		onChildAt: 7;
-		modifiers: BlKeyModifiers primary;
-		play.
+	aScripter
+		clickStep: [ :s | 
+			s
+				label: 'Select items in tree';
+				id: #scrollable;
+				onChildAt: 7;
+				modifiers: BlKeyModifiers primary ].
 
-	aScripter check
-		label: 'Check that selection works';
-		satisfies: [ :anElement | anElement selectedIndices size = 5 ];
-		play.
+	aScripter
+		checkStep: [ :s | 
+			s
+				label: 'Check that selection works';
+				satisfies: [ :anElement | anElement selectedIndices size = 5 ] ].
 
 	^ aScripter
 ]

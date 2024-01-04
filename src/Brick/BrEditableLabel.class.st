@@ -37,8 +37,19 @@ BrEditableLabel >> cancelEdition [
 { #category : #initialization }
 BrEditableLabel >> defaultEditorShortcuts [
 	^ {
-		BrEditorShortcut editableLabelAccept.
-		BrEditorShortcut editableLabelCancel
+		(BrEditorShortcut new
+		  name: 'Accept';
+		  description: 'Accepts changes make to the text.';
+		  combination: BlKeyCombination enter;
+		  performBlock: [ self acceptEdition ];
+		  yourself).
+		(BrEditorShortcut new
+		  name: 'Cancel';
+		  description:
+			  'Cancels changes and brings back the state of the editor.';
+		  combination: BlKeyCombination escape;
+		  performBlock: [ self cancelEdition ];
+		  yourself)
 	}
 ]
 
@@ -48,7 +59,13 @@ BrEditableLabel >> defaultLabelShortcuts [
 		BrEditorShortcut loseFocus.
 		BrEditorShortcut focusPrevious.
 		BrEditorShortcut focusNext.
-		BrEditorShortcut editableLabelSwitchToEditor
+		(BrEditorShortcut new
+		  name: 'Switch to editor';
+		  description:
+			  'Switches the label into an editor allowing users to edit it.';
+		  combination: BlKeyCombination enter;
+		  performBlock: [ self switchToEditor ];
+		  yourself)
 	}
 ]
 
