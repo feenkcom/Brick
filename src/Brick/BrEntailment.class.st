@@ -27,7 +27,7 @@ BrEntailment >> initialize [
 { #category : #accessing }
 BrEntailment >> premise: aPremiseStencil [
 	"Define how premise should be visually represented.
-	For example is can be a source code or a list of items"
+	For example it can be a source code view or a list of items"
 
 	self viewModel premise: aPremiseStencil
 ]
