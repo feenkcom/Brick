@@ -8,7 +8,8 @@ Class {
 		'sink',
 		'whenSuccess',
 		'whenPending',
-		'isClosed'
+		'isClosed',
+		'currentStream'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -39,11 +40,15 @@ BrAsyncElementSink >> element: anElement [
 
 { #category : #'api - accessing' }
 BrAsyncElementSink >> forwardStream: anAsyncStream [
-	"Forward a given stream into the sink, closing the sink afterwards"
+	"Forward a given stream into the sink, closing the sink afterwards. There can only be one stream forwarding items to the sink.
+	The previous stream is terminated."
 	<return: #TAsyncPromise>
 	| aPromise |
 	
-	aPromise := (anAsyncStream forward: self) asAsyncPromise.
+	currentStream ifNotNil: [ :aStream | aStream terminate ].
+	currentStream := anAsyncStream terminatable.
+	
+	aPromise := (currentStream forward: self) asAsyncPromise.
 	updater element enqueueTask: (BlPromiseTask new promise: aPromise).
 	^ aPromise
 ]

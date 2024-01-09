@@ -3,6 +3,7 @@ Class {
 	#superclass : #BrWidgetModel,
 	#instVars : [
 		'contentStencilBuilder',
+		'cachedContentElement',
 		'toolbarStencilBuilder',
 		'actionbarStencilBuilder',
 		'selected'
@@ -36,6 +37,13 @@ BrTabModel >> actionsStencil: anActionStencilBuilder [
 	self toolbarStencil: anActionStencilBuilder
 ]
 
+{ #category : #accessing }
+BrTabModel >> cachedContentElementDo: aBlock ifAbsent: anotherBlock [
+	^ cachedContentElement
+		ifNotNil: aBlock
+		ifNil: anotherBlock
+]
+
 { #category : #'mouse handlers' }
 BrTabModel >> clickEvent: anEvent [
 	(self widget states hasState: BlElementState disabled)
@@ -43,6 +51,21 @@ BrTabModel >> clickEvent: anEvent [
 
 	anEvent consumed: true.
 	self select
+]
+
+{ #category : #accessing }
+BrTabModel >> contentElement [
+	"Return a cached content element for the tab if already present,
+	otherwise use a content stencil to instantiate tab's content"
+	
+	cachedContentElement
+		ifNotNil: [ :anElement | ^ anElement ].
+
+	cachedContentElement := self contentStencilBuilder
+		tabModel: self;
+		asElement.
+	
+	^ cachedContentElement
 ]
 
 { #category : #accessing }
@@ -65,7 +88,8 @@ BrTabModel >> deselect [
 BrTabModel >> initialize [
 	super initialize.
 	
-	selected := false
+	selected := false.
+	cachedContentElement := nil
 ]
 
 { #category : #hooks }
@@ -121,7 +145,9 @@ BrTabModel >> stencil: aStencilBuilder [
 	It should be computed lazily by the Tab widget on demand"
 
 	contentStencilBuilder := aStencilBuilder asStencilBuilder: BrTabStencilBuilder.
-	self notifyStencilChanged: contentStencilBuilder.
+	cachedContentElement := nil.
+
+	self notifyStencilChanged: contentStencilBuilder
 ]
 
 { #category : #accessing }
