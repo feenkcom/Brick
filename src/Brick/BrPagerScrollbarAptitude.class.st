@@ -19,7 +19,12 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement model: aP
 	aPreviewElement := BrButton new
 		margin: (BlInsets all: 3);
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
-		aptitude: BrGlamorousFadedButtonExteriourAptitude.
+		aptitude: BrGlamorousFadedButtonExteriourAptitude + ((BrGlamorousWithTooltipAptitude content: [
+			BrElementAsFormPreview
+				forElement: aPageContentElement
+				preferredExtent: 400@400 ])
+					showDelay: 100 milliSeconds;
+					hideDelay: 50 milliSeconds).
 
 	aPageContentElement addEventHandler: (BrPagerPagePreviewResizeListener new previewElement: aPreviewElement).
 	aPageContentElement addEventHandler: (BrPagerPagePreviewFocusListener new

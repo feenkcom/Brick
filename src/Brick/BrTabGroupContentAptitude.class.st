@@ -2,8 +2,7 @@ Class {
 	#name : #BrTabGroupContentAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
-		'content',
-		'contentElementsCache'
+		'content'
 	],
 	#category : #'Brick-Tabs - Look'
 }
@@ -29,8 +28,7 @@ BrTabGroupContentAptitude >> initialize [
 		labeled: 'Content'.
 	
 	self add: (BrLayoutResizerAptitude new inherit: content).
-	
-	contentElementsCache := IdentityDictionary new.
+
 	self addChangeAddChildAs: #(content) with: [ content ]
 ]
 
@@ -58,32 +56,19 @@ BrTabGroupContentAptitude >> onTabDeselected: aTabModel [
 
 { #category : #hooks }
 BrTabGroupContentAptitude >> onTabRemoved: aTabModel [
-	| aRemovedContentElement |
-
-	aRemovedContentElement := (contentElementsCache removeKey: aTabModel ifAbsent: [ ^ self ]).
-	aRemovedContentElement withAllChildrenBreadthFirstDo: [ :anElement |
-		anElement dispatchEvent: BrWidgetPermanentlyRemovedEvent new ]
+	aTabModel
+		cachedContentElementDo: [ :aRemovedContentElement |
+			aRemovedContentElement withAllChildrenBreadthFirstDo: [ :anElement |
+				anElement dispatchEvent: BrWidgetPermanentlyRemovedEvent new ] ]
+		ifAbsent: [ ^ self ]
 ]
 
 { #category : #hooks }
 BrTabGroupContentAptitude >> onTabSelected: aTabModel [
-	| aContentElement |
-	
-	self widgetContent removeChildren.
 
-	aContentElement := contentElementsCache
-		at: aTabModel
-		ifAbsentPut: [
-			| aStencilBuilder aTabContentElement |
-			
-			aStencilBuilder := aTabModel contentStencilBuilder.
-			aTabContentElement := aStencilBuilder
-				tabModel: aTabModel;
-				asElement.
-			aStencilBuilder tabModel: nil.
-			aTabContentElement ].
-
-	self widgetContent addChild: aContentElement "removeFromParent"
+	self widgetContent
+		removeChildren;
+		addChild: aTabModel contentElement
 ]
 
 { #category : #hooks }

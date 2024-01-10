@@ -277,7 +277,9 @@ BrElementUpdater >> subscribeToElement [
 BrElementUpdater >> updateElement [
 	"I should be called from a UI process."
 	self elementDo: [ :anElement |
-		self action cull: anElement cull: payload value ]
+		BlFrameTelemetry
+			timeSync: [ 'Update element {1} using {2} with payload {3}' format: { anElement . self action . payload value } ]
+			during: [ self action cull: anElement cull: payload value ] ]
 ]
 
 { #category : #'private - updating' }
