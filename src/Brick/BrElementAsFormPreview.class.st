@@ -47,6 +47,22 @@ BrElementAsFormPreview >> createAsFormFuture: anElement [
 ]
 
 { #category : #initialization }
+BrElementAsFormPreview >> createAsFormStream: anElement [
+	| anInitialFormStream anUpdatingFormStream |
+	
+	"renders an initial preview"
+	anInitialFormStream := (self createAsFormFuture: anElement) asAsyncStream.
+	
+	"re-renders the preview whenever an element is invalidated"
+	anUpdatingFormStream := ((anElement
+		eventsStreamOn: BlElementRepaintRequestedEvent) keepOnlyLast
+		throttle: 1 second)
+		mapFuture: [ :eachEvent | self createAsFormFuture: eachEvent currentTarget ].
+	
+	^ anInitialFormStream merge: anUpdatingFormStream
+]
+
+{ #category : #initialization }
 BrElementAsFormPreview >> initialize [
 	super initialize.
 	
@@ -61,18 +77,8 @@ BrElementAsFormPreview >> initialize [
 
 { #category : #initialization }
 BrElementAsFormPreview >> initializeForElement: anElement [
-	| anInitialFormStream aFormStream anUpdatingFormStream |
-	
-	"renders an initial preview"
-	anInitialFormStream := (self createAsFormFuture: anElement) asAsyncStream.
-	
-	"re-renders the preview whenever an element is invalidated"
-	anUpdatingFormStream := ((anElement eventsStreamOn: BlElementRepaintRequestedEvent) keepOnlyLast
-		throttle: 1 second)
-		mapFuture: [ :eachEvent | self createAsFormFuture: eachEvent currentTarget ].
-
-	aFormStream := anInitialFormStream merge: anUpdatingFormStream.
-
+	| aFormStream |
+	aFormStream := self createAsFormStream: anElement.
 	formElement stream: aFormStream
 ]
 
