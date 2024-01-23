@@ -10,7 +10,7 @@ Class {
 
 { #category : #'api - accessing' }
 BrPagerPagePreviewFocusListener >> eventsToHandle [
-	^ { BlFocusInEvent . BlFocusOutEvent . BrPagerPageBoundEvent }
+	^ { BlFocusInEvent . BlFocusOutEvent . BlFocusTransferEvent. BrPagerPageBoundEvent }
 ]
 
 { #category : #'element handlers' }
@@ -27,6 +27,13 @@ BrPagerPagePreviewFocusListener >> focusOutEvent: anEvent [
 	previewElement userData
 		at: #previousFocusedElement
 		put: anEvent target asWeakReference
+]
+
+{ #category : #'element handlers' }
+BrPagerPagePreviewFocusListener >> focusTransferEvent: anEvent [
+	previewElement userData
+		at: #previousFocusedElement
+		put: anEvent focusedElement asWeakReference
 ]
 
 { #category : #'api - hooks' }
