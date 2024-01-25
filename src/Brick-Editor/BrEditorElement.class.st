@@ -52,7 +52,18 @@ BrEditorElement >> initialize [
 	
 	textStyleHandler := BlEventHandler
 		on: BrTextEditorTextStyleRequested
-		do: [ :anEvent | self editor stylerStrategy styleTextInEditorElement: self thenDo: anEvent afterAction ]
+		do: [ :anEvent | self privateDoStyleTextAndAfterDo: anEvent afterAction ]
+]
+
+{ #category : #accessing }
+BrEditorElement >> privateDoStyleTextAndAfterDo: aBlock [
+	"Actually trigger a text styler"
+	
+	(BlTextStylerRequestedSignal new element: self) emit.
+	
+	self editor stylerStrategy
+		styleTextInEditorElement: self
+		thenDo: aBlock
 ]
 
 { #category : #scrolling }
