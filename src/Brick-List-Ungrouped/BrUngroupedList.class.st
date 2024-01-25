@@ -25,7 +25,7 @@ BrUngroupedList >> itemSuchThat: aMatchBlock do: anActionBlock [
 				isSynchronous
 					ifTrue: [
 						anActionBlock value: anIndex.
-						^ self ]
+						^ anIndex asAsyncPromise ]
 					ifFalse: [ self enqueueTask: (BlTaskAction new
 						action: [ anActionBlock value: anIndex ]) ] ] ].
 
