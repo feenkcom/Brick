@@ -10,6 +10,31 @@ BrUngroupedList >> defaultListModel [
 ]
 
 { #category : #'api - accessing' }
+BrUngroupedList >> itemSuchThat: aMatchBlock do: anActionBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found.
+	Evaluate an action block synchronously if an item was already preloaded, otherwise schedule
+	execution in a UI process"
+	<return: #TAsyncPromise>
+	| aPromise |
+	
+	aPromise := self itemsProvider
+		itemSuchThat: aMatchBlock
+		do: [ :anIndex :isSynchronous |
+			anIndex > 0 ifTrue: [ 
+				isSynchronous
+					ifTrue: [
+						anActionBlock value: anIndex.
+						^ anIndex asAsyncPromise ]
+					ifFalse: [ self enqueueTask: (BlTaskAction new
+						action: [ anActionBlock value: anIndex ]) ] ] ].
+
+	self enqueueTask: (BlPromiseTask new promise: aPromise).
+	
+	^ aPromise
+]
+
+{ #category : #'api - accessing' }
 BrUngroupedList >> items [
 	^ self viewModel items
 ]
@@ -17,6 +42,11 @@ BrUngroupedList >> items [
 { #category : #'api - accessing' }
 BrUngroupedList >> items: aCollectionOfValues [
 	self itemsProvider: (BrSequenceableCollectionItemsProvider new collection: aCollectionOfValues)
+]
+
+{ #category : #'api - accessing' }
+BrUngroupedList >> itemsProvider [
+	^ self viewModel itemsProvider
 ]
 
 { #category : #'api - accessing' }
@@ -33,36 +63,24 @@ BrUngroupedList >> scrollToItem: anObject [
 ]
 
 { #category : #'api - scrolling' }
-BrUngroupedList >> scrollToItemSuchThat: aBlock [
+BrUngroupedList >> scrollToItemSuchThat: aMatchBlock [
 	<return: #TAsyncPromise>
 
-	| aPromise |
-	aPromise := (self viewModel itemsProvider preloadUntilFoundSuchThat: aBlock)
-		then: [ :anItemIndex | self enqueueTask: (BlTaskAction new
-			action: [ self scrollToIndex: anItemIndex ]).
-			anItemIndex ].
-	
-	self enqueueTask: (BlPromiseTask new promise: aPromise).
-	
-	^ aPromise
+	^ self
+		itemSuchThat: aMatchBlock
+		do: [ :anItemIndex | self scrollToIndex: anItemIndex ]
 ]
 
 { #category : #'api - scrolling' }
-BrUngroupedList >> scrollToItemSuchThat: aBlock offset: anOffset [
+BrUngroupedList >> scrollToItemSuchThat: aMatchBlock offset: anOffset [
 	"Scroll the InfiniteELement to make the datasource position visible 
 	with the given offset from resolved layout start.
 	See {{gtMethod:BlInfiniteLinearLayout>>#scrollToPosition:offset:}}"
 	<return: #TAsyncPromise>
 
-	| aPromise |
-	aPromise := (self viewModel itemsProvider preloadUntilFoundSuchThat: aBlock)
-		then: [ :anItemIndex | self enqueueTask: (BlTaskAction new
-			action: [ self scrollToIndex: anItemIndex offset: anOffset ]).
-			anItemIndex ].
-	
-	self enqueueTask: (BlPromiseTask new promise: aPromise).
-	
-	^ aPromise
+	^ self
+		itemSuchThat: aMatchBlock
+		do: [ :anItemIndex | self scrollToIndex: anItemIndex offset: anOffset ]
 ]
 
 { #category : #'api - accessing' }

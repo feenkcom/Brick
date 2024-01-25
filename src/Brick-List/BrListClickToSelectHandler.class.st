@@ -2,7 +2,8 @@ Class {
 	#name : #BrListClickToSelectHandler,
 	#superclass : #BlCustomEventHandler,
 	#instVars : [
-		'listWidget'
+		'listWidget',
+		'shouldRequestFocus'
 	],
 	#category : #'Brick-List-Support'
 }
@@ -17,8 +18,8 @@ BrListClickToSelectHandler >> clickEvent: aBlClickEvent [
 
 	aBlClickEvent consumed: true.
 	
+	listWidget requestFocus.
 	listWidget selectOne: anItemIndex dueTo: aBlClickEvent.
-	listWidget requestFocus
 ]
 
 { #category : #'api - accessing' }
@@ -33,6 +34,13 @@ BrListClickToSelectHandler >> eventsToHandle [
 	^ { BlClickEvent . BlDoubleClickEvent }
 ]
 
+{ #category : #'initialization ' }
+BrListClickToSelectHandler >> initialize [
+	super initialize.
+	
+	shouldRequestFocus := true
+]
+
 { #category : #accessing }
 BrListClickToSelectHandler >> listWidget [
 	^ listWidget
@@ -41,4 +49,14 @@ BrListClickToSelectHandler >> listWidget [
 { #category : #accessing }
 BrListClickToSelectHandler >> listWidget: anObject [
 	listWidget := anObject
+]
+
+{ #category : #accessing }
+BrListClickToSelectHandler >> shouldRequestFocus [
+	^ shouldRequestFocus
+]
+
+{ #category : #accessing }
+BrListClickToSelectHandler >> shouldRequestFocus: anObject [
+	shouldRequestFocus := anObject
 ]
