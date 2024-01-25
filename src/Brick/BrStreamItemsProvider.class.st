@@ -29,6 +29,11 @@ BrStreamItemsProvider >> attachToListModel: aListModel [
 	aListModel dispatchEvent: (BrItemsProviderPromiseEnqueuedEvent new promise: buffer bufferLoadingPromise).
 ]
 
+{ #category : #'private - accessing' }
+BrStreamItemsProvider >> bufferLoadingPromise [
+	^ buffer bufferLoadingPromise
+]
+
 { #category : #accessing }
 BrStreamItemsProvider >> currentItems [
 	^ buffer loadedItems

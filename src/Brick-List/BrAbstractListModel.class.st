@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'itemTypeStencil',
 		'itemIdStencil',
-		'rowDataBinder'
+		'rowDataBinder',
+		'shouldRequestFocusOnSelectionClick'
 	],
 	#category : #'Brick-List-Models'
 }
@@ -19,6 +20,7 @@ BrAbstractListModel >> initialize [
 	super initialize.
 
 	itemTypeStencil := [ :anItemTypeFactory | anItemTypeFactory default ] asStencilBuilder: BrListItemTypeStencilBuilder.
+	shouldRequestFocusOnSelectionClick := true.
 	itemIdStencil := nil
 ]
 
@@ -79,4 +81,14 @@ BrAbstractListModel >> rowDataBinder: aStencil [
 
 	rowDataBinder := aStencil asStencilBuilder: BrListRowDataBinder.
 	self dispatchEvent: (BrListRowDataBinderChangedEvent new rowDataBinder: rowDataBinder)
+]
+
+{ #category : #accessing }
+BrAbstractListModel >> shouldRequestFocusOnSelectionClick [
+	^ shouldRequestFocusOnSelectionClick
+]
+
+{ #category : #accessing }
+BrAbstractListModel >> shouldRequestFocusOnSelectionClick: anObject [
+	shouldRequestFocusOnSelectionClick := anObject
 ]

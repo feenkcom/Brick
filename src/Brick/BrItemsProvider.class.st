@@ -25,6 +25,13 @@ BrItemsProvider >> attachToListModel: aListModel [
 	listModel := aListModel
 ]
 
+{ #category : #'api - loading' }
+BrItemsProvider >> bufferLoadingPromise [
+	<return: #TAsyncPromise>
+
+	^ true asAsyncPromise
+]
+
 { #category : #accessing }
 BrItemsProvider >> currentItems [
 	^ self subclassResponsibility
@@ -50,6 +57,19 @@ BrItemsProvider >> itemCount [
 	<return: #Number>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'api - loading' }
+BrItemsProvider >> itemSuchThat: aMatchBlock do: anActionBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found"
+	<return: #TAsyncPromise>
+
+	^ ((self preloadUntilFoundSuchThat: aMatchBlock)
+		then: [ :anIndex | self bufferLoadingPromise then: [ anIndex ] ])
+		then: [ :anIndex :isSynchronous |
+			anActionBlock cull: anIndex cull: isSynchronous.
+			anIndex ]
 ]
 
 { #category : #accessing }

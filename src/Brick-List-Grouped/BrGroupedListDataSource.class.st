@@ -99,7 +99,7 @@ BrGroupedListDataSource >> onBindHolder: anElementHolder at: aPosition [
 
 { #category : #'instance creation' }
 BrGroupedListDataSource >> onBindItem: anItemEntity holder: anElementHolder at: aPosition [
-	| anItemObject anItemElementWithBindedData |
+	| anItemObject |
 
 	anItemObject := anItemEntity itemObject.
 
