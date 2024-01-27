@@ -10,8 +10,15 @@ Class {
 		'deselectedInterval',
 		'sourceEvent'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
+
+{ #category : #'api - accessing' }
+BrSelectionChanged >> allSelectedDo: aBlock [
+	"Evaluate a given block with each selected interval as an argument"
+
+	selection do: [ :eachSelectedInterval | aBlock value: eachSelectedInterval indices ]
+]
 
 { #category : #'api - accessing' }
 BrSelectionChanged >> deselectedDo: aBlock [
