@@ -66,6 +66,11 @@ BrSelectionChanged >> selection: aBlSelection [
 	selection := aBlSelection
 ]
 
+{ #category : #'api - accessing' }
+BrSelectionChanged >> selectionDo: aBlock [
+	aBlock value: selection
+]
+
 { #category : #accessing }
 BrSelectionChanged >> sourceEvent [
 	^ sourceEvent
