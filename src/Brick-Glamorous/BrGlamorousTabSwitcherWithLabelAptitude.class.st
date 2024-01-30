@@ -15,6 +15,9 @@ Class {
 BrGlamorousTabSwitcherWithLabelAptitude >> initialize [
 	super initialize.
 
-	self add: (BrGlamorousTextLabelAptitude new foreground: Color black).	
-	
+	self add: (BrGlamorousTextLabelAptitude new 
+		foreground: Color black).	
+		
+	self addChangeProperty: #(widget geometry) with: [ 
+		BlStadiumGeometry new ].
 ]

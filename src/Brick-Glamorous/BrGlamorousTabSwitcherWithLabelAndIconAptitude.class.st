@@ -8,7 +8,12 @@ Class {
 BrGlamorousTabSwitcherWithLabelAndIconAptitude >> initialize [
 	super initialize.
 
-	self add: (BrGlamorousButtonLabelAndIconAptitude new).
+	self add: (BrGlamorousButtonLabelAndIconAptitude new
+		defaultColor: Color black;
+		hoveredColor: Color black;
+		pressedColor: Color black;
+		selectedColor: Color black).
 	
-	"self addChangeProperty: #(widget geometry) with: [ BlCircleGeometry new ]."
+	self addChangeProperty: #(widget geometry) with: [ 
+		BlStadiumGeometry new ].
 ]
