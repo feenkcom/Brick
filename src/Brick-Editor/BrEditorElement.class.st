@@ -50,6 +50,8 @@ BrEditorElement >> initialize [
 	self when: BlFocusInEvent do: [ hasFocus := true ].
 	self when: BlFocusOutEvent do: [ hasFocus := false ].
 	
+	self enableNestedScrolling.
+	
 	textStyleHandler := BlEventHandler
 		on: BrTextEditorTextStyleRequested
 		do: [ :anEvent | self privateDoStyleTextAndAfterDo: anEvent afterAction ]
