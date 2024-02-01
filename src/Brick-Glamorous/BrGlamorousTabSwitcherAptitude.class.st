@@ -12,6 +12,15 @@ Class {
 }
 
 { #category : #initialization }
+BrGlamorousTabSwitcherAptitude >> createCommonStyleAptitude [
+	^ (BrStyleCommonAptitude new
+		default: [ :aStyle | aStyle background: Color white ];
+		hovered: [ :aStyle | aStyle background: Color veryVeryLightGray lighter ];
+		pressed: [ :aStyle | aStyle background: Color veryVeryLightGray  ];
+		selected: [ :aStyle | aStyle background: self theme item selectedColor ])
+]
+
+{ #category : #initialization }
 BrGlamorousTabSwitcherAptitude >> initialize [
 	super initialize.
 
@@ -22,7 +31,5 @@ BrGlamorousTabSwitcherAptitude >> initialize [
 
 	self addChangeProperty: #(widget padding) with: [ BlInsets top: 2 left: 2 bottom: 2 right: 2 ].
 
-	self add: (BrStyleCommonAptitude new
-		default: 	[ :aStyle | aStyle background: Color white ];
-		hovered: [ :aStyle | aStyle background: Color veryVeryLightGray lighter ])
+	self add: self createCommonStyleAptitude.
 ]
