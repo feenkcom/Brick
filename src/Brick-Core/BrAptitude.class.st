@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'changes'
 	],
-	#category : 'Brick-Core-Core'
+	#category : #'Brick-Core-Core'
 }
 
 { #category : #'api - composition' }
@@ -23,6 +23,11 @@ BrAptitude class >> + anotherLook [
 { #category : #'api - composition' }
 BrAptitude class >> - anotherLook [
 	^ self asLook - anotherLook
+]
+
+{ #category : #'api - composition' }
+BrAptitude class >> asAptitude [
+	^ self new
 ]
 
 { #category : #'api - composition' }
@@ -122,6 +127,11 @@ BrAptitude >> addChangeProperty: aCollection withCopy: aBlock [
 				path: aCollection;
 				value: aBlock;
 				yourself)
+]
+
+{ #category : #'api - composition' }
+BrAptitude >> asAptitude [
+	^ self
 ]
 
 { #category : #'api - composition' }
