@@ -30,11 +30,6 @@ BrWithContextMenuAptitude class >> content: anObject [
 			yourself ]
 ]
 
-{ #category : #constants }
-BrWithContextMenuAptitude class >> defaultPreferredExtent [
-	200 @ 400
-]
-
 { #category : #'instance creation' }
 BrWithContextMenuAptitude class >> handle: anObject content: anotherObject [
 	^ self stencil: [
@@ -47,11 +42,6 @@ BrWithContextMenuAptitude class >> handle: anObject content: anotherObject [
 ]
 
 { #category : #initialization }
-BrWithContextMenuAptitude >> defaultPreferredExtent [
-	^ self class defaultPreferredExtent
-]
-
-{ #category : #initialization }
 BrWithContextMenuAptitude >> initialize [
 	super initialize.
 
@@ -59,7 +49,7 @@ BrWithContextMenuAptitude >> initialize [
 			on: BrContextMenuHideWish
 			do: [ :aWish | self onHideWish: aWish ].
 
-	preferredExtent := self defaultPreferredExtent.
+	preferredExtent := 200 @ 400.
 
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
