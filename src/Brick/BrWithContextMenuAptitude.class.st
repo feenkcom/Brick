@@ -44,76 +44,72 @@ BrWithContextMenuAptitude class >> handle: anObject content: anotherObject [
 { #category : #initialization }
 BrWithContextMenuAptitude >> initialize [
 	super initialize.
-	
+
 	hideWishHandler := BlEventHandler
-		on: BrContextMenuHideWish
-		do: [ :aWish | self onHideWish: aWish ].
-	
+			on: BrContextMenuHideWish
+			do: [ :aWish | self onHideWish: aWish ].
+
 	preferredExtent := 200 @ 400.
-	
+
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
-	
+
 	strategy := BrAnchoredCompositeStrategy builder
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 negated @ 4 negated) ];
-				availableBounds: BrAnchoredBottomRightAvailableBounds;
-				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [
-					self removeInnerContainerContextMenuAptitudes.
-					innerContainer addAptitude: BrContextMenuBottomRightAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 @ 4 negated) ];
-				availableBounds: BrAnchoredBottomLeftAvailableBounds;
-				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [
-					self removeInnerContainerContextMenuAptitudes.
-					innerContainer addAptitude: BrContextMenuBottomLeftAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 negated @ 4) ];
-				availableBounds: BrAnchoredTopRightAvailableBounds;
-				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [
-					self removeInnerContainerContextMenuAptitudes.
-					innerContainer addAptitude: BrContextMenuTopRightAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 @ 4) ];
-				availableBounds: BrAnchoredTopLeftAvailableBounds;
-				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [ 
-					self removeInnerContainerContextMenuAptitudes.
-					innerContainer addAptitude: BrContextMenuTopLeftAptitude ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 negated @ 0) ];
-				availableBounds: BrAnchoredRightAvailableBounds;
-				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [
-					self removeInnerContainerContextMenuAptitudes.
-					innerContainer addAptitude: (BrContextMenuRightAptitude new 
-						position: position;
-						element: self root) ] ];
-		single: [ :e | 
-			e
-				anchorBounds: [ :f | widget bounds inParent: f ];
-				referencePoint: [ position + (4 @ 0) ];
-				availableBounds: BrAnchoredLeftAvailableBounds;
-				scaleFactor: BrAnchoredGlobalScaleFactor;
-				apply: [
-					self removeInnerContainerContextMenuAptitudes.
-					innerContainer addAptitude: (BrContextMenuLeftAptitude new 
-						position: position;
-						element: self root) ] ];
-		build.
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: [ position + (4 negated @ 4 negated) ];
+					availableBounds: BrAnchoredBottomRightAvailableBounds;
+					scaleFactor: BrAnchoredGlobalScaleFactor;
+					apply: [ self removeInnerContainerContextMenuAptitudes.
+						innerContainer addAptitude: BrContextMenuBottomRightAptitude ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: [ position + (4 @ 4 negated) ];
+					availableBounds: BrAnchoredBottomLeftAvailableBounds;
+					scaleFactor: BrAnchoredGlobalScaleFactor;
+					apply: [ self removeInnerContainerContextMenuAptitudes.
+						innerContainer addAptitude: BrContextMenuBottomLeftAptitude ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: [ position + (4 negated @ 4) ];
+					availableBounds: BrAnchoredTopRightAvailableBounds;
+					scaleFactor: BrAnchoredGlobalScaleFactor;
+					apply: [ self removeInnerContainerContextMenuAptitudes.
+						innerContainer addAptitude: BrContextMenuTopRightAptitude ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: [ position + (4 @ 4) ];
+					availableBounds: BrAnchoredTopLeftAvailableBounds;
+					scaleFactor: BrAnchoredGlobalScaleFactor;
+					apply: [ self removeInnerContainerContextMenuAptitudes.
+						innerContainer addAptitude: BrContextMenuTopLeftAptitude ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: [ position + (4 negated @ 0) ];
+					availableBounds: BrAnchoredRightAvailableBounds;
+					scaleFactor: BrAnchoredGlobalScaleFactor;
+					apply: [ self removeInnerContainerContextMenuAptitudes.
+						innerContainer
+							addAptitude: (BrContextMenuRightAptitude new
+									position: position;
+									element: self root) ] ];
+			single: [ :e | 
+				e
+					anchorBounds: [ :f | widget bounds inParent: f ];
+					referencePoint: [ position + (4 @ 0) ];
+					availableBounds: BrAnchoredLeftAvailableBounds;
+					scaleFactor: BrAnchoredGlobalScaleFactor;
+					apply: [ self removeInnerContainerContextMenuAptitudes.
+						innerContainer
+							addAptitude: (BrContextMenuLeftAptitude new
+									position: position;
+									element: self root) ] ];
+			build
 ]
 
 { #category : #initialization }
