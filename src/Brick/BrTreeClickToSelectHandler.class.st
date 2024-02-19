@@ -4,15 +4,20 @@ Class {
 	#instVars : [
 		'treeWidget'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #'api - accessing' }
 BrTreeClickToSelectHandler >> clickEvent: aBlClickEvent [
-	aBlClickEvent consumed: true.
+	| clickedDataSourcePosition |
 
-	treeWidget selectOne: (aBlClickEvent currentTarget constraints infinite holder dataSourcePosition) dueTo: aBlClickEvent.
-	treeWidget requestFocus
+	clickedDataSourcePosition := aBlClickEvent currentTarget constraints infinite holder dataSourcePosition.
+	clickedDataSourcePosition <= 0
+		ifTrue: [ ^ self ].
+
+	aBlClickEvent consumed: true.
+	treeWidget requestFocus.
+	treeWidget selectOne: clickedDataSourcePosition dueTo: aBlClickEvent
 ]
 
 { #category : #'api - accessing' }
