@@ -139,6 +139,10 @@ BrSelectionModel >> selectOne: anIndex dueTo: aSourceEvent [
 	"Select an item at a given index deselecting all previously selected items"
 	| aSelectionCopy |
 
+	self
+		assert: [ anIndex > 0 ]
+		description: [ 'Selection index must be greater than 0' ].
+
 	aSelectionCopy := selection copy.
 	aSelectionCopy deselect: anIndex - 1 to: anIndex.
 
