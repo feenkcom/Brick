@@ -13,6 +13,11 @@ BrGlamorousDropdownAptitude >> background: aBlBackground [
 ]
 
 { #category : #'api - text style' }
+BrGlamorousDropdownAptitude >> border: aBlBorder [
+	anchoredLook border: aBlBorder
+]
+
+{ #category : #'api - text style' }
 BrGlamorousDropdownAptitude >> cornerRadius: aNumber [
 	anchoredLook cornerRadius: aNumber
 ]
