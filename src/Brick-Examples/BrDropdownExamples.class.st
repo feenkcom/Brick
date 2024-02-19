@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDropdownExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Dropdown'
+	#category : #'Brick-Examples-Dropdown'
 }
 
 { #category : #examples }
@@ -96,7 +96,7 @@ BrDropdownExamples >> coloredDropdown [
 	<gtExample>
 	| aButtonCircularLook aWithDropdownLook |
 	
-	aButtonCircularLook := [ BrInteractiveCommonAptitude new
+	aButtonCircularLook := [ BrLazyStyleCommonAptitude new
 		default: [ :e | e
 			background: BrGlamorousColors defaultButtonBorderColor;
 			border: (BlBorder

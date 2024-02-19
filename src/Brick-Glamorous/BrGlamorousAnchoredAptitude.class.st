@@ -3,9 +3,10 @@ Class {
 	#superclass : #BrAptitude,
 	#instVars : [
 		'background',
-		'cornerRadius'
+		'cornerRadius',
+		'border'
 	],
-	#category : 'Brick-Glamorous-Anchored'
+	#category : #'Brick-Glamorous-Anchored'
 }
 
 { #category : #accessing }
@@ -17,6 +18,17 @@ BrGlamorousAnchoredAptitude >> background [
 BrGlamorousAnchoredAptitude >> background: aBlBackground [
 	background := aBlBackground.
 	self widgetDo: [ :aWidget | aWidget background: background ]
+]
+
+{ #category : #accessing }
+BrGlamorousAnchoredAptitude >> border [
+	^ border
+]
+
+{ #category : #accessing }
+BrGlamorousAnchoredAptitude >> border: anObject [
+	border := anObject asBlBorder.
+	self widgetDo: [ :aWidget | aWidget border: border ]
 ]
 
 { #category : #accessing }
@@ -37,6 +49,7 @@ BrGlamorousAnchoredAptitude >> cornerRadius: aNumber [
 BrGlamorousAnchoredAptitude >> initialize [
 	super initialize.
 	background := Color white.
+	border := self theme button defaultBorderColor asBlBorder.
 	cornerRadius := 4.
 	self
 		add: BrShadowAptitude new;
@@ -44,8 +57,5 @@ BrGlamorousAnchoredAptitude >> initialize [
 			with: [ BrAnchoredGeometry cornerRadius: self cornerRadius element: widget ];
 		addChangeProperty: #(widget background) with: [ self background ];
 		addChangeProperty: #(widget border)
-			with: [ BlBorder
-				paint:
-					self theme button defaultBorderColor asBlPaint
-				width: 1 ]
+			with: [ border asBlBorder ]
 ]

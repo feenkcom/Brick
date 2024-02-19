@@ -4,12 +4,17 @@ Class {
 	#instVars : [
 		'anchoredLook'
 	],
-	#category : 'Brick-Glamorous-Dropdown'
+	#category : #'Brick-Glamorous-Dropdown'
 }
 
 { #category : #'api - text style' }
 BrGlamorousDropdownAptitude >> background: aBlBackground [
 	anchoredLook background: aBlBackground
+]
+
+{ #category : #'api - text style' }
+BrGlamorousDropdownAptitude >> border: aBlBorder [
+	anchoredLook border: aBlBorder
 ]
 
 { #category : #'api - text style' }
