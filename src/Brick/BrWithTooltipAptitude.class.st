@@ -119,7 +119,8 @@ BrWithTooltipAptitude >> hideDelay: anObject [
 
 { #category : #accessing }
 BrWithTooltipAptitude >> hideLater [
-	self assert: [ self canHide ].
+	self canHide
+		ifFalse: [ ^ self ].
 	self cancelHideLater.
 	hideLaterTask := BlDelayedTaskAction new
 		delay: self hideDelay;
