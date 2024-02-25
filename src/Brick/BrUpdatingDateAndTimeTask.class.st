@@ -57,7 +57,7 @@ BrUpdatingDateAndTimeTask >> onEnqueuedInElement: anElement [
 BrUpdatingDateAndTimeTask >> onRun [
 	| aTimeLabel |
 	dateAndTime ifNil: [ ^ self stop ].
-	
+
 	aTimeLabel := BrDateAndTimeLabel new
 			time: dateAndTime;
 			now: self time now.
@@ -66,7 +66,7 @@ BrUpdatingDateAndTimeTask >> onRun [
 		ifTrue: [ labelUpdater value: element value: aTimeLabel output ].
 
 	aTimeLabel hasNextUpdate
-		ifTrue: [ delay := self time now - aTimeLabel nextUpdate ]
+		ifTrue: [ delay := aTimeLabel nextUpdate - self time now ]
 ]
 
 { #category : #'api - initialization' }

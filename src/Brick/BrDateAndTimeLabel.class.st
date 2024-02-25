@@ -160,6 +160,16 @@ BrDateAndTimeLabel >> outputRelative: aString within: aDuration [
 	self nextUpdateWithin: aDuration
 ]
 
+{ #category : #printing }
+BrDateAndTimeLabel >> printOn: aStream [
+	super printOn: aStream.
+	self output ifNil: [ ^ self ].
+	aStream
+		nextPut: $(;
+		nextPutAll: self output asString;
+		nextPut: $)
+]
+
 { #category : #'api - accessing' }
 BrDateAndTimeLabel >> time [
 	"Return the date and time that should be displayed."
