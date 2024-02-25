@@ -30,6 +30,30 @@ BrDateAndTimeLabel >> gtDisplayOn: stream [
 	self output gtDisplayOn: stream
 ]
 
+{ #category : #'gt - extensions' }
+BrDateAndTimeLabel >> gtOverview [
+	^ OrderedDictionary new
+		at: 'Now' put: self now;
+		at: 'Time' put: self time;
+		at: 'Output' put: self output;
+		at: 'Next update [time]' put: self nextUpdate;
+		at: 'Next update [duration]' put: self nextUpdate - self now;
+		yourself
+]
+
+{ #category : #'gt - extensions' }
+BrDateAndTimeLabel >> gtOverviewFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Time';
+		priority: 1;
+		items: [ self gtOverview associations ];
+		column: 'Name' text: #key;
+		column: 'Value' text: #value weight: 2;
+		send: #value;
+		actionUpdateButton
+]
+
 { #category : #'api - testing' }
 BrDateAndTimeLabel >> hasNextUpdate [
 	<return: #Boolean>
@@ -64,7 +88,7 @@ BrDateAndTimeLabel >> nextUpdate: aDateAndTime [
 
 { #category : #'api - output' }
 BrDateAndTimeLabel >> nextUpdateWithin: aDuration [
-	self nextUpdate: self absolute - aDuration + self now
+	self nextUpdate: self now + aDuration
 ]
 
 { #category : #'api - accessing' }
@@ -134,6 +158,16 @@ BrDateAndTimeLabel >> outputRelative: aString within: aDuration [
 				self isPositive ifTrue: [ aStream nextPutAll: ' ago' ] ].
 	self output: anOutput.
 	self nextUpdateWithin: aDuration
+]
+
+{ #category : #printing }
+BrDateAndTimeLabel >> printOn: aStream [
+	super printOn: aStream.
+	self output ifNil: [ ^ self ].
+	aStream
+		nextPut: $(;
+		nextPutAll: self output asString;
+		nextPut: $)
 ]
 
 { #category : #'api - accessing' }

@@ -38,12 +38,18 @@ BrDateAndTimeSinceNowPrinter >> build: aTimeLabel [
 		ifTrue: [ ^ aTimeLabel
 				output: (aTimeLabel isPositive ifTrue: [ 'yesterday' ] ifFalse: [ 'tomorrow' ])
 				within: 1 day ].
-	aDuration < 30 days
+	aDuration < 7 days
 		ifTrue: [ ^ aTimeLabel
 				outputNumber: aDuration days
 				unit: 'day'
 				within: 1 day ].
 	^ aTimeLabel outputDate
+]
+
+{ #category : #'api - printing' }
+BrDateAndTimeSinceNowPrinter >> time: aTime [
+	<return: #BrDateAndTimeLabel>
+	^ self time: aTime now: DateAndTime now
 ]
 
 { #category : #'api - printing' }
