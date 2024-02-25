@@ -56,7 +56,7 @@ BrUpdatingDateAndTimeTask >> onEnqueuedInElement: anElement [
 { #category : #'api - running' }
 BrUpdatingDateAndTimeTask >> onRun [
 	| aTimeLabel |
-	dateAndTime ifNil: [ ^ self ].
+	dateAndTime ifNil: [ ^ self stop ].
 
 	aTimeLabel := BrDateAndTimeLabel new
 			time: dateAndTime;
