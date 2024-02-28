@@ -21,7 +21,7 @@ Class {
 	#instVars : [
 		'labelElement'
 	],
-	#category : 'Brick-! Core - Looks'
+	#category : #'Brick-! Core - Looks'
 }
 
 { #category : #accessing }
@@ -29,6 +29,15 @@ BrTextLabelAptitude >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ labelElement attributesBuilder
+]
+
+{ #category : #default }
+BrTextLabelAptitude >> defaultLabelElement [
+	^ BlAttributedTextElement new
+		text: 'Label' asRopedText;
+		labelMeasurement;
+		padding: (BlInsets all: 1);
+		yourself.
 ]
 
 { #category : #initialization }
@@ -40,10 +49,7 @@ BrTextLabelAptitude >> editorMeasurement [
 BrTextLabelAptitude >> initialize [
 	super initialize.
 
-	labelElement := BlAttributedTextElement new
-		text: 'Label' asRopedText;
-		labelMeasurement;
-		padding: (BlInsets all: 1).
+	labelElement := self defaultLabelElement.
 
 	self addChangeAddChildAs: #(content label) with: [ self label ].
 ]
