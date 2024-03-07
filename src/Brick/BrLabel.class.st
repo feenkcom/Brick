@@ -50,7 +50,15 @@ BrLabel >> text: aTextOrString [
 ]
 
 { #category : #'time label' }
-BrLabel >> updatingDateAndModel [
+BrLabel >> updatingDateAndTime: aDateAndTime [
+	"Display updating date and time as a since now text, e.g., 1 minute ago.
+	Note: The updating date and time must be initialized before aptitudes."
+
+	^ self updatingDateAndTimeModel dateAndTime: aDateAndTime
+]
+
+{ #category : #'time label' }
+BrLabel >> updatingDateAndTimeModel [
 	"Display updating date and time as a since now text, e.g., 1 minute ago.
 	Note: The updating date and time must be initialized before aptitudes."
 
@@ -61,12 +69,4 @@ BrLabel >> updatingDateAndModel [
 			aViewModel := BrUpdatingDateAndTimeModel new.
 			self viewModel add: aViewModel.
 			aViewModel ]
-]
-
-{ #category : #'time label' }
-BrLabel >> updatingDateAndTime: aDateAndTime [
-	"Display updating date and time as a since now text, e.g., 1 minute ago.
-	Note: The updating date and time must be initialized before aptitudes."
-
-	^ self updatingDateAndModel dateAndTime: aDateAndTime
 ]

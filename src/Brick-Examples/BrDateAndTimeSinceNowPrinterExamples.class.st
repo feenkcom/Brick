@@ -281,7 +281,7 @@ BrDateAndTimeSinceNowPrinterExamples >> newColumnedListWithDurations: aCollectio
 		cellStencil: [ :anItemType :aColumn :anIndex | 
 			| aLabel |
 			aLabel := self newTimeElement.
-			aLabel updatingDateAndModel
+			aLabel updatingDateAndTimeModel
 				printer: [ :aTimeLabel | 
 					| anOutput aTmpTimeLabel |
 					aTmpTimeLabel := BrDateAndTimeSinceNowPrinter new
@@ -301,7 +301,7 @@ BrDateAndTimeSinceNowPrinterExamples >> newColumnedListWithDurations: aCollectio
 BrDateAndTimeSinceNowPrinterExamples >> newTimeElement [
 	<gtExample>
 	^ BrLabel new
-		updatingDateAndModel;
+		updatingDateAndTimeModel;
 		aptitude: BrGlamorousLabelAptitude new;
 		addAptitude: (BrGlamorousWithLabelTooltipAptitude new text: '');
 		yourself
