@@ -1,3 +1,9 @@
+"
+I print {{gtClass:DateAndTime}} in a human readable duration, e.g., ""just now"", ""1 minute ago"".
+See more examples in {{gtClass:BrDateAndTimeSinceNowPrinterExamples}}.
+#Example
+{{gtExample:BrDateAndTimeSinceNowPrinterExamples >> #asDemoListElement | codeExpanded=false | previewExpanded=true | previewHeight=480 }}
+"
 Class {
 	#name : #BrDateAndTimeSinceNowPrinter,
 	#superclass : #Object,
@@ -18,10 +24,26 @@ BrDateAndTimeSinceNowPrinter >> before: aDuration now: aNow [
 
 { #category : #'api - printing' }
 BrDateAndTimeSinceNowPrinter >> build: aTimeLabel [
+	^ aTimeLabel isPositive
+		ifTrue: [ self buildPast: aTimeLabel ]
+		ifFalse: [ self buildFuture: aTimeLabel ]
+]
+
+{ #category : #'api - printing' }
+BrDateAndTimeSinceNowPrinter >> buildFuture: aTimeLabel [
+	| aDuration |
+	aDuration := aTimeLabel absolute.
+	aTimeLabel output: 'in future'.
+	aTimeLabel nextUpdateIn: aDuration.
+	^ aTimeLabel
+]
+
+{ #category : #'api - printing' }
+BrDateAndTimeSinceNowPrinter >> buildPast: aTimeLabel [
 	| aDuration |
 	aDuration := aTimeLabel absolute.
 	aDuration < 15 seconds
-		ifTrue: [ ^ aTimeLabel output: 'just now' within: 15 seconds ].
+		ifTrue: [ ^ aTimeLabel output: 'just now' in: 15 seconds - aDuration ].
 	aDuration < 1 minute
 		ifTrue: [ ^ aTimeLabel outputRelative: 'less than minute' within: 1 minute ].
 	aDuration < 1 hour
@@ -34,10 +56,7 @@ BrDateAndTimeSinceNowPrinter >> build: aTimeLabel [
 				outputNumber: aDuration hours
 				unit: 'hour'
 				within: 1 hour ].
-	aDuration < 2 days
-		ifTrue: [ ^ aTimeLabel
-				output: (aTimeLabel isPositive ifTrue: [ 'yesterday' ] ifFalse: [ 'tomorrow' ])
-				within: 1 day ].
+	aDuration < 2 days ifTrue: [ ^ aTimeLabel output: 'yesterday' within: 1 day ].
 	aDuration < 7 days
 		ifTrue: [ ^ aTimeLabel
 				outputNumber: aDuration days

@@ -32,13 +32,30 @@ BrDateAndTimeLabel >> gtDisplayOn: stream [
 
 { #category : #'gt - extensions' }
 BrDateAndTimeLabel >> gtOverview [
-	^ OrderedDictionary new
-		at: 'Now' put: self now;
-		at: 'Time' put: self time;
+	| aDictionary |
+	aDictionary := OrderedDictionary new.
+
+	self time <= self now
+		ifTrue: [ aDictionary
+				at: 'Time' put: self time;
+				at: 'Now' put: self now ]
+		ifFalse: [ aDictionary
+				at: 'Now' put: self now;
+				at: 'Time' put: self time ].
+
+	aDictionary
+		at: 'Duration' put: self duration;
+		at: 'Absolute duration' put: self absolute;
+		at: 'Time <= Now' put: self isPositive;
 		at: 'Output' put: self output;
-		at: 'Next update [time]' put: self nextUpdate;
-		at: 'Next update [duration]' put: self nextUpdate - self now;
-		yourself
+		at: 'Next update at [time]' put: self nextUpdate.
+
+	self hasNextUpdate ifTrue: [ 
+		aDictionary 
+			at: 'Next update in [duration]' 
+			put: self nextUpdateIn ].
+
+	^ aDictionary
 ]
 
 { #category : #'gt - extensions' }
@@ -50,8 +67,7 @@ BrDateAndTimeLabel >> gtOverviewFor: aView [
 		items: [ self gtOverview associations ];
 		column: 'Name' text: #key;
 		column: 'Value' text: #value weight: 2;
-		send: #value;
-		actionUpdateButton
+		send: #value
 ]
 
 { #category : #'api - testing' }
@@ -87,8 +103,24 @@ BrDateAndTimeLabel >> nextUpdate: aDateAndTime [
 ]
 
 { #category : #'api - output' }
+BrDateAndTimeLabel >> nextUpdateIn [
+	^ self hasNextUpdate
+		ifTrue: [ self nextUpdate - self now ]
+		ifFalse: [ 0 seconds ]
+]
+
+{ #category : #'api - output' }
+BrDateAndTimeLabel >> nextUpdateIn: aDuration [
+	| aTime |
+	aTime := self now + aDuration.
+	self nextUpdate: aTime
+]
+
+{ #category : #'api - output' }
 BrDateAndTimeLabel >> nextUpdateWithin: aDuration [
-	self nextUpdate: self now + aDuration
+	| aDiff |
+	aDiff := aDuration - self duration + (self duration roundDownTo: aDuration).
+	self nextUpdateIn: aDiff
 ]
 
 { #category : #'api - accessing' }
@@ -122,6 +154,12 @@ BrDateAndTimeLabel >> output: aString [
 ]
 
 { #category : #'api - output' }
+BrDateAndTimeLabel >> output: aString in: aDuration [
+	self output: aString.
+	self nextUpdateIn: aDuration
+]
+
+{ #category : #'api - output' }
 BrDateAndTimeLabel >> output: aString within: aDuration [
 	self output: aString.
 	self nextUpdateWithin: aDuration
@@ -133,7 +171,7 @@ BrDateAndTimeLabel >> outputDate [
 ]
 
 { #category : #'api - output' }
-BrDateAndTimeLabel >> outputNumber: anInteger unit: aUnit within: aDuration [
+BrDateAndTimeLabel >> outputNumber: anInteger unit: aUnit [
 	| anOutput |
 	anOutput := String
 			streamContents: [ :aStream | 
@@ -141,10 +179,20 @@ BrDateAndTimeLabel >> outputNumber: anInteger unit: aUnit within: aDuration [
 				aStream nextPutAll: anInteger asString.
 				aStream space.
 				aStream nextPutAll: (aUnit asPluralBasedOn: anInteger).
-				self isPositive
-					ifTrue: [ aStream nextPutAll: ' ago' ] ].
+				self isPositive ifTrue: [ aStream nextPutAll: ' ago' ] ].
 
-	self output: anOutput.
+	self output: anOutput
+]
+
+{ #category : #'api - output' }
+BrDateAndTimeLabel >> outputNumber: anInteger unit: aUnit in: aDuration [
+	self outputNumber: anInteger unit: aUnit.
+	self nextUpdateIn: aDuration
+]
+
+{ #category : #'api - output' }
+BrDateAndTimeLabel >> outputNumber: anInteger unit: aUnit within: aDuration [
+	self outputNumber: anInteger unit: aUnit.
 	self nextUpdateWithin: aDuration
 ]
 
