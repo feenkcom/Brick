@@ -1,3 +1,8 @@
+"
+I exemplify {{gtClass:BrDateAndTimeSinceNowPrinter}}. 
+#Example
+{{gtExample:BrDateAndTimeSinceNowPrinterExamples >> #asDemoListElement | codeExpanded=false | previewExpanded=true | previewHeight=480 }}
+"
 Class {
 	#name : #BrDateAndTimeSinceNowPrinterExamples,
 	#superclass : #Object,
@@ -74,7 +79,7 @@ BrDateAndTimeSinceNowPrinterExamples >> fiftyNineMinutesAgo59Minutes59Seconds [
 	self
 		assertResult: aResult
 		output: '59 minutes ago'
-		nextUpdate: aNow + 1 minutes.
+		nextUpdate: aNow + 1 second.
 	^ aResult
 ]
 
@@ -125,7 +130,7 @@ BrDateAndTimeSinceNowPrinterExamples >> hourAgoPlus1Second [
 	self
 		assertResult: aResult
 		output: '1 hour ago'
-		nextUpdate: aNow + 1 hour.
+		nextUpdate: aNow + 59 minutes + 59 seconds.
 	^ aResult
 ]
 
@@ -139,81 +144,25 @@ BrDateAndTimeSinceNowPrinterExamples >> hourAgoPlus59Minutes59Seconds [
 	self
 		assertResult: aResult
 		output: '1 hour ago'
-		nextUpdate: aNow + 1 hour.
+		nextUpdate: aNow + 1 second.
 	^ aResult
 ]
 
 { #category : #'examples - future' }
-BrDateAndTimeSinceNowPrinterExamples >> inLessThanMinute15Seconds [
+BrDateAndTimeSinceNowPrinterExamples >> inFuture [
 	<gtExample>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
-	aResult := aPrinter after: 15 seconds now: aNow.
+	aResult := aPrinter after: 59 minutes + 59 seconds now: aNow.
 	self
 		assertResult: aResult
-		output: 'in less than minute'
-		nextUpdate: aNow + 1 minute.
+		output: 'in future'
+		nextUpdate: aNow + 59 minutes + 59 seconds.
 	^ aResult
 ]
 
-{ #category : #'examples - future' }
-BrDateAndTimeSinceNowPrinterExamples >> inOneHour [
-	<gtExample>
-	| aPrinter aNow aResult |
-	aPrinter := self basicPrinter.
-	aNow := self now.
-	aResult := aPrinter after: 1 hour now: aNow.
-	self
-		assertResult: aResult
-		output: 'in 1 hour'
-		nextUpdate: aNow + 1 hour.
-	^ aResult
-]
-
-{ #category : #'examples - future' }
-BrDateAndTimeSinceNowPrinterExamples >> inOneMinute [
-	<gtExample>
-	| aPrinter aNow aResult |
-	aPrinter := self basicPrinter.
-	aNow := self now.
-	aResult := aPrinter after: 1 minute now: aNow.
-	self
-		assertResult: aResult
-		output: 'in 1 minute'
-		nextUpdate: aNow + 1 minutes.
-	^ aResult
-]
-
-{ #category : #'examples - future' }
-BrDateAndTimeSinceNowPrinterExamples >> inSevenDays [
-	<gtExample>
-	| aPrinter aNow aResult |
-	aPrinter := self basicPrinter.
-	aNow := self now.
-	aResult := aPrinter after: 7 days now: aNow.
-	self
-		assertResult: aResult
-		output: '3 March 2024'
-		nextUpdate: aNow + 1 day.
-	^ aResult
-]
-
-{ #category : #'examples - future' }
-BrDateAndTimeSinceNowPrinterExamples >> inTwoDays [
-	<gtExample>
-	| aPrinter aNow aResult |
-	aPrinter := self basicPrinter.
-	aNow := self now.
-	aResult := aPrinter after: 2 days now: aNow.
-	self
-		assertResult: aResult
-		output: 'in 2 days'
-		nextUpdate: aNow + 1 day.
-	^ aResult
-]
-
-{ #category : #'examples - present' }
+{ #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> justNow0Seconds [
 	<gtExample>
 	| aPrinter aNow aResult |
@@ -227,7 +176,7 @@ BrDateAndTimeSinceNowPrinterExamples >> justNow0Seconds [
 	^ aResult
 ]
 
-{ #category : #'examples - present' }
+{ #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> justNow14Seconds [
 	<gtExample>
 	| aPrinter aNow aResult |
@@ -237,21 +186,7 @@ BrDateAndTimeSinceNowPrinterExamples >> justNow14Seconds [
 	self
 		assertResult: aResult
 		output: 'just now'
-		nextUpdate: aNow + 15 seconds.
-	^ aResult
-]
-
-{ #category : #'examples - present' }
-BrDateAndTimeSinceNowPrinterExamples >> justNowIn14Seconds [
-	<gtExample>
-	| aPrinter aNow aResult |
-	aPrinter := self basicPrinter.
-	aNow := self now.
-	aResult := aPrinter after: 14 seconds now: aNow.
-	self
-		assertResult: aResult
-		output: 'just now'
-		nextUpdate: aNow + 15 seconds.
+		nextUpdate: aNow + 1 seconds.
 	^ aResult
 ]
 
@@ -265,7 +200,7 @@ BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo15Seconds [
 	self
 		assertResult: aResult
 		output: 'less than minute ago'
-		nextUpdate: aNow + 1 minute.
+		nextUpdate: aNow + 45 seconds.
 	^ aResult
 ]
 
@@ -279,7 +214,7 @@ BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo59Seconds [
 	self
 		assertResult: aResult
 		output: 'less than minute ago'
-		nextUpdate: aNow + 1 minute.
+		nextUpdate: aNow + 1 second.
 	^ aResult
 ]
 
@@ -307,7 +242,7 @@ BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute1Second [
 	self
 		assertResult: aResult
 		output: '1 minute ago'
-		nextUpdate: aNow + 1 minutes.
+		nextUpdate: aNow + 59 seconds.
 	^ aResult
 ]
 
@@ -321,7 +256,7 @@ BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute59Second [
 	self
 		assertResult: aResult
 		output: '1 minute ago'
-		nextUpdate: aNow + 1 minutes.
+		nextUpdate: aNow + 1 second.
 	^ aResult
 ]
 
@@ -340,7 +275,7 @@ BrDateAndTimeSinceNowPrinterExamples >> newColumnedListWithDurations: aCollectio
 		cellStencil: [ :anItemType :aColumn :anIndex | self newTimeElement ];
 		dataBinder: [ :aLabel :aTime | self updateTimeElement: aLabel time: aTime ].
 
-	"aList column
+	aList column
 		matchParent;
 		title: 'Updates at';
 		cellStencil: [ :anItemType :aColumn :anIndex | 
@@ -348,23 +283,25 @@ BrDateAndTimeSinceNowPrinterExamples >> newColumnedListWithDurations: aCollectio
 			aLabel := self newTimeElement.
 			aLabel updatingDateAndModel
 				printer: [ :aTimeLabel | 
-					| anOutput |
+					| anOutput aTmpTimeLabel |
+					aTmpTimeLabel := BrDateAndTimeSinceNowPrinter new
+							time: aTimeLabel time
+							now: aTimeLabel now.
+
 					anOutput := 'updates in {1}'
-							format: {aTimeLabel absolute gtHumanReadableString}.
+							format: {aTmpTimeLabel nextUpdateIn gtHumanReadableString}.
 					aTimeLabel output: anOutput within: 1 second ].
 			aLabel ];
-		dataBinder: [ :aLabel :aTime | 
-			| aTimeLabel |
-			aTimeLabel := BrDateAndTimeSinceNowPrinter new time: aTime.
-			self updateTimeElement: aLabel time: aTimeLabel nextUpdate ].
-"
+		dataBinder: [ :aLabel :aTime | self updateTimeElement: aLabel time: aTime ].
+
 	^ aList
 ]
 
 { #category : #'examples - demo' }
 BrDateAndTimeSinceNowPrinterExamples >> newTimeElement [
+	<gtExample>
 	^ BrLabel new
-		updatingDateAndTime: nil;
+		updatingDateAndModel;
 		aptitude: BrGlamorousLabelAptitude new;
 		addAptitude: (BrGlamorousWithLabelTooltipAptitude new text: '');
 		yourself
@@ -424,17 +361,17 @@ BrDateAndTimeSinceNowPrinterExamples >> thirtyMinutesAgo [
 	^ aResult
 ]
 
-{ #category : #'examples - future' }
-BrDateAndTimeSinceNowPrinterExamples >> tomorrow [
+{ #category : #'examples - past' }
+BrDateAndTimeSinceNowPrinterExamples >> thirtyMinutesAnd1SecondAgo [
 	<gtExample>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
-	aResult := aPrinter after: 1 day now: aNow.
+	aResult := aPrinter before: 30 minutes + 1 second now: aNow.
 	self
 		assertResult: aResult
-		output: 'tomorrow'
-		nextUpdate: aNow + 1 day.
+		output: '30 minutes ago'
+		nextUpdate: aNow + 59 seconds.
 	^ aResult
 ]
 
@@ -448,7 +385,7 @@ BrDateAndTimeSinceNowPrinterExamples >> twentyThreeHoursAgoPlus59Minutes59Second
 	self
 		assertResult: aResult
 		output: '23 hours ago'
-		nextUpdate: aNow + 1 hour.
+		nextUpdate: aNow + 1 second.
 	^ aResult
 ]
 
@@ -482,6 +419,7 @@ BrDateAndTimeSinceNowPrinterExamples >> twoMinutesAgo2Minutes [
 
 { #category : #'examples - demo' }
 BrDateAndTimeSinceNowPrinterExamples >> updateTimeElement: aLabel time: aTime [
+	<gtExample>
 	aLabel updatingDateAndTime: aTime.
 	^ aLabel aptitude
 		findActor: BrGlamorousWithLabelTooltipAptitude
