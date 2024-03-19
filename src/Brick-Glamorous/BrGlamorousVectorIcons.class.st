@@ -923,3 +923,11 @@ BrGlamorousVectorIcons class >> upwardsDownwards [
 			viewbox: (4@3 extent: 8@10));
 		background: Color black ] asStencil
 ]
+
+{ #category : #accessing }
+BrGlamorousVectorIcons class >> window [
+	<script: 'self window inspect'>
+
+	^ [ self largeWindow asElement asScalableElement size: 16 @ 16 ]
+		  asStencil
+]
