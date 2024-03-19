@@ -15,7 +15,8 @@ Class {
 		'positionInSpaceChangedEventHandler',
 		'hideEventHandler',
 		'showEventHandler',
-		'relocateEventHandler'
+		'relocateEventHandler',
+		'dragStartEventHandler'
 	],
 	#category : #'Brick-Anchored - Look'
 }
@@ -49,6 +50,12 @@ BrWithAnchoredAptitude >> canShow [
 ]
 
 { #category : #initialization }
+BrWithAnchoredAptitude >> handleDragStartEvent: anEvent [
+	self canHide
+		ifTrue: [ self hide ]
+]
+
+{ #category : #initialization }
 BrWithAnchoredAptitude >> handleMouseUpEvent: e [
 	"hide when clicked outside of container" 
 	((e target ~~ innerContainer and: [ 
@@ -75,7 +82,8 @@ BrWithAnchoredAptitude >> hide [
 
 	widget
 		removeEventHandler: extentChangedEventHandler;
-		removeEventHandler: positionInSpaceChangedEventHandler.
+		removeEventHandler: positionInSpaceChangedEventHandler;
+		removeEventHandler: dragStartEventHandler.
 	self root
 		removeChild: outerContainer;
 		removeEventFilter: clickOutsideEventHandler;
@@ -93,43 +101,40 @@ BrWithAnchoredAptitude >> hide [
 
 { #category : #initialization }
 BrWithAnchoredAptitude >> initialize [
-
 	super initialize.
 	self stencil: [ BlElement new ].
 	watchDog := BlRepeatedTaskAction new
-		            delay: 500 milliSeconds;
-		            action: [ "hide when widget removed from scene by checking repeatedly"
-			            (widget isAttachedToSceneGraph not and: [ self canHide ]) 
-				            ifTrue: [ self hide ] ];
-		            yourself.
+			delay: 500 milliSeconds;
+			action: [  "hide when widget removed from scene by checking repeatedly"(widget
+					isAttachedToSceneGraph not and: [ self canHide ]) ifTrue: [ self hide ] ];
+			yourself.
 
 	clickOutsideEventHandler := BlEventHandler
-		                            on: BlMouseUpEvent
-		                            do: [ :e | 
-			                            (self hasModifiers: e) ifFalse: [
-			                            		self handleMouseUpEvent: e ] ].
+			on: BlMouseUpEvent
+			do: [ :e | (self hasModifiers: e) ifFalse: [ self handleMouseUpEvent: e ] ].
+
+	dragStartEventHandler := BlEventHandler
+			on: BlDragStartEvent
+			do: [ :e | self handleDragStartEvent: e ].
 
 	pressEscEventHandler := BlShortcutWithAction new
-		                        combination: BlKeyCombination escape;
-		                        action: [ 
-			                        self canHide ifTrue: [ self hide ] ].
+			combination: BlKeyCombination escape;
+			action: [ self canHide ifTrue: [ self hide ] ].
 
 	extentChangedEventHandler := BlEventHandler
-		                             on: BlElementExtentChangedEvent
-		                             do: [ :e | "relocate when extent changes" 
-			                             self visible ifTrue: [ self relocate ] ].
+			on: BlElementExtentChangedEvent
+			do: [  "relocate when extent changes":e | self visible ifTrue: [ self relocate ] ].
 
 	positionInSpaceChangedEventHandler := BlEventHandler
-		                                      on:
-		                                      BlElementPositionInSpaceChangedEvent
-		                                      do: [ "relocate when position in space changes" 
-			                                      self visible ifTrue: [ 
-				                                      self relocate ] ].
+			on: BlElementPositionInSpaceChangedEvent
+			do: [  "relocate when position in space changes"self visible
+					ifTrue: [ self relocate ] ].
 
-	self addChange: (BrLookChange new
-			 up: [ :e |  ];
-			 down: [ :e | self canHide ifTrue: [ self hide ] ];
-			 yourself)
+	self
+		addChange: (BrLookChange new
+				up: [ :e |  ];
+				down: [ :e | self canHide ifTrue: [ self hide ] ];
+				yourself)
 ]
 
 { #category : #'private - hooks' }
@@ -272,6 +277,10 @@ BrWithAnchoredAptitude >> show [
 	widget
 		addEventHandler: extentChangedEventHandler;
 		addEventHandler: positionInSpaceChangedEventHandler.
+		
+	dragStartEventHandler
+		ifNotNil: [ widget addEventHandler: dragStartEventHandler ].
+		
 	self relocate
 ]
 
