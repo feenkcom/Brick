@@ -7,7 +7,7 @@ Class {
 		'tabEventHandler',
 		'actionbarStencilBuilder'
 	],
-	#category : 'Brick-Tabs - Model'
+	#category : #'Brick-Tabs - Model'
 }
 
 { #category : #'instance creation' }
@@ -122,26 +122,61 @@ BrTabGroupModel >> isNotEmpty [
 
 { #category : #'api - tabs' }
 BrTabGroupModel >> moveTab: aBrTabModel at: aNewIndex [
-	| aCurrentIndex |
+	"Move a given tab so it appears at a given index"
+	| currentIndex insertionIndex|
 
-	aCurrentIndex := self indexOf: aBrTabModel.
+	self
+		assert: (aNewIndex between: 1 and: self tabs size)
+		description: [ 'A new tab index must be within bounds' ].
 
-	self 
-		assert: [ aCurrentIndex isZero not ]
+	currentIndex := self indexOf: aBrTabModel.
+	
+	self
+		assert: [ currentIndex isZero not ]
 		description: [ 'Only an existing tab can be moved' ].
 
 	"trying to move a tab to the same position, do nothing"
-	aCurrentIndex = aNewIndex
+	currentIndex = aNewIndex
 		ifTrue: [ ^ self ].
 
+	insertionIndex := aNewIndex.
+
 	self tabs remove: aBrTabModel.
-	self tabs add: aBrTabModel beforeIndex: aNewIndex.
+	self tabs add: aBrTabModel beforeIndex: insertionIndex.
 
-	self 
-		assert: [ (self indexOf: aBrTabModel) = aNewIndex ]
-		description: [ 'Moved tab should be now at the expected position' ].
+	self notifyTabMoved: aBrTabModel from: currentIndex to: aNewIndex.
+]
 
-	self notifyTabMoved: aBrTabModel from: aCurrentIndex to: aNewIndex.
+{ #category : #'api - tabs' }
+BrTabGroupModel >> moveTab: aBrTabModel atCursor: aNewIndex [
+	"Move a given tab so it appears at a given cursor index [0... tabs size]"
+	| currentIndex beforeIndex insertionIndex |
+
+	self
+		assert: (aNewIndex between: 0 and: self tabs size)
+		description: [ 'A new tab index must be within bounds' ].
+
+	currentIndex := self indexOf: aBrTabModel.
+	
+	self
+		assert: [ currentIndex isZero not ]
+		description: [ 'Only an existing tab can be moved' ].
+
+	"do nothing whe trying to move a tab to the same position"
+	(currentIndex = aNewIndex or: [ (currentIndex - 1) = aNewIndex ])
+		ifTrue: [ ^ self ].
+
+		
+	beforeIndex := aNewIndex > currentIndex
+		ifTrue: [ aNewIndex ]
+		ifFalse: [ (aNewIndex + 1) min: self tabs size ].
+
+	self tabs remove: aBrTabModel.
+	self tabs add: aBrTabModel beforeIndex: beforeIndex.
+	
+	insertionIndex := self indexOf: aBrTabModel.
+	
+	self notifyTabMoved: aBrTabModel from: currentIndex to: insertionIndex
 ]
 
 { #category : #notifying }

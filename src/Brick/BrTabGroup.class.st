@@ -52,6 +52,11 @@ BrTabGroup >> moveTab: anElement at: anInteger [
 ]
 
 { #category : #'api - adding / removing' }
+BrTabGroup >> moveTab: anElement atCursor: anInteger [
+	self viewModel moveTab: anElement viewModel atCursor: anInteger
+]
+
+{ #category : #'api - adding / removing' }
 BrTabGroup >> removeSelectedTab [
 	self viewModel removeSelectedTab
 ]
@@ -76,6 +81,11 @@ BrTabGroup >> selectTabWithLabelString: aString [
 	(self viewModel tabs
 		detect: [ :each | each tabLabel text asString = aString ]
 		ifNone: [ ^ self ]) select
+]
+
+{ #category : #accessing }
+BrTabGroup >> tabIndexOf: aBrTab [
+	^ self viewModel indexOf: aBrTab viewModel
 ]
 
 { #category : #accessing }
