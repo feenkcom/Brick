@@ -11,6 +11,13 @@ Class {
 	#category : #'Brick-! Core - Item Providers'
 }
 
+{ #category : #accessing }
+BrStreamItemsProvider class >> defaultExecutionConfiguration [
+	^ AsyncFutureExecutionConfiguration new
+			highPriority;
+			customGroup: #ScrollingList
+]
+
 { #category : #'instance creation' }
 BrStreamItemsProvider class >> forCollection: aSequenceableCollection [
 	^ self forStream: aSequenceableCollection asAsyncStream
@@ -41,9 +48,7 @@ BrStreamItemsProvider >> currentItems [
 
 { #category : #initialization }
 BrStreamItemsProvider >> defaultExecutionConfiguration [
-	^ AsyncFutureExecutionConfiguration new
-			highPriority;
-			customGroup: #ScrollingList
+	^ self class defaultExecutionConfiguration
 ]
 
 { #category : #initialization }
@@ -63,9 +68,9 @@ BrStreamItemsProvider >> executionConfiguration [
 ]
 
 { #category : #initialization }
-BrStreamItemsProvider >> executionConfiguration: anObject [
-	executionConfiguration := anObject.
-	buffer ifNotNil: [ buffer executionConfiguration: anObject ]
+BrStreamItemsProvider >> executionConfiguration: anAsyncFutureExecutionConfiguration [
+	executionConfiguration := anAsyncFutureExecutionConfiguration.
+	buffer ifNotNil: [ buffer executionConfiguration: anAsyncFutureExecutionConfiguration ]
 ]
 
 { #category : #'api - loading' }

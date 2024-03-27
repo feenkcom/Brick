@@ -85,7 +85,19 @@ BrUngroupedList >> scrollToItemSuchThat: aMatchBlock offset: anOffset [
 
 { #category : #'api - accessing' }
 BrUngroupedList >> stream: anAsyncStream [
+	self
+		stream: anAsyncStream
+		executionConfiguration: BrStreamItemsProvider defaultExecutionConfiguration
+]
+
+{ #category : #'api - accessing' }
+BrUngroupedList >> stream: anAsyncStream executionConfiguration: anAsyncFutureExecutionConfiguration [
 	(self viewModel itemsProvider isKindOf: BrStreamItemsProvider)
-		ifTrue: [ self viewModel itemsProvider stream: anAsyncStream ]
-		ifFalse: [ self itemsProvider: (BrStreamItemsProvider new stream: anAsyncStream) ]
+		ifTrue: [
+			self viewModel itemsProvider
+				stream: anAsyncStream;
+				executionConfiguration: anAsyncFutureExecutionConfiguration ]
+		ifFalse: [ self itemsProvider: (BrStreamItemsProvider new
+			stream: anAsyncStream;
+			executionConfiguration: anAsyncFutureExecutionConfiguration) ]
 ]

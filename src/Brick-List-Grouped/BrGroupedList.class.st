@@ -83,5 +83,14 @@ BrGroupedList >> selectedEntityDo: aBlock [
 
 { #category : #'api - accessing' }
 BrGroupedList >> stream: anAsyncStream [
-	self groupsProvider: (BrStreamItemsProvider new stream: anAsyncStream)
+	self
+		stream: anAsyncStream
+		executionConfiguration: BrStreamItemsProvider defaultExecutionConfiguration
+]
+
+{ #category : #accessing }
+BrGroupedList >> stream: anAsyncStream executionConfiguration: anAsyncFutureExecutionConfiguration [
+	self groupsProvider: (BrStreamItemsProvider new
+		stream: anAsyncStream;
+		executionConfiguration: anAsyncFutureExecutionConfiguration)
 ]
