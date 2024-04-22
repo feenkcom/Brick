@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'iconElement'
 	],
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #accessing }
@@ -72,5 +72,5 @@ BrGlamorousButtonLabelAndIconAptitude >> updateIcon [
 			anIconElement removeFromParent.
 			iconElement removeFromParent.
 			aParent addChild: iconElement at: anIndex as: #icon ]
-		ifNone: [ self widgetContent addChild: iconElement as: #icon ] ]
+		ifNone: [ self widgetContent addChildFirst: iconElement as: #icon ] ]
 ]
