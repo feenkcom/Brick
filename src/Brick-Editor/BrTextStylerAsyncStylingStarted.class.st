@@ -8,6 +8,12 @@ Class {
 	#category : #'Brick-Editor-Styler'
 }
 
+{ #category : #initialization }
+BrTextStylerAsyncStylingStarted >> prepareForDelivery [
+	super prepareForDelivery.
+	unstyledText ifNotNil: [ :aText | unstyledText := aText copy ]
+]
+
 { #category : #accessing }
 BrTextStylerAsyncStylingStarted >> styler [
 	^ styler
@@ -25,5 +31,5 @@ BrTextStylerAsyncStylingStarted >> unstyledText [
 
 { #category : #accessing }
 BrTextStylerAsyncStylingStarted >> unstyledText: aText [
-	unstyledText := aText copy.
+	unstyledText := aText
 ]

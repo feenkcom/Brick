@@ -50,7 +50,7 @@ BrTextStylerAsyncStrategy >> styleTextInEditorElement: aBrEditorElement thenDo: 
 		BrTextStylerAsyncStylingFinished new
 			element: aBrEditorElement;
 			future: aTextStylingFuture;
-			styledText: aStyledText copy;
+			styledText: aStyledText;
 			styler: aStyler;
 			emit.
 

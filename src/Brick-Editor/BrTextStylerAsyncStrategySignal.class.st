@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'element',
 		'future',
-		'isElementAttachedToSpace'
+		'isElementAttachedToSpace',
+		'text'
 	],
 	#category : #'Brick-Editor-Styler'
 }
@@ -37,12 +38,37 @@ BrTextStylerAsyncStrategySignal >> isElementAttachedToSpace [
 	^ isElementAttachedToSpace
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
+BrTextStylerAsyncStrategySignal >> prepareForDelivery [
+	super prepareForDelivery.
+
+	element ifNotNil: [ :anElement | 
+		text := anElement text copy ]
+]
+
+{ #category : #printing }
 BrTextStylerAsyncStrategySignal >> printOneLineContentsOn: stream [
-	super printOneLineContentsOn: stream.
+	stream print: element identityHash; space.
 
+	self text
+		ifEmpty: [ stream nextPutAll: 'Empty text' ]
+		ifNotEmpty: [ 
+			| anIndex |
+			anIndex := self text finder endOfLine; search.
+			anIndex isZero 
+				ifTrue: [ stream print: self text ]
+				ifFalse: [ stream print: (self text from: 1 to: (anIndex - 1 max: 1)) ] ].
+
+	stream space.
 	stream print: element.
-
 	self isElementAttachedToSpace ifFalse: [ 
-		stream nextPutAll: ' is not in space' ]
+		stream nextPutAll: ' is not in space' ].
+		
+	stream space.
+	super printOneLineContentsOn: stream.
+]
+
+{ #category : #accessing }
+BrTextStylerAsyncStrategySignal >> text [
+	^ text
 ]
