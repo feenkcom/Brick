@@ -7,7 +7,8 @@ Class {
 		'shouldHideWidget',
 		'isResizable',
 		'whenResizedHandler',
-		'resizerAptitudes'
+		'resizerAptitudes',
+		'isKeepRatio'
 	],
 	#category : #'Brick-Dropdown - Look'
 }
@@ -101,6 +102,7 @@ BrWithDropdownAptitude >> beResizable [
 { #category : #private }
 BrWithDropdownAptitude >> createResizeAptitudeWith: anAptitude [
 	whenResizedHandler ifNotNil: [ anAptitude whenResizedDo: whenResizedHandler ].
+	anAptitude keepRatio: self isKeepRatio.
 	^ anAptitude
 ]
 
@@ -114,9 +116,24 @@ BrWithDropdownAptitude >> createResizerOn: anElement [
 	^ anElement addAptitude: self resizerAptitudes
 ]
 
+{ #category : #accessing }
+BrWithDropdownAptitude >> doKeepRatio [
+	"Keep dropdown extent ratio while resizing"
+
+	isKeepRatio := true.
+	self updateResizerAptitudesKeepRatio
+]
+
 { #category : #'api - displaying' }
 BrWithDropdownAptitude >> doNotHideWidget [
 	self shouldHideWidget: false
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> doNotKeepRatio [
+	"Do not keep dropdown extent ratio while resizing"
+
+	isKeepRatio := false
 ]
 
 { #category : #'api - displaying' }
@@ -156,6 +173,7 @@ BrWithDropdownAptitude >> initialize [
 	super initialize.
 
 	isResizable := true.
+	isKeepRatio := false.
 	self resizersOnBottom.
 
 	hideWishHandler := BlEventHandler
@@ -244,6 +262,11 @@ BrWithDropdownAptitude >> initializeRequests [
 	self request: BrDropdownVisibleRequest new
 ]
 
+{ #category : #testing }
+BrWithDropdownAptitude >> isKeepRatio [
+	^ isKeepRatio ifNil: [ false ]
+]
+
 { #category : #accessing }
 BrWithDropdownAptitude >> isResizable [
 	^ isResizable
@@ -305,7 +328,8 @@ BrWithDropdownAptitude >> resizerAptitudes: anObject [
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnBottom [
 	self
-		resizerAptitudes: (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new)
+		resizerAptitudes: (self
+				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
 				+ (self
 						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
 				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
@@ -314,7 +338,8 @@ BrWithDropdownAptitude >> resizersOnBottom [
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnTop [
 	self
-		resizerAptitudes: (self createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new)
+		resizerAptitudes: (self
+				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
 				+ (self
 						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
 				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
@@ -348,6 +373,13 @@ BrWithDropdownAptitude >> stencil: aValuable [
 	stencil := BrDropdownContentStencil new
 			contentStencil: aValuable;
 			decorator: [ :anElement | self createResizerOn: anElement ]
+]
+
+{ #category : #private }
+BrWithDropdownAptitude >> updateResizerAptitudesKeepRatio [
+	resizerAptitudes ifNil: [ ^ self ].
+	resizerAptitudes withAllActorsDepthFirstDo: [ :anAptitude |
+		anAptitude keepRatio: self isKeepRatio ]
 ]
 
 { #category : #accessing }
