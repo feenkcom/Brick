@@ -71,6 +71,15 @@ BrResizer >> location: aResizerLocation [
 	self states addState: (BrResizerLocationState location: aResizerLocation)
 ]
 
+{ #category : #printing }
+BrResizer >> printOn: aStream [
+	super printOn: aStream.
+	self location
+		ifNotNil: [ :aLocation | 
+			aStream space.
+			aLocation printResizerLocationNameOne: aStream ]
+]
+
 { #category : #accessing }
 BrResizer >> target [
 	^ target
