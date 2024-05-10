@@ -25,6 +25,11 @@ BrGlamorousWithResizerAptitude >> initialize [
 				yourself)
 ]
 
+{ #category : #accessing }
+BrGlamorousWithResizerAptitude >> keepRatio: aBoolean [
+	self resizerDo: [ :aResizer | aResizer keepRatio: aBoolean ]
+]
+
 { #category : #initialization }
 BrGlamorousWithResizerAptitude >> newResizer [
 	^ BrResizer new
