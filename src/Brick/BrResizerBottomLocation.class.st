@@ -8,9 +8,3 @@ Class {
 BrResizerBottomLocation >> newResizerListener [
 	^ BlResizerBottomListener new minimumExtent: (0@30)
 ]
-
-{ #category : #printing }
-BrResizerBottomLocation >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPutAll: 'bottom'
-]

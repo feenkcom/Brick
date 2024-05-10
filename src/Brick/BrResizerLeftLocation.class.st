@@ -8,9 +8,3 @@ Class {
 BrResizerLeftLocation >> newResizerListener [
 	^ BlResizerLeftListener new
 ]
-
-{ #category : #printing }
-BrResizerLeftLocation >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPutAll: 'left'
-]

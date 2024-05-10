@@ -8,9 +8,3 @@ Class {
 BrResizerTopLocation >> newResizerListener [
 	^ BlResizerTopListener new
 ]
-
-{ #category : #accessing }
-BrResizerTopLocation >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPutAll: 'top'
-]
