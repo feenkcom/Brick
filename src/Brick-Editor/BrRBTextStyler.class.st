@@ -23,8 +23,6 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #BrRBTextStyler,
 	#superclass : #BrTextStylerST80,
-	#traits : 'TRBProgramNodeVisitor',
-	#classTraits : 'TRBProgramNodeVisitor classTrait',
 	#instVars : [
 		'parentheseLevel',
 		'bracketLevel'
@@ -348,6 +346,12 @@ BrRBTextStyler >> visitArgumentNodes: aNodeCollection [
 ]
 
 { #category : #visiting }
+BrRBTextStyler >> visitArgumentVariableNode: anArgumentNode [
+
+	^ self visitLocalVariableNode: anArgumentNode
+]
+
+{ #category : #visiting }
 BrRBTextStyler >> visitArrayNode: anArrayNode [ 
 
 	anArrayNode children do: [:each | self visitNode: each]
@@ -379,8 +383,24 @@ BrRBTextStyler >> visitCascadeNode: aCascadeNode [
 ]
 
 { #category : #visiting }
+BrRBTextStyler >> visitClassVariableNode: aNode [
+	^ self visitLiteralVariableNode: aNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitEnglobingErrorNode: anEnglobingErrorNode [
+	anEnglobingErrorNode content do: [ :each | self visitNode: each ]
+]
+
+{ #category : #visiting }
 BrRBTextStyler >> visitGlobalNode: aSelfNode [
 	^ self visitVariableNode: aSelfNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitGlobalVariableNode: aNode [
+
+	^ self visitLiteralVariableNode: aNode
 ]
 
 { #category : #visiting }
@@ -406,6 +426,26 @@ BrRBTextStyler >> visitLiteralNode: aLiteralNode [
 		addStyle: (self literalStyleSymbol: value)
 		attribute: (BlTextClassLink class: value class)
 		forNode: aLiteralNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitLiteralValueNode: aNode [
+	"Redirect the message by default to #visitLiteralNode: for retrocompatibility (pharo 8)"
+
+	^ self visitLiteralNode: aNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitLiteralVariableNode: aNode [
+	"to be backward compatible, we visit for Gloabls here (there used to be no difference)"
+
+	^ self visitGlobalNode: aNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitLocalVariableNode: aNode [
+	"call visitTemporaryNode: for backward compatibility"
+	^ self visitTemporaryNode: aNode
 ]
 
 { #category : #'visiting rb nodes' }
@@ -528,11 +568,30 @@ BrRBTextStyler >> visitSequenceNode: aSequenceNode [
 	aSequenceNode periods do: [ :pos | self addStyle: #statementSeparator from: pos to: pos ]
 ]
 
+{ #category : #'visiting - reflectivity' }
+BrRBTextStyler >> visitStoreIntoTempNode: aNode [
+	^ aNode
+]
+
+{ #category : #'visiting - reflectivity' }
+BrRBTextStyler >> visitStorePopIntoTempNode: aNode [
+	^ aNode
+]
+
 { #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitSuperNode: aSuperNode [
 	self 
 		addStyle: #super
 		forNode: aSuperNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitTemporaryDeclarationNode: aTemporaryDeclarationNode [
+	"| temp |
+	temp is a temporary node as we can find in the body of methods, but it can't be visited the same way.
+	IT redirects the message on argumentNodeVisitor as a way to keep retrocompatibility"
+
+	^ self visitArgumentNode: aTemporaryDeclarationNode
 ]
 
 { #category : #'visiting rb nodes' }
@@ -548,11 +607,23 @@ BrRBTextStyler >> visitTemporaryNodes: aNodeCollection [
 	^self visitArgumentNodes: aNodeCollection
 ]
 
+{ #category : #visiting }
+BrRBTextStyler >> visitTemporaryVariableNode: aNode [
+
+	^ self visitLocalVariableNode: aNode
+]
+
 { #category : #'visiting rb nodes' }
 BrRBTextStyler >> visitThisContextNode: aThisContextNode [
 	self 
 		addStyle: #thisContext
 		forNode: aThisContextNode
+]
+
+{ #category : #visiting }
+BrRBTextStyler >> visitUnreachableStatement: anUnreachableStatement [
+
+	^ self visitEnglobingErrorNode: anUnreachableStatement
 ]
 
 { #category : #'visiting rb nodes' }
