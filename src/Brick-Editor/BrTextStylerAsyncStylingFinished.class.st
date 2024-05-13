@@ -9,13 +9,30 @@ Class {
 }
 
 { #category : #'gt - extensions' }
+BrTextStylerAsyncStylingFinished >> gtInnerTextAttributeTreeFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Styled inner text attributes';
+		priority: 0.1;
+		object: [ self styledText ];
+		view: #gtInnerTextAttributeTreeFor:
+]
+
+{ #category : #'gt - extensions' }
 BrTextStylerAsyncStylingFinished >> gtInnerTextFor: aView [
 	<gtView>
 	^ aView forward
-		title: 'Inner text';
+		title: 'Styled inner text';
 		priority: 0;
 		object: [ self styledText ];
 		view: #gtInnerTextFor:
+]
+
+{ #category : #initialization }
+BrTextStylerAsyncStylingFinished >> prepareForDelivery [
+	super prepareForDelivery.
+
+	styledText ifNotNil: [ :aText | styledText := aText copy ]
 ]
 
 { #category : #accessing }

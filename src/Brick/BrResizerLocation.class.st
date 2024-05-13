@@ -1,7 +1,7 @@
 Class {
 	#name : #BrResizerLocation,
 	#superclass : #Object,
-	#category : 'Brick-Resizer - State'
+	#category : #'Brick-Resizer - State'
 }
 
 { #category : #comparing }
@@ -25,4 +25,18 @@ BrResizerLocation >> hash [
 { #category : #'instance creation' }
 BrResizerLocation >> newResizerListener [
 	^ self subclassResponsibility
+]
+
+{ #category : #printing }
+BrResizerLocation >> printOn: aStream [
+	aStream nextPutAll: 'resizer location - '.
+	self printResizerLocationNameOne: aStream
+]
+
+{ #category : #printing }
+BrResizerLocation >> printResizerLocationNameOne: aStream [
+	| aName |
+	aName := self className.
+	aName := aName copyFrom: 10 to: aName size - 8.
+	aStream nextPutAll: aName asLowercase
 ]

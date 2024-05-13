@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'length'
 	],
-	#category : 'Brick-Resizer - Support'
+	#category : #'Brick-Resizer - Support'
 }
 
 { #category : #'api - size' }
@@ -57,5 +57,5 @@ BrResizerExactLength >> length: aNumber [
 
 { #category : #printing }
 BrResizerExactLength >> printOn: aStream [ 
-	aStream nextPutAll: 'Exact width: '; print: self width
+	aStream nextPutAll: 'Exact width: '; print: self length
 ]

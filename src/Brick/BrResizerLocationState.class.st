@@ -30,7 +30,7 @@ BrResizerLocationState >> = anObject [
 BrResizerLocationState >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
-	^ location hash
+	^ self class hash bitXor: location hash
 ]
 
 { #category : #accessing }
@@ -41,6 +41,11 @@ BrResizerLocationState >> location [
 { #category : #accessing }
 BrResizerLocationState >> location: aResizerLocation [
 	location := aResizerLocation
+]
+
+{ #category : #printing }
+BrResizerLocationState >> printOn: aStream [
+	aStream print: location
 ]
 
 { #category : #accessing }

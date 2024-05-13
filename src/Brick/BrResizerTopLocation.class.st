@@ -1,7 +1,7 @@
 Class {
 	#name : #BrResizerTopLocation,
 	#superclass : #BrResizerLocation,
-	#category : 'Brick-Resizer - State'
+	#category : #'Brick-Resizer - State'
 }
 
 { #category : #'instance creation' }

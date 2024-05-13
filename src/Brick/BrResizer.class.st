@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'target',
 		'location',
-		'resizerListener'
+		'resizerListener',
+		'isKeepRatio'
 	],
 	#category : #'Brick-Resizer - UI'
 }
@@ -32,8 +33,21 @@ BrResizer >> beTop [
 { #category : #initialization }
 BrResizer >> initialize [
 	super initialize.
-	
-	
+
+	isKeepRatio := false
+]
+
+{ #category : #testing }
+BrResizer >> isKeepRatio [
+	^ isKeepRatio ifNil: [ false ]
+]
+
+{ #category : #accessing }
+BrResizer >> keepRatio: aBoolean [
+
+	isKeepRatio := aBoolean.
+	resizerListener ifNotNil: [ :anEventHandler |
+		anEventHandler keepRatio: self isKeepRatio ]
 ]
 
 { #category : #accessing }
@@ -51,9 +65,19 @@ BrResizer >> location: aResizerLocation [
 	resizerListener ifNotNil: [ :anEventHandler | self removeEventHandler: anEventHandler ].
 	resizerListener := self location newResizerListener.
 	resizerListener resizeTarget: self target.
+	resizerListener keepRatio: self isKeepRatio.
 	self addEventHandler: resizerListener.
 
 	self states addState: (BrResizerLocationState location: aResizerLocation)
+]
+
+{ #category : #printing }
+BrResizer >> printOn: aStream [
+	super printOn: aStream.
+	self location
+		ifNotNil: [ :aLocation | 
+			aStream space.
+			aLocation printResizerLocationNameOne: aStream ]
 ]
 
 { #category : #accessing }
