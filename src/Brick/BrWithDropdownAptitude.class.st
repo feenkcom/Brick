@@ -174,7 +174,7 @@ BrWithDropdownAptitude >> initialize [
 
 	isResizable := true.
 	isKeepRatio := false.
-	self resizersOnBottom.
+	self resizersOnBottomLeft.
 
 	hideWishHandler := BlEventHandler
 			on: BrDropdownHideWish
@@ -192,7 +192,7 @@ BrWithDropdownAptitude >> initialize [
 					availableBounds: BrAnchoredBottomRightAvailableBounds;
 					apply: [ self removeInnerContainerDropdownAptitudes.
 						innerContainer addAptitude: BrDropdownBottomRightAptitude.
-						self resizersOnBottom ] ];
+						self resizersOnBottomRight ] ];
 			single: [ :e | 
 				e
 					anchorBounds: [ :f | widget bounds inParent: f ];
@@ -200,7 +200,7 @@ BrWithDropdownAptitude >> initialize [
 					availableBounds: BrAnchoredBottomLeftAvailableBounds;
 					apply: [ self removeInnerContainerDropdownAptitudes.
 						innerContainer addAptitude: BrDropdownBottomLeftAptitude.
-						self resizersOnBottom ] ];
+						self resizersOnBottomLeft ] ];
 			single: [ :e | 
 				e
 					anchorBounds: [ :f | widget bounds inParent: f ];
@@ -208,7 +208,7 @@ BrWithDropdownAptitude >> initialize [
 					availableBounds: BrAnchoredTopRightAvailableBounds;
 					apply: [ self removeInnerContainerDropdownAptitudes.
 						innerContainer addAptitude: BrDropdownTopLeftAptitude.
-						self resizersOnTop ] ];
+						self resizersOnTopRight ] ];
 			single: [ :e | 
 				e
 					anchorBounds: [ :f | widget bounds inParent: f ];
@@ -216,7 +216,7 @@ BrWithDropdownAptitude >> initialize [
 					availableBounds: BrAnchoredTopLeftAvailableBounds;
 					apply: [ self removeInnerContainerDropdownAptitudes.
 						innerContainer addAptitude: BrDropdownTopRightAptitude.
-						self resizersOnTop ] ];
+						self resizersOnTopLeft ] ];
 			build
 ]
 
@@ -336,12 +336,44 @@ BrWithDropdownAptitude >> resizersOnBottom [
 ]
 
 { #category : #accessing }
+BrWithDropdownAptitude >> resizersOnBottomLeft [
+	self
+		resizerAptitudes: (self
+				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizersOnBottomRight [
+	self
+		resizerAptitudes: (self
+				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+]
+
+{ #category : #accessing }
 BrWithDropdownAptitude >> resizersOnTop [
 	self
 		resizerAptitudes: (self
 				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
 				+ (self
 						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizersOnTopLeft [
+	self
+		resizerAptitudes: (self
+				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
+				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
+]
+
+{ #category : #accessing }
+BrWithDropdownAptitude >> resizersOnTopRight [
+	self
+		resizerAptitudes: (self
+				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
 				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
 ]
 
