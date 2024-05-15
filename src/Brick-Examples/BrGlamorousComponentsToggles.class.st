@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousComponentsToggles,
 	#superclass : #BrGlamorousComponents,
-	#category : 'Brick-Examples-! Glamorous components'
+	#category : #'Brick-Examples-! Glamorous components'
 }
 
 { #category : #accessing }
@@ -20,6 +20,26 @@ BrGlamorousComponentsToggles >> toggleGroupWithIcons [
 			label: 'Browse');
 		addToggle: (BrToggle new
 			aptitude: BrGlamorousToggleWithIconAptitude new;
+			icon: BrGlamorousVectorIcons play;
+			label: 'Play')
+]
+
+{ #category : #accessing }
+BrGlamorousComponentsToggles >> toggleGroupWithIconsAndLabels [
+	<gtExample>
+
+	^ BrToggleGroup new
+		aptitude: BrGlamorousToggleGroupAptitude new;
+		addToggle: (BrToggle new
+			aptitude: BrGlamorousToggleWithIconAndLabelAptitude new;
+			icon: BrGlamorousVectorIcons inspect;
+			label: 'Inspect');
+		addToggle: (BrToggle new
+			aptitude: BrGlamorousToggleWithIconAndLabelAptitude new;
+			icon: BrGlamorousVectorIcons browse;
+			label: 'Browse');
+		addToggle: (BrToggle new
+			aptitude: BrGlamorousToggleWithIconAndLabelAptitude new;
 			icon: BrGlamorousVectorIcons play;
 			label: 'Play')
 ]

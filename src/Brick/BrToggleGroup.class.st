@@ -3,8 +3,13 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : 'Brick-Toggle - UI'
+	#category : #'Brick-Toggle - UI'
 }
+
+{ #category : #accessing }
+BrToggleGroup >> activatedToggle [
+	^ self viewModel activatedToggle widget
+]
 
 { #category : #'adding / removing' }
 BrToggleGroup >> addToggle: aToggle [

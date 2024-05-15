@@ -1,7 +1,7 @@
 Extension { #name : #BrDateAndTimeSinceNowPrinter }
 
 { #category : #'*Brick-Examples' }
-BrDateAndTimeSinceNowPrinter classSide >> gtDemoFor: aView [
+BrDateAndTimeSinceNowPrinter class >> gtDemoFor: aView [
 	<gtClassView>
 	^ aView forward
 		title: 'Demo';
