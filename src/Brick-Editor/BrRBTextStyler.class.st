@@ -389,7 +389,7 @@ BrRBTextStyler >> visitClassVariableNode: aNode [
 
 { #category : #visiting }
 BrRBTextStyler >> visitEnglobingErrorNode: anEnglobingErrorNode [
-	anEnglobingErrorNode content do: [ :each | self visitNode: each ]
+	anEnglobingErrorNode contents do: [ :each | self visitNode: each ]
 ]
 
 { #category : #visiting }
