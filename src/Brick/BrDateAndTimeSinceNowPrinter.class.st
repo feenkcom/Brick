@@ -45,7 +45,7 @@ BrDateAndTimeSinceNowPrinter >> buildPast: aTimeLabel [
 	aDuration < 15 seconds
 		ifTrue: [ ^ aTimeLabel output: 'just now' in: 15 seconds - aDuration ].
 	aDuration < 1 minute
-		ifTrue: [ ^ aTimeLabel outputRelative: 'less than minute' within: 1 minute ].
+		ifTrue: [ ^ aTimeLabel outputRelative: 'less than one minute' within: 1 minute ].
 	aDuration < 1 hour
 		ifTrue: [ ^ aTimeLabel
 				outputNumber: aDuration minutes

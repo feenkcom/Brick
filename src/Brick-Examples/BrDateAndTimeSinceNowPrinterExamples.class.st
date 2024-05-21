@@ -199,7 +199,7 @@ BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo15Seconds [
 	aResult := aPrinter before: 15 seconds now: aNow.
 	self
 		assertResult: aResult
-		output: 'less than minute ago'
+		output: 'less than one minute ago'
 		nextUpdate: aNow + 45 seconds.
 	^ aResult
 ]
@@ -213,7 +213,7 @@ BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo59Seconds [
 	aResult := aPrinter before: 59 seconds now: aNow.
 	self
 		assertResult: aResult
-		output: 'less than minute ago'
+		output: 'less than one minute ago'
 		nextUpdate: aNow + 1 second.
 	^ aResult
 ]
