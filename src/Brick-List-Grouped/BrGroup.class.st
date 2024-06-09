@@ -25,6 +25,12 @@ BrGroup >> domainObject: anObject [
 	domainObject := anObject
 ]
 
+{ #category : #accessing }
+BrGroup >> gtDisplayOn: stream [
+	stream nextPutAll: 'Group: '.
+	self domainObject gtDisplayOn: stream.
+]
+
 { #category : #initialization }
 BrGroup >> initialize [
 	super initialize.
