@@ -34,7 +34,18 @@ BrColumnedListHeaderAptitude >> headerPane [
 			hMatchParent;
 			vFitContent.
 	widget viewModel
-		columnsDo: [ :aColumn | headerPane addChild: (labelStencil value: aColumn) ].
+		columnsDo: [ :aColumn | 
+			| titleLabel resizer |
+			titleLabel := labelStencil value: aColumn.
+			resizer := BrResizer new
+					aptitude: BrGlamorousThinBarResizerAptitude;
+					beRight;
+					target: titleLabel;
+					constraintsDo: [ :c | c ignoreByLayout ];
+					when: BlResizerResizedEvent
+						do: [ :anEvent | aColumn width: anEvent extent x ].
+			titleLabel addChild: resizer.
+			headerPane addChild: titleLabel ].
 	^ headerPane
 ]
 
