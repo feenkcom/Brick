@@ -245,6 +245,17 @@ BrElementUpdater >> postponedTime [
 	^ aNow + self postponedDuration.
 ]
 
+{ #category : #printing }
+BrElementUpdater >> printOn: aStream [
+	super printOn: aStream.
+
+	aStream
+		nextPut: $(;
+		nextPutAll: 'update action: ';
+		print: self action;
+		nextPut: $)
+]
+
 { #category : #'api - updating' }
 BrElementUpdater >> requestUpdate [
 	self postponeUpdate.

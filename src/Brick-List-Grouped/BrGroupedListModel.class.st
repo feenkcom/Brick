@@ -11,6 +11,7 @@ Class {
 
 { #category : #'api - accessing' }
 BrGroupedListModel >> entityAt: anIndex [
+	<return: #BrGroupedListEntity>
 	^ groups entityAt: anIndex
 ]
 
@@ -21,6 +22,7 @@ BrGroupedListModel >> entityCount [
 
 { #category : #accessing }
 BrGroupedListModel >> groups [
+	<return: #BrGroupedListGroups>
 	^ groups
 ]
 
@@ -70,6 +72,11 @@ BrGroupedListModel >> initializeListeners [
 
 	self when: BrGroupedListHeaderElementStencilRequest reply: [ :aResponse | aResponse headerElementStencil: self headerElementStencil ].
 	self when: BrGroupedListHeaderDataBinderRequest reply: [ :aResponse | aResponse headerDataBinder: self headerDataBinder ].
+]
+
+{ #category : #'api - accessing' }
+BrGroupedListModel >> itemAt: anIndex [
+	^ (self entityAt: anIndex) object
 ]
 
 { #category : #'private - event handling' }

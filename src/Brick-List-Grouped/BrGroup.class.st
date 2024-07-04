@@ -69,6 +69,17 @@ BrGroup >> itemStencil: aBrListItemElementStencilBuilderOrBlock [
 ]
 
 { #category : #accessing }
+BrGroup >> itemSuchThat: aMatchBlock do: anActionBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found.
+	Evaluate an action block synchronously if an item was already preloaded, otherwise schedule
+	execution in a UI process"
+
+	<return: #TAsyncPromise>
+	^ itemsProvider itemSuchThat: aMatchBlock do: anActionBlock
+]
+
+{ #category : #accessing }
 BrGroup >> itemType: aBrListItemTypeStencilBuilderOrBlock [
 	"Set a stencil that will be used to create an item element of a given type"
 
