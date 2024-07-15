@@ -38,7 +38,9 @@ BrWithAnchoredAptitude >> canRelocate [
 	^ widget isNotNil
 		and: [ widget isAttachedToSceneGraph
 				and: [ outerContainer isNotNil
-						and: [ outerContainer isAttachedToSceneGraph ] ] ]
+						and: [ outerContainer isAttachedToSceneGraph 
+							and: [ innerContainer isNotNil
+								and: [ innerContainer hasChildren ] ] ] ] ]
 ]
 
 { #category : #testing }

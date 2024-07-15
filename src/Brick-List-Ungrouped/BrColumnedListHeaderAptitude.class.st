@@ -16,6 +16,23 @@ Class {
 }
 
 { #category : #private }
+BrColumnedListHeaderAptitude >> buildColumnHeadersInto: headerPane [
+	widget viewModel
+		columnsDo: [ :aColumn | 
+			| titleLabel resizer |
+			titleLabel := labelStencil value: aColumn.
+			resizer := BrResizer new
+					aptitude: BrGlamorousThinBarResizerAptitude;
+					beRight;
+					target: titleLabel;
+					constraintsDo: [ :c | c ignoreByLayout ];
+					when: BlResizerResizedEvent
+						do: [ :anEvent | aColumn width: anEvent extent x ].
+			titleLabel addChild: resizer.
+			headerPane addChild: titleLabel ]
+]
+
+{ #category : #private }
 BrColumnedListHeaderAptitude >> cellSpacing [
 	^ cellSpacing
 ]
@@ -29,23 +46,12 @@ BrColumnedListHeaderAptitude >> cellSpacing: aNumber [
 BrColumnedListHeaderAptitude >> headerPane [
 	| headerPane |
 	headerPane := BrHorizontalPane new
+			id: #'column-header';
 			cellSpacing: self cellSpacing;
 			padding: (BlInsets top: 5 bottom: 5);
 			hMatchParent;
 			vFitContent.
-	widget viewModel
-		columnsDo: [ :aColumn | 
-			| titleLabel resizer |
-			titleLabel := labelStencil value: aColumn.
-			resizer := BrResizer new
-					aptitude: BrGlamorousThinBarResizerAptitude;
-					beRight;
-					target: titleLabel;
-					constraintsDo: [ :c | c ignoreByLayout ];
-					when: BlResizerResizedEvent
-						do: [ :anEvent | aColumn width: anEvent extent x ].
-			titleLabel addChild: resizer.
-			headerPane addChild: titleLabel ].
+	self buildColumnHeadersInto: headerPane.
 	^ headerPane
 ]
 
@@ -63,6 +69,10 @@ BrColumnedListHeaderAptitude >> initialize [
 					text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
 			aColumn columnWidth applyOn: label.
 			label ].
+	self when: BrColumnsChanged do: [ :evt | self rebuildHeadersDueTo: evt ].
+	self
+		when: BrItemsProviderItemsChangedEvent
+		do: [ :evt | self rebuildHeadersDueTo: evt ].
 	self addChangeAddChildFirst: #() with: [ self headerPane ]
 ]
 
@@ -74,4 +84,12 @@ BrColumnedListHeaderAptitude >> labelStencil: aBlock [
 { #category : #private }
 BrColumnedListHeaderAptitude >> newCellPaddingInsets [
 	^ BlInsets empty
+]
+
+{ #category : #initialization }
+BrColumnedListHeaderAptitude >> rebuildHeadersDueTo: evt [
+	| header |
+	header := (evt target query // #'column-header') anyOne.
+	header removeChildren.
+	^ self buildColumnHeadersInto: header
 ]

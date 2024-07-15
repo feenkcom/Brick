@@ -71,6 +71,28 @@ BrColumnedListExamples >> addColorValueColumn [
 	^ aListModel
 ]
 
+{ #category : #'examples - scripting' }
+BrColumnedListExamples >> addColumnsAndItemsTo: aList [
+	aList column
+		title: 'Class';
+		weight: 1;
+		cellStencil: [ BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
+				hMatchParent;
+				vFitContent ];
+		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass name asString ].
+	aList column
+		title: 'Package';
+		weight: 1;
+		cellStencil: [ BrLabel new
+				aptitude: BrGlamorousLabelAptitude new;
+				hMatchParent;
+				vFitContent ];
+		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass package name asString ].
+
+	aList items: Smalltalk allClasses
+]
+
 { #category : #'examples - instance creation' }
 BrColumnedListExamples >> columnedListElement [
 	<gtExample>
@@ -172,23 +194,7 @@ BrColumnedListExamples >> compositeAllClassesAndPackage [
 	<gtExample>
 	| aList |
 	aList := BrColumnedList new.
-	aList column
-		title: 'Class';
-		cellStencil: [
-			BrLabel new
-				aptitude: BrGlamorousLabelAptitude new;
-				hMatchParent;
-				vFitContent ];
-		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass name asString ].
-	aList column
-		title: 'Package';
-		cellStencil: [
-			BrLabel new
-				aptitude: BrGlamorousLabelAptitude new;
-				hMatchParent;
-				vFitContent ];
-		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass package name asString ].
-	aList items: Smalltalk allClasses.
+	self addColumnsAndItemsTo: aList.
 	^ aList
 ]
 
@@ -197,6 +203,38 @@ BrColumnedListExamples >> compositeAllClassesAndPackageMultiSelect [
 	<gtExample>
 	^ self compositeAllClassesAndPackage
 		aptitude: BrColumnedMultiListAptitude new
+]
+
+{ #category : #'examples - scripting' }
+BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersAfter [
+	<gtExample>
+	| aList query header |
+	aList := BrColumnedList new.
+	self addColumnsAndItemsTo: aList.
+	aList addAptitude: BrColumnedListHeaderAptitude.
+	query := aList query // #'column-header'.
+	self assert: query isNotEmpty.
+	header := query anyOne.
+	self assert: header children size = 2.
+	self assert: header children first text asString = 'Class'.
+	self assert: header children second text asString = 'Package'.
+	^ aList
+]
+
+{ #category : #'examples - scripting' }
+BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersBefore [
+	<gtExample>
+	| aList query header |
+	aList := BrColumnedList new.
+	aList addAptitude: BrColumnedListHeaderAptitude.
+	self addColumnsAndItemsTo: aList.
+	query := aList query // #'column-header'.
+	self assert: query isNotEmpty.
+	header := query anyOne.
+	self assert: header children size = 2.
+	self assert: header children first text asString = 'Class'.
+	self assert: header children second text asString = 'Package'.
+	^ aList
 ]
 
 { #category : #'examples - scripting' }
