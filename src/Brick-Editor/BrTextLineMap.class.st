@@ -33,13 +33,14 @@ Class {
 { #category : #adding }
 BrTextLineMap >> addLine: lineNumber offset: offsetNumber [
 	"Add the supplied known index."
-	| closestMapEntry |
 
+	| closestMapEntry |
 	"Ensure there are no close entries"
 	closestMapEntry := self mapEntryFor: lineNumber.
-	(lineNumber - closestMapEntry key) < minEntrySpacing ifTrue: [ ^ self ].
+	(lineNumber - closestMapEntry key < minEntrySpacing
+		and: [ lineNumber <= map last key ]) ifTrue: [ ^ self ].
 
-	map add: lineNumber -> offsetNumber.
+	map add: lineNumber -> offsetNumber
 ]
 
 { #category : #accessing }

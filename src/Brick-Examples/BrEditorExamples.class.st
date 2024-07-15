@@ -144,6 +144,37 @@ BrEditorExamples >> readOnlyWithoutSelectionEditorWithGlamorousRegularLook [
 ]
 
 { #category : #accessing }
+BrEditorExamples >> scrollingLongText [
+	<gtExample>
+	| aScripter text editor |
+	aScripter := BlScripter new.
+	text := (String
+			streamContents: [ :stream | 
+				1
+					to: 100000
+					do: [ :i | 
+						i
+							printOn: stream
+							base: 10
+							nDigits: 9.
+						stream cr ] ]) asRopedText.
+	editor := BrEditor new.
+	editor editor text: text.
+	aScripter element: editor.
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Initial scroll';
+				block: [ :el | el scrollToPosition: 51111 ] ].
+	aScripter
+		doStep: [ :s | 
+			s
+				label: 'Scroll to end';
+				block: [ :el | el scrollToPosition: 99999 ] ].
+	^ aScripter
+]
+
+{ #category : #accessing }
 BrEditorExamples >> wrappedEditorClickToFocus [
 	<gtExample>
 	| aScripter |
