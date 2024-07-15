@@ -86,38 +86,6 @@ BrGroupedListGroups >> findGroupAt: anIndex [
 	self error: ('Could not find a group that contains an item with index {1}' format: { anIndex })
 ]
 
-{ #category : #'api - accessing' }
-BrGroupedListGroups >> groupSuchThat: aGroupMatchBlock itemSuchThat: anItemMatchBlock do: anActionBlock [
-	"Attempt to find the first group and group item matching given blocks 
-	which may involve preloading items until such item is found.
-	Evaluate an action block synchronously if an item was already preloaded,
-	otherwise schedule execution in a UI process"
-
-	<return: #TAsyncPromise>
-	^ (groupsProvider
-		itemSuchThat: aGroupMatchBlock 
-		do: [ :aGroupIndex :isGroupSynchronous | ])
-			then: [ :aGroupIndex :isGroupSynchronous | 
-				aGroupIndex > 0 
-					ifTrue: [ 
-						| aGroupedListGroup |
-						aGroupedListGroup := (self loadedGroups at: aGroupIndex).
-						(aGroupedListGroup group
-							itemSuchThat: anItemMatchBlock
-							do: [ :anItemIndex :isItemSynchronous | ])
-								then: [ :anItemIndex :isItemSynchronous |
-									| anIndex |
-									anIndex := anItemIndex > 0 
-										ifTrue: [ aGroupedListGroup headerIndex + anItemIndex ]
-										ifFalse: [ anItemIndex ].
-									anActionBlock
-										cull: anIndex
-										cull: isGroupSynchronous & isItemSynchronous.
-									anIndex ] ]
-					ifFalse: [ aGroupIndex ]
-			].
-]
-
 { #category : #initialization }
 BrGroupedListGroups >> groupsProvider: aBrItemsProvider listModel: aBrGroupedListModel [
 	self

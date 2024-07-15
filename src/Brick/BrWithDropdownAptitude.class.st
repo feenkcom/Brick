@@ -165,7 +165,10 @@ BrWithDropdownAptitude >> hide [
 	super hide.
 
 	self shouldHideWidget
-		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ]
+		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ].
+		
+	self visible ifFalse: [ 
+		self dispatchEvent: BrDropdownIsHidden new ]
 ]
 
 { #category : #initialization }
@@ -180,7 +183,9 @@ BrWithDropdownAptitude >> initialize [
 			on: BrDropdownHideWish
 			do: [ :aWish | self onHideWish: aWish ].
 
-	clickShowCondition := [ :aClickEvent | (self hasModifiers: aClickEvent) not ].	"when true, the widget under the dropdown will be hidden"
+	clickShowCondition := [ :aClickEvent | (self hasModifiers: aClickEvent) not ].
+	
+	"when true, the widget under the dropdown will be hidden"
 	shouldHideWidget := true.
 
 	preferredExtent := 200 @ 300.
@@ -397,7 +402,10 @@ BrWithDropdownAptitude >> show [
 	super show.
 
 	self shouldHideWidget
-		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ]
+		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ].
+		
+	self visible ifTrue: [ 
+		self dispatchEvent: BrDropdownIsVisible new ]
 ]
 
 { #category : #'api - displaying' }

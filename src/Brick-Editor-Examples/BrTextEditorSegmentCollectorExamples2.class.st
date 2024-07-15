@@ -4,6 +4,30 @@ Class {
 	#category : #'Brick-Editor-Examples'
 }
 
+{ #category : #accessing }
+BrTextEditorSegmentCollectorExamples2 >> cachePastEnd [
+	<gtExample>
+	| textModel text segmentCollector |
+	text := (String
+			streamContents: [ :stream | 
+				1
+					to: 52000
+					do: [ :i | 
+						i
+							printOn: stream
+							base: 10
+							nDigits: 9.
+						stream cr ] ]) asRopedText.
+	textModel := BrTextEditorModel new.
+	textModel text: text.
+	segmentCollector := BrTextEditorSegmentCollector new.
+	segmentCollector editor: textModel.
+	segmentCollector text: text.
+	segmentCollector computeForwardAt: 51111.
+	segmentCollector computeForwardAt: 51999.
+	^ segmentCollector
+]
+
 { #category : #examples }
 BrTextEditorSegmentCollectorExamples2 >> retrieveLimitPlusOne [
 	<gtExample>
