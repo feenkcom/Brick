@@ -69,13 +69,10 @@ BrColumnedListHeaderAptitude >> initialize [
 					text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
 			aColumn columnWidth applyOn: label.
 			label ].
+	self when: BrColumnsChanged do: [ :evt | self rebuildHeadersDueTo: evt ].
 	self
-		when: BrColumnsChanged
-		do: [ :evt | 
-			| header |
-			header := (evt target query // #'column-header') anyOne.
-			header removeChildren.
-			self buildColumnHeadersInto: header ].
+		when: BrItemsProviderItemsChangedEvent
+		do: [ :evt | self rebuildHeadersDueTo: evt ].
 	self addChangeAddChildFirst: #() with: [ self headerPane ]
 ]
 
@@ -87,4 +84,12 @@ BrColumnedListHeaderAptitude >> labelStencil: aBlock [
 { #category : #private }
 BrColumnedListHeaderAptitude >> newCellPaddingInsets [
 	^ BlInsets empty
+]
+
+{ #category : #initialization }
+BrColumnedListHeaderAptitude >> rebuildHeadersDueTo: evt [
+	| header |
+	header := (evt target query // #'column-header') anyOne.
+	header removeChildren.
+	^ self buildColumnHeadersInto: header
 ]

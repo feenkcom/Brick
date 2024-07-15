@@ -208,26 +208,32 @@ BrColumnedListExamples >> compositeAllClassesAndPackageMultiSelect [
 { #category : #'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersAfter [
 	<gtExample>
-	| aList query |
+	| aList query header |
 	aList := BrColumnedList new.
 	self addColumnsAndItemsTo: aList.
 	aList addAptitude: BrColumnedListHeaderAptitude.
 	query := aList query // #'column-header'.
 	self assert: query isNotEmpty.
-	self assert: query anyOne children size = 2.
+	header := query anyOne.
+	self assert: header children size = 2.
+	self assert: header children first text asString = 'Class'.
+	self assert: header children second text asString = 'Package'.
 	^ aList
 ]
 
 { #category : #'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersBefore [
 	<gtExample>
-	| aList query |
+	| aList query header |
 	aList := BrColumnedList new.
 	aList addAptitude: BrColumnedListHeaderAptitude.
 	self addColumnsAndItemsTo: aList.
 	query := aList query // #'column-header'.
 	self assert: query isNotEmpty.
-	self assert: query anyOne children size = 2.
+	header := query anyOne.
+	self assert: header children size = 2.
+	self assert: header children first text asString = 'Class'.
+	self assert: header children second text asString = 'Package'.
 	^ aList
 ]
 
