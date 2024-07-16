@@ -13,33 +13,15 @@ BrColumnedTreeRowElementStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 	| aRowElement theCellElements |
 	aRowElement := self createRowElement.
-
-	theCellElements := OrderedCollection new: self columns size.	"we should wrap the first column element into another element in order to add a toggle button"
-	self columnElements
-		ifNotEmpty: [ :theColumnElements | 
-			| aFirstColumnWrapper aToggleButton |
-			aFirstColumnWrapper := BlElement new
-					layout: BlLinearLayout horizontal alignCenterLeft;
-					constraintsDo: [ :c | 
-						c horizontal matchParent.
-						c vertical fitContent ].
-
-			self columns first columnWidth applyOn: aFirstColumnWrapper.
-
+	theCellElements := OrderedCollection new: self columns size.
+	columnElements
+		ifNotEmpty: [ | aToggleButton |
 			aToggleButton := self createExpandCollapseElement
+					id: #toggle;
 					toggleAction: [ :aToggleElement :aToggleModel | aToggleModel model toggle ].
-
-			aFirstColumnWrapper
-				addChild: aToggleButton as: #toggle;
-				addChild: theColumnElements first.
-
-			theCellElements add: aFirstColumnWrapper ].
-
-	self columnElements
-		allButFirstDo: [ :eachCellElement | theCellElements add: eachCellElement ].
-
+			theCellElements add: aToggleButton ].
+	theCellElements addAll: columnElements.
 	aRowElement addChildren: theCellElements.
-
 	^ aRowElement
 ]
 
