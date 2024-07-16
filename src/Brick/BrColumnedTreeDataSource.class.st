@@ -86,6 +86,9 @@ BrColumnedTreeDataSource >> onCreateHolder: anInfiniteElement type: anItemType [
 						asElement.
 
 				eachColumn columnWidth applyOn: eachColumnElement.
+				eachColumn announcer
+					when: BrColumnWidthChanged
+					do: [ :evt | eachColumn columnWidth applyOn: eachColumnElement ].
 
 				eachColumnElement ].	"now wrap the column elements in a row element with adornments"
 	aRowElement := rowElementStencil
