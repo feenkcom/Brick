@@ -313,7 +313,7 @@ BrWithAnchoredAptitude >> strategy: anObject [
 		ifTrue: [ ^ self ].
 	strategy := anObject.
 	self canRelocate
-		ifTrue: [ self canRelocate ]
+		ifTrue: [ self relocate ]
 ]
 
 { #category : #accessing }
