@@ -116,6 +116,17 @@ BrWithDropdownAptitude >> createResizerOn: anElement [
 	^ anElement addAptitude: self resizerAptitudes
 ]
 
+{ #category : #'api - displaying' }
+BrWithDropdownAptitude >> detachResizerAptitudes [
+	"Detach aptitudes from widgets since keeping them
+	around may produce memory leaks.
+	See https://github.com/feenkcom/gtoolkit/issues/3915"
+	
+	self resizerAptitudes ifNotNil: [ :anAptitude |
+		anAptitude isAttachedToWidget ifTrue: [ 
+			 anAptitude widget removeAptitude: anAptitude ] ]
+]
+
 { #category : #accessing }
 BrWithDropdownAptitude >> doKeepRatio [
 	"Keep dropdown extent ratio while resizing"
@@ -164,6 +175,7 @@ BrWithDropdownAptitude >> handleMouseUpEvent: anEvent [
 BrWithDropdownAptitude >> hide [
 	super hide.
 
+	self detachResizerAptitudes.
 	self shouldHideWidget
 		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ].
 		
@@ -321,13 +333,13 @@ BrWithDropdownAptitude >> resizerAptitudes [
 ]
 
 { #category : #accessing }
-BrWithDropdownAptitude >> resizerAptitudes: anObject [
+BrWithDropdownAptitude >> resizerAptitudes: aResizerAptitude [
 	(resizerAptitudes isNotNil and: [ resizerAptitudes isAttachedToWidget ])
 		ifTrue: [ | aWidget |
 			aWidget := resizerAptitudes widget.
 			aWidget removeAptitude: resizerAptitudes.
-			aWidget addAptitude: anObject ].
-	resizerAptitudes := anObject
+			aWidget addAptitude: aResizerAptitude ].
+	resizerAptitudes := aResizerAptitude
 ]
 
 { #category : #accessing }
