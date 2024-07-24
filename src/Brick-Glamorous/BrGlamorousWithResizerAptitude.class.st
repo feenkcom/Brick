@@ -21,7 +21,7 @@ BrGlamorousWithResizerAptitude >> initialize [
 		addChange:
 			(BrLookChange new
 				up: [ :e | resizer target: self widget ];
-				down: [ :e | resizer target: nil ];
+				down: [ :e | "resizer target: nil" ];
 				yourself)
 ]
 
