@@ -8,7 +8,8 @@ Class {
 		'isResizable',
 		'whenResizedHandler',
 		'resizerAptitudes',
-		'isKeepRatio'
+		'isKeepRatio',
+		'resizerAptitudeStencil'
 	],
 	#category : #'Brick-Dropdown - Look'
 }
@@ -328,6 +329,23 @@ BrWithDropdownAptitude >> removeInnerContainerDropdownAptitudes [
 ]
 
 { #category : #accessing }
+BrWithDropdownAptitude >> resizerAptitudeStencil: aStencil [
+	"Set resizer aptitude stencil.
+	Since this method is called on every extent change (e.g., when users use resizers),
+	we want to update resizer aptitudes only if necessary. This is the main purpose
+	of {{gtClass:BrGlamorousResizerAptitudeStencil}} instances (plus the resizer aptitude creation).
+	
+	Example GtWorldByScripterExamples>>#worldSpotter_ResizeVertically_ClosePressingEscape"
+
+	resizerAptitudeStencil = aStencil ifTrue: [ ^ self ].
+
+	resizerAptitudeStencil := aStencil.
+	resizerAptitudeStencil isKeepRatio: self isKeepRatio.
+	resizerAptitudeStencil whenResizedDo: whenResizedHandler.
+	self resizerAptitudes: aStencil create
+]
+
+{ #category : #accessing }
 BrWithDropdownAptitude >> resizerAptitudes [
 	^ resizerAptitudes
 ]
@@ -344,54 +362,32 @@ BrWithDropdownAptitude >> resizerAptitudes: aResizerAptitude [
 
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnBottom [
-	self
-		resizerAptitudes: (self
-				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
-				+ (self
-						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+	self resizerAptitudeStencil: BrGlamorousResizerBottomAptitudeStencil new.
 ]
 
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnBottomLeft [
-	self
-		resizerAptitudes: (self
-				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+	self resizerAptitudeStencil: BrGlamorousResizerBottomLeftAptitudeStencil new.
 ]
 
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnBottomRight [
-	self
-		resizerAptitudes: (self
-				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new)
+	self resizerAptitudeStencil: BrGlamorousResizerBottomRightAptitudeStencil new.
 ]
 
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnTop [
-	self
-		resizerAptitudes: (self
-				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
-				+ (self
-						createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
+	self resizerAptitudeStencil: BrGlamorousResizerTopAptitudeStencil new.
 ]
 
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnTopLeft [
-	self
-		resizerAptitudes: (self
-				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
+	self resizerAptitudeStencil: BrGlamorousResizerTopLeftAptitudeStencil new.
 ]
 
 { #category : #accessing }
 BrWithDropdownAptitude >> resizersOnTopRight [
-	self
-		resizerAptitudes: (self
-				createResizeAptitudeWith: BrGlamorousWithHorizontalResizerAptitude new beRight)
-				+ (self createResizeAptitudeWith: BrGlamorousWithVerticalResizerAptitude new beTop)
+	self resizerAptitudeStencil: BrGlamorousResizerTopRightAptitudeStencil new.
 ]
 
 { #category : #'api - displaying' }
@@ -429,6 +425,9 @@ BrWithDropdownAptitude >> stencil: aValuable [
 
 { #category : #private }
 BrWithDropdownAptitude >> updateResizerAptitudesKeepRatio [
+	resizerAptitudeStencil ifNotNil: [ :aStencil | 
+		aStencil isKeepRatio: self isKeepRatio ].
+
 	resizerAptitudes ifNil: [ ^ self ].
 	resizerAptitudes withAllActorsDepthFirstDo: [ :anAptitude |
 		anAptitude keepRatio: self isKeepRatio ]
@@ -436,5 +435,10 @@ BrWithDropdownAptitude >> updateResizerAptitudesKeepRatio [
 
 { #category : #accessing }
 BrWithDropdownAptitude >> whenResizedDo: aBlock [
-	whenResizedHandler := aBlock
+	whenResizedHandler := aBlock.
+	resizerAptitudeStencil ifNotNil: [ :aStencil | 
+		aStencil whenResizedDo: aBlock ].
+	resizerAptitudes ifNotNil: [
+		resizerAptitudes withAllActorsDepthFirstDo: [ :anAptitude |
+			anAptitude whenResizedDo: whenResizedHandler ] ]
 ]
