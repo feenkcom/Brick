@@ -20,8 +20,13 @@ BrGlamorousWithResizerAptitude >> initialize [
 	self
 		addChange:
 			(BrLookChange new
-				up: [ :e | resizer target: self widget ];
-				down: [ :e | "resizer target: nil" ];
+				up: [ :e | 
+					resizer target: self widget ];
+				down: [ :e | 
+					"We do not want to keep target elements, since it may produce memory leaks.
+					Issue: https://github.com/feenkcom/gtoolkit/issues/3915
+					Example: GtWorldByScripterExamples>>#worldSpotter_ResizeVertically_ClosePressingEscape"
+					resizer target: nil ];
 				yourself)
 ]
 
