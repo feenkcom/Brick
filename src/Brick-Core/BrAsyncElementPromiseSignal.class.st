@@ -1,12 +1,13 @@
 Class {
 	#name : #BrAsyncElementPromiseSignal,
-	#superclass : #BeaconSignal,
+	#superclass : #ContextStackSignal,
 	#instVars : [
 		'element',
 		'promise',
 		'spaceTasks',
 		'elementTasks',
-		'dataSnapshot'
+		'dataSnapshot',
+		'isAttachedToSceneGraph'
 	],
 	#category : #'Brick-Core-Futures'
 }
@@ -57,11 +58,19 @@ BrAsyncElementPromiseSignal >> elementTasks [
 ]
 
 { #category : #accessing }
+BrAsyncElementPromiseSignal >> isAttachedToSceneGraph [
+	^ isAttachedToSceneGraph
+]
+
+{ #category : #accessing }
 BrAsyncElementPromiseSignal >> prepareForDelivery [
+	super prepareForDelivery.
+
 	element ifNil: [ ^ self ].
 
 	spaceTasks := (element space ifNotNil: [ :s | s taskQueue tasks ]).
-	elementTasks := element taskQueue tasks
+	elementTasks := element taskQueue tasks.
+	isAttachedToSceneGraph := element isAttachedToSceneGraph
 ]
 
 { #category : #accessing }

@@ -2,9 +2,10 @@ Class {
 	#name : #BrTextEditorSignal,
 	#superclass : #BeaconSignal,
 	#instVars : [
-		'textEditor'
+		'textEditor',
+		'text'
 	],
-	#category : 'Brick-Editor-Signals'
+	#category : #'Brick-Editor-Signals'
 }
 
 { #category : #testing }
@@ -18,6 +19,14 @@ BrTextEditorSignal class >> gtNormalOperationSignal [
 { #category : #'instance creation' }
 BrTextEditorSignal class >> textEditor: aBrTextEditor [
 	^ self new textEditor: aBrTextEditor
+]
+
+{ #category : #initialization }
+BrTextEditorSignal >> prepareForDelivery [
+	super prepareForDelivery.
+
+	self textEditor ifNotNil: [ :anEditor | 
+		text := anEditor text copy ]
 ]
 
 { #category : #accessing }
