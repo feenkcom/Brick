@@ -7,7 +7,8 @@ Class {
 	#name : #BrGlamorousWithVerticalScrollbarAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
-		'scrollbar'
+		'scrollbar',
+		'scrollableName'
 	],
 	#category : #'Brick-Glamorous-Scrollbar'
 }
@@ -16,6 +17,7 @@ Class {
 BrGlamorousWithVerticalScrollbarAptitude >> initialize [
 	super initialize.
 
+	scrollableName := #scrollable.
 	scrollbar := BrScrollbar new
 			beVertical;
 			thumb: (BrScrollbarThumb new aptitude: BrGlamorousScrollbarThumbAptitude new);
@@ -43,7 +45,17 @@ BrGlamorousWithVerticalScrollbarAptitude >> scrollBarHoverAptitude [
 
 { #category : #'private - accessing' }
 BrGlamorousWithVerticalScrollbarAptitude >> scrollable [
-	^ self widget childNamed: #scrollable
+	^ self widget childNamed: self scrollableName
+]
+
+{ #category : #'private - accessing' }
+BrGlamorousWithVerticalScrollbarAptitude >> scrollableName [
+	^ scrollableName
+]
+
+{ #category : #accessing }
+BrGlamorousWithVerticalScrollbarAptitude >> scrollableName: aSymbol [
+	scrollableName := aSymbol
 ]
 
 { #category : #'private - updating' }
