@@ -1,8 +1,8 @@
 Class {
 	#name : #BrEditor,
 	#superclass : #BrEditorElement,
-	#traits : 'TBrLayoutResizable',
-	#classTraits : 'TBrLayoutResizable classTrait',
+	#traits : 'TBrLayoutResizable + TBrScrollable',
+	#classTraits : 'TBrLayoutResizable classTrait + TBrScrollable classTrait',
 	#instVars : [
 		'textReplacedHandler'
 	],
@@ -32,6 +32,28 @@ BrEditor >> beReadOnlyWithSelection [
 { #category : #'api - editor' }
 BrEditor >> beReadOnlyWithoutSelection [
 	self beMode: BrTextEditorReadonlyWithoutSelectionMode new
+]
+
+{ #category : #accessing }
+BrEditor >> computeVerticalScrollExtent [
+	^ (self layout
+		findFirstVisibleChildClosestToEndCompletelyVisible: true
+		acceptPartiallyVisible: true) segment textEnd
+		- (self layout
+				findFirstVisibleChildClosestToStartCompletelyVisible: true
+				acceptPartiallyVisible: true) segment textStart
+]
+
+{ #category : #accessing }
+BrEditor >> computeVerticalScrollOffset [
+	^ (self layout
+		findFirstVisibleChildClosestToStartCompletelyVisible: true
+		acceptPartiallyVisible: true) segment textStart
+]
+
+{ #category : #accessing }
+BrEditor >> computeVerticalScrollRange [
+	^ self text size
 ]
 
 { #category : #'editor - accessing' }

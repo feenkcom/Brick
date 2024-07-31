@@ -21,13 +21,14 @@ BrGlamorousListWithScrollbarAptitude >> beVertical [
 BrGlamorousListWithScrollbarAptitude >> initialize [
 	super initialize.
 
-	scrollableHandler := BlEventHandler 
-		on: BlElementRemovedFromParentEvent 
-		do: [ :anEvent | self onScrollableRemovedFromParent: anEvent ].
+	scrollableHandler := BlEventHandler
+			on: BlElementRemovedFromParentEvent
+			do: [ :anEvent | self onScrollableRemovedFromParent: anEvent ].
 
-	self add: (BrListOrientationAptitude new
-		horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] after: [  ] ];
-		vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] after: [  ] ])
+	self
+		add: (BrListOrientationAptitude new
+				horizontal: [ :aStyle | aStyle do: [ :aWidget | self beHorizontal ] ];
+				vertical: [ :aStyle | aStyle do: [ :aWidget | self beVertical ] ])
 ]
 
 { #category : #'private - event handling' }
