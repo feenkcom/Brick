@@ -15,6 +15,18 @@ BrAsyncElementFutureCompletedSuccessfullySignal class >> gtNormalOperationSignal
 	^ true
 ]
 
+{ #category : #'gt-extensions' }
+BrAsyncElementFutureCompletedSuccessfullySignal >> gtPromiseFor: aView [
+	<gtView>
+	self promise ifNil: [ ^ aView empty ].
+	
+	^ aView forward
+		title: 'Promise';
+		priority: 20;
+		object: [ self promise ];
+		view: #gtPromiseFor:
+]
+
 { #category : #accessing }
 BrAsyncElementFutureCompletedSuccessfullySignal >> isCurrentPromise [
 	^ isCurrentPromise

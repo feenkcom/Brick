@@ -41,7 +41,10 @@ BrAsyncElementPromise >> privateDataSnapshot: aDataSnapshot synchronous: isSynch
 	isSynchronous
 		ifTrue: [ self privateUpdateElement ]
 		ifFalse: [
-			(BrAsyncElementPromiseRequestUpdateSignal forElement: updater element) emit.
+			(BrAsyncElementPromiseRequestUpdateSignal forElement: updater element) 
+				promise: promise;
+				dataSnapshot: aDataSnapshot;
+				emit.
 			updater requestUpdate ]
 ]
 
@@ -99,7 +102,10 @@ BrAsyncElementPromise >> privateInitializeElement [
 BrAsyncElementPromise >> privateUpdateElement [
 	"Must be called from the UI thread"
 
-	(BrAsyncElementPromiseElementUpdateSignal forElement: updater element) emit.
+	(BrAsyncElementPromiseElementUpdateSignal forElement: updater element) 
+		promise: promise;
+		dataSnapshot: dataSnapshot;
+		emit.
 
 	dataSnapshot
 		ifSuccess: [ :aData | whenSuccess ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
