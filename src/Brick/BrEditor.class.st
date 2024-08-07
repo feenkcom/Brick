@@ -36,19 +36,12 @@ BrEditor >> beReadOnlyWithoutSelection [
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollExtent [
-	^ (self layout
-		findFirstVisibleChildClosestToEndCompletelyVisible: true
-		acceptPartiallyVisible: true) segment textEnd
-		- (self layout
-				findFirstVisibleChildClosestToStartCompletelyVisible: true
-				acceptPartiallyVisible: true) segment textStart
+	^ self lastVisibleSegment textEnd - self firstVisibleSegment textStart
 ]
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollOffset [
-	^ (self layout
-		findFirstVisibleChildClosestToStartCompletelyVisible: true
-		acceptPartiallyVisible: true) segment textStart
+	^ self firstVisibleSegment textStart
 ]
 
 { #category : #accessing }
@@ -101,6 +94,13 @@ BrEditor >> editor: aBrTextEditor [
 	aBrTextEditor consumeClickEvent: false
 ]
 
+{ #category : #accessing }
+BrEditor >> firstVisibleSegment [
+	^ (self layout
+		findFirstVisibleChildClosestToStartCompletelyVisible: true
+		acceptPartiallyVisible: true) segment
+]
+
 { #category : #initialization }
 BrEditor >> initialize [
 	super initialize.
@@ -120,6 +120,7 @@ BrEditor >> initialize [
 	
 	self when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
 	self when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
+	self when: BrScrollByWish do: [:aWish | self onScrollBy: aWish]
 ]
 
 { #category : #'api - editor' }
@@ -148,11 +149,28 @@ BrEditor >> isReadOnly [
 	^ self viewModel mode isReadOnly
 ]
 
+{ #category : #accessing }
+BrEditor >> lastVisibleSegment [
+	^ (self layout
+		findFirstVisibleChildClosestToEndCompletelyVisible: true
+		acceptPartiallyVisible: true) segment
+]
+
 { #category : #'editor - operations' }
 BrEditor >> navigator [
 	<return: #BrTextEditorNavigator>
 
 	^ self editor navigator
+]
+
+{ #category : #'api - scrolling' }
+BrEditor >> onScrollBy: aWish [
+	| position linesOnScreen |
+	position := aWish delta y asInteger.
+	linesOnScreen := self lastVisibleSegment index - self firstVisibleSegment index.
+	position > self computeVerticalScrollExtent
+		ifTrue: [ self scrollToPosition: self lastVisibleSegment index + linesOnScreen ]
+		ifFalse: [ self scrollToPosition: self firstVisibleSegment index - linesOnScreen ]
 ]
 
 { #category : #'editor - operations' }
