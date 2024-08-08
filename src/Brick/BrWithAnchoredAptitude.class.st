@@ -139,6 +139,27 @@ BrWithAnchoredAptitude >> initialize [
 				yourself)
 ]
 
+{ #category : #initialization }
+BrWithAnchoredAptitude >> initializeListeners [
+	super initializeListeners.
+
+	self
+		when: BlElementAddedToSceneGraphEvent
+		do: [ :anEvent | self onAddedToSceneGraphEvent: anEvent ]
+]
+
+{ #category : #'event handling' }
+BrWithAnchoredAptitude >> onAddedToSceneGraphEvent: anEvent [ 
+	root ifNil: [ ^ self ].
+	self widget space == self root space ifTrue: [ ^ self ].
+	
+	"Since the widget is displayed in another space, 
+	we need to reset the root element in order to display
+	anchored elements in the same space as the widget.
+	See https://github.com/feenkcom/gtoolkit/issues/3945"
+	self root: nil
+]
+
 { #category : #'private - hooks' }
 BrWithAnchoredAptitude >> onAnchoredElementCreated: anAnchoredElement [
 ]
