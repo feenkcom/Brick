@@ -45,6 +45,11 @@ BrUpdatingDateAndTimeModel >> printer: anObject [
 	printer := anObject
 ]
 
+{ #category : #actions }
+BrUpdatingDateAndTimeModel >> stopUpdateTask [
+	timeTask ifNotNil: [ :aTask | aTask stop ]. 
+]
+
 { #category : #accessing }
 BrUpdatingDateAndTimeModel >> updateTimeTask [
 	self
