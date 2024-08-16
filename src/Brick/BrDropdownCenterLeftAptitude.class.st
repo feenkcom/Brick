@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDropdownCenterLeftAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Dropdown - Look'
+	#category : #'Brick-Dropdown - Look'
 }
 
 { #category : #initialization }
@@ -15,7 +15,7 @@ BrDropdownCenterLeftAptitude >> initialize [
 					handle := widget childNamed: #handle.
 					content := widget childNamed: #content.
 					widget
-						layout: BlFrameLayout new;
+						layout: BlLinearLayout horizontal;
 						constraintsDo: [ :c | 
 							c horizontal fitContentLimited.
 							c vertical fitContentLimited.
@@ -26,8 +26,8 @@ BrDropdownCenterLeftAptitude >> initialize [
 					content
 						margin: (BlInsets left: handle width);
 						constraintsDo: [ :c | 
-							c horizontal fitContent.
-							c vertical fitContentLimitedOffset: handle height ].
+							c horizontal fitContentLimited.
+							c vertical fitContentLimited ].
 					handle
 						constraintsDo: [ :c | 
 							c frame horizontal alignLeft.
