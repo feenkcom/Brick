@@ -124,6 +124,7 @@ BrAnchoredVisualAnalysisElement >> initializeScenePreview [
 					build);
 			clipChildren: false.
 	scalableScenePreview := scenePreview asScalableElement
+			zIndex: -1;
 			margin: (BlInsets all: 30);
 			border: (BlBorder builder
 					dashedSmall;
