@@ -1,7 +1,7 @@
 Class {
 	#name : #BrContextMenuExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Context Menu'
+	#category : #'Brick-Examples-Context Menu'
 }
 
 { #category : #accessing }
@@ -102,7 +102,7 @@ BrContextMenuExamples >> modelForElement: anElement [
 					(BrGlamorousContextMenuAptitude new
 						content:
 							(BrGlamorousSimpleContextMenuContent new
-								display:
+								items:
 									{('Change to blue' -> [ :e | e background: Color blue ]).
 									('Change to red' -> [ :e | e background: Color red ]).
 									('Change to green' -> [ :e | e background: Color green ])};
