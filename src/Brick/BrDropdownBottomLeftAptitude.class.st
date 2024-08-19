@@ -24,15 +24,15 @@ BrDropdownBottomLeftAptitude >> initialize [
 						padding:
 							(BlInsets
 								top: 0
-								left: 0 "handle width"
-								bottom: 0 "handle height"
+								left: 0
+								bottom: 0
 								right: 0);
 						removeChild: handle;
 						addChildFirst: handle.
 					content
 						constraintsDo: [ :c | 
-							c horizontal fitContent.
-							c vertical fitContentLimitedOffset: 0 "handle height" ].
+							c horizontal fitContentLimited.
+							c vertical fitContentLimited ].
 					handle
 						constraintsDo: [ :c | 
 							c linear horizontal alignRight.
