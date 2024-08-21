@@ -36,17 +36,17 @@ BrEditor >> beReadOnlyWithoutSelection [
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollExtent [
-	^ self lastVisibleSegment textEnd - self firstVisibleSegment textStart
+	^ self lastVisibleSegment index - self firstVisibleSegment index
 ]
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollOffset [
-	^ self firstVisibleSegment textStart
+	^ self firstVisibleSegment index
 ]
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollRange [
-	^ self text size
+	^ self text lineCount
 ]
 
 { #category : #'editor - accessing' }
@@ -165,12 +165,10 @@ BrEditor >> navigator [
 
 { #category : #'api - scrolling' }
 BrEditor >> onScrollBy: aWish [
-	| position linesOnScreen |
+	| position current |
 	position := aWish delta y asInteger.
-	linesOnScreen := self lastVisibleSegment index - self firstVisibleSegment index.
-	position > self computeVerticalScrollExtent
-		ifTrue: [ self scrollToPosition: self lastVisibleSegment index + linesOnScreen ]
-		ifFalse: [ self scrollToPosition: self firstVisibleSegment index - linesOnScreen ]
+	current := self firstVisibleSegment index.
+	self scrollToPosition: position + current
 ]
 
 { #category : #'editor - operations' }
