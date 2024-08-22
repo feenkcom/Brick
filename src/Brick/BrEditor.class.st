@@ -166,7 +166,11 @@ BrEditor >> navigator [
 { #category : #'api - scrolling' }
 BrEditor >> onScrollBy: aWish [
 	| position current |
-	position := aWish delta y asInteger.
+	position := aWish delta y.
+	position := position positive
+			ifTrue: [ position roundUpTo: 1 ]
+			ifFalse: [ position roundDownTo: 1 ].
+	position asBeaconSignal emit.
 	current := self firstVisibleSegment index.
 	self scrollToPosition: position + current
 ]
