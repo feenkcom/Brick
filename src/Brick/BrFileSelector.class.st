@@ -57,7 +57,7 @@ BrFileSelector >> buildUI [
 	self
 		addChildren: {scrollbar.
 				table.
-				alignedButton}	"scrollable horizontally only to accomodate the breadcrumb"
+				alignedButton}
 ]
 
 { #category : #accessing }
