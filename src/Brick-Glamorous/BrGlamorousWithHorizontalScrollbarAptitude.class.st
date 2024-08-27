@@ -13,8 +13,8 @@ BrGlamorousWithHorizontalScrollbarAptitude >> initialize [
 
 	scrollbar := BrScrollbar new
 			beHorizontal;
-			thumb: (BrScrollbarThumb new aptitude: BrGlamorousScrollbarThumbAptitude new);
-			track: (BrScrollbarTrack new aptitude: BrGlamorousScrollbarTrackAptitude new);
+			thumb: (BlElement new aptitude: BrGlamorousScrollbarThumbAptitude new);
+			track: (BlElement new aptitude: BrGlamorousScrollbarTrackAptitude new);
 			aptitude: BrScrollbarAptitude new + (self scrollBarHoverAptitude // #track)
 					+ (self scrollBarHoverAptitude // #thumb);
 			constraintsDo: [ :c | 
