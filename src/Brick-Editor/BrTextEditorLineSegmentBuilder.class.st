@@ -57,7 +57,7 @@ BrTextEditorLineSegmentBuilder >> beReadOnly [
 
 { #category : #initialization }
 BrTextEditorLineSegmentBuilder >> defaultSplitter [
-	^ BrTextEditorLineSplitter new
+	^ BrTextEditorSplitter new
 		segmentClass: BrTextEditorLineSegment;
 		yourself
 ]

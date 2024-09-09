@@ -643,7 +643,7 @@ BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 { #category : #'examples - instance creation' }
 BrTextEditorLineSplitterExamples >> textLineSplitter [
 	<gtExample>
-	^ BrTextEditorLineSplitter new
+	^ BrTextEditorSplitter new
 		segmentClass: BrTextEditorLineSegment;
 		yourself
 ]

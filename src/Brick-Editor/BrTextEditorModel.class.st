@@ -87,7 +87,7 @@ BrTextEditorModel >> beEditableCode [
 { #category : #accessing }
 BrTextEditorModel >> beLineBased [
 	segmentBuilder := BrTextEditorLineSegmentBuilder new
-			splitter: (BrTextEditorLineSplitter new
+			splitter: (BrTextEditorSplitter new
 					segmentClass: BrTextEditorLineSegment;
 					yourself)
 ]
@@ -95,7 +95,7 @@ BrTextEditorModel >> beLineBased [
 { #category : #accessing }
 BrTextEditorModel >> beParagraphBased [
 	segmentBuilder := BrTextEditorLineSegmentBuilder new
-			splitter: (BrTextEditorLineSplitter new
+			splitter: (BrTextEditorSplitter new
 					segmentClass: BrTextEditorParagraphSegment;
 					yourself)
 ]
