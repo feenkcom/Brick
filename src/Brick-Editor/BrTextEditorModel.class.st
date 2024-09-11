@@ -754,8 +754,7 @@ BrTextEditorModel >> onTextAttributeAdded: aBlTextAttributeAdded [
 	self assertUIProcess.
 
 	self segmentBuilder
-		addedAttribute: aBlTextAttributeAdded attribute
-		from: aBlTextAttributeAdded fromIndex
+		attributesModfiedFrom: aBlTextAttributeAdded fromIndex
 		to: aBlTextAttributeAdded toIndex
 		in: self.
 
@@ -767,7 +766,7 @@ BrTextEditorModel >> onTextAttributesRemoved: aBlTextAttributesRemoved [
 	self assertUIProcess.
 
 	self segmentBuilder
-		removedAttributesFrom: aBlTextAttributesRemoved fromIndex
+		attributesModfiedFrom: aBlTextAttributesRemoved fromIndex
 		to: aBlTextAttributesRemoved toIndex
 		in: self.
 ]

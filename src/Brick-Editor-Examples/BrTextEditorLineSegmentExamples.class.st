@@ -2416,6 +2416,49 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfWorld [
 	^ aTextEditor
 ]
 
+{ #category : #'examples - pieces' }
+BrTextEditorLineSegmentExamples >> pieces_with_hidden_text [
+	"Test if splitter updates due to changing attributes in the text"
+	<gtExample>
+	| aTextEditor aSegment |
+		
+	aTextEditor := self emptyEditor.
+	aTextEditor text: '(foo
+bar
+baz)' asRopedText.
+	
+	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
+	
+	aSegment := aTextEditor segmentCollector segments first.
+	self assert: aSegment index equals: 1.
+	self assert: aSegment text asString equals: '(foo'.
+	self assert: aSegment textStart equals: 0.
+	self assert: aSegment textEnd equals: 4.
+	
+	aSegment := aTextEditor segmentCollector segments second.
+	self assert: aSegment index equals: 2.
+	self assert: aSegment text asString equals: 'bar'.
+	self assert: aSegment textStart equals: 5.
+	self assert: aSegment textEnd equals: 8.
+	
+	aSegment := aTextEditor segmentCollector segments third.
+	self assert: aSegment index equals: 3.
+	self assert: aSegment text asString equals: 'baz)'.
+	self assert: aSegment textStart equals: 9.
+	self assert: aSegment textEnd equals: 13.
+	
+	aTextEditor text attribute: BrTextHideAttribute new from: 2 to: 12.
+	aTextEditor segmentCollector computeForwardAt: 1.
+
+	aSegment := aTextEditor segmentCollector segments first.
+	self assert: aSegment index equals: 1.
+	self assert: aSegment pieces size equals: 3.
+	self assert: aSegment textStart equals: 0.
+	self assert: aSegment textEnd equals: 13.
+
+	^ aTextEditor
+]
+
 { #category : #'examples - scope' }
 BrTextEditorLineSegmentExamples >> scope_segment_HelloCrWorld_0_to_5_to_be_0_to_11 [
 	<gtExample>

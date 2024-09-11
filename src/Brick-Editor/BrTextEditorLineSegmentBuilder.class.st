@@ -16,33 +16,31 @@ Class {
 }
 
 { #category : #'text - modifications' }
-BrTextEditorLineSegmentBuilder >> addedAttribute: anAttribute from: aFromIndex to: aToIndex in: aBrTextEditor [
-	"Is sent after an attribute was added in provided text editor"
-	| aFromSegment aToSegment |
+BrTextEditorLineSegmentBuilder >> attributesModfiedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
+	"Is sent after an attributes were removed in provided text editor"
+
+	| aFromSegment aToSegment oldSegmentCount newSegmentCount attributedSubText |
 
 	self
 		assert: [ aFromIndex <= (aToIndex + 1) ]
 		description: [ '`From` index must be less or equal to `to` index' ].
-
 	aBrTextEditor segmentCollector
 		cachedSegmentAt: aFromIndex
 		ifFound: [ :aSegment | aFromSegment := aSegment ]
-		ifNotFound: [ ].
-
+		ifNotFound: [ ^self ].
 	aBrTextEditor segmentCollector
 		cachedSegmentAt: aToIndex
 		ifFound: [ :aSegment | aToSegment := aSegment ]
-		ifNotFound: [ ].
+		ifNotFound: [ ^self ].
 
-	"we add attribute to something completely outside of the cached segments, just ignore it"
-	(aFromSegment isNil or: [ aToSegment isNil ])	
-		ifTrue: [
-			self flag: #TODO.
-			^ self ].
-
-	aBrTextEditor updater
-		from: aFromSegment textStart to: aToSegment textEnd;
-		update
+	attributedSubText := aBrTextEditor text from: (aFromIndex max: 1) to: aToIndex.
+	newSegmentCount := self splitSegmentCountOf: attributedSubText.
+	oldSegmentCount := aToSegment index - aFromSegment index + 1.
+	oldSegmentCount ~= newSegmentCount
+		ifTrue: [ self resetSegmentCacheAndNotify: aBrTextEditor ]
+		ifFalse: [ aBrTextEditor updater
+				from: aFromSegment textStart to: aToSegment textEnd;
+				update ]
 ]
 
 { #category : #'api - accessing' }
@@ -108,7 +106,6 @@ BrTextEditorLineSegmentBuilder >> deleteFrom: aFromIndex segment: aFromSegment t
 { #category : #'text - modifications' }
 BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
 	| aFromSegment aToSegment aTargetSegment |
-
 	self
 		assert: [ aFromIndex <= aToIndex ]
 		description: [ '`From` index must be less or equal to `to` index' ].
@@ -116,23 +113,22 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 	aBrTextEditor segmentCollector
 		cachedSegmentAt: aFromIndex
 		ifFound: [ :aSegment | aFromSegment := aSegment ]
-		ifNotFound: [ ].
+		ifNotFound: [  ].
 
 	aBrTextEditor segmentCollector
 		cachedSegmentAt: aToIndex
 		ifFound: [ :aSegment | aToSegment := aSegment ]
-		ifNotFound: [ ].
+		ifNotFound: [  ].
 
-	(aFromSegment isNil or: [ aToSegment isNil ])	ifTrue: [ | interval |
-			"Either aFromIndex or aToIndex are outside the segment collector's cache.
-			It looks like the text editor's text has already been updated, 
-			simply reset the cache and notify the editor"
-			interval := aBrTextEditor segmentCollector cachedInterval.
-			aBrTextEditor segmentCollector resetCache.
-			aBrTextEditor notifyItemsRemoved: interval.
-			^ self ].
+	(aFromSegment isNil or: [ aToSegment isNil ])
+		ifTrue: [ ^ self resetSegmentCacheAndNotify: aBrTextEditor ].
 
-	aTargetSegment := self deleteFrom: aFromIndex segment: aFromSegment to: aToIndex segment: aToSegment in: aBrTextEditor.
+	aTargetSegment := self
+			deleteFrom: aFromIndex
+			segment: aFromSegment
+			to: aToIndex
+			segment: aToSegment
+			in: aBrTextEditor.
 
 	aBrTextEditor updater
 		from: aTargetSegment textStart to: aTargetSegment textEnd;
@@ -151,18 +147,14 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 	"I am doing a hard work updating editor's segment cache due to inserted string.
 	Note: This is an *algorithm* that should be very performant, that is why we don't see
 	a point in doing it in OOP style, procedural way fits quite well"
-	| aCurrentSegment aStream theNewSegments |
 
+	| aCurrentSegment aStream theNewSegments |
 	self
 		assert: [ aBrTextEditor text isNotEmpty ]
 		description: [ 'Text can not be empty here' ].
-	self
-		assert: [ aString isNotEmpty ]
-		description: [ 'String must not be empty' ].
-
-	aStream := BrEditorSegmentStream new.
-	aStream limit: Float infinity.
-
+	self assert: [ aString isNotEmpty ] description: [ 'String must not be empty' ].
+	
+	aStream := BrEditorSegmentStream new limit: Float infinity.
 	self
 		split: (aBrTextEditor text from: aTextIndex + 1 to: aTextIndex + aString size)
 		in: aStream
@@ -175,45 +167,26 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 
 	theNewSegments := aCurrentSegment insert: aStream segments.
 	theNewSegments size > 1
-		ifTrue: [ aBrTextEditor segmentCollector addSegments: theNewSegments allButFirst after: aCurrentSegment ].
+		ifTrue: [ aBrTextEditor segmentCollector
+				addSegments: theNewSegments allButFirst
+				after: aCurrentSegment ].
 
 	aCurrentSegment moveTextPiecesBy: aString size at: aTextIndex.
-	aBrTextEditor segmentCollector moveTextBy: aString size after: theNewSegments last.
-	
+	aBrTextEditor segmentCollector
+		moveTextBy: aString size
+		after: theNewSegments last.
+
 	aBrTextEditor updater
 		from: aCurrentSegment textStart to: aCurrentSegment textEnd;
 		update
 ]
 
 { #category : #'text - modifications' }
-BrTextEditorLineSegmentBuilder >> removedAttributesFrom: aFromIndex to: aToIndex in: aBrTextEditor [
-	"Is sent after an attributes were removed in provided text editor"
-
-	| aFromSegment aToSegment |
-
-	self
-		assert: [ aFromIndex <= (aToIndex + 1) ]
-		description: [ '`From` index must be less or equal to `to` index' ].
-
-	aBrTextEditor segmentCollector
-		cachedSegmentAt: aFromIndex
-		ifFound: [ :aSegment | aFromSegment := aSegment ]
-		ifNotFound: [ ].
-
-	aBrTextEditor segmentCollector
-		cachedSegmentAt: aToIndex
-		ifFound: [ :aSegment | aToSegment := aSegment ]
-		ifNotFound: [ ].
-
-	"we remove attributes from something completely outside of the cached segments, just ignore it"
-	(aFromSegment isNil or: [ aToSegment isNil ])	
-		ifTrue: [
-			self flag: #TODO.
-			^ self ].
-
-	aBrTextEditor updater
-		from: aFromSegment textStart to: aToSegment textEnd;
-		update
+BrTextEditorLineSegmentBuilder >> resetSegmentCacheAndNotify: aBrTextEditor [
+	| interval |
+	interval := aBrTextEditor segmentCollector cachedInterval.
+	aBrTextEditor segmentCollector resetCache.
+	aBrTextEditor notifyItemsRemoved: interval
 ]
 
 { #category : #'private - deletion' }
@@ -247,6 +220,21 @@ BrTextEditorLineSegmentBuilder >> split: aBrText in: aStream [
 { #category : #splitting }
 BrTextEditorLineSegmentBuilder >> split: aBrText in: aBrEditorSegmentStream offset: anOffset [
 	self splitter split: aBrText in: aBrEditorSegmentStream offset: anOffset
+]
+
+{ #category : #'text - modifications' }
+BrTextEditorLineSegmentBuilder >> splitSegmentCountOf: attributedSubText [
+	^ (self splitSegmentsOf: attributedSubText) size
+]
+
+{ #category : #'text - modifications' }
+BrTextEditorLineSegmentBuilder >> splitSegmentsOf: attributedSubText [
+	| aStream |
+	aStream := BrEditorSegmentStream new.
+	aStream limit: Float infinity.
+
+	self split: attributedSubText in: aStream.
+	^ aStream segments
 ]
 
 { #category : #accessing }
