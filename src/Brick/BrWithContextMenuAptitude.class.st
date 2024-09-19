@@ -10,35 +10,9 @@ Class {
 	#category : #'Brick-Context Menu - Look'
 }
 
-{ #category : #'instance creation' }
-BrWithContextMenuAptitude class >> anchoredAptitude [
-	^ self anchoredAptitudeClass new
-]
-
 { #category : #accessing }
 BrWithContextMenuAptitude class >> anchoredAptitudeClass [
 	^ BrContextMenuAptitude
-]
-
-{ #category : #accessing }
-BrWithContextMenuAptitude class >> content: anObject [
-	^ self stencil: [
-		BrAnchoredElement new
-			aptitude: (self anchoredAptitude
-				content: anObject asStencil asElement;
-				yourself);
-			yourself ]
-]
-
-{ #category : #'instance creation' }
-BrWithContextMenuAptitude class >> handle: anObject content: anotherObject [
-	^ self stencil: [
-		BrAnchoredElement new
-			aptitude: (self anchoredAptitude
-				handle: anObject asStencil asElement;
-				content: anotherObject asStencil asElement;
-				yourself);
-			yourself ]
 ]
 
 { #category : #initialization }
