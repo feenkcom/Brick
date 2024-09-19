@@ -8,6 +8,11 @@ Class {
 	#category : #'Brick-Dropdown - Look'
 }
 
+{ #category : #accessing }
+BrDropdownContentStencil class >> stencilProperties [
+	^ #(contentStencil decorator)
+]
+
 { #category : #'as yet unclassified' }
 BrDropdownContentStencil >> buildDefault [
 	| aContentElement |

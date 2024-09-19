@@ -7,11 +7,11 @@ Class {
 { #category : #accessing }
 BrContextMenuExamples >> aptitude [
 	<gtExample>
-	| look |
-	look := BrWithContextMenuAptitude new.
-	self assert: look visible equals: false.
-	self assert: (look stencil asStencil asElement isKindOf: BlElement).
-	^ look
+	| aptitude |
+	aptitude := BrWithContextMenuAptitude new.
+	self assert: aptitude visible equals: false.
+	self assert: (aptitude stencil asElement isKindOf: BlElement).
+	^ aptitude
 ]
 
 { #category : #accessing }
@@ -89,7 +89,7 @@ BrContextMenuExamples >> model [
 				yourself ];
 		yourself.
 	self assert: model visible equals: false.
-	self assert: (model stencil asStencil asElement isKindOf: BlElement).
+	self assert: (model stencil asElement isKindOf: BlElement).
 	^ model
 ]
 

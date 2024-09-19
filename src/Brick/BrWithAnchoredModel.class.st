@@ -5,7 +5,7 @@ Class {
 		'visible',
 		'stencil'
 	],
-	#category : 'Brick-Anchored - Model'
+	#category : #'Brick-Anchored - Model'
 }
 
 { #category : #initialization }
@@ -58,7 +58,7 @@ BrWithAnchoredModel >> stencil [
 BrWithAnchoredModel >> stencil: anObject [
 	stencil = anObject
 		ifTrue: [ ^ self ].
-	stencil := anObject asStencil.
+	stencil := anObject asStencilBuilder: BrAnchoredAptitudeStencilBuilder.
 	self notifyStencilChanged
 ]
 
