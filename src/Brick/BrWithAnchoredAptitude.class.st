@@ -27,56 +27,40 @@ BrWithAnchoredAptitude class >> anchoredAptitude [
 ]
 
 { #category : #accessing }
-BrWithAnchoredAptitude class >> content: anObject [
-	^ self
-		stencil: [ :aWidget |
-			| aContentStencil aContentElement |
-			aContentStencil := anObject asStencilBuilder: BrAnchoredAptitudeStencilBuilder.
-			
-			aContentElement := aContentStencil
-				widget: aWidget;
-				asElement.
-				
-			BrAnchoredElement new
-				aptitude: (self anchoredAptitude
-						content: aContentElement;
-						yourself);
-				yourself ]
+BrWithAnchoredAptitude class >> anchoredAptitudeClass [
+	^ self subclassResponsibility
 ]
 
 { #category : #'instance creation' }
-BrWithAnchoredAptitude class >> handle: anObject content: anotherObject [
+BrWithAnchoredAptitude class >> content: aContentStencil [
+	^ self stencil: (self defaultStencilClass new
+		contentStencil: aContentStencil;
+		anchoredAptitudeClass: self anchoredAptitudeClass)
+]
+
+{ #category : #accessing }
+BrWithAnchoredAptitude class >> defaultStencilClass [
+	^ BrWithAnchoredAptitudeWithHandleAndContentStencil
+]
+
+{ #category : #'instance creation' }
+BrWithAnchoredAptitude class >> handle: aHandleStencil content: aContentStencil [
 	^ self
-		handle: anObject
-		content: anotherObject
+		handle: aHandleStencil
+		content: aContentStencil
 		aptitudeDo: [ :anAnchoredLook | ]
 ]
 
 { #category : #'instance creation' }
-BrWithAnchoredAptitude class >> handle: anObject content: anotherObject aptitudeDo: aBlock [
-	^ self
-		stencil: [ :aWidget |
-			| anAnchoredAptitude aContentStencil aContentElement|
-			
-			aContentStencil := anotherObject asStencilBuilder: BrAnchoredAptitudeStencilBuilder.
-			
-			aContentElement := aContentStencil
-				widget: aWidget;
-				asElement.
-
-			anAnchoredAptitude := self anchoredAptitude
-					handle: anObject asStencil asElement;
-					content: aContentElement;
-					yourself.
-
-			aBlock value: anAnchoredAptitude.
-
-			BrAnchoredElement new
-				aptitude: anAnchoredAptitude;
-				yourself ]
+BrWithAnchoredAptitude class >> handle: aHandleStencil content: aContentStencil aptitudeDo: aBlock [
+	^ self stencil: (self defaultStencilClass new
+		handleStencil: aHandleStencil;
+		contentStencil: aContentStencil;
+		aptitudeDecoratorBlock: aBlock;
+		anchoredAptitudeClass: self anchoredAptitudeClass)
 ]
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
 BrWithAnchoredAptitude class >> stencil: anObject [
 	^ self new
 		stencil: anObject;
@@ -335,12 +319,13 @@ BrWithAnchoredAptitude >> root: anElement [
 BrWithAnchoredAptitude >> show [
 	self canShow ifFalse: [ ^ self ].
 
-	(stencil isKindOf: BrAnchoredAptitudeStencilBuilder)
-		ifFalse: [ stencil := stencil asStencilBuilder: BrAnchoredAptitudeStencilBuilder].
+	(stencil isKindOf: BrWithAnchoredAptitudeStencil)
+		ifFalse: [ stencil := stencil asStencilBuilder: BrWithAnchoredAptitudeStencil].
 	
 	self flag: 'TODO extentChangedEventHandler really needed on inner container?'.
 	innerContainer := stencil
 		widget: widget;
+		aptitude: self;
 		asElement.
 	innerContainer addEventHandler: extentChangedEventHandler.
 
@@ -377,7 +362,7 @@ BrWithAnchoredAptitude >> stencil [
 BrWithAnchoredAptitude >> stencil: aValuable [
 	stencil = aValuable
 		ifTrue: [ ^ self ].
-	stencil := aValuable asStencilBuilder: BrAnchoredAptitudeStencilBuilder.
+	stencil := aValuable asStencilBuilder: BrWithAnchoredAptitudeStencil.
 	self canHide
 		ifTrue: [ self
 				hide;

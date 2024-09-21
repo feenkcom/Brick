@@ -19,6 +19,11 @@ BrWithDropdownAptitude class >> anchoredAptitudeClass [
 	^ BrDropdownAptitude
 ]
 
+{ #category : #accessing }
+BrWithDropdownAptitude class >> defaultStencilClass [
+	^ BrWithDropdownAptitudeStencil
+]
+
 { #category : #'api - displaying' }
 BrWithDropdownAptitude >> attachToCenter [
 	strategy := BrAnchoredCompositeStrategy builder
@@ -377,13 +382,6 @@ BrWithDropdownAptitude >> show [
 		
 	self visible ifTrue: [ 
 		self dispatchEvent: BrDropdownIsVisible new ]
-]
-
-{ #category : #'api - displaying' }
-BrWithDropdownAptitude >> stencil: aValuable [
-	super stencil: (BrDropdownContentStencil new
-		contentStencil: aValuable;
-		decorator: [ :anElement | self createResizerOn: anElement ])
 ]
 
 { #category : #private }
