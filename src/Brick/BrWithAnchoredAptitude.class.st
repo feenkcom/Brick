@@ -22,6 +22,45 @@ Class {
 }
 
 { #category : #accessing }
+BrWithAnchoredAptitude class >> anchoredAptitude [
+	^ self anchoredAptitudeClass new
+]
+
+{ #category : #accessing }
+BrWithAnchoredAptitude class >> anchoredAptitudeClass [
+	^ self subclassResponsibility
+]
+
+{ #category : #'instance creation' }
+BrWithAnchoredAptitude class >> content: aContentStencil [
+	^ self stencil: (self defaultStencilClass new
+		contentStencil: aContentStencil;
+		anchoredAptitudeClass: self anchoredAptitudeClass)
+]
+
+{ #category : #accessing }
+BrWithAnchoredAptitude class >> defaultStencilClass [
+	^ BrWithAnchoredAptitudeWithHandleAndContentStencil
+]
+
+{ #category : #'instance creation' }
+BrWithAnchoredAptitude class >> handle: aHandleStencil content: aContentStencil [
+	^ self
+		handle: aHandleStencil
+		content: aContentStencil
+		aptitudeDo: [ :anAnchoredLook | ]
+]
+
+{ #category : #'instance creation' }
+BrWithAnchoredAptitude class >> handle: aHandleStencil content: aContentStencil aptitudeDo: aBlock [
+	^ self stencil: (self defaultStencilClass new
+		handleStencil: aHandleStencil;
+		contentStencil: aContentStencil;
+		aptitudeDecoratorBlock: aBlock;
+		anchoredAptitudeClass: self anchoredAptitudeClass)
+]
+
+{ #category : #'instance creation' }
 BrWithAnchoredAptitude class >> stencil: anObject [
 	^ self new
 		stencil: anObject;
@@ -104,7 +143,7 @@ BrWithAnchoredAptitude >> hide [
 { #category : #initialization }
 BrWithAnchoredAptitude >> initialize [
 	super initialize.
-	self stencil: [ BlElement new ].
+	self stencil: [ :aWidget | BlElement new ].
 	watchDog := BlRepeatedTaskAction new
 			delay: 500 milliSeconds;
 			action: [  "hide when widget removed from scene by checking repeatedly"(widget
@@ -280,8 +319,15 @@ BrWithAnchoredAptitude >> root: anElement [
 BrWithAnchoredAptitude >> show [
 	self canShow ifFalse: [ ^ self ].
 
+	(stencil isKindOf: BrWithAnchoredAptitudeStencil)
+		ifFalse: [ stencil := stencil asStencilBuilder: BrWithAnchoredAptitudeStencil].
+	
 	self flag: 'TODO extentChangedEventHandler really needed on inner container?'.
-	innerContainer := stencil asElement addEventHandler: extentChangedEventHandler.
+	innerContainer := stencil
+		widget: widget;
+		aptitude: self;
+		asElement.
+	innerContainer addEventHandler: extentChangedEventHandler.
 
 	self onAnchoredElementCreated: innerContainer.
 
@@ -313,10 +359,10 @@ BrWithAnchoredAptitude >> stencil [
 ]
 
 { #category : #accessing }
-BrWithAnchoredAptitude >> stencil: anObject [
-	stencil = anObject
+BrWithAnchoredAptitude >> stencil: aValuable [
+	stencil = aValuable
 		ifTrue: [ ^ self ].
-	stencil := anObject asStencil.
+	stencil := aValuable asStencilBuilder: BrWithAnchoredAptitudeStencil.
 	self canHide
 		ifTrue: [ self
 				hide;

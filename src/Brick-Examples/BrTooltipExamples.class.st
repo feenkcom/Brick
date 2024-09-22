@@ -10,7 +10,7 @@ BrTooltipExamples >> aptitude [
 	| look |
 	look := BrWithTooltipAptitude new.
 	self assert: look visible equals: false.
-	self assert: (look stencil asStencil asElement isKindOf: BlElement).
+	self assert: (look stencil asElement isKindOf: BlElement).
 	^ look
 ]
 

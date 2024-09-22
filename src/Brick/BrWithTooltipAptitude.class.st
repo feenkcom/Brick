@@ -14,35 +14,9 @@ Class {
 	#category : #'Brick-Tooltip - Look'
 }
 
-{ #category : #'instance creation' }
-BrWithTooltipAptitude class >> anchoredAptitude [
-	^ self anchoredAptitudeClass new
-]
-
 { #category : #accessing }
 BrWithTooltipAptitude class >> anchoredAptitudeClass [
 	^ BrTooltipAptitude
-]
-
-{ #category : #'instance creation' }
-BrWithTooltipAptitude class >> content: anObject [
-	^ self stencil: [
-		BrAnchoredElement new
-			aptitude: (self anchoredAptitude
-				content: anObject asStencil asElement;
-				yourself);
-			yourself ]
-]
-
-{ #category : #'instance creation' }
-BrWithTooltipAptitude class >> handle: anObject content: anotherObject [
-	^ self stencil: [
-		BrAnchoredElement new
-			aptitude: (self anchoredAptitude
-				handle: anObject asStencil asElement;
-				content: anotherObject asStencil asElement;
-				yourself);
-			yourself ]
 ]
 
 { #category : #initialization }

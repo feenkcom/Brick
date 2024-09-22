@@ -15,45 +15,13 @@ Class {
 }
 
 { #category : #accessing }
-BrWithDropdownAptitude class >> anchoredAptitude [
-	^ self anchoredAptitudeClass new
-]
-
-{ #category : #accessing }
 BrWithDropdownAptitude class >> anchoredAptitudeClass [
 	^ BrDropdownAptitude
 ]
 
 { #category : #accessing }
-BrWithDropdownAptitude class >> content: anObject [
-	^ self
-		stencil: [ :aDecorator | BrAnchoredElement new
-				aptitude: (self anchoredAptitude
-						content: (aDecorator value: anObject asStencil asElement);
-						yourself);
-				yourself ]
-]
-
-{ #category : #'instance creation' }
-BrWithDropdownAptitude class >> handle: anObject content: anotherObject [
-	^ self
-		handle: anObject
-		content: anotherObject
-		aptitudeDo: [ :anAnchoredLook | ]
-]
-
-{ #category : #'instance creation' }
-BrWithDropdownAptitude class >> handle: anObject content: anotherObject aptitudeDo: aBlock [
-	^ self
-		stencil: [ :aDecorator | | anAnchoredAptitude |
-			anAnchoredAptitude := self anchoredAptitude
-					handle: anObject asStencil asElement;
-					content: (aDecorator value: anotherObject asStencil asElement);
-					yourself.
-			aBlock value: anAnchoredAptitude.
-			BrAnchoredElement new
-				aptitude: anAnchoredAptitude;
-				yourself ]
+BrWithDropdownAptitude class >> defaultStencilClass [
+	^ BrWithDropdownAptitudeStencil
 ]
 
 { #category : #'api - displaying' }
@@ -414,13 +382,6 @@ BrWithDropdownAptitude >> show [
 		
 	self visible ifTrue: [ 
 		self dispatchEvent: BrDropdownIsVisible new ]
-]
-
-{ #category : #'api - displaying' }
-BrWithDropdownAptitude >> stencil: aValuable [
-	stencil := BrDropdownContentStencil new
-			contentStencil: aValuable;
-			decorator: [ :anElement | self createResizerOn: anElement ]
 ]
 
 { #category : #private }
