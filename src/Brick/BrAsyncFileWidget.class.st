@@ -50,6 +50,22 @@ BrAsyncFileWidget >> formBlock: aBlock [
 				c vertical matchParent ] ]
 ]
 
+{ #category : #accessing }
+BrAsyncFileWidget >> formContentsBlock: aBlock [
+
+	self
+		stencil: [ 
+			| byteArray |
+			byteArray := aBlock value.
+			(SkiaImage
+				fromBuffer: byteArray
+				start: 0
+				end: byteArray size - 1) asElement
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ] ]
+]
+
 { #category : #'system startup' }
 BrAsyncFileWidget >> resumeOnStartUp [
 
