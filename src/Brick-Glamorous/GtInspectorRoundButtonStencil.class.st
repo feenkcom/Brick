@@ -13,6 +13,11 @@ GtInspectorRoundButtonStencil class >> large [
 ]
 
 { #category : #'instance creation' }
+GtInspectorRoundButtonStencil class >> mini [
+	^ self new size: 10 @ 10
+]
+
+{ #category : #'instance creation' }
 GtInspectorRoundButtonStencil class >> normal [
 	^ self new size: 20@20
 ]
@@ -20,6 +25,11 @@ GtInspectorRoundButtonStencil class >> normal [
 { #category : #'instance creation' }
 GtInspectorRoundButtonStencil class >> small [
 	^ self new size: 16@16
+]
+
+{ #category : #'instance creation' }
+GtInspectorRoundButtonStencil class >> tiny [
+	^ self new size: 12 @ 12
 ]
 
 { #category : #'api - instantiation' }
