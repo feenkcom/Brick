@@ -30,57 +30,62 @@ BrTextEditorLineSegmentHolder class >> defaultSegmentLayout: aBlock [
 { #category : #'private - segment' }
 BrTextEditorLineSegmentHolder >> buildSegment: anEditorSegment [
 	| newPieceElements thePieces hasSelection hasCursor |
-
 	segment := anEditorSegment.
 
 	hasSelection := self hasSelection.
 	hasCursor := self hasCursor.
-	
+
 	BlFrameTelemetry
 		time: [ 'Update segment properties' ]
 		during: [ segment updateSegmentProperties ].
 
-	pieceElements := self newPiecesMap.
+	pieceElements := BrTextEditorLineSegmentPieceDictionaryMap new.
 	newPieceElements := OrderedCollection new.
 
-	thePieces := BlFrameTelemetry
-		time: [ 'Get pieces' ]
-		during: [ segment pieces ].
-	
+	thePieces := BlFrameTelemetry time: [ 'Get pieces' ] during: [ segment pieces ].
+
 	BlFrameTelemetry
 		time: [ 'Create piece elements' ]
-		during: [
-			thePieces withIndexDo: [ :aPiece :eachIndex | 
-				| thePieceElements |
-				
-				thePieceElements := BlFrameTelemetry
-					time: [ 'Create piece elements at {1} for {2}' format: { eachIndex. aPiece class name } ]
-					during: [ (aPiece createElement: self infiniteElement) asOrderedCollection ].
-				
-				newPieceElements addAll: thePieceElements.
-				pieceElements atPiece: aPiece putElements: thePieceElements ] ].
+		during: [ thePieces
+				withIndexDo: [ :aPiece :eachIndex | 
+					| thePieceElements |
+					thePieceElements := BlFrameTelemetry
+							time: [ 'Create piece elements at {1} for {2}'
+									format: {eachIndex.
+											aPiece class name} ]
+							during: [ (aPiece createElement: self infiniteElement)
+									asOrderedCollection ].
+
+					newPieceElements addAll: thePieceElements.
+					pieceElements atPiece: aPiece putElements: thePieceElements ] ].
 
 	(hasCursor or: [ hasSelection ])
-		ifTrue: [
-			BlFrameTelemetry
+		ifTrue: [ BlFrameTelemetry
 				timeSync: [ 'Set cursor, selection' ]
-				during: [
-					pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement |
-						hasCursor
-							ifTrue: [
-								BlFrameTelemetry
-									timeSync: [ 'Set cursor' ]
-									during: [ aPiece setCursor: aPieceElement of: anEditorSegment in: self infiniteElement ] ].
-						
-						BlFrameTelemetry
-							timeSync: [ 'Set focus' ]
-							during: [ aPiece updateFocus: self infiniteElement isFocused of: aPieceElement in: self infiniteElement ].
-						
-						hasSelection
-							ifTrue: [
-								BlFrameTelemetry
-									timeSync: [ 'Set selection' ]
-									during: [ aPiece updateSelection: aPieceElement of: anEditorSegment in: self infiniteElement ] ] ] ] ].
+				during: [ pieceElements
+						piecesAndTheirElementsDo: [ :aPiece :aPieceElement | 
+							hasCursor
+								ifTrue: [ BlFrameTelemetry
+										timeSync: [ 'Set cursor' ]
+										during: [ aPiece
+												setCursor: aPieceElement
+												of: anEditorSegment
+												in: self infiniteElement ] ].
+
+							BlFrameTelemetry
+								timeSync: [ 'Set focus' ]
+								during: [ aPiece
+										updateFocus: self infiniteElement isFocused
+										of: aPieceElement
+										in: self infiniteElement ].
+
+							hasSelection
+								ifTrue: [ BlFrameTelemetry
+										timeSync: [ 'Set selection' ]
+										during: [ aPiece
+												updateSelection: aPieceElement
+												of: anEditorSegment
+												in: self infiniteElement ] ] ] ] ].
 
 	BlFrameTelemetry
 		timeSync: [ 'Remove segment children' ]

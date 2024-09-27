@@ -16,14 +16,22 @@ BrTextEditorSegmentSplitterObject >> endIntervalWith: endingAttributes [
 	(endingAttributes
 		allSatisfy: [ :each | each isAdornment and: [ each shouldOverlay ] ])
 		ifTrue: [ ^ self ].
-	self hasReplacement ifFalse: [ self outputTextTo: intervalLast ].
-	endingAttributes
-		do: [ :each | 
-			(each isAdornment and: [ each shouldReplace or: [ each shouldAppend ] ])
-				ifTrue: [ self
-						outputAdornment: each
-						from: (intervalFirst min: start)
-						to: intervalLast ] ].
+	self hasReplacement
+		ifTrue: [ endingAttributes
+				do: [ :each | 
+					(each isAdornment and: [ each shouldReplace ])
+						ifTrue: [ self
+								outputAdornment: each
+								from: (intervalFirst min: start)
+								to: intervalLast ] ] ]
+		ifFalse: [ self outputTextTo: intervalLast.
+			endingAttributes
+				do: [ :each | 
+					(each isAdornment and: [ each shouldAppend ])
+						ifTrue: [ self
+								outputAdornment: each
+								from: (intervalFirst min: start)
+								to: intervalLast ] ] ].
 	start := intervalLast + 1
 ]
 
@@ -117,6 +125,10 @@ BrTextEditorSegmentSplitterObject >> startIntervalWith: startingAttributes [
 				anySatisfy: [ :each | each isAdornment and: [ each shouldReplace ] ] ])
 		ifTrue: [ ^ self ].
 	self outputTextTo: intervalFirst - 1.
+	"Replace attributes trump overlay attributes"
+	(startingAttributes
+		anySatisfy: [ :each | each isAdornment and: [ each shouldReplace ] ])
+		ifTrue: [ ^ self ].
 	startingAttributes
 		do: [ :each | 
 			(each isAdornment and: [ each shouldOverlay ])
