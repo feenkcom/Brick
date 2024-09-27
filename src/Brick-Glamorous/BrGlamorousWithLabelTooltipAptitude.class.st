@@ -26,6 +26,16 @@ Class {
 }
 
 { #category : #'instance creation' }
+BrGlamorousWithLabelTooltipAptitude class >> text: aTextOrString [
+	^ self new text: aTextOrString
+]
+
+{ #category : #'instance creation' }
+BrGlamorousWithLabelTooltipAptitude class >> text: aTextOrString keymap: aKeymap [
+	^ self new text: aTextOrString keymap: aKeymap
+]
+
+{ #category : #'instance creation' }
 BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 	| anElement |
 	anElement := BrLabel new
@@ -49,6 +59,57 @@ BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString [
 	^ anElement
 ]
 
+{ #category : #'instance creation' }
+BrGlamorousWithLabelTooltipAptitude >> newLabelWithText: aTextOrString keymap: aKeymap [
+	"Keymap can be:
+		- a text, e.g., 'F5',
+		- a BlKeyCombination instance, or
+		- nil"
+
+	| aContainer aLabel |
+	aLabel := self newLabelWithText: aTextOrString.
+	aLabel constraintsDo: [ :c | 
+		c linear vertical alignCenter.
+		c padding: (BlInsets all: 0). ].
+	aContainer := BrHorizontalPane new
+			fitContent;
+			padding: (BlInsets all: 5);
+			addChild: aLabel.
+
+	aKeymap
+		ifNotNil: [ aContainer
+				addChild: (BrHorizontalPane new
+						fitContent;
+						constraintsDo: [ :c | 
+							c linear vertical alignCenter ];
+						geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+						border: (BlBorder paint: Color gray width: 1);
+						padding: (BlInsets all: 1);
+						margin: (BlInsets top: 2 left: 5);
+						addChild: (BrLabel new
+								aptitude: BrGlamorousLabelAptitude;
+								text: (aKeymap asRopedText
+										fontName: 'Source Code Pro';
+										foreground: Color gray;
+										fontSize: 10));
+						yourself) ].
+						
+	"This is a huge hack. Do not use it in other places!
+	We use it to better estimate the preferredExtent value.
+	Read more about it in the class comment."
+	BlSpace new
+		extent: preferredExtent;
+		addChild: aContainer;
+		doLayout;
+		removeChild: aContainer.
+		
+	preferredExtent := aContainer extent 
+		+ (8 @ 8) "It is a handle size. Taken from
+		{{gtMethod:BrAnchoredWithHandleAndContentAptitude>>#initialize}}".
+						
+	^ aContainer
+]
+
 { #category : #accessing }
 BrGlamorousWithLabelTooltipAptitude >> text: aTextOrString [
 	self
@@ -56,6 +117,17 @@ BrGlamorousWithLabelTooltipAptitude >> text: aTextOrString [
 				aptitude:
 					(BrGlamorousTooltipAptitude new
 						content: (self newLabelWithText: aTextOrString);
+						yourself);
+				yourself ]
+]
+
+{ #category : #accessing }
+BrGlamorousWithLabelTooltipAptitude >> text: aTextOrString keymap: aKeymap [
+	self
+		stencil: [ BrAnchoredElement new
+				aptitude:
+					(BrGlamorousTooltipAptitude new
+						content: (self newLabelWithText: aTextOrString keymap: aKeymap);
 						yourself);
 				yourself ]
 ]
