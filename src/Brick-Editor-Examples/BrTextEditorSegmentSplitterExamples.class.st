@@ -87,17 +87,14 @@ BrTextEditorSegmentSplitterExamples >> appendingInReplacingAdornmentTextSplit [
 			split: text
 			from: 1
 			to: text size.
-	self assert: segments size equals: 4.
+	self assert: segments size equals: 3.
 	self assert: segments first isText.
 	self assert: segments first textStart equals: 1.
 	self assert: segments first textEnd equals: 3.
 	self assert: segments first text asString equals: '12'.
 	self assert: (segments second isKindOf: BrTextEditorLineSegmentAdornmentPiece).
-	self assert: segments second adornmentAttribute equals: appending.
-	self assert: segments second text asString equals: '34'.
-	self assert: (segments third isKindOf: BrTextEditorLineSegmentAdornmentPiece).
-	self assert: segments third adornmentAttribute equals: replacing.
-	self assert: segments third text asString equals: '56'.
+	self assert: segments second adornmentAttribute equals: replacing.
+	self assert: segments second text asString equals: '56'.
 	self assert: segments last isText.
 	self assert: segments last textStart equals: 7.
 	self assert: segments last textEnd equals: 11.
