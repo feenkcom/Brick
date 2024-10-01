@@ -30,6 +30,7 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 	"Initialize an itemElement for a given editor segment.
 	Please note, that itemElement may be reused from a previous segment, which means it is
 	important to also assign defaults such as empty selection or no cursors"
+	
 	segment := anEditorSegment.
 	itemElement segment: segment.
 
@@ -41,7 +42,7 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 
 	segment updateSegmentProperties.
 
-	pieceElements := BrTextEditorLineSegmentPieceDictionaryMap new.
+	pieceElements := self newPiecesMap.
 	newPieceElements := OrderedCollection new.
 
 	thePieces := segment pieces.
@@ -51,6 +52,7 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 			| thePieceElements |
 			thePieceElements := (aPiece createElement: self infiniteElement)
 					asOrderedCollection.
+
 			newPieceElements addAll: thePieceElements.
 			pieceElements atPiece: aPiece putElements: thePieceElements ].
 
