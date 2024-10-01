@@ -41,7 +41,7 @@ BrEditor >> computeVerticalScrollExtent [
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollOffset [
-	^ self firstVisibleSegment index
+	^ self firstVisibleSegment index - 1
 ]
 
 { #category : #accessing }
