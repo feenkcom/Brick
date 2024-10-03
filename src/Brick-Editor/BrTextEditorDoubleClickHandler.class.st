@@ -22,7 +22,7 @@ BrTextEditorDoubleClickHandler class >> uniqueInstance [
 { #category : #'api - event managing' }
 BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 	| aScreenPosition aGlobalTextIndex aSelecter anEditorElement |
-	
+
 	"To not create an instance of me for each tiny text element"
 	anEditorElement := anEvent currentTarget
 		withAllParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
@@ -34,7 +34,8 @@ BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 	aGlobalTextIndex := anEditorElement editor navigator
 		findTextIndexAtScreenPosition: aScreenPosition
 		ifAbsent: [ ^ self ].
-	
+
+	anEvent consumed: true.
 	aSelecter := anEditorElement editor selecter.
 
 	anEvent modifiers isPrimaryModifier
