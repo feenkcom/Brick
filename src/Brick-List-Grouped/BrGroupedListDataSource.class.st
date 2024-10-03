@@ -73,17 +73,15 @@ BrGroupedListDataSource >> itemTypeAt: anItemPosition [
 
 { #category : #'instance creation' }
 BrGroupedListDataSource >> onBindHeader: aBrGroup holder: anElementHolder at: aPosition [
-	| anItemElementWithBindedData |
-
-	anItemElementWithBindedData := headerDataBinder
+	headerDataBinder
 		itemElement: anElementHolder itemElement;
 		itemObject: aBrGroup;
 		rowObject: aBrGroup;
 		itemPosition: aPosition;
-		asElement.
+		build.
 
 	anElementHolder
-		itemElement: anItemElementWithBindedData;
+		itemElement: anElementHolder itemElement;
 		rowValue: aBrGroup
 ]
 
