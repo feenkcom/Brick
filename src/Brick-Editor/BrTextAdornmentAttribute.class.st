@@ -142,6 +142,11 @@ BrTextAdornmentAttribute >> shouldAppend [
 ]
 
 { #category : #testing }
+BrTextAdornmentAttribute >> shouldFold [
+	^ alignmentMode == #fold
+]
+
+{ #category : #testing }
 BrTextAdornmentAttribute >> shouldOverlay [
 	^ alignmentMode == #overlay
 ]
