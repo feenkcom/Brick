@@ -28,7 +28,7 @@ BrTextEditorSegmentSplitterObject >> endIntervalWith: endingAttributes [
 		ifFalse: [ self hasReplacement ifFalse: [ self outputTextTo: intervalLast ].
 			endingAttributes
 				do: [ :each | 
-					(each isAdornment and: [ each shouldAppend ])
+					(each isAdornment and: [ each shouldReplace or: [ each shouldAppend ] ])
 						ifTrue: [ self
 								outputAdornment: each
 								from: (intervalFirst min: start)
