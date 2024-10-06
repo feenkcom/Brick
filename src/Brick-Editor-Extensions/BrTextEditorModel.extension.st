@@ -10,23 +10,6 @@ BrTextEditorModel >> gtHistoryFor: aView [
 ]
 
 { #category : #'*Brick-Editor-Extensions' }
-BrTextEditorModel >> gtLiveFor: aView [
-	<gtView>
-
-	^ aView explicit
-		title: 'Live';
-		priority: 0;
-		stencil: [ 
-			BrEditorElement new 
-				editor: self;
-				padding: (BlInsets all: 10);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical matchParent ];
-				requestFocus ]
-]
-
-{ #category : #'*Brick-Editor-Extensions' }
 BrTextEditorModel >> gtSegmentsFor: aView [
 	<gtView>
 
