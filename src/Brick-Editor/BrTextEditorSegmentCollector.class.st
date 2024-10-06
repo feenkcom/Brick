@@ -173,7 +173,7 @@ BrTextEditorSegmentCollector >> cachedSegmentAt: aTextIndex ifFound: aFoundBlock
 	segmentIndex := self cachedSegmentIndexAt: aTextIndex.
 	segmentIndex = 0 ifTrue: [ ^ aNotFoundBlock cull: self ].
 	segment := self segments at: segmentIndex.
-	aFoundBlock cull: segment
+	^ aFoundBlock cull: segment
 ]
 
 { #category : #'cache - accessing' }
