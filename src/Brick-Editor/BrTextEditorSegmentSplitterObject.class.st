@@ -16,14 +16,23 @@ BrTextEditorSegmentSplitterObject >> endIntervalWith: endingAttributes [
 	(endingAttributes
 		allSatisfy: [ :each | each isAdornment and: [ each shouldOverlay ] ])
 		ifTrue: [ ^ self ].
-	self hasReplacement ifFalse: [ self outputTextTo: intervalLast ].
-	endingAttributes
-		do: [ :each | 
-			(each isAdornment and: [ each shouldReplace or: [ each shouldAppend ] ])
-				ifTrue: [ self
-						outputAdornment: each
-						from: (intervalFirst min: start)
-						to: intervalLast ] ].
+	self hasFold
+		ifTrue: [ endingAttributes
+				do: [ :each | 
+					(each isAdornment and: [ each shouldFold ])
+						ifTrue: [ splitter
+								outputAdornment: each
+								from: (intervalFirst min: start)
+								to: intervalLast
+								virtual: false ] ] ]
+		ifFalse: [ self hasReplacement ifFalse: [ self outputTextTo: intervalLast ].
+			endingAttributes
+				do: [ :each | 
+					(each isAdornment and: [ each shouldReplace or: [ each shouldAppend ] ])
+						ifTrue: [ self
+								outputAdornment: each
+								from: (intervalFirst min: start)
+								to: intervalLast ] ] ].
 	start := intervalLast + 1
 ]
 
@@ -31,6 +40,12 @@ BrTextEditorSegmentSplitterObject >> endIntervalWith: endingAttributes [
 BrTextEditorSegmentSplitterObject >> finished [
 	self hasReplacement ifFalse: [ self outputTextTo: intervalLast ].
 	self endIntervalWith: self interestingAttributes
+]
+
+{ #category : #accessing }
+BrTextEditorSegmentSplitterObject >> hasFold [
+	^ interestingAttributes
+		anySatisfy: [ :each | each isAdornment and: [ each shouldFold ] ]
 ]
 
 { #category : #accessing }
@@ -110,7 +125,8 @@ BrTextEditorSegmentSplitterObject >> startIntervalWith: startingAttributes [
 	startingAttributesThatNeedSplit := startingAttributes
 			select: [ :each | 
 				each isEventHandler
-					or: [ each isAdornment and: [ each shouldOverlay or: [ each shouldReplace ] ] ] ].
+					or: [ each isAdornment
+							and: [ each shouldOverlay or: [ each shouldReplace or: [ each shouldFold ] ] ] ] ].
 	startingAttributesThatNeedSplit notEmpty ifFalse: [ ^ self ].
 	((startingAttributesThatNeedSplit allSatisfy: [ :each | each isEventHandler ])
 		and: [ interestingAttributes
