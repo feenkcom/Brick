@@ -59,7 +59,7 @@ BrTextEditorBasicMode >> postCopy [
 
 { #category : #initialization }
 BrTextEditorBasicMode >> shortcuts [
-	^ shortcuts ifNil: [ shortcuts := self createShortcuts ]
+	^ shortcuts ifNil: [ shortcuts := self createShortcuts reject: #isNil ]
 ]
 
 { #category : #'api - hooks' }
