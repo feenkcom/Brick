@@ -84,6 +84,20 @@ BrTextEditorOperatorExamples >> editorOnEmptyText [
 ]
 
 { #category : #'instance creation' }
+BrTextEditorOperatorExamples >> editorOnFoldedText [
+	<gtExample>
+	| anEditor anEditorElement |
+	
+	anEditorElement := self editorFor: self foldedMultilineText.
+	anEditor := anEditorElement editor.
+	
+	self assert: anEditor cursors isEmpty.
+	self assert: anEditor selection isEmpty.
+	
+	^ anEditorElement
+]
+
+{ #category : #'instance creation' }
 BrTextEditorOperatorExamples >> editorOnMultilineText [
 	<gtExample>
 	| anEditor anEditorElement |
@@ -453,6 +467,28 @@ BrTextEditorOperatorExamples >> findWhitespaceIn_space_tab_at_2 [
 	self assert: whitespace = (' ', String tab).
 	
 	^ whitespace
+]
+
+{ #category : #'as yet unclassified' }
+BrTextEditorOperatorExamples >> foldedMultilineText [
+	| text string openIndex closeIndex |
+	string := '(foo
+bar
+{ 
+	quux
+	bletch
+}
+baz)'.
+	text := string asRopedText.
+	openIndex := string indexOf: $(.
+	closeIndex := string indexOf: $).
+
+	text
+		attribute: BrTextFoldAttribute new
+		from: openIndex + 1
+		to: closeIndex - 1.
+
+	^ text
 ]
 
 { #category : #'instance creation' }

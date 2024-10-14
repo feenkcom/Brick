@@ -594,6 +594,35 @@ BrTextEditorNavigatorExamples >> cursor_moveAcrossCRLF [
 	^ anEditor
 ]
 
+{ #category : #'examples - crlf handling' }
+BrTextEditorNavigatorExamples >> cursor_moveAcrossFoldedText [
+	<gtExample>
+	| anEditor |
+	anEditor := self editorOnFoldedText.
+	anEditor navigator
+		moveTo: 0;
+		apply.
+	anEditor navigator
+		moveRight;
+		apply.
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 1}.
+	anEditor navigator
+		moveRight;
+		apply.
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 31}.
+	anEditor navigator
+		moveLeft;
+		apply.
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 1}.
+	^ anEditor
+]
+
 { #category : #'examples - move down' }
 BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	<gtExample>
