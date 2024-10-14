@@ -95,6 +95,40 @@ BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
 	^ emptyInterval
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextEditorOperator >> findFoldEndAfter: aTextIndex [
+	| aText aTextIterator foundFold |
+	aText := self text.
+	aTextIterator := aText iterator: aTextIndex to: aText size.
+
+	foundFold := false.
+	[ aTextIterator hasNext
+		and: [ aTextIterator next.
+			foundFold := aTextIterator attributes
+					anySatisfy: [ :att | att isAdornment and: [ att shouldFold ] ] ] ]
+		whileTrue.
+
+	^ aTextIterator position - foundFold asBit
+]
+
+{ #category : #'as yet unclassified' }
+BrTextEditorOperator >> findFoldStartBefore: aTextIndex [
+	| aText aTextIterator foundFold |
+	aText := self text.
+
+	aTextIterator := aText iterator: (1 min: aText size) to: aTextIndex.
+	aTextIterator skip: (aTextIndex - 1 max: 0).
+
+	foundFold := false.
+	[ aTextIterator hasPrevious
+		and: [ aTextIterator previous.
+			foundFold := aTextIterator attributes
+					anySatisfy: [ :att | att isAdornment and: [ att shouldFold ] ] ] ]
+		whileTrue.
+
+	^ aTextIterator position + 1
+]
+
 { #category : #private }
 BrTextEditorOperator >> findLineEndAfter: aTextIndex [
 	<return: #Number>
@@ -383,6 +417,20 @@ BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 			skip ifFalse: [ newPosition := textIterator position ] ].
 
 	^ newPosition
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorOperator >> hasFoldAfterCursor: aCursor [
+	aCursor position = self text size ifTrue: [ ^ false ].
+	^ (self text attributesAt: aCursor position + 1)
+		anySatisfy: [ :att | att isAdornment and: [ att shouldFold ] ]
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorOperator >> hasFoldBeforeCursor: aCursor [
+	aCursor position = 0 ifTrue: [ ^ false ].
+	^ (self text attributesAt: aCursor position - 1)
+		anySatisfy: [ :att | att isAdornment and: [ att shouldFold ] ]
 ]
 
 { #category : #private }

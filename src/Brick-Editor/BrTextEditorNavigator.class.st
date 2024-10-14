@@ -160,11 +160,13 @@ BrTextEditorNavigator >> moveLeft [
 	"Move all cursors to the left"
 
 	self cursor
-		do:
-			[ :aCursor | 
-			(self hasString: String crlf beforeCursor: aCursor)
-				ifTrue: [ operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ].
-			operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ]
+		do: [ :aCursor | 
+			(self hasFoldBeforeCursor: aCursor)
+				ifTrue: [ operations
+						add: (BrTextEditorNavigatorMoveToStartOfFoldedTextOperation cursor: aCursor) ]
+				ifFalse: [ (self hasString: String crlf beforeCursor: aCursor)
+						ifTrue: [ operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ].
+					operations add: (BrTextEditorNavigatorMoveLeftOperation cursor: aCursor) ] ]
 ]
 
 { #category : #'api - configuration' }
@@ -172,11 +174,13 @@ BrTextEditorNavigator >> moveRight [
 	"Move all cursors one to the right"
 
 	self cursor
-		do:
-			[ :aCursor | 
-			(self hasString: String crlf afterCursor: aCursor)
-				ifTrue: [ operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ].
-			operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ]
+		do: [ :aCursor | 
+			(self hasFoldAfterCursor: aCursor)
+				ifTrue: [ operations
+						add: (BrTextEditorNavigatorMoveToEndOfFoldedTextOperation cursor: aCursor) ]
+				ifFalse: [ (self hasString: String crlf afterCursor: aCursor)
+						ifTrue: [ operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ].
+					operations add: (BrTextEditorNavigatorMoveRightOperation cursor: aCursor) ] ]
 ]
 
 { #category : #'api - configuration' }
