@@ -933,7 +933,6 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_empty [
 { #category : #'examples - move to line end' }
 BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 	<gtExample>
-	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	eventRecord := self connectEventRecordTo: anEditor.
@@ -941,11 +940,11 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 		moveToEndNextWord;
 		apply;
 		unsubscribe.
-	self assertEditor: anEditor cursorIsAt: 8.
+	self assertEditor: anEditor cursorIsAt: 2.
 	self
 		assertEvents: eventRecord
 		moveCursorFrom: 0
-		to: 8.
+		to: 2.
 	self
 		assert: (eventRecord
 				noEventsOfTypes: {#addedEvents.
@@ -956,7 +955,6 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 { #category : #'examples - move to line end' }
 BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
 	<gtExample>
-	<label: 'Cursor before the first character of the line should move to the end'>
 	| anEditor eventRecord |
 	anEditor := self cursor_add_at_1_in_empty.
 	eventRecord := self connectEventRecordTo: anEditor.
@@ -964,11 +962,11 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
 		moveToEndNextWord;
 		apply;
 		unsubscribe.
-	self assertEditor: anEditor cursorIsAt: 8.
+	self assertEditor: anEditor cursorIsAt: 2.
 	self
 		assertEvents: eventRecord
 		moveCursorFrom: 1
-		to: 8.
+		to: 2.
 	self
 		assert: (eventRecord
 				noEventsOfTypes: {#addedEvents.
