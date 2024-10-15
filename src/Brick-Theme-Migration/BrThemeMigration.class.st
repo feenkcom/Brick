@@ -44,17 +44,14 @@ BrThemeMigration >> methodToSelector: aMethod inTheme: aString [
 	| selector |
 	selector := aMethod selector.
 	aString = 'default'
-		ifFalse: [ selector := aMethod selector
-				copyReplaceAll: aString capitalized
-				with: ''.
+		ifFalse: [ selector := aMethod selector copyReplaceAll: aString capitalized with: ''.
 			selector := selector copyReplaceAll: aString with: '' ].
 	aString = 'item'
 		ifTrue: [ selector := selector copyReplaceAll: 'List' with: '' ].
 	selector := selector withoutPrefix: 'link'.
 	selector := selector withoutPrefix: 'With'.
 	selector := selector uncapitalized.
-	selector = 'color'
-		ifTrue: [ ^ selector ].
+	(selector sameContentAs: 'color') ifTrue: [ ^ selector ].
 	((selector endsWith: 'Color') or: [ selector endsWith: 'Colors' ])
 		ifTrue: [ ^ selector ].
 	^ selector , 'Color'
@@ -66,12 +63,9 @@ BrThemeMigration >> methodToTheme: aMethod [
 	aMethod selector = #expandCollapseTriangleBackgroundColor
 		ifTrue: [ ^ 'default' ].
 	category := aMethod category.
-	category = 'accessing'
-		ifTrue: [ ^ 'default' ].
-	(category beginsWith: 'list')
-		ifTrue: [ ^ 'item' ].
-	(category beginsWith: 'links')
-		ifTrue: [ ^ 'link' ].
+	category = #accessing ifTrue: [ ^ 'default' ].
+	(category beginsWith: 'list') ifTrue: [ ^ 'item' ].
+	(category beginsWith: 'links') ifTrue: [ ^ 'link' ].
 	^ ('-' split: category) first trimBoth
 ]
 
