@@ -71,7 +71,7 @@ BrTextEditorLineSegmentBuilder >> deleteFrom: aFromIndex segment: aFromSegment t
 		in: aBrTextEditor.
 
 	aTargetSegment := shouldMergeWithPrevious
-		ifTrue: [ aBrTextEditor segmentCollector segments at: (aFromSegment index - 1) ]
+		ifTrue: [ aBrTextEditor segmentCollector segmentAt: (aFromSegment index - 1) ]
 		ifFalse: [ aFromSegment ].
 
 	removedLength := aToIndex - aFromIndex + 1.
@@ -204,7 +204,7 @@ BrTextEditorLineSegmentBuilder >> shouldMergeDeletingFrom: aFromIndex segment: a
 	(aFromIndex < aFromSegment textStart)
 		ifTrue: [ ^ true ].
 
-	aPreviousSegment := aBrTextEditor segmentCollector segments at: (aFromSegment index - 1).
+	aPreviousSegment := aBrTextEditor segmentCollector segmentAt: (aFromSegment index - 1).
 	
 	"if the difference between the end of the previous segment and the start of
 	our deletion interval is 1 it means that we are trying to delete a line break symbol

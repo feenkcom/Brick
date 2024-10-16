@@ -482,7 +482,7 @@ BrTextEditorSegmentCollector >> moveTextBy: aNumber [
 BrTextEditorSegmentCollector >> moveTextBy: aNumber after: aSegment [
 	"move all segments after the given segment by aNumber"
 
-	aSegment index + 1 to: self segments size do: [ :anIndex |
+	aSegment index + 1 to: self lastIndex do: [ :anIndex |
 		| eachSegment |
 		eachSegment := self cachedAt: anIndex.
 		eachSegment moveTextBy: aNumber ].
@@ -529,11 +529,14 @@ BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset after: aSegment
 { #category : #'cache - adding / removing' }
 BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 	"Remove all segments within index interval"
+	| aFirstIndex |
+	
+	aFirstIndex := self firstIndex.
 
-	anInterval reverseDo: [ :anIndex | self segments removeAt: anIndex ].
+	anInterval reverseDo: [ :anIndex | segments removeAt: (anIndex - aFirstIndex + 1) ].
 	
 	self segments
-		withIndexDo: [ :eachSegment :anIndex | eachSegment index: anIndex ].
+		withIndexDo: [ :eachSegment :anIndex | eachSegment index: (aFirstIndex + anIndex - 1) ].
 	
 	segmentsInterval := (segments first index to: segments last index).
 
@@ -559,7 +562,7 @@ BrTextEditorSegmentCollector >> segmentAt: anIndex [
 		ifFalse: [ self computeSegmentAt: anIndex ]
 ]
 
-{ #category : #accessing }
+{ #category : #'private - accessing' }
 BrTextEditorSegmentCollector >> segments [
 	<return: #SequenceableCollection of: #BrTextEditorSegment>
 
