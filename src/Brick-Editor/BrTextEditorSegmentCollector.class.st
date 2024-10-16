@@ -55,59 +55,13 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments after: aSegme
 				afterIndex: aSegment index - self firstSegmentIndex + anIndex ].
 
 	self
-		offsetSegmentIndicesBy: aCollectionOfSegments size
+		privateOffsetSegmentIndicesBy: aCollectionOfSegments size
 		after: aCollectionOfSegments last index.
 
 	self assertSegmentsIntervalConsistency.
 
 	self editor
 		notifyItemsInserted: (aCollectionOfSegments first index to: aCollectionOfSegments last index)
-]
-
-{ #category : #'api - modifications' }
-BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments before: aSegment [
-	"Add the supplied collection of segments to the receiver before aSegment.
-	This may safely cause the number of cached segments to exceed limit."
-
-	self
-		assert: [ aCollectionOfSegments isNotEmpty ]
-		description: [ 'Can not add a collection of empty segments!' ].
-	
-	self
-		assert: [ segments size = segmentsInterval size ]
-		description: [ 'Amount of segments must correspond to the interval' ].
-
-	self
-		assert: [
-			| satisfy |
-			satisfy := true.
-			segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
-				satisfy := satisfy and: [ eachSegment index = anExpectedIndex ]	].
-			satisfy ]
-		description: [ 'Segment indices must correspond to the interval' ].
-
-	aCollectionOfSegments withIndexDo: [ :aNewSegment :anIndex |
-		aNewSegment index: (aSegment index - aCollectionOfSegments size) + anIndex.
-		segments
-			add: aNewSegment
-			afterIndex: aNewSegment index - 1 ].
-	
-	self offsetSegmentIndicesBy: aCollectionOfSegments size after: aCollectionOfSegments last index.
-
-	self editor notifyItemsInserted: (aCollectionOfSegments first index to: aCollectionOfSegments last index).
-	
-	self
-		assert: [ segments size = segmentsInterval size ]
-		description: [ 'Amount of segments must correspond to the interval' ].
-		
-	self
-		assert: [
-			| satisfy |
-			satisfy := true.
-			segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
-				satisfy := satisfy and: [ eachSegment index = anExpectedIndex ]	].
-			satisfy ]
-		description: [ 'Segment indices must correspond to the interval' ].
 ]
 
 { #category : #'private - asserting' }
@@ -384,33 +338,6 @@ BrTextEditorSegmentCollector >> newSegments [
 	^ OrderedCollection new
 ]
 
-{ #category : #'api - modifications' }
-BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset [
-	"Offset segments' #index by anOffset of all cached segments"
-	
-	self
-		offsetSegmentIndicesBy: anOffset
-		after: self firstSegmentIndex - 1
-]
-
-{ #category : #'api - modifications' }
-BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset after: aSegmentIndex [
-	"Offset segments' #index by anOffset of all segments after a given segment index"
-	
-	self
-		assert: [ aSegmentIndex + 1 >= self firstSegmentIndex ]
-		description: [ 'Segment index must be greater or equal first segment index ' ].
-
-	"Note: #lastSegmentIndex is not valid during execution of this method!"
-	aSegmentIndex + 1 to: (segments size + self firstSegmentIndex - 1) do: [ :anIndex |
-		| eachSegment |
-		eachSegment := self cachedSegmentAt: anIndex.
-		eachSegment index: eachSegment index + anOffset ].
-	
-	"actual cached interval changed, update it"
-	segmentsInterval := segmentsInterval first to: segmentsInterval last + anOffset
-]
-
 { #category : #'private - computing' }
 BrTextEditorSegmentCollector >> privateComputeBackwardAt: anIndex [
 	"Populate the cache at anIndex, which is prior to the start of the currently cached segments."
@@ -502,6 +429,24 @@ BrTextEditorSegmentCollector >> privateFindCachedSegmentIndexForLetterAt: aTextI
 ]
 
 { #category : #'private - computing' }
+BrTextEditorSegmentCollector >> privateOffsetSegmentIndicesBy: anOffset after: aSegmentIndex [
+	"Offset segments' #index by anOffset of all segments after a given segment index"
+	
+	self
+		assert: [ aSegmentIndex + 1 >= self firstSegmentIndex ]
+		description: [ 'Segment index must be greater or equal first segment index ' ].
+
+	"Note: #lastSegmentIndex is not valid during execution of this method!"
+	aSegmentIndex + 1 to: (segments size + self firstSegmentIndex - 1) do: [ :anIndex |
+		| eachSegment |
+		eachSegment := self cachedSegmentAt: anIndex.
+		eachSegment index: eachSegment index + anOffset ].
+	
+	"actual cached interval changed, update it"
+	segmentsInterval := segmentsInterval first to: segmentsInterval last + anOffset.
+]
+
+{ #category : #'private - computing' }
 BrTextEditorSegmentCollector >> privateRecomputeSegmentIndices [
 	"Recompute segment indices according to currently cached inerval"
 	
@@ -551,6 +496,8 @@ BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 	"Remove all segments within index interval"
 	| aFirstIndex |
 	
+	self assertSegmentsIntervalConsistency.
+	
 	aFirstIndex := self firstSegmentIndex.
 
 	anInterval reverseDo: [ :anIndex | segments removeAt: (anIndex - aFirstIndex + 1) ].
@@ -559,6 +506,8 @@ BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 		withIndexDo: [ :eachSegment :anIndex | eachSegment index: (aFirstIndex + anIndex - 1) ].
 	
 	segmentsInterval := (segments first index to: segments last index).
+	
+	self assertSegmentsIntervalConsistency.
 
 	self editor notifyItemsRemoved: anInterval
 ]
