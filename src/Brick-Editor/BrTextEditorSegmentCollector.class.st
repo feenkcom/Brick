@@ -64,7 +64,7 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments after: aSegme
 		aNewSegment index: anIndex + aSegment index.
 		self segments
 			add: aNewSegment
-			afterIndex: aSegment index - self firstIndex + anIndex ].
+			afterIndex: aSegment index - self firstSegmentIndex + anIndex ].
 	
 	self offsetSegmentIndicesBy: aCollectionOfSegments size after: aCollectionOfSegments last index.
 
@@ -309,7 +309,7 @@ BrTextEditorSegmentCollector >> computeSegmentAt: anIndex [
 		assert: [ (self isCachedAt: anIndex) not ]
 		description: [ 'Computing of already cached segment is wasteful' ].
 
-	anIndex > self lastIndex
+	anIndex > self lastSegmentIndex
 		ifTrue: [ self computeForwardAt: anIndex ]
 		ifFalse: [ self computeBackwardAt: anIndex ].
 
@@ -365,8 +365,8 @@ BrTextEditorSegmentCollector >> computedSegmentsCount [
 	
 	self hasCached
 		ifFalse: [ self computeForwardAt: 1 ].
-		
-	^ self lastIndex
+
+	^ self lastSegmentIndex
 ]
 
 { #category : #accessing }
@@ -396,7 +396,16 @@ BrTextEditorSegmentCollector >> end [
 ]
 
 { #category : #'cache - accessing' }
-BrTextEditorSegmentCollector >> firstIndex [
+BrTextEditorSegmentCollector >> firstIndex [	
+	self
+		deprecated: 'Use #firstSegmentIndex'
+		transformWith: '`@receiver firstIndex' -> '`@receiver firstSegmentIndex'.
+	
+	^ self firstSegmentIndex
+]
+
+{ #category : #'cache - accessing' }
+BrTextEditorSegmentCollector >> firstSegmentIndex [
 	"Return the index of the first cached segment or 0 if there are no cached segments"
 	<return: #Number>
 	
@@ -459,6 +468,15 @@ BrTextEditorSegmentCollector >> isCachedAt: anIndex [
 
 { #category : #'cache - accessing' }
 BrTextEditorSegmentCollector >> lastIndex [
+	self
+		deprecated: 'Use #lastSegmentIndex'
+		transformWith: '`@receiver lastIndex' -> '`@receiver lastSegmentIndex'.
+	
+	^ self lastSegmentIndex
+]
+
+{ #category : #'cache - accessing' }
+BrTextEditorSegmentCollector >> lastSegmentIndex [
 	"Return the index of the last cached segment or 0 if there are no cached segments"
 	<return: #Number>
 	
@@ -474,7 +492,7 @@ BrTextEditorSegmentCollector >> moveTextBy: aNumber [
 	self hasCached
 		ifFalse: [ ^ self ].
 	
-	self segments do: [ :aSegment | aSegment moveTextBy: aNumber ].
+	segments do: [ :aSegment | aSegment moveTextBy: aNumber ].
 	self computeSubText
 ]
 
@@ -482,7 +500,7 @@ BrTextEditorSegmentCollector >> moveTextBy: aNumber [
 BrTextEditorSegmentCollector >> moveTextBy: aNumber after: aSegment [
 	"move all segments after the given segment by aNumber"
 
-	aSegment index + 1 to: self lastIndex do: [ :anIndex |
+	aSegment index + 1 to: self lastSegmentIndex do: [ :anIndex |
 		| eachSegment |
 		eachSegment := self cachedAt: anIndex.
 		eachSegment moveTextBy: aNumber ].
@@ -504,7 +522,7 @@ BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset [
 	
 	self
 		offsetSegmentIndicesBy: anOffset
-		after: self firstIndex - 1
+		after: self firstSegmentIndex - 1
 ]
 
 { #category : #'text - modifications' }
@@ -513,13 +531,13 @@ BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset after: aSegment
 	Note: #lastIndex is not valid during execution of this method!"
 	
 	self
-		assert: [ aSegmentIndex + 1 >= self firstIndex ]
+		assert: [ aSegmentIndex + 1 >= self firstSegmentIndex ]
 		description: [ 'Segment index must be greater or equal first segment index ' ].
 		
-	(aSegmentIndex + 1 to: self segments size + self firstIndex - 1) do: [ :anIndex |
+	(aSegmentIndex + 1 to: segments size + self firstSegmentIndex - 1) do: [ :anIndex |
 		| aSegment |
 		
-		aSegment := self segments at: anIndex - self firstIndex + 1.
+		aSegment := segments at: anIndex - self firstSegmentIndex + 1.
 		aSegment index: aSegment index + anOffset ].
 	
 	"actual cached interval changed, update it"
@@ -531,7 +549,7 @@ BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 	"Remove all segments within index interval"
 	| aFirstIndex |
 	
-	aFirstIndex := self firstIndex.
+	aFirstIndex := self firstSegmentIndex.
 
 	anInterval reverseDo: [ :anIndex | segments removeAt: (anIndex - aFirstIndex + 1) ].
 	
