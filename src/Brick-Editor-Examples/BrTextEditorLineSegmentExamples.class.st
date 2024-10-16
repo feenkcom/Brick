@@ -16,19 +16,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_0 [
 	aCursor := BrTextEditorSingleCursor new position: 0.
 	
 	"cursor is in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
 	
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
@@ -45,19 +45,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_1 [
 	aCursor := BrTextEditorSingleCursor new position: 1.
 	
 	"cursor is in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
 	
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 		
 	"cursor is not in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
@@ -74,19 +74,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_2 [
 	aCursor := BrTextEditorSingleCursor new position: 2.
 	
 	"cursor is in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
 	
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 	
 	"cursor is not in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
@@ -103,19 +103,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_3 [
 	aCursor := BrTextEditorSingleCursor new position: 3.
 
 	"cursor is not in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
 
 	"cursor is not in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
@@ -133,19 +133,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_4 [
 	aCursor := BrTextEditorSingleCursor new position: 4.
 
 	"cursor is not in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
@@ -162,19 +162,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_5 [
 	aCursor := BrTextEditorSingleCursor new position: 5.
 
 	"cursor is not in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
@@ -191,19 +191,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_6 [
 	aCursor := BrTextEditorSingleCursor new position: 6.
 
 	"cursor is not in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
@@ -220,19 +220,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_7 [
 	aCursor := BrTextEditorSingleCursor new position: 7.
 
 	"cursor is not in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment).
@@ -249,19 +249,19 @@ BrTextEditorLineSegmentExamples >> cursor_in_HACrCrLfBA_at_8 [
 	aCursor := BrTextEditorSingleCursor new position: 8.
 
 	"cursor is not in the first segment"
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the second segment"
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
 
 	"cursor is not in the third segment"
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: (aCursor
 		insideSubText: aSegment pieces first
 		of: aSegment) not.
@@ -279,7 +279,7 @@ BrTextEditorLineSegmentExamples >> delete_ACrCr_in_HACrCrBA_at_2_4 [
 
 	self assert: aTextEditor text asString equals: 'HBA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 3).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -295,7 +295,7 @@ BrTextEditorLineSegmentExamples >> delete_A_in_A_at_1_1 [
 
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -311,7 +311,7 @@ BrTextEditorLineSegmentExamples >> delete_A_in_BA_at_2_2 [
 
 	self assert: aTextEditor text asString equals: 'B'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -327,8 +327,8 @@ BrTextEditorLineSegmentExamples >> delete_A_in_BCrA_at_3_3 [
 
 	self assert: aTextEditor text asString equals: 'B', String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (2 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (2 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -344,7 +344,7 @@ BrTextEditorLineSegmentExamples >> delete_BA_in_BA_at_1_2 [
 
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -356,16 +356,16 @@ BrTextEditorLineSegmentExamples >> delete_B_in_BA_at_1_1 [
 	| aTextEditor theOldPieces theNewPieces |
 	aTextEditor := self insert_B_in_A_at_0.
 	
-	theOldPieces := aTextEditor segmentCollector segments first pieces.
+	theOldPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 
 	aTextEditor delete: 0 to: 1.
 
 	self assert: aTextEditor text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 	
-	theNewPieces := aTextEditor segmentCollector segments first pieces.
+	theNewPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theOldPieces equals: theNewPieces.
 
 	^ aTextEditor
@@ -381,8 +381,8 @@ BrTextEditorLineSegmentExamples >> delete_CrB_in_HACrCrBA_at_4_5 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 4).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 	^ aTextEditor
 ]
@@ -397,9 +397,9 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_1 [
 
 	self assert: aTextEditor text asString equals: String cr, 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 3).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (4 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (4 to: 6).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -415,8 +415,8 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_2 [
 
 	self assert: aTextEditor text asString equals: 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 5).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -432,8 +432,8 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_3 [
 
 	self assert: aTextEditor text asString equals: 'D', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (2 to: 4).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -449,8 +449,8 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_4 [
 
 	self assert: aTextEditor text asString equals: String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 3).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -466,7 +466,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_5 [
 
 	self assert: aTextEditor text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -482,7 +482,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_6 [
 
 	self assert: aTextEditor text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -498,7 +498,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_0_7 [
 
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -514,8 +514,8 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_1_7 [
 
 	self assert: aTextEditor text asString equals: String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -531,9 +531,9 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_2_7 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -549,9 +549,9 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_3_7 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'C'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 3).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -567,9 +567,9 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_4_7 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'CD'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 4).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -585,10 +585,10 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_5_7 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'CD', String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 4).
-	self assert: aTextEditor segmentCollector segments fourth textInterval equals: (5 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) textInterval equals: (5 to: 5).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 4).
 
 	^ aTextEditor
@@ -604,10 +604,10 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_6_7 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'CD', String cr, 'B'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 4).
-	self assert: aTextEditor segmentCollector segments fourth textInterval equals: (5 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) textInterval equals: (5 to: 6).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 4).
 
 	^ aTextEditor
@@ -623,10 +623,10 @@ BrTextEditorLineSegmentExamples >> delete_CrCrCDCrBA_in_CrCrCDCrBA_at_7_7 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 4).
-	self assert: aTextEditor segmentCollector segments fourth textInterval equals: (5 to: 7).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) textInterval equals: (5 to: 7).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 4).
 
 	^ aTextEditor
@@ -642,7 +642,7 @@ BrTextEditorLineSegmentExamples >> delete_CrCr_in_HACrCrBA_at_3_4 [
 
 	self assert: aTextEditor text asString equals: 'HABA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 4).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -658,7 +658,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_BACr_at_3_3 [
 
 	self assert: aTextEditor text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -674,7 +674,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_BCrA_at_2_2 [
 
 	self assert: aTextEditor text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -690,7 +690,7 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_Cr_at_1_1 [
 
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -709,8 +709,8 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_HACrCrBA_at_3_3 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 5).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	self assert: aRemovedEvent itemCount equals: 1.
@@ -731,8 +731,8 @@ BrTextEditorLineSegmentExamples >> delete_Cr_in_HACrCrBA_at_4_4 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 5).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -748,7 +748,7 @@ BrTextEditorLineSegmentExamples >> delete_HACrCrBA_in_HACrCrBA_at_1_6 [
 
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -764,7 +764,7 @@ BrTextEditorLineSegmentExamples >> delete_HACrCrB_in_HACrCrBA_at_1_5 [
 
 	self assert: aTextEditor text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -780,7 +780,7 @@ BrTextEditorLineSegmentExamples >> delete_HACrCr_in_HACrCrBA_at_1_4 [
 
 	self assert: aTextEditor text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -790,25 +790,28 @@ BrTextEditorLineSegmentExamples >> delete_HACrCr_in_HACrCrBA_at_1_4 [
 BrTextEditorLineSegmentExamples >> emptyEditor [
 	<gtExample>
 	| aTextEditor aTextEditorElement aSegmentElement aPieceElement |
-	
 	aTextEditor := BrTextEditorModel new segmentBuilder: self lineSegmentBuilder.
-	
+
 	self assert: aTextEditor text asString equals: ''.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval
+		equals: (0 to: 0).
+
 	aTextEditorElement := BrEditorElement new.
-	aTextEditorElement size: 600@600.
+	aTextEditorElement size: 600 @ 600.
 	aTextEditorElement editor: aTextEditor.
 	aTextEditorElement forceLayout.
-	
+
 	self assert: aTextEditorElement childrenCount equals: 1.
 
 	aSegmentElement := aTextEditorElement children first.
 	self assert: aSegmentElement childrenCount equals: 1.
-	
+
 	aPieceElement := aSegmentElement children first.
-	self assert: aPieceElement segmentPiece == aTextEditor segmentCollector segments first pieces first.
+	self
+		assert: aPieceElement segmentPiece
+				== (aTextEditor segmentCollector cachedSegmentAt: 1) pieces first.
 
 	^ aTextEditor
 ]
@@ -823,8 +826,8 @@ BrTextEditorLineSegmentExamples >> insert_000_in_HABA_at_2 [
 
 	self assert: aTextEditor text asString equals: 'HA000BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 7).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HA000BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 7).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HA000BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -841,8 +844,8 @@ BrTextEditorLineSegmentExamples >> insert_A_inEmptyAt_0 [
 	
 	self assert: aTextEditor text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'A'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -858,10 +861,10 @@ BrTextEditorLineSegmentExamples >> insert_A_in_HACrBA_At_3 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, 'ABA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 6).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'ABA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'ABA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -877,12 +880,12 @@ BrTextEditorLineSegmentExamples >> insert_A_in_HACrCrBA_At_3 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, 'A', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 4).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'A'.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (5 to: 7).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'A'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (5 to: 7).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -898,8 +901,8 @@ BrTextEditorLineSegmentExamples >> insert_B_in_A_at_0 [
 
 	self assert: aTextEditor text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -915,10 +918,10 @@ BrTextEditorLineSegmentExamples >> insert_C_in_CrBA_At_0 [
 
 	self assert: aTextEditor text asString equals: 'C', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'C'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (2 to: 4).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'C'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -936,12 +939,12 @@ BrTextEditorLineSegmentExamples >> insert_CrLf_in_Hello_At_5 [
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment textInterval equals: (0 to: 5).
 	self assert: aSegment textEndDelimited equals: 7.
 	self assert: aSegment text asString equals: 'Hello'.
 
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment textInterval equals: (7 to: 7).
 	self assert: aSegment textEndDelimited equals: 7.
 	self assert: aSegment text asString equals: ''.
@@ -959,10 +962,10 @@ BrTextEditorLineSegmentExamples >> insert_D_in_CCrBA_At_1 [
 
 	self assert: aTextEditor text asString equals: 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'CD'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 5).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'CD'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -974,7 +977,7 @@ BrTextEditorLineSegmentExamples >> insert_E_in_Hello_World_at_2 [
 	| aTextEditor thePiecesBeforeInsertion |
 	aTextEditor := self insert_Hello_World_inEmptyAt_0.
 	
-	thePiecesBeforeInsertion := aTextEditor segmentCollector segments first pieces.
+	thePiecesBeforeInsertion := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePiecesBeforeInsertion size equals: 3.
 	
 	self assert: thePiecesBeforeInsertion first textStart equals: 0.
@@ -999,7 +1002,7 @@ BrTextEditorLineSegmentExamples >> insert_E_in_Hello_World_at_2 [
 
 	self assert: aTextEditor text asString equals: 'HeEllo World'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 12).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 12).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -1010,13 +1013,13 @@ BrTextEditorLineSegmentExamples >> insert_HABA_inEmptyAt_0 [
 	<gtExample>
 	| aTextEditor aSegment |
 	aTextEditor := self emptyEditor.
-	
+
 	aTextEditor insertString: 'HABA' at: 0.
-	
+
 	self assert: aTextEditor text asString equals: 'HABA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	
-	aSegment := aTextEditor segmentCollector segments at: 1.
+
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment textInterval equals: (0 to: 4).
 	self assert: aSegment textEndDelimited equals: 4.
 
@@ -1035,7 +1038,7 @@ BrTextEditorLineSegmentExamples >> insert_Hello_World_inEmptyAt_0 [
 
 	self assert: aTextEditor text asString equals: 'Hello World'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 11).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 11).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -1051,7 +1054,7 @@ BrTextEditorLineSegmentExamples >> insert_Hello_inEmptyAt_0 [
 
 	self assert: aTextEditor text asString equals: 'Hello'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 5).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 1).
 
 	^ aTextEditor
@@ -1063,17 +1066,37 @@ BrTextEditorLineSegmentExamples >> insert_NewLineCrLf_in_HACrBA_At_3 [
 	| aTextEditor |
 	aTextEditor := self insert_NewLine_in_HABA_At_2.
 
-	aTextEditor insertString: String cr, String lf at: 3.
+	aTextEditor insertString: String cr , String lf at: 3.
 
-	self assert: aTextEditor text asArray equals: { $H. $A.  Character cr. Character cr. Character lf. $B. $A. }.
+	self
+		assert: aTextEditor text asArray
+		equals: {$H.
+				$A.
+				Character cr.
+				Character cr.
+				Character lf.
+				$B.
+				$A}.
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (5 to: 7).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'BA'.
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval
+		equals: (0 to: 2).
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString
+		equals: 'HA'.
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval
+		equals: (3 to: 3).
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString
+		equals: ''.
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval
+		equals: (5 to: 7).
+	self
+		assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString
+		equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -1092,9 +1115,9 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_inCrAt_1 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 2).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 	
 	self assert: anInsertedEvent itemCount equals: 1.
@@ -1115,8 +1138,8 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_inEmptyAt_0 [
 
 	self assert: aTextEditor text asString equals: String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1132,10 +1155,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_0 [
 
 	self assert: aTextEditor text asString equals: String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments first text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1151,10 +1174,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_1 [
 
 	self assert: aTextEditor text asString equals: 'B', String cr, 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'B'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (2 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'A'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'B'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (2 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1170,10 +1193,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_BA_At_2 [
 
 	self assert: aTextEditor text asString equals: 'BA', String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'BA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1189,12 +1212,12 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_CDCrBA_At_0 [
 
 	self assert: aTextEditor text asString equals: String cr, 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments first text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'CD'.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (4 to: 6).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'CD'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (4 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -1210,14 +1233,14 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_CrCDCrBA_At_0 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments first text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 4).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'CD'.
-	self assert: aTextEditor segmentCollector segments fourth textInterval equals: (5 to: 7).
-	self assert: aTextEditor segmentCollector segments fourth text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'CD'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) textInterval equals: (5 to: 7).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 4).
 
 	^ aTextEditor
@@ -1233,14 +1256,14 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_CrCDCrBA_At_1 [
 
 	self assert: aTextEditor text asString equals: String cr, String cr, 'CD', String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments first text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 1).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (2 to: 4).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'CD'.
-	self assert: aTextEditor segmentCollector segments fourth textInterval equals: (5 to: 7).
-	self assert: aTextEditor segmentCollector segments fourth text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (2 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'CD'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) textInterval equals: (5 to: 7).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 4).
 
 	^ aTextEditor
@@ -1256,10 +1279,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_0 [
 
 	self assert: aTextEditor text asString equals: String cr, 'HABA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 0).
-	self assert: aTextEditor segmentCollector segments first text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (1 to: 5).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'HABA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 0).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (1 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'HABA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1275,10 +1298,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_1 [
 
 	self assert: aTextEditor text asString equals: 'H', String cr, 'ABA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 1).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'H'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (2 to: 5).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'ABA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 1).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'H'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (2 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'ABA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1292,16 +1315,16 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_2 [
 
 	aTextEditor insertString: String cr at: 2.
 
-	self assert: aTextEditor text asString equals: 'HA', String cr, 'BA'.
+	self assert: aTextEditor text asString equals: 'HA' , String cr , 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
-	
-	aSegment := aTextEditor segmentCollector segments at: 1.
+
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment textInterval equals: (0 to: 2).
 	self assert: aSegment textEndDelimited equals: 3.
 	self assert: aSegment text asString equals: 'HA'.
 
-	aSegment := aTextEditor segmentCollector segments at: 2.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment textInterval equals: (3 to: 5).
 	self assert: aSegment textEndDelimited equals: 5.
 	self assert: aSegment text asString equals: 'BA'.
@@ -1319,10 +1342,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_3 [
 
 	self assert: aTextEditor text asString equals: 'HAB', String cr, 'A'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 3).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HAB'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (4 to: 5).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'A'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HAB'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (4 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'A'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1338,10 +1361,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HABA_At_4 [
 
 	self assert: aTextEditor text asString equals: 'HABA', String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 4).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HABA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (5 to: 5).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HABA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (5 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1357,12 +1380,12 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HACrBA_At_2 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (4 to: 6).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (4 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -1378,12 +1401,12 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HACrBA_At_3 [
 
 	self assert: aTextEditor text asString equals: 'HA', String cr, String cr, 'BA'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'HA'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (4 to: 6).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'BA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'HA'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (4 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'BA'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -1399,12 +1422,12 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HeCrllo_At_3 [
 
 	self assert: aTextEditor text asString equals: 'He', String cr, String cr, 'llo'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'He'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 3).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (4 to: 7).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'llo'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'He'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 3).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (4 to: 7).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'llo'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 3).
 
 	^ aTextEditor
@@ -1420,45 +1443,45 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloCrWorldCr_WithAppendin
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 5.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: ''.
 	self assert: aSegment textStart equals: 6.
 	self assert: aSegment textEnd equals: 6.
 	
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: aSegment index equals: 3.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 7.
 	self assert: aSegment textEnd equals: 12.
 	
-	aSegment := aTextEditor segmentCollector segments fourth.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 4.
 	self assert: aSegment index equals: 4.
 	self assert: aSegment text asString equals: ''.
 	self assert: aSegment textStart equals: 13.
 	self assert: aSegment textEnd equals: 13.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 6.
 	self assert: thePieces first textEnd equals: 6.
 	
-	thePieces := aTextEditor segmentCollector segments third pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 3) pieces.
 	self assert: thePieces size equals: 2.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1472,14 +1495,14 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloCrWorldCr_WithAppendin
 	
 	self assert: (thePieces first text ~~ thePieces second text).
 	
-	thePieces := aTextEditor segmentCollector segments fourth pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 4) pieces.
 	self assert: thePieces size equals: 1.
 
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 13.
 	self assert: thePieces first textEnd equals: 13.
 	
-	self assert: (thePieces first text ~~ aTextEditor segmentCollector segments fourth text).
+	self assert: (thePieces first text ~~ (aTextEditor segmentCollector cachedSegmentAt: 4) text).
 
 	^ aTextEditor
 ]
@@ -1494,39 +1517,39 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementA
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: ''.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 6.
 	
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: aSegment index equals: 3.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 7.
 	self assert: aSegment textEnd equals: 12.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 0.
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 1.
 	self assert: thePieces first textEnd equals: 6.
 	
-	thePieces := aTextEditor segmentCollector segments third pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 3) pieces.
 	self assert: thePieces size equals: 2.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentAdornmentPiece).
@@ -1552,39 +1575,39 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementO
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: ''.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 6.
 	
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: aSegment index equals: 3.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 7.
 	self assert: aSegment textEnd equals: 12.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 0.
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 1.
 	self assert: thePieces first textEnd equals: 6.
 	
-	thePieces := aTextEditor segmentCollector segments third pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 3) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentAdornmentPiece).
@@ -1605,39 +1628,39 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_HelloWorld_WithReplacementO
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 5.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: ''.
 	self assert: aSegment textStart equals: 6.
 	self assert: aSegment textEnd equals: 6.
 	
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: aSegment index equals: 3.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 7.
 	self assert: aSegment textEnd equals: 12.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 6.
 	self assert: thePieces first textEnd equals: 6.
 	
-	thePieces := aTextEditor segmentCollector segments third pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 3) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentAdornmentPiece).
@@ -1658,10 +1681,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_2 [
 
 	self assert: aTextEditor text asString equals: 'He', String cr, 'llo'.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 2).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'He'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (3 to: 6).
-	self assert: aTextEditor segmentCollector segments second text asString equals: 'llo'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 2).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'He'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (3 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: 'llo'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1677,10 +1700,10 @@ BrTextEditorLineSegmentExamples >> insert_NewLine_in_Hello_At_5 [
 
 	self assert: aTextEditor text asString equals: 'Hello', String cr.
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 5).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'Hello'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (6 to: 6).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'Hello'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (6 to: 6).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 2).
 
 	^ aTextEditor
@@ -1698,14 +1721,14 @@ BrTextEditorLineSegmentExamples >> insert_haCrCrbaCr_inHelloAt_2 [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 4.
 	
-	self assert: aTextEditor segmentCollector segments first textInterval equals: (0 to: 4).
-	self assert: aTextEditor segmentCollector segments first text asString equals: 'Heha'.
-	self assert: aTextEditor segmentCollector segments second textInterval equals: (5 to: 5).
-	self assert: aTextEditor segmentCollector segments second text asString equals: ''.
-	self assert: aTextEditor segmentCollector segments third textInterval equals: (6 to: 8).
-	self assert: aTextEditor segmentCollector segments third text asString equals: 'ba'.
-	self assert: aTextEditor segmentCollector segments fourth textInterval equals: (9 to: 12).
-	self assert: aTextEditor segmentCollector segments fourth text asString equals: 'llo'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) textInterval equals: (0 to: 4).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 1) text asString equals: 'Heha'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) textInterval equals: (5 to: 5).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 2) text asString equals: ''.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) textInterval equals: (6 to: 8).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 3) text asString equals: 'ba'.
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) textInterval equals: (9 to: 12).
+	self assert: (aTextEditor segmentCollector cachedSegmentAt: 4) text asString equals: 'llo'.
 	self assert: aTextEditor segmentCollector cachedInterval equals: (1 to: 4).
 
 	^ aTextEditor
@@ -1726,13 +1749,13 @@ BrTextEditorLineSegmentExamples >> overwrite_Hello_World_with_S_in_Hello_World [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello World'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 11.
 	
-	theOldPieces := aTextEditor segmentCollector segments first pieces.
+	theOldPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theOldPieces size equals: 3.
 	
 	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1758,13 +1781,13 @@ BrTextEditorLineSegmentExamples >> overwrite_Hello_World_with_S_in_Hello_World [
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'S'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 1.
 	
-	theNewPieces := aTextEditor segmentCollector segments first pieces.
+	theNewPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theNewPieces size equals: 1.
 	
 	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1795,13 +1818,13 @@ BrTextEditorLineSegmentExamples >> overwrite_World_with_S_in_Hello_World [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello World'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 11.
 	
-	theOldPieces := aTextEditor segmentCollector segments first pieces.
+	theOldPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theOldPieces size equals: 3.
 	
 	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1827,13 +1850,13 @@ BrTextEditorLineSegmentExamples >> overwrite_World_with_S_in_Hello_World [
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello S'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 7.
 	
-	theNewPieces := aTextEditor segmentCollector segments first pieces.
+	theNewPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theNewPieces size equals: 3.
 	
 	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1872,13 +1895,13 @@ BrTextEditorLineSegmentExamples >> overwrite_d_with_S_in_Hello_World [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello World'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 11.
 	
-	theOldPieces := aTextEditor segmentCollector segments first pieces.
+	theOldPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theOldPieces size equals: 3.
 	
 	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1904,13 +1927,13 @@ BrTextEditorLineSegmentExamples >> overwrite_d_with_S_in_Hello_World [
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello WorlS'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 11.
 	
-	theNewPieces := aTextEditor segmentCollector segments first pieces.
+	theNewPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theNewPieces size equals: 3.
 	
 	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1949,13 +1972,13 @@ BrTextEditorLineSegmentExamples >> overwrite_llo_World_with_S_in_Hello_World [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello World'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 11.
 	
-	theOldPieces := aTextEditor segmentCollector segments first pieces.
+	theOldPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theOldPieces size equals: 3.
 	
 	self assert: (theOldPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -1981,13 +2004,13 @@ BrTextEditorLineSegmentExamples >> overwrite_llo_World_with_S_in_Hello_World [
 
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'HeS'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 3.
 	
-	theNewPieces := aTextEditor segmentCollector segments first pieces.
+	theNewPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theNewPieces size equals: 1.
 	
 	self assert: (theNewPieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2017,7 +2040,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCr [
 	
 	aTextEditor := self insert_NewLine_in_Hello_At_5.
 	
-	theFirstPieces := aTextEditor segmentCollector segments first pieces.
+	theFirstPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theFirstPieces size equals: 1.
 	
 	aPiece := theFirstPieces first.
@@ -2031,7 +2054,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCr [
 	self assert: (aPiece globalTextIndexToLocal: 4) equals: 4.
 	self assert: (aPiece globalTextIndexToLocal: 5) equals: 5.
 	
-	theSecondPieces := aTextEditor segmentCollector segments second pieces.
+	theSecondPieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: theSecondPieces size equals: 1.
 	
 	aPiece := theSecondPieces first.
@@ -2050,7 +2073,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
 	
 	aTextEditor := self insert_CrLf_in_Hello_At_5.
 	
-	theFirstPieces := aTextEditor segmentCollector segments first pieces.
+	theFirstPieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: theFirstPieces size equals: 1.
 	
 	aPiece := theFirstPieces first.
@@ -2064,7 +2087,7 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrLf [
 	self assert: (aPiece globalTextIndexToLocal: 4) equals: 4.
 	self assert: (aPiece globalTextIndexToLocal: 5) equals: 5.
 	
-	theSecondPieces := aTextEditor segmentCollector segments second pieces.
+	theSecondPieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: theSecondPieces size equals: 1.
 	
 	aPiece := theSecondPieces first.
@@ -2086,34 +2109,34 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 5.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 6.
 	self assert: aSegment textEnd equals: 11.
 	
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: aSegment index equals: 3.
 	self assert: aSegment text asString equals: ''.
 	self assert: aSegment textStart equals: 12.
 	self assert: aSegment textEnd equals: 12.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 
-	self assert: (thePieces first text ~~ aTextEditor segmentCollector segments first text).
+	self assert: (thePieces first text ~~ (aTextEditor segmentCollector cachedSegmentAt: 1) text).
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 2.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2126,16 +2149,16 @@ BrTextEditorLineSegmentExamples >> pieces_HelloCrWorldCr_WithAppendingAfterWorld
 	self assert: thePieces second adornmentAttribute shouldAppend.
 	
 	self assert: (thePieces first text ~~ thePieces second text).
-	self assert: (thePieces first text ~~ aTextEditor segmentCollector segments second text).
+	self assert: (thePieces first text ~~ (aTextEditor segmentCollector cachedSegmentAt: 2) text).
 	
-	thePieces := aTextEditor segmentCollector segments third pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 3) pieces.
 	self assert: thePieces size equals: 1.
 
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 12.
 	self assert: thePieces first textEnd equals: 12.
 	
-	self assert: (thePieces first text ~~ aTextEditor segmentCollector segments third text).
+	self assert: (thePieces first text ~~ (aTextEditor segmentCollector cachedSegmentAt: 3) text).
 	
 	^ aTextEditor
 ]
@@ -2150,7 +2173,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_1_WithAppending [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 4.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2182,7 +2205,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_Smart_World_WithAppending [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 8.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2233,7 +2256,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World [
 	
 	aTextEditor := self insert_Hello_World_inEmptyAt_0.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 3.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2275,26 +2298,26 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementAndAppendin
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 5.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 6.
 	self assert: aSegment textEnd equals: 11.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 2.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentAdornmentPiece).
@@ -2323,13 +2346,13 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOf [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello World'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 11.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 3.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2358,7 +2381,7 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfLineBreak
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 1.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 3.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
@@ -2386,26 +2409,26 @@ BrTextEditorLineSegmentExamples >> pieces_Hello_World_WithReplacementOfWorld [
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 2.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: 'Hello'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 5.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: 'World'.
 	self assert: aSegment textStart equals: 6.
 	self assert: aSegment textEnd equals: 11.
 	
-	thePieces := aTextEditor segmentCollector segments first pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 1) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorSegmentTextPiece).
 	self assert: thePieces first textStart equals: 0.
 	self assert: thePieces first textEnd equals: 5.
 	
-	thePieces := aTextEditor segmentCollector segments second pieces.
+	thePieces := (aTextEditor segmentCollector cachedSegmentAt: 2) pieces.
 	self assert: thePieces size equals: 1.
 	
 	self assert: (thePieces first isKindOf: BrTextEditorLineSegmentAdornmentPiece).
@@ -2429,19 +2452,19 @@ baz)' asRopedText.
 	
 	self assert: aTextEditor segmentCollector computedSegmentsCount equals: 3.
 	
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment text asString equals: '(foo'.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 4.
 	
-	aSegment := aTextEditor segmentCollector segments second.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 2.
 	self assert: aSegment index equals: 2.
 	self assert: aSegment text asString equals: 'bar'.
 	self assert: aSegment textStart equals: 5.
 	self assert: aSegment textEnd equals: 8.
 	
-	aSegment := aTextEditor segmentCollector segments third.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 3.
 	self assert: aSegment index equals: 3.
 	self assert: aSegment text asString equals: 'baz)'.
 	self assert: aSegment textStart equals: 9.
@@ -2450,7 +2473,7 @@ baz)' asRopedText.
 	aTextEditor text attribute: BrTextHideAttribute new from: 2 to: 12.
 	aTextEditor segmentCollector computeForwardAt: 1.
 
-	aSegment := aTextEditor segmentCollector segments first.
+	aSegment := aTextEditor segmentCollector cachedSegmentAt: 1.
 	self assert: aSegment index equals: 1.
 	self assert: aSegment pieces size equals: 3.
 	self assert: aSegment textStart equals: 0.

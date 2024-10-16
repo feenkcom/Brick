@@ -14,7 +14,6 @@ Class {
 { #category : #executing }
 BrTextEditorSelectionUpdateCommand >> executeOn: aTextEditor [
 	| changedFrom changedTo |
-	
 	changedFrom := self fromIndex.
 
 	changedTo := self toIndex.
@@ -27,8 +26,8 @@ BrTextEditorSelectionUpdateCommand >> executeOn: aTextEditor [
 	aTextEditor segmentCollector
 		findCachedSegmentForLetterAt: changedTo
 		ifFound: [ :aSegment | changedTo := aSegment index ]
-		ifNotFound: [ changedTo := aTextEditor segmentCollector segments size ].	
-	
+		ifNotFound: [ changedTo := aTextEditor segmentCollector lastSegmentIndex ].
+
 	aTextEditor
 		enqueueHolderCommand: self newHolderCommand
 		interval: (changedFrom to: changedTo)

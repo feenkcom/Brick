@@ -33,13 +33,14 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveLimitPlusOne [
 	<gtExample>
 	| string limit editor collector |
 	
-	limit := 500.
+	limit := 6.
 	string := String streamContents: [ :stream |
-		1 to: limit+1 do: [ :i |
+		1 to: limit * 2 do: [ :i |
 		 stream
 		 	<< 'Line ';
 		 	<< (i printPaddedWith: $0 to: 3);
 		 	lf ] ].
+
 	editor := BrTextEditorModel new.
 	editor text: string asRopedText.
 	collector := editor segmentCollector.
@@ -53,7 +54,8 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveLimitPlusOne [
 			equals: 'Line ', (limit+1 printPaddedWith: $0 to: 3).
 	self assert: (collector segmentAt: limit) asString
 			equals: 'Line ', (limit printPaddedWith: $0 to: 3).
-
+			
+	^ collector
 ]
 
 { #category : #examples }
@@ -61,7 +63,7 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveWithinLimit [
 	<gtExample>
 	| string cacheLimit limit editor collector |
 
-	cacheLimit := 500.
+	cacheLimit := 6.
 	
 	editor := BrTextEditorModel new.
 
@@ -83,5 +85,6 @@ BrTextEditorSegmentCollectorExamples2 >> retrieveWithinLimit [
 			equals: 'Line ', (limit printPaddedWith: $0 to: 3).
 	self assert: (collector segmentAt: limit // 2) asString
 			equals: 'Line ', (limit // 2 printPaddedWith: $0 to: 3).
-
+			
+	^ collector
 ]

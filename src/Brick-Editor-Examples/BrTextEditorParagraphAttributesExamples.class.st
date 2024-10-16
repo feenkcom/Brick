@@ -22,22 +22,25 @@ BrTextEditorParagraphAttributesExamples >> editorElement [
 { #category : #examples }
 BrTextEditorParagraphAttributesExamples >> helloEditor [
 	<gtExample>
-	| anEditorElement |
+	| anEditorElement aSegment |
 
 	anEditorElement := self editorElement.
 	anEditorElement editor text: self helloText.
 	
 	anEditorElement forceLayout.
 
-	self assert: anEditorElement editor segmentCollector segments size equals: 1.
+	self assert: anEditorElement editor segmentCollector computedSegmentsCount equals: 1.
+
+	aSegment := anEditorElement editor segmentCollector cachedSegmentAt: 1.
+	
 	self
-		assert: anEditorElement editor segmentCollector segments first lineSpacing
+		assert: aSegment lineSpacing
 		equals: 20.
 	self
-		assert: anEditorElement editor segmentCollector segments first wordPadding
+		assert: aSegment wordPadding
 		equals: (BlInsets top: 10 bottom: 10).
 	self
-		assert: anEditorElement editor segmentCollector segments first paragraphMargin
+		assert: aSegment paragraphMargin
 		equals: (BlInsets top: 15 left: 20 bottom: 15 right: 20).
 
 	^ anEditorElement
