@@ -152,7 +152,7 @@ BrTextEditorInserter >> insert [
 	shouldDeleteSelected
 		ifTrue: [ self deleteSelectedText ].
 		
-	theFilteredTextMap := Dictionary new.
+	theFilteredTextMap := GtStringContentDictionary new.
 	theInsertions := OrderedCollection new.
 
 	insertionIndices do: [ :eachAssociation |
