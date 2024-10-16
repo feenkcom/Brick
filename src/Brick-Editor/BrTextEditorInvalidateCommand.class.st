@@ -19,13 +19,13 @@ BrTextEditorInvalidateCommand >> executeOn: aTextEditor [
 	aTextEditor segmentCollector
 		findCachedSegmentForLetterAt: changedFrom
 		ifFound: [ :aSegment | changedFrom := aSegment index ]
-		ifNotFound: [ changedFrom := 1 ].
+		ifNotFound: [ changedFrom := aTextEditor segmentCollector firstSegmentIndex ].
 
 	"convert from text => to segment index"
 	aTextEditor segmentCollector
 		findCachedSegmentForLetterAt: changedTo
 		ifFound: [ :aSegment | changedTo := aSegment index ]
-		ifNotFound: [ changedTo := aTextEditor segmentCollector segments size ].
+		ifNotFound: [ changedTo := aTextEditor segmentCollector lastSegmentIndex ].
 		
 	aTextEditor
 		enqueueHolderCommand: self newHolderCommand
