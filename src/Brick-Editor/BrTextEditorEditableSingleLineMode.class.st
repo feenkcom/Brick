@@ -4,7 +4,7 @@ Class {
 	#category : #'Brick-Editor-Model'
 }
 
-{ #category : #defaults }
-BrTextEditorEditableSingleLineMode >> returnKeyAndAction [
+{ #category : #shortcuts }
+BrTextEditorEditableSingleLineMode >> returnShortcut [
 	^ nil
 ]

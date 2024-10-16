@@ -10,7 +10,7 @@ Class {
 	#category : #'Brick-Editor-Model'
 }
 
-{ #category : #defaults }
-BrTextEditorEditableCodeMode >> returnKeyAndAction [
+{ #category : #shortcuts }
+BrTextEditorEditableCodeMode >> returnShortcut [
 	^ BrEditorShortcut carriageReturn 
 ]

@@ -380,12 +380,12 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToNextWordEnd_twi
 	
 	self 
 		assert: anEditor selection 
-		equals: (BlCompositeSelection new select: 6 to: 14).
+		equals: (BlCompositeSelection new select: 6 to: 9).
 	self 
 		assert: anEditor editor selectedText asString 
-		equals: 'er river'.
+		equals: 'er '.
 	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(14)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(9)).
 	
 	^ anEditor
 ]
