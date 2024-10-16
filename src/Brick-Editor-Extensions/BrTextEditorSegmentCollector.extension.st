@@ -6,7 +6,7 @@ BrTextEditorSegmentCollector >> gtSegmentsFor: aView [
 
 	^ aView columnedList
 		title: 'Segments';
-		items: [ self segments ];
+		items: [ segments ];
 		priority: 1;
 		column: 'Index' text: [ :each | '{1} ({2}-{3} | {4})' format: { each index . each textStart . each textEnd . each textEndDelimited } ];
 		column: 'Text' text: [ :each | each ]

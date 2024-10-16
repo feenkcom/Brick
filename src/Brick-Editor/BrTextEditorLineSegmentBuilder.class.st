@@ -25,11 +25,11 @@ BrTextEditorLineSegmentBuilder >> attributesModfiedFrom: aFromIndex to: aToIndex
 		assert: [ aFromIndex <= (aToIndex + 1) ]
 		description: [ '`From` index must be less or equal to `to` index' ].
 	aBrTextEditor segmentCollector
-		cachedSegmentAt: aFromIndex
+		findCachedSegmentForLetterAt: aFromIndex
 		ifFound: [ :aSegment | aFromSegment := aSegment ]
 		ifNotFound: [ ^self ].
 	aBrTextEditor segmentCollector
-		cachedSegmentAt: aToIndex
+		findCachedSegmentForLetterAt: aToIndex
 		ifFound: [ :aSegment | aToSegment := aSegment ]
 		ifNotFound: [ ^self ].
 
@@ -111,12 +111,12 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 		description: [ '`From` index must be less or equal to `to` index' ].
 
 	aBrTextEditor segmentCollector
-		cachedSegmentAt: aFromIndex
+		findCachedSegmentForLetterAt: aFromIndex
 		ifFound: [ :aSegment | aFromSegment := aSegment ]
 		ifNotFound: [  ].
 
 	aBrTextEditor segmentCollector
-		cachedSegmentAt: aToIndex
+		findCachedSegmentForLetterAt: aToIndex
 		ifFound: [ :aSegment | aToSegment := aSegment ]
 		ifNotFound: [  ].
 
@@ -161,7 +161,7 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 		offset: aTextIndex.
 
 	aBrTextEditor segmentCollector
-		cachedSegmentAt: aTextIndex
+		findCachedSegmentForLetterAt: aTextIndex
 		ifFound: [ :aSegment | aCurrentSegment := aSegment ]
 		ifNotFound: [ ^ self ].
 

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transformation'
 	],
-	#category : 'Brick-Editor-Commands'
+	#category : #'Brick-Editor-Commands'
 }
 
 { #category : #executing }
@@ -32,7 +32,7 @@ BrTextEditorScreenToCursorCommand >> relativeScreenToCursor: aTransformation for
 
 	"we convert a relative screen position, should send only to the segment at the cursor position"
 	aTextEditor segmentCollector
-		cachedSegmentAt: self transformation cursor position
+		findCachedSegmentForLetterAt: self transformation cursor position
 		ifFound: [ :aSegment |
 			aTextEditor
 				enqueueHolderCommand: self newHolderCommand

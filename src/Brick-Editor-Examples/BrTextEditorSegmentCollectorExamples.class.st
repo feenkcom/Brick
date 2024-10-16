@@ -20,7 +20,7 @@ BrTextEditorSegmentCollectorExamples >> cachedSegmentAt142 [
 	limit := (segmentCollector cacheLimit * 1.42) rounded.
 	segment := segmentCollector segmentAt: limit.
 	^ segmentCollector
-		cachedSegmentAt: (limit - 1) * 100	"each line is 100 characters"
+		findCachedSegmentForLetterAt: (limit - 1) * 100	"each line is 100 characters"
 		ifFound: [ :seg | self assert: seg = segment ]
 		ifNotFound: [ self error: 'Segment not found' ]
 ]

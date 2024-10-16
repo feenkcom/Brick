@@ -145,7 +145,7 @@ BrTextEditorSegment >> isFirstTextPiece: aSegmentPiece [
 BrTextEditorSegment >> isLastIn: aTextEditor [
 	"Return true if I am absolutely the very last segment (not last cached) in a given text editor"
 
-	^ self index = aTextEditor segmentCollector segments size
+	^ self index = aTextEditor segmentCollector lastSegmentIndex
 ]
 
 { #category : #testing }
