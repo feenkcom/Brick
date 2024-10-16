@@ -5,7 +5,7 @@ Class {
 		'fromIndex',
 		'toIndex'
 	],
-	#category : 'Brick-Editor-Commands'
+	#category : #'Brick-Editor-Commands'
 }
 
 { #category : #executing }
@@ -17,13 +17,13 @@ BrTextEditorInvalidateCommand >> executeOn: aTextEditor [
 
 	"convert from text => to segment index"
 	aTextEditor segmentCollector
-		cachedSegmentAt: changedFrom
+		findCachedSegmentForLetterAt: changedFrom
 		ifFound: [ :aSegment | changedFrom := aSegment index ]
 		ifNotFound: [ changedFrom := 1 ].
 
 	"convert from text => to segment index"
 	aTextEditor segmentCollector
-		cachedSegmentAt: changedTo
+		findCachedSegmentForLetterAt: changedTo
 		ifFound: [ :aSegment | changedTo := aSegment index ]
 		ifNotFound: [ changedTo := aTextEditor segmentCollector segments size ].
 		

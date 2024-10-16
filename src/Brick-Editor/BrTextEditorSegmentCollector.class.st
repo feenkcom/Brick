@@ -24,8 +24,6 @@ The limit represents the maximum number of items held by the receiver when an un
 Class {
 	#name : #BrTextEditorSegmentCollector,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'text',
 		'subText',
@@ -38,7 +36,7 @@ Class {
 	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
-{ #category : #'cache - adding / removing' }
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments after: aSegment [
 	"Add the supplied collection of segments to the receiver after aSegment.
 	This may safely cause the number of cached segments to exceed limit."
@@ -46,46 +44,27 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments after: aSegme
 	self
 		assert: [ aCollectionOfSegments isNotEmpty ]
 		description: [ 'Can not add a collection of empty segments!' ].
-	
-	self
-		assert: [ self segments size = segmentsInterval size ]
-		description: [ 'Amount of segments must correspond to the interval' ].
+
+	self assertSegmentsIntervalConsistency.
+
+	aCollectionOfSegments
+		withIndexDo: [ :aNewSegment :anIndex | 
+			aNewSegment index: anIndex + aSegment index.
+			segments
+				add: aNewSegment
+				afterIndex: aSegment index - self firstSegmentIndex + anIndex ].
 
 	self
-		assert: [
-			| satisfy |
-			satisfy := true.
-			self segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
-				satisfy := satisfy and: [ eachSegment index = anExpectedIndex ]	].
-			satisfy ]
-		description: [ 'Segment indices must correspond to the interval' ].
+		offsetSegmentIndicesBy: aCollectionOfSegments size
+		after: aCollectionOfSegments last index.
 
-	aCollectionOfSegments withIndexDo: [ :aNewSegment :anIndex |
-		aNewSegment index: anIndex + aSegment index.
-		self segments
-			add: aNewSegment
-			afterIndex: aSegment index - self firstSegmentIndex + anIndex ].
-	
-	self offsetSegmentIndicesBy: aCollectionOfSegments size after: aCollectionOfSegments last index.
+	self assertSegmentsIntervalConsistency.
 
-	self
-		assert: [ self segments size = segmentsInterval size ]
-		description: [ 'Amount of segments must correspond to the interval' ].
-		
-	self
-		assert: [
-			| satisfy |
-			satisfy := true.
-			self segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
-				satisfy := satisfy and: [ eachSegment index = anExpectedIndex ]	].
-			satisfy ]
-		description: [ 'Segment indices must correspond to the interval' ].
-
-	self editor notifyItemsInserted: (aCollectionOfSegments first index to: aCollectionOfSegments last index).
-	
+	self editor
+		notifyItemsInserted: (aCollectionOfSegments first index to: aCollectionOfSegments last index)
 ]
 
-{ #category : #'cache - adding / removing' }
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments before: aSegment [
 	"Add the supplied collection of segments to the receiver before aSegment.
 	This may safely cause the number of cached segments to exceed limit."
@@ -95,21 +74,21 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments before: aSegm
 		description: [ 'Can not add a collection of empty segments!' ].
 	
 	self
-		assert: [ self segments size = segmentsInterval size ]
+		assert: [ segments size = segmentsInterval size ]
 		description: [ 'Amount of segments must correspond to the interval' ].
 
 	self
 		assert: [
 			| satisfy |
 			satisfy := true.
-			self segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
+			segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
 				satisfy := satisfy and: [ eachSegment index = anExpectedIndex ]	].
 			satisfy ]
 		description: [ 'Segment indices must correspond to the interval' ].
 
 	aCollectionOfSegments withIndexDo: [ :aNewSegment :anIndex |
 		aNewSegment index: (aSegment index - aCollectionOfSegments size) + anIndex.
-		self segments
+		segments
 			add: aNewSegment
 			afterIndex: aNewSegment index - 1 ].
 	
@@ -118,17 +97,33 @@ BrTextEditorSegmentCollector >> addSegments: aCollectionOfSegments before: aSegm
 	self editor notifyItemsInserted: (aCollectionOfSegments first index to: aCollectionOfSegments last index).
 	
 	self
-		assert: [ self segments size = segmentsInterval size ]
+		assert: [ segments size = segmentsInterval size ]
 		description: [ 'Amount of segments must correspond to the interval' ].
 		
 	self
 		assert: [
 			| satisfy |
 			satisfy := true.
-			self segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
+			segments with: segmentsInterval do: [ :eachSegment :anExpectedIndex |
 				satisfy := satisfy and: [ eachSegment index = anExpectedIndex ]	].
 			satisfy ]
 		description: [ 'Segment indices must correspond to the interval' ].
+]
+
+{ #category : #'private - asserting' }
+BrTextEditorSegmentCollector >> assertSegmentsIntervalConsistency [
+	self
+		assert: [ segments size = segmentsInterval size ]
+		description: [ 'Amount of segments must correspond to the interval' ].
+
+	self
+		assert: [ | satisfy |
+			satisfy := true.
+			segments
+				with: segmentsInterval
+				do: [ :eachSegment :anExpectedIndex | satisfy := satisfy and: [ eachSegment index = anExpectedIndex ] ].
+			satisfy ]
+		description: [ 'Segment indices must correspond to the interval' ]
 ]
 
 { #category : #accessing }
@@ -148,17 +143,6 @@ BrTextEditorSegmentCollector >> cacheLimit: aNumber [
 	limit := aNumber
 ]
 
-{ #category : #'cache - accessing' }
-BrTextEditorSegmentCollector >> cachedAt: anIndex [
-	"Return a cached segment at an absolute index within editor
-	(I must convert index from editor coordiantes to my local cache coordinates)"
-	<return: #BrTextEditorSegment>
-	| aCachedIndex |
-
-	aCachedIndex := anIndex - segmentsInterval first + 1.
-	^ self segments at: aCachedIndex
-]
-
 { #category : #accessing }
 BrTextEditorSegmentCollector >> cachedInterval [
 	"Return the interval of the indices of the currently cached segments"
@@ -168,83 +152,14 @@ BrTextEditorSegmentCollector >> cachedInterval [
 ]
 
 { #category : #'cache - accessing' }
-BrTextEditorSegmentCollector >> cachedSegmentAt: aTextIndex ifFound: aFoundBlock ifNotFound: aNotFoundBlock [
-	| segmentIndex segment |
-	segmentIndex := self cachedSegmentIndexAt: aTextIndex.
-	segmentIndex = 0 ifTrue: [ ^ aNotFoundBlock cull: self ].
-	segment := self segments at: segmentIndex.
-	^ aFoundBlock cull: segment
-]
+BrTextEditorSegmentCollector >> cachedSegmentAt: anIndex [
+	"Return a cached segment at an absolute index within editor
+	(I must convert index from editor coordiantes to my local cache coordinates)"
+	<return: #BrTextEditorSegment>
+	| aCachedIndex |
 
-{ #category : #'cache - accessing' }
-BrTextEditorSegmentCollector >> cachedSegmentIndexAt: aTextIndex [
-	"Return an index of a segment in a collection of cached segments that contains
-	a text item with a given index or return 0 if no such *cached* segment exists.
-	I use binary search to find a segment, algorithmic complexity O(log n)"
-	<return: #Number>
-
-	^ self segments
-		findBinaryIndex: [ :aSegment |
-			(aTextIndex between: aSegment textStart and: aSegment textEnd)
-				ifTrue: [ 0 ]
-				ifFalse: [
-					aTextIndex < aSegment textStart
-						ifTrue: [ -1 ]
-						ifFalse: [ 1 ] ] ]
-		ifNone: [ :a :b |
-			| anAssoc |
-			
-			anAssoc := (self segments
-				at: a
-				ifAbsent: [ nil ]) -> a.
-			
-			anAssoc key ifNil: [
-				anAssoc := (self segments
-					at: b
-					ifAbsent: [ nil ]) -> b. ].
-
-			anAssoc key
-				ifNil: [ 0 ]
-				ifNotNil: [ :aSegment |
-					(aTextIndex between: aSegment textStart and: aSegment textEndDelimited)
-						ifTrue: [ anAssoc value ]
-						ifFalse: [ 0 ] ] ]
-]
-
-{ #category : #'cache - computation' }
-BrTextEditorSegmentCollector >> computeBackwardAt: anIndex [
-	"Populate the cache at anIndex, which is prior to the start of the currently cached segments."
-	| mapEntry cachedInterval stream builder newSubText newSegments overlap streamLimit |
-
-	"Look for the map entry just earlier than anIndex
-	(removing the need to parse the text from the beginning of the string to the found mapEntry"
-	cachedInterval := self computeInterval: anIndex.
-	mapEntry := map mapEntryFor: cachedInterval first.
-	newSubText := text from: mapEntry value to: text size.
-	newSegments := OrderedCollection new.
-
-	overlap := cachedInterval last - segmentsInterval first + 1.
-	streamLimit := overlap > 0
-		ifTrue: [ overlap ]
-		ifFalse: [ self cacheLimit ].
-	stream := BrEditorSegmentStream new.
-	stream skip: cachedInterval first - mapEntry key.
-	stream limit: streamLimit.
-	builder := self editor segmentBuilder.
-	
-	builder
-		split: newSubText
-		in: stream
-		offset: ((newSubText start - text textOffset - 1) max: 0).
-	
-	newSegments addAll: stream collection.
-	overlap > 0 ifTrue:
-		[ newSegments addAll: (segments copyFrom: 1 to: overlap) ].
-	segmentsInterval := cachedInterval first to: cachedInterval first + newSegments size - 1.
-	segments := newSegments.
-
-	self computeSegmentIndices.
-	self computeSubText.
+	aCachedIndex := anIndex - segmentsInterval first + 1.
+	^ segments at: aCachedIndex
 ]
 
 { #category : #'cache - computation' }
@@ -284,8 +199,8 @@ BrTextEditorSegmentCollector >> computeForwardAt: anIndex [
 	segments addAll: stream collection.
 	segmentsInterval := cachedInterval first to: cachedInterval first + segments size - 1.
 	
-	self computeSegmentIndices.
-	self computeSubText.
+	self privateRecomputeSegmentIndices.
+	self privateRecomputeSubText.
 	map addLine: segmentsInterval first offset: subText start.
 ]
 
@@ -299,62 +214,6 @@ BrTextEditorSegmentCollector >> computeInterval: anIndex [
 	end := start + self cacheLimit - 1.
 	
 	^ start to: end
-]
-
-{ #category : #accessing }
-BrTextEditorSegmentCollector >> computeSegmentAt: anIndex [
-	<return: #BrTextEditorSegment>
-
-	self
-		assert: [ (self isCachedAt: anIndex) not ]
-		description: [ 'Computing of already cached segment is wasteful' ].
-
-	anIndex > self lastSegmentIndex
-		ifTrue: [ self computeForwardAt: anIndex ]
-		ifFalse: [ self computeBackwardAt: anIndex ].
-
-	self
-		assert: [ self isCachedAt: anIndex ]
-		description: [ 'Segment must be already cached!' ].
-
-	^ self cachedAt: anIndex
-]
-
-{ #category : #'private - computing' }
-BrTextEditorSegmentCollector >> computeSegmentIndices [
-	"Recompute segment indices according to currently cached inerval"
-	
-	self
-		assert: [ self hasCached ]
-		description: [ 'There must be cached segments in order to compute sub text' ].
-	
-	self
-		assert: [ segments size = segmentsInterval size ]
-		description: [ 'Cached segments interval must correspond to amount of segments' ].
-		
-	segments
-		with: segmentsInterval
-		do: [ :aSegment :anIndex | aSegment index: anIndex ]
-]
-
-{ #category : #'private - computing' }
-BrTextEditorSegmentCollector >> computeSubText [
-	"Recompute subtext according to currently cached segments"
-	| subTextStart subTextEnd |
-
-	self
-		assert: [ self hasCached ]
-		description: [ 'There must be cached segments in order to compute sub text' ].
-
-	subTextStart := segments first textStart + 1.
-	subTextEnd := segments last textEnd + 1.
-	"Allow for the fact that the last line in the string may not have a line-end character"
-	subTextEnd > text size ifTrue: [ subTextEnd := subTextEnd - 1 ].
-	subText := text from: subTextStart to: subTextEnd.
-
-	"The following assertion should always be true, but is very expensive.
-	Only used if a problem is suspected."
-	"self assert: subText asString lines size <= segments size."
 ]
 
 { #category : #'cache - accessing' }
@@ -393,6 +252,15 @@ BrTextEditorSegmentCollector >> end [
 	^ self hasCached
 		ifTrue: [ subText end ]
 		ifFalse: [ 0 ]
+]
+
+{ #category : #'cache - accessing' }
+BrTextEditorSegmentCollector >> findCachedSegmentForLetterAt: aTextIndex ifFound: aFoundBlock ifNotFound: aNotFoundBlock [
+	| segmentIndex segment |
+	segmentIndex := self privateFindCachedSegmentIndexForLetterAt: aTextIndex.
+	segmentIndex = 0 ifTrue: [ ^ aNotFoundBlock cull: self ].
+	segment := segments at: segmentIndex.
+	^ aFoundBlock cull: segment
 ]
 
 { #category : #'cache - accessing' }
@@ -485,30 +353,30 @@ BrTextEditorSegmentCollector >> lastSegmentIndex [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'text - modifications' }
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> moveTextBy: aNumber [
-	"move all segments' subTexts start/end indices by aNumber"
+	"Move all segments' subTexts start/end indices by aNumber"
 
 	self hasCached
 		ifFalse: [ ^ self ].
 	
 	segments do: [ :aSegment | aSegment moveTextBy: aNumber ].
-	self computeSubText
+	self privateRecomputeSubText
 ]
 
-{ #category : #'text - modifications' }
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> moveTextBy: aNumber after: aSegment [
-	"move all segments after the given segment by aNumber"
+	"Move all segments after the given segment by aNumber"
 
 	aSegment index + 1 to: self lastSegmentIndex do: [ :anIndex |
 		| eachSegment |
-		eachSegment := self cachedAt: anIndex.
+		eachSegment := self cachedSegmentAt: anIndex.
 		eachSegment moveTextBy: aNumber ].
 	
-	self computeSubText
+	self privateRecomputeSubText
 ]
 
-{ #category : #'instance creation' }
+{ #category : #initialization }
 BrTextEditorSegmentCollector >> newSegments [
 	"Return a new empty collection that will be used to store segments"
 	<return: #SequenceableCollection>
@@ -516,7 +384,7 @@ BrTextEditorSegmentCollector >> newSegments [
 	^ OrderedCollection new
 ]
 
-{ #category : #'text - modifications' }
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset [
 	"Offset segments' #index by anOffset of all cached segments"
 	
@@ -525,26 +393,160 @@ BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset [
 		after: self firstSegmentIndex - 1
 ]
 
-{ #category : #'text - modifications' }
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> offsetSegmentIndicesBy: anOffset after: aSegmentIndex [
-	"Offset segments' #index by anOffset of all segments after a given segment index.
-	Note: #lastIndex is not valid during execution of this method!"
+	"Offset segments' #index by anOffset of all segments after a given segment index"
 	
 	self
 		assert: [ aSegmentIndex + 1 >= self firstSegmentIndex ]
 		description: [ 'Segment index must be greater or equal first segment index ' ].
-		
-	(aSegmentIndex + 1 to: segments size + self firstSegmentIndex - 1) do: [ :anIndex |
-		| aSegment |
-		
-		aSegment := segments at: anIndex - self firstSegmentIndex + 1.
-		aSegment index: aSegment index + anOffset ].
+
+	"Note: #lastSegmentIndex is not valid during execution of this method!"
+	aSegmentIndex + 1 to: (segments size + self firstSegmentIndex - 1) do: [ :anIndex |
+		| eachSegment |
+		eachSegment := self cachedSegmentAt: anIndex.
+		eachSegment index: eachSegment index + anOffset ].
 	
 	"actual cached interval changed, update it"
 	segmentsInterval := segmentsInterval first to: segmentsInterval last + anOffset
 ]
 
-{ #category : #'cache - adding / removing' }
+{ #category : #'private - computing' }
+BrTextEditorSegmentCollector >> privateComputeBackwardAt: anIndex [
+	"Populate the cache at anIndex, which is prior to the start of the currently cached segments."
+	| mapEntry cachedInterval stream builder newSubText newSegments overlap streamLimit |
+
+	"Look for the map entry just earlier than anIndex
+	(removing the need to parse the text from the beginning of the string to the found mapEntry"
+	cachedInterval := self computeInterval: anIndex.
+	mapEntry := map mapEntryFor: cachedInterval first.
+	newSubText := text from: mapEntry value to: text size.
+	newSegments := OrderedCollection new.
+
+	overlap := cachedInterval last - segmentsInterval first + 1.
+	streamLimit := overlap > 0
+		ifTrue: [ overlap ]
+		ifFalse: [ self cacheLimit ].
+	stream := BrEditorSegmentStream new.
+	stream skip: cachedInterval first - mapEntry key.
+	stream limit: streamLimit.
+	builder := self editor segmentBuilder.
+	
+	builder
+		split: newSubText
+		in: stream
+		offset: ((newSubText start - text textOffset - 1) max: 0).
+	
+	newSegments addAll: stream collection.
+	overlap > 0 ifTrue:
+		[ newSegments addAll: (segments copyFrom: 1 to: overlap) ].
+	segmentsInterval := cachedInterval first to: cachedInterval first + newSegments size - 1.
+	segments := newSegments.
+
+	self privateRecomputeSegmentIndices.
+	self privateRecomputeSubText.
+]
+
+{ #category : #'private - computing' }
+BrTextEditorSegmentCollector >> privateComputeSegmentAt: anIndex [
+	<return: #BrTextEditorSegment>
+
+	self
+		assert: [ (self isCachedAt: anIndex) not ]
+		description: [ 'Computing of already cached segment is wasteful' ].
+
+	anIndex > self lastSegmentIndex
+		ifTrue: [ self computeForwardAt: anIndex ]
+		ifFalse: [ self privateComputeBackwardAt: anIndex ].
+
+	self
+		assert: [ self isCachedAt: anIndex ]
+		description: [ 'Segment must be already cached!' ].
+
+	^ self cachedSegmentAt: anIndex
+]
+
+{ #category : #'private - accessing' }
+BrTextEditorSegmentCollector >> privateFindCachedSegmentIndexForLetterAt: aTextIndex [
+	"Return an index of a segment in a collection of cached segments that contains
+	a text item with a given index or return 0 if no such *cached* segment exists.
+	I use binary search to find a segment, algorithmic complexity O(log n)"
+	<return: #Number>
+
+	^ segments
+		findBinaryIndex: [ :aSegment |
+			(aTextIndex between: aSegment textStart and: aSegment textEnd)
+				ifTrue: [ 0 ]
+				ifFalse: [
+					aTextIndex < aSegment textStart
+						ifTrue: [ -1 ]
+						ifFalse: [ 1 ] ] ]
+		ifNone: [ :a :b |
+			| anAssoc |
+			
+			anAssoc := (segments
+				at: a
+				ifAbsent: [ nil ]) -> a.
+			
+			anAssoc key ifNil: [
+				anAssoc := (segments
+					at: b
+					ifAbsent: [ nil ]) -> b. ].
+
+			anAssoc key
+				ifNil: [ 0 ]
+				ifNotNil: [ :aSegment |
+					(aTextIndex between: aSegment textStart and: aSegment textEndDelimited)
+						ifTrue: [ anAssoc value ]
+						ifFalse: [ 0 ] ] ]
+]
+
+{ #category : #'private - computing' }
+BrTextEditorSegmentCollector >> privateRecomputeSegmentIndices [
+	"Recompute segment indices according to currently cached inerval"
+	
+	self
+		assert: [ self hasCached ]
+		description: [ 'There must be cached segments in order to compute sub text' ].
+	
+	self
+		assert: [ segments size = segmentsInterval size ]
+		description: [ 'Cached segments interval must correspond to amount of segments' ].
+		
+	segments
+		with: segmentsInterval
+		do: [ :aSegment :anIndex | aSegment index: anIndex ]
+]
+
+{ #category : #'private - computing' }
+BrTextEditorSegmentCollector >> privateRecomputeSubText [
+	"Recompute subtext according to currently cached segments"
+	| subTextStart subTextEnd |
+
+	self
+		assert: [ self hasCached ]
+		description: [ 'There must be cached segments in order to compute sub text' ].
+
+	subTextStart := segments first textStart + 1.
+	subTextEnd := segments last textEnd + 1.
+	"Allow for the fact that the last line in the string may not have a line-end character"
+	subTextEnd > text size ifTrue: [ subTextEnd := subTextEnd - 1 ].
+	subText := text from: subTextStart to: subTextEnd.
+
+	"The following assertion should always be true, but is very expensive.
+	Only used if a problem is suspected."
+	"self assert: subText asString lines size <= segments size."
+]
+
+{ #category : #'private - accessing' }
+BrTextEditorSegmentCollector >> privateSegments [
+	"Never access segments directly"
+	<return: #SequenceableCollection of: #BrTextEditorSegment>
+
+	^ segments
+]
+
+{ #category : #'api - modifications' }
 BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 	"Remove all segments within index interval"
 	| aFirstIndex |
@@ -553,7 +555,7 @@ BrTextEditorSegmentCollector >> removeSegmentInterval: anInterval [
 
 	anInterval reverseDo: [ :anIndex | segments removeAt: (anIndex - aFirstIndex + 1) ].
 	
-	self segments
+	segments
 		withIndexDo: [ :eachSegment :anIndex | eachSegment index: (aFirstIndex + anIndex - 1) ].
 	
 	segmentsInterval := (segments first index to: segments last index).
@@ -576,15 +578,13 @@ BrTextEditorSegmentCollector >> segmentAt: anIndex [
 	<return: #BrTextEditorSegment>
 	
 	^ (self isCachedAt: anIndex)
-		ifTrue: [ self cachedAt: anIndex ]
-		ifFalse: [ self computeSegmentAt: anIndex ]
+		ifTrue: [ self cachedSegmentAt: anIndex ]
+		ifFalse: [ self privateComputeSegmentAt: anIndex ]
 ]
 
 { #category : #'private - accessing' }
 BrTextEditorSegmentCollector >> segments [
-	<return: #SequenceableCollection of: #BrTextEditorSegment>
-
-	^ segments
+	^ self privateSegments
 ]
 
 { #category : #'cache - accessing' }

@@ -2746,7 +2746,7 @@ BrTextEditorLineSegmentExamples >> segment_in_Empty_at_0 [
 	aTextEditor := self emptyEditor.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 0
+		findCachedSegmentForLetterAt: 0
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2763,7 +2763,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_0 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 0
+		findCachedSegmentForLetterAt: 0
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2780,7 +2780,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_1 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 1
+		findCachedSegmentForLetterAt: 1
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2797,7 +2797,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_2 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 2
+		findCachedSegmentForLetterAt: 2
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2814,7 +2814,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_3 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 3
+		findCachedSegmentForLetterAt: 3
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2831,7 +2831,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_4 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 4
+		findCachedSegmentForLetterAt: 4
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2848,7 +2848,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_5 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 5
+		findCachedSegmentForLetterAt: 5
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2865,7 +2865,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_6 [
 	aTextEditor := self insert_NewLineCrLf_in_HACrBA_At_3.
 	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 6
+		findCachedSegmentForLetterAt: 6
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2883,7 +2883,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_7 [
 	self assert: aTextEditor text size equals: 7.
 
 	aTextEditor segmentCollector
-		cachedSegmentAt: 7
+		findCachedSegmentForLetterAt: 7
 		ifFound: [ :aFoundSegment | aSegment := aFoundSegment ]
 		ifNotFound: [].
 
@@ -2902,7 +2902,7 @@ BrTextEditorLineSegmentExamples >> segment_in_HACrCrLfBA_at_8 [
 
 	notFoundFlag := false.	
 	aTextEditor segmentCollector
-		cachedSegmentAt: 8
+		findCachedSegmentForLetterAt: 8
 		ifFound: [ :aFoundSegment | ]
 		ifNotFound: [ notFoundFlag := true ].
 

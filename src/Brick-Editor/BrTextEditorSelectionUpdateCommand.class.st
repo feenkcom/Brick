@@ -8,7 +8,7 @@ Class {
 		'fromIndex',
 		'toIndex'
 	],
-	#category : 'Brick-Editor-Commands'
+	#category : #'Brick-Editor-Commands'
 }
 
 { #category : #executing }
@@ -20,12 +20,12 @@ BrTextEditorSelectionUpdateCommand >> executeOn: aTextEditor [
 	changedTo := self toIndex.
 
 	aTextEditor segmentCollector
-		cachedSegmentAt: changedFrom
+		findCachedSegmentForLetterAt: changedFrom
 		ifFound: [ :aSegment | changedFrom := aSegment index ]
 		ifNotFound: [ 1 ].
 
 	aTextEditor segmentCollector
-		cachedSegmentAt: changedTo
+		findCachedSegmentForLetterAt: changedTo
 		ifFound: [ :aSegment | changedTo := aSegment index ]
 		ifNotFound: [ changedTo := aTextEditor segmentCollector segments size ].	
 	

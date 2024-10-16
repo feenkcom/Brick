@@ -14,13 +14,13 @@ BrTextEditorUpdateCommand >> executeOn: aTextEditor [
 
 	"convert from text => to segment index"
 	changedFrom := aTextEditor segmentCollector
-		cachedSegmentAt: self fromIndex
+		findCachedSegmentForLetterAt: self fromIndex
 		ifFound: [ :aSegment | aSegment index ]
 		ifNotFound: [ aTextEditor segmentCollector firstSegmentIndex ].
 
 	"convert from text => to segment index"
 	changedTo := aTextEditor segmentCollector
-		cachedSegmentAt: self toIndex
+		findCachedSegmentForLetterAt: self toIndex
 		ifFound: [ :aSegment | aSegment index ]
 		ifNotFound: [ aTextEditor segmentCollector lastSegmentIndex ].
 	
@@ -29,7 +29,7 @@ BrTextEditorUpdateCommand >> executeOn: aTextEditor [
 
 	changedFrom
 		to: changedTo
-		do: [ :anIndex | (aTextEditor segmentCollector cachedAt: anIndex) clearCache ].
+		do: [ :anIndex | (aTextEditor segmentCollector cachedSegmentAt: anIndex) clearCache ].
 
 	aTextEditor notifyItemsChanged: (changedFrom to: changedTo)
 ]

@@ -33,7 +33,7 @@ BrTextEditorCursorChangeCommand >> executeOn: aTextEditor [
 		during: [ self processAttributesOn: aTextEditor ].
 
 	aTextEditor segmentCollector
-		cachedSegmentAt: self position
+		findCachedSegmentForLetterAt: self position
 		ifFound: [ :aSegment |
 			BlFrameTelemetry
 				timeSync: [ 'Enqueue cursor changed holder command {1}' format: { aSegment index to: aSegment index } ]
