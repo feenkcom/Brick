@@ -379,18 +379,16 @@ BrTextEditorOperator >> findWordAt: aTextIndex [
 
 { #category : #private }
 BrTextEditorOperator >> findWordEndAfter: aTextIndex [
-
 	"Find a text index of the end of the next word after a given text index"
 
 	| textIterator newPosition aText |
 	newPosition := aTextIndex.
 	aText := self text.
 	textIterator := aText iterator: (newPosition max: 1) to: aText size.
-	[ textIterator hasNext and: [ newPosition = aTextIndex ] ] 
-		whileTrue: [ 
-			| skip ch |
+	[ textIterator hasNext and: [ newPosition = aTextIndex ] ]
+		whileTrue: [ | skip ch |
 			ch := textIterator peek.
-			skip := ch isSeparator or: [ ch isLetter and: [ ch isUppercase ] ].
+			skip := ch isLetter and: [ ch isUppercase ].
 			textIterator nextWord.
 			skip ifFalse: [ newPosition := textIterator position ] ].
 

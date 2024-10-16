@@ -5,26 +5,61 @@ Class {
 }
 
 { #category : #'examples - showroom' }
-BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
+BrTextEditorNavigatorExamples >> assertEditor: anEditor cursorIsAt: position [
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: position}
+]
 
+{ #category : #'examples - move to' }
+BrTextEditorNavigatorExamples >> assertEvents: eventRecord addCursorAt: pos [
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: pos}
+]
+
+{ #category : #'examples - move down' }
+BrTextEditorNavigatorExamples >> assertEvents: eventRecord moveCursorFrom: from to: to [
+	self
+		assert: eventRecord movedEvents first cursor
+		equals: (BrTextEditorSingleCursor new position: to).
+	self assert: eventRecord movedEvents first oldIndex equals: from.
+	self assert: eventRecord movedEvents first newIndex equals: to
+]
+
+{ #category : #'examples - move to' }
+BrTextEditorNavigatorExamples >> assertEvents: eventRecord removeCursorAt: pos [
+	self
+		assert: (eventRecord removedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: pos}
+]
+
+{ #category : #'private - utility' }
+BrTextEditorNavigatorExamples >> connectEventRecordTo: anEditor [
+	| eventRecord |
+	eventRecord := BrTextEditorNavigatorExamplesEventRecord new.
+
+	anEditor navigator
+		whenAdded: [ :anEvent | eventRecord addedEvents add: anEvent ];
+		whenMoved: [ :anEvent | eventRecord movedEvents add: anEvent ];
+		whenRemoved: [ :anEvent | eventRecord removedEvents add: anEvent ].
+	^ eventRecord
+]
+
+{ #category : #'examples - showroom' }
+BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_in_something [
 	<gtExample>
 	| anEditor |
 	anEditor := self editorOnSomeThing.
 	anEditor navigator
 		moveTo: 0;
 		apply.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 0) }.
+	self assertEditor: anEditor cursorIsAt: 0.
 
 	anEditor navigator
 		moveToEndNextWord;
 		apply.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 4) }.
+	self assertEditor: anEditor cursorIsAt: 4.
 	^ anEditor
 ]
 
@@ -33,45 +68,34 @@ BrTextEditorNavigatorExamples >> cursor_addAt0_moveNextWord_twice_in_something [
 	<gtExample>
 	| anEditor |
 	anEditor := self cursor_addAt0_moveNextWord_in_something.
-		
+
 	anEditor navigator
 		moveToEndNextWord;
 		apply.
+	self assertEditor: anEditor cursorIsAt: 9.
 
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 9) }.
-		
 	^ anEditor
 ]
 
 { #category : #'examples - showroom' }
 BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_in_something [
-
 	<gtExample>
 	| anEditor |
 	anEditor := self editorOnSomeThing.
 	anEditor navigator
 		moveTo: 9;
 		apply.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 9) }.
+	self assertEditor: anEditor cursorIsAt: 9.
 
 	anEditor navigator
 		moveToStartPreviousWord;
 		apply.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 4) }.
+	self assertEditor: anEditor cursorIsAt: 4.
 	^ anEditor
 ]
 
 { #category : #'examples - showroom' }
 BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_something [
-
 	<gtExample>
 	| anEditor |
 	anEditor := self cursor_addAt9_movePreviousWord_in_something.
@@ -79,150 +103,101 @@ BrTextEditorNavigatorExamples >> cursor_addAt9_movePreviousWord_twice_in_somethi
 	anEditor navigator
 		moveToStartPreviousWord;
 		apply.
-
-	self
-		assert: anEditor cursors allCursors
-		equals: { (BrTextEditorSingleCursor new position: 0) }.
+	self assertEditor: anEditor cursorIsAt: 0.
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_0_and_0_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 0;
 		addAt: 0;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+	self assertEditor: anEditor cursorIsAt: 0.
+	self assertEvents: eventRecord addCursorAt: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_0_and_1_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 0;
 		addAt: 1;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1 }.
-		
-	self assert: theAddedEvents size equals: 2.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
+	self assert: eventRecord addedEvents size equals: 2.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_0_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 0;
 		apply;
 		unsubscribe.
-
 	anEditor forceLayout.
-
-	self assert: anEditor cursors isNotEmpty.
+	self assertEditor: anEditor cursorIsAt: 0.
+	self assertEvents: eventRecord addCursorAt: 0.
 	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 0}.
-
-	self assert: theAddedEvents size equals: 1.
-	self
-		assert: (theAddedEvents collect: #cursor) asArray
-		equals: {BrTextEditorSingleCursor new position: 0}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_1_and_0_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 1;
 		addAt: 0;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1 }.
-
-	self assert: theAddedEvents size equals: 2.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
+	self assert: eventRecord addedEvents size equals: 2.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -230,14 +205,14 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_and_0_in_empty [
 BrTextEditorNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 	<gtExample>
 	| anEditor thePreviousSegments theNewSegments thePreviousTextPieces theNewTextPieces |
-	
 	anEditor := self editorOnMultilineText.
 
 	thePreviousSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: thePreviousSegments size equals: 11.
-	
-	thePreviousTextPieces := thePreviousSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+
+	thePreviousTextPieces := thePreviousSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: thePreviousTextPieces size equals: 63.
 
 	anEditor navigator
@@ -245,194 +220,123 @@ BrTextEditorNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 		apply.
 
 	anEditor forceLayout.
+	self assertEditor: anEditor cursorIsAt: 1.
 
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 1 }.
-	
 	theNewSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: theNewSegments size equals: 11.
-	
-	theNewTextPieces := theNewSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+
+	theNewTextPieces := theNewSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: theNewTextPieces size equals: 63.
-	
+
 	self assert: thePreviousSegments equals: theNewSegments.
 	self assert: thePreviousTextPieces equals: theNewTextPieces.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_1_in_cursors_at_0 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 1;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1.
-	}.
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 1
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
+	self assertEvents: eventRecord addCursorAt: 1.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_1_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 1;
 		apply;
 		unsubscribe.
-
 	anEditor forceLayout.
-
-	self assert: anEditor cursors isNotEmpty.
+	self assertEditor: anEditor cursorIsAt: 1.
+	self assertEvents: eventRecord addCursorAt: 1.
 	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 1}.
-
-	self assert: theAddedEvents size equals: 1.
-	self
-		assert: (theAddedEvents collect: #cursor) asArray
-		equals: {BrTextEditorSingleCursor new position: 1}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_2_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 2;
 		apply;
 		unsubscribe.
-
 	anEditor forceLayout.
-
-	self assert: anEditor cursors isNotEmpty.
+	self assertEditor: anEditor cursorIsAt: 2.
+	self assertEvents: eventRecord addCursorAt: 2.
 	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 2}.
-
-	self assert: theAddedEvents size equals: 1.
-	self
-		assert: (theAddedEvents collect: #cursor) asArray
-		equals: {BrTextEditorSingleCursor new position: 2}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_68_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 68;
 		apply;
 		unsubscribe.
-
 	anEditor forceLayout.
-
-	self assert: anEditor cursors isNotEmpty.
+	self assertEditor: anEditor cursorIsAt: 68.
+	self assertEvents: eventRecord addCursorAt: 68.
 	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 68}.
-
-	self assert: theAddedEvents size equals: 1.
-	self
-		assert: (theAddedEvents collect: #cursor) asArray
-		equals: {BrTextEditorSingleCursor new position: 68}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorNavigatorExamples >> cursor_add_at_8_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		addAt: 8;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 8.
-	}.
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 8
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 8}.
+	self assertEvents: eventRecord addCursorAt: 8.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -577,20 +481,19 @@ BrTextEditorNavigatorExamples >> cursor_is_on_last_line_when_before_the_first_ch
 { #category : #'examples - crlf handling' }
 BrTextEditorNavigatorExamples >> cursor_moveAcrossCRLF [
 	<gtExample>
-	
 	| anEditor |
 	anEditor := self editorOnCrlfText.
-	(anEditor navigator)
+	anEditor navigator
 		moveTo: 2;
 		apply.
-	(anEditor navigator)
+	anEditor navigator
 		moveRight;
 		apply.
-	self assert: anEditor cursors allCursors equals: {BrTextEditorSingleCursor new position: 4}.
-	(anEditor navigator)
+	self assertEditor: anEditor cursorIsAt: 4.
+	anEditor navigator
 		moveLeft;
 		apply.
-	self assert: anEditor cursors allCursors equals: {BrTextEditorSingleCursor new position: 2}.
+	self assertEditor: anEditor cursorIsAt: 2.
 	^ anEditor
 ]
 
@@ -605,58 +508,44 @@ BrTextEditorNavigatorExamples >> cursor_moveAcrossFoldedText [
 	anEditor navigator
 		moveRight;
 		apply.
-	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 1}.
+	self assertEditor: anEditor cursorIsAt: 1.
 	anEditor navigator
 		moveRight;
 		apply.
-	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 31}.
+	self assertEditor: anEditor cursorIsAt: 31.
 	anEditor navigator
 		moveLeft;
 		apply.
-	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 1}.
+	self assertEditor: anEditor cursorIsAt: 1.
 	^ anEditor
 ]
 
 { #category : #'examples - move down' }
 BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents theReachBoudnaryEvents |
-	
+	| anEditor eventRecord theReachBoundaryEvents |
 	anEditor := self cursor_moveTo_190_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-	theReachBoudnaryEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
+	theReachBoundaryEvents := OrderedCollection new.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		whenReachedBoundary: [ :anEvent | theReachBoudnaryEvents add: anEvent ];
+		whenReachedBoundary: [ :anEvent | theReachBoundaryEvents add: anEvent ];
 		moveDown;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 202 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 202).
-	self assert: theMovedEvents first oldIndex equals: 190.
-	self assert: theMovedEvents first newIndex equals: 202.
-	self assert: theRemovedEvents isEmpty.
-	self assert: theReachBoudnaryEvents size equals: 1.
-	self assert: theReachBoudnaryEvents first cursor equals: (BrTextEditorSingleCursor new position: 202).
-	self assert: theReachBoudnaryEvents first isBottom.
-	
+	self assertEditor: anEditor cursorIsAt: 202.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 190
+		to: 202.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
+	self assert: theReachBoundaryEvents size equals: 1.
+	self
+		assert: theReachBoundaryEvents first cursor
+		equals: (BrTextEditorSingleCursor new position: 202).
+	self assert: theReachBoundaryEvents first isBottom.
 	^ anEditor
 ]
 
@@ -664,32 +553,22 @@ BrTextEditorNavigatorExamples >> cursor_moveDown_in_cursors_at_190 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_0 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 28 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 28).
-	self assert: theMovedEvents first oldIndex equals: 0.
-	self assert: theMovedEvents first newIndex equals: 28.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 28.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 0
+		to: 28.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -697,35 +576,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_0 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor after the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 1;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 28 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 28).
-	self assert: theMovedEvents first oldIndex equals: 1.
-	self assert: theMovedEvents first newIndex equals: 28.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 28.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 1
+		to: 28.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -733,35 +602,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_1 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_201 [
 	<gtExample>
 	<label: 'Cursor before the last character of the whole text should not move'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 201;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 202 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 202).
-	self assert: theMovedEvents first oldIndex equals: 201.
-	self assert: theMovedEvents first newIndex equals: 202.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 202.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 201
+		to: 202.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -769,32 +628,22 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_201 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_202 [
 	<gtExample>
 	<label: 'Cursor after the last character of the whole text should not move'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 202;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 202 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 202.
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -802,35 +651,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_202 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_27 [
 	<gtExample>
 	<label: 'Cursor before the last character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 27;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 28 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 28).
-	self assert: theMovedEvents first oldIndex equals: 27.
-	self assert: theMovedEvents first newIndex equals: 28.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 28.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 27
+		to: 28.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -838,60 +677,41 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_27 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_cursors_at_28 [
 	<gtExample>
 	<label: 'Cursor after the last character of the line should not move'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 28;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 28 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 28.
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to line end' }
 BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineEnd;
 		apply;
 		unsubscribe.
-		
 	self assert: anEditor cursors isEmpty.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -899,29 +719,19 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineEnd_in_empty [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_0 [
 	<gtExample>
 	<label: 'Cursor before the first character should not be moved'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -929,32 +739,22 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_0 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor after the first character moves before the start of the text'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_moveTo_1_in_cursors_at_0.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theMovedEvents first oldIndex equals: 1.
-	self assert: theMovedEvents first newIndex equals: 0.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 1
+		to: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -962,35 +762,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_1 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_27 [
 	<gtExample>
 	<label: 'Cursor before the last character of the line should move to the start'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 27;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theMovedEvents first oldIndex equals: 27.
-	self assert: theMovedEvents first newIndex equals: 0.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 27
+		to: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -998,35 +788,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_27 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_28 [
 	<gtExample>
 	<label: 'Cursor after the last character of the line should move to to the start'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 28;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theMovedEvents first oldIndex equals: 28.
-	self assert: theMovedEvents first newIndex equals: 0.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 28
+		to: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1034,32 +814,22 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_28 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_29 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should not move'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 29;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 29 }.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 29.
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1067,35 +837,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_29 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_30 [
 	<gtExample>
 	<label: 'Cursor after the first character of the line should move to the start of that line'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 30;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 29 }.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 29).
-	self assert: theMovedEvents first oldIndex equals: 30.
-	self assert: theMovedEvents first newIndex equals: 29.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 29.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 30
+		to: 29.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1103,35 +863,25 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_30 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_40 [
 	<gtExample>
 	<label: 'Cursor before the last character of the line should move to the start of that line'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 40;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 29 }.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 29).
-	self assert: theMovedEvents first oldIndex equals: 40.
-	self assert: theMovedEvents first newIndex equals: 29.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 29.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 40
+		to: 29.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1139,129 +889,88 @@ BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_40 [
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_cursors_at_41 [
 	<gtExample>
 	<label: 'Cursor after the last character of the line should move to the start of that line'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
 	anEditor navigator
 		moveTo: 41;
 		apply.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 29 }.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 29).
-	self assert: theMovedEvents first oldIndex equals: 41.
-	self assert: theMovedEvents first newIndex equals: 29.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 29.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 41
+		to: 29.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to line start' }
 BrTextEditorNavigatorExamples >> cursor_moveToLineStart_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToLineStart;
 		apply;
 		unsubscribe.
-		
 	self assert: anEditor cursors isEmpty.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to line end' }
 BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 	<gtExample>
-	<label: 'Cursor before the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToEndNextWord;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 8 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 8).
-	self assert: theMovedEvents first oldIndex equals: 0.
-	self assert: theMovedEvents first newIndex equals: 8.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 2.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 0
+		to: 2.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to line end' }
 BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
 	<gtExample>
-	<label: 'Cursor before the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_1_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToEndNextWord;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 8 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 8).
-	self assert: theMovedEvents first oldIndex equals: 1.
-	self assert: theMovedEvents first newIndex equals: 8.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 2.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 1
+		to: 2.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1269,32 +978,22 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_1 [
 BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_1 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_1_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToStartPreviousWord;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theMovedEvents first oldIndex equals: 1.
-	self assert: theMovedEvents first newIndex equals: 0.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 1
+		to: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1302,32 +1001,22 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_1 [
 BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_2 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_2_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToStartPreviousWord;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theMovedEvents first oldIndex equals: 2.
-	self assert: theMovedEvents first newIndex equals: 0.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 2
+		to: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1335,35 +1024,27 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_2 [
 BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_8 [
 	<gtExample>
 	<label: 'Cursor before the first character of the line should move to the end'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_8_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveToStartPreviousWord;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: (anEditor cursors allCursors 
-			includes: (BrTextEditorSingleCursor new position: 0 )).
-	self assert: (anEditor cursors allCursors 
-			includes: (BrTextEditorSingleCursor new position: 2 )).
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 2).
-	self assert: theMovedEvents first oldIndex equals: 8.
-	self assert: theMovedEvents first newIndex equals: 2.
-	self assert: theRemovedEvents isEmpty.
-	
+	self
+		assert: (anEditor cursors allCursors
+				includes: (BrTextEditorSingleCursor new position: 0)).
+	self
+		assert: (anEditor cursors allCursors
+				includes: (BrTextEditorSingleCursor new position: 2)).
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 8
+		to: 2.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1371,30 +1052,23 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_8 [
 BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_half_in_empty [
 	<gtExample>
 	<label: 'Click on the left half of the first character'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0) - 1) @ (self paragraphMargin top + (self glyphHeight / 2.0));
+		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0) - 1)
+				@ (self paragraphMargin top + (self glyphHeight / 2.0));
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(0)).
-
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(0)) allCursors.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self assert: eventRecord addedEvents size equals: 1.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(0)) allCursors.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1402,30 +1076,24 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_half_in_empty [
 BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_in_empty [
 	<gtExample>
 	<label: 'Click on a whitespace to the left from the first character'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (self paragraphMargin left / 2.0) @ (self paragraphMargin top + (self glyphHeight / 2.0));
+		moveToScreenPosition: (self paragraphMargin left / 2.0)
+				@ (self paragraphMargin top + (self glyphHeight / 2.0));
 		apply;
 		unsubscribe.
-
 	self assert: anEditor cursors isNotEmpty.
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(0)).
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(0)) allCursors.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assert: eventRecord addedEvents size equals: 1.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(0)) allCursors.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1433,30 +1101,24 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_left_in_empty [
 BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_middle_in_empty [
 	<gtExample>
 	<label: 'Click right in the middle of the first character'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0)) @ (self paragraphMargin top + (self glyphHeight / 2.0));
+		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0))
+				@ (self paragraphMargin top + (self glyphHeight / 2.0));
 		apply;
 		unsubscribe.
-		
 	self assert: anEditor cursors isNotEmpty.
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(0)).
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(0)) allCursors.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assert: eventRecord addedEvents size equals: 1.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(0)) allCursors.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1464,30 +1126,24 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_middle_in_empty [
 BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
 	<gtExample>
 	<label: 'Click on the right half of the first character'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0) + 1) @ (self paragraphMargin top + (self glyphHeight / 2.0));
+		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0) + 1)
+				@ (self paragraphMargin top + (self glyphHeight / 2.0));
 		apply;
 		unsubscribe.
-		
 	self assert: anEditor cursors isNotEmpty.
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(1)).
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(1)) allCursors.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assert: eventRecord addedEvents size equals: 1.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(1)) allCursors.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
@@ -1495,268 +1151,175 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
 BrTextEditorNavigatorExamples >> cursor_moveToScreen_41_right_in_empty [
 	<gtExample>
 	<label: 'Click on the right half of the 41th character'>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (400@100);
+		moveToScreenPosition: 400 @ 100;
 		apply;
 		unsubscribe.
-
 	self assert: anEditor cursors isNotEmpty.
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(41)).
-
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(41)) allCursors.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assert: eventRecord addedEvents size equals: 1.
+	self
+		assert: (eventRecord addedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(41)) allCursors.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to' }
 BrTextEditorNavigatorExamples >> cursor_moveTo_0_in_cursors_at_0_and_1 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
+	"even though it is a move event, what actually happens is we need to delete one cursor at (1) because the other one is already at the target position"
 	anEditor := self cursor_add_at_0_and_1_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		"even though it is a move event, what actually happens is we need to delete one cursor at (1) because the other one is already at the target position"
 		moveTo: 0;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents size equals: 1.
-	self assert: (theRemovedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 1
-	}.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#addedEvents}).
+	self assertEvents: eventRecord removeCursorAt: 1.
 	^ anEditor
 ]
 
 { #category : #'examples - move to' }
 BrTextEditorNavigatorExamples >> cursor_moveTo_0_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveTo: 0;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self assertEvents: eventRecord addCursorAt: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to' }
 BrTextEditorNavigatorExamples >> cursor_moveTo_190_in_empty [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveTo: 190;
 		apply;
 		unsubscribe.
-		
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 190 }.
-	
-	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 190.
-	}.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 190.
+	self assertEvents: eventRecord addCursorAt: 190.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to' }
 BrTextEditorNavigatorExamples >> cursor_moveTo_1_in_cursors_at_0 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveTo: 1;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 1 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 1).
-	self assert: theMovedEvents first oldIndex equals: 0.
-	self assert: theMovedEvents first newIndex equals: 1.
-	self assert: theRemovedEvents isEmpty.
-	
+	self assertEditor: anEditor cursorIsAt: 1.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 0
+		to: 1.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move to' }
 BrTextEditorNavigatorExamples >> cursor_moveTo_2_in_cursors_at_0_and_1 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_and_1_in_empty.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveTo: 2;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 2 }.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 2).
-	self assert: theMovedEvents first oldIndex equals: 0.
-	self assert: theMovedEvents first newIndex equals: 2.
-	self assert: theRemovedEvents size equals: 1.
-	self assert: (theRemovedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 1
-	}.
-
+	self assertEditor: anEditor cursorIsAt: 2.
+	self assert: eventRecord addedEvents isEmpty.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 0
+		to: 2.
+	self assertEvents: eventRecord removeCursorAt: 1.
 	^ anEditor
 ]
 
 { #category : #'examples - move to' }
 BrTextEditorNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_68_in_empty.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		moveTo: 67;
 		apply;
 		unsubscribe.
-
 	anEditor forceLayout.
-
-	self assert: anEditor cursors isNotEmpty.
+	self assertEditor: anEditor cursorIsAt: 67.
 	self
-		assert: anEditor cursors allCursors
-		equals: {BrTextEditorSingleCursor new position: 67}.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
+		assertEvents: eventRecord
+		moveCursorFrom: 68
+		to: 67.
 	self
-		assert: theMovedEvents first cursor
-		equals: (BrTextEditorSingleCursor new position: 67).
-	self assert: theMovedEvents first oldIndex equals: 68.
-	self assert: theMovedEvents first newIndex equals: 67.
-	self assert: theRemovedEvents isEmpty.
-
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
 	^ anEditor
 ]
 
 { #category : #'examples - move up' }
 BrTextEditorNavigatorExamples >> cursor_moveUp_in_cursors_at_1 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents theReachBoudnaryEvents |
-	
+	| anEditor theReachBoundaryEvents eventRecord |
 	anEditor := self cursor_add_at_1_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-	theReachBoudnaryEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
+	theReachBoundaryEvents := OrderedCollection new.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		whenReachedBoundary: [ :anEvent | theReachBoudnaryEvents add: anEvent ];
+		whenReachedBoundary: [ :anEvent | theReachBoundaryEvents add: anEvent ];
 		moveUp;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theMovedEvents first oldIndex equals: 1.
-	self assert: theMovedEvents first newIndex equals: 0.
-	self assert: theRemovedEvents isEmpty.
-	self assert: theReachBoudnaryEvents size equals: 1.
-	self assert: theReachBoudnaryEvents first cursor equals: (BrTextEditorSingleCursor new position: 0).
-	self assert: theReachBoudnaryEvents first isTop.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assertEvents: eventRecord
+		moveCursorFrom: 1
+		to: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#addedEvents.
+						#removedEvents}).
+	self assert: theReachBoundaryEvents size equals: 1.
+	self
+		assert: theReachBoundaryEvents first cursor
+		equals: (BrTextEditorSingleCursor new position: 0).
+	self assert: theReachBoundaryEvents first isTop.
 	^ anEditor
 ]
 
@@ -1764,14 +1327,14 @@ BrTextEditorNavigatorExamples >> cursor_moveUp_in_cursors_at_1 [
 BrTextEditorNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor [
 	<gtExample>
 	| anEditor thePreviousSegments theNewSegments thePreviousTextPieces theNewTextPieces |
-
 	anEditor := self cursor_add_at_1_does_not_rebuild_editor.
 
 	thePreviousSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: thePreviousSegments size equals: 11.
 
-	thePreviousTextPieces := thePreviousSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+	thePreviousTextPieces := thePreviousSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: thePreviousTextPieces size equals: 63.
 
 	anEditor navigator
@@ -1779,146 +1342,103 @@ BrTextEditorNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor
 		apply.
 
 	anEditor forceLayout.
+	self assertEditor: anEditor cursorIsAt: 2.
 
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 2 }.
-	
 	theNewSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: theNewSegments size equals: 11.
-	
-	theNewTextPieces := theNewSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+
+	theNewTextPieces := theNewSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: theNewTextPieces size equals: 63.
-	
+
 	self assert: thePreviousSegments equals: theNewSegments.
 	self assert: thePreviousTextPieces equals: theNewTextPieces.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - remove' }
 BrTextEditorNavigatorExamples >> cursor_removeAll_in_cursors_at_0_and_1 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_and_1_in_empty.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		removeAll;
 		apply;
 		unsubscribe.
-
 	self assert: anEditor cursors isEmpty.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents size equals: 2.
-	self assert: (theRemovedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1
-	}.
-	
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#addedEvents}).
+	self assert: eventRecord removedEvents size equals: 2.
+	self
+		assert: (eventRecord removedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
 	^ anEditor
 ]
 
 { #category : #'examples - remove' }
 BrTextEditorNavigatorExamples >> cursor_remove_at_0_in_cursors_at_0 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_in_empty.
-	
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		removeAt: 0;
 		apply;
 		unsubscribe.
-
 	self assert: anEditor cursors isEmpty.
-
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents size equals: 1.
-	self assert: (theRemovedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-	}.
-
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#addedEvents}).
+	self assertEvents: eventRecord removeCursorAt: 0.
 	^ anEditor
 ]
 
 { #category : #'examples - remove' }
 BrTextEditorNavigatorExamples >> cursor_remove_at_1_and_0_in_cursors_at_0_and_1 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_and_1_in_empty.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		removeAt: 0;
 		removeAt: 1;
 		apply;
 		unsubscribe.
-
 	self assert: anEditor cursors isEmpty.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents size equals: 2.
-	self assert: (theRemovedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 0.
-		BrTextEditorSingleCursor new position: 1
-	}.
-
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#addedEvents}).
+	self assert: eventRecord removedEvents size equals: 2.
+	self
+		assert: (eventRecord removedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 0.
+				BrTextEditorSingleCursor new position: 1}.
 	^ anEditor
 ]
 
 { #category : #'examples - remove' }
 BrTextEditorNavigatorExamples >> cursor_remove_at_1_in_cursors_at_0_and_1 [
 	<gtExample>
-	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
+	| anEditor eventRecord |
 	anEditor := self cursor_add_at_0_and_1_in_empty.
-
-	theAddedEvents := OrderedCollection new.
-	theMovedEvents := OrderedCollection new.
-	theRemovedEvents := OrderedCollection new.
-
+	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
-		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
-		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
-		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
 		removeAt: 1;
 		apply;
 		unsubscribe.
-
-	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 0 }.
-	
-	self assert: theAddedEvents isEmpty.
-	self assert: theMovedEvents isEmpty.
-	self assert: theRemovedEvents size equals: 1.
-	self assert: (theRemovedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 1.
-	}.
-	
+	self assertEditor: anEditor cursorIsAt: 0.
+	self
+		assert: (eventRecord
+				noEventsOfTypes: {#movedEvents.
+						#addedEvents}).
+	self assertEvents: eventRecord removeCursorAt: 1.
 	^ anEditor
 ]

@@ -627,11 +627,11 @@ BrTextEditorModel >> onBindHolder: aSegmentHolder at: aPosition [
 		during: [ aSegmentHolder segment: aSegment ].
 
 	"If the last cached segment was requested, load more so that the editor knows there are more lines"
-	(aPosition = segmentCollector lastIndex and: [ segmentCollector end < segmentCollector text size ])
+	(aPosition = segmentCollector lastSegmentIndex and: [ segmentCollector end < segmentCollector text size ])
 		ifTrue: [
-			previousLastIndex := segmentCollector lastIndex.
+			previousLastIndex := segmentCollector lastSegmentIndex.
 			segmentCollector computeForwardAt: aPosition + 1.
-			self notifyItemsInserted: (aPosition + 1 to: aPosition + segmentCollector lastIndex - previousLastIndex) ]
+			self notifyItemsInserted: (aPosition + 1 to: aPosition + segmentCollector lastSegmentIndex - previousLastIndex) ]
 ]
 
 { #category : #'instance creation' }
