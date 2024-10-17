@@ -141,9 +141,15 @@ BrTextEditorSegmentHolder >> updatePieceElements [
 { #category : #'private - segment' }
 BrTextEditorSegmentHolder >> updateSegment [
 	| newPieceElements hasCursor hasSelection |
+	
+	(BrTextEditorSegmentUpdateSignal new
+		textEditor: self editor;
+		segment: segment;
+		itemElement: itemElement) emit.
+	
 	hasSelection := self hasSelection.
 	hasCursor := self hasCursor.
-
+	
 	segment updateSegmentProperties.
 
 	newPieceElements := self updatePieceElements.

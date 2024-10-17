@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTextEditorSignal,
-	#superclass : #BeaconSignal,
+	#superclass : #ContextStackSignal,
 	#instVars : [
 		'textEditor',
 		'text'

@@ -263,6 +263,12 @@ BrTextEditorSegment >> pieces [
 		ifFalse: [ pieces := self computedPieces ]
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextEditorSegment >> postCopy [
+	pieces := pieces ifNotNil: [ pieces collect: [ :eachPiece | eachPiece copy ] ].
+	text := text copy.
+]
+
 { #category : #printing }
 BrTextEditorSegment >> printOn: aStream [
 	self text printOn: aStream

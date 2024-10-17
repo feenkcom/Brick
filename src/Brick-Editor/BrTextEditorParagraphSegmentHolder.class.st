@@ -31,6 +31,11 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 	Please note, that itemElement may be reused from a previous segment, which means it is
 	important to also assign defaults such as empty selection or no cursors"
 	
+	(BrTextEditorSegmentBuildSignal new
+		textEditor: self editor;
+		segment: anEditorSegment;
+		itemElement: itemElement) emit.
+	
 	segment := anEditorSegment.
 	itemElement segment: segment.
 
@@ -56,8 +61,16 @@ BrTextEditorParagraphSegmentHolder >> buildSegment: anEditorSegment [
 			newPieceElements addAll: thePieceElements.
 			pieceElements atPiece: aPiece putElements: thePieceElements ].
 
+	
 	itemElement removeChildren.
-	itemElement addChildren: newPieceElements.
+	[ itemElement addChildren: newPieceElements ]
+		on: Error do: [ :anError |
+			(BrTextEditorSegmentAdornmentErrorSignal new
+				textEditor: self editor;
+				segment: segment;
+				itemElement: itemElement) emit.
+	
+			anError pass ].
 
 	hasCursor
 		ifTrue: [ self onCursorChanged ]
@@ -165,8 +178,14 @@ BrTextEditorParagraphSegmentHolder >> onFocusChanged: aBoolean [
 
 { #category : #updating }
 BrTextEditorParagraphSegmentHolder >> onRecycled [
-
-	itemElement removeChildren. 
+	super onRecycled.
+	
+	(BrTextEditorSegmentRecycleSignal new
+		textEditor: self editor;
+		segment: segment;
+		itemElement: itemElement) emit.
+	
+	itemElement removeChildren.
 	pieceElements piecesAndTheirElementsDo: [ :aPiece :aPieceElement | aPiece onRecycled: aPieceElement in: self infiniteElement ].
 	itemElement selection: BlSelection empty.
 	itemElement removeCursors.
