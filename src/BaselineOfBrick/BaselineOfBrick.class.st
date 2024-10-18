@@ -29,31 +29,31 @@ BaselineOfBrick >> baseline: spec [
 	spec for: #'common' do: [
 		spec
 			baseline: 'Bloc' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.720/src' ].
+				spec repository: 'github://feenkcom/Bloc:v0.8.721/src' ].
 		spec
 			baseline: 'Futures' with: [
 				spec repository: 'github://feenkcom/pharo-futures:v0.6.118/src' ].
 		spec
 			baseline: 'BlocExamples' with: [
-				spec repository: 'github://feenkcom/Bloc:v0.8.720/src' ].
+				spec repository: 'github://feenkcom/Bloc:v0.8.721/src' ].
 		spec
 			baseline: 'BlocPac' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.651/src' ].
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.652/src' ].
 		spec
 			baseline: 'BlocPacExamples' with: [
-				spec repository: 'github://feenkcom/bloc-pac:v0.6.651/src' ].
+				spec repository: 'github://feenkcom/bloc-pac:v0.6.652/src' ].
 		spec
 			baseline: 'GToolkitResourcesUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.334/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.335/src' ].
 
 		spec package: 'Brick-Core' with: [
-			spec requires: #('Bloc' 'BlocPac') ].
+			spec requires: #(#Bloc #BlocPac) ].
 		spec package: 'Brick-Editor' with: [
 			spec requires: #(#'Brick-Core') ].
 		spec package: 'Brick-Editor-Extensions' with: [
 			spec requires: #(#'Brick-Editor') ].
 		spec package: 'Brick' with: [
-			spec requires: #(#'Brick-Core' #'Brick-Editor' 'Futures') ].
+			spec requires: #(#'Brick-Core' #'Brick-Editor' #Futures) ].
 		spec package: 'Brick-List' with: [
 			spec requires: #(#Brick) ].
 		spec package: 'Brick-List-Ungrouped' with: [
@@ -63,15 +63,15 @@ BaselineOfBrick >> baseline: spec [
 		spec package: 'Brick-Theme' with: [
 			spec requires: #(#Brick) ].
 		spec package: 'Brick-Glamorous' with: [
-			spec requires: #(#Brick 'GToolkitResourcesUtility') ].
+			spec requires: #(#Brick #GToolkitResourcesUtility) ].
 		spec package: 'Brick-Material' with: [
 			spec requires: #(#Brick) ].
 		spec package: 'Brick-Hydra' with: [
 			spec requires: #(#Brick) ].
 		spec package: 'Brick-DevTool' with: [
-			spec requires: #(#Brick 'Bloc' 'BlocPac') ].
+			spec requires: #(#Brick #Bloc #BlocPac) ].
 		spec package: 'Brick-Examples' with: [
-			spec requires: #('BlocExamples' #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra' #'Brick-DevTool') ].
+			spec requires: #(#BlocExamples #Brick #'Brick-Glamorous' #'Brick-Material' #'Brick-Hydra' #'Brick-DevTool') ].
 		spec package: 'Brick-Theme-Examples' with: [
 			spec requires: #(#'Brick-Theme') ].
 		spec package: 'Brick-Theme-Migration' with: [
