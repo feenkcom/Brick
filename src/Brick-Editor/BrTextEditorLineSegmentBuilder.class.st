@@ -16,30 +16,33 @@ Class {
 }
 
 { #category : #'text - modifications' }
-BrTextEditorLineSegmentBuilder >> attributesModfiedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
-	"Is sent after an attributes were removed in provided text editor"
-
-	| aFromSegment aToSegment oldSegmentCount newSegmentCount attributedSubText |
+BrTextEditorLineSegmentBuilder >> attributesModfiedFrom: aFromIndex to: aToIndex in: aBrTextEditor affectedText: anAffectedText [
+	"Is sent after attributes were added or removed in a provided text editor"
+	| oldSegmentCount newSegmentCount attributedSubText |
 
 	self
 		assert: [ aFromIndex <= (aToIndex + 1) ]
 		description: [ '`From` index must be less or equal to `to` index' ].
-	aBrTextEditor segmentCollector
-		findCachedSegmentForLetterAt: aFromIndex
-		ifFound: [ :aSegment | aFromSegment := aSegment ]
-		ifNotFound: [ ^self ].
-	aBrTextEditor segmentCollector
-		findCachedSegmentForLetterAt: aToIndex
-		ifFound: [ :aSegment | aToSegment := aSegment ]
-		ifNotFound: [ ^self ].
+
+	BrTextEditorAttributesModifiedSignal new
+		textEditor: aBrTextEditor;
+		fromIndex: aFromIndex;
+		toIndex: aToIndex;
+		affectedText: anAffectedText;
+		emit.
 
 	attributedSubText := aBrTextEditor text from: (aFromIndex max: 1) to: aToIndex.
+
+	oldSegmentCount := self splitSegmentCountOf: anAffectedText.
 	newSegmentCount := self splitSegmentCountOf: attributedSubText.
-	oldSegmentCount := aToSegment index - aFromSegment index + 1.
+
 	oldSegmentCount ~= newSegmentCount
-		ifTrue: [ self resetSegmentCacheAndNotify: aBrTextEditor ]
-		ifFalse: [ aBrTextEditor updater
-				from: aFromSegment textStart to: aToSegment textEnd;
+		ifTrue: [
+			"It is possible that the segment structure has changed"
+			self resetSegmentCacheAndNotify: aBrTextEditor ]
+		ifFalse: [
+			aBrTextEditor updater
+				from: aFromIndex to: aToIndex;
 				update ]
 ]
 
@@ -184,9 +187,14 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 { #category : #'text - modifications' }
 BrTextEditorLineSegmentBuilder >> resetSegmentCacheAndNotify: aBrTextEditor [
 	| interval |
+	
+	BrTextEditorResetCacheSignal new
+		textEditor: aBrTextEditor;
+		emit.
+	
 	interval := aBrTextEditor segmentCollector cachedInterval.
 	aBrTextEditor segmentCollector resetCache.
-	aBrTextEditor notifyItemsRemoved: interval
+	aBrTextEditor notifyChanged
 ]
 
 { #category : #'private - deletion' }

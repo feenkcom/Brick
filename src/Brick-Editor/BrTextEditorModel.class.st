@@ -396,8 +396,8 @@ BrTextEditorModel >> initialize [
 BrTextEditorModel >> initializeText: aBrText [
 	aBrText when: BlTextStringsInserted send: #onStringsInserted: to: self.
 	aBrText when: BlTextsDeleted send: #onTextsDeleted: to: self.
-	aBrText when: BlTextAttributeAdded send: #onTextAttributeAdded: to: self.
-	aBrText when: BlTextAttributesRemoved send: #onTextAttributesRemoved: to: self.
+	aBrText when: BlTextAttributesAdded send: #onTextAttributeAdded: to: self.
+	aBrText when: BlTextAttributesRemoved send: #onTextAttributesRemoved: to: self
 ]
 
 { #category : #initialization }
@@ -756,9 +756,10 @@ BrTextEditorModel >> onTextAttributeAdded: aBlTextAttributeAdded [
 	self segmentBuilder
 		attributesModfiedFrom: aBlTextAttributeAdded fromIndex
 		to: aBlTextAttributeAdded toIndex
-		in: self.
+		in: self
+		affectedText: aBlTextAttributeAdded affectedText.
 
-	self notifyAttributesWithinCursor: { aBlTextAttributeAdded attribute }
+	self notifyAttributesWithinCursor: aBlTextAttributeAdded attributes
 ]
 
 { #category : #'hooks - text modifications' }
@@ -768,7 +769,8 @@ BrTextEditorModel >> onTextAttributesRemoved: aBlTextAttributesRemoved [
 	self segmentBuilder
 		attributesModfiedFrom: aBlTextAttributesRemoved fromIndex
 		to: aBlTextAttributesRemoved toIndex
-		in: self.
+		in: self
+		affectedText: aBlTextAttributesRemoved affectedText
 ]
 
 { #category : #'hooks - text modifications' }
