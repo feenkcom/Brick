@@ -17,7 +17,7 @@ Class {
 BrTextEditorLineSegmentAdornmentPiece >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	(anotherObject class == self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject text = self text

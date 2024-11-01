@@ -139,22 +139,12 @@ BrTextEditorParagraphSegmentHolder >> onCursorChanged [
 	Segment holder should update text elements accordingly"
 
 	| theCursors |
-	self
-		assert: [ segment isNotNil ]
-		description: [ 'Segment must be bound!' ].
-	theCursors := BlFrameTelemetry
-		timeSync: [ 'Compute segment cursors' ]
-		during: [ (self infiniteElement editor cursors allCursors
-				select: [ :aCursor | aCursor insideSegment: segment ]
-				thenCollect: [ :aCursor | aCursor position - segment textStart ])
-				asSet ].
-	BlFrameTelemetry
-		timeSync: [ 'Set segment cursors {1}' format: {theCursors} ]
-		during: [ itemElement setCursors: theCursors ].
+	theCursors := (self infiniteElement editor cursors allCursors
+			select: [ :aCursor | aCursor insideSegment: segment ]
+			thenCollect: [ :aCursor | self positionWithSegmentOf: aCursor ]) asSet.
+	itemElement setCursors: theCursors.
 	(theCursors isNotEmpty and: [ self infiniteElement isFocused ])
-		ifTrue: [ BlFrameTelemetry
-				timeSync: [ 'Show segment cursors' ]
-				during: [ itemElement showCursors ] ]
+		ifTrue: [ itemElement showCursors ]
 ]
 
 { #category : #updating }
@@ -211,6 +201,18 @@ BrTextEditorParagraphSegmentHolder >> onTextChanged [
 	itemElement text: segment text
 ]
 
+{ #category : #updating }
+BrTextEditorParagraphSegmentHolder >> positionWithSegmentOf: aCursor [
+	| foldedChars relativePosition |
+	relativePosition := aCursor position - segment textStart.
+	foldedChars := (0 to: relativePosition)
+			count: [ :i | 
+				(segment text attributesAt: i)
+					anySatisfy: [ :att | att class == BrTextFoldAttribute ] ].
+
+	^ relativePosition - foldedChars
+]
+
 { #category : #cursor }
 BrTextEditorParagraphSegmentHolder >> relativeScreenToCursor: aTransformation [
 	"trying to find a segment that actually contains a given position"
@@ -221,14 +223,9 @@ BrTextEditorParagraphSegmentHolder >> relativeScreenToCursor: aTransformation [
 { #category : #accessing }
 BrTextEditorParagraphSegmentHolder >> segment: anEditorSegment [
 	self infiniteElement
-		ignoreRequestLayoutDuring:
-			[ segment == anEditorSegment
-				ifTrue:
-					[ BlFrameTelemetry timeSync: [ 'Update segment at {1}' format: {anEditorSegment index} ] during: [ self updateSegment ] ]
-				ifFalse:
-					[ BlFrameTelemetry
-						timeSync: [ 'Build segment at {1}' format: {anEditorSegment index} ]
-						during: [ self buildSegment: anEditorSegment ] ] ]
+		ignoreRequestLayoutDuring: [ segment == anEditorSegment
+				ifTrue: [ self updateSegment ]
+				ifFalse: [ self buildSegment: anEditorSegment ] ]
 ]
 
 { #category : #'private - accessing' }
