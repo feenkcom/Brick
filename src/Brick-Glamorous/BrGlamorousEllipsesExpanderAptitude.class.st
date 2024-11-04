@@ -6,33 +6,32 @@ Class {
 
 { #category : #'as yet unclassified' }
 BrGlamorousEllipsesExpanderAptitude >> defaultCollapsedStencil [
-	^ BlElement new
+	^ [BlElement new
 		size: 11 @ 11;
 		padding: BlInsets empty;
-		background: Color lightGray twiceLighter;
-		addChild: (self dotElement relocate: 2 @ 5);
-		addChild: (self dotElement relocate: 5 @ 5);
-		addChild: (self dotElement relocate: 8 @ 5);
-		yourself
+		addChild: (self dotElement relocate: 0 @ 4);
+		addChild: (self dotElement relocate: 4 @ 4);
+		addChild: (self dotElement relocate: 8 @ 4);
+		yourself] asStencil
 ]
 
 { #category : #'as yet unclassified' }
 BrGlamorousEllipsesExpanderAptitude >> defaultExpandedStencil [
-	^ BlElement new
+	^ [BlElement new
 		size: 11 @ 11;
 		padding: BlInsets empty;
-		background: Color lightGray twiceLighter;
-		addChild: (self dotElement relocate: 5 @ 2);
-		addChild: (self dotElement relocate: 5 @ 5);
-		addChild: (self dotElement relocate: 5 @ 8);
-		yourself
+		addChild: (self dotElement relocate: 4 @ 0);
+		addChild: (self dotElement relocate: 4 @ 4);
+		addChild: (self dotElement relocate: 4 @ 8);
+		yourself] asStencil
 ]
 
 { #category : #'as yet unclassified' }
 BrGlamorousEllipsesExpanderAptitude >> dotElement [
 	| dot |
 	dot := BlElement new.
-	dot background: Color lightGray.
-	dot size: 2 @ 2.
+	dot geometry: BlCircleGeometry new.
+	dot background: Color gray.
+	dot size: 3 @ 3.
 	^ dot
 ]

@@ -100,39 +100,25 @@ BrTextEditorSegmentHolder >> updatePieceElements [
 	| newPieceElements newPieceMap |
 	newPieceMap := self newPiecesMap.
 	newPieceElements := OrderedCollection new.
+	segment pieces
+		do: [ :eachSegmentPiece | 
+			| thePieceElements |
+			thePieceElements := pieceElements
+					at: eachSegmentPiece
+					pieceAndElementsDo: [ :eachPiece :theSegmentElements | 
+						eachSegmentPiece currentCursors: eachPiece currentCursors.
+						theSegmentElements
+							do: [ :eachSegmentElement | 
+								eachPiece
+									updateText: eachSegmentElement
+									of: segment
+									in: self infiniteElement ].
+						theSegmentElements ]
+					ifAbsent: [ (eachSegmentPiece createElement: self infiniteElement)
+							asOrderedCollection ].
 
-	BlFrameTelemetry
-		timeSync: [ 'Update piece elements' ]
-		during: [ | thePieces |
-			BlFrameTelemetry
-				timeSync: [ 'Compute pieces' ]
-				during: [ thePieces := segment pieces ].
-
-			thePieces
-				do: [ :eachSegmentPiece | 
-					| thePieceElements |
-					thePieceElements := pieceElements
-							at: eachSegmentPiece
-							pieceAndElementsDo: [  "We should transfer the knowledge of the cursors to the new segment piece,
-						otherwise cursors may not be removed from the corresponding elements
-						https://github.com/feenkcom/gtoolkit/issues/892":eachPiece :theSegmentElements | 
-								eachSegmentPiece currentCursors: eachPiece currentCursors.
-
-								theSegmentElements
-									do: [ :eachSegmentElement | 
-										BlFrameTelemetry
-											timeSync: [ 'Update text of `{1}`' format: {eachPiece} ]
-											during: [ eachPiece
-													updateText: eachSegmentElement
-													of: segment
-													in: self infiniteElement ] ].
-								theSegmentElements ]
-							ifAbsent: [ BlFrameTelemetry
-									timeSync: [ 'Create element for `{1}`' format: {eachSegmentPiece} ]
-									during: [ (eachSegmentPiece createElement: self infiniteElement) asOrderedCollection ] ].
-
-					newPieceElements addAll: thePieceElements.
-					newPieceMap atPiece: eachSegmentPiece putElements: thePieceElements ] ].
+			newPieceElements addAll: thePieceElements.
+			newPieceMap atPiece: eachSegmentPiece putElements: thePieceElements ].
 
 	pieceElements := newPieceMap.
 	^ newPieceElements

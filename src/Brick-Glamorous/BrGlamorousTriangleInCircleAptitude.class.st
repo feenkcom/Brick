@@ -58,8 +58,8 @@ BrGlamorousTriangleInCircleAptitude >> initializeTriangle: aTriangle [
 	"configure collapsed and expanded triangle elements"
 
 	aTriangle
-		background: self theme default expandCollapseTriangleBackgroundColor;
-		constraintsDo: [ :c | 
+		"background: self theme default expandCollapseTriangleBackgroundColor;
+		"constraintsDo: [ :c | 
 			c frame horizontal alignCenter.
 			c frame vertical alignCenter ]
 ]
