@@ -26,34 +26,27 @@ BrListItemElementWithContextMenuDecorator >> buildDefault [
 		BrGlamorousWithContextMenuAptitude
 			content: [
 				anElement
-					allParentsDetect: [ :eachParent | eachParent constraints infinite holder infiniteElement notNil ]
-					ifFound: [ :aListItemElement |
-						anElement
-							allParentsDetect: [ :eachParent | eachParent phlow isView ]
-							ifFound: [ :aListElement |
-								| anItemHolder anItemPosition anItemObject anItemType |
+					allParentsDetect: [ :eachParent | 
+						eachParent isKindOf: BrSimpleList ]
+					ifFound: [ :aListElement |
+						| anItemHolder anItemPosition anItemObject anItemType |
 						
-								anItemHolder := aListItemElement constraints infinite holder.
-								anItemPosition := anItemHolder dataSourcePosition.
-								anItemObject := aListElement viewModel itemAt: anItemPosition.
+						anItemHolder := anElement constraints infinite holder.
+						anItemPosition := anItemHolder dataSourcePosition.
+						anItemObject := aListElement viewModel itemAt: anItemPosition.
 
-								anItemType := aListElement viewModel itemTypeStencil
-									itemPosition: anItemPosition;
-									itemObject: anItemObject;
-									build.
+						anItemType := aListElement viewModel itemTypeStencil
+							itemPosition: anItemPosition;
+							itemObject: anItemObject;
+							build.
 								
-								contextMenuStencil
-									itemType: anItemType;
-									itemObject: anItemObject;
-									itemPosition: anItemPosition;
-									itemElement: anElement;
-									build ]
-					ifNone: [ BlElement new ]
-					]
-					ifNone: [ BlElement new ].
-				
-				
-				 ].
+						contextMenuStencil
+							itemType: anItemType;
+							itemObject: anItemObject;
+							itemPosition: anItemPosition;
+							itemElement: anElement;
+							build ]
+					ifNone: [ BlElement new ]].
 
 	anElement addAptitude: aContextMenuAptitude.
 	^ anElement
