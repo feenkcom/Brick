@@ -2,11 +2,25 @@ Class {
 	#name : #BrExplicitIdentityNormalizer,
 	#superclass : #BrIdentityNormalizer,
 	#instVars : [
-		'colors',
-		'defaultColor'
+		'candidates',
+		'defaultCandidate'
 	],
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
+
+{ #category : #'instance creation' }
+BrExplicitIdentityNormalizer class >> startingWithBlue [
+	^ self new
+			setIndexTo: Color blue;
+			yourself
+]
+
+{ #category : #'instance creation' }
+BrExplicitIdentityNormalizer class >> startingWithRed [
+	^ self new
+			setIndexTo: Color red;
+			yourself
+]
 
 { #category : #'instance creation' }
 BrExplicitIdentityNormalizer class >> withCommand: aBlock withColors: aCollection withDefaultColor: aColor [
@@ -18,34 +32,42 @@ BrExplicitIdentityNormalizer class >> withCommand: aBlock withColors: aCollectio
 ]
 
 { #category : #accessing }
-BrExplicitIdentityNormalizer >> colors [
-	
-	^colors
+BrExplicitIdentityNormalizer >> candidates [
+	^ candidates
+]
+
+{ #category : #accessing }
+BrExplicitIdentityNormalizer >> candidates: aCollection [
+	candidates := aCollection
 ]
 
 { #category : #accessing }
 BrExplicitIdentityNormalizer >> colors: anObject [
+	candidates := anObject
+]
+
+{ #category : #accessing }
+BrExplicitIdentityNormalizer >> defaultCandidate: anObject [
 	
-	colors := anObject
+	defaultCandidate := anObject
 ]
 
 { #category : #accessing }
 BrExplicitIdentityNormalizer >> defaultColor [
 	
-	^defaultColor
+	^defaultCandidate
 ]
 
 { #category : #accessing }
 BrExplicitIdentityNormalizer >> defaultColor: anObject [
 	
-	defaultColor := anObject
+	defaultCandidate := anObject
 ]
 
 { #category : #private }
-BrExplicitIdentityNormalizer >> nextColor [
-	
-	colorIndex := colorIndex + 1.
-	^colorIndex > self colors size
+BrExplicitIdentityNormalizer >> nextResult [
+	resultIndex := resultIndex + 1.
+	^resultIndex > self candidates size
 		ifTrue: [ self defaultColor ]
-		ifFalse: [ self colors at: colorIndex ]
+		ifFalse: [ self candidates at: resultIndex ]
 ]

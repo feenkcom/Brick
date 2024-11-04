@@ -1,7 +1,7 @@
 Class {
 	#name : #BrNormalizerExamples,
 	#superclass : #Object,
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #'explicit identity' }
@@ -75,7 +75,7 @@ BrNormalizerExamples >> identityStartingWithBlue [
 	<gtExample>
 	| n |
 	n := BrIdentityNormalizer startingWithBlue.
-	self assert: n nextColor = Color blue
+	self assert: n nextResult = Color blue
 ]
 
 { #category : #identity }
@@ -83,7 +83,7 @@ BrNormalizerExamples >> identityStartingWithRed [
 	<gtExample>
 	| n |
 	n := BrIdentityNormalizer startingWithRed.
-	self assert: n nextColor = Color red
+	self assert: n nextResult = Color red
 ]
 
 { #category : #identity }
