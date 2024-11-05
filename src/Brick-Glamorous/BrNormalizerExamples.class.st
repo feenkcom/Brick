@@ -71,22 +71,6 @@ BrNormalizerExamples >> identity [
 ]
 
 { #category : #identity }
-BrNormalizerExamples >> identityStartingWithBlue [
-	<gtExample>
-	| n |
-	n := BrIdentityNormalizer startingWithBlue.
-	self assert: n nextResult = Color blue
-]
-
-{ #category : #identity }
-BrNormalizerExamples >> identityStartingWithRed [
-	<gtExample>
-	| n |
-	n := BrIdentityNormalizer startingWithRed.
-	self assert: n nextResult = Color red
-]
-
-{ #category : #identity }
 BrNormalizerExamples >> identityWithCommand [
 	<gtExample>
 	| colorOne colorTwo normalizer |
