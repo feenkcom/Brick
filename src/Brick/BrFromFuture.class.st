@@ -10,14 +10,33 @@ Class {
 		'elementStencil',
 		'elementDataBinder',
 		'element',
-		'updater'
+		'updater',
+		'configuration'
 	],
 	#category : #'Brick-Future - Support'
 }
 
+{ #category : #accessing }
+BrFromFuture >> configuration [
+	<return: #AsyncFutureExecutionConfiguration>
+	^ configuration ifNil: [ configuration := self defaultConfiguration ]
+]
+
+{ #category : #accessing }
+BrFromFuture >> configuration: aAsyncFutureExecutionConfiguration [
+	configuration := aAsyncFutureExecutionConfiguration
+]
+
 { #category : #'api - accessing' }
 BrFromFuture >> dataBinder: aFromFutureDataBinder [
 	elementDataBinder := aFromFutureDataBinder asStencilBuilder: BrFromFutureDataBinder
+]
+
+{ #category : #initialization }
+BrFromFuture >> defaultConfiguration [
+	^ AsyncFutureExecutionConfiguration new
+		customGroup: #UI;
+		highPriority
 ]
 
 { #category : #initialization }
@@ -49,6 +68,7 @@ BrFromFuture >> initialize [
 
 { #category : #'hooks - children' }
 BrFromFuture >> onAddedToSceneGraph [
+	| promise |
 	super onAddedToSceneGraph.
 	
 	dataSnapshot isPending
@@ -65,11 +85,12 @@ BrFromFuture >> onAddedToSceneGraph [
 	self privateUpdateElement.
 
 	futureExecution := future await.
-	futureExecution
+	promise := futureExecution
 		then: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ]
 		otherwise: [ :anError |
 			anError freeze.
-			self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ]
+			self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ].
+	element enqueueTask: (BlPromiseTask new promise: promise).
 ]
 
 { #category : #private }
