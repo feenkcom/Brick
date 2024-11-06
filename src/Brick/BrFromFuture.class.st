@@ -84,7 +84,7 @@ BrFromFuture >> onAddedToSceneGraph [
 
 	self privateUpdateElement.
 
-	futureExecution := future await.
+	futureExecution := future await: self configuration.
 	promise := futureExecution
 		then: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ]
 		otherwise: [ :anError |
