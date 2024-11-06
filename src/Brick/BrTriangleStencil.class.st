@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'backgroundColor'
 	],
-	#category : 'Brick-Triangle - Stencil'
+	#category : #'Brick-Triangle - Stencil'
 }
 
 { #category : #accessing }
@@ -28,7 +28,7 @@ BrTriangleStencil >> create [
 
 { #category : #defaults }
 BrTriangleStencil >> defaultBackgroundColor [
-	^ Color gray
+	^ BrGlamorousColors expandCollapseTriangleBackgroundColor
 ]
 
 { #category : #initialization }

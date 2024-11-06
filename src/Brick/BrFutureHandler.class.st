@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'future',
 		'action',
-		'monitor'
+		'monitor',
+		'configuration'
 	],
 	#category : #'Brick-Future - Support'
 }
@@ -12,6 +13,24 @@ Class {
 { #category : #'api - initialization' }
 BrFutureHandler >> action: aBlockOrMessageSend [
 	action := aBlockOrMessageSend
+]
+
+{ #category : #accessing }
+BrFutureHandler >> configuration [
+	<return: #AsyncFutureExecutionConfiguration>
+	^ configuration ifNil: [ configuration := self defaultConfiguration ]
+]
+
+{ #category : #accessing }
+BrFutureHandler >> configuration: aAsyncFutureExecutionConfiguration [
+	configuration := aAsyncFutureExecutionConfiguration
+]
+
+{ #category : #initialization }
+BrFutureHandler >> defaultConfiguration [
+	^ AsyncFutureExecutionConfiguration new
+		customGroup: #UI;
+		highPriority
 ]
 
 { #category : #initialization }
@@ -37,7 +56,7 @@ BrFutureHandler >> updateWithFuture: aFuture [
 				future := nil.
 				action cull: theCurrentResult cull: true ]
 			ifFalse: [
-				future await
+				(future await: self configuration)
 					then: [ :aResult |
 						monitor critical: [
 							future == aFuture

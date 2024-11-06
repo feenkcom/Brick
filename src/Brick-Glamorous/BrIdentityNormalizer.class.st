@@ -3,24 +3,10 @@ Class {
 	#superclass : #BrGlamorousNormalizer,
 	#instVars : [
 		'dictionary',
-		'colorIndex'
+		'resultIndex'
 	],
 	#category : #'Brick-Glamorous-Normalizer'
 }
-
-{ #category : #'instance creation' }
-BrIdentityNormalizer class >> startingWithBlue [
-	^ self new
-			setIndexTo: Color blue;
-			yourself
-]
-
-{ #category : #'instance creation' }
-BrIdentityNormalizer class >> startingWithRed [
-	^ self new
-			setIndexTo: Color red;
-			yourself
-]
 
 { #category : #'instance creation' }
 BrIdentityNormalizer class >> withCommand: aBlock [
@@ -31,7 +17,7 @@ BrIdentityNormalizer class >> withCommand: aBlock [
 ]
 
 { #category : #'initialize-release' }
-BrIdentityNormalizer >> colors [
+BrIdentityNormalizer >> candidates [
 	^ BrGlamorousColors distinctTenStrongColors
 ]
 
@@ -39,24 +25,23 @@ BrIdentityNormalizer >> colors [
 BrIdentityNormalizer >> initialize [
 	
 	super initialize.
-	colorIndex := 0.
+	resultIndex := 0.
 	dictionary := Dictionary new.
 	command := #yourself
 ]
 
 { #category : #private }
-BrIdentityNormalizer >> nextColor [
+BrIdentityNormalizer >> nextResult [
 	
-	colorIndex := colorIndex \\ self colors size + 1.
-	^self colors at: colorIndex
+	resultIndex := resultIndex \\ self candidates size + 1.
+	^self candidates at: resultIndex
 ]
 
 { #category : #private }
-BrIdentityNormalizer >> setIndexTo: aColor [
-	"colorAsSymbol has to be one of Color colorNames. 
-	The method set the current index to the color given in parameter"
+BrIdentityNormalizer >> setIndexTo: aCandidate [
+	"The method set the current index to the candidate given in parameter"
 	
-	colorIndex := (self colors indexOf: aColor) - 1
+	resultIndex := (self candidates indexOf: aCandidate) - 1
 ]
 
 { #category : #accessing }
@@ -64,5 +49,5 @@ BrIdentityNormalizer >> value: anEntity [
 	
 	^ dictionary
 		at: (command cull: anEntity)
-		ifAbsentPut: [ self nextColor ]
+		ifAbsentPut: [ self nextResult ]
 ]
