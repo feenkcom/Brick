@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transformation'
 	],
-	#category : 'Brick-Editor-Commands-Holder'
+	#category : #'Brick-Editor-Commands-Holder'
 }
 
 { #category : #executing }
@@ -18,6 +18,6 @@ BrTextEditorScreenToCursorHolderCommand >> transformation [
 ]
 
 { #category : #accessing }
-BrTextEditorScreenToCursorHolderCommand >> transformation: anObject [
-	transformation := anObject
+BrTextEditorScreenToCursorHolderCommand >> transformation: aTransformation [
+	transformation := aTransformation
 ]
