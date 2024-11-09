@@ -320,15 +320,15 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_with_folded_t
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
 		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
 		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (142@153);
+		moveToScreenPosition: (280@150);
 		apply;
 		unsubscribe.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(172)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(183)).
 
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(172)) allCursors.
+	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(183)) allCursors.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
 	
