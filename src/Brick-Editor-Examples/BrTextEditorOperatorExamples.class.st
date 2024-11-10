@@ -98,6 +98,20 @@ BrTextEditorOperatorExamples >> editorOnFoldedText [
 ]
 
 { #category : #'instance creation' }
+BrTextEditorOperatorExamples >> editorOnMultilineFoldedText [
+	<gtExample>
+	| anEditor anEditorElement |
+	
+	anEditorElement := self editorFor: self multilineFoldedText.
+	anEditor := anEditorElement editor.
+	
+	self assert: anEditor cursors isEmpty.
+	self assert: anEditor selection isEmpty.
+	
+	^ anEditorElement
+]
+
+{ #category : #'instance creation' }
 BrTextEditorOperatorExamples >> editorOnMultilineText [
 	<gtExample>
 	| anEditor anEditorElement |
@@ -488,6 +502,22 @@ baz)'.
 		from: openIndex + 1
 		to: closeIndex - 1.
 
+	^ text
+]
+
+{ #category : #'instance creation' }
+BrTextEditorOperatorExamples >> multilineFoldedText [
+	| text |
+	text := 'segment: anEditorSegment
+	segment == anEditorSegment
+		ifTrue:
+			[ BlFrameTelemetry time: [ ''Update segment at {1}'' format: {anEditorSegment index} ] during: [ self updateSegment ] ]
+		ifFalse:
+			[ BlFrameTelemetry
+				time: [ ''Build segment at {1}'' format: {anEditorSegment index} ]
+				during: [ self buildSegment: anEditorSegment ] ]' asRopedText.
+	text attribute: BrTextFoldAttribute new from: 68 to: 160.
+		text attribute: BrTextFoldAttribute new from: 180 to: 181.
 	^ text
 ]
 

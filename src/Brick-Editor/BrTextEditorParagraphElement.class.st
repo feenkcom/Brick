@@ -460,6 +460,23 @@ BrTextEditorParagraphElement >> placeholderElements [
 				or: [ (each isKindOf: BrCursorElement) or: [ each visibility isGone ] ] ]
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextEditorParagraphElement >> positionWithinSegmentOf: relativePosition [
+	"Add back to cursor position any folded chars"
+
+	| foldedChars pos |
+	foldedChars := 0.
+	pos := 0.
+	[ pos - foldedChars < segment text size
+		and: [ pos - foldedChars < relativePosition ] ]
+		whileTrue: [ ((segment text attributesAt: pos)
+				anySatisfy: [ :att | att class == BrTextFoldAttribute ])
+				ifTrue: [ foldedChars := foldedChars + 1 ].
+			pos := pos + 1 ].
+
+	^ relativePosition + foldedChars
+]
+
 { #category : #'api - cursor' }
 BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEditorElement [
 	"trying to find a segment that actually contains a given position"
@@ -548,7 +565,7 @@ BrTextEditorParagraphElement >> screenToCursor: aTransformation of: anEditorElem
 		aCharOffsetInParagraph := aParagraph
 			charOffsetForPoint: theBoundsInLocal center - self padding topLeft.
 
-		aTransformation transformed: aCharOffsetInParagraph + self segment textStart ]
+		aTransformation transformed: (self positionWithinSegmentOf: aCharOffsetInParagraph) + self segment textStart ]
 ]
 
 { #category : #accessing }

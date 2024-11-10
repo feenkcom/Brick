@@ -46,6 +46,6 @@ BrTextEditorScreenToCursorCommand >> transformation [
 ]
 
 { #category : #accessing }
-BrTextEditorScreenToCursorCommand >> transformation: anObject [
-	transformation := anObject
+BrTextEditorScreenToCursorCommand >> transformation: aTransformation [
+	transformation := aTransformation
 ]
