@@ -158,6 +158,16 @@ BrWithContextMenuAptitude >> onMouseUp: anEvent [
 	self show
 ]
 
+{ #category : #accessing }
+BrWithContextMenuAptitude >> position [
+	^ position
+]
+
+{ #category : #accessing }
+BrWithContextMenuAptitude >> position: anObject [
+	position := anObject
+]
+
 { #category : #private }
 BrWithContextMenuAptitude >> removeInnerContainerContextMenuAptitudes [
 	innerContainer
