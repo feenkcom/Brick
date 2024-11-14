@@ -62,7 +62,8 @@ BrDevAptitudeOverview >> buildCoderArtifactReferenceList: aListOfWishReferences 
 	theMethodGroups := theMethodGroups collect: [ :eachAssociation | eachAssociation value collect: [ :each | each value ] as: Set ].
 
 	aList := BrSimpleList new
-		matchParent;
+		hMatchParent;
+		vFitContent;
 		items: theMethodGroups associations;
 		stencil: [ :eachReferenceGroup |
 			| aHighlighter |
@@ -82,7 +83,8 @@ BrDevAptitudeOverview >> buildEventsList [
 	| aList |
 	
 	aList := BrSimpleList new
-		matchParent;
+		hMatchParent;
+		vFitContent;
 		items: (self aptitudeClass withAllSuperclassEvents);
 		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
@@ -136,7 +138,8 @@ BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
 { #category : #'private - instance creation' }
 BrDevAptitudeOverview >> buildLookHierarchy [
 	^ BrSimpleTree new
-		matchParent;
+		hMatchParent;
+		vFitContent;
 		nodeStencil: [ BrLabel new beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		nodeDataBinder: [ :anItemElement :anItem |
 			anItemElement text: (anItem rootClass = self aptitudeClass
@@ -152,7 +155,8 @@ BrDevAptitudeOverview >> buildRequestsList [
 	| aList |
 	
 	aList := BrSimpleList new
-		matchParent;
+		hMatchParent;
+		vFitContent;
 		items: (self aptitudeClass withAllSuperclassRequests);
 		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
@@ -208,7 +212,8 @@ BrDevAptitudeOverview >> buildSmallReferencesList: aListOfLookArtifactReferences
 	| aList |
 	
 	aList := BrSimpleList new
-		matchParent;
+		hMatchParent;
+		vFitContent;
 		addEventHandler: (GtPhlowListToSelectHandler new);
 		items: aListOfLookArtifactReferences;
 		itemStencil: [ BrLabel new
@@ -225,7 +230,8 @@ BrDevAptitudeOverview >> buildWishesList [
 	| aList |
 	
 	aList := BrSimpleList new
-		matchParent;
+		hMatchParent;
+		vFitContent;
 		items: (self aptitudeClass withAllSuperclassWishes);
 		itemStencil: [ BrLabel new hMatchParent beSmallSize aptitude: BrGlamorousLabelAptitude ];
 		itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem name ].
