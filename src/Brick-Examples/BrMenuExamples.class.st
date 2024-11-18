@@ -28,13 +28,22 @@ BrMenuExamples >> menuActionItemWithLabel [
 { #category : #'example - items' }
 BrMenuExamples >> menuItems [
 	<gtExample>
-	| aMenuItems |
+	| aMenuItems anInlineSubmenu |
 	aMenuItems := BrMenuItems new.
-	aMenuItems addItem: self submenuInlineMessageItems.
+	anInlineSubmenu := self submenuInlineMessageItems.
+	anInlineSubmenu select.
+	anInlineSubmenu items second select.
+	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
-	aMenuItems addItemLabel: 'Cut' action: [ ].
-	aMenuItems addItemLabel: 'Copy' shortcut: 'CMD+C' action: [ ].
-	aMenuItems addItemLabel: 'Paste' shortcut: 'CMD+V' action: [ ].
+	aMenuItems addItemLabel: 'Cut' action: [  ].
+	aMenuItems
+		addItemLabel: 'Copy'
+		shortcut: 'CMD+C'
+		action: [  ].
+	aMenuItems
+		addItemLabel: 'Paste'
+		shortcut: 'CMD+V'
+		action: [  ].
 
 	^ aMenuItems
 ]

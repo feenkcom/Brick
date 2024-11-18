@@ -10,6 +10,11 @@ Class {
 	#category : #'Brick-Menu'
 }
 
+{ #category : #'api - selection' }
+BrMenuItem >> deselect [
+	^ self isSelected: false
+]
+
 { #category : #'api - grouping' }
 BrMenuItem >> group [
 	<return: #BrMenuItemGroupConfiguration>
@@ -75,13 +80,13 @@ BrMenuItem >> initialize [
 	group := BrMenuItemGroupConfiguration new.
 ]
 
-{ #category : #accessing }
+{ #category : #'api - selection' }
 BrMenuItem >> isSelected [
 	<return: #Boolean>
 	^ isSelected
 ]
 
-{ #category : #accessing }
+{ #category : #'api - selection' }
 BrMenuItem >> isSelected: aBoolean [
 	isSelected := aBoolean
 ]
@@ -142,4 +147,9 @@ BrMenuItem >> parentsDo: aBlock [
 	parent ifNotNil: [ :aParent |
 		aBlock cull: aParent.
 		aParent parentsDo: aBlock ]
+]
+
+{ #category : #'api - selection' }
+BrMenuItem >> select [
+	^ self isSelected: true
 ]
