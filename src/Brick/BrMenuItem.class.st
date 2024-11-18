@@ -4,10 +4,30 @@ Class {
 	#instVars : [
 		'labelModel',
 		'isSelected',
-		'parent'
+		'parent',
+		'group'
 	],
 	#category : #'Brick-Menu'
 }
+
+{ #category : #'api - grouping' }
+BrMenuItem >> group [
+	<return: #BrMenuItemGroupConfiguration>
+	^ group
+]
+
+{ #category : #'api - grouping' }
+BrMenuItem >> group: aBrMenuItemGroupConfiguration [
+	group := aBrMenuItemGroupConfiguration
+]
+
+{ #category : #'api - grouping' }
+BrMenuItem >> groupId: aSymbol priority: aPriority [
+	self
+		group: (BrMenuItemGroupConfiguration new
+				name: aSymbol;
+				priority: aPriority)
+]
 
 { #category : #'gt - extensions' }
 BrMenuItem >> gtItemChildren [
@@ -15,8 +35,23 @@ BrMenuItem >> gtItemChildren [
 ]
 
 { #category : #'gt - extensions' }
+BrMenuItem >> gtItemDepth [
+	| aDepth |
+	aDepth := 1.
+	self parentsDo: [ aDepth := aDepth + 1 ].
+	^ aDepth
+]
+
+{ #category : #'gt - extensions' }
 BrMenuItem >> gtItemLabel [
 	^ self labelModel ifNotNil: #gtItemLabel
+]
+
+{ #category : #'gt - extensions' }
+BrMenuItem >> gtItemSelection [
+	^ self isSelected
+		ifTrue: [ 'selected' ]
+		ifFalse: [ 'no' asRopedText foreground: BrGlamorousColors disabledButtonTextColor ]
 ]
 
 { #category : #'gt - extensions' }
@@ -36,7 +71,8 @@ BrMenuItem >> gtParentsFor: aView [
 { #category : #initialization }
 BrMenuItem >> initialize [
 	super initialize.
-	isSelected := false
+	isSelected := false.
+	group := BrMenuItemGroupConfiguration new.
 ]
 
 { #category : #accessing }
