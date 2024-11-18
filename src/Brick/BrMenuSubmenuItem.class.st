@@ -29,6 +29,12 @@ BrMenuSubmenuItem >> initialize [
 ]
 
 { #category : #'api - submenu' }
+BrMenuSubmenuItem >> items [
+	<return: #BrMenuItems>
+	^ self submenu items
+]
+
+{ #category : #'api - submenu' }
 BrMenuSubmenuItem >> submenu [
 	<return: #BrMenuItems>
 	^ submenu

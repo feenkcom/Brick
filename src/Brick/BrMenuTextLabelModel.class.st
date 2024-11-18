@@ -6,7 +6,7 @@ Class {
 		'shortcut',
 		'preview'
 	],
-	#category : #'Brick-Menu '
+	#category : #'Brick-Menu'
 }
 
 { #category : #'gt - extensions' }
