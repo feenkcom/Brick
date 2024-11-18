@@ -28,10 +28,22 @@ BrMenuExamples >> menuActionItemWithLabel [
 { #category : #'example - items' }
 BrMenuExamples >> menuItems [
 	<gtExample>
-	| aMenuItems |
+	| aMenuItems anInlineSubmenu |
 	aMenuItems := BrMenuItems new.
-	aMenuItems addItem: self submenuItemWithLabel.
-	aMenuItems addItem: self menuActionItemWithLabel.
+	anInlineSubmenu := self submenuInlineMessageItems.
+	anInlineSubmenu select.
+	anInlineSubmenu items second select.
+	aMenuItems addItem: anInlineSubmenu.
+	aMenuItems addItem: self submenuExtractTemporaryItems.
+	aMenuItems addItemLabel: 'Cut' action: [  ].
+	aMenuItems
+		addItemLabel: 'Copy'
+		shortcut: 'CMD+C'
+		action: [  ].
+	aMenuItems
+		addItemLabel: 'Paste'
+		shortcut: 'CMD+V'
+		action: [  ].
 
 	^ aMenuItems
 ]
@@ -54,7 +66,7 @@ BrMenuExamples >> menuTextAndShortcutLabel [
 BrMenuExamples >> menuTextLabel [
 	<gtExample>
 	| aLabel |
-	aLabel := BrMenuTextLabel new.
+	aLabel := BrMenuTextLabelModel new.
 	aLabel text: 'Copy'.
 
 	self assert: aLabel text equals: 'Copy'.
@@ -63,11 +75,26 @@ BrMenuExamples >> menuTextLabel [
 ]
 
 { #category : #'examples - submenu' }
-BrMenuExamples >> submenuItemWithLabel [
+BrMenuExamples >> refactoringGroup [
+	<gtExample>
+	| aGroup |
+	aGroup := BrMenuItemGroupConfiguration new 
+		name: 'Refactoring';
+		priority: 30.
+	
+	self assert: aGroup name equals: 'Refactoring'.
+	self assert: aGroup priority equals: 30.
+	
+	^ aGroup
+]
+
+{ #category : #'examples - submenu' }
+BrMenuExamples >> submenuExtractTemporaryItems [
 	<gtExample>
 	| anItem |
 	anItem := BrMenuSubmenuItem new.
 	anItem label: 'Extract temporary'.
+	anItem group: self refactoringGroup.
 	anItem submenuItem: (BrMenuActionItem new
 		label: 'Extract temporary' preview: BrMenuSubmenuItem name).
 	anItem submenuItem: (BrMenuActionItem new
@@ -77,6 +104,30 @@ BrMenuExamples >> submenuItemWithLabel [
 	self assert: anItem labelModel text equals: 'Extract temporary'.
 	self assert: anItem submenu isNotNil.
 	self assert: anItem submenu itemsCount equals: 2.
+	
+	self assert: anItem submenu items first parent equals: anItem.
+
+	^ anItem
+]
+
+{ #category : #'examples - submenu' }
+BrMenuExamples >> submenuInlineMessageItems [
+	<gtExample>
+	| anItem |
+	anItem := BrMenuSubmenuItem new.
+	anItem label: 'Inline message'.
+	anItem group: self refactoringGroup.
+	anItem submenuItem: (BrMenuActionItem new
+		label: 'Inline message' preview: 'anItem label').
+	anItem submenuItem: (BrMenuActionItem new
+		label: 'Inline message' preview: 'anItem label text').
+	anItem submenuItem: (BrMenuActionItem new
+		label: 'Inline message' preview: 'self assert: anItem labelModel text equals: ''Copy''').
+	
+	self assert: anItem labelModel isNotNil.
+	self assert: anItem labelModel text equals: 'Inline message'.
+	self assert: anItem submenu isNotNil.
+	self assert: anItem submenu itemsCount equals: 3.
 	
 	self assert: anItem submenu items first parent equals: anItem.
 
