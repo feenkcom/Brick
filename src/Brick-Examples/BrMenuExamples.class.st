@@ -54,7 +54,7 @@ BrMenuExamples >> menuTextAndShortcutLabel [
 BrMenuExamples >> menuTextLabel [
 	<gtExample>
 	| aLabel |
-	aLabel := BrMenuTextLabel new.
+	aLabel := BrMenuTextLabelModel new.
 	aLabel text: 'Copy'.
 
 	self assert: aLabel text equals: 'Copy'.
