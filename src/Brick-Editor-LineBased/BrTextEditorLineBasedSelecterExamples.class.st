@@ -1,5 +1,5 @@
 Class {
 	#name : #BrTextEditorLineBasedSelecterExamples,
 	#superclass : #BrTextEditorSelecterExamples,
-	#category : #'Brick-Editor-Examples-Operators'
+	#category : #'Brick-Editor-LineBased-Examples'
 }

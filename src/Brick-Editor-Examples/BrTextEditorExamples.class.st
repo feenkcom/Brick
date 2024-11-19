@@ -403,7 +403,7 @@ BrTextEditorExamples >> newBeReplaceTextAttribute [
 BrTextEditorExamples >> newEditor [
 	<gtExample>
 
-	^ BrTextEditorModel new beLineBased
+	^ BrTextEditorModel new
 ]
 
 { #category : #'instance creation' }

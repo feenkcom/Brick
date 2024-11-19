@@ -12,7 +12,7 @@ Class {
 		'wordStencilBuilder',
 		'lineSplitter'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'text - modifications' }
@@ -59,7 +59,7 @@ BrTextEditorLineSegmentBuilder >> beReadOnly [
 { #category : #initialization }
 BrTextEditorLineSegmentBuilder >> defaultSplitter [
 	^ BrTextEditorSplitter new
-		segmentClass: BrTextEditorLineSegment;
+		segmentClass: BrTextEditorParagraphSegment;
 		yourself
 ]
 

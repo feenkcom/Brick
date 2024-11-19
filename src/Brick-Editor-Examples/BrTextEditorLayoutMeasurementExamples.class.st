@@ -1,8 +1,6 @@
 Class {
 	#name : #BrTextEditorLayoutMeasurementExamples,
 	#superclass : #Object,
-	#traits : 'TBrTextEditorFixedMeasurerExamples',
-	#classTraits : 'TBrTextEditorFixedMeasurerExamples classTrait',
 	#category : #'Brick-Editor-Examples'
 }
 
