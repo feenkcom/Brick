@@ -63,7 +63,7 @@ TBrTextEditorFixedMeasurerExamples >> glyphHeight [
 
 { #category : #'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> glyphWidth [
-	^ 30
+	^ 10
 ]
 
 { #category : #'private - font metrics' }
