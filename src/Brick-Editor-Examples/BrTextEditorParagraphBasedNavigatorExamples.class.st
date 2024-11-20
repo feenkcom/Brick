@@ -257,7 +257,8 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_right_half_
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
 		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
 		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (self glyphWidth / 2.0 + 5) @ (self glyphHeight / 2.0);
+		moveToScreenPosition: (self paragraphMargin left + (self glyphWidth / 2.0 + 5))
+				@ (self paragraphMargin top + (self glyphHeight / 2.0));
 		apply;
 		unsubscribe.
 

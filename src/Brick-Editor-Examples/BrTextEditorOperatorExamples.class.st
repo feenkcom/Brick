@@ -118,7 +118,6 @@ BrTextEditorOperatorExamples >> editorOnMultilineText [
 	
 	anEditorElement := self editorFor: self multilineText.
 	anEditor := anEditorElement editor.
-	anEditor beLineBased.
 	
 	self assert: anEditor cursors isEmpty.
 	self assert: anEditor selection isEmpty.
@@ -139,7 +138,6 @@ BrTextEditorOperatorExamples >> editorOnTextWithDelimiters [
 	
 	anEditorElement := self editorFor: self delimiterText.
 	anEditor := anEditorElement editor.
-	anEditor beLineBased.
 	
 	self assert: anEditor cursors isEmpty.
 	self assert: anEditor selection isEmpty.

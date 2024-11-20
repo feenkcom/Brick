@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorSegmentTextPiece,
 	#superclass : #BrTextEditorAbstractSegmentPiece,
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #comparing }

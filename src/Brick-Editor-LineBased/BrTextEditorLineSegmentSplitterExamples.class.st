@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorLineSegmentSplitterExamples,
 	#superclass : #Object,
-	#category : #'Brick-Editor-Examples-Model'
+	#category : #'Brick-Editor-LineBased-Examples'
 }
 
 { #category : #accessing }

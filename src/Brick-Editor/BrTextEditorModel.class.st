@@ -85,14 +85,6 @@ BrTextEditorModel >> beEditableCode [
 ]
 
 { #category : #accessing }
-BrTextEditorModel >> beLineBased [
-	segmentBuilder := BrTextEditorLineSegmentBuilder new
-			splitter: (BrTextEditorSplitter new
-					segmentClass: BrTextEditorLineSegment;
-					yourself)
-]
-
-{ #category : #accessing }
 BrTextEditorModel >> beParagraphBased [
 	segmentBuilder := BrTextEditorLineSegmentBuilder new
 			splitter: (BrTextEditorSplitter new
@@ -346,9 +338,7 @@ BrTextEditorModel >> history: aBrTextEditorHistory [
 
 { #category : #initialization }
 BrTextEditorModel >> initialize [
-	super initialize.
-
-	"We might set the mode before #initialize. See class side #withEditorMode:"
+	super initialize.	"We might set the mode before #initialize. See class side #withEditorMode:"
 	mode ifNil: [ mode := BrTextEditorNullMode new ].
 
 	attachedElements := Set new.
@@ -378,8 +368,8 @@ BrTextEditorModel >> initialize [
 
 	isFocused := false.
 	shouldStyleWhenTextModified := true.
-	shouldConsumeClickEvent := true.
-
+	shouldConsumeClickEvent := true.	
+	
 	"only when the editor mode is null, set an actual mode.
 	Setting an editor mode can be slow therefore we provide a class side
 	method to customize the editor mode before initialization"
@@ -387,9 +377,7 @@ BrTextEditorModel >> initialize [
 		ifTrue: [ self editorMode: self defaultEditorMode ]
 		ifFalse: [ self installEditorMode: mode ].
 
-	DontUseParagraphEditor
-		ifNil: [ self beParagraphBased ]
-		ifNotNil: [ self beLineBased ]
+	self beParagraphBased
 ]
 
 { #category : #initialization }

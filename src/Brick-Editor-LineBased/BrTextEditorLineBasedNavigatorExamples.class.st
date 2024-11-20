@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorLineBasedNavigatorExamples,
 	#superclass : #BrTextEditorNavigatorExamples,
-	#category : #'Brick-Editor-Examples-Operators'
+	#category : #'Brick-Editor-LineBased-Examples'
 }
 
 { #category : #accessing }
