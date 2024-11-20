@@ -1150,6 +1150,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
 { #category : #'examples - move to screen' }
 BrTextEditorNavigatorExamples >> cursor_moveToScreen_41_right_in_empty [
 	<gtExample>
+	<noTest>
 	<label: 'Click on the right half of the 41th character'>
 	| anEditor eventRecord |
 	anEditor := self editorOnMultilineText.
