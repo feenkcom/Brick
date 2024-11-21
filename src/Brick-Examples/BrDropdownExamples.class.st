@@ -318,7 +318,7 @@ BrDropdownExamples >> toggleButton [
 			(BlElement new
 				size: 8 @ 8;
 				geometry:
-					(BlPolygon
+					(BlPolygonGeometry
 						vertices:
 							{(0 @ 0).
 							(8 @ 0).
