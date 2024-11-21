@@ -24,7 +24,6 @@ TBrTextEditorFixedMeasurerExamples >> editorFor: aText [
 	aRopedText := aText asRopedText lineSpacing: self lineSpacing; paragraphMargin: self paragraphMargin; wordPadding: self wordPadding.
 
 	anEditor := BrEditor new.
-	anEditor editor beLineBased.
 	anEditor aptitude: BrEditorAptitude new.
 	anEditor padding: BlInsets empty.
 	anEditor fitContent.
@@ -64,7 +63,7 @@ TBrTextEditorFixedMeasurerExamples >> glyphHeight [
 
 { #category : #'private - font metrics' }
 TBrTextEditorFixedMeasurerExamples >> glyphWidth [
-	^ 30
+	^ 10
 ]
 
 { #category : #'private - font metrics' }

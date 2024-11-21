@@ -5,7 +5,7 @@ I split a piece of text behind a {{gtClass:BrTextEditorLineSegment}} into pieces
 Class {
 	#name : #BrTextEditorLineSegmentSplitter,
 	#superclass : #BrTextEditorAbstractSegmentSplitter,
-	#category : #'Brick-Editor-Model - Segment-Text-Line'
+	#category : #'Brick-Editor-LineBased-Model'
 }
 
 { #category : #'private - pieces computation' }

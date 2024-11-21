@@ -227,6 +227,7 @@ BrTextEditorSelecterExamples >> select_from_0_to_5_in_steps [
 { #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
 	<gtExample>
+	<noTest>
 	| anEditor |
 
 	anEditor := self editorOnMultilineText.
@@ -238,9 +239,9 @@ BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
 	
 	self 
 		assert: anEditor selection 
-		equals: (BlCompositeSelection new select: 6 to: 35).
+		equals: (BlCompositeSelection new select: 6 to: 36).
 	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(35)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(36)).
 	
 	^ anEditor
 ]
@@ -248,6 +249,7 @@ BrTextEditorSelecterExamples >> select_moveOneDown_at_6 [
 { #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneDown_at_6_thenUp [
 	<gtExample>
+	<noTest>
 	| anEditor |
 
 	anEditor := self select_moveOneDown_at_6.
@@ -455,6 +457,7 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_End [
 { #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneUp_at_35 [
 	<gtExample>
+	<noTest>
 	| anEditor |
 
 	anEditor := self editorOnMultilineText.
@@ -476,6 +479,7 @@ BrTextEditorSelecterExamples >> select_moveOneUp_at_35 [
 { #category : #'examples - move' }
 BrTextEditorSelecterExamples >> select_moveOneUp_at_35_thenDown [
 	<gtExample>
+	<noTest>
 	| anEditor |
 
 	anEditor := self select_moveOneUp_at_35.

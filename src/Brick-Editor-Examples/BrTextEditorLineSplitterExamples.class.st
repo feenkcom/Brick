@@ -644,7 +644,7 @@ BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 BrTextEditorLineSplitterExamples >> textLineSplitter [
 	<gtExample>
 	^ BrTextEditorSplitter new
-		segmentClass: BrTextEditorLineSegment;
+		segmentClass: BrTextEditorParagraphSegment;
 		yourself
 ]
 

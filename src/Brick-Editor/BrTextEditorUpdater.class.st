@@ -3,10 +3,10 @@ Class {
 	#superclass : #BrTextEditorOperator,
 	#instVars : [
 		'intervals',
-		'shouldRedraw',
-		'shouldRecreate'
+		'shouldRecreate',
+		'commandClass'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }
@@ -24,33 +24,24 @@ BrTextEditorUpdater >> from: aFromTextIndex to: aToTextIndex [
 { #category : #initialization }
 BrTextEditorUpdater >> initialize [
 	super initialize.
-	
+
 	intervals := OrderedCollection new.
 	shouldRecreate := true.
-	shouldRedraw := true
+	commandClass := BrTextEditorUpdateCommand
 ]
 
 { #category : #'api - configuration' }
 BrTextEditorUpdater >> redrawOnly [
-	shouldRedraw := true.
-	shouldRecreate := false
+	shouldRecreate := false.
+	commandClass := BrTextEditorInvalidateCommand
 ]
 
 { #category : #'api - processing' }
 BrTextEditorUpdater >> update [
-	intervals do: [ :eachInterval |
-		(shouldRecreate not and: [ shouldRedraw ])
-			ifTrue: [
-				| aCommand |
-				aCommand := BrTextEditorInvalidateCommand new
-					fromIndex: eachInterval first;
-					toIndex: eachInterval last.
-				self editor enqueueCommand: aCommand ].
-		shouldRecreate
-			ifTrue: [
-				| aCommand |
-				aCommand := BrTextEditorUpdateCommand new
-					fromIndex: eachInterval first;
-					toIndex: eachInterval last.
-				self editor enqueueCommand: aCommand ] ]
+	intervals
+		do: [ :eachInterval | 
+			self editor
+				enqueueCommand: (commandClass new
+						fromIndex: eachInterval first;
+						toIndex: eachInterval last) ]
 ]

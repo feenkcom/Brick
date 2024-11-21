@@ -93,15 +93,14 @@ BrWithTooltipAptitude >> hideDelay: anObject [
 
 { #category : #accessing }
 BrWithTooltipAptitude >> hideLater [
-	self canHide
-		ifFalse: [ ^ self ].
+	self canHide ifFalse: [ ^ self ].
 	self cancelHideLater.
+	self hideDelay ifNil: [ ^ self ].
 	hideLaterTask := BlDelayedTaskAction new
-		delay: self hideDelay;
-		action: [ self canHide
-				ifTrue: [ self hide ].
-			hideLaterTask := nil ];
-		yourself.
+			delay: self hideDelay;
+			action: [ self canHide ifTrue: [ self hide ].
+				hideLaterTask := nil ];
+			yourself.
 	innerContainer enqueueTask: hideLaterTask
 ]
 
