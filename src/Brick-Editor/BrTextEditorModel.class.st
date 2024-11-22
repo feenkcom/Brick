@@ -780,7 +780,7 @@ BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
 		ifTrue: [
 			self text updateFrom: aBlTextStyledEvent text text.
 			"This can allow the splitter to resplit text that has been unfolded after restyle"
-			self segmentBuilder resetSegmentCacheAndNotify: self.
+		"	self segmentBuilder resetSegmentCacheAndNotify: self."
 			
 			BlFrameTelemetry
 				time: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
