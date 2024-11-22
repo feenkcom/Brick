@@ -146,7 +146,7 @@ BrGlamorousVectorIcons class >> crossGeometry: aThickness extent: anExtent origi
 	h := anExtent y.
 	halfH := h / 2.0.
 	
-	^ BlNormalizedPolygon vertices: ({
+	^ BlNormalizedPolygonGeometry vertices: ({
 		cathetus @ 0.
 		halfW @ (halfH - cathetus).
 		(w - cathetus) @ 0.
@@ -601,7 +601,7 @@ BrGlamorousVectorIcons class >> minusGeometry: aThickness extent: anExtent origi
 	top := halfH - halfThickness.
 	bottom := halfH + halfThickness.
 	
-	^ BlNormalizedPolygon vertices: ({
+	^ BlNormalizedPolygonGeometry vertices: ({
 		0 @ top.
 		w @ top.
 		w @ bottom.
