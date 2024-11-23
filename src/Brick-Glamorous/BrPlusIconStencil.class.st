@@ -48,7 +48,7 @@ BrPlusIconStencil >> create [
 	^ BlElement new
 		size: (aRadius + aRadius) @ (aRadius + aRadius);
 		geometry:
-			(BlPolygon
+			(BlPolygonGeometry
 				vertices:
 					{((aRadius - aThickness) @ 0).
 					((aRadius + aThickness) @ 0).

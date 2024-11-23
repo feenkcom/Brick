@@ -50,24 +50,41 @@ BrTextEditorSplitter >> split: aBlText in: aBrEditorSegmentStream [
 { #category : #'api - splitting' }
 BrTextEditorSplitter >> split: aBrText in: aBrEditorSegmentStream offset: anOffset [
 	| anIterator |
-
 	aBrText isEmpty
-		ifTrue: [ ^ aBrEditorSegmentStream nextPut: (self newSegment: aBrText from: 1 to: 0 delimited: 0 offset: anOffset) ].
+		ifTrue: [ ^ aBrEditorSegmentStream
+				nextPut: (self
+						newSegment: aBrText
+						from: 1
+						to: 0
+						delimited: 0
+						offset: anOffset) ].
 
 	anIterator := aBrText iterator.
 
-	[ anIterator hasNext and: [ aBrEditorSegmentStream wantsMore ] ] whileTrue: [
-		anIterator
-			nextLineIndicesDo: [ :aLineStart :aLineEnd :aLineDelimiterEnd |
-				aBrEditorSegmentStream nextPut: (self newSegment: aBrText from: aLineStart to: aLineEnd delimited: aLineDelimiterEnd offset: anOffset) ]
-			shouldMerge: [ :aLineStart :aLineEnd :aLineDelimiterEnd |
-				(aBrText from: aLineEnd + 1 to: aLineDelimiterEnd) iterator
-					detectAttribute: [ :eachAttribute | self wantsToMergeSegments: eachAttribute ]
-					ifFound: [ true ]
-					ifNone: [ false ] ] ].
+	[ anIterator hasNext and: [ aBrEditorSegmentStream wantsMore ] ]
+		whileTrue: [ anIterator
+				nextLineIndicesDo: [ :aLineStart :aLineEnd :aLineDelimiterEnd | 
+					aBrEditorSegmentStream
+						nextPut: (self
+								newSegment: aBrText
+								from: aLineStart
+								to: aLineEnd
+								delimited: aLineDelimiterEnd
+								offset: anOffset) ]
+				shouldMerge: [ :aLineStart :aLineEnd :aLineDelimiterEnd | 
+					(aBrText from: aLineEnd + 1 to: aLineDelimiterEnd) iterator
+						detectAttribute: [ :eachAttribute | self wantsToMergeSegments: eachAttribute ]
+						ifFound: [ true ]
+						ifNone: [ false ] ] ].
 
 	(aBrEditorSegmentStream wantsMore and: [ aBrText last isLineBreak ])
-		ifTrue: [ aBrEditorSegmentStream nextPut: (self newSegment: aBrText from: aBrText size + 1 to: aBrText size delimited: aBrText size offset: anOffset) ]
+		ifTrue: [ aBrEditorSegmentStream
+				nextPut: (self
+						newSegment: aBrText
+						from: aBrText size + 1
+						to: aBrText size
+						delimited: aBrText size
+						offset: anOffset) ]
 ]
 
 { #category : #testing }

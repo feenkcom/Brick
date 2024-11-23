@@ -1,7 +1,7 @@
 Class {
 	#name : #BrExpandedTriangleStencil,
 	#superclass : #BrTriangleStencil,
-	#category : 'Brick-Triangle - Stencil'
+	#category : #'Brick-Triangle - Stencil'
 }
 
 { #category : #'api - instantiation' }
@@ -9,5 +9,5 @@ BrExpandedTriangleStencil >> create [
 	<return: #BlElement>
 	
 	^ super create
-		geometry: (BlPolygon vertices: { 0@0 . 8@0 . 4@8 })
+		geometry: (BlPolygonGeometry vertices: { 0@0 . 8@0 . 4@8 })
 ]
