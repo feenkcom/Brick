@@ -2,7 +2,8 @@ Class {
 	#name : #BrGlamorousButtonFlatExteriorAptitude,
 	#superclass : #BrLazyStyleCommonAptitude,
 	#instVars : [
-		'backgroundPaint'
+		'backgroundPaint',
+		'hoveredBackgroundPaint'
 	],
 	#category : #'Brick-Glamorous-Buttons - Support'
 }
@@ -24,7 +25,12 @@ BrGlamorousButtonFlatExteriorAptitude >> disabledBackgroundPaint [
 
 { #category : #accessing }
 BrGlamorousButtonFlatExteriorAptitude >> hoveredBackgroundPaint [
-	^ Color gray alpha: 0.15
+	^ hoveredBackgroundPaint ifNil: [ Color gray alpha: 0.15 ]
+]
+
+{ #category : #accessing }
+BrGlamorousButtonFlatExteriorAptitude >> hoveredBackgroundPaint: aPaint [
+	hoveredBackgroundPaint := aPaint
 ]
 
 { #category : #initialization }

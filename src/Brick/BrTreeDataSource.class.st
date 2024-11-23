@@ -10,7 +10,7 @@ Class {
 		'clickToSelectHandler',
 		'nodeIdStencil'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #private }
@@ -110,6 +110,8 @@ BrTreeDataSource >> onRemoved: anAnnouncement [
 
 { #category : #accessing }
 BrTreeDataSource >> rootNode: aTreeNode [
+
+	rootNode ifNotNil: [ :aPreviousRoot | aPreviousRoot announcer unsubscribe: self ].
 	rootNode := aTreeNode.
 	rootNode announcer when: BrTreeNodeChanged send: #onChanged: to: self.
 	rootNode announcer when: BrTreeNodeExpanded send: #onExpanded: to: self.
