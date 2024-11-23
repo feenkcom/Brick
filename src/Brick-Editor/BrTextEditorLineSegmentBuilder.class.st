@@ -16,32 +16,24 @@ Class {
 }
 
 { #category : #'text - modifications' }
-BrTextEditorLineSegmentBuilder >> attributesModfiedFrom: aFromIndex to: aToIndex in: aBrTextEditor affectedText: anAffectedText [
+BrTextEditorLineSegmentBuilder >> attributesModifiedFrom: aFromIndex to: aToIndex in: aBrTextEditor affectedText: anAffectedText [
 	"Is sent after attributes were added or removed in a provided text editor"
-	| oldSegmentCount newSegmentCount attributedSubText |
 
+	| attributedSubText |
+	"It is possible that the segment structure has changed"
 	self
 		assert: [ aFromIndex <= (aToIndex + 1) ]
 		description: [ '`From` index must be less or equal to `to` index' ].
-
 	BrTextEditorAttributesModifiedSignal new
 		textEditor: aBrTextEditor;
 		fromIndex: aFromIndex;
 		toIndex: aToIndex;
 		affectedText: anAffectedText;
 		emit.
-
 	attributedSubText := aBrTextEditor text from: (aFromIndex max: 1) to: aToIndex.
-
-	oldSegmentCount := self splitSegmentCountOf: anAffectedText.
-	newSegmentCount := self splitSegmentCountOf: attributedSubText.
-
-	oldSegmentCount ~= newSegmentCount
-		ifTrue: [
-			"It is possible that the segment structure has changed"
-			self resetSegmentCacheAndNotify: aBrTextEditor ]
-		ifFalse: [
-			aBrTextEditor updater
+	(self requiresResplittingFrom: attributedSubText to: anAffectedText)
+		ifTrue: [ self resetSegmentCacheAndNotify: aBrTextEditor ]
+		ifFalse: [ aBrTextEditor updater
 				from: aFromIndex to: aToIndex;
 				update ]
 ]
@@ -185,14 +177,19 @@ BrTextEditorLineSegmentBuilder >> insertedString: aString at: aTextIndex in: aBr
 ]
 
 { #category : #'text - modifications' }
+BrTextEditorLineSegmentBuilder >> requiresResplittingFrom: attributedSubText to: anAffectedText [
+	| oldSegmentCount newSegmentCount |
+	oldSegmentCount := self splitSegmentCountOf: anAffectedText.
+	newSegmentCount := self splitSegmentCountOf: attributedSubText.
+	^ oldSegmentCount ~= newSegmentCount
+]
+
+{ #category : #'text - modifications' }
 BrTextEditorLineSegmentBuilder >> resetSegmentCacheAndNotify: aBrTextEditor [
-	| interval |
-	
 	BrTextEditorResetCacheSignal new
 		textEditor: aBrTextEditor;
 		emit.
-	
-	interval := aBrTextEditor segmentCollector cachedInterval.
+
 	aBrTextEditor segmentCollector resetCache.
 	aBrTextEditor notifyChanged
 ]

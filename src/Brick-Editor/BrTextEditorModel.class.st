@@ -742,7 +742,7 @@ BrTextEditorModel >> onTextAttributeAdded: aBlTextAttributeAdded [
 	self assertUIProcess.
 
 	self segmentBuilder
-		attributesModfiedFrom: aBlTextAttributeAdded fromIndex
+		attributesModifiedFrom: aBlTextAttributeAdded fromIndex
 		to: aBlTextAttributeAdded toIndex
 		in: self
 		affectedText: aBlTextAttributeAdded affectedText.
@@ -755,7 +755,7 @@ BrTextEditorModel >> onTextAttributesRemoved: aBlTextAttributesRemoved [
 	self assertUIProcess.
 
 	self segmentBuilder
-		attributesModfiedFrom: aBlTextAttributesRemoved fromIndex
+		attributesModifiedFrom: aBlTextAttributesRemoved fromIndex
 		to: aBlTextAttributesRemoved toIndex
 		in: self
 		affectedText: aBlTextAttributesRemoved affectedText
@@ -777,27 +777,28 @@ BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
 	self assertUIProcess.
 
 	(aBlTextStyledEvent text isNextGenerationOf: self text)
-		ifTrue: [
+		ifTrue: [ (self segmentBuilder
+				requiresResplittingFrom: self text
+				to: aBlTextStyledEvent text)
+				ifTrue: [  "It is possible that the segment structure has changed"self segmentBuilder
+						resetSegmentCacheAndNotify: self ].
 			self text updateFrom: aBlTextStyledEvent text text.
-			"This can allow the splitter to resplit text that has been unfolded after restyle"
-			self segmentBuilder resetSegmentCacheAndNotify: self.
-			
+
 			BlFrameTelemetry
-				time: [ 'Execute after-action: {1}' format: { aBlTextStyledEvent afterAction } ]
-				during: [ aBlTextStyledEvent afterAction value: self text. ].
-			
+				time: [ 'Execute after-action: {1}' format: {aBlTextStyledEvent afterAction} ]
+				during: [ aBlTextStyledEvent afterAction value: self text ].
+
 			BlFrameTelemetry
 				time: [ 'notifyTextStyled' ]
 				during: [ self notifyTextStyled: self text ].
-			
+
 			BlFrameTelemetry
 				time: [ 'processCursorAttributes' ]
-				during: [ self processCursorEnterEvents  ].
-			
+				during: [ self processCursorEnterEvents ].
+
 			BlFrameTelemetry
 				time: [ 'Invalidate the whole text editor due to text change' ]
-				during: [
-					self updater
+				during: [ self updater
 						all;
 						update ] ]
 		ifFalse: [ self styleTextAndAfterDo: aBlTextStyledEvent afterAction ]
