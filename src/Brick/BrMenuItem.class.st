@@ -1,14 +1,24 @@
 Class {
 	#name : #BrMenuItem,
-	#superclass : #Object,
+	#superclass : #BrMenuModel,
 	#instVars : [
 		'labelModel',
 		'isSelected',
-		'parent',
 		'group'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
+
+{ #category : #testing }
+BrMenuItem class >> isAbstract [
+	^ self name = #BrMenuItem
+]
+
+{ #category : #'api - converting' }
+BrMenuItem >> asElement [
+	<return: #BlElement>
+	^ self labelModel asElement
+]
 
 { #category : #'api - selection' }
 BrMenuItem >> deselect [
@@ -76,6 +86,7 @@ BrMenuItem >> gtParentsFor: aView [
 { #category : #initialization }
 BrMenuItem >> initialize [
 	super initialize.
+	announcer := Announcer new.
 	isSelected := false.
 	group := BrMenuItemGroupConfiguration new.
 ]
@@ -88,7 +99,10 @@ BrMenuItem >> isSelected [
 
 { #category : #'api - selection' }
 BrMenuItem >> isSelected: aBoolean [
-	isSelected := aBoolean
+	isSelected = aBoolean ifTrue: [ ^ self ].
+	isSelected := aBoolean.
+	self onSelectionChanged.
+	self notifySelectionChanged.
 ]
 
 { #category : #'api - label model' }
@@ -129,6 +143,22 @@ BrMenuItem >> labelModel [
 { #category : #'api - label model' }
 BrMenuItem >> labelModel: aLabelModel [
 	labelModel := aLabelModel
+]
+
+{ #category : #accessing }
+BrMenuItem >> menuType [
+	^ self class
+]
+
+{ #category : #'event handling' }
+BrMenuItem >> notifySelectionChanged [
+	announcer announce: (BrMenuItemSelectionChanged new
+		menuItem: self;
+		isSelected: self isSelected)
+]
+
+{ #category : #'event handling' }
+BrMenuItem >> onSelectionChanged [
 ]
 
 { #category : #'api - parent' }

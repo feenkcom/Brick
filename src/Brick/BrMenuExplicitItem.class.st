@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stencil'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
 
 { #category : #accessing }

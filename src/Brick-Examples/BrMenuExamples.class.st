@@ -35,15 +35,62 @@ BrMenuExamples >> menuItems [
 	anInlineSubmenu items second select.
 	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
-	aMenuItems addItemLabel: 'Cut' action: [  ].
+	aMenuItems
+		addItemLabel: 'Cut'
+		action: [ NonInteractiveTranscript stdout show: 'Cut ' ].
 	aMenuItems
 		addItemLabel: 'Copy'
 		shortcut: 'CMD+C'
-		action: [  ].
+		action: [ NonInteractiveTranscript stdout show: 'Copy ' ].
 	aMenuItems
 		addItemLabel: 'Paste'
 		shortcut: 'CMD+V'
-		action: [  ].
+		action: [ NonInteractiveTranscript stdout show: 'Paste ' ].
+
+	^ aMenuItems
+]
+
+{ #category : #'example - items' }
+BrMenuExamples >> menuItems_selectAnotherInlineMenu [
+	<gtExample>
+	| aMenuItems anInlineRootItem anItemOne anItemTwo |
+	aMenuItems := self menuItems.
+	anInlineRootItem := aMenuItems items first.
+	anItemOne := anInlineRootItem items second.
+	anItemTwo := anInlineRootItem items third.
+	
+	self assert: anInlineRootItem isSelected.
+	self assert: anItemOne isSelected.
+	self assert: anItemTwo isSelected not.
+	
+	anItemTwo select.
+	self assert: anInlineRootItem isSelected.
+	self assert: anItemOne isSelected not.
+	self assert: anItemTwo isSelected.
+
+	^ aMenuItems
+]
+
+{ #category : #'example - items' }
+BrMenuExamples >> menuItems_selectExtractMenu [
+	<gtExample>
+	| aMenuItems anInlineRootItem anItemOne anItemTwo anExtractRootItem |
+	aMenuItems := self menuItems_selectAnotherInlineMenu.
+	anInlineRootItem := aMenuItems items first.
+	anItemOne := anInlineRootItem items second.
+	anItemTwo := anInlineRootItem items third.
+	anExtractRootItem := aMenuItems items second.
+
+	self assert: anInlineRootItem isSelected.
+	self assert: anItemOne isSelected not.
+	self assert: anItemTwo isSelected.
+	self assert: anExtractRootItem isSelected not.
+
+	anExtractRootItem select.
+	self assert: anInlineRootItem isSelected not.
+	self assert: anItemOne isSelected not.
+	self assert: anItemTwo isSelected not.
+	self assert: anExtractRootItem isSelected.
 
 	^ aMenuItems
 ]

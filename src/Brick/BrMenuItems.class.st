@@ -1,17 +1,25 @@
 Class {
 	#name : #BrMenuItems,
-	#superclass : #Object,
+	#superclass : #BrMenuModel,
 	#instVars : [
 		'items',
-		'parent'
+		'selectedItem'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
 
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
 	aMenuItem parent: self parent.
-	self items add: aMenuItem
+	self items add: aMenuItem.
+	
+	aMenuItem isSelected ifTrue: [
+		self selectedItem: aMenuItem ].
+
+	aMenuItem announcer
+		when: BrMenuItemSelectionChanged
+		send: #onMenuItemSelection:
+		to: self
 ]
 
 { #category : #'add / remove' }
@@ -30,6 +38,38 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 	aMenuItem label: aLabelString shortcut: aShortcutString.
 	aMenuItem action: anAction.
 	self addItem: aMenuItem
+]
+
+{ #category : #'api - converting' }
+BrMenuItems >> asElement [
+	| anElement |
+	anElement := BrSimpleList new
+			fitContentLimited;
+			items: self items;
+			stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
+			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+			padding: (BlInsets all: 5);
+			border: (BlBorder paint: Color veryLightGray width: 1).
+
+	self announcer weak
+		when: BrMenuItemsHideRequest
+		send: #removeFromParent
+		to: anElement.
+	^ anElement
+]
+
+{ #category : #'api - selection' }
+BrMenuItems >> deselect [
+	selectedItem ifNotNil: #deselect.
+	selectedItem := nil
+]
+
+{ #category : #'api - selection' }
+BrMenuItems >> deselectedItem: aMenuItem [
+	self assert: [ aMenuItem isSelected not ].
+	selectedItem == aMenuItem ifFalse: [ ^ self ].
+
+	selectedItem := nil
 ]
 
 { #category : #'api - grouping' }
@@ -66,31 +106,16 @@ BrMenuItems >> gtGroupsFor: aView [
 		column: 'Type' text: #class weight: 0.5
 ]
 
-{ #category : #'gt - extensions' }
-BrMenuItems >> gtItemsFor: aView [
-	<gtView>
-	^ aView columnedTree
-		title: 'Menu items';
-		items: [ self items ifNil: [ #() ] ];
-		children: #gtItemChildren;
-		expandAll;
-		column: 'Label' text: [ :anItem | anItem gtItemLabel ];
-		column: 'Selection'
-			text: [ :anItem | anItem isSelected ]
-			weight: 0.2;
-		column: 'Depth'
-			text: [ :anItem | 
-				| aDepth |
-				aDepth := 0.
-				anItem parentsDo: [ aDepth := aDepth + 1 ].
-				aDepth ]
-			weight: 0.2;
-		column: 'Type' text: #class weight: 0.5
+{ #category : #'api - visibility' }
+BrMenuItems >> hide [
+	self deselect.
+	announcer announce: (BrMenuItemsHideRequest new menuItems: self)
 ]
 
 { #category : #initialization }
 BrMenuItems >> initialize [
 	super initialize.
+	announcer := Announcer new.
 	items := OrderedCollection new
 ]
 
@@ -108,6 +133,18 @@ BrMenuItems >> items: aCollection [
 { #category : #accessing }
 BrMenuItems >> itemsCount [
 	^ self items size
+]
+
+{ #category : #accessing }
+BrMenuItems >> menuType [
+	^ self class
+]
+
+{ #category : #'event handling' }
+BrMenuItems >> onMenuItemSelection: anAnnouncement [
+	anAnnouncement menuItem isSelected
+		ifTrue: [ self selectedItem: anAnnouncement menuItem ]
+		ifFalse: [ self deselectedItem: anAnnouncement menuItem ]
 ]
 
 { #category : #accessing }
@@ -131,4 +168,18 @@ BrMenuItems >> printOn: aStream [
 		space;
 		nextPutAll: ('item' asPluralBasedOn: self itemsCount);
 		nextPut: $]
+]
+
+{ #category : #accessing }
+BrMenuItems >> selectedItem [
+	^ selectedItem
+]
+
+{ #category : #'api - selection' }
+BrMenuItems >> selectedItem: aMenuItem [
+	self assert: [ aMenuItem isSelected ].
+	selectedItem == aMenuItem ifTrue: [ ^ self ].
+
+	selectedItem ifNotNil: #deselect.
+	selectedItem := aMenuItem
 ]
