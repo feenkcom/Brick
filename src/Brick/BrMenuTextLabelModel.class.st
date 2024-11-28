@@ -6,8 +6,13 @@ Class {
 		'shortcut',
 		'preview'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
+
+{ #category : #'api - converting' }
+BrMenuTextLabelModel >> asElement [
+	^ BrMenuTextLabelElement new labelModel: self
+]
 
 { #category : #'gt - extensions' }
 BrMenuTextLabelModel >> gtItemLabel [
@@ -35,6 +40,11 @@ BrMenuTextLabelModel >> preview [
 { #category : #accessing }
 BrMenuTextLabelModel >> preview: aString [
 	preview := aString
+]
+
+{ #category : #accessing }
+BrMenuTextLabelModel >> previewDo: aBlock [
+	self preview ifNotNil: aBlock
 ]
 
 { #category : #printing }
@@ -71,6 +81,11 @@ BrMenuTextLabelModel >> shortcut: aString [
 ]
 
 { #category : #accessing }
+BrMenuTextLabelModel >> shortcutDo: aBlock [
+	self shortcut ifNotNil: aBlock
+]
+
+{ #category : #accessing }
 BrMenuTextLabelModel >> text [
 	<return: #String>
 	^ text
@@ -79,4 +94,22 @@ BrMenuTextLabelModel >> text [
 { #category : #accessing }
 BrMenuTextLabelModel >> text: aString [
 	text := aString
+]
+
+{ #category : #accessing }
+BrMenuTextLabelModel >> textAndPreviewDo: aBlock [
+	self text ifNotNil: [ :aText | 
+		| aFormatedText |
+		aFormatedText := aText asRopedText glamorousRegularFont.
+		self previewDo: [ :aPreview | 
+			aFormatedText append: ((' ' , aPreview asString) asRopedText
+				glamorousCodeFont;
+				foreground: Color gray;
+				glamorousCodeTinySize) ].
+		aBlock cull: aFormatedText ]
+]
+
+{ #category : #accessing }
+BrMenuTextLabelModel >> textDo: aBlock [
+	self text ifNotNil: aBlock
 ]

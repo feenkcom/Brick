@@ -4,8 +4,13 @@ Class {
 	#instVars : [
 		'submenu'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
+
+{ #category : #'api - converting' }
+BrMenuSubmenuItem >> asElement [
+	^ BrMenuSubmenuItemElement new menuItem: self
+]
 
 { #category : #'gt - extensions' }
 BrMenuSubmenuItem >> gtItemChildren [
@@ -32,6 +37,14 @@ BrMenuSubmenuItem >> initialize [
 BrMenuSubmenuItem >> items [
 	<return: #BrMenuItems>
 	^ self submenu items
+]
+
+{ #category : #'event handling' }
+BrMenuSubmenuItem >> onSelectionChanged [
+	super onSelectionChanged.
+	
+	self isSelected ifFalse: [ 
+		self submenu hide ]
 ]
 
 { #category : #'api - submenu' }

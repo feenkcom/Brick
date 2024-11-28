@@ -48,6 +48,51 @@ BrMenuExamples >> menuItems [
 	^ aMenuItems
 ]
 
+{ #category : #'example - items' }
+BrMenuExamples >> menuItems_selectAnotherInlineMenu [
+	<gtExample>
+	| aMenuItems anInlineRootItem anItemOne anItemTwo |
+	aMenuItems := self menuItems.
+	anInlineRootItem := aMenuItems items first.
+	anItemOne := anInlineRootItem items second.
+	anItemTwo := anInlineRootItem items third.
+	
+	self assert: anInlineRootItem isSelected.
+	self assert: anItemOne isSelected.
+	self assert: anItemTwo isSelected not.
+	
+	anItemTwo select.
+	self assert: anInlineRootItem isSelected.
+	self assert: anItemOne isSelected not.
+	self assert: anItemTwo isSelected.
+
+	^ aMenuItems
+]
+
+{ #category : #'example - items' }
+BrMenuExamples >> menuItems_selectExtractMenu [
+	<gtExample>
+	| aMenuItems anInlineRootItem anItemOne anItemTwo anExtractRootItem |
+	aMenuItems := self menuItems_selectAnotherInlineMenu.
+	anInlineRootItem := aMenuItems items first.
+	anItemOne := anInlineRootItem items second.
+	anItemTwo := anInlineRootItem items third.
+	anExtractRootItem := aMenuItems items second.
+
+	self assert: anInlineRootItem isSelected.
+	self assert: anItemOne isSelected not.
+	self assert: anItemTwo isSelected.
+	self assert: anExtractRootItem isSelected not.
+
+	anExtractRootItem select.
+	self assert: anInlineRootItem isSelected not.
+	self assert: anItemOne isSelected not.
+	self assert: anItemTwo isSelected not.
+	self assert: anExtractRootItem isSelected.
+
+	^ aMenuItems
+]
+
 { #category : #'examples - label' }
 BrMenuExamples >> menuTextAndShortcutLabel [
 	<gtExample>
