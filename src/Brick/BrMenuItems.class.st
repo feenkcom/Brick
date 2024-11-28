@@ -1,11 +1,9 @@
 Class {
 	#name : #BrMenuItems,
-	#superclass : #Object,
+	#superclass : #BrMenuModel,
 	#instVars : [
 		'items',
-		'parent',
-		'selectedItem',
-		'announcer'
+		'selectedItem'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -40,11 +38,6 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 	aMenuItem label: aLabelString shortcut: aShortcutString.
 	aMenuItem action: anAction.
 	self addItem: aMenuItem
-]
-
-{ #category : #accessing }
-BrMenuItems >> announcer [
-	^ announcer
 ]
 
 { #category : #'api - converting' }
@@ -111,30 +104,6 @@ BrMenuItems >> gtGroupsFor: aView [
 			text: #gtItemDepth
 			weight: 0.2;
 		column: 'Type' text: #class weight: 0.5
-]
-
-{ #category : #'gt - extensions' }
-BrMenuItems >> gtItemsFor: aView [
-	<gtView>
-	^ aView columnedTree
-		title: 'Menu items';
-		items: [ self items ifNil: [ #() ] ];
-		children: #gtItemChildren;
-		expandAll;
-		column: 'Label' text: [ :anItem | anItem gtItemLabel ];
-		column: 'Selection'
-			text: [ :anItem | GtPhlowOverviewItem new 
-				boolean: anItem isSelected; 
-				description ]
-			weight: 0.2;
-		column: 'Depth'
-			text: [ :anItem | 
-				| aDepth |
-				aDepth := 1.
-				anItem parentsDo: [ aDepth := aDepth + 1 ].
-				aDepth ]
-			weight: 0.2;
-		column: 'Type' text: #menuType weight: 0.5
 ]
 
 { #category : #'api - visibility' }

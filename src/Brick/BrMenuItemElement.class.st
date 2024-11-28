@@ -22,7 +22,23 @@ BrMenuItemElement >> initialize [
 	super initialize.
 	self constraintsDo: [ :c | 
 		c horizontal matchParent.
-		c vertical fitContent ]
+		c vertical fitContent ].
+	self initializeStyling.
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> initializeCommonStyling [
+	"Example: LeSnippetAptitude>>#initialize"
+
+	self
+		addAptitude: (BrStyleCommonAptitude new
+				default: [ :aStyle | aStyle background: Color white ];
+				hovered: [ :aStyle | aStyle background: self theme item selectedColor ];
+				pressed: [ :aStyle | aStyle background: self theme item pressedColor ])
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> initializeStyling [
 ]
 
 { #category : #accessing }
@@ -54,6 +70,9 @@ BrMenuItemElement >> onMouseEnterEvent: anEvent [
 
 { #category : #'event handling' }
 BrMenuItemElement >> onSelectionChanged: anAnnouncement [
+	| isSelected |
+	isSelected := anAnnouncement menuItem isSelected.
+	self dispatchEvent: (BlElementSelectedStateWish selected: isSelected)
 ]
 
 { #category : #'event handling' }

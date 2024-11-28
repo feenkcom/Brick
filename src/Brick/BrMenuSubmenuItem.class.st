@@ -44,7 +44,10 @@ BrMenuSubmenuItem >> onSelectionChanged [
 	super onSelectionChanged.
 	
 	self isSelected ifFalse: [ 
-		self submenu hide ]
+		self submenu hide ].
+		
+	"Note: show action happens in BrMenuSubmenuItemElement>>#onSelectionChanged:.
+	It looks confusing."
 ]
 
 { #category : #'api - submenu' }

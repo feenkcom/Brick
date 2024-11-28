@@ -4,6 +4,13 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #initialization }
+BrMenuActionItemElement >> initializeStyling [
+	super initializeStyling.
+
+	self initializeCommonStyling
+]
+
 { #category : #'event handling' }
 BrMenuActionItemElement >> onMenuItemChanged [
 	super onMenuItemChanged.

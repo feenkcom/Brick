@@ -1,12 +1,10 @@
 Class {
 	#name : #BrMenuItem,
-	#superclass : #Object,
+	#superclass : #BrMenuModel,
 	#instVars : [
 		'labelModel',
 		'isSelected',
-		'parent',
-		'group',
-		'announcer'
+		'group'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -14,11 +12,6 @@ Class {
 { #category : #testing }
 BrMenuItem class >> isAbstract [
 	^ self name = #BrMenuItem
-]
-
-{ #category : #'api - announcer' }
-BrMenuItem >> announcer [
-	^ announcer
 ]
 
 { #category : #'api - converting' }
