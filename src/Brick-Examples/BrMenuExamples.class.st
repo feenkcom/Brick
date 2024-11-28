@@ -35,15 +35,17 @@ BrMenuExamples >> menuItems [
 	anInlineSubmenu items second select.
 	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
-	aMenuItems addItemLabel: 'Cut' action: [  ].
+	aMenuItems
+		addItemLabel: 'Cut'
+		action: [ NonInteractiveTranscript stdout show: 'Cut ' ].
 	aMenuItems
 		addItemLabel: 'Copy'
 		shortcut: 'CMD+C'
-		action: [  ].
+		action: [ NonInteractiveTranscript stdout show: 'Copy ' ].
 	aMenuItems
 		addItemLabel: 'Paste'
 		shortcut: 'CMD+V'
-		action: [  ].
+		action: [ NonInteractiveTranscript stdout show: 'Paste ' ].
 
 	^ aMenuItems
 ]

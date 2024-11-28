@@ -22,8 +22,8 @@ BrMenuSubmenuItemElement >> onDeselected: anAnnouncement [
 ]
 
 { #category : #'event handling' }
-BrMenuSubmenuItemElement >> onMenuItemChanged [
-	super onMenuItemChanged.
+BrMenuSubmenuItemElement >> onMenuModelChanged [
+	super onMenuModelChanged.
 	self updateElement
 ]
 

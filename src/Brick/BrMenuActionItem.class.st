@@ -19,5 +19,5 @@ BrMenuActionItem >> action: anObject [
 
 { #category : #'api - converting' }
 BrMenuActionItem >> asElement [
-	^ BrMenuActionItemElement new menuItem: self
+	^ BrMenuActionItemElement new menuModel: self
 ]

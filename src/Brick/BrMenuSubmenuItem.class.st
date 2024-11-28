@@ -9,7 +9,7 @@ Class {
 
 { #category : #'api - converting' }
 BrMenuSubmenuItem >> asElement [
-	^ BrMenuSubmenuItemElement new menuItem: self
+	^ BrMenuSubmenuItemElement new menuModel: self
 ]
 
 { #category : #'gt - extensions' }

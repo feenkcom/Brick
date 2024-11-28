@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuSteppedElement,
-	#superclass : #BlElement,
+	#superclass : #BrMenuModelElement,
 	#category : #'Brick-Menu - UI'
 }
 
@@ -24,6 +24,12 @@ BrMenuSteppedElement >> initialize [
 ]
 
 { #category : #'event handling' }
+BrMenuSteppedElement >> onMenuModelChanged [
+	super onMenuModelChanged.
+	self updateElement.
+]
+
+{ #category : #'event handling' }
 BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 	| aSourceElement aSubmenuElement |
 	anEvent consumed: true.
@@ -34,4 +40,10 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 					c stepped
 						relativeBounds: (aSourceElement bounds) ].
 	self addChild: aSubmenuElement.
+]
+
+{ #category : #'private - updating' }
+BrMenuSteppedElement >> updateElement [
+	self removeChildren.
+	self addChild: self menuModel asElement
 ]
