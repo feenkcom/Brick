@@ -68,7 +68,7 @@ TBrSelectable >> selectLast [
 TBrSelectable >> selectNext [
 	self selectedIndices
 		ifEmpty: [ self selectOne: 1  ]
-		ifNotEmpty: [ :theIndices | self selectOne: (theIndices first + 1 min: self maxSelectionIndex) ]
+		ifNotEmpty: [ :theIndices | self selectOne: (theIndices first + 1 min: (self maxSelectionIndex max: 1)) ]
 ]
 
 { #category : #'api - selection' }
