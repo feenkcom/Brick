@@ -287,7 +287,9 @@ BrAsyncElementFuture >> privateUpdateElement [
 	
 	aNewDataSnapshot
 		ifSuccess: [ :aData | whenSuccess ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
-		ifError: [ :anError | whenError ifNotNil: [ :aBlock | aBlock cull: updater element cull: anError ] ]
+		ifError: [ :anError | whenError
+			ifNotNil: [ :aBlock | aBlock cull: updater element cull: anError ]
+			ifNil: [ updater element showNotification: anError asNotification ] ]
 		ifPending: [ :aData | whenPending ifNotNil: [ :aBlock | aBlock cull: updater element cull: aData ] ]
 ]
 
