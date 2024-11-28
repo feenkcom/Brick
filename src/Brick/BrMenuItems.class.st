@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuItems,
-	#superclass : #BrMenuModel,
+	#superclass : #BrMenu,
 	#instVars : [
 		'items',
 		'selectedItem'
@@ -52,7 +52,7 @@ BrMenuItems >> asElement [
 			border: (BlBorder paint: Color veryLightGray width: 1).
 
 	self announcer weak
-		when: BrMenuItemsHideRequest
+		when: BrMenuHideRequest
 		send: #removeFromParent
 		to: anElement.
 	^ anElement
@@ -103,19 +103,29 @@ BrMenuItems >> gtGroupsFor: aView [
 		column: 'Depth'
 			text: #gtItemDepth
 			weight: 0.2;
-		column: 'Type' text: #class weight: 0.5
+		column: 'Type' text: #class weight: 0.5;
+		actionUpdateButton
+]
+
+{ #category : #'gt - extensions' }
+BrMenuItems >> gtItemChildren [
+	^ self items
+]
+
+{ #category : #'gt - extensions' }
+BrMenuItems >> gtRootItems [
+	^ self items
 ]
 
 { #category : #'api - visibility' }
 BrMenuItems >> hide [
 	self deselect.
-	announcer announce: (BrMenuItemsHideRequest new menuItems: self)
+	super hide.
 ]
 
 { #category : #initialization }
 BrMenuItems >> initialize [
 	super initialize.
-	announcer := Announcer new.
 	items := OrderedCollection new
 ]
 
@@ -145,16 +155,6 @@ BrMenuItems >> onMenuItemSelection: anAnnouncement [
 	anAnnouncement menuItem isSelected
 		ifTrue: [ self selectedItem: anAnnouncement menuItem ]
 		ifFalse: [ self deselectedItem: anAnnouncement menuItem ]
-]
-
-{ #category : #accessing }
-BrMenuItems >> parent [
-	^ parent
-]
-
-{ #category : #accessing }
-BrMenuItems >> parent: anObject [
-	parent := anObject
 ]
 
 { #category : #printing }

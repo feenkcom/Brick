@@ -45,11 +45,6 @@ BrMenuItem >> groupId: aSymbol priority: aPriority [
 ]
 
 { #category : #'gt - extensions' }
-BrMenuItem >> gtItemChildren [
-	^ Array empty
-]
-
-{ #category : #'gt - extensions' }
 BrMenuItem >> gtItemDepth [
 	| aDepth |
 	aDepth := 1.
@@ -69,24 +64,9 @@ BrMenuItem >> gtItemSelection [
 		ifFalse: [ 'no' asRopedText foreground: BrGlamorousColors disabledButtonTextColor ]
 ]
 
-{ #category : #'gt - extensions' }
-BrMenuItem >> gtParentsFor: aView [
-	<gtView>
-	self parent ifNil: [ ^ aView empty ].
-	^ aView columnedList
-		title: 'Parents';
-		items: [ Array
-				streamContents: [ :aStream | self parentsDo: [ :aParent | aStream nextPut: aParent ] ] ];
-		column: 'Index'
-			text: [ :_ :anIndex | anIndex ]
-			width: 40;
-		column: 'Parent' text: #gtItemLabel
-]
-
 { #category : #initialization }
 BrMenuItem >> initialize [
 	super initialize.
-	announcer := Announcer new.
 	isSelected := false.
 	group := BrMenuItemGroupConfiguration new.
 ]
@@ -159,24 +139,6 @@ BrMenuItem >> notifySelectionChanged [
 
 { #category : #'event handling' }
 BrMenuItem >> onSelectionChanged [
-]
-
-{ #category : #'api - parent' }
-BrMenuItem >> parent [
-	<return: #BrMenuItem or: nil>
-	^ parent
-]
-
-{ #category : #'api - parent' }
-BrMenuItem >> parent: aMenuItem [
-	parent := aMenuItem
-]
-
-{ #category : #'api - parent' }
-BrMenuItem >> parentsDo: aBlock [
-	parent ifNotNil: [ :aParent |
-		aBlock cull: aParent.
-		aParent parentsDo: aBlock ]
 ]
 
 { #category : #'api - selection' }
