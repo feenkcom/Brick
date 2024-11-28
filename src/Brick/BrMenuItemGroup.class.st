@@ -5,7 +5,7 @@ Class {
 		'items',
 		'configuration'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
 
 { #category : #'add / remove' }

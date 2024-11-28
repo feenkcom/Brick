@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'action'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
 
 { #category : #accessing }
@@ -15,4 +15,9 @@ BrMenuActionItem >> action [
 { #category : #accessing }
 BrMenuActionItem >> action: anObject [
 	action := anObject
+]
+
+{ #category : #'api - converting' }
+BrMenuActionItem >> asElement [
+	^ BrMenuActionItemElement new menuItem: self
 ]

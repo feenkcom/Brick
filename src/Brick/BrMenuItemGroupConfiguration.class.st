@@ -5,7 +5,7 @@ Class {
 		'name',
 		'priority'
 	],
-	#category : #'Brick-Menu'
+	#category : #'Brick-Menu - Model'
 }
 
 { #category : #accessing }

@@ -1,0 +1,17 @@
+Class {
+	#name : #BrMenuActionItemElement,
+	#superclass : #BrMenuItemElement,
+	#category : #'Brick-Menu - UI'
+}
+
+{ #category : #'event handling' }
+BrMenuActionItemElement >> onMenuItemChanged [
+	super onMenuItemChanged.
+	self updateElement
+]
+
+{ #category : #'event handling' }
+BrMenuActionItemElement >> updateElement [
+	self removeChildren.
+	self addLabelElement
+]
