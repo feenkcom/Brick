@@ -9,22 +9,12 @@ Class {
 
 { #category : #'api - converting' }
 BrMenuSubmenuItem >> asElement [
-	^ BrMenuSubmenuItemElement new menuItem: self
+	^ BrMenuSubmenuItemElement new menuModel: self
 ]
 
 { #category : #'gt - extensions' }
 BrMenuSubmenuItem >> gtItemChildren [
-	^ self submenu items
-]
-
-{ #category : #'gt - extensions' }
-BrMenuSubmenuItem >> gtSubmenuFor: aView [
-	<gtView>
-	submenu ifNil: [ ^ aView empty ].
-	^ aView forward
-		title: 'Menu items';
-		object: [ self submenu ];
-		view: #gtItemsFor:
+	^ self submenu gtItemChildren
 ]
 
 { #category : #initialization }
@@ -44,7 +34,10 @@ BrMenuSubmenuItem >> onSelectionChanged [
 	super onSelectionChanged.
 	
 	self isSelected ifFalse: [ 
-		self submenu hide ]
+		self submenu hide ].
+		
+	"Note: show action happens in BrMenuSubmenuItemElement>>#onSelectionChanged:.
+	It looks confusing."
 ]
 
 { #category : #'api - submenu' }

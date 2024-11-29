@@ -1,11 +1,9 @@
 Class {
 	#name : #BrMenuItems,
-	#superclass : #Object,
+	#superclass : #BrMenu,
 	#instVars : [
 		'items',
-		'parent',
-		'selectedItem',
-		'announcer'
+		'selectedItem'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -42,24 +40,21 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 	self addItem: aMenuItem
 ]
 
-{ #category : #accessing }
-BrMenuItems >> announcer [
-	^ announcer
-]
-
 { #category : #'api - converting' }
 BrMenuItems >> asElement [
 	| anElement |
-	anElement := BrSimpleList new
+	anElement := BrSimpleList new.
+	anElement
 			fitContentLimited;
 			items: self items;
 			stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
 			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 			padding: (BlInsets all: 5);
-			border: (BlBorder paint: Color veryLightGray width: 1).
+			border: (BlBorder paint: Color veryLightGray width: 1);
+			background: anElement theme default contentBackgroundColor.
 
 	self announcer weak
-		when: BrMenuItemsHideRequest
+		when: BrMenuHideRequest
 		send: #removeFromParent
 		to: anElement.
 	^ anElement
@@ -110,43 +105,29 @@ BrMenuItems >> gtGroupsFor: aView [
 		column: 'Depth'
 			text: #gtItemDepth
 			weight: 0.2;
-		column: 'Type' text: #class weight: 0.5
+		column: 'Type' text: #class weight: 0.5;
+		actionUpdateButton
 ]
 
 { #category : #'gt - extensions' }
-BrMenuItems >> gtItemsFor: aView [
-	<gtView>
-	^ aView columnedTree
-		title: 'Menu items';
-		items: [ self items ifNil: [ #() ] ];
-		children: #gtItemChildren;
-		expandAll;
-		column: 'Label' text: [ :anItem | anItem gtItemLabel ];
-		column: 'Selection'
-			text: [ :anItem | GtPhlowOverviewItem new 
-				boolean: anItem isSelected; 
-				description ]
-			weight: 0.2;
-		column: 'Depth'
-			text: [ :anItem | 
-				| aDepth |
-				aDepth := 1.
-				anItem parentsDo: [ aDepth := aDepth + 1 ].
-				aDepth ]
-			weight: 0.2;
-		column: 'Type' text: #menuType weight: 0.5
+BrMenuItems >> gtItemChildren [
+	^ self items
+]
+
+{ #category : #'gt - extensions' }
+BrMenuItems >> gtRootItems [
+	^ self items
 ]
 
 { #category : #'api - visibility' }
 BrMenuItems >> hide [
 	self deselect.
-	announcer announce: (BrMenuItemsHideRequest new menuItems: self)
+	super hide.
 ]
 
 { #category : #initialization }
 BrMenuItems >> initialize [
 	super initialize.
-	announcer := Announcer new.
 	items := OrderedCollection new
 ]
 
@@ -176,16 +157,6 @@ BrMenuItems >> onMenuItemSelection: anAnnouncement [
 	anAnnouncement menuItem isSelected
 		ifTrue: [ self selectedItem: anAnnouncement menuItem ]
 		ifFalse: [ self deselectedItem: anAnnouncement menuItem ]
-]
-
-{ #category : #accessing }
-BrMenuItems >> parent [
-	^ parent
-]
-
-{ #category : #accessing }
-BrMenuItems >> parent: anObject [
-	parent := anObject
 ]
 
 { #category : #printing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuSteppedElement,
-	#superclass : #BlElement,
+	#superclass : #BrMenuModelElement,
 	#category : #'Brick-Menu - UI'
 }
 
@@ -15,27 +15,21 @@ BrMenuSteppedElement >> initialize [
 
 	self
 		constraintsDo: [ :c | 
+			c ignoreByLayout.
 			c horizontal matchParent.
-			c vertical matchParent ].
+			c vertical matchParent ];
+		preventMouseEvents;
+		clipChildren: false.
 
 	self
 		when: BrMenuShowSubmenuWish
 		do: [ :anEvent | self onShowSubmenuWish: anEvent ].
-	self
-		when: BrMenuHideSubmenuWish
-		do: [ :anEvent | self onHideSubmenuWish: anEvent ]
 ]
 
 { #category : #'event handling' }
-BrMenuSteppedElement >> onHideSubmenuWish: anEvent [
-	| aSourceElement aSubmenu aChild |
-	self childrenCount isZero ifTrue: [ ^ self ].
-	anEvent consumed: true.
-	aSourceElement := anEvent fromElement.
-	aSubmenu := anEvent submenu.
-	
-	aChild := self childAt: self childrenCount.
-	aChild removeFromParent.
+BrMenuSteppedElement >> onMenuModelChanged [
+	super onMenuModelChanged.
+	self updateElement.
 ]
 
 { #category : #'event handling' }
@@ -49,4 +43,10 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 					c stepped
 						relativeBounds: (aSourceElement bounds) ].
 	self addChild: aSubmenuElement.
+]
+
+{ #category : #'private - updating' }
+BrMenuSteppedElement >> updateElement [
+	self removeChildren.
+	self addChild: self menuModel asElement
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #BrMenuItemsHideRequest,
+	#name : #BrMenuHideRequest,
 	#superclass : #BrMenuItemsAnnouncement,
 	#category : #'Brick-Menu - Events'
 }

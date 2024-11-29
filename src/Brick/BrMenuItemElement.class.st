@@ -1,15 +1,15 @@
 Class {
 	#name : #BrMenuItemElement,
-	#superclass : #BlElement,
-	#instVars : [
-		'menuItem'
-	],
+	#superclass : #BrMenuModelElement,
 	#category : #'Brick-Menu - UI'
 }
 
 { #category : #'private - updating' }
 BrMenuItemElement >> addLabelElement [
-	self addChild: self menuItem labelModel asElement
+	| aLabelElement |
+	aLabelElement := self menuItem labelModel asElement.
+	self addChild: aLabelElement.
+	^ aLabelElement
 ]
 
 { #category : #initialization }
@@ -20,28 +20,48 @@ BrMenuItemElement >> defaultLayout [
 { #category : #initialization }
 BrMenuItemElement >> initialize [
 	super initialize.
+	self initializeViewModels.
 	self constraintsDo: [ :c | 
 		c horizontal matchParent.
-		c vertical fitContent ]
+		c vertical fitContent ].
+	self initializeEventHandlers.
+	self initializeStyling.
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> initializeCommonStyling [
+	self
+		addAptitude: (BrStyleCommonAptitude new
+				default: [ :aStyle | aStyle background: Color white ];
+				hovered: [ :aStyle | aStyle background: self theme item selectedColor ];
+				pressed: [ :aStyle | aStyle background: self theme item pressedColor ])
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> initializeEventHandlers [
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> initializeStyling [
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> initializeViewModels [
 ]
 
 { #category : #accessing }
 BrMenuItemElement >> menuItem [
-	^ menuItem
+	^ self menuModel
 ]
 
 { #category : #accessing }
 BrMenuItemElement >> menuItem: aMenuItem [
-	menuItem = aMenuItem ifTrue: [ ^ self ].
-
-	menuItem ifNotNil: [ self unsubscribeFromMenuItem ].
-	menuItem := aMenuItem.
-	self onMenuItemChanged.
-	self subscribeToMenuItem
+	self menuModel: aMenuItem
 ]
 
 { #category : #'event handling' }
-BrMenuItemElement >> onMenuItemChanged [
+BrMenuItemElement >> onMenuModelChanged [ 
+	super onMenuModelChanged.
 	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ]
 ]
 
@@ -54,10 +74,14 @@ BrMenuItemElement >> onMouseEnterEvent: anEvent [
 
 { #category : #'event handling' }
 BrMenuItemElement >> onSelectionChanged: anAnnouncement [
+	| isSelected |
+	isSelected := anAnnouncement menuItem isSelected.
+	self dispatchEvent: (BlElementSelectedStateWish selected: isSelected)
 ]
 
 { #category : #'event handling' }
-BrMenuItemElement >> subscribeToMenuItem [
+BrMenuItemElement >> subscribeToMenuModel [
+	super subscribeToMenuModel.
 	self menuItem announcer weak
 		when: BrMenuItemSelectionChanged
 		send: #onSelectionChanged:
@@ -65,6 +89,7 @@ BrMenuItemElement >> subscribeToMenuItem [
 ]
 
 { #category : #'event handling' }
-BrMenuItemElement >> unsubscribeFromMenuItem [
+BrMenuItemElement >> unsubscribeFromMenuModel [
+	super unsubscribeFromMenuModel.
 	self menuItem unsubscribe: self
 ]

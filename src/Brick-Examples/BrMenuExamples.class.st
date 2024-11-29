@@ -12,6 +12,22 @@ BrMenuExamples >> basicMenuActionItem [
 	anItem := BrMenuActionItem new.
 ]
 
+{ #category : #'examples - submenu' }
+BrMenuExamples >> explicitMenu [
+	<gtExample>
+	| aMenu |
+	aMenu := BrMenuExplicit new.
+	aMenu stencil: [ BlElement new
+		size: 50@100;
+		border: (BlBorder paint: Color paleBlue darker);
+		background: Color paleBlue ].
+	
+	self assert: aMenu stencil isNotNil.
+	self assert: (aMenu asElement isKindOf: BlElement).
+	
+	^ aMenu
+]
+
 { #category : #'examples - action item' }
 BrMenuExamples >> menuActionItemWithLabel [
 	<gtExample>
@@ -35,15 +51,20 @@ BrMenuExamples >> menuItems [
 	anInlineSubmenu items second select.
 	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
-	aMenuItems addItemLabel: 'Cut' action: [  ].
+	aMenuItems
+		addItemLabel: 'Cut'
+		action: [ NonInteractiveTranscript stdout show: 'Cut ' ].
 	aMenuItems
 		addItemLabel: 'Copy'
 		shortcut: 'CMD+C'
-		action: [  ].
+		action: [ NonInteractiveTranscript stdout show: 'Copy ' ].
 	aMenuItems
 		addItemLabel: 'Paste'
 		shortcut: 'CMD+V'
-		action: [  ].
+		action: [ NonInteractiveTranscript stdout show: 'Paste ' ].
+	aMenuItems addItem: (BrMenuSubmenuItem new
+		label: 'Create view';
+		submenu: self explicitMenu).
 
 	^ aMenuItems
 ]
