@@ -72,6 +72,11 @@ BrWithExplicitMenuAptitude >> initialize [
 	menuContainer := BrMenuSteppedElement new.
 	
 	self initializeEventHandlers.
+	
+	self addChange: (BrLookChange new
+				up: [ :e |  ];
+				down: [ :e | self hide ];
+				yourself)
 ]
 
 { #category : #initialization }
