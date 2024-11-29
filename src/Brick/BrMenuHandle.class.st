@@ -11,3 +11,14 @@ Class {
 BrMenuHandle class >> isAbstract [
 	^ self name = #BrMenuHandle
 ]
+
+{ #category : #accessing }
+BrMenuHandle >> menu [
+	<return: #BrMenu>
+	^ menu
+]
+
+{ #category : #accessing }
+BrMenuHandle >> menu: anObject [
+	menu := anObject
+]
