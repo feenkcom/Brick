@@ -8,7 +8,8 @@ Class {
 		'menuContainer',
 		'extentChangedEventHandler',
 		'positionInSpaceChangedEventHandler',
-		'clickOutsideEventHandler'
+		'clickOutsideEventHandler',
+		'pressEscEventHandler'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -57,7 +58,8 @@ BrWithExplicitMenuAptitude >> hide [
 				removeEventHandler: extentChangedEventHandler;
 				removeEventHandler: positionInSpaceChangedEventHandler.
 			aParent := menuContainer parent.
-			aParent removeEventHandler: clickOutsideEventHandler.
+			aParent removeEventFilter: clickOutsideEventHandler.
+			aParent removeShortcut: pressEscEventHandler.
 			menuContainer removeFromParent ]
 ]
 
@@ -86,6 +88,10 @@ BrWithExplicitMenuAptitude >> initializeEventHandlers [
 			on: BlMouseUpEvent
 			do: [ :anEvent | 
 				self handleClickedOutsideMouseUpEvent: anEvent ].
+				
+	pressEscEventHandler := BlShortcutWithAction new
+			combination: BlKeyCombination escape;
+			action: [ :anEvent | self hide ].
 ]
 
 { #category : #initialization }
@@ -153,13 +159,14 @@ BrWithExplicitMenuAptitude >> showIn: anElement [
 	self hide.
 	menuContainer menuModel: stencil create.
 	anElement addEventFilter: clickOutsideEventHandler.
-	anElement addChild: menuContainer.
-	
+	anElement addShortcut: pressEscEventHandler.
+
 	self widgetDo: [ :aWidget |
 		aWidget 
 			addEventHandler: extentChangedEventHandler;
 			addEventHandler: positionInSpaceChangedEventHandler ].
 	
+	anElement addChild: menuContainer.
 	self relocate
 ]
 
