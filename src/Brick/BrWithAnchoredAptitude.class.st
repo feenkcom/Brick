@@ -217,13 +217,13 @@ BrWithAnchoredAptitude >> onHideWish: aWish [
 			aWish consumed: true.
 			^ self hide ].
 	
-	"if anchor is not specified and the souce is within the widget - hide"
+	"if anchor is not specified and the source is within the widget - hide"
 	(aWish anchor isNil and: [ aWish source = widget or: [ aWish source hasParent: widget ] ])
 		ifTrue: [ 
 			aWish consumed: true.
 			^ self hide ].
 		
-	"if anchor is not specified and the souce is within the outer container - hide"
+	"if anchor is not specified and the source is within the outer container - hide"
 	((aWish anchor isNil and: [ outerContainer notNil ]) and: [ aWish source = outerContainer or: [ aWish source hasParent: outerContainer ] ])
 		ifTrue: [ 
 			aWish consumed: true.

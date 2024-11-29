@@ -43,13 +43,15 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 { #category : #'api - converting' }
 BrMenuItems >> asElement [
 	| anElement |
-	anElement := BrSimpleList new
+	anElement := BrSimpleList new.
+	anElement
 			fitContentLimited;
 			items: self items;
 			stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
 			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 			padding: (BlInsets all: 5);
-			border: (BlBorder paint: Color veryLightGray width: 1).
+			border: (BlBorder paint: Color veryLightGray width: 1);
+			background: anElement theme default contentBackgroundColor.
 
 	self announcer weak
 		when: BrMenuHideRequest

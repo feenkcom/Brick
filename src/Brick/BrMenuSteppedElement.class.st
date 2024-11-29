@@ -15,8 +15,11 @@ BrMenuSteppedElement >> initialize [
 
 	self
 		constraintsDo: [ :c | 
+			c ignoreByLayout.
 			c horizontal matchParent.
-			c vertical matchParent ].
+			c vertical matchParent ];
+		preventMouseEvents;
+		clipChildren: false.
 
 	self
 		when: BrMenuShowSubmenuWish
