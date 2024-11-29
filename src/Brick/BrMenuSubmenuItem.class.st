@@ -42,14 +42,14 @@ BrMenuSubmenuItem >> onSelectionChanged [
 
 { #category : #'api - submenu' }
 BrMenuSubmenuItem >> submenu [
-	<return: #BrMenuItems>
+	<return: #BrMenu>
 	^ submenu
 ]
 
 { #category : #'api - submenu' }
-BrMenuSubmenuItem >> submenu: aBrMenuItems [
-	aBrMenuItems parent: self.
-	submenu := aBrMenuItems
+BrMenuSubmenuItem >> submenu: aBrMenu [
+	aBrMenu parent: self.
+	submenu := aBrMenu
 ]
 
 { #category : #'api - submenu' }
