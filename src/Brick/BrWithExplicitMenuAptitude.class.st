@@ -136,11 +136,14 @@ BrWithExplicitMenuAptitude >> onWidgetPositionChanged: anEvent [
 
 { #category : #private }
 BrWithExplicitMenuAptitude >> relocate [
-	menuContainer isAttachedToSceneGraph ifFalse: [ ^ self ].
 	self widgetDo: [ :aWidget | 
-		menuContainer layoutDo: [ :aLayout | 
-			aLayout anchorBounds: (aWidget bounds 
-				inParent: menuContainer parent) asRectangle ] ]
+		aWidget isVisibleInSpace 
+			ifFalse: [ menuContainer visibility: BlVisibility gone ]
+			ifTrue: [ menuContainer visibility: BlVisibility visible ].
+		menuContainer parent ifNotNil: [ :aParent |
+			menuContainer layoutDo: [ :aLayout | 
+				aLayout anchorBounds: (aWidget bounds 
+					inParent: aParent) asRectangle ] ] ]
 ]
 
 { #category : #'api - displaying' }
