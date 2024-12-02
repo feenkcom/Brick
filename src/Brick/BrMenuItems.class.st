@@ -42,7 +42,7 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 
 { #category : #'api - converting' }
 BrMenuItems >> asElement [
-	^ self asSimpleListElement
+	^ self elementType new menuModel: self
 ]
 
 { #category : #'api - converting' }
@@ -86,30 +86,6 @@ BrMenuItems >> asGroupedListElement [
 ]
 
 { #category : #'api - converting' }
-BrMenuItems >> asSimpleListElement [
-	| anElement |
-	anElement := BrSimpleList new.
-	anElement
-		fitContentLimited;
-		items: self items;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-		padding: (BlInsets all: 5);
-		border: (BlBorder paint: Color veryLightGray width: 1);
-		background: anElement theme default contentBackgroundColor;
-		stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
-		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | anItemObject elementType ];
-		itemStencil: [ :anItemType | anItemType new ];
-		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
-			anItemElement menuModel: anItemObject ].
-
-	self announcer weak
-		when: BrMenuHideRequest
-		send: #removeFromParent
-		to: anElement.
-	^ anElement
-]
-
-{ #category : #'api - converting' }
 BrMenuItems >> asTreeElement [
 	| anElement |
 	anElement := BrSimpleTree new.
@@ -142,6 +118,11 @@ BrMenuItems >> deselectedItem: aMenuItem [
 	selectedItem == aMenuItem ifFalse: [ ^ self ].
 
 	selectedItem := nil
+]
+
+{ #category : #'api - converting' }
+BrMenuItems >> elementType [
+	^ BrMenuItemsElement
 ]
 
 { #category : #'api - grouping' }
