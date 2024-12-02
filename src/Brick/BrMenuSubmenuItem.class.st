@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuSubmenuItem,
-	#superclass : #BrMenuItem,
+	#superclass : #BrMenuLabeledItem,
 	#instVars : [
 		'submenu'
 	],
@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #'api - converting' }
-BrMenuSubmenuItem >> asElement [
-	^ BrMenuSubmenuItemElement new menuModel: self
+BrMenuSubmenuItem >> elementType [
+	^ BrMenuSubmenuItemElement
 ]
 
 { #category : #'gt - extensions' }

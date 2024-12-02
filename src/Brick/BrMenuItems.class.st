@@ -92,11 +92,15 @@ BrMenuItems >> asSimpleListElement [
 	anElement
 		fitContentLimited;
 		items: self items;
-		stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		padding: (BlInsets all: 5);
 		border: (BlBorder paint: Color veryLightGray width: 1);
-		background: anElement theme default contentBackgroundColor.
+		background: anElement theme default contentBackgroundColor;
+		stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
+		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | anItemObject elementType ];
+		itemStencil: [ :anItemType | anItemType new ];
+		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
+			anItemElement menuModel: anItemObject ].
 
 	self announcer weak
 		when: BrMenuHideRequest

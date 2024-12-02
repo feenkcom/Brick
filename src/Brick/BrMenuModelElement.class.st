@@ -1,6 +1,8 @@
 Class {
 	#name : #BrMenuModelElement,
 	#superclass : #BlElement,
+	#traits : 'TBrLayoutResizable',
+	#classTraits : 'TBrLayoutResizable classTrait',
 	#instVars : [
 		'menuModel'
 	],
