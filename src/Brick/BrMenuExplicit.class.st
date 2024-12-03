@@ -2,7 +2,7 @@ Class {
 	#name : #BrMenuExplicit,
 	#superclass : #BrMenu,
 	#instVars : [
-		'stencil'
+		'stencilBuilder'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -10,7 +10,9 @@ Class {
 { #category : #'api - converting' }
 BrMenuExplicit >> asElement [
 	| anElement |
-	anElement := self stencil asElement.
+	anElement := self stencil
+			menuModel: self;
+			asElement.
 
 	self announcer weak
 		when: BrMenuHideRequest
@@ -21,10 +23,11 @@ BrMenuExplicit >> asElement [
 
 { #category : #accessing }
 BrMenuExplicit >> stencil [
-	^ stencil
+	<return: #BrMenuExplicitStencilBuilder>
+	^ stencilBuilder
 ]
 
 { #category : #accessing }
 BrMenuExplicit >> stencil: aBrStencil [
-	stencil := aBrStencil asStencil
+	stencilBuilder := aBrStencil asStencilBuilder: BrMenuExplicitStencilBuilder
 ]
