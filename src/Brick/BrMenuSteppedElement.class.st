@@ -1,8 +1,19 @@
 Class {
 	#name : #BrMenuSteppedElement,
 	#superclass : #BrMenuModelElement,
+	#instVars : [
+		'elementCache'
+	],
 	#category : #'Brick-Menu - UI'
 }
+
+{ #category : #private }
+BrMenuSteppedElement >> cachedSubmenuElement: aSubmenu [
+	^ elementCache
+		at: aSubmenu
+		ifPresent: [ :anElement | anElement removeFromParent ]
+		ifAbsentPut: [ aSubmenu asElement ]
+]
 
 { #category : #initialization }
 BrMenuSteppedElement >> defaultLayout [
@@ -12,6 +23,7 @@ BrMenuSteppedElement >> defaultLayout [
 { #category : #initialization }
 BrMenuSteppedElement >> initialize [
 	super initialize.
+	elementCache := IdentityDictionary new.
 
 	self
 		constraintsDo: [ :c | 
@@ -34,19 +46,18 @@ BrMenuSteppedElement >> onMenuModelChanged [
 
 { #category : #'event handling' }
 BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
-	| aSourceElement aSubmenuElement |
+	| aSourceElement aSubmenuElement aSubmenu |
 	anEvent consumed: true.
+	aSubmenu := anEvent submenu.
+	aSubmenuElement := self cachedSubmenuElement: aSubmenu.
 	aSourceElement := anEvent fromElement.
-	aSubmenuElement := anEvent submenu asElement.
 	aSubmenuElement
-				constraintsDo: [ :c | 
-					c stepped
-						relativeBounds: (aSourceElement bounds) ].
-	self addChild: aSubmenuElement.
+		constraintsDo: [ :c | c stepped relativeBounds: aSourceElement bounds ].
+	self addChild: aSubmenuElement
 ]
 
 { #category : #'private - updating' }
 BrMenuSteppedElement >> updateElement [
 	self removeChildren.
-	self addChild: self menuModel asElement
+	self addChild: (self cachedSubmenuElement: self menuModel)
 ]

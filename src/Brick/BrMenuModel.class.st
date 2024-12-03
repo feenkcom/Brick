@@ -59,6 +59,11 @@ BrMenuModel >> initialize [
 	announcer := Announcer new.
 ]
 
+{ #category : #'api - submenu' }
+BrMenuModel >> items [
+	^ #()
+]
+
 { #category : #accessing }
 BrMenuModel >> parent [
 	<return: #BrMenuItem or: nil>

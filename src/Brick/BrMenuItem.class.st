@@ -2,7 +2,6 @@ Class {
 	#name : #BrMenuItem,
 	#superclass : #BrMenuModel,
 	#instVars : [
-		'labelModel',
 		'isSelected',
 		'group'
 	],
@@ -17,12 +16,20 @@ BrMenuItem class >> isAbstract [
 { #category : #'api - converting' }
 BrMenuItem >> asElement [
 	<return: #BlElement>
-	^ self labelModel asElement
+	^ self elementType new menuModel: self
 ]
 
 { #category : #'api - selection' }
 BrMenuItem >> deselect [
 	^ self isSelected: false
+]
+
+{ #category : #'api - converting' }
+BrMenuItem >> elementType [
+	"Return element class that is used do display the menu item"
+
+	<return: #'BlElement class'>
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - grouping' }
@@ -83,46 +90,6 @@ BrMenuItem >> isSelected: aBoolean [
 	isSelected := aBoolean.
 	self onSelectionChanged.
 	self notifySelectionChanged.
-]
-
-{ #category : #'api - label model' }
-BrMenuItem >> label: aLabelString [
-	self labelModel: (BrMenuTextLabelModel new text: aLabelString)
-]
-
-{ #category : #'api - label model' }
-BrMenuItem >> label: aLabelString preview: aPreviewString [
-	self
-		labelModel: (BrMenuTextLabelModel new
-				text: aLabelString;
-				preview: aPreviewString)
-]
-
-{ #category : #'api - label model' }
-BrMenuItem >> label: aLabelString preview: aPreviewString shortcut: aShortcutString [
-	self
-		labelModel: (BrMenuTextLabelModel new
-				text: aLabelString;
-				preview: aPreviewString;
-				shortcut: aShortcutString)
-]
-
-{ #category : #'api - label model' }
-BrMenuItem >> label: aLabelString shortcut: aShortcutString [
-	self
-		labelModel: (BrMenuTextLabelModel new
-				text: aLabelString;
-				shortcut: aShortcutString)
-]
-
-{ #category : #'api - label model' }
-BrMenuItem >> labelModel [
-	^ labelModel
-]
-
-{ #category : #'api - label model' }
-BrMenuItem >> labelModel: aLabelModel [
-	labelModel := aLabelModel
 ]
 
 { #category : #accessing }
