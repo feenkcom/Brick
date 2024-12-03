@@ -36,6 +36,23 @@ BrMenuSteppedElement >> initialize [
 	self
 		when: BrMenuShowSubmenuWish
 		do: [ :anEvent | self onShowSubmenuWish: anEvent ].
+	self 
+		when: BrMenuDetachWish
+		do: [ :anEvent | self onDetachWish: anEvent ]
+]
+
+{ #category : #'event handling' }
+BrMenuSteppedElement >> onDetachWish: anEvent [
+	| aMenuModel anElement |
+	anEvent consumed: true.
+	aMenuModel := anEvent menuModel.
+	aMenuModel ifNil: [
+		elementCache keysAndValuesDo: [ :eachMenuModel :eachElement | 
+			eachElement = anEvent source ifTrue: [
+				aMenuModel := eachMenuModel ] ] ].
+	aMenuModel ifNil: [ ^ self ].
+	anElement := elementCache removeKey: aMenuModel ifAbsent: [ nil ].
+	aMenuModel announcer unsubscribe: anElement
 ]
 
 { #category : #'event handling' }
