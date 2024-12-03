@@ -5,17 +5,25 @@ Class {
 }
 
 { #category : #initialization }
+BrMenuDragHandleElement >> defaultLayout [
+	^ BlFrameLayout new
+]
+
+{ #category : #initialization }
 BrMenuDragHandleElement >> initialize [
+	| anElement |
 	super initialize.
-	self background: Color veryLightGray.
-	self geometry: BlStadiumGeometry new.
-	self exact: 12 @ 4.
+	anElement := BrFrame new
+			background: Color veryLightGray;
+			geometry: BlStadiumGeometry new;
+			exact: 12 @ 4.
+	self addChild: anElement.
+	self padding: (BlInsets all: 3).
+	self fitContent.
 	
 	self mouseCursor: BlGrabCursor new.
 	self
 		when: BlMouseDownEvent
 		do: [ :anEvent | self mouseCursor: BlGrabbingCursor new ].
-	self
-		when: BlMouseUpEvent
-		do: [ :anEvent | self mouseCursor: BlGrabCursor new ].
+	self when: BlMouseUpEvent do: [ :anEvent | self mouseCursor: BlGrabCursor new ]
 ]

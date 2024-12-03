@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'handleElement',
 		'pullHandler',
-		'closeButton'
+		'closeButton',
+		'isPinned'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -16,7 +17,6 @@ BrMenuPinnableAptitude >> addCloseButton [
 	self widgetDo: [ :anElement |
 		anElement clipChildren: false.
 		closeButton := self newCloseButton.
-		closeButton visibility: BlVisibility gone.
 		closeButton action: [ :aButton |
 			self onCloseFrom: aButton ].
 		self
@@ -31,31 +31,19 @@ BrMenuPinnableAptitude >> addCloseButton [
 { #category : #initialization }
 BrMenuPinnableAptitude >> initialize [
 	super initialize.
+	isPinned := false.
 	pullHandler := BlPullHandler new disallowOutOfBounds.
 	handleElement := self newHandleElement.
 	handleElement addEventHandler: pullHandler.
 	closeButton := nil.
-	
-	self
-		addChange:
-			(BrLookChange new
-				up: [ :e | 
-					self widget addChild: handleElement.
-					pullHandler targetElement: self widget ];
-				down: [ :e | 
-					handleElement removeFromParent.
-					pullHandler targetElement: nil.
-					closeButton ifNotNil: #removeFromParent.
-					closeButton := nil ];
-				yourself).
 ]
 
 { #category : #initialization }
 BrMenuPinnableAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self when: BlPullStartEvent doOnce: [ :anEvent | self onPullStartEvent: anEvent ].
-	self when: BlPullEndEvent doOnce: [ :anEvent | self onPullEndEvent: anEvent ]
+	self when: BlPullStartEvent do: [ :anEvent | self onPullStartEvent: anEvent ].
+	self when: BlPullEndEvent do: [ :anEvent | self onPullEndEvent: anEvent ]
 ]
 
 { #category : #'event handling' }
@@ -85,25 +73,44 @@ BrMenuPinnableAptitude >> onCloseFrom: aButton [
 	self widgetDo: [ :aWidget | 
 		BlTaskAction 
 			enqueueElement: aWidget 
-			action: [ aWidget removeFromParent ] ]
+			action: [ 
+				aWidget removeFromParent.
+				isPinned := false ] ]
+]
+
+{ #category : #'api - hooks' }
+BrMenuPinnableAptitude >> onInstalledIn: anElement [
+	super onInstalledIn: anElement.
+	self widget addChild: handleElement.
+	pullHandler targetElement: self widget
 ]
 
 { #category : #'event handling' }
-BrMenuPinnableAptitude >> onPullEndEvent: anEvent [ 
-	self widgetDo: [ :aWidget |
-		| aPosition aSpace |
-		anEvent consumed: true.
-	
-		aPosition := aWidget positionInSpace.
-		aSpace := aWidget space.
-		aWidget removeFromParent.
-		aSpace addChild: aWidget.
-		aWidget relocate: aPosition.
-		self addCloseButton ]
+BrMenuPinnableAptitude >> onPullEndEvent: anEvent [
+	isPinned ifTrue: [ ^ self ].
+	self
+		widgetDo: [ :aWidget | 
+			| aPosition aSpace isMenuInSpaceRoot aParent |
+			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
+			anEvent consumed: true.
+
+			aPosition := aWidget positionInSpace.
+			aParent := aWidget parent.
+			aSpace := aWidget space.
+			isMenuInSpaceRoot := (aParent ifNotNil: #parent) = (aSpace ifNotNil: #root).
+			aWidget removeFromParent.
+			NonInteractiveTranscript stdout show: isMenuInSpaceRoot; space.
+			isMenuInSpaceRoot
+				ifTrue: [ aSpace root addChild: aWidget before: aParent ]
+				ifFalse: [ aSpace root addChild: aWidget ].
+			aWidget relocate: aPosition.
+			self addCloseButton.
+			isPinned := true ]
 ]
 
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onPullStartEvent: anEvent [ 
+	isPinned ifTrue: [ ^ self ].
 	self widgetDo: [ :aWidget |
 		| aPosition |
 		anEvent consumed: true.
@@ -113,4 +120,14 @@ BrMenuPinnableAptitude >> onPullStartEvent: anEvent [
 		aWidget constraintsDo: [ :c | 
 			c ignoreByLayout ].
 		aWidget relocate: aPosition ]
+]
+
+{ #category : #'api - hooks' }
+BrMenuPinnableAptitude >> onUninstalledIn: anElement [
+	super onUninstalledIn: anElement.
+	handleElement removeFromParent.
+	pullHandler targetElement: nil.
+	closeButton ifNotNil: #removeFromParent.
+	closeButton := nil.
+	isPinned := false.
 ]
