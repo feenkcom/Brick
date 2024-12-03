@@ -9,9 +9,11 @@ BrMenuSubmenuItemElement >> initialize [
 	super initialize.
 	self initializeStyling.
 	self
-		addChild: (BrGlamorousVectorIcons play asElement
-				background: Color veryLightGray;
-				constraintsDo: [ :c | c linear vertical alignCenter ])
+		addChild: ((BrGlamorousVectorIcons play asElement background: Color veryLightGray)
+				asScalableElement
+				size: 14 @ 14;
+				constraintsDo: [ :c | c linear vertical alignCenter ];
+				margin: (BlInsets left: 10))
 ]
 
 { #category : #initialization }

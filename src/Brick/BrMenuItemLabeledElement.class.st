@@ -11,7 +11,8 @@ Class {
 BrMenuItemLabeledElement >> initialize [
 	super initialize.
 	self initializeLabelElement.
-	self addChild: labelElement as: #'menu--labeled'
+	self addChild: labelElement as: #'menu--labeled'.
+	self padding: (BlInsets top: 1 bottom: 1 left: 3 right: 3)
 ]
 
 { #category : #initialization }

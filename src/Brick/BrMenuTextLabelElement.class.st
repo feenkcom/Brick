@@ -40,9 +40,10 @@ BrMenuTextLabelElement >> initializeShortcutElement [
 	shortcutLabel := BrLabel new
 			fitContent;
 			text: '';
+			beSmallSize;
 			aptitude: (BrGlamorousLabelAptitude new
 					foreground: BrGlamorousColors disabledButtonTextColor;
-					glamorousRegularSmallSize).
+					glamorousCodeMiniSize).
 
 	shortcutElement := BrFrame new
 			fitContent;
@@ -50,7 +51,8 @@ BrMenuTextLabelElement >> initializeShortcutElement [
 			geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
 			border: (BlBorder paint: BrGlamorousColors disabledButtonTextColor width: 1);
 			addChild: shortcutLabel;
-			visibility: BlVisibility gone
+			visibility: BlVisibility gone;
+			margin: (BlInsets left: 10)
 ]
 
 { #category : #accessing }
