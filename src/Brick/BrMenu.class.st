@@ -6,5 +6,5 @@ Class {
 
 { #category : #'api - visibility' }
 BrMenu >> hide [
-	announcer announce: (BrMenuHideRequest new menuItems: self)
+	announcer announce: (BrMenuHideRequest new menuModel: self)
 ]

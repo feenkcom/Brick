@@ -157,7 +157,7 @@ BrWithExplicitMenuAptitude >> show [
 	
 	self widgetDo: [ :aWidget | 
 		| aParent |
-		aParent := aWidget space topMostParent.
+		aParent := aWidget space root.
 		self showIn: aParent ]
 ]
 
