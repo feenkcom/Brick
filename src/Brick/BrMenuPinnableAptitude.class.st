@@ -71,6 +71,7 @@ BrMenuPinnableAptitude >> newHandleElement [
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onCloseFrom: aButton [
 	self widgetDo: [ :aWidget | 
+		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 		BlTaskAction 
 			enqueueElement: aWidget 
 			action: [ 
@@ -97,7 +98,7 @@ BrMenuPinnableAptitude >> onPullEndEvent: anEvent [
 			aPosition := aWidget positionInSpace.
 			aParent := aWidget parent.
 			aSpace := aWidget space.
-			isMenuInSpaceRoot := (aParent ifNotNil: #parent) = (aSpace ifNotNil: #root).
+			isMenuInSpaceRoot := aParent parent = aSpace root.
 			aWidget removeFromParent.
 			NonInteractiveTranscript stdout show: isMenuInSpaceRoot; space.
 			isMenuInSpaceRoot
@@ -113,6 +114,7 @@ BrMenuPinnableAptitude >> onPullStartEvent: anEvent [
 	isPinned ifTrue: [ ^ self ].
 	self widgetDo: [ :aWidget |
 		| aPosition |
+		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 		anEvent consumed: true.
 	
 		aPosition := aWidget position.
