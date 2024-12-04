@@ -3,8 +3,3 @@ Class {
 	#superclass : #BrMenuModel,
 	#category : #'Brick-Menu - Model'
 }
-
-{ #category : #'api - visibility' }
-BrMenu >> hide [
-	announcer announce: (BrMenuHideRequest new menuModel: self)
-]

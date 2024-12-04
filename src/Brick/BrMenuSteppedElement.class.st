@@ -11,13 +11,19 @@ Class {
 BrMenuSteppedElement >> cachedSubmenuElement: aSubmenu [
 	^ elementCache
 		at: aSubmenu
-		ifPresent: [ :anElement | anElement removeFromParent ]
+		ifPresent: [ :anElement | anElement ]
 		ifAbsentPut: [ aSubmenu asElement ]
 ]
 
 { #category : #initialization }
 BrMenuSteppedElement >> defaultLayout [
 	^ BlSteppedLayout new
+]
+
+{ #category : #'api - testing' }
+BrMenuSteppedElement >> hasPinnedChildrenOnly [
+	^ elementCache allSatisfy: [ :anElement | 
+		(anElement parent == self) not ]
 ]
 
 { #category : #initialization }
@@ -39,6 +45,17 @@ BrMenuSteppedElement >> initialize [
 	self 
 		when: BrMenuDetachWish
 		do: [ :anEvent | self onDetachWish: anEvent ]
+]
+
+{ #category : #'api - testing' }
+BrMenuSteppedElement >> isUnpinnedChild: anElement [
+	"Return true if anElement is my child element of an unpinned menu."
+	
+	(anElement hasParent: self) ifFalse: [ ^ false ].
+
+	^ elementCache anySatisfy: [ :eachElement | 
+		anElement == eachElement or: [ 
+			anElement hasParent: eachElement ] ]
 ]
 
 { #category : #'event handling' }
@@ -63,18 +80,30 @@ BrMenuSteppedElement >> onMenuModelChanged [
 
 { #category : #'event handling' }
 BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
-	| aSourceElement aSubmenuElement aSubmenu |
+	| aSubmenuElement aSubmenu |
 	anEvent consumed: true.
 	aSubmenu := anEvent submenu.
 	aSubmenuElement := self cachedSubmenuElement: aSubmenu.
-	aSourceElement := anEvent fromElement.
-	aSubmenuElement
-		constraintsDo: [ :c | c stepped relativeBounds: aSourceElement bounds ].
-	self addChild: aSubmenuElement
+	aSubmenuElement constraintsDo: [ :c | 
+		c stepped relativeBounds: anEvent fromElement bounds ].
+	(aSubmenuElement parent == self) ifFalse: [ 
+		aSubmenuElement removeFromParent.
+		self addChild: aSubmenuElement ]
+]
+
+{ #category : #'api - displaying' }
+BrMenuSteppedElement >> show [
+	| anElement |
+	anElement := self cachedSubmenuElement: self menuModel.
+	(anElement parent == self) ifFalse: [ 
+		anElement removeFromParent.
+		self addChild: anElement ]
 ]
 
 { #category : #'private - updating' }
 BrMenuSteppedElement >> updateElement [
-	self removeChildren.
-	self addChild: (self cachedSubmenuElement: self menuModel)
+	elementCache keysAndValuesDo: [ :aMenu :anElement | 
+		anElement removeFromParent ].
+	elementCache removeAll.
+	self show
 ]

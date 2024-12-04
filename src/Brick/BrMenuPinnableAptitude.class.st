@@ -5,7 +5,8 @@ Class {
 		'handleElement',
 		'pullHandler',
 		'closeButton',
-		'isPinned'
+		'isPinned',
+		'pinner'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -28,6 +29,20 @@ BrMenuPinnableAptitude >> addCloseButton [
 		anElement addChild: closeButton ]
 ]
 
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beRelativePinner [
+	"I keep dragged menus in a same parent.
+	As a consequence, pinned widgets keep relative position to 
+	its original element (handle)."
+
+	pinner := BrMenuRelativePinner new
+]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beSpaceRootPinner [
+	pinner := BrMenuSpaceRootPinner new
+]
+
 { #category : #initialization }
 BrMenuPinnableAptitude >> initialize [
 	super initialize.
@@ -36,6 +51,7 @@ BrMenuPinnableAptitude >> initialize [
 	handleElement := self newHandleElement.
 	handleElement addEventHandler: pullHandler.
 	closeButton := nil.
+	pinner := BrMenuRelativePinner new
 ]
 
 { #category : #initialization }
@@ -91,20 +107,9 @@ BrMenuPinnableAptitude >> onPullEndEvent: anEvent [
 	isPinned ifTrue: [ ^ self ].
 	self
 		widgetDo: [ :aWidget | 
-			| aPosition aSpace isMenuInSpaceRoot aParent |
 			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 			anEvent consumed: true.
-
-			aPosition := aWidget positionInSpace.
-			aParent := aWidget parent.
-			aSpace := aWidget space.
-			isMenuInSpaceRoot := aParent parent = aSpace root.
-			aWidget removeFromParent.
-			NonInteractiveTranscript stdout show: isMenuInSpaceRoot; space.
-			isMenuInSpaceRoot
-				ifTrue: [ aSpace root addChild: aWidget before: aParent ]
-				ifFalse: [ aSpace root addChild: aWidget ].
-			aWidget relocate: aPosition.
+			pinner pinMenuElement: aWidget.
 			self addCloseButton.
 			isPinned := true ]
 ]
