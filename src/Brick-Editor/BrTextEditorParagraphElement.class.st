@@ -385,13 +385,23 @@ BrTextEditorParagraphElement >> onLayout: aBounds context: aBlElementBoundsUpdat
 
 { #category : #layout }
 BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
-	| aParagraphLayoutWidth aParagraph |
+	| aParagraphLayoutWidth aParagraph didAnyPlaceholderChange|
 	
+	didAnyPlaceholderChange := false.
 	self placeholderElements
-		do: [ :eachElement | 
+		do: [ :eachElement |
+			| aMeasuredExtent |
+			
+			aMeasuredExtent := eachElement measuredExtent.
+			
 			self layout
 				measureChildWithMargins: eachElement
-				parentSpec: anExtentMeasurementSpec ].
+				parentSpec: anExtentMeasurementSpec.
+				
+			didAnyPlaceholderChange := didAnyPlaceholderChange or: [ (aMeasuredExtent closeTo: eachElement measuredExtent) not ] ].
+
+	didAnyPlaceholderChange ifTrue: [
+		paragraph value: nil ].
 
 	aParagraph := paragraph
 			ifNonePut: [ self invalidate.
