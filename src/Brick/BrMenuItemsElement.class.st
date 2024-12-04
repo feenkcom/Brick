@@ -17,8 +17,10 @@ BrMenuItemsElement >> initialize [
 	super initialize.
 	self fitContentLimited.
 
+	self background: self theme default contentBackgroundColor.
 	self initializeListElement.
-	self addChild: listElement as: #'menu--list'
+	self addChild: listElement as: #'menu--list'.
+	self addAptitude: BrShadowAptitude new
 ]
 
 { #category : #initialization }
@@ -26,10 +28,10 @@ BrMenuItemsElement >> initializeListElement [
 	listElement := BrSimpleList new
 		fitContentLimited;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-		padding: (BlInsets all: 5);
 		border: (BlBorder paint: Color veryLightGray width: 1);
 		background: self theme default contentBackgroundColor;
-		stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
+		stencil: [ :aRowValue :anIndex :aListWidget | 
+			aRowValue asElement ];
 		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | anItemObject elementType ];
 		itemStencil: [ :anItemType | anItemType new ];
 		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |

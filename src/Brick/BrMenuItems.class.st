@@ -53,20 +53,18 @@ BrMenuItems >> asGroupedListElement [
 				BrGroup new
 					items: each items;
 					domainObject: each configuration;
+					itemType: [ :aFactory :anObject :anIndex |
+						anObject elementType ];
 					itemStencil: [ :anItemType | 
-						BrLabel new
-							beSmallSize;
-							aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
-							hMatchParent;
-							vFitContent;
-							margin: (BlInsets top: 3 left: 0) ];
-					itemDataBinder: [ :anItemElement :anItem | anItemElement text: anItem labelModel text ] ].
+						anItemType new ];
+					itemDataBinder: [ :anItemElement :anItem | 
+						anItemElement menuModel: anItem ] ].
 
 	anElement := BrGroupedList new.
 	anElement
 		fitContentLimited;
-		padding: (BlInsets all: 5);
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+		padding: (BlInsets all: 1);
 		border: (BlBorder paint: Color veryLightGray width: 1);
 		background: anElement theme default contentBackgroundColor;
 		headerElementStencil: [ BrLabel new
@@ -74,8 +72,9 @@ BrMenuItems >> asGroupedListElement [
 				aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
 				hMatchParent;
 				vFitContent;
-				margin: (BlInsets top: 3 left: 0) ];
-		headerDataBinder: [ :aLabelElement :aGroup | aLabelElement text: aGroup domainObject name asString ];
+				margin: (BlInsets top: 3) ];
+		headerDataBinder: [ :aLabelElement :aGroup | 
+				aLabelElement text: aGroup domainObject name asString ];
 		groups: someGroups.
 
 	self announcer weak
