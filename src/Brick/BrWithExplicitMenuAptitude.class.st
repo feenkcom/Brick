@@ -9,7 +9,9 @@ Class {
 		'extentChangedEventHandler',
 		'positionInSpaceChangedEventHandler',
 		'clickOutsideEventHandler',
-		'pressEscEventHandler'
+		'pressEscEventHandler',
+		'removedFromSceneEventHandler',
+		'addedToSceneEventHandler'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -21,7 +23,9 @@ BrWithExplicitMenuAptitude >> canHide [
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canShow [
-	self visible ifTrue: [ ^ false ].
+	self visible ifTrue: [ 
+		menuContainer hasPinnedChildrenOnly ifFalse: [
+			^ false ] ].
 	self widgetDo: [ :aWidget | 
 		^ aWidget isAttachedToSceneGraph 
 			and: [ aWidget visibility shouldDraw ] ].
@@ -50,17 +54,25 @@ BrWithExplicitMenuAptitude >> hasModifiers: anEvent [
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
-
+	menuContainer menuModel ifNotNil: [ :aMenu | 
+		aMenu hide.
+		menuContainer childrenCount isZero ifFalse: [
+			"Only pinned children remains. 
+			We therefore keep the menu container."
+			^ self ] ].
+	
 	self
 		widgetDo: [ :aWidget | 
-			| aParent |
+			| aContainerParent |
 			aWidget
 				removeEventHandler: extentChangedEventHandler;
-				removeEventHandler: positionInSpaceChangedEventHandler.
-			aParent := menuContainer parent.
-			aParent removeEventFilter: clickOutsideEventHandler.
-			aParent removeShortcut: pressEscEventHandler.
-			menuContainer removeFromParent ]
+				removeEventHandler: positionInSpaceChangedEventHandler;
+				removeEventHandler: addedToSceneEventHandler;
+				removeEventHandler: removedFromSceneEventHandler.
+			aContainerParent := menuContainer parent.
+			aContainerParent removeEventFilter: clickOutsideEventHandler.
+			aContainerParent removeShortcut: pressEscEventHandler.
+			menuContainer removeFromParent. ]
 ]
 
 { #category : #initialization }
@@ -81,6 +93,14 @@ BrWithExplicitMenuAptitude >> initialize [
 
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> initializeEventHandlers [
+	addedToSceneEventHandler := BlEventHandler
+			on: BlElementAddedToSceneGraphEvent
+			do: [ :anEvent | self onWidgetAddedToSceneGraph: anEvent ].
+
+	removedFromSceneEventHandler := BlEventHandler
+			on: BlElementRemovedFromSceneGraphEvent
+			do: [ :anEvent | self onWidgetRemovedFromSceneGraph: anEvent ].
+
 	extentChangedEventHandler := BlEventHandler
 			on: BlElementExtentChangedEvent
 			do: [ :anEvent | self onWidgetExtentChanged: anEvent ].
@@ -125,8 +145,13 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 		ifFalse: [ ^ self ].
 
 	anEvent consumed: true.
-
+	
 	self show
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onWidgetAddedToSceneGraph: anEvent [
+	menuContainer visibility: BlVisibility visible
 ]
 
 { #category : #'event handling' }
@@ -137,6 +162,11 @@ BrWithExplicitMenuAptitude >> onWidgetExtentChanged: anEvent [
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWidgetPositionChanged: anEvent [ 
 	self visible ifTrue: [ self relocate ]
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onWidgetRemovedFromSceneGraph: anEvent [
+	menuContainer visibility: BlVisibility gone
 ]
 
 { #category : #private }
@@ -166,15 +196,19 @@ BrWithExplicitMenuAptitude >> showIn: anElement [
 	stencil ifNil: [ ^ self ].
 	self hide.
 	menuContainer menuModel: stencil create.
+	menuContainer show.
 	anElement addEventFilter: clickOutsideEventHandler.
 	anElement addShortcut: pressEscEventHandler.
 
 	self widgetDo: [ :aWidget |
 		aWidget 
 			addEventHandler: extentChangedEventHandler;
-			addEventHandler: positionInSpaceChangedEventHandler ].
+			addEventHandler: positionInSpaceChangedEventHandler;
+			addEventHandler: addedToSceneEventHandler;
+			addEventHandler: removedFromSceneEventHandler ].
 	
-	anElement addChild: menuContainer.
+	menuContainer parent == anElement ifFalse: [
+		anElement addChild: menuContainer ].
 	self relocate
 ]
 

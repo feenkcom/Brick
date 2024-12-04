@@ -53,6 +53,11 @@ BrMenuModel >> gtRootItems [
 	^ { self }
 ]
 
+{ #category : #'api - visibility' }
+BrMenuModel >> hide [
+	announcer announce: (BrMenuHideRequest new menuModel: self)
+]
+
 { #category : #initialization }
 BrMenuModel >> initialize [
 	super initialize.

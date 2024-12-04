@@ -71,6 +71,12 @@ BrMenuItem >> gtItemSelection [
 		ifFalse: [ 'no' asRopedText foreground: BrGlamorousColors disabledButtonTextColor ]
 ]
 
+{ #category : #'api - visibility' }
+BrMenuItem >> hide [
+	self deselect.
+	super hide
+]
+
 { #category : #initialization }
 BrMenuItem >> initialize [
 	super initialize.
