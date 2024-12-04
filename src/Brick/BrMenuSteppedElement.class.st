@@ -47,6 +47,17 @@ BrMenuSteppedElement >> initialize [
 		do: [ :anEvent | self onDetachWish: anEvent ]
 ]
 
+{ #category : #'api - testing' }
+BrMenuSteppedElement >> isUnpinnedChild: anElement [
+	"Return true if anElement is my child element of an unpinned menu."
+	
+	(anElement hasParent: self) ifFalse: [ ^ false ].
+
+	^ elementCache anySatisfy: [ :eachElement | 
+		anElement == eachElement or: [ 
+			anElement hasParent: eachElement ] ]
+]
+
 { #category : #'event handling' }
 BrMenuSteppedElement >> onDetachWish: anEvent [
 	| aMenuModel anElement |

@@ -36,7 +36,8 @@ BrWithExplicitMenuAptitude >> canShow [
 BrWithExplicitMenuAptitude >> handleClickedOutsideMouseUpEvent: anEvent [
 	"Hide when clicked outside of container" 
 	anEvent target == menuContainer ifTrue: [ ^ self ].
-	(anEvent target hasParent: menuContainer) ifTrue: [ ^ self ].
+	(menuContainer isUnpinnedChild: anEvent target)
+		ifTrue: [ ^ self ].
 	self hide.
 ]
 
