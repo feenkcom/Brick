@@ -64,16 +64,13 @@ BrWithExplicitMenuAptitude >> hide [
 	
 	self
 		widgetDo: [ :aWidget | 
-			| aContainerParent |
 			aWidget
 				removeEventHandler: extentChangedEventHandler;
 				removeEventHandler: positionInSpaceChangedEventHandler;
 				removeEventHandler: addedToSceneEventHandler;
-				removeEventHandler: removedFromSceneEventHandler.
-			aContainerParent := menuContainer parent.
-			aContainerParent removeEventFilter: clickOutsideEventHandler.
-			aContainerParent removeShortcut: pressEscEventHandler.
-			menuContainer removeFromParent. ]
+				removeEventHandler: removedFromSceneEventHandler ].
+	
+	self temporaryHide
 ]
 
 { #category : #initialization }
@@ -152,7 +149,7 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWidgetAddedToSceneGraph: anEvent [
-	menuContainer visibility: BlVisibility visible
+	self temporaryShow
 ]
 
 { #category : #'event handling' }
@@ -167,7 +164,7 @@ BrWithExplicitMenuAptitude >> onWidgetPositionChanged: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWidgetRemovedFromSceneGraph: anEvent [
-	menuContainer visibility: BlVisibility gone
+	self temporaryHide
 ]
 
 { #category : #private }
@@ -198,9 +195,7 @@ BrWithExplicitMenuAptitude >> showIn: anElement [
 	self hide.
 	menuContainer menuModel: stencil create.
 	menuContainer show.
-	anElement addEventFilter: clickOutsideEventHandler.
-	anElement addShortcut: pressEscEventHandler.
-
+	
 	self widgetDo: [ :aWidget |
 		aWidget 
 			addEventHandler: extentChangedEventHandler;
@@ -208,9 +203,7 @@ BrWithExplicitMenuAptitude >> showIn: anElement [
 			addEventHandler: addedToSceneEventHandler;
 			addEventHandler: removedFromSceneEventHandler ].
 	
-	menuContainer parent == anElement ifFalse: [
-		anElement addChild: menuContainer ].
-	self relocate
+	self temporaryShowIn: anElement
 ]
 
 { #category : #accessing }
@@ -223,6 +216,39 @@ BrWithExplicitMenuAptitude >> stencil: aStencil [
 	"Set a stencil that creates a menu model"
 
 	stencil := aStencil asStencil
+]
+
+{ #category : #private }
+BrWithExplicitMenuAptitude >> temporaryHide [
+	"Temporary hide without destroying menu content"
+
+	self
+		widgetDo: [ :aWidget | 
+			| aContainerParent |
+			aContainerParent := menuContainer parent.
+			aContainerParent removeEventFilter: clickOutsideEventHandler.
+			aContainerParent removeShortcut: pressEscEventHandler.
+			menuContainer removeFromParent ]
+]
+
+{ #category : #private }
+BrWithExplicitMenuAptitude >> temporaryShow [
+	"Re-add temporary hiden menu container without reconstructing its menu content"
+
+	self widgetDo: [ :aWidget | 
+		| aParent |
+		aParent := aWidget space root.
+		self temporaryShowIn: aParent ]
+]
+
+{ #category : #private }
+BrWithExplicitMenuAptitude >> temporaryShowIn: anElement [
+	anElement addEventFilter: clickOutsideEventHandler.
+	anElement addShortcut: pressEscEventHandler.
+	
+	menuContainer parent == anElement ifFalse: [
+		anElement addChild: menuContainer ].
+	self relocate
 ]
 
 { #category : #'api - menu' }
