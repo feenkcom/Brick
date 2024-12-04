@@ -30,6 +30,16 @@ BrMenuItemGroupConfiguration >> name: anObject [
 	name := anObject
 ]
 
+{ #category : #printing }
+BrMenuItemGroupConfiguration >> printOn: aStream [
+	super printOn: aStream.
+
+	aStream
+		nextPut: $(;
+		nextPutAll: self name asString;
+		nextPut: $)
+]
+
 { #category : #accessing }
 BrMenuItemGroupConfiguration >> priority [
 	^ priority

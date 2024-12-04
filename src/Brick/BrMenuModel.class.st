@@ -25,25 +25,59 @@ BrMenuModel >> asElement [
 ]
 
 { #category : #'gt - extensions' }
-BrMenuModel >> gtItemsFor: aView [
+BrMenuModel >> gtItemChildren [
+	^ Array empty
+]
+
+{ #category : #'gt - extensions' }
+BrMenuModel >> gtItemLabel [
+	^ self gtDisplayString
+]
+
+{ #category : #'gt - extensions' }
+BrMenuModel >> gtParentsFor: aView [
 	<gtView>
-	^ aView columnedTree
-		title: 'Menu items';
-		items: [ self items ifNil: [ #() ] ];
-		children: #gtItemChildren;
-		expandAll;
-		column: 'Label' text: [ :anItem | anItem gtItemLabel ];
-		column: 'Selection'
-			text: [ :anItem | GtPhlowOverviewItem new 
-				boolean: anItem isSelected; 
-				description ]
-			weight: 0.2;
-		column: 'Depth'
-			text: [ :anItem | 
-				| aDepth |
-				aDepth := 1.
-				anItem parentsDo: [ aDepth := aDepth + 1 ].
-				aDepth ]
-			weight: 0.2;
-		column: 'Type' text: #menuType weight: 0.5
+	self parent ifNil: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Parents';
+		items: [ Array streamContents: [ :aStream | 
+			self parentsDo: [ :aParent | aStream nextPut: aParent ] ] ];
+		column: 'Index'
+			text: [ :_ :anIndex | anIndex ]
+			width: 40;
+		column: 'Parent' text: #gtItemLabel
+]
+
+{ #category : #'gt - extensions' }
+BrMenuModel >> gtRootItems [
+	^ { self }
+]
+
+{ #category : #initialization }
+BrMenuModel >> initialize [
+	super initialize.
+	announcer := Announcer new.
+]
+
+{ #category : #'api - submenu' }
+BrMenuModel >> items [
+	^ #()
+]
+
+{ #category : #accessing }
+BrMenuModel >> parent [
+	<return: #BrMenuItem or: nil>
+	^ parent
+]
+
+{ #category : #accessing }
+BrMenuModel >> parent: anObject [
+	parent := anObject
+]
+
+{ #category : #'api - parent' }
+BrMenuModel >> parentsDo: aBlock [
+	parent ifNotNil: [ :aParent |
+		aBlock cull: aParent.
+		aParent parentsDo: aBlock ]
 ]

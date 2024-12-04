@@ -4,14 +4,6 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
-{ #category : #'private - updating' }
-BrMenuItemElement >> addLabelElement [
-	| aLabelElement |
-	aLabelElement := self menuItem labelModel asElement.
-	self addChild: aLabelElement.
-	^ aLabelElement
-]
-
 { #category : #initialization }
 BrMenuItemElement >> defaultLayout [
 	^ BlLinearLayout horizontal
@@ -20,12 +12,10 @@ BrMenuItemElement >> defaultLayout [
 { #category : #initialization }
 BrMenuItemElement >> initialize [
 	super initialize.
-	self initializeViewModels.
-	self constraintsDo: [ :c | 
-		c horizontal matchParent.
-		c vertical fitContent ].
-	self initializeEventHandlers.
-	self initializeStyling.
+	self hMatchParent.
+	self vFitContent.
+
+	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ]
 ]
 
 { #category : #initialization }
@@ -37,18 +27,6 @@ BrMenuItemElement >> initializeCommonStyling [
 				pressed: [ :aStyle | aStyle background: self theme item pressedColor ])
 ]
 
-{ #category : #initialization }
-BrMenuItemElement >> initializeEventHandlers [
-]
-
-{ #category : #initialization }
-BrMenuItemElement >> initializeStyling [
-]
-
-{ #category : #initialization }
-BrMenuItemElement >> initializeViewModels [
-]
-
 { #category : #accessing }
 BrMenuItemElement >> menuItem [
 	^ self menuModel
@@ -57,12 +35,6 @@ BrMenuItemElement >> menuItem [
 { #category : #accessing }
 BrMenuItemElement >> menuItem: aMenuItem [
 	self menuModel: aMenuItem
-]
-
-{ #category : #'event handling' }
-BrMenuItemElement >> onMenuModelChanged [ 
-	super onMenuModelChanged.
-	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ]
 ]
 
 { #category : #'event handling' }

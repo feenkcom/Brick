@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuSubmenuItem,
-	#superclass : #BrMenuItem,
+	#superclass : #BrMenuLabeledItem,
 	#instVars : [
 		'submenu'
 	],
@@ -8,23 +8,13 @@ Class {
 }
 
 { #category : #'api - converting' }
-BrMenuSubmenuItem >> asElement [
-	^ BrMenuSubmenuItemElement new menuModel: self
+BrMenuSubmenuItem >> elementType [
+	^ BrMenuSubmenuItemElement
 ]
 
 { #category : #'gt - extensions' }
 BrMenuSubmenuItem >> gtItemChildren [
-	^ self submenu items
-]
-
-{ #category : #'gt - extensions' }
-BrMenuSubmenuItem >> gtSubmenuFor: aView [
-	<gtView>
-	submenu ifNil: [ ^ aView empty ].
-	^ aView forward
-		title: 'Menu items';
-		object: [ self submenu ];
-		view: #gtItemsFor:
+	^ self submenu gtItemChildren
 ]
 
 { #category : #initialization }
@@ -52,14 +42,14 @@ BrMenuSubmenuItem >> onSelectionChanged [
 
 { #category : #'api - submenu' }
 BrMenuSubmenuItem >> submenu [
-	<return: #BrMenuItems>
+	<return: #BrMenu>
 	^ submenu
 ]
 
 { #category : #'api - submenu' }
-BrMenuSubmenuItem >> submenu: aBrMenuItems [
-	aBrMenuItems parent: self.
-	submenu := aBrMenuItems
+BrMenuSubmenuItem >> submenu: aBrMenu [
+	aBrMenu parent: self.
+	submenu := aBrMenu
 ]
 
 { #category : #'api - submenu' }

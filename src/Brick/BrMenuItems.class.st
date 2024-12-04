@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuItems,
-	#superclass : #BrMenuModel,
+	#superclass : #BrMenu,
 	#instVars : [
 		'items',
 		'selectedItem'
@@ -42,17 +42,64 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 
 { #category : #'api - converting' }
 BrMenuItems >> asElement [
-	| anElement |
-	anElement := BrSimpleList new
-			fitContentLimited;
-			items: self items;
-			stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
-			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-			padding: (BlInsets all: 5);
-			border: (BlBorder paint: Color veryLightGray width: 1).
+	^ self elementType new menuModel: self
+]
+
+{ #category : #'api - converting' }
+BrMenuItems >> asGroupedListElement [
+	| anElement someGroups |
+	someGroups := self groups
+			collect: [ :each | 
+				BrGroup new
+					items: each items;
+					domainObject: each configuration;
+					itemType: [ :aFactory :anObject :anIndex |
+						anObject elementType ];
+					itemStencil: [ :anItemType | 
+						anItemType new ];
+					itemDataBinder: [ :anItemElement :anItem | 
+						anItemElement menuModel: anItem ] ].
+
+	anElement := BrGroupedList new.
+	anElement
+		fitContentLimited;
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+		padding: (BlInsets all: 1);
+		border: (BlBorder paint: Color veryLightGray width: 1);
+		background: anElement theme default contentBackgroundColor;
+		headerElementStencil: [ BrLabel new
+				beSmallSize;
+				aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
+				hMatchParent;
+				vFitContent;
+				margin: (BlInsets top: 3) ];
+		headerDataBinder: [ :aLabelElement :aGroup | 
+				aLabelElement text: aGroup domainObject name asString ];
+		groups: someGroups.
 
 	self announcer weak
-		when: BrMenuItemsHideRequest
+		when: BrMenuHideRequest
+		send: #removeFromParent
+		to: anElement.
+	^ anElement
+]
+
+{ #category : #'api - converting' }
+BrMenuItems >> asTreeElement [
+	| anElement |
+	anElement := BrSimpleTree new.
+	anElement
+		fitContentLimited;
+		stencil: [ :aRowValue :anIndex :aListWidget | aRowValue asElement ];
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+		padding: (BlInsets all: 5);
+		border: (BlBorder paint: Color veryLightGray width: 1);
+		background: anElement theme default contentBackgroundColor;
+		items: self groups lazy: #items;
+		expandUpTo: 2.
+
+	self announcer weak
+		when: BrMenuHideRequest
 		send: #removeFromParent
 		to: anElement.
 	^ anElement
@@ -70,6 +117,11 @@ BrMenuItems >> deselectedItem: aMenuItem [
 	selectedItem == aMenuItem ifFalse: [ ^ self ].
 
 	selectedItem := nil
+]
+
+{ #category : #'api - converting' }
+BrMenuItems >> elementType [
+	^ BrMenuItemsElement
 ]
 
 { #category : #'api - grouping' }
@@ -103,19 +155,29 @@ BrMenuItems >> gtGroupsFor: aView [
 		column: 'Depth'
 			text: #gtItemDepth
 			weight: 0.2;
-		column: 'Type' text: #class weight: 0.5
+		column: 'Type' text: #class weight: 0.5;
+		actionUpdateButton
+]
+
+{ #category : #'gt - extensions' }
+BrMenuItems >> gtItemChildren [
+	^ self items
+]
+
+{ #category : #'gt - extensions' }
+BrMenuItems >> gtRootItems [
+	^ self items
 ]
 
 { #category : #'api - visibility' }
 BrMenuItems >> hide [
 	self deselect.
-	announcer announce: (BrMenuItemsHideRequest new menuItems: self)
+	super hide.
 ]
 
 { #category : #initialization }
 BrMenuItems >> initialize [
 	super initialize.
-	announcer := Announcer new.
 	items := OrderedCollection new
 ]
 
@@ -145,16 +207,6 @@ BrMenuItems >> onMenuItemSelection: anAnnouncement [
 	anAnnouncement menuItem isSelected
 		ifTrue: [ self selectedItem: anAnnouncement menuItem ]
 		ifFalse: [ self deselectedItem: anAnnouncement menuItem ]
-]
-
-{ #category : #accessing }
-BrMenuItems >> parent [
-	^ parent
-]
-
-{ #category : #accessing }
-BrMenuItems >> parent: anObject [
-	parent := anObject
 ]
 
 { #category : #printing }

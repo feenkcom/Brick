@@ -10,7 +10,7 @@ Class {
 
 { #category : #accessing }
 BrMenuShowSubmenuWish >> fromElement [
-	^ fromElement
+	^ fromElement ifNil: [ self source ]
 ]
 
 { #category : #accessing }

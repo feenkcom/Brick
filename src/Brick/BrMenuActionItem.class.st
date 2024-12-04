@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuActionItem,
-	#superclass : #BrMenuItem,
+	#superclass : #BrMenuLabeledItem,
 	#instVars : [
 		'action'
 	],
@@ -18,6 +18,6 @@ BrMenuActionItem >> action: anObject [
 ]
 
 { #category : #'api - converting' }
-BrMenuActionItem >> asElement [
-	^ BrMenuActionItemElement new menuModel: self
+BrMenuActionItem >> elementType [
+	^ BrMenuActionItemElement
 ]
