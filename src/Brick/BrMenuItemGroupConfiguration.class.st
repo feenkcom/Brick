@@ -8,6 +8,13 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> refactoring [
+	^ self new
+		name: #Refactoring;
+		priority: 30
+]
+
 { #category : #accessing }
 BrMenuItemGroupConfiguration >> id [
 	^ self name

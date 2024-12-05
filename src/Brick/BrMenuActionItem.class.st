@@ -13,8 +13,11 @@ BrMenuActionItem >> action [
 ]
 
 { #category : #accessing }
-BrMenuActionItem >> action: anObject [
-	action := anObject
+BrMenuActionItem >> action: aBlock [
+	"Set a block that is evaluated on click events.
+	It has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
+
+	action := aBlock
 ]
 
 { #category : #'api - converting' }
