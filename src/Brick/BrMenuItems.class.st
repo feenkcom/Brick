@@ -3,13 +3,15 @@ Class {
 	#superclass : #BrMenu,
 	#instVars : [
 		'items',
-		'selectedItem'
+		'selectedItem',
+		'groups'
 	],
 	#category : #'Brick-Menu - Model'
 }
 
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
+	groups := nil.
 	aMenuItem parent: self parent.
 	self items add: aMenuItem.
 	
@@ -47,41 +49,12 @@ BrMenuItems >> asElement [
 
 { #category : #'api - converting' }
 BrMenuItems >> asGroupedListElement [
-	| anElement someGroups |
-	someGroups := self groups
-			collect: [ :each | 
-				BrGroup new
-					items: each items;
-					domainObject: each configuration;
-					itemType: [ :aFactory :anObject :anIndex |
-						anObject elementType ];
-					itemStencil: [ :anItemType | 
-						anItemType new ];
-					itemDataBinder: [ :anItemElement :anItem | 
-						anItemElement menuModel: anItem ] ].
+	^ BrMenuItemsGroupedElement new menuModel: self
+]
 
-	anElement := BrGroupedList new.
-	anElement
-		fitContentLimited;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-		padding: (BlInsets all: 1);
-		border: (BlBorder paint: Color veryLightGray width: 1);
-		background: anElement theme default contentBackgroundColor;
-		headerElementStencil: [ BrLabel new
-				beSmallSize;
-				aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
-				hMatchParent;
-				vFitContent;
-				margin: (BlInsets top: 3) ];
-		headerDataBinder: [ :aLabelElement :aGroup | 
-				aLabelElement text: aGroup domainObject name asString ];
-		groups: someGroups.
-
-	self announcer weak
-		when: BrMenuHideRequest
-		send: #removeFromParent
-		to: anElement.
-	^ anElement
+{ #category : #'api - converting' }
+BrMenuItems >> asSimpleListElement [
+	^ BrMenuItemsListElement new menuModel: self
 ]
 
 { #category : #'api - converting' }
@@ -121,13 +94,16 @@ BrMenuItems >> deselectedItem: aMenuItem [
 
 { #category : #'api - converting' }
 BrMenuItems >> elementType [
-	^ BrMenuItemsElement
+	^ self groups size > 1
+		ifFalse: [ BrMenuItemsListElement ]
+		ifTrue: [ BrMenuItemsGroupedElement ]
 ]
 
 { #category : #'api - grouping' }
 BrMenuItems >> groups [
 	<return: #Array of: #BrMenuItemGroup>
 	| aDictionary |
+	groups ifNotNil: [ ^ groups ].
 	aDictionary := Dictionary new.
 	self items
 		do: [ :eachItem | 
@@ -136,7 +112,8 @@ BrMenuItems >> groups [
 				ifPresent: [ :aGroup | aGroup addItem: eachItem ]
 				ifAbsentPut: [ BrMenuItemGroup new addItem: eachItem ] ].
 
-	^ aDictionary values sort: [ :a :b | a priority < b priority ]
+	groups := aDictionary values sort: [ :a :b | a priority < b priority ].
+	^ groups
 ]
 
 { #category : #'gt - extensions' }

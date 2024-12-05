@@ -1,5 +1,5 @@
 Class {
-	#name : #BrMenuItemsElement,
+	#name : #BrMenuItemsListElement,
 	#superclass : #BrMenuModelElement,
 	#instVars : [
 		'listElement'
@@ -8,50 +8,51 @@ Class {
 }
 
 { #category : #initialization }
-BrMenuItemsElement >> defaultLayout [
+BrMenuItemsListElement >> defaultLayout [
 	^ BlFrameLayout new
 ]
 
 { #category : #initialization }
-BrMenuItemsElement >> initialize [
+BrMenuItemsListElement >> initialize [
 	super initialize.
-	self fitContentLimited.
-
-	self background: self theme default contentBackgroundColor.
+	self
+		fitContentLimited;
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+		border: (BlBorder paint: Color veryLightGray width: 1);
+		outskirts: BlOutskirts outside;
+		background: self theme default contentBackgroundColor.
+	
 	self initializeListElement.
 	self addChild: listElement as: #'menu--list'.
 	self addAptitude: BrShadowAptitude new
 ]
 
 { #category : #initialization }
-BrMenuItemsElement >> initializeListElement [
+BrMenuItemsListElement >> initializeListElement [
 	listElement := BrSimpleList new
 		fitContentLimited;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-		border: (BlBorder paint: Color veryLightGray width: 1);
-		background: self theme default contentBackgroundColor;
-		stencil: [ :aRowValue :anIndex :aListWidget | 
-			aRowValue asElement ];
-		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | anItemObject elementType ];
-		itemStencil: [ :anItemType | anItemType new ];
+		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | 
+			anItemObject elementType ];
+		itemStencil: [ :anItemType | 
+			anItemType new ];
 		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
 			anItemElement menuModel: anItemObject ].
 ]
 
 { #category : #'event handling' }
-BrMenuItemsElement >> onMenuHideRequest: anAnnouncement [
+BrMenuItemsListElement >> onMenuHideRequest: anAnnouncement [
 	self removeFromParent
 ]
 
 { #category : #'event handling' }
-BrMenuItemsElement >> onMenuModelChanged [
+BrMenuItemsListElement >> onMenuModelChanged [
 	super onMenuModelChanged.
 
 	listElement items: self menuModel items
 ]
 
 { #category : #'event handling' }
-BrMenuItemsElement >> subscribeToMenuModel [
+BrMenuItemsListElement >> subscribeToMenuModel [
 	super subscribeToMenuModel.
 
 	self menuModel announcer weak
@@ -61,7 +62,7 @@ BrMenuItemsElement >> subscribeToMenuModel [
 ]
 
 { #category : #'event handling' }
-BrMenuItemsElement >> unsubscribeFromMenuModel [
+BrMenuItemsListElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
 
 	self menuModel announcer unsubscribe: self
