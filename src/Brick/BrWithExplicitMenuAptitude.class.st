@@ -11,7 +11,8 @@ Class {
 		'clickOutsideEventHandler',
 		'pressEscEventHandler',
 		'removedFromSceneEventHandler',
-		'addedToSceneEventHandler'
+		'addedToSceneEventHandler',
+		'menuContainerParent'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -80,6 +81,7 @@ BrWithExplicitMenuAptitude >> initialize [
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
 
 	menuContainer := BrMenuSteppedElement new.
+	menuContainerParent := nil.
 	
 	self initializeEventHandlers.
 	
@@ -222,13 +224,11 @@ BrWithExplicitMenuAptitude >> stencil: aStencil [
 BrWithExplicitMenuAptitude >> temporaryHide [
 	"Temporary hide without destroying menu content"
 
-	self
-		widgetDo: [ :aWidget | 
-			| aContainerParent |
-			aContainerParent := menuContainer parent.
-			aContainerParent removeEventFilter: clickOutsideEventHandler.
-			aContainerParent removeShortcut: pressEscEventHandler.
-			menuContainer removeFromParent ]
+	menuContainer removeFromParent.
+	menuContainerParent ifNotNil: [ :aParent | 
+		menuContainerParent := nil.
+		aParent removeEventFilter: clickOutsideEventHandler.
+		aParent removeShortcut: pressEscEventHandler. ]
 ]
 
 { #category : #private }
@@ -243,6 +243,7 @@ BrWithExplicitMenuAptitude >> temporaryShow [
 
 { #category : #private }
 BrWithExplicitMenuAptitude >> temporaryShowIn: anElement [
+	menuContainerParent := anElement.
 	anElement addEventFilter: clickOutsideEventHandler.
 	anElement addShortcut: pressEscEventHandler.
 	
