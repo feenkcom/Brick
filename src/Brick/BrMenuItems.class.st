@@ -42,6 +42,11 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 	self addItem: aMenuItem
 ]
 
+{ #category : #'add / remove' }
+BrMenuItems >> addItems: aCollection [
+	aCollection do: [ :each | self addItem: each ]
+]
+
 { #category : #'api - converting' }
 BrMenuItems >> asElement [
 	^ self elementType new menuModel: self
@@ -161,12 +166,6 @@ BrMenuItems >> initialize [
 { #category : #accessing }
 BrMenuItems >> items [
 	^ items
-]
-
-{ #category : #accessing }
-BrMenuItems >> items: aCollection [
-	aCollection parent: self parent.
-	items := aCollection
 ]
 
 { #category : #accessing }

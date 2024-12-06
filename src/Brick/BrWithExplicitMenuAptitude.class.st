@@ -193,9 +193,12 @@ BrWithExplicitMenuAptitude >> show [
 
 { #category : #private }
 BrWithExplicitMenuAptitude >> showIn: anElement [
+	| aMenu |
 	stencil ifNil: [ ^ self ].
 	self hide.
-	menuContainer menuModel: stencil create.
+	aMenu := stencil create.
+	aMenu ifNil: [ ^ self ].
+	menuContainer menuModel: aMenu.
 	menuContainer show.
 	
 	self widgetDo: [ :aWidget |
