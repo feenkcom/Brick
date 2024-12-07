@@ -12,10 +12,21 @@ Class {
 		'pressEscEventHandler',
 		'removedFromSceneEventHandler',
 		'addedToSceneEventHandler',
-		'menuContainerParent'
+		'menuContainerParent',
+		'relocator'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
+
+{ #category : #'api - relocating' }
+BrWithExplicitMenuAptitude >> beClickPositionRelocator [
+	self relocator: BrMenuClickPositionRelocator new
+]
+
+{ #category : #'api - relocating' }
+BrWithExplicitMenuAptitude >> beWidgetBoundsRelocator [
+	self relocator: BrMenuWidgetBoundsRelocator new
+]
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
@@ -35,7 +46,7 @@ BrWithExplicitMenuAptitude >> canShow [
 
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> handleClickedOutsideMouseUpEvent: anEvent [
-	"Hide when clicked outside of container" 
+	"Hide when clicked outside of the container" 
 	anEvent target == menuContainer ifTrue: [ ^ self ].
 	(menuContainer isUnpinnedChild: anEvent target)
 		ifTrue: [ ^ self ].
@@ -82,7 +93,9 @@ BrWithExplicitMenuAptitude >> initialize [
 
 	menuContainer := BrMenuSteppedElement new.
 	menuContainerParent := nil.
-	
+	relocator := BrMenuWidgetBoundsRelocator new
+		menuContainer: menuContainer.
+
 	self initializeEventHandlers.
 	
 	self addChange: (BrLookChange new
@@ -146,6 +159,9 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 
 	anEvent consumed: true.
 	
+	self widgetDo: [ :aWidget | 
+		relocator mouseUp: anEvent given: aWidget ].
+	
 	self show
 ]
 
@@ -175,10 +191,19 @@ BrWithExplicitMenuAptitude >> relocate [
 		aWidget isVisibleInSpace 
 			ifFalse: [ menuContainer visibility: BlVisibility gone ]
 			ifTrue: [ menuContainer visibility: BlVisibility visible ].
-		menuContainer parent ifNotNil: [ :aParent |
-			menuContainer layoutDo: [ :aLayout | 
-				aLayout anchorBounds: (aWidget bounds 
-					inParent: aParent) asRectangle ] ] ]
+		relocator relocateGiven: aWidget ]
+]
+
+{ #category : #'api - relocating' }
+BrWithExplicitMenuAptitude >> relocator [
+	<return: #BrMenuContainerRelocator>
+	^ relocator
+]
+
+{ #category : #'api - relocating' }
+BrWithExplicitMenuAptitude >> relocator: aBrMenuContainerRelocator [
+	aBrMenuContainerRelocator menuContainer: menuContainer.
+	relocator := aBrMenuContainerRelocator
 ]
 
 { #category : #'api - displaying' }
