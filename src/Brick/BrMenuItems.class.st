@@ -18,7 +18,7 @@ BrMenuItems >> addItem: aMenuItem [
 	aMenuItem isSelected ifTrue: [
 		self selectedItem: aMenuItem ].
 
-	aMenuItem announcer
+	aMenuItem announcer weak
 		when: BrMenuItemSelectionChanged
 		send: #onMenuItemSelection:
 		to: self
