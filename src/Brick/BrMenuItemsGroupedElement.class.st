@@ -15,13 +15,11 @@ BrMenuItemsGroupedElement >> defaultLayout [
 { #category : #initialization }
 BrMenuItemsGroupedElement >> initialize [
 	super initialize.
-	self
-		fitContentLimited;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-		background: self theme default contentBackgroundColor.
-
+	self fitContentLimited.
 	self initializeListElement.
+
 	self addChild: listElement as: #'menu--list'.
+	self initializeCommonStyle
 ]
 
 { #category : #initialization }

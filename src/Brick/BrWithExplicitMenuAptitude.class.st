@@ -91,11 +91,7 @@ BrWithExplicitMenuAptitude >> initialize [
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
 
-	menuContainer := BrMenuSteppedElement new.
-	menuContainerParent := nil.
-	relocator := BrMenuWidgetBoundsRelocator new
-		menuContainer: menuContainer.
-
+	self initializeMenuContainer.
 	self initializeEventHandlers.
 	
 	self addChange: (BrLookChange new
@@ -138,7 +134,18 @@ BrWithExplicitMenuAptitude >> initializeListeners [
 
 	self
 		when: BlMouseUpEvent
-		do: [ :anEvent |  self onMouseUp: anEvent ]
+		do: [ :anEvent |  self onMouseUp: anEvent ].
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> initializeMenuContainer [
+	menuContainer := BrMenuSteppedElement new.
+	menuContainerParent := nil.
+	relocator := BrMenuClickPositionRelocator new
+		menuContainer: menuContainer.
+	menuContainer
+		when: BrMenuWhoToPinToEvent
+		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 ]
 
 { #category : #'api - menu' }
@@ -163,6 +170,18 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 		relocator mouseUp: anEvent given: aWidget ].
 	
 	self show
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onWhoToPinToEvent: anEvent [ 
+	anEvent consumed: true.
+	self widgetDo: [ :aWidget |
+		| anotherEvent |
+		anotherEvent := BrMenuWhoToPinToEvent new.
+		aWidget fireEvent: anotherEvent.
+		NonInteractiveTranscript stdout show: 'BrMenuWhoToPinToEvent... '; cr.
+		anotherEvent anchorElement ifNotNil: [ :anElement |
+			anEvent anchorElement: anElement ] ]
 ]
 
 { #category : #'event handling' }
