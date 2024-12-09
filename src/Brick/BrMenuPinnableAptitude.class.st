@@ -30,12 +30,23 @@ BrMenuPinnableAptitude >> addCloseButton [
 ]
 
 { #category : #'api - initialization' }
-BrMenuPinnableAptitude >> beRelativePinner [
+BrMenuPinnableAptitude >> beAnyParentPinner [
+	"It moves a dragged menu element to a space root element.
+	It asks to which parent element it should be attached to.
+	It keeps the menu element in top-left relative position to 
+	the given anchore element. It hides the menu element if
+	the anchor element is removed from its space."
+
+	pinner := BrMenuAnchorElementPinner new
+]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beSameParentPinner [
 	"I keep dragged menus in a same parent.
 	As a consequence, pinned widgets keep relative position to 
 	its original element (handle)."
 
-	pinner := BrMenuRelativePinner new
+	pinner := BrMenuSameParentPinner new
 ]
 
 { #category : #'api - initialization' }
@@ -51,7 +62,7 @@ BrMenuPinnableAptitude >> initialize [
 	handleElement := self newHandleElement.
 	handleElement addEventHandler: pullHandler.
 	closeButton := nil.
-	pinner := BrMenuRelativePinner new
+	pinner := BrMenuAnchorElementPinner new
 ]
 
 { #category : #initialization }
@@ -91,6 +102,7 @@ BrMenuPinnableAptitude >> onCloseFrom: aButton [
 		BlTaskAction 
 			enqueueElement: aWidget 
 			action: [ 
+				aWidget fireEvent: BrMenuPinnedElementAboutToBeClosed new.
 				aWidget removeFromParent.
 				isPinned := false ] ]
 ]

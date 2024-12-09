@@ -1,11 +1,11 @@
 Class {
-	#name : #BrMenuRelativePinner,
+	#name : #BrMenuSameParentPinner,
 	#superclass : #BrMenuPinner,
 	#category : #'Brick-Menu - Support'
 }
 
 { #category : #'api - actions' }
-BrMenuRelativePinner >> pinMenuElement: aWidget [
+BrMenuSameParentPinner >> pinMenuElement: aWidget [
 	| aParent |
 	aParent := aWidget parent.
 	aWidget removeFromParent.
