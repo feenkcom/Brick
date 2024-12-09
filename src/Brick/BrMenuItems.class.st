@@ -43,6 +43,15 @@ BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAc
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem label: aText.
+	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItems: aCollection [
 	aCollection do: [ :each | self addItem: each ]
 ]
