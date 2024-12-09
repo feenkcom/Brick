@@ -18,13 +18,10 @@ BrMenuItemsGroupedElement >> initialize [
 	self
 		fitContentLimited;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-		border: (BlBorder paint: Color veryLightGray width: 1);
-		outskirts: BlOutskirts outside;
 		background: self theme default contentBackgroundColor.
 
 	self initializeListElement.
 	self addChild: listElement as: #'menu--list'.
-	self addAptitude: BrShadowAptitude new
 ]
 
 { #category : #initialization }
