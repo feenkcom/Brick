@@ -195,7 +195,6 @@ BrWithExplicitMenuAptitude >> onWhoToPinToEvent: anEvent [
 		| anotherEvent |
 		anotherEvent := BrMenuWhoToPinToEvent new.
 		aWidget fireEvent: anotherEvent.
-		NonInteractiveTranscript stdout show: 'BrMenuWhoToPinToEvent... '; cr.
 		anotherEvent anchorElement ifNotNil: [ :anElement |
 			anEvent anchorElement: anElement ] ]
 ]

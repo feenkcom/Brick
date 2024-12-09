@@ -30,7 +30,6 @@ BrMenuAnchorElementPinner >> pinMenuElement: aWidget [
 	anEvent := BrMenuWhoToPinToEvent new.
 	aWidget fireEvent: anEvent.
 	anElement := anEvent anchorElement.
-	NonInteractiveTranscript stdout show: 'BrMenuAnchorElementPinner>>#pinMenuElement: element: '; show: anElement; cr.
 	anElement ifNil: [ 
 		fallbackPinner pinMenuElement: aWidget.
 		^ self ].

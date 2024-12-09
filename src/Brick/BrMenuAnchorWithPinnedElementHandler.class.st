@@ -16,7 +16,6 @@ BrMenuAnchorWithPinnedElementHandler >> computeDistanceTo: anElement [
 	pinnedElement ifNil: [ ^ self ].
 
 	positionShift := anElement positionInSpace - pinnedElement positionInSpace.
-	NonInteractiveTranscript stdout show: 'Anchor distance: '; show: positionShift; cr.
 ]
 
 { #category : #'event handling' }
