@@ -37,12 +37,7 @@ BrMenuSteppedElement >> initialize [
 			c horizontal matchParent.
 			c vertical matchParent ];
 		preventMouseEvents;
-		clipChildren: false;
-		geometry: (BlChildrenWrappingGeometry cornerRadius: 4);
-		border: (BlBorder paint: Color gray width: 1);
-		outskirts: BlOutskirts outside;
-		background: self theme default contentBackgroundColor;
-		addAptitude: BrShadowAptitude new.
+		clipChildren: false.
 
 	self
 		when: BrMenuShowSubmenuWish

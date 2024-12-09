@@ -9,6 +9,12 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #initialization }
+BrMenuModelElement >> initializeCommonStyle [
+	self addAptitude: BrMenuCommonAptitude new.
+	self addAptitude: BrShadowAptitude new
+]
+
 { #category : #accessing }
 BrMenuModelElement >> menuModel [
 	<return: #BrMenuModel>
