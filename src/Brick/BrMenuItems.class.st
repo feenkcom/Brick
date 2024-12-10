@@ -43,6 +43,15 @@ BrMenuItems >> addItemLabel: aText preview: aPreviewText action: anAction [
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText preview: aPreviewText shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem label: aText preview: aPreviewText shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
