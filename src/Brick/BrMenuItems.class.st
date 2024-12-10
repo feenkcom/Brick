@@ -52,11 +52,32 @@ BrMenuItems >> addItemLabel: aText preview: aPreviewText shortcut: aShortcutStri
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText preview: aPreviewText shortcut: aShortcutString submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem 
+		label: aText 
+		preview: aPreviewText 
+		shortcut: aShortcutString.
+	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
 	aMenuItem label: aLabelString shortcut: aShortcutString.
 	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText shortcut: aShortcutString submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem label: aText shortcut: aShortcutString.
+	aMenuItem submenu: aSubmenu.
 	self addItem: aMenuItem
 ]
 
