@@ -246,7 +246,7 @@ BrWithExplicitMenuAptitude >> show [
 	
 	self widgetDo: [ :aWidget | 
 		| aParent |
-		aParent := aWidget space root.
+		aParent := aWidget topMostParent.
 		self showIn: aParent ]
 ]
 
@@ -299,7 +299,7 @@ BrWithExplicitMenuAptitude >> temporaryShow [
 
 	self widgetDo: [ :aWidget | 
 		| aParent |
-		aParent := aWidget space root.
+		aParent := aWidget topMostParent.
 		self temporaryShowIn: aParent ]
 ]
 

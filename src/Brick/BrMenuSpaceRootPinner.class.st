@@ -6,15 +6,15 @@ Class {
 
 { #category : #'api - actions' }
 BrMenuSpaceRootPinner >> pinMenuElement: aWidget [
-	| aPosition aParent aSpace isParentInSpaceRoot |
+	| aPosition aCurrentParent aNewParent willBeSameParent |
 	aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 	aPosition := aWidget positionInSpace.
-	aParent := aWidget parent.
-	aSpace := aWidget space.
-	isParentInSpaceRoot := aParent parent = aSpace root.
+	aCurrentParent := aWidget parent.
+	aNewParent := aWidget topMostParent.
+	willBeSameParent := aCurrentParent parent = aNewParent.
 	aWidget removeFromParent.
-	isParentInSpaceRoot
-		ifTrue: [ aSpace root addChild: aWidget before: aParent ]
-		ifFalse: [ aSpace root addChild: aWidget ].
+	willBeSameParent
+		ifTrue: [ aNewParent addChild: aWidget before: aCurrentParent ]
+		ifFalse: [ aNewParent addChild: aWidget ].
 	aWidget relocate: aPosition
 ]
