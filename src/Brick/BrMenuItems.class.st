@@ -34,11 +34,29 @@ BrMenuItems >> addItemLabel: aText action: anAction [
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText preview: aPreviewText action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem label: aText preview: aPreviewText.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
 	aMenuItem label: aLabelString shortcut: aShortcutString.
 	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem label: aText.
+	aMenuItem submenu: aSubmenu.
 	self addItem: aMenuItem
 ]
 

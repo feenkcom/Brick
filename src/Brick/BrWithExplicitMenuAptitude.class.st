@@ -146,6 +146,15 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
+	menuContainer 
+		when: BrMenuSourceElementRequest 
+		do: [ :anEvent | self onSourceElementRequest: anEvent ]
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> menuContainer [
+	<return: #BrMenuSteppedElement>
+	^ menuContainer
 ]
 
 { #category : #'api - menu' }
@@ -172,6 +181,13 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 	self show
 ]
 
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> onSourceElementRequest: anEvent [ 
+	anEvent consumed: true.
+	self widgetDo: [ :aWidget | 
+		anEvent sourceElement: aWidget ]
+]
+
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWhoToPinToEvent: anEvent [ 
 	anEvent consumed: true.
@@ -179,7 +195,6 @@ BrWithExplicitMenuAptitude >> onWhoToPinToEvent: anEvent [
 		| anotherEvent |
 		anotherEvent := BrMenuWhoToPinToEvent new.
 		aWidget fireEvent: anotherEvent.
-		NonInteractiveTranscript stdout show: 'BrMenuWhoToPinToEvent... '; cr.
 		anotherEvent anchorElement ifNotNil: [ :anElement |
 			anEvent anchorElement: anElement ] ]
 ]
@@ -313,4 +328,16 @@ BrWithExplicitMenuAptitude >> useSecondaryMouseButton [
 BrWithExplicitMenuAptitude >> visible [
 	<return: #Boolean>
 	^ menuContainer isAttachedToSceneGraph
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withAllExtraEventHandlers [
+	"Let's initialize menu container with other event handlers, e.g., spawn."
+	| allPragmas |
+	allPragmas := Pragma 
+		allNamed: #menuContainerInitialization 
+		from: self class 
+		to: BrWithExplicitMenuAptitude.
+	allPragmas do: [ :eachPragma |
+		self perform: eachPragma methodSelector ]
 ]
