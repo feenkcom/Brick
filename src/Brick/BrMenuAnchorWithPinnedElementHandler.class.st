@@ -113,6 +113,9 @@ BrMenuAnchorWithPinnedElementHandler >> showPinnedElementOn: anEvent [
 	anEvent currentTarget space == pinnedElementParent space
 		ifFalse: [ pinnedElementParent := anEvent currentTarget space root ].
 	
+	pinnedElement parent == pinnedElementParent ifTrue: [ ^ self ].
+	
+	pinnedElement removeFromParent.
 	pinnedElementParent addChild: pinnedElement
 ]
 
