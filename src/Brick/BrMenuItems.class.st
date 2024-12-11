@@ -12,7 +12,7 @@ Class {
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
 	groups := nil.
-	aMenuItem parent: self parent.
+	aMenuItem parent: self.
 	self items add: aMenuItem.
 	
 	aMenuItem isSelected ifTrue: [

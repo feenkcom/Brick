@@ -71,7 +71,7 @@ BrMenuModel >> items [
 
 { #category : #accessing }
 BrMenuModel >> parent [
-	<return: #BrMenuItem or: nil>
+	<return: #BrMenuModel or: nil>
 	^ parent
 ]
 

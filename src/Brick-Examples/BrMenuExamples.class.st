@@ -171,7 +171,7 @@ BrMenuExamples >> submenuExtractTemporaryItems [
 	self assert: anItem submenu isNotNil.
 	self assert: anItem submenu itemsCount equals: 2.
 	
-	self assert: anItem submenu items first parent equals: anItem.
+	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem
 ]
@@ -195,7 +195,7 @@ BrMenuExamples >> submenuInlineMessageItems [
 	self assert: anItem submenu isNotNil.
 	self assert: anItem submenu itemsCount equals: 3.
 	
-	self assert: anItem submenu items first parent equals: anItem.
+	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem
 ]

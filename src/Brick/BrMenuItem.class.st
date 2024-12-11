@@ -74,7 +74,8 @@ BrMenuItem >> gtItemSelection [
 { #category : #'api - visibility' }
 BrMenuItem >> hide [
 	self deselect.
-	super hide
+	super hide.
+	self parent ifNotNil: #hide
 ]
 
 { #category : #initialization }

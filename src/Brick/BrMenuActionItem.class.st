@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuActionItem,
 	#superclass : #BrMenuLabeledItem,
 	#instVars : [
-		'action'
+		'action',
+		'hideOnClick'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -23,4 +24,23 @@ BrMenuActionItem >> action: aBlock [
 { #category : #'api - converting' }
 BrMenuActionItem >> elementType [
 	^ BrMenuActionItemElement
+]
+
+{ #category : #accessing }
+BrMenuActionItem >> hideOnClick [
+	<return: #Boolean>
+	^ hideOnClick ifNil: [ true ]
+]
+
+{ #category : #accessing }
+BrMenuActionItem >> hideOnClick: aBoolean [
+	hideOnClick := aBoolean
+]
+
+{ #category : #initialization }
+BrMenuActionItem >> initialize [
+	super initialize.
+	
+	action := [ :anElement :aButtonModel :anEvent | ].
+	hideOnClick := true
 ]
