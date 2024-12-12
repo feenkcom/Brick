@@ -15,7 +15,8 @@ Class {
 	#name : #BrButtonModel,
 	#superclass : #BrWidgetModel,
 	#instVars : [
-		'action'
+		'action',
+		'enableAllModifiers'
 	],
 	#category : #'Brick-Button - Model'
 }
@@ -56,6 +57,16 @@ BrButtonModel >> clickEvent: anEvent [
 		ifFalse: [ self action gtValueWithArgs: { self widget . self . anEvent } ]
 ]
 
+{ #category : #'mouse handlers' }
+BrButtonModel >> disableAllModifiers [
+	enableAllModifiers := false
+]
+
+{ #category : #'mouse handlers' }
+BrButtonModel >> enableAllModifiers [
+	enableAllModifiers := true
+]
+
 { #category : #'gt-extension' }
 BrButtonModel >> gtActionFor: aView [
 	<gtView>
@@ -90,14 +101,18 @@ BrButtonModel >> hasModifiers: anEvent [
 BrButtonModel >> initialize [
 	super initialize.
 
-	action := [ :anElement :aButtonModel :anEvent | ]
+	action := [ :anElement :aButtonModel :anEvent |  ].
+	self disableAllModifiers
 ]
 
 { #category : #initialization }
 BrButtonModel >> initializeListeners [
 	self
 		when: BlClickEvent
-		do: [ :anEvent | (self hasModifiers: anEvent) ifFalse: [ self clickEvent: anEvent ] ].
+		do: [ :anEvent | 
+			(enableAllModifiers or: [ (self hasModifiers: anEvent) not ])
+				ifTrue: [ self clickEvent: anEvent ] ].
+				
 	self
 		when: BlFocusInEvent
 		do: [ self
