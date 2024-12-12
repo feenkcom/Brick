@@ -12,7 +12,7 @@ Class {
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
 	groups := nil.
-	aMenuItem parent: self parent.
+	aMenuItem parent: self.
 	self items add: aMenuItem.
 	
 	aMenuItem isSelected ifTrue: [
@@ -43,11 +43,41 @@ BrMenuItems >> addItemLabel: aText preview: aPreviewText action: anAction [
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText preview: aPreviewText shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem label: aText preview: aPreviewText shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText preview: aPreviewText shortcut: aShortcutString submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem 
+		label: aText 
+		preview: aPreviewText 
+		shortcut: aShortcutString.
+	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemLabel: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
 	aMenuItem label: aLabelString shortcut: aShortcutString.
 	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemLabel: aText shortcut: aShortcutString submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem label: aText shortcut: aShortcutString.
+	aMenuItem submenu: aSubmenu.
 	self addItem: aMenuItem
 ]
 
