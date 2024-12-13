@@ -18,14 +18,60 @@ BrButton >> action [
 
 { #category : #'api - widget' }
 BrButton >> action: aValuable [
-	"An action can be a block with two optional parameters:
+	"An action can be a block with three optional parameters:
 	 - a UI element to which this button model is attached
 	 - this button model
+	 - a click or a key-down event
 	[ :aButtonElement :aButtonModel :anEvent |  ].
+	
+	The action is evaluated if
+	- a button is enabled, and
+	- no key modifier is pressed.
 
 	Button action must not be nil"
 
 	self viewModel action: aValuable
+]
+
+{ #category : #'api - widget' }
+BrButton >> actionWithModifiers: aBlockOrSymbolOrValuable [
+	"Add an action that is executed when clicked with modifiers.
+	An action can be a block with three optional parameters:
+	 - a UI element to which this button model is attached
+	 - this button model
+	 - a click or a key-down event
+	[ :aButtonElement :aButtonModel :anEvent |  ].
+	
+	The action is evaluated if
+	- a button is enabled, and
+	- a key modifier are pressed.
+
+	Button action must not be nil"
+
+	self viewModel actionWithModifiers: aBlockOrSymbolOrValuable
+]
+
+{ #category : #'api - widget' }
+BrButton >> actionsWithModifiers [
+	^ self viewModel actionsWithModifiers
+]
+
+{ #category : #'api - widget' }
+BrButton >> actionsWithModifiers: aCollection [
+	"A collection of actions that are executed when clicked with modifiers.
+	Each action can be a block with three optional parameters:
+	 - a UI element to which this button model is attached
+	 - this button model
+	 - a click or a key-down event
+	[ :aButtonElement :aButtonModel :anEvent |  ].
+	
+	The actions are evaluated if
+	- a button is enabled, and
+	- a key modifier are pressed.
+
+	Button actions must not be nil"
+
+	self viewModel actionsWithModifiers: aCollection
 ]
 
 { #category : #layout }
