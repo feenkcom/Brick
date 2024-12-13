@@ -16,7 +16,7 @@ Class {
 	#superclass : #BrWidgetModel,
 	#instVars : [
 		'action',
-		'enableAllModifiers'
+		'actionsWithModifiers'
 	],
 	#category : #'Brick-Button - Model'
 }
@@ -65,7 +65,7 @@ BrButtonModel >> actionWithModifiers: aBlockOrSymbolOrValuable [
 	
 	The action is evaluated if
 	- a button is enabled, and
-	- key modifier are pressed.
+	- a key modifier are pressed.
 
 	Button action must not be nil"
 
@@ -176,18 +176,16 @@ BrButtonModel >> hasModifiers: anEvent [
 BrButtonModel >> initialize [
 	super initialize.
 
-	action := [ :anElement :aButtonModel :anEvent |  ].
-	self disableAllModifiers
+	action := [ :anElement :aButtonModel :anEvent | ].
+	actionsWithModifiers := #().
 ]
 
 { #category : #initialization }
 BrButtonModel >> initializeListeners [
 	self
 		when: BlClickEvent
-		do: [ :anEvent | 
-			(enableAllModifiers or: [ (self hasModifiers: anEvent) not ])
-				ifTrue: [ self clickEvent: anEvent ] ].
-				
+		do: [ :anEvent | self clickEvent: anEvent ].
+	
 	self
 		when: BlFocusInEvent
 		do: [ self

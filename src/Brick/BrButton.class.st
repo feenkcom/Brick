@@ -44,7 +44,7 @@ BrButton >> actionWithModifiers: aBlockOrSymbolOrValuable [
 	
 	The action is evaluated if
 	- a button is enabled, and
-	- key modifier are pressed.
+	- a key modifier are pressed.
 
 	Button action must not be nil"
 
