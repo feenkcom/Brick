@@ -40,9 +40,11 @@ BrMenuItemElement >> menuItem: aMenuItem [
 
 { #category : #'event handling' }
 BrMenuItemElement >> onMouseEnterEvent: anEvent [
-	self menuItem ifNil: [ ^ self ].
+	| aMenuModel |
+	aMenuModel := self menuModel.
+	aMenuModel ifNil: [ ^ self ].
 	anEvent consumed: true.
-	self menuItem select
+	aMenuModel select
 ]
 
 { #category : #'event handling' }
