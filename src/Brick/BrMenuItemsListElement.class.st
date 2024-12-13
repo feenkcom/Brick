@@ -36,14 +36,18 @@ BrMenuItemsListElement >> initializeListElement [
 
 { #category : #'event handling' }
 BrMenuItemsListElement >> onMenuHideRequest: anAnnouncement [
-	self removeFromParent
+	BlTaskAction enqueueElement: self action: [ self removeFromParent ]
+]
+
+{ #category : #'event handling' }
+BrMenuItemsListElement >> onMenuItemsChanged: anAnnouncement [
+	BlTaskAction enqueueElement: self action: [ self updateListElement ]
 ]
 
 { #category : #'event handling' }
 BrMenuItemsListElement >> onMenuModelChanged [
 	super onMenuModelChanged.
-
-	listElement items: self menuModel items
+	self updateListElement
 ]
 
 { #category : #'event handling' }
@@ -52,8 +56,11 @@ BrMenuItemsListElement >> subscribeToMenuModel [
 
 	self menuModel announcer weak
 		when: BrMenuHideRequest
-		send: #onMenuHideRequest:
-		to: self
+			send: #onMenuHideRequest:
+			to: self;
+		when: BrMenuItemsChanged
+			send: #onMenuItemsChanged:
+			to: self
 ]
 
 { #category : #'event handling' }
@@ -61,4 +68,9 @@ BrMenuItemsListElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
 
 	self menuModel announcer unsubscribe: self
+]
+
+{ #category : #'private - updating' }
+BrMenuItemsListElement >> updateListElement [
+	listElement items: self menuModel items
 ]

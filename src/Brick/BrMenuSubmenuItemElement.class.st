@@ -35,7 +35,7 @@ BrMenuSubmenuItemElement >> onDeselected: anAnnouncement [
 BrMenuSubmenuItemElement >> onSelected: anAnnouncement [
 	self
 		fireEvent: (BrMenuShowSubmenuWish new
-				submenu: anAnnouncement menuItem submenu;
+				submenu: anAnnouncement menuModel submenu;
 				fromElement: self)
 ]
 
@@ -43,8 +43,8 @@ BrMenuSubmenuItemElement >> onSelected: anAnnouncement [
 BrMenuSubmenuItemElement >> onSelectionChanged: anAnnouncement [
 	| isSelected |
 	super onSelectionChanged: anAnnouncement.
-	anAnnouncement menuItem == self menuItem ifFalse: [ ^ self ].
-	isSelected := anAnnouncement menuItem isSelected.
+	anAnnouncement menuModel == self menuModel ifFalse: [ ^ self ].
+	isSelected := anAnnouncement menuModel isSelected.
 
 	isSelected
 		ifTrue: [ self onSelected: anAnnouncement ]

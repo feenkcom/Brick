@@ -21,7 +21,9 @@ BrMenuItems >> addItem: aMenuItem [
 	aMenuItem announcer weak
 		when: BrMenuItemSelectionChanged
 		send: #onMenuItemSelection:
-		to: self
+		to: self.
+		
+	self announcer announce: (BrMenuItemsChanged new menuModel: self)
 ]
 
 { #category : #'add / remove' }
@@ -216,6 +218,26 @@ BrMenuItems >> items [
 	^ items
 ]
 
+{ #category : #'add / remove' }
+BrMenuItems >> items: aCollection [
+	groups := nil.
+	aCollection do: [ :eachItem | eachItem parent: self ].
+	self items removeAll.
+	self items addAll: aCollection.
+	
+	aCollection do: [ :eachItem |
+		eachItem isSelected ifTrue: [
+			self selectedItem: aCollection ] ].
+
+	aCollection do: [ :eachItem |
+		eachItem announcer weak
+			when: BrMenuItemSelectionChanged
+			send: #onMenuItemSelection:
+			to: self ].
+	
+	self announcer announce: (BrMenuItemsChanged new menuModel: self)
+]
+
 { #category : #accessing }
 BrMenuItems >> itemsCount [
 	^ self items size
@@ -228,9 +250,9 @@ BrMenuItems >> menuType [
 
 { #category : #'event handling' }
 BrMenuItems >> onMenuItemSelection: anAnnouncement [
-	anAnnouncement menuItem isSelected
-		ifTrue: [ self selectedItem: anAnnouncement menuItem ]
-		ifFalse: [ self deselectedItem: anAnnouncement menuItem ]
+	anAnnouncement menuModel isSelected
+		ifTrue: [ self selectedItem: anAnnouncement menuModel ]
+		ifFalse: [ self deselectedItem: anAnnouncement menuModel ]
 ]
 
 { #category : #printing }

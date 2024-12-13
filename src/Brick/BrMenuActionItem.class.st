@@ -44,3 +44,10 @@ BrMenuActionItem >> initialize [
 	action := [ :anElement :aButtonModel :anEvent | ].
 	hideOnClick := true
 ]
+
+{ #category : #'event handling' }
+BrMenuActionItem >> onClick: anEvent element: anElement model: aButtonModel [
+	self action ifNil: [ ^ self ].
+	self action gtValueWithArgs: { anElement. aButtonModel. anEvent }.
+	self hideOnClick ifTrue: [ self hideAll ]
+]

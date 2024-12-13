@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuItemSelectionChanged,
-	#superclass : #BrMenuItemAnnouncement,
+	#superclass : #BrMenuModelAnnouncement,
 	#instVars : [
 		'isSelected'
 	],
