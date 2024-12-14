@@ -73,8 +73,7 @@ BrMenuModel >> id [
 
 { #category : #accessing }
 BrMenuModel >> id: anElementId [
-	anElementId ifNil: [ ^ self ].
-	id := anElementId asBlocElementId
+	id := anElementId
 ]
 
 { #category : #initialization }

@@ -9,6 +9,46 @@ Class {
 }
 
 { #category : #factory }
+BrMenuItemGroupConfiguration class >> debugger [
+	^ self new
+		name: #Debugger;
+		priority: 20
+]
+
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> default [
+	^ self new
+]
+
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> evaluation [
+	^ self new
+		name: #Evaluation;
+		priority: 47
+]
+
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> gemstone [
+	^ self new
+		name: #GemStone;
+		priority: 40
+]
+
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> llm [
+	^ self new
+		name: #'OpenAI';
+		priority: 45
+]
+
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> navigation [
+	^ self new
+		name: #Navigation;
+		priority: 20
+]
+
+{ #category : #factory }
 BrMenuItemGroupConfiguration class >> refactoring [
 	^ self new
 		name: #Refactoring;

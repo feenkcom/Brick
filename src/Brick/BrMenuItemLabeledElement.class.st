@@ -12,7 +12,7 @@ BrMenuItemLabeledElement >> initialize [
 	super initialize.
 	self initializeLabelElement.
 	self addChild: labelElement as: #'menu--labeled'.
-	self padding: (BlInsets top: 5 bottom: 5 left: 10 right: 10)
+	self padding: (BlInsets top: 3 bottom: 3 left: 10 right: 10)
 ]
 
 { #category : #initialization }
