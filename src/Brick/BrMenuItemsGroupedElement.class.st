@@ -32,9 +32,12 @@ BrMenuItemsGroupedElement >> initializeListElement [
 					aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
 					hMatchParent;
 					vFitContent;
-					margin: (BlInsets top: 3 bottom: 1 left: 3 right: 3) ];
-			headerDataBinder: [ :aLabelElement :aGroup | 
-				aLabelElement text: aGroup domainObject name asString ];
+					margin: (BlInsets
+							top: BrMenuConstants defaultMenuItemTopPadding
+							bottom: 1
+							left: BrMenuConstants defaultMenuItemLeftPadding
+							right: BrMenuConstants defaultMenuItemRightPadding) ];
+			headerDataBinder: [ :aLabelElement :aGroup | aLabelElement text: aGroup domainObject name asString ];
 			groups: #()
 ]
 
