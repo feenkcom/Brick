@@ -1,5 +1,5 @@
 Class {
-	#name : #BrMenuAnnouncement,
+	#name : #BrMenuModelAnnouncement,
 	#superclass : #Announcement,
 	#instVars : [
 		'menuModel'
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #accessing }
-BrMenuAnnouncement >> menuModel [
+BrMenuModelAnnouncement >> menuModel [
 	<return: #BrMenu>
 	^ menuModel
 ]
 
 { #category : #accessing }
-BrMenuAnnouncement >> menuModel: aMenu [
+BrMenuModelAnnouncement >> menuModel: aMenu [
 	menuModel := aMenu
 ]

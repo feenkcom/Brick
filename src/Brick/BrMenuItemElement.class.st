@@ -15,7 +15,8 @@ BrMenuItemElement >> initialize [
 	self hMatchParent.
 	self vFitContent.
 
-	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ]
+	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ].
+	self when: BlMouseLeaveEvent do: [ :anEvent | self onMouseLeaveEvent: anEvent ].
 ]
 
 { #category : #initialization }
@@ -39,15 +40,22 @@ BrMenuItemElement >> menuItem: aMenuItem [
 
 { #category : #'event handling' }
 BrMenuItemElement >> onMouseEnterEvent: anEvent [
-	self menuItem ifNil: [ ^ self ].
+	| aMenuModel |
+	aMenuModel := self menuModel.
+	aMenuModel ifNil: [ ^ self ].
 	anEvent consumed: true.
-	self menuItem select
+	aMenuModel select
+]
+
+{ #category : #'event handling' }
+BrMenuItemElement >> onMouseLeaveEvent: anEvent [
+	
 ]
 
 { #category : #'event handling' }
 BrMenuItemElement >> onSelectionChanged: anAnnouncement [
 	| isSelected |
-	isSelected := anAnnouncement menuItem isSelected.
+	isSelected := anAnnouncement menuModel isSelected.
 	self dispatchEvent: (BlElementSelectedStateWish selected: isSelected)
 ]
 

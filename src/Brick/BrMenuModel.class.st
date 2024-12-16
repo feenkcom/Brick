@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'announcer',
-		'parent'
+		'parent',
+		'id'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -58,6 +59,23 @@ BrMenuModel >> hide [
 	announcer announce: (BrMenuHideRequest new menuModel: self)
 ]
 
+{ #category : #'api - visibility' }
+BrMenuModel >> hideAll [
+	self hide.
+	self parentDo: #hideAll
+]
+
+{ #category : #accessing }
+BrMenuModel >> id [
+	<return: #BlElementId>
+	^ id
+]
+
+{ #category : #accessing }
+BrMenuModel >> id: anElementId [
+	id := anElementId
+]
+
 { #category : #initialization }
 BrMenuModel >> initialize [
 	super initialize.
@@ -78,6 +96,11 @@ BrMenuModel >> parent [
 { #category : #accessing }
 BrMenuModel >> parent: anObject [
 	parent := anObject
+]
+
+{ #category : #'api - parent' }
+BrMenuModel >> parentDo: aBlock [
+	parent ifNotNil: aBlock
 ]
 
 { #category : #'api - parent' }

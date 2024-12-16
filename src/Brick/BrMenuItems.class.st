@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'items',
 		'selectedItem',
-		'groups'
+		'groups',
+		'elementType'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -21,7 +22,9 @@ BrMenuItems >> addItem: aMenuItem [
 	aMenuItem announcer weak
 		when: BrMenuItemSelectionChanged
 		send: #onMenuItemSelection:
-		to: self
+		to: self.
+		
+	self announcer announce: (BrMenuItemsChanged new menuModel: self)
 ]
 
 { #category : #'add / remove' }
@@ -131,6 +134,16 @@ BrMenuItems >> asTreeElement [
 	^ anElement
 ]
 
+{ #category : #'api - initialization' }
+BrMenuItems >> beGroupedElementType [
+	self elementType: BrMenuItemsGroupedElement
+]
+
+{ #category : #'api - initialization' }
+BrMenuItems >> beListElementType [
+	self elementType: BrMenuItemsListElement
+]
+
 { #category : #'api - selection' }
 BrMenuItems >> deselect [
 	selectedItem ifNotNil: #deselect.
@@ -147,9 +160,18 @@ BrMenuItems >> deselectedItem: aMenuItem [
 
 { #category : #'api - converting' }
 BrMenuItems >> elementType [
-	^ self groups size > 1
-		ifFalse: [ BrMenuItemsListElement ]
-		ifTrue: [ BrMenuItemsGroupedElement ]
+	^ elementType ifNil: [ 
+		^ self groups size > 1
+			ifFalse: [ BrMenuItemsListElement ]
+			ifTrue: [ BrMenuItemsGroupedElement ] ]
+]
+
+{ #category : #'api - initialization' }
+BrMenuItems >> elementType: aClass [
+	"Set a class that is kind of `BlElement`.
+	The will be used to create menu elements, displaying this menu."
+
+	elementType := aClass
 ]
 
 { #category : #'api - grouping' }
@@ -216,6 +238,26 @@ BrMenuItems >> items [
 	^ items
 ]
 
+{ #category : #'add / remove' }
+BrMenuItems >> items: aCollection [
+	groups := nil.
+	aCollection do: [ :eachItem | eachItem parent: self ].
+	self items removeAll.
+	self items addAll: aCollection.
+	
+	aCollection do: [ :eachItem |
+		eachItem isSelected ifTrue: [
+			self selectedItem: aCollection ] ].
+
+	aCollection do: [ :eachItem |
+		eachItem announcer weak
+			when: BrMenuItemSelectionChanged
+			send: #onMenuItemSelection:
+			to: self ].
+	
+	self announcer announce: (BrMenuItemsChanged new menuModel: self)
+]
+
 { #category : #accessing }
 BrMenuItems >> itemsCount [
 	^ self items size
@@ -228,9 +270,9 @@ BrMenuItems >> menuType [
 
 { #category : #'event handling' }
 BrMenuItems >> onMenuItemSelection: anAnnouncement [
-	anAnnouncement menuItem isSelected
-		ifTrue: [ self selectedItem: anAnnouncement menuItem ]
-		ifFalse: [ self deselectedItem: anAnnouncement menuItem ]
+	anAnnouncement menuModel isSelected
+		ifTrue: [ self selectedItem: anAnnouncement menuModel ]
+		ifFalse: [ self deselectedItem: anAnnouncement menuModel ]
 ]
 
 { #category : #printing }

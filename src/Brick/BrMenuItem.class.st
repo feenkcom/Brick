@@ -75,7 +75,7 @@ BrMenuItem >> gtItemSelection [
 BrMenuItem >> hide [
 	self deselect.
 	super hide.
-	self parent ifNotNil: #hide
+	self parentDo: #hide
 ]
 
 { #category : #initialization }
@@ -107,7 +107,7 @@ BrMenuItem >> menuType [
 { #category : #'event handling' }
 BrMenuItem >> notifySelectionChanged [
 	announcer announce: (BrMenuItemSelectionChanged new
-		menuItem: self;
+		menuModel: self;
 		isSelected: self isSelected)
 ]
 

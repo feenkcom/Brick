@@ -32,9 +32,12 @@ BrMenuItemsGroupedElement >> initializeListElement [
 					aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
 					hMatchParent;
 					vFitContent;
-					margin: (BlInsets top: 3 bottom: 1 left: 3 right: 3) ];
-			headerDataBinder: [ :aLabelElement :aGroup | 
-				aLabelElement text: aGroup domainObject name asString ];
+					margin: (BlInsets
+							top: BrMenuConstants defaultMenuItemTopPadding
+							bottom: 1
+							left: BrMenuConstants defaultMenuItemLeftPadding
+							right: BrMenuConstants defaultMenuItemRightPadding) ];
+			headerDataBinder: [ :aLabelElement :aGroup | aLabelElement text: aGroup domainObject name asString ];
 			groups: #()
 ]
 
@@ -56,11 +59,15 @@ BrMenuItemsGroupedElement >> onMenuHideRequest: anAnnouncement [
 	self removeFromParent
 ]
 
+{ #category : #'private - updating' }
+BrMenuItemsGroupedElement >> onMenuItemsChanged: anAnnouncement [
+	BlTaskAction enqueueElement: self action: [ self updateListElement ]
+]
+
 { #category : #'event handling' }
 BrMenuItemsGroupedElement >> onMenuModelChanged [
 	super onMenuModelChanged.
-
-	listElement groups: self listGroups
+	self updateListElement
 ]
 
 { #category : #'event handling' }
@@ -69,8 +76,11 @@ BrMenuItemsGroupedElement >> subscribeToMenuModel [
 
 	self menuModel announcer weak
 		when: BrMenuHideRequest
-		send: #onMenuHideRequest:
-		to: self
+			send: #onMenuHideRequest:
+			to: self;
+		when: BrMenuItemsChanged
+			send: #onMenuItemsChanged:
+			to: self
 ]
 
 { #category : #'event handling' }
@@ -78,4 +88,9 @@ BrMenuItemsGroupedElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
 
 	self menuModel announcer unsubscribe: self
+]
+
+{ #category : #'private - updating' }
+BrMenuItemsGroupedElement >> updateListElement [
+	listElement groups: self listGroups
 ]

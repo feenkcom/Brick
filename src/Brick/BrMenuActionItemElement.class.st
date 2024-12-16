@@ -21,9 +21,10 @@ BrMenuActionItemElement >> initialize [
 
 { #category : #'event handling' }
 BrMenuActionItemElement >> onClick: anEvent element: anElement model: aButtonModel [ 
-	self menuModel ifNotNil: [ :aMenuModel |
-		aMenuModel action ifNotNil: [ :anAction | 
-			anAction cull: anElement cull: aButtonModel cull: anEvent.
-			aMenuModel hideOnClick ifTrue: [ 
-				aMenuModel hide ] ] ].
+	| aMenuModel |
+	aMenuModel := self menuModel.
+	aMenuModel ifNil: [ ^ self ].
+	aMenuModel action ifNotNil: [ :anAction | 
+		anAction gtValueWithArgs: { anElement. aButtonModel. anEvent } ].
+	aMenuModel hideOnClick ifTrue: [ aMenuModel hideAll ].
 ]

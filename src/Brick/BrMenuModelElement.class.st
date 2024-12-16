@@ -33,6 +33,8 @@ BrMenuModelElement >> menuModel: aMenuModel [
 
 { #category : #'event handling' }
 BrMenuModelElement >> onMenuModelChanged [
+	self menuModel id ifNotNil: [ :anElementId |
+		self id: anElementId ]
 ]
 
 { #category : #'event handling' }
