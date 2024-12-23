@@ -6,7 +6,8 @@ Class {
 		'pullHandler',
 		'closeButton',
 		'isPinned',
-		'pinner'
+		'pinner',
+		'isHideParentMenuOnPinned'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -41,6 +42,20 @@ BrMenuPinnableAptitude >> beAnyParentPinner [
 ]
 
 { #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beHideMenu [
+	"If my menu widget is pinned, I hide the other menu widgets."
+
+	isHideParentMenuOnPinned := true
+]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beKeepMenu [
+	"If my menu widget is pinned, I still keep the other menu widgets around."
+
+	isHideParentMenuOnPinned := false
+]
+
+{ #category : #'api - initialization' }
 BrMenuPinnableAptitude >> beSameParentPinner [
 	"I keep dragged menus in a same parent.
 	As a consequence, pinned widgets keep relative position to 
@@ -62,13 +77,16 @@ BrMenuPinnableAptitude >> endPinning [
 			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 			pinner pinMenuElement: aWidget.
 			self addCloseButton.
-			isPinned := true ]
+			isPinned := true.
+			self isHideParentMenuOnPinned ifTrue: [ 
+				self notifyHideParentMenu ] ]
 ]
 
 { #category : #initialization }
 BrMenuPinnableAptitude >> initialize [
 	super initialize.
 	isPinned := false.
+	isHideParentMenuOnPinned := true.
 	pullHandler := BlPullHandler new disallowOutOfBounds.
 	handleElement := self newHandleElement.
 	handleElement addEventHandler: pullHandler.
@@ -82,6 +100,12 @@ BrMenuPinnableAptitude >> initializeListeners [
 
 	self when: BlPullStartEvent do: [ :anEvent | self onPullStartEvent: anEvent ].
 	self when: BlPullEndEvent do: [ :anEvent | self onPullEndEvent: anEvent ]
+]
+
+{ #category : #testing }
+BrMenuPinnableAptitude >> isHideParentMenuOnPinned [
+	<return: #Boolean>
+	^ isHideParentMenuOnPinned ifNil: [ true ]
 ]
 
 { #category : #'event handling' }
@@ -104,6 +128,12 @@ BrMenuPinnableAptitude >> newHandleElement [
 			c ignoreByLayout.
 			c ignored horizontal alignCenter.
 			c ignored vertical alignTop ]
+]
+
+{ #category : #'private - notifying' }
+BrMenuPinnableAptitude >> notifyHideParentMenu [
+	self menuModel ifNotNil: [ :aMenuModel | 
+		aMenuModel hideAll ]
 ]
 
 { #category : #'event handling' }
