@@ -77,9 +77,7 @@ BrMenuPinnableAptitude >> endPinning [
 			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 			pinner pinMenuElement: aWidget.
 			self addCloseButton.
-			isPinned := true.
-			self isHideParentMenuOnPinned ifTrue: [ 
-				self notifyHideParentMenu ] ]
+			isPinned := true. ]
 ]
 
 { #category : #initialization }
@@ -202,7 +200,10 @@ BrMenuPinnableAptitude >> startPinning [
 		aWidget fireEvent: (BrMenuDetachWish new menuModel: self menuModel).
 		aWidget constraintsDo: [ :c | 
 			c ignoreByLayout ].
-		aWidget relocate: aPosition ]
+		aWidget relocate: aPosition.
+		
+		self isHideParentMenuOnPinned ifTrue: [ 
+			self notifyHideParentMenu ] ]
 ]
 
 { #category : #'event handling' }
