@@ -169,7 +169,7 @@ BrMenuPinnableAptitude >> startPinning [
 		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
 
 		aPosition := aWidget position.
-		aWidget fireEvent: BrMenuDetachWish new.
+		aWidget fireEvent: (BrMenuDetachWish new menuModel: self menuModel).
 		aWidget constraintsDo: [ :c | 
 			c ignoreByLayout ].
 		aWidget relocate: aPosition ]

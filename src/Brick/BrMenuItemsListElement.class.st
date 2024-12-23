@@ -36,7 +36,10 @@ BrMenuItemsListElement >> initializeListElement [
 
 { #category : #'event handling' }
 BrMenuItemsListElement >> onMenuHideRequest: anAnnouncement [
-	BlTaskAction enqueueElement: self action: [ self removeFromParent ]
+	BlTaskAction
+		enqueueElement: self
+		action: [ 
+			self removeFromParent ]
 ]
 
 { #category : #'event handling' }

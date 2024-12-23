@@ -60,6 +60,11 @@ BrMenuSteppedElement >> isUnpinnedChild: anElement [
 
 { #category : #'event handling' }
 BrMenuSteppedElement >> onDetachWish: anEvent [
+	"Detach an event source element from its view model.
+	Particularly:
+	- remove the element from my cache (and therefore create a new element if show menu it requested again), and
+	- unsubscribe it from the menu model"
+
 	| aMenuModel anElement |
 	anEvent consumed: true.
 	aMenuModel := anEvent menuModel.
