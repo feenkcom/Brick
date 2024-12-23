@@ -2,10 +2,30 @@ Class {
 	#name : #BrMenuSubmenuItem,
 	#superclass : #BrMenuLabeledItem,
 	#instVars : [
-		'submenu'
+		'submenu',
+		'action',
+		'hideOnClick'
 	],
 	#category : #'Brick-Menu - Model'
 }
+
+{ #category : #'api - action' }
+BrMenuSubmenuItem >> action [
+	^ action
+]
+
+{ #category : #'api - action' }
+BrMenuSubmenuItem >> action: aBlock [
+	"Set a block that is evaluated on click events.
+	It has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
+
+	action := aBlock
+]
+
+{ #category : #'api - action' }
+BrMenuSubmenuItem >> bePinSubmenuAction [
+	self action: [ :anElement :aButtonModel :anEvent | self notifyPinRequest ]
+]
 
 { #category : #'api - converting' }
 BrMenuSubmenuItem >> elementType [
@@ -17,9 +37,22 @@ BrMenuSubmenuItem >> gtItemChildren [
 	^ self submenu gtItemChildren
 ]
 
+{ #category : #'api - action' }
+BrMenuSubmenuItem >> hideOnClick [
+	<return: #Boolean>
+	^ hideOnClick ifNil: [ false ]
+]
+
+{ #category : #'api - action' }
+BrMenuSubmenuItem >> hideOnClick: aBoolean [
+	hideOnClick := aBoolean
+]
+
 { #category : #initialization }
 BrMenuSubmenuItem >> initialize [
 	super initialize.
+	action := [ :anElement :aButtonModel :anEvent |  ].
+	hideOnClick := false.
 	submenu := BrMenuItems new parent: self
 ]
 
@@ -27,6 +60,11 @@ BrMenuSubmenuItem >> initialize [
 BrMenuSubmenuItem >> items [
 	<return: #BrMenuItems>
 	^ self submenu items
+]
+
+{ #category : #'event handling' }
+BrMenuSubmenuItem >> notifyPinRequest [
+	self submenu notifyPinRequest
 ]
 
 { #category : #'event handling' }
