@@ -6,7 +6,8 @@ Class {
 		'pinnedElementParent',
 		'positionShift',
 		'anchorElement',
-		'aboutToBeClosedHandler'
+		'aboutToBeClosedHandler',
+		'pinnedElementPullEndEventHandler'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -72,6 +73,33 @@ BrMenuAnchorWithPinnedElementHandler >> onInstalledIn: anElement [
 ]
 
 { #category : #accessing }
+BrMenuAnchorWithPinnedElementHandler >> onPinnedElementAboutToBeClosed: anEvent [ 
+	"Uninstall event handlers on the pinned element close action."
+
+	pinnedElement removeEventHandler: aboutToBeClosedHandler.
+	pinnedElement removeEventHandler: pinnedElementPullEndEventHandler.
+	anchorElement removeEventHandler: self.
+	pinnedElement := nil.
+	pinnedElementParent := nil.
+]
+
+{ #category : #'event handling' }
+BrMenuAnchorWithPinnedElementHandler >> onPinnedElementPullEndEvent: anEvent [
+	"Recompute pinned element distance when it is dragged by a user"
+
+	anchorElement ifNotNil: [ :anElement | 
+		self computeDistanceTo: anElement ]
+]
+
+{ #category : #'api - hooks' }
+BrMenuAnchorWithPinnedElementHandler >> onUninstalledIn: anElement [
+	super onUninstalledIn: anElement.
+
+	anchorElement := nil.
+	positionShift := nil.
+]
+
+{ #category : #accessing }
 BrMenuAnchorWithPinnedElementHandler >> pinnedElement [
 	^ pinnedElement
 ]
@@ -90,8 +118,12 @@ BrMenuAnchorWithPinnedElementHandler >> pinnedElement: anElement [
 	
 	aboutToBeClosedHandler := (BlEventHandler 
 		on: BrMenuPinnedElementAboutToBeClosed 
-		do: [ :anEvent | self onAboutToBeClosed: anEvent ]).
+		do: [ :anEvent | self onPinnedElementAboutToBeClosed: anEvent ]).
+	pinnedElementPullEndEventHandler := (BlEventHandler 
+		on: BlPullEndEvent 
+		do: [ :anEvent | self onPinnedElementPullEndEvent: anEvent ]).
 	anElement addEventHandler: aboutToBeClosedHandler.
+	anElement addEventHandler: pinnedElementPullEndEventHandler.
 ]
 
 { #category : #'private - updating' }

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuPinnableAptitude,
-	#superclass : #BrAptitude,
+	#superclass : #BrMenuModelAptitude,
 	#instVars : [
 		'handleElement',
 		'pullHandler',
@@ -52,6 +52,17 @@ BrMenuPinnableAptitude >> beSameParentPinner [
 { #category : #'api - initialization' }
 BrMenuPinnableAptitude >> beSpaceRootPinner [
 	pinner := BrMenuSpaceRootPinner new
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> endPinning [
+	isPinned ifTrue: [ ^ self ].
+	self
+		widgetDo: [ :aWidget | 
+			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
+			pinner pinMenuElement: aWidget.
+			self addCloseButton.
+			isPinned := true ]
 ]
 
 { #category : #initialization }
@@ -114,31 +125,30 @@ BrMenuPinnableAptitude >> onInstalledIn: anElement [
 	pullHandler targetElement: self widget
 ]
 
+{ #category : #'private - event management' }
+BrMenuPinnableAptitude >> onMenuPinRequest: anAnnouncement [
+	self menuModel == anAnnouncement menuModel ifFalse: [ ^ self ].
+
+	self widgetDo: [ :aWidget | 
+		BlTaskAction
+			enqueueElement: aWidget
+			action: [ 
+				self startPinning.
+				self endPinning ] ]
+]
+
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onPullEndEvent: anEvent [
 	isPinned ifTrue: [ ^ self ].
-	self
-		widgetDo: [ :aWidget | 
-			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
-			anEvent consumed: true.
-			pinner pinMenuElement: aWidget.
-			self addCloseButton.
-			isPinned := true ]
+	anEvent consumed: true.
+	self endPinning.
 ]
 
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onPullStartEvent: anEvent [ 
 	isPinned ifTrue: [ ^ self ].
-	self widgetDo: [ :aWidget |
-		| aPosition |
-		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
-		anEvent consumed: true.
-	
-		aPosition := aWidget position.
-		aWidget fireEvent: BrMenuDetachWish new.
-		aWidget constraintsDo: [ :c | 
-			c ignoreByLayout ].
-		aWidget relocate: aPosition ]
+	anEvent consumed: true.
+	self startPinning
 ]
 
 { #category : #'api - hooks' }
@@ -149,4 +159,34 @@ BrMenuPinnableAptitude >> onUninstalledIn: anElement [
 	closeButton ifNotNil: #removeFromParent.
 	closeButton := nil.
 	isPinned := false.
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> startPinning [
+	isPinned ifTrue: [ ^ self ].
+	self widgetDo: [ :aWidget |
+		| aPosition |
+		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
+
+		aPosition := aWidget position.
+		aWidget fireEvent: BrMenuDetachWish new.
+		aWidget constraintsDo: [ :c | 
+			c ignoreByLayout ].
+		aWidget relocate: aPosition ]
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> subscribeToMenuModel [
+	super subscribeToMenuModel.
+	
+	self menuModel announcer weak 
+		when: BrMenuPinRequest
+		send: #onMenuPinRequest:
+		to: self
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> unsubscribeFromMenuModel [
+	super unsubscribeFromMenuModel.
+	self menuModel announcer unsubscribe: self
 ]
