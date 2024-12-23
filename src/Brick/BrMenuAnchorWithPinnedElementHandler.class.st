@@ -46,14 +46,6 @@ BrMenuAnchorWithPinnedElementHandler >> hidePinnedElement [
 	pinnedElement removeFromParent
 ]
 
-{ #category : #accessing }
-BrMenuAnchorWithPinnedElementHandler >> onAboutToBeClosed: anEvent [ 
-	pinnedElement removeEventHandler: aboutToBeClosedHandler.
-	anchorElement removeEventHandler: self.
-	pinnedElement := nil.
-	pinnedElementParent := nil.
-]
-
 { #category : #'api - hooks' }
 BrMenuAnchorWithPinnedElementHandler >> onInstalledIn: anElement [
 	super onInstalledIn: anElement.
