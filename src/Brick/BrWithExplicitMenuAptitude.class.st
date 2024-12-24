@@ -68,21 +68,21 @@ BrWithExplicitMenuAptitude >> hasModifiers: anEvent [
 BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
 	menuContainer menuModel ifNotNil: [ :aMenu | 
-		aMenu hide.
-		menuContainer childrenCount isZero ifFalse: [
-			"Only pinned children remains. 
-			We therefore keep the menu container."
-			^ self ] ].
+		aMenu hide ].
 	
-	self
-		widgetDo: [ :aWidget | 
-			aWidget
-				removeEventHandler: extentChangedEventHandler;
-				removeEventHandler: positionInSpaceChangedEventHandler;
-				removeEventHandler: addedToSceneEventHandler;
-				removeEventHandler: removedFromSceneEventHandler ].
-	
-	self temporaryHide
+	"Widgets enqueue their hide actions, therefore
+	let's check remaining menu widgets in the next pulse."
+	self widgetDo: [ :aWidget | 
+		BlTaskAction
+			enqueueElement: aWidget
+			action: [
+				menuContainer childrenCount isZero ifTrue: [
+					aWidget
+						removeEventHandler: extentChangedEventHandler;
+						removeEventHandler: positionInSpaceChangedEventHandler;
+						removeEventHandler: addedToSceneEventHandler;
+						removeEventHandler: removedFromSceneEventHandler.
+					self temporaryHide ] ] ]
 ]
 
 { #category : #initialization }
