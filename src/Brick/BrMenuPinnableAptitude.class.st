@@ -1,12 +1,13 @@
 Class {
 	#name : #BrMenuPinnableAptitude,
-	#superclass : #BrAptitude,
+	#superclass : #BrMenuModelAptitude,
 	#instVars : [
 		'handleElement',
 		'pullHandler',
 		'closeButton',
 		'isPinned',
-		'pinner'
+		'pinner',
+		'isHideParentMenuOnPinned'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -41,6 +42,20 @@ BrMenuPinnableAptitude >> beAnyParentPinner [
 ]
 
 { #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beHideMenu [
+	"If my menu widget is pinned, I hide the other menu widgets."
+
+	isHideParentMenuOnPinned := true
+]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> beKeepMenu [
+	"If my menu widget is pinned, I still keep the other menu widgets around."
+
+	isHideParentMenuOnPinned := false
+]
+
+{ #category : #'api - initialization' }
 BrMenuPinnableAptitude >> beSameParentPinner [
 	"I keep dragged menus in a same parent.
 	As a consequence, pinned widgets keep relative position to 
@@ -54,10 +69,22 @@ BrMenuPinnableAptitude >> beSpaceRootPinner [
 	pinner := BrMenuSpaceRootPinner new
 ]
 
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> endPinning [
+	isPinned ifTrue: [ ^ self ].
+	self
+		widgetDo: [ :aWidget | 
+			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
+			pinner pinMenuElement: aWidget.
+			self addCloseButton.
+			isPinned := true. ]
+]
+
 { #category : #initialization }
 BrMenuPinnableAptitude >> initialize [
 	super initialize.
 	isPinned := false.
+	isHideParentMenuOnPinned := true.
 	pullHandler := BlPullHandler new disallowOutOfBounds.
 	handleElement := self newHandleElement.
 	handleElement addEventHandler: pullHandler.
@@ -71,6 +98,12 @@ BrMenuPinnableAptitude >> initializeListeners [
 
 	self when: BlPullStartEvent do: [ :anEvent | self onPullStartEvent: anEvent ].
 	self when: BlPullEndEvent do: [ :anEvent | self onPullEndEvent: anEvent ]
+]
+
+{ #category : #testing }
+BrMenuPinnableAptitude >> isHideParentMenuOnPinned [
+	<return: #Boolean>
+	^ isHideParentMenuOnPinned ifNil: [ true ]
 ]
 
 { #category : #'event handling' }
@@ -95,6 +128,12 @@ BrMenuPinnableAptitude >> newHandleElement [
 			c ignored vertical alignTop ]
 ]
 
+{ #category : #'private - notifying' }
+BrMenuPinnableAptitude >> notifyHideParentMenu [
+	self menuModel ifNotNil: [ :aMenuModel | 
+		aMenuModel hideAll ]
+]
+
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onCloseFrom: aButton [
 	self widgetDo: [ :aWidget | 
@@ -114,31 +153,30 @@ BrMenuPinnableAptitude >> onInstalledIn: anElement [
 	pullHandler targetElement: self widget
 ]
 
+{ #category : #'private - event management' }
+BrMenuPinnableAptitude >> onMenuPinRequest: anAnnouncement [
+	self menuModel == anAnnouncement menuModel ifFalse: [ ^ self ].
+
+	self widgetDo: [ :aWidget | 
+		BlTaskAction
+			enqueueElement: aWidget
+			action: [ 
+				self startPinning.
+				self endPinning ] ]
+]
+
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onPullEndEvent: anEvent [
 	isPinned ifTrue: [ ^ self ].
-	self
-		widgetDo: [ :aWidget | 
-			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
-			anEvent consumed: true.
-			pinner pinMenuElement: aWidget.
-			self addCloseButton.
-			isPinned := true ]
+	anEvent consumed: true.
+	self endPinning.
 ]
 
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onPullStartEvent: anEvent [ 
 	isPinned ifTrue: [ ^ self ].
-	self widgetDo: [ :aWidget |
-		| aPosition |
-		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
-		anEvent consumed: true.
-	
-		aPosition := aWidget position.
-		aWidget fireEvent: BrMenuDetachWish new.
-		aWidget constraintsDo: [ :c | 
-			c ignoreByLayout ].
-		aWidget relocate: aPosition ]
+	anEvent consumed: true.
+	self startPinning
 ]
 
 { #category : #'api - hooks' }
@@ -149,4 +187,37 @@ BrMenuPinnableAptitude >> onUninstalledIn: anElement [
 	closeButton ifNotNil: #removeFromParent.
 	closeButton := nil.
 	isPinned := false.
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> startPinning [
+	isPinned ifTrue: [ ^ self ].
+	self widgetDo: [ :aWidget |
+		| aPosition |
+		aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
+
+		aPosition := aWidget position.
+		aWidget fireEvent: (BrMenuDetachWish new menuModel: self menuModel).
+		aWidget constraintsDo: [ :c | 
+			c ignoreByLayout ].
+		aWidget relocate: aPosition.
+		
+		self isHideParentMenuOnPinned ifTrue: [ 
+			self notifyHideParentMenu ] ]
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> subscribeToMenuModel [
+	super subscribeToMenuModel.
+	
+	self menuModel announcer weak 
+		when: BrMenuPinRequest
+		send: #onMenuPinRequest:
+		to: self
+]
+
+{ #category : #'event handling' }
+BrMenuPinnableAptitude >> unsubscribeFromMenuModel [
+	super unsubscribeFromMenuModel.
+	self menuModel announcer unsubscribe: self
 ]

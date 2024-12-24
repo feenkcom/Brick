@@ -125,12 +125,9 @@ BrMenuItems >> asTreeElement [
 		border: (BlBorder paint: Color veryLightGray width: 1);
 		background: anElement theme default contentBackgroundColor;
 		items: self groups lazy: #items;
-		expandUpTo: 2.
+		expandUpTo: 2;
+		addAptitude: (BrMenuHideableAptitude new menuModel: self).
 
-	self announcer weak
-		when: BrMenuHideRequest
-		send: #removeFromParent
-		to: anElement.
 	^ anElement
 ]
 

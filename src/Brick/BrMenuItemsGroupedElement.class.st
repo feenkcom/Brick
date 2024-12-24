@@ -56,7 +56,10 @@ BrMenuItemsGroupedElement >> listGroups [
 
 { #category : #'event handling' }
 BrMenuItemsGroupedElement >> onMenuHideRequest: anAnnouncement [
-	self removeFromParent
+	BlTaskAction
+		enqueueElement: self
+		action: [ 
+			self removeFromParent ]
 ]
 
 { #category : #'private - updating' }

@@ -14,10 +14,8 @@ BrMenuExplicit >> asElement [
 			menuModel: self;
 			asElement.
 
-	self announcer weak
-		when: BrMenuHideRequest
-		send: #removeFromParent
-		to: anElement.
+	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
+	
 	^ anElement
 ]
 
