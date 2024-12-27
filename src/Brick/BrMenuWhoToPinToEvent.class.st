@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'anchorElement'
 	],
-	#category : #'Brick-Menu - Support'
+	#category : #'Brick-Menu - Events'
 }
 
 { #category : #accessing }
