@@ -54,6 +54,8 @@ BrMenuItemElement >> onMouseLeaveEvent: anEvent [
 
 { #category : #'event handling' }
 BrMenuItemElement >> onSelectionChanged: anAnnouncement [
+	"Must be called in a UI process."
+
 	| isSelected |
 	isSelected := anAnnouncement menuModel isSelected.
 	self dispatchEvent: (BlElementSelectedStateWish selected: isSelected)

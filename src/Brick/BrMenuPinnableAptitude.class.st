@@ -155,14 +155,13 @@ BrMenuPinnableAptitude >> onInstalledIn: anElement [
 
 { #category : #'private - event management' }
 BrMenuPinnableAptitude >> onMenuPinRequest: anAnnouncement [
+	"Must be called in a UI process."
+	
 	self menuModel == anAnnouncement menuModel ifFalse: [ ^ self ].
 
 	self widgetDo: [ :aWidget | 
-		BlTaskAction
-			enqueueElement: aWidget
-			action: [ 
-				self startPinning.
-				self endPinning ] ]
+		self startPinning.
+		self endPinning ]
 ]
 
 { #category : #'event handling' }

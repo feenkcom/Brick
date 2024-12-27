@@ -36,15 +36,16 @@ BrMenuItemsListElement >> initializeListElement [
 
 { #category : #'event handling' }
 BrMenuItemsListElement >> onMenuHideRequest: anAnnouncement [
-	BlTaskAction
-		enqueueElement: self
-		action: [ 
-			self removeFromParent ]
+	"Must be called in a UI process."
+
+	self removeFromParent
 ]
 
 { #category : #'event handling' }
 BrMenuItemsListElement >> onMenuItemsChanged: anAnnouncement [
-	BlTaskAction enqueueElement: self action: [ self updateListElement ]
+	BlTaskAction 
+		enqueueElement: self 
+		action: [ self updateListElement ]
 ]
 
 { #category : #'event handling' }
