@@ -6,11 +6,10 @@ Class {
 
 { #category : #'event handling' }
 BrMenuHideableAptitude >> onMenuHideRequest: anAnnouncement [
+	"Must be called in a UI process."
+	
 	self widgetDo: [ :aWidget | 
-		BlTaskAction
-			enqueueElement: aWidget 
-			action: [
-				aWidget removeFromParent ] ]
+		aWidget removeFromParent ]
 ]
 
 { #category : #'event handling' }

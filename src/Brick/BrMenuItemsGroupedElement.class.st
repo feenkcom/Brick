@@ -56,15 +56,16 @@ BrMenuItemsGroupedElement >> listGroups [
 
 { #category : #'event handling' }
 BrMenuItemsGroupedElement >> onMenuHideRequest: anAnnouncement [
-	BlTaskAction
-		enqueueElement: self
-		action: [ 
-			self removeFromParent ]
+	"Must be called in a UI process."
+
+	self removeFromParent
 ]
 
 { #category : #'private - updating' }
 BrMenuItemsGroupedElement >> onMenuItemsChanged: anAnnouncement [
-	BlTaskAction enqueueElement: self action: [ self updateListElement ]
+	BlTaskAction 
+		enqueueElement: self 
+		action: [ self updateListElement ]
 ]
 
 { #category : #'event handling' }
