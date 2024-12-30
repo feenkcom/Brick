@@ -220,3 +220,15 @@ BrMenuPinnableAptitude >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
 	self menuModel announcer unsubscribe: self
 ]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> withAllExtraEventHandlers [
+	"Let's initialize menu container with other event handlers, e.g., spawn."
+	| allPragmas |
+	allPragmas := Pragma 
+		allNamed: #postPinAction 
+		from: self class 
+		to: BrMenuPinnableAptitude.
+	allPragmas do: [ :eachPragma |
+		self perform: eachPragma methodSelector ]
+]
