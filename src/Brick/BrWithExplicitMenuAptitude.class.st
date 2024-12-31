@@ -246,6 +246,7 @@ BrWithExplicitMenuAptitude >> show [
 	
 	self widgetDo: [ :aWidget | 
 		| aParent |
+		aWidget dispatchEvent: BrTooltipHideWish new.
 		aParent := aWidget topMostParent.
 		self showIn: aParent ]
 ]
