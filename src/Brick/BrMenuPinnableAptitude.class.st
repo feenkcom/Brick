@@ -129,11 +129,20 @@ BrMenuPinnableAptitude >> newCloseButton [
 
 { #category : #initialization }
 BrMenuPinnableAptitude >> newHandleElement [
-	^ BrMenuDragHandleElement new
+	^ BrFrame new 
+		in: [ :theFrame |
+			theFrame states addState: (BrResizerLocationState 
+				location: BrResizerTopLocation new) ];
 		constraintsDo: [ :c | 
-			c ignoreByLayout.
-			c ignored horizontal alignCenter.
-			c ignored vertical alignTop ]
+			c ignoreByLayout ];
+		mouseCursor: BlGrabCursor new;
+		when: BlMouseDownEvent
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabbingCursor new ];
+		when: BlMouseUpEvent 
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ];
+		when: BlDragEndEvent
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ];
+		addAptitude: BrGlamorousHandleBarResizerAptitude new.
 ]
 
 { #category : #'private - notifying' }
@@ -157,6 +166,7 @@ BrMenuPinnableAptitude >> onCloseFrom: aButton [
 { #category : #'api - hooks' }
 BrMenuPinnableAptitude >> onInstalledIn: anElement [
 	super onInstalledIn: anElement.
+	anElement clipChildren: false.
 	self widget addChild: handleElement.
 	pullHandler targetElement: self widget
 ]
