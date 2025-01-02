@@ -56,8 +56,14 @@ BrMenuAnchorWithPinnedElementHandler >> onInstalledIn: anElement [
 	self 
 		assert: [ anchorElement isNil ]
 		description: [ 'I can be installed only on one element. Already installed on {1}. New request: {2}' format: { anchorElement. anElement } ].
+	self 
+		assert: [ pinnedElement isNotNil ]
+		description: [ 'Pinned element must be initialized' ].
 		
 	anchorElement := anElement.
+	
+	pinnedElement dispatchEvent: (BrMenuAnchorElementChanged new
+		anchorElement: anElement).
 		
 	BlTaskAction
 		enqueueElement: anElement
@@ -68,6 +74,9 @@ BrMenuAnchorWithPinnedElementHandler >> onInstalledIn: anElement [
 BrMenuAnchorWithPinnedElementHandler >> onPinnedElementAboutToBeClosed: anEvent [ 
 	"Uninstall event handlers on the pinned element close action."
 
+	pinnedElement dispatchEvent: (BrMenuAnchorElementChanged new
+		anchorElement: nil).
+	
 	pinnedElement removeEventHandler: aboutToBeClosedHandler.
 	pinnedElement removeEventHandler: pinnedElementPullEndEventHandler.
 	anchorElement removeEventHandler: self.

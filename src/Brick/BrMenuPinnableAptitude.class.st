@@ -7,7 +7,8 @@ Class {
 		'closeButton',
 		'isPinned',
 		'pinner',
-		'isHideParentMenuOnPinned'
+		'isHideParentMenuOnPinned',
+		'pinningActions'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -28,6 +29,11 @@ BrMenuPinnableAptitude >> addCloseButton [
 			when: BlMouseLeaveEvent
 			do: [ :anEvent | closeButton visibility: BlVisibility gone ].
 		anElement addChild: closeButton ]
+]
+
+{ #category : #'as yet unclassified' }
+BrMenuPinnableAptitude >> addPinningAction: anAction [
+	pinningActions := self pinningActions copyWith: anAction
 ]
 
 { #category : #'api - initialization' }
@@ -75,6 +81,7 @@ BrMenuPinnableAptitude >> endPinning [
 	self
 		widgetDo: [ :aWidget | 
 			aWidget isAttachedToSceneGraph ifFalse: [ ^ self ].
+			self performPreEndPinActions.
 			pinner pinMenuElement: aWidget.
 			self addCloseButton.
 			isPinned := true. ]
@@ -89,7 +96,8 @@ BrMenuPinnableAptitude >> initialize [
 	handleElement := self newHandleElement.
 	handleElement addEventHandler: pullHandler.
 	closeButton := nil.
-	pinner := BrMenuAnchorElementPinner new
+	pinner := BrMenuAnchorElementPinner new.
+	pinningActions := Array empty.
 ]
 
 { #category : #initialization }
@@ -121,11 +129,20 @@ BrMenuPinnableAptitude >> newCloseButton [
 
 { #category : #initialization }
 BrMenuPinnableAptitude >> newHandleElement [
-	^ BrMenuDragHandleElement new
+	^ BrFrame new 
+		in: [ :theFrame |
+			theFrame states addState: (BrResizerLocationState 
+				location: BrResizerTopLocation new) ];
 		constraintsDo: [ :c | 
-			c ignoreByLayout.
-			c ignored horizontal alignCenter.
-			c ignored vertical alignTop ]
+			c ignoreByLayout ];
+		mouseCursor: BlGrabCursor new;
+		when: BlMouseDownEvent
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabbingCursor new ];
+		when: BlMouseUpEvent 
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ];
+		when: BlDragEndEvent
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ];
+		addAptitude: BrGlamorousHandleBarResizerAptitude new.
 ]
 
 { #category : #'private - notifying' }
@@ -149,6 +166,7 @@ BrMenuPinnableAptitude >> onCloseFrom: aButton [
 { #category : #'api - hooks' }
 BrMenuPinnableAptitude >> onInstalledIn: anElement [
 	super onInstalledIn: anElement.
+	anElement clipChildren: false.
 	self widget addChild: handleElement.
 	pullHandler targetElement: self widget
 ]
@@ -188,6 +206,25 @@ BrMenuPinnableAptitude >> onUninstalledIn: anElement [
 	isPinned := false.
 ]
 
+{ #category : #'private - updating' }
+BrMenuPinnableAptitude >> performPreEndPinActions [
+	| aContext |
+	self pinningActions ifEmpty: [ ^ self ].
+	self widgetDo: [ :aWidget | 
+		aContext := BrMenuPinActionContext new
+			menuElement: aWidget;
+			pinnableAptitude: self ].
+	aContext ifNil: [ ^ self ].
+
+	self pinningActions do: [ :eachAction |
+		eachAction executePreEndPinBlockInContext: aContext ].
+]
+
+{ #category : #'as yet unclassified' }
+BrMenuPinnableAptitude >> pinningActions [
+	^ pinningActions ifNil: [ pinningActions := Array empty ]
+]
+
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> startPinning [
 	isPinned ifTrue: [ ^ self ].
@@ -219,4 +256,16 @@ BrMenuPinnableAptitude >> subscribeToMenuModel [
 BrMenuPinnableAptitude >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
 	self menuModel announcer unsubscribe: self
+]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> withAllPinActions [
+	"Let's initialize menu element, e.g., by installing other event handlers."
+	| allPragmas |
+	allPragmas := Pragma 
+		allNamed: #menuPinAction 
+		from: self class 
+		to: BrMenuPinnableAptitude.
+	allPragmas do: [ :eachPragma |
+		(self perform: eachPragma methodSelector) ]
 ]
