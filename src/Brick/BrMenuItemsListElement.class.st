@@ -25,6 +25,7 @@ BrMenuItemsListElement >> initialize [
 { #category : #initialization }
 BrMenuItemsListElement >> initializeListElement [
 	listElement := BrSimpleList new
+		beNotFocusable;
 		fitContentLimited;
 		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | 
 			anItemObject elementType ];

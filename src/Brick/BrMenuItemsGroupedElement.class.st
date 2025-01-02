@@ -25,6 +25,7 @@ BrMenuItemsGroupedElement >> initialize [
 { #category : #initialization }
 BrMenuItemsGroupedElement >> initializeListElement [
 	listElement := BrGroupedList new
+			beNotFocusable;
 			fitContentLimited;
 			headerElementStencil: [ :anItemType :aListWidget | 
 				BrLabel new
