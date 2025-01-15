@@ -220,8 +220,23 @@ BrMenuPinnableAptitude >> performPreEndPinActions [
 		eachAction executePreEndPinBlockInContext: aContext ].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - updating' }
+BrMenuPinnableAptitude >> performPreStartPinActions [
+	| aContext |
+	self pinningActions ifEmpty: [ ^ self ].
+	self widgetDo: [ :aWidget | 
+		aContext := BrMenuPinActionContext new
+			menuElement: aWidget;
+			pinnableAptitude: self ].
+	aContext ifNil: [ ^ self ].
+
+	self pinningActions do: [ :eachAction |
+		eachAction executePreStartPinBlockInContext: aContext ].
+]
+
+{ #category : #accessing }
 BrMenuPinnableAptitude >> pinningActions [
+	<return: #Collection of: #BrMenuPinAction>
 	^ pinningActions ifNil: [ pinningActions := Array empty ]
 ]
 
@@ -234,6 +249,7 @@ BrMenuPinnableAptitude >> startPinning [
 
 		aPosition := aWidget position.
 		aWidget fireEvent: (BrMenuDetachWish new menuModel: self menuModel).
+		self performPreStartPinActions.
 		aWidget constraintsDo: [ :c | 
 			c ignoreByLayout ].
 		aWidget relocate: aPosition.
@@ -255,7 +271,8 @@ BrMenuPinnableAptitude >> subscribeToMenuModel [
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
-	self menuModel announcer unsubscribe: self
+	self menuModel ifNotNil: [ :aMenuModel | 
+		aMenuModel announcer unsubscribe: self ]
 ]
 
 { #category : #'api - initialization' }
@@ -268,4 +285,11 @@ BrMenuPinnableAptitude >> withAllPinActions [
 		to: BrMenuPinnableAptitude.
 	allPragmas do: [ :eachPragma |
 		(self perform: eachPragma methodSelector) ]
+]
+
+{ #category : #'api - initialization' }
+BrMenuPinnableAptitude >> withPinnedAptitude [
+	<menuPinAction>
+	self addPinningAction: (BrMenuPinAction new
+		preEndPinBlock: [ self add: BrMenuPinnedAptitude new ])
 ]

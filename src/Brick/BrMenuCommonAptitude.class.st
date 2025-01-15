@@ -13,14 +13,5 @@ BrMenuCommonAptitude >> initialize [
 
 	self
 		addChangeProperty: #(widget geometry)
-		with: [ BlRoundedRectangleGeometry cornerRadius: 4 ].
-	self
-		addChangeProperty: #(widget border)
-		with: [ BlBorder paint: Color veryLightGray width: 1 ].
-	self
-		addChangeProperty: #(widget outskirts)
-		with: [ BlOutskirts outside ].
-	self
-		addChangeProperty: #(widget background)
-		with: [ self theme default contentBackgroundColor ].
+		with: [ BlRoundedRectangleGeometry cornerRadius: BrMenuConstants cornerRadius ].
 ]

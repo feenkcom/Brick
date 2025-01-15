@@ -37,7 +37,8 @@ BrMenuSteppedElement >> initialize [
 			c horizontal matchParent.
 			c vertical matchParent ];
 		preventMouseEvents;
-		clipChildren: false.
+		clipChildren: false;
+		beInSingleCompositionLayer.
 
 	self
 		when: BrMenuShowSubmenuWish
@@ -111,4 +112,9 @@ BrMenuSteppedElement >> updateElement [
 		anElement removeFromParent ].
 	elementCache removeAll.
 	self show
+]
+
+{ #category : #'api - initialization' }
+BrMenuSteppedElement >> withCenterHandle [
+	self layout withCenterHandle
 ]

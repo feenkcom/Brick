@@ -22,7 +22,7 @@ BrMenuClickPositionRelocator >> initialize [
 	super initialize.
 
 	topLeftShift := 0 @ 0.
-	extent := 4 @ 4.
+	extent := BrMenuConstants handleExtent.
 	center := extent / 2.0
 ]
 

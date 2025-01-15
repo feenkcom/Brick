@@ -4,6 +4,11 @@ Class {
 	#category : #'Brick-Menu - Support'
 }
 
+{ #category : #accessing }
+BrMenuConstants class >> cornerRadius [
+	^ 4
+]
+
 { #category : #constants }
 BrMenuConstants class >> defaultMenuItemBottomPadding [
 	^ 3
@@ -22,4 +27,11 @@ BrMenuConstants class >> defaultMenuItemRightPadding [
 { #category : #constants }
 BrMenuConstants class >> defaultMenuItemTopPadding [
 	^ 3
+]
+
+{ #category : #initialization }
+BrMenuConstants class >> handleExtent [
+	"Default handle extent used for context menus."
+
+	^ 4 @ 4
 ]
