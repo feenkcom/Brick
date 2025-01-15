@@ -16,17 +16,17 @@ BrMenuConstants class >> defaultMenuItemBottomPadding [
 
 { #category : #constants }
 BrMenuConstants class >> defaultMenuItemLeftPadding [
-	^ 10
+	^ 6
 ]
 
 { #category : #constants }
 BrMenuConstants class >> defaultMenuItemRightPadding [
-	^ 10
+	^ 6
 ]
 
 { #category : #constants }
 BrMenuConstants class >> defaultMenuItemTopPadding [
-	^ 3
+	^ 2
 ]
 
 { #category : #initialization }
