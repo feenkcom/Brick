@@ -47,7 +47,7 @@ BrMenuExplicitHandle >> hide [
 	super hide.
 	
 	"Recompute the submenu next time is it displayed."
-	menu := nil
+	submenuStencil ifNotNil: [ menu := nil ]
 ]
 
 { #category : #initialization }
