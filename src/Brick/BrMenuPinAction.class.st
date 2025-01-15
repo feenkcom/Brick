@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuPinAction,
 	#superclass : #Object,
 	#instVars : [
-		'preEndPinBlock'
+		'preEndPinBlock',
+		'preStartPinBlock'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -10,6 +11,12 @@ Class {
 { #category : #'api - execution' }
 BrMenuPinAction >> executePreEndPinBlockInContext: aContext [
 	self preEndPinBlock ifNotNil: [ :aBlock | 
+		aBlock cull: aContext ]
+]
+
+{ #category : #'api - execution' }
+BrMenuPinAction >> executePreStartPinBlockInContext: aContext [
+	self preStartPinBlock ifNotNil: [ :aBlock | 
 		aBlock cull: aContext ]
 ]
 
@@ -21,4 +28,14 @@ BrMenuPinAction >> preEndPinBlock [
 { #category : #accessing }
 BrMenuPinAction >> preEndPinBlock: anObject [
 	preEndPinBlock := anObject
+]
+
+{ #category : #accessing }
+BrMenuPinAction >> preStartPinBlock [
+	^ preStartPinBlock
+]
+
+{ #category : #accessing }
+BrMenuPinAction >> preStartPinBlock: anObject [
+	preStartPinBlock := anObject
 ]

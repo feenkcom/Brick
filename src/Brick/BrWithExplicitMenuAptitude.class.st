@@ -90,7 +90,7 @@ BrWithExplicitMenuAptitude >> initialize [
 	super initialize.
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
-
+	
 	self initializeMenuContainer.
 	self initializeEventHandlers.
 	
@@ -140,6 +140,7 @@ BrWithExplicitMenuAptitude >> initializeListeners [
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer := BrMenuSteppedElement new.
+	menuContainer addAptitude: BrMenuContainerAptitude new.
 	menuContainerParent := nil.
 	relocator := BrMenuClickPositionRelocator new
 		menuContainer: menuContainer.
@@ -147,8 +148,8 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer 
-		when: BrMenuSourceElementRequest 
-		do: [ :anEvent | self onSourceElementRequest: anEvent ]
+		when: BrMenuAnchorElementRequest 
+		do: [ :anEvent | self onAnchorElementRequest: anEvent ]
 ]
 
 { #category : #accessing }
@@ -165,6 +166,13 @@ BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	modifiersMatcher := aBlockOrSymbol
 ]
 
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [ 
+	anEvent consumed: true.
+	self widgetDo: [ :aWidget | 
+		anEvent sourceElement: aWidget ]
+]
+
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 	anEvent button = mouseButton
@@ -179,13 +187,6 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 		relocator mouseUp: anEvent given: aWidget ].
 	
 	self show
-]
-
-{ #category : #initialization }
-BrWithExplicitMenuAptitude >> onSourceElementRequest: anEvent [ 
-	anEvent consumed: true.
-	self widgetDo: [ :aWidget | 
-		anEvent sourceElement: aWidget ]
 ]
 
 { #category : #'event handling' }

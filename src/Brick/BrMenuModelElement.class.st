@@ -12,7 +12,6 @@ Class {
 { #category : #initialization }
 BrMenuModelElement >> initializeCommonStyle [
 	self addAptitude: BrMenuCommonAptitude new.
-	self addAptitude: BrShadowAptitude new
 ]
 
 { #category : #accessing }

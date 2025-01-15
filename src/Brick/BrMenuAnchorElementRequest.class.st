@@ -1,5 +1,5 @@
 Class {
-	#name : #BrMenuSourceElementRequest,
+	#name : #BrMenuAnchorElementRequest,
 	#superclass : #BlEvent,
 	#instVars : [
 		'sourceElement'
@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #accessing }
-BrMenuSourceElementRequest >> sourceElement [
+BrMenuAnchorElementRequest >> sourceElement [
 	^ sourceElement
 ]
 
 { #category : #accessing }
-BrMenuSourceElementRequest >> sourceElement: anObject [
+BrMenuAnchorElementRequest >> sourceElement: anObject [
 	sourceElement := anObject
 ]
 
 { #category : #accessing }
-BrMenuSourceElementRequest >> sourceElementDo: aBlock [
+BrMenuAnchorElementRequest >> sourceElementDo: aBlock [
 	^ sourceElement ifNotNil: aBlock
 ]

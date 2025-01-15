@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuExplicitHandle,
 	#superclass : #BrMenuHandle,
 	#instVars : [
-		'stencil'
+		'handleStencil',
+		'submenuStencil'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -10,7 +11,9 @@ Class {
 { #category : #'api - converting' }
 BrMenuExplicitHandle >> asElement [
 	| anElement |
-	anElement := self stencil asElement.
+	anElement := handleStencil asElement.
+	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
+	
 	BlTaskAction
 		enqueueElement: anElement
 		action: [ anElement
@@ -23,24 +26,39 @@ BrMenuExplicitHandle >> asElement [
 { #category : #initialization }
 BrMenuExplicitHandle >> defaultElement [
 	^ BlElement new
-		size: 3@3;
+		size: BrMenuConstants handleExtent * 2.0;
 		geometry: BlCircleGeometry new;
-		background: Color white
+		background: Color white;
+		addAptitude: BrMenuCommonAptitude new
+]
+
+{ #category : #initialization }
+BrMenuExplicitHandle >> defaultMenu [
+	^ submenuStencil ifNotNil: #create
+]
+
+{ #category : #accessing }
+BrMenuExplicitHandle >> handle: aStencil [
+	handleStencil := aStencil asStencil
+]
+
+{ #category : #'api - visibility' }
+BrMenuExplicitHandle >> hide [
+	super hide.
+	
+	"Recompute the submenu next time is it displayed."
+	submenuStencil ifNotNil: [ menu := nil ]
 ]
 
 { #category : #initialization }
 BrMenuExplicitHandle >> initialize [
 	super initialize.
 
-	stencil := [ self defaultElement ] asStencil
+	handleStencil := [ self defaultElement ] asStencil.
+	submenuStencil := nil.
 ]
 
 { #category : #accessing }
-BrMenuExplicitHandle >> stencil [
-	^ stencil
-]
-
-{ #category : #accessing }
-BrMenuExplicitHandle >> stencil: aStencil [
-	stencil := aStencil asStencil
+BrMenuExplicitHandle >> submenu: aStencil [
+	submenuStencil := aStencil asStencil
 ]

@@ -18,9 +18,55 @@ BrMenuExamples >> explicitMenu [
 	| aMenu |
 	aMenu := BrMenuExplicit new.
 	aMenu stencil: [ BlElement new
-		size: 50@100;
-		border: (BlBorder paint: Color paleBlue darker);
+		size: 150@100;
+		addAptitude: (BrMenuPinnableAptitude new 
+			menuModel: aMenu;
+			withResizers;
+			withAllPinActions);
+		addAptitude: BrMenuCommonAptitude new;
 		background: Color paleBlue ].
+	
+	self assert: aMenu stencil isNotNil.
+	self assert: (aMenu asElement isKindOf: BlElement).
+	
+	^ aMenu
+]
+
+{ #category : #'examples - submenu' }
+BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
+	<gtExample>
+	| aMenu |
+	aMenu := BrMenuExplicit new.
+	aMenu stencil: [ BlElement new
+		beInSeparateCompositionLayer;
+		size: 150@100;
+		addAptitude: (BrMenuPinnableAptitude new 
+			menuModel: aMenu;
+			withResizers;
+			withAllPinActions);
+		addAptitude: BrMenuCommonAptitude new;
+		background: Color paleOrange ].
+	
+	self assert: aMenu stencil isNotNil.
+	self assert: (aMenu asElement isKindOf: BlElement).
+	
+	^ aMenu
+]
+
+{ #category : #'examples - submenu' }
+BrMenuExamples >> explicitMenuInSingleCompositionLayer [
+	<gtExample>
+	| aMenu |
+	aMenu := BrMenuExplicit new.
+	aMenu stencil: [ BlElement new
+		beInSingleCompositionLayer;
+		size: 150@100;
+		addAptitude: (BrMenuPinnableAptitude new 
+			menuModel: aMenu;
+			withResizers;
+			withAllPinActions);
+		addAptitude: BrMenuCommonAptitude new;
+		background: Color paleGreen ].
 	
 	self assert: aMenu stencil isNotNil.
 	self assert: (aMenu asElement isKindOf: BlElement).
@@ -65,6 +111,12 @@ BrMenuExamples >> menuItems [
 	aMenuItems addItem: (BrMenuSubmenuItem new
 		label: 'Create view';
 		submenu: self explicitMenu).
+	aMenuItems addItem: (BrMenuSubmenuItem new
+		label: 'Create view (single layer)';
+		submenu: self explicitMenuInSingleCompositionLayer).
+	aMenuItems addItem: (BrMenuSubmenuItem new
+		label: 'Create view (comp. layer)';
+		submenu: self explicitMenuInSeparateCompositionLayer).
 
 	^ aMenuItems
 ]

@@ -35,7 +35,7 @@ BrMenuItemsGroupedElement >> initializeListElement [
 					vFitContent;
 					margin: (BlInsets
 							top: BrMenuConstants defaultMenuItemTopPadding
-							bottom: 1
+							bottom: 2
 							left: BrMenuConstants defaultMenuItemLeftPadding
 							right: BrMenuConstants defaultMenuItemRightPadding) ];
 			headerDataBinder: [ :aLabelElement :aGroup | aLabelElement text: aGroup domainObject name asString ];
