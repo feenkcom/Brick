@@ -2,7 +2,6 @@ Class {
 	#name : #BrWithExplicitMenuAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
-		'stencil',
 		'mouseButton',
 		'modifiersMatcher',
 		'menuContainer',
@@ -13,7 +12,8 @@ Class {
 		'removedFromSceneEventHandler',
 		'addedToSceneEventHandler',
 		'menuContainerParent',
-		'relocator'
+		'relocator',
+		'menuStencil'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -56,13 +56,19 @@ BrWithExplicitMenuAptitude >> canShow [
 	 ^ false
 ]
 
-{ #category : #'event handling' }
-BrWithExplicitMenuAptitude >> handleClickedOutsideMouseUpEvent: anEvent [
-	"Hide when clicked outside of the container" 
-	anEvent target == menuContainer ifTrue: [ ^ self ].
-	(menuContainer isUnpinnedChild: anEvent target)
-		ifTrue: [ ^ self ].
-	self hide.
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> handle: aHandleBlock submenu: aMenuBlock [
+	menuContainer withCenterHandle.
+	self stencil: [ (BrMenuExplicitHandle new
+		handle: aHandleBlock;
+		submenu: aMenuBlock) ]
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlock [
+	menuContainer withCenterHandle.
+	self stencil: [ (BrMenuExplicitHandle new
+		submenu: aMenuBlock) ]
 ]
 
 { #category : #'event handling' }
@@ -133,7 +139,7 @@ BrWithExplicitMenuAptitude >> initializeEventHandlers [
 	clickOutsideEventHandler := BlEventHandler
 			on: BlMouseUpEvent
 			do: [ :anEvent | 
-				self handleClickedOutsideMouseUpEvent: anEvent ].
+				self onClickedOutsideMouseUpEvent: anEvent ].
 				
 	pressEscEventHandler := BlShortcutWithAction new
 			combination: BlKeyCombination escape;
@@ -164,6 +170,11 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		do: [ :anEvent | self onAnchorElementRequest: anEvent ]
 ]
 
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> menu: aMenuBlock [
+	self stencil: aMenuBlock
+]
+
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> menuContainer [
 	<return: #BrMenuSteppedElement>
@@ -183,6 +194,15 @@ BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [
 	anEvent consumed: true.
 	self widgetDo: [ :aWidget | 
 		anEvent sourceElement: aWidget ]
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onClickedOutsideMouseUpEvent: anEvent [
+	"Hide when clicked outside of the container" 
+	anEvent target == menuContainer ifTrue: [ ^ self ].
+	(menuContainer isUnpinnedChild: anEvent target)
+		ifTrue: [ ^ self ].
+	self hide.
 ]
 
 { #category : #'event handling' }
@@ -267,9 +287,9 @@ BrWithExplicitMenuAptitude >> show [
 { #category : #private }
 BrWithExplicitMenuAptitude >> showIn: anElement [
 	| aMenu |
-	stencil ifNil: [ ^ self ].
+	menuStencil ifNil: [ ^ self ].
 	self hide.
-	aMenu := stencil create.
+	aMenu := menuStencil create.
 	aMenu ifNil: [ ^ self ].
 	menuContainer menuModel: aMenu.
 	menuContainer show.
@@ -286,14 +306,14 @@ BrWithExplicitMenuAptitude >> showIn: anElement [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> stencil [
-	^ stencil
+	^ menuStencil
 ]
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> stencil: aStencil [
 	"Set a stencil that creates a menu model"
 
-	stencil := aStencil asStencil
+	menuStencil := aStencil asStencil
 ]
 
 { #category : #private }
@@ -364,6 +384,15 @@ BrWithExplicitMenuAptitude >> withContainerContextMenu [
 { #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withContainerDropdown [
 	menuContainer withDropdownAreas
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> withHandleSubmenu: aMenuBlock [
+	self
+		deprecated: 'Use handleSubmenu: instead'
+		transformWith: '`@receiver withHandleSubmenu: `@argument'
+			-> '`@receiver handleSubmenu: `@argument'.
+	self handleSubmenu: aMenuBlock
 ]
 
 { #category : #'api - menu' }
