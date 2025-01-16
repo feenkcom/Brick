@@ -18,14 +18,18 @@ Class {
 	#category : #'Brick-Menu - Aptitude'
 }
 
-{ #category : #'api - relocating' }
-BrWithExplicitMenuAptitude >> beClickPositionRelocator [
-	self relocator: BrMenuClickPositionRelocator new
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> beContextMenu [
+	self withClickPositionRelocator.
+	self withSecondaryMouseButton.
+	self withContainerContextMenu
 ]
 
-{ #category : #'api - relocating' }
-BrWithExplicitMenuAptitude >> beWidgetBoundsRelocator [
-	self relocator: BrMenuWidgetBoundsRelocator new
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> beDropdown [
+	self withWidgetBoundsRelocator.
+	self withPrimaryMouseButton.
+	self withContainerDropdown
 ]
 
 { #category : #testing }
@@ -321,11 +325,6 @@ BrWithExplicitMenuAptitude >> usePrimaryMouseButton [
 	mouseButton := BlMouseButton primary
 ]
 
-{ #category : #'api - menu' }
-BrWithExplicitMenuAptitude >> useSecondaryMouseButton [
-	mouseButton := BlMouseButton secondary
-]
-
 { #category : #testing }
 BrWithExplicitMenuAptitude >> visible [
 	<return: #Boolean>
@@ -342,4 +341,34 @@ BrWithExplicitMenuAptitude >> withAllExtraEventHandlers [
 		to: BrWithExplicitMenuAptitude.
 	allPragmas do: [ :eachPragma |
 		self perform: eachPragma methodSelector ]
+]
+
+{ #category : #'api - relocating' }
+BrWithExplicitMenuAptitude >> withClickPositionRelocator [
+	self relocator: BrMenuClickPositionRelocator new
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withContainerContextMenu [
+	menuContainer withContextMenuAreas
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withContainerDropdown [
+	menuContainer withDropdownAreas
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> withPrimaryMouseButton [
+	mouseButton := BlMouseButton primary
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> withSecondaryMouseButton [
+	mouseButton := BlMouseButton secondary
+]
+
+{ #category : #'api - relocating' }
+BrWithExplicitMenuAptitude >> withWidgetBoundsRelocator [
+	self relocator: BrMenuWidgetBoundsRelocator new
 ]

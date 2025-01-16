@@ -118,3 +118,13 @@ BrMenuSteppedElement >> updateElement [
 BrMenuSteppedElement >> withCenterHandle [
 	self layout withCenterHandle
 ]
+
+{ #category : #'api - initialization' }
+BrMenuSteppedElement >> withContextMenuAreas [
+	self layout withContextMenuAreas
+]
+
+{ #category : #'api - initialization' }
+BrMenuSteppedElement >> withDropdownAreas [
+	self layout withDropdownAreas
+]
