@@ -19,6 +19,14 @@ Class {
 }
 
 { #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> beClickPositionRelocator [
+	self
+		deprecated: 'Use #withClickPositionRelocator instead.'
+		transformWith: '`@receiver beClickPositionRelocator' -> '`@receiver withClickPositionRelocator'.
+	self withClickPositionRelocator
+]
+
+{ #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> beContextMenu [
 	self withClickPositionRelocator.
 	self withSecondaryMouseButton.
