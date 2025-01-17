@@ -25,6 +25,11 @@ BrMenuModel >> asElement [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - converting' }
+BrMenuModel >> asStencil [
+	^ [ self ] asStencil
+]
+
 { #category : #'gt - extensions' }
 BrMenuModel >> gtItemChildren [
 	^ Array empty
@@ -85,6 +90,13 @@ BrMenuModel >> initialize [
 { #category : #'api - submenu' }
 BrMenuModel >> items [
 	^ #()
+]
+
+{ #category : #'api - hooks' }
+BrMenuModel >> onMenuDisplayed: aMenuElement [
+	"Subclasses may react when a menu is dispalyed using a given element"
+
+	
 ]
 
 { #category : #accessing }

@@ -30,7 +30,7 @@ BrWithExplicitMenuAptitude >> beClickPositionRelocator [
 BrWithExplicitMenuAptitude >> beContextMenu [
 	self withClickPositionRelocator.
 	self withSecondaryMouseButton.
-	self withContainerContextMenu
+	self withContainerContextMenuAreas
 ]
 
 { #category : #'api - initialization' }
@@ -58,17 +58,16 @@ BrWithExplicitMenuAptitude >> canShow [
 
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handle: aHandleBlock submenu: aMenuBlock [
-	menuContainer withCenterHandle.
-	self stencil: [ (BrMenuExplicitHandle new
+	menuContainer withCenteredHandle.
+	self stencil: (BrMenuExplicitHandle new
 		handle: aHandleBlock;
-		submenu: aMenuBlock) ]
+		submenu: aMenuBlock)
 ]
 
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlock [
-	menuContainer withCenterHandle.
-	self stencil: [ (BrMenuExplicitHandle new
-		submenu: aMenuBlock) ]
+	self withCenteredHandle.
+	self stencil: (BrMenuExplicitHandle new submenu: aMenuBlock)
 ]
 
 { #category : #'event handling' }
@@ -218,7 +217,7 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 	self widgetDo: [ :aWidget | 
 		relocator mouseUp: anEvent given: aWidget ].
 	
-	self show
+	self showDueTo: anEvent
 ]
 
 { #category : #'event handling' }
@@ -275,21 +274,34 @@ BrWithExplicitMenuAptitude >> relocator: aBrMenuContainerRelocator [
 
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> show [
+	self showDueTo: nil
+]
+
+{ #category : #'api - displaying' }
+BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
 	self canShow ifFalse: [ ^ self ].
-	
-	self widgetDo: [ :aWidget | 
-		| aParent |
-		aWidget dispatchEvent: BrTooltipHideWish new.
-		aParent := aWidget topMostParent.
-		self showIn: aParent ]
+
+	self
+		widgetDo: [ :aWidget | 
+			| aParent |
+			aWidget dispatchEvent: BrTooltipHideWish new.
+			aParent := aWidget topMostParent.
+			self showIn: aParent dueToEvent: anEventOrNil ]
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> showIn: anElement [
+BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
 	| aMenu |
 	menuStencil ifNil: [ ^ self ].
 	self hide.
-	aMenu := menuStencil create.
+	
+	self widgetDo: [ :aWidget |
+		aMenu := menuStencil 
+			context: (BrMenuInitialContext new
+				anchorElement: aWidget;
+				menuAptitude: self;
+				dueToEvent: anEventOrNil);
+			build ].
 	aMenu ifNil: [ ^ self ].
 	menuContainer menuModel: aMenu.
 	menuContainer show.
@@ -306,14 +318,15 @@ BrWithExplicitMenuAptitude >> showIn: anElement [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> stencil [
+	<return: #BrMenuInitialStencilBuilder or: nil>
 	^ menuStencil
 ]
 
 { #category : #accessing }
-BrWithExplicitMenuAptitude >> stencil: aStencil [
+BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
 	"Set a stencil that creates a menu model"
 
-	menuStencil := aStencil asStencil
+	menuStencil := aStencilBuilder asStencilBuilder: BrMenuInitialStencilBuilder
 ]
 
 { #category : #private }
@@ -344,6 +357,7 @@ BrWithExplicitMenuAptitude >> temporaryShowIn: anElement [
 	anElement addShortcut: pressEscEventHandler.
 	
 	menuContainer parent == anElement ifFalse: [
+		menuContainer removeFromParent.
 		anElement addChild: menuContainer ].
 	self relocate
 ]
@@ -371,13 +385,18 @@ BrWithExplicitMenuAptitude >> withAllExtraEventHandlers [
 		self perform: eachPragma methodSelector ]
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withCenteredHandle [
+	menuContainer withCenteredHandle
+]
+
 { #category : #'api - relocating' }
 BrWithExplicitMenuAptitude >> withClickPositionRelocator [
 	self relocator: BrMenuClickPositionRelocator new
 ]
 
 { #category : #'api - initialization' }
-BrWithExplicitMenuAptitude >> withContainerContextMenu [
+BrWithExplicitMenuAptitude >> withContainerContextMenuAreas [
 	menuContainer withContextMenuAreas
 ]
 
@@ -405,7 +424,17 @@ BrWithExplicitMenuAptitude >> withSecondaryMouseButton [
 	mouseButton := BlMouseButton secondary
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withTopLeftHandle [
+	menuContainer withTopLeftHandle
+]
+
 { #category : #'api - relocating' }
 BrWithExplicitMenuAptitude >> withWidgetBoundsRelocator [
 	self relocator: BrMenuWidgetBoundsRelocator new
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withoutHandle [
+	menuContainer withoutHandle
 ]

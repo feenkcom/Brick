@@ -14,12 +14,6 @@ BrMenuExplicitHandle >> asElement [
 	anElement := handleStencil asElement.
 	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
 	
-	BlTaskAction
-		enqueueElement: anElement
-		action: [ anElement
-				fireEvent: (BrMenuShowSubmenuWish new
-						submenu: self menu;
-						fromElement: anElement) ].
 	^ anElement
 ]
 
