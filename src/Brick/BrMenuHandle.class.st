@@ -38,3 +38,17 @@ BrMenuHandle >> menu: aBrMenu [
 	aBrMenu parent: self.
 	menu := aBrMenu
 ]
+
+{ #category : #'api - hooks' }
+BrMenuHandle >> onMenuDisplayed: aMenuElement [
+	"Subclasses may react when a menu is dispalyed using a given element"
+
+	super onMenuDisplayed: aMenuElement.
+	
+	BlTaskAction
+		enqueueElement: aMenuElement
+		action: [ aMenuElement
+				fireEvent: (BrMenuShowSubmenuWish new
+						submenu: self menu;
+						fromElement: aMenuElement) ].
+]

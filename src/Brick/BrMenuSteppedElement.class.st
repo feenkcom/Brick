@@ -94,7 +94,8 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 		c stepped relativeBounds: anEvent fromElement bounds ].
 	(aSubmenuElement parent == self) ifFalse: [ 
 		aSubmenuElement removeFromParent.
-		self addChild: aSubmenuElement ]
+		self addChild: aSubmenuElement.
+		aSubmenu onMenuDisplayed: aSubmenuElement ]
 ]
 
 { #category : #'api - displaying' }
@@ -103,7 +104,8 @@ BrMenuSteppedElement >> show [
 	anElement := self cachedSubmenuElement: self menuModel.
 	(anElement parent == self) ifFalse: [ 
 		anElement removeFromParent.
-		self addChild: anElement ]
+		self addChild: anElement.
+		self menuModel onMenuDisplayed: anElement ]
 ]
 
 { #category : #'private - updating' }
@@ -115,8 +117,8 @@ BrMenuSteppedElement >> updateElement [
 ]
 
 { #category : #'api - initialization' }
-BrMenuSteppedElement >> withCenterHandle [
-	self layout withCenterHandle
+BrMenuSteppedElement >> withCenteredHandle [
+	self layout withCenteredHandle
 ]
 
 { #category : #'api - initialization' }
@@ -127,4 +129,14 @@ BrMenuSteppedElement >> withContextMenuAreas [
 { #category : #'api - initialization' }
 BrMenuSteppedElement >> withDropdownAreas [
 	self layout withDropdownAreas
+]
+
+{ #category : #'api - initialization' }
+BrMenuSteppedElement >> withTopLeftHandle [
+	self layout withTopLeftHandle
+]
+
+{ #category : #'api - initialization' }
+BrMenuSteppedElement >> withoutHandle [
+	self layout withoutHandle
 ]
