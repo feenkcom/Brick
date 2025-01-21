@@ -487,6 +487,18 @@ BrTextEditorParagraphElement >> positionWithinSegmentOf: relativePosition [
 	^ relativePosition + foldedChars
 ]
 
+{ #category : #printing }
+BrTextEditorParagraphElement >> printOn: aStream [
+	super printOn: aStream.
+
+	aStream
+		nextPutAll: ' ''';
+		nextPutAll: (String
+				streamContents: [ :aLimitedStream | aLimitedStream nextPutAll: self text asString ]
+				limitedTo: 36);
+		nextPut: $'
+]
+
 { #category : #'api - cursor' }
 BrTextEditorParagraphElement >> relativeScreenToCursor: aTransformation of: anEditorElement [
 	"trying to find a segment that actually contains a given position"
