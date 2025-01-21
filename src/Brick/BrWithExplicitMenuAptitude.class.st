@@ -58,7 +58,7 @@ BrWithExplicitMenuAptitude >> canShow [
 
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handle: aHandleBlock submenu: aMenuBlock [
-	menuContainer withCenteredHandle.
+	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new
 		handle: aHandleBlock;
 		submenu: aMenuBlock)
@@ -66,7 +66,7 @@ BrWithExplicitMenuAptitude >> handle: aHandleBlock submenu: aMenuBlock [
 
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlock [
-	self withCenteredHandle.
+	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new submenu: aMenuBlock)
 ]
 
@@ -178,6 +178,11 @@ BrWithExplicitMenuAptitude >> menu: aMenuBlock [
 BrWithExplicitMenuAptitude >> menuContainer [
 	<return: #BrMenuSteppedElement>
 	^ menuContainer
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> menuContainerDo: aBlock [
+	aBlock value: menuContainer
 ]
 
 { #category : #'api - menu' }
@@ -403,6 +408,11 @@ BrWithExplicitMenuAptitude >> withContainerContextMenuAreas [
 { #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withContainerDropdown [
 	menuContainer withDropdownAreas
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withDefaultHandle [
+	self withCenteredHandle
 ]
 
 { #category : #'api - menu' }

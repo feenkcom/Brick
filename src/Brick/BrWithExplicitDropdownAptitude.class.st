@@ -17,3 +17,8 @@ BrWithExplicitDropdownAptitude >> initialize [
 	self beDropdown.
 	self withAllExtraEventHandlers
 ]
+
+{ #category : #'api - initialization' }
+BrWithExplicitDropdownAptitude >> withDefaultHandle [
+	self withTopLeftHandle
+]
