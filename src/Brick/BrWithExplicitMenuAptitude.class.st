@@ -180,6 +180,11 @@ BrWithExplicitMenuAptitude >> menuContainer [
 	^ menuContainer
 ]
 
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> menuContainerDo: aBlock [
+	aBlock value: menuContainer
+]
+
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	"Customize the modifiers matcher in a form of [ :aBlKeyModifiers | true ] that is used
