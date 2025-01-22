@@ -152,6 +152,19 @@ BrWithExplicitMenuAptitude >> initializeListeners [
 	self
 		when: BlMouseUpEvent
 		do: [ :anEvent |  self onMouseUp: anEvent ].
+		
+	self 
+		when: BrDropdownShowWish
+		do: [ :anEvent | self showDueTo: nil ].
+	self 
+		when: BrDropdownHideWish
+		do: [ :anEvent | self hide ].
+	self 
+		when: BrContextMenuShowWish
+		do: [ :anEvent | self showDueTo: nil ].
+	self 
+		when: BrContextMenuHideWish
+		do: [ :anEvent | self hide ].
 ]
 
 { #category : #initialization }
@@ -284,6 +297,8 @@ BrWithExplicitMenuAptitude >> show [
 
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
+	"The event parameter must be one with a position, `nil` otherwise."
+
 	self canShow ifFalse: [ ^ self ].
 
 	self
@@ -296,6 +311,8 @@ BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
 
 { #category : #private }
 BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
+	"The event parameter must be one with a position, `nil` otherwise."
+
 	| aMenu |
 	menuStencil ifNil: [ ^ self ].
 	self hide.
