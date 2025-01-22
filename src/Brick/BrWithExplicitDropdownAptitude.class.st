@@ -18,6 +18,22 @@ BrWithExplicitDropdownAptitude >> initialize [
 	self withAllExtraEventHandlers
 ]
 
+{ #category : #initialization }
+BrWithExplicitDropdownAptitude >> initializeListeners [
+	super initializeListeners.
+
+	self 
+		when: BrDropdownShowWish
+		do: [ :anEvent | 
+			anEvent consumed: true.
+			self showDueTo: nil ].
+	self 
+		when: BrDropdownHideWish
+		do: [ :anEvent | 
+			anEvent consumed: true.
+			self hide ].
+]
+
 { #category : #'api - initialization' }
 BrWithExplicitDropdownAptitude >> withDefaultHandle [
 	self withTopLeftHandle

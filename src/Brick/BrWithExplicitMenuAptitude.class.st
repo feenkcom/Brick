@@ -152,19 +152,6 @@ BrWithExplicitMenuAptitude >> initializeListeners [
 	self
 		when: BlMouseUpEvent
 		do: [ :anEvent |  self onMouseUp: anEvent ].
-		
-	self 
-		when: BrDropdownShowWish
-		do: [ :anEvent | self showDueTo: nil ].
-	self 
-		when: BrDropdownHideWish
-		do: [ :anEvent | self hide ].
-	self 
-		when: BrContextMenuShowWish
-		do: [ :anEvent | self showDueTo: nil ].
-	self 
-		when: BrContextMenuHideWish
-		do: [ :anEvent | self hide ].
 ]
 
 { #category : #initialization }

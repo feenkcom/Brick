@@ -15,3 +15,19 @@ BrWithExplicitContextMenuAptitude >> initialize [
 	self beContextMenu.
 	self withAllExtraEventHandlers.
 ]
+
+{ #category : #initialization }
+BrWithExplicitContextMenuAptitude >> initializeListeners [
+	super initializeListeners.
+
+	self
+		when: BrContextMenuShowWish
+		do: [ :anEvent | 
+			anEvent consumed: true.
+			self showDueTo: nil ].
+	self
+		when: BrContextMenuHideWish
+		do: [ :anEvent | 
+			anEvent consumed: true.
+			self hide ]
+]
