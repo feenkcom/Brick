@@ -54,7 +54,7 @@ BrMenuResizableAptitude >> onElementLayoutMarkMayChanged [
 	aMark := self mark.
 	aMark = self lastMark ifTrue: [ ^ self ].
 	lastMark := aMark.
-	aMark acceptVisitor: self
+	self visitMark: aMark
 ]
 
 { #category : #'event handling' }
@@ -73,6 +73,11 @@ BrMenuResizableAptitude >> resizerAptitude: aResizerAptitude [
 	self removeResizerAptitude.
 	resizerAptitude := aResizerAptitude.
 	self add: aResizerAptitude
+]
+
+{ #category : #'event handling' }
+BrMenuResizableAptitude >> visitMark: aMark [
+	aMark acceptVisitor: self
 ]
 
 { #category : #visiting }
