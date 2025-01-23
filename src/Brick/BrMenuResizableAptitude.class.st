@@ -75,11 +75,6 @@ BrMenuResizableAptitude >> resizerAptitude: aResizerAptitude [
 	self add: aResizerAptitude
 ]
 
-{ #category : #'event handling' }
-BrMenuResizableAptitude >> visitMark: aMark [
-	aMark acceptVisitor: self
-]
-
 { #category : #visiting }
 BrMenuResizableAptitude >> visitSteppedLayoutAllToBottomMark: aMark [
 	| anAptitude |
