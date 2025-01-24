@@ -13,7 +13,8 @@ Class {
 		'addedToSceneEventHandler',
 		'menuContainerParent',
 		'relocator',
-		'menuStencil'
+		'menuStencil',
+		'submenus'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -42,7 +43,7 @@ BrWithExplicitMenuAptitude >> beDropdown [
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
-	^ self visible
+	^ self visible and: [ self haveAnyVisibleSubmenu not ]
 ]
 
 { #category : #testing }
@@ -57,11 +58,26 @@ BrWithExplicitMenuAptitude >> canShow [
 ]
 
 { #category : #'api - menu' }
-BrWithExplicitMenuAptitude >> handle: aHandleBlock submenu: aMenuBlock [
+BrWithExplicitMenuAptitude >> handle: aHandleStencil content: aContentStencil [
+	"Set a menu with a handle element and with an explicit menu element.
+	aHandleStencil is a stencil that creates a BlElement instance.
+	aContentStencil is a stencil that creates a BlElement instance."
+
+	self
+		handle: aHandleStencil
+		submenu: (BrMenuExplicit new stencil: aContentStencil)
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
+	"Initialize a menu with a handle.
+	aHandleBlock is a stencil that creates a BlElement instance.
+	aMenuBlock is a stencil that creates a BrMenu instance."
+
 	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new
-		handle: aHandleBlock;
-		submenu: aMenuBlock)
+		handle: aHandleStencil;
+		submenu: aMenuStencil)
 ]
 
 { #category : #'api - menu' }
@@ -81,14 +97,21 @@ BrWithExplicitMenuAptitude >> hasModifiers: anEvent [
 				  anEvent modifiers isShift ] ] ]
 ]
 
+{ #category : #testing }
+BrWithExplicitMenuAptitude >> haveAnyVisibleSubmenu [
+	^ self submenus anySatisfy: #isAttachedToSceneGraph
+]
+
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
 	menuContainer menuModel ifNotNil: [ :aMenu | 
 		aMenu hide ].
+	menuContainer hide.
 	
 	"Widgets enqueue their hide actions, therefore
-	let's check remaining menu widgets in the next pulse."
+	let's check remaining menu widgets in the next pulse.
+	TODO: I am not sure this is still true. Do we need to enque the hide action?"
 	self widgetDo: [ :aWidget | 
 		BlTaskAction
 			enqueueElement: aWidget
@@ -99,7 +122,10 @@ BrWithExplicitMenuAptitude >> hide [
 						removeEventHandler: positionInSpaceChangedEventHandler;
 						removeEventHandler: addedToSceneEventHandler;
 						removeEventHandler: removedFromSceneEventHandler.
-					self temporaryHide ] ] ]
+					self temporaryHide.
+					self fireEvent: (BrMenuIsHiddenEvent new
+						menuModel: menuContainer menuModel;
+						menuContainer: menuContainer). ] ] ]
 ]
 
 { #category : #initialization }
@@ -107,6 +133,7 @@ BrWithExplicitMenuAptitude >> initialize [
 	super initialize.
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
+	submenus := IdentitySet new: 1.
 	
 	self initializeMenuContainer.
 	self initializeEventHandlers.
@@ -134,15 +161,14 @@ BrWithExplicitMenuAptitude >> initializeEventHandlers [
 	positionInSpaceChangedEventHandler := BlEventHandler
 			on: BlElementPositionInSpaceChangedEvent
 			do: [ :anEvent | self onWidgetPositionChanged: anEvent ].
-			
+
 	clickOutsideEventHandler := BlEventHandler
 			on: BlMouseUpEvent
-			do: [ :anEvent | 
-				self onClickedOutsideMouseUpEvent: anEvent ].
-				
+			do: [ :anEvent | self onClickedOutsideMouseUpEvent: anEvent ].
+
 	pressEscEventHandler := BlShortcutWithAction new
 			combination: BlKeyCombination escape;
-			action: [ :anEvent | self hide ].
+			action: [ :anEvent | self onEscapeKeyCombinationEvent: anEvent ]
 ]
 
 { #category : #initialization }
@@ -166,7 +192,16 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer 
 		when: BrMenuAnchorElementRequest 
-		do: [ :anEvent | self onAnchorElementRequest: anEvent ]
+		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
+	menuContainer 
+		when: BrMenuHideAllWish
+		do: [ :anEvent | self onHideAllWish: anEvent ].
+	menuContainer
+		when: BrMenuIsVisibleEvent
+		do: [ :anEvent | self onMenuIsVisibleEvent: anEvent ].
+	menuContainer
+		when: BrMenuIsHiddenEvent
+		do: [ :anEvent | self onMenuIsHiddenEvent: anEvent ]
 ]
 
 { #category : #'api - menu' }
@@ -182,6 +217,8 @@ BrWithExplicitMenuAptitude >> menuContainer [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> menuContainerDo: aBlock [
+	"Initialize menu container, e.g., setting background and border."
+
 	aBlock value: menuContainer
 ]
 
@@ -193,7 +230,7 @@ BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	modifiersMatcher := aBlockOrSymbol
 ]
 
-{ #category : #initialization }
+{ #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [ 
 	anEvent consumed: true.
 	self widgetDo: [ :aWidget | 
@@ -206,7 +243,32 @@ BrWithExplicitMenuAptitude >> onClickedOutsideMouseUpEvent: anEvent [
 	anEvent target == menuContainer ifTrue: [ ^ self ].
 	(menuContainer isUnpinnedChild: anEvent target)
 		ifTrue: [ ^ self ].
+	anEvent consumed: true.
 	self hide.
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onEscapeKeyCombinationEvent: anEvent [ 
+	anEvent consumed: true.
+	self hide
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onHideAllWish: anEvent [ 
+	anEvent consumed: true.
+	self hide
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onMenuIsHiddenEvent: anEvent [
+	anEvent consumed: true.
+	self submenus remove: anEvent menuContainer ifAbsent: [ "ignore" ]
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onMenuIsVisibleEvent: anEvent [
+	anEvent consumed: true.
+	self submenus add: anEvent menuContainer
 ]
 
 { #category : #'event handling' }
@@ -253,6 +315,7 @@ BrWithExplicitMenuAptitude >> onWidgetPositionChanged: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWidgetRemovedFromSceneGraph: anEvent [
+	anEvent consumed: true.
 	self temporaryHide
 ]
 
@@ -322,7 +385,11 @@ BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
 			addEventHandler: addedToSceneEventHandler;
 			addEventHandler: removedFromSceneEventHandler ].
 	
-	self temporaryShowIn: anElement
+	self temporaryShowIn: anElement.
+	
+	self fireEvent: (BrMenuIsVisibleEvent new
+			menuModel: aMenu;
+			menuContainer: menuContainer).
 ]
 
 { #category : #accessing }
@@ -336,6 +403,12 @@ BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
 	"Set a stencil that creates a menu model"
 
 	menuStencil := aStencilBuilder asStencilBuilder: BrMenuInitialStencilBuilder
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> submenus [
+	<return: #IdentitySet of: #BrMenuSteppedElement>
+	^ submenus ifNil: [ submenus := IdentitySet new: 1 ]
 ]
 
 { #category : #private }

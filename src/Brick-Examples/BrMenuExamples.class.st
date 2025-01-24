@@ -74,6 +74,40 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 	^ aMenu
 ]
 
+{ #category : #'examples - submenu' }
+BrMenuExamples >> explicitMenuWithWithButtons [
+	<gtExample>
+	| aMenu |
+	aMenu := BrMenuExplicit new.
+	aMenu
+		stencil: [ BlElement new
+				layout: BlLinearLayout vertical alignCenter;
+				size: 150 @ 100;
+				addAptitude: (BrMenuPinnableAptitude new
+						menuModel: aMenu;
+						withResizers;
+						withAllPinActions);
+				addAptitude: BrMenuCommonAptitude new;
+				background: Color palePeach;
+				addChild: (BlElement new
+						id: #'menu-in-submenu';
+						size: 70 @ 20;
+						background: Color palePeach darker;
+						aptitude: (BrWithExplicitDropdownAptitude new
+								handle: [ BlElement new
+										id: #'menu-in-submenu-handle';
+										size: 70 @ 20;
+										background: Color palePeach darker ]
+								submenu: [ BrMenuItems new
+									addItem: self submenuInlineMessageItems;
+									addItem: self submenuExtractTemporaryItems ])) ].
+
+	self assert: aMenu stencil isNotNil.
+	self assert: (aMenu asElement isKindOf: BlElement).
+
+	^ aMenu
+]
+
 { #category : #'examples - action item' }
 BrMenuExamples >> menuActionItemWithLabel [
 	<gtExample>
@@ -105,7 +139,8 @@ BrMenuExamples >> menuItems [
 		shortcut: 'CMD+C'
 		action: [ NonInteractiveTranscript stdout show: 'Copy ' ].
 	aMenuItems
-		addItemLabel: 'Paste'
+		addItemId: #'menu-paste-item'
+		label: 'Paste'
 		shortcut: 'CMD+V'
 		action: [ NonInteractiveTranscript stdout show: 'Paste ' ].
 	aMenuItems addItem: (BrMenuSubmenuItem new
@@ -117,6 +152,10 @@ BrMenuExamples >> menuItems [
 	aMenuItems addItem: (BrMenuSubmenuItem new
 		label: 'Create view (comp. layer)';
 		submenu: self explicitMenuInSeparateCompositionLayer).
+	aMenuItems addItem: (BrMenuSubmenuItem new
+			id: #'menu-complex-submenu';
+			label: 'Complex submenu';
+			submenu: self explicitMenuWithWithButtons).
 
 	^ aMenuItems
 ]

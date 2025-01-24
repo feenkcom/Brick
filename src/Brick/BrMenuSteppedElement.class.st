@@ -20,10 +20,26 @@ BrMenuSteppedElement >> defaultLayout [
 	^ BlSteppedLayout new
 ]
 
+{ #category : #accessing }
+BrMenuSteppedElement >> elementCache [
+	"Return a cache.
+	For testing purposes only."
+
+	^ elementCache
+]
+
 { #category : #'api - testing' }
 BrMenuSteppedElement >> hasPinnedChildrenOnly [
 	^ elementCache allSatisfy: [ :anElement | 
 		(anElement parent == self) not ]
+]
+
+{ #category : #'api - displaying' }
+BrMenuSteppedElement >> hide [
+	"Remove all my menu elements and caches.
+	I should not remove elements that are not cached menu elements."
+
+	self removeCachedElements
 ]
 
 { #category : #initialization }
@@ -45,7 +61,7 @@ BrMenuSteppedElement >> initialize [
 		do: [ :anEvent | self onShowSubmenuWish: anEvent ].
 	self 
 		when: BrMenuDetachWish
-		do: [ :anEvent | self onDetachWish: anEvent ]
+		do: [ :anEvent | self onDetachWish: anEvent ].
 ]
 
 { #category : #'api - testing' }
@@ -98,8 +114,17 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 		aSubmenu onMenuDisplayed: aSubmenuElement ]
 ]
 
+{ #category : #'private - updating' }
+BrMenuSteppedElement >> removeCachedElements [
+	elementCache
+		keysAndValuesDo: [ :aMenu :anElement | anElement removeFromParent ].
+	elementCache removeAll
+]
+
 { #category : #'api - displaying' }
 BrMenuSteppedElement >> show [
+	"Display menu element."
+
 	| anElement |
 	anElement := self cachedSubmenuElement: self menuModel.
 	(anElement parent == self) ifFalse: [ 
@@ -110,9 +135,7 @@ BrMenuSteppedElement >> show [
 
 { #category : #'private - updating' }
 BrMenuSteppedElement >> updateElement [
-	elementCache keysAndValuesDo: [ :aMenu :anElement | 
-		anElement removeFromParent ].
-	elementCache removeAll.
+	self removeCachedElements.
 	self show
 ]
 
