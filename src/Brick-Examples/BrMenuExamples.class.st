@@ -139,7 +139,8 @@ BrMenuExamples >> menuItems [
 		shortcut: 'CMD+C'
 		action: [ NonInteractiveTranscript stdout show: 'Copy ' ].
 	aMenuItems
-		addItemLabel: 'Paste'
+		addItemId: #'menu-paste-item'
+		label: 'Paste'
 		shortcut: 'CMD+V'
 		action: [ NonInteractiveTranscript stdout show: 'Paste ' ].
 	aMenuItems addItem: (BrMenuSubmenuItem new

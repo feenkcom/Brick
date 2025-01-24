@@ -14,7 +14,7 @@ BrMenuExplicitHandle >> asElement [
 	anElement := handleStencil asElement.
 	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
 	
-	"If se click on a handle, we want to close its menu."
+	"If a user clicks on a handle, we want to close its menu."
 	anElement
 		when: BlClickEvent
 		do: [ :anEvent | anEvent currentTarget fireEvent: BrMenuHideAllWish new  ].

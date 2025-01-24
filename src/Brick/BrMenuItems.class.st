@@ -28,6 +28,16 @@ BrMenuItems >> addItem: aMenuItem [
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemId: anId label: aLabelString shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem id: anId.
+	aMenuItem label: aLabelString shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemLabel: aText action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.

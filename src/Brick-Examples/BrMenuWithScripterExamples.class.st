@@ -11,6 +11,14 @@ BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
 	^ BrFrame new
 		matchParent;
+		addChild: (BlElement new
+			size: 10@10;
+			id: #'outside-click';
+			background: (Color lightGray alpha: 0.5);
+			constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignLeft.
+					c frame vertical alignTop ]);
 		addChild: (BrButton new
 				aptitude: BrGlamorousButtonWithLabelAptitude;
 				label: 'Dropdown';
@@ -20,6 +28,7 @@ BrMenuWithScripterExamples >> buttonWithDropdown [
 					c frame vertical alignCenter ];
 				addAptitude: (BrWithExplicitDropdownAptitude new
 						handle: [ BrButton new
+								id: #'menu-dropdown-handle';
 								aptitude: BrGlamorousButtonWithLabelAptitude - BrGlamorousButtonExteriorAptitude;
 								label: 'Dropdown' ]
 						submenu: BrMenuExamples new menuItems))
@@ -189,6 +198,214 @@ BrMenuWithScripterExamples >> hoverComplexSubmenu [
 		exists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickElementWithDropdownInDropdown.
+
+	aScripter mouseMoveOver
+		label: 'Move mouse to Paste menu item';
+		onSpaceRoot;
+		// #'menu-paste-item';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown handle does not exist';
+		notExists;
+		onSpaceRoot;
+		// #'menu-in-submenu-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert one dropdown is opened';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 1;
+		onSpaceRoot;
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown has one (cached) submenu';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude submenus size ]
+					ifNone: [ -1 ] ]
+			equals: 1;
+		/ BrButton;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_clickOutside [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened.
+
+	aScripter click
+		label: 'Move mouse to Paste menu item';
+		// #'outside-click';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown handle does not exist';
+		notExists;
+		onSpaceRoot;
+		// #'menu-dropdown-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert all dropdowns are closed';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 0;
+		onSpaceRoot;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown has zero cached menu elements';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		/ BrButton;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened.
+
+	aScripter mouseMoveOver
+		label: 'Move mouse to Paste menu item';
+		onSpaceRoot;
+		// #'menu-complex-submenu';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown handle exists';
+		exists;
+		onSpaceRoot;
+		// #'menu-in-submenu-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert two dropdowns are opened';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 2;
+		onSpaceRoot;
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown has one (cached) submenu';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude submenus size ]
+					ifNone: [ -1 ] ]
+			equals: 1;
+		/ BrButton;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu_clickOutside [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu.
+
+	aScripter click
+		label: 'Move mouse to Paste menu item';
+		// #'outside-click';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown handle does not exist';
+		notExists;
+		onSpaceRoot;
+		// #'menu-in-submenu-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert one dropdowns is opened';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 1;
+		onSpaceRoot;
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown has zero (cached) submenus';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude submenus size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		/ BrButton;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu_clickOutside_clickOutside [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu_clickOutside.
+
+	aScripter click
+		label: 'Move mouse to Paste menu item';
+		// #'outside-click';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown handle does not exist';
+		notExists;
+		onSpaceRoot;
+		// #'menu-dropdown-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert all dropdowns are closed';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 0;
+		onSpaceRoot;
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown has zero (cached) submenus';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude submenus size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown has zero cached menu elements';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		/ BrButton;
 		play.
 
 	^ aScripter

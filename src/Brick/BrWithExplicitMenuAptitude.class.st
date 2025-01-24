@@ -43,7 +43,7 @@ BrWithExplicitMenuAptitude >> beDropdown [
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
-	^ self visible and: [ self submenus isEmpty ]
+	^ self visible and: [ self haveAnyVisibleSubmenu not ]
 ]
 
 { #category : #testing }
@@ -97,6 +97,11 @@ BrWithExplicitMenuAptitude >> hasModifiers: anEvent [
 				  anEvent modifiers isShift ] ] ]
 ]
 
+{ #category : #testing }
+BrWithExplicitMenuAptitude >> haveAnyVisibleSubmenu [
+	^ self submenus anySatisfy: #isAttachedToSceneGraph
+]
+
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
@@ -128,7 +133,7 @@ BrWithExplicitMenuAptitude >> initialize [
 	super initialize.
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
-	submenus := OrderedCollection new: 1.
+	submenus := IdentitySet new: 1.
 	
 	self initializeMenuContainer.
 	self initializeEventHandlers.
@@ -402,7 +407,8 @@ BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> submenus [
-	^ submenus ifNil: [ submenus := OrderedCollection new: 1 ]
+	<return: #IdentitySet of: #BrMenuSteppedElement>
+	^ submenus ifNil: [ submenus := IdentitySet new: 1 ]
 ]
 
 { #category : #private }
