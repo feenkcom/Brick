@@ -57,11 +57,26 @@ BrWithExplicitMenuAptitude >> canShow [
 ]
 
 { #category : #'api - menu' }
-BrWithExplicitMenuAptitude >> handle: aHandleBlock submenu: aMenuBlock [
+BrWithExplicitMenuAptitude >> handle: aHandleStencil content: aContentStencil [
+	"Set a menu with a handle element and with an explicit menu element.
+	aHandleStencil is a stencil that creates a BlElement instance.
+	aContentStencil is a stencil that creates a BlElement instance."
+
+	self
+		handle: aHandleStencil
+		submenu: (BrMenuExplicit new stencil: aContentStencil)
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
+	"Initialize a menu with a handle.
+	aHandleBlock is a stencil that creates a BlElement instance.
+	aMenuBlock is a stencil that creates a BrMenu instance."
+
 	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new
-		handle: aHandleBlock;
-		submenu: aMenuBlock)
+		handle: aHandleStencil;
+		submenu: aMenuStencil)
 ]
 
 { #category : #'api - menu' }
@@ -86,6 +101,7 @@ BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
 	menuContainer menuModel ifNotNil: [ :aMenu | 
 		aMenu hide ].
+	menuContainer hide.
 	
 	"Widgets enqueue their hide actions, therefore
 	let's check remaining menu widgets in the next pulse."
@@ -166,7 +182,10 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer 
 		when: BrMenuAnchorElementRequest 
-		do: [ :anEvent | self onAnchorElementRequest: anEvent ]
+		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
+	menuContainer 
+		when: BrMenuHideAllWish
+		do: [ :anEvent | self onHideAllWish: anEvent ]
 ]
 
 { #category : #'api - menu' }
@@ -182,6 +201,8 @@ BrWithExplicitMenuAptitude >> menuContainer [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> menuContainerDo: aBlock [
+	"Initialize menu container, e.g., setting background and border."
+
 	aBlock value: menuContainer
 ]
 
@@ -193,7 +214,7 @@ BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	modifiersMatcher := aBlockOrSymbol
 ]
 
-{ #category : #initialization }
+{ #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [ 
 	anEvent consumed: true.
 	self widgetDo: [ :aWidget | 
@@ -207,6 +228,12 @@ BrWithExplicitMenuAptitude >> onClickedOutsideMouseUpEvent: anEvent [
 	(menuContainer isUnpinnedChild: anEvent target)
 		ifTrue: [ ^ self ].
 	self hide.
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onHideAllWish: anEvent [ 
+	anEvent consumed: true.
+	self hide
 ]
 
 { #category : #'event handling' }

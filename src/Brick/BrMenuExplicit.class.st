@@ -26,6 +26,9 @@ BrMenuExplicit >> stencil [
 ]
 
 { #category : #accessing }
-BrMenuExplicit >> stencil: aBrStencil [
-	stencilBuilder := aBrStencil asStencilBuilder: BrMenuExplicitStencilBuilder
+BrMenuExplicit >> stencil: aBrStencilBuilder [
+	"Set a stencil builder that builds BlElement instances.
+	It can be a block with one argument, receiving this element model object: [ :anExplicitMenu | ]."
+
+	stencilBuilder := aBrStencilBuilder asStencilBuilder: BrMenuExplicitStencilBuilder
 ]

@@ -14,6 +14,11 @@ BrMenuExplicitHandle >> asElement [
 	anElement := handleStencil asElement.
 	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
 	
+	"If se click on a handle, we want to close its menu."
+	anElement
+		when: BlClickEvent
+		do: [ :anEvent | anEvent currentTarget fireEvent: BrMenuHideAllWish new  ].
+
 	^ anElement
 ]
 
@@ -33,6 +38,9 @@ BrMenuExplicitHandle >> defaultMenu [
 
 { #category : #accessing }
 BrMenuExplicitHandle >> handle: aStencil [
+	"Set a handle stencil.
+	aStencil is a stencil that creates a BlElement."
+
 	handleStencil := aStencil asStencil
 ]
 
@@ -54,5 +62,8 @@ BrMenuExplicitHandle >> initialize [
 
 { #category : #accessing }
 BrMenuExplicitHandle >> submenu: aStencil [
+	"Set a submenu stencil.
+	aStencil is a stencil that creates a BrMenu instance."
+
 	submenuStencil := aStencil asStencil
 ]
