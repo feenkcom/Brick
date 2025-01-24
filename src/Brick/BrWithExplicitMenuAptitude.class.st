@@ -284,6 +284,8 @@ BrWithExplicitMenuAptitude >> show [
 
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
+	"The event parameter must be one with a position, `nil` otherwise."
+
 	self canShow ifFalse: [ ^ self ].
 
 	self
@@ -296,6 +298,8 @@ BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
 
 { #category : #private }
 BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
+	"The event parameter must be one with a position, `nil` otherwise."
+
 	| aMenu |
 	menuStencil ifNil: [ ^ self ].
 	self hide.
