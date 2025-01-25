@@ -4,6 +4,14 @@ Class {
 	#category : #'Brick-Examples-Menu'
 }
 
+{ #category : #asserting }
+BrMenuExamples >> assertGlamorousElementForMenuModel: aMenu [
+	| anElement |
+	anElement := aMenu acceptVisitor: BrGlamorousMenuElementBuilder new.
+
+	self assert: (anElement isKindOf: BlElement)
+]
+
 { #category : #'examples - action item' }
 BrMenuExamples >> basicMenuActionItem [
 	<gtExample>
@@ -17,18 +25,19 @@ BrMenuExamples >> explicitMenu [
 	<gtExample>
 	| aMenu |
 	aMenu := BrMenuExplicit new.
-	aMenu stencil: [ BlElement new
-		size: 150@100;
-		addAptitude: (BrMenuPinnableAptitude new 
-			menuModel: aMenu;
-			withResizers;
-			withAllPinActions);
-		addAptitude: BrMenuCommonAptitude new;
-		background: Color paleBlue ].
-	
+	aMenu
+		stencil: [ BlElement new
+				size: 150 @ 100;
+				addAptitude: (BrMenuPinnableAptitude new
+						menuModel: aMenu;
+						withResizers;
+						withAllPinActions);
+				addAptitude: BrMenuCommonAptitude new;
+				background: Color paleBlue ].
+
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
-	
+	self assertGlamorousElementForMenuModel: aMenu.
+
 	^ aMenu
 ]
 
@@ -48,7 +57,7 @@ BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
 		background: Color paleOrange ].
 	
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
+	self assertGlamorousElementForMenuModel: aMenu.
 	
 	^ aMenu
 ]
@@ -69,7 +78,7 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 		background: Color paleGreen ].
 	
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
+	self assertGlamorousElementForMenuModel: aMenu.
 	
 	^ aMenu
 ]
@@ -103,7 +112,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 									addItem: self submenuExtractTemporaryItems ])) ].
 
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
+	self assertGlamorousElementForMenuModel: aMenu.
 
 	^ aMenu
 ]
