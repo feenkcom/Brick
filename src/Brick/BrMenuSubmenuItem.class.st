@@ -32,11 +32,6 @@ BrMenuSubmenuItem >> bePinSubmenuAction [
 	self action: [ :anElement :aButtonModel :anEvent | self notifyPinRequest ]
 ]
 
-{ #category : #'api - converting' }
-BrMenuSubmenuItem >> elementType [
-	^ BrMenuSubmenuItemElement
-]
-
 { #category : #'gt - extensions' }
 BrMenuSubmenuItem >> gtItemChildren [
 	^ self submenu gtItemChildren

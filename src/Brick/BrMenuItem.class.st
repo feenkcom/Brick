@@ -18,23 +18,9 @@ BrMenuItem >> acceptVisitor: aVisitor [
 	^ aVisitor visitMenuItem: self
 ]
 
-{ #category : #'api - converting' }
-BrMenuItem >> asElement [
-	<return: #BlElement>
-	^ self elementType new menuModel: self
-]
-
 { #category : #'api - selection' }
 BrMenuItem >> deselect [
 	^ self isSelected: false
-]
-
-{ #category : #'api - converting' }
-BrMenuItem >> elementType [
-	"Return element class that is used do display the menu item"
-
-	<return: #'BlElement class'>
-	^ self subclassResponsibility
 ]
 
 { #category : #'api - grouping' }

@@ -9,11 +9,6 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
-{ #category : #'api - converting' }
-BrMenuTextLabelModel >> asElement [
-	^ BrMenuTextLabelElement new labelModel: self
-]
-
 { #category : #accessing }
 BrMenuTextLabelModel >> preview [
 	<return: #String>

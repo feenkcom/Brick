@@ -25,12 +25,6 @@ BrMenuModel >> announcer [
 ]
 
 { #category : #'api - converting' }
-BrMenuModel >> asElement [
-	<return: #BlElement>
-	^ self subclassResponsibility
-]
-
-{ #category : #'api - converting' }
 BrMenuModel >> asStencil [
 	^ [ self ] asStencil
 ]

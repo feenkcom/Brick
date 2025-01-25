@@ -114,25 +114,6 @@ BrMenuItems >> addItems: aCollection [
 ]
 
 { #category : #'api - converting' }
-BrMenuItems >> asElement [
-	^ self elementType new menuModel: self
-]
-
-{ #category : #'api - converting' }
-BrMenuItems >> asGroupedListElement [
-	^ BrMenuItemsGroupedElement new 
-		menuModel: self;
-		typeBuilder: BrGlamorousMenuItemTypeBuilder new
-]
-
-{ #category : #'api - converting' }
-BrMenuItems >> asSimpleListElement [
-	^ BrMenuItemsListElement new
-		menuModel: self;
-		typeBuilder: BrGlamorousMenuItemTypeBuilder new
-]
-
-{ #category : #'api - converting' }
 BrMenuItems >> asTreeElement [
 	| anElement |
 	anElement := BrSimpleTree new.
@@ -148,11 +129,6 @@ BrMenuItems >> asTreeElement [
 		addAptitude: (BrMenuHideableAptitude new menuModel: self).
 
 	^ anElement
-]
-
-{ #category : #'api - initialization' }
-BrMenuItems >> beGroupedElementType [
-	self elementType: BrMenuItemsGroupedElement
 ]
 
 { #category : #'api - initialization' }
@@ -176,10 +152,7 @@ BrMenuItems >> deselectedItem: aMenuItem [
 
 { #category : #'api - converting' }
 BrMenuItems >> elementType [
-	^ elementType ifNil: [ 
-		self groups size > 1
-			ifFalse: [ BrMenuItemsListElement ]
-			ifTrue: [ BrMenuItemsGroupedElement ] ]
+	^ elementType
 ]
 
 { #category : #'api - initialization' }

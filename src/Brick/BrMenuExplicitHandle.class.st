@@ -13,20 +13,6 @@ BrMenuExplicitHandle >> acceptVisitor: aVisitor [
 	^ aVisitor visitMenuExplicitHandle: self
 ]
 
-{ #category : #'api - converting' }
-BrMenuExplicitHandle >> asElement [
-	| anElement |
-	anElement := handleStencil asElement.
-	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
-	
-	"If a user clicks on a handle, we want to close its menu."
-	anElement
-		when: BlClickEvent
-		do: [ :anEvent | anEvent currentTarget fireEvent: BrMenuHideAllWish new  ].
-
-	^ anElement
-]
-
 { #category : #initialization }
 BrMenuExplicitHandle >> defaultElement [
 	^ BlElement new

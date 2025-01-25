@@ -12,18 +12,6 @@ BrMenuExplicit >> acceptVisitor: aVisitor [
 	^ aVisitor visitMenuExplicit: self
 ]
 
-{ #category : #'api - converting' }
-BrMenuExplicit >> asElement [
-	| anElement |
-	anElement := self stencil
-			menuModel: self;
-			asElement.
-
-	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
-	
-	^ anElement
-]
-
 { #category : #accessing }
 BrMenuExplicit >> stencil [
 	<return: #BrMenuExplicitStencilBuilder>
