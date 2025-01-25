@@ -7,7 +7,7 @@ Class {
 { #category : #asserting }
 BrMenuExamples >> assertGlamorousElementForMenuModel: aMenu [
 	| anElement |
-	anElement := aMenu acceptVisitor: BrGlamorousMenuElementBuilder new.
+	anElement := self visitMenuModel: aMenu.
 
 	self assert: (anElement isKindOf: BlElement)
 ]
@@ -298,4 +298,9 @@ BrMenuExamples >> submenuInlineMessageItems [
 	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem
+]
+
+{ #category : #visiting }
+BrMenuExamples >> visitMenuModel: aMenu [
+	^ aMenu acceptVisitor: BrGlamorousMenuElementBuilder new
 ]

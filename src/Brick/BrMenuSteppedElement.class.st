@@ -92,7 +92,7 @@ BrMenuSteppedElement >> isUnpinnedChild: anElement [
 { #category : #private }
 BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 	<return: #BlElement or: nil>
-	^ aSubmenu acceptVisitor: self elementBuilder
+	^ self visitSubmenu: aSubmenu
 ]
 
 { #category : #'event handling' }
@@ -157,6 +157,11 @@ BrMenuSteppedElement >> show [
 BrMenuSteppedElement >> updateElement [
 	self removeCachedElements.
 	self show
+]
+
+{ #category : #private }
+BrMenuSteppedElement >> visitSubmenu: aSubmenu [
+	^ aSubmenu acceptVisitor: self elementBuilder
 ]
 
 { #category : #'api - initialization' }
