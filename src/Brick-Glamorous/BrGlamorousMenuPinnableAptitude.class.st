@@ -8,6 +8,8 @@ Class {
 BrGlamorousMenuPinnableAptitude >> newCloseButton [
 	^ GtInspectorRoundButtonStencil small asElement
 		icon: (BrPlusIconStencil close radius: 3) asElement;
+		action: [ :aButton |
+			self onCloseFrom: aButton ];
 		zIndex: 10;
 		constraintsDo: [ :c | 
 			c ignoreByLayout.

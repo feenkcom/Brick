@@ -20,8 +20,6 @@ BrMenuPinnableAptitude >> addCloseButton [
 	self widgetDo: [ :anElement |
 		anElement clipChildren: false.
 		closeButton := self newCloseButton.
-		closeButton action: [ :aButton |
-			self onCloseFrom: aButton ].
 		self
 			when: BlMouseEnterEvent
 			do: [ :anEvent | closeButton visibility: BlVisibility visible ].
@@ -119,7 +117,8 @@ BrMenuPinnableAptitude >> newCloseButton [
 	^ BlElement new
 		size: 5 @ 5;
 		geometry: BlCircleGeometry new;
-		background: self theme status paleErrorBackgroundColor
+		background: self theme status paleErrorBackgroundColor;
+		when: BlClickEvent do: [ :anEvent | self onCloseFrom: anEvent currentTarget ]
 ]
 
 { #category : #initialization }
