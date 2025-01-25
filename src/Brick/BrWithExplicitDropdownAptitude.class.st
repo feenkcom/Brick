@@ -38,13 +38,11 @@ BrWithExplicitDropdownAptitude >> initializeListeners [
 	self 
 		when: BrDropdownShowWish
 		do: [ :anEvent | 
-			anEvent consumed: true.
-			self showDueTo: nil ].
+			self onShowWish: anEvent ].
 	self 
 		when: BrDropdownHideWish
 		do: [ :anEvent | 
-			anEvent consumed: true.
-			self hide ].
+			self onHideWish: anEvent ].
 ]
 
 { #category : #'api - initialization' }

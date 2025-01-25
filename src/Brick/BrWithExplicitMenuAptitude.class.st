@@ -260,6 +260,29 @@ BrWithExplicitMenuAptitude >> onHideAllWish: anEvent [
 ]
 
 { #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onHideWish: aWish [
+	"hide on wish"
+
+	"if an anchor is explicitely specified we can hide"
+	(aWish anchor = widget)
+		ifTrue: [
+			aWish consumed: true.
+			^ self hide ].
+	
+	"if anchor is not specified and the source is within the widget - hide"
+	(aWish anchor isNil and: [ aWish source = widget or: [ aWish source hasParent: widget ] ])
+		ifTrue: [ 
+			aWish consumed: true.
+			^ self hide ].
+		
+	"if anchor is not specified and the source is within the outer container - hide"
+	(aWish anchor isNil and: [ menuContainer notNil  and: [ aWish source = menuContainer or: [ aWish source hasParent: menuContainer ] ] ])
+		ifTrue: [ 
+			aWish consumed: true.
+			^ self hide ]
+]
+
+{ #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onMenuIsHiddenEvent: anEvent [
 	anEvent consumed: true.
 	self submenus remove: anEvent menuContainer ifAbsent: [ "ignore" ]
@@ -285,6 +308,24 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 		relocator mouseUp: anEvent given: aWidget ].
 	
 	self showDueTo: anEvent
+]
+
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> onShowWish: aWish [
+	self canShow
+		ifFalse: [ ^ self ].
+		
+	"if an anchor is explicitely specified we can show"
+	(aWish anchor = widget)
+		ifTrue: [
+			aWish consumed: true.
+			^ self show ].
+	
+	"if anchor is not specify we can check the source of the wish"
+	(aWish anchor isNil and: [ aWish source = widget or: [ aWish source hasParent: widget ] ])
+		ifTrue: [ 
+			aWish consumed: true.
+			^ self show ]
 ]
 
 { #category : #'event handling' }
