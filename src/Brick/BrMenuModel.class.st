@@ -14,6 +14,11 @@ BrMenuModel class >> isAbstract [
 	^ self name = #BrMenuModel
 ]
 
+{ #category : #visiting }
+BrMenuModel >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuModel: self
+]
+
 { #category : #'api - announcer' }
 BrMenuModel >> announcer [
 	^ announcer

@@ -7,6 +7,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuExplicit >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuExplicit: self
+]
+
 { #category : #'api - converting' }
 BrMenuExplicit >> asElement [
 	| anElement |

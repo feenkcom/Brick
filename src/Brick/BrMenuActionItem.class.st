@@ -8,6 +8,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuActionItem >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuActionItem: self
+]
+
 { #category : #accessing }
 BrMenuActionItem >> action [
 	^ action

@@ -13,6 +13,11 @@ BrMenuItem class >> isAbstract [
 	^ self name = #BrMenuItem
 ]
 
+{ #category : #visiting }
+BrMenuItem >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuItem: self
+]
+
 { #category : #'api - converting' }
 BrMenuItem >> asElement [
 	<return: #BlElement>

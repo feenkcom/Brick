@@ -12,6 +12,11 @@ BrMenuHandle class >> isAbstract [
 	^ self name = #BrMenuHandle
 ]
 
+{ #category : #visiting }
+BrMenuHandle >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuHandle: self
+]
+
 { #category : #initialization }
 BrMenuHandle >> defaultMenu [
 	<return: #BrMenu or: nil>

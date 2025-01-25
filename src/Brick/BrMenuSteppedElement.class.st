@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuSteppedElement,
 	#superclass : #BrMenuModelElement,
 	#instVars : [
-		'elementCache'
+		'elementCache',
+		'elementBuilder'
 	],
 	#category : #'Brick-Menu - UI'
 }
@@ -12,12 +13,25 @@ BrMenuSteppedElement >> cachedSubmenuElement: aSubmenu [
 	^ elementCache
 		at: aSubmenu
 		ifPresent: [ :anElement | anElement ]
-		ifAbsentPut: [ aSubmenu asElement ]
+		ifAbsentPut: [ self newElementForSubmenu: aSubmenu ]
 ]
 
 { #category : #initialization }
 BrMenuSteppedElement >> defaultLayout [
 	^ BlSteppedLayout new
+]
+
+{ #category : #accessing }
+BrMenuSteppedElement >> elementBuilder [
+	<return: #BrMenuElementBuilder>
+	^ elementBuilder ifNil: [ elementBuilder := BrMenuBasicElementBuilder new ]
+]
+
+{ #category : #accessing }
+BrMenuSteppedElement >> elementBuilder: anElementBuilder [
+	"Set a builder that is used to create menu elements."
+
+	elementBuilder := anElementBuilder
 ]
 
 { #category : #accessing }
@@ -73,6 +87,12 @@ BrMenuSteppedElement >> isUnpinnedChild: anElement [
 	^ elementCache anySatisfy: [ :eachElement | 
 		anElement == eachElement or: [ 
 			anElement hasParent: eachElement ] ]
+]
+
+{ #category : #private }
+BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
+	<return: #BlElement or: nil>
+	^ aSubmenu acceptVisitor: self elementBuilder
 ]
 
 { #category : #'event handling' }

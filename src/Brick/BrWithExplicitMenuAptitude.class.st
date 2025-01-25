@@ -57,6 +57,22 @@ BrWithExplicitMenuAptitude >> canShow [
 	 ^ false
 ]
 
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> defaultElementBuilder [
+	^ BrMenuBasicElementBuilder new
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> elementBuilder [
+	<return: #BrMenuElementBuilder>
+	^ menuContainer elementBuilder
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> elementBuilder: anElementBuilder [
+	menuContainer elementBuilder: anElementBuilder
+]
+
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handle: aHandleStencil content: aContentStencil [
 	"Set a menu with a handle element and with an explicit menu element.
@@ -183,6 +199,7 @@ BrWithExplicitMenuAptitude >> initializeListeners [
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer := BrMenuSteppedElement new.
+	menuContainer elementBuilder: self defaultElementBuilder.
 	menuContainer addAptitude: BrMenuContainerAptitude new.
 	menuContainerParent := nil.
 	relocator := BrMenuClickPositionRelocator new
@@ -411,6 +428,7 @@ BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
 	self widgetDo: [ :aWidget |
 		aMenu := menuStencil 
 			context: (BrMenuInitialContext new
+				elementBuilder: menuContainer elementBuilder;
 				anchorElement: aWidget;
 				menuAptitude: self;
 				dueToEvent: anEventOrNil);

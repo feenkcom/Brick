@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'anchorElement',
 		'menuAptitude',
-		'positionInSpace'
+		'positionInSpace',
+		'elementBuilder'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -23,6 +24,17 @@ BrMenuInitialContext >> anchorElement: anElement [
 BrMenuInitialContext >> dueToEvent: anEvent [ 
 	anEvent ifNil: [ ^ self ].
 	self positionInSpace: anEvent position
+]
+
+{ #category : #accessing }
+BrMenuInitialContext >> elementBuilder [
+	<return: #BrMenuElementBuilder>
+	^ elementBuilder
+]
+
+{ #category : #accessing }
+BrMenuInitialContext >> elementBuilder: anObject [
+	elementBuilder := anObject
 ]
 
 { #category : #accessing }

@@ -10,6 +10,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuItems >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuItems: self
+]
+
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
 	groups := nil.
@@ -168,7 +173,7 @@ BrMenuItems >> deselectedItem: aMenuItem [
 { #category : #'api - converting' }
 BrMenuItems >> elementType [
 	^ elementType ifNil: [ 
-		^ self groups size > 1
+		self groups size > 1
 			ifFalse: [ BrMenuItemsListElement ]
 			ifTrue: [ BrMenuItemsGroupedElement ] ]
 ]

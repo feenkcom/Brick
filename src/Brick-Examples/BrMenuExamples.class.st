@@ -93,7 +93,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 						id: #'menu-in-submenu';
 						size: 70 @ 20;
 						background: Color palePeach darker;
-						aptitude: (BrWithExplicitDropdownAptitude new
+						aptitude: (BrGlamorousWithExplicitDropdownAptitude new
 								handle: [ BlElement new
 										id: #'menu-in-submenu-handle';
 										size: 70 @ 20;

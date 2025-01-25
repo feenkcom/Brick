@@ -26,7 +26,7 @@ BrMenuWithScripterExamples >> buttonWithDropdown [
 					c margin: (BlInsets all: 10).
 					c frame horizontal alignCenter.
 					c frame vertical alignCenter ];
-				addAptitude: (BrWithExplicitDropdownAptitude new
+				addAptitude: (BrGlamorousWithExplicitDropdownAptitude new
 						handle: [ BrButton new
 								id: #'menu-dropdown-handle';
 								aptitude: BrGlamorousButtonWithLabelAptitude - BrGlamorousButtonExteriorAptitude;
@@ -79,7 +79,7 @@ BrMenuWithScripterExamples >> clickDropdownHandle [
 		label: 'Assert empty dropdown aptitude caches';
 		do: [ :aButton | 
 			aButton aptitude
-				findActor: BrWithExplicitDropdownAptitude
+				findActor: BrGlamorousWithExplicitDropdownAptitude
 				ifFound: [ :anAptitude | 
 					self
 						assert: anAptitude menuContainer elementCache isEmpty
@@ -130,7 +130,7 @@ BrMenuWithScripterExamples >> clickDropdownInDropdownHandle [
 		label: 'Assert dropdown has no other submenus';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude submenus size ]
 					ifNone: [ -1 ] ]
 			equals: 0;
@@ -164,7 +164,7 @@ BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 		label: 'Assert dropdown has one submenu';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude submenus size ]
 					ifNone: [ -1 ] ]
 			equals: 1;
@@ -233,7 +233,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened [
 		label: 'Assert dropdown has one (cached) submenu';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude submenus size ]
 					ifNone: [ -1 ] ]
 			equals: 1;
@@ -272,7 +272,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_click
 		label: 'Assert dropdown has zero cached menu elements';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
 					ifNone: [ -1 ] ]
 			equals: 0;
@@ -312,7 +312,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 		label: 'Assert dropdown has one (cached) submenu';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude submenus size ]
 					ifNone: [ -1 ] ]
 			equals: 1;
@@ -351,7 +351,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 		label: 'Assert dropdown has zero (cached) submenus';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude submenus size ]
 					ifNone: [ -1 ] ]
 			equals: 0;
@@ -390,7 +390,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 		label: 'Assert dropdown has zero (cached) submenus';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude submenus size ]
 					ifNone: [ -1 ] ]
 			equals: 0;
@@ -401,7 +401,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 		label: 'Assert dropdown has zero cached menu elements';
 		value: [ :aButton | 
 				aButton aptitude
-					findActor: BrWithExplicitDropdownAptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
 					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
 					ifNone: [ -1 ] ]
 			equals: 0;

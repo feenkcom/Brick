@@ -8,6 +8,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuExplicitHandle >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuExplicitHandle: self
+]
+
 { #category : #'api - converting' }
 BrMenuExplicitHandle >> asElement [
 	| anElement |
@@ -42,6 +47,11 @@ BrMenuExplicitHandle >> handle: aStencil [
 	aStencil is a stencil that creates a BlElement."
 
 	handleStencil := aStencil asStencil
+]
+
+{ #category : #accessing }
+BrMenuExplicitHandle >> handleStencil [
+	^ handleStencil
 ]
 
 { #category : #'api - visibility' }
