@@ -1,16 +1,23 @@
+"
+I know how to resize menu elements.
+I use {{gtClass:BrMenuResizerAptitudeBuilder}} to create new resizers.
+
+"
 Class {
 	#name : #BrMenuResizableAptitude,
 	#superclass : #BrAptitude,
-	#traits : 'TBlSteppedLayoutMarkVisitor',
-	#classTraits : 'TBlSteppedLayoutMarkVisitor classTrait',
 	#instVars : [
 		'lastMark',
-		'whenResizedHandler',
-		'isKeepRatio',
-		'resizerAptitude'
+		'resizerAptitude',
+		'resizerAptitudeBuilder'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
+
+{ #category : #initialization }
+BrMenuResizableAptitude >> defaultResizerAptitudeBuilder [
+	^ BrMenuResizerAptitudeBuilder new
+]
 
 { #category : #initialization }
 BrMenuResizableAptitude >> initializeListeners [
@@ -22,13 +29,6 @@ BrMenuResizableAptitude >> initializeListeners [
 	self
 		when: BlElementExtentChangedEvent
 		do: [ :anEvent | self onElementExtentChanged: anEvent ]
-]
-
-{ #category : #private }
-BrMenuResizableAptitude >> initializeResizerAptitude: anAptitude [
-	whenResizedHandler ifNotNil: [ anAptitude whenResizedDo: whenResizedHandler ].
-	isKeepRatio ifNotNil: [ :aBoolean | anAptitude keepRatio: aBoolean ].
-	^ anAptitude
 ]
 
 { #category : #accessing }
@@ -50,11 +50,15 @@ BrMenuResizableAptitude >> onElementExtentChanged: anEvent [
 
 { #category : #'event handling' }
 BrMenuResizableAptitude >> onElementLayoutMarkMayChanged [
-	| aMark |
+	| aMark anAptitude |
 	aMark := self mark.
 	aMark = self lastMark ifTrue: [ ^ self ].
 	lastMark := aMark.
-	self visitMark: aMark
+
+	anAptitude := self visitMark: aMark.
+	anAptitude
+		ifNotNil: [ self resizerAptitude: anAptitude ]
+		ifNil: [ self removeResizerAptitude ]
 ]
 
 { #category : #'event handling' }
@@ -75,103 +79,28 @@ BrMenuResizableAptitude >> resizerAptitude: aResizerAptitude [
 	self add: aResizerAptitude
 ]
 
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutAllToBottomMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beRight)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beBottom).
-	self resizerAptitude: anAptitude
+{ #category : #accessing }
+BrMenuResizableAptitude >> resizerAptitudeBuilder [
+	<return: #BrMenuResizerAptitudeBuilder>
+	^ resizerAptitudeBuilder
+		ifNil: [ resizerAptitudeBuilder := self defaultResizerAptitudeBuilder ]
+]
+
+{ #category : #accessing }
+BrMenuResizableAptitude >> resizerAptitudeBuilder: aBuilder [
+	resizerAptitudeBuilder := aBuilder
 ]
 
 { #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutAllToLeftMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beTop)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beBottom).
-	self resizerAptitude: anAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutAllToRightMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beRight)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beTop)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beBottom).
-	self resizerAptitude: anAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutAllToUpMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beRight)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beTop).
-	self resizerAptitude: anAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutBottomLeftMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beBottom).
-	self resizerAptitude: anAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutBottomRightMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beRight)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beBottom).
-	self resizerAptitude: anAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutMark: aMark [
-	self removeResizerAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutUpLeftMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beLeft)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beTop).
-	self resizerAptitude: anAptitude
-]
-
-{ #category : #visiting }
-BrMenuResizableAptitude >> visitSteppedLayoutUpRightMark: aMark [
-	| anAptitude |
-	anAptitude := (self
-			initializeResizerAptitude: BrGlamorousWithHorizontalResizerAptitude new beRight)
-			+ (self
-					initializeResizerAptitude: BrGlamorousWithVerticalResizerAptitude new beTop).
-	self resizerAptitude: anAptitude
+BrMenuResizableAptitude >> visitMark: aMark [
+	<return: #BrAptitude or: nil>
+	^ aMark acceptVisitor: self resizerAptitudeBuilder
 ]
 
 { #category : #'api - initialization' }
 BrMenuResizableAptitude >> whenResizedDo: aBlock [
-	whenResizedHandler := aBlock.
+	self resizerAptitudeBuilder whenResizedDo: aBlock.
 	resizerAptitude ifNotNil: [
 		resizerAptitude withAllActorsDepthFirstDo: [ :anAptitude |
-			anAptitude whenResizedDo: whenResizedHandler ] ]
+			anAptitude whenResizedDo: aBlock ] ]
 ]
