@@ -57,16 +57,6 @@ BrMenuItemGroup >> gtItemDepth [
 	^ ''
 ]
 
-{ #category : #'gt - extensions' }
-BrMenuItemGroup >> gtItemLabel [
-	^ 'Group: ', self id asString
-]
-
-{ #category : #'gt - extensions' }
-BrMenuItemGroup >> gtItemSelection [
-	^ ''
-]
-
 { #category : #'api - configuration' }
 BrMenuItemGroup >> id [
 	^ self configuration id

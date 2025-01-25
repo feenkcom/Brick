@@ -35,6 +35,11 @@ BrMenuElementBuilder >> visitMenuExplicitHandle: aMenuModel [
 { #category : #visiting }
 BrMenuElementBuilder >> visitMenuModel: aMenuModel [
 	^ BlElement new
+		layout: BlLinearLayout vertical;
 		background: Color paleRed;
-		size: 120 @ 30
+		constraintsDo: [ :c | 
+			c padding: (BlInsets all: 5).
+			c horizontal fitContent.
+			c vertical fitContent ];
+		addChild: (BlTextElement new text: aMenuModel gtDisplayString asRopedText)
 ]

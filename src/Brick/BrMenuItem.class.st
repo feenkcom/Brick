@@ -64,18 +64,6 @@ BrMenuItem >> gtItemDepth [
 	^ aDepth
 ]
 
-{ #category : #'gt - extensions' }
-BrMenuItem >> gtItemLabel [
-	^ self labelModel ifNotNil: #gtItemLabel
-]
-
-{ #category : #'gt - extensions' }
-BrMenuItem >> gtItemSelection [
-	^ self isSelected
-		ifTrue: [ 'selected' ]
-		ifFalse: [ 'no' asRopedText foreground: BrGlamorousColors disabledButtonTextColor ]
-]
-
 { #category : #'api - visibility' }
 BrMenuItem >> hide [
 	self deselect.

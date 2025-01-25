@@ -7,7 +7,7 @@ Class {
 		'shortcutElement',
 		'shortcutLabel'
 	],
-	#category : #'Brick-Menu - UI'
+	#category : #'Brick-Glamorous-Menu'
 }
 
 { #category : #initialization }

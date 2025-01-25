@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousMenuElementBuilder,
 	#superclass : #BrMenuElementBuilder,
-	#category : #'Brick-Menu - UI'
+	#category : #'Brick-Glamorous-Menu'
 }
 
 { #category : #visiting }

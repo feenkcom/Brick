@@ -41,25 +41,6 @@ BrMenuModel >> gtItemChildren [
 ]
 
 { #category : #'gt - extensions' }
-BrMenuModel >> gtItemLabel [
-	^ self gtDisplayString
-]
-
-{ #category : #'gt - extensions' }
-BrMenuModel >> gtParentsFor: aView [
-	<gtView>
-	self parent ifNil: [ ^ aView empty ].
-	^ aView columnedList
-		title: 'Parents';
-		items: [ Array streamContents: [ :aStream | 
-			self parentsDo: [ :aParent | aStream nextPut: aParent ] ] ];
-		column: 'Index'
-			text: [ :_ :anIndex | anIndex ]
-			width: 40;
-		column: 'Parent' text: #gtItemLabel
-]
-
-{ #category : #'gt - extensions' }
 BrMenuModel >> gtRootItems [
 	^ { self }
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'buttonModel'
 	],
-	#category : #'Brick-Menu - UI'
+	#category : #'Brick-Glamorous-Menu'
 }
 
 { #category : #initialization }

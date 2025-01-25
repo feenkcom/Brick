@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousWithExplicitContextMenuAptitude,
 	#superclass : #BrWithExplicitContextMenuAptitude,
-	#category : #'Brick-Menu - Aptitude'
+	#category : #'Brick-Glamorous-Menu'
 }
 
 { #category : #initialization }
