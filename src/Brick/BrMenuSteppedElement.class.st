@@ -24,7 +24,7 @@ BrMenuSteppedElement >> defaultLayout [
 { #category : #accessing }
 BrMenuSteppedElement >> elementBuilder [
 	<return: #BrMenuElementBuilder>
-	^ elementBuilder ifNil: [ elementBuilder := BrMenuBasicElementBuilder new ]
+	^ elementBuilder ifNil: [ elementBuilder := BrMenuElementBuilder new ]
 ]
 
 { #category : #accessing }

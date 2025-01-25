@@ -59,7 +59,7 @@ BrWithExplicitMenuAptitude >> canShow [
 
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> defaultElementBuilder [
-	^ BrMenuBasicElementBuilder new
+	^ BrMenuElementBuilder new
 ]
 
 { #category : #accessing }
