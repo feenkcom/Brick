@@ -14,3 +14,17 @@ TBlDevScripterTarget >> onBrTextEditor [
 TBlDevScripterTarget >> onBrTextEditorText [
 	self onChildFromMessage: #text
 ]
+
+{ #category : #'*Brick-DevTool' }
+TBlDevScripterTarget >> onDropdown: aBoolean [
+	"True indicates using a new menu implementation.
+	False means using an old anchored implementation."
+
+	^ aBoolean
+		ifFalse: [ self
+				// BrAnchoredOuterContainer;
+				/ BrAnchoredOuterContainer;
+				// BrAnchoredElement;
+				/ #content ]
+		ifTrue: [ self // BrMenuSteppedElement ]
+]
