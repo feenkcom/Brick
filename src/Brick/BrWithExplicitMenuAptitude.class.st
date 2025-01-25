@@ -14,7 +14,8 @@ Class {
 		'menuContainerParent',
 		'relocator',
 		'menuStencil',
-		'submenus'
+		'submenus',
+		'cacheCleaner'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -41,6 +42,17 @@ BrWithExplicitMenuAptitude >> beDropdown [
 	self withContainerDropdown
 ]
 
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> cacheCleaner [
+	<return: #BrMenuCacheCleaner>
+	^ cacheCleaner ifNil: [ cacheCleaner := self defaultCacheCleaner ]
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> cacheCleaner: anObject [
+	cacheCleaner := anObject
+]
+
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
 	^ self visible and: [ self haveAnyVisibleSubmenu not ]
@@ -55,6 +67,11 @@ BrWithExplicitMenuAptitude >> canShow [
 		^ aWidget isAttachedToSceneGraph 
 			and: [ aWidget visibility shouldDraw ] ].
 	 ^ false
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> defaultCacheCleaner [
+	^ BrMenuCacheCleaner allCleaner
 ]
 
 { #category : #initialization }
@@ -123,7 +140,7 @@ BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
 	menuContainer menuModel ifNotNil: [ :aMenu | 
 		aMenu hide ].
-	menuContainer hide.
+	self cacheCleaner cleanMenuContainer: menuContainer.
 	
 	"Widgets enqueue their hide actions, therefore
 	let's check remaining menu widgets in the next pulse.
@@ -150,6 +167,7 @@ BrWithExplicitMenuAptitude >> initialize [
 	mouseButton := BlMouseButton secondary.
 	modifiersMatcher := [ :aBlKeyModifiers | true ].
 	submenus := IdentitySet new: 1.
+	cacheCleaner := self defaultCacheCleaner.
 	
 	self initializeMenuContainer.
 	self initializeEventHandlers.
@@ -560,9 +578,19 @@ BrWithExplicitMenuAptitude >> withHandleSubmenu: aMenuBlock [
 	self handleSubmenu: aMenuBlock
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withKeepAllCacheCleaner [
+	self cacheCleaner: BrMenuCacheCleaner allKeeper
+]
+
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> withPrimaryMouseButton [
 	mouseButton := BlMouseButton primary
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withRemoveAllCacheCleaner [
+	self cacheCleaner: BrMenuCacheCleaner allCleaner
 ]
 
 { #category : #'api - menu' }
