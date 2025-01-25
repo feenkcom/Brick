@@ -120,12 +120,16 @@ BrMenuItems >> asElement [
 
 { #category : #'api - converting' }
 BrMenuItems >> asGroupedListElement [
-	^ BrMenuItemsGroupedElement new menuModel: self
+	^ BrMenuItemsGroupedElement new 
+		menuModel: self;
+		typeBuilder: BrGlamorousMenuItemTypeBuilder new
 ]
 
 { #category : #'api - converting' }
 BrMenuItems >> asSimpleListElement [
-	^ BrMenuItemsListElement new menuModel: self
+	^ BrMenuItemsListElement new
+		menuModel: self;
+		typeBuilder: BrGlamorousMenuItemTypeBuilder new
 ]
 
 { #category : #'api - converting' }

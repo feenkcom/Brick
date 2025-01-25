@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuItemsGroupedElement,
 	#superclass : #BrMenuModelElement,
 	#instVars : [
-		'listElement'
+		'listElement',
+		'typeBuilder'
 	],
 	#category : #'Brick-Glamorous-Menu'
 }
@@ -50,9 +51,14 @@ BrMenuItemsGroupedElement >> listGroups [
 			BrGroup new
 				items: each items;
 				domainObject: each configuration;
-				itemType: [ :aFactory :anObject :anIndex | anObject elementType ];
-				itemStencil: [ :anItemType | anItemType new ];
-				itemDataBinder: [ :anItemElement :anItem | anItemElement menuModel: anItem ] ]
+				itemType: [ :aFactory :anObject :anIndex | 
+					self visitMenuModel: anObject ];
+				itemStencil: [ :anItemType | 
+					anItemType = BlInfiniteItemType invalid
+						ifTrue: [ BrMenuInvalidItemElement new ]
+						ifFalse: [ anItemType new ] ];
+				itemDataBinder: [ :anItemElement :anItem | 
+					anItemElement menuModel: anItem ] ]
 ]
 
 { #category : #'event handling' }
@@ -88,6 +94,17 @@ BrMenuItemsGroupedElement >> subscribeToMenuModel [
 			to: self
 ]
 
+{ #category : #accessing }
+BrMenuItemsGroupedElement >> typeBuilder [
+	<return: #BrMenuItemTypeBuilder>
+	^ typeBuilder ifNil: [ typeBuilder := BrGlamorousMenuItemTypeBuilder new ]
+]
+
+{ #category : #accessing }
+BrMenuItemsGroupedElement >> typeBuilder: anObject [
+	typeBuilder := anObject
+]
+
 { #category : #'event handling' }
 BrMenuItemsGroupedElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
@@ -98,4 +115,9 @@ BrMenuItemsGroupedElement >> unsubscribeFromMenuModel [
 { #category : #'private - updating' }
 BrMenuItemsGroupedElement >> updateListElement [
 	listElement groups: self listGroups
+]
+
+{ #category : #'private - updating' }
+BrMenuItemsGroupedElement >> visitMenuModel: aMenuModel [
+	^ aMenuModel acceptVisitor: self typeBuilder
 ]

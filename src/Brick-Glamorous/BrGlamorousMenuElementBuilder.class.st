@@ -4,6 +4,11 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
+{ #category : #'as yet unclassified' }
+BrGlamorousMenuElementBuilder >> defaultTypeBuilder [
+	^ BrGlamorousMenuItemTypeBuilder new
+]
+
 { #category : #visiting }
 BrGlamorousMenuElementBuilder >> visitMenuActionItem: aMenuModel [
 	^ BrMenuActionItemElement new menuModel: aMenuModel
@@ -17,17 +22,7 @@ BrGlamorousMenuElementBuilder >> visitMenuItems: aMenuModel [
 					ifFalse: [ BrMenuItemsListElement ]
 					ifTrue: [ BrMenuItemsGroupedElement ] ].
 
-	^ anElementClass new menuModel: aMenuModel
-]
-
-{ #category : #visiting }
-BrGlamorousMenuElementBuilder >> visitMenuModel: aMenuModel [
-	^ BrLabel new
-		text: aMenuModel gtDisplayText;
-		aptitude: (BrGlamorousLabelAptitude new foreground: BrGlamorousColors errorBackgroundColor)
-]
-
-{ #category : #visiting }
-BrGlamorousMenuElementBuilder >> visitMenuSubmenuItem: aMenuModel [
-	^ BrMenuSubmenuItemElement new menuModel: aMenuModel
+	^ anElementClass new 
+		menuModel: aMenuModel;
+		typeBuilder: self typeBuilder
 ]

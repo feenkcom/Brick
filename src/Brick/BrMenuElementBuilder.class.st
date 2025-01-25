@@ -3,8 +3,27 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBrMenuModelVisitor',
 	#classTraits : 'TBrMenuModelVisitor classTrait',
+	#instVars : [
+		'typeBuilder'
+	],
 	#category : #'Brick-Menu - UI'
 }
+
+{ #category : #initialization }
+BrMenuElementBuilder >> defaultTypeBuilder [
+	^ BrMenuItemTypeBuilder new
+]
+
+{ #category : #accessing }
+BrMenuElementBuilder >> typeBuilder [
+	<return: #BrMenuItemTypeBuilder>
+	^ typeBuilder ifNil: [ typeBuilder := self defaultTypeBuilder ]
+]
+
+{ #category : #accessing }
+BrMenuElementBuilder >> typeBuilder: anObject [
+	typeBuilder := anObject
+]
 
 { #category : #visiting }
 BrMenuElementBuilder >> visitMenuExplicit: aMenuModel [
@@ -33,13 +52,22 @@ BrMenuElementBuilder >> visitMenuExplicitHandle: aMenuModel [
 ]
 
 { #category : #visiting }
+BrMenuElementBuilder >> visitMenuItem: aMenuModel [
+	"Use type builder to get element class.
+	Since menu item instances are supposed to be used
+	in infinite layouts (e.g., grouped lists), the type builder is used.
+	The type builder returns either
+	- BlInfiniteItemType invalid, or 
+	- a BlElement class whose instance understands #menuModel:"
+
+	| aType |
+	aType := aMenuModel acceptVisitor: self typeBuilder.
+	^ aType = BlInfiniteItemType invalid
+		ifTrue: [ BrMenuInvalidItemElement new menuModel: aMenuModel ]
+		ifFalse: [ aType new menuModel: aMenuModel ]
+]
+
+{ #category : #visiting }
 BrMenuElementBuilder >> visitMenuModel: aMenuModel [
-	^ BlElement new
-		layout: BlLinearLayout vertical;
-		background: Color paleRed;
-		constraintsDo: [ :c | 
-			c padding: (BlInsets all: 5).
-			c horizontal fitContent.
-			c vertical fitContent ];
-		addChild: (BlTextElement new text: aMenuModel gtDisplayString asRopedText)
+	^ BrMenuInvalidItemElement new menuModel: aMenuModel
 ]
