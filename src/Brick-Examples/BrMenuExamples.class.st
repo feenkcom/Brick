@@ -28,7 +28,7 @@ BrMenuExamples >> explicitMenu [
 	aMenu
 		stencil: [ BlElement new
 				size: 150 @ 100;
-				addAptitude: (BrMenuPinnableAptitude new
+				addAptitude: (BrGlamorousMenuPinnableAptitude new
 						menuModel: aMenu;
 						withResizers;
 						withAllPinActions);
@@ -49,7 +49,7 @@ BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
 	aMenu stencil: [ BlElement new
 		beInSeparateCompositionLayer;
 		size: 150@100;
-		addAptitude: (BrMenuPinnableAptitude new 
+		addAptitude: (BrGlamorousMenuPinnableAptitude new 
 			menuModel: aMenu;
 			withResizers;
 			withAllPinActions);
@@ -70,7 +70,7 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 	aMenu stencil: [ BlElement new
 		beInSingleCompositionLayer;
 		size: 150@100;
-		addAptitude: (BrMenuPinnableAptitude new 
+		addAptitude: (BrGlamorousMenuPinnableAptitude new 
 			menuModel: aMenu;
 			withResizers;
 			withAllPinActions);
@@ -92,7 +92,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 		stencil: [ BlElement new
 				layout: BlLinearLayout vertical alignCenter;
 				size: 150 @ 100;
-				addAptitude: (BrMenuPinnableAptitude new
+				addAptitude: (BrGlamorousMenuPinnableAptitude new
 						menuModel: aMenu;
 						withResizers;
 						withAllPinActions);
