@@ -8,6 +8,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuActionItem >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuActionItem: self
+]
+
 { #category : #accessing }
 BrMenuActionItem >> action [
 	^ action
@@ -19,11 +24,6 @@ BrMenuActionItem >> action: aBlock [
 	It has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
 
 	action := aBlock
-]
-
-{ #category : #'api - converting' }
-BrMenuActionItem >> elementType [
-	^ BrMenuActionItemElement
 ]
 
 { #category : #accessing }

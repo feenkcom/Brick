@@ -14,15 +14,14 @@ BrMenuModel class >> isAbstract [
 	^ self name = #BrMenuModel
 ]
 
+{ #category : #visiting }
+BrMenuModel >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuModel: self
+]
+
 { #category : #'api - announcer' }
 BrMenuModel >> announcer [
 	^ announcer
-]
-
-{ #category : #'api - converting' }
-BrMenuModel >> asElement [
-	<return: #BlElement>
-	^ self subclassResponsibility
 ]
 
 { #category : #'api - converting' }
@@ -33,25 +32,6 @@ BrMenuModel >> asStencil [
 { #category : #'gt - extensions' }
 BrMenuModel >> gtItemChildren [
 	^ Array empty
-]
-
-{ #category : #'gt - extensions' }
-BrMenuModel >> gtItemLabel [
-	^ self gtDisplayString
-]
-
-{ #category : #'gt - extensions' }
-BrMenuModel >> gtParentsFor: aView [
-	<gtView>
-	self parent ifNil: [ ^ aView empty ].
-	^ aView columnedList
-		title: 'Parents';
-		items: [ Array streamContents: [ :aStream | 
-			self parentsDo: [ :aParent | aStream nextPut: aParent ] ] ];
-		column: 'Index'
-			text: [ :_ :anIndex | anIndex ]
-			width: 40;
-		column: 'Parent' text: #gtItemLabel
 ]
 
 { #category : #'gt - extensions' }

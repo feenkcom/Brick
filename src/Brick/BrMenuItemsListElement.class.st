@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuItemsListElement,
 	#superclass : #BrMenuModelElement,
 	#instVars : [
-		'listElement'
+		'listElement',
+		'typeBuilder'
 	],
 	#category : #'Brick-Menu - UI'
 }
@@ -29,8 +30,12 @@ BrMenuItemsListElement >> initializeListElement [
 		fitContentLimited;
 		itemType: [ :anItemTypeFactory :anItemObject :anItemIndex | 
 			anItemObject elementType ];
+		itemType: [ :aFactory :anObject :anIndex | 
+			self visitMenuModel: anObject ];
 		itemStencil: [ :anItemType | 
-			anItemType new ];
+			anItemType = BlInfiniteItemType invalid
+				ifTrue: [ BrMenuInvalidItemElement new ]
+				ifFalse: [ anItemType new ] ];
 		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
 			anItemElement menuModel: anItemObject ].
 ]
@@ -68,6 +73,17 @@ BrMenuItemsListElement >> subscribeToMenuModel [
 			to: self
 ]
 
+{ #category : #accessing }
+BrMenuItemsListElement >> typeBuilder [
+	<return: #BrMenuItemTypeBuilder>
+	^ typeBuilder ifNil: [ typeBuilder := BrMenuItemTypeBuilder new ]
+]
+
+{ #category : #accessing }
+BrMenuItemsListElement >> typeBuilder: anObject [
+	typeBuilder := anObject
+]
+
 { #category : #'event handling' }
 BrMenuItemsListElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
@@ -78,4 +94,9 @@ BrMenuItemsListElement >> unsubscribeFromMenuModel [
 { #category : #'private - updating' }
 BrMenuItemsListElement >> updateListElement [
 	listElement items: self menuModel items
+]
+
+{ #category : #initialization }
+BrMenuItemsListElement >> visitMenuModel: aMenuModel [
+	^ aMenuModel acceptVisitor: self typeBuilder 
 ]

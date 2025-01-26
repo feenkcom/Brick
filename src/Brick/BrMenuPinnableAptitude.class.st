@@ -20,8 +20,6 @@ BrMenuPinnableAptitude >> addCloseButton [
 	self widgetDo: [ :anElement |
 		anElement clipChildren: false.
 		closeButton := self newCloseButton.
-		closeButton action: [ :aButton |
-			self onCloseFrom: aButton ].
 		self
 			when: BlMouseEnterEvent
 			do: [ :anEvent | closeButton visibility: BlVisibility visible ].
@@ -114,17 +112,13 @@ BrMenuPinnableAptitude >> isHideParentMenuOnPinned [
 	^ isHideParentMenuOnPinned ifNil: [ true ]
 ]
 
-{ #category : #'event handling' }
+{ #category : #initialization }
 BrMenuPinnableAptitude >> newCloseButton [
-	^ GtInspectorRoundButtonStencil small asElement
-		icon: (BrPlusIconStencil close radius: 3) asElement;
-		zIndex: 10;
-		constraintsDo: [ :c | 
-			c ignoreByLayout.
-			c ignored horizontal alignCenterAt: 1.0.
-			c ignored vertical alignCenterAt: 0.0 ];
-		addAptitude: (BrGlamorousWithLabelTooltipAptitude 
-			text: 'Close').
+	^ BlElement new
+		size: 5 @ 5;
+		geometry: BlCircleGeometry new;
+		background: self theme status paleErrorBackgroundColor;
+		when: BlClickEvent do: [ :anEvent | self onCloseFrom: anEvent currentTarget ]
 ]
 
 { #category : #initialization }
@@ -141,8 +135,7 @@ BrMenuPinnableAptitude >> newHandleElement [
 		when: BlMouseUpEvent 
 			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ];
 		when: BlDragEndEvent
-			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ];
-		addAptitude: BrGlamorousHandleBarResizerAptitude new.
+			do: [ :anEvent | anEvent currentTarget mouseCursor: BlGrabCursor new ]
 ]
 
 { #category : #'private - notifying' }

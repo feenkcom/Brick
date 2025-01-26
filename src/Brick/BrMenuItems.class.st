@@ -10,6 +10,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuItems >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuItems: self
+]
+
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
 	groups := nil.
@@ -109,21 +114,6 @@ BrMenuItems >> addItems: aCollection [
 ]
 
 { #category : #'api - converting' }
-BrMenuItems >> asElement [
-	^ self elementType new menuModel: self
-]
-
-{ #category : #'api - converting' }
-BrMenuItems >> asGroupedListElement [
-	^ BrMenuItemsGroupedElement new menuModel: self
-]
-
-{ #category : #'api - converting' }
-BrMenuItems >> asSimpleListElement [
-	^ BrMenuItemsListElement new menuModel: self
-]
-
-{ #category : #'api - converting' }
 BrMenuItems >> asTreeElement [
 	| anElement |
 	anElement := BrSimpleTree new.
@@ -139,11 +129,6 @@ BrMenuItems >> asTreeElement [
 		addAptitude: (BrMenuHideableAptitude new menuModel: self).
 
 	^ anElement
-]
-
-{ #category : #'api - initialization' }
-BrMenuItems >> beGroupedElementType [
-	self elementType: BrMenuItemsGroupedElement
 ]
 
 { #category : #'api - initialization' }
@@ -167,10 +152,7 @@ BrMenuItems >> deselectedItem: aMenuItem [
 
 { #category : #'api - converting' }
 BrMenuItems >> elementType [
-	^ elementType ifNil: [ 
-		^ self groups size > 1
-			ifFalse: [ BrMenuItemsListElement ]
-			ifTrue: [ BrMenuItemsGroupedElement ] ]
+	^ elementType
 ]
 
 { #category : #'api - initialization' }
@@ -196,26 +178,6 @@ BrMenuItems >> groups [
 
 	groups := aDictionary values sort: [ :a :b | a priority < b priority ].
 	^ groups
-]
-
-{ #category : #'gt - extensions' }
-BrMenuItems >> gtGroupsFor: aView [
-	<gtView>
-	^ aView columnedTree
-		title: 'Grouped menu items';
-		priority: 10;
-		items: [ self groups ifNil: [ #() ] ];
-		children: #gtItemChildren;
-		expandAll;
-		column: 'Label' text: [ :anItem | anItem gtItemLabel ];
-		column: 'Selection'
-			text: #gtItemSelection
-			weight: 0.2;
-		column: 'Depth'
-			text: #gtItemDepth
-			weight: 0.2;
-		column: 'Type' text: #class weight: 0.5;
-		actionUpdateButton
 ]
 
 { #category : #'gt - extensions' }

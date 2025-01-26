@@ -4,6 +4,14 @@ Class {
 	#category : #'Brick-Examples-Menu'
 }
 
+{ #category : #asserting }
+BrMenuExamples >> assertGlamorousElementForMenuModel: aMenu [
+	| anElement |
+	anElement := self visitMenuModel: aMenu.
+
+	self assert: (anElement isKindOf: BlElement)
+]
+
 { #category : #'examples - action item' }
 BrMenuExamples >> basicMenuActionItem [
 	<gtExample>
@@ -17,18 +25,19 @@ BrMenuExamples >> explicitMenu [
 	<gtExample>
 	| aMenu |
 	aMenu := BrMenuExplicit new.
-	aMenu stencil: [ BlElement new
-		size: 150@100;
-		addAptitude: (BrMenuPinnableAptitude new 
-			menuModel: aMenu;
-			withResizers;
-			withAllPinActions);
-		addAptitude: BrMenuCommonAptitude new;
-		background: Color paleBlue ].
-	
+	aMenu
+		stencil: [ BlElement new
+				size: 150 @ 100;
+				addAptitude: (BrGlamorousMenuPinnableAptitude new
+						menuModel: aMenu;
+						withResizers;
+						withAllPinActions);
+				addAptitude: BrMenuCommonAptitude new;
+				background: Color paleBlue ].
+
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
-	
+	self assertGlamorousElementForMenuModel: aMenu.
+
 	^ aMenu
 ]
 
@@ -40,7 +49,7 @@ BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
 	aMenu stencil: [ BlElement new
 		beInSeparateCompositionLayer;
 		size: 150@100;
-		addAptitude: (BrMenuPinnableAptitude new 
+		addAptitude: (BrGlamorousMenuPinnableAptitude new 
 			menuModel: aMenu;
 			withResizers;
 			withAllPinActions);
@@ -48,7 +57,7 @@ BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
 		background: Color paleOrange ].
 	
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
+	self assertGlamorousElementForMenuModel: aMenu.
 	
 	^ aMenu
 ]
@@ -61,7 +70,7 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 	aMenu stencil: [ BlElement new
 		beInSingleCompositionLayer;
 		size: 150@100;
-		addAptitude: (BrMenuPinnableAptitude new 
+		addAptitude: (BrGlamorousMenuPinnableAptitude new 
 			menuModel: aMenu;
 			withResizers;
 			withAllPinActions);
@@ -69,7 +78,7 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 		background: Color paleGreen ].
 	
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
+	self assertGlamorousElementForMenuModel: aMenu.
 	
 	^ aMenu
 ]
@@ -83,7 +92,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 		stencil: [ BlElement new
 				layout: BlLinearLayout vertical alignCenter;
 				size: 150 @ 100;
-				addAptitude: (BrMenuPinnableAptitude new
+				addAptitude: (BrGlamorousMenuPinnableAptitude new
 						menuModel: aMenu;
 						withResizers;
 						withAllPinActions);
@@ -93,7 +102,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 						id: #'menu-in-submenu';
 						size: 70 @ 20;
 						background: Color palePeach darker;
-						aptitude: (BrWithExplicitDropdownAptitude new
+						aptitude: (BrGlamorousWithExplicitDropdownAptitude new
 								handle: [ BlElement new
 										id: #'menu-in-submenu-handle';
 										size: 70 @ 20;
@@ -103,7 +112,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 									addItem: self submenuExtractTemporaryItems ])) ].
 
 	self assert: aMenu stencil isNotNil.
-	self assert: (aMenu asElement isKindOf: BlElement).
+	self assertGlamorousElementForMenuModel: aMenu.
 
 	^ aMenu
 ]
@@ -289,4 +298,9 @@ BrMenuExamples >> submenuInlineMessageItems [
 	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem
+]
+
+{ #category : #visiting }
+BrMenuExamples >> visitMenuModel: aMenu [
+	^ aMenu acceptVisitor: BrGlamorousMenuElementBuilder new
 ]

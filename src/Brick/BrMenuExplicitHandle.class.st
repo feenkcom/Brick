@@ -8,18 +8,9 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
-{ #category : #'api - converting' }
-BrMenuExplicitHandle >> asElement [
-	| anElement |
-	anElement := handleStencil asElement.
-	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
-	
-	"If a user clicks on a handle, we want to close its menu."
-	anElement
-		when: BlClickEvent
-		do: [ :anEvent | anEvent currentTarget fireEvent: BrMenuHideAllWish new  ].
-
-	^ anElement
+{ #category : #visiting }
+BrMenuExplicitHandle >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuExplicitHandle: self
 ]
 
 { #category : #initialization }
@@ -42,6 +33,11 @@ BrMenuExplicitHandle >> handle: aStencil [
 	aStencil is a stencil that creates a BlElement."
 
 	handleStencil := aStencil asStencil
+]
+
+{ #category : #accessing }
+BrMenuExplicitHandle >> handleStencil [
+	^ handleStencil
 ]
 
 { #category : #'api - visibility' }

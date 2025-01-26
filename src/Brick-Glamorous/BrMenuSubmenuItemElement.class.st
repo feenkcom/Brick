@@ -1,7 +1,7 @@
 Class {
 	#name : #BrMenuSubmenuItemElement,
 	#superclass : #BrMenuItemLabeledElement,
-	#category : #'Brick-Menu - UI'
+	#category : #'Brick-Glamorous-Menu'
 }
 
 { #category : #initialization }

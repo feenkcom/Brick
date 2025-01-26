@@ -15,27 +15,6 @@ BrMenuItemGroup >> addItem: aMenuItem [
 	self items add: aMenuItem
 ]
 
-{ #category : #'api - converting' }
-BrMenuItemGroup >> asElement [
-	^ BrHorizontalPane new
-		hMatchParent;
-		vFitContent;
-		addChild: (BrLabel new
-				fitContent;
-				constraintsDo: [ :c | c linear vertical alignCenter ];
-				text: self name;
-				aptitude: (BrGlamorousLabelAptitude new foreground: Color veryLightGray);
-				constraintsDo: [ :c | 
-					c linear vertical alignCenter ]);
-		addChild: (BrFrame new
-				hMatchParent;
-				vExact: 1;
-				margin: (BlInsets left: 3);
-				background: Color veryLightGray;
-				constraintsDo: [ :c | 
-					c linear vertical alignCenter ])
-]
-
 { #category : #'api - configuration' }
 BrMenuItemGroup >> configuration [
 	<return: #BrMenuItemGroupConfiguration>
@@ -54,16 +33,6 @@ BrMenuItemGroup >> gtItemChildren [
 
 { #category : #'gt - extensions' }
 BrMenuItemGroup >> gtItemDepth [
-	^ ''
-]
-
-{ #category : #'gt - extensions' }
-BrMenuItemGroup >> gtItemLabel [
-	^ 'Group: ', self id asString
-]
-
-{ #category : #'gt - extensions' }
-BrMenuItemGroup >> gtItemSelection [
 	^ ''
 ]
 

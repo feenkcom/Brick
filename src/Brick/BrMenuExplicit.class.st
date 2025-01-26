@@ -7,16 +7,9 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
-{ #category : #'api - converting' }
-BrMenuExplicit >> asElement [
-	| anElement |
-	anElement := self stencil
-			menuModel: self;
-			asElement.
-
-	anElement addAptitude: (BrMenuHideableAptitude new menuModel: self).
-	
-	^ anElement
+{ #category : #visiting }
+BrMenuExplicit >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuExplicit: self
 ]
 
 { #category : #accessing }

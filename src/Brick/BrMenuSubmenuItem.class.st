@@ -9,6 +9,11 @@ Class {
 	#category : #'Brick-Menu - Model'
 }
 
+{ #category : #visiting }
+BrMenuSubmenuItem >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuSubmenuItem: self
+]
+
 { #category : #'api - action' }
 BrMenuSubmenuItem >> action [
 	^ action
@@ -25,11 +30,6 @@ BrMenuSubmenuItem >> action: aBlock [
 { #category : #'api - action' }
 BrMenuSubmenuItem >> bePinSubmenuAction [
 	self action: [ :anElement :aButtonModel :anEvent | self notifyPinRequest ]
-]
-
-{ #category : #'api - converting' }
-BrMenuSubmenuItem >> elementType [
-	^ BrMenuSubmenuItemElement
 ]
 
 { #category : #'gt - extensions' }
