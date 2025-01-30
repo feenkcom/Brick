@@ -6,20 +6,20 @@ Class {
 		'attributesCreatingBlock',
 		'createdAttributes'
 	],
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #private }
 BrTextExpandButtonAttribute >> applyExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece in: aTextEditor [
-	"Add attributes if expanded and remove if collapsed"
-	| aBrText |
-	
-	aBrText := aTBrTextEditorTextualPiece text.
-	"we should not forget to remove already created attributes"
-	aBrText clearAttributes: [ :aTextAttribute | self createdAttributes includes: aTextAttribute ].
-	
-	isExpanded
-		ifTrue: [ self createAttributesAffect: aBrText in: aTextEditor ]
+	self applyExpandedOrCollapsedAttributesOnText: aTBrTextEditorTextualPiece text
+]
+
+{ #category : #private }
+BrTextExpandButtonAttribute >> applyExpandedOrCollapsedAttributesOnText: aBrText [
+	aBrText
+		clearAttributes: [ :aTextAttribute | self createdAttributes includes: aTextAttribute ].
+
+	isExpanded ifTrue: [ self createAttributesAffect: aBrText ]
 ]
 
 { #category : #accessing }
@@ -33,10 +33,8 @@ BrTextExpandButtonAttribute >> attributesCreatingBlock: aBlock [
 ]
 
 { #category : #private }
-BrTextExpandButtonAttribute >> createAttributesAffect: aBrText in: aTextEditor [
-	createdAttributes := (attributesCreatingBlock
-		cull: aBrText
-		cull: aTextEditor) asOrderedCollection.
+BrTextExpandButtonAttribute >> createAttributesAffect: aBrText [
+	createdAttributes := attributesCreatingBlock value asOrderedCollection.
 	aBrText attributes: createdAttributes
 ]
 
@@ -72,7 +70,13 @@ BrTextExpandButtonAttribute >> isExpanded: aBoolean [
 ]
 
 { #category : #private }
+BrTextExpandButtonAttribute >> toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece [
+	self isExpanded: isExpanded not.
+	self applyExpandedOrCollapsedAttributesOnText: aTBrTextEditorTextualPiece text
+]
+
+{ #category : #private }
 BrTextExpandButtonAttribute >> toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece in: aTextEditor [
 	self isExpanded: isExpanded not.
-	self applyExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece in: aTextEditor
+	self applyExpandedOrCollapsedAttributesOnText: aTBrTextEditorTextualPiece text
 ]

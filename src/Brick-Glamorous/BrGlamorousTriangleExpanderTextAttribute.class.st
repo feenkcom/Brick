@@ -20,13 +20,9 @@ BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece
 			padding: (BlInsets all: 2);
 			margin: (BlInsets top: 2);
 			mouseCursor: BlCursor default;
-			toggleAction: [ self
-					toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece
-					in: anEditorElement editor ].
+			toggleAction: [ self toggleExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece ].
 
-	self
-		applyExpandedOrCollapsedAttributesOn: aTBrTextEditorTextualPiece
-		in: anEditorElement editor.
+	self applyExpandedOrCollapsedAttributesOnText: aTBrTextEditorTextualPiece text.
 
 	^ aToggle
 ]
