@@ -4,9 +4,6 @@ I am a text attribute that adds a small expand button that when clicked may appl
 Class {
 	#name : #BrGlamorousTriangleExpanderTextAttribute,
 	#superclass : #BrTextExpandButtonAttribute,
-	#instVars : [
-		'id'
-	],
 	#category : #'Brick-Glamorous'
 }
 
@@ -25,25 +22,4 @@ BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece
 	self applyExpandedOrCollapsedAttributesOnText: aTBrTextEditorTextualPiece text.
 
 	^ aToggle
-]
-
-{ #category : #accessing }
-BrGlamorousTriangleExpanderTextAttribute >> id [
-	<return: #BlElementId>
-	
-	^ id
-]
-
-{ #category : #accessing }
-BrGlamorousTriangleExpanderTextAttribute >> id: anElementId [
-	id := anElementId
-]
-
-{ #category : #accessing }
-BrGlamorousTriangleExpanderTextAttribute >> initialize [
-	super initialize.
-
-	self placeholderAlignment: #alignMiddle.
-
-	id := BlElementId noId
 ]
