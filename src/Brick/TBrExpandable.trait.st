@@ -1,5 +1,5 @@
 "
-I add API that allows users to expand and collapse widgets that support it, for example {{gtClass:BrTriangle}}.
+I add API that allows users to expand and collapse widgets that support it, for example {{gtClass:BrInlineExpanderElement}}.
 
 "
 Trait {
