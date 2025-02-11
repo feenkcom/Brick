@@ -512,7 +512,7 @@ BrTextEditorNavigatorExamples >> cursor_moveAcrossFoldedText [
 	anEditor navigator
 		moveRight;
 		apply.
-	self assertEditor: anEditor cursorIsAt: 31.
+	self assertEditor: anEditor cursorIsAt: 32.
 	anEditor navigator
 		moveLeft;
 		apply.

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousEllipsesExpanderAptitude,
-	#superclass : #BrGlamorousTriangleInCircleAptitude,
+	#superclass : #BrGlamorousTriangleInCircleExpanderAptitude,
 	#category : #'Brick-Glamorous-List, Tree'
 }
 

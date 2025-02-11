@@ -1,11 +1,11 @@
 Class {
-	#name : #BrGlamorousTriangleInCircleAptitude,
-	#superclass : #BrTriangleAptitude,
+	#name : #BrGlamorousTriangleInCircleExpanderAptitude,
+	#superclass : #BrTriangleExpanderAptitude,
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
 { #category : #initialization }
-BrGlamorousTriangleInCircleAptitude >> initialize [
+BrGlamorousTriangleInCircleExpanderAptitude >> initialize [
 	super initialize.
 	self
 		addChangeProperty: #(widget layout) with: [ BlFrameLayout new ];
@@ -54,7 +54,7 @@ BrGlamorousTriangleInCircleAptitude >> initialize [
 ]
 
 { #category : #initialization }
-BrGlamorousTriangleInCircleAptitude >> initializeTriangle: aTriangle [
+BrGlamorousTriangleInCircleExpanderAptitude >> initializeTriangle: aTriangle [
 	"configure collapsed and expanded triangle elements"
 
 	aTriangle

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'isExpanded',
 		'attributesCreatingBlock',
-		'createdAttributes'
+		'createdAttributes',
+		'id'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
@@ -48,12 +49,25 @@ BrTextExpandButtonAttribute >> createdAttributes: aCollection [
 	createdAttributes := aCollection
 ]
 
+{ #category : #accessing }
+BrTextExpandButtonAttribute >> id [
+	<return: #BlElementId>
+	
+	^ id
+]
+
+{ #category : #accessing }
+BrTextExpandButtonAttribute >> id: anElementId [
+	id := anElementId
+]
+
 { #category : #initialization }
 BrTextExpandButtonAttribute >> initialize [
 	super initialize.
 	
 	self beAppend.
-	
+		self placeholderAlignment: #alignMiddle.
+	id := BlElementId noId.
 	attributesCreatingBlock := [ OrderedCollection new ].
 	isExpanded := false.
 	createdAttributes := OrderedCollection new

@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTriangle,
+	#name : #BrInlineExpanderElement,
 	#superclass : #BlElement,
 	#traits : 'TBrExpandable + TBrEnableable + TBrSizeAdjustable',
 	#classTraits : 'TBrExpandable classTrait + TBrEnableable classTrait + TBrSizeAdjustable classTrait',
@@ -7,35 +7,35 @@ Class {
 }
 
 { #category : #'api - actions' }
-BrTriangle >> action: aBlock [
+BrInlineExpanderElement >> action: aBlock [
 	"do no handle expand and collapse actions"
 	self viewModel action: aBlock
 ]
 
 { #category : #'api - expandable' }
-BrTriangle >> collapse [
+BrInlineExpanderElement >> collapse [
 	self states addState: BrCollapsedState uniqueInstance
 ]
 
 { #category : #'api - expandable' }
-BrTriangle >> expand [
+BrInlineExpanderElement >> expand [
 	self states addState: BrExpandedState uniqueInstance
 ]
 
 { #category : #'api - visibility' }
-BrTriangle >> hide [
+BrInlineExpanderElement >> hide [
 	self visibility: BlVisibility hidden
 ]
 
 { #category : #'api - visibility' }
-BrTriangle >> hide: aBoolean [
+BrInlineExpanderElement >> hide: aBoolean [
 	aBoolean 
 		ifTrue: [ self hide ] 
 		ifFalse: [ self show ]
 ]
 
 { #category : #initialization }
-BrTriangle >> initialize [
+BrInlineExpanderElement >> initialize [
 	super initialize.
 	
 	self viewModel: BrButtonModel new.
@@ -43,7 +43,7 @@ BrTriangle >> initialize [
 ]
 
 { #category : #'api - expandable' }
-BrTriangle >> isExpanded [
+BrInlineExpanderElement >> isExpanded [
 	"Return true if an widget is expanded (has expanded state), false otherwise"
 	<return: #Boolean>
 
@@ -51,12 +51,12 @@ BrTriangle >> isExpanded [
 ]
 
 { #category : #'api - visibility' }
-BrTriangle >> show [
+BrInlineExpanderElement >> show [
 	self visibility: BlVisibility visible
 ]
 
 { #category : #'api - actions' }
-BrTriangle >> toggleAction: aBlock [
+BrInlineExpanderElement >> toggleAction: aBlock [
 	"toggle triangle and then evaluate the block"
 
 	self viewModel action: [ :aWidget :aButtonModel :anEvent |

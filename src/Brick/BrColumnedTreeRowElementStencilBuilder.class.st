@@ -47,8 +47,8 @@ BrColumnedTreeRowElementStencilBuilder >> columns: anObject [
 
 { #category : #'api - instantiation' }
 BrColumnedTreeRowElementStencilBuilder >> createExpandCollapseElement [
-	^ BrTriangle new
-		aptitude: BrGlamorousTriangleInCircleAptitude
+	^ BrInlineExpanderElement new
+		aptitude: BrGlamorousTriangleInCircleExpanderAptitude
 ]
 
 { #category : #'api - instantiation' }

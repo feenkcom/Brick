@@ -8,5 +8,5 @@ Class {
 BrTextEditorNavigatorMoveToEndOfFoldedTextOperation >> performOn: aNavigator [
 	aNavigator
 		privateRegisterForMove: self cursor
-		by: (aNavigator findFoldEndAfter: self cursor position) - self cursor position
+		by: (aNavigator findFoldEndAfter: self cursor position) - self cursor position + 1
 ]
