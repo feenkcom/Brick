@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTriangleAptitude,
+	#name : #BrTriangleExpanderAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
 		'isExpanded',
@@ -8,18 +8,18 @@ Class {
 		'collapsedTriangle',
 		'expandedTriangle'
 	],
-	#category : 'Brick-Triangle - Look'
+	#category : #'Brick-Triangle - Look'
 }
 
 { #category : #'api - expandable' }
-BrTriangleAptitude >> collapse [
+BrTriangleExpanderAptitude >> collapse [
 	self isExpanded ifFalse: [ ^ self ].
 	isExpanded := false.
 	self updateVisibleTriangle.
 ]
 
 { #category : #'private - ui' }
-BrTriangleAptitude >> collapseWidget: aWidget [
+BrTriangleExpanderAptitude >> collapseWidget: aWidget [
 	self collapsedTriangle removeFromParent.
 	self expandedTriangle removeFromParent.
 	self widgetContent addChild: self collapsedTriangle as: #triangle.
@@ -27,12 +27,12 @@ BrTriangleAptitude >> collapseWidget: aWidget [
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> collapsedStencil [
+BrTriangleExpanderAptitude >> collapsedStencil [
 	^ collapsedStencil
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> collapsedStencil: aStencil [
+BrTriangleExpanderAptitude >> collapsedStencil: aStencil [
 	collapsedStencil := aStencil.
 	collapsedTriangle ifNotNil: [ :aTriangle | aTriangle removeFromParent ].
 	collapsedTriangle := nil.
@@ -40,7 +40,7 @@ BrTriangleAptitude >> collapsedStencil: aStencil [
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> collapsedTriangle [
+BrTriangleExpanderAptitude >> collapsedTriangle [
 	collapsedTriangle ifNil: [ 
 		collapsedTriangle := self collapsedStencil asElement.
 		self initializeTriangle: collapsedTriangle ].
@@ -48,24 +48,24 @@ BrTriangleAptitude >> collapsedTriangle [
 ]
 
 { #category : #defaults }
-BrTriangleAptitude >> defaultCollapsedStencil [
+BrTriangleExpanderAptitude >> defaultCollapsedStencil [
 	^ BrCollapsedTriangleStencil new
 ]
 
 { #category : #defaults }
-BrTriangleAptitude >> defaultExpandedStencil [
+BrTriangleExpanderAptitude >> defaultExpandedStencil [
 	^ BrExpandedTriangleStencil new
 ]
 
 { #category : #'api - expandable' }
-BrTriangleAptitude >> expand [
+BrTriangleExpanderAptitude >> expand [
 	self isExpanded ifTrue: [ ^ self ].
 	isExpanded := true.
 	self updateVisibleTriangle.
 ]
 
 { #category : #'private - ui' }
-BrTriangleAptitude >> expandWidget: aWidget [
+BrTriangleExpanderAptitude >> expandWidget: aWidget [
 	self collapsedTriangle removeFromParent.
 	self expandedTriangle removeFromParent.
 	self widgetContent addChild: self expandedTriangle as: #triangle.
@@ -73,12 +73,12 @@ BrTriangleAptitude >> expandWidget: aWidget [
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> expandedStencil [
+BrTriangleExpanderAptitude >> expandedStencil [
 	^ expandedStencil
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> expandedStencil: aStencil [
+BrTriangleExpanderAptitude >> expandedStencil: aStencil [
 	expandedStencil := aStencil.
 	expandedTriangle ifNotNil: [ :aTriangle | aTriangle removeFromParent ].
 	expandedTriangle := nil.
@@ -86,7 +86,7 @@ BrTriangleAptitude >> expandedStencil: aStencil [
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> expandedTriangle [
+BrTriangleExpanderAptitude >> expandedTriangle [
 	expandedTriangle ifNil: [ 
 		expandedTriangle := self expandedStencil asElement.
 		self initializeTriangle: expandedTriangle ].
@@ -94,7 +94,7 @@ BrTriangleAptitude >> expandedTriangle [
 ]
 
 { #category : #initialization }
-BrTriangleAptitude >> initialize [
+BrTriangleExpanderAptitude >> initialize [
 	super initialize.
 	
 	isExpanded := false.
@@ -108,7 +108,7 @@ BrTriangleAptitude >> initialize [
 ]
 
 { #category : #initialization }
-BrTriangleAptitude >> initializeListeners [
+BrTriangleExpanderAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self when: BrTriangleStencilsChanged do: [ :anEvent | self onStencilsChanged: anEvent ].
@@ -117,44 +117,44 @@ BrTriangleAptitude >> initializeListeners [
 ]
 
 { #category : #initialization }
-BrTriangleAptitude >> initializeRequests [
+BrTriangleExpanderAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: BrTriangleStencilsRequest new.
 ]
 
 { #category : #initialization }
-BrTriangleAptitude >> initializeTriangle: aTriangle [
+BrTriangleExpanderAptitude >> initializeTriangle: aTriangle [
 	"subclasses may configure collapsed and expanded triangle elements"
 ]
 
 { #category : #'api - expandable' }
-BrTriangleAptitude >> isExpanded [
+BrTriangleExpanderAptitude >> isExpanded [
 	<return: #Boolean>
 	^ isExpanded
 ]
 
 { #category : #hooks }
-BrTriangleAptitude >> onStencilsChanged: anEvent [
+BrTriangleExpanderAptitude >> onStencilsChanged: anEvent [
 	self collapsedStencil: anEvent collapsedStencil.
 	self expandedStencil: anEvent expandedStencil.
 ]
 
 { #category : #'api - expandable' }
-BrTriangleAptitude >> toggle [
+BrTriangleExpanderAptitude >> toggle [
 	isExpanded := isExpanded not.
 	self updateVisibleTriangle.
 ]
 
 { #category : #accessing }
-BrTriangleAptitude >> triangle [
+BrTriangleExpanderAptitude >> triangle [
 	^ self isExpanded 
 		ifTrue: [ self expandedTriangle ]
 		ifFalse: [ self collapsedTriangle ] 
 ]
 
 { #category : #'private - ui' }
-BrTriangleAptitude >> updateVisibleTriangle [
+BrTriangleExpanderAptitude >> updateVisibleTriangle [
 	self widgetDo: [ :aWidget |
 		self isExpanded 
 			ifTrue: [ self expandWidget: aWidget ]

@@ -13,9 +13,9 @@ Class {
 { #category : #accessing }
 BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| aToggle |
-	aToggle := BrTriangle new
+	aToggle := BrInlineExpanderElement new
 			id: self id;
-			aptitude: BrGlamorousTriangleInCircleAptitude;
+			aptitude: BrGlamorousTriangleInCircleExpanderAptitude;
 			expanded: self isExpanded;
 			padding: (BlInsets all: 2);
 			margin: (BlInsets top: 2);

@@ -1,28 +1,28 @@
 Class {
-	#name : #BrTriangleExamples,
+	#name : #BrInlineExpanderExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Triangle'
+	#category : #'Brick-Examples-Triangle'
 }
 
 { #category : #basic }
-BrTriangleExamples >> basicTriangle [
+BrInlineExpanderExamples >> basicExpander [
 	<gtExample>
 	| aTriangle |
-	aTriangle := BrTriangle new.
+	aTriangle := BrInlineExpanderElement new.
 	^ aTriangle
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircle [
+BrInlineExpanderExamples >> glamorousInCircle [
 	<gtExample>
 	| aTriangle |
-	aTriangle := self basicTriangle.
-	aTriangle aptitude: BrGlamorousTriangleInCircleAptitude.
+	aTriangle := self basicExpander.
+	aTriangle aptitude: BrGlamorousTriangleInCircleExpanderAptitude.
 	^ aTriangle
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircleCollapsed [
+BrInlineExpanderExamples >> glamorousInCircleCollapsed [
 	<gtExample>
 	| aTriangle |
 	aTriangle := self glamorousInCircleExpanded.
@@ -32,18 +32,18 @@ BrTriangleExamples >> glamorousInCircleCollapsed [
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircleDisabled [
+BrInlineExpanderExamples >> glamorousInCircleDisabled [
 	<gtExample>
 	| aTriangle |
 	aTriangle := self glamorousInCircle.
-	aTriangle aptitude: BrGlamorousTriangleInCircleAptitude.
+	aTriangle aptitude: BrGlamorousTriangleInCircleExpanderAptitude.
 	aTriangle disable.
 	self assert: aTriangle isDisabled.
 	^ aTriangle
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircleExpanded [
+BrInlineExpanderExamples >> glamorousInCircleExpanded [
 	<gtExample>
 	| aTriangle |
 	aTriangle := self glamorousInCircle.
@@ -53,7 +53,7 @@ BrTriangleExamples >> glamorousInCircleExpanded [
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircleHidden [
+BrInlineExpanderExamples >> glamorousInCircleHidden [
 	<gtExample>
 	| aTriangle |
 	aTriangle := self glamorousInCircle.
@@ -62,7 +62,7 @@ BrTriangleExamples >> glamorousInCircleHidden [
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircleVisible [
+BrInlineExpanderExamples >> glamorousInCircleVisible [
 	<gtExample>
 	| aTriangle |
 	aTriangle := self glamorousInCircleHidden.
@@ -71,7 +71,7 @@ BrTriangleExamples >> glamorousInCircleVisible [
 ]
 
 { #category : #glamorous }
-BrTriangleExamples >> glamorousInCircleWithAction [
+BrInlineExpanderExamples >> glamorousInCircleWithAction [
 	<gtExample>
 	| aTriangle theActions |
 	theActions := OrderedCollection new.
@@ -91,10 +91,10 @@ BrTriangleExamples >> glamorousInCircleWithAction [
 ]
 
 { #category : #basic }
-BrTriangleExamples >> triangle [
+BrInlineExpanderExamples >> triangle [
 	<gtExample>
 	| aTriangle |
-	aTriangle := self basicTriangle.
-	aTriangle aptitude: BrTriangleAptitude.
+	aTriangle := self basicExpander.
+	aTriangle aptitude: BrTriangleExpanderAptitude.
 	^ aTriangle
 ]
