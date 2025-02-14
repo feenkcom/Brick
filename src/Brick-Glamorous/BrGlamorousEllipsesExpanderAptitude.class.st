@@ -4,7 +4,7 @@ Class {
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 BrGlamorousEllipsesExpanderAptitude >> defaultCollapsedStencil [
 	^ [BlElement new
 		size: 11 @ 11;
@@ -15,7 +15,7 @@ BrGlamorousEllipsesExpanderAptitude >> defaultCollapsedStencil [
 		yourself] asStencil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 BrGlamorousEllipsesExpanderAptitude >> defaultExpandedStencil [
 	^ [BlElement new
 		size: 11 @ 11;
@@ -26,7 +26,7 @@ BrGlamorousEllipsesExpanderAptitude >> defaultExpandedStencil [
 		yourself] asStencil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 BrGlamorousEllipsesExpanderAptitude >> dotElement [
 	| dot |
 	dot := BlElement new.
