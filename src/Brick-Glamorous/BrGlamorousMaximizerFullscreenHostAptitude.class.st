@@ -22,10 +22,14 @@ BrGlamorousMaximizerFullscreenHostAptitude >> createCloseButton [
 
 { #category : #'private - hooks' }
 BrGlamorousMaximizerFullscreenHostAptitude >> onMaximize: aMaximizeWish [
-	| anElementToMaximize aHostElement originalHorizontalResizingStrategy originalVerticalResizingStrategy previousHorizontalResizerState previousVerticalResizerState originalPosition containerElement closeButton |
+	| anElementToMaximize aHostElement originalHorizontalResizingStrategy originalVerticalResizingStrategy previousHorizontalResizerState previousVerticalResizerState originalPosition containerElement closeButton originalElevation |
 	
 	anElementToMaximize := aMaximizeWish elementToMaximize.
 	aHostElement := self widget.
+	
+	anElementToMaximize elevation = BlRelativeElevation zero ifFalse: [ 
+		originalElevation := anElementToMaximize elevation.
+		anElementToMaximize elevation: BlRelativeElevation zero ].
 	
 	originalHorizontalResizingStrategy := anElementToMaximize constraints horizontal resizer.
 	originalVerticalResizingStrategy := anElementToMaximize constraints vertical resizer.
@@ -48,7 +52,7 @@ BrGlamorousMaximizerFullscreenHostAptitude >> onMaximize: aMaximizeWish [
 
 	anElementToMaximize states addState: BrLayoutHorizontalResizerState matchParent.
 	anElementToMaximize states addState: BrLayoutVerticalResizerState matchParent.
-
+	
 	containerElement := BlElement new
 		background: aMaximizeWish preferredBackground;
 		constraintsDo: [ :c |
@@ -60,6 +64,9 @@ BrGlamorousMaximizerFullscreenHostAptitude >> onMaximize: aMaximizeWish [
 	closeButton action: [
 		aHostElement removeChild: containerElement.
 		anElementToMaximize removeFromParent.
+		
+		originalElevation ifNotNil: [
+			anElementToMaximize elevation: originalElevation ].
 		
 		previousHorizontalResizerState
 			ifNil: [ anElementToMaximize states removeState: BrLayoutHorizontalResizerState matchParent ]
