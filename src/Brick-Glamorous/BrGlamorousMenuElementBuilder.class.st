@@ -4,7 +4,7 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BrGlamorousMenuElementBuilder >> defaultTypeBuilder [
 	^ BrGlamorousMenuItemTypeBuilder new
 ]
