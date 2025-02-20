@@ -4,7 +4,8 @@ Class {
 	#traits : 'TBrLayoutResizable + TBrScrollable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrScrollable classTrait',
 	#instVars : [
-		'textReplacedHandler'
+		'textReplacedHandler',
+		'lineCount'
 	],
 	#category : #'Brick-Editor - UI'
 }
@@ -46,7 +47,7 @@ BrEditor >> computeVerticalScrollOffset [
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollRange [
-	^ self text lineCount
+	^ self lineCount
 ]
 
 { #category : #'editor - accessing' }
@@ -118,6 +119,8 @@ BrEditor >> initialize [
 
 	self viewModel: self defaultEditorModel.
 	
+	self viewModel when: BrEditorTextChanged do: [ lineCount := nil].
+	
 	self when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
 	self when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
 	self when: BrScrollByWish do: [:aWish | self onScrollBy: aWish]
@@ -154,6 +157,11 @@ BrEditor >> lastVisibleSegment [
 	^ (self layout
 		findFirstVisibleChildClosestToEndCompletelyVisible: true
 		acceptPartiallyVisible: true) segment
+]
+
+{ #category : #accessing }
+BrEditor >> lineCount [
+	^ lineCount ifNil: [ lineCount := self text lineCount ]
 ]
 
 { #category : #'editor - operations' }
