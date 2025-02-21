@@ -15,7 +15,8 @@ Class {
 		'relocator',
 		'menuStencil',
 		'submenus',
-		'cacheCleaner'
+		'cacheCleaner',
+		'mouseEventHandler'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -77,6 +78,13 @@ BrWithExplicitMenuAptitude >> defaultCacheCleaner [
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> defaultElementBuilder [
 	^ BrMenuElementBuilder new
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> doNotShowOnClick [
+	"Do not show menu on click"
+
+	self withoutMouseEventHandler
 ]
 
 { #category : #accessing }
@@ -209,9 +217,8 @@ BrWithExplicitMenuAptitude >> initializeEventHandlers [
 BrWithExplicitMenuAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self
-		when: BlMouseUpEvent
-		do: [ :anEvent |  self onMouseUp: anEvent ].
+	mouseEventHandler := self newMouseUpEventHandler.
+	self addEventHandler: mouseEventHandler
 ]
 
 { #category : #initialization }
@@ -263,6 +270,11 @@ BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	to test whether the context menu should be opened"
 
 	modifiersMatcher := aBlockOrSymbol
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> newMouseUpEventHandler [
+	^ BlEventHandler on: BlMouseUpEvent do: [ :anEvent | self onMouseUp: anEvent ]
 ]
 
 { #category : #'event handling' }
@@ -583,6 +595,15 @@ BrWithExplicitMenuAptitude >> withKeepAllCacheCleaner [
 	self cacheCleaner: BrMenuCacheCleaner allKeeper
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withMouseUpEventHandler [
+	"Show menu on click. This is default behavior."
+
+	mouseEventHandler ifNotNil: [ self withoutMouseEventHandler ].
+	mouseEventHandler := self newMouseUpEventHandler.
+	self addEventHandler: mouseEventHandler.
+]
+
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> withPrimaryMouseButton [
 	mouseButton := BlMouseButton primary
@@ -611,4 +632,13 @@ BrWithExplicitMenuAptitude >> withWidgetBoundsRelocator [
 { #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withoutHandle [
 	menuContainer withoutHandle
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withoutMouseEventHandler [
+	"Do not show menu on click"
+
+	mouseEventHandler ifNil: [ ^ self ].
+	self removeEventHandler: mouseEventHandler.
+	mouseEventHandler := nil
 ]
