@@ -350,10 +350,7 @@ BrTextEditorSegmentCollector >> privateComputeBackwardAt: anIndex [
 	newSubText := text from: mapEntry value to: text size.
 	newSegments := OrderedCollection new.
 
-	overlap := cachedInterval last - segmentsInterval first + 1.
-	streamLimit := overlap > 0
-		ifTrue: [ overlap ]
-		ifFalse: [ self cacheLimit ].
+	streamLimit := self cacheLimit.
 	stream := BrEditorSegmentStream new.
 	stream skip: cachedInterval first - mapEntry key.
 	stream limit: streamLimit.
@@ -365,8 +362,6 @@ BrTextEditorSegmentCollector >> privateComputeBackwardAt: anIndex [
 		offset: ((newSubText start - text textOffset - 1) max: 0).
 	
 	newSegments addAll: stream collection.
-	overlap > 0 ifTrue:
-		[ newSegments addAll: (segments copyFrom: 1 to: overlap) ].
 	segmentsInterval := cachedInterval first to: cachedInterval first + newSegments size - 1.
 	segments := newSegments.
 
