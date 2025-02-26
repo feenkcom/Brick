@@ -80,6 +80,11 @@ BrWithExplicitMenuAptitude >> defaultElementBuilder [
 	^ BrMenuElementBuilder new
 ]
 
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> defaultMenuContainerPadding [
+	^ BlInsets empty
+]
+
 { #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> doNotShowOnClick [
 	"Do not show menu on click"
@@ -233,6 +238,7 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer := BrMenuSteppedElement new.
 	menuContainer elementBuilder: self defaultElementBuilder.
 	menuContainer addAptitude: BrMenuContainerAptitude new.
+	menuContainer padding: self defaultMenuContainerPadding.
 	menuContainerParent := nil.
 	relocator := BrMenuClickPositionRelocator new
 		menuContainer: menuContainer.
