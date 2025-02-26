@@ -132,16 +132,6 @@ BrButtonModel >> clickWithoutModifiersEvent: anEvent [
 	self action gtValueWithArgs: { self widget . self . anEvent }
 ]
 
-{ #category : #'mouse handlers' }
-BrButtonModel >> disableAllModifiers [
-	enableAllModifiers := false
-]
-
-{ #category : #'mouse handlers' }
-BrButtonModel >> enableAllModifiers [
-	enableAllModifiers := true
-]
-
 { #category : #initialization }
 BrButtonModel >> hasModifiers: anEvent [
 
