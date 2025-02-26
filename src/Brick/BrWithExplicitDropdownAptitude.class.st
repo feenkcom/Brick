@@ -38,6 +38,18 @@ BrWithExplicitDropdownAptitude >> initializeListeners [
 	self when: BrDropdownHideWish do: [ :anEvent | self onHideWish: anEvent ]
 ]
 
+{ #category : #'private - event management' }
+BrWithExplicitDropdownAptitude >> onHidden [
+	super onHidden.
+	self dispatchEvent: BrDropdownIsHidden new
+]
+
+{ #category : #'private - event management' }
+BrWithExplicitDropdownAptitude >> onShown [
+	super onShown.
+	self dispatchEvent: BrDropdownIsVisible new
+]
+
 { #category : #'api - initialization' }
 BrWithExplicitDropdownAptitude >> withDefaultHandle [
 	self withTopLeftHandle

@@ -90,7 +90,7 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 	aMenu := BrMenuExplicit new.
 	aMenu
 		stencil: [ BlElement new
-				layout: BlLinearLayout vertical alignCenter;
+				layout: BlFrameLayout new;
 				size: 150 @ 100;
 				addAptitude: (BrGlamorousMenuPinnableAptitude new
 						menuModel: aMenu;
@@ -99,9 +99,21 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 				addAptitude: BrMenuCommonAptitude new;
 				background: Color palePeach;
 				addChild: (BlElement new
+					size: 10@10;
+					id: #'menu-in-outside-click';
+					background: (Color lightGray alpha: 0.5);
+					constraintsDo: [ :c | 
+							c margin: (BlInsets all: 10).
+							c frame horizontal alignLeft.
+							c frame vertical alignTop ]);
+				addChild: (BlElement new
 						id: #'menu-in-submenu';
 						size: 70 @ 20;
 						background: Color palePeach darker;
+						constraintsDo: [ :c | 
+								c margin: (BlInsets all: 10).
+								c frame horizontal alignCenter.
+								c frame vertical alignCenter ];
 						aptitude: (BrGlamorousWithExplicitDropdownAptitude new
 								handle: [ BlElement new
 										id: #'menu-in-submenu-handle';
