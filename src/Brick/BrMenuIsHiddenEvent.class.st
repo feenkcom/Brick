@@ -1,5 +1,10 @@
 "
 I indicate that another menu was closed inside of an existing menu.
+I am used internally.
+Users should use dedicated events to listen to show/hide state changes:
+- for dropdowns: {{gtClass:BrDropdownIsHidden}}. 
+- for context menus: *not implemented*, 
+- for tooltips: *not implemented*.
 "
 Class {
 	#name : #BrMenuIsHiddenEvent,

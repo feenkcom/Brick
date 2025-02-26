@@ -56,7 +56,7 @@ BrWithExplicitMenuAptitude >> cacheCleaner: anObject [
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
-	^ self visible and: [ self haveAnyVisibleSubmenu not ]
+	^ self visible
 ]
 
 { #category : #testing }
@@ -146,27 +146,34 @@ BrWithExplicitMenuAptitude >> haveAnyVisibleSubmenu [
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> hide [
 	self canHide ifFalse: [ ^ self ].
+	
+	self hideSubmenus.
+	
 	menuContainer menuModel ifNotNil: [ :aMenu | 
 		aMenu hide ].
 	self cacheCleaner cleanMenuContainer: menuContainer.
 	
-	"Widgets enqueue their hide actions, therefore
-	let's check remaining menu widgets in the next pulse.
-	TODO: I am not sure this is still true. Do we need to enque the hide action?"
 	self widgetDo: [ :aWidget | 
-		BlTaskAction
-			enqueueElement: aWidget
-			action: [
-				menuContainer childrenCount isZero ifTrue: [
-					aWidget
-						removeEventHandler: extentChangedEventHandler;
-						removeEventHandler: positionInSpaceChangedEventHandler;
-						removeEventHandler: addedToSceneEventHandler;
-						removeEventHandler: removedFromSceneEventHandler.
-					self temporaryHide.
-					self fireEvent: (BrMenuIsHiddenEvent new
-						menuModel: menuContainer menuModel;
-						menuContainer: menuContainer). ] ] ]
+		menuContainer childrenCount isZero ifTrue: [
+			aWidget
+				removeEventHandler: extentChangedEventHandler;
+				removeEventHandler: positionInSpaceChangedEventHandler;
+				removeEventHandler: addedToSceneEventHandler;
+				removeEventHandler: removedFromSceneEventHandler.
+			self temporaryHide.
+			self fireEvent: (BrMenuIsHiddenEvent new
+				menuModel: menuContainer menuModel;
+				menuContainer: menuContainer).
+			GtJustContextStackSignal emit.
+			self onHidden ] ]
+]
+
+{ #category : #private }
+BrWithExplicitMenuAptitude >> hideSubmenus [
+	self haveAnyVisibleSubmenu ifFalse: [ ^ self ].
+	
+	self submenus do: [ :eachElement | 
+		eachElement fireEvent: BrMenuHideAllWish new ]
 ]
 
 { #category : #initialization }
@@ -288,8 +295,14 @@ BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [
 BrWithExplicitMenuAptitude >> onClickedOutsideMouseUpEvent: anEvent [
 	"Hide when clicked outside of the container" 
 	anEvent target == menuContainer ifTrue: [ ^ self ].
+	
 	(menuContainer isUnpinnedChild: anEvent target)
 		ifTrue: [ ^ self ].
+	
+	self submenus do: [ :eachSubmenuContainer |
+		(eachSubmenuContainer isUnpinnedChild: anEvent target)
+			ifTrue: [ ^ self ] ].
+
 	anEvent consumed: true.
 	self hide.
 ]
@@ -298,6 +311,13 @@ BrWithExplicitMenuAptitude >> onClickedOutsideMouseUpEvent: anEvent [
 BrWithExplicitMenuAptitude >> onEscapeKeyCombinationEvent: anEvent [ 
 	anEvent consumed: true.
 	self hide
+]
+
+{ #category : #'private - event management' }
+BrWithExplicitMenuAptitude >> onHidden [
+	"Subclasses may act when the menu is hidden"
+
+	
 ]
 
 { #category : #'event handling' }
@@ -373,6 +393,13 @@ BrWithExplicitMenuAptitude >> onShowWish: aWish [
 		ifTrue: [ 
 			aWish consumed: true.
 			^ self show ]
+]
+
+{ #category : #'private - event management' }
+BrWithExplicitMenuAptitude >> onShown [
+	"Subclasses may act when the menu is shown"
+
+	
 ]
 
 { #category : #'event handling' }
@@ -479,6 +506,7 @@ BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
 	self fireEvent: (BrMenuIsVisibleEvent new
 			menuModel: aMenu;
 			menuContainer: menuContainer).
+	self onShown.
 ]
 
 { #category : #accessing }
@@ -496,6 +524,8 @@ BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> submenus [
+	"Return menu container elements that were opened from this context menu"
+
 	<return: #IdentitySet of: #BrMenuSteppedElement>
 	^ submenus ifNil: [ submenus := IdentitySet new: 1 ]
 ]
@@ -522,14 +552,14 @@ BrWithExplicitMenuAptitude >> temporaryShow [
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> temporaryShowIn: anElement [
-	menuContainerParent := anElement.
-	anElement addEventFilter: clickOutsideEventHandler.
-	anElement addShortcut: pressEscEventHandler.
+BrWithExplicitMenuAptitude >> temporaryShowIn: aParentElement [
+	menuContainerParent := aParentElement.
+	aParentElement addEventFilter: clickOutsideEventHandler.
+	aParentElement addShortcut: pressEscEventHandler.
 	
-	menuContainer parent == anElement ifFalse: [
+	menuContainer parent == aParentElement ifFalse: [
 		menuContainer removeFromParent.
-		anElement addChild: menuContainer ].
+		aParentElement addChild: menuContainer ].
 	self relocate
 ]
 
@@ -542,6 +572,11 @@ BrWithExplicitMenuAptitude >> usePrimaryMouseButton [
 BrWithExplicitMenuAptitude >> visible [
 	<return: #Boolean>
 	^ menuContainer isAttachedToSceneGraph
+]
+
+{ #category : #'api - displaying' }
+BrWithExplicitMenuAptitude >> visible: aBoolean [
+	aBoolean ifTrue: [ self show ] ifFalse: [ self hide ]
 ]
 
 { #category : #'api - initialization' }
