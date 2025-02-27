@@ -175,6 +175,13 @@ BrMenuSteppedElement >> withContextMenuAreas [
 ]
 
 { #category : #'api - initialization' }
+BrMenuSteppedElement >> withDownUpDropdownAreas [
+	"Place dropdowns only down or up"
+
+	self layout withDownUpDropdownAreas
+]
+
+{ #category : #'api - initialization' }
 BrMenuSteppedElement >> withDropdownAreas [
 	self layout withDropdownAreas
 ]

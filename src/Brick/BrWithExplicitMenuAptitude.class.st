@@ -608,8 +608,20 @@ BrWithExplicitMenuAptitude >> withClickPositionRelocator [
 ]
 
 { #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withContainerAreaBuilders: aCollectionOfAreaBuilders [
+	menuContainer layout areaBuilders: aCollectionOfAreaBuilders
+]
+
+{ #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withContainerContextMenuAreas [
 	menuContainer withContextMenuAreas
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withContainerDownUpDropdown [
+	"Place dropdowns only down or up"
+
+	menuContainer withDownUpDropdownAreas
 ]
 
 { #category : #'api - initialization' }
