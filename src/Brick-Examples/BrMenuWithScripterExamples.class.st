@@ -181,6 +181,99 @@ BrMenuWithScripterExamples >> displayButtonWithDropdown [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuElement [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickElementWithDropdownInDropdown.
+
+	aScripter do
+		label: 'Fire dropdown hide wish event';
+		block: [ :anElement | anElement fireEvent: BrDropdownHideWish new ];
+		onSpaceRoot;
+		// #'menu-in-submenu-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert one dropdown is opened';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 1;
+		onSpaceRoot;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown has cached menu elements';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
+					ifNone: [ -1 ] ]
+			equals: 3;
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert menu-in-submenu dropdown has zero (cached) submenus';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude submenus size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		onSpaceRoot;
+		// #'menu-in-submenu';
+		play.
+		
+	aScripter assert
+		label: 'Assert menu-in-submenu dropdown has zero cached menu elements';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		onSpaceRoot;
+		// #'menu-in-submenu';
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverComplexSubmenu.
+
+	aScripter do
+		label: 'Fire dropdown hide wish event';
+		block: [ :anElement | anElement fireEvent: BrDropdownHideWish new ];
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu-in-outside-click';
+		play.
+
+	aScripter assert
+		label: 'Assert all dropdowns are closed';
+		value: [ :aRootElement | (aRootElement query // BrMenuSteppedElement) result size ]
+			equals: 0;
+		onSpaceRoot;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown has zero cached menu elements';
+		value: [ :aButton | 
+				aButton aptitude
+					findActor: BrGlamorousWithExplicitDropdownAptitude
+					ifFound: [ :anAptitude | anAptitude menuContainer elementCache size ]
+					ifNone: [ -1 ] ]
+			equals: 0;
+		/ BrButton;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverComplexSubmenu [
 	<gtExample>
 	| aScripter |

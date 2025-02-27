@@ -335,7 +335,7 @@ BrWithExplicitMenuAptitude >> onHideAllWish: anEvent [
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onHideWish: aWish [
 	"hide on wish"
-
+	
 	"if an anchor is explicitely specified we can hide"
 	(aWish anchor = widget)
 		ifTrue: [

@@ -51,6 +51,13 @@ BrWithExplicitDropdownAptitude >> initializeListeners [
 	self when: BrDropdownHideWish do: [ :anEvent | self onHideWish: anEvent ]
 ]
 
+{ #category : #initialization }
+BrWithExplicitDropdownAptitude >> initializeMenuContainer [
+	super initializeMenuContainer.
+	menuContainer when: BrDropdownShowWish do: [ :anEvent | self onShowWish: anEvent ].
+	menuContainer when: BrDropdownHideWish do: [ :anEvent | self onHideWish: anEvent ]
+]
+
 { #category : #'private - event management' }
 BrWithExplicitDropdownAptitude >> onHidden [
 	super onHidden.
