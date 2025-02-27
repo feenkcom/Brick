@@ -82,7 +82,7 @@ BrWithExplicitMenuAptitude >> defaultElementBuilder [
 
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> defaultMenuContainerPadding [
-	^ BlInsets empty
+	^ BlInsets all: 20
 ]
 
 { #category : #'api - initialization' }
