@@ -24,6 +24,19 @@ BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContent
 		menuContainerDo: aContainerBlock
 ]
 
+{ #category : #'instance creation' }
+BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContentStencil do: anAptitudeBlock [
+	"Create a menu with a handle element and with an explicit menu element.
+	aHandleStencil is a stencil that creates a BlElement instance.
+	aContentStencil is a stencil that creates a BlElement instance.
+	anAptitudeBlock is a block that receives the aptitude instance."
+
+	^ self new 
+		handle: aHandleStencil content: aContentStencil;
+		in: [ :anAptitude | anAptitudeBlock value: anAptitude ];
+		yourself
+]
+
 { #category : #initialization }
 BrWithExplicitDropdownAptitude >> initialize [
 	super initialize.
