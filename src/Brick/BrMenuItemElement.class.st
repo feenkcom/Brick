@@ -73,5 +73,5 @@ BrMenuItemElement >> subscribeToMenuModel [
 { #category : #'event handling' }
 BrMenuItemElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
-	self menuItem unsubscribe: self
+	self menuItem announcer unsubscribe: self
 ]
