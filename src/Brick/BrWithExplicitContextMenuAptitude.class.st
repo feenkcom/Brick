@@ -20,12 +20,14 @@ BrWithExplicitContextMenuAptitude >> initialize [
 BrWithExplicitContextMenuAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self
-		when: BrContextMenuShowWish
-		do: [ :anEvent | 
-			self onShowWish: anEvent ].
-	self
-		when: BrContextMenuHideWish
-		do: [ :anEvent | 
-			self onHideWish: anEvent ]
+	self when: BrContextMenuShowWish do: [ :anEvent | self onShowWish: anEvent ].
+	self when: BrContextMenuHideWish do: [ :anEvent | self onHideWish: anEvent ]
+]
+
+{ #category : #initialization }
+BrWithExplicitContextMenuAptitude >> initializeMenuContainer [
+	super initializeMenuContainer.
+
+	menuContainer when: BrContextMenuShowWish do: [ :anEvent | self onShowWish: anEvent ].
+	menuContainer when: BrContextMenuHideWish do: [ :anEvent | self onHideWish: anEvent ]
 ]

@@ -82,16 +82,6 @@ BrButton >> baselineOffset [
 		ifNone: [ 0 ]
 ]
 
-{ #category : #'api - widget' }
-BrButton >> disableAllModifiers [
-	self viewModel disableAllModifiers
-]
-
-{ #category : #'api - widget' }
-BrButton >> enableAllModifiers [
-	self viewModel enableAllModifiers
-]
-
 { #category : #accessing }
 BrButton >> gtActionFor: aView [
 	<gtView>
