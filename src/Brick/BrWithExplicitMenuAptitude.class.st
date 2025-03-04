@@ -673,6 +673,15 @@ BrWithExplicitMenuAptitude >> withSecondaryMouseButton [
 ]
 
 { #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withSuboptimalAreaFinder: anAreaFinder [
+	"Set area finder that is used when there is not an available area 
+	with enough space for a given child node.
+	See {{gtMethod:BlSteppedLayoutState>>#placeMeasuredChild:}} for more details."
+	
+	menuContainer suboptimalAreaFinder: anAreaFinder
+]
+
+{ #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withTopLeftHandle [
 	menuContainer withTopLeftHandle
 ]
