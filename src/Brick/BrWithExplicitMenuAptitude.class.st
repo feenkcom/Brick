@@ -461,6 +461,32 @@ BrWithExplicitMenuAptitude >> relocator: aBrMenuContainerRelocator [
 	relocator := aBrMenuContainerRelocator
 ]
 
+{ #category : #'api - demo' }
+BrWithExplicitMenuAptitude >> removeClickOutsideEventHandler [
+	"I am used for demo purposes, e.g., creating slides"
+
+	menuContainerParent ifNotNil: [ :aParent | 
+		aParent removeEventFilter: clickOutsideEventHandler ]
+]
+
+{ #category : #'api - demo' }
+BrWithExplicitMenuAptitude >> removePressEscEventHandler [
+	"I am used for demo purposes, e.g., creating slides"
+	
+	menuContainerParent ifNotNil: [ :aParent | 
+		aParent removeShortcut: pressEscEventHandler ]
+]
+
+{ #category : #'api - demo' }
+BrWithExplicitMenuAptitude >> removeSceneEventHandlers [
+	"I am used for demo purposes, e.g., creating slides"
+	
+	self widgetDo: [ :aWidget | 
+		aWidget
+			removeEventHandler: addedToSceneEventHandler;
+			removeEventHandler: removedFromSceneEventHandler ]
+]
+
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> show [
 	self showDueTo: nil
