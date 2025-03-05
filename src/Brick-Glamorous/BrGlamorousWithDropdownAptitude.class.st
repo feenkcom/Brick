@@ -1,7 +1,7 @@
 "
 # Widget with dropdown look
 Adds the dropdown functionality to an element
-
+Use {{gtClass:BrGlamorousWithExplicitDropdownAptitude}} instead.
 "
 Class {
 	#name : #BrGlamorousWithDropdownAptitude,

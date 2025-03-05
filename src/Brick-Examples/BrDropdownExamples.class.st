@@ -186,7 +186,7 @@ BrDropdownExamples >> hideOnClickViaWish [
 	<gtExample>
 	| aWithDropdownLook |
 	
-	aWithDropdownLook := BrGlamorousWithDropdownAptitude
+	aWithDropdownLook := BrGlamorousWithExplicitDropdownAptitude
 		handle: [
 			BrButton new
 				aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
