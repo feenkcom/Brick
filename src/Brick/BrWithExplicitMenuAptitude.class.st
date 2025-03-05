@@ -507,7 +507,7 @@ BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
+BrWithExplicitMenuAptitude >> showIn: aParentElement dueToEvent: anEventOrNil [
 	"The event parameter must be one with a position, `nil` otherwise."
 
 	| aMenu |
@@ -533,7 +533,7 @@ BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
 			addEventHandler: addedToSceneEventHandler;
 			addEventHandler: removedFromSceneEventHandler ].
 	
-	self temporaryShowIn: anElement.
+	self temporaryShowIn: aParentElement.
 	
 	self fireEvent: (BrMenuIsVisibleEvent new
 			menuModel: aMenu;
