@@ -73,8 +73,10 @@ BrWithExplicitDropdownAptitude >> initializeMenuContainer [
 BrWithExplicitDropdownAptitude >> onHidden [
 	super onHidden.
 	
-	self shouldHideWidget
-		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ].
+	true ifFalse: [
+		"It requires more changes. Currently, it breaks the menu behavior."
+		self shouldHideWidget
+			ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ] ].
 	
 	self dispatchEvent: BrDropdownIsHidden new
 ]
@@ -83,8 +85,10 @@ BrWithExplicitDropdownAptitude >> onHidden [
 BrWithExplicitDropdownAptitude >> onShown [
 	super onShown.
 	
-	self shouldHideWidget
-		ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ].
+	true ifFalse: [
+		"It requires more changes. Currently, it breaks the menu behavior."
+		self shouldHideWidget
+			ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ] ].
 	
 	self dispatchEvent: BrDropdownIsVisible new.
 ]
@@ -95,8 +99,8 @@ BrWithExplicitDropdownAptitude >> shouldHideWidget [
 ]
 
 { #category : #'api - displaying' }
-BrWithExplicitDropdownAptitude >> shouldHideWidget: anObject [
-	shouldHideWidget := anObject
+BrWithExplicitDropdownAptitude >> shouldHideWidget: aBoolean [
+	shouldHideWidget := aBoolean
 ]
 
 { #category : #'api - initialization' }

@@ -66,7 +66,7 @@ BrWithExplicitMenuAptitude >> canShow [
 			^ false ] ].
 	self widgetDo: [ :aWidget | 
 		^ aWidget isAttachedToSceneGraph 
-			and: [ aWidget visibility shouldDraw ] ].
+			and: [ aWidget visibility shouldLayout ] ].
 	 ^ false
 ]
 
