@@ -41,11 +41,27 @@ BlElement >> addViewModel: aViewModel [
 
 { #category : #'*Brick' }
 BlElement >> anchor [
+	"Get an anchor element, which is the element to which a BrWithExplicitMenuAptitude is attached to.
+	This is a convenience method to get an anchor element.
+	It is likely preferable to use BrMenuAnchorElementEvent instead.
+	Note: Anchor is unavailable if a menu is closed.
+	Note: Try to fire events:
+		- to keep your code more generic, and
+		- to keep your elements usable also ouside of menu containers."
+
 	^ self userData at: #brickAnchor ifAbsent: [ self parent ifNotNil: #anchor ]
 ]
 
 { #category : #'*Brick' }
 BlElement >> anchor: anElementOrNil [
+	"Set anchor element, which is an element to which a BrWithExplicitMenuAptitude is attached.
+	This is a convenience method to get an anchor element using BlElement>>#anchor.
+	It is likely preferable to use BrMenuAnchorElementEvent instead.
+	Note: Anchor is unavailable if a menu is closed.
+	Note: Try to fire events:
+		- to keep your code more generic, and
+		- to keep your elements usable also ouside of menu containers."
+
 	anElementOrNil
 		ifNotNil: [ self userData at: #brickAnchor put: anElementOrNil ]
 		ifNil: [ self userData removeKey: #brickAnchor ifAbsent: [  "ignore" ] ]

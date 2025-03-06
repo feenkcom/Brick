@@ -75,8 +75,8 @@ BrWithExplicitMenuAptitude >> canShow [
 			^ false ] ].
 	self widgetDo: [ :aWidget | 
 		^ aWidget isAttachedToSceneGraph 
-			and: [ aWidget visibility shouldLayout ] ].
-	 ^ false
+			and: [ aWidget visibility shouldDraw ] ].
+	^ false
 ]
 
 { #category : #initialization }
@@ -259,7 +259,7 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer 
-		when: BrMenuAnchorElementRequest 
+		when: BrMenuAnchorElementEvent 
 		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
 	menuContainer 
 		when: BrMenuHideAllWish

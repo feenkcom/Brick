@@ -1,3 +1,6 @@
+"
+Use {{gtClass:BrWithExplicitContextMenuAptitude}} subclasses instead.
+"
 Class {
 	#name : #BrWithContextMenuAptitude,
 	#superclass : #BrWithAnchoredAptitude,

@@ -33,6 +33,12 @@ BrMenuInitialContext >> anchorElement: anElement [
 { #category : #convenience }
 BrMenuInitialContext >> dueToEvent: anEvent [ 
 	anEvent ifNil: [ ^ self ].
+	
+	"TODO: Do I need to do something like: 
+		`self root globalPointToLocal: anEvent position`?
+	Source: `BrWithContextMenuAptitude>>#onMouseUp:`
+	Note: Handle is not properly positioned in `BrAnchoredExamples>>#contextMenu`
+		using the new context menu implementation."
 	self positionInSpace: anEvent position
 ]
 

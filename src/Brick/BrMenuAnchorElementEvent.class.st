@@ -3,7 +3,7 @@ I request an anchor element, which is a {{gtClass:BlElement}} on which a {{gtCla
 Users can also use {{gtMethod:BlElement>>#anchor}} to obtain the information.
 "
 Class {
-	#name : #BrMenuAnchorElementRequest,
+	#name : #BrMenuAnchorElementEvent,
 	#superclass : #BlEvent,
 	#instVars : [
 		'sourceElement'
@@ -12,16 +12,21 @@ Class {
 }
 
 { #category : #accessing }
-BrMenuAnchorElementRequest >> sourceElement [
+BrMenuAnchorElementEvent >> sourceElement [
 	^ sourceElement
 ]
 
 { #category : #accessing }
-BrMenuAnchorElementRequest >> sourceElement: anObject [
+BrMenuAnchorElementEvent >> sourceElement: anObject [
 	sourceElement := anObject
 ]
 
 { #category : #accessing }
-BrMenuAnchorElementRequest >> sourceElementDo: aBlock [
+BrMenuAnchorElementEvent >> sourceElementDo: aBlock [
 	^ sourceElement ifNotNil: aBlock
+]
+
+{ #category : #accessing }
+BrMenuAnchorElementEvent >> sourceElementDo: aBlock ifAbsent: anAbsentBlock [
+	^ sourceElement ifNotNil: aBlock ifNil: anAbsentBlock
 ]
