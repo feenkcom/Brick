@@ -45,8 +45,10 @@ BlElement >> anchor [
 ]
 
 { #category : #'*Brick' }
-BlElement >> anchor: anElement [
-	self userData at: #brickAnchor put: anElement
+BlElement >> anchor: anElementOrNil [
+	anElementOrNil
+		ifNotNil: [ self userData at: #brickAnchor put: anElementOrNil ]
+		ifNil: [ self userData removeKey: #brickAnchor ifAbsent: [  "ignore" ] ]
 ]
 
 { #category : #'*Brick' }

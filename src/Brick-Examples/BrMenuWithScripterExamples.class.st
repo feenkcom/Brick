@@ -175,6 +175,35 @@ BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> dispatchDropdownShowWishToButtonWithDropdown [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithDropdown.
+
+	aScripter do
+		label: 'Dispatch dropdown show wish';
+		block: [ :aButton | aButton dispatchEvent: (BrDropdownShowWish new anchor: aButton) ];
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		value: [ :aMenuContainer | aMenuContainer childrenCount ] equals: 2;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdown [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithDropdown ]

@@ -289,7 +289,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 				c vertical matchParent ];
 			yourself.
 	anchor := BlElement new
-			aptitude: (BrGlamorousWithContextMenuAptitude handle: handle content: content);
+			aptitude: (BrGlamorousWithExplicitContextMenuAptitude handle: handle content: content);
 			id: #anchorElement;
 			background: Color red;
 			size: 40 @ 80;

@@ -19,16 +19,11 @@ BrContextMenuExamples >> compact [
 	<gtExample>
 	| element |
 	element := self element.
-	element aptitude:
-		(BrGlamorousWithContextMenuAptitude
-			content: [
-				BrGlamorousSimpleContextMenuContent new
-					items:
-						{('Change to blue' -> [ :e | e background: Color blue ]).
-						('Change to red' -> [ :e | e background: Color red ]).
-						('Change to green' -> [ :e | e background: Color green ])};
-					yourself ]);
-		yourself.
+	element
+		aptitude: (BrGlamorousWithExplicitContextMenuAptitude
+				items: {'Change to blue' -> [ element background: Color blue ].
+						'Change to red' -> [ element background: Color red ].
+						'Change to green' -> [ element background: Color green ]}).
 	^ element
 ]
 

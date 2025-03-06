@@ -8,15 +8,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContentStencil [
-	"Create a menu with a handle element and with an explicit menu element.
-	aHandleStencil is a stencil that creates a BlElement instance.
-	aContentStencil is a stencil that creates a BlElement instance."
-
-	^ self new handle: aHandleStencil content: aContentStencil
-]
-
-{ #category : #'instance creation' }
 BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContentStencil containerDo: aContainerBlock [
 	"Create a menu with a handle element and with an explicit menu element.
 	aHandleStencil is a stencil that creates a BlElement instance.
