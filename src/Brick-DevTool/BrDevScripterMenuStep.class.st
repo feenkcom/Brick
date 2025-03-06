@@ -51,6 +51,12 @@ BrDevScripterMenuStep >> prepareSteppedLayoutAnalyzerFor: aMenuAptitudeClass [
 ]
 
 { #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutContextMenuAnalyzer [
+	^ (self prepareSteppedLayoutAnalyzerFor: BrGlamorousWithExplicitContextMenuAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - other' }
 BrDevScripterMenuStep >> prepareSteppedLayoutDropdownAnalyzer [
 	^ (self prepareSteppedLayoutAnalyzerFor: BrWithExplicitDropdownAptitude)
 		referenceSender
