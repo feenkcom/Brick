@@ -477,14 +477,22 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert anchored element height';
-				value: [ :anInnerContainer | anInnerContainer height ]
-					equals: [ :anInnerContainer | 
-						| aChild |
-						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
-						aChild height + aChild margin height ];
+				label: 'Assert anchored bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) and: [
+						anElement isVisibleInSpace ] ];
 				onSpaceRoot;
-				// BrAnchoredElement ].
+				id: #itemsScrollableContainer ].
+				
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert anchored bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) and: [
+						anElement isVisibleInSpace ] ];
+				onSpaceRoot;
+				id: #itemsContainer ].
 
 	^ aScripter
 ]
