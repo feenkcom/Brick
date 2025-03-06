@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousSimpleContextMenuContent,
 	#superclass : #BrSimpleList,
-	#category : 'Brick-Glamorous-Context Menu'
+	#category : #'Brick-Glamorous-Context Menu'
 }
 
 { #category : #initialization }
@@ -26,9 +26,12 @@ BrGlamorousSimpleContextMenuContent >> initialize [
 				padding: (BlInsets all: 5);
 				when: BlClickEvent
 					do: [ e value cull: self anchor.
-					self anchor
-						dispatchEvent:
+					self fireEvent:
 							(BrContextMenuHideWish new
+								anchor: self anchor;
+								yourself).
+					self fireEvent:
+							(BrDropdownHideWish new
 								anchor: self anchor;
 								yourself) ];
 				addChild:
