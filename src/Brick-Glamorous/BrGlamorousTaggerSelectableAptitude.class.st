@@ -99,7 +99,7 @@ BrGlamorousTaggerSelectableAptitude >> newAddAnyTagButton [
 BrGlamorousTaggerSelectableAptitude >> newAddExplicitTagButton [
 	| aDropdownLook |
 	
-	aDropdownLook := BrGlamorousWithDropdownAptitude
+	aDropdownLook := BrGlamorousWithExplicitDropdownAptitude
 		handle: [
 			BrButton new
 				aptitude: (BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonIconAptitude new);
@@ -222,7 +222,7 @@ BrGlamorousTaggerSelectableAptitude >> newTagElementFor: aTaggerTag [
 	
 	aTagPrototypeChangerButton := BrButton new
 		beSmallSize;
-		aptitude: BrGlamorousButtonWithLabelAndIconAptitude - BrGlamorousButtonExteriorAptitude + (BrInteractiveCommonAptitude new default: [ :w | w background: Color gray ]) + (BrGlamorousWithDropdownAptitude
+		aptitude: BrGlamorousButtonWithLabelAndIconAptitude - BrGlamorousButtonExteriorAptitude + (BrInteractiveCommonAptitude new default: [ :w | w background: Color gray ]) + (BrGlamorousWithExplicitDropdownAptitude
 			handle: [
 				BrButton new
 					aptitude: (BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonLabelAptitude new + BrGlamorousButtonIconAptitude);

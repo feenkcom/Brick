@@ -1,6 +1,9 @@
 Class {
 	#name : #BrWithExplicitDropdownAptitude,
 	#superclass : #BrWithExplicitMenuAptitude,
+	#instVars : [
+		'shouldHideWidget'
+	],
 	#category : #'Brick-Menu - Aptitude'
 }
 
@@ -37,11 +40,19 @@ BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContent
 		yourself
 ]
 
+{ #category : #'api - displaying' }
+BrWithExplicitDropdownAptitude >> doNotHideWidget [
+	self shouldHideWidget: false
+]
+
 { #category : #initialization }
 BrWithExplicitDropdownAptitude >> initialize [
 	super initialize.
 	self beDropdown.
-	self withAllExtraEventHandlers
+	self withAllExtraEventHandlers.
+	
+	"when true, the widget under the dropdown will be hidden"
+	shouldHideWidget := true.
 ]
 
 { #category : #initialization }
@@ -61,13 +72,35 @@ BrWithExplicitDropdownAptitude >> initializeMenuContainer [
 { #category : #'private - event management' }
 BrWithExplicitDropdownAptitude >> onHidden [
 	super onHidden.
+	
+	true ifFalse: [
+		"It requires more changes. Currently, it breaks the menu behavior."
+		self shouldHideWidget
+			ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility visible ] ] ].
+	
 	self dispatchEvent: BrDropdownIsHidden new
 ]
 
 { #category : #'private - event management' }
 BrWithExplicitDropdownAptitude >> onShown [
 	super onShown.
-	self dispatchEvent: BrDropdownIsVisible new
+	
+	true ifFalse: [
+		"It requires more changes. Currently, it breaks the menu behavior."
+		self shouldHideWidget
+			ifTrue: [ self widgetDo: [ :aWidget | aWidget visibility: BlVisibility hidden ] ] ].
+	
+	self dispatchEvent: BrDropdownIsVisible new.
+]
+
+{ #category : #'api - displaying' }
+BrWithExplicitDropdownAptitude >> shouldHideWidget [
+	^ shouldHideWidget ifNil: [ true ]
+]
+
+{ #category : #'api - displaying' }
+BrWithExplicitDropdownAptitude >> shouldHideWidget: aBoolean [
+	shouldHideWidget := aBoolean
 ]
 
 { #category : #'api - initialization' }

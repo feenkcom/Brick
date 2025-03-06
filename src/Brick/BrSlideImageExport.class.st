@@ -85,7 +85,7 @@ BrSlideImageExport >> createDropdownFieldFor: aCollection [
 	| button dropDownLook |
 	button := self
 		createDropdownButtonWithLabel: aCollection first asString.
-	dropDownLook := BrGlamorousWithDropdownAptitude
+	dropDownLook := BrGlamorousWithExplicitDropdownAptitude
 		handle: [ self createDropdownButtonWithLabel: aCollection first asString ]
 		content: [ BrSimpleList new
 				items: aCollection;

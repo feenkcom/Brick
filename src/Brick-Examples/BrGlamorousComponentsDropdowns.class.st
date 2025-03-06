@@ -23,7 +23,7 @@ BrGlamorousComponentsDropdowns >> buttonWithIcon [
 
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude +
-			(BrGlamorousWithDropdownAptitude
+			(BrGlamorousWithExplicitDropdownAptitude
 				handle: [
 					BrButton new
 						aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
@@ -43,7 +43,7 @@ BrGlamorousComponentsDropdowns >> buttonWithLabel [
 
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude +
-			(BrGlamorousWithDropdownAptitude
+			(BrGlamorousWithExplicitDropdownAptitude
 				handle: [
 					BrButton new
 						aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonLabelAptitude;
@@ -62,17 +62,20 @@ BrGlamorousComponentsDropdowns >> hideDropdown [
 
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude +
-			(BrGlamorousWithDropdownAptitude
+			(BrGlamorousWithExplicitDropdownAptitude
 				handle: [
 					BrButton new
 						aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
 						icon: BrGlamorousIcons menu ]
 				content: [
-					BrButton new
-						aptitude: BrGlamorousButtonWithLabelAptitude;
-						margin: (BlInsets all: 20);
-						label: 'Close';
-						action: [ :aButton | aButton fireEvent: BrDropdownHideWish new ] ]);
+					BrFrame new 
+						fitContent;
+						addChild: (
+							BrButton new
+								aptitude: BrGlamorousButtonWithLabelAptitude;
+								margin: (BlInsets all: 20);
+								label: 'Close';
+								action: [ :aButton | aButton fireEvent: BrDropdownHideWish new ]) ]);
 		icon: BrGlamorousIcons menu;
 		label: 'Click me'
 ]

@@ -66,7 +66,7 @@ BrWithExplicitMenuAptitude >> canShow [
 			^ false ] ].
 	self widgetDo: [ :aWidget | 
 		^ aWidget isAttachedToSceneGraph 
-			and: [ aWidget visibility shouldDraw ] ].
+			and: [ aWidget visibility shouldLayout ] ].
 	 ^ false
 ]
 
@@ -461,6 +461,32 @@ BrWithExplicitMenuAptitude >> relocator: aBrMenuContainerRelocator [
 	relocator := aBrMenuContainerRelocator
 ]
 
+{ #category : #'api - demo' }
+BrWithExplicitMenuAptitude >> removeClickOutsideEventHandler [
+	"I am used for demo purposes, e.g., creating slides"
+
+	menuContainerParent ifNotNil: [ :aParent | 
+		aParent removeEventFilter: clickOutsideEventHandler ]
+]
+
+{ #category : #'api - demo' }
+BrWithExplicitMenuAptitude >> removePressEscEventHandler [
+	"I am used for demo purposes, e.g., creating slides"
+	
+	menuContainerParent ifNotNil: [ :aParent | 
+		aParent removeShortcut: pressEscEventHandler ]
+]
+
+{ #category : #'api - demo' }
+BrWithExplicitMenuAptitude >> removeSceneEventHandlers [
+	"I am used for demo purposes, e.g., creating slides"
+	
+	self widgetDo: [ :aWidget | 
+		aWidget
+			removeEventHandler: addedToSceneEventHandler;
+			removeEventHandler: removedFromSceneEventHandler ]
+]
+
 { #category : #'api - displaying' }
 BrWithExplicitMenuAptitude >> show [
 	self showDueTo: nil
@@ -481,7 +507,7 @@ BrWithExplicitMenuAptitude >> showDueTo: anEventOrNil [
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
+BrWithExplicitMenuAptitude >> showIn: aParentElement dueToEvent: anEventOrNil [
 	"The event parameter must be one with a position, `nil` otherwise."
 
 	| aMenu |
@@ -507,7 +533,7 @@ BrWithExplicitMenuAptitude >> showIn: anElement dueToEvent: anEventOrNil [
 			addEventHandler: addedToSceneEventHandler;
 			addEventHandler: removedFromSceneEventHandler ].
 	
-	self temporaryShowIn: anElement.
+	self temporaryShowIn: aParentElement.
 	
 	self fireEvent: (BrMenuIsVisibleEvent new
 			menuModel: aMenu;

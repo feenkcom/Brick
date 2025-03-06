@@ -24,6 +24,13 @@ BrWithDropdownAptitude class >> defaultStencilClass [
 	^ BrWithDropdownAptitudeStencil
 ]
 
+{ #category : #testing }
+BrWithDropdownAptitude class >> isDeprecated [
+	"Use BrWithExplicitDropdownAptitude subclasses instead"
+
+	^ true
+]
+
 { #category : #'api - displaying' }
 BrWithDropdownAptitude >> attachToCenter [
 	strategy := BrAnchoredCompositeStrategy builder

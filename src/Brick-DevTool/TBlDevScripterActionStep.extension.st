@@ -13,26 +13,10 @@ TBlDevScripterActionStep >> addDropdownVisualAnalysis [
 ]
 
 { #category : #'*Brick-DevTool' }
-TBlDevScripterActionStep >> prepareSteppedLayoutAnalyzerFor: aMenuAptitudeClass [
-	^ self do
-		referenceSender;
-		label: 'Prepare stepped layout analyser';
-		block: [ :aButton :aUserData | 
-			aButton
-				aptitudeDo: [ :anAptitude | 
-					anAptitude
-						withAllActorsBreadthFirstDo: [ :eachAptitude | 
-							(eachAptitude isKindOf: aMenuAptitudeClass)
-								ifTrue: [ 
-									| anAnalyzer |
-									anAnalyzer := BlSteppedLayoutLastStateAnalyzer new.
-									anAnalyzer menuContainer: eachAptitude menuContainer.
-									eachAptitude menuContainer layout analyzer: anAnalyzer.
-									aUserData at: BlSteppedLayoutLastStateAnalyzer put: anAnalyzer ] ] ] ]
-]
-
-{ #category : #'*Brick-DevTool' }
-TBlDevScripterActionStep >> prepareSteppedLayoutDropdownAnalyzer [
-	^ (self prepareSteppedLayoutAnalyzerFor: BrWithExplicitDropdownAptitude)
-		referenceSender
+TBlDevScripterActionStep >> menuStep [
+	^ self
+		addStep: (BrDevScripterMenuStep new
+				label: 'Menu';
+				referenceSender;
+				onParentStepTarget: self)
 ]

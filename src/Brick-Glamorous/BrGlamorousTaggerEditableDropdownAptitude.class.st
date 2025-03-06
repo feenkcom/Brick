@@ -29,7 +29,7 @@ BrGlamorousTaggerEditableDropdownAptitude >> newAddTagButton [
 
 	button := BrButton new
 			aptitude: BrGlamorousButtonWithIconAptitude new
-					+ (BrGlamorousWithDropdownAptitude
+					+ (BrGlamorousWithExplicitDropdownAptitude
 							handle: [ BrButton new
 									aptitude: BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonIconAptitude new
 											+ BrGlamorousButtonWithLabelTooltipAptitude new

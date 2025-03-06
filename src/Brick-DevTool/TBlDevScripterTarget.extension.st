@@ -23,8 +23,6 @@ TBlDevScripterTarget >> onDropdown: aBoolean [
 	^ aBoolean
 		ifFalse: [ self
 				// BrAnchoredOuterContainer;
-				/ BrAnchoredOuterContainer;
-				// BrAnchoredElement;
-				/ #content ]
+				/ BrAnchoredElement ]
 		ifTrue: [ self // BrMenuSteppedElement ]
 ]
