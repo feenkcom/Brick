@@ -15,6 +15,13 @@ BrWithContextMenuAptitude class >> anchoredAptitudeClass [
 	^ BrContextMenuAptitude
 ]
 
+{ #category : #testing }
+BrWithContextMenuAptitude class >> isDeprecated [
+	"Use BrWithExplicitContextMenuAptitude subclasses instead"
+
+	^ true
+]
+
 { #category : #initialization }
 BrWithContextMenuAptitude >> initialize [
 	super initialize.
