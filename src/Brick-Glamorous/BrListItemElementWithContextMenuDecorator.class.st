@@ -23,7 +23,7 @@ BrListItemElementWithContextMenuDecorator >> buildDefault [
 		build.
 
 	aContextMenuAptitude :=
-		BrGlamorousWithContextMenuAptitude
+		BrGlamorousWithExplicitContextMenuAptitude
 			content: [
 				anElement
 					allParentsDetect: [ :eachParent | 

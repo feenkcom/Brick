@@ -13,7 +13,7 @@ BrColumnedListItemElementWithContextMenuDecorator >> buildDefault [
 			itemType: self itemType;
 			build.
 
-	aContextMenuAptitude := BrGlamorousWithContextMenuAptitude
+	aContextMenuAptitude := BrGlamorousWithExplicitContextMenuAptitude
 			content: [ 
 				anElement
 					allParentsDetect: [ :eachParent | 
