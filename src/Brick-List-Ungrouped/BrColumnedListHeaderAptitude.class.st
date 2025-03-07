@@ -88,8 +88,9 @@ BrColumnedListHeaderAptitude >> newCellPaddingInsets [
 
 { #category : #initialization }
 BrColumnedListHeaderAptitude >> rebuildHeadersDueTo: evt [
-	| header |
-	header := (evt target query // #'column-header') anyOne.
-	header removeChildren.
-	^ self buildColumnHeadersInto: header
+	evt target
+		enqueueTask: [ | header |
+			header := (evt target query // #'column-header') anyOne.
+			header removeChildren.
+			self buildColumnHeadersInto: header ] asBlTask
 ]
