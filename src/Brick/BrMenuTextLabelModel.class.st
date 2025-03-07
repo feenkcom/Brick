@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuTextLabelModel,
-	#superclass : #Object,
+	#superclass : #BrMenuLabelModel,
 	#instVars : [
 		'text',
 		'shortcut',
@@ -8,6 +8,11 @@ Class {
 	],
 	#category : #'Brick-Menu - Model'
 }
+
+{ #category : #visiting }
+BrMenuTextLabelModel >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuTextLabelModel: self
+]
 
 { #category : #accessing }
 BrMenuTextLabelModel >> preview [

@@ -1,8 +1,8 @@
 Class {
 	#name : #BrMenuElementBuilder,
 	#superclass : #Object,
-	#traits : 'TBrMenuModelVisitor',
-	#classTraits : 'TBrMenuModelVisitor classTrait',
+	#traits : 'TBrMenuModelVisitor + TBrMenuLabelModelVisitor',
+	#classTraits : 'TBrMenuModelVisitor classTrait + TBrMenuLabelModelVisitor classTrait',
 	#instVars : [
 		'typeBuilder'
 	],
@@ -74,11 +74,18 @@ BrMenuElementBuilder >> visitMenuItem: aMenuModel [
 	- BlInfiniteItemType invalid, or 
 	- a BlElement class whose instance understands #menuModel:"
 
-	| aType |
+	| aType anElement |
 	aType := aMenuModel acceptVisitor: self typeBuilder.
-	^ aType = BlInfiniteItemType invalid
-		ifTrue: [ BrMenuInvalidItemElement new menuModel: aMenuModel ]
-		ifFalse: [ aType new menuModel: aMenuModel ]
+	anElement := self typeBuilder buildElementFromItemType: aType.
+	^ anElement menuModel: aMenuModel
+]
+
+{ #category : #visiting }
+BrMenuElementBuilder >> visitMenuLabelModel: aLabelModel [
+	| aType anElement |
+	aType := aLabelModel acceptVisitor: self typeBuilder.
+	anElement := self typeBuilder buildElementFromItemType: aType.
+	^ anElement labelModel: aLabelModel
 ]
 
 { #category : #visiting }

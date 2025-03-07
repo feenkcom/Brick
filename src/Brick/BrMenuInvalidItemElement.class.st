@@ -27,6 +27,11 @@ BrMenuInvalidItemElement >> initializeTextElement [
 	textElement := BlTextElement new
 ]
 
+{ #category : #'api - initialization' }
+BrMenuInvalidItemElement >> labelModel: aLabelModel [
+	^ self menuModel: self
+]
+
 { #category : #'event handling' }
 BrMenuInvalidItemElement >> onMenuModelChanged [
 	super onMenuModelChanged.

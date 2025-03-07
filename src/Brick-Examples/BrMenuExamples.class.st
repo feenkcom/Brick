@@ -18,6 +18,8 @@ BrMenuExamples >> basicMenuActionItem [
 	
 	| anItem |
 	anItem := BrMenuActionItem new.
+	
+	^ anItem
 ]
 
 { #category : #'examples - submenu' }
@@ -135,14 +137,32 @@ BrMenuExamples >> menuActionItemWithLabel [
 	
 	| anItem |
 	anItem := BrMenuActionItem new.
-	anItem label: 'Copy'.
+	anItem icon: BrGlamorousVectorIcons clipboard label: 'Copy'.
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Copy'.
+	self assert: anItem labelModel icon isNotNil.
 	
 	^ anItem
 ]
 
-{ #category : #'example - items' }
+{ #category : #'examples - label' }
+BrMenuExamples >> menuIconTextAndShortcutLabel [
+	<gtExample>
+	| aLabel |
+	aLabel := BrMenuIconTextLabelModel new.
+	aLabel text: 'Copy'.
+	aLabel shortcut: 'CMD+C'.
+	aLabel icon: BrGlamorousVectorIcons clipboard.
+
+	self assert: aLabel text equals: 'Copy'.
+	self assert: aLabel shortcut equals: 'CMD+C'.
+	self assert: aLabel icon isNotNil.
+	self assert: aLabel icon asElement isNotNil.
+
+	^ aLabel
+]
+
+{ #category : #'examples - items' }
 BrMenuExamples >> menuItems [
 	<gtExample>
 	| aMenuItems anInlineSubmenu |
@@ -181,7 +201,7 @@ BrMenuExamples >> menuItems [
 	^ aMenuItems
 ]
 
-{ #category : #'example - items' }
+{ #category : #'examples - items' }
 BrMenuExamples >> menuItems_selectAnotherInlineMenu [
 	<gtExample>
 	| aMenuItems anInlineRootItem anItemOne anItemTwo |
@@ -202,7 +222,7 @@ BrMenuExamples >> menuItems_selectAnotherInlineMenu [
 	^ aMenuItems
 ]
 
-{ #category : #'example - items' }
+{ #category : #'examples - items' }
 BrMenuExamples >> menuItems_selectExtractMenu [
 	<gtExample>
 	| aMenuItems anInlineRootItem anItemOne anItemTwo anExtractRootItem |
@@ -293,14 +313,14 @@ BrMenuExamples >> submenuInlineMessageItems [
 	<gtExample>
 	| anItem |
 	anItem := BrMenuSubmenuItem new.
-	anItem label: 'Inline message'.
+	anItem icon: BrGlamorousVectorIcons down label: 'Inline message'.
 	anItem group: self refactoringGroup.
 	anItem submenuItem: (BrMenuActionItem new
-		label: 'Inline message' preview: 'anItem label').
+		icon: BrGlamorousVectorIcons down label: 'Inline message' preview: 'anItem label').
 	anItem submenuItem: (BrMenuActionItem new
-		label: 'Inline message' preview: 'anItem label text').
+		icon: BrGlamorousVectorIcons down label: 'Inline message' preview: 'anItem label text').
 	anItem submenuItem: (BrMenuActionItem new
-		label: 'Inline message' preview: 'self assert: anItem labelModel text equals: ''Copy''').
+		icon: BrGlamorousVectorIcons down label: 'Inline message' preview: 'self assert: anItem labelModel text equals: ''Copy''').
 	
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Inline message'.

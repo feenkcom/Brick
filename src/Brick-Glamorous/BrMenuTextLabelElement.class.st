@@ -16,6 +16,7 @@ BrMenuTextLabelElement >> initialize [
 	self
 		hMatchParent;
 		vFitContent;
+		alignCenter;
 		constraintsDo: [ :c | 
 			c linear vertical alignCenter ].
 	self initializeLabelElement.

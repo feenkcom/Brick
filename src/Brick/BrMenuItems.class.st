@@ -33,6 +33,83 @@ BrMenuItems >> addItem: aMenuItem [
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aText action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem icon: anIconStencil label: aText.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aText preview: aPreviewText action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem icon: anIconStencil label: aText preview: aPreviewText.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aText preview: aPreviewText shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem icon: anIconStencil label: aText preview: aPreviewText shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aText preview: aPreviewText shortcut: aShortcutString submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem
+		icon: anIconStencil 
+		label: aText 
+		preview: aPreviewText 
+		shortcut: aShortcutString.
+	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aLabelString shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem icon: anIconStencil label: aLabelString shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aText shortcut: aShortcutString submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem icon: anIconStencil label: aText shortcut: aShortcutString.
+	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemIcon: anIconStencil label: aText submenu: aSubmenu [
+	| aMenuItem |
+	aMenuItem := BrMenuSubmenuItem new.
+	aMenuItem icon: anIconStencil label: aText.
+	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem id: anId.
+	aMenuItem icon: anIconStencil label: aLabelString shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemId: anId label: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
@@ -115,6 +192,9 @@ BrMenuItems >> addItems: aCollection [
 
 { #category : #'api - converting' }
 BrMenuItems >> asTreeElement [
+	"Not a production code.
+	For exploration purposes only."
+
 	| anElement |
 	anElement := BrSimpleTree new.
 	anElement

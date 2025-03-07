@@ -6,15 +6,31 @@ Class {
 
 { #category : #visiting }
 BrGlamorousMenuItemTypeBuilder >> visitCoderMenuActionItem: aMenuModel [
-	^ GtCoderMenuActionItemElement
+	^ self
+		visitMenuLabeledItem: aMenuModel
+		withElementClass: GtCoderMenuActionItemElement
 ]
 
 { #category : #visiting }
 BrGlamorousMenuItemTypeBuilder >> visitMenuActionItem: aMenuModel [
-	^ BrMenuActionItemElement
+	^ self
+		visitMenuLabeledItem: aMenuModel
+		withElementClass: BrMenuActionItemElement
+]
+
+{ #category : #visiting }
+BrGlamorousMenuItemTypeBuilder >> visitMenuIconTextLabelModel: aLabelModel [
+	^ BrMenuElementClassType new elementClass: BrMenuIconTextLabelElement
 ]
 
 { #category : #visiting }
 BrGlamorousMenuItemTypeBuilder >> visitMenuSubmenuItem: aMenuModel [
-	^ BrMenuSubmenuItemElement
+	^ self
+		visitMenuLabeledItem: aMenuModel
+		withElementClass: BrMenuSubmenuItemElement
+]
+
+{ #category : #visiting }
+BrGlamorousMenuItemTypeBuilder >> visitMenuTextLabelModel: aLabelModel [
+	^ BrMenuElementClassType new elementClass: BrMenuTextLabelElement
 ]
