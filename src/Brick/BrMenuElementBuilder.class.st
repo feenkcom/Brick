@@ -26,6 +26,11 @@ BrMenuElementBuilder >> typeBuilder: anObject [
 ]
 
 { #category : #visiting }
+BrMenuElementBuilder >> visitGivenModel: aMenuModel [
+	^ aMenuModel acceptVisitor: self
+]
+
+{ #category : #visiting }
 BrMenuElementBuilder >> visitMenuDecoratingModel: aMenuModel [
 	| anOriginalMenuModel anElement |
 	anOriginalMenuModel := aMenuModel menuModel.
