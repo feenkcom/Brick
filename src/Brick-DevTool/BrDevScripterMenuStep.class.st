@@ -4,6 +4,23 @@ Class {
 	#category : #'Brick-DevTool-Scripter'
 }
 
+{ #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuContainerExist: anExpectedCount [
+	| anExistingCount |
+	^ self assert
+		label: ('Assert existing {1} menu {2}'
+				format: {anExpectedCount.
+						'container' asPluralBasedOn: anExpectedCount});
+		satisfies: [ :aRootElement | 
+				anExistingCount := (aRootElement query // BrMenuSteppedElement) all size.
+				anExistingCount = anExpectedCount ]
+			description: [ :aRootElement | 
+				'Expected {1} menu container, actual number is: {2}'
+					format: {anExpectedCount.
+							anExistingCount} ];
+		onSpaceRoot
+]
+
 { #category : #'steps - other' }
 BrDevScripterMenuStep >> keepPermanentlyDropdownInScene [
 	^ (self keepPermanentlyMenuInScene: BrGlamorousWithExplicitDropdownAptitude) 

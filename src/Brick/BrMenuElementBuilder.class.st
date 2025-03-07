@@ -26,6 +26,20 @@ BrMenuElementBuilder >> typeBuilder: anObject [
 ]
 
 { #category : #visiting }
+BrMenuElementBuilder >> visitMenuDecoratingModel: aMenuModel [
+	| anOriginalMenuModel anElement |
+	anOriginalMenuModel := aMenuModel menuModel.
+	anOriginalMenuModel ifNil: [ ^ self visitMenuModel: aMenuModel ].
+	
+	anElement := anOriginalMenuModel acceptVisitor: self.
+	
+	aMenuModel decorator ifNil: [ ^ anElement ].
+	aMenuModel decorator cull: anElement.
+	
+	^ anElement
+]
+
+{ #category : #visiting }
 BrMenuElementBuilder >> visitMenuExplicit: aMenuModel [
 	| anElement |
 	anElement := aMenuModel stencil

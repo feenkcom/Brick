@@ -125,6 +125,8 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 	| aSubmenuElement aSubmenu |
 	anEvent consumed: true.
 	aSubmenu := anEvent submenu.
+	aSubmenu ifNil: [ ^ self ].
+	
 	aSubmenuElement := self cachedSubmenuElement: aSubmenu.
 	aSubmenuElement constraintsDo: [ :c | 
 		c stepped relativeBounds: anEvent fromElement bounds ].
