@@ -25,6 +25,23 @@ BrMenuItemLabeledElement >> initializeLabelElement [
 	labelElement := BrMenuTextLabelElement new
 ]
 
+{ #category : #'api - initialization' }
+BrMenuItemLabeledElement >> labelElementClass: anElementClass [
+	| anElement |
+	self
+		assert: [ anElementClass isNotNil ]
+		description: [ 'Label element must be non-nil' ].
+		
+	anElementClass = labelElement class ifTrue: [ ^ self ].
+		
+	anElement := anElementClass new.
+	self replaceChild: labelElement with: anElement as: #'menu--labeled'.
+	labelElement := anElement.
+	
+	self menuModel ifNil: [ ^ self ].
+	self updateLabelElement
+]
+
 { #category : #'event handling' }
 BrMenuItemLabeledElement >> onMenuModelChanged [
 	super onMenuModelChanged.

@@ -49,11 +49,22 @@ BrMenuHandle >> onMenuDisplayed: aMenuElement [
 	"Subclasses may react when a menu is dispalyed using a given element"
 
 	super onMenuDisplayed: aMenuElement.
-	
+
 	BlTaskAction
 		enqueueElement: aMenuElement
-		action: [ aMenuElement
-				fireEvent: (BrMenuShowSubmenuWish new
-						submenu: self menu;
-						fromElement: aMenuElement) ].
+		action: [ self onMenuDisplayedFromParentMenuElement: aMenuElement ]
+]
+
+{ #category : #private }
+BrMenuHandle >> onMenuDisplayedFromParentMenuElement: aMenuElement [
+	| aMenu |
+	aMenu := self menu.
+	aMenu ifNil: [ 
+		self hide. 
+		^ self ].
+	
+	aMenuElement
+		fireEvent: (BrMenuShowSubmenuWish new
+				submenu: aMenu;
+				fromElement: aMenuElement)
 ]

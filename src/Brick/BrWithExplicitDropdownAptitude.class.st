@@ -8,15 +8,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContentStencil [
-	"Create a menu with a handle element and with an explicit menu element.
-	aHandleStencil is a stencil that creates a BlElement instance.
-	aContentStencil is a stencil that creates a BlElement instance."
-
-	^ self new handle: aHandleStencil content: aContentStencil
-]
-
-{ #category : #'instance creation' }
 BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContentStencil containerDo: aContainerBlock [
 	"Create a menu with a handle element and with an explicit menu element.
 	aHandleStencil is a stencil that creates a BlElement instance.
@@ -36,6 +27,28 @@ BrWithExplicitDropdownAptitude class >> handle: aHandleStencil content: aContent
 
 	^ self new 
 		handle: aHandleStencil content: aContentStencil;
+		in: [ :anAptitude | anAptitudeBlock value: anAptitude ];
+		yourself
+]
+
+{ #category : #'instance creation' }
+BrWithExplicitDropdownAptitude class >> handle: aHandleStencil menu: aMenuStencil [
+	"Create a menu with a handle element and with an explicit menu element.
+	aHandleStencil is a stencil that creates a BlElement instance.
+	aMenuBlock is a stencil that creates a BrMenu instance."
+
+	^ self handle: aHandleStencil menu: aMenuStencil do: [ :anAptitude | ]
+]
+
+{ #category : #'instance creation' }
+BrWithExplicitDropdownAptitude class >> handle: aHandleStencil menu: aMenuStencil do: anAptitudeBlock [
+	"Create a menu with a handle element and with an explicit menu element.
+	aHandleStencil is a stencil that creates a BlElement instance.
+	aMenuBlock is a stencil that creates a BrMenu instance.
+	anAptitudeBlock is a block that receives the aptitude instance."
+
+	^ self new 
+		handle: aHandleStencil submenu: aMenuStencil;
 		in: [ :anAptitude | anAptitudeBlock value: anAptitude ];
 		yourself
 ]

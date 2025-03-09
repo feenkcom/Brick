@@ -1,8 +1,8 @@
 Class {
 	#name : #BrMenuLabeledItem,
 	#superclass : #BrMenuItem,
-	#traits : 'TBrMenuWithTextLabelModel',
-	#classTraits : 'TBrMenuWithTextLabelModel classTrait',
+	#traits : 'TBrMenuWithLabelModel',
+	#classTraits : 'TBrMenuWithLabelModel classTrait',
 	#category : #'Brick-Menu - Model'
 }
 

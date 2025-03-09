@@ -224,17 +224,25 @@ BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersAfter [
 { #category : #'examples - scripting' }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersBefore [
 	<gtExample>
-	| aList query header |
-	aList := BrColumnedList new.
-	aList addAptitude: BrColumnedListHeaderAptitude.
-	self addColumnsAndItemsTo: aList.
-	query := aList query // #'column-header'.
-	self assert: query isNotEmpty.
-	header := query anyOne.
-	self assert: header children size = 2.
-	self assert: header children first text asString = 'Class'.
-	self assert: header children second text asString = 'Package'.
-	^ aList
+	| query header scripter |
+	scripter := BlScripter new.
+	scripter
+		element: (BrColumnedList new
+				addAptitude: BrColumnedListHeaderAptitude;
+				yourself).
+	scripter doStep: [ :s | s action: [ :list | self addColumnsAndItemsTo: list ] ].
+	scripter
+		checkStep: [ :s | 
+			s
+				label: 'Check header exists';
+				do: [ :list | 
+					query := list query // #'column-header'.
+					self assert: query isNotEmpty.
+					header := query anyOne.
+					self assert: header children size = 2.
+					self assert: header children first text asString = 'Class'.
+					self assert: header children second text asString = 'Package' ] ].
+	^ scripter
 ]
 
 { #category : #'examples - scripting' }

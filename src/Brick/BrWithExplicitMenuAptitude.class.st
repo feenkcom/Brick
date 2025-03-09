@@ -21,6 +21,15 @@ Class {
 	#category : #'Brick-Menu - Aptitude'
 }
 
+{ #category : #'instance creation' }
+BrWithExplicitMenuAptitude class >> handle: aHandleStencil content: aContentStencil [
+	"Create a menu with a handle element and with an explicit menu element.
+	aHandleStencil is a stencil that creates a BlElement instance.
+	aContentStencil is a stencil that creates a BlElement instance."
+
+	^ self new handle: aHandleStencil content: aContentStencil
+]
+
 { #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> beClickPositionRelocator [
 	self
@@ -66,8 +75,8 @@ BrWithExplicitMenuAptitude >> canShow [
 			^ false ] ].
 	self widgetDo: [ :aWidget | 
 		^ aWidget isAttachedToSceneGraph 
-			and: [ aWidget visibility shouldLayout ] ].
-	 ^ false
+			and: [ aWidget visibility shouldDraw ] ].
+	^ false
 ]
 
 { #category : #initialization }
@@ -127,9 +136,13 @@ BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
 ]
 
 { #category : #'api - menu' }
-BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlock [
+BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlockOrStencil [
+	"Set a stencil that creates a menu model.
+	The stencil returns a BrMenu instance.
+	A default menu handle is used."
+
 	self withDefaultHandle.
-	self stencil: (BrMenuExplicitHandle new submenu: aMenuBlock)
+	self stencil: (BrMenuExplicitHandle new submenu: aMenuBlockOrStencil)
 ]
 
 { #category : #'event handling' }
@@ -246,7 +259,7 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer 
-		when: BrMenuAnchorElementRequest 
+		when: BrMenuAnchorElementEvent 
 		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
 	menuContainer 
 		when: BrMenuHideAllWish
@@ -295,6 +308,13 @@ BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [
 	anEvent consumed: true.
 	self widgetDo: [ :aWidget | 
 		anEvent sourceElement: aWidget ]
+]
+
+{ #category : #'api - hooks' }
+BrWithExplicitMenuAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+	
+	menuContainer anchor: anElement.
 ]
 
 { #category : #'event handling' }
@@ -387,7 +407,7 @@ BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
 BrWithExplicitMenuAptitude >> onShowWish: aWish [
 	self canShow
 		ifFalse: [ ^ self ].
-		
+	
 	"if an anchor is explicitely specified we can show"
 	(aWish anchor = widget)
 		ifTrue: [
@@ -406,6 +426,14 @@ BrWithExplicitMenuAptitude >> onShown [
 	"Subclasses may act when the menu is shown"
 
 	
+]
+
+{ #category : #'api - hooks' }
+BrWithExplicitMenuAptitude >> onUninstalledIn: anElement [
+	self hide.
+	menuContainer anchor: nil.
+
+	super onUninstalledIn: anElement.
 ]
 
 { #category : #'event handling' }
@@ -549,7 +577,9 @@ BrWithExplicitMenuAptitude >> stencil [
 
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
-	"Set a stencil that creates a menu model"
+	"Set a stencil that creates a menu model.
+	The stencil builder can be a block with one argument: [ :aBrMenuInitialContext | ].
+	The stencil builder returns a BrMenu instance or nil."
 
 	menuStencil := aStencilBuilder asStencilBuilder: BrMenuInitialStencilBuilder
 ]
@@ -598,6 +628,11 @@ BrWithExplicitMenuAptitude >> temporaryShowIn: aParentElement [
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> usePrimaryMouseButton [
 	mouseButton := BlMouseButton primary
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> useSecondaryMouseButton [
+	self withSecondaryMouseButton
 ]
 
 { #category : #testing }

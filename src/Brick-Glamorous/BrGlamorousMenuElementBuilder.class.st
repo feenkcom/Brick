@@ -10,11 +10,6 @@ BrGlamorousMenuElementBuilder >> defaultTypeBuilder [
 ]
 
 { #category : #visiting }
-BrGlamorousMenuElementBuilder >> visitMenuActionItem: aMenuModel [
-	^ BrMenuActionItemElement new menuModel: aMenuModel
-]
-
-{ #category : #visiting }
 BrGlamorousMenuElementBuilder >> visitMenuItems: aMenuModel [
 	| anElementClass |
 	anElementClass := aMenuModel elementType

@@ -14,6 +14,11 @@ TBrMenuModelVisitor >> visitMenuActionItem: aMenuModel [
 ]
 
 { #category : #visiting }
+TBrMenuModelVisitor >> visitMenuDecoratingModel: aMenuModel [
+	^ self visitMenuModel: aMenuModel
+]
+
+{ #category : #visiting }
 TBrMenuModelVisitor >> visitMenuExplicit: aMenuModel [
 	^ self visitMenu: aMenuModel
 ]

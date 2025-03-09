@@ -289,7 +289,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 				c vertical matchParent ];
 			yourself.
 	anchor := BlElement new
-			aptitude: (BrGlamorousWithContextMenuAptitude handle: handle content: content);
+			aptitude: (BrGlamorousWithExplicitContextMenuAptitude handle: handle content: content);
 			id: #anchorElement;
 			background: Color red;
 			size: 40 @ 80;
@@ -395,6 +395,11 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 				label: 'Set space extent';
 				block: [ :aSpace | aSpace extent: 300 @ 500 ];
 				onSpace ].
+				
+	aScripter menuStep 
+		prepareSteppedLayoutContextMenuAnalyzer 
+		// #anchorElement; 
+		play.
 
 	aScripter
 		doStep: [ :s | 
@@ -412,26 +417,22 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert context menu extent';
-				value: [ :aPane | aPane extent ]
-					equals: [ :aPane | 
-						| aChild |
-						aChild := aPane childWithId: #itemsContainer.
-						aChild extent + aChild margin extent ];
+				label: 'Assert scrollable container menu bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) 
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-
+				
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert anchored element height';
-				value: [ :anInnerContainer | anInnerContainer height ]
-					equals: [ :anInnerContainer | 
-						| aChild |
-						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
-						aChild height + aChild margin height ];
+				label: 'Assert context menu bounds';
+				satisfies: [ :anElement | 
+					(anElement height = anElement parent height) 
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
-				// BrAnchoredElement ].
+				id: #itemsContainer ].
 
 	^ aScripter
 ]
@@ -477,14 +478,22 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert anchored element height';
-				value: [ :anInnerContainer | anInnerContainer height ]
-					equals: [ :anInnerContainer | 
-						| aChild |
-						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
-						aChild height + aChild margin height ];
+				label: 'Assert anchored bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) and: [
+						anElement isVisibleInSpace ] ];
 				onSpaceRoot;
-				// BrAnchoredElement ].
+				id: #itemsScrollableContainer ].
+				
+	aScripter
+		assertStep: [ :s | 
+			s
+				label: 'Assert anchored bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) and: [
+						anElement isVisibleInSpace ] ];
+				onSpaceRoot;
+				id: #itemsContainer ].
 
 	^ aScripter
 ]
@@ -501,6 +510,11 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 				label: 'Set space extent';
 				block: [ :aSpace | aSpace extent: 650 @ 500 ];
 				onSpace ].
+				
+	aScripter menuStep 
+		prepareSteppedLayoutContextMenuAnalyzer 
+		// #anchorElement; 
+		play.
 
 	aScripter
 		secondaryClickStep: [ :s | 
@@ -511,26 +525,22 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert context menu extent';
-				value: [ :aPane | aPane extent ]
-					equals: [ :aPane | 
-						| aChild |
-						aChild := aPane childWithId: #itemsContainer.
-						aChild extent + aChild margin extent ];
+				label: 'Assert scrollable container menu bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) 
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-
+				
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert anchored element height';
-				value: [ :anInnerContainer | anInnerContainer height ]
-					equals: [ :anInnerContainer | 
-						| aChild |
-						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
-						aChild height + aChild margin height ];
+				label: 'Assert context menu bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) 
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
-				// BrAnchoredElement ].
+				id: #itemsContainer ].
 
 	^ aScripter
 ]
@@ -548,6 +558,11 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 				block: [ :aSpace | aSpace extent: 650 @ 500 ];
 				onSpace ].
 
+	aScripter menuStep 
+		prepareSteppedLayoutContextMenuAnalyzer 
+		// #anchorElement; 
+		play.
+				
 	aScripter
 		doStep: [ :s | 
 			s
@@ -562,38 +577,24 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 				id: #anchorElement ].
 
 	aScripter
-		doStep: [ :s | 
-			s
-				label: 'Setup dropdown overview';
-				block: [ :aButton :aUserData | 
-					aUserData
-						at: BrAnchoredVisualAnalysis
-						put: (BrAnchoredVisualAnalysis new elementWithDropdown: aButton) ];
-				id: #anchorElement ].
-
-	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert context menu extent';
-				value: [ :aPane | aPane extent ]
-					equals: [ :aPane | 
-						| aChild |
-						aChild := aPane childWithId: #itemsContainer.
-						aChild extent + aChild margin extent ];
+				label: 'Assert scrollable container menu bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) 
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-
+				
 	aScripter
 		assertStep: [ :s | 
 			s
-				label: 'Assert anchored element height';
-				value: [ :anInnerContainer | anInnerContainer height ]
-					equals: [ :anInnerContainer | 
-						| aChild |
-						aChild := anInnerContainer childWithId: #itemsScrollableContainer.
-						aChild height + aChild margin height ];
+				label: 'Assert context menu bounds';
+				satisfies: [ :anElement | 
+					(anElement isVisibleFullyInParent: anElement parent) 
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
-				// BrAnchoredElement ].
+				id: #itemsContainer ].
 
 	^ aScripter
 ]

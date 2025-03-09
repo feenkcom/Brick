@@ -33,9 +33,7 @@ BrMenuItemsListElement >> initializeListElement [
 		itemType: [ :aFactory :anObject :anIndex | 
 			self visitMenuModel: anObject ];
 		itemStencil: [ :anItemType | 
-			anItemType = BlInfiniteItemType invalid
-				ifTrue: [ BrMenuInvalidItemElement new ]
-				ifFalse: [ anItemType new ] ];
+			self typeBuilder buildElementFromItemType: anItemType ];
 		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
 			anItemElement menuModel: anItemObject ].
 ]

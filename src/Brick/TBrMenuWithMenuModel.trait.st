@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'menuModel'
 	],
-	#category : #'Brick-Menu - Support'
+	#category : #'Brick-Menu - Model'
 }
 
 { #category : #'api - menu' }

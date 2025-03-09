@@ -1,3 +1,6 @@
+"
+Use {{gtClass:BrWithExplicitContextMenuAptitude}} subclasses instead.
+"
 Class {
 	#name : #BrWithContextMenuAptitude,
 	#superclass : #BrWithAnchoredAptitude,
@@ -13,6 +16,13 @@ Class {
 { #category : #accessing }
 BrWithContextMenuAptitude class >> anchoredAptitudeClass [
 	^ BrContextMenuAptitude
+]
+
+{ #category : #testing }
+BrWithContextMenuAptitude class >> isDeprecated [
+	"Use BrWithExplicitContextMenuAptitude subclasses instead"
+
+	^ true
 ]
 
 { #category : #initialization }

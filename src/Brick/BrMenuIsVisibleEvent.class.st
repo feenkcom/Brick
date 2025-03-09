@@ -13,7 +13,7 @@ Class {
 		'menuModel',
 		'menuContainer'
 	],
-	#category : #'Brick-Menu - Aptitude'
+	#category : #'Brick-Menu - Events'
 }
 
 { #category : #accessing }
@@ -34,4 +34,9 @@ BrMenuIsVisibleEvent >> menuModel [
 { #category : #accessing }
 BrMenuIsVisibleEvent >> menuModel: anObject [
 	menuModel := anObject
+]
+
+{ #category : #sending }
+BrMenuIsVisibleEvent >> sendTo: anObject [
+	anObject menuIsVisibleEvent: self
 ]
