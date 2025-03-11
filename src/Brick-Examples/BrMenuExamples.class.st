@@ -173,25 +173,32 @@ BrMenuExamples >> menuActionItemWithLabel [
 BrMenuExamples >> menuActionItemWithUpdateSubscription [
 	<gtExample>
 	
-	| anActionItem aCounter anAnnouncer anItemsModel aLabelItem |
+	| anIncreaseItem aCounter anAnnouncer anItemsModel aLabelItem aDecreaseItem |
 	aCounter := 0.
 	anAnnouncer := Announcer new.
 	anItemsModel := BrMenuItems new.
-	anActionItem := self basicMenuActionItem.
-	anActionItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
-	anActionItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
-	anActionItem hideOnClick: false.
-	anItemsModel addItem: anActionItem.
+	anIncreaseItem := self basicMenuActionItem.
+	anIncreaseItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
+	anIncreaseItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
+	anIncreaseItem hideOnClick: false.
+	anItemsModel addItem: anIncreaseItem.
 	
-	self assert: anActionItem labelModel isNotNil.
-	self assert: anActionItem labelModel text equals: 'Increase'.
-	self assert: anActionItem labelModel preview equals: '0'.
+	aDecreaseItem := self basicMenuActionItem.
+	aDecreaseItem icon: BrGlamorousVectorIcons remove label: 'Decrease' preview: [ aCounter printString ].
+	aDecreaseItem action: [ aCounter := aCounter - 1. anAnnouncer announce: Announcement new ].
+	aDecreaseItem hideOnClick: false.
+	anItemsModel addItem: aDecreaseItem.
+	
+	self assert: anIncreaseItem labelModel isNotNil.
+	self assert: anIncreaseItem labelModel text equals: 'Increase'.
+	self assert: anIncreaseItem labelModel preview equals: '0'.
 	
 	aCounter := aCounter + 1.
-	self assert: anActionItem labelModel text equals: 'Increase'.
-	self assert: anActionItem labelModel preview equals: '1'.
+	self assert: anIncreaseItem labelModel text equals: 'Increase'.
+	self assert: anIncreaseItem labelModel preview equals: '1'.
 	
-	anActionItem updateWhen: Announcement from: anAnnouncer.
+	anIncreaseItem updateWhen: Announcement from: anAnnouncer.
+	aDecreaseItem updateWhen: Announcement from: anAnnouncer.
 	self assert: anAnnouncer numberOfSubscriptions equals: 0.
 	
 	aLabelItem := self basicMenuLabelItem.
@@ -199,6 +206,9 @@ BrMenuExamples >> menuActionItemWithUpdateSubscription [
 	aLabelItem updateWhen: Announcement from: anAnnouncer.
 	aLabelItem disableIf: [ aCounter odd ].
 	anItemsModel addItem: aLabelItem.
+	
+	anIncreaseItem disableIf: [ aCounter >= 10 ].
+	aDecreaseItem disableIf: [ aCounter <= 0 ].
 	
 	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.
 	self assert: anAnnouncer numberOfSubscriptions equals: 0.
