@@ -256,7 +256,7 @@ BrMenuPinnableAptitude >> subscribeToMenuModel [
 	super subscribeToMenuModel.
 	
 	self menuModel announcer weak 
-		when: BrMenuPinRequest
+		when: BrMenuPinRequestAnnouncement
 		send: #onMenuPinRequest:
 		to: self
 ]

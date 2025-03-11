@@ -1,6 +1,8 @@
 Class {
 	#name : #BrMenuItemElement,
 	#superclass : #BrMenuModelElement,
+	#traits : 'TBrMenuWithUpdatableElement',
+	#classTraits : 'TBrMenuWithUpdatableElement classTrait',
 	#category : #'Brick-Menu - UI'
 }
 
@@ -39,6 +41,12 @@ BrMenuItemElement >> menuItem: aMenuItem [
 ]
 
 { #category : #'event handling' }
+BrMenuItemElement >> onMenuModelChanged [
+	super onMenuModelChanged.
+	self updateElementSubscriptions
+]
+
+{ #category : #'event handling' }
 BrMenuItemElement >> onMouseEnterEvent: anEvent [
 	| aMenuModel |
 	aMenuModel := self menuModel.
@@ -65,13 +73,22 @@ BrMenuItemElement >> onSelectionChanged: anAnnouncement [
 BrMenuItemElement >> subscribeToMenuModel [
 	super subscribeToMenuModel.
 	self menuItem announcer weak
-		when: BrMenuItemSelectionChanged
+		when: BrMenuItemSelectionChangedAnnouncement
 		send: #onSelectionChanged:
-		to: self
+		to: self.
+	self subscribeToUpdatableMenuModel.
 ]
 
 { #category : #'event handling' }
 BrMenuItemElement >> unsubscribeFromMenuModel [
 	super unsubscribeFromMenuModel.
-	self menuItem announcer unsubscribe: self
+	
+	self unsubscribeFromUpdatableMenuModel
+]
+
+{ #category : #'event handling' }
+BrMenuItemElement >> unsubscribeFromMenuModelExcludingUserSubscriptions [
+	super unsubscribeFromMenuModelExcludingUserSubscriptions.
+	
+	self menuModel announcer unsubscribe: self.
 ]

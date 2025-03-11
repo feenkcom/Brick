@@ -1,6 +1,8 @@
 Class {
 	#name : #BrMenuItem,
 	#superclass : #BrMenuModel,
+	#traits : 'TBrMenuWithUpdatableModel',
+	#classTraits : 'TBrMenuWithUpdatableModel classTrait',
 	#instVars : [
 		'isSelected',
 		'group'
@@ -52,8 +54,16 @@ BrMenuItem >> gtItemDepth [
 
 { #category : #'api - visibility' }
 BrMenuItem >> hide [
+	"Hide corresponding menu element.
+	Note: This method can be called only from the UI process."
+	
+	"Deselect this menu item."
 	self deselect.
+	
 	super hide.
+	
+	"Forward the hide request to its parent,
+	which is usually a BrMenuItems instance."
 	self parentDo: #hide
 ]
 
@@ -85,7 +95,7 @@ BrMenuItem >> menuType [
 
 { #category : #'event handling' }
 BrMenuItem >> notifySelectionChanged [
-	announcer announce: (BrMenuItemSelectionChanged new
+	announcer announce: (BrMenuItemSelectionChangedAnnouncement new
 		menuModel: self;
 		isSelected: self isSelected)
 ]

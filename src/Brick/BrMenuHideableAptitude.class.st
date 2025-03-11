@@ -17,7 +17,7 @@ BrMenuHideableAptitude >> subscribeToMenuModel [
 	super subscribeToMenuModel.
 	
 	self menuModel announcer weak 
-		when: BrMenuHideRequest
+		when: BrMenuHideRequestAnnouncement
 		send: #onMenuHideRequest:
 		to: self
 ]

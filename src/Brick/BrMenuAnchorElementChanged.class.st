@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuAnchorElementChanged,
-	#superclass : #BrChangeEvent,
+	#superclass : #BrMenuChangeEvent,
 	#instVars : [
 		'anchorElement'
 	],

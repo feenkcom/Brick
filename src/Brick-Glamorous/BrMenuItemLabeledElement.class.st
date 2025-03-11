@@ -48,6 +48,13 @@ BrMenuItemLabeledElement >> onMenuModelChanged [
 	self updateLabelElement
 ]
 
+{ #category : #'event handling' }
+BrMenuItemLabeledElement >> onUpdateRequestedAnnouncement: anAnnouncement [
+	super onUpdateRequestedAnnouncement: anAnnouncement.
+
+	labelElement dispatchEvent: BrMenuUpdateWish new
+]
+
 { #category : #'private - updating' }
 BrMenuItemLabeledElement >> updateLabelElement [
 	labelElement labelModel: self menuModel labelModel

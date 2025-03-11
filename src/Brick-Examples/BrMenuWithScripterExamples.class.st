@@ -174,6 +174,15 @@ BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 	^ aScripter
 ]
 
+{ #category : #'examples - scripter' }
+BrMenuWithScripterExamples >> contextMenuElementWithMenuModel: aMenuModel [
+	^ BrFrame new
+		exact: 50 @ 50;
+		geometry: BlCircleGeometry new;
+		background: BrGlamorousColors errorBackgroundColor;
+		addAptitude: (BrGlamorousWithExplicitContextMenuAptitude menu: aMenuModel)
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> dispatchDropdownShowWishToButtonWithDropdown [
 	<gtExample>
@@ -567,4 +576,93 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 		play.
 
 	^ aScripter
+]
+
+{ #category : #'examples - updates' }
+BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
+	<gtExample>
+	| anItem aCounter anAnnouncer aMenuItems aScripter |
+	aCounter := 0.
+	anAnnouncer := Announcer new.
+	anItem := BrMenuActionItem new
+			id: #'increase-click';
+			icon: BrGlamorousVectorIcons add
+				label: 'Increase'
+				preview: [ aCounter printString ];
+			action: [ aCounter := aCounter + 1.
+				anAnnouncer announce: Announcement new ];
+			hideOnClick: false;
+			updateWhen: Announcement from: anAnnouncer;
+			yourself.
+	aMenuItems := BrMenuItems new.
+	aMenuItems addItem: anItem.
+
+	aScripter := self
+			scripterWithModel: [ aMenuItems ]
+			element: [ self contextMenuElementWithMenuModel: aMenuItems ].
+
+	self assert: anAnnouncer numberOfSubscriptions equals: 0.
+
+	aScripter secondaryClick
+		label: 'Open context menu';
+		play.
+
+	self assert: anAnnouncer numberOfSubscriptions equals: 1.
+
+	aScripter click
+		label: 'Click increase menu item';
+		onSpaceRoot;
+		onDropdown: true;
+		// #'increase-click';
+		play.
+
+	self assert: aCounter equals: 1.
+	self assert: anItem labelModel text equals: 'Increase'.
+	self assert: anItem labelModel preview equals: '1'.
+
+	aScripter click
+		label: 'Click increase menu item';
+		onSpaceRoot;
+		onDropdown: true;
+		// #'increase-click';
+		play.
+
+	self assert: aCounter equals: 2.
+	self assert: anItem labelModel text equals: 'Increase'.
+	self assert: anItem labelModel preview equals: '2'.
+	self assert: anAnnouncer numberOfSubscriptions equals: 1.
+
+	aScripter userData at: #counter put: aCounter.
+	aScripter userData at: #coutnerAnnouncer put: anAnnouncer.
+
+	^ aScripter
+]
+
+{ #category : #'examples - updates' }
+BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_closeMenu [
+	<gtExample>
+	| aCounter anAnnouncer aScripter |
+	aScripter := self menuWithUpdatableMenuItems.
+	aCounter := aScripter userData at: #counter.
+	anAnnouncer := aScripter userData at: #coutnerAnnouncer.
+
+	self assert: anAnnouncer numberOfSubscriptions equals: 1.
+
+	aScripter shortcut
+		label: 'Close the context menu';
+		combination: BlKeyCombination escape;
+		play.
+
+	self assert: anAnnouncer numberOfSubscriptions equals: 0.
+
+	^ aScripter
+]
+
+{ #category : #'examples - updates' }
+BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_demo [
+	<gtExample>
+	| aScripter |
+	aScripter := self menuWithUpdatableMenuItems.
+
+	^ aScripter elementWithoutParent
 ]

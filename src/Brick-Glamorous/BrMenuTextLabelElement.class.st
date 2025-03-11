@@ -17,12 +17,13 @@ BrMenuTextLabelElement >> initialize [
 		hMatchParent;
 		vFitContent;
 		alignCenter;
-		constraintsDo: [ :c | 
-			c linear vertical alignCenter ].
+		constraintsDo: [ :c | c linear vertical alignCenter ].
 	self initializeLabelElement.
 	self initializeShortcutElement.
 	self addChild: labelElement as: #'menu--label'.
-	self addChild: shortcutElement as: #'menu--shortcut'
+	self addChild: shortcutElement as: #'menu--shortcut'.
+
+	self when: BrMenuUpdateWish do: [ :anEvent | self onMenuUpdateWish: anEvent ]
 ]
 
 { #category : #initialization }
@@ -86,6 +87,11 @@ BrMenuTextLabelElement >> labelText [
 { #category : #'event handling' }
 BrMenuTextLabelElement >> onLabelModelChanged [
 	self updateElement
+]
+
+{ #category : #'event handling' }
+BrMenuTextLabelElement >> onMenuUpdateWish: anEvent [
+	self updateLabelElement
 ]
 
 { #category : #'private - updating' }

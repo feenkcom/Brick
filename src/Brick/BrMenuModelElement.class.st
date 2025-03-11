@@ -10,6 +10,15 @@ Class {
 }
 
 { #category : #initialization }
+BrMenuModelElement >> initialize [
+	super initialize.
+
+	self
+		when: BrMenuUnsubscribeWish
+		do: [ :anEvent | self onMenuUnsubscribeWish: anEvent ]
+]
+
+{ #category : #initialization }
 BrMenuModelElement >> initializeCommonStyle [
 	self addAptitude: BrMenuCommonAptitude new.
 ]
@@ -37,9 +46,21 @@ BrMenuModelElement >> onMenuModelChanged [
 ]
 
 { #category : #'event handling' }
+BrMenuModelElement >> onMenuUnsubscribeWish: anEvent [
+	anEvent alsoUserSubscriptions
+		ifTrue: [ self unsubscribeFromMenuModel ]
+		ifFalse: [ self unsubscribeFromMenuModelExcludingUserSubscriptions ]
+]
+
+{ #category : #'event handling' }
 BrMenuModelElement >> subscribeToMenuModel [
 ]
 
 { #category : #'event handling' }
 BrMenuModelElement >> unsubscribeFromMenuModel [
+	self unsubscribeFromMenuModelExcludingUserSubscriptions
+]
+
+{ #category : #'event handling' }
+BrMenuModelElement >> unsubscribeFromMenuModelExcludingUserSubscriptions [
 ]

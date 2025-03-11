@@ -25,11 +25,11 @@ BrMenuItems >> addItem: aMenuItem [
 		self selectedItem: aMenuItem ].
 
 	aMenuItem announcer weak
-		when: BrMenuItemSelectionChanged
+		when: BrMenuItemSelectionChangedAnnouncement
 		send: #onMenuItemSelection:
 		to: self.
 		
-	self announcer announce: (BrMenuItemsChanged new menuModel: self)
+	self announcer announce: (BrMenuItemsChangedAnnouncement new menuModel: self)
 ]
 
 { #category : #'add / remove' }
@@ -272,7 +272,12 @@ BrMenuItems >> gtRootItems [
 
 { #category : #'api - visibility' }
 BrMenuItems >> hide [
+	"Hide corresponding menu element.
+	Note: This method can be called only from the UI process."
+
+	"Deselect any menu item."
 	self deselect.
+	
 	super hide.
 ]
 
@@ -300,11 +305,11 @@ BrMenuItems >> items: aCollection [
 
 	aCollection do: [ :eachItem |
 		eachItem announcer weak
-			when: BrMenuItemSelectionChanged
+			when: BrMenuItemSelectionChangedAnnouncement
 			send: #onMenuItemSelection:
 			to: self ].
 	
-	self announcer announce: (BrMenuItemsChanged new menuModel: self)
+	self announcer announce: (BrMenuItemsChangedAnnouncement new menuModel: self)
 ]
 
 { #category : #accessing }

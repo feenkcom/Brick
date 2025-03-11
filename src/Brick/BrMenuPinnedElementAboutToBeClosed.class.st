@@ -1,5 +1,5 @@
 Class {
 	#name : #BrMenuPinnedElementAboutToBeClosed,
-	#superclass : #BlEvent,
+	#superclass : #BrMenuEvent,
 	#category : #'Brick-Menu - Events'
 }

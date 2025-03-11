@@ -11,5 +11,5 @@ BrMenu >> acceptVisitor: aVisitor [
 
 { #category : #'api - notifying' }
 BrMenu >> notifyPinRequest [
-	self announcer announce: (BrMenuPinRequest new menuModel: self)
+	self announcer announce: (BrMenuPinRequestAnnouncement new menuModel: self)
 ]

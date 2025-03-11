@@ -41,13 +41,17 @@ BrMenuModel >> gtRootItems [
 
 { #category : #'api - visibility' }
 BrMenuModel >> hide [
-	"This announcement can be announced only from the UI process."
+	"Hide corresponding menu element.
+	Note: This method can be called only from the UI process."
 
-	announcer announce: (BrMenuHideRequest new menuModel: self)
+	announcer announce: (BrMenuHideRequestAnnouncement new menuModel: self)
 ]
 
 { #category : #'api - visibility' }
 BrMenuModel >> hideAll [
+	"Hide everything up to the root menu model.
+	Note: This method can be called only from the UI process."
+
 	self hide.
 	self parentDo: #hideAll
 ]

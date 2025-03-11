@@ -132,15 +132,52 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 ]
 
 { #category : #'examples - action item' }
-BrMenuExamples >> menuActionItemWithLabel [
+BrMenuExamples >> menuActionItemWithIconAndLabel [
 	<gtExample>
 	
 	| anItem |
-	anItem := BrMenuActionItem new.
+	anItem := self basicMenuActionItem.
 	anItem icon: BrGlamorousVectorIcons clipboard label: 'Copy'.
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Copy'.
 	self assert: anItem labelModel icon isNotNil.
+	
+	^ anItem
+]
+
+{ #category : #'examples - action item' }
+BrMenuExamples >> menuActionItemWithLabel [
+	<gtExample>
+	
+	| anItem |
+	anItem := self basicMenuActionItem.
+	anItem label: 'Copy'.
+	self assert: anItem labelModel isNotNil.
+	self assert: anItem labelModel text equals: 'Copy'.
+	
+	^ anItem
+]
+
+{ #category : #'examples - action item' }
+BrMenuExamples >> menuActionItemWithUpdateSubscription [
+	<gtExample>
+	
+	| anItem aCounter anAnnouncer |
+	aCounter := 0.
+	anAnnouncer := Announcer new.
+	anItem := self basicMenuActionItem.
+	anItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
+	anItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
+	self assert: anItem labelModel isNotNil.
+	self assert: anItem labelModel text equals: 'Increase'.
+	self assert: anItem labelModel preview equals: '0'.
+	
+	aCounter := aCounter + 1.
+	self assert: anItem labelModel text equals: 'Increase'.
+	self assert: anItem labelModel preview equals: '1'.
+	
+	anItem updateWhen: Announcement from: anAnnouncer.
+	self assert: anAnnouncer numberOfSubscriptions equals: 0.
 	
 	^ anItem
 ]
