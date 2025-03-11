@@ -579,12 +579,23 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 ]
 
 { #category : #'examples - updates' }
+BrMenuWithScripterExamples >> labelElement: aLabel hasForegroundColor: aColor [
+	^ ((aLabel query // #'menu--label')
+		@ [ :eachLabel | 
+			eachLabel text
+				hasAttributeSuchThat: [ :anAttribute | 
+					anAttribute class = BlTextForegroundAttribute
+						and: [ anAttribute paint = aColor ] ] ])
+		isNotEmpty
+]
+
+{ #category : #'examples - updates' }
 BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 	<gtExample>
-	| anItem aCounter anAnnouncer aMenuItems aScripter |
+	| anActionItem aCounter anAnnouncer aMenuItems aScripter aLabelItem |
 	aCounter := 0.
 	anAnnouncer := Announcer new.
-	anItem := BrMenuActionItem new
+	anActionItem := BrMenuActionItem new
 			id: #'increase-click';
 			icon: BrGlamorousVectorIcons add
 				label: 'Increase'
@@ -594,8 +605,14 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 			hideOnClick: false;
 			updateWhen: Announcement from: anAnnouncer;
 			yourself.
+	aLabelItem := BrMenuLabelItem new
+			label: [ 'Counter value is {1}.' format: {aCounter} ];
+			updateWhen: Announcement from: anAnnouncer;
+			disableIf: [ :aMenuItem | aCounter even ];
+			yourself.
 	aMenuItems := BrMenuItems new.
-	aMenuItems addItem: anItem.
+	aMenuItems addItem: anActionItem.
+	aMenuItems addItem: aLabelItem.
 
 	aScripter := self
 			scripterWithModel: [ aMenuItems ]
@@ -607,7 +624,19 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		label: 'Open context menu';
 		play.
 
-	self assert: anAnnouncer numberOfSubscriptions equals: 1.
+	self assert: anAnnouncer numberOfSubscriptions equals: 2.
+
+	aScripter assert
+		label: 'Label item is disabled on 0';
+		satisfies: [ :aLabel | 
+			aLabel isDisabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme button disabledTextColor ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// BrMenuLabelItemElement;
+		play.
 
 	aScripter click
 		label: 'Click increase menu item';
@@ -617,8 +646,21 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		play.
 
 	self assert: aCounter equals: 1.
-	self assert: anItem labelModel text equals: 'Increase'.
-	self assert: anItem labelModel preview equals: '1'.
+	self assert: anActionItem labelModel text equals: 'Increase'.
+	self assert: anActionItem labelModel preview equals: '1'.
+	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.
+
+	aScripter assert
+		label: 'Label item is enabled on 1';
+		satisfies: [ :aLabel | 
+			aLabel isEnabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme button defaultTextColor ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// BrMenuLabelItemElement;
+		play.
 
 	aScripter click
 		label: 'Click increase menu item';
@@ -628,9 +670,22 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		play.
 
 	self assert: aCounter equals: 2.
-	self assert: anItem labelModel text equals: 'Increase'.
-	self assert: anItem labelModel preview equals: '2'.
-	self assert: anAnnouncer numberOfSubscriptions equals: 1.
+	self assert: anActionItem labelModel text equals: 'Increase'.
+	self assert: anActionItem labelModel preview equals: '2'.
+	self assert: aLabelItem labelModel text equals: 'Counter value is 2.'.
+	self assert: anAnnouncer numberOfSubscriptions equals: 2.
+
+	aScripter assert
+		label: 'Label item is disabled on 2';
+		satisfies: [ :aLabel | 
+			aLabel isDisabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme button disabledTextColor ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// BrMenuLabelItemElement;
+		play.
 
 	aScripter userData at: #counter put: aCounter.
 	aScripter userData at: #coutnerAnnouncer put: anAnnouncer.
@@ -646,7 +701,7 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_closeMenu [
 	aCounter := aScripter userData at: #counter.
 	anAnnouncer := aScripter userData at: #coutnerAnnouncer.
 
-	self assert: anAnnouncer numberOfSubscriptions equals: 1.
+	self assert: anAnnouncer numberOfSubscriptions equals: 2.
 
 	aScripter shortcut
 		label: 'Close the context menu';

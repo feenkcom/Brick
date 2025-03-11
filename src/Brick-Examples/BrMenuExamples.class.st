@@ -197,6 +197,7 @@ BrMenuExamples >> menuActionItemWithUpdateSubscription [
 	aLabelItem := self basicMenuLabelItem.
 	aLabelItem label: [ ('Counter value is {1}.' ) format: { aCounter } ].
 	aLabelItem updateWhen: Announcement from: anAnnouncer.
+	aLabelItem disableIf: [ aCounter odd ].
 	anItemsModel addItem: aLabelItem.
 	
 	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.

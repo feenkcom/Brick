@@ -1,8 +1,8 @@
 Class {
 	#name : #BrMenuItemElement,
 	#superclass : #BrMenuModelElement,
-	#traits : 'TBrMenuWithUpdatableElement',
-	#classTraits : 'TBrMenuWithUpdatableElement classTrait',
+	#traits : 'TBrMenuWithUpdatableElement + TBrEnableable',
+	#classTraits : 'TBrMenuWithUpdatableElement classTrait + TBrEnableable classTrait',
 	#category : #'Brick-Menu - UI'
 }
 
@@ -43,7 +43,8 @@ BrMenuItemElement >> menuItem: aMenuItem [
 { #category : #'event handling' }
 BrMenuItemElement >> onMenuModelChanged [
 	super onMenuModelChanged.
-	self updateElementSubscriptions
+	self updateElementSubscriptions.
+	self enabled: self menuModel isEnabled
 ]
 
 { #category : #'event handling' }
@@ -67,6 +68,15 @@ BrMenuItemElement >> onSelectionChanged: anAnnouncement [
 	| isSelected |
 	isSelected := anAnnouncement menuModel isSelected.
 	self dispatchEvent: (BlElementSelectedStateWish selected: isSelected)
+]
+
+{ #category : #'event handling' }
+BrMenuItemElement >> onUpdateRequestedAnnouncement: anAnnouncement [
+	"This is called from the UI process."
+
+	self menuModel hasEnableSpecifications ifFalse: [ ^ self ].
+
+	self enabled: self menuModel isEnabled
 ]
 
 { #category : #'event handling' }

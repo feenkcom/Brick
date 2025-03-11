@@ -7,6 +7,18 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
+{ #category : #'api - enablement' }
+BrMenuItemLabeledElement >> disable [
+	super disable.
+	labelElement disable.
+]
+
+{ #category : #'api - enablement' }
+BrMenuItemLabeledElement >> enable [
+	super enable.
+	labelElement enable.
+]
+
 { #category : #initialization }
 BrMenuItemLabeledElement >> initialize [
 	super initialize.

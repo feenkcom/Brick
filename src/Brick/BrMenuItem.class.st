@@ -1,8 +1,8 @@
 Class {
 	#name : #BrMenuItem,
 	#superclass : #BrMenuModel,
-	#traits : 'TBrMenuWithUpdatableModel',
-	#classTraits : 'TBrMenuWithUpdatableModel classTrait',
+	#traits : 'TBrMenuWithUpdatableModel + TBrMenuWithEnablementModel',
+	#classTraits : 'TBrMenuWithUpdatableModel classTrait + TBrMenuWithEnablementModel classTrait',
 	#instVars : [
 		'isSelected',
 		'group'

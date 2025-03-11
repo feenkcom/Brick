@@ -6,8 +6,3 @@ Class {
 	],
 	#category : #'Brick-Glamorous-Menu'
 }
-
-{ #category : #initialization }
-BrMenuLabelItemElement >> initialize [
-	super initialize.
-]
