@@ -3,16 +3,11 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'subscriptions',
-		'elementFuture',
-		'menuModel'
+		'menuModel',
+		'elementUpdater'
 	],
 	#category : #'Brick-Menu - Support'
 }
-
-{ #category : #'event handling' }
-BrMenuUpdateSubscriptions >> handleAnnouncement: anAnnouncement [
-	^ true
-]
 
 { #category : #initialization }
 BrMenuUpdateSubscriptions >> initialize [
@@ -22,8 +17,10 @@ BrMenuUpdateSubscriptions >> initialize [
 
 { #category : #'api - initialization' }
 BrMenuUpdateSubscriptions >> menuElement: aMenuElement [
-	elementFuture := (BrAsyncElementFuture on: aMenuElement)
-			whenSuccess: [ :anElement :aBoolean | self updateMenuElement: anElement with: aBoolean ]
+	elementUpdater := BrElementUpdater new
+			postponedDuration: 100 milliSeconds;
+			element: aMenuElement;
+			action: (MessageSend receiver: self selector: #updateMenuElement)
 ]
 
 { #category : #accessing }
@@ -38,9 +35,9 @@ BrMenuUpdateSubscriptions >> menuModel: anObject [
 
 { #category : #'event handling' }
 BrMenuUpdateSubscriptions >> onAnnouncement: anAnnouncement [
-	elementFuture ifNil: [ ^ self ].
-	
-	elementFuture future: [ self handleAnnouncement: anAnnouncement ] asAsyncFuture.
+	elementUpdater ifNil: [ ^ self ].
+
+	elementUpdater requestUpdate
 ]
 
 { #category : #accessing }
@@ -55,7 +52,7 @@ BrMenuUpdateSubscriptions >> unsubscribe [
 ]
 
 { #category : #'event handling' }
-BrMenuUpdateSubscriptions >> updateMenuElement: anElement with: aBoolean [
+BrMenuUpdateSubscriptions >> updateMenuElement [
 	menuModel onUpdateRequest
 ]
 
