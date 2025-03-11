@@ -1,6 +1,8 @@
 Class {
 	#name : #BrMenuTextLabelElement,
 	#superclass : #BrHorizontalPane,
+	#traits : 'TBrEnableable',
+	#classTraits : 'TBrEnableable classTrait',
 	#instVars : [
 		'labelModel',
 		'labelElement',
@@ -17,12 +19,23 @@ BrMenuTextLabelElement >> initialize [
 		hMatchParent;
 		vFitContent;
 		alignCenter;
-		constraintsDo: [ :c | 
-			c linear vertical alignCenter ].
+		constraintsDo: [ :c | c linear vertical alignCenter ].
 	self initializeLabelElement.
 	self initializeShortcutElement.
 	self addChild: labelElement as: #'menu--label'.
-	self addChild: shortcutElement as: #'menu--shortcut'
+	self addChild: shortcutElement as: #'menu--shortcut'.
+
+	self when: BrMenuUpdateWish do: [ :anEvent | self onMenuUpdateWish: anEvent ].
+	
+	self initializeCommonStyling
+]
+
+{ #category : #initialization }
+BrMenuTextLabelElement >> initializeCommonStyling [
+	self
+		addAptitude: ((BrStyleCommonAptitude new @ labelElement / #label)
+				enabled: [ :aStyle | aStyle foreground: self theme button defaultTextColor ];
+				disabled: [ :aStyle | aStyle foreground: self theme button disabledTextColor ])
 ]
 
 { #category : #initialization }
@@ -86,6 +99,11 @@ BrMenuTextLabelElement >> labelText [
 { #category : #'event handling' }
 BrMenuTextLabelElement >> onLabelModelChanged [
 	self updateElement
+]
+
+{ #category : #'event handling' }
+BrMenuTextLabelElement >> onMenuUpdateWish: anEvent [
+	self updateLabelElement
 ]
 
 { #category : #'private - updating' }

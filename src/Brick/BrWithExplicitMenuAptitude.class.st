@@ -182,7 +182,6 @@ BrWithExplicitMenuAptitude >> hide [
 			self fireEvent: (BrMenuIsHiddenEvent new
 				menuModel: menuContainer menuModel;
 				menuContainer: menuContainer).
-			GtJustContextStackSignal emit.
 			self onHidden ] ]
 ]
 

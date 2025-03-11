@@ -17,7 +17,7 @@ BrMenuTextLabelModel >> acceptVisitor: aVisitor [
 { #category : #accessing }
 BrMenuTextLabelModel >> preview [
 	<return: #String>
-	^ preview
+	^ preview value
 ]
 
 { #category : #accessing }
@@ -55,7 +55,7 @@ BrMenuTextLabelModel >> printOn: aStream [
 { #category : #accessing }
 BrMenuTextLabelModel >> shortcut [
 	<return: #String>
-	^ shortcut
+	^ shortcut value
 ]
 
 { #category : #accessing }
@@ -71,7 +71,7 @@ BrMenuTextLabelModel >> shortcutDo: aBlock [
 { #category : #accessing }
 BrMenuTextLabelModel >> text [
 	<return: #String>
-	^ text
+	^ text value
 ]
 
 { #category : #accessing }

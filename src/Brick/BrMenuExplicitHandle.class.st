@@ -42,6 +42,9 @@ BrMenuExplicitHandle >> handleStencil [
 
 { #category : #'api - visibility' }
 BrMenuExplicitHandle >> hide [
+	"Hide corresponding menu element.
+	Note: This method can be called only from the UI process."
+	
 	super hide.
 	
 	"Recompute the submenu next time is it displayed."

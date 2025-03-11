@@ -80,14 +80,25 @@ BrMenuItemsGroupedElement >> onMenuModelChanged [
 ]
 
 { #category : #'event handling' }
+BrMenuItemsGroupedElement >> onMenuUnsubscribeWish: anEvent [
+	| aScrollable |
+	super onMenuUnsubscribeWish: anEvent.
+
+	anEvent alsoUserSubscriptions ifFalse: [ ^ self ].
+	aScrollable := listElement childWithId: #scrollable.
+	aScrollable childrenDo: [ :eachChild | 
+		eachChild dispatchEvent: (BrMenuUnsubscribeWish new alsoUserSubscriptions: true) ]
+]
+
+{ #category : #'event handling' }
 BrMenuItemsGroupedElement >> subscribeToMenuModel [
 	super subscribeToMenuModel.
 
 	self menuModel announcer weak
-		when: BrMenuHideRequest
+		when: BrMenuHideRequestAnnouncement
 			send: #onMenuHideRequest:
 			to: self;
-		when: BrMenuItemsChanged
+		when: BrMenuItemsChangedAnnouncement
 			send: #onMenuItemsChanged:
 			to: self
 ]
@@ -104,8 +115,8 @@ BrMenuItemsGroupedElement >> typeBuilder: anObject [
 ]
 
 { #category : #'event handling' }
-BrMenuItemsGroupedElement >> unsubscribeFromMenuModel [
-	super unsubscribeFromMenuModel.
+BrMenuItemsGroupedElement >> unsubscribeFromMenuModelExcludingUserSubscriptions [
+	super unsubscribeFromMenuModelExcludingUserSubscriptions.
 
 	self menuModel announcer unsubscribe: self
 ]

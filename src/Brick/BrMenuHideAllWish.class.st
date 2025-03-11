@@ -8,7 +8,7 @@ Users should use dedicated events to hide specific menu widgets:
 "
 Class {
 	#name : #BrMenuHideAllWish,
-	#superclass : #BrWish,
+	#superclass : #BrMenuWish,
 	#instVars : [
 		'menuModel',
 		'menuElement'

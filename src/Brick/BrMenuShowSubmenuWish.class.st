@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuShowSubmenuWish,
-	#superclass : #BrWish,
+	#superclass : #BrMenuWish,
 	#instVars : [
 		'submenu',
 		'fromElement'

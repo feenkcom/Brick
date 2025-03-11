@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuWhoToPinToEvent,
-	#superclass : #BlEvent,
+	#superclass : #BrMenuEvent,
 	#instVars : [
 		'anchorElement'
 	],

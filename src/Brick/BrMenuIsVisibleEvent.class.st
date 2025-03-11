@@ -8,7 +8,7 @@ Users should use dedicated events to listen to show/hide state changes:
 "
 Class {
 	#name : #BrMenuIsVisibleEvent,
-	#superclass : #BrChangeEvent,
+	#superclass : #BrMenuChangeEvent,
 	#instVars : [
 		'menuModel',
 		'menuContainer'
