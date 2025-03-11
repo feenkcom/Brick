@@ -19,6 +19,17 @@ BrMenuExamples >> basicMenuActionItem [
 	| anItem |
 	anItem := BrMenuActionItem new.
 	
+	self assert: anItem hideOnClick.
+	
+	^ anItem
+]
+
+{ #category : #'examples - items' }
+BrMenuExamples >> basicMenuLabelItem [
+	<gtExample>
+	| anItem |
+	anItem := BrMenuLabelItem new.
+
 	^ anItem
 ]
 
@@ -158,28 +169,40 @@ BrMenuExamples >> menuActionItemWithLabel [
 	^ anItem
 ]
 
-{ #category : #'examples - action item' }
+{ #category : #'examples - items' }
 BrMenuExamples >> menuActionItemWithUpdateSubscription [
 	<gtExample>
 	
-	| anItem aCounter anAnnouncer |
+	| anActionItem aCounter anAnnouncer anItemsModel aLabelItem |
 	aCounter := 0.
 	anAnnouncer := Announcer new.
-	anItem := self basicMenuActionItem.
-	anItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
-	anItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
-	self assert: anItem labelModel isNotNil.
-	self assert: anItem labelModel text equals: 'Increase'.
-	self assert: anItem labelModel preview equals: '0'.
+	anItemsModel := BrMenuItems new.
+	anActionItem := self basicMenuActionItem.
+	anActionItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
+	anActionItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
+	anActionItem hideOnClick: false.
+	anItemsModel addItem: anActionItem.
+	
+	self assert: anActionItem labelModel isNotNil.
+	self assert: anActionItem labelModel text equals: 'Increase'.
+	self assert: anActionItem labelModel preview equals: '0'.
 	
 	aCounter := aCounter + 1.
-	self assert: anItem labelModel text equals: 'Increase'.
-	self assert: anItem labelModel preview equals: '1'.
+	self assert: anActionItem labelModel text equals: 'Increase'.
+	self assert: anActionItem labelModel preview equals: '1'.
 	
-	anItem updateWhen: Announcement from: anAnnouncer.
+	anActionItem updateWhen: Announcement from: anAnnouncer.
 	self assert: anAnnouncer numberOfSubscriptions equals: 0.
 	
-	^ anItem
+	aLabelItem := self basicMenuLabelItem.
+	aLabelItem label: [ ('Counter value is {1}.' ) format: { aCounter } ].
+	aLabelItem updateWhen: Announcement from: anAnnouncer.
+	anItemsModel addItem: aLabelItem.
+	
+	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.
+	self assert: anAnnouncer numberOfSubscriptions equals: 0.
+	
+	^ anItemsModel
 ]
 
 { #category : #'examples - label' }
