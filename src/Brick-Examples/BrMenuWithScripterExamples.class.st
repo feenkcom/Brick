@@ -6,6 +6,18 @@ Class {
 	#category : #'Brick-Examples-Menu'
 }
 
+{ #category : #'examples - updates' }
+BrMenuWithScripterExamples >> actionElementIsWithoutForegroundAttribute: anActionElement [
+	| aSize |
+	aSize := anActionElement menuModel labelModel text size.
+
+	^ ((anActionElement query // #'menu--label')
+		@ [ :eachLabel | 
+			((eachLabel text from: 1 to: aSize)
+				hasAttributeSuchThat: [ :anAttribute | anAttribute type = BlTextForegroundAttribute ])
+				not ]) isNotEmpty
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
@@ -590,6 +602,27 @@ BrMenuWithScripterExamples >> labelElement: aLabel hasForegroundColor: aColor [
 ]
 
 { #category : #'examples - updates' }
+BrMenuWithScripterExamples >> labelElement: aLabel hasNotForegroundColor: aColor [
+	^ ((aLabel query // #'menu--label')
+		@ [ :eachLabel | 
+			(eachLabel text
+				hasAttributeSuchThat: [ :anAttribute | 
+					anAttribute type = BlTextForegroundAttribute
+						and: [ anAttribute paint = aColor ] ]) not ])
+		isNotEmpty
+]
+
+{ #category : #'examples - updates' }
+BrMenuWithScripterExamples >> labelElementIsWithoutForegroundAttribute: aLabel [
+	^ ((aLabel query // #'menu--label')
+		@ [ :eachLabel | 
+			(eachLabel text
+				hasAttributeSuchThat: [ :anAttribute | 
+					anAttribute type = BlTextForegroundAttribute ]) not ])
+		isNotEmpty
+]
+
+{ #category : #'examples - updates' }
 BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 	<gtExample>
 	| anActionItem aCounter anAnnouncer aMenuItems aScripter aLabelItem |
@@ -604,6 +637,7 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 				anAnnouncer announce: Announcement new ];
 			hideOnClick: false;
 			updateWhen: Announcement from: anAnnouncer;
+			disableIf: [ :aMenuItem | aCounter >= 2 ];
 			yourself.
 	aLabelItem := BrMenuLabelItem new
 			label: [ 'Counter value is {1}.' format: {aCounter} ];
@@ -625,6 +659,14 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		play.
 
 	self assert: anAnnouncer numberOfSubscriptions equals: 2.
+
+	aScripter assert
+		label: 'Action item is enabled on 0';
+		satisfies: [ :aLabel | aLabel isEnabled and: [ self actionElementIsWithoutForegroundAttribute: aLabel ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// #'increase-click';
+		play.
 
 	aScripter assert
 		label: 'Label item is disabled on 0';
@@ -652,14 +694,18 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 
 	aScripter assert
 		label: 'Label item is enabled on 1';
-		satisfies: [ :aLabel | 
-			aLabel isEnabled
-				and: [ self
-						labelElement: aLabel
-						hasForegroundColor: aLabel theme button defaultTextColor ] ];
+		satisfies: [ :aLabel | aLabel isEnabled and: [ self labelElementIsWithoutForegroundAttribute: aLabel ] ];
 		onSpaceRoot;
 		onDropdown: true;
 		// BrMenuLabelItemElement;
+		play.
+		
+	aScripter assert
+		label: 'Action item is enabled on 1';
+		satisfies: [ :aLabel | aLabel isEnabled and: [ self actionElementIsWithoutForegroundAttribute: aLabel ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// #'increase-click';
 		play.
 
 	aScripter click
@@ -685,6 +731,18 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		onSpaceRoot;
 		onDropdown: true;
 		// BrMenuLabelItemElement;
+		play.
+	
+	aScripter assert
+		label: 'Action item is disabled on 2';
+		satisfies: [ :aLabel | 
+			aLabel isDisabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme button disabledTextColor ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// #'increase-click';
 		play.
 
 	aScripter userData at: #counter put: aCounter.
