@@ -3,6 +3,7 @@ Extension { #name : #BlMouseProcessor }
 { #category : #'*Brick-DevTool' }
 BlMouseProcessor >> gtLastClickEventTargetsFor: aView [
 	<gtView>
+	<gtIgnoreConstraint: #GtSendersOfHaltSelectorsInGtPackagesConstraint>
 	
 	lastClickEvent ifNil: [ ^ aView empty ].
 	
