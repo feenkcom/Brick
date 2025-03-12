@@ -4,7 +4,7 @@ Users can also use {{gtMethod:BlElement>>#anchor}} to obtain the information.
 "
 Class {
 	#name : #BrMenuAnchorElementEvent,
-	#superclass : #BlEvent,
+	#superclass : #BrMenuEvent,
 	#instVars : [
 		'sourceElement'
 	],

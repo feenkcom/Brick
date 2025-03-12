@@ -8,6 +8,16 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #accessing }
+BrMenuSteppedElement >> anchor: anAnchor [
+	super anchor: anAnchor.
+
+	"Some code depends on anchor elements even after menu element removal.
+	For that reason, the anchor is set to every menu element."
+	elementCache
+		keysAndValuesDo: [ :aMenuModel :anElement | anElement anchor: anAnchor ]
+]
+
 { #category : #private }
 BrMenuSteppedElement >> cachedSubmenuElement: aSubmenu [
 	^ elementCache
@@ -92,7 +102,16 @@ BrMenuSteppedElement >> isUnpinnedChild: anElement [
 { #category : #private }
 BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 	<return: #BlElement or: nil>
-	^ self visitSubmenu: aSubmenu
+	| anElement |
+	anElement := self visitSubmenu: aSubmenu.
+	
+	"Some code depends on anchor elements even after menu element removal.
+	For that reason, the anchor is set to every menu element."
+	anElement ifNotNil: [
+		self anchor ifNotNil: [ :anAnchor | 
+			anElement anchor: self anchor ] ].
+	
+	^ anElement
 ]
 
 { #category : #'event handling' }
@@ -105,13 +124,16 @@ BrMenuSteppedElement >> onDetachWish: anEvent [
 	| aMenuModel anElement |
 	anEvent consumed: true.
 	aMenuModel := anEvent menuModel.
-	aMenuModel ifNil: [
-		elementCache keysAndValuesDo: [ :eachMenuModel :eachElement | 
-			eachElement = anEvent source ifTrue: [
-				aMenuModel := eachMenuModel ] ] ].
+	aMenuModel
+		ifNil: [ elementCache
+				keysAndValuesDo: [ :eachMenuModel :eachElement | eachElement = anEvent source ifTrue: [ aMenuModel := eachMenuModel ] ] ].
 	aMenuModel ifNil: [ ^ self ].
-	anElement := elementCache removeKey: aMenuModel ifAbsent: [ nil ].
-	aMenuModel announcer unsubscribe: anElement
+	anElement := self removeCachedSubmenuElement: aMenuModel.
+	anElement ifNil: [ ^ self ].
+	
+	"In case of detach wish, we do not want to unsubscribe from user-defined subscriptions."
+	anElement dispatchEvent: (BrMenuUnsubscribeWish new
+		alsoUserSubscriptions: false).
 ]
 
 { #category : #'event handling' }
@@ -139,8 +161,17 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 { #category : #'private - updating' }
 BrMenuSteppedElement >> removeCachedElements [
 	elementCache
-		keysAndValuesDo: [ :aMenu :anElement | anElement removeFromParent ].
+		keysAndValuesDo: [ :aMenuModel :anElement | 
+			anElement
+				dispatchEvent: (BrMenuUnsubscribeWish new
+						alsoUserSubscriptions: true).
+			anElement removeFromParent ].
 	elementCache removeAll
+]
+
+{ #category : #'private - updating' }
+BrMenuSteppedElement >> removeCachedSubmenuElement: aMenuModel [
+	^ elementCache removeKey: aMenuModel ifAbsent: [ nil ].
 ]
 
 { #category : #'api - displaying' }
@@ -186,6 +217,11 @@ BrMenuSteppedElement >> withDownUpDropdownAreas [
 { #category : #'api - initialization' }
 BrMenuSteppedElement >> withDropdownAreas [
 	self layout withDropdownAreas
+]
+
+{ #category : #'api - initialization' }
+BrMenuSteppedElement >> withTooltipAreas [
+	self layout withTooltipAreas
 ]
 
 { #category : #'api - initialization' }

@@ -24,6 +24,13 @@ BrGlamorousMenuItemTypeBuilder >> visitMenuIconTextLabelModel: aLabelModel [
 ]
 
 { #category : #visiting }
+BrGlamorousMenuItemTypeBuilder >> visitMenuLabelItem: aMenuModel [
+	^ self
+		visitMenuLabeledItem: aMenuModel
+		withElementClass: BrMenuLabelItemElement
+]
+
+{ #category : #visiting }
 BrGlamorousMenuItemTypeBuilder >> visitMenuSubmenuItem: aMenuModel [
 	^ self
 		visitMenuLabeledItem: aMenuModel

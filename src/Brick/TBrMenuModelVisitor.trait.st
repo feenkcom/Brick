@@ -44,6 +44,11 @@ TBrMenuModelVisitor >> visitMenuItems: aMenuModel [
 ]
 
 { #category : #visiting }
+TBrMenuModelVisitor >> visitMenuLabelItem: aMenuModel [
+	^ self visitMenuLabeledItem: aMenuModel
+]
+
+{ #category : #visiting }
 TBrMenuModelVisitor >> visitMenuLabeledItem: aMenuModel [
 	^ self visitMenuItem: aMenuModel
 ]

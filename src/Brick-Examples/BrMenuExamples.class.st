@@ -19,6 +19,17 @@ BrMenuExamples >> basicMenuActionItem [
 	| anItem |
 	anItem := BrMenuActionItem new.
 	
+	self assert: anItem hideOnClick.
+	
+	^ anItem
+]
+
+{ #category : #'examples - items' }
+BrMenuExamples >> basicMenuLabelItem [
+	<gtExample>
+	| anItem |
+	anItem := BrMenuLabelItem new.
+
 	^ anItem
 ]
 
@@ -132,17 +143,77 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 ]
 
 { #category : #'examples - action item' }
-BrMenuExamples >> menuActionItemWithLabel [
+BrMenuExamples >> menuActionItemWithIconAndLabel [
 	<gtExample>
 	
 	| anItem |
-	anItem := BrMenuActionItem new.
+	anItem := self basicMenuActionItem.
 	anItem icon: BrGlamorousVectorIcons clipboard label: 'Copy'.
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Copy'.
 	self assert: anItem labelModel icon isNotNil.
 	
 	^ anItem
+]
+
+{ #category : #'examples - action item' }
+BrMenuExamples >> menuActionItemWithLabel [
+	<gtExample>
+	
+	| anItem |
+	anItem := self basicMenuActionItem.
+	anItem label: 'Copy'.
+	self assert: anItem labelModel isNotNil.
+	self assert: anItem labelModel text equals: 'Copy'.
+	
+	^ anItem
+]
+
+{ #category : #'examples - items' }
+BrMenuExamples >> menuActionItemWithUpdateSubscription [
+	<gtExample>
+	
+	| anIncreaseItem aCounter anAnnouncer anItemsModel aLabelItem aDecreaseItem |
+	aCounter := 0.
+	anAnnouncer := Announcer new.
+	anItemsModel := BrMenuItems new.
+	anIncreaseItem := self basicMenuActionItem.
+	anIncreaseItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
+	anIncreaseItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
+	anIncreaseItem hideOnClick: false.
+	anItemsModel addItem: anIncreaseItem.
+	
+	aDecreaseItem := self basicMenuActionItem.
+	aDecreaseItem icon: BrGlamorousVectorIcons remove label: 'Decrease' preview: [ aCounter printString ].
+	aDecreaseItem action: [ aCounter := aCounter - 1. anAnnouncer announce: Announcement new ].
+	aDecreaseItem hideOnClick: false.
+	anItemsModel addItem: aDecreaseItem.
+	
+	self assert: anIncreaseItem labelModel isNotNil.
+	self assert: anIncreaseItem labelModel text equals: 'Increase'.
+	self assert: anIncreaseItem labelModel preview equals: '0'.
+	
+	aCounter := aCounter + 1.
+	self assert: anIncreaseItem labelModel text equals: 'Increase'.
+	self assert: anIncreaseItem labelModel preview equals: '1'.
+	
+	anIncreaseItem updateWhen: Announcement from: anAnnouncer.
+	aDecreaseItem updateWhen: Announcement from: anAnnouncer.
+	self assert: anAnnouncer numberOfSubscriptions equals: 0.
+	
+	aLabelItem := self basicMenuLabelItem.
+	aLabelItem label: [ ('Counter value is {1}.' ) format: { aCounter } ].
+	aLabelItem updateWhen: Announcement from: anAnnouncer.
+	aLabelItem disableIf: [ aCounter odd ].
+	anItemsModel addItem: aLabelItem.
+	
+	anIncreaseItem disableIf: [ aCounter >= 10 ].
+	aDecreaseItem disableIf: [ aCounter <= 0 ].
+	
+	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.
+	self assert: anAnnouncer numberOfSubscriptions equals: 0.
+	
+	^ anItemsModel
 ]
 
 { #category : #'examples - label' }

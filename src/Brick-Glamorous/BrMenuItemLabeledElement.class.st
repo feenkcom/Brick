@@ -7,6 +7,18 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
+{ #category : #'api - enablement' }
+BrMenuItemLabeledElement >> disable [
+	super disable.
+	labelElement disable.
+]
+
+{ #category : #'api - enablement' }
+BrMenuItemLabeledElement >> enable [
+	super enable.
+	labelElement enable.
+]
+
 { #category : #initialization }
 BrMenuItemLabeledElement >> initialize [
 	super initialize.
@@ -46,6 +58,13 @@ BrMenuItemLabeledElement >> labelElementClass: anElementClass [
 BrMenuItemLabeledElement >> onMenuModelChanged [
 	super onMenuModelChanged.
 	self updateLabelElement
+]
+
+{ #category : #'event handling' }
+BrMenuItemLabeledElement >> onUpdateRequestedAnnouncement: anAnnouncement [
+	super onUpdateRequestedAnnouncement: anAnnouncement.
+
+	labelElement dispatchEvent: BrMenuUpdateWish new
 ]
 
 { #category : #'private - updating' }

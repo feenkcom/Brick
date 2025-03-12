@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuDetachWish,
-	#superclass : #BrWish,
+	#superclass : #BrMenuWish,
 	#instVars : [
 		'menuModel'
 	],
