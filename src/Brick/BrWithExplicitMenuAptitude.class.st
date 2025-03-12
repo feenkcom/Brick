@@ -52,6 +52,13 @@ BrWithExplicitMenuAptitude >> beDropdown [
 	self withContainerDropdown
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> beTooltipMenu [
+	self withWidgetBoundsRelocator.
+	self withContainerTooltipAreas.
+	self withCenteredHandle
+]
+
 { #category : #accessing }
 BrWithExplicitMenuAptitude >> cacheCleaner [
 	<return: #BrMenuCacheCleaner>
@@ -92,6 +99,16 @@ BrWithExplicitMenuAptitude >> defaultElementBuilder [
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> defaultMenuContainerPadding [
 	^ BlInsets all: 20
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> defaultModifiersMatcher [
+	^ [ :aBlKeyModifiers | true ]
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> defaultMouseEventHandler [
+	^ self newMouseUpEventHandler
 ]
 
 { #category : #'api - initialization' }
@@ -197,14 +214,15 @@ BrWithExplicitMenuAptitude >> hideSubmenus [
 BrWithExplicitMenuAptitude >> initialize [
 	super initialize.
 	mouseButton := BlMouseButton secondary.
-	modifiersMatcher := [ :aBlKeyModifiers | true ].
+	modifiersMatcher := self defaultModifiersMatcher.
 	submenus := IdentitySet new: 1.
 	cacheCleaner := self defaultCacheCleaner.
-	
+
 	self initializeMenuContainer.
 	self initializeEventHandlers.
-	
-	self addChange: (BrLookChange new
+
+	self
+		addChange: (BrLookChange new
 				up: [ :e |  ];
 				down: [ :e | self hide ];
 				yourself)
@@ -241,8 +259,7 @@ BrWithExplicitMenuAptitude >> initializeEventHandlers [
 BrWithExplicitMenuAptitude >> initializeListeners [
 	super initializeListeners.
 
-	mouseEventHandler := self newMouseUpEventHandler.
-	self addEventHandler: mouseEventHandler
+	self mouseEventHandler: self defaultMouseEventHandler
 ]
 
 { #category : #initialization }
@@ -290,6 +307,14 @@ BrWithExplicitMenuAptitude >> menuContainerDo: aBlock [
 ]
 
 { #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> modifiersMatcher [
+	"Return the modifiers matcher in a form of [ :aBlKeyModifiers | true ] that is used
+	to test whether the menu should be opened"
+
+	^ modifiersMatcher ifNil: [ modifiersMatcher := self defaultModifiersMatcher ]
+]
+
+{ #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	"Customize the modifiers matcher in a form of [ :aBlKeyModifiers | true ] that is used
 	to test whether the context menu should be opened"
@@ -297,9 +322,34 @@ BrWithExplicitMenuAptitude >> modifiersMatcher: aBlockOrSymbol [
 	modifiersMatcher := aBlockOrSymbol
 ]
 
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> mouseButton [
+	^ mouseButton
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> mouseEventHandler [
+	<return: #BrMenuMouseEventHandler>
+	^ mouseEventHandler
+]
+
+{ #category : #accessing }
+BrWithExplicitMenuAptitude >> mouseEventHandler: aBrMenuMouseEventHandler [
+	mouseEventHandler == aBrMenuMouseEventHandler ifTrue: [ ^ self ].
+
+	self withoutMouseEventHandler.
+	mouseEventHandler := aBrMenuMouseEventHandler.
+	self addEventHandler: aBrMenuMouseEventHandler
+]
+
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> newMouseUpEventHandler [
-	^ BlEventHandler on: BlMouseUpEvent do: [ :anEvent | self onMouseUp: anEvent ]
+	^ BrMenuMouseUpEventHandler new menuAptitude: self
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> newTooltipEventHandler [
+	^ BrMenuTooltipEventHandler new menuAptitude: self
 ]
 
 { #category : #'event handling' }
@@ -388,6 +438,9 @@ BrWithExplicitMenuAptitude >> onMenuIsVisibleEvent: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onMouseUp: anEvent [
+	"Note: to be removed.
+	Replaced by BrMenuMouseUpEventHandler."
+
 	anEvent button = mouseButton
 		ifFalse: [ ^ self ].
 	
@@ -625,11 +678,6 @@ BrWithExplicitMenuAptitude >> temporaryShowIn: aParentElement [
 ]
 
 { #category : #'api - menu' }
-BrWithExplicitMenuAptitude >> usePrimaryMouseButton [
-	mouseButton := BlMouseButton primary
-]
-
-{ #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> useSecondaryMouseButton [
 	self withSecondaryMouseButton
 ]
@@ -690,6 +738,11 @@ BrWithExplicitMenuAptitude >> withContainerDropdown [
 ]
 
 { #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withContainerTooltipAreas [
+	menuContainer withTooltipAreas
+]
+
+{ #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withDefaultHandle [
 	self withCenteredHandle
 ]
@@ -710,11 +763,9 @@ BrWithExplicitMenuAptitude >> withKeepAllCacheCleaner [
 
 { #category : #'api - initialization' }
 BrWithExplicitMenuAptitude >> withMouseUpEventHandler [
-	"Show menu on click. This is default behavior."
+	"Show menu on click events."
 
-	mouseEventHandler ifNotNil: [ self withoutMouseEventHandler ].
-	mouseEventHandler := self newMouseUpEventHandler.
-	self addEventHandler: mouseEventHandler.
+	self mouseEventHandler: self newMouseUpEventHandler
 ]
 
 { #category : #'api - menu' }
@@ -739,6 +790,13 @@ BrWithExplicitMenuAptitude >> withSuboptimalAreaFinder: anAreaFinder [
 	See {{gtMethod:BlSteppedLayoutState>>#placeMeasuredChild:}} for more details."
 	
 	menuContainer suboptimalAreaFinder: anAreaFinder
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withTooltipEventHandler [
+	"Show menu on mouse enter events."
+
+	self mouseEventHandler: self newTooltipEventHandler
 ]
 
 { #category : #'api - initialization' }

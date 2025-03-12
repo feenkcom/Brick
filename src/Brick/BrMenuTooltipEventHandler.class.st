@@ -1,38 +1,27 @@
 Class {
-	#name : #BrMenuTooltipHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : #BrMenuTooltipEventHandler,
+	#superclass : #BrMenuMouseEventHandler,
 	#instVars : [
 		'hideLaterTask',
-		'showLaterTask',
-		'menuAptitude'
+		'showLaterTask'
 	],
 	#category : #'Brick-Menu - Support'
 }
 
 { #category : #private }
-BrMenuTooltipHandler >> canHide [
-	^ menuAptitude ifNotNil: #canHide ifNil: [ false ]
-]
-
-{ #category : #private }
-BrMenuTooltipHandler >> canShow [
-	^ menuAptitude ifNotNil: #canShow ifNil: [ false ]
-]
-
-{ #category : #private }
-BrMenuTooltipHandler >> cancelHideLaterTask [
+BrMenuTooltipEventHandler >> cancelHideLaterTask [
 	hideLaterTask ifNotNil: [ :aTask | aTask stop ].
 	hideLaterTask := nil
 ]
 
 { #category : #private }
-BrMenuTooltipHandler >> cancelShowLaterTask [
+BrMenuTooltipEventHandler >> cancelShowLaterTask [
 	showLaterTask ifNotNil: [ :aTask | aTask stop ].
 	showLaterTask := nil
 ]
 
 { #category : #'api - event managing' }
-BrMenuTooltipHandler >> clickEvent: anEvent [
+BrMenuTooltipEventHandler >> clickEvent: anEvent [
 	(self wantToShowDueToEnterEvent: anEvent) ifFalse: [ ^ self ].
 	self cancelShowLaterTask.
 	self cancelHideLaterTask.
@@ -40,7 +29,7 @@ BrMenuTooltipHandler >> clickEvent: anEvent [
 ]
 
 { #category : #'api - accessing' }
-BrMenuTooltipHandler >> eventsToHandle [
+BrMenuTooltipEventHandler >> eventsToHandle [
 	^ {BlMouseEnterEvent.
 		BlMouseLeaveEvent.
 		BlClickEvent.
@@ -48,67 +37,42 @@ BrMenuTooltipHandler >> eventsToHandle [
 		BrMenuIsVisibleEvent}
 ]
 
-{ #category : #private }
-BrMenuTooltipHandler >> hide [
-	"Hide tooltip"
-
-	menuAptitude ifNotNil: #hide
-]
-
 { #category : #accessing }
-BrMenuTooltipHandler >> hideDelay [
+BrMenuTooltipEventHandler >> hideDelay [
 	^ 300 milliSeconds
 ]
 
-{ #category : #accessing }
-BrMenuTooltipHandler >> menuAptitude [
-	<return: #BrWithExplicitMenuAptitude>
-	^ menuAptitude
-]
-
-{ #category : #accessing }
-BrMenuTooltipHandler >> menuAptitude: aBrWithExplicitMenuAptitude [
-	menuAptitude := aBrWithExplicitMenuAptitude
-]
-
 { #category : #'api - event managing' }
-BrMenuTooltipHandler >> menuIsHiddenEvent: anEvent [
+BrMenuTooltipEventHandler >> menuIsHiddenEvent: anEvent [
 	self cancelShowLaterTask.
 	self cancelHideLaterTask.
 ]
 
 { #category : #'api - event managing' }
-BrMenuTooltipHandler >> menuIsVisibleEvent: anEvent [
+BrMenuTooltipEventHandler >> menuIsVisibleEvent: anEvent [
 	self cancelShowLaterTask.
 ]
 
 { #category : #'api - event managing' }
-BrMenuTooltipHandler >> mouseEnterEvent: anEvent [
+BrMenuTooltipEventHandler >> mouseEnterEvent: anEvent [
 	(self wantToShowDueToEnterEvent: anEvent) ifFalse: [ ^ self ].
 	self cancelHideLaterTask.
 	self startShowLaterTaskDueToEvent: anEvent
 ]
 
 { #category : #'api - event managing' }
-BrMenuTooltipHandler >> mouseLeaveEvent: anEvent [
+BrMenuTooltipEventHandler >> mouseLeaveEvent: anEvent [
 	self cancelShowLaterTask.
 	self startHideLaterTaskDueToEvent: anEvent
 ]
 
 { #category : #accessing }
-BrMenuTooltipHandler >> showDelay [
+BrMenuTooltipEventHandler >> showDelay [
 	^ 1000 milliSeconds
 ]
 
 { #category : #private }
-BrMenuTooltipHandler >> showDueToEvent: anEvent [
-	"Show tooltip"
-
-	menuAptitude ifNotNil: [ :anAptitude | anAptitude showDueTo: anEvent ]
-]
-
-{ #category : #private }
-BrMenuTooltipHandler >> startHideLaterTaskDueToEvent: anEvent [ 
+BrMenuTooltipEventHandler >> startHideLaterTaskDueToEvent: anEvent [ 
 	| aTask |
 	self cancelHideLaterTask.
 	
@@ -119,11 +83,12 @@ BrMenuTooltipHandler >> startHideLaterTaskDueToEvent: anEvent [
 				hideLaterTask := nil ];
 			yourself.
 			
-	anEvent currentTarget enqueueTask: aTask
+	self widgetDo: [ :aWidget | 
+		aWidget enqueueTask: aTask ]
 ]
 
 { #category : #private }
-BrMenuTooltipHandler >> startShowLaterTaskDueToEvent: anEvent [
+BrMenuTooltipEventHandler >> startShowLaterTaskDueToEvent: anEvent [
 	| aTask |
 	self canShow ifFalse: [ ^ self ].
 	self cancelShowLaterTask.
@@ -131,14 +96,15 @@ BrMenuTooltipHandler >> startShowLaterTaskDueToEvent: anEvent [
 	showLaterTask := aTask := BlDelayedTaskAction new
 		delay: self showDelay;
 		action: [ 
-			self showDueToEvent: anEvent. 
+			self showDueTo: anEvent. 
 			showLaterTask := nil ];
 		yourself.
 		
-	anEvent currentTarget enqueueTask: aTask
+	self widgetDo: [ :aWidget | 
+		aWidget enqueueTask: aTask ]
 ]
 
 { #category : #private }
-BrMenuTooltipHandler >> wantToShowDueToEnterEvent: anEvent [
+BrMenuTooltipEventHandler >> wantToShowDueToEnterEvent: anEvent [
 	^ menuAptitude ifNotNil: #canShow ifNil: [ false ]
 ]

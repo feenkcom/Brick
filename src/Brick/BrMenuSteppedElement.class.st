@@ -220,6 +220,11 @@ BrMenuSteppedElement >> withDropdownAreas [
 ]
 
 { #category : #'api - initialization' }
+BrMenuSteppedElement >> withTooltipAreas [
+	self layout withTooltipAreas
+]
+
+{ #category : #'api - initialization' }
 BrMenuSteppedElement >> withTopLeftHandle [
 	self layout withTopLeftHandle
 ]
