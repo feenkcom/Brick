@@ -33,9 +33,11 @@ BrMenuTextLabelElement >> initialize [
 { #category : #initialization }
 BrMenuTextLabelElement >> initializeCommonStyling [
 	self
-		addAptitude: ((BrStyleCommonAptitude new @ labelElement / #label)
-				enabled: [ :aStyle | aStyle foreground: self theme button defaultTextColor ];
-				disabled: [ :aStyle | aStyle foreground: self theme button disabledTextColor ])
+		addAptitude: (BrStyleCommonAptitude new @ labelElement / #label
+				disabled: [ :aStyle | 
+					aStyle
+						do: [ self updateLabelElement ]
+						after: [ self updateLabelElement ] ])
 ]
 
 { #category : #initialization }
@@ -93,6 +95,11 @@ BrMenuTextLabelElement >> labelText [
 			glamorousCodeFont;
 			foreground: Color gray;
 			glamorousCodeTinySize) ] ].
+			
+	aFormatedText ifNotNil: [ 
+		self isDisabled ifTrue: [ 
+			aFormatedText foreground: self theme button disabledTextColor ] ].
+			
 	^ aFormatedText ifNil: [ '' ]
 ]
 
