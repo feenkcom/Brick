@@ -8,6 +8,16 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #accessing }
+BrMenuSteppedElement >> anchor: anAnchor [
+	super anchor: anAnchor.
+
+	"Some code depends on anchor elements even after menu element removal.
+	For that reason, the anchor is set to every menu element."
+	elementCache
+		keysAndValuesDo: [ :aMenuModel :anElement | anElement anchor: anAnchor ]
+]
+
 { #category : #private }
 BrMenuSteppedElement >> cachedSubmenuElement: aSubmenu [
 	^ elementCache
@@ -92,7 +102,16 @@ BrMenuSteppedElement >> isUnpinnedChild: anElement [
 { #category : #private }
 BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 	<return: #BlElement or: nil>
-	^ self visitSubmenu: aSubmenu
+	| anElement |
+	anElement := self visitSubmenu: aSubmenu.
+	
+	"Some code depends on anchor elements even after menu element removal.
+	For that reason, the anchor is set to every menu element."
+	anElement ifNotNil: [
+		self anchor ifNotNil: [ :anAnchor | 
+			anElement anchor: self anchor ] ].
+	
+	^ anElement
 ]
 
 { #category : #'event handling' }
