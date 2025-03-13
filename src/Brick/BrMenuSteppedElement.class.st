@@ -225,6 +225,11 @@ BrMenuSteppedElement >> withTooltipAreas [
 ]
 
 { #category : #'api - initialization' }
+BrMenuSteppedElement >> withTooltipHandle [
+	self layout withTooltipHandle
+]
+
+{ #category : #'api - initialization' }
 BrMenuSteppedElement >> withTopLeftHandle [
 	self layout withTopLeftHandle
 ]

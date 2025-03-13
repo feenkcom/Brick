@@ -56,7 +56,7 @@ BrWithExplicitMenuAptitude >> beDropdown [
 BrWithExplicitMenuAptitude >> beTooltipMenu [
 	self withWidgetBoundsRelocator.
 	self withContainerTooltipAreas.
-	self withCenteredHandle
+	self withTooltipHandle
 ]
 
 { #category : #accessing }
@@ -797,6 +797,11 @@ BrWithExplicitMenuAptitude >> withTooltipEventHandler [
 	"Show menu on mouse enter events."
 
 	self mouseEventHandler: self newTooltipEventHandler
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> withTooltipHandle [
+	menuContainer withTooltipHandle
 ]
 
 { #category : #'api - initialization' }
