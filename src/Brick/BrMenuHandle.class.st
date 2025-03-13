@@ -56,9 +56,7 @@ BrMenuHandle >> onMenuDisplayed: aMenuElement [
 
 	super onMenuDisplayed: aMenuElement.
 
-	BlTaskAction
-		enqueueElement: aMenuElement
-		action: [ self onMenuDisplayedFromParentMenuElement: aMenuElement ]
+	self onMenuDisplayedFromParentMenuElement: aMenuElement
 ]
 
 { #category : #private }
