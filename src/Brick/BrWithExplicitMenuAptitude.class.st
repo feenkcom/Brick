@@ -225,7 +225,9 @@ BrWithExplicitMenuAptitude >> initialize [
 		addChange: (BrLookChange new
 				up: [ :e |  ];
 				down: [ :e | self hide ];
-				yourself)
+				yourself).
+				
+	self mouseEventHandler: self defaultMouseEventHandler.
 ]
 
 { #category : #initialization }
@@ -253,13 +255,6 @@ BrWithExplicitMenuAptitude >> initializeEventHandlers [
 	pressEscEventHandler := BlShortcutWithAction new
 			combination: BlKeyCombination escape;
 			action: [ :anEvent | self onEscapeKeyCombinationEvent: anEvent ]
-]
-
-{ #category : #initialization }
-BrWithExplicitMenuAptitude >> initializeListeners [
-	super initializeListeners.
-
-	self mouseEventHandler: self defaultMouseEventHandler
 ]
 
 { #category : #initialization }
