@@ -10,7 +10,8 @@ Class {
 		'anchorElement',
 		'menuAptitude',
 		'positionInSpace',
-		'elementBuilder'
+		'elementBuilder',
+		'dueToEvent'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -30,7 +31,33 @@ BrMenuInitialContext >> anchorElement: anElement [
 	anchorElement := anElement
 ]
 
-{ #category : #convenience }
+{ #category : #accessing }
+BrMenuInitialContext >> childrenPositionDo: aPositionBlock ifAbsentDo: anAbsentBlock [
+	"Call aPositionBlock with an event position in children coordinates where a click (an open menu request) happened.
+	Call anAbsentBlock if the position is unknown or the open menu request happened by other means."
+
+	^ self
+		dueToEventDo: [ :anEvent | aPositionBlock cull: anEvent childrenPosition ]
+		ifAbsentDo: anAbsentBlock
+]
+
+{ #category : #accessing }
+BrMenuInitialContext >> childrenPositionIfAbsent: anAbsentBlock [
+	"Return an event position in children coordinates where a click (an open menu request) happened.
+	Call anAbsentBlock if the position is unknown or the open menu request happened by other means."
+
+	<return: #Point>
+	^ self
+		dueToEventDo: [ :anEvent | anEvent childrenPosition ]
+		ifAbsentDo: anAbsentBlock
+]
+
+{ #category : #accessing }
+BrMenuInitialContext >> dueToEvent [
+	^ dueToEvent
+]
+
+{ #category : #accessing }
 BrMenuInitialContext >> dueToEvent: anEvent [ 
 	anEvent ifNil: [ ^ self ].
 	
@@ -39,7 +66,13 @@ BrMenuInitialContext >> dueToEvent: anEvent [
 	Source: `BrWithContextMenuAptitude>>#onMouseUp:`
 	Note: Handle is not properly positioned in `BrAnchoredExamples>>#contextMenu`
 		using the new context menu implementation."
+	dueToEvent := anEvent.
 	self positionInSpace: anEvent position
+]
+
+{ #category : #accessing }
+BrMenuInitialContext >> dueToEventDo: aBlock ifAbsentDo: anAbsentBlock [
+	^ dueToEvent ifNotNil: aBlock ifNil: anAbsentBlock
 ]
 
 { #category : #accessing }
