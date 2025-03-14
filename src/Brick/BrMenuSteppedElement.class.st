@@ -114,6 +114,13 @@ BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 	^ anElement
 ]
 
+{ #category : #'hooks - children' }
+BrMenuSteppedElement >> onChildRemoved: anElement [
+	super onChildRemoved: anElement.
+
+	self childrenCount isZero ifTrue: [ self dispatchEvent: BrMenuHideAllWish new ]
+]
+
 { #category : #'event handling' }
 BrMenuSteppedElement >> onDetachWish: anEvent [
 	"Detach an event source element from its view model.

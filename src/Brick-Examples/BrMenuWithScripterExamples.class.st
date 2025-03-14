@@ -186,6 +186,43 @@ BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 	^ aScripter
 ]
 
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> clickPasteMenuItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickButtonWithDropdown.
+
+	aScripter mouseMoveOver
+		label: 'Hover paste menu item';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu-paste-item';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	aScripter click
+		label: 'Click paste menu item';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu-paste-item';
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - scripter' }
 BrMenuWithScripterExamples >> contextMenuElementWithMenuModel: aMenuModel [
 	^ BrFrame new
