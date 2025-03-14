@@ -57,3 +57,8 @@ BrWithExplicitTooltipAptitude >> initializeMenuContainer [
 	menuContainer when: BrTooltipShowWish do: [ :anEvent | self onShowWish: anEvent ].
 	menuContainer when: BrTooltipHideWish do: [ :anEvent | self onHideWish: anEvent ]
 ]
+
+{ #category : #'api - initialization' }
+BrWithExplicitTooltipAptitude >> withDefaultHandle [
+	self withTooltipHandle
+]

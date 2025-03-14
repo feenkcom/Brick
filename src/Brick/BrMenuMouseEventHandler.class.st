@@ -32,7 +32,15 @@ BrMenuMouseEventHandler >> menuAptitude [
 
 { #category : #accessing }
 BrMenuMouseEventHandler >> menuAptitude: aBrWithExplicitMenuAptitude [
-	menuAptitude := aBrWithExplicitMenuAptitude
+	self
+		assert: [ menuAptitude isNil ]
+		description: [ 'Menu aptitude can be initialized only once' ].
+	self
+		assert: [ aBrWithExplicitMenuAptitude isNotNil ]
+		description: [ 'Menu aptitude must be non-nil' ].
+
+	menuAptitude := aBrWithExplicitMenuAptitude.
+	self onMenuAptitudeInitialized
 ]
 
 { #category : #accessing }
@@ -43,6 +51,19 @@ BrMenuMouseEventHandler >> modifiersMatcher [
 { #category : #accessing }
 BrMenuMouseEventHandler >> mouseButton [
 	^ menuAptitude ifNotNil: #mouseButton
+]
+
+{ #category : #'api - hooks' }
+BrMenuMouseEventHandler >> onInstalledIn: anObject [
+	super onInstalledIn: anObject.
+
+	self
+		assert: [ menuAptitude isNotNil ]
+		description: [ 'Menu aptitude must be initialized first' ]
+]
+
+{ #category : #initialization }
+BrMenuMouseEventHandler >> onMenuAptitudeInitialized [
 ]
 
 { #category : #accessing }
