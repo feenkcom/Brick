@@ -10,6 +10,16 @@ BrMenuConstants class >> cornerRadius [
 ]
 
 { #category : #constants }
+BrMenuConstants class >> defaultMenuGroupBottomPadding [
+	^ 2
+]
+
+{ #category : #constants }
+BrMenuConstants class >> defaultMenuGroupTopPadding [
+	^ 4
+]
+
+{ #category : #constants }
 BrMenuConstants class >> defaultMenuItemBottomPadding [
 	^ 3
 ]

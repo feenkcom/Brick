@@ -8,3 +8,8 @@ Class {
 BrGlamorousWithExplicitTooltipAptitude >> defaultElementBuilder [
 	^ BrGlamorousMenuElementBuilder new
 ]
+
+{ #category : #'api - initialization' }
+BrGlamorousWithExplicitTooltipAptitude >> withDefaultHandle [
+	^ self withTooltipHandle
+]
