@@ -118,7 +118,11 @@ BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 BrMenuSteppedElement >> onChildRemoved: anElement [
 	super onChildRemoved: anElement.
 
-	self childrenCount isZero ifTrue: [ self dispatchEvent: BrMenuHideAllWish new ]
+	self childrenCount isZero ifFalse: [ ^ self ].
+
+	BlTaskAction
+		enqueueElement: self
+		action: [ self dispatchEvent: BrMenuHideAllWish new ]
 ]
 
 { #category : #'event handling' }

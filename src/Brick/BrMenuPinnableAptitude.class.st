@@ -26,7 +26,9 @@ BrMenuPinnableAptitude >> addCloseButton [
 		self
 			when: BlMouseLeaveEvent
 			do: [ :anEvent | closeButton visibility: BlVisibility gone ].
-		anElement addChild: closeButton ]
+		anElement 
+			addChild: closeButton
+			as: BrMenuPinnedCloseButtonId ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -160,7 +162,9 @@ BrMenuPinnableAptitude >> onCloseFrom: aButton [
 BrMenuPinnableAptitude >> onInstalledIn: anElement [
 	super onInstalledIn: anElement.
 	anElement clipChildren: false.
-	self widget addChild: handleElement.
+	self widget 
+		addChild: handleElement 
+		as: BrMenuPinnedHandleId.
 	pullHandler targetElement: self widget
 ]
 
