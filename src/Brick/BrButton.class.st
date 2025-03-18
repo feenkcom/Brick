@@ -86,6 +86,9 @@ BrButton >> baselineOffset [
 BrButton >> gtActionFor: aView [
 	<gtView>
 	self action ifNil: [ ^ aView empty ].
+	self action blocDefiningMethod = (BrButtonModel >> #initialize)
+		ifTrue: [ ^ aView empty ].
+
 	^ (self action gtSourceCodeFor: aView)
 		title: 'Action';
 		priority: 20
