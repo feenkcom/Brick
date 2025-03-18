@@ -69,6 +69,16 @@ BrEditableLabel >> defaultLabelShortcuts [
 	}
 ]
 
+{ #category : #accessing }
+BrEditableLabel >> editorShortcuts [
+	^ editorShortcuts
+]
+
+{ #category : #accessing }
+BrEditableLabel >> editorShortcuts: anObject [
+	editorShortcuts := anObject
+]
+
 { #category : #'api - focus' }
 BrEditableLabel >> focusNext [	
 	self
@@ -112,6 +122,16 @@ BrEditableLabel >> initialize [
 				ifFalse: [ anEvent currentTarget acceptEdition ] ].
 
 	self switchToLabel
+]
+
+{ #category : #accessing }
+BrEditableLabel >> labelShortcuts [
+	^ labelShortcuts
+]
+
+{ #category : #accessing }
+BrEditableLabel >> labelShortcuts: anObject [
+	labelShortcuts := anObject
 ]
 
 { #category : #'private - hooks' }

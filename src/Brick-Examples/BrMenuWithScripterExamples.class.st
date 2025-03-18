@@ -21,8 +21,15 @@ BrMenuWithScripterExamples >> actionElementIsWithoutForegroundAttribute: anActio
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
+	^ self buttonWithDropdownMenu: BrMenuExamples new menuItems
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
+	<gtExample>
 	^ BrFrame new
 		matchParent;
+		border: (BlBorder paint: (Color black alpha: 0.5) width: 1);
 		addChild: (BlElement new
 			size: 10@10;
 			id: #'outside-click';
@@ -33,17 +40,18 @@ BrMenuWithScripterExamples >> buttonWithDropdown [
 					c frame vertical alignTop ]);
 		addChild: (BrButton new
 				aptitude: BrGlamorousButtonWithLabelAptitude;
+				id: #'menu-dropdown-button';
 				label: 'Dropdown';
 				constraintsDo: [ :c | 
 					c margin: (BlInsets all: 10).
 					c frame horizontal alignCenter.
 					c frame vertical alignCenter ];
-				addAptitude: (BrGlamorousWithExplicitDropdownAptitude new
+				addAptitude: (BrGlamorousWithExplicitDropdownAptitude
 						handle: [ BrButton new
 								id: #'menu-dropdown-handle';
 								aptitude: BrGlamorousButtonWithLabelAptitude - BrGlamorousButtonExteriorAptitude;
 								label: 'Dropdown' ]
-						submenu: BrMenuExamples new menuItems))
+						menu: aMenuStencil))
 ]
 
 { #category : #'examples - dropdown' }
