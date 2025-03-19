@@ -8,6 +8,19 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #'private - updating' }
+BrMenuSteppedElement >> addMenuModel: aMenuModel element: aMenuElement [
+	aMenuElement parent == self ifTrue: [ ^ self ].
+
+	self
+		dispatchEvent: (BrMenuElementAdded new
+				menuElement: aMenuElement;
+				menuModel: aMenuModel).
+	aMenuElement removeFromParent.
+	self addChild: aMenuElement.
+	aMenuModel onMenuDisplayed: aMenuElement
+]
+
 { #category : #accessing }
 BrMenuSteppedElement >> anchor: anAnchor [
 	super anchor: anAnchor.
@@ -118,6 +131,8 @@ BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 BrMenuSteppedElement >> onChildRemoved: anElement [
 	super onChildRemoved: anElement.
 
+	self dispatchEvent: (BrMenuElementRemoved new menuElement: anElement).
+
 	self childrenCount isZero ifFalse: [ ^ self ].
 
 	BlTaskAction
@@ -159,14 +174,11 @@ BrMenuSteppedElement >> onShowSubmenuWish: anEvent [
 	anEvent consumed: true.
 	aSubmenu := anEvent submenu.
 	aSubmenu ifNil: [ ^ self ].
-	
+
 	aSubmenuElement := self cachedSubmenuElement: aSubmenu.
-	aSubmenuElement constraintsDo: [ :c | 
-		c stepped relativeBounds: anEvent fromElement bounds ].
-	(aSubmenuElement parent == self) ifFalse: [ 
-		aSubmenuElement removeFromParent.
-		self addChild: aSubmenuElement.
-		aSubmenu onMenuDisplayed: aSubmenuElement ]
+	aSubmenuElement
+		constraintsDo: [ :c | c stepped relativeBounds: anEvent fromElement bounds ].
+	self addMenuModel: aSubmenu element: aSubmenuElement
 ]
 
 { #category : #'private - updating' }
@@ -189,12 +201,10 @@ BrMenuSteppedElement >> removeCachedSubmenuElement: aMenuModel [
 BrMenuSteppedElement >> show [
 	"Display menu element."
 
-	| anElement |
-	anElement := self cachedSubmenuElement: self menuModel.
-	(anElement parent == self) ifFalse: [ 
-		anElement removeFromParent.
-		self addChild: anElement.
-		self menuModel onMenuDisplayed: anElement ]
+	| anElement aMenuModel |
+	aMenuModel := self menuModel.
+	anElement := self cachedSubmenuElement: aMenuModel.
+	self addMenuModel: aMenuModel element: anElement
 ]
 
 { #category : #'private - updating' }

@@ -4,8 +4,10 @@ Class {
 	#instVars : [
 		'hideLaterTask',
 		'showLaterTask',
-		'containerMouserOverEventHandler',
-		'containerMouserOutEventHandler'
+		'menuElementMouseEnterEventHandler',
+		'menuElementMouseLeaveEventHandler',
+		'hideDelay',
+		'showDelay'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -25,9 +27,20 @@ BrMenuTooltipEventHandler >> cancelShowLaterTask [
 { #category : #'api - event managing' }
 BrMenuTooltipEventHandler >> clickEvent: anEvent [
 	(self wantToShowDueToEnterEvent: anEvent) ifFalse: [ ^ self ].
+	anEvent consumed: true.
 	self cancelShowLaterTask.
 	self cancelHideLaterTask.
 	self hide
+]
+
+{ #category : #initialization }
+BrMenuTooltipEventHandler >> defaultHideDelay [
+	^ 300 milliSeconds
+]
+
+{ #category : #initialization }
+BrMenuTooltipEventHandler >> defaultShowDelay [
+	^ 1000 milliSeconds
 ]
 
 { #category : #'api - accessing' }
@@ -36,35 +49,69 @@ BrMenuTooltipEventHandler >> eventsToHandle [
 		BlMouseLeaveEvent.
 		BlClickEvent.
 		BrMenuIsHiddenEvent.
-		BrMenuIsVisibleEvent}
+		BrMenuIsVisibleEvent.
+		BrMenuElementAdded.
+		BrMenuElementRemoved}
 ]
 
 { #category : #accessing }
 BrMenuTooltipEventHandler >> hideDelay [
-	^ 300 milliSeconds
+	^ hideDelay ifNil: [ hideDelay := self defaultHideDelay ]
+]
+
+{ #category : #accessing }
+BrMenuTooltipEventHandler >> hideDelay: anObject [
+	hideDelay := anObject
 ]
 
 { #category : #initialization }
 BrMenuTooltipEventHandler >> initialize [
 	super initialize.
+	menuElementMouseEnterEventHandler := BlEventHandler
+			on: BlMouseEnterEvent
+			do: [ :anEvent | self onMenuElementMouseEnterEvent: anEvent ].
+	menuElementMouseLeaveEventHandler := BlEventHandler
+			on: BlMouseLeaveEvent
+			do: [ :anEvent | self onMenuElementMouseLeaveEvent: anEvent ]
+]
 
-	containerMouserOverEventHandler := BlEventHandler
-			on: BlMouseOverEvent
-			do: [ :anEvent | self onContainerMouseOverEvent: anEvent ].
-	containerMouserOutEventHandler := BlEventHandler
-			on: BlMouseOutEvent
-			do: [ :anEvent | self onContainerMouseOutEvent: anEvent ]
+{ #category : #'api - event managing' }
+BrMenuTooltipEventHandler >> menuElementAddedEvent: anEvent [
+	"Register mouse enter and leave events, detecting when to hide/show tooltip."
+
+	anEvent source == menuAptitude ifFalse: [ ^ self ].
+	
+	anEvent
+		menuElementDo: [ :anElement | 
+			anElement addEventHandler: menuElementMouseEnterEventHandler.
+			anElement addEventHandler: menuElementMouseLeaveEventHandler ]
+]
+
+{ #category : #'api - event managing' }
+BrMenuTooltipEventHandler >> menuElementRemovedEvent: anEvent [
+	"Unregister mouse enter and leave events from a removed menu element."
+
+	anEvent source == menuAptitude ifFalse: [ ^ self ].
+	
+	anEvent
+		menuElementDo: [ :anElement | 
+			anElement removeEventHandler: menuElementMouseEnterEventHandler.
+			anElement removeEventHandler: menuElementMouseLeaveEventHandler ]
 ]
 
 { #category : #'api - event managing' }
 BrMenuTooltipEventHandler >> menuIsHiddenEvent: anEvent [
+	anEvent source == menuAptitude ifFalse: [ ^ self ].
+
 	self cancelShowLaterTask.
-	self cancelHideLaterTask.
+	self cancelHideLaterTask
 ]
 
 { #category : #'api - event managing' }
 BrMenuTooltipEventHandler >> menuIsVisibleEvent: anEvent [
-	self cancelShowLaterTask.
+	anEvent source == menuAptitude ifFalse: [ ^ self ].
+
+	self cancelShowLaterTask
 ]
 
 { #category : #'api - event managing' }
@@ -72,7 +119,7 @@ BrMenuTooltipEventHandler >> mouseEnterEvent: anEvent [
 	"The user mouse entered the anchor widget. 
 	Let's therefore:
 	- cancel any hide-later-task in case a tooltip is already visible, and
-	- start new show-later-task."
+	- start new show-later-task in case a tooltip is not visible."
 
 	self cancelHideLaterTask.
 	(self wantToShowDueToEnterEvent: anEvent) ifFalse: [ ^ self ].
@@ -81,48 +128,34 @@ BrMenuTooltipEventHandler >> mouseEnterEvent: anEvent [
 
 { #category : #'api - event managing' }
 BrMenuTooltipEventHandler >> mouseLeaveEvent: anEvent [
+	"The user mouse left the anchor widget. 
+	Let's therefore:
+	- cancel any show-later-task in case a tooltip is about to be displayed, and
+	- start new hide-later-task in case a tooltip is already visible."
+
 	self cancelShowLaterTask.
 	self startHideLaterTaskDueToEvent: anEvent
 ]
 
 { #category : #private }
-BrMenuTooltipEventHandler >> onContainerMouseOutEvent: anEvent [
-	"The user mouse is either:
-	1. inside of a menu container child, or
-	2. completely left the menu container.
-	The second case happens only if the menu container does not cover whole window (a BlSpace extent).
-	It can happen only with visible Driller and menu item element at the edge of the menu container. 
-	We could cover this case with BlMouseLeaveEvent.
-	Let's ignore this case and cancel the hide-later-task as we want to keep the menu around while the
-	user mouse is hovering the menu elements."
+BrMenuTooltipEventHandler >> onMenuElementMouseEnterEvent: anEvent [
+	"The user mouse entered the menu element.
+	Let's therefore cancel any hide-later-task."
 
 	self cancelHideLaterTask
 ]
 
 { #category : #private }
-BrMenuTooltipEventHandler >> onContainerMouseOverEvent: anEvent [
-	"The user mouse is outside of any menu container child.
-	Let's therefore start the hide-later-task to hide the tooltip."
+BrMenuTooltipEventHandler >> onMenuElementMouseLeaveEvent: anEvent [
+	"The user mouse left the menu element.
+	Let's therefore start the hide-later-task."
 
 	self startHideLaterTaskDueToEvent: anEvent
 ]
 
-{ #category : #initialization }
-BrMenuTooltipEventHandler >> onMenuAptitudeInitialized [
-	super onMenuAptitudeInitialized.
-	self subscribeToMenuContainer
-]
-
-{ #category : #'api - hooks' }
-BrMenuTooltipEventHandler >> onUninstalledIn: anObject [
-	super onUninstalledIn: anObject.
-	
-	self unsubscribeFromMenuContainer.
-]
-
 { #category : #accessing }
 BrMenuTooltipEventHandler >> showDelay [
-	^ 1000 milliSeconds
+	^ showDelay ifNil: [ showDelay := self defaultShowDelay ]
 ]
 
 { #category : #private }
@@ -156,22 +189,6 @@ BrMenuTooltipEventHandler >> startShowLaterTaskDueToEvent: anEvent [
 		
 	self widgetDo: [ :aWidget | 
 		aWidget enqueueTask: aTask ]
-]
-
-{ #category : #private }
-BrMenuTooltipEventHandler >> subscribeToMenuContainer [
-	self menuAptitude ifNotNil: [ :anAptitude | 
-		anAptitude menuContainerDo: [ :aContainer | 
-			aContainer addEventHandler: containerMouserOverEventHandler.
-			aContainer addEventHandler: containerMouserOutEventHandler ] ].
-]
-
-{ #category : #private }
-BrMenuTooltipEventHandler >> unsubscribeFromMenuContainer [
-	self menuAptitude ifNotNil: [ :anAptitude | 
-		anAptitude menuContainerDo: [ :aContainer | 
-			aContainer removeEventHandler: containerMouserOverEventHandler.
-			aContainer removeEventHandler: containerMouserOutEventHandler ] ].
 ]
 
 { #category : #private }

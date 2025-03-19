@@ -54,6 +54,38 @@ BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
 						menu: aMenuStencil))
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltip [
+	<gtExample>
+	^ self buttonWithTooltipMenu: BrMenuExamples new menuItems
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltipMenu: aMenuStencil [
+	<gtExample>
+	^ BrFrame new
+		matchParent;
+		border: (BlBorder paint: (Color black alpha: 0.5) width: 1);
+		addChild: (BlElement new
+			size: 10@10;
+			id: #'outside-click';
+			background: (Color lightGray alpha: 0.5);
+			constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignLeft.
+					c frame vertical alignTop ]);
+		addChild: (BrButton new
+				aptitude: BrGlamorousButtonWithLabelAptitude;
+				id: #'menu-tooltip-button';
+				label: 'Tooltip';
+				constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignCenter.
+					c frame vertical alignCenter ];
+				addAptitude: (BrGlamorousWithExplicitTooltipAptitude
+						menu: aMenuStencil))
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickButtonWithDropdown [
 	<gtExample>
@@ -275,6 +307,12 @@ BrMenuWithScripterExamples >> displayButtonWithDropdown [
 	^ self scripterWithElement: [ self buttonWithDropdown ]
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithTooltip [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithTooltip ]
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuElement [
 	<gtExample>
@@ -363,6 +401,27 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 					ifNone: [ -1 ] ]
 			equals: 0;
 		/ BrButton;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithTooltip [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Hover button with tooltip';
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
 		play.
 
 	^ aScripter
@@ -635,6 +694,28 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 	^ aScripter
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverTooltipMenuPasteItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Hover button with tooltip';
+		onSpaceRoot;
+		// #'menu-paste-item';
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - updates' }
 BrMenuWithScripterExamples >> labelElement: aLabel hasForegroundColor: aColor [
 	^ ((aLabel query // #'menu--label')
@@ -665,6 +746,48 @@ BrMenuWithScripterExamples >> labelElementIsWithoutForegroundAttribute: aLabel [
 				hasAttributeSuchThat: [ :anAttribute | 
 					anAttribute type = BlTextForegroundAttribute ]) not ])
 		isNotEmpty
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> leaveButtonWithTooltip [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Move mouse outside of the button with tooltip';
+		/ #'outside-click';
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> leaveTooltipMenuPasteItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverTooltipMenuPasteItem.
+
+	aScripter mouseMoveOver
+		label: 'Move mouse outside of the button with tooltip';
+		/ #'outside-click';
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
 ]
 
 { #category : #'examples - updates' }
