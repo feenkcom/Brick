@@ -314,6 +314,50 @@ BrMenuWithScripterExamples >> displayButtonWithTooltip [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverComplexSubmenu.
+
+	aScripter mouseMoveOver
+		label: 'Hover pinnable handle';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu--pinned-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	(aScripter mouseDragBy: -300@ -400)
+		label: 'Drag pinnable handle';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu--pinned-handle';
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	aScripter assert
+		label: 'Assert dragged menu element exists';
+		exists;
+		onSpaceRoot;
+		// #'menu--pinned-handle';
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuElement [
 	<gtExample>
 	| aScripter |
