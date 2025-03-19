@@ -264,15 +264,14 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer addAptitude: BrMenuContainerAptitude new.
 	menuContainer padding: self defaultMenuContainerPadding.
 	menuContainerParent := nil.
-	relocator := BrMenuClickPositionRelocator new
-		menuContainer: menuContainer.
+	relocator := BrMenuClickPositionRelocator new menuContainer: menuContainer.
 	menuContainer
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
-	menuContainer 
-		when: BrMenuAnchorElementEvent 
+	menuContainer
+		when: BrMenuAnchorElementEvent
 		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
-	menuContainer 
+	menuContainer
 		when: BrMenuHideAllWish
 		do: [ :anEvent | self onHideAllWish: anEvent ].
 	menuContainer
@@ -280,7 +279,13 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		do: [ :anEvent | self onMenuIsVisibleEvent: anEvent ].
 	menuContainer
 		when: BrMenuIsHiddenEvent
-		do: [ :anEvent | self onMenuIsHiddenEvent: anEvent ]
+		do: [ :anEvent | self onMenuIsHiddenEvent: anEvent ].
+	menuContainer
+		when: BrMenuElementAdded
+		do: [ :anEvent | self onMenuElementAddedEvent: anEvent ].
+	menuContainer
+		when: BrMenuElementRemoved
+		do: [ :anEvent | self onMenuElementRemovedEvent: anEvent ]
 ]
 
 { #category : #'api - menu' }
@@ -417,6 +422,22 @@ BrWithExplicitMenuAptitude >> onHideWish: aWish [
 		ifTrue: [ 
 			aWish consumed: true.
 			^ self hide ]
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> onMenuElementAddedEvent: anEvent [
+	self
+		dispatchEvent: (BrMenuElementAdded new
+				menuModel: anEvent menuModel;
+				menuElement: anEvent menuElement)
+]
+
+{ #category : #initialization }
+BrWithExplicitMenuAptitude >> onMenuElementRemovedEvent: anEvent [
+	self
+		dispatchEvent: (BrMenuElementRemoved new
+				menuModel: anEvent menuModel;
+				menuElement: anEvent menuElement)
 ]
 
 { #category : #'event handling' }
