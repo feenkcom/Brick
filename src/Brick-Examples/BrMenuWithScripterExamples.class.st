@@ -73,6 +73,12 @@ BrMenuWithScripterExamples >> buttonWithTooltip [
 ]
 
 { #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltipLabelItem [
+	<gtExample>
+	^ self buttonWithTooltipMenu: BrMenuExamples new menuLabelItem
+]
+
+{ #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltipMenu: aMenuStencil [
 	<gtExample>
 	^ BrFrame new
@@ -379,6 +385,12 @@ BrMenuWithScripterExamples >> displayButtonWithTooltip [
 	^ self scripterWithElement: [ self buttonWithTooltip ]
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipLabelItem [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithTooltipLabelItem ]
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
 	<gtExample>
@@ -609,6 +621,27 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 	<gtExample>
 	| aScripter |
 	aScripter := self displayButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Hover button with tooltip';
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithTooltipLabelItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithTooltipLabelItem.
 
 	aScripter mouseMoveOver
 		label: 'Hover button with tooltip';
@@ -951,6 +984,27 @@ BrMenuWithScripterExamples >> leaveButtonWithTooltip [
 	<gtExample>
 	| aScripter |
 	aScripter := self hoverButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Move mouse outside of the button with tooltip';
+		/ #'outside-click';
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> leaveButtonWithTooltipLabelItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverButtonWithTooltipLabelItem.
 
 	aScripter mouseMoveOver
 		label: 'Move mouse outside of the button with tooltip';

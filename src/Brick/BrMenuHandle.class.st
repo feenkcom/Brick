@@ -23,18 +23,6 @@ BrMenuHandle >> defaultMenu [
 	^ nil
 ]
 
-{ #category : #'api - visibility' }
-BrMenuHandle >> hide [
-	"Hide corresponding menu element.
-	Note: This method can be called only from the UI process."
-	
-	"Hide associated menu model."
-	menu ifNotNil: #hide.
-	
-	"Then hide the handle element."
-	super hide.
-]
-
 { #category : #accessing }
 BrMenuHandle >> menu [
 	<return: #BrMenu>

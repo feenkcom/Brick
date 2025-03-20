@@ -338,6 +338,18 @@ BrMenuExamples >> menuItems_selectExtractMenu [
 	^ aMenuItems
 ]
 
+{ #category : #'examples - items' }
+BrMenuExamples >> menuLabelItem [
+	<gtExample>
+	| aMenuItem |
+	aMenuItem := self basicMenuLabelItem.
+
+	aMenuItem id: #'menu-label-item'.
+	aMenuItem label: 'I am a label item explaining something' shortcut: 'F5'.
+
+	^ aMenuItem
+]
+
 { #category : #'examples - label' }
 BrMenuExamples >> menuTextAndShortcutLabel [
 	<gtExample>
