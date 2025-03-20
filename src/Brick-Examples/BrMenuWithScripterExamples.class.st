@@ -25,6 +25,12 @@ BrMenuWithScripterExamples >> buttonWithDropdown [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> buttonWithDropdownExplicitDecoratedMenu [
+	<gtExample>
+	^ self buttonWithDropdownMenu: BrMenuExamples new explicitDecoratedMenuWithButtons
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdownExplicitMenu [
 	<gtExample>
 	^ self buttonWithDropdownMenu: BrMenuExamples new explicitMenuWithWithButtons
@@ -97,6 +103,27 @@ BrMenuWithScripterExamples >> clickButtonWithDropdown [
 	<gtExample>
 	| aScripter |
 	aScripter := self displayButtonWithDropdown.
+
+	aScripter click
+		label: 'Open dropdown';
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitDecoratedMenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithDropdownExplicitDecoratedMenu.
 
 	aScripter click
 		label: 'Open dropdown';
@@ -335,6 +362,12 @@ BrMenuWithScripterExamples >> displayButtonWithDropdown [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitDecoratedMenu [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithDropdownExplicitDecoratedMenu ]
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitMenu [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithDropdownExplicitMenu ]
@@ -367,6 +400,50 @@ BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
 		play.
 		
 	(aScripter mouseDragBy: -300@ -400)
+		label: 'Drag pinnable handle';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu--pinned-handle';
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	aScripter assert
+		label: 'Assert dragged menu element exists';
+		exists;
+		onSpaceRoot;
+		// #'menu--pinned-handle';
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> dragPinnableExplicitDecoratedMenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickButtonWithDropdownExplicitDecoratedMenu.
+
+	aScripter mouseMoveOver
+		label: 'Hover pinnable handle';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu--pinned-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	(aScripter mouseDragBy: -200@ 100)
 		label: 'Drag pinnable handle';
 		onSpaceRoot;
 		// BrMenuSteppedElement;
