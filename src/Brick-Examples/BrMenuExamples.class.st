@@ -34,6 +34,27 @@ BrMenuExamples >> basicMenuLabelItem [
 ]
 
 { #category : #'examples - submenu' }
+BrMenuExamples >> explicitDecoratedMenuWithButtons [
+	<gtExample>
+	| aMenuModel aDecoratedMenu |
+	aMenuModel := self explicitMenuWithWithButtons.
+	aDecoratedMenu := BrMenuDecoratoringModel new.
+	aDecoratedMenu
+			menuModel: aMenuModel;
+			decorator: [ :theOriginalElement | 
+				theOriginalElement userData 
+					at: BrMenuDecoratoringModel 
+					put: aDecoratedMenu ].
+
+	self assert: aDecoratedMenu menuModel equals: aMenuModel.
+	self assert: aDecoratedMenu decorator isNotNil.
+	self assert: aMenuModel parent equals: aDecoratedMenu.
+	self assertGlamorousElementForMenuModel: aDecoratedMenu.
+
+	^ aDecoratedMenu
+]
+
+{ #category : #'examples - submenu' }
 BrMenuExamples >> explicitMenu [
 	<gtExample>
 	| aMenu |
@@ -315,6 +336,18 @@ BrMenuExamples >> menuItems_selectExtractMenu [
 	self assert: anExtractRootItem isSelected.
 
 	^ aMenuItems
+]
+
+{ #category : #'examples - items' }
+BrMenuExamples >> menuLabelItem [
+	<gtExample>
+	| aMenuItem |
+	aMenuItem := self basicMenuLabelItem.
+
+	aMenuItem id: #'menu-label-item'.
+	aMenuItem label: 'I am a label item explaining something' shortcut: 'F5'.
+
+	^ aMenuItem
 ]
 
 { #category : #'examples - label' }

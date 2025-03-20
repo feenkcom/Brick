@@ -25,6 +25,12 @@ BrMenuWithScripterExamples >> buttonWithDropdown [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> buttonWithDropdownExplicitDecoratedMenu [
+	<gtExample>
+	^ self buttonWithDropdownMenu: BrMenuExamples new explicitDecoratedMenuWithButtons
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdownExplicitMenu [
 	<gtExample>
 	^ self buttonWithDropdownMenu: BrMenuExamples new explicitMenuWithWithButtons
@@ -67,6 +73,12 @@ BrMenuWithScripterExamples >> buttonWithTooltip [
 ]
 
 { #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltipLabelItem [
+	<gtExample>
+	^ self buttonWithTooltipMenu: BrMenuExamples new menuLabelItem
+]
+
+{ #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltipMenu: aMenuStencil [
 	<gtExample>
 	^ BrFrame new
@@ -97,6 +109,27 @@ BrMenuWithScripterExamples >> clickButtonWithDropdown [
 	<gtExample>
 	| aScripter |
 	aScripter := self displayButtonWithDropdown.
+
+	aScripter click
+		label: 'Open dropdown';
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitDecoratedMenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithDropdownExplicitDecoratedMenu.
 
 	aScripter click
 		label: 'Open dropdown';
@@ -335,6 +368,12 @@ BrMenuWithScripterExamples >> displayButtonWithDropdown [
 ]
 
 { #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitDecoratedMenu [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithDropdownExplicitDecoratedMenu ]
+]
+
+{ #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitMenu [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithDropdownExplicitMenu ]
@@ -344,6 +383,12 @@ BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitMenu [
 BrMenuWithScripterExamples >> displayButtonWithTooltip [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithTooltip ]
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipLabelItem [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithTooltipLabelItem ]
 ]
 
 { #category : #'examples - dropdown' }
@@ -367,6 +412,50 @@ BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
 		play.
 		
 	(aScripter mouseDragBy: -300@ -400)
+		label: 'Drag pinnable handle';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu--pinned-handle';
+		play.
+		
+	aScripter assert
+		label: 'Assert dropdown is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	aScripter assert
+		label: 'Assert dragged menu element exists';
+		exists;
+		onSpaceRoot;
+		// #'menu--pinned-handle';
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> dragPinnableExplicitDecoratedMenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickButtonWithDropdownExplicitDecoratedMenu.
+
+	aScripter mouseMoveOver
+		label: 'Hover pinnable handle';
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		// #'menu--pinned-handle';
+		play.
+
+	aScripter assert
+		label: 'Assert dropdown is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	(aScripter mouseDragBy: -200@ 100)
 		label: 'Drag pinnable handle';
 		onSpaceRoot;
 		// BrMenuSteppedElement;
@@ -532,6 +621,27 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 	<gtExample>
 	| aScripter |
 	aScripter := self displayButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Hover button with tooltip';
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithTooltipLabelItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithTooltipLabelItem.
 
 	aScripter mouseMoveOver
 		label: 'Hover button with tooltip';
@@ -874,6 +984,27 @@ BrMenuWithScripterExamples >> leaveButtonWithTooltip [
 	<gtExample>
 	| aScripter |
 	aScripter := self hoverButtonWithTooltip.
+
+	aScripter mouseMoveOver
+		label: 'Move mouse outside of the button with tooltip';
+		/ #'outside-click';
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is closed';
+		notExists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> leaveButtonWithTooltipLabelItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self hoverButtonWithTooltipLabelItem.
 
 	aScripter mouseMoveOver
 		label: 'Move mouse outside of the button with tooltip';

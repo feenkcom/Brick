@@ -12,12 +12,12 @@ Class {
 BrMenuSteppedElement >> addMenuModel: aMenuModel element: aMenuElement [
 	aMenuElement parent == self ifTrue: [ ^ self ].
 
+	aMenuElement removeFromParent.
+	self addChild: aMenuElement.
 	self
 		dispatchEvent: (BrMenuElementAdded new
 				menuElement: aMenuElement;
 				menuModel: aMenuModel).
-	aMenuElement removeFromParent.
-	self addChild: aMenuElement.
 	aMenuModel onMenuDisplayed: aMenuElement
 ]
 
@@ -34,7 +34,7 @@ BrMenuSteppedElement >> anchor: anAnchor [
 { #category : #private }
 BrMenuSteppedElement >> cachedSubmenuElement: aSubmenu [
 	^ elementCache
-		at: aSubmenu
+		at: aSubmenu elementMenuModel
 		ifPresent: [ :anElement | anElement ]
 		ifAbsentPut: [ self newElementForSubmenu: aSubmenu ]
 ]
@@ -119,7 +119,9 @@ BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 	anElement := self visitSubmenu: aSubmenu.
 	
 	"Some code depends on anchor elements even after menu element removal.
-	For that reason, the anchor is set to every menu element."
+	For that reason, the anchor is set to every menu element.
+	Note: We want to remove such dependecy, so please do not create more
+	code using `anElement anchor`."
 	anElement ifNotNil: [
 		self anchor ifNotNil: [ :anAnchor | 
 			anElement anchor: self anchor ] ].
@@ -149,11 +151,13 @@ BrMenuSteppedElement >> onDetachWish: anEvent [
 
 	| aMenuModel anElement |
 	anEvent consumed: true.
-	aMenuModel := anEvent menuModel.
-	aMenuModel
-		ifNil: [ elementCache
-				keysAndValuesDo: [ :eachMenuModel :eachElement | eachElement = anEvent source ifTrue: [ aMenuModel := eachMenuModel ] ] ].
+	
+	aMenuModel := anEvent menuModel elementMenuModel.
+	aMenuModel ifNil: [ 
+		elementCache keysAndValuesDo: [ :eachMenuModel :eachElement | 
+			eachElement = anEvent source ifTrue: [ aMenuModel := eachMenuModel ] ] ].
 	aMenuModel ifNil: [ ^ self ].
+	
 	anElement := self removeCachedSubmenuElement: aMenuModel.
 	anElement ifNil: [ ^ self ].
 	
@@ -194,7 +198,7 @@ BrMenuSteppedElement >> removeCachedElements [
 
 { #category : #'private - updating' }
 BrMenuSteppedElement >> removeCachedSubmenuElement: aMenuModel [
-	^ elementCache removeKey: aMenuModel ifAbsent: [ nil ].
+	^ elementCache removeKey: aMenuModel elementMenuModel ifAbsent: [ nil ].
 ]
 
 { #category : #'api - displaying' }

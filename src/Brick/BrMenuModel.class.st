@@ -29,6 +29,14 @@ BrMenuModel >> asStencil [
 	^ [ self ] asStencil
 ]
 
+{ #category : #accessing }
+BrMenuModel >> elementMenuModel [
+	"I return a menu model that is kept by elements.
+	I avoid returning `BrMenuDecoratoringModel` instances."
+
+	^ self
+]
+
 { #category : #'gt - extensions' }
 BrMenuModel >> gtItemChildren [
 	^ Array empty

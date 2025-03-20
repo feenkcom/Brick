@@ -146,7 +146,6 @@ BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
 	aHandleBlock is a stencil that creates a BlElement instance.
 	aMenuBlock is a stencil that creates a BrMenu instance."
 
-	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new
 		handle: aHandleStencil;
 		submenu: aMenuStencil)
@@ -155,10 +154,8 @@ BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlockOrStencil [
 	"Set a stencil that creates a menu model.
-	The stencil returns a BrMenu instance.
-	A default menu handle is used."
+	The stencil returns a BrMenu instance."
 
-	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new submenu: aMenuBlockOrStencil)
 ]
 
@@ -228,6 +225,7 @@ BrWithExplicitMenuAptitude >> initialize [
 				yourself).
 				
 	self mouseEventHandler: self defaultMouseEventHandler.
+	self withDefaultHandle
 ]
 
 { #category : #initialization }
