@@ -41,7 +41,7 @@ BrMenuDecoratoringModel >> decorator: aBlockClosure [
 
 { #category : #accessing }
 BrMenuDecoratoringModel >> elementMenuModel [
-	^ self menuModel
+	^ self menuModel ifNotNil: #elementMenuModel
 ]
 
 { #category : #'event handling' }
