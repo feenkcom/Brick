@@ -119,7 +119,9 @@ BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 	anElement := self visitSubmenu: aSubmenu.
 	
 	"Some code depends on anchor elements even after menu element removal.
-	For that reason, the anchor is set to every menu element."
+	For that reason, the anchor is set to every menu element.
+	Note: We want to remove such dependecy, so please do not create more
+	code using `anElement anchor`."
 	anElement ifNotNil: [
 		self anchor ifNotNil: [ :anAnchor | 
 			anElement anchor: self anchor ] ].
