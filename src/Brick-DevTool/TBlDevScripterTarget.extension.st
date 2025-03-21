@@ -20,9 +20,16 @@ TBlDevScripterTarget >> onDropdown: aBoolean [
 	"True indicates using a new menu implementation.
 	False means using an old anchored implementation."
 
-	^ aBoolean
+	aBoolean
 		ifFalse: [ self
 				// BrAnchoredOuterContainer;
 				/ BrAnchoredElement ]
 		ifTrue: [ self // BrMenuSteppedElement ]
+]
+
+{ #category : #'*Brick-DevTool' }
+TBlDevScripterTarget >> onMenuContainer [
+	self
+		onSpaceRoot;
+		// BrMenuSteppedElement
 ]

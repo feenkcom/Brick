@@ -323,6 +323,250 @@ BrMenuWithScripterExamples >> clickPasteMenuItem [
 	^ aScripter
 ]
 
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayTabGroupWithButtonDropdownMenu.
+
+	aScripter menuStep
+		openDropdownWithId: #'menu-dropdown-button';
+		assertMenuContainerExist: 1;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemFour [
+	"In this case clicking on the menu item, the tab `Two` is selected
+	and anchor dispatches dropdown-hide-wish. The menu therefore should not open again
+	once the tab `One` is selected."
+
+	<gtExample>
+	| aScripter aMenuItemId anAnchorElement |
+	aScripter := self clickTabGroupWithButtonDropdownMenu.
+
+	aMenuItemId := #'menu-item-four'.
+	anAnchorElement := (aScripter root query // #'menu-dropdown-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+
+	aScripter menuStep
+		hoverMenuItemWithId: aMenuItemId;
+		assertMenuContainerExist: 1;
+		clickMenuItemWithId: aMenuItemId;
+		assertClosedMenuContainer;
+		assertPermanentlyHiddenDropdownInElement: anAnchorElement;
+		assertDropdownContainerHasEmptyElementCacheInElement: anAnchorElement;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemFour_switchBackToTabOne [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemFour.
+
+	aScripter click
+		label: 'Switch back to tab one';
+		// #'tab-one';
+		play.
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemOne [
+	"In this case clicking on the menu item, the tab `Two` is selected
+	and menu item explicitly set do-not-hide-on-click property. 
+	The menu therefore should open again once the tab `One` is selected."
+
+	<gtExample>
+	| aScripter aMenuItemId anAnchorElement |
+	aScripter := self clickTabGroupWithButtonDropdownMenu.
+
+	aMenuItemId := #'menu-item-one'.
+	anAnchorElement := (aScripter root query // #'menu-dropdown-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+
+	aScripter menuStep
+		hoverMenuItemWithId: aMenuItemId;
+		assertMenuContainerExist: 1;
+		clickMenuItemWithId: aMenuItemId;
+		assertClosedMenuContainer;
+		assertTemporarilyHiddenDropdownInElement: anAnchorElement;
+		assertDropdownElementCacheSize: 2 inElement: anAnchorElement;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemOne_switchBackToTabOne [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemOne.
+
+	aScripter click
+		label: 'Switch back to tab one';
+		// #'tab-one';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist: 1;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemThree [
+	"In this case clicking on the menu item, the tab `Two` is selected
+	and menu item element fires dropdown-hide-wish. The menu therefore should not open again
+	once the tab `One` is selected."
+
+	<gtExample>
+	| aScripter aMenuItemId anAnchorElement |
+	aScripter := self clickTabGroupWithButtonDropdownMenu.
+
+	aMenuItemId := #'menu-item-three'.
+	anAnchorElement := (aScripter root query // #'menu-dropdown-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+
+	aScripter menuStep
+		hoverMenuItemWithId: aMenuItemId;
+		assertMenuContainerExist: 1;
+		clickMenuItemWithId: aMenuItemId;
+		assertClosedMenuContainer;
+		assertPermanentlyHiddenDropdownInElement: anAnchorElement;
+		assertDropdownContainerHasEmptyElementCacheInElement: anAnchorElement;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemThree_switchBackToTabOne [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemThree.
+
+	aScripter click
+		label: 'Switch back to tab one';
+		// #'tab-one';
+		play.
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemTwo [
+	"In this case clicking on the menu item, the tab `Two` is selected
+	and menu item calls hide-all. The menu therefore should not open again
+	once the tab `One` is selected."
+
+	<gtExample>
+	| aScripter aMenuItemId anAnchorElement |
+	aScripter := self clickTabGroupWithButtonDropdownMenu.
+
+	aMenuItemId := #'menu-item-two'.
+	anAnchorElement := (aScripter root query // #'menu-dropdown-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+
+	aScripter menuStep
+		hoverMenuItemWithId: aMenuItemId;
+		assertMenuContainerExist: 1;
+		clickMenuItemWithId: aMenuItemId;
+		assertClosedMenuContainer;
+		assertPermanentlyHiddenDropdownInElement: anAnchorElement;
+		assertDropdownContainerHasEmptyElementCacheInElement: anAnchorElement;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemTwo_switchBackToTabOne [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemTwo.
+
+	aScripter click
+		label: 'Switch back to tab one';
+		// #'tab-one';
+		play.
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo [
+	"In this case clicking on the tab `Two`, the menu is closed and should not open again
+	once the tab `One` is selected."
+
+	<gtExample>
+	| aScripter anAnchorElement |
+	aScripter := self clickTabGroupWithButtonDropdownMenu.
+
+	anAnchorElement := (aScripter root query // #'menu-dropdown-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+
+	aScripter click
+		label: 'Switch back to tab one';
+		// #'tab-two';
+		play.
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		assertPermanentlyHiddenDropdownInElement: anAnchorElement;
+		assertDropdownContainerHasEmptyElementCacheInElement: anAnchorElement;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo_switchBackToTabOne [
+	<gtExample>
+	| aScripter |
+	aScripter := self clickTabGroupWithButtonDropdownMenu_switchToTabTwo.
+
+	aScripter click
+		label: 'Switch back to tab one';
+		// #'tab-one';
+		play.
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		onMenuContainer;
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - scripter' }
 BrMenuWithScripterExamples >> contextMenuElementWithMenuModel: aMenuModel [
 	^ BrFrame new
@@ -389,6 +633,12 @@ BrMenuWithScripterExamples >> displayButtonWithTooltip [
 BrMenuWithScripterExamples >> displayButtonWithTooltipLabelItem [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithTooltipLabelItem ]
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> displayTabGroupWithButtonDropdownMenu [
+	<gtExample>
+	^ self scripterWithElement: [ self tabGroupWithButtonDropdownMenu ]
 ]
 
 { #category : #'examples - dropdown' }
@@ -1198,4 +1448,140 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_demo [
 	aScripter := self menuWithUpdatableMenuItems.
 
 	^ aScripter elementWithoutParent
+]
+
+{ #category : #'examples - show and hide wish' }
+BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu [
+	"I exemplify the cases of switching to another tab from a context menu.
+	As a consequence the dropdown anchor element is removed from a space
+	and therefore the dropdown temporarily hidden.
+	See https://github.com/feenkcom/gtoolkit/issues/4375"
+
+	<gtExample>
+	| aTabOne aTabTwo |
+	aTabOne := BrTab new
+			id: #'tab-one';
+			aptitude: BrGlamorousTabAptitude new;
+			label: 'One';
+			stencil: [ | aMenuItems aMenuItem |
+				aMenuItems := BrMenuItems new.
+				aMenuItem := BrMenuActionItem new
+						id: #'menu-item-one';
+						label: 'Switch to tab two (no-hide)';
+						hideOnClick: false;
+						action: [ :anElement |
+							(anElement space root query // #'tab-two') anyOne select ];
+						yourself.
+				aMenuItems addItem: aMenuItem.
+				aMenuItem := BrMenuActionItem new
+						id: #'menu-item-two';
+						label: 'Switch to tab two (hide)';
+						hideOnClick: true;
+						action: [ :anElement | 
+							(anElement space root query // #'tab-two') anyOne select ];
+						yourself.
+				aMenuItems addItem: aMenuItem.
+				aMenuItem := BrMenuActionItem new
+						id: #'menu-item-three';
+						label: 'Switch to tab two (fire hide wish)';
+						hideOnClick: false;
+						action: [ :anElement | 
+							(anElement space root query // #'tab-two') anyOne select.
+							anElement fireEvent: BrDropdownHideWish new ];
+						yourself.
+				aMenuItems addItem: aMenuItem.
+				aMenuItem := BrMenuActionItem new
+						id: #'menu-item-four';
+						label: 'Switch to tab two (dispatch hide wish)';
+						hideOnClick: false;
+						action: [ :anElement | 
+							| aWish |
+							aWish := BrMenuAnchorElementWish new.
+							anElement fireEvent: aWish.
+							(anElement space root query // #'tab-two') anyOne select.
+							aWish anchorElementDo: [ :anAnchorElement | 
+								anAnchorElement dispatchEvent: (BrDropdownHideWish new 
+									anchor: anAnchorElement) ] ];
+						yourself.
+				aMenuItems addItem: aMenuItem.
+
+				BrFrame new
+					matchParent;
+					border: (BlBorder paint: (Color black alpha: 0.5) width: 1);
+					addChild: (BlElement new
+							size: 10 @ 10;
+							id: #'outside-click';
+							background: (Color lightGray alpha: 0.5);
+							constraintsDo: [ :c | 
+								c margin: (BlInsets all: 10).
+								c frame horizontal alignLeft.
+								c frame vertical alignTop ]);
+					addChild: (BrButton new
+							aptitude: BrGlamorousButtonWithLabelAptitude;
+							id: #'menu-dropdown-button';
+							label: 'Dropdown';
+							constraintsDo: [ :c | 
+								c margin: (BlInsets all: 10).
+								c frame horizontal alignCenter.
+								c frame vertical alignCenter ];
+							addAptitude: (BrGlamorousWithExplicitDropdownAptitude
+									handle: [ BrButton new
+											id: #'menu-dropdown-handle';
+											aptitude: BrGlamorousButtonWithLabelAptitude - BrGlamorousButtonExteriorAptitude;
+											label: 'Dropdown' ]
+									menu: aMenuItems)) ].
+	aTabTwo := BrTab new
+			id: #'tab-two';
+			aptitude: BrGlamorousTabAptitude new;
+			label: 'Two';
+			stencil: [ BrFrame new
+					matchParent;
+					background: Color paleGreen ].
+	^ BrTabGroup new
+		matchParent;
+		aptitude: BrGlamorousTabGroupAptitude new;
+		addTab: aTabOne;
+		addTab: aTabTwo
+]
+
+{ #category : #'examples - dropdown' }
+BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu: aMenuStencil [
+	<gtExample>
+	^ BrTabGroup new
+		matchParent;
+		aptitude: BrGlamorousTabGroupAptitude new;
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'One';
+				stencil: [ BrFrame new
+						matchParent;
+						border: (BlBorder paint: (Color black alpha: 0.5) width: 1);
+						addChild: (BlElement new
+								size: 10 @ 10;
+								id: #'outside-click';
+								background: (Color lightGray alpha: 0.5);
+								constraintsDo: [ :c | 
+									c margin: (BlInsets all: 10).
+									c frame horizontal alignLeft.
+									c frame vertical alignTop ]);
+						addChild: (BrButton new
+								aptitude: BrGlamorousButtonWithLabelAptitude;
+								id: #'menu-dropdown-button';
+								label: 'Dropdown';
+								constraintsDo: [ :c | 
+									c margin: (BlInsets all: 10).
+									c frame horizontal alignCenter.
+									c frame vertical alignCenter ];
+								addAptitude: (BrGlamorousWithExplicitDropdownAptitude
+										handle: [ BrButton new
+												id: #'menu-dropdown-handle';
+												aptitude: BrGlamorousButtonWithLabelAptitude - BrGlamorousButtonExteriorAptitude;
+												label: 'Dropdown' ]
+										menu: aMenuStencil)) ]);
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Two';
+				stencil: [ BrFrame new
+						matchParent;
+						background: Color paleGreen ])
 ]

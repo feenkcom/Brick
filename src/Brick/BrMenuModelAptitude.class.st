@@ -1,3 +1,6 @@
+"
+I am a basic {{gtClass:BrMenuModel}}-related aptitude, holding the {{gtClass:BrMenuModel}} itself.
+"
 Class {
 	#name : #BrMenuModelAptitude,
 	#superclass : #BrAptitude,
@@ -5,6 +8,11 @@ Class {
 	#classTraits : 'TBrMenuWithMenuModel classTrait',
 	#category : #'Brick-Menu - Aptitude'
 }
+
+{ #category : #testing }
+BrMenuModelAptitude class >> isAbstract [
+	^ self name = #BrMenuModelAptitude
+]
 
 { #category : #initialization }
 BrMenuModelAptitude >> initializeListeners [

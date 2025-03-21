@@ -1,3 +1,6 @@
+"
+I define basic appearance of {{gtClass:BrMenuSteppedElement}}. 
+"
 Class {
 	#name : #BrMenuContainerAptitude,
 	#superclass : #BrAptitude,
