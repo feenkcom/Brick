@@ -52,7 +52,7 @@ BrMenuModel >> hide [
 	"Hide corresponding menu element.
 	Note: This method can be called only from the UI process."
 
-	announcer announce: (BrMenuHideRequestAnnouncement new menuModel: self)
+	announcer announce: (BrMenuHideAnnouncement new menuModel: self)
 ]
 
 { #category : #'api - visibility' }
@@ -60,8 +60,12 @@ BrMenuModel >> hideAll [
 	"Hide everything up to the root menu model.
 	Note: This method can be called only from the UI process."
 
-	self hide.
-	self parentDo: #hideAll
+	self
+		parentDo: [ :aParent | 
+			aParent hideAll.
+			^ self ].
+
+	announcer announce: (BrMenuHideAllAnnouncement new menuModel: self)
 ]
 
 { #category : #accessing }

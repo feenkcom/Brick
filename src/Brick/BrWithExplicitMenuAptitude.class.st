@@ -72,7 +72,7 @@ BrWithExplicitMenuAptitude >> cacheCleaner: anObject [
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
-	^ self visible
+	^ self visible or: [ self isTemporarilyHidden ]
 ]
 
 { #category : #testing }
@@ -267,7 +267,7 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer
-		when: BrMenuAnchorElementEvent
+		when: BrMenuAnchorElementWish
 		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
 	menuContainer
 		when: BrMenuHideAllWish
@@ -284,6 +284,15 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer
 		when: BrMenuElementRemoved
 		do: [ :anEvent | self onMenuElementRemovedEvent: anEvent ]
+]
+
+{ #category : #testing }
+BrWithExplicitMenuAptitude >> isTemporarilyHidden [
+	self
+		widgetDo: [ :aWidget | 
+			^ (aWidget hasEventHandler: addedToSceneEventHandler)
+				and: [ (aWidget hasEventHandler: clickOutsideEventHandler) not ] ].
+	^ false
 ]
 
 { #category : #'api - menu' }
@@ -354,7 +363,7 @@ BrWithExplicitMenuAptitude >> newTooltipEventHandler [
 BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [ 
 	anEvent consumed: true.
 	self widgetDo: [ :aWidget | 
-		anEvent sourceElement: aWidget ]
+		anEvent anchorElement: aWidget ]
 ]
 
 { #category : #'api - hooks' }

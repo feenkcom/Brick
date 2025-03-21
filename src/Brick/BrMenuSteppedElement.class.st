@@ -66,6 +66,13 @@ BrMenuSteppedElement >> elementCache [
 ]
 
 { #category : #'api - testing' }
+BrMenuSteppedElement >> hasEmptyElementCache [
+	"For testing purposes only, e.g., scripter examples"
+
+	^ elementCache isEmpty
+]
+
+{ #category : #'api - testing' }
 BrMenuSteppedElement >> hasPinnedChildrenOnly [
 	^ elementCache allSatisfy: [ :anElement | 
 		(anElement parent == self) not ]
