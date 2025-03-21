@@ -74,7 +74,7 @@ BrMenuItemsListElement >> subscribeToMenuModel [
 	super subscribeToMenuModel.
 
 	self menuModel announcer weak
-		when: BrMenuHideRequestAnnouncement
+		when: BrMenuHideAnnouncement
 			send: #onMenuHideRequest:
 			to: self;
 		when: BrMenuItemsChangedAnnouncement

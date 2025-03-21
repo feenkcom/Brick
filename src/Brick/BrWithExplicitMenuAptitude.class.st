@@ -72,7 +72,7 @@ BrWithExplicitMenuAptitude >> cacheCleaner: anObject [
 
 { #category : #testing }
 BrWithExplicitMenuAptitude >> canHide [
-	^ self visible
+	^ self visible or: [ self isTemporarilyHidden ]
 ]
 
 { #category : #testing }
@@ -146,7 +146,6 @@ BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
 	aHandleBlock is a stencil that creates a BlElement instance.
 	aMenuBlock is a stencil that creates a BrMenu instance."
 
-	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new
 		handle: aHandleStencil;
 		submenu: aMenuStencil)
@@ -155,10 +154,8 @@ BrWithExplicitMenuAptitude >> handle: aHandleStencil submenu: aMenuStencil [
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> handleSubmenu: aMenuBlockOrStencil [
 	"Set a stencil that creates a menu model.
-	The stencil returns a BrMenu instance.
-	A default menu handle is used."
+	The stencil returns a BrMenu instance."
 
-	self withDefaultHandle.
 	self stencil: (BrMenuExplicitHandle new submenu: aMenuBlockOrStencil)
 ]
 
@@ -228,6 +225,7 @@ BrWithExplicitMenuAptitude >> initialize [
 				yourself).
 				
 	self mouseEventHandler: self defaultMouseEventHandler.
+	self withDefaultHandle
 ]
 
 { #category : #initialization }
@@ -269,7 +267,7 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 		when: BrMenuWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
 	menuContainer
-		when: BrMenuAnchorElementEvent
+		when: BrMenuAnchorElementWish
 		do: [ :anEvent | self onAnchorElementRequest: anEvent ].
 	menuContainer
 		when: BrMenuHideAllWish
@@ -286,6 +284,15 @@ BrWithExplicitMenuAptitude >> initializeMenuContainer [
 	menuContainer
 		when: BrMenuElementRemoved
 		do: [ :anEvent | self onMenuElementRemovedEvent: anEvent ]
+]
+
+{ #category : #testing }
+BrWithExplicitMenuAptitude >> isTemporarilyHidden [
+	self
+		widgetDo: [ :aWidget | 
+			^ (aWidget hasEventHandler: addedToSceneEventHandler)
+				and: [ (aWidget hasEventHandler: clickOutsideEventHandler) not ] ].
+	^ false
 ]
 
 { #category : #'api - menu' }
@@ -356,7 +363,7 @@ BrWithExplicitMenuAptitude >> newTooltipEventHandler [
 BrWithExplicitMenuAptitude >> onAnchorElementRequest: anEvent [ 
 	anEvent consumed: true.
 	self widgetDo: [ :aWidget | 
-		anEvent sourceElement: aWidget ]
+		anEvent anchorElement: aWidget ]
 ]
 
 { #category : #'api - hooks' }

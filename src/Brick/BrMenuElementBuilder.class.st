@@ -31,15 +31,16 @@ BrMenuElementBuilder >> visitGivenModel: aMenuModel [
 ]
 
 { #category : #visiting }
-BrMenuElementBuilder >> visitMenuDecoratingModel: aMenuModel [
+BrMenuElementBuilder >> visitMenuDecoratingModel: aDecoratingMenuModel [
 	| anOriginalMenuModel anElement |
-	anOriginalMenuModel := aMenuModel menuModel.
-	anOriginalMenuModel ifNil: [ ^ self visitMenuModel: aMenuModel ].
+	anOriginalMenuModel := aDecoratingMenuModel menuModel.
+	anOriginalMenuModel ifNil: [ 
+		^ self visitMenuModel: aDecoratingMenuModel ].
 	
 	anElement := anOriginalMenuModel acceptVisitor: self.
 	
-	aMenuModel decorator ifNil: [ ^ anElement ].
-	aMenuModel decorator cull: anElement.
+	aDecoratingMenuModel decorator ifNil: [ ^ anElement ].
+	aDecoratingMenuModel decorator cull: anElement.
 	
 	^ anElement
 ]

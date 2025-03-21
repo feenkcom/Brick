@@ -26,8 +26,5 @@ BrMenuActionItemElement >> onClick: anEvent element: anElement model: aButtonMod
 	aMenuModel ifNil: [ ^ self ].
 	aMenuModel action ifNotNil: [ :anAction | 
 		anAction gtValueWithArgs: { anElement. aButtonModel. anEvent } ].
-	aMenuModel hideOnClick ifTrue: [ 
-		BlTaskAction
-			enqueueElement: self 
-			action: [ aMenuModel hideAll ] ].
+	aMenuModel hideOnClick ifTrue: [ aMenuModel hideAll ].
 ]
