@@ -1,3 +1,12 @@
+"
+I am a handle for a menu that appears at the top left of the menu as an attached circle.
+I provide the position in the context available to indivdiual menu items (for example, to create a new element at that position).
+For example:
+```
+BrMenuExplicitHandle new menu:
+	BrMenuExamples new menuItems
+```
+"
 Class {
 	#name : #BrMenuExplicitHandle,
 	#superclass : #BrMenuHandle,
