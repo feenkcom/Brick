@@ -367,7 +367,7 @@ BrTextEditorModel >> initialize [
 	history := BrTextEditorHistory new.
 
 	isFocused := false.
-	shouldStyleWhenTextModified := true.
+	shouldStyleWhenTextModified := false.
 	shouldConsumeClickEvent := true.	
 	
 	"only when the editor mode is null, set an actual mode.
