@@ -192,7 +192,7 @@ BrWithExplicitMenuAptitude >> hide [
 				removeEventHandler: positionInSpaceChangedEventHandler;
 				removeEventHandler: addedToSceneEventHandler;
 				removeEventHandler: removedFromSceneEventHandler.
-			self temporaryHide.
+			self temporarilyHide.
 			self fireEvent: (BrMenuIsHiddenEvent new
 				menuModel: menuContainer menuModel;
 				menuContainer: menuContainer).
@@ -524,7 +524,7 @@ BrWithExplicitMenuAptitude >> onWhoToPinToEvent: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWidgetAddedToSceneGraph: anEvent [
-	self temporaryShow
+	self temporarilyShow
 ]
 
 { #category : #'event handling' }
@@ -540,7 +540,7 @@ BrWithExplicitMenuAptitude >> onWidgetPositionChanged: anEvent [
 { #category : #'event handling' }
 BrWithExplicitMenuAptitude >> onWidgetRemovedFromSceneGraph: anEvent [
 	anEvent consumed: true.
-	self temporaryHide
+	self temporarilyHide
 ]
 
 { #category : #private }
@@ -636,7 +636,7 @@ BrWithExplicitMenuAptitude >> showIn: aParentElement dueToEvent: anEventOrNil [
 			addEventHandler: addedToSceneEventHandler;
 			addEventHandler: removedFromSceneEventHandler ].
 	
-	self temporaryShowIn: aParentElement.
+	self temporarilyShowIn: aParentElement.
 	
 	self fireEvent: (BrMenuIsVisibleEvent new
 			menuModel: aMenu;
@@ -668,28 +668,30 @@ BrWithExplicitMenuAptitude >> submenus [
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> temporaryHide [
-	"Temporary hide without destroying menu content"
+BrWithExplicitMenuAptitude >> temporarilyHide [
+	"Temporarily hide without destroying menu content"
 
 	menuContainer removeFromParent.
 	menuContainerParent ifNotNil: [ :aParent | 
 		menuContainerParent := nil.
 		aParent removeEventFilter: clickOutsideEventHandler.
-		aParent removeShortcut: pressEscEventHandler. ]
+		aParent removeShortcut: pressEscEventHandler. ].
+		
+	NonInteractiveTranscript stdout show: #temporaryHide:; cr.
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> temporaryShow [
-	"Re-add temporary hiden menu container without reconstructing its menu content"
+BrWithExplicitMenuAptitude >> temporarilyShow [
+	"Re-add temporarily hiden menu container without reconstructing its menu content"
 
 	self widgetDo: [ :aWidget | 
 		| aParent |
 		aParent := aWidget topMostParent.
-		self temporaryShowIn: aParent ]
+		self temporarilyShowIn: aParent ]
 ]
 
 { #category : #private }
-BrWithExplicitMenuAptitude >> temporaryShowIn: aParentElement [
+BrWithExplicitMenuAptitude >> temporarilyShowIn: aParentElement [
 	menuContainerParent := aParentElement.
 	aParentElement addEventFilter: clickOutsideEventHandler.
 	aParentElement addShortcut: pressEscEventHandler.
@@ -697,7 +699,9 @@ BrWithExplicitMenuAptitude >> temporaryShowIn: aParentElement [
 	menuContainer parent == aParentElement ifFalse: [
 		menuContainer removeFromParent.
 		aParentElement addChild: menuContainer ].
-	self relocate
+	self relocate.
+	
+	NonInteractiveTranscript stdout show: #temporarilyShowIn:; cr.
 ]
 
 { #category : #'api - menu' }
