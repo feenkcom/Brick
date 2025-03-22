@@ -38,6 +38,20 @@ BrDevScripterMenuStep >> assertDropdownElementCacheSize: aCacheSize inElement: a
 ]
 
 { #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertHandleCenterInSpacePosition: aSpacePosition [
+	| aLabel |
+	aLabel := 'Assert handle center position in space is {1}'
+			format: {aSpacePosition}.
+
+	^ self assert
+		label: aLabel;
+		value: [ :aMenuContainer | (aMenuContainer childAt: 1) bounds inSpace center ]
+			equals: aSpacePosition;
+		referenceSender;
+		onSpaceRoot
+]
+
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertMenuContainerElementCacheSize: aCacheSize for: aMenuAptitudeClass [
 	^ self assert
 		referenceSender;
@@ -233,6 +247,13 @@ BrDevScripterMenuStep >> keepPermanentlyMenuInScene: aMenuAptitudeClass [
 ]
 
 { #category : #'steps - interactions' }
+BrDevScripterMenuStep >> openContextMenu [
+	^ self secondaryClick
+		label: 'Open context menu';
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
 BrDevScripterMenuStep >> openDropdown [
 	^ self click
 		label: 'Open dropdown';
@@ -274,5 +295,11 @@ BrDevScripterMenuStep >> prepareSteppedLayoutContextMenuAnalyzer [
 { #category : #'steps - other' }
 BrDevScripterMenuStep >> prepareSteppedLayoutDropdownAnalyzer [
 	^ (self prepareSteppedLayoutAnalyzerFor: BrWithExplicitDropdownAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutTooltipAnalyzer [
+	^ (self prepareSteppedLayoutAnalyzerFor: BrGlamorousWithExplicitTooltipAptitude)
 		referenceSender
 ]

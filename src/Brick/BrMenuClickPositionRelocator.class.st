@@ -2,9 +2,9 @@ Class {
 	#name : #BrMenuClickPositionRelocator,
 	#superclass : #BrMenuContainerRelocator,
 	#instVars : [
-		'topLeftShift',
 		'center',
-		'extent'
+		'extent',
+		'topLeftShift'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -36,19 +36,13 @@ BrMenuClickPositionRelocator >> mouseUp: anEvent given: aWidget [
 { #category : #'api - relocating' }
 BrMenuClickPositionRelocator >> relocateGiven: aWidget [
 	menuContainer parent
-		ifNotNil: [ :aParent | 
+		ifNotNil: [ :aTopMostParent | 
 			menuContainer
 				layoutDo: [ :aLayout | 
-					| aWidgetRectangle aShiftedRectangle|
-					aWidgetRectangle := (aWidget bounds inParent: aParent) asRectangle.
-					aShiftedRectangle := self shiftedWidgetBounds: aWidgetRectangle.
+					| aShiftedBounds aShiftedBoundsInTopMostParent aShiftedBoundsInContainer aShiftedRectangle |
+					aShiftedBounds := BlBounds origin: topLeftShift - center extent: extent.
+					aShiftedBoundsInTopMostParent := aTopMostParent localBoundsToMine: aShiftedBounds fromChild: aWidget.
+					aShiftedBoundsInContainer := menuContainer parentBoundsToLocal: aShiftedBoundsInTopMostParent.
+					aShiftedRectangle := aShiftedBoundsInContainer asRectangle.
 					aLayout anchorBounds: aShiftedRectangle ] ]
-]
-
-{ #category : #accessing }
-BrMenuClickPositionRelocator >> shiftedWidgetBounds: aWidgetRectangle [
-	<return: #Rectangle>
-	| anOrigin |
-	anOrigin := aWidgetRectangle origin translateBy: topLeftShift - center.
-	^ anOrigin extent: extent.
 ]

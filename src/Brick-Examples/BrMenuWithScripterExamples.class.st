@@ -18,6 +18,38 @@ BrMenuWithScripterExamples >> actionElementIsWithoutForegroundAttribute: anActio
 				not ]) isNotEmpty
 ]
 
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> buttonWithContextMenu [
+	<gtExample>
+	^ self buttonWithContextMenu: BrMenuExamples new menuItems
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> buttonWithContextMenu: aMenuStencil [
+	<gtExample>
+	^ BrFrame new
+		matchParent;
+		border: (BlBorder paint: (Color black alpha: 0.5) width: 1);
+		addChild: (BlElement new
+			size: 10@10;
+			id: #'outside-click';
+			background: (Color lightGray alpha: 0.5);
+			constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignLeft.
+					c frame vertical alignTop ]);
+		addChild: (BrButton new
+				aptitude: BrGlamorousButtonWithLabelAptitude;
+				id: #'menu-context-menu-button';
+				label: 'Context menu';
+				constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignCenter.
+					c frame vertical alignCenter ];
+				addAptitude: (BrGlamorousWithExplicitContextMenuAptitude
+						menu: aMenuStencil))
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
@@ -102,6 +134,29 @@ BrMenuWithScripterExamples >> buttonWithTooltipMenu: aMenuStencil [
 					c frame vertical alignCenter ];
 				addAptitude: (BrGlamorousWithExplicitTooltipAptitude
 						menu: aMenuStencil))
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> clickButtonWithContextMenu [
+	<gtExample>
+	| aScripter anAnchorElement aClickPosition |
+	aScripter := self displayButtonWithContextMenu.
+
+	aScripter menuStep
+		openContextMenu;
+		/ #'menu-context-menu-button';
+		play.
+		
+	anAnchorElement := (aScripter root query // #'menu-context-menu-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+	aClickPosition := anAnchorElement bounds inSpace center.
+		
+	aScripter menuStep
+		assertMenuContainerExist;
+		assertHandleCenterInSpacePosition: aClickPosition;
+		play.
+
+	^ aScripter
 ]
 
 { #category : #'examples - dropdown' }
@@ -567,6 +622,44 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo
 	^ aScripter
 ]
 
+{ #category : #'examples - transformation' }
+BrMenuWithScripterExamples >> clickTransformedContainerWithContextMenu [
+	<gtExample>
+	<noTest>
+	| aScripter anAnchorElement anAnchorCenterPosition anEventPosition |
+	aScripter := self displayTransformedContainerWithContextMenu.	"aScripter menuStep
+		openContextMenu;
+		// #'menu-anchor';
+		play."
+
+	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+		// #'menu-anchor';
+		play.
+
+	aScripter secondaryClick
+		// #'menu-anchor';
+		play.
+
+	anAnchorElement := (aScripter root query // #'menu-anchor') anyOne.
+	self assert: anAnchorElement isNotNil.
+	anAnchorCenterPosition := anAnchorElement space root
+			localPointToMine: anAnchorElement bounds center
+			fromChild: anAnchorElement.
+			
+	anEventPosition := aScripter events detect: [ :each | each isKindOf: BlMouseUpEvent ]
+		ifFound: [ :anEvent | anEvent position ]
+		ifNone: [ nil ].
+	self assert: anEventPosition isNotNil.
+	"self assert: anAnchorCenterPosition equals: anEventPosition."
+	
+	aScripter menuStep
+		assertMenuContainerExist;
+		assertHandleCenterInSpacePosition: anEventPosition;
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - scripter' }
 BrMenuWithScripterExamples >> contextMenuElementWithMenuModel: aMenuModel [
 	^ BrFrame new
@@ -605,6 +698,12 @@ BrMenuWithScripterExamples >> dispatchDropdownShowWishToButtonWithDropdown [
 	^ aScripter
 ]
 
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenu [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithContextMenu ]
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdown [
 	<gtExample>
@@ -639,6 +738,12 @@ BrMenuWithScripterExamples >> displayButtonWithTooltipLabelItem [
 BrMenuWithScripterExamples >> displayTabGroupWithButtonDropdownMenu [
 	<gtExample>
 	^ self scripterWithElement: [ self tabGroupWithButtonDropdownMenu ]
+]
+
+{ #category : #'examples - transformation' }
+BrMenuWithScripterExamples >> displayTransformedContainerWithContextMenu [
+	<gtExample>
+	^ self scripterWithElement: [ self transformedContainerWithContextMenu ]
 ]
 
 { #category : #'examples - dropdown' }
@@ -1584,4 +1689,59 @@ BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu: aMenuStencil [
 				stencil: [ BrFrame new
 						matchParent;
 						background: Color paleGreen ])
+]
+
+{ #category : #'examples - transformation' }
+BrMenuWithScripterExamples >> transformedContainerWithContextMenu [
+	"Original example: BrAnchoredExamples>>#contextMenu"
+	<gtExample>
+	
+	| handleSize handle content container anchor anchorContainer |
+	handleSize := 8 @ 8.
+	handle := [ BlElement new
+		id: #'menu-handle';
+		size: handleSize;
+		yourself ] asStencil.
+	content := [ (BrLabel new
+		id: #'menu-content';
+		aptitude:
+			(BrGlamorousLabelAptitude new
+				glamorousRegularFontAndSize;
+				yourself);
+		padding: (BlInsets all: handleSize x);
+		text: 'look at me!';
+		yourself) asScrollableElement
+		alignCenter;
+		yourself ] asStencil.
+	container := BlElement new
+		background: Color gray muchLighter;
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ];
+		transformDo: [ :t | 
+			t
+				origin: BlAffineTransformationTopLeftOrigin new;
+				rotateBy: 30;
+				translateBy: 400 @ 100;
+				scaleBy: 0.5 ];
+		yourself.
+	anchor := BlElement new
+		id: #'menu-anchor';
+		aptitude: (BrGlamorousWithExplicitContextMenuAptitude handle: handle content: content);
+		background: Color red;
+		size: 40 @ 80;
+		addEventHandler: BlPullHandler new;
+		yourself.
+	anchorContainer := BlElement new
+		background: Color red muchLighter;
+		relocate: 200 @ 250;
+		size: 400 @ 200;
+		constraintsDo: [ :c | c ignoreByLayout ];
+		clipChildren: false;
+		addChild: anchor;
+		yourself.
+	^ container
+		addChild: anchorContainer;
+		yourself
 ]
