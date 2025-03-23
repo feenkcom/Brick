@@ -345,7 +345,7 @@ BrMenuExamples >> menuLabelItem [
 	aMenuItem := self basicMenuLabelItem.
 
 	aMenuItem id: #'menu-label-item'.
-	aMenuItem label: 'I am a label item explaining something' shortcut: 'F5'.
+	aMenuItem label: self tooltipLongString shortcut: 'F5'.
 
 	^ aMenuItem
 ]
@@ -434,6 +434,11 @@ BrMenuExamples >> submenuInlineMessageItems [
 	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem
+]
+
+{ #category : #'examples - items' }
+BrMenuExamples >> tooltipLongString [
+	^ 'I am a label item explaining something in great detail'
 ]
 
 { #category : #visiting }
