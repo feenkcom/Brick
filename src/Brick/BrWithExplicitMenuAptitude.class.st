@@ -543,6 +543,15 @@ BrWithExplicitMenuAptitude >> onWidgetRemovedFromSceneGraph: anEvent [
 	self temporarilyHide
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitMenuAptitude >> preferredChildWeight: aNumber [
+	"Argument is a value between 0.0 and 1.0.
+	The value is used to compute maximum child width.
+	See BlSteppedLayoutState>>#estimateWidthSpecOf: for more details."
+
+	menuContainer layout preferredChildWeight: aNumber
+]
+
 { #category : #private }
 BrWithExplicitMenuAptitude >> relocate [
 	self widgetDo: [ :aWidget | 

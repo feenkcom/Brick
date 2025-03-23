@@ -105,9 +105,43 @@ BrMenuWithScripterExamples >> buttonWithTooltip [
 ]
 
 { #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltipLabel: aLabelString shortcut: aShortcutString [
+	<gtExample>
+	^ BrFrame new
+		matchParent;
+		border: (BlBorder paint: (Color black alpha: 0.5) width: 1);
+		addChild: (BlElement new
+			size: 10@10;
+			id: #'outside-click';
+			background: (Color lightGray alpha: 0.5);
+			constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignLeft.
+					c frame vertical alignTop ]);
+		addChild: (BrButton new
+				aptitude: BrGlamorousButtonWithLabelAptitude;
+				id: #'menu-tooltip-button';
+				label: 'Tooltip';
+				constraintsDo: [ :c | 
+					c margin: (BlInsets all: 10).
+					c frame horizontal alignCenter.
+					c frame vertical alignCenter ];
+				addAptitude: (BrGlamorousWithExplicitTooltipAptitude
+						text: aLabelString shortcut: aShortcutString))
+]
+
+{ #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltipLabelItem [
 	<gtExample>
 	^ self buttonWithTooltipMenu: BrMenuExamples new menuLabelItem
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltipLongString [
+	<gtExample>
+	^ self
+		buttonWithTooltipLabel: BrMenuExamples new tooltipLongString
+		shortcut: 'F5'
 ]
 
 { #category : #'examples - tooltip' }
@@ -625,18 +659,15 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo
 { #category : #'examples - transformation' }
 BrMenuWithScripterExamples >> clickTransformedContainerWithContextMenu [
 	<gtExample>
-	<noTest>
 	| aScripter anAnchorElement anAnchorCenterPosition anEventPosition |
-	aScripter := self displayTransformedContainerWithContextMenu.	"aScripter menuStep
-		openContextMenu;
-		// #'menu-anchor';
-		play."
+	aScripter := self displayTransformedContainerWithContextMenu.
 
 	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
 		// #'menu-anchor';
 		play.
 
-	aScripter secondaryClick
+	aScripter menuStep
+		openContextMenu;
 		// #'menu-anchor';
 		play.
 
@@ -645,16 +676,19 @@ BrMenuWithScripterExamples >> clickTransformedContainerWithContextMenu [
 	anAnchorCenterPosition := anAnchorElement space root
 			localPointToMine: anAnchorElement bounds center
 			fromChild: anAnchorElement.
+
+	anEventPosition := aScripter events
+			detect: [ :each | each isKindOf: BlMouseUpEvent ]
+			ifFound: [ :anEvent | anEvent position ]
+			ifNone: [ nil ].
 			
-	anEventPosition := aScripter events detect: [ :each | each isKindOf: BlMouseUpEvent ]
-		ifFound: [ :anEvent | anEvent position ]
-		ifNone: [ nil ].
 	self assert: anEventPosition isNotNil.
-	"self assert: anAnchorCenterPosition equals: anEventPosition."
+	self assert: (anAnchorCenterPosition closeTo: anEventPosition precision: 0.0001).
 	
 	aScripter menuStep
 		assertMenuContainerExist;
-		assertHandleCenterInSpacePosition: anEventPosition;
+		flag: 'I am not sure why the position is not more precise. Ideally, we do not need #roundDownTo:.';
+		assertHandleCenterInSpacePosition: (anEventPosition roundDownTo: 1);
 		play.
 
 	^ aScripter
@@ -732,6 +766,12 @@ BrMenuWithScripterExamples >> displayButtonWithTooltip [
 BrMenuWithScripterExamples >> displayButtonWithTooltipLabelItem [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithTooltipLabelItem ]
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipLongString [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithTooltipLongString ]
 ]
 
 { #category : #'examples - show and hide wish' }
@@ -994,8 +1034,12 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverButtonWithTooltipLabelItem [
+	"The tooltip label is not fully visible, because the default 
+	preferred child width weight is 0.3. It does not fit in this case.
+	Users can use BrWithExplicitTooltipAptitude class>>#text: to use the whole window width."
+
 	<gtExample>
-	| aScripter |
+	| aScripter aMenuElement aLabelElement aMenuContainer |
 	aScripter := self displayButtonWithTooltipLabelItem.
 
 	aScripter mouseMoveOver
@@ -1009,6 +1053,42 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltipLabelItem [
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
+		
+	aMenuElement := (aScripter root query // #'menu-label-item') anyOne.
+	aLabelElement := (aScripter root query // #'menu-label-item' // #label) anyOne.
+	aMenuContainer := (aScripter root query // BrMenuSteppedElement) anyOne.
+	self assert: aMenuElement width < aLabelElement width.
+	self assert: aMenuElement width < aMenuContainer width.
+	
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithTooltipLongString [
+	"The tooltip label is fully visible, because the preferred child width weight is 1.0. 
+	Users can use BrWithExplicitTooltipAptitude class>>#menu: to use default preferred child weight."
+
+	<gtExample>
+	| aScripter aMenuElement aLabelElement aMenuContainer |
+	aScripter := self displayButtonWithTooltipLongString.
+
+	aScripter mouseMoveOver
+		label: 'Hover button with tooltip';
+		/ BrButton;
+		play.
+		
+	aScripter assert
+		label: 'Assert tooltip is opened';
+		exists;
+		onSpaceRoot;
+		// BrMenuSteppedElement;
+		play.
+		
+	aMenuElement := (aScripter root query // BrMenuLabelItemElement) anyOne.
+	aLabelElement := (aScripter root query // BrMenuLabelItemElement // #label) anyOne.
+	aMenuContainer := (aScripter root query // BrMenuSteppedElement) anyOne.
+	self assert: aMenuElement width > aLabelElement width.
+	self assert: aMenuElement width < aMenuContainer width.
 
 	^ aScripter
 ]

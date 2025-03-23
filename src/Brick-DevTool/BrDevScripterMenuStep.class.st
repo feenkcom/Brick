@@ -39,14 +39,20 @@ BrDevScripterMenuStep >> assertDropdownElementCacheSize: aCacheSize inElement: a
 
 { #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertHandleCenterInSpacePosition: aSpacePosition [
-	| aLabel |
+	| aLabel aHandlePosition |
 	aLabel := 'Assert handle center position in space is {1}'
 			format: {aSpacePosition}.
 
 	^ self assert
 		label: aLabel;
-		value: [ :aMenuContainer | (aMenuContainer childAt: 1) bounds inSpace center ]
-			equals: aSpacePosition;
+		satisfies: [ :aSpaceRoot |
+			| aHandleElement |
+			aHandleElement :=(aSpaceRoot query // BrMenuSteppedElement) anyOne childAt: 1.
+			aHandlePosition := aHandleElement boundsInSpace center.
+			aHandlePosition closeTo: aSpacePosition precision: 0.0001 ]
+			description: [ :aMenuContainer | 
+				'Handle center position is {1}. Expected position is {2}' 
+					format: { aHandlePosition. aSpacePosition } ];
 		referenceSender;
 		onSpaceRoot
 ]
@@ -250,6 +256,7 @@ BrDevScripterMenuStep >> keepPermanentlyMenuInScene: aMenuAptitudeClass [
 BrDevScripterMenuStep >> openContextMenu [
 	^ self secondaryClick
 		label: 'Open context menu';
+		onParentStepTarget: self;
 		referenceSender
 ]
 
