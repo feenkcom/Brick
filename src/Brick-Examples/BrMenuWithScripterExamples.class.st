@@ -272,13 +272,10 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownAndTooltip [
 	| aScripter |
 	aScripter := self hoverButtonWithDropdownAndTooltip.
 
-	aScripter memoryLogger
-		runFor: GtJustContextStackSignal
-		during: [ :aStep | 
-			aStep menuStep
-				openDropdown;
-				// #'menu-dropdown-button';
-				play ].
+	aScripter menuStep
+		openDropdown;
+		// #'menu-dropdown-button';
+		play.
 
 	aScripter menuStep
 		assertMenuContainerExist;
