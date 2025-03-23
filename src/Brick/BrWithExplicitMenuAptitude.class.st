@@ -86,6 +86,17 @@ BrWithExplicitMenuAptitude >> canShow [
 	^ false
 ]
 
+{ #category : #'event handling' }
+BrWithExplicitMenuAptitude >> consumeClickedOutsideMouseUpEvent: anEvent [
+	"Dropdown and context menu want to consume the event.
+	As a consequence, no other actions are triggered.
+	For example:
+	- no new dropdown or context menu is opened,
+	- no button action is executed."
+
+	anEvent consumed: true
+]
+
 { #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> content: aBlockOrStencil [
 	"Set explicit menu with a default handle"
@@ -392,7 +403,7 @@ BrWithExplicitMenuAptitude >> onClickedOutsideMouseUpEvent: anEvent [
 		(eachSubmenuContainer isUnpinnedChild: anEvent target)
 			ifTrue: [ ^ self ] ].
 
-	anEvent consumed: true.
+	self consumeClickedOutsideMouseUpEvent: anEvent.
 	self hide.
 ]
 

@@ -230,7 +230,6 @@ BrMenuWithScripterExamples >> clickButtonWithContextMenu [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> clickButtonWithContextMenuAndTooltip [
 	<gtExample>
-	<noTest>
 	| aScripter |
 	aScripter := self hoverButtonWithContextMenuAndTooltip.
 
@@ -270,14 +269,16 @@ BrMenuWithScripterExamples >> clickButtonWithDropdown [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> clickButtonWithDropdownAndTooltip [
 	<gtExample>
-	<noTest>
 	| aScripter |
 	aScripter := self hoverButtonWithDropdownAndTooltip.
 
-	aScripter menuStep
-		openDropdown;
-		// #'menu-dropdown-button';
-		play.
+	aScripter memoryLogger
+		runFor: GtJustContextStackSignal
+		during: [ :aStep | 
+			aStep menuStep
+				openDropdown;
+				// #'menu-dropdown-button';
+				play ].
 
 	aScripter menuStep
 		assertMenuContainerExist;

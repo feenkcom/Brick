@@ -24,15 +24,6 @@ BrMenuTooltipEventHandler >> cancelShowLaterTask [
 	showLaterTask := nil
 ]
 
-{ #category : #'api - event managing' }
-BrMenuTooltipEventHandler >> clickEvent: anEvent [
-	(self wantToShowDueToEnterEvent: anEvent) ifFalse: [ ^ self ].
-	anEvent consumed: true.
-	self cancelShowLaterTask.
-	self cancelHideLaterTask.
-	self hide
-]
-
 { #category : #initialization }
 BrMenuTooltipEventHandler >> defaultHideDelay [
 	^ 300 milliSeconds
@@ -47,7 +38,6 @@ BrMenuTooltipEventHandler >> defaultShowDelay [
 BrMenuTooltipEventHandler >> eventsToHandle [
 	^ {BlMouseEnterEvent.
 		BlMouseLeaveEvent.
-		BlClickEvent.
 		BrMenuIsHiddenEvent.
 		BrMenuIsVisibleEvent.
 		BrMenuElementAdded.

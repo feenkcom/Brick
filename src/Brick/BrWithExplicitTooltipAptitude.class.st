@@ -72,6 +72,15 @@ BrWithExplicitTooltipAptitude class >> text: aLabelString shortcut: aShortcutStr
 	^ anAptitude
 ]
 
+{ #category : #'event handling' }
+BrWithExplicitTooltipAptitude >> consumeClickedOutsideMouseUpEvent: anEvent [
+	"Tooltips do not consume click outside events since the event may trigger other actions.
+	For example:
+		- open a dropdown
+		- open a context menu
+		- run a button action."
+]
+
 { #category : #initialization }
 BrWithExplicitTooltipAptitude >> defaultMouseEventHandler [
 	^ self newTooltipEventHandler
