@@ -60,8 +60,8 @@ BrMenuTooltipEventHandler >> hideDelay [
 ]
 
 { #category : #accessing }
-BrMenuTooltipEventHandler >> hideDelay: anObject [
-	hideDelay := anObject
+BrMenuTooltipEventHandler >> hideDelay: aDuration [
+	hideDelay := aDuration
 ]
 
 { #category : #initialization }
@@ -156,6 +156,11 @@ BrMenuTooltipEventHandler >> onMenuElementMouseLeaveEvent: anEvent [
 { #category : #accessing }
 BrMenuTooltipEventHandler >> showDelay [
 	^ showDelay ifNil: [ showDelay := self defaultShowDelay ]
+]
+
+{ #category : #accessing }
+BrMenuTooltipEventHandler >> showDelay: aDuration [
+	showDelay := aDuration
 ]
 
 { #category : #private }

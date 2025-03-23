@@ -32,7 +32,7 @@ BrGlamorousTaggerEditableDropdownAptitude >> newAddTagButton [
 					+ (BrGlamorousWithExplicitDropdownAptitude
 							handle: [ BrButton new
 									aptitude: BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonIconAptitude new
-											+ BrGlamorousButtonWithLabelTooltipAptitude new
+											+ BrGlamorousButtonWithLabelTooltipAptitude2 new
 											+ (BrInteractiveCommonAptitude new
 													default: [ :aWidget | aWidget border: BlBorder empty ];
 													hovered: [ :aWidget | aWidget background: self theme status neutralBackgroundColor darker ];

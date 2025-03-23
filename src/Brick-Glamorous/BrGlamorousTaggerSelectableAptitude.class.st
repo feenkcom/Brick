@@ -145,38 +145,25 @@ BrGlamorousTaggerSelectableAptitude >> newAllowedTagsChooser: aCollectionOfTags 
 { #category : #'private - instance creation' }
 BrGlamorousTaggerSelectableAptitude >> newBasicAddTagButton [
 	^ BrButton new
-		aptitude:
-			BrGlamorousButtonRectangularAptitude new
-				+ BrGlamorousButtonIconAptitude new
-				+ BrGlamorousButtonWithLabelTooltipAptitude new
-				+
-					(BrInteractiveCommonAptitude new
+		aptitude: BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonIconAptitude new
+				+ BrGlamorousButtonWithLabelTooltipAptitude2 new
+				+ (BrInteractiveCommonAptitude new
 						default: [ :aWidget | 
 							aWidget
 								border: BlBorder empty;
 								background: self theme status neutralBackgroundColor ];
-						hovered: [ :aWidget | 
-							aWidget background:
-								self theme status neutralBackgroundColor darker ];
-						pressed: [ :aWidget | 
-							aWidget
-								background:
-									self theme status neutralBackgroundColor darker darker ];
-						focused: [ :aWidget | 
-							aWidget
-								border: (BlBorder paint: self theme editor focusedBorderColor width: 1) ]);
+						hovered: [ :aWidget | aWidget background: self theme status neutralBackgroundColor darker ];
+						pressed: [ :aWidget | aWidget background: self theme status neutralBackgroundColor darker darker ];
+						focused: [ :aWidget | aWidget border: (BlBorder paint: self theme editor focusedBorderColor width: 1) ]);
 		icon: BrGlamorousVectorIcons add;
 		label: 'Add';
 		beSmallSize;
 		hExact: 20;
 		margin: margin;
 		constraintsDo: [ :c | c flow vertical alignCenter ];
-		addShortcut:
-			(BlShortcutWithAction new
+		addShortcut: (BlShortcutWithAction new
 				combination: BlKeyCombination arrowLeft;
-				action: [ :anEvent | 
-					anEvent currentTarget
-						previousSiblingDo: [ :anElement | anElement requestFocus ] ])
+				action: [ :anEvent | anEvent currentTarget previousSiblingDo: [ :anElement | anElement requestFocus ] ])
 ]
 
 { #category : #'private - instance creation' }

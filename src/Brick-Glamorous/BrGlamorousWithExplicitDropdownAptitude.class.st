@@ -15,10 +15,3 @@ BrGlamorousWithExplicitDropdownAptitude >> beNotResizable [
 BrGlamorousWithExplicitDropdownAptitude >> defaultElementBuilder [
 	^ BrGlamorousMenuElementBuilder new
 ]
-
-{ #category : #deprecated }
-BrGlamorousWithExplicitDropdownAptitude >> preferredExtent: aPoint [
-	"ignore"
-
-	
-]

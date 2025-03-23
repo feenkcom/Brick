@@ -86,6 +86,13 @@ BrWithExplicitMenuAptitude >> canShow [
 	^ false
 ]
 
+{ #category : #'api - menu' }
+BrWithExplicitMenuAptitude >> content: aBlockOrStencil [
+	"Set explicit menu with a default handle"
+
+	^ self handleSubmenu: (BrMenuExplicit new stencil: aBlockOrStencil)
+]
+
 { #category : #initialization }
 BrWithExplicitMenuAptitude >> defaultCacheCleaner [
 	^ BrMenuCacheCleaner allCleaner
@@ -552,6 +559,13 @@ BrWithExplicitMenuAptitude >> preferredChildWeight: aNumber [
 	menuContainer layout preferredChildWeight: aNumber
 ]
 
+{ #category : #deprecated }
+BrWithExplicitMenuAptitude >> preferredExtent: aPoint [
+	"ignore"
+
+	
+]
+
 { #category : #private }
 BrWithExplicitMenuAptitude >> relocate [
 	self widgetDo: [ :aWidget | 
@@ -653,13 +667,13 @@ BrWithExplicitMenuAptitude >> showIn: aParentElement dueToEvent: anEventOrNil [
 	self onShown.
 ]
 
-{ #category : #accessing }
+{ #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> stencil [
 	<return: #BrMenuInitialStencilBuilder or: nil>
 	^ menuStencil
 ]
 
-{ #category : #accessing }
+{ #category : #'api - menu' }
 BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
 	"Set a stencil that creates a menu model.
 	The stencil builder can be a block with one argument: [ :aBrMenuInitialContext | ].
@@ -685,8 +699,6 @@ BrWithExplicitMenuAptitude >> temporarilyHide [
 		menuContainerParent := nil.
 		aParent removeEventFilter: clickOutsideEventHandler.
 		aParent removeShortcut: pressEscEventHandler. ].
-		
-	NonInteractiveTranscript stdout show: #temporaryHide:; cr.
 ]
 
 { #category : #private }
@@ -709,8 +721,6 @@ BrWithExplicitMenuAptitude >> temporarilyShowIn: aParentElement [
 		menuContainer removeFromParent.
 		aParentElement addChild: menuContainer ].
 	self relocate.
-	
-	NonInteractiveTranscript stdout show: #temporarilyShowIn:; cr.
 ]
 
 { #category : #'api - menu' }

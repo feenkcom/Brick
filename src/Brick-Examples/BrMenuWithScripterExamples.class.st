@@ -50,10 +50,36 @@ BrMenuWithScripterExamples >> buttonWithContextMenu: aMenuStencil [
 						menu: aMenuStencil))
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithContextMenuAndTooltip [
+	<gtExample>
+	| anElement aButton |
+	anElement := self buttonWithContextMenu.
+	aButton := (anElement query // #'menu-context-menu-button') anyOne.
+	aButton
+		addAptitude: (BrGlamorousWithExplicitTooltipAptitude
+				text: BrMenuExamples new tooltipLongString).
+
+	^ anElement
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
 	^ self buttonWithDropdownMenu: BrMenuExamples new menuItems
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithDropdownAndTooltip [
+	<gtExample>
+	| anElement aButton |
+	anElement := self buttonWithDropdown.
+	aButton := (anElement query // #'menu-dropdown-button') anyOne.
+	aButton
+		addAptitude: (BrGlamorousWithExplicitTooltipAptitude
+				text: BrMenuExamples new tooltipLongString).
+
+	^ anElement
 ]
 
 { #category : #'examples - dropdown' }
@@ -102,6 +128,14 @@ BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
 BrMenuWithScripterExamples >> buttonWithTooltip [
 	<gtExample>
 	^ self buttonWithTooltipMenu: BrMenuExamples new menuItems
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> buttonWithTooltipKeymap [
+	<gtExample>
+	^ self
+		buttonWithTooltipLabel: BrMenuExamples new tooltipLongString
+		shortcut: $o meta shift asString 
 ]
 
 { #category : #'examples - tooltip' }
@@ -193,6 +227,25 @@ BrMenuWithScripterExamples >> clickButtonWithContextMenu [
 	^ aScripter
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> clickButtonWithContextMenuAndTooltip [
+	<gtExample>
+	<noTest>
+	| aScripter |
+	aScripter := self hoverButtonWithContextMenuAndTooltip.
+
+	aScripter menuStep
+		openContextMenu;
+		// #'menu-context-menu-button';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickButtonWithDropdown [
 	<gtExample>
@@ -209,6 +262,25 @@ BrMenuWithScripterExamples >> clickButtonWithDropdown [
 		exists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> clickButtonWithDropdownAndTooltip [
+	<gtExample>
+	<noTest>
+	| aScripter |
+	aScripter := self hoverButtonWithDropdownAndTooltip.
+
+	aScripter menuStep
+		openDropdown;
+		// #'menu-dropdown-button';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
 		play.
 
 	^ aScripter
@@ -738,10 +810,22 @@ BrMenuWithScripterExamples >> displayButtonWithContextMenu [
 	^ self scripterWithElement: [ self buttonWithContextMenu ]
 ]
 
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenuAndTooltip [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithContextMenuAndTooltip ]
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdown [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithDropdown ]
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithDropdownAndTooltip [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithDropdownAndTooltip ]
 ]
 
 { #category : #'examples - dropdown' }
@@ -760,6 +844,12 @@ BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitMenu [
 BrMenuWithScripterExamples >> displayButtonWithTooltip [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithTooltip ]
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipKeymap [
+	<gtExample>
+	^ self scripterWithElement: [ self buttonWithTooltipKeymap ]
 ]
 
 { #category : #'examples - tooltip' }
@@ -1012,6 +1102,42 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 ]
 
 { #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithContextMenuAndTooltip [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithContextMenuAndTooltip.
+
+	aScripter menuStep
+		displayTooltip;
+		// #'menu-context-menu-button';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithDropdownAndTooltip [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithDropdownAndTooltip.
+
+	aScripter menuStep
+		displayTooltip;
+		// #'menu-dropdown-button';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 	<gtExample>
 	| aScripter |
@@ -1027,6 +1153,24 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 		exists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - tooltip' }
+BrMenuWithScripterExamples >> hoverButtonWithTooltipKeymap [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithTooltipKeymap.
+
+	aScripter menuStep
+		displayTooltip;
+		/ BrButton;
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
 		play.
 
 	^ aScripter

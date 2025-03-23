@@ -1,4 +1,6 @@
 "
+Use {{gtClass:BrGlamorousWithExplicitTooltipAptitude}} instead.
+
 I display a label tooltip of a given {{gtMethod:BrGlamorousWithLabelTooltipAptitude >> #text: | label=text}}. 
 #Example
 The following example shows a tooltip that it displayed to the left: {{gtExample: BrAnchoredByScripterExamples >> #tooltipLongLabelCenterLeft_AnchorMoreToTheRight | noCode | previewHeight=500 | previewShow=#gtAnchoredContainerOverviewFor:}}
@@ -24,6 +26,13 @@ Class {
 	#superclass : #BrWithTooltipAptitude,
 	#category : #'Brick-Glamorous-Buttons'
 }
+
+{ #category : #testing }
+BrGlamorousWithLabelTooltipAptitude class >> isDeprecated [
+	"Use BrGlamorousWithExplicitTooltipAptitude instead"
+
+	^ true
+]
 
 { #category : #'instance creation' }
 BrGlamorousWithLabelTooltipAptitude class >> text: aTextOrString [

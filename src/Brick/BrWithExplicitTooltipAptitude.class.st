@@ -48,6 +48,7 @@ BrWithExplicitTooltipAptitude class >> text: aLabelString shortcut: aShortcutStr
 	"Keymap can be:
 		- a text, e.g., 'F5',
 		- a BlKeyCombination instance, or
+		- a KMKeyCombination instance, or
 		- nil"
 
 	^ self
@@ -61,20 +62,26 @@ BrWithExplicitTooltipAptitude class >> text: aLabelString shortcut: aShortcutStr
 	"Keymap can be:
 		- a text, e.g., 'F5',
 		- a BlKeyCombination instance, or
+		- a KMKeyCombination instance, or
 		- nil"
 
-	^ self
-		menu: [ aShortcutString
-				ifNotNil: [ BrMenuLabelItem new label: aLabelString shortcut: aShortcutString asString ]
-				ifNil: [ BrMenuLabelItem new label: aLabelString ] ]
-		do: [ :anAptitude | 
-			anAptitude preferredChildWeight: 1.0.
-			anAptitudeBlock value: anAptitude ]
+	| anAptitude |
+	anAptitude := self new text: aLabelString shortcut: aShortcutString.
+	anAptitude preferredChildWeight: 1.0.
+	anAptitudeBlock value: anAptitude.
+	^ anAptitude
 ]
 
 { #category : #initialization }
 BrWithExplicitTooltipAptitude >> defaultMouseEventHandler [
 	^ self newTooltipEventHandler
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitTooltipAptitude >> hideDelay: aDuration [
+	"Note: It assumes that the mouse event handler is the tooltip event handler."
+
+	self mouseEventHandler hideDelay: aDuration
 ]
 
 { #category : #initialization }
@@ -98,6 +105,39 @@ BrWithExplicitTooltipAptitude >> initializeMenuContainer [
 
 	menuContainer when: BrTooltipShowWish do: [ :anEvent | self onShowWish: anEvent ].
 	menuContainer when: BrTooltipHideWish do: [ :anEvent | self onHideWish: anEvent ]
+]
+
+{ #category : #'private - instance creation' }
+BrWithExplicitTooltipAptitude >> newMenuModelWithLabel: aLabelString shortcut: aShortcutString [
+	^ aShortcutString
+		ifNotNil: [ BrMenuLabelItem new
+				label: aLabelString value asString
+				shortcut: aShortcutString value asString ]
+		ifNil: [ BrMenuLabelItem new label: aLabelString value asString ]
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitTooltipAptitude >> showDelay: aDuration [
+	"Note: It assumes that the mouse event handler is the tooltip event handler."
+
+	self mouseEventHandler showDelay: aDuration
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitTooltipAptitude >> text: aLabelString [
+	self text: aLabelString shortcut: nil
+]
+
+{ #category : #'api - menu' }
+BrWithExplicitTooltipAptitude >> text: aLabelString shortcut: aShortcutString [
+	"Keymap can be:
+		- a text, e.g., 'F5',
+		- a BlKeyCombination instance, or
+		- a KMKeyCombination instance, or
+		- nil"
+
+	self
+		handleSubmenu: [ self newMenuModelWithLabel: aLabelString shortcut: aShortcutString ]
 ]
 
 { #category : #'api - initialization' }
