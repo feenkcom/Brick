@@ -357,7 +357,7 @@ BrAnchoredByScripterExamples >> elementWithShortLabelTooltip [
 			yourself.
 	anchor := BlElement new
 			id: #anchorElement;
-			aptitude: (BrGlamorousWithExplicitTooltipAptitude
+			aptitude: (BrGlamorousWithLabelTooltipAptitude new
 					text: 'I am a tooltip';
 					root: container;
 					yourself);
