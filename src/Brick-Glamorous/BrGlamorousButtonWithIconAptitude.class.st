@@ -7,11 +7,10 @@ Class {
 { #category : #initialization }
 BrGlamorousButtonWithIconAptitude >> initialize [
 	super initialize.
-	
-	self addAll: {
-		BrGlamorousButtonExteriorAptitude new.
-		BrGlamorousButtonRectangularAptitude new.
-		BrGlamorousButtonIconAptitude new.
-		BrGlamorousButtonWithLabelTooltipAptitude new
-	}
+
+	self
+		addAll: {BrGlamorousButtonExteriorAptitude new.
+				BrGlamorousButtonRectangularAptitude new.
+				BrGlamorousButtonIconAptitude new.
+				BrGlamorousButtonWithLabelTooltipAptitude2 new}
 ]

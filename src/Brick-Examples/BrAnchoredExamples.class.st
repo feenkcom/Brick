@@ -117,7 +117,7 @@ BrAnchoredExamples >> tooltip [
 		text: 'no transformation affects me!';
 		alignCenter ] asStencil.
 	^ BlElement new
-		aptitude: (BrGlamorousWithTooltipAptitude content: tip);
+		aptitude: (BrGlamorousWithExplicitTooltipAptitude content: tip);
 		background: Color red;
 		size: 80 @ 100;
 		addEventHandler: BlPullHandler new.

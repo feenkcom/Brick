@@ -8,9 +8,8 @@ Class {
 BrGlamorousButtonWithIconCircularAptitude >> initialize [
 	super initialize.
 	self
-		addAll:
-			{BrGlamorousButtonExteriorAptitude new.
-			BrGlamorousButtonCircularAptitude new.
-			BrGlamorousButtonIconAptitude new.
-			BrGlamorousButtonWithLabelTooltipAptitude new}
+		addAll: {BrGlamorousButtonExteriorAptitude new.
+				BrGlamorousButtonCircularAptitude new.
+				BrGlamorousButtonIconAptitude new.
+				BrGlamorousButtonWithLabelTooltipAptitude2 new}
 ]

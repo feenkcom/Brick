@@ -1,8 +1,18 @@
+"
+Use {{gtClass:BrGlamorousButtonWithLabelTooltipAptitude2}} instead.
+"
 Class {
 	#name : #BrGlamorousButtonWithLabelTooltipAptitude,
 	#superclass : #BrGlamorousWithLabelTooltipAptitude,
 	#category : #'Brick-Glamorous-Buttons'
 }
+
+{ #category : #testing }
+BrGlamorousButtonWithLabelTooltipAptitude class >> isDeprecated [
+	"Use BrGlamorousButtonWithLabelTooltipAptitude2 instead"
+
+	^ true
+]
 
 { #category : #initialization }
 BrGlamorousButtonWithLabelTooltipAptitude >> initializeListeners [

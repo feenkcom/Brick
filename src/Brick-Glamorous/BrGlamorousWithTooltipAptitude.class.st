@@ -1,3 +1,6 @@
+"
+Use {{gtClass:BrGlamorousWithExplicitTooltipAptitude}} instead.
+"
 Class {
 	#name : #BrGlamorousWithTooltipAptitude,
 	#superclass : #BrWithTooltipAptitude,
@@ -7,4 +10,11 @@ Class {
 { #category : #'as yet unclassified' }
 BrGlamorousWithTooltipAptitude class >> anchoredAptitudeClass [
 	^ BrGlamorousTooltipAptitude
+]
+
+{ #category : #testing }
+BrGlamorousWithTooltipAptitude class >> isDeprecated [
+	"Use BrGlamorousWithExplicitTooltipAptitude instead"
+
+	^ true
 ]

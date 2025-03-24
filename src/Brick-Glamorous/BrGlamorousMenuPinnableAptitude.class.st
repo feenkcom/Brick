@@ -15,7 +15,7 @@ BrGlamorousMenuPinnableAptitude >> newCloseButton [
 			c ignoreByLayout.
 			c ignored horizontal alignCenterAt: 1.0.
 			c ignored vertical alignCenterAt: 0.0 ];
-		addAptitude: (BrGlamorousWithLabelTooltipAptitude 
+		addAptitude: (BrGlamorousWithExplicitTooltipAptitude 
 			text: 'Close').
 ]
 

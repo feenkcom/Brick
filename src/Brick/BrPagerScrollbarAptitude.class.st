@@ -19,7 +19,7 @@ BrPagerScrollbarAptitude >> buildPreviewOfThePage: aPageContentElement model: aP
 	aPreviewElement := BrButton new
 		margin: (BlInsets all: 3);
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
-		aptitude: BrGlamorousFadedButtonExteriourAptitude + ((BrGlamorousWithTooltipAptitude content: [
+		aptitude: BrGlamorousFadedButtonExteriourAptitude + ((BrGlamorousWithExplicitTooltipAptitude content: [
 			BrElementAsFormPreview
 				forElement: aPageContentElement
 				preferredExtent: 400@400 ])

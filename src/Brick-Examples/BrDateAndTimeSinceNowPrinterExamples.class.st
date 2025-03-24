@@ -303,7 +303,7 @@ BrDateAndTimeSinceNowPrinterExamples >> newTimeElement [
 	^ BrLabel new
 		updatingDateAndTimeModel;
 		aptitude: BrGlamorousLabelAptitude new;
-		addAptitude: (BrGlamorousWithLabelTooltipAptitude new text: '');
+		addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: '');
 		yourself
 ]
 
@@ -422,7 +422,7 @@ BrDateAndTimeSinceNowPrinterExamples >> updateTimeElement: aLabel time: aTime [
 	<gtExample>
 	aLabel updatingDateAndTime: aTime.
 	^ aLabel aptitude
-		findActor: BrGlamorousWithLabelTooltipAptitude
+		findActor: BrGlamorousWithExplicitTooltipAptitude
 		ifFound: [ :aTooltip | 
 			aTooltip
 				text: (String streamContents: [ :s | aTime asLocal printSeparateDateAndTimeOn: s ]) ]

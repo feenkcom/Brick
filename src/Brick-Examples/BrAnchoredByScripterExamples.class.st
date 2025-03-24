@@ -311,35 +311,33 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 BrAnchoredByScripterExamples >> elementWithLongLabelTooltip [
 	<gtExample>
 	| container anchor anchorContainer |
-
 	container := BlElement new
-		id: #placementArea;
-		background: Color gray muchLighter;
-		layout: BlLinearLayout vertical;
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.
+			id: #placementArea;
+			background: Color gray muchLighter;
+			layout: BlLinearLayout vertical;
+			constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself.
 	anchor := BlElement new
-		id: #anchorElement;
-		aptitude:
-			(BrGlamorousWithLabelTooltipAptitude new
-				text: 'I am a very loooooooong label tooltip';
-				root: container;
-				yourself);
-		background: Color red;
-		size: 40 @ 80;
-		addEventHandler: BlPullHandler new;
-		yourself.
+			id: #anchorElement;
+			aptitude: (BrGlamorousWithLabelTooltipAptitude new
+					text: 'I am a very loooooooong label tooltip';
+					root: container;
+					yourself);
+			background: Color red;
+			size: 40 @ 80;
+			addEventHandler: BlPullHandler new;
+			yourself.
 	anchorContainer := BlElement new
-		id: #anchorContainer;
-		background: Color red muchLighter;
-		relocate: 200 @ 250;
-		size: 400 @ 200;
-		constraintsDo: [ :c | c ignoreByLayout ];
-		clipChildren: false;
-		addChild: anchor;
-		yourself.
+			id: #anchorContainer;
+			background: Color red muchLighter;
+			relocate: 200 @ 250;
+			size: 400 @ 200;
+			constraintsDo: [ :c | c ignoreByLayout ];
+			clipChildren: false;
+			addChild: anchor;
+			yourself.
 	^ container
 		addChild: anchorContainer;
 		yourself
@@ -349,35 +347,33 @@ BrAnchoredByScripterExamples >> elementWithLongLabelTooltip [
 BrAnchoredByScripterExamples >> elementWithShortLabelTooltip [
 	<gtExample>
 	| container anchor anchorContainer |
-
 	container := BlElement new
-		id: #placementArea;
-		background: Color gray muchLighter;
-		layout: BlLinearLayout vertical;
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.
+			id: #placementArea;
+			background: Color gray muchLighter;
+			layout: BlLinearLayout vertical;
+			constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself.
 	anchor := BlElement new
-		id: #anchorElement;
-		aptitude:
-			(BrGlamorousWithLabelTooltipAptitude new
-				text: 'I am a tooltip';
-				root: container;
-				yourself);
-		background: Color red;
-		size: 40 @ 80;
-		addEventHandler: BlPullHandler new;
-		yourself.
+			id: #anchorElement;
+			aptitude: (BrGlamorousWithLabelTooltipAptitude new
+					text: 'I am a tooltip';
+					root: container;
+					yourself);
+			background: Color red;
+			size: 40 @ 80;
+			addEventHandler: BlPullHandler new;
+			yourself.
 	anchorContainer := BlElement new
-		id: #anchorContainer;
-		background: Color red muchLighter;
-		relocate: 200 @ 250;
-		size: 400 @ 200;
-		constraintsDo: [ :c | c ignoreByLayout ];
-		clipChildren: false;
-		addChild: anchor;
-		yourself.
+			id: #anchorContainer;
+			background: Color red muchLighter;
+			relocate: 200 @ 250;
+			size: 400 @ 200;
+			constraintsDo: [ :c | c ignoreByLayout ];
+			clipChildren: false;
+			addChild: anchor;
+			yourself.
 	^ container
 		addChild: anchorContainer;
 		yourself

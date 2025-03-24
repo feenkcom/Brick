@@ -198,6 +198,14 @@ BrDevScripterMenuStep >> clickMenuItemWithId: anElementId [
 ]
 
 { #category : #'steps - interactions' }
+BrDevScripterMenuStep >> displayTooltip [
+	^ self mouseMoveOver
+		label: 'Display tooltip';
+		onParentStepTarget: self;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
 BrDevScripterMenuStep >> hoverMenuItem [
 	^ self mouseMoveOver
 		label: 'Hover menu item';
