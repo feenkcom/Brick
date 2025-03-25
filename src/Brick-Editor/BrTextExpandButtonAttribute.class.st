@@ -5,7 +5,8 @@ Class {
 		'isExpanded',
 		'attributesCreatingBlock',
 		'createdAttributes',
-		'id'
+		'id',
+		'definingMethod'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
@@ -47,6 +48,16 @@ BrTextExpandButtonAttribute >> createdAttributes [
 { #category : #accessing }
 BrTextExpandButtonAttribute >> createdAttributes: aCollection [
 	createdAttributes := aCollection
+]
+
+{ #category : #accessing }
+BrTextExpandButtonAttribute >> definingMethod [
+	^ definingMethod
+]
+
+{ #category : #accessing }
+BrTextExpandButtonAttribute >> definingMethod: anObject [
+	definingMethod := anObject
 ]
 
 { #category : #accessing }
