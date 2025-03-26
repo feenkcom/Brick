@@ -29,6 +29,7 @@ BrGroupedList >> groups: aCollectionOfBrGroup [
 
 { #category : #'api - accessing' }
 BrGroupedList >> groupsProvider: aBrAbstractListItemsProvider [
+	self checkInUIProcess.
 	self viewModel groupsProvider: aBrAbstractListItemsProvider
 ]
 
@@ -90,6 +91,7 @@ BrGroupedList >> stream: anAsyncStream [
 
 { #category : #accessing }
 BrGroupedList >> stream: anAsyncStream executionConfiguration: anAsyncFutureExecutionConfiguration [
+	self checkInUIProcess.
 	self groupsProvider: (BrStreamItemsProvider new
 		stream: anAsyncStream;
 		executionConfiguration: anAsyncFutureExecutionConfiguration)

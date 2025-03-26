@@ -51,6 +51,7 @@ BrUngroupedList >> itemsProvider [
 
 { #category : #'api - accessing' }
 BrUngroupedList >> itemsProvider: aBrAbstractListItemsProvider [
+	self checkInUIProcess.
 	self viewModel itemsProvider: aBrAbstractListItemsProvider
 ]
 
