@@ -1,8 +1,8 @@
 Class {
 	#name : #BrList,
 	#superclass : #BlElement,
-	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable',
-	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait',
+	#traits : 'TBrLayoutResizable + TBrSelectable + TBrScrollable + TSignalNonUIProcess',
+	#classTraits : 'TBrLayoutResizable classTrait + TBrSelectable classTrait + TBrScrollable classTrait + TSignalNonUIProcess classTrait',
 	#instVars : [
 		'selectionCallback'
 	],
