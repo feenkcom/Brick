@@ -140,3 +140,8 @@ BrGlamorousEditableLabelAptitude >> setFocusedBackground: aBackground [
 BrGlamorousEditableLabelAptitude >> setFocusedBorderColor: aBorderColor [
 	focusedBorderColor := aBorderColor
 ]
+
+{ #category : #accessing }
+BrGlamorousEditableLabelAptitude >> styleLook [
+	^ styleLook
+]
