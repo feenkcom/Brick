@@ -688,7 +688,8 @@ BrWithExplicitMenuAptitude >> stencil [
 BrWithExplicitMenuAptitude >> stencil: aStencilBuilder [
 	"Set a stencil that creates a menu model.
 	The stencil builder can be a block with one argument: [ :aBrMenuInitialContext | ].
-	The stencil builder returns a BrMenu instance or nil."
+	The stencil builder returns a BrMenuModel instance or nil.
+	The stencil builder is responsible for building BrMenuHandle models if expected to be used."
 
 	menuStencil := aStencilBuilder asStencilBuilder: BrMenuInitialStencilBuilder
 ]
