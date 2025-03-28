@@ -58,14 +58,13 @@ BrMenuTextLabelElement >> initializeShortcutElement [
 			text: '';
 			beSmallSize;
 			aptitude: (BrGlamorousLabelAptitude new
-					foreground: BrGlamorousColors disabledButtonTextColor;
 					glamorousCodeMiniSize).
 
 	shortcutElement := BrFrame new
 			fitContent;
 			constraintsDo: [ :c | c linear vertical alignCenter ];
 			geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
-			border: (BlBorder paint: BrGlamorousColors disabledButtonTextColor width: 1);
+			border: (BlBorder paint: BrGlamorousColors disabledButtonTextColor width: 0.5);
 			addChild: shortcutLabel;
 			visibility: BlVisibility gone;
 			margin: (BlInsets left: 10)
