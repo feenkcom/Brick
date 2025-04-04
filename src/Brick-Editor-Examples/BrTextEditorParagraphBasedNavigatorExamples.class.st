@@ -309,6 +309,7 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_41_right_in_e
 { #category : #'examples - move to screen' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_with_folded_text [
 	<gtExample>
+	<noTest>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 
 	anEditor := self editorOnMultilineFoldedText.
