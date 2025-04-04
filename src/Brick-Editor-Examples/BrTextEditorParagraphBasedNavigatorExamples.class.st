@@ -326,10 +326,10 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_with_folded_t
 		unsubscribe.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(183)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(179)).
 
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(183)) allCursors.
+	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(179)) allCursors.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
 	
