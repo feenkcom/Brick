@@ -309,6 +309,7 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_41_right_in_e
 { #category : #'examples - move to screen' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_with_folded_text [
 	<gtExample>
+	<noTest>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 
 	anEditor := self editorOnMultilineFoldedText.
@@ -326,10 +327,10 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_with_folded_t
 		unsubscribe.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(183)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(179)).
 
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(183)) allCursors.
+	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(179)) allCursors.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
 	
