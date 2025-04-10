@@ -119,3 +119,11 @@ BrMenuModel >> parentsDo: aBlock [
 		aBlock cull: aParent.
 		aParent parentsDo: aBlock ]
 ]
+
+{ #category : #'api - announcer' }
+BrMenuModel >> requestFocus [
+	"Attempt to transer focus to the element of the menu item.
+	Note: does nothing if there was no constructed element"
+
+	self announcer announce: BrMenuFocusWish new
+]
