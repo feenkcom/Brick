@@ -426,12 +426,12 @@ BrTextEditorSelecterExamples >> select_moveOneRight_at_6_extendToPreviousWordSta
 	
 	self 
 		assert: anEditor selection 
-		equals: (BlCompositeSelection new select: 0 to: 6).
+		equals: (BlCompositeSelection new select: 1 to: 6).
 	self 
 		assert: anEditor editor selectedText asString 
-		equals: 'A summ'.
+		equals: ' summ'.
 	
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(0)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(1)).
 	
 	^ anEditor
 ]
