@@ -61,15 +61,45 @@ BrItemsProvider >> itemCount [
 
 { #category : #'api - loading' }
 BrItemsProvider >> itemSuchThat: aMatchBlock do: anActionBlock [
+	"Deprecated, please use #itemSuchThat:ifFound:ifNone:"
+	<return: #TAsyncPromise>
+	
+	self
+		deprecated: 'Please use #itemSuchThat:ifFound: instead'
+		transformWith: '`@receiver itemSuchThat: `@statements1 do: `@statements2'
+				-> '`@receiver itemSuchThat: `@statements1 ifFound: `@statements2'.
+
+	^ self
+		itemSuchThat: aMatchBlock
+		ifFound: aMatchBlock
+		ifNone: [ :isSynchronous | anActionBlock cull: 0 cull: isSynchronous ]
+]
+
+{ #category : #'api - loading' }
+BrItemsProvider >> itemSuchThat: aMatchBlock ifFound: aFoundBlock [
 	"Attempt to find the first item matching a given block which may involve
 	preloading items until such item is found"
+	<return: #TAsyncPromise>
+
+	^ self
+		itemSuchThat: aMatchBlock
+		ifFound: aFoundBlock
+		ifNone: [ nil ]
+]
+
+{ #category : #'api - loading' }
+BrItemsProvider >> itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found.
+	Evaluates aNotFoundBlock if there are no more items to check and nothing was found"
 	<return: #TAsyncPromise>
 
 	^ ((self preloadUntilFoundSuchThat: aMatchBlock)
 		then: [ :anIndex | self bufferLoadingPromise then: [ anIndex ] ])
 		then: [ :anIndex :isSynchronous |
-			anActionBlock cull: anIndex cull: isSynchronous.
-			anIndex ]
+			anIndex > 0
+				ifTrue: [ aFoundBlock cull: anIndex cull: isSynchronous ]
+				ifFalse: [ aNotFoundBlock cull: isSynchronous ] ]
 ]
 
 { #category : #accessing }

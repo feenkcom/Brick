@@ -11,6 +11,32 @@ BrUngroupedList >> defaultListModel [
 
 { #category : #'api - accessing' }
 BrUngroupedList >> itemSuchThat: aMatchBlock do: anActionBlock [
+	"Deprecated, please use #itemSuchThat:ifFound:ifNone:"
+	<return: #TAsyncPromise>
+	
+	self
+		deprecated: 'Please use #itemSuchThat:ifFound: instead'
+		transformWith: '`@receiver itemSuchThat: `@statements1 do: `@statements2'
+				-> '`@receiver itemSuchThat: `@statements1 ifFound: `@statements2'.
+	
+	^ self
+		itemSuchThat: aMatchBlock
+		ifFound: anActionBlock
+		ifNone: [ :isSynchronous | anActionBlock cull: 0 cull: isSynchronous ]
+]
+
+{ #category : #'api - accessing' }
+BrUngroupedList >> itemSuchThat: aMatchBlock ifFound: aFoundBlock [
+	<return: #TAsyncPromise>
+	
+	^ self
+		itemSuchThat: aMatchBlock
+		ifFound: aFoundBlock
+		ifNone: [ :isSynchronous | ]
+]
+
+{ #category : #'api - accessing' }
+BrUngroupedList >> itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
 	"Attempt to find the first item matching a given block which may involve
 	preloading items until such item is found.
 	Evaluate an action block synchronously if an item was already preloaded, otherwise schedule
@@ -20,14 +46,22 @@ BrUngroupedList >> itemSuchThat: aMatchBlock do: anActionBlock [
 	
 	aPromise := self itemsProvider
 		itemSuchThat: aMatchBlock
-		do: [ :anIndex :isSynchronous |
-			anIndex > 0 ifTrue: [ 
-				isSynchronous
-					ifTrue: [
-						anActionBlock value: anIndex.
-						^ anIndex asAsyncPromise ]
-					ifFalse: [ self enqueueTask: (BlTaskAction new
-						action: [ anActionBlock value: anIndex ]) ] ] ].
+		ifFound: [ :anIndex :isSynchronous |
+			isSynchronous
+				ifTrue: [
+					aFoundBlock cull: anIndex cull: isSynchronous ]
+				ifFalse: [
+					self enqueueTask: (BlTaskAction new action: [ aFoundBlock cull: anIndex cull: isSynchronous ]) ].
+			isSynchronous
+		]
+		ifNone: [ :isSynchronous |
+			isSynchronous
+				ifTrue: [
+					aNotFoundBlock cull: isSynchronous ]
+				ifFalse: [
+					self enqueueTask: (BlTaskAction new action: [ aNotFoundBlock cull: isSynchronous ]) ].
+			isSynchronous
+	].
 
 	self enqueueTask: (BlPromiseTask new promise: aPromise).
 	
@@ -69,7 +103,7 @@ BrUngroupedList >> scrollToItemSuchThat: aMatchBlock [
 
 	^ self
 		itemSuchThat: aMatchBlock
-		do: [ :anItemIndex | self scrollToIndex: anItemIndex ]
+		ifFound: [ :anItemIndex | self scrollToIndex: anItemIndex ]
 ]
 
 { #category : #'api - scrolling' }
@@ -81,7 +115,7 @@ BrUngroupedList >> scrollToItemSuchThat: aMatchBlock offset: anOffset [
 
 	^ self
 		itemSuchThat: aMatchBlock
-		do: [ :anItemIndex | self scrollToIndex: anItemIndex offset: anOffset ]
+		ifFound: [ :anItemIndex | self scrollToIndex: anItemIndex offset: anOffset ]
 ]
 
 { #category : #'api - accessing' }
