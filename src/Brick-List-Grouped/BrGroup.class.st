@@ -70,13 +70,42 @@ BrGroup >> itemStencil: aBrListItemElementStencilBuilderOrBlock [
 
 { #category : #accessing }
 BrGroup >> itemSuchThat: aMatchBlock do: anActionBlock [
+	"Deprecated, please use #itemSuchThat:ifFound:ifNone:"
+	<return: #TAsyncPromise>
+
+	self
+		deprecated: 'Please use #itemSuchThat:ifFound: instead'
+		transformWith: '`@receiver itemSuchThat: `@statements1 do: `@statements2'
+				-> '`@receiver itemSuchThat: `@statements1 ifFound: `@statements2'.
+	
+	^ self
+		itemSuchThat: aMatchBlock
+		ifFound: aMatchBlock
+		ifNone: [ :isSynchronous | anActionBlock cull: 0 cull: isSynchronous ]
+]
+
+{ #category : #accessing }
+BrGroup >> itemSuchThat: aMatchBlock ifFound: aFoundBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found."
+	<return: #TAsyncPromise>
+
+	^ itemsProvider
+		itemSuchThat: aMatchBlock
+		ifFound: aFoundBlock
+]
+
+{ #category : #accessing }
+BrGroup >> itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
 	"Attempt to find the first item matching a given block which may involve
 	preloading items until such item is found.
-	Evaluate an action block synchronously if an item was already preloaded, otherwise schedule
-	execution in a UI process"
-
+	Evaluates aNotFoundBlock if there are no more items to check and nothing was found"
 	<return: #TAsyncPromise>
-	^ itemsProvider itemSuchThat: aMatchBlock do: anActionBlock
+
+	^ itemsProvider
+		itemSuchThat: aMatchBlock
+		ifFound: aFoundBlock
+		 ifNone: aNotFoundBlock
 ]
 
 { #category : #accessing }
