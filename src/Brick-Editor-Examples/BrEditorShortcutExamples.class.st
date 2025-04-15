@@ -109,3 +109,69 @@ BrEditorShortcutExamples >> deleteOneLetterBeforeCursorWithSelectionAfterCursor 
 	
 	^ anEditorElement
 ]
+
+{ #category : #accessing }
+BrEditorShortcutExamples >> deleteWordAfterCursor [
+	<gtExample>
+	| anEditorElement anEditor |
+	
+	anEditorElement := BrTextEditorOperatorExamples new editorOnMultilineText.
+	anEditor := anEditorElement editor.
+	
+	anEditor navigator
+		moveTo: 51;
+		apply.
+
+	BrEditorShortcut deleteNextWord 
+		performOnEditor: anEditor element: anEditorElement dueTo: nil.
+		
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 51 }).
+	self assert: (anEditor text from: 43 to: 64) asString equals: 'with sand in my hands!'.
+	
+	BrEditorShortcut deleteNextWord 
+		performOnEditor: anEditor element: anEditorElement dueTo: nil.
+		
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 51 }).
+	self assert: (anEditor text from: 43 to: 63) asString equals: 'with sandin my hands!'.
+
+	BrEditorShortcut deleteNextWord 
+	performOnEditor: anEditor element: anEditorElement dueTo: nil.
+		
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 51 }).
+	self assert: (anEditor text from: 43 to: 61) asString equals: 'with sand my hands!'.
+	
+	^ anEditorElement
+]
+
+{ #category : #accessing }
+BrEditorShortcutExamples >> deleteWordBeforeCursor [
+	<gtExample>
+	| anEditorElement anEditor |
+	
+	anEditorElement := BrTextEditorOperatorExamples new editorOnMultilineText.
+	anEditor := anEditorElement editor.
+	
+	anEditor navigator
+		moveTo: 51;
+		apply.
+
+	BrEditorShortcut deletePreviousWord 
+		performOnEditor: anEditor element: anEditorElement dueTo: nil.
+		
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 47 }).
+	self assert: (anEditor text from: 43 to: 63) asString equals: 'with als in my hands!'.
+	
+	BrEditorShortcut deletePreviousWord 
+		performOnEditor: anEditor element: anEditorElement dueTo: nil.
+		
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 46 }).
+	self assert: (anEditor text from: 43 to: 62) asString equals: 'withals in my hands!'.
+
+	BrEditorShortcut deletePreviousWord 
+	performOnEditor: anEditor element: anEditorElement dueTo: nil.
+		
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: { 42 }).
+	self assert: (anEditor text from: 43 to: 58) asString equals: 'als in my hands!'.
+	
+	^ anEditorElement
+]

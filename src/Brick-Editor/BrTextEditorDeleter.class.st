@@ -184,6 +184,32 @@ BrTextEditorDeleter >> oneBeforeCursorIfOutsideOfSelection [
 			ifFalse: [ self oneBeforeCursor: aCursor ] ]
 ]
 
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> oneWordAfterCursor [
+	"Delete one word after the cursors"
+
+	self cursor do: [ :aCursor | self oneWordAfterCursor: aCursor ]
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> oneWordAfterCursor: aCursor [
+	^ self
+		from: aCursor position
+		to: (self findWordEndAfter: (aCursor position + 1 min: self text size))
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> oneWordBeforeCursor [
+	"Delete one word before the cursors"
+
+	self cursor do: [ :aCursor | self oneWordBeforeCursor: aCursor ]
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorDeleter >> oneWordBeforeCursor: aCursor [
+	^ self from: (self findWordStartBefore: aCursor position) to: aCursor position
+]
+
 { #category : #private }
 BrTextEditorDeleter >> privateDelete: aFromTextIndex to: aToTextIndex [
 	"I delete a piece of text within a given text interval without cursor or selection update.

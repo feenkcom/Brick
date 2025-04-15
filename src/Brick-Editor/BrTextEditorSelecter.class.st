@@ -117,7 +117,7 @@ BrTextEditorSelecter >> extendToNextWordEnd [
 	theCommands := self cursors collect: [ :aCursor |
 		| aDelta |
 		
-		aDelta := (self findWordEndAfter: aCursor position) - aCursor position.
+		aDelta := (self findWordEndAfter: aCursor position+1) - aCursor position.
 		(self
 			privateExtendSelectionRightAt: aCursor position
 			by: aDelta)

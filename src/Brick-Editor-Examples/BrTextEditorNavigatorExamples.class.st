@@ -940,11 +940,11 @@ BrTextEditorNavigatorExamples >> cursor_moveToNextWord_in_cursors_at_0 [
 		moveToEndNextWord;
 		apply;
 		unsubscribe.
-	self assertEditor: anEditor cursorIsAt: 2.
+	self assertEditor: anEditor cursorIsAt: 1.
 	self
 		assertEvents: eventRecord
 		moveCursorFrom: 0
-		to: 2.
+		to: 1.
 	self
 		assert: (eventRecord
 				noEventsOfTypes: {#addedEvents.
@@ -1005,6 +1005,7 @@ BrTextEditorNavigatorExamples >> cursor_moveToPreviousWord_in_cursors_at_2 [
 	anEditor := self cursor_add_at_2_in_empty.
 	eventRecord := self connectEventRecordTo: anEditor.
 	anEditor navigator
+		moveToStartPreviousWord;
 		moveToStartPreviousWord;
 		apply;
 		unsubscribe.
