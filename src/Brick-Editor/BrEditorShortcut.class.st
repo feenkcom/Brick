@@ -55,6 +55,19 @@ BrEditorShortcut class >> cut [
 		  yourself
 ]
 
+{ #category : #accessing }
+BrEditorShortcut class >> deleteNextWord [
+	^ self new
+		name: 'Forward delete word';
+		description: 'Delete up to the end of the word starting at the current cursor';
+		combination: BlKeyCombination builder primary delete build;
+		performBlock: [ :aBrTextEditor | 
+			aBrTextEditor deleter
+				oneWordAfterCursor;
+				delete ];
+		yourself
+]
+
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> deleteOneLetterAfterCursor [
 
@@ -86,6 +99,19 @@ BrEditorShortcut class >> deleteOneLetterBeforeCursor [
 				  surroundings: aBrTextEditor surroundMap;
 				  delete ];
 		  yourself
+]
+
+{ #category : #accessing }
+BrEditorShortcut class >> deletePreviousWord [
+	^ self new
+		name: 'Backwards delete word';
+		description: 'Delete backwards to the start of the word starting at the current cursor';
+		combination: BlKeyCombination builder primary backspace build;
+		performBlock: [ :aBrTextEditor | 
+			aBrTextEditor deleter
+				oneWordBeforeCursor;
+				delete ];
+		yourself
 ]
 
 { #category : #'shortcut creation' }
