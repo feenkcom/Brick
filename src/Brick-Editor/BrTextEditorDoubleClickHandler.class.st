@@ -21,6 +21,16 @@ BrTextEditorDoubleClickHandler class >> uniqueInstance [
 
 { #category : #'api - event managing' }
 BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
+	self mouseDoublePressEvent: anEvent
+]
+
+{ #category : #accessing }
+BrTextEditorDoubleClickHandler >> eventsToHandle [
+	^ { BlMouseDoublePressEvent }
+]
+
+{ #category : #'api - event managing' }
+BrTextEditorDoubleClickHandler >> mouseDoublePressEvent: anEvent [
 	| aScreenPosition aGlobalTextIndex aSelecter anEditorElement |
 
 	"To not create an instance of me for each tiny text element"
@@ -28,7 +38,7 @@ BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 		withAllParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
 		ifFound: #yourself
 		ifNone: [ ^ self ].
-		
+
 	aScreenPosition := (anEditorElement localBoundsToMine: (BlBounds origin: anEvent localPosition extent: 0.0@0.0) fromChild: anEvent currentTarget) center.
 
 	aGlobalTextIndex := anEditorElement editor navigator
@@ -44,11 +54,6 @@ BrTextEditorDoubleClickHandler >> doubleClickEvent: anEvent [
 	aSelecter
 		selectionUnitAt: aGlobalTextIndex;
 		select
-]
-
-{ #category : #accessing }
-BrTextEditorDoubleClickHandler >> eventsToHandle [
-	^ { BlDoubleClickEvent }
 ]
 
 { #category : #accessing }
