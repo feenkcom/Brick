@@ -1,5 +1,5 @@
 "
-I am a {{gtClass:BrMenuWish}}. 
+I am a {{gtClass:BrPopoverWish}}. 
 I am dispatched when 
 - a menu element should be unsubscribed from its {{gtClass:BrMenuModel}}, and
 - a menu element should be unsubscribed from {{gtClass:BrMenuUpdateSubscriptions | label=user subscriptions}}. 

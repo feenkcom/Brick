@@ -61,7 +61,7 @@ BrWithExplicitPopoverAptitude >> beTooltipMenu [
 
 { #category : #accessing }
 BrWithExplicitPopoverAptitude >> cacheCleaner [
-	<return: #BrMenuCacheCleaner>
+	<return: #BrPopoverCacheCleaner>
 	^ cacheCleaner ifNil: [ cacheCleaner := self defaultCacheCleaner ]
 ]
 
@@ -106,7 +106,7 @@ BrWithExplicitPopoverAptitude >> content: aBlockOrStencil [
 
 { #category : #initialization }
 BrWithExplicitPopoverAptitude >> defaultCacheCleaner [
-	^ BrMenuCacheCleaner allCleaner
+	^ BrPopoverCacheCleaner allCleaner
 ]
 
 { #category : #initialization }
@@ -816,7 +816,7 @@ BrWithExplicitPopoverAptitude >> withHandleSubmenu: aMenuBlock [
 
 { #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withKeepAllCacheCleaner [
-	self cacheCleaner: BrMenuCacheCleaner allKeeper
+	self cacheCleaner: BrPopoverCacheCleaner allKeeper
 ]
 
 { #category : #'api - initialization' }
@@ -840,7 +840,7 @@ BrWithExplicitPopoverAptitude >> withPrimaryMouseButton [
 
 { #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withRemoveAllCacheCleaner [
-	self cacheCleaner: BrMenuCacheCleaner allCleaner
+	self cacheCleaner: BrPopoverCacheCleaner allCleaner
 ]
 
 { #category : #'api - menu' }
