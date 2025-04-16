@@ -42,7 +42,7 @@ BrFromStream >> defaultLayout [
 BrFromStream >> initialize [
 	super initialize.
 	
-	monitor := Monitor new.
+	monitor := Mutex new.
 
 	collection := OrderedCollection new.
 	recent := OrderedCollection new.
