@@ -381,16 +381,13 @@ BrTextEditorOperator >> findWordAt: aTextIndex [
 BrTextEditorOperator >> findWordEndAfter: aTextIndex [
 	"Find a text index of the end of the next word after a given text index"
 
-	| textIterator newPosition aText skip ch |
+	| textIterator newPosition aText |
 	newPosition := aTextIndex.
 	aText := self text.
 	textIterator := aText iterator: (newPosition max: 1) to: aText size.
-	[ textIterator hasNext and: [ newPosition = aTextIndex ] ]
-		whileTrue: [ ch := textIterator peek.
-			skip := self startsCamelCaseWord: ch.
-			textIterator nextWord.
-			skip ifFalse: [ newPosition := textIterator position ] ].
-
+	textIterator hasNext
+		ifTrue: [ textIterator nextWord.
+			newPosition := textIterator position ].
 	^ newPosition
 ]
 
@@ -398,18 +395,14 @@ BrTextEditorOperator >> findWordEndAfter: aTextIndex [
 BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 	"Find a text index of the start of the previous word before a given text index"
 
-	| textIterator newPosition aText skip ch |
+	| textIterator newPosition aText |
 	newPosition := aTextIndex.
 	aText := self text.
 	textIterator := aText iterator.
 	textIterator position: newPosition.
-	[ textIterator hasPrevious and: [ newPosition = aTextIndex ] ]
-		whileTrue: [ textIterator prevWord.
-			textIterator hasPrevious ifFalse: [ ^ textIterator position ].
-			ch := textIterator peer.
-			skip := self startsCamelCaseWord: ch.
-			skip ifFalse: [ newPosition := textIterator position ] ].
-
+	textIterator hasPrevious
+		ifTrue: [ textIterator prevWord.
+			newPosition := textIterator position ].
 	^ newPosition
 ]
 
@@ -565,14 +558,6 @@ BrTextEditorOperator >> reverseFindDelimitedUnitAt: aTextIndex [
 { #category : #accessing }
 BrTextEditorOperator >> selection [
 	^ self editor selection
-]
-
-{ #category : #private }
-BrTextEditorOperator >> startsCamelCaseWord: ch [
-	"This is required because the character classification causes the first letter of a
-	camelCasedWord to be treated as a separate, 1 char word"
-	
-	^ ch isLetter and: [ ch isUppercase ]
 ]
 
 { #category : #'api - event' }

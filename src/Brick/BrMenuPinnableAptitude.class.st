@@ -146,6 +146,16 @@ BrMenuPinnableAptitude >> notifyHideParentMenu [
 		aMenuModel hideAll ]
 ]
 
+{ #category : #'api - hooks' }
+BrMenuPinnableAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+	anElement clipChildren: false.
+	self widget 
+		addChild: handleElement 
+		as: BrMenuPinnedHandleId.
+	pullHandler targetElement: self widget
+]
+
 { #category : #'event handling' }
 BrMenuPinnableAptitude >> onCloseFrom: aButton [
 	self widgetDo: [ :aWidget | 
@@ -156,16 +166,6 @@ BrMenuPinnableAptitude >> onCloseFrom: aButton [
 				aWidget fireEvent: BrMenuPinnedElementAboutToBeClosed new.
 				aWidget removeFromParent.
 				isPinned := false ] ]
-]
-
-{ #category : #'api - hooks' }
-BrMenuPinnableAptitude >> onInstalledIn: anElement [
-	super onInstalledIn: anElement.
-	anElement clipChildren: false.
-	self widget 
-		addChild: handleElement 
-		as: BrMenuPinnedHandleId.
-	pullHandler targetElement: self widget
 ]
 
 { #category : #'private - event management' }

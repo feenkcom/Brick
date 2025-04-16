@@ -26,6 +26,8 @@ BrTextEditorEditableMode >> createShortcuts [
 		, {self returnShortcut.
 				self deleteOneLetterAfterCursorShortcut.
 				self deleteOneLetterBeforeCursorShortcut.
+				self deleteOneWordAfterCursorShortcut.
+				self deleteOneWordBeforeCursorShortcut.
 				self shiftRightShortcut.
 				self shiftLeftShortcut.
 				self cutShortcut.
@@ -70,6 +72,16 @@ BrTextEditorEditableMode >> deleteOneLetterAfterCursorShortcut [
 { #category : #shortcuts }
 BrTextEditorEditableMode >> deleteOneLetterBeforeCursorShortcut [
 	^ BrEditorShortcut deleteOneLetterBeforeCursor
+]
+
+{ #category : #shortcuts }
+BrTextEditorEditableMode >> deleteOneWordAfterCursorShortcut [
+	^BrEditorShortcut deleteNextWord
+]
+
+{ #category : #shortcuts }
+BrTextEditorEditableMode >> deleteOneWordBeforeCursorShortcut [
+	^BrEditorShortcut deletePreviousWord
 ]
 
 { #category : #shortcuts }
