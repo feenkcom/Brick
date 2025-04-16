@@ -82,7 +82,7 @@ BrStreamItemsProvider >> finish [
 BrStreamItemsProvider >> initialize [
 	super initialize.
 	
-	monitor := Monitor new.
+	monitor := Mutex new.
 	executionConfiguration := self defaultExecutionConfiguration
 ]
 

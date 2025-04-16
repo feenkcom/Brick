@@ -37,7 +37,7 @@ BrFutureHandler >> defaultConfiguration [
 BrFutureHandler >> initialize [
 	super initialize.
 	
-	monitor := Monitor new
+	monitor := Mutex new
 ]
 
 { #category : #'api - initialization' }
