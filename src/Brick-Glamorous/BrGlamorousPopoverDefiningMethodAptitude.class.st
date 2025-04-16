@@ -14,7 +14,7 @@ Class {
 BrGlamorousPopoverDefiningMethodAptitude >> initialize [
 	super initialize.
 
-	self add: BrMenuCommonAptitude new.
+	self add: BrPopoverCommonAptitude new.
 
 	self
 		addChange: (BrLookChange new
@@ -55,9 +55,9 @@ BrGlamorousPopoverDefiningMethodAptitude >> menuModel: aMenuModel [
 	aMenuModel ifNil: [ ^ self ].
 
 	self
-		add: (BrGlamorousMenuPinnableAptitude new
+		add: (BrGlamorousPopoverPinnableAptitude new
 				menuModel: aMenuModel;
 				withResizers;
 				withAllPinActions);
-		add: (BrMenuHideableAptitude new menuModel: aMenuModel)
+		add: (BrPopoverHideableAptitude new menuModel: aMenuModel)
 ]

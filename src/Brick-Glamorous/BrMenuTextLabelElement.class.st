@@ -25,7 +25,7 @@ BrMenuTextLabelElement >> initialize [
 	self addChild: labelElement as: #'menu--label'.
 	self addChild: shortcutElement as: #'menu--shortcut'.
 
-	self when: BrMenuUpdateWish do: [ :anEvent | self onMenuUpdateWish: anEvent ].
+	self when: BrPopoverUpdateWish do: [ :anEvent | self onMenuUpdateWish: anEvent ].
 	
 	self initializeCommonStyling
 ]

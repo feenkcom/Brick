@@ -1,28 +1,12 @@
 Class {
 	#name : #BrMenuWhoToPinToEvent,
-	#superclass : #BrMenuEvent,
-	#instVars : [
-		'anchorElement'
-	],
+	#superclass : #BrPopoverWhoToPinToEvent,
 	#category : #'Brick-Menu - Events'
 }
 
-{ #category : #accessing }
-BrMenuWhoToPinToEvent >> anchorElement [
-	^ anchorElement
-]
+{ #category : #testing }
+BrMenuWhoToPinToEvent class >> isDeprecated [
+	"Use superclass instead"
 
-{ #category : #accessing }
-BrMenuWhoToPinToEvent >> anchorElement: anObject [
-	anchorElement := anObject
-]
-
-{ #category : #accessing }
-BrMenuWhoToPinToEvent >> element [
-	^ anchorElement
-]
-
-{ #category : #accessing }
-BrMenuWhoToPinToEvent >> element: anObject [
-	anchorElement := anObject
+	^ true
 ]

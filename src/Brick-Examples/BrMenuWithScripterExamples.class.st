@@ -1823,7 +1823,7 @@ BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu [
 						hideOnClick: false;
 						action: [ :anElement | 
 							| aWish |
-							aWish := BrMenuAnchorElementWish new.
+							aWish := BrPopoverAnchorElementWish new.
 							anElement fireEvent: aWish.
 							(anElement space root query // #'tab-two') anyOne select.
 							aWish anchorElementDo: [ :anAnchorElement | 

@@ -1,17 +1,12 @@
-"
-I define basic appearance of menu widgets, e.g., geometry, border.
-"
 Class {
 	#name : #BrMenuCommonAptitude,
-	#superclass : #BrAptitude,
+	#superclass : #BrPopoverCommonAptitude,
 	#category : #'Brick-Menu - Aptitude'
 }
 
-{ #category : #initialization }
-BrMenuCommonAptitude >> initialize [
-	super initialize.
+{ #category : #testing }
+BrMenuCommonAptitude class >> isDeprecated [
+	"Use superclass instead"
 
-	self
-		addChangeProperty: #(widget geometry)
-		with: [ BlRoundedRectangleGeometry cornerRadius: BrMenuConstants cornerRadius ].
+	^ true
 ]

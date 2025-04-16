@@ -1,6 +1,6 @@
 Class {
 	#name : #BrWithExplicitTooltipAptitude,
-	#superclass : #BrWithExplicitMenuAptitude,
+	#superclass : #BrWithExplicitPopoverAptitude,
 	#category : #'Brick-Menu - Aptitude'
 }
 
@@ -83,7 +83,7 @@ BrWithExplicitTooltipAptitude >> consumeClickedOutsideMouseUpEvent: anEvent [
 
 { #category : #initialization }
 BrWithExplicitTooltipAptitude >> defaultMouseEventHandler [
-	^ self newTooltipEventHandler
+	^ self newMouseHoverEventHandler
 ]
 
 { #category : #'api - initialization' }

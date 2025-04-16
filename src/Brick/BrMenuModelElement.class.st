@@ -14,13 +14,13 @@ BrMenuModelElement >> initialize [
 	super initialize.
 
 	self
-		when: BrMenuUnsubscribeWish
+		when: BrPopoverUnsubscribeWish
 		do: [ :anEvent | self onMenuUnsubscribeWish: anEvent ]
 ]
 
 { #category : #initialization }
 BrMenuModelElement >> initializeCommonStyle [
-	self addAptitude: BrMenuCommonAptitude new.
+	self addAptitude: BrPopoverCommonAptitude new.
 ]
 
 { #category : #accessing }

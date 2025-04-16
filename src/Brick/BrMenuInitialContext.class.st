@@ -1,6 +1,6 @@
 "
 I am a {{gtClass:BrMenuInitialStencilBuilder}}'s parameter. I hold information that can be used to build the first {{gtClass:BrMenu}} element displayed in {{gtClass:BrMenuSteppedElement}}.
-See {{gtMethod:BrWithExplicitMenuAptitude>>#showIn:dueToEvent:}} for more details.
+See {{gtMethod:BrWithExplicitPopoverAptitude>>#showIn:dueToEvent:}} for more details.
 
 "
 Class {
@@ -94,7 +94,7 @@ BrMenuInitialContext >> elementBuilder: aBrMenuElementBuilder [
 BrMenuInitialContext >> menuAptitude [
 	"Return a menu aptitude which handles menu (context menu, dropdown, or tooltip)."
 
-	<return: #BrWithExplicitMenuAptitude>
+	<return: #BrWithExplicitPopoverAptitude>
 	^ menuAptitude
 ]
 

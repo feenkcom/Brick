@@ -216,7 +216,7 @@ BrMenuItems >> asTreeElement [
 		background: anElement theme default contentBackgroundColor;
 		items: self groups lazy: #items;
 		expandUpTo: 2;
-		addAptitude: (BrMenuHideableAptitude new menuModel: self).
+		addAptitude: (BrPopoverHideableAptitude new menuModel: self).
 
 	^ anElement
 ]

@@ -28,7 +28,7 @@ BrMenuExplicitHandle >> defaultElement [
 		size: BrMenuConstants handleExtent * 2.0;
 		geometry: BlCircleGeometry new;
 		background: Color white;
-		addAptitude: BrMenuCommonAptitude new
+		addAptitude: BrPopoverCommonAptitude new
 ]
 
 { #category : #initialization }

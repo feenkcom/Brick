@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuAnchorElementEvent,
-	#superclass : #BrMenuAnchorElementWish,
+	#superclass : #BrPopoverAnchorElementWish,
 	#category : #'Brick-Menu - Events'
 }
 

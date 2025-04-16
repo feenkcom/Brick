@@ -1,10 +1,12 @@
 Class {
 	#name : #BrGlamorousMenuResizableAptitude,
-	#superclass : #BrMenuResizableAptitude,
+	#superclass : #BrGlamorousPopoverResizableAptitude,
 	#category : #'Brick-Glamorous-Menu'
 }
 
-{ #category : #initialization }
-BrGlamorousMenuResizableAptitude >> defaultResizerAptitudeBuilder [
-	^ BrGlamorousMenuResizerAptitudeBuilder new
+{ #category : #testing }
+BrGlamorousMenuResizableAptitude class >> isDeprecated [
+	"Use superclass instead"
+
+	^ true
 ]

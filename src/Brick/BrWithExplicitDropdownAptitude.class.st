@@ -1,6 +1,6 @@
 Class {
 	#name : #BrWithExplicitDropdownAptitude,
-	#superclass : #BrWithExplicitMenuAptitude,
+	#superclass : #BrWithExplicitPopoverAptitude,
 	#instVars : [
 		'shouldHideWidget'
 	],

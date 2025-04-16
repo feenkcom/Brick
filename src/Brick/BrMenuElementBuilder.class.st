@@ -52,7 +52,7 @@ BrMenuElementBuilder >> visitMenuExplicit: aMenuModel [
 			menuModel: aMenuModel;
 			asElement.
 
-	anElement addAptitude: (BrMenuHideableAptitude new menuModel: aMenuModel).
+	anElement addAptitude: (BrPopoverHideableAptitude new menuModel: aMenuModel).
 
 	^ anElement
 ]
@@ -61,12 +61,12 @@ BrMenuElementBuilder >> visitMenuExplicit: aMenuModel [
 BrMenuElementBuilder >> visitMenuExplicitHandle: aMenuModel [
 	| anElement |
 	anElement := aMenuModel handleStencil asElement.
-	anElement addAptitude: (BrMenuHideableAptitude new menuModel: aMenuModel).
+	anElement addAptitude: (BrPopoverHideableAptitude new menuModel: aMenuModel).
 	
 	"If a user clicks on a handle, we want to close its menu."
 	anElement
 		when: BlClickEvent
-		do: [ :anEvent | anEvent currentTarget fireEvent: BrMenuHideAllWish new ].
+		do: [ :anEvent | anEvent currentTarget fireEvent: BrPopoverHideAllWish new ].
 
 	^ anElement
 ]

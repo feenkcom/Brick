@@ -123,7 +123,9 @@ BrMenuModel >> parentsDo: aBlock [
 { #category : #'api - announcer' }
 BrMenuModel >> requestFocus [
 	"Attempt to transer focus to the element of the menu item.
-	Note: does nothing if there was no constructed element"
+	Note: does nothing if there was no constructed element."
+	
+	self deprecated: 'It does not seem to be used. Moreover, the wish should be a menu model announcement.'.
 
-	self announcer announce: BrMenuFocusWish new
+	self announcer announce: BrPopoverFocusWish new
 ]

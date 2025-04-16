@@ -1,6 +1,6 @@
 Class {
 	#name : #BrWithExplicitContextMenuAptitude,
-	#superclass : #BrWithExplicitMenuAptitude,
+	#superclass : #BrWithExplicitPopoverAptitude,
 	#category : #'Brick-Menu - Aptitude'
 }
 
