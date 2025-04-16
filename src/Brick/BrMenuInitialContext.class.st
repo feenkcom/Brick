@@ -94,7 +94,7 @@ BrMenuInitialContext >> elementBuilder: aBrMenuElementBuilder [
 BrMenuInitialContext >> menuAptitude [
 	"Return a menu aptitude which handles menu (context menu, dropdown, or tooltip)."
 
-	<return: #BrWithExplicitMenuAptitude>
+	<return: #BrWithExplicitPopoverAptitude>
 	^ menuAptitude
 ]
 

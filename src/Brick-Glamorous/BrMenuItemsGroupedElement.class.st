@@ -87,7 +87,7 @@ BrMenuItemsGroupedElement >> onMenuUnsubscribeWish: anEvent [
 	anEvent alsoUserSubscriptions ifFalse: [ ^ self ].
 	aScrollable := listElement childWithId: #scrollable.
 	aScrollable childrenDo: [ :eachChild | 
-		eachChild dispatchEvent: (BrMenuUnsubscribeWish new alsoUserSubscriptions: true) ]
+		eachChild dispatchEvent: (BrPopoverUnsubscribeWish new alsoUserSubscriptions: true) ]
 ]
 
 { #category : #'event handling' }

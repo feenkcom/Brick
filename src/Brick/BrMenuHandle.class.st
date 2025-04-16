@@ -56,7 +56,7 @@ BrMenuHandle >> onMenuDisplayedFromParentMenuElement: aMenuElement [
 		^ self ].
 	
 	aMenuElement
-		fireEvent: (BrMenuShowSubmenuWish new
+		fireEvent: (BrPopoverShowSubmenuWish new
 				submenu: aMenu;
 				fromElement: aMenuElement)
 ]

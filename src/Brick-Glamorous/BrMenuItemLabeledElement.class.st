@@ -64,7 +64,7 @@ BrMenuItemLabeledElement >> onMenuModelChanged [
 BrMenuItemLabeledElement >> onUpdateRequestedAnnouncement: anAnnouncement [
 	super onUpdateRequestedAnnouncement: anAnnouncement.
 
-	labelElement dispatchEvent: BrMenuUpdateWish new
+	labelElement dispatchEvent: BrPopoverUpdateWish new
 ]
 
 { #category : #'private - updating' }

@@ -1,23 +1,12 @@
 Class {
 	#name : #BrMenuAnchorElementChanged,
-	#superclass : #BrMenuChangeEvent,
-	#instVars : [
-		'anchorElement'
-	],
+	#superclass : #BrPopoverAnchorElementChanged,
 	#category : #'Brick-Menu - Events'
 }
 
-{ #category : #accessing }
-BrMenuAnchorElementChanged >> anchorElement [
-	^ anchorElement
-]
+{ #category : #testing }
+BrMenuAnchorElementChanged class >> isDeprecated [
+	"Use superclass instead"
 
-{ #category : #accessing }
-BrMenuAnchorElementChanged >> anchorElement: anObject [
-	anchorElement := anObject
-]
-
-{ #category : #sending }
-BrMenuAnchorElementChanged >> sendTo: anObject [
-	anObject menuAnchorElementChangedEvent: self
+	^ true
 ]

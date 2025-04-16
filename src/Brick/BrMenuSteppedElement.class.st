@@ -15,7 +15,7 @@ BrMenuSteppedElement >> addMenuModel: aMenuModel element: aMenuElement [
 	aMenuElement removeFromParent.
 	self addChild: aMenuElement.
 	self
-		dispatchEvent: (BrMenuElementAdded new
+		dispatchEvent: (BrPopoverElementAdded new
 				menuElement: aMenuElement;
 				menuModel: aMenuModel).
 	aMenuModel onMenuDisplayed: aMenuElement
@@ -101,10 +101,10 @@ BrMenuSteppedElement >> initialize [
 		beInSingleCompositionLayer.
 
 	self
-		when: BrMenuShowSubmenuWish
+		when: BrPopoverShowSubmenuWish
 		do: [ :anEvent | self onShowSubmenuWish: anEvent ].
 	self 
-		when: BrMenuDetachWish
+		when: BrPopoverDetachWish
 		do: [ :anEvent | self onDetachWish: anEvent ].
 ]
 
@@ -140,13 +140,13 @@ BrMenuSteppedElement >> newElementForSubmenu: aSubmenu [
 BrMenuSteppedElement >> onChildRemoved: anElement [
 	super onChildRemoved: anElement.
 
-	self dispatchEvent: (BrMenuElementRemoved new menuElement: anElement).
+	self dispatchEvent: (BrPopoverElementRemoved new menuElement: anElement).
 
 	self childrenCount isZero ifFalse: [ ^ self ].
 
 	BlTaskAction
 		enqueueElement: self
-		action: [ self dispatchEvent: BrMenuHideAllWish new ]
+		action: [ self dispatchEvent: BrPopoverHideAllWish new ]
 ]
 
 { #category : #'event handling' }
@@ -169,7 +169,7 @@ BrMenuSteppedElement >> onDetachWish: anEvent [
 	anElement ifNil: [ ^ self ].
 	
 	"In case of detach wish, we do not want to unsubscribe from user-defined subscriptions."
-	anElement dispatchEvent: (BrMenuUnsubscribeWish new
+	anElement dispatchEvent: (BrPopoverUnsubscribeWish new
 		alsoUserSubscriptions: false).
 ]
 
@@ -197,7 +197,7 @@ BrMenuSteppedElement >> removeCachedElements [
 	elementCache
 		keysAndValuesDo: [ :aMenuModel :anElement | 
 			anElement
-				dispatchEvent: (BrMenuUnsubscribeWish new
+				dispatchEvent: (BrPopoverUnsubscribeWish new
 						alsoUserSubscriptions: true).
 			anElement removeFromParent ].
 	elementCache removeAll

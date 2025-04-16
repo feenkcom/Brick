@@ -62,11 +62,11 @@ BrMenuExamples >> explicitMenu [
 	aMenu
 		stencil: [ BlElement new
 				size: 150 @ 100;
-				addAptitude: (BrGlamorousMenuPinnableAptitude new
+				addAptitude: (BrGlamorousPopoverPinnableAptitude new
 						menuModel: aMenu;
 						withResizers;
 						withAllPinActions);
-				addAptitude: BrMenuCommonAptitude new;
+				addAptitude: BrPopoverCommonAptitude new;
 				background: Color paleBlue ].
 
 	self assert: aMenu stencil isNotNil.
@@ -83,11 +83,11 @@ BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
 	aMenu stencil: [ BlElement new
 		beInSeparateCompositionLayer;
 		size: 150@100;
-		addAptitude: (BrGlamorousMenuPinnableAptitude new 
+		addAptitude: (BrGlamorousPopoverPinnableAptitude new 
 			menuModel: aMenu;
 			withResizers;
 			withAllPinActions);
-		addAptitude: BrMenuCommonAptitude new;
+		addAptitude: BrPopoverCommonAptitude new;
 		background: Color paleOrange ].
 	
 	self assert: aMenu stencil isNotNil.
@@ -104,11 +104,11 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 	aMenu stencil: [ BlElement new
 		beInSingleCompositionLayer;
 		size: 150@100;
-		addAptitude: (BrGlamorousMenuPinnableAptitude new 
+		addAptitude: (BrGlamorousPopoverPinnableAptitude new 
 			menuModel: aMenu;
 			withResizers;
 			withAllPinActions);
-		addAptitude: BrMenuCommonAptitude new;
+		addAptitude: BrPopoverCommonAptitude new;
 		background: Color paleGreen ].
 	
 	self assert: aMenu stencil isNotNil.
@@ -126,11 +126,11 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 		stencil: [ BlElement new
 				layout: BlFrameLayout new;
 				size: 150 @ 100;
-				addAptitude: (BrGlamorousMenuPinnableAptitude new
+				addAptitude: (BrGlamorousPopoverPinnableAptitude new
 						menuModel: aMenu;
 						withResizers;
 						withAllPinActions);
-				addAptitude: BrMenuCommonAptitude new;
+				addAptitude: BrPopoverCommonAptitude new;
 				background: Color palePeach;
 				addChild: (BlElement new
 					size: 10@10;

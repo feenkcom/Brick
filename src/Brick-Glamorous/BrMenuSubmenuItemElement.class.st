@@ -50,7 +50,7 @@ BrMenuSubmenuItemElement >> onDeselected: anAnnouncement [
 { #category : #'event handling' }
 BrMenuSubmenuItemElement >> onSelected: anAnnouncement [
 	self
-		fireEvent: (BrMenuShowSubmenuWish new
+		fireEvent: (BrPopoverShowSubmenuWish new
 				submenu: anAnnouncement menuModel submenu;
 				fromElement: self)
 ]
