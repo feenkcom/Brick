@@ -110,6 +110,16 @@ BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString shortcut:
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemId: anId label: aText preview: aPreviewText action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem id: anId.
+	aMenuItem label: aText preview: aPreviewText.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemId: anId label: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
