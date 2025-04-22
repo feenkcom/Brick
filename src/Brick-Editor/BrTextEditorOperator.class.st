@@ -14,6 +14,15 @@ BrTextEditorOperator >> assertUIProcess [
 	self editor assertUIProcess
 ]
 
+{ #category : #'api - word movement' }
+BrTextEditorOperator >> camelCaseClassifier [
+	"Returns true if a word boundary occurs between c1 and c2"
+	^ [ :c1 :c2 | 
+	c1 isSeparator ~= c2 isSeparator
+		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_))
+				or: [ c1 isUppercase not and: [ c2 isUppercase ] ] ] ]
+]
+
 { #category : #private }
 BrTextEditorOperator >> characterType: aCharacter [
 	<return: #Symbol>
@@ -95,7 +104,7 @@ BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
 	^ emptyInterval
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - folding' }
 BrTextEditorOperator >> findFoldEndAfter: aTextIndex [
 	| aText aTextIterator foundFold |
 	aText := self text.
@@ -111,7 +120,7 @@ BrTextEditorOperator >> findFoldEndAfter: aTextIndex [
 	^ aTextIterator position - foundFold asBit
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - folding' }
 BrTextEditorOperator >> findFoldStartBefore: aTextIndex [
 	| aText aTextIterator foundFold |
 	aText := self text.
@@ -342,56 +351,36 @@ BrTextEditorOperator >> findWhitespaceOfLineBefore: aTextIndex [
 	^ (aText from: (aLineStartIndex min: aTextIterator position) to: aTextIterator position) asString
 ]
 
-{ #category : #private }
-BrTextEditorOperator >> findWordAt: aTextIndex [
+{ #category : #'api - word movement' }
+BrTextEditorOperator >> findWordAt: aTextIndex withClassifier: classifier [
 	"Find a word text interval or a whitespace at a given text index"
+
 	<return: #Interval>
-	| aTextIterator hasWordToTheLeft hasWordToTheRight shouldBeWord aWordStart aWordEnd aDesiredType |
+	| aTextIterator |
 	self assertUIProcess.
-	
 	aTextIterator := self text iterator skip: aTextIndex.
-	
-	hasWordToTheLeft := aTextIterator hasPrevious and: [ self isWordChar: aTextIterator peer ].
-	hasWordToTheRight := aTextIterator hasNext and: [ self isWordChar: aTextIterator peek ].
-	shouldBeWord := hasWordToTheLeft or: hasWordToTheRight.
-
-	aWordStart := aTextIndex.
-	aWordEnd := aTextIndex.
-
-	aTextIterator hasNext ifTrue: [
-		aTextIterator
-			nextSegment: [ :eachCharacter | self characterType: eachCharacter ]
-			indicesDo: [ :aStart :anEnd :aType |
-				aDesiredType := aType.
-				(shouldBeWord not or: [ (aType = #word and: [ shouldBeWord ]) ])
-					ifTrue: [ aWordEnd := anEnd ] ] ].
-	
-	aTextIterator := self text iterator skip: aTextIndex.
-	aTextIterator hasPrevious ifTrue: [
-		aTextIterator
-			previousSegment: [ :eachCharacter | self characterType: eachCharacter ]
-			indicesDo: [ :aStart :anEnd :aType |
-				((aType = #word and: [ shouldBeWord ]) or: [ (aDesiredType isNil or: [ aType = aDesiredType ] ) ])
-					ifTrue: [ aWordStart := aStart ] ] ].
-
-	^ aWordStart to: aWordEnd
+	aTextIterator nextWordWithClassifier: classifier.
+	^ aTextIterator
+		prevWordWithClassifier: classifier
+		indicesDo: [ :start :end | start to: end ]
 ]
 
-{ #category : #private }
+{ #category : #'api - word movement' }
 BrTextEditorOperator >> findWordEndAfter: aTextIndex [
 	"Find a text index of the end of the next word after a given text index"
 
-	| textIterator newPosition aText |
+	| textIterator newPosition aText | 
 	newPosition := aTextIndex.
 	aText := self text.
 	textIterator := aText iterator: (newPosition max: 1) to: aText size.
 	textIterator hasNext
-		ifTrue: [ textIterator nextWord.
-			newPosition := textIterator position ].
+		ifTrue: [ newPosition := textIterator
+					nextWordWithClassifier: editor movementWordClassifier
+					indicesDo: [ :st :nd | nd ] ].
 	^ newPosition
 ]
 
-{ #category : #private }
+{ #category : #'api - word movement' }
 BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 	"Find a text index of the start of the previous word before a given text index"
 
@@ -401,8 +390,9 @@ BrTextEditorOperator >> findWordStartBefore: aTextIndex [
 	textIterator := aText iterator.
 	textIterator position: newPosition.
 	textIterator hasPrevious
-		ifTrue: [ textIterator prevWord.
-			newPosition := textIterator position ].
+		ifTrue: [ newPosition := textIterator
+					prevWordWithClassifier: editor movementWordClassifier
+					indicesDo: [ :st :nd | st ] ].
 	^ newPosition
 ]
 

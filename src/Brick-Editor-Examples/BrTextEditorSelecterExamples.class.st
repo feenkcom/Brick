@@ -668,10 +668,10 @@ BrTextEditorSelecterExamples >> select_word_at_1 [
 		selectionUnitAt: 1;
 		select.
 
-	self assert: anEditor selection equals: (BlCompositeSelection new select: 0 to: 1).
-	self assert: anEditor editor selectedText asString equals: 'A'.
+	self assert: anEditor selection equals: (BlCompositeSelection new select: 1 to: 2).
+	self assert: anEditor editor selectedText asString equals: ' '.
 
-	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(1)).
+	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(2)).
 
 	^ anEditor
 ]
