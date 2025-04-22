@@ -547,7 +547,10 @@ BrTextEditorSelecter >> selectionUnitAt: aTextIndex [
 	self assertUIProcess.
 
 	aUnitInterval := self findDelimitedUnitAt: aTextIndex.
-	aUnitInterval isEmpty ifTrue: [ aUnitInterval := self findWordAt: aTextIndex ].
+	aUnitInterval isEmpty
+		ifTrue: [ aUnitInterval := self
+					findWordAt: aTextIndex
+					withClassifier: editor doubleClickWordClassifier ].
 	self from: aUnitInterval first to: aUnitInterval last
 ]
 

@@ -22,7 +22,9 @@ Class {
 		'shortcuts',
 		'isFocused',
 		'shouldStyleWhenTextModified',
-		'shouldConsumeClickEvent'
+		'shouldConsumeClickEvent',
+		'movementWordClassifier',
+		'doubleClickWordClassifier'
 	],
 	#classVars : [
 		'DontUseParagraphEditor'
@@ -56,6 +58,13 @@ BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
 BrTextEditorModel >> addEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 	aCollectionOfBrTextEditorShortcut
 		do: [ :eachShortcut | self addEditorShortcut: eachShortcut ]
+]
+
+{ #category : #'api - word movement' }
+BrTextEditorModel >> alphanumericUnderscoreWordClassifier [
+	^ [ :c1 :c2 | 
+	c1 isSeparator ~= c2 isSeparator
+		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_)) ] ]
 ]
 
 { #category : #asserting }
@@ -100,6 +109,14 @@ BrTextEditorModel >> beReadOnlyWithSelection [
 { #category : #'api - mode' }
 BrTextEditorModel >> beReadOnlyWithoutSelection [
 	self editorMode: BrTextEditorReadonlyWithoutSelectionMode new
+]
+
+{ #category : #'api - word movement' }
+BrTextEditorModel >> camelCaseWordClassifier [
+	^ [ :c1 :c2 | 
+	c1 isSeparator ~= c2 isSeparator
+		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_))
+				or: [ c1 isUppercase not and: [ c2 isUppercase ] ] ] ]
 ]
 
 { #category : #'private - selection' }
@@ -227,6 +244,16 @@ BrTextEditorModel >> disableStyleTextWhenModifiedDuring: aBlock [
 	aPreviousShouldStyleWhenTextModified := shouldStyleWhenTextModified.
 	shouldStyleWhenTextModified := false.
 	aBlock ensure: [ shouldStyleWhenTextModified := aPreviousShouldStyleWhenTextModified ]
+]
+
+{ #category : #'api - word movement' }
+BrTextEditorModel >> doubleClickWordClassifier [
+	^doubleClickWordClassifier
+]
+
+{ #category : #accessing }
+BrTextEditorModel >> doubleClickWordClassifier: anObject [
+	doubleClickWordClassifier := anObject
 ]
 
 { #category : #'api - mode' }
@@ -368,7 +395,10 @@ BrTextEditorModel >> initialize [
 
 	isFocused := false.
 	shouldStyleWhenTextModified := true.
-	shouldConsumeClickEvent := true.	
+	shouldConsumeClickEvent := true.
+	
+	movementWordClassifier := self camelCaseWordClassifier.
+	doubleClickWordClassifier := self alphanumericUnderscoreWordClassifier.
 	
 	"only when the editor mode is null, set an actual mode.
 	Setting an editor mode can be slow therefore we provide a class side
@@ -477,6 +507,16 @@ BrTextEditorModel >> moveCursorTo: aTextIndex [
 	self navigator
 		moveTo: aTextIndex;
 		apply
+]
+
+{ #category : #'api - word movement' }
+BrTextEditorModel >> movementWordClassifier [
+	^movementWordClassifier
+]
+
+{ #category : #accessing }
+BrTextEditorModel >> movementWordClassifier: anObject [
+	movementWordClassifier := anObject
 ]
 
 { #category : #'api - modification' }
