@@ -37,12 +37,25 @@ BrEditor >> beReadOnlyWithoutSelection [
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollExtent [
-	^ self lastVisibleSegment index - self firstVisibleSegment index
+	"Note: I do not know whether 0 as a default value is correct."
+	
+	<return: #Integer> 
+	^ self lastVisibleSegment 
+		ifNotNil: [ :aLastSegment | 
+			self firstVisibleSegment 
+				ifNotNil: [ :aFirstSegment | aLastSegment index - aFirstSegment index ]
+				ifNil: [ 0 ] ]
+		ifNil: [ 0 ]
 ]
 
 { #category : #accessing }
 BrEditor >> computeVerticalScrollOffset [
-	^ self firstVisibleSegment index - 1
+	"Note: I do not know whether 0 as a default value is correct."
+
+	<return: #Integer>
+	^ self firstVisibleSegment
+		ifNotNil: [ :aSegment | aSegment index - 1 ]
+		ifNil: [ 0 ]
 ]
 
 { #category : #accessing }
@@ -97,9 +110,11 @@ BrEditor >> editor: aBrTextEditor [
 
 { #category : #accessing }
 BrEditor >> firstVisibleSegment [
+	<return: #BrTextEditorSegment or: nil>
+	
 	^ (self layout
 		findFirstVisibleChildClosestToStartCompletelyVisible: true
-		acceptPartiallyVisible: true) segment
+		acceptPartiallyVisible: true) ifNotNil: #segment
 ]
 
 { #category : #initialization }
@@ -154,9 +169,11 @@ BrEditor >> isReadOnly [
 
 { #category : #accessing }
 BrEditor >> lastVisibleSegment [
+	<return: #BrTextEditorSegment or: nil>
+	
 	^ (self layout
 		findFirstVisibleChildClosestToEndCompletelyVisible: true
-		acceptPartiallyVisible: true) segment
+		acceptPartiallyVisible: true) ifNotNil: #segment
 ]
 
 { #category : #accessing }
@@ -176,8 +193,9 @@ BrEditor >> onScrollBy: aWish [
 	| position |
 	position := aWish delta y.
 	position := position positive
-			ifTrue: [ self lastVisibleSegment index + position ceiling ]
-			ifFalse: [ self firstVisibleSegment index + position floor ].
+			ifTrue: [ self lastVisibleSegment ifNotNil: [ :aSegment | aSegment index + position ceiling ] ]
+			ifFalse: [ self firstVisibleSegment ifNotNil: [ :aSegment | aSegment index + position floor ] ].
+	position ifNil: [ ^ self ].
 	self scrollToPosition: position
 ]
 
