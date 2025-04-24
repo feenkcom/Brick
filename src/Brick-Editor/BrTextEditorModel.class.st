@@ -1146,6 +1146,15 @@ BrTextEditorModel >> shouldConsumeClickEvent [
 	^ shouldConsumeClickEvent ifNil: [ shouldConsumeClickEvent := true ]
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextEditorModel >> smalltalkWordClassifier [
+	^ [ :c1 :c2 | 
+	c1 isSeparator ~= c2 isSeparator
+		or: [ c1 = $:
+				or: [ c1 isAlphaNumeric | (c1 = $_)
+						and: [ (c2 isAlphaNumeric | (c2 = $_) | (c2 = $:)) not ] ] ] ]
+]
+
 { #category : #'text - styling' }
 BrTextEditorModel >> styleText [
 	"I request styler to re-style my current text"
