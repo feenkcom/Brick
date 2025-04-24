@@ -36,7 +36,7 @@ BrUpdatingDateAndTimeTask >> initialize [
 
 { #category : #'api - testing' }
 BrUpdatingDateAndTimeTask >> isIndefiniteTermTask [
-	"Identifies whether the task may be in enqueued indefinitely.
+	"Identifies whether the task may be enqueued indefinitely.
 	BlScripter uses it to ignore such tasks while pulsing."
 
 	^ true
