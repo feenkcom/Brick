@@ -60,7 +60,7 @@ BrFromFuture >> initialize [
 	super initialize.
 	
 	dataSnapshot := BrFromFutureDataSnapshot new setPending: nil.
-	elementStencil := [ BlElement new ] asStencil.
+	elementStencil := [ BlElement new id: #default ] asStencil.
 	elementDataBinder := BrFromFutureDataBinder new.
 	updater := BrElementUpdater new.
 	updater element: self selector: #privateUpdateElement.
@@ -84,6 +84,7 @@ BrFromFuture >> onAddedToSceneGraph [
 
 	self privateUpdateElement.
 
+	future ifNil: [ ^ self ].
 	futureExecution := future await: self configuration.
 	promise := futureExecution
 		then: [ :aResult | self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ]
