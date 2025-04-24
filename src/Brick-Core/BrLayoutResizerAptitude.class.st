@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'propagations'
 	],
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #'api - style' }
@@ -305,6 +305,13 @@ BrLayoutResizerAptitude >> vAnyToFitContent: aChildElementOrBlock [
 	"Always fit content vertically irrelevant from what model says"
 
 	propagations vAnyToFitContent: aChildElementOrBlock
+]
+
+{ #category : #'api - to match parent element' }
+BrLayoutResizerAptitude >> vAnyToMatchParent: aChildElementOrBlock [
+	"Match parent horizontally"
+
+	propagations vAnyToMatchParent: aChildElementOrBlock
 ]
 
 { #category : #'api - style' }
