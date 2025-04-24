@@ -34,6 +34,14 @@ BrUpdatingDateAndTimeTask >> initialize [
 	labelUpdater := [ :anElement :aString | anElement text: aString ]
 ]
 
+{ #category : #'api - testing' }
+BrUpdatingDateAndTimeTask >> isIndefiniteTermTask [
+	"Identifies whether the task may be enqueued indefinitely.
+	BlScripter uses it to ignore such tasks while pulsing."
+
+	^ true
+]
+
 { #category : #'api - initialization' }
 BrUpdatingDateAndTimeTask >> labelUpdater: aBlock [
 	"Label update is an object that understands #value:value:.

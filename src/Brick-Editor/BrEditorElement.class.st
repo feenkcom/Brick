@@ -91,6 +91,14 @@ BrEditorElement >> scrollToPosition: aPosition [
 ]
 
 { #category : #accessing }
+BrEditorElement >> smoothScrollToPosition: aPosition [
+	(self editor segmentCollector end < self editor segmentCollector text size
+		and: [ self editor segmentCollector cachedInterval last < aPosition ])
+		ifTrue: [ self editor segmentCollector computeForwardAt: aPosition ].
+	^ super smoothScrollToPosition: aPosition
+]
+
+{ #category : #accessing }
 BrEditorElement >> text [
 	^ self editor text
 ]
