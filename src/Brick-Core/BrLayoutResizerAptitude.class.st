@@ -157,6 +157,13 @@ BrLayoutResizerAptitude >> hFitContentLimited [
 	^ self styleFor: BrLayoutHorizontalResizerState fitContentLimited
 ]
 
+{ #category : #'api - to exact' }
+BrLayoutResizerAptitude >> hFitContentLimited: aChildElementOrBlock toExact: aWidth [
+	"Exact width if widget fits content limited"
+
+	propagations hFitContentLimited: aChildElementOrBlock toExact: aWidth
+]
+
 { #category : #'api - to fit content' }
 BrLayoutResizerAptitude >> hFitContentLimitedToFitContent [
 	"Fit content if model specifies fit content limited horizontally"
@@ -357,9 +364,23 @@ BrLayoutResizerAptitude >> vFitContent [
 	^ self styleFor: BrLayoutVerticalResizerState fitContent
 ]
 
+{ #category : #'api - to exact' }
+BrLayoutResizerAptitude >> vFitContent: aChildElementOrBlock toExact: aWidth [
+	"Exact height if widget fits content"
+
+	propagations vFitContent: aChildElementOrBlock toExact: aWidth
+]
+
 { #category : #'api - style' }
 BrLayoutResizerAptitude >> vFitContentLimited [
 	^ self styleFor: BrLayoutVerticalResizerState fitContentLimited
+]
+
+{ #category : #'api - to exact' }
+BrLayoutResizerAptitude >> vFitContentLimited: aChildElementOrBlock toExact: aWidth [
+	"Exact height if widget fits content limited"
+
+	propagations vFitContentLimited: aChildElementOrBlock toExact: aWidth
 ]
 
 { #category : #'api - to fit content' }
@@ -420,6 +441,13 @@ BrLayoutResizerAptitude >> vInherit: aChildElementOrBlock [
 { #category : #'api - style' }
 BrLayoutResizerAptitude >> vMatchParent [
 	^ self styleFor: BrLayoutVerticalResizerState matchParent
+]
+
+{ #category : #'api - to exact' }
+BrLayoutResizerAptitude >> vMatchParent: aChildElementOrBlock toExact: aWidth [
+	"Exact height if widget matches parent"
+
+	propagations vMatchParent: aChildElementOrBlock toExact: aWidth
 ]
 
 { #category : #'api - to fit content' }

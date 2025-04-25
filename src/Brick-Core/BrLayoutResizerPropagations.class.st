@@ -5,7 +5,7 @@ Class {
 		'propagations',
 		'propagationMap'
 	],
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #'api - layout resizeable' }
@@ -46,6 +46,11 @@ BrLayoutResizerPropagations class >> vAll [
 { #category : #'api - layout resizeable' }
 BrLayoutResizerPropagations class >> vExact [
 	^ BrLayoutVerticalResizerState exact
+]
+
+{ #category : #'api - layout resizeable' }
+BrLayoutResizerPropagations class >> vExact: aHeight [
+	^ BrLayoutVerticalExactResizerPropagatedState new height: aHeight
 ]
 
 { #category : #'api - layout resizeable' }
@@ -170,10 +175,17 @@ BrLayoutResizerPropagations >> hExactToMatchParent: aChildElementOrBlock [
 		to: self class hMatchParent
 ]
 
-{ #category : #'api - to match parent' }
+{ #category : #'apo - to exact' }
 BrLayoutResizerPropagations >> hFitContent: aChildElementOrBlock toExact: aWidth [
 	(self addPropagationFor: aChildElementOrBlock)
 		from: self class hFitContent
+		to: (self class hExact: aWidth)
+]
+
+{ #category : #'apo - to exact' }
+BrLayoutResizerPropagations >> hFitContentLimited: aChildElementOrBlock toExact: aWidth [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class hFitContentLimited
 		to: (self class hExact: aWidth)
 ]
 
@@ -232,7 +244,7 @@ BrLayoutResizerPropagations >> hInherit: aChildElementOrBlock [
 			to: self class hMatchParent
 ]
 
-{ #category : #'api - to match parent' }
+{ #category : #'apo - to exact' }
 BrLayoutResizerPropagations >> hMatchParent: aChildElementOrBlock toExact: aWidth [
 	(self addPropagationFor: aChildElementOrBlock)
 		from: self class hMatchParent
@@ -400,6 +412,20 @@ BrLayoutResizerPropagations >> vExactToMatchParent: aChildElementOrBlock [
 		to: self class vMatchParent
 ]
 
+{ #category : #'apo - to exact' }
+BrLayoutResizerPropagations >> vFitContent: aChildElementOrBlock toExact: aWidth [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class vFitContent
+		to: (self class vExact: aWidth)
+]
+
+{ #category : #'apo - to exact' }
+BrLayoutResizerPropagations >> vFitContentLimited: aChildElementOrBlock toExact: aWidth [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class vFitContentLimited
+		to: (self class vExact: aWidth)
+]
+
 { #category : #'api - to fit content' }
 BrLayoutResizerPropagations >> vFitContentLimitedToFitContent: aChildElementOrBlock [
 	(self addPropagationFor: aChildElementOrBlock)
@@ -453,6 +479,13 @@ BrLayoutResizerPropagations >> vInherit: aChildElementOrBlock [
 			to: self class vFitContentLimited;
 		from: self class vMatchParent
 			to: self class vMatchParent
+]
+
+{ #category : #'apo - to exact' }
+BrLayoutResizerPropagations >> vMatchParent: aChildElementOrBlock toExact: aWidth [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class vMatchParent
+		to: (self class vExact: aWidth)
 ]
 
 { #category : #'api - to fit content' }
