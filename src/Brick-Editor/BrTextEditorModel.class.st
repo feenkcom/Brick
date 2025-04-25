@@ -1150,9 +1150,8 @@ BrTextEditorModel >> shouldConsumeClickEvent [
 BrTextEditorModel >> smalltalkWordClassifier [
 	^ [ :c1 :c2 | 
 	c1 isSeparator ~= c2 isSeparator
-		or: [ c1 = $:
-				or: [ c1 isAlphaNumeric | (c1 = $_)
-						and: [ (c2 isAlphaNumeric | (c2 = $_) | (c2 = $:)) not ] ] ] ]
+		or: [ ((c1 isAlphaNumeric | (c1 = $_)) not and: [ c2 isAlphaNumeric | (c2 = $_) ])
+				or: [ c1 isAlphaNumeric | (c1 = $_) and: [ c2 tokenish not ] ] ] ]
 ]
 
 { #category : #'text - styling' }
