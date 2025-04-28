@@ -10,6 +10,14 @@ Class {
 	#category : #'Brick-Menu - Support'
 }
 
+{ #category : #cleanup }
+BrPopoverRelocateReason class >> cleanUp [
+	Show := nil.
+	Reappear := nil.
+	Position := nil.
+	Extent := nil
+]
+
 { #category : #factory }
 BrPopoverRelocateReason class >> extent [
 	^ Extent ifNil: [ Extent := BrPopoverRelocatePositionExtentReason new ]
