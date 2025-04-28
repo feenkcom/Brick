@@ -251,7 +251,7 @@ BrTextEditorModel >> doubleClickWordClassifier [
 	^doubleClickWordClassifier
 ]
 
-{ #category : #accessing }
+{ #category : #'api - word movement' }
 BrTextEditorModel >> doubleClickWordClassifier: anObject [
 	doubleClickWordClassifier := anObject
 ]
@@ -514,7 +514,7 @@ BrTextEditorModel >> movementWordClassifier [
 	^movementWordClassifier
 ]
 
-{ #category : #accessing }
+{ #category : #'api - word movement' }
 BrTextEditorModel >> movementWordClassifier: anObject [
 	movementWordClassifier := anObject
 ]
