@@ -529,13 +529,13 @@ BrWithExplicitPopoverAptitude >> onWidgetAddedToSceneGraph: anEvent [
 ]
 
 { #category : #'event handling' }
-BrWithExplicitPopoverAptitude >> onWidgetExtentChanged: anEvent [ 
-	self visible ifTrue: [ self relocate ]
+BrWithExplicitPopoverAptitude >> onWidgetExtentChanged: anEvent [
+	self visible ifTrue: [ self relocateFirstTime: false ]
 ]
 
 { #category : #'event handling' }
-BrWithExplicitPopoverAptitude >> onWidgetPositionChanged: anEvent [ 
-	self visible ifTrue: [ self relocate ]
+BrWithExplicitPopoverAptitude >> onWidgetPositionChanged: anEvent [
+	self visible ifTrue: [ self relocateFirstTime: false ]
 ]
 
 { #category : #'event handling' }
@@ -561,10 +561,16 @@ BrWithExplicitPopoverAptitude >> preferredExtent: aPoint [
 ]
 
 { #category : #private }
-BrWithExplicitPopoverAptitude >> relocate [
-	self widgetDo: [ :aWidget | 
-		relocator relocateGiven: aWidget.
-		self visibilityUpdater updateGiven: aWidget ]
+BrWithExplicitPopoverAptitude >> relocateFirstTime: isFirstTimeDisplay [
+	"Change menu container visibility and popover layout anchor bounds.
+	isFirstTimeDisplay indicates:
+	- true = it is the first time the popover is displayed, e.g., #show method was called,
+	- false = any other reason, why the method is called, e.g., anchor element position changed."
+
+	self
+		widgetDo: [ :aWidget | 
+			relocator relocateGiven: aWidget firstTime: isFirstTimeDisplay.
+			self visibilityUpdater updateGiven: aWidget firstTime: isFirstTimeDisplay ]
 ]
 
 { #category : #'api - relocating' }
@@ -631,32 +637,35 @@ BrWithExplicitPopoverAptitude >> showIn: aParentElement dueToEvent: anEventOrNil
 	| aMenu |
 	menuStencil ifNil: [ ^ self ].
 	self hide.
-	
-	self widgetDo: [ :aWidget |
-		aMenu := menuStencil 
-			context: (BrMenuInitialContext new
-				elementBuilder: menuContainer elementBuilder;
-				anchorElement: aWidget;
-				menuAptitude: self;
-				dueToEvent: anEventOrNil);
-			build ].
+
+	self
+		widgetDo: [ :aWidget | 
+			aMenu := menuStencil
+					context: (BrMenuInitialContext new
+							elementBuilder: menuContainer elementBuilder;
+							anchorElement: aWidget;
+							menuAptitude: self;
+							dueToEvent: anEventOrNil);
+					build ].
 	aMenu ifNil: [ ^ self ].
 	menuContainer menuModel: aMenu.
 	menuContainer show.
-	
-	self widgetDo: [ :aWidget |
-		aWidget 
-			addEventHandler: extentChangedEventHandler;
-			addEventHandler: positionInSpaceChangedEventHandler;
-			addEventHandler: addedToSceneEventHandler;
-			addEventHandler: removedFromSceneEventHandler ].
-	
-	self temporarilyShowIn: aParentElement.
-	
-	self fireEvent: (BrPopoverIsVisibleEvent new
-			menuModel: aMenu;
-			menuContainer: menuContainer).
-	self onShown.
+
+	self
+		widgetDo: [ :aWidget | 
+			aWidget
+				addEventHandler: extentChangedEventHandler;
+				addEventHandler: positionInSpaceChangedEventHandler;
+				addEventHandler: addedToSceneEventHandler;
+				addEventHandler: removedFromSceneEventHandler ].
+
+	self temporarilyShowIn: aParentElement firstTime: true.
+
+	self
+		fireEvent: (BrPopoverIsVisibleEvent new
+				menuModel: aMenu;
+				menuContainer: menuContainer).
+	self onShown
 ]
 
 { #category : #'api - menu' }
@@ -698,22 +707,23 @@ BrWithExplicitPopoverAptitude >> temporarilyHide [
 BrWithExplicitPopoverAptitude >> temporarilyShow [
 	"Re-add temporarily hiden menu container without reconstructing its menu content"
 
-	self widgetDo: [ :aWidget | 
-		| aParent |
-		aParent := aWidget topMostParent.
-		self temporarilyShowIn: aParent ]
+	self
+		widgetDo: [ :aWidget | 
+			| aParent |
+			aParent := aWidget topMostParent.
+			self temporarilyShowIn: aParent firstTime: false ]
 ]
 
 { #category : #private }
-BrWithExplicitPopoverAptitude >> temporarilyShowIn: aParentElement [
+BrWithExplicitPopoverAptitude >> temporarilyShowIn: aParentElement firstTime: isFirstTimeDisplay [
 	menuContainerParent := aParentElement.
 	aParentElement addEventFilter: clickOutsideEventHandler.
 	aParentElement addShortcut: pressEscEventHandler.
-	
-	menuContainer parent == aParentElement ifFalse: [
-		menuContainer removeFromParent.
-		aParentElement addChild: menuContainer ].
-	self relocate.
+
+	menuContainer parent == aParentElement
+		ifFalse: [ menuContainer removeFromParent.
+			aParentElement addChild: menuContainer ].
+	self relocateFirstTime: isFirstTimeDisplay
 ]
 
 { #category : #'api - menu' }
@@ -796,7 +806,9 @@ BrWithExplicitPopoverAptitude >> withContainerInSpaceVisibilityUpdater [
 
 { #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withContainerPermanentVisibilityUpdater [
-	self visibilityUpdater: (BrPopoverContainerPermanentVisibilityUpdater new menuContainer: menuContainer)
+	"Keep menu container always visible."
+
+	self visibilityUpdater: BrPopoverContainerPermanentVisibilityUpdater new
 ]
 
 { #category : #'api - initialization' }
@@ -873,6 +885,8 @@ BrWithExplicitPopoverAptitude >> withTopLeftHandle [
 
 { #category : #'api - relocating' }
 BrWithExplicitPopoverAptitude >> withVisibleWidgetBoundsRelocator [
+	"Keep popover handle (stepped layout anchor bounds) inside of a visible area."
+
 	self relocator: BrPopoverVisibleWidgetBoundsRelocator new
 ]
 

@@ -41,7 +41,7 @@ BrPopoverClickPositionRelocator >> mouseEvent: anEvent given: anAnchorElement [
 ]
 
 { #category : #'api - relocating' }
-BrPopoverClickPositionRelocator >> relocateGiven: anAnchorElement [
+BrPopoverClickPositionRelocator >> relocateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
 	"Set stepped layout anchor bounds around the mouse (click) event position"
 
 	menuContainer parent

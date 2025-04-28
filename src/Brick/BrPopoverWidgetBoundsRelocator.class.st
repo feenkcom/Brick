@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'api - relocating' }
-BrPopoverWidgetBoundsRelocator >> relocateGiven: anAnchorElement [
+BrPopoverWidgetBoundsRelocator >> relocateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
 	menuContainer parent ifNotNil: [ :aParent |
 		menuContainer layoutDo: [ :aLayout | 
 			aLayout anchorBounds: (anAnchorElement bounds 
