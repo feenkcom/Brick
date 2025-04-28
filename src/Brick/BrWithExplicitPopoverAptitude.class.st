@@ -16,7 +16,8 @@ Class {
 		'menuStencil',
 		'submenus',
 		'cacheCleaner',
-		'mouseEventHandler'
+		'mouseEventHandler',
+		'visibilityUpdater'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -281,6 +282,7 @@ BrWithExplicitPopoverAptitude >> initializeMenuContainer [
 	menuContainer padding: self defaultMenuContainerPadding.
 	menuContainerParent := nil.
 	relocator := BrPopoverClickPositionRelocator new menuContainer: menuContainer.
+	visibilityUpdater := BrPopoverContainerInSpaceVisibilityUpdater new menuContainer: menuContainer.
 	menuContainer
 		when: BrPopoverWhoToPinToEvent
 		do: [ :anEvent | self onWhoToPinToEvent: anEvent ].
@@ -478,25 +480,6 @@ BrWithExplicitPopoverAptitude >> onMenuIsVisibleEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-BrWithExplicitPopoverAptitude >> onMouseUp: anEvent [
-	"Note: to be removed.
-	Replaced by BrMenuMouseUpEventHandler."
-
-	anEvent button = mouseButton
-		ifFalse: [ ^ self ].
-	
-	(modifiersMatcher value: anEvent modifiers)
-		ifFalse: [ ^ self ].
-
-	anEvent consumed: true.
-	
-	self widgetDo: [ :aWidget | 
-		relocator mouseUp: anEvent given: aWidget ].
-	
-	self showDueTo: anEvent
-]
-
-{ #category : #'event handling' }
 BrWithExplicitPopoverAptitude >> onShowWish: aWish [
 	self canShow
 		ifFalse: [ ^ self ].
@@ -580,10 +563,8 @@ BrWithExplicitPopoverAptitude >> preferredExtent: aPoint [
 { #category : #private }
 BrWithExplicitPopoverAptitude >> relocate [
 	self widgetDo: [ :aWidget | 
-		aWidget isVisibleInSpace 
-			ifFalse: [ menuContainer visibility: BlVisibility gone ]
-			ifTrue: [ menuContainer visibility: BlVisibility visible ].
-		relocator relocateGiven: aWidget ]
+		relocator relocateGiven: aWidget.
+		self visibilityUpdater updateGiven: aWidget ]
 ]
 
 { #category : #'api - relocating' }
@@ -740,6 +721,19 @@ BrWithExplicitPopoverAptitude >> useSecondaryMouseButton [
 	self withSecondaryMouseButton
 ]
 
+{ #category : #accessing }
+BrWithExplicitPopoverAptitude >> visibilityUpdater [
+	<return: #BrPopoverContainerVisibilityUpdater>
+	^ visibilityUpdater ifNil: [ visibilityUpdater := BrPopoverContainerInSpaceVisibilityUpdater new menuContainer: menuContainer ].
+]
+
+{ #category : #accessing }
+BrWithExplicitPopoverAptitude >> visibilityUpdater: aBrPopoverContainerVisibilityUpdater [
+	aBrPopoverContainerVisibilityUpdater menuContainer: menuContainer.
+
+	visibilityUpdater := aBrPopoverContainerVisibilityUpdater
+]
+
 { #category : #testing }
 BrWithExplicitPopoverAptitude >> visible [
 	<return: #Boolean>
@@ -793,6 +787,16 @@ BrWithExplicitPopoverAptitude >> withContainerDownUpDropdown [
 { #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withContainerDropdown [
 	menuContainer withDropdownAreas
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> withContainerInSpaceVisibilityUpdater [
+	self visibilityUpdater: (BrPopoverContainerInSpaceVisibilityUpdater new menuContainer: menuContainer)
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> withContainerPermanentVisibilityUpdater [
+	self visibilityUpdater: (BrPopoverContainerPermanentVisibilityUpdater new menuContainer: menuContainer)
 ]
 
 { #category : #'api - initialization' }
@@ -865,6 +869,11 @@ BrWithExplicitPopoverAptitude >> withTooltipHandle [
 { #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withTopLeftHandle [
 	menuContainer withTopLeftHandle
+]
+
+{ #category : #'api - relocating' }
+BrWithExplicitPopoverAptitude >> withVisibleWidgetBoundsRelocator [
+	self relocator: BrPopoverVisibleWidgetBoundsRelocator new
 ]
 
 { #category : #'api - relocating' }

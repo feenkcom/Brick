@@ -1,3 +1,8 @@
+"
+I am {{gtClass:BrPopoverContainerRelocator}}. 
+I set {{gtMethod:BlSteppedLayout >> #anchorBounds:}} of the same bounds as a given anchor element.
+
+"
 Class {
 	#name : #BrPopoverWidgetBoundsRelocator,
 	#superclass : #BrPopoverContainerRelocator,
@@ -5,9 +10,9 @@ Class {
 }
 
 { #category : #'api - relocating' }
-BrPopoverWidgetBoundsRelocator >> relocateGiven: aWidget [
+BrPopoverWidgetBoundsRelocator >> relocateGiven: anAnchorElement [
 	menuContainer parent ifNotNil: [ :aParent |
 		menuContainer layoutDo: [ :aLayout | 
-			aLayout anchorBounds: (aWidget bounds 
+			aLayout anchorBounds: (anAnchorElement bounds 
 				inParent: aParent) asRectangle ] ]
 ]
