@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'api - relocating' }
-BrPopoverVisibleWidgetBoundsRelocator >> relocateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
+BrPopoverVisibleWidgetBoundsRelocator >> relocateGiven: anAnchorElement reason: aReason [
 	menuContainer parent ifNotNil: [ :aParent |
 		menuContainer layoutDo: [ :aLayout | 
 			| aBounds anInsideRectangle |

@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'api - updating' }
-BrPopoverContainerPermanentVisibilityUpdater >> updateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
+BrPopoverContainerPermanentVisibilityUpdater >> updateGiven: anAnchorElement reason: aReason [
 	"Do not change menu container visibility"
 
 	

@@ -530,12 +530,12 @@ BrWithExplicitPopoverAptitude >> onWidgetAddedToSceneGraph: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitPopoverAptitude >> onWidgetExtentChanged: anEvent [
-	self visible ifTrue: [ self relocateFirstTime: false ]
+	self visible ifTrue: [ self relocateDueToReason: BrPopoverRelocateReason extent ]
 ]
 
 { #category : #'event handling' }
 BrWithExplicitPopoverAptitude >> onWidgetPositionChanged: anEvent [
-	self visible ifTrue: [ self relocateFirstTime: false ]
+	self visible ifTrue: [ self relocateDueToReason: BrPopoverRelocateReason position ]
 ]
 
 { #category : #'event handling' }
@@ -561,16 +561,14 @@ BrWithExplicitPopoverAptitude >> preferredExtent: aPoint [
 ]
 
 { #category : #private }
-BrWithExplicitPopoverAptitude >> relocateFirstTime: isFirstTimeDisplay [
+BrWithExplicitPopoverAptitude >> relocateDueToReason: aReason [
 	"Change menu container visibility and popover layout anchor bounds.
-	isFirstTimeDisplay indicates:
-	- true = it is the first time the popover is displayed, e.g., #show method was called,
-	- false = any other reason, why the method is called, e.g., anchor element position changed."
+	aReason is `BrPopoverRelocateReason` kind of instance."
 
 	self
 		widgetDo: [ :aWidget | 
-			relocator relocateGiven: aWidget firstTime: isFirstTimeDisplay.
-			self visibilityUpdater updateGiven: aWidget firstTime: isFirstTimeDisplay ]
+			relocator relocateGiven: aWidget reason: aReason.
+			self visibilityUpdater updateGiven: aWidget reason: aReason ]
 ]
 
 { #category : #'api - relocating' }
@@ -659,7 +657,7 @@ BrWithExplicitPopoverAptitude >> showIn: aParentElement dueToEvent: anEventOrNil
 				addEventHandler: addedToSceneEventHandler;
 				addEventHandler: removedFromSceneEventHandler ].
 
-	self temporarilyShowIn: aParentElement firstTime: true.
+	self temporarilyShowIn: aParentElement dueToReason: BrPopoverRelocateReason show.
 
 	self
 		fireEvent: (BrPopoverIsVisibleEvent new
@@ -711,11 +709,11 @@ BrWithExplicitPopoverAptitude >> temporarilyShow [
 		widgetDo: [ :aWidget | 
 			| aParent |
 			aParent := aWidget topMostParent.
-			self temporarilyShowIn: aParent firstTime: false ]
+			self temporarilyShowIn: aParent dueToReason: BrPopoverRelocateReason reappear ]
 ]
 
 { #category : #private }
-BrWithExplicitPopoverAptitude >> temporarilyShowIn: aParentElement firstTime: isFirstTimeDisplay [
+BrWithExplicitPopoverAptitude >> temporarilyShowIn: aParentElement dueToReason: aReason [
 	menuContainerParent := aParentElement.
 	aParentElement addEventFilter: clickOutsideEventHandler.
 	aParentElement addShortcut: pressEscEventHandler.
@@ -723,7 +721,7 @@ BrWithExplicitPopoverAptitude >> temporarilyShowIn: aParentElement firstTime: is
 	menuContainer parent == aParentElement
 		ifFalse: [ menuContainer removeFromParent.
 			aParentElement addChild: menuContainer ].
-	self relocateFirstTime: isFirstTimeDisplay
+	self relocateDueToReason: aReason
 ]
 
 { #category : #'api - menu' }

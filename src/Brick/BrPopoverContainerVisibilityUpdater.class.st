@@ -28,8 +28,9 @@ BrPopoverContainerVisibilityUpdater >> menuContainer: anObject [
 ]
 
 { #category : #'api - updating' }
-BrPopoverContainerVisibilityUpdater >> updateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
-	"Subclasses may change menu container visibility given the anchor element"
+BrPopoverContainerVisibilityUpdater >> updateGiven: anAnchorElement reason: aReason [
+	"Subclasses may change menu container visibility given the anchor element.
+	aReason is `BrPopoverRelocateReason` kind of instance"
 
 	
 ]

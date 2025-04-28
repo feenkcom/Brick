@@ -33,8 +33,9 @@ BrPopoverContainerRelocator >> mouseEvent: anEvent given: anAnchorElement [
 ]
 
 { #category : #'api - relocating' }
-BrPopoverContainerRelocator >> relocateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
-	"Relocate menu elements given the anchor element"
+BrPopoverContainerRelocator >> relocateGiven: anAnchorElement reason: aReason [
+	"Relocate menu elements given the anchor element.
+	aReason is `BrPopoverRelocateReason` kind of instance"
 
 	self subclassResponsibility
 ]

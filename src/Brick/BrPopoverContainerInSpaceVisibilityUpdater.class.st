@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BrPopoverContainerInSpaceVisibilityUpdater >> updateGiven: anAnchorElement firstTime: isFirstTimeDisplay [
+BrPopoverContainerInSpaceVisibilityUpdater >> updateGiven: anAnchorElement reason: aReason [
 	"Subclasses may change menu container visibility given the anchor element"
 
 	anAnchorElement isVisibleInSpace 
