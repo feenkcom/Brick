@@ -545,6 +545,7 @@ BrTextEditorSelecter >> selectionUnitAt: aTextIndex [
 
 	| aUnitInterval |
 	self assertUIProcess.
+	aTextIndex > self text size ifTrue: [ ^ self ].
 
 	aUnitInterval := self findDelimitedUnitAt: aTextIndex.
 	aUnitInterval isEmpty
