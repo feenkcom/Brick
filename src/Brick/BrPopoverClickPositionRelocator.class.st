@@ -1,3 +1,8 @@
+"
+I am {{gtClass:BrPopoverContainerRelocator}}. 
+I set {{gtMethod:BlSteppedLayout >> #anchorBounds:}} centered around a {{gtMethod: BlMouseEvent >> #position}} with a given {{gtMethod:BrPopoverClickPositionRelocator >> #extent: | label=#selector}}. 
+
+"
 Class {
 	#name : #BrPopoverClickPositionRelocator,
 	#superclass : #BrPopoverContainerRelocator,
@@ -11,7 +16,8 @@ Class {
 
 { #category : #'api - initialization' }
 BrPopoverClickPositionRelocator >> extent: aPoint [
-	"Set bounds extent"
+	"Set anchor bounds extent.
+	The stepped layout anchor bounds are centered around mouse (click) event positions."
 
 	extent := aPoint.
 	center := extent / 2.0
@@ -27,21 +33,24 @@ BrPopoverClickPositionRelocator >> initialize [
 ]
 
 { #category : #'api - relocating' }
-BrPopoverClickPositionRelocator >> mouseUp: anEvent given: aWidget [
-	super mouseUp: anEvent given: aWidget.
+BrPopoverClickPositionRelocator >> mouseEvent: anEvent given: anAnchorElement [
+	super mouseEvent: anEvent given: anAnchorElement.
 	
-	topLeftShift := aWidget globalPointToLocal: anEvent position
+	"Remember distance of the mouse event compared to the given anchor element"
+	topLeftShift := anAnchorElement globalPointToLocal: anEvent position
 ]
 
 { #category : #'api - relocating' }
-BrPopoverClickPositionRelocator >> relocateGiven: aWidget [
+BrPopoverClickPositionRelocator >> relocateGiven: anAnchorElement reason: aReason [
+	"Set stepped layout anchor bounds around the mouse (click) event position"
+
 	menuContainer parent
 		ifNotNil: [ :aTopMostParent | 
 			menuContainer
 				layoutDo: [ :aLayout | 
 					| aShiftedBounds aShiftedBoundsInTopMostParent aShiftedBoundsInContainer aShiftedRectangle |
 					aShiftedBounds := BlBounds origin: topLeftShift - center extent: extent.
-					aShiftedBoundsInTopMostParent := aTopMostParent localBoundsToMine: aShiftedBounds fromChild: aWidget.
+					aShiftedBoundsInTopMostParent := aTopMostParent localBoundsToMine: aShiftedBounds fromChild: anAnchorElement.
 					aShiftedBoundsInContainer := menuContainer parentBoundsToLocal: aShiftedBoundsInTopMostParent.
 					aShiftedRectangle := aShiftedBoundsInContainer asRectangle.
 					aLayout anchorBounds: aShiftedRectangle ] ]
