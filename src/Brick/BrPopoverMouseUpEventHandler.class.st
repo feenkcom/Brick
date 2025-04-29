@@ -20,7 +20,7 @@ BrPopoverMouseUpEventHandler >> mouseUpEvent: anEvent [
 	anEvent consumed: true.
 	
 	self widgetDo: [ :aWidget | 
-		self relocator mouseUp: anEvent given: aWidget ].
+		self relocator mouseEvent: anEvent given: aWidget ].
 	
 	self showDueTo: anEvent
 ]

@@ -1,3 +1,9 @@
+"
+I am an abstract class.
+I am responsible for changing {{gtMethod:BlSteppedLayout >> #anchorBounds:}}. 
+I am used by {{gtClass:BrWithExplicitPopoverAptitude}}. 
+
+"
 Class {
 	#name : #BrPopoverContainerRelocator,
 	#superclass : #Object,
@@ -14,19 +20,22 @@ BrPopoverContainerRelocator >> menuContainer [
 
 { #category : #accessing }
 BrPopoverContainerRelocator >> menuContainer: anElement [
+	"Set popover container which has {{gtClass:BlSteppedLayout}} layout."
+
 	menuContainer := anElement
 ]
 
 { #category : #'api - relocating' }
-BrPopoverContainerRelocator >> mouseUp: anEvent given: aWidget [
+BrPopoverContainerRelocator >> mouseEvent: anEvent given: anAnchorElement [
 	"Relocators can store interesting information."
 
 	
 ]
 
 { #category : #'api - relocating' }
-BrPopoverContainerRelocator >> relocateGiven: aWidget [
-	"Relocate menu elements given the widget"
+BrPopoverContainerRelocator >> relocateGiven: anAnchorElement reason: aReason [
+	"Relocate menu elements given the anchor element.
+	aReason is `BrPopoverRelocateReason` kind of instance"
 
 	self subclassResponsibility
 ]
