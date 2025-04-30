@@ -1,3 +1,12 @@
+"
+I am {{gtClass:BrMenuItem}}. 
+I create {{gtClass:BrMenuItems}}'s item element using {{gtMethod:BrMenuExplicitItem >> #stencil: | label=#yourself}}. 
+Users can use convenience methods:
+- {{gtMethod:BrMenuItems>>#addItemStencil:}}, 
+- {{gtMethod: BrMenuItems>>#addItemId:stencil: }}. 
+# Example
+Click on the following button and check the explicit item with a text editor: {{gtExample:BrMenuExamples >> menuItems | codeExpanded=false | previewExpanded=true | previewHeight=300 | previewShow=#gtDropdownFor: }}
+"
 Class {
 	#name : #BrMenuExplicitItem,
 	#superclass : #BrMenuItem,
