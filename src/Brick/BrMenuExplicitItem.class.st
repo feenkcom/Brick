@@ -1,6 +1,6 @@
 Class {
-	#name : #BrMenuExplicit,
-	#superclass : #BrMenu,
+	#name : #BrMenuExplicitItem,
+	#superclass : #BrMenuItem,
 	#instVars : [
 		'stencilBuilder'
 	],
@@ -8,20 +8,20 @@ Class {
 }
 
 { #category : #visiting }
-BrMenuExplicit >> acceptVisitor: aVisitor [
-	^ aVisitor visitMenuExplicit: self
+BrMenuExplicitItem >> acceptVisitor: aVisitor [
+	^ aVisitor visitMenuExplicitItem: self
 ]
 
 { #category : #accessing }
-BrMenuExplicit >> stencil [
+BrMenuExplicitItem >> stencil [
 	<return: #BrMenuExplicitStencilBuilder>
 	^ stencilBuilder
 ]
 
 { #category : #accessing }
-BrMenuExplicit >> stencil: aBrStencilBuilder [
+BrMenuExplicitItem >> stencil: aBrStencilBuilder [
 	"Set a stencil builder that builds BlElement instances.
-	It can be a block with one argument, receiving this menu model object: [ :anExplicitMenu | ]."
+	It can be a block with one argument, receiving this menu model object: [ :aMenuExplicitItem | ]."
 
 	stencilBuilder := aBrStencilBuilder asStencilBuilder: BrMenuExplicitStencilBuilder
 ]

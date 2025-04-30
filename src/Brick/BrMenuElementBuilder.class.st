@@ -52,6 +52,8 @@ BrMenuElementBuilder >> visitMenuExplicit: aMenuModel [
 			menuModel: aMenuModel;
 			asElement.
 
+	aMenuModel id ifNotNil: [ :anId | anElement id: anId ].
+
 	anElement addAptitude: (BrPopoverHideableAptitude new menuModel: aMenuModel).
 
 	^ anElement
@@ -67,6 +69,18 @@ BrMenuElementBuilder >> visitMenuExplicitHandle: aMenuModel [
 	anElement
 		when: BlClickEvent
 		do: [ :anEvent | anEvent currentTarget fireEvent: BrPopoverHideAllWish new ].
+
+	^ anElement
+]
+
+{ #category : #visiting }
+BrMenuElementBuilder >> visitMenuExplicitItem: aMenuModel [
+	| anElement |
+	anElement := aMenuModel stencil
+			menuModel: aMenuModel;
+			asElement.
+			
+	aMenuModel id ifNotNil: [ :anId | anElement id: anId ].
 
 	^ anElement
 ]

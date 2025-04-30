@@ -19,6 +19,13 @@ BrMenuItemElement >> initialize [
 
 	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ].
 	self when: BlMouseLeaveEvent do: [ :anEvent | self onMouseLeaveEvent: anEvent ].
+	
+	self
+		padding: (BlInsets
+				top: BrMenuConstants defaultMenuItemTopPadding
+				bottom: BrMenuConstants defaultMenuItemBottomPadding
+				left: BrMenuConstants defaultMenuItemLeftPadding
+				right: BrMenuConstants defaultMenuItemRightPadding)
 ]
 
 { #category : #initialization }

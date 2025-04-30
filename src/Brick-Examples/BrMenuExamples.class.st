@@ -24,7 +24,18 @@ BrMenuExamples >> basicMenuActionItem [
 	^ anItem
 ]
 
-{ #category : #'examples - items' }
+{ #category : #'examples - explicit item' }
+BrMenuExamples >> basicMenuExplicitItem [
+	<gtExample>
+	| anItem |
+	anItem := BrMenuExplicitItem new.
+
+
+
+	^ anItem
+]
+
+{ #category : #'examples - label item' }
 BrMenuExamples >> basicMenuLabelItem [
 	<gtExample>
 	| anItem |
@@ -237,6 +248,31 @@ BrMenuExamples >> menuActionItemWithUpdateSubscription [
 	^ anItemsModel
 ]
 
+{ #category : #'examples - explicit item' }
+BrMenuExamples >> menuExplicitItemWithEditor [
+	<gtExample>
+	| anItem anElement |
+	anItem := self basicMenuExplicitItem.
+
+	anItem
+		stencil: [ :aMenuItem | 
+			BrEditor new
+				aptitude: BrGlamorousRegularEditorAptitude;
+				background: BrGlamorousColors defaultButtonBackgroundColor;
+				geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
+				text: ('' asRopedText
+						attribute: (BrGhostTextAttribute
+								for: ('type something' asRopedText glamorousRegularFontAndSize
+										foreground: Color lightGray)));
+				hMatchParent;
+				vFitContent ].
+
+	anElement := BrGlamorousMenuElementBuilder new visitModel: anItem.
+	self assert: (anElement isKindOf: BrEditor).
+
+	^ anItem
+]
+
 { #category : #'examples - label' }
 BrMenuExamples >> menuIconTextAndShortcutLabel [
 	<gtExample>
@@ -257,7 +293,7 @@ BrMenuExamples >> menuIconTextAndShortcutLabel [
 { #category : #'examples - items' }
 BrMenuExamples >> menuItems [
 	<gtExample>
-	| aMenuItems anInlineSubmenu |
+	| aMenuItems anInlineSubmenu anElement |
 	aMenuItems := BrMenuItems new.
 	anInlineSubmenu := self submenuInlineMessageItems.
 	anInlineSubmenu select.
@@ -289,6 +325,10 @@ BrMenuExamples >> menuItems [
 			id: #'menu-complex-submenu';
 			label: 'Complex submenu';
 			submenu: self explicitMenuWithWithButtons).
+	aMenuItems addItem: self menuExplicitItemWithEditor.
+	
+	anElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
+	self assert: (anElement isKindOf: BlElement).
 
 	^ aMenuItems
 ]
@@ -338,7 +378,7 @@ BrMenuExamples >> menuItems_selectExtractMenu [
 	^ aMenuItems
 ]
 
-{ #category : #'examples - items' }
+{ #category : #'examples - label item' }
 BrMenuExamples >> menuLabelItem [
 	<gtExample>
 	| aMenuItem |

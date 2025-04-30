@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuActionItemElement,
-	#superclass : #BrMenuItemLabeledElement,
+	#superclass : #BrMenuLabeledItemElement,
 	#instVars : [
 		'buttonModel'
 	],
