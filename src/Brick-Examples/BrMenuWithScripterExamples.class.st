@@ -115,7 +115,7 @@ BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
 				constraintsDo: [ :c | 
 					c margin: (BlInsets all: 10).
 					c frame horizontal alignCenter.
-					c frame vertical alignCenter ];
+					c frame vertical alignCenterAt: 0.3 ];
 				addAptitude: (BrGlamorousWithExplicitDropdownAptitude
 						handle: [ BrButton new
 								id: #'menu-dropdown-handle';
