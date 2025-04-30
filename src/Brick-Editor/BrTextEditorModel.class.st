@@ -60,13 +60,6 @@ BrTextEditorModel >> addEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 		do: [ :eachShortcut | self addEditorShortcut: eachShortcut ]
 ]
 
-{ #category : #'api - word movement' }
-BrTextEditorModel >> alphanumericUnderscoreWordClassifier [
-	^ [ :c1 :c2 | 
-	c1 isSeparator ~= c2 isSeparator
-		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_)) ] ]
-]
-
 { #category : #asserting }
 BrTextEditorModel >> assertUIProcess [
 	"I check if the current process is a UI process of all attached editor elements"
@@ -109,14 +102,6 @@ BrTextEditorModel >> beReadOnlyWithSelection [
 { #category : #'api - mode' }
 BrTextEditorModel >> beReadOnlyWithoutSelection [
 	self editorMode: BrTextEditorReadonlyWithoutSelectionMode new
-]
-
-{ #category : #'api - word movement' }
-BrTextEditorModel >> camelCaseWordClassifier [
-	^ [ :c1 :c2 | 
-	c1 isSeparator ~= c2 isSeparator
-		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_))
-				or: [ c1 isUppercase not and: [ c2 isUppercase ] ] ] ]
 ]
 
 { #category : #'private - selection' }
@@ -397,8 +382,8 @@ BrTextEditorModel >> initialize [
 	shouldStyleWhenTextModified := true.
 	shouldConsumeClickEvent := true.
 	
-	movementWordClassifier := self camelCaseWordClassifier.
-	doubleClickWordClassifier := self alphanumericUnderscoreWordClassifier.
+	movementWordClassifier := CamelCaseWordClassifier new.
+	doubleClickWordClassifier := AlphanumericUnderscoreWordClassifier new.
 	
 	"only when the editor mode is null, set an actual mode.
 	Setting an editor mode can be slow therefore we provide a class side
@@ -1144,14 +1129,6 @@ BrTextEditorModel >> setEditorShortcuts: aBrTextEditorShortcuts [
 { #category : #accessing }
 BrTextEditorModel >> shouldConsumeClickEvent [
 	^ shouldConsumeClickEvent ifNil: [ shouldConsumeClickEvent := true ]
-]
-
-{ #category : #'as yet unclassified' }
-BrTextEditorModel >> smalltalkWordClassifier [
-	^ [ :c1 :c2 | 
-	c1 isSeparator ~= c2 isSeparator
-		or: [ ((c1 isAlphaNumeric | (c1 = $_)) not and: [ c2 isAlphaNumeric | (c2 = $_) ])
-				or: [ c1 isAlphaNumeric | (c1 = $_) and: [ c2 tokenish not ] ] ] ]
 ]
 
 { #category : #'text - styling' }
