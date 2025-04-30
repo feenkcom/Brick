@@ -262,7 +262,7 @@ BrMenuExamples >> menuExplicitItemWithEditor [
 				geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
 				text: ('' asRopedText
 						attribute: (BrGhostTextAttribute
-								for: ('type something' asRopedText glamorousRegularFontAndSize
+								for: ('explicit item with text editor' asRopedText glamorousRegularFontAndSize
 										foreground: Color lightGray)));
 				hMatchParent;
 				vFitContent ].
