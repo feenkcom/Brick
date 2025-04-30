@@ -43,6 +43,7 @@ BaselineOfBrick >> baseline: spec [
 		spec 
 			package: #'Brick-Core' with: [
 				spec requires: #('Bloc' 'BlocPac' ). ];
+			package: #'Brick-Classifiers';
 			package: #'Brick-Editor' with: [
 				spec requires: #(#'Brick-Core' ). ];
 			package: #'Brick-Editor-Extensions' with: [
