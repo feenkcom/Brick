@@ -4,6 +4,12 @@ Class {
 	#category : #'Brick-Classifiers'
 }
 
+{ #category : #'as yet unclassified' }
+BrCamelCaseWordClassifier >> itself [
+	<gtExample>
+	^ self
+]
+
 { #category : #classification }
 BrCamelCaseWordClassifier >> value: c1 value: c2 [
 	^ c1 isSeparator ~= c2 isSeparator

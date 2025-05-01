@@ -4,6 +4,12 @@ Class {
 	#category : #'Brick-Classifiers'
 }
 
+{ #category : #'as yet unclassified' }
+BrSmalltalkWordClassifier >> itself [
+	<gtExample>
+	^ self
+]
+
 { #category : #classification }
 BrSmalltalkWordClassifier >> value: c1 value: c2 [
 	^ c1 isSeparator ~= c2 isSeparator

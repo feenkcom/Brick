@@ -26,11 +26,11 @@ BrClassifierStyler >> privateStyle: aText [
 	pieces
 		do: [ :p | 
 			| newColor |
-			newColor := BrGlamorousColors distinctTenLightColors
+			newColor := (BrGlamorousColors distinctTenLightColors
 					remove: previousColor ifAbsent: [  ];
-					yourself.
+					yourself) atRandom.
 			(aText from: index + 1 to: index + p size)
-				highlight: newColor atRandom twiceLighter.
+				highlight: newColor twiceLighter lighter.
 			index := index + p size.
 			previousColor := newColor ].
 	^ aText
