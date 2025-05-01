@@ -19,13 +19,19 @@ BrClassifierStyler >> classifier: aClassifier [
 
 { #category : #'as yet unclassified' }
 BrClassifierStyler >> privateStyle: aText [
-	| pieces index |
-	pieces := aText asString piecesCutWhere: BrCamelCaseWordClassifier new.
+	| pieces index previousColor |
+	pieces := aText asString piecesCutWhere: classifier.
 	index := 0.
+	previousColor := Color white.
 	pieces
 		do: [ :p | 
+			| newColor |
+			newColor := BrGlamorousColors distinctTenLightColors
+					remove: previousColor ifAbsent: [  ];
+					yourself.
 			(aText from: index + 1 to: index + p size)
-				highlight: BrGlamorousColors distinctTenLightColors atRandom twiceLighter twiceLighter.
-			index := index + p size ].
+				highlight: newColor atRandom twiceLighter.
+			index := index + p size.
+			previousColor := newColor ].
 	^ aText
 ]

@@ -14,7 +14,7 @@ BrWordClassifier >> gtHighlightingFor: aView [
 		title: 'Highlighting';
 		aptitude: BrGlamorousCodeEditorAptitude;
 		text: ((Object >> #printOn:) sourceCode);
-		styler: (BrClassifierStyler for: self)
+		styler: [ BrClassifierStyler for: self ]
 ]
 
 { #category : #classification }
