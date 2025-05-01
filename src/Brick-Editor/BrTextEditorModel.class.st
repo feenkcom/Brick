@@ -382,8 +382,8 @@ BrTextEditorModel >> initialize [
 	shouldStyleWhenTextModified := true.
 	shouldConsumeClickEvent := true.
 	
-	movementWordClassifier := CamelCaseWordClassifier new.
-	doubleClickWordClassifier := AlphanumericUnderscoreWordClassifier new.
+	movementWordClassifier := BrCamelCaseWordClassifier new.
+	doubleClickWordClassifier := BrAlphanumericUnderscoreWordClassifier new.
 	
 	"only when the editor mode is null, set an actual mode.
 	Setting an editor mode can be slow therefore we provide a class side

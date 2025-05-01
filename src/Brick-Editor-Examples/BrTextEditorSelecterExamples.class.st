@@ -677,6 +677,21 @@ BrTextEditorSelecterExamples >> select_word_at_1 [
 ]
 
 { #category : #'examples - word' }
+BrTextEditorSelecterExamples >> select_word_at_1_on_empty_text [
+	<gtExample>
+	| anEditor |
+
+	anEditor := self editorOnEmptyText.
+	anEditor selecter
+		selectionUnitAt: 1;
+		select.
+
+	self assert: anEditor selection isEmpty.
+
+	^ anEditor
+]
+
+{ #category : #'examples - word' }
 BrTextEditorSelecterExamples >> select_word_at_2 [
 	<gtExample>
 	| anEditor |
