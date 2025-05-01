@@ -130,6 +130,15 @@ BrMenuItems >> addItemId: anId label: aLabelString shortcut: aShortcutString act
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemId: anId stencil: aStencil [
+	| aMenuItem |
+	aMenuItem := BrMenuExplicitItem new.
+	aMenuItem id: anId.
+	aMenuItem stencil: aStencil.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemLabel: aText action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
@@ -192,6 +201,14 @@ BrMenuItems >> addItemLabel: aText submenu: aSubmenu [
 	aMenuItem := BrMenuSubmenuItem new.
 	aMenuItem label: aText.
 	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemStencil: aStencil [
+	| aMenuItem |
+	aMenuItem := BrMenuExplicitItem new.
+	aMenuItem stencil: aStencil.
 	self addItem: aMenuItem
 ]
 

@@ -13,12 +13,6 @@ BrMenuInvalidItemElement >> initialize [
 	self initializeTextElement.
 
 	self addChild: textElement.
-	self
-		padding: (BlInsets
-				top: BrMenuConstants defaultMenuItemTopPadding
-				bottom: BrMenuConstants defaultMenuItemBottomPadding
-				left: BrMenuConstants defaultMenuItemLeftPadding
-				right: BrMenuConstants defaultMenuItemRightPadding).
 	self background: self theme status paleErrorBackgroundColor
 ]
 

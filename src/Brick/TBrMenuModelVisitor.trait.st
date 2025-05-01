@@ -29,6 +29,11 @@ TBrMenuModelVisitor >> visitMenuExplicitHandle: aMenuModel [
 ]
 
 { #category : #visiting }
+TBrMenuModelVisitor >> visitMenuExplicitItem: aMenuModel [
+	^ self visitMenuItem: aMenuModel
+]
+
+{ #category : #visiting }
 TBrMenuModelVisitor >> visitMenuHandle: aMenuModel [
 	^ self visitMenuModel: aMenuModel
 ]
@@ -60,4 +65,11 @@ TBrMenuModelVisitor >> visitMenuModel: aMenuModel [
 { #category : #visiting }
 TBrMenuModelVisitor >> visitMenuSubmenuItem: aMenuModel [
 	^ self visitMenuLabeledItem: aMenuModel
+]
+
+{ #category : #visiting }
+TBrMenuModelVisitor >> visitModel: aMenuModel [
+	"I am a helper method to satisfy `GtRBAcceptVisitorCalledFromNonVisitingMethods`."
+
+	^ aMenuModel acceptVisitor: self
 ]
