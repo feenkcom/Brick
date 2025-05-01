@@ -19,19 +19,15 @@ BrClassifierStyler >> classifier: aClassifier [
 
 { #category : #'as yet unclassified' }
 BrClassifierStyler >> privateStyle: aText [
-	| pieces index previousColor |
+	| pieces index |
 	pieces := aText asString piecesCutWhere: classifier.
 	index := 0.
-	previousColor := Color white.
 	pieces
-		do: [ :p | 
+		doWithIndex: [ :p :pieceIndex | 
 			| newColor |
-			newColor := (BrGlamorousColors distinctTenLightColors
-					remove: previousColor ifAbsent: [  ];
-					yourself) atRandom.
+			newColor := BrGlamorousColors distinctTenLightColors at: (pieceIndex \\ BrGlamorousColors distinctTenLightColors size) + 1.
 			(aText from: index + 1 to: index + p size)
 				highlight: newColor twiceLighter lighter.
-			index := index + p size.
-			previousColor := newColor ].
+			index := index + p size].
 	^ aText
 ]
