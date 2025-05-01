@@ -1,5 +1,5 @@
 Class {
-	#name : #BrMenuItemLabeledElement,
+	#name : #BrMenuLabeledItemElement,
 	#superclass : #BrMenuItemElement,
 	#instVars : [
 		'labelElement'
@@ -8,37 +8,31 @@ Class {
 }
 
 { #category : #'api - enablement' }
-BrMenuItemLabeledElement >> disable [
+BrMenuLabeledItemElement >> disable [
 	super disable.
 	labelElement disable.
 ]
 
 { #category : #'api - enablement' }
-BrMenuItemLabeledElement >> enable [
+BrMenuLabeledItemElement >> enable [
 	super enable.
 	labelElement enable.
 ]
 
 { #category : #initialization }
-BrMenuItemLabeledElement >> initialize [
+BrMenuLabeledItemElement >> initialize [
 	super initialize.
 	self initializeLabelElement.
 	self addChild: labelElement as: #'menu--labeled'.
-	self
-		padding: (BlInsets
-				top: BrMenuConstants defaultMenuItemTopPadding
-				bottom: BrMenuConstants defaultMenuItemBottomPadding
-				left: BrMenuConstants defaultMenuItemLeftPadding
-				right: BrMenuConstants defaultMenuItemRightPadding)
 ]
 
 { #category : #initialization }
-BrMenuItemLabeledElement >> initializeLabelElement [
+BrMenuLabeledItemElement >> initializeLabelElement [
 	labelElement := BrMenuTextLabelElement new
 ]
 
 { #category : #'api - initialization' }
-BrMenuItemLabeledElement >> labelElementClass: anElementClass [
+BrMenuLabeledItemElement >> labelElementClass: anElementClass [
 	| anElement |
 	self
 		assert: [ anElementClass isNotNil ]
@@ -55,19 +49,19 @@ BrMenuItemLabeledElement >> labelElementClass: anElementClass [
 ]
 
 { #category : #'event handling' }
-BrMenuItemLabeledElement >> onMenuModelChanged [
+BrMenuLabeledItemElement >> onMenuModelChanged [
 	super onMenuModelChanged.
 	self updateLabelElement
 ]
 
 { #category : #'event handling' }
-BrMenuItemLabeledElement >> onUpdateRequestedAnnouncement: anAnnouncement [
+BrMenuLabeledItemElement >> onUpdateRequestedAnnouncement: anAnnouncement [
 	super onUpdateRequestedAnnouncement: anAnnouncement.
 
 	labelElement dispatchEvent: BrPopoverUpdateWish new
 ]
 
 { #category : #'private - updating' }
-BrMenuItemLabeledElement >> updateLabelElement [
+BrMenuLabeledItemElement >> updateLabelElement [
 	labelElement labelModel: self menuModel labelModel
 ]
