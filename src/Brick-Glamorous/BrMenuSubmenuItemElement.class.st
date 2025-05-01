@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuSubmenuItemElement,
-	#superclass : #BrMenuItemLabeledElement,
+	#superclass : #BrMenuLabeledItemElement,
 	#category : #'Brick-Glamorous-Menu'
 }
 

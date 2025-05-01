@@ -37,6 +37,11 @@ BrMenuItemTypeBuilder >> visitMenuDecoratingModel: aMenuModel [
 ]
 
 { #category : #visiting }
+BrMenuItemTypeBuilder >> visitMenuExplicitItem: aMenuModel [
+	^ BrMenuElementClassType new elementClass: BrMenuExplicitItemElement
+]
+
+{ #category : #visiting }
 BrMenuItemTypeBuilder >> visitMenuLabelModel: aLabelModel [
 	^ BlInfiniteItemType invalid
 ]
