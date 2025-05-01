@@ -27,7 +27,7 @@ BrClassifierStyler >> privateStyle: aText [
 			| newColor |
 			newColor := BrGlamorousColors distinctTenLightColors at: (pieceIndex \\ BrGlamorousColors distinctTenLightColors size) + 1.
 			(aText from: index + 1 to: index + p size)
-				highlight: newColor twiceLighter.
+				highlight: newColor twiceLighter lighter.
 			index := index + p size].
 	^ aText
 ]
