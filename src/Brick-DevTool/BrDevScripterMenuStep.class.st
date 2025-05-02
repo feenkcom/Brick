@@ -4,9 +4,27 @@ Class {
 	#category : #'Brick-DevTool-Scripter'
 }
 
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> actOnMenuItemKeyPress [
+	^ self keyPress
+		label: 'Press return to act on menu item';
+		key: BlKeyboardKey return;
+		referenceSender
+]
+
 { #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertClosedMenuContainer [
 	^ (self assertMenuContainerExist: 0) referenceSender
+]
+
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> assertDeselectedMenuItem: anElementId [
+	^ self assert
+		label: ('Assert deselected menu item with ID: {1}' format: {anElementId});
+		satisfies: [ :anElement | anElement states isSelected not ];
+		referenceSender;
+		onParentStepTarget: self;
+		// anElementId
 ]
 
 { #category : #'steps - checks' }
@@ -55,6 +73,17 @@ BrDevScripterMenuStep >> assertHandleCenterInSpacePosition: aSpacePosition [
 					format: { aHandlePosition. aSpacePosition } ];
 		referenceSender;
 		onSpaceRoot
+]
+
+{ #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuContainerChildrenCount: anExpectedCount [
+	^ self assert
+		label: ('Assert popover container has {1} children' format: {anExpectedCount});
+		value: [ :aMenuContainer | aMenuContainer childrenCount ]
+			equals: anExpectedCount;
+		referenceSender;
+		onParentStepTarget: self;
+		onThisOrBreadthFirstChildOfKind: BrMenuSteppedElement
 ]
 
 { #category : #'steps - checks' }
@@ -113,6 +142,17 @@ BrDevScripterMenuStep >> assertMenuContainerHasEmptyElementCacheFor: aMenuAptitu
 ]
 
 { #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuContainerHasFocus [
+	^ self assert
+		label: 'Assert menu container has focus';
+		satisfies: [ :aSteppedElement | aSteppedElement hasFocus ]
+			description: [ :aSteppedElement | 'Menu container must have focus: {1}' format: {aSteppedElement} ];
+		referenceSender;
+		onParentStepTarget: self;
+		onThisOrBreadthFirstChildOfKind: BrMenuSteppedElement
+]
+
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertPermanentlyHiddenDropdown [
 	"It means that the menu will not be displayed unless explicitly requested.
 	For example, temporarily hidden menus are opened again, once its anchor element 
@@ -150,6 +190,16 @@ BrDevScripterMenuStep >> assertPermanentlyHiddenMenuContainerFor: aMenuAptitudeC
 					ifAbsent: [ NotFound signalFor: aMenuAptitudeClass in: anAnchorElement ] ]
 			description: [ :anAnchorElement | '{1} is not permanently hidden' ];
 		onParentStepTarget: self
+]
+
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> assertSelectedMenuItem: anElementId [
+	^ self assert
+		label: ('Assert selected menu item with ID: {1}' format: {anElementId});
+		satisfies: [ :anElement | anElement states isSelected ];
+		referenceSender;
+		onParentStepTarget: self;
+		// anElementId
 ]
 
 { #category : #'steps - checks' }
@@ -261,6 +311,22 @@ BrDevScripterMenuStep >> keepPermanentlyMenuInScene: aMenuAptitudeClass [
 ]
 
 { #category : #'steps - interactions' }
+BrDevScripterMenuStep >> nextMenuItemKeyPress [
+	^ self keyPress
+		label: 'Press arrow down';
+		key: BlKeyboardKey arrowDown;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> nextSubmenuKeyPress [
+	^ self keyPress
+		label: 'Press arrow right';
+		key: BlKeyboardKey arrowRight;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
 BrDevScripterMenuStep >> openContextMenu [
 	^ self secondaryClick
 		label: 'Open context menu';
@@ -316,5 +382,13 @@ BrDevScripterMenuStep >> prepareSteppedLayoutDropdownAnalyzer [
 { #category : #'steps - other' }
 BrDevScripterMenuStep >> prepareSteppedLayoutTooltipAnalyzer [
 	^ (self prepareSteppedLayoutAnalyzerFor: BrGlamorousWithExplicitTooltipAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> previousMenuItemKeyPress [
+	^ self keyPress
+		label: 'Press arrow up';
+		key: BlKeyboardKey arrowUp;
 		referenceSender
 ]

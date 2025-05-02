@@ -862,6 +862,160 @@ BrMenuWithScripterExamples >> displayButtonWithTooltipLongString [
 	^ self scripterWithElement: [ self buttonWithTooltipLongString ]
 ]
 
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown [
+	<gtExample>
+	| aScripter |
+	aScripter := self
+			scripterWithElement: [ self focusedButtonWithFocusableDropdown ].
+
+	self assert: (aScripter root query // #'menu-dropdown-button') anyOne isFocused.
+			
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_displayDropdown [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown.
+
+	aScripter menuStep
+		openDropdownWithId: #'menu-dropdown-button';
+		assertMenuContainerExist;
+		play.
+		
+	aScripter menuStep
+		assertMenuContainerChildrenCount: 2;
+		assertMenuContainerHasFocus;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown_displayDropdown.
+
+	aScripter menuStep
+		label: 'Select inline message';
+		assertMenuContainerHasFocus;
+		assertDeselectedMenuItem: #'menu-inline-message-item';
+		nextMenuItemKeyPress;
+		assertSelectedMenuItem: #'menu-inline-message-item';
+		assertMenuContainerChildrenCount: 3;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem2 [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem.
+
+	aScripter menuStep
+		label: 'Select extract temporary';
+		assertMenuContainerHasFocus;
+		assertSelectedMenuItem: #'menu-inline-message-item';
+		assertDeselectedMenuItem: #'menu-extract-temporary-item';
+		nextMenuItemKeyPress;
+		assertSelectedMenuItem: #'menu-extract-temporary-item';
+		assertDeselectedMenuItem: #'menu-inline-message-item';
+		assertMenuContainerChildrenCount: 3;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem2_actOnItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem2.
+
+	aScripter menuStep
+		label: 'Press enter on extract temporary item';
+		actOnMenuItemKeyPress;
+		assertMenuContainerHasFocus;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem3 [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem2.
+
+	aScripter menuStep
+		label: 'Select cut';
+		assertMenuContainerHasFocus;
+		assertSelectedMenuItem: #'menu-extract-temporary-item';
+		assertDeselectedMenuItem: #'menu-cut-item';
+		nextMenuItemKeyPress;
+		assertSelectedMenuItem: #'menu-cut-item';
+		assertDeselectedMenuItem: #'menu-extract-temporary-item';
+		assertDeselectedMenuItem: #'menu-inline-message-item';
+		assertMenuContainerChildrenCount: 2;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem3_actOnItem [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem3.
+
+	aScripter menuStep
+		label: 'Press enter on cut item';
+		actOnMenuItemKeyPress;
+		assertClosedMenuContainer;
+		play.
+
+	aScripter assert
+		satisfies: [ :aButton | aButton isFocused ]
+			description: [ :aButton | 
+				'Dropdown button must be focused after dropdown close action: {1}'
+					format: {aButton} ];
+		// #'menu-dropdown-button';
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem_nextSubmenu [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem.
+
+	aScripter menuStep
+		label: 'Select inline message submenu';
+		assertMenuContainerHasFocus;
+		assertSelectedMenuItem: #'menu-inline-message-item';
+		assertDeselectedMenuItem: #'menu-extract-temporary-item';
+		nextSubmenuKeyPress;
+		assertDeselectedMenuItem: #'menu-extract-temporary-item';
+		assertSelectedMenuItem: #'menu-inline-message-item';
+		assertMenuContainerChildrenCount: 3;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> displayTabGroupWithButtonDropdownMenu [
 	<gtExample>
@@ -1097,6 +1251,28 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 		play.
 
 	^ aScripter
+]
+
+{ #category : #'examples - focusable' }
+BrMenuWithScripterExamples >> focusedButtonWithFocusableDropdown [
+	<gtExample>
+	| aMenuItems aFrame aButton |
+	aMenuItems := BrMenuExamples new menuItems.
+	aMenuItems items do: #deselect.
+	aMenuItems beListElementType.
+	aFrame := self buttonWithDropdownMenu: aMenuItems.
+	aButton := (aFrame query // #'menu-dropdown-button') anyOne.
+	aButton beFocusable.
+	aButton requestFocus.
+	aButton aptitude
+		findActor: BrGlamorousWithExplicitDropdownAptitude
+		ifFound: [ :anAptitude | anAptitude withGainFocusOnShow ]
+		ifNone: [ 
+			NotFound
+				signalFor: BrGlamorousWithExplicitDropdownAptitude
+				in: aButton ].
+	
+	^ aFrame
 ]
 
 { #category : #'examples - tooltip' }

@@ -17,7 +17,8 @@ Class {
 		'submenus',
 		'cacheCleaner',
 		'mouseEventHandler',
-		'visibilityUpdater'
+		'visibilityUpdater',
+		'userData'
 	],
 	#category : #'Brick-Menu - Aptitude'
 }
@@ -270,6 +271,8 @@ BrWithExplicitPopoverAptitude >> initializeEventHandlers [
 			do: [ :anEvent | self onClickedOutsideMouseUpEvent: anEvent ].
 
 	pressEscEventHandler := BlShortcutWithAction new
+			name: 'Close popover';
+			description: 'Close popover, e.g., context menu, dropdown, and tooltip.';
 			combination: BlKeyCombination escape;
 			action: [ :anEvent | self onEscapeKeyCombinationEvent: anEvent ]
 ]
@@ -730,6 +733,35 @@ BrWithExplicitPopoverAptitude >> useSecondaryMouseButton [
 ]
 
 { #category : #accessing }
+BrWithExplicitPopoverAptitude >> userData [
+	"Returns a Dictionary that holds application dependent and temporary objects.
+	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
+	<return: #Dictionary>
+
+	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> userDataRemoveEventHandlerAt: aKey [
+	self userData
+		at: aKey
+		ifPresent: [ :anOldEventHandler | self removeEventHandler: anOldEventHandler ]
+		ifAbsent: [  "ignore" ]
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> userDataReplaceEventHandlerAt: aKey with: anEventHandler [ 
+	self userData
+		at: aKey
+		ifPresent: [ :anOldEventHandler | self removeEventHandler: anOldEventHandler ]
+		ifAbsent: [  "ignore" ].
+
+	self userData at: aKey put: anEventHandler.
+
+	self addEventHandler: anEventHandler
+]
+
+{ #category : #accessing }
 BrWithExplicitPopoverAptitude >> visibilityUpdater [
 	<return: #BrPopoverContainerVisibilityUpdater>
 	^ visibilityUpdater ifNil: [ visibilityUpdater := BrPopoverContainerInSpaceVisibilityUpdater new menuContainer: menuContainer ].
@@ -819,6 +851,19 @@ BrWithExplicitPopoverAptitude >> withDefaultHandle [
 	self withCenteredHandle
 ]
 
+{ #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> withGainFocusOnShow [
+	"Let's request focus on popover show action and 
+	return back to the original element when the popover is closed."
+
+	| anEventHandler |
+	anEventHandler := BrPopoverGainFocusOnShowEventHandler new
+			menuContainer: menuContainer.
+	self
+		userDataReplaceEventHandlerAt: #BrPopoverGainFocusOnShowEventHandler
+		with: anEventHandler
+]
+
 { #category : #'api - menu' }
 BrWithExplicitPopoverAptitude >> withHandleSubmenu: aMenuBlock [
 	self
@@ -891,6 +936,13 @@ BrWithExplicitPopoverAptitude >> withVisibleWidgetBoundsRelocator [
 { #category : #'api - relocating' }
 BrWithExplicitPopoverAptitude >> withWidgetBoundsRelocator [
 	self relocator: BrPopoverWidgetBoundsRelocator new
+]
+
+{ #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> withoutGainFocusOnShow [
+	"Remove any request focus on popover show event handler."
+
+	self userDataRemoveEventHandlerAt: #BrPopoverGainFocusOnShowEventHandler
 ]
 
 { #category : #'api - initialization' }

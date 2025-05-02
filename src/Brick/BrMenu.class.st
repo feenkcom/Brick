@@ -13,3 +13,12 @@ BrMenu >> acceptVisitor: aVisitor [
 BrMenu >> notifyPinRequest [
 	self announcer announce: (BrMenuPinRequestAnnouncement new menuModel: self)
 ]
+
+{ #category : #'api - navigation' }
+BrMenu >> requestNavigateHere [
+	"Subclasses may perform actions on navigate in menus.
+	Must be executed from a UI process."
+
+	super requestNavigateHere.
+	self navigate
+]

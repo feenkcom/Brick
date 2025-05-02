@@ -78,6 +78,15 @@ BrMenuSubmenuItem >> onSelectionChanged [
 	It looks confusing."
 ]
 
+{ #category : #'api - navigation' }
+BrMenuSubmenuItem >> requestNavigateToSubmenu [
+	super requestNavigateToSubmenu.
+	
+	self select.
+	self isSelected ifTrue: [ 
+		self submenu navigate ].
+]
+
 { #category : #'api - submenu' }
 BrMenuSubmenuItem >> submenu [
 	<return: #BrMenu>

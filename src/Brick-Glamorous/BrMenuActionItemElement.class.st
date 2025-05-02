@@ -20,6 +20,11 @@ BrMenuActionItemElement >> initialize [
 ]
 
 { #category : #'event handling' }
+BrMenuActionItemElement >> onActionRequestedAnnouncement: anAnnouncement [
+	self dispatchEvent: BlClickEvent new
+]
+
+{ #category : #'event handling' }
 BrMenuActionItemElement >> onClick: anEvent element: anElement model: aButtonModel [ 
 	| aMenuModel |
 	aMenuModel := self menuModel.
@@ -27,4 +32,13 @@ BrMenuActionItemElement >> onClick: anEvent element: anElement model: aButtonMod
 	aMenuModel action ifNotNil: [ :anAction | 
 		anAction gtValueWithArgs: { anElement. aButtonModel. anEvent } ].
 	aMenuModel hideOnClick ifTrue: [ aMenuModel hideAll ].
+]
+
+{ #category : #'event handling' }
+BrMenuActionItemElement >> subscribeToMenuModel [
+	super subscribeToMenuModel.
+	self menuItem announcer weak
+		when: BrMenuModelActionRequestedAnnouncement
+		send: #onActionRequestedAnnouncement:
+		to: self.
 ]
