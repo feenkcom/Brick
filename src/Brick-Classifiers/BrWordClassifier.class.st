@@ -13,7 +13,13 @@ BrWordClassifier >> gtHighlightingFor: aView [
 	^ aView textEditor
 		title: 'Highlighting';
 		aptitude: BrGlamorousCodeEditorAptitude;
-		text: ((Object >> #printOn:) sourceCode);
+		text: 'wordWithCamelCase_and_underscore
+	"Smalltalk comment"
+
+	aSomething := aSomethingElse 
+		doWith: [ :a | a value ] 
+		andWith: ((Something named: ''something'');
+		andThenSometingElse';
 		styler: [ BrClassifierStyler for: self ]
 ]
 
