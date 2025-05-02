@@ -33,3 +33,10 @@ TBlDevScripterTarget >> onMenuContainer [
 		onSpaceRoot;
 		// BrMenuSteppedElement
 ]
+
+{ #category : #'*Brick-DevTool' }
+TBlDevScripterTarget >> onPopover [
+	self
+		onSpaceRoot;
+		onDropdown: true
+]

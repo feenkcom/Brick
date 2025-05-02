@@ -301,7 +301,8 @@ BrMenuExamples >> menuItems [
 	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
 	aMenuItems
-		addItemLabel: 'Cut'
+		addItemId: #'menu-cut-item'
+		label: 'Cut'
 		action: [ NonInteractiveTranscript stdout show: 'Cut ' ].
 	aMenuItems
 		addItemLabel: 'Copy'
@@ -316,10 +317,10 @@ BrMenuExamples >> menuItems [
 		label: 'Create view';
 		submenu: self explicitMenu).
 	aMenuItems addItem: (BrMenuSubmenuItem new
-		label: 'Create view (single layer)';
+		label: 'Create view' preview: 'single layer';
 		submenu: self explicitMenuInSingleCompositionLayer).
 	aMenuItems addItem: (BrMenuSubmenuItem new
-		label: 'Create view (comp. layer)';
+		label: 'Create view' preview: 'comp. layer';
 		submenu: self explicitMenuInSeparateCompositionLayer).
 	aMenuItems addItem: (BrMenuSubmenuItem new
 			id: #'menu-complex-submenu';
@@ -435,6 +436,7 @@ BrMenuExamples >> submenuExtractTemporaryItems [
 	<gtExample>
 	| anItem |
 	anItem := BrMenuSubmenuItem new.
+	anItem id: #'menu-extract-temporary-item'.
 	anItem label: 'Extract temporary'.
 	anItem group: self refactoringGroup.
 	anItem submenuItem: (BrMenuActionItem new
@@ -457,6 +459,7 @@ BrMenuExamples >> submenuInlineMessageItems [
 	<gtExample>
 	| anItem |
 	anItem := BrMenuSubmenuItem new.
+	anItem id: #'menu-inline-message-item'.
 	anItem icon: BrGlamorousVectorIcons down label: 'Inline message'.
 	anItem group: self refactoringGroup.
 	anItem submenuItem: (BrMenuActionItem new
