@@ -34,6 +34,11 @@ BrMenuSubmenuItemElement >> initializeStyling [
 ]
 
 { #category : #'event handling' }
+BrMenuSubmenuItemElement >> onActionRequestedAnnouncement: anAnnouncement [
+	self dispatchEvent: BlClickEvent new
+]
+
+{ #category : #'event handling' }
 BrMenuSubmenuItemElement >> onClick: anEvent element: anElement model: aButtonModel [ 
 	| aMenuModel |
 	aMenuModel := self menuModel.
@@ -68,4 +73,13 @@ BrMenuSubmenuItemElement >> onSelectionChanged: anAnnouncement [
 		
 	"Note: hide action happens in BrMenuSubmenuItem>>#onSelectionChanged.
 	Is looks confusing."
+]
+
+{ #category : #'event handling' }
+BrMenuSubmenuItemElement >> subscribeToMenuModel [
+	super subscribeToMenuModel.
+	self menuItem announcer weak
+		when: BrMenuModelActionRequestedAnnouncement
+		send: #onActionRequestedAnnouncement:
+		to: self.
 ]

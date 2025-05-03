@@ -2,7 +2,8 @@ Class {
 	#name : #BrMenuElementClassType,
 	#superclass : #BlInfiniteItemType,
 	#instVars : [
-		'elementClass'
+		'elementClass',
+		'decorator'
 	],
 	#category : #'Brick-Menu - Support'
 }
@@ -19,7 +20,20 @@ BrMenuElementClassType >> = anObject [
 { #category : #'api - instance creation' }
 BrMenuElementClassType >> createElement [
 	<return: #BlElement>
-	^ self elementClass new
+	| anElement |
+	anElement := self elementClass new.
+	self decorator ifNotNil: [ :aBlock | aBlock cull: anElement ].
+	^ anElement
+]
+
+{ #category : #accessing }
+BrMenuElementClassType >> decorator [
+	^ decorator
+]
+
+{ #category : #accessing }
+BrMenuElementClassType >> decorator: anObject [
+	decorator := anObject
 ]
 
 { #category : #accessing }

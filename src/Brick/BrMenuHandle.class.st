@@ -60,3 +60,8 @@ BrMenuHandle >> onMenuDisplayedFromParentMenuElement: aMenuElement [
 				submenu: aMenu;
 				fromElement: aMenuElement)
 ]
+
+{ #category : #'api - navigation' }
+BrMenuHandle >> requestNavigateHere [
+	self hideAll
+]

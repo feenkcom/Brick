@@ -90,6 +90,14 @@ BrMenuModel >> items [
 	^ #()
 ]
 
+{ #category : #'api - navigation' }
+BrMenuModel >> navigate [
+	"Navigate to a corresponding menu element.
+	Note: This method can be called only from the UI process."
+
+	announcer announce: (BrMenuNavigateAnnouncement new menuModel: self)
+]
+
 { #category : #'api - hooks' }
 BrMenuModel >> onMenuDisplayed: aMenuElement [
 	"Subclasses may react when a menu is dispalyed using a given element"
@@ -120,6 +128,14 @@ BrMenuModel >> parentsDo: aBlock [
 		aParent parentsDo: aBlock ]
 ]
 
+{ #category : #'api - action' }
+BrMenuModel >> requestAct [
+	"Subclasses may perform actions on request act, e.g., click on action items.
+	Must be executed from a UI process."
+
+	
+]
+
 { #category : #'api - announcer' }
 BrMenuModel >> requestFocus [
 	"Attempt to transer focus to the element of the menu item.
@@ -128,4 +144,28 @@ BrMenuModel >> requestFocus [
 	self deprecated: 'It does not seem to be used. Moreover, the wish should be a menu model announcement.'.
 
 	self announcer announce: BrPopoverFocusWish new
+]
+
+{ #category : #'api - navigation' }
+BrMenuModel >> requestNavigateHere [
+	"Subclasses may perform actions on navigate in menus.
+	Must be executed from a UI process."
+
+	
+]
+
+{ #category : #'api - navigation' }
+BrMenuModel >> requestNavigateToParent [
+	"Subclasses may perform actions on navigate to parent menus.
+	Must be executed from a UI process."
+
+	self parentDo: [ :aParent | aParent requestNavigateHere ]
+]
+
+{ #category : #'api - navigation' }
+BrMenuModel >> requestNavigateToSubmenu [
+	"Subclasses may perform actions on navigate to submenu.
+	Must be executed from a UI process."
+
+	
 ]

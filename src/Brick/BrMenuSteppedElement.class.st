@@ -106,6 +106,9 @@ BrMenuSteppedElement >> initialize [
 	self 
 		when: BrPopoverDetachWish
 		do: [ :anEvent | self onDetachWish: anEvent ].
+	self 
+		when: BrPopoverGainFocusWish
+		do: [ :anEvent | self onPopoverGainFocusWish: anEvent ]
 ]
 
 { #category : #'api - testing' }
@@ -177,6 +180,13 @@ BrMenuSteppedElement >> onDetachWish: anEvent [
 BrMenuSteppedElement >> onMenuModelChanged [
 	super onMenuModelChanged.
 	self updateElement.
+]
+
+{ #category : #'event handling' }
+BrMenuSteppedElement >> onPopoverGainFocusWish: anEvent [ 
+	anEvent consumed: true.
+	self hasChildren ifFalse: [ ^ self ].
+	(self childAt: self childrenCount) dispatchEvent: BrPopoverGainFocusWish new
 ]
 
 { #category : #'event handling' }

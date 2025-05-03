@@ -4,6 +4,13 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
+{ #category : #private }
+BrGlamorousMenuItemTypeBuilder >> decorateType: aType [
+	super decorateType: aType.
+
+	aType decorator: [ :anElement | anElement addAptitude: BrMenuItemAptitude new ]
+]
+
 { #category : #visiting }
 BrGlamorousMenuItemTypeBuilder >> visitCoderMenuActionItem: aMenuModel [
 	^ self
