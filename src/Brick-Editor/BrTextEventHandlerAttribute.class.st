@@ -36,7 +36,7 @@ BrTextEventHandlerAttribute >> type [
 ]
 
 { #category : #events }
-BrTextEventHandlerAttribute >> wantsEvent: anEvent in: aTextEditor [
+BrTextEventHandlerAttribute >> wantsEvent: anEvent [
 	"Return true if I am interested in a given event and want to handle it,
 	false otherwise"
 	<return: #Boolean>

@@ -7,7 +7,8 @@ Class {
 		'cursorElements',
 		'cursorStencil',
 		'selection',
-		'segment'
+		'segment',
+		'previousMouseAttributes'
 	],
 	#classVars : [
 		'Slants',
@@ -182,6 +183,20 @@ BrTextEditorParagraphElement >> canAddTextToParagraph: eachElement [
 				and: [ eachElement aptitude isNil and: [ eachElement visibility isGone not ] ] ]
 ]
 
+{ #category : #accessing }
+BrTextEditorParagraphElement >> createSyntheticLeaveEventsForEvent: evt attributes: atts in: anEditorElement [
+	| leaveEvent |
+	leaveEvent := evt asMouseLeaveEvent.
+	((self previousMouseAttributes reject: [ :each | atts includes: each ])
+		select: [ :each | each wantsEvent: leaveEvent ])
+		do: [ :each | 
+			each
+				handleEvent: leaveEvent
+				in: anEditorElement editor
+				on: self segment ].
+	self previousMouseAttributes: atts
+]
+
 { #category : #private }
 BrTextEditorParagraphElement >> cursorAt: aTextPosition ifFound: aFoundBlock ifNone: aNoneBlock [
 
@@ -271,26 +286,26 @@ BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 { #category : #accessing }
 BrTextEditorParagraphElement >> handleMouseEvent: evt paragraph: aParagraph [
 	| atts aCharOffsetInParagraph anEditorElement |
-	
-	evt isMouseMove
-		ifTrue: [ ^ self ].
-	
+	"Produce synthetic MouseLeave events when staying within the element"
 	anEditorElement := self
 			allParentsDetect: [ :anElement | anElement isKindOf: BrEditorElement ]
 			ifFound: #yourself
-			ifNone: [ ^self ].
-
+			ifNone: [ ^ self ].
 	aCharOffsetInParagraph := aParagraph
 			charOffsetForPoint: evt localPosition - self padding topLeft.
 	atts := (self text attributesAt: aCharOffsetInParagraph)
 			select: #isEventHandler.
+	self
+		createSyntheticLeaveEventsForEvent: evt
+		attributes: atts
+		in: anEditorElement.
 	^ atts
-		do: [ :anAttribute | 
-			(anAttribute wantsEvent: evt in: anEditorElement editor)
-				ifTrue: [ anAttribute
-						handleEvent: evt
-						in: anEditorElement editor
-						on: self segment ] ]
+		select: [ :anAttribute | anAttribute wantsEvent: evt ]
+		thenDo: [ :anAttribute | 
+			anAttribute
+				handleEvent: evt
+				in: anEditorElement editor
+				on: self segment ]
 ]
 
 { #category : #'api - cursor' }
@@ -307,6 +322,7 @@ BrTextEditorParagraphElement >> initialize [
 	cursorStencil := BrCursorStencil uniqueInstance.
 	text := BlText empty.
 	selection := BlSelection empty.
+	previousMouseAttributes := IdentitySet new.
 	self addMouseHandler
 ]
 
@@ -485,6 +501,16 @@ BrTextEditorParagraphElement >> positionWithinSegmentOf: relativePosition [
 			pos := pos + 1 ].
 
 	^ relativePosition + foldedChars
+]
+
+{ #category : #accessing }
+BrTextEditorParagraphElement >> previousMouseAttributes [
+	^ previousMouseAttributes ifNil: [ previousMouseAttributes := OrderedCollection new]
+]
+
+{ #category : #accessing }
+BrTextEditorParagraphElement >> previousMouseAttributes: anObject [
+	previousMouseAttributes := anObject
 ]
 
 { #category : #printing }
