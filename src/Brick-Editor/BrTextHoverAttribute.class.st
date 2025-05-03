@@ -23,8 +23,8 @@ BrTextHoverAttribute >> enterAction: anObject [
 BrTextHoverAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	"Handle a given event or dispatch it using #sendTo:"
 
-	(anEvent isKindOf: BlMouseEnterEvent)
-		ifTrue: [ self performEnterAction: anEvent in: aTextEditor ].
+	(anEvent isKindOf: BlMouseMoveEvent)
+		ifTrue: [ self performMoveAction: anEvent in: aTextEditor ].
 
 	(anEvent isKindOf: BlMouseLeaveEvent)
 		ifTrue: [ self performLeaveAction: anEvent in: aTextEditor ].
@@ -55,17 +55,18 @@ BrTextHoverAttribute >> leaveAction: aBlock [
 
 { #category : #private }
 BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
-	isHovered
-		ifTrue: [ ^ self ].
-		
+	isHovered ifTrue: [ ^ self ].
+
 	isHovered := true.
 
-	self enterAction gtValueWithArgs: {
-		anEvent currentTarget text. "first we pass text"
-		anEvent currentTarget. "then the text piece (word) element"
-		aTextEditor. "then the whole editor element"
-		anEvent "the event itself"
-	}
+	anEvent currentTarget text
+		findAttribute: self
+		indicesDo: [ :st :nd | 
+			self enterAction
+				gtValueWithArgs: {anEvent currentTarget text from: st to: nd.
+						anEvent currentTarget.
+						aTextEditor.
+						anEvent} ]
 ]
 
 { #category : #private }
@@ -84,11 +85,16 @@ BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [
 ]
 
 { #category : #events }
-BrTextHoverAttribute >> wantsEvent: anEvent in: aTextEditor [
+BrTextHoverAttribute >> performMoveAction: anEvent in: aTextEditor [
+	self performEnterAction: anEvent in: aTextEditor
+]
+
+{ #category : #events }
+BrTextHoverAttribute >> wantsEvent: anEvent [
 	"Return true if I am interested in a given event and want to handle it,
 	false otherwise"
 	<return: #Boolean>
 
-	^ (anEvent isKindOf: BlMouseEnterEvent)
+	^ (anEvent isKindOf: BlMouseMoveEvent)
 		or: [ anEvent isKindOf: BlMouseLeaveEvent ]
 ]

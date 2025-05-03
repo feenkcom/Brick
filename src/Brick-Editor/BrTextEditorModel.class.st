@@ -536,27 +536,32 @@ BrTextEditorModel >> newUpdateCommand [
 
 { #category : #'private - cursor' }
 BrTextEditorModel >> notifyAttributesWithinCursor: aCollectionOfAttributes [
-
 	"I select and notify those attributes in the given collection that are within any of the cursors"
+
 	| theEventHandlingAttributes anEvent aCurrentText aCurrentTextSize |
 	self isFocused ifFalse: [ ^ self ].
 
 	anEvent := BrTextCursorAttributeEnterEvent new.
 
-	theEventHandlingAttributes := (aCollectionOfAttributes select: [ 
-		                               :eachAttribute | 
-		                               eachAttribute isEventHandler ]) asSet.
+	theEventHandlingAttributes := (aCollectionOfAttributes
+			select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
 
 	aCurrentText := self text.
 	aCurrentTextSize := aCurrentText size.
-		                               
-	self cursors do: [ :eachCursor | 
-		| atts |
-		atts := aCurrentText attributesAt: (eachCursor position min: aCurrentTextSize).
-		atts do: [ :eachAttribute | 
-			(theEventHandlingAttributes includes: eachAttribute) ifTrue: [ 
-				(eachAttribute wantsEvent: anEvent in: self) ifTrue: [ 
-					eachAttribute handleEvent: anEvent in: self on: nil ] ] ] ]
+
+	self cursors
+		do: [ :eachCursor | 
+			| atts |
+			atts := aCurrentText
+					attributesAt: (eachCursor position min: aCurrentTextSize).
+			atts
+				do: [ :eachAttribute | 
+					(theEventHandlingAttributes includes: eachAttribute)
+						ifTrue: [ (eachAttribute wantsEvent: anEvent)
+								ifTrue: [ eachAttribute
+										handleEvent: anEvent
+										in: self
+										on: nil ] ] ] ]
 ]
 
 { #category : #'event firing' }
@@ -906,8 +911,7 @@ BrTextEditorModel >> processCursorEnterEvents [
 			eachAttribute := eachEventHandlerAttributeAndInterval key.
 			eachInterval := eachEventHandlerAttributeAndInterval value.
 			anEnteredEvent interval: eachInterval.
-
-			(eachAttribute wantsEvent: anEnteredEvent in: self)
+			(eachAttribute wantsEvent: anEnteredEvent)
 				ifTrue: [ eachAttribute
 						handleEvent: anEnteredEvent
 						in: self
@@ -930,7 +934,7 @@ BrTextEditorModel >> processCursorLeaveEvents [
 			eachAttribute := eachEventHandlerAttributeAndInterval key.
 			eachInterval := eachEventHandlerAttributeAndInterval value.
 			aLeavedEvent interval: eachInterval.
-			(eachAttribute wantsEvent: aLeavedEvent in: self)
+			(eachAttribute wantsEvent: aLeavedEvent)
 				ifTrue: [ eachAttribute
 						handleEvent: aLeavedEvent
 						in: self
