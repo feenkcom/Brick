@@ -1,26 +1,29 @@
 Class {
 	#name : #BrPressExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Press'
+	#category : #'Brick-Examples-Press'
 }
 
 { #category : #'examples - mouse events' }
 BrPressExamples >> mouseDownOnPressableElement [
 	<gtExample>
+	<return: #BlElement>
 	| anElement aModel aPressEventHandler aPressCounter aPressStateFromEvent |
-
 	anElement := self pressableElement.
 	aModel := anElement viewModel.
 
 	aPressCounter := 0.
 	aPressStateFromEvent := nil.
-	aPressEventHandler := BlEventHandler on: BrPressedChanged do: [ :anEvent |
-		aPressCounter := aPressCounter + 1.
-		aPressStateFromEvent := anEvent isPressed ].
+	aPressEventHandler := BlEventHandler
+			on: BrPressedChanged
+			do: [ :anEvent | 
+				aPressCounter := aPressCounter + 1.
+				aPressStateFromEvent := anEvent isPressed ].
 
 	aModel addEventHandler: aPressEventHandler.
 
-	aModel dispatchEvent: (BlMouseDownEvent primary position: anElement bounds center).
+	aModel
+		dispatchEvent: (BlMouseDownEvent primary position: anElement bounds center).
 
 	aModel removeEventHandler: aPressEventHandler.
 
@@ -34,20 +37,23 @@ BrPressExamples >> mouseDownOnPressableElement [
 { #category : #'examples - mouse events' }
 BrPressExamples >> mouseUpOnPressableElement [
 	<gtExample>
+	<return: #BlElement>
 	| anElement aModel aPressEventHandler aPressCounter aPressStateFromEvent |
-
 	anElement := self mouseDownOnPressableElement.
 	aModel := anElement viewModel.
 
 	aPressCounter := 0.
 	aPressStateFromEvent := nil.
-	aPressEventHandler := BlEventHandler on: BrPressedChanged do: [ :anEvent |
-		aPressCounter := aPressCounter + 1.
-		aPressStateFromEvent := anEvent isPressed ].
+	aPressEventHandler := BlEventHandler
+			on: BrPressedChanged
+			do: [ :anEvent | 
+				aPressCounter := aPressCounter + 1.
+				aPressStateFromEvent := anEvent isPressed ].
 
 	aModel addEventHandler: aPressEventHandler.
 
-	aModel dispatchEvent: (BlMouseUpEvent primary position: anElement bounds center).
+	aModel
+		dispatchEvent: (BlMouseUpEvent primary position: anElement bounds center).
 
 	aModel removeEventHandler: aPressEventHandler.
 
@@ -61,20 +67,20 @@ BrPressExamples >> mouseUpOnPressableElement [
 { #category : #'examples - instance creation' }
 BrPressExamples >> pressModel [
 	<gtExample>
+	<return: #BrPressModel>
 	| aModel |
-	
 	aModel := BrPressModel new.
 	self assert: aModel isPressed not.
-	
+
 	^ aModel
 ]
 
 { #category : #'examples - instance creation' }
 BrPressExamples >> pressableElement [
 	<gtExample>
-	
+	<return: #BlElement>
 	^ BlElement new
-		size: 300@200;
+		size: 300 @ 200;
 		background: Color veryLightGray;
 		border: (BlBorder paint: Color gray width: 10);
 		viewModel: self pressModel;
@@ -84,29 +90,29 @@ BrPressExamples >> pressableElement [
 { #category : #'examples - requests' }
 BrPressExamples >> requestPressedState [
 	<gtExample>
+	<return: #BrPressModel>
 	| anElement aModel aResponse |
-	
 	anElement := self mouseDownOnPressableElement.
 	aModel := anElement viewModel.
-	
+
 	aResponse := aModel request: BrPressedRequest new.
 	self assert: aResponse pressed.
 	self assert: aResponse isPressed.
-	
+
 	^ aModel
 ]
 
 { #category : #'examples - requests' }
 BrPressExamples >> requestUnpressedState [
 	<gtExample>
+	<return: #BrPressModel>
 	| anElement aModel aResponse |
-	
 	anElement := self mouseUpOnPressableElement.
 	aModel := anElement viewModel.
-	
+
 	aResponse := aModel request: BrPressedRequest new.
 	self assert: aResponse pressed not.
 	self assert: aResponse isPressed not.
-	
+
 	^ aModel
 ]

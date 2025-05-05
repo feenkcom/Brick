@@ -124,44 +124,46 @@ BrExamplesShowroom class >> allToggles [
 { #category : #accordion }
 BrExamplesShowroom >> accordion [
 	<gtExample>
+	<return: #BrAccordion>
 	| accordion |
-
 	accordion := BrAccordion new.
 	accordion vExact: 200.
 	accordion aptitude: BrGlamorousAccordionAptitude new.
 	accordion content: [ BlElement new background: Color paleRed ].
-	accordion header: [
-		BrButton new
-			aptitude: BrGlamorousAccordionHeaderAptitude new;
-			label: 'Click to expand/collapse';
-			action: [ accordion toggleExpanded ] ].
+	accordion
+		header: [ BrButton new
+				aptitude: BrGlamorousAccordionHeaderAptitude new;
+				label: 'Click to expand/collapse';
+				action: [ accordion toggleExpanded ] ].
 	^ accordion
 ]
 
 { #category : #accordion }
 BrExamplesShowroom >> accordionList [
 	<gtExample>
-	
+	<return: #BlElement>
 	| children container |
-	children := 5 timesCollect: [ :anIndex |
-		| accordion |
-		accordion := BrAccordion new.
-		accordion aptitude: BrGlamorousAccordionAptitude new.
-		accordion margin: (BlInsets all: 5).
-		accordion content: [ (BrEditor new text: 'Hello world' asRopedText) ].
-		accordion header: [
-			BrButton new
-				aptitude: BrGlamorousAccordionHeaderAptitude new;
-				label: 'Header ', anIndex asString;
-				action: [ accordion toggle ] ].
-		accordion ].
+	children := 5
+			timesCollect: [ :anIndex | 
+				| accordion |
+				accordion := BrAccordion new.
+				accordion aptitude: BrGlamorousAccordionAptitude new.
+				accordion margin: (BlInsets all: 5).
+				accordion content: [ BrEditor new text: 'Hello world' asRopedText ].
+				accordion
+					header: [ BrButton new
+							aptitude: BrGlamorousAccordionHeaderAptitude new;
+							label: 'Header ' , anIndex asString;
+							action: [ accordion toggle ] ].
+				accordion ].
 
 	container := BlElement new.
 	container layout: BlLinearLayout vertical.
 	container padding: (BlInsets all: 10).
-	container constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical fitContent ].
+	container
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical fitContent ].
 
 	container addChildren: children.
 	^ container
@@ -170,6 +172,7 @@ BrExamplesShowroom >> accordionList [
 { #category : #list }
 BrExamplesShowroom >> columnedList [
 	<gtExample>
+	<return: #BrColumnedList>
 	| aList |
 	aList := BrColumnedList new.
 	aList column
@@ -177,9 +180,7 @@ BrExamplesShowroom >> columnedList [
 		title: 'Index';
 		stencil: [ :aColor :aRowIndex | 
 			BrLabel new
-				aptitude:
-					(BrGlamorousLabelAptitude new
-						foreground: aColor contrastingBlackAndWhiteColor);
+				aptitude: (BrGlamorousLabelAptitude new foreground: aColor contrastingBlackAndWhiteColor);
 				text: aRowIndex asString;
 				background: aColor;
 				padding: (BlInsets all: 12) ].
@@ -188,9 +189,7 @@ BrExamplesShowroom >> columnedList [
 		title: 'Color';
 		stencil: [ :aColor | 
 			BrLabel new
-				aptitude:
-					(BrGlamorousLabelAptitude new
-						foreground: aColor contrastingBlackAndWhiteColor);
+				aptitude: (BrGlamorousLabelAptitude new foreground: aColor contrastingBlackAndWhiteColor);
 				text: aColor asString;
 				background: aColor;
 				padding: (BlInsets all: 12) ].
@@ -202,34 +201,38 @@ BrExamplesShowroom >> columnedList [
 BrExamplesShowroom >> glamorousBreadcrumb [
 	<gtExample>
 	<description: 'Breadcrumb with glamorous look'>
+	<return: #BrBreadcrumb>
 	| aBreadcrumb |
-
 	aBreadcrumb := BrBreadcrumb new.
-	aBreadcrumb aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
-		BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-			text: '>';
-			margin: (BlInsets left: 5 right: 5) ]).
+	aBreadcrumb
+		aptitude: (BrGlamorousBreadcrumbAptitude new
+				separator: [ BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+						text: '>';
+						margin: (BlInsets left: 5 right: 5) ]).
 
-	aBreadcrumb addItem: (BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		text: 'Home').
+	aBreadcrumb
+		addItem: (BrLabel new
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'Home').
 
-	aBreadcrumb addItem: (BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		text: 'Store').
-	
-	aBreadcrumb addItem: (BrLabel new
-		aptitude: BrGlamorousLabelAptitude;
-		text: 'T-Shirt').
-	
+	aBreadcrumb
+		addItem: (BrLabel new
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'Store').
+
+	aBreadcrumb
+		addItem: (BrLabel new
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'T-Shirt').
+
 	^ aBreadcrumb
 ]
 
 { #category : #buttons }
 BrExamplesShowroom >> glamorousButton [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Button';
@@ -239,6 +242,7 @@ BrExamplesShowroom >> glamorousButton [
 { #category : #buttons }
 BrExamplesShowroom >> glamorousButtonWithTooltipLook [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude;
 		label: 'Accept';
@@ -249,7 +253,7 @@ BrExamplesShowroom >> glamorousButtonWithTooltipLook [
 { #category : #buttons }
 BrExamplesShowroom >> glamorousDefaultButton [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Button';
@@ -259,14 +263,14 @@ BrExamplesShowroom >> glamorousDefaultButton [
 { #category : #buttons }
 BrExamplesShowroom >> glamorousDisabledButton [
 	<gtExample>
-	
-	^ self glamorousButton
-		disable
+	<return: #BrButton>
+	^ self glamorousButton disable
 ]
 
 { #category : #buttons }
 BrExamplesShowroom >> glamorousHugeButton [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		beHugeSize;
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
@@ -277,6 +281,7 @@ BrExamplesShowroom >> glamorousHugeButton [
 { #category : #buttons }
 BrExamplesShowroom >> glamorousLargeButton [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		beLargeSize;
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
@@ -287,7 +292,7 @@ BrExamplesShowroom >> glamorousLargeButton [
 { #category : #buttons }
 BrExamplesShowroom >> glamorousSmallButton [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		beSmallSize;
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
@@ -299,40 +304,43 @@ BrExamplesShowroom >> glamorousSmallButton [
 BrExamplesShowroom >> glamorousTabs [
 	<gtExample>
 	<description: 'Tabs with glamorous look'>
+	<return: #BrTabGroup>
 	| aTabGroup |
-
 	aTabGroup := BrTabGroup new.
 	aTabGroup aptitude: BrGlamorousTabGroupAptitude new.
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabAptitude new;
-		label: 'Tab 1';
-		stencil: [ BlElement new
-			constraintsDo: [ :c |
-				c horizontal exact: 300.
-				c vertical exact: 150 ];
-			margin: (BlInsets all: 10);
-			background: (Color red alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Tab 1';
+				stencil: [ BlElement new
+						constraintsDo: [ :c | 
+							c horizontal exact: 300.
+							c vertical exact: 150 ];
+						margin: (BlInsets all: 10);
+						background: (Color red alpha: 0.2) ]).
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabAptitude new;
-		label: 'Tab 2';
-		stencil: [ BlElement new
-			margin: (BlInsets all: 10);
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical exact: 50 ];
-			background: (Color blue alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Tab 2';
+				stencil: [ BlElement new
+						margin: (BlInsets all: 10);
+						constraintsDo: [ :c | 
+							c horizontal matchParent.
+							c vertical exact: 50 ];
+						background: (Color blue alpha: 0.2) ]).
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabAptitude new;
-		label: 'Tab 3';
-		stencil: [ BlElement new
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical exact: 100 ];
-			margin: (BlInsets all: 10);
-			background: (Color orange alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Tab 3';
+				stencil: [ BlElement new
+						constraintsDo: [ :c | 
+							c horizontal matchParent.
+							c vertical exact: 100 ];
+						margin: (BlInsets all: 10);
+						background: (Color orange alpha: 0.2) ]).
 
 	^ aTabGroup
 ]
@@ -341,33 +349,36 @@ BrExamplesShowroom >> glamorousTabs [
 BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithIcons [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
+	<return: #BrTabGroup>
 	| aTabGroup |
-
 	aTabGroup := BrTabGroup new.
-	aTabGroup aptitude: BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude new.
+	aTabGroup
+		aptitude: BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude new.
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
-		label: 'Tab 1';
-		icon: BrGlamorousVectorIcons add;
-		stencil: [ BlElement new
-			constraintsDo: [ :c |
-				c horizontal exact: 300.
-				c vertical matchParent ];
-			margin: (BlInsets all: 10);
-			background: (Color red alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
+				label: 'Tab 1';
+				icon: BrGlamorousVectorIcons add;
+				stencil: [ BlElement new
+						constraintsDo: [ :c | 
+							c horizontal exact: 300.
+							c vertical matchParent ];
+						margin: (BlInsets all: 10);
+						background: (Color red alpha: 0.2) ]).
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
-		label: 'Tab 2';
-		icon: BrGlamorousVectorIcons remove;
-		stencil: [ BlElement new
-			margin: (BlInsets all: 10);
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical matchParent ];
-			background: (Color blue alpha: 0.2) ]).
-	
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
+				label: 'Tab 2';
+				icon: BrGlamorousVectorIcons remove;
+				stencil: [ BlElement new
+						margin: (BlInsets all: 10);
+						constraintsDo: [ :c | 
+							c horizontal matchParent.
+							c vertical matchParent ];
+						background: (Color blue alpha: 0.2) ]).
+
 	^ aTabGroup
 ]
 
@@ -375,31 +386,34 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithIcons [
 BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithLabels [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
+	<return: #BrTabGroup>
 	| aTabGroup |
-
 	aTabGroup := BrTabGroup new.
-	aTabGroup aptitude: BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude new.
+	aTabGroup
+		aptitude: BrGlamorousTabGroupSwitcherWithHiddenSelectedTabAptitude new.
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
-		label: 'Tab 1';
-		stencil: [ BlElement new
-			constraintsDo: [ :c |
-				c horizontal exact: 300.
-				c vertical matchParent ];
-			margin: (BlInsets all: 10);
-			background: (Color red alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
+				label: 'Tab 1';
+				stencil: [ BlElement new
+						constraintsDo: [ :c | 
+							c horizontal exact: 300.
+							c vertical matchParent ];
+						margin: (BlInsets all: 10);
+						background: (Color red alpha: 0.2) ]).
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
-		label: 'Tab 2';
-		stencil: [ BlElement new
-			margin: (BlInsets all: 10);
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical matchParent ];
-			background: (Color blue alpha: 0.2) ]).
-	
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
+				label: 'Tab 2';
+				stencil: [ BlElement new
+						margin: (BlInsets all: 10);
+						constraintsDo: [ :c | 
+							c horizontal matchParent.
+							c vertical matchParent ];
+						background: (Color blue alpha: 0.2) ]).
+
 	^ aTabGroup
 ]
 
@@ -407,33 +421,35 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithHiddenSelectedTabsWithLabels [
 BrExamplesShowroom >> glamorousTabsSwitcherWithIcons [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
+	<return: #BrTabGroup>
 	| aTabGroup |
-
 	aTabGroup := BrTabGroup new.
 	aTabGroup aptitude: BrGlamorousTabGroupSwitcherAptitude new.
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
-		label: 'Tab 1';
-		icon: BrGlamorousVectorIcons add;
-		stencil: [ BlElement new
-			constraintsDo: [ :c |
-				c horizontal exact: 300.
-				c vertical matchParent ];
-			margin: (BlInsets all: 10);
-			background: (Color red alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
+				label: 'Tab 1';
+				icon: BrGlamorousVectorIcons add;
+				stencil: [ BlElement new
+						constraintsDo: [ :c | 
+							c horizontal exact: 300.
+							c vertical matchParent ];
+						margin: (BlInsets all: 10);
+						background: (Color red alpha: 0.2) ]).
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
-		label: 'Tab 2';
-		icon: BrGlamorousVectorIcons remove;
-		stencil: [ BlElement new
-			margin: (BlInsets all: 10);
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical matchParent ];
-			background: (Color blue alpha: 0.2) ]).
-	
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithIconAptitude new;
+				label: 'Tab 2';
+				icon: BrGlamorousVectorIcons remove;
+				stencil: [ BlElement new
+						margin: (BlInsets all: 10);
+						constraintsDo: [ :c | 
+							c horizontal matchParent.
+							c vertical matchParent ];
+						background: (Color blue alpha: 0.2) ]).
+
 	^ aTabGroup
 ]
 
@@ -441,37 +457,40 @@ BrExamplesShowroom >> glamorousTabsSwitcherWithIcons [
 BrExamplesShowroom >> glamorousTabsSwitcherWithLabels [
 	<gtExample>
 	<description: 'Tabs with glamorous switcher look'>
+	<return: #BrTabGroup>
 	| aTabGroup |
-
 	aTabGroup := BrTabGroup new.
 	aTabGroup aptitude: BrGlamorousTabGroupSwitcherAptitude new.
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
-		label: 'Tab 1';
-		stencil: [ BlElement new
-			constraintsDo: [ :c |
-				c horizontal exact: 300.
-				c vertical matchParent ];
-			margin: (BlInsets all: 10);
-			background: (Color red alpha: 0.2) ]).
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
+				label: 'Tab 1';
+				stencil: [ BlElement new
+						constraintsDo: [ :c | 
+							c horizontal exact: 300.
+							c vertical matchParent ];
+						margin: (BlInsets all: 10);
+						background: (Color red alpha: 0.2) ]).
 
-	aTabGroup addTab: (BrTab new
-		aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
-		label: 'Tab 2';
-		stencil: [ BlElement new
-			margin: (BlInsets all: 10);
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical matchParent ];
-			background: (Color blue alpha: 0.2) ]).
-	
+	aTabGroup
+		addTab: (BrTab new
+				aptitude: BrGlamorousTabSwitcherWithLabelAptitude new;
+				label: 'Tab 2';
+				stencil: [ BlElement new
+						margin: (BlInsets all: 10);
+						constraintsDo: [ :c | 
+							c horizontal matchParent.
+							c vertical matchParent ];
+						background: (Color blue alpha: 0.2) ]).
+
 	^ aTabGroup
 ]
 
 { #category : #buttons }
 BrExamplesShowroom >> glamorousTinyButton [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		beTinySize;
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
@@ -483,54 +502,54 @@ BrExamplesShowroom >> glamorousTinyButton [
 BrExamplesShowroom >> glamorousToolbar [
 	<gtExample>
 	<description: 'Toolbar with glamorous look'>
+	<return: #BrToolbar>
 	| aToolbar |
-	
 	aToolbar := BrToolbar new.
 	aToolbar aptitude: BrGlamorousToolbarAptitude new.
-	
-	aToolbar addItem: (BrButton new
-		aptitude: BrGlamorousButtonWithLabelAptitude new;
-		label: 'Button 1').
-		
-	aToolbar addItem: (BrButton new
-		aptitude: BrGlamorousButtonWithIconAptitude new;
-		label: 'Button 2').
-	
-	aToolbar addItem: (BrButton new
-		aptitude: BrGlamorousButtonWithLabelAptitude new;
-		label: 'Button 3').
-	
+
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrGlamorousButtonWithLabelAptitude new;
+				label: 'Button 1').
+
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrGlamorousButtonWithIconAptitude new;
+				label: 'Button 2').
+
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrGlamorousButtonWithLabelAptitude new;
+				label: 'Button 3').
+
 	^ aToolbar
 ]
 
 { #category : #toggle }
 BrExamplesShowroom >> hydraToggle [
 	<gtExample>
-
-	^ BrToggle new
-		aptitude: BrHydraSwitchRadioAptitude new
+	<return: #BrToggle>
+	^ BrToggle new aptitude: BrHydraSwitchRadioAptitude new
 ]
 
 { #category : #toggle }
 BrExamplesShowroom >> hydraWithTrackToggle [
 	<gtExample>
-
-	^ BrToggle new
-		aptitude: BrHydraSwitchWithTrackAptitude new
+	<return: #BrToggle>
+	^ BrToggle new aptitude: BrHydraSwitchWithTrackAptitude new
 ]
 
 { #category : #toggle }
 BrExamplesShowroom >> hydraWithoutTrackToggle [
 	<gtExample>
-
-	^ BrToggle new
-		aptitude: BrHydraSwitchWithoutTrackAptitude new
+	<return: #BrToggle>
+	^ BrToggle new aptitude: BrHydraSwitchWithoutTrackAptitude new
 ]
 
 { #category : #buttons }
 BrExamplesShowroom >> materialButton [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrMaterialButtonAptitude new;
 		label: 'Button'
@@ -539,7 +558,7 @@ BrExamplesShowroom >> materialButton [
 { #category : #buttons }
 BrExamplesShowroom >> materialDisabledButton [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrMaterialButtonAptitude new;
 		label: 'Disabled';
@@ -549,7 +568,7 @@ BrExamplesShowroom >> materialDisabledButton [
 { #category : #toggle }
 BrExamplesShowroom >> materialIconAndLabelToggle [
 	<gtExample>
-
+	<return: #BrToggle>
 	^ BrToggle new
 		aptitude: BrMaterialToggleWithIconAptitude + BrMaterialToggleWithLabelAptitude
 ]
@@ -557,23 +576,21 @@ BrExamplesShowroom >> materialIconAndLabelToggle [
 { #category : #toggle }
 BrExamplesShowroom >> materialIconToggle [
 	<gtExample>
-
-	^ BrToggle new
-		aptitude: BrMaterialToggleWithIconAptitude
+	<return: #BrToggle>
+	^ BrToggle new aptitude: BrMaterialToggleWithIconAptitude
 ]
 
 { #category : #toggle }
 BrExamplesShowroom >> materialLabelToggle [
 	<gtExample>
-
-	^ BrToggle new
-		aptitude: BrMaterialToggleWithLabelAptitude
+	<return: #BrToggle>
+	^ BrToggle new aptitude: BrMaterialToggleWithLabelAptitude
 ]
 
 { #category : #toggle }
 BrExamplesShowroom >> materialReversedToggle [
 	<gtExample>
-
+	<return: #BrToggle>
 	^ BrToggle new
 		aptitude: BrMaterialToggleWithLabelAptitude + BrMaterialToggleWithIconAptitude
 ]
@@ -581,7 +598,7 @@ BrExamplesShowroom >> materialReversedToggle [
 { #category : #toggle }
 BrExamplesShowroom >> materialToggle [
 	<gtExample>
-
+	<return: #BrToggle>
 	^ BrToggle new
 		aptitude: BrMaterialToggleWithIconAptitude + BrMaterialToggleWithLabelAptitude
 ]
@@ -590,36 +607,38 @@ BrExamplesShowroom >> materialToggle [
 BrExamplesShowroom >> materialToolbar [
 	<gtExample>
 	<description: 'Toolbar with material look'>
+	<return: #BrToolbar>
 	| aToolbar |
-	
 	aToolbar := BrToolbar new.
 	aToolbar aptitude: BrMaterialToolbarAptitude new.
-	
-	aToolbar addItem: (BrButton new
-		aptitude: BrMaterialButtonAptitude new;
-		label: 'Button 1').
 
-	aToolbar addItem: (BrButton new
-		aptitude: BrMaterialButtonAptitude new;
-		label: 'Button 2').
-	
-	aToolbar addItem: (BrButton new
-		aptitude: BrMaterialButtonAptitude new;
-		label: 'Button 3').
-	
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialButtonAptitude new;
+				label: 'Button 1').
+
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialButtonAptitude new;
+				label: 'Button 2').
+
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialButtonAptitude new;
+				label: 'Button 3').
+
 	^ aToolbar
 ]
 
 { #category : #list }
 BrExamplesShowroom >> simpleList [
 	<gtExample>
+	<return: #BrSimpleList>
 	^ BrSimpleList new
 		items: Color indexedColors;
 		stencil: [ :aColor | 
 			BrLabel new
-				aptitude:
-					(BrGlamorousLabelAptitude new
-						foreground: aColor contrastingBlackAndWhiteColor);
+				aptitude: (BrGlamorousLabelAptitude new foreground: aColor contrastingBlackAndWhiteColor);
 				text: aColor asString;
 				background: aColor;
 				padding: (BlInsets all: 12);

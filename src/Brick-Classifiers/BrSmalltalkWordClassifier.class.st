@@ -7,6 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 BrSmalltalkWordClassifier >> itself [
 	<gtExample>
+	<return: #BrSmalltalkWordClassifier>
 	^ self
 ]
 

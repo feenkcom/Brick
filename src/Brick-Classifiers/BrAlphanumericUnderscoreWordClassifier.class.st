@@ -7,6 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 BrAlphanumericUnderscoreWordClassifier >> itself [
 	<gtExample>
+	<return: #BrAlphanumericUnderscoreWordClassifier>
 	^ self
 ]
 

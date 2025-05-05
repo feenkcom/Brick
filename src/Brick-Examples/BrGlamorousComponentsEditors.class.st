@@ -20,7 +20,7 @@ Class {
 { #category : #examples }
 BrGlamorousComponentsEditors >> basicEditor [
 	<gtExample>
-
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousEditorAptitude;
 		text: String loremIpsum
@@ -29,7 +29,7 @@ BrGlamorousComponentsEditors >> basicEditor [
 { #category : #examples }
 BrGlamorousComponentsEditors >> digitsOnly [
 	<gtExample>
-
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousEditorAptitude + BrGlamorousInputFieldSpacingAptitude;
 		inputFilter: BrTextEditorDigitInputFilter new;
@@ -40,7 +40,7 @@ BrGlamorousComponentsEditors >> digitsOnly [
 { #category : #examples }
 BrGlamorousComponentsEditors >> inputField [
 	<gtExample>
-
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousEditorAptitude + BrGlamorousInputFieldSpacingAptitude;
 		text: (String loremIpsum: 20) trimBoth;
@@ -50,7 +50,7 @@ BrGlamorousComponentsEditors >> inputField [
 { #category : #examples }
 BrGlamorousComponentsEditors >> textArea [
 	<gtExample>
-
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
 		text: String loremIpsum

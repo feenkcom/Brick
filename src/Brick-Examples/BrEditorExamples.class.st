@@ -7,7 +7,7 @@ Class {
 { #category : #'examples - modes' }
 BrEditorExamples >> editableEditorWithGlamorousRegularLook [
 	<gtExample>
-	
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		beEditable;
@@ -17,6 +17,7 @@ BrEditorExamples >> editableEditorWithGlamorousRegularLook [
 { #category : #accessing }
 BrEditorExamples >> editorClickToFocus [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := BlScripter new.
 	aScripter
@@ -26,16 +27,11 @@ BrEditorExamples >> editorClickToFocus [
 				fitContent).
 
 	aScripter
-		assertStep: [ :s | 
-			s
-				satisfies: [ :anEditor | anEditor hasFocus not ] ].
+		assertStep: [ :s | s satisfies: [ :anEditor | anEditor hasFocus not ] ].
 
 	aScripter click play.
 
-	aScripter
-		assertStep: [ :s | 
-			s
-				satisfies: [ :anEditor | anEditor hasFocus ] ].
+	aScripter assertStep: [ :s | s satisfies: [ :anEditor | anEditor hasFocus ] ].
 
 	^ aScripter
 ]
@@ -43,7 +39,7 @@ BrEditorExamples >> editorClickToFocus [
 { #category : #'examples - input filter' }
 BrEditorExamples >> editorWithAlphaNumericFilter [
 	<gtExample>
-
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude + BrGlamorousEditorSpacingAptitude;
 		inputFilter: BrTextEditorAlphaNumericInputFilter new;
@@ -54,7 +50,7 @@ BrEditorExamples >> editorWithAlphaNumericFilter [
 { #category : #'examples - input filter' }
 BrEditorExamples >> editorWithDigitFilter [
 	<gtExample>
-	
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude + BrGlamorousEditorSpacingAptitude;
 		inputFilter: BrTextEditorDigitInputFilter new;
@@ -65,7 +61,7 @@ BrEditorExamples >> editorWithDigitFilter [
 { #category : #examples }
 BrEditorExamples >> editorWithGlamorousRegularLook [
 	<gtExample>
-	
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		text: String loremIpsum
@@ -74,48 +70,46 @@ BrEditorExamples >> editorWithGlamorousRegularLook [
 { #category : #'examples - modes look' }
 BrEditorExamples >> editorWithGlamorousRegularLookAndModeLook [
 	<gtExample>
+	<return: #BrHorizontalPane>
 	| aModeLook anEditor |
-	
 	aModeLook := BrEditorModeAptitude new
-		editableFocused: [ :aWidget | aWidget border: (BlBorder paint: BrGlamorousColors focusedEditorBorderColor width: 1) ];
-		editableUnfocused: [ :aWidget | aWidget border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1) ];
-		readOnly: [ :aWidget | aWidget border: BlBorder empty ].
+			editableFocused: [ :aWidget | 
+				aWidget
+					border: (BlBorder paint: BrGlamorousColors focusedEditorBorderColor width: 1) ];
+			editableUnfocused: [ :aWidget | aWidget border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1) ];
+			readOnly: [ :aWidget | aWidget border: BlBorder empty ].
 
 	anEditor := BrEditor new
-		aptitude: BrGlamorousRegularEditorAptitude new + aModeLook;
-		text: String loremIpsum;
-		vFitContent.
+			aptitude: BrGlamorousRegularEditorAptitude new + aModeLook;
+			text: String loremIpsum;
+			vFitContent.
 
 	^ BrHorizontalPane new
 		cellSpacing: 5;
 		hMatchParent;
 		vFitContent;
-		addChildren: { 
-			anEditor.
-			BrVerticalPane new
-				fitContent;
-				cellSpacing: 5;
-				addChildren: { 
-					BrButton new
-						aptitude: BrGlamorousButtonWithLabelAptitude new;
-						label: 'Editable';
-						action: [ anEditor beEditable ].
-					BrButton new
-						aptitude: BrGlamorousButtonWithLabelAptitude new;
-						label: 'Readonly with selection';
-						action: [ anEditor beReadOnlyWithSelection ].
-					BrButton new
-						aptitude: BrGlamorousButtonWithLabelAptitude new;
-						label: 'Readonly without selection';
-						action: [ anEditor beReadOnlyWithoutSelection ]
-				}
-		}
+		addChildren: {anEditor.
+				BrVerticalPane new
+					fitContent;
+					cellSpacing: 5;
+					addChildren: {BrButton new
+								aptitude: BrGlamorousButtonWithLabelAptitude new;
+								label: 'Editable';
+								action: [ anEditor beEditable ].
+							BrButton new
+								aptitude: BrGlamorousButtonWithLabelAptitude new;
+								label: 'Readonly with selection';
+								action: [ anEditor beReadOnlyWithSelection ].
+							BrButton new
+								aptitude: BrGlamorousButtonWithLabelAptitude new;
+								label: 'Readonly without selection';
+								action: [ anEditor beReadOnlyWithoutSelection ]}}
 ]
 
 { #category : #'examples - input filter' }
 BrEditorExamples >> editorWithNoFilter [
 	<gtExample>
-	
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude + BrGlamorousEditorSpacingAptitude;
 		inputFilter: BrTextEditorNoInputFilter new;
@@ -126,7 +120,7 @@ BrEditorExamples >> editorWithNoFilter [
 { #category : #'examples - modes' }
 BrEditorExamples >> readOnlyWithSelectionEditorWithGlamorousRegularLook [
 	<gtExample>
-	
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		beReadOnlyWithSelection;
@@ -136,7 +130,7 @@ BrEditorExamples >> readOnlyWithSelectionEditorWithGlamorousRegularLook [
 { #category : #'examples - modes' }
 BrEditorExamples >> readOnlyWithoutSelectionEditorWithGlamorousRegularLook [
 	<gtExample>
-	
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		beReadOnlyWithoutSelection;
@@ -146,6 +140,7 @@ BrEditorExamples >> readOnlyWithoutSelectionEditorWithGlamorousRegularLook [
 { #category : #accessing }
 BrEditorExamples >> scrollingLongText [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter text editor |
 	aScripter := BlScripter new.
 	text := (String
@@ -177,6 +172,7 @@ BrEditorExamples >> scrollingLongText [
 { #category : #accessing }
 BrEditorExamples >> wrappedEditorClickToFocus [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := BlScripter new.
 	aScripter
@@ -195,10 +191,7 @@ BrEditorExamples >> wrappedEditorClickToFocus [
 				// #editor;
 				satisfies: [ :anEditor | anEditor hasFocus not ] ].
 
-	aScripter
-		clickStep: [ :s | 
-			s
-				// #editor ].
+	aScripter clickStep: [ :s | s // #editor ].
 
 	aScripter
 		assertStep: [ :s | 

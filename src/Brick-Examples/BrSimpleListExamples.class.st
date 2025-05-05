@@ -7,13 +7,13 @@ Class {
 { #category : #'examples - vertical list' }
 BrSimpleListExamples >> allClasses [
 	<gtExample>
+	<return: #BrSimpleList>
 	^ BrSimpleList new
-		itemStencil: [
-			BrLabel new
-				"hMatchParent;"
-				aptitude: BrGlamorousLabelAptitude new + (BrStyleCommonAptitude new
-					selected: [ :aStyle | aStyle background: Color veryVeryLightGray ]);
-				padding: (BlInsets all: 5) ];
+		itemStencil: [ BrLabel new
+				aptitude: BrGlamorousLabelAptitude new
+						+ (BrStyleCommonAptitude new
+								selected: [ :aStyle | aStyle background: Color veryVeryLightGray ]);
+				padding: (BlInsets all: 5)	"hMatchParent;" ];
 		itemDataBinder: [ :eachElement :eachClass :eachIndex | eachElement text: eachClass name ];
 		items: (SystemNavigation new allClasses sorted: [ :a :b | a name < b name ])
 ]
@@ -21,27 +21,29 @@ BrSimpleListExamples >> allClasses [
 { #category : #'examples - vertical list' }
 BrSimpleListExamples >> allClassesMultiSelect [
 	<gtExample>
-	^ self allClasses
-		aptitude: BrMultiListAptitude new
+	<return: #BrSimpleList>
+	^ self allClasses aptitude: BrMultiListAptitude new
 ]
 
 { #category : #'examples - horizontal list' }
 BrSimpleListExamples >> horizontalAllClasses [
 	<gtExample>
+	<return: #BrSimpleList>
 	| aList |
 	aList := self allClasses.
 	aList beHorizontal.
-	
+
 	^ aList
 ]
 
 { #category : #'examples - nested lists' }
 BrSimpleListExamples >> horizontalAndVerticalNumbers [
 	<gtExample>
+	<return: #BrSimpleList>
 	| aList |
-	aList := self 
-		horizontalListFor: (0 to: 10000 by: 100)
-		verticalListFor: [ :aNumber | aNumber to: aNumber + 99 ].
+	aList := self
+			horizontalListFor: (0 to: 10000 by: 100)
+			verticalListFor: [ :aNumber | aNumber to: aNumber + 99 ].
 	^ aList
 ]
 
@@ -92,21 +94,29 @@ BrSimpleListExamples >> horizontalListFor: aCollection verticalListFor: aHorizon
 { #category : #'examples - horizontal list' }
 BrSimpleListExamples >> horizontalNumbers [
 	<gtExample>
+	<return: #BrSimpleList>
 	| aList |
 	aList := self horizontalListFor: (1 to: 1000).
-	
+
 	^ aList
 ]
 
 { #category : #'examples - support' }
 BrSimpleListExamples >> label [
 	<gtExample>
+	<return: #BrLabel>
 	| aLabel |
 	aLabel := BrLabel new
-		beHugeSize;
-		aptitude: BrGlamorousLabelAptitude.
+			beHugeSize;
+			aptitude: BrGlamorousLabelAptitude.
 	aLabel margin: aLabel margin + (BlInsets all: 5).
-	aLabel padding: aLabel padding + (BlInsets top: 5 right: 10 bottom: 5 left: 10).
+	aLabel
+		padding: aLabel padding
+				+ (BlInsets
+						top: 5
+						right: 10
+						bottom: 5
+						left: 10).
 	aLabel border: (BlBorder paint: Color lightGray width: 1).
 	aLabel geometry: (BlRoundedRectangleGeometry cornerRadius: 4).
 	^ aLabel
@@ -115,6 +125,7 @@ BrSimpleListExamples >> label [
 { #category : #'examples - vertical list' }
 BrSimpleListExamples >> scripterAllClassesMultiSelect [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := BlScripter new element: self allClassesMultiSelect.
 
@@ -130,6 +141,7 @@ BrSimpleListExamples >> scripterAllClassesMultiSelect [
 { #category : #'examples - vertical list' }
 BrSimpleListExamples >> scripterAllClassesMultiSelectSelected [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterAllClassesMultiSelect.
 
@@ -167,6 +179,7 @@ BrSimpleListExamples >> scripterAllClassesMultiSelectSelected [
 { #category : #'examples - vertical list' }
 BrSimpleListExamples >> scripterAllClassesMultiSelectSelectedDiscontinuous [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterAllClassesMultiSelectSelected.
 
@@ -193,6 +206,7 @@ BrSimpleListExamples >> simpleListWithItemsBindsOnce [
 	"This example makes sure that when the list is displayed for the first time, the items are created and bound just once."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aList aScripter aCreationAmount aBindingAmount theItemsChangedEvents |
 	aCreationAmount := 0.
 	aBindingAmount := 0.
@@ -218,9 +232,7 @@ BrSimpleListExamples >> simpleListWithItemsBindsOnce [
 	aScripter element: aList.
 
 	aScripter
-		doStep: [ :s | 
-			s
-				action: [ :anElement | anElement items: Smalltalk allClasses ] ].
+		doStep: [ :s | s action: [ :anElement | anElement items: Smalltalk allClasses ] ].
 
 	self assert: aCreationAmount equals: 6.
 	self assert: aBindingAmount equals: 6.
@@ -267,10 +279,11 @@ BrSimpleListExamples >> streamingList [
 { #category : #'examples - nested lists' }
 BrSimpleListExamples >> verticalAndHorizontalNumbers [
 	<gtExample>
+	<return: #BrSimpleList>
 	| aList |
-	aList := self 
-		verticalListFor: (0 to: 10000 by: 100)
-		horizontalListFor: [ :aNumber | aNumber to: aNumber + 99 ].
+	aList := self
+			verticalListFor: (0 to: 10000 by: 100)
+			horizontalListFor: [ :aNumber | aNumber to: aNumber + 99 ].
 	^ aList
 ]
 
@@ -320,8 +333,9 @@ BrSimpleListExamples >> verticalListFor: aCollection horizontalListFor: aHorizon
 { #category : #'examples - vertical list' }
 BrSimpleListExamples >> verticalNumbers [
 	<gtExample>
+	<return: #BrSimpleList>
 	| aList |
 	aList := self verticalListFor: (1 to: 1000).
-	
+
 	^ aList
 ]

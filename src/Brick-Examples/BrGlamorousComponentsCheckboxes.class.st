@@ -18,7 +18,7 @@ Class {
 { #category : #'instance creation' }
 BrGlamorousComponentsCheckboxes >> checked [
 	<gtExample>
-	
+	<return: #BrCheckbox>
 	^ BrCheckbox new
 		aptitude: BrGlamorousCheckboxAptitude;
 		check
@@ -27,7 +27,7 @@ BrGlamorousComponentsCheckboxes >> checked [
 { #category : #'instance creation' }
 BrGlamorousComponentsCheckboxes >> indeterminate [
 	<gtExample>
-
+	<return: #BrCheckbox>
 	^ BrCheckbox new
 		aptitude: BrGlamorousCheckboxAptitude;
 		indeterminate
@@ -36,7 +36,7 @@ BrGlamorousComponentsCheckboxes >> indeterminate [
 { #category : #'instance creation' }
 BrGlamorousComponentsCheckboxes >> unchecked [
 	<gtExample>
-	
+	<return: #BrCheckbox>
 	^ BrCheckbox new
 		aptitude: BrGlamorousCheckboxAptitude;
 		uncheck

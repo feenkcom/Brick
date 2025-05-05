@@ -17,8 +17,8 @@ Class {
 { #category : #examples }
 BrColumnWidthExamples >> columnWidthIsAbstract [
 	<gtExample>
-	
+	<return: #True>
 	self assert: BrColumnWidth isAbstract.
-	
+
 	^ BrColumnWidth isAbstract
 ]

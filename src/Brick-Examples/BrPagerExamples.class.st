@@ -7,6 +7,7 @@ Class {
 { #category : #example }
 BrPagerExamples >> closePageWithPendingFuture [
 	<gtExample>
+	<return: #BlScripter>
 	| scripter firstPage future futureStarted futureScheduled futureResult |
 	scripter := BlScripter new element: self example.
 
@@ -42,10 +43,7 @@ BrPagerExamples >> closePageWithPendingFuture [
 
 	self assert: firstPage viewModel pendingFuturePromises size equals: 1.
 
-	scripter
-		doStep: [ :s | 
-			s
-				action: [ :anElement | anElement removePageAt: 1 ] ].
+	scripter doStep: [ :s | s action: [ :anElement | anElement removePageAt: 1 ] ].
 
 	self assert: firstPage viewModel pendingFuturePromises size equals: 0.	"because an element was removed from the scene graph, an update is not sceduled, therefore
 	whenError: block is not executed, it is expected and actually quite nice"
@@ -57,37 +55,41 @@ BrPagerExamples >> closePageWithPendingFuture [
 { #category : #example }
 BrPagerExamples >> example [
 	<gtExample>
+	<return: #BrPager>
 	| pager |
-
 	pager := BrPager new.
-	pager constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
-
-	pager addPage: (BlElement new
-		viewModel: BrPagerPageModel new;
-		id: (#page asBlocElementId indexed: 1);
-		constraintsDo: [ :c |
+	pager
+		constraintsDo: [ :c | 
 			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color gray).
+			c vertical matchParent ].
 
-	pager addPage: (BlElement new
-		viewModel: BrPagerPageModel new;
-		id: (#page asBlocElementId indexed: 1);
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color lightGray).
+	pager
+		addPage: (BlElement new
+				viewModel: BrPagerPageModel new;
+				id: (#page asBlocElementId indexed: 1);
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ];
+				background: Color gray).
 
-	pager addPage: (BlElement new
-		viewModel: BrPagerPageModel new;
-		id: (#page asBlocElementId indexed: 1);
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color veryLightGray).
-		
+	pager
+		addPage: (BlElement new
+				viewModel: BrPagerPageModel new;
+				id: (#page asBlocElementId indexed: 1);
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ];
+				background: Color lightGray).
+
+	pager
+		addPage: (BlElement new
+				viewModel: BrPagerPageModel new;
+				id: (#page asBlocElementId indexed: 1);
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ];
+				background: Color veryLightGray).
+
 	self assert: pager pages size equals: 3.
 
 	^ pager

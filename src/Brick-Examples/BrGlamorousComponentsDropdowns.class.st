@@ -20,19 +20,17 @@ Class {
 { #category : #button }
 BrGlamorousComponentsDropdowns >> buttonWithIcon [
 	<gtExample>
-
+	<return: #BrButton>
 	^ BrButton new
-		aptitude: BrGlamorousButtonWithIconAptitude +
-			(BrGlamorousWithExplicitDropdownAptitude
-				handle: [
-					BrButton new
-						aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-						icon: BrGlamorousIcons menu ]
-				content: [
-					BlElement new
-						background: (Color gray alpha: 0.2);
-						size: 100 @ 100;
-						margin: (BlInsets all: 10) ]);
+		aptitude: BrGlamorousButtonWithIconAptitude
+				+ (BrGlamorousWithExplicitDropdownAptitude
+						handle: [ BrButton new
+								aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
+								icon: BrGlamorousIcons menu ]
+						content: [ BlElement new
+								background: (Color gray alpha: 0.2);
+								size: 100 @ 100;
+								margin: (BlInsets all: 10) ]);
 		icon: BrGlamorousIcons menu;
 		label: 'Click me'
 ]
@@ -40,42 +38,37 @@ BrGlamorousComponentsDropdowns >> buttonWithIcon [
 { #category : #button }
 BrGlamorousComponentsDropdowns >> buttonWithLabel [
 	<gtExample>
-
+	<return: #BrButton>
 	^ BrButton new
-		aptitude: BrGlamorousButtonWithLabelAptitude +
-			(BrGlamorousWithExplicitDropdownAptitude
-				handle: [
-					BrButton new
-						aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonLabelAptitude;
-						label: 'Click me' ]
-				content: [
-					BlElement new
-						background: (Color gray alpha: 0.2);
-						size: 100 @ 100;
-						margin: (BlInsets all: 10) ]);
+		aptitude: BrGlamorousButtonWithLabelAptitude
+				+ (BrGlamorousWithExplicitDropdownAptitude
+						handle: [ BrButton new
+								aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonLabelAptitude;
+								label: 'Click me' ]
+						content: [ BlElement new
+								background: (Color gray alpha: 0.2);
+								size: 100 @ 100;
+								margin: (BlInsets all: 10) ]);
 		label: 'Click me'
 ]
 
 { #category : #button }
 BrGlamorousComponentsDropdowns >> hideDropdown [
 	<gtExample>
-
+	<return: #BrButton>
 	^ BrButton new
-		aptitude: BrGlamorousButtonWithIconAptitude +
-			(BrGlamorousWithExplicitDropdownAptitude
-				handle: [
-					BrButton new
-						aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-						icon: BrGlamorousIcons menu ]
-				content: [
-					BrFrame new 
-						fitContent;
-						addChild: (
-							BrButton new
-								aptitude: BrGlamorousButtonWithLabelAptitude;
-								margin: (BlInsets all: 20);
-								label: 'Close';
-								action: [ :aButton | aButton fireEvent: BrDropdownHideWish new ]) ]);
+		aptitude: BrGlamorousButtonWithIconAptitude
+				+ (BrGlamorousWithExplicitDropdownAptitude
+						handle: [ BrButton new
+								aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
+								icon: BrGlamorousIcons menu ]
+						content: [ BrFrame new
+								fitContent;
+								addChild: (BrButton new
+										aptitude: BrGlamorousButtonWithLabelAptitude;
+										margin: (BlInsets all: 20);
+										label: 'Close';
+										action: [ :aButton | aButton fireEvent: BrDropdownHideWish new ]) ]);
 		icon: BrGlamorousIcons menu;
 		label: 'Click me'
 ]

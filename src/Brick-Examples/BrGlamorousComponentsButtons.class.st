@@ -21,7 +21,7 @@ Class {
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabel [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Default';
@@ -31,7 +31,7 @@ BrGlamorousComponentsButtons >> withLabel [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelDisabled [
 	<gtExample>
-	
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Default';
@@ -41,6 +41,7 @@ BrGlamorousComponentsButtons >> withLabelDisabled [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelHuge [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Huge';
@@ -50,6 +51,7 @@ BrGlamorousComponentsButtons >> withLabelHuge [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelLarge [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Large';
@@ -59,6 +61,7 @@ BrGlamorousComponentsButtons >> withLabelLarge [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelMini [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Mini';
@@ -68,6 +71,7 @@ BrGlamorousComponentsButtons >> withLabelMini [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelNormal [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Normal';
@@ -77,22 +81,22 @@ BrGlamorousComponentsButtons >> withLabelNormal [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelSizes [
 	<gtExample>
+	<return: #BrHorizontalPane>
 	^ BrHorizontalPane new
 		fitContent;
 		cellSpacing: 10;
-		addChildren: { 
-			self withLabelMini.
-			self withLabelTiny.
-			self withLabelSmall.
-			self withLabelNormal.
-			self withLabelLarge.
-			self withLabelHuge
-		}
+		addChildren: {self withLabelMini.
+				self withLabelTiny.
+				self withLabelSmall.
+				self withLabelNormal.
+				self withLabelLarge.
+				self withLabelHuge}
 ]
 
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelSmall [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Small';
@@ -102,6 +106,7 @@ BrGlamorousComponentsButtons >> withLabelSmall [
 { #category : #accessing }
 BrGlamorousComponentsButtons >> withLabelTiny [
 	<gtExample>
+	<return: #BrButton>
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithLabelAptitude new;
 		label: 'Tiny';
