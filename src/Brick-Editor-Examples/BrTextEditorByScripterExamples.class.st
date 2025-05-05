@@ -7,6 +7,7 @@ Class {
 { #category : #'click - adornment element' }
 BrTextEditorByScripterExamples >> click_adornment_element [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement.
 	aScripter
@@ -15,10 +16,7 @@ BrTextEditorByScripterExamples >> click_adornment_element [
 				action: [ :aBrEditor | aBrEditor text: self textWithAdornment ];
 				onSelf ].
 
-	aScripter
-		clickStep: [ :s | 
-			s
-				id: #adornment ].
+	aScripter clickStep: [ :s | s id: #adornment ].
 
 	aScripter
 		checkStep: [ :s | 
@@ -38,13 +36,11 @@ BrTextEditorByScripterExamples >> click_adornment_element [
 { #category : #'click - empty' }
 BrTextEditorByScripterExamples >> click_empty [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement.
 
-	aScripter
-		clickStep: [ :s | 
-			s
-				onSelf ].
+	aScripter clickStep: [ :s | s onSelf ].
 
 	aScripter
 		checkStep: [ :s | 
@@ -64,14 +60,14 @@ BrTextEditorByScripterExamples >> click_empty [
 { #category : #'instance creation' }
 BrTextEditorByScripterExamples >> scripter [
 	<gtExample>
-	
+	<return: #BlScripter>
 	^ BlScripter new
 ]
 
 { #category : #'instance creation' }
 BrTextEditorByScripterExamples >> scripterElement [
 	<gtExample>
-
+	<return: #BrEditor>
 	^ BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude + BrGlamorousTextAreaSpacingAptitude;
 		matchParent;
@@ -81,6 +77,7 @@ BrTextEditorByScripterExamples >> scripterElement [
 { #category : #'instance creation' }
 BrTextEditorByScripterExamples >> scripterWithElement [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripter.
 	aScripter element: self scripterElement.
@@ -103,11 +100,12 @@ BrTextEditorByScripterExamples >> scripterWithElement [
 { #category : #'click - adornment element' }
 BrTextEditorByScripterExamples >> textWithAdornment [
 	<gtExample>
-
+	<return: #BlRunRopedText>
 	^ 'Hello world
-Next line with ' asRopedText, ('adornment' asRopedText appendingAdornment: [
-	BlElement new
-		size: 200@100;
-		background: (Color gray alpha: 0.2);
-		id: #adornment ]), ' element' asRopedText
+Next line with ' asRopedText
+		, ('adornment' asRopedText
+				appendingAdornment: [ BlElement new
+						size: 200 @ 100;
+						background: (Color gray alpha: 0.2);
+						id: #adornment ]) , ' element' asRopedText
 ]

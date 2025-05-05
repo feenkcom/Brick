@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrContextMenuExamples >> aptitude [
 	<gtExample>
+	<return: #BrWithContextMenuAptitude>
 	| aptitude |
 	aptitude := BrWithContextMenuAptitude new.
 	self assert: aptitude visible equals: false.
@@ -17,6 +18,7 @@ BrContextMenuExamples >> aptitude [
 { #category : #accessing }
 BrContextMenuExamples >> compact [
 	<gtExample>
+	<return: #BlElement>
 	| element |
 	element := self element.
 	element
@@ -30,6 +32,7 @@ BrContextMenuExamples >> compact [
 { #category : #accessing }
 BrContextMenuExamples >> element [
 	<gtExample>
+	<return: #BlElement>
 	^ BlElement new
 		background: Color red;
 		yourself
@@ -38,6 +41,7 @@ BrContextMenuExamples >> element [
 { #category : #accessing }
 BrContextMenuExamples >> elementWithContextMenuModelAndLook [
 	<gtExample>
+	<return: #BlElement>
 	| element model look |
 	element := self element.
 	model := self modelForElement: element.
@@ -51,6 +55,7 @@ BrContextMenuExamples >> elementWithContextMenuModelAndLook [
 { #category : #accessing }
 BrContextMenuExamples >> elementWithModelAndLook [
 	<gtExample>
+	<return: #BlElement>
 	| element model look |
 	element := self element.
 	model := self model.
@@ -64,25 +69,23 @@ BrContextMenuExamples >> elementWithModelAndLook [
 { #category : #accessing }
 BrContextMenuExamples >> model [
 	<gtExample>
+	<return: #BrWithContextMenuModel>
 	| model |
 	model := BrWithContextMenuModel new
-		stencil: [ BrAnchoredElement new
-				aptitude:
-					(BrContextMenuAptitude new
-						handle:
-							(BlElement new
-								size: 10 @ 10;
-								padding: (BlInsets all: 5);
-								background: Color yellow;
-								yourself);
-						content:
-							(BlElement new
-								background: Color green;
-								yourself);
-						yourself);
-				background: Color blue;
-				yourself ];
-		yourself.
+			stencil: [ BrAnchoredElement new
+					aptitude: (BrContextMenuAptitude new
+							handle: (BlElement new
+									size: 10 @ 10;
+									padding: (BlInsets all: 5);
+									background: Color yellow;
+									yourself);
+							content: (BlElement new
+									background: Color green;
+									yourself);
+							yourself);
+					background: Color blue;
+					yourself ];
+			yourself.
 	self assert: model visible equals: false.
 	self assert: (model stencil asElement isKindOf: BlElement).
 	^ model

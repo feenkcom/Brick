@@ -10,7 +10,7 @@ Class {
 { #category : #'examples - editor' }
 BrTextStylerExamples >> codeSnippetStyler [
 	<gtExample>
-
+	<return: #BrRBTextStyler>
 	^ BrRBTextStyler new classOrMetaClass: BlElement
 ]
 
@@ -62,18 +62,18 @@ BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 { #category : #'examples - editor' }
 BrTextStylerExamples >> editorWithMethod [
 	<gtExample>
-
+	<return: #BrTextEditorModel>
 	^ self newEditor text: self newMethodText
 ]
 
 { #category : #'examples - styler strategy' }
 BrTextStylerExamples >> editorWithSyncStylerStrategy [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor anEditorElement aStyler theTextAttributes |
-
-	anEditor := self editorWithMethod.	
+	anEditor := self editorWithMethod.
 	aStyler := self codeSnippetStyler.
-	
+
 	anEditorElement := BrEditorElement new.
 	anEditorElement editor: anEditor.
 
@@ -84,20 +84,19 @@ BrTextStylerExamples >> editorWithSyncStylerStrategy [
 	self assert: theTextAttributes size isZero not.
 
 	^ anEditor
-	
 ]
 
 { #category : #'instance creation' }
 BrTextStylerExamples >> newEditor [
 	<gtExample>
-
+	<return: #BrTextEditorModel>
 	^ BrTextEditorModel new
 ]
 
 { #category : #'instance creation' }
 BrTextStylerExamples >> newMethodText [
 	<gtExample>
-	
+	<return: #BlRunRopedText>
 	^ (BlElement >> #applyLayoutSafelyIn:context:) sourceCode asRopedText
 ]
 

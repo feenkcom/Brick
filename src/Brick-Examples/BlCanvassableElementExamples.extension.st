@@ -16,6 +16,7 @@ BlCanvassableElementExamples >> graphEditorDemo [
 	NB: This demo replaces BlPannableElementExamples>>#pannablePinchableGraphEditorDemo."
 
 	<gtExample>
+	<return: #BlCanvassableElement>
 	| padding margin graphCanvas |
 	padding := 2.
 	margin := padding.
@@ -33,9 +34,9 @@ BlCanvassableElementExamples >> graphEditorDemo [
 					| newNode |
 					newNode := self pullableNodeStencil asElement.
 					newNode relocate: evt childrenPosition.
-					graphCanvas addChild: newNode. ];
+					graphCanvas addChild: newNode ];
 			aptitude: (BrGlamorousWithExplicitContextMenuAptitude
-					items: { 'Inspect graph' -> [ graphCanvas inspect ] });
+					items: {'Inspect graph' -> [ graphCanvas inspect ]});
 			yourself.
 	^ graphCanvas
 ]
@@ -43,7 +44,9 @@ BlCanvassableElementExamples >> graphEditorDemo [
 { #category : #'*Brick-Examples' }
 BlCanvassableElementExamples >> pullableNodeStencil [
 	"Node for graphEditorDemo"
+
 	<gtExample>
+	<return: #BrValuableStencil>
 	^ [ | node |
 	node := BlElement new.
 	node
@@ -60,7 +63,7 @@ BlCanvassableElementExamples >> pullableNodeStencil [
 				default: [ :aStyle | aStyle border: (BlBorder paint: Color black width: 1) ];
 				hovered: [ :aStyle | aStyle border: (BlBorder paint: Color red width: 1) ])
 				+ (BrGlamorousWithExplicitContextMenuAptitude
-						items: { 'Inspect node' -> [ node inspect ] }).
+						items: {'Inspect node' -> [ node inspect ]}).
 	node addEventHandler: BlPullHandler new.
 	node
 		addEventHandler: (BlEventHandler
@@ -74,6 +77,7 @@ BlCanvassableElementExamples >> pullableNodeStencil [
 { #category : #'*Brick-Examples' }
 BlCanvassableElementExamples >> roundedNode [
 	<gtExample>
+	<return: #BlElement>
 	| node |
 	node := BlElement new
 			geometry: (BlRoundedRectangleGeometry cornerRadius: 4);

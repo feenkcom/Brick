@@ -21,6 +21,7 @@ BrMenuWithScripterExamples >> actionElementIsWithoutForegroundAttribute: anActio
 { #category : #'examples - context menu' }
 BrMenuWithScripterExamples >> buttonWithContextMenu [
 	<gtExample>
+	<return: #BrFrame>
 	^ self buttonWithContextMenu: BrMenuExamples new menuItems
 ]
 
@@ -53,6 +54,7 @@ BrMenuWithScripterExamples >> buttonWithContextMenu: aMenuStencil [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithContextMenuAndTooltip [
 	<gtExample>
+	<return: #BrFrame>
 	| anElement aButton |
 	anElement := self buttonWithContextMenu.
 	aButton := (anElement query // #'menu-context-menu-button') anyOne.
@@ -66,12 +68,14 @@ BrMenuWithScripterExamples >> buttonWithContextMenuAndTooltip [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
+	<return: #BrFrame>
 	^ self buttonWithDropdownMenu: BrMenuExamples new menuItems
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithDropdownAndTooltip [
 	<gtExample>
+	<return: #BrFrame>
 	| anElement aButton |
 	anElement := self buttonWithDropdown.
 	aButton := (anElement query // #'menu-dropdown-button') anyOne.
@@ -85,12 +89,15 @@ BrMenuWithScripterExamples >> buttonWithDropdownAndTooltip [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdownExplicitDecoratedMenu [
 	<gtExample>
-	^ self buttonWithDropdownMenu: BrMenuExamples new explicitDecoratedMenuWithButtons
+	<return: #BrFrame>
+	^ self
+		buttonWithDropdownMenu: BrMenuExamples new explicitDecoratedMenuWithButtons
 ]
 
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdownExplicitMenu [
 	<gtExample>
+	<return: #BrFrame>
 	^ self buttonWithDropdownMenu: BrMenuExamples new explicitMenuWithWithButtons
 ]
 
@@ -127,15 +134,17 @@ BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltip [
 	<gtExample>
+	<return: #BrFrame>
 	^ self buttonWithTooltipMenu: BrMenuExamples new menuItems
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltipKeymap [
 	<gtExample>
+	<return: #BrFrame>
 	^ self
 		buttonWithTooltipLabel: BrMenuExamples new tooltipLongString
-		shortcut: $o meta shift asString 
+		shortcut: $o meta shift asString
 ]
 
 { #category : #'examples - tooltip' }
@@ -167,12 +176,14 @@ BrMenuWithScripterExamples >> buttonWithTooltipLabel: aLabelString shortcut: aSh
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltipLabelItem [
 	<gtExample>
+	<return: #BrFrame>
 	^ self buttonWithTooltipMenu: BrMenuExamples new menuLabelItem
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltipLongString [
 	<gtExample>
+	<return: #BrFrame>
 	^ self
 		buttonWithTooltipLabel: BrMenuExamples new tooltipLongString
 		shortcut: 'F5'
@@ -207,6 +218,7 @@ BrMenuWithScripterExamples >> buttonWithTooltipMenu: aMenuStencil [
 { #category : #'examples - context menu' }
 BrMenuWithScripterExamples >> clickButtonWithContextMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter anAnchorElement aClickPosition |
 	aScripter := self displayButtonWithContextMenu.
 
@@ -214,11 +226,11 @@ BrMenuWithScripterExamples >> clickButtonWithContextMenu [
 		openContextMenu;
 		/ #'menu-context-menu-button';
 		play.
-		
+
 	anAnchorElement := (aScripter root query // #'menu-context-menu-button') anyOne.
 	self assert: anAnchorElement isNotNil.
 	aClickPosition := anAnchorElement bounds inSpace center.
-		
+
 	aScripter menuStep
 		assertMenuContainerExist;
 		assertHandleCenterInSpacePosition: aClickPosition;
@@ -230,6 +242,7 @@ BrMenuWithScripterExamples >> clickButtonWithContextMenu [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> clickButtonWithContextMenuAndTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverButtonWithContextMenuAndTooltip.
 
@@ -248,6 +261,7 @@ BrMenuWithScripterExamples >> clickButtonWithContextMenuAndTooltip [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickButtonWithDropdown [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithDropdown.
 
@@ -255,7 +269,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdown [
 		label: 'Open dropdown';
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is opened';
 		exists;
@@ -269,6 +283,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdown [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> clickButtonWithDropdownAndTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverButtonWithDropdownAndTooltip.
 
@@ -287,6 +302,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownAndTooltip [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitDecoratedMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithDropdownExplicitDecoratedMenu.
 
@@ -294,7 +310,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitDecoratedMenu [
 		label: 'Open dropdown';
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is opened';
 		exists;
@@ -308,6 +324,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitDecoratedMenu [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithDropdownExplicitMenu.
 
@@ -315,7 +332,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitMenu [
 		label: 'Open dropdown';
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is opened';
 		exists;
@@ -329,6 +346,7 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitMenu [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickDropdownHandle [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickButtonWithDropdown.
 
@@ -366,6 +384,7 @@ BrMenuWithScripterExamples >> clickDropdownHandle [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickDropdownInDropdownHandle [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickElementWithDropdownInDropdown.
 
@@ -414,6 +433,7 @@ BrMenuWithScripterExamples >> clickDropdownInDropdownHandle [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverComplexSubmenu.
 
@@ -430,7 +450,7 @@ BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 			equals: 2;
 		onSpaceRoot;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown has one submenu';
 		value: [ :aButton | 
@@ -448,6 +468,7 @@ BrMenuWithScripterExamples >> clickElementWithDropdownInDropdown [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> clickPasteMenuItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickButtonWithDropdown.
 
@@ -464,14 +485,14 @@ BrMenuWithScripterExamples >> clickPasteMenuItem [
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aScripter click
 		label: 'Click paste menu item';
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		// #'menu-paste-item';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is closed';
 		notExists;
@@ -485,6 +506,7 @@ BrMenuWithScripterExamples >> clickPasteMenuItem [
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayTabGroupWithButtonDropdownMenu.
 
@@ -503,6 +525,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemFour 
 	once the tab `One` is selected."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter aMenuItemId anAnchorElement |
 	aScripter := self clickTabGroupWithButtonDropdownMenu.
 
@@ -526,6 +549,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemFour 
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemFour_switchBackToTabOne [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemFour.
 
@@ -549,6 +573,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemOne [
 	The menu therefore should open again once the tab `One` is selected."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter aMenuItemId anAnchorElement |
 	aScripter := self clickTabGroupWithButtonDropdownMenu.
 
@@ -572,6 +597,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemOne [
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemOne_switchBackToTabOne [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemOne.
 
@@ -595,6 +621,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemThree
 	once the tab `One` is selected."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter aMenuItemId anAnchorElement |
 	aScripter := self clickTabGroupWithButtonDropdownMenu.
 
@@ -618,6 +645,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemThree
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemThree_switchBackToTabOne [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemThree.
 
@@ -641,6 +669,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemTwo [
 	once the tab `One` is selected."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter aMenuItemId anAnchorElement |
 	aScripter := self clickTabGroupWithButtonDropdownMenu.
 
@@ -664,6 +693,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemTwo [
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_clickItemTwo_switchBackToTabOne [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickTabGroupWithButtonDropdownMenu_clickItemTwo.
 
@@ -686,6 +716,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo
 	once the tab `One` is selected."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter anAnchorElement |
 	aScripter := self clickTabGroupWithButtonDropdownMenu.
 
@@ -710,6 +741,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo_switchBackToTabOne [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickTabGroupWithButtonDropdownMenu_switchToTabTwo.
 
@@ -729,6 +761,7 @@ BrMenuWithScripterExamples >> clickTabGroupWithButtonDropdownMenu_switchToTabTwo
 { #category : #'examples - transformation' }
 BrMenuWithScripterExamples >> clickTransformedContainerWithContextMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter anAnchorElement anAnchorCenterPosition anEventPosition |
 	aScripter := self displayTransformedContainerWithContextMenu.
 
@@ -751,10 +784,11 @@ BrMenuWithScripterExamples >> clickTransformedContainerWithContextMenu [
 			detect: [ :each | each isKindOf: BlMouseUpEvent ]
 			ifFound: [ :anEvent | anEvent position ]
 			ifNone: [ nil ].
-			
+
 	self assert: anEventPosition isNotNil.
-	self assert: (anAnchorCenterPosition closeTo: anEventPosition precision: 0.0001).
-	
+	self
+		assert: (anAnchorCenterPosition closeTo: anEventPosition precision: 0.0001).
+
 	aScripter menuStep
 		assertMenuContainerExist;
 		flag: 'I am not sure why the position is not more precise. Ideally, we do not need #roundDownTo:.';
@@ -776,6 +810,7 @@ BrMenuWithScripterExamples >> contextMenuElementWithMenuModel: aMenuModel [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> dispatchDropdownShowWishToButtonWithDropdown [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithDropdown.
 
@@ -784,14 +819,14 @@ BrMenuWithScripterExamples >> dispatchDropdownShowWishToButtonWithDropdown [
 		block: [ :aButton | aButton dispatchEvent: (BrDropdownShowWish new anchor: aButton) ];
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is opened';
 		exists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is opened';
 		value: [ :aMenuContainer | aMenuContainer childrenCount ] equals: 2;
@@ -805,78 +840,90 @@ BrMenuWithScripterExamples >> dispatchDropdownShowWishToButtonWithDropdown [
 { #category : #'examples - context menu' }
 BrMenuWithScripterExamples >> displayButtonWithContextMenu [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithContextMenu ]
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> displayButtonWithContextMenuAndTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithContextMenuAndTooltip ]
 ]
 
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdown [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithDropdown ]
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> displayButtonWithDropdownAndTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithDropdownAndTooltip ]
 ]
 
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitDecoratedMenu [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithDropdownExplicitDecoratedMenu ]
 ]
 
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitMenu [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithDropdownExplicitMenu ]
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> displayButtonWithTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithTooltip ]
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> displayButtonWithTooltipKeymap [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithTooltipKeymap ]
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> displayButtonWithTooltipLabelItem [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithTooltipLabelItem ]
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> displayButtonWithTooltipLongString [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithTooltipLongString ]
 ]
 
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithElement: [ self focusedButtonWithFocusableDropdown ].
 
 	self assert: (aScripter root query // #'menu-dropdown-button') anyOne isFocused.
-			
+
 	^ aScripter
 ]
 
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_displayDropdown [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown.
 
@@ -884,7 +931,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_displayD
 		openDropdownWithId: #'menu-dropdown-button';
 		assertMenuContainerExist;
 		play.
-		
+
 	aScripter menuStep
 		assertMenuContainerChildrenCount: 2;
 		assertMenuContainerHasFocus;
@@ -897,6 +944,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_displayD
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown_displayDropdown.
 
@@ -916,6 +964,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem2 [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem.
 
@@ -937,6 +986,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem2_actOnItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem2.
 
@@ -953,6 +1003,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem3 [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem2.
 
@@ -975,6 +1026,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem3_actOnItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem3.
 
@@ -998,6 +1050,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem_nextSubmenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayFocusedButtonWithFocusableDropdown_nextMenuItem.
 
@@ -1019,18 +1072,21 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 { #category : #'examples - show and hide wish' }
 BrMenuWithScripterExamples >> displayTabGroupWithButtonDropdownMenu [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self tabGroupWithButtonDropdownMenu ]
 ]
 
 { #category : #'examples - transformation' }
 BrMenuWithScripterExamples >> displayTransformedContainerWithContextMenu [
 	<gtExample>
+	<return: #BlScripter>
 	^ self scripterWithElement: [ self transformedContainerWithContextMenu ]
 ]
 
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverComplexSubmenu.
 
@@ -1047,21 +1103,21 @@ BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
-	(aScripter mouseDragBy: -300@ -400)
+
+	(aScripter mouseDragBy: -300 @ -400)
 		label: 'Drag pinnable handle';
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		// #'menu--pinned-handle';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is closed';
 		notExists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dragged menu element exists';
 		exists;
@@ -1075,6 +1131,7 @@ BrMenuWithScripterExamples >> dragPinnableComplexSubmenu [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> dragPinnableExplicitDecoratedMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickButtonWithDropdownExplicitDecoratedMenu.
 
@@ -1091,21 +1148,21 @@ BrMenuWithScripterExamples >> dragPinnableExplicitDecoratedMenu [
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
-	(aScripter mouseDragBy: -200@ 100)
+
+	(aScripter mouseDragBy: -200 @ 100)
 		label: 'Drag pinnable handle';
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		// #'menu--pinned-handle';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is closed';
 		notExists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dragged menu element exists';
 		exists;
@@ -1119,6 +1176,7 @@ BrMenuWithScripterExamples >> dragPinnableExplicitDecoratedMenu [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> dragPinnableExplicitMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickButtonWithDropdownExplicitMenu.
 
@@ -1135,21 +1193,21 @@ BrMenuWithScripterExamples >> dragPinnableExplicitMenu [
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
-	(aScripter mouseDragBy: -200@ 100)
+
+	(aScripter mouseDragBy: -200 @ 100)
 		label: 'Drag pinnable handle';
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		// #'menu--pinned-handle';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown is closed';
 		notExists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dragged menu element exists';
 		exists;
@@ -1163,6 +1221,7 @@ BrMenuWithScripterExamples >> dragPinnableExplicitMenu [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuElement [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickElementWithDropdownInDropdown.
 
@@ -1179,7 +1238,7 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuE
 			equals: 1;
 		onSpaceRoot;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown has cached menu elements';
 		value: [ :aButton | 
@@ -1190,7 +1249,7 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuE
 			equals: 3;
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert menu-in-submenu dropdown has zero (cached) submenus';
 		value: [ :aButton | 
@@ -1202,7 +1261,7 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuE
 		onSpaceRoot;
 		// #'menu-in-submenu';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert menu-in-submenu dropdown has zero cached menu elements';
 		value: [ :aButton | 
@@ -1221,6 +1280,7 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromDropdownInDropdownSubmenuE
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverComplexSubmenu.
 
@@ -1238,7 +1298,7 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 			equals: 0;
 		onSpaceRoot;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown has zero cached menu elements';
 		value: [ :aButton | 
@@ -1256,6 +1316,7 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 { #category : #'examples - focusable' }
 BrMenuWithScripterExamples >> focusedButtonWithFocusableDropdown [
 	<gtExample>
+	<return: #BrFrame>
 	| aMenuItems aFrame aButton |
 	aMenuItems := BrMenuExamples new menuItems.
 	aMenuItems items do: #deselect.
@@ -1267,17 +1328,17 @@ BrMenuWithScripterExamples >> focusedButtonWithFocusableDropdown [
 	aButton aptitude
 		findActor: BrGlamorousWithExplicitDropdownAptitude
 		ifFound: [ :anAptitude | anAptitude withGainFocusOnShow ]
-		ifNone: [ 
-			NotFound
+		ifNone: [ NotFound
 				signalFor: BrGlamorousWithExplicitDropdownAptitude
 				in: aButton ].
-	
+
 	^ aFrame
 ]
 
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverButtonWithContextMenuAndTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithContextMenuAndTooltip.
 
@@ -1296,6 +1357,7 @@ BrMenuWithScripterExamples >> hoverButtonWithContextMenuAndTooltip [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverButtonWithDropdownAndTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithDropdownAndTooltip.
 
@@ -1314,6 +1376,7 @@ BrMenuWithScripterExamples >> hoverButtonWithDropdownAndTooltip [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithTooltip.
 
@@ -1321,7 +1384,7 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 		label: 'Hover button with tooltip';
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is opened';
 		exists;
@@ -1335,6 +1398,7 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltip [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverButtonWithTooltipKeymap [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayButtonWithTooltipKeymap.
 
@@ -1357,6 +1421,7 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltipLabelItem [
 	Users can use BrWithExplicitTooltipAptitude class>>#text: to use the whole window width."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter aMenuElement aLabelElement aMenuContainer |
 	aScripter := self displayButtonWithTooltipLabelItem.
 
@@ -1364,20 +1429,20 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltipLabelItem [
 		label: 'Hover button with tooltip';
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is opened';
 		exists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aMenuElement := (aScripter root query // #'menu-label-item') anyOne.
 	aLabelElement := (aScripter root query // #'menu-label-item' // #label) anyOne.
 	aMenuContainer := (aScripter root query // BrMenuSteppedElement) anyOne.
 	self assert: aMenuElement width < aLabelElement width.
 	self assert: aMenuElement width < aMenuContainer width.
-	
+
 	^ aScripter
 ]
 
@@ -1387,6 +1452,7 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltipLongString [
 	Users can use BrWithExplicitTooltipAptitude class>>#menu: to use default preferred child weight."
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter aMenuElement aLabelElement aMenuContainer |
 	aScripter := self displayButtonWithTooltipLongString.
 
@@ -1394,16 +1460,17 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltipLongString [
 		label: 'Hover button with tooltip';
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is opened';
 		exists;
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
-		
+
 	aMenuElement := (aScripter root query // BrMenuLabelItemElement) anyOne.
-	aLabelElement := (aScripter root query // BrMenuLabelItemElement // #label) anyOne.
+	aLabelElement := (aScripter root query // BrMenuLabelItemElement // #label)
+			anyOne.
 	aMenuContainer := (aScripter root query // BrMenuSteppedElement) anyOne.
 	self assert: aMenuElement width > aLabelElement width.
 	self assert: aMenuElement width < aMenuContainer width.
@@ -1414,6 +1481,7 @@ BrMenuWithScripterExamples >> hoverButtonWithTooltipLongString [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverComplexSubmenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickButtonWithDropdown.
 
@@ -1437,6 +1505,7 @@ BrMenuWithScripterExamples >> hoverComplexSubmenu [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self clickElementWithDropdownInDropdown.
 
@@ -1477,6 +1546,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened [
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_clickOutside [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened.
 
@@ -1498,7 +1568,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_click
 			equals: 0;
 		onSpaceRoot;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown has zero cached menu elements';
 		value: [ :aButton | 
@@ -1516,6 +1586,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_click
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened.
 
@@ -1556,8 +1627,10 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu_clickOutside [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
-	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu.
+	aScripter := self
+			hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu.
 
 	aScripter click
 		label: 'Click outside of all menu elements';
@@ -1588,7 +1661,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 			equals: 0;
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown has zero cached menu elements';
 		value: [ :aButton | 
@@ -1606,8 +1679,10 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu_clickOutsideInnerMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
-	aScripter := self hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu.
+	aScripter := self
+			hoverPasteItemKeepingTheSecondDropdownOpened_hoverBackComplexSubmenu.
 
 	aScripter click
 		label: 'Click outside of inner menu elements';
@@ -1639,7 +1714,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 			equals: 0;
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert dropdown has some cached menu elements';
 		value: [ :aButton | 
@@ -1650,7 +1725,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 			equals: 3;
 		/ BrButton;
 		play.
-		
+
 	aScripter assert
 		label: 'Assert menu-in-submenu dropdown has zero (cached) submenus';
 		value: [ :aButton | 
@@ -1662,7 +1737,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 		onSpaceRoot;
 		// #'menu-in-submenu';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert menu-in-submenu dropdown has zero cached menu elements';
 		value: [ :aButton | 
@@ -1681,6 +1756,7 @@ BrMenuWithScripterExamples >> hoverPasteItemKeepingTheSecondDropdownOpened_hover
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> hoverTooltipMenuPasteItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverButtonWithTooltip.
 
@@ -1689,7 +1765,7 @@ BrMenuWithScripterExamples >> hoverTooltipMenuPasteItem [
 		onSpaceRoot;
 		// #'menu-paste-item';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is opened';
 		exists;
@@ -1735,6 +1811,7 @@ BrMenuWithScripterExamples >> labelElementIsWithoutForegroundAttribute: aLabel [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> leaveButtonWithTooltip [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverButtonWithTooltip.
 
@@ -1742,7 +1819,7 @@ BrMenuWithScripterExamples >> leaveButtonWithTooltip [
 		label: 'Move mouse outside of the button with tooltip';
 		/ #'outside-click';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is closed';
 		notExists;
@@ -1756,6 +1833,7 @@ BrMenuWithScripterExamples >> leaveButtonWithTooltip [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> leaveButtonWithTooltipLabelItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverButtonWithTooltipLabelItem.
 
@@ -1763,7 +1841,7 @@ BrMenuWithScripterExamples >> leaveButtonWithTooltipLabelItem [
 		label: 'Move mouse outside of the button with tooltip';
 		/ #'outside-click';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is closed';
 		notExists;
@@ -1777,6 +1855,7 @@ BrMenuWithScripterExamples >> leaveButtonWithTooltipLabelItem [
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> leaveTooltipMenuPasteItem [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self hoverTooltipMenuPasteItem.
 
@@ -1784,7 +1863,7 @@ BrMenuWithScripterExamples >> leaveTooltipMenuPasteItem [
 		label: 'Move mouse outside of the button with tooltip';
 		/ #'outside-click';
 		play.
-		
+
 	aScripter assert
 		label: 'Assert tooltip is closed';
 		notExists;
@@ -1798,6 +1877,7 @@ BrMenuWithScripterExamples >> leaveTooltipMenuPasteItem [
 { #category : #'examples - updates' }
 BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 	<gtExample>
+	<return: #BlScripter>
 	| anActionItem aCounter anAnnouncer aMenuItems aScripter aLabelItem |
 	aCounter := 0.
 	anAnnouncer := Announcer new.
@@ -1872,7 +1952,7 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		onDropdown: true;
 		// BrMenuLabelItemElement;
 		play.
-		
+
 	aScripter assert
 		label: 'Action item is enabled on 1';
 		satisfies: [ :aLabel | aLabel isEnabled and: [ self actionElementIsWithoutForegroundAttribute: aLabel ] ];
@@ -1905,7 +1985,7 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 		onDropdown: true;
 		// BrMenuLabelItemElement;
 		play.
-	
+
 	aScripter assert
 		label: 'Action item is disabled on 2';
 		satisfies: [ :aLabel | 
@@ -1927,6 +2007,7 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 { #category : #'examples - updates' }
 BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_closeMenu [
 	<gtExample>
+	<return: #BlScripter>
 	| aCounter anAnnouncer aScripter |
 	aScripter := self menuWithUpdatableMenuItems.
 	aCounter := aScripter userData at: #counter.
@@ -1947,6 +2028,7 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_closeMenu [
 { #category : #'examples - updates' }
 BrMenuWithScripterExamples >> menuWithUpdatableMenuItems_demo [
 	<gtExample>
+	<return: #BrFrame>
 	| aScripter |
 	aScripter := self menuWithUpdatableMenuItems.
 
@@ -1961,6 +2043,7 @@ BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu [
 	See https://github.com/feenkcom/gtoolkit/issues/4375"
 
 	<gtExample>
+	<return: #BrTabGroup>
 	| aTabOne aTabTwo |
 	aTabOne := BrTab new
 			id: #'tab-one';
@@ -1972,16 +2055,14 @@ BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu [
 						id: #'menu-item-one';
 						label: 'Switch to tab two (no-hide)';
 						hideOnClick: false;
-						action: [ :anElement |
-							(anElement space root query // #'tab-two') anyOne select ];
+						action: [ :anElement | (anElement space root query // #'tab-two') anyOne select ];
 						yourself.
 				aMenuItems addItem: aMenuItem.
 				aMenuItem := BrMenuActionItem new
 						id: #'menu-item-two';
 						label: 'Switch to tab two (hide)';
 						hideOnClick: true;
-						action: [ :anElement | 
-							(anElement space root query // #'tab-two') anyOne select ];
+						action: [ :anElement | (anElement space root query // #'tab-two') anyOne select ];
 						yourself.
 				aMenuItems addItem: aMenuItem.
 				aMenuItem := BrMenuActionItem new
@@ -2002,9 +2083,8 @@ BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu [
 							aWish := BrPopoverAnchorElementWish new.
 							anElement fireEvent: aWish.
 							(anElement space root query // #'tab-two') anyOne select.
-							aWish anchorElementDo: [ :anAnchorElement | 
-								anAnchorElement dispatchEvent: (BrDropdownHideWish new 
-									anchor: anAnchorElement) ] ];
+							aWish
+								anchorElementDo: [ :anAnchorElement | anAnchorElement dispatchEvent: (BrDropdownHideWish new anchor: anAnchorElement) ] ];
 						yourself.
 				aMenuItems addItem: aMenuItem.
 
@@ -2092,53 +2172,53 @@ BrMenuWithScripterExamples >> tabGroupWithButtonDropdownMenu: aMenuStencil [
 { #category : #'examples - transformation' }
 BrMenuWithScripterExamples >> transformedContainerWithContextMenu [
 	"Original example: BrAnchoredExamples>>#contextMenu"
+
 	<gtExample>
-	
+	<return: #BlElement>
 	| handleSize handle content container anchor anchorContainer |
 	handleSize := 8 @ 8.
 	handle := [ BlElement new
-		id: #'menu-handle';
-		size: handleSize;
-		yourself ] asStencil.
+			id: #'menu-handle';
+			size: handleSize;
+			yourself ] asStencil.
 	content := [ (BrLabel new
-		id: #'menu-content';
-		aptitude:
-			(BrGlamorousLabelAptitude new
-				glamorousRegularFontAndSize;
-				yourself);
-		padding: (BlInsets all: handleSize x);
-		text: 'look at me!';
-		yourself) asScrollableElement
-		alignCenter;
-		yourself ] asStencil.
+			id: #'menu-content';
+			aptitude: (BrGlamorousLabelAptitude new
+					glamorousRegularFontAndSize;
+					yourself);
+			padding: (BlInsets all: handleSize x);
+			text: 'look at me!';
+			yourself) asScrollableElement
+			alignCenter;
+			yourself ] asStencil.
 	container := BlElement new
-		background: Color gray muchLighter;
-		layout: BlLinearLayout vertical;
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		transformDo: [ :t | 
-			t
-				origin: BlAffineTransformationTopLeftOrigin new;
-				rotateBy: 30;
-				translateBy: 400 @ 100;
-				scaleBy: 0.5 ];
-		yourself.
+			background: Color gray muchLighter;
+			layout: BlLinearLayout vertical;
+			constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical matchParent ];
+			transformDo: [ :t | 
+				t
+					origin: BlAffineTransformationTopLeftOrigin new;
+					rotateBy: 30;
+					translateBy: 400 @ 100;
+					scaleBy: 0.5 ];
+			yourself.
 	anchor := BlElement new
-		id: #'menu-anchor';
-		aptitude: (BrGlamorousWithExplicitContextMenuAptitude handle: handle content: content);
-		background: Color red;
-		size: 40 @ 80;
-		addEventHandler: BlPullHandler new;
-		yourself.
+			id: #'menu-anchor';
+			aptitude: (BrGlamorousWithExplicitContextMenuAptitude handle: handle content: content);
+			background: Color red;
+			size: 40 @ 80;
+			addEventHandler: BlPullHandler new;
+			yourself.
 	anchorContainer := BlElement new
-		background: Color red muchLighter;
-		relocate: 200 @ 250;
-		size: 400 @ 200;
-		constraintsDo: [ :c | c ignoreByLayout ];
-		clipChildren: false;
-		addChild: anchor;
-		yourself.
+			background: Color red muchLighter;
+			relocate: 200 @ 250;
+			size: 400 @ 200;
+			constraintsDo: [ :c | c ignoreByLayout ];
+			clipChildren: false;
+			addChild: anchor;
+			yourself.
 	^ container
 		addChild: anchorContainer;
 		yourself

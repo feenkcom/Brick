@@ -15,6 +15,7 @@ Class {
 { #category : #examples }
 BrGlamorousComponentsAccordions >> withEditor [
 	<gtExample>
+	<return: #BrAccordion>
 	| anAccordion |
 	anAccordion := BrAccordion new.
 	anAccordion

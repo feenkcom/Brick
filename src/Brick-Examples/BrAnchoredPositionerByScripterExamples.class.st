@@ -66,6 +66,7 @@ BrAnchoredPositionerByScripterExamples >> anchorPosition: anchorPositionBlock re
 { #category : #accessing }
 BrAnchoredPositionerByScripterExamples >> rightSide [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self rootContainerWithDefinedExtent.
 
@@ -79,8 +80,7 @@ BrAnchoredPositionerByScripterExamples >> rightSide [
 
 	self
 		scripter: aScripter
-		relocatePopup: [ :popupPreferredMaxBoundsInTarget :popupSize | 
-			popupPreferredMaxBoundsInTarget topLeft ].
+		relocatePopup: [ :popupPreferredMaxBoundsInTarget :popupSize | popupPreferredMaxBoundsInTarget topLeft ].
 
 	^ aScripter	"^ self
 		anchorPosition: [ :target :anchor | (target size - anchor size) / 8 + (0 @ (6 / 8 * (target size - anchor size) y)) ]
@@ -94,6 +94,7 @@ BrAnchoredPositionerByScripterExamples >> rightSide [
 { #category : #'examples - element' }
 BrAnchoredPositionerByScripterExamples >> rootContainer [
 	<gtExample>
+	<return: #BlElement>
 	| screenContainer targetContainer positioner anchor target anchorContainer popup rootContainer legendContainer |
 	positioner := self anchoredPositioner.
 	anchor := positioner anchor.

@@ -18,42 +18,42 @@ BrThemeExamples >> container [
 { #category : #accessing }
 BrThemeExamples >> listBaseline [
 	<gtExample>
+	<return: #BrSimpleList>
 	| list |
 	list := BrSimpleList vertical
-		itemType: [ :aFactory :anItem :anIndex | Integer ];
-		itemStencil: [ :anItemType | 
-			BrButton new
-				aptitude: BrGlamorousButtonWithLabelAptitude;
-				yourself ];
-		itemDataBinder: [ :anElement :anItem :anIndex | anElement label: anItem asString ];
-		items: (1 to: 1000);
-		yourself.
+			itemType: [ :aFactory :anItem :anIndex | Integer ];
+			itemStencil: [ :anItemType | 
+				BrButton new
+					aptitude: BrGlamorousButtonWithLabelAptitude;
+					yourself ];
+			itemDataBinder: [ :anElement :anItem :anIndex | anElement label: anItem asString ];
+			items: (1 to: 1000);
+			yourself.
 	^ list
 ]
 
 { #category : #accessing }
 BrThemeExamples >> listLook [
 	<gtExample>
+	<return: #BrSimpleList>
 	| list a b |
 	a := BrThemeExampleMapped new
-		at: BrButton put: #newGlamorousButtonLookFor:;
-		yourself.
+			at: BrButton put: #newGlamorousButtonLookFor:;
+			yourself.
 	b := BrThemeExampleMapped new
-		at: BrButton put: #newMaterialButtonLookFor:;
-		yourself.
+			at: BrButton put: #newMaterialButtonLookFor:;
+			yourself.
 	list := BrSimpleList vertical
-		theme: a;
-		itemType: [ :aFactory :anItem :anIndex | Integer ];
-		itemStencil: [ :anItemType | 
-			BrButton new
-				aptitude: BrThemeableAptitude;
-				action: [ list theme == a
-						ifTrue: [ list theme: b ]
-						ifFalse: [ list theme: a ] ];
-				yourself ];
-		itemDataBinder: [ :anElement :anItem :anIndex | anElement label: anItem asString ];
-		items: (1 to: 1000);
-		yourself.
+			theme: a;
+			itemType: [ :aFactory :anItem :anIndex | Integer ];
+			itemStencil: [ :anItemType | 
+				BrButton new
+					aptitude: BrThemeableAptitude;
+					action: [ list theme == a ifTrue: [ list theme: b ] ifFalse: [ list theme: a ] ];
+					yourself ];
+			itemDataBinder: [ :anElement :anItem :anIndex | anElement label: anItem asString ];
+			items: (1 to: 1000);
+			yourself.
 	^ list
 ]
 
@@ -70,27 +70,25 @@ BrThemeExamples >> listProfileAll [
 { #category : #accessing }
 BrThemeExamples >> listProperty [
 	<gtExample>
+	<return: #BrSimpleList>
 	| list a b |
 	a := BrThemeExampleMapped new
-		at: BrButton put: #newGlamorousButtonLookFor:;
-		yourself.
+			at: BrButton put: #newGlamorousButtonLookFor:;
+			yourself.
 	b := BrThemeExampleMapped new
-		at: BrButton put: #newMaterialButtonLookFor:;
-		yourself.
+			at: BrButton put: #newMaterialButtonLookFor:;
+			yourself.
 	list := BrSimpleList vertical
-		itemType: [ :aFactory :anItem :anIndex | Integer ];
-		itemStencil: [ :anItemType | 
-			BrButton new
-				action: [ list theme == a
-						ifTrue: [ list theme: b ]
-						ifFalse: [ list theme: a ] ];
-				yourself ];
-		itemDataBinder: [ :anElement :anItem :anIndex | anElement label: anItem asString ];
-		items: (1 to: 1000);
-		yourself.
+			itemType: [ :aFactory :anItem :anIndex | Integer ];
+			itemStencil: [ :anItemType | 
+				BrButton new
+					action: [ list theme == a ifTrue: [ list theme: b ] ifFalse: [ list theme: a ] ];
+					yourself ];
+			itemDataBinder: [ :anElement :anItem :anIndex | anElement label: anItem asString ];
+			items: (1 to: 1000);
+			yourself.
 	list properties
-		addProperty:
-			(BrThemeElementProperty new
+		addProperty: (BrThemeElementProperty new
 				theme: a;
 				yourself).
 	^ list

@@ -78,6 +78,7 @@ BrAnchoredByScripterExamples >> assertTooltip: aScripter [
 { #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> dropdownBottomRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithDropdown ].
 
@@ -125,6 +126,7 @@ BrAnchoredByScripterExamples >> dropdownBottomRight [
 { #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithDropdown ].
 
@@ -166,6 +168,7 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight [
 { #category : #'examples - dropdown' }
 BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight_ByOnePixel [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithDropdown ].
 
@@ -207,49 +210,48 @@ BrAnchoredByScripterExamples >> dropdownBottomRight_AnchorMoreToTheRight_ByOnePi
 { #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> elementWithDropdown [
 	<gtExample>
+	<return: #BlElement>
 	| handleSize handle content container anchor anchorContainer |
 	handleSize := 50 @ 50.
 	handle := [ BlElement new
-		size: handleSize;
-		yourself ] asStencil.
+			size: handleSize;
+			yourself ] asStencil.
 	content := [ (BrLabel new
-		id: #labelContent;
-		aptitude:
-			(BrGlamorousLabelAptitude new
-				glamorousRegularFontAndSize;
-				yourself);
-		padding: (BlInsets all: handleSize x);
-		text: 'look at me!';
-		yourself) asScrollableElement
-		alignCenter;
-		yourself ] asStencil.
+			id: #labelContent;
+			aptitude: (BrGlamorousLabelAptitude new
+					glamorousRegularFontAndSize;
+					yourself);
+			padding: (BlInsets all: handleSize x);
+			text: 'look at me!';
+			yourself) asScrollableElement
+			alignCenter;
+			yourself ] asStencil.
 	container := BlElement new
-		id: #placementArea;
-		background: Color gray muchLighter;
-		layout: BlLinearLayout vertical;
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.
+			id: #placementArea;
+			background: Color gray muchLighter;
+			layout: BlLinearLayout vertical;
+			constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself.
 	anchor := BlElement new
-		id: #anchorElement;
-		aptitude:
-			((BrGlamorousWithDropdownAptitude handle: handle content: content)
-				root: container;
-				yourself);
-		background: Color red;
-		size: 40 @ 80;
-		addEventHandler: BlPullHandler new;
-		yourself.
+			id: #anchorElement;
+			aptitude: ((BrGlamorousWithDropdownAptitude handle: handle content: content)
+					root: container;
+					yourself);
+			background: Color red;
+			size: 40 @ 80;
+			addEventHandler: BlPullHandler new;
+			yourself.
 	anchorContainer := BlElement new
-		id: #anchorContainer;
-		background: Color red muchLighter;
-		relocate: 200 @ 250;
-		size: 400 @ 200;
-		constraintsDo: [ :c | c ignoreByLayout ];
-		clipChildren: false;
-		addChild: anchor;
-		yourself.
+			id: #anchorContainer;
+			background: Color red muchLighter;
+			relocate: 200 @ 250;
+			size: 400 @ 200;
+			constraintsDo: [ :c | c ignoreByLayout ];
+			clipChildren: false;
+			addChild: anchor;
+			yourself.
 	^ container
 		addChild: anchorContainer;
 		yourself
@@ -258,6 +260,7 @@ BrAnchoredByScripterExamples >> elementWithDropdown [
 { #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 	<gtExample>
+	<return: #BlElement>
 	| handleSize handle content container anchor anchorContainer |
 	handleSize := 8 @ 8.
 	handle := [ BlElement new
@@ -275,7 +278,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 											glamorousRegularFontAndSize;
 											yourself);
 									padding: (BlInsets all: handleSize x);
-									text: anIndex asString, ' - item with some extra text';
+									text: anIndex asString , ' - item with some extra text';
 									yourself) ] ];
 			yourself) asScrollableElement
 			alignCenter;
@@ -310,6 +313,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 { #category : #'examples - tooltip' }
 BrAnchoredByScripterExamples >> elementWithLongLabelTooltip [
 	<gtExample>
+	<return: #BlElement>
 	| container anchor anchorContainer |
 	container := BlElement new
 			id: #placementArea;
@@ -346,6 +350,7 @@ BrAnchoredByScripterExamples >> elementWithLongLabelTooltip [
 { #category : #'examples - tooltip' }
 BrAnchoredByScripterExamples >> elementWithShortLabelTooltip [
 	<gtExample>
+	<return: #BlElement>
 	| container anchor anchorContainer |
 	container := BlElement new
 			id: #placementArea;
@@ -382,6 +387,7 @@ BrAnchoredByScripterExamples >> elementWithShortLabelTooltip [
 { #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
@@ -391,10 +397,9 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 				label: 'Set space extent';
 				block: [ :aSpace | aSpace extent: 300 @ 500 ];
 				onSpace ].
-				
-	aScripter menuStep 
-		prepareSteppedLayoutContextMenuAnalyzer 
-		// #anchorElement; 
+
+	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+		// #anchorElement;
 		play.
 
 	aScripter
@@ -415,18 +420,16 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 			s
 				label: 'Assert scrollable container menu bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) 
+					(anElement isVisibleFullyInParent: anElement parent)
 						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-				
+
 	aScripter
 		assertStep: [ :s | 
 			s
 				label: 'Assert context menu bounds';
-				satisfies: [ :anElement | 
-					(anElement height = anElement parent height) 
-						and: [ anElement isVisibleInSpace ] ];
+				satisfies: [ :anElement | anElement height = anElement parent height and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsContainer ].
 
@@ -436,6 +439,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 { #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
@@ -476,18 +480,18 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 			s
 				label: 'Assert anchored bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) and: [
-						anElement isVisibleInSpace ] ];
+					(anElement isVisibleFullyInParent: anElement parent)
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-				
+
 	aScripter
 		assertStep: [ :s | 
 			s
 				label: 'Assert anchored bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) and: [
-						anElement isVisibleInSpace ] ];
+					(anElement isVisibleFullyInParent: anElement parent)
+						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsContainer ].
 
@@ -497,6 +501,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft_AnchorMoreToTheRight [
 { #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> longContextMenuTheRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
@@ -506,10 +511,9 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 				label: 'Set space extent';
 				block: [ :aSpace | aSpace extent: 650 @ 500 ];
 				onSpace ].
-				
-	aScripter menuStep 
-		prepareSteppedLayoutContextMenuAnalyzer 
-		// #anchorElement; 
+
+	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+		// #anchorElement;
 		play.
 
 	aScripter
@@ -523,17 +527,17 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 			s
 				label: 'Assert scrollable container menu bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) 
+					(anElement isVisibleFullyInParent: anElement parent)
 						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-				
+
 	aScripter
 		assertStep: [ :s | 
 			s
 				label: 'Assert context menu bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) 
+					(anElement isVisibleFullyInParent: anElement parent)
 						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsContainer ].
@@ -544,6 +548,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 { #category : #'examples - context menu' }
 BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongContextMenu ].
 
@@ -554,11 +559,10 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 				block: [ :aSpace | aSpace extent: 650 @ 500 ];
 				onSpace ].
 
-	aScripter menuStep 
-		prepareSteppedLayoutContextMenuAnalyzer 
-		// #anchorElement; 
+	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+		// #anchorElement;
 		play.
-				
+
 	aScripter
 		doStep: [ :s | 
 			s
@@ -577,17 +581,17 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 			s
 				label: 'Assert scrollable container menu bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) 
+					(anElement isVisibleFullyInParent: anElement parent)
 						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsScrollableContainer ].
-				
+
 	aScripter
 		assertStep: [ :s | 
 			s
 				label: 'Assert context menu bounds';
 				satisfies: [ :anElement | 
-					(anElement isVisibleFullyInParent: anElement parent) 
+					(anElement isVisibleFullyInParent: anElement parent)
 						and: [ anElement isVisibleInSpace ] ];
 				onSpaceRoot;
 				id: #itemsContainer ].
@@ -598,6 +602,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 { #category : #'examples - tooltip' }
 BrAnchoredByScripterExamples >> tooltipLongLabelCenterLeft_AnchorMoreToTheRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithLongLabelTooltip ].
 
@@ -639,6 +644,7 @@ BrAnchoredByScripterExamples >> tooltipLongLabelCenterLeft_AnchorMoreToTheRight 
 { #category : #'examples - tooltip' }
 BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
 
@@ -673,6 +679,7 @@ BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter [
 { #category : #'examples - tooltip' }
 BrAnchoredByScripterExamples >> tooltipShortLabelBottomCenter_AnchorMoreToTheRight [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self elementWithShortLabelTooltip ].
 

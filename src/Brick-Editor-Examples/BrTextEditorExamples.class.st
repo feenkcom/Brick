@@ -151,30 +151,30 @@ BrTextEditorExamples class >> loremIpsum: aLength [
 { #category : #examples }
 BrTextEditorExamples >> adormentDynamicAttribute [
 	<gtExample>
-	
+	<return: #BrEditorElement>
 	^ self newElement editor: self editorWithAdormentDynamicAttribute
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> brickString [
 	<gtExample>
+	<return: #ByteString>
 	^ 'Brick'
 ]
 
 { #category : #examples }
 BrTextEditorExamples >> editorWithAdormentDynamicAttribute [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| editor text |
 	text := self newThreeLineText.
 	editor := self newEditor text: text.
 	editor text
-		attributes: { 
-			BrTextAdornmentDynamicAttribute new 
-				stencil: [ 
-					BlElement new 
-						size: 70 @ 50; 
-						margin: (BlInsets all: 5);
-						background: Color red ] }
+		attributes: {BrTextAdornmentDynamicAttribute new
+					stencil: [ BlElement new
+							size: 70 @ 50;
+							margin: (BlInsets all: 5);
+							background: Color red ]}
 		from: 1
 		to: text size.
 	^ editor
@@ -183,13 +183,12 @@ BrTextEditorExamples >> editorWithAdormentDynamicAttribute [
 { #category : #examples }
 BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningEmptyCollection [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| editor text |
 	text := self newThreeLineText.
 	editor := self newEditor text: text.
 	editor text
-		attributes: { 
-			BrTextAdornmentDynamicAttribute new 
-				stencil: [ #() ] }
+		attributes: {BrTextAdornmentDynamicAttribute new stencil: [ #() ]}
 		from: 1
 		to: text size.
 	^ editor
@@ -198,21 +197,20 @@ BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningEmptyCollecti
 { #category : #examples }
 BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningTwoElements [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| editor text |
 	text := self newThreeLineText.
 	editor := self newEditor text: text.
 	editor text
-		attributes: { 
-			BrTextAdornmentDynamicAttribute new 
-				stencil: [ 
-					{ BlElement new 
-						size: 70 @ 50; 
-						margin: (BlInsets all: 5);
-						background: Color red.
-					BlElement new 
-						size: 70 @ 50; 
-						margin: (BlInsets all: 5);
-						background: Color green } ] }
+		attributes: {BrTextAdornmentDynamicAttribute new
+					stencil: [ {BlElement new
+								size: 70 @ 50;
+								margin: (BlInsets all: 5);
+								background: Color red.
+							BlElement new
+								size: 70 @ 50;
+								margin: (BlInsets all: 5);
+								background: Color green} ]}
 		from: 1
 		to: text size.
 	^ editor
@@ -221,6 +219,7 @@ BrTextEditorExamples >> editorWithAdormentDynamicAttributeReturningTwoElements [
 { #category : #'examples - editing' }
 BrTextEditorExamples >> editorWithBrickText [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor aText |
 	anEditor := self newEditor.
 	aText := self brickString asRopedText.
@@ -232,6 +231,7 @@ BrTextEditorExamples >> editorWithBrickText [
 { #category : #'examples - editing' }
 BrTextEditorExamples >> editorWithLastHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithBrickText.
 	(anEditor text from: anEditor text size to: anEditor text size)
@@ -243,16 +243,17 @@ BrTextEditorExamples >> editorWithLastHiddenCharacter [
 { #category : #'examples - editor' }
 BrTextEditorExamples >> editorWithMethod [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	^ self newEditor text: self newMethodText
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> editorWithSecondHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithBrickText.
-	(anEditor text from: 2 to: 2)
-		attribute: self newBeReplaceTextAttribute.
+	(anEditor text from: 2 to: 2) attribute: self newBeReplaceTextAttribute.
 	self assert: anEditor text asString equals: self brickString.
 	^ anEditor
 ]
@@ -260,12 +261,14 @@ BrTextEditorExamples >> editorWithSecondHiddenCharacter [
 { #category : #examples }
 BrTextEditorExamples >> editorWithText [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	^ self newEditor text: self newText
 ]
 
 { #category : #examples }
 BrTextEditorExamples >> elementOnMethodWithSyntaxHighlighting [
 	<gtExample>
+	<return: #BrEditorElement>
 	| element styler text editor |
 	text := self newMethodText.
 	element := self newElement.
@@ -281,21 +284,25 @@ BrTextEditorExamples >> elementOnMethodWithSyntaxHighlighting [
 { #category : #examples }
 BrTextEditorExamples >> elementWithEditor [
 	<gtExample>
-	
+	<return: #BrEditorElement>
 	^ self newElement editor: self editorWithText
 ]
 
 { #category : #examples }
 BrTextEditorExamples >> elementWithEmptyEditor [
 	<gtExample>
-	
-	^ self newElement editor: (self newEditor text: (' ' asRopedText fontSize: 16; monospace))
+	<return: #BrEditorElement>
+	^ self newElement
+		editor: (self newEditor
+				text: (' ' asRopedText
+						fontSize: 16;
+						monospace))
 ]
 
 { #category : #examples }
 BrTextEditorExamples >> elementWithMethod [
 	<gtExample>
-	
+	<return: #BrEditorElement>
 	^ self newElement editor: self editorWithMethod
 ]
 
@@ -332,16 +339,18 @@ BrTextEditorExamples >> fullDrawOn: aCanvas [
 { #category : #'examples - editing' }
 BrTextEditorExamples >> insertAStringAfterLastHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithLastHiddenCharacter.
 	anEditor insertString: '_' at: anEditor text size.
-	self assert: anEditor text asString equals: self brickString, '_'.
+	self assert: anEditor text asString equals: self brickString , '_'.
 	^ anEditor
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> insertAStringAfterSecondHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithSecondHiddenCharacter.
 	anEditor insertString: '_' at: 2.
@@ -352,64 +361,69 @@ BrTextEditorExamples >> insertAStringAfterSecondHiddenCharacter [
 { #category : #'examples - editing' }
 BrTextEditorExamples >> insertLineFeedString [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithBrickText.
 	anEditor insertString: String lf at: anEditor text size.
-	self assert: anEditor text asString equals: self brickString, String lf.
+	self assert: anEditor text asString equals: self brickString , String lf.
 	^ anEditor
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> insertLineFeedStringAfterLastHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithLastHiddenCharacter.
 	anEditor insertString: String lf at: anEditor text size.
-	self assert: anEditor text asString equals: self brickString, String lf.
+	self assert: anEditor text asString equals: self brickString , String lf.
 	^ anEditor
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> insertLineFeedStringAfterSecondHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithSecondHiddenCharacter.
 	anEditor insertString: String lf at: 2.
-	self assert: anEditor text asString equals: 'Br', String lf, 'ick'.
+	self assert: anEditor text asString equals: 'Br' , String lf , 'ick'.
 	^ anEditor
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> insertLineFeedStringBeforeSecondHiddenCharacter [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| anEditor |
 	anEditor := self editorWithSecondHiddenCharacter.
 	anEditor insertString: String lf at: 1.
-	self assert: anEditor text asString equals: 'B', String lf, 'rick'.
+	self assert: anEditor text asString equals: 'B' , String lf , 'rick'.
 	^ anEditor
 ]
 
 { #category : #'examples - editing' }
 BrTextEditorExamples >> newBeReplaceTextAttribute [
 	<gtExample>
+	<return: #BrTextAdornmentDynamicAttribute>
 	^ BrTextAdornmentDynamicAttribute new
 		beReplace;
-		stencil: [ BlElement new 
-			size: 10@10; 
-			background: Color lightGray ]
+		stencil: [ BlElement new
+				size: 10 @ 10;
+				background: Color lightGray ]
 ]
 
 { #category : #'instance creation' }
 BrTextEditorExamples >> newEditor [
 	<gtExample>
-
+	<return: #BrTextEditorModel>
 	^ BrTextEditorModel new
 ]
 
 { #category : #'instance creation' }
 BrTextEditorExamples >> newElement [
 	<gtExample>
-	
+	<return: #BrEditorElement>
 	^ BrEditorElement new
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
@@ -420,20 +434,20 @@ BrTextEditorExamples >> newElement [
 { #category : #'instance creation' }
 BrTextEditorExamples >> newMethodText [
 	<gtExample>
-	
+	<return: #BlRunRopedText>
 	^ (BrTextEditorExamples >> #fullDrawOn:) sourceCode asRopedText
 ]
 
 { #category : #'instance creation' }
 BrTextEditorExamples >> newText [
 	<gtExample>
-	
+	<return: #BlRunRopedText>
 	^ (String loremIpsum: 2000000) asRopedText
 ]
 
 { #category : #'instance creation' }
 BrTextEditorExamples >> newThreeLineText [
 	<gtExample>
-	
+	<return: #BlRunRopedText>
 	^ ('first' , String cr , 'second' , String cr , 'third') asRopedText
 ]
