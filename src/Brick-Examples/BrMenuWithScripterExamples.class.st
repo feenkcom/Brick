@@ -862,7 +862,7 @@ BrMenuWithScripterExamples >> displayButtonWithTooltipLongString [
 	^ self scripterWithElement: [ self buttonWithTooltipLongString ]
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown [
 	<gtExample>
 	| aScripter |
@@ -874,7 +874,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown [
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_displayDropdown [
 	<gtExample>
 	| aScripter |
@@ -894,7 +894,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_displayD
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem [
 	<gtExample>
 	| aScripter |
@@ -913,7 +913,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem2 [
 	<gtExample>
 	| aScripter |
@@ -934,7 +934,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem2_actOnItem [
 	<gtExample>
 	| aScripter |
@@ -950,7 +950,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem3 [
 	<gtExample>
 	| aScripter |
@@ -972,7 +972,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem3_actOnItem [
 	<gtExample>
 	| aScripter |
@@ -995,7 +995,7 @@ BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenu
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> displayFocusedButtonWithFocusableDropdown_nextMenuItem_nextSubmenu [
 	<gtExample>
 	| aScripter |
@@ -1253,12 +1253,11 @@ BrMenuWithScripterExamples >> fireDropdownHideWishFromSubmenuElement [
 	^ aScripter
 ]
 
-{ #category : #'examples - focusable' }
+{ #category : #'examples - keyboard navigation' }
 BrMenuWithScripterExamples >> focusedButtonWithFocusableDropdown [
 	<gtExample>
 	| aMenuItems aFrame aButton |
 	aMenuItems := BrMenuExamples new menuItems.
-	aMenuItems items do: #deselect.
 	aMenuItems beListElementType.
 	aFrame := self buttonWithDropdownMenu: aMenuItems.
 	aButton := (aFrame query // #'menu-dropdown-button') anyOne.
