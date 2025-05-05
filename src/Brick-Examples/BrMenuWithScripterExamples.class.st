@@ -124,6 +124,28 @@ BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
 						menu: aMenuStencil))
 ]
 
+{ #category : #'examples - selection' }
+BrMenuWithScripterExamples >> buttonWithSelectedListItemDropdown [
+	<gtExample>
+	| aMenuItems aFrame aButton |
+	aMenuItems := BrMenuExamples new menuItems.
+	aMenuItems beListElementType.
+	aMenuItems items first select.
+	aFrame := self buttonWithDropdownMenu: aMenuItems.
+	aButton := (aFrame query // #'menu-dropdown-button') anyOne.
+	aButton beFocusable.
+	aButton requestFocus.
+	aButton aptitude
+		findActor: BrGlamorousWithExplicitDropdownAptitude
+		ifFound: [ :anAptitude | anAptitude withGainFocusOnShow ]
+		ifNone: [ 
+			NotFound
+				signalFor: BrGlamorousWithExplicitDropdownAptitude
+				in: aButton ].
+	
+	^ aFrame
+]
+
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> buttonWithTooltip [
 	<gtExample>
@@ -836,6 +858,39 @@ BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitDecoratedMenu [
 BrMenuWithScripterExamples >> displayButtonWithDropdownExplicitMenu [
 	<gtExample>
 	^ self scripterWithElement: [ self buttonWithDropdownExplicitMenu ]
+]
+
+{ #category : #'examples - selection' }
+BrMenuWithScripterExamples >> displayButtonWithSelectedListItemDropdown [
+	<gtExample>
+	| aScripter |
+	aScripter := self
+			scripterWithElement: [ self buttonWithSelectedListItemDropdown ].
+
+	self assert: (aScripter root query // #'menu-dropdown-button') anyOne isFocused.
+	
+	^ aScripter
+]
+
+{ #category : #'examples - selection' }
+BrMenuWithScripterExamples >> displayButtonWithSelectedListItemDropdown_displayDropdown [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithSelectedListItemDropdown.
+
+	aScripter menuStep
+		openDropdownWithId: #'menu-dropdown-button';
+		assertMenuContainerExist;
+		play.
+
+	aScripter menuStep
+		assertMenuContainerChildrenCount: 2;
+		assertMenuContainerHasFocus;
+		assertSelectedMenuItem: #'menu-inline-message-item';
+		onPopover;
+		play.
+
+	^ aScripter
 ]
 
 { #category : #'examples - tooltip' }
