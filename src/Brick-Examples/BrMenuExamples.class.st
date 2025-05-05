@@ -296,8 +296,6 @@ BrMenuExamples >> menuItems [
 	| aMenuItems anInlineSubmenu anElement |
 	aMenuItems := BrMenuItems new.
 	anInlineSubmenu := self submenuInlineMessageItems.
-	anInlineSubmenu select.
-	anInlineSubmenu items second select.
 	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
 	aMenuItems
@@ -342,6 +340,9 @@ BrMenuExamples >> menuItems_selectAnotherInlineMenu [
 	anInlineRootItem := aMenuItems items first.
 	anItemOne := anInlineRootItem items second.
 	anItemTwo := anInlineRootItem items third.
+	
+	anInlineRootItem select.
+	anItemOne select.
 	
 	self assert: anInlineRootItem isSelected.
 	self assert: anItemOne isSelected.
