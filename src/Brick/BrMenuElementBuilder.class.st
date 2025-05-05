@@ -9,6 +9,10 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #visiting }
+BrMenuElementBuilder >> decorateMenuItem: anElement [ 
+]
+
 { #category : #initialization }
 BrMenuElementBuilder >> defaultTypeBuilder [
 	^ BrMenuItemTypeBuilder new
@@ -97,6 +101,12 @@ BrMenuElementBuilder >> visitMenuItem: aMenuModel [
 	| aType anElement |
 	aType := aMenuModel acceptVisitor: self typeBuilder.
 	anElement := self typeBuilder buildElementFromItemType: aType.
+	
+	"Menu items are created using this builder only if they are used as a main element,
+	not as a part of a list. Builders may therefore need to decorate those elements,
+	to look properly, e.g, set geometry."
+	self decorateMenuItem: anElement.
+	
 	^ anElement menuModel: aMenuModel
 ]
 
