@@ -17,6 +17,7 @@ Class {
 { #category : #accessing }
 BrWorkingWithAptitudeExplanation >> labelWithAptitude [
 	<gtExample>
+	<return: #BrLabel>
 	| label |
 	label := self labelWithoutAptitude.
 	label aptitude: BrGlamorousLabelAptitude new bold.
@@ -29,12 +30,12 @@ BrWorkingWithAptitudeExplanation >> labelWithAptitude [
 { #category : #accessing }
 BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAndBehaviorAptitude [
 	<gtExample>
+	<return: #BrLabel>
 	| label |
 	label := self labelWithoutAptitude.
-	label aptitude: 
-			BrGlamorousLabelAptitude new bold +
-			BrShadowAptitude new + 
-			BrGlamorousWithMaximizerAptitude new.
+	label
+		aptitude: BrGlamorousLabelAptitude new bold + BrShadowAptitude new
+				+ BrGlamorousWithMaximizerAptitude new.
 	self assert: label hasChildren.
 	self assert: label children size = 2.
 	self assert: (label children first isKindOf: BlTextElement).
@@ -46,11 +47,10 @@ BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAndBehaviorAptitude 
 { #category : #accessing }
 BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAptitude [
 	<gtExample>
+	<return: #BrLabel>
 	| label |
 	label := self labelWithoutAptitude.
-	label aptitude: 
-			BrGlamorousLabelAptitude new bold +
-			BrShadowAptitude new.
+	label aptitude: BrGlamorousLabelAptitude new bold + BrShadowAptitude new.
 	self assert: label hasChildren.
 	self assert: label children size = 1.
 	self assert: (label children first isKindOf: BlTextElement).
@@ -61,13 +61,14 @@ BrWorkingWithAptitudeExplanation >> labelWithCompositeVisualAptitude [
 { #category : #accessing }
 BrWorkingWithAptitudeExplanation >> labelWithoutAptitude [
 	<gtExample>
+	<return: #BrLabel>
 	| label |
 	label := BrLabel new
-		text: 'glamorous toolkit';
-		background: Color white;
-		padding: (BlInsets all: 20);
-		alignCenter;
-		relocate: 20@30.
+			text: 'glamorous toolkit';
+			background: Color white;
+			padding: (BlInsets all: 20);
+			alignCenter;
+			relocate: 20 @ 30.
 	self assert: label hasChildren not.
 	self assert: label effect isNullEffect.
 	^ label

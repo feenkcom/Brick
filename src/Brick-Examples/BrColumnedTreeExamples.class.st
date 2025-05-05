@@ -7,6 +7,7 @@ Class {
 { #category : #examples }
 BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelect [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := BlScripter new
 			element: self subclassesOfCollectionMultiSelect fitContent.
@@ -23,6 +24,7 @@ BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelect [
 { #category : #examples }
 BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectExpanded [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelect.
 
@@ -46,6 +48,7 @@ BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectExpanded [
 { #category : #examples }
 BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelectExpanded.
 
@@ -77,6 +80,7 @@ BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
 { #category : #examples }
 BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDiscontinuous [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelectSelected.
 
@@ -101,6 +105,7 @@ BrColumnedTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDis
 { #category : #examples }
 BrColumnedTreeExamples >> subclassesOfCollection [
 	<gtExample>
+	<return: #BrColumnedTree>
 	| aTree |
 	aTree := BrColumnedTree new.
 	aTree column
@@ -116,8 +121,7 @@ BrColumnedTreeExamples >> subclassesOfCollection [
 				aptitude: BrGlamorousLabelAptitude new;
 				hMatchParent;
 				vFitContent ];
-		dataBinder:
-				[ :aCellElement :aClass | aCellElement text: aClass package name asString ].
+		dataBinder: [ :aCellElement :aClass | aCellElement text: aClass package name asString ].
 	aTree items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
 	^ aTree
 ]
@@ -125,6 +129,7 @@ BrColumnedTreeExamples >> subclassesOfCollection [
 { #category : #examples }
 BrColumnedTreeExamples >> subclassesOfCollectionMultiSelect [
 	<gtExample>
+	<return: #BrColumnedTree>
 	^ self subclassesOfCollection
 		rowStencil: BrGlamorousColumnedTreeSelectableRowElementStencilBuilder new;
 		aptitude: BrColumnedMultiTreeAptitude
@@ -133,29 +138,24 @@ BrColumnedTreeExamples >> subclassesOfCollectionMultiSelect [
 { #category : #examples }
 BrColumnedTreeExamples >> subropesTree [
 	<gtExample>
+	<return: #BrColumnedTree>
 	| aRope aTree |
 	aRope := BlConcatenationRopeExamples new small_from_1_to_2.
-	
+
 	aTree := BrColumnedTree new.
 	aTree column
 		title: 'Text';
 		width: 150;
-		cellStencil: [ 
-			BrLabel new 
-				aptitude: BrGlamorousLabelAptitude new ];
+		cellStencil: [ BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :eachLabel :eachRope | eachLabel text: eachRope ].
-		
+
 	aTree column
 		title: 'Length';
 		weight: 2;
-		cellStencil: [ 
-			BrLabel new 
-				aptitude: BrGlamorousLabelAptitude new ];
+		cellStencil: [ BrLabel new aptitude: BrGlamorousLabelAptitude new ];
 		dataBinder: [ :eachLabel :eachRope | eachLabel text: eachRope size asString ].
-		
-	aTree 
-		items: {aRope} 
-		lazy: [ :eachRope | eachRope children ].
-	
+
+	aTree items: {aRope} lazy: [ :eachRope | eachRope children ].
+
 	^ aTree
 ]

@@ -55,6 +55,7 @@ BrTabGroupByScripterExamples >> clickThenDisplayTabTwoThenMoveTabGroupThenClickT
 	"Issue [feenkcom/gtoolkit#3200](https://github.com/feenkcom/gtoolkit/issues/3200)"
 
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self displayTabGroupContainer.
 
@@ -112,6 +113,7 @@ BrTabGroupByScripterExamples >> clickThenDisplayTabTwoThenMoveTabGroupThenClickT
 { #category : #'examples - scripter actions' }
 BrTabGroupByScripterExamples >> displayTabGroupContainer [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterWithElement: [ self tabGroupContainer ].
 
@@ -130,11 +132,12 @@ BrTabGroupByScripterExamples >> displayTabGroupContainer [
 { #category : #'examples - elements' }
 BrTabGroupByScripterExamples >> tabGroupContainer [
 	<gtExample>
+	<return: #BlElement>
 	| aContainer |
 	aContainer := BlElement new
 			size: 300 @ 300;
 			border: (BlBorder paint: Color lightGray width: 1).
-	
+
 	aContainer addChild: self tabGroupWithTwoTabs.
 
 	^ aContainer
@@ -143,6 +146,7 @@ BrTabGroupByScripterExamples >> tabGroupContainer [
 { #category : #'examples - elements' }
 BrTabGroupByScripterExamples >> tabGroupWithTwoTabs [
 	<gtExample>
+	<return: #BrTabGroup>
 	| aTabGroup |
 	aTabGroup := BrTabGroup new.
 	aTabGroup aptitude: BrGlamorousTabGroupAptitude.
@@ -158,6 +162,7 @@ BrTabGroupByScripterExamples >> tabGroupWithTwoTabs [
 { #category : #'examples - elements' }
 BrTabGroupByScripterExamples >> tabOne [
 	<gtExample>
+	<return: #BrTab>
 	| aTab |
 	aTab := BrTab new.
 	aTab
@@ -171,6 +176,7 @@ BrTabGroupByScripterExamples >> tabOne [
 { #category : #'examples - elements' }
 BrTabGroupByScripterExamples >> tabOneContent [
 	<gtExample>
+	<return: #BrFrame>
 	| aFrame aButton |
 	aFrame := BrFrame new
 			matchParent;
@@ -196,6 +202,7 @@ BrTabGroupByScripterExamples >> tabOneContent [
 { #category : #'examples - elements' }
 BrTabGroupByScripterExamples >> tabTwo [
 	<gtExample>
+	<return: #BrTab>
 	| aTab |
 	aTab := BrTab new.
 	aTab
@@ -209,6 +216,7 @@ BrTabGroupByScripterExamples >> tabTwo [
 { #category : #'examples - elements' }
 BrTabGroupByScripterExamples >> tabTwoContent [
 	<gtExample>
+	<return: #BrFrame>
 	^ BrFrame new
 		matchParent;
 		background: (Color orange alpha: 0.3)

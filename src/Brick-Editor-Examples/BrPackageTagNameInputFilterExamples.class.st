@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrPackageTagNameInputFilterExamples >> simpleInputFilter [
 	<gtExample>
+	<return: #BrPackageTagNameInputFilter>
 	| filter |
 	filter := BrPackageTagNameInputFilter new.
 
@@ -20,8 +21,11 @@ BrPackageTagNameInputFilterExamples >> simpleInputFilter [
 	self
 		assert: (filter filter: 'Α Ωαλιδ Θνιψοδε Ταγ')
 		equals: 'Α Ωαλιδ Θνιψοδε Ταγ'.
-	self assert: (filter filter: '$AnInvalid%
-	Tαg$') equals: 'AnInvalidTαg'.
+	self
+		assert: (filter
+				filter: '$AnInvalid%
+	Tαg$')
+		equals: 'AnInvalidTαg'.
 
 	^ filter
 ]

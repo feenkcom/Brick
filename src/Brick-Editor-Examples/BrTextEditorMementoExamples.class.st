@@ -7,19 +7,20 @@ Class {
 { #category : #'examples - memento' }
 BrTextEditorMementoExamples >> editorRestoreState [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| aMemento aTextEditor |
-	
 	aMemento := self editorSaveState.
 	aTextEditor := self newTextEditor.
-	
+
 	aTextEditor restoreState: aMemento.
-	
+
 	^ aTextEditor
 ]
 
 { #category : #'examples - memento' }
 BrTextEditorMementoExamples >> editorRestoreStateWithShorterText [
 	<gtExample>
+	<return: #BlScripter>
 	| anEditor aScripter aMemento |
 	anEditor := BrEditor new.
 	anEditor aptitude: BrEditorAptitude new glamorousRegularFont.
@@ -57,19 +58,19 @@ BrTextEditorMementoExamples >> editorRestoreStateWithShorterText [
 { #category : #'examples - memento' }
 BrTextEditorMementoExamples >> editorSaveState [
 	<gtExample>
+	<return: #BrTextEditorCompositeMemento>
 	| aTextEditor aMemento |
-	
 	aTextEditor := self textEditorWithState.
 	aMemento := aTextEditor saveState.
-	
+
 	^ aMemento
 ]
 
 { #category : #'instance creation' }
 BrTextEditorMementoExamples >> newTextEditor [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| aTextEditor |
-
 	aTextEditor := BrTextEditorModel new.
 	^ aTextEditor
 ]
@@ -77,20 +78,20 @@ BrTextEditorMementoExamples >> newTextEditor [
 { #category : #'instance creation' }
 BrTextEditorMementoExamples >> textEditorWithState [
 	<gtExample>
+	<return: #BrTextEditorModel>
 	| aTextEditor |
-
 	aTextEditor := BrTextEditorModel new
-		text: 'Hello world' asRopedText glamorousCodeFontAndSize.
-	
+			text: 'Hello world' asRopedText glamorousCodeFontAndSize.
+
 	aTextEditor navigator
 		addAt: 1;
 		addAt: 9;
-		apply.	
+		apply.
 
 	aTextEditor selecter
 		from: 3 to: 8;
 		withoutCursorUpdate;
 		select.
-	
+
 	^ aTextEditor
 ]

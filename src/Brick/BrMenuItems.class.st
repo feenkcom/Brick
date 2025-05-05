@@ -332,6 +332,7 @@ BrMenuItems >> items [
 { #category : #'add / remove' }
 BrMenuItems >> items: aCollection [
 	groups := nil.
+	selectedItem := nil.
 	aCollection do: [ :eachItem | eachItem parent: self ].
 	self items removeAll.
 	self items addAll: aCollection.

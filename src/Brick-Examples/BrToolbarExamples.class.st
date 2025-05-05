@@ -1,28 +1,30 @@
 Class {
 	#name : #BrToolbarExamples,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Toolbar'
+	#category : #'Brick-Examples-Toolbar'
 }
 
 { #category : #accessing }
 BrToolbarExamples >> addItemsOnButtonClick [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
+	<return: #BrToolbar>
 	| aToolbar |
-	
 	aToolbar := BrToolbar new.
 	aToolbar aptitude: BrMaterialToolbarAptitude.
 
-	aToolbar addItem: (BrButton new 
-			aptitude: BrMaterialToggleLabelledAptitude;
-			label: 'Add';
-			action: [ | aSize |
-				aSize := aToolbar numberOfItems.
-				aToolbar addItem: (BrButton new 
-					aptitude: BrMaterialToggleLabelledAptitude;
-					label: aToolbar numberOfItems asString; 
-					action: [ :aWidget | self inform: 'Click on button ', aWidget label asString ]).
-				self assert: aToolbar numberOfItems equals: aSize + 1 ]).
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialToggleLabelledAptitude;
+				label: 'Add';
+				action: [ | aSize |
+					aSize := aToolbar numberOfItems.
+					aToolbar
+						addItem: (BrButton new
+								aptitude: BrMaterialToggleLabelledAptitude;
+								label: aToolbar numberOfItems asString;
+								action: [ :aWidget | self inform: 'Click on button ' , aWidget label asString ]).
+					self assert: aToolbar numberOfItems equals: aSize + 1 ]).
 	self assert: aToolbar numberOfItems equals: 1.
 	^ aToolbar
 ]
@@ -31,21 +33,23 @@ BrToolbarExamples >> addItemsOnButtonClick [
 BrToolbarExamples >> addItemsOnButtonClickVertically [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
+	<return: #BrToolbar>
 	| aToolbar |
-	
 	aToolbar := BrToolbar new.
 	aToolbar aptitude: BrMaterialToolbarAptitude.
 
-	aToolbar addItem: (BrButton new
-			aptitude: BrMaterialToggleLabelledAptitude;
-			label: 'Add';
-			action: [ | aSize |
-				aSize := aToolbar numberOfItems.
-				aToolbar addItem: (BrButton new 
-					aptitude: BrMaterialToggleLabelledAptitude;
-					label: aToolbar numberOfItems asString; 
-					action: [ :aWidget | self inform: 'Click on button ', aWidget label asString ]).
-				self assert: aToolbar numberOfItems equals: aSize + 1 ]).
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialToggleLabelledAptitude;
+				label: 'Add';
+				action: [ | aSize |
+					aSize := aToolbar numberOfItems.
+					aToolbar
+						addItem: (BrButton new
+								aptitude: BrMaterialToggleLabelledAptitude;
+								label: aToolbar numberOfItems asString;
+								action: [ :aWidget | self inform: 'Click on button ' , aWidget label asString ]).
+					self assert: aToolbar numberOfItems equals: aSize + 1 ]).
 	self assert: aToolbar numberOfItems equals: 1.
 	^ aToolbar
 ]
@@ -54,18 +58,20 @@ BrToolbarExamples >> addItemsOnButtonClickVertically [
 BrToolbarExamples >> removeItemsOnButtonClick [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
+	<return: #BrToolbar>
 	| aToolbar |
 	aToolbar := self addItemsOnButtonClick.
-	
-	aToolbar addItem: (BrButton new 
-		aptitude: BrMaterialToggleLabelledAptitude;
-		label: 'Remove'; 
-		action: [ | aSize anIndex |
-			aSize := aToolbar numberOfItems.
-			anIndex := ((aSize - 3) max: 0) atRandom + 3.
-			anIndex <= aSize ifTrue: [ 
-				aToolbar removeItemAt: anIndex.
-				self assert: aToolbar numberOfItems equals: aSize - 1 ] ]).
+
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialToggleLabelledAptitude;
+				label: 'Remove';
+				action: [ | aSize anIndex |
+					aSize := aToolbar numberOfItems.
+					anIndex := (aSize - 3 max: 0) atRandom + 3.
+					anIndex <= aSize
+						ifTrue: [ aToolbar removeItemAt: anIndex.
+							self assert: aToolbar numberOfItems equals: aSize - 1 ] ]).
 	self assert: aToolbar numberOfItems equals: 2.
 	^ aToolbar
 ]
@@ -74,17 +80,19 @@ BrToolbarExamples >> removeItemsOnButtonClick [
 BrToolbarExamples >> removeItemsOnButtonClickVertically [
 	<gtExample>
 	<label: 'Add toolbar items on a button click'>
+	<return: #BrToolbar>
 	| aToolbar |
 	aToolbar := self addItemsOnButtonClickVertically.
-	aToolbar addItem: (BrButton new 
-		aptitude: BrMaterialToggleLabelledAptitude;
-		label: 'Remove'; 
-		action: [ | aSize anIndex |
-			aSize := aToolbar numberOfItems.
-			anIndex := ((aSize - 3) max: 0) atRandom + 3.
-			anIndex <= aSize ifTrue: [ 
-				aToolbar removeItemAt: anIndex.
-				self assert: aToolbar numberOfItems equals: aSize - 1 ] ]).
+	aToolbar
+		addItem: (BrButton new
+				aptitude: BrMaterialToggleLabelledAptitude;
+				label: 'Remove';
+				action: [ | aSize anIndex |
+					aSize := aToolbar numberOfItems.
+					anIndex := (aSize - 3 max: 0) atRandom + 3.
+					anIndex <= aSize
+						ifTrue: [ aToolbar removeItemAt: anIndex.
+							self assert: aToolbar numberOfItems equals: aSize - 1 ] ]).
 	self assert: aToolbar numberOfItems equals: 2.
 	^ aToolbar
 ]
@@ -92,6 +100,7 @@ BrToolbarExamples >> removeItemsOnButtonClickVertically [
 { #category : #accessing }
 BrToolbarExamples >> toolbar [
 	<gtExample>
+	<return: #BrToolbar>
 	| aToolbar |
 	aToolbar := BrToolbar new.
 	aToolbar aptitude: BrMaterialToolbarAptitude.
@@ -104,12 +113,14 @@ BrToolbarExamples >> toolbar [
 { #category : #accessing }
 BrToolbarExamples >> toolbarInAContainer [
 	<gtExample>
+	<return: #BlElement>
 	| aContainer |
 	aContainer := BlElement new.
 	aContainer layout: BlLinearLayout horizontal.
-	aContainer constraintsDo: [ :c | 
-		c horizontal matchParent.
-		c vertical fitContent ].
+	aContainer
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical fitContent ].
 	aContainer addChild: self removeItemsOnButtonClickVertically as: #toolbar.
 	^ aContainer
 ]
@@ -117,24 +128,27 @@ BrToolbarExamples >> toolbarInAContainer [
 { #category : #accessing }
 BrToolbarExamples >> toolbarItemGToolkit [
 	<gtExample>
-	^ BrButton new 
+	<return: #BrButton>
+	^ BrButton new
 		aptitude: BrMaterialToggleLabelledAptitude;
-		label: 'GToolkit'; 
+		label: 'GToolkit';
 		action: [ self inform: 'Click on GToolkit' ]
 ]
 
 { #category : #accessing }
 BrToolbarExamples >> toolbarItemHello [
 	<gtExample>
-	^ BrButton new 
+	<return: #BrButton>
+	^ BrButton new
 		aptitude: BrMaterialToggleLabelledAptitude;
-		label: 'Hello'; 
+		label: 'Hello';
 		action: [ self inform: 'Click on Hello' ]
 ]
 
 { #category : #accessing }
 BrToolbarExamples >> verticalToolbar [
 	<gtExample>
+	<return: #BrToolbar>
 	| aToolbar |
 	aToolbar := BrToolbar new.
 	aToolbar aptitude: BrMaterialToolbarAptitude.

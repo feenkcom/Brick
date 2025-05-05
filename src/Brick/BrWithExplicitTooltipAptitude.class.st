@@ -121,7 +121,7 @@ BrWithExplicitTooltipAptitude >> newMenuModelWithLabel: aLabelString shortcut: a
 	^ aShortcutString
 		ifNotNil: [ BrMenuLabelItem new
 				label: aLabelString value asString
-				shortcut: aShortcutString value asString ]
+				shortcut: aShortcutString value gtDisplayString ]
 		ifNil: [ BrMenuLabelItem new label: aLabelString value asString ]
 ]
 

@@ -23,20 +23,23 @@ Class {
 { #category : #'examples - basic compositions' }
 BrGlamorousProgressExamples >> barAndTextAbove [
 	<gtExample>
+	<return: #BrProgress>
 	| aProgress |
 	aProgress := self thirtyPercentProgress.
 	aProgress
 		layout: BlLinearLayout vertical;
-			constraintsDo: [ :c | 
-				c horizontal matchParent.
-				c vertical fitContent ].
-	aProgress aptitude: BrGlamorousProgressLabelAptitude + BrGlamorousProgressBarAptitude.
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical fitContent ].
+	aProgress
+		aptitude: BrGlamorousProgressLabelAptitude + BrGlamorousProgressBarAptitude.
 	^ aProgress
 ]
 
 { #category : #'examples - main compositions' }
 BrGlamorousProgressExamples >> barAndTextAbove_MainUsage [
 	<gtExample>
+	<return: #BrProgress>
 	| aProgress |
 	aProgress := self thirtyPercentProgress.
 	aProgress aptitude: BrGlamorousProgressWithLabelAndBarAptitude.
@@ -46,6 +49,7 @@ BrGlamorousProgressExamples >> barAndTextAbove_MainUsage [
 { #category : #'examples - main compositions' }
 BrGlamorousProgressExamples >> barAndTextBelow_MainUsage [
 	<gtExample>
+	<return: #BrProgress>
 	| aProgress |
 	aProgress := self thirtyPercentProgress.
 	aProgress aptitude: BrGlamorousProgressWithBarAndLabelAptitude.
@@ -55,6 +59,7 @@ BrGlamorousProgressExamples >> barAndTextBelow_MainUsage [
 { #category : #'examples - basic compositions' }
 BrGlamorousProgressExamples >> barOnly [
 	<gtExample>
+	<return: #BrProgress>
 	| aProgress |
 	aProgress := self thirtyPercentProgress.
 	aProgress aptitude: BrGlamorousProgressBarAptitude.
@@ -64,6 +69,7 @@ BrGlamorousProgressExamples >> barOnly [
 { #category : #'examples - main compositions' }
 BrGlamorousProgressExamples >> barOnly_MainUsage [
 	<gtExample>
+	<return: #BrProgress>
 	| aProgress |
 	aProgress := self thirtyPercentProgress.
 	aProgress aptitude: BrGlamorousProgressWithBarAptitude.
@@ -79,8 +85,8 @@ BrGlamorousProgressExamples >> initialize [
 { #category : #'examples - basic widget' }
 BrGlamorousProgressExamples >> thirtyPercentProgress [
 	<gtExample>
+	<return: #BrProgress>
 	^ progressExamples thirtyPercentProgress
-		constraintsDo: [ :c | 
-			c horizontal matchParent ];
+		constraintsDo: [ :c | c horizontal matchParent ];
 		patternLabel: '{1}% out of {2}% is finished'
 ]

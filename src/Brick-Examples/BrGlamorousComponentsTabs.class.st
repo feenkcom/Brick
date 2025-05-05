@@ -14,33 +14,30 @@ Class {
 { #category : #examples }
 BrGlamorousComponentsTabs >> defaultTabs [
 	<gtExample>
-
+	<return: #BrTabGroup>
 	^ BrTabGroup new
 		aptitude: BrGlamorousTabGroupAptitude new;
 		addTab: (BrTab new
-			aptitude: BrGlamorousTabAptitude new;
-			label: 'Tab 1';
-			stencil: [
-				BrFrame new
-					exact: 300@150;
-					margin: (BlInsets all: 10);
-					background: (Color red alpha: 0.2) ]);
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Tab 1';
+				stencil: [ BrFrame new
+						exact: 300 @ 150;
+						margin: (BlInsets all: 10);
+						background: (Color red alpha: 0.2) ]);
 		addTab: (BrTab new
-			aptitude: BrGlamorousTabAptitude new;
-			label: 'Tab 2';
-			stencil: [
-				BrFrame new
-					hMatchParent;
-					vExact: 50;
-					margin: (BlInsets all: 10);
-					background: (Color blue alpha: 0.2) ]);
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Tab 2';
+				stencil: [ BrFrame new
+						hMatchParent;
+						vExact: 50;
+						margin: (BlInsets all: 10);
+						background: (Color blue alpha: 0.2) ]);
 		addTab: (BrTab new
-			aptitude: BrGlamorousTabAptitude new;
-			label: 'Tab 3';
-			stencil: [
-				BrFrame new
-					hMatchParent;
-					vExact: 100;
-					margin: (BlInsets all: 10);
-					background: (Color orange alpha: 0.2) ])
+				aptitude: BrGlamorousTabAptitude new;
+				label: 'Tab 3';
+				stencil: [ BrFrame new
+						hMatchParent;
+						vExact: 100;
+						margin: (BlInsets all: 10);
+						background: (Color orange alpha: 0.2) ])
 ]

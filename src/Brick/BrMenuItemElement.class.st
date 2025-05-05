@@ -51,7 +51,8 @@ BrMenuItemElement >> menuItem: aMenuItem [
 BrMenuItemElement >> onMenuModelChanged [
 	super onMenuModelChanged.
 	self updateElementSubscriptions.
-	self enabled: self menuModel isEnabled
+	self enabled: self menuModel isEnabled.
+	self dispatchEvent: (BlElementSelectedStateWish selected: self menuModel isSelected)
 ]
 
 { #category : #'event handling' }

@@ -10,7 +10,7 @@ Class {
 
 { #category : #'api - accessing' }
 BrPopoverGainFocusOnShowEventHandler >> eventsToHandle [
-	^ { BrPopoverIsVisibleEvent. BrPopoverIsHiddenEvent}
+	^ { BrPopoverIsVisibleEvent. BrPopoverIsHiddenEvent. BrPopoverAboutToShowEvent}
 ]
 
 { #category : #accessing }
@@ -28,20 +28,28 @@ BrPopoverGainFocusOnShowEventHandler >> menuIsHiddenEvent: anEvent [
 	menuContainer ifNil: [ ^ self ].
 	anEvent menuContainer == menuContainer ifFalse: [ ^ self ].
 
-	previousFocusOwner
-		ifNotNil: [ :aWeak | (aWeak at: 1) ifNotNil: [ :anElement | anElement requestFocus ] ]
+	previousFocusOwner ifNotNil: [ :aWeak |
+		(aWeak at: 1) ifNotNil: [ :anElement | anElement requestFocus ] ]
 ]
 
 { #category : #'api - event managing' }
 BrPopoverGainFocusOnShowEventHandler >> menuIsVisibleEvent: anEvent [
-	| aSpace aFocusOwner |
 	menuContainer ifNil: [ ^ self ].
 	anEvent menuContainer == menuContainer ifFalse: [ ^ self ].
 
-	aSpace := menuContainer space ifNil: [ ^ self ].
+	menuContainer dispatchEvent: BrPopoverGainFocusWish new
+]
+
+{ #category : #'api - event managing' }
+BrPopoverGainFocusOnShowEventHandler >> popoverAboutToShowEvent: anEvent [
+	| aSpace aFocusOwner |
+	menuContainer ifNil: [ ^ self ].
+	anEvent menuContainer == menuContainer ifFalse: [ ^ self ].
+	anEvent anchorElement ifNil: [ ^ self ].
+
+	aSpace := anEvent anchorElement space ifNil: [ ^ self ].
 	aFocusOwner := aSpace focusOwner.
 	aFocusOwner ifNil: [ ^ self ].
 	
 	previousFocusOwner := aFocusOwner asWeakReference.
-	menuContainer dispatchEvent: BrPopoverGainFocusWish new
 ]

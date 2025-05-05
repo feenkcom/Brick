@@ -15,9 +15,11 @@ Class {
 { #category : #examples }
 BrTextAttributesHowToGuide >> hideMarkupInText [
 	<gtExample>
+	<return: #BrEditor>
 	| text leftMarker rightMarker |
-
-	text := 'Move cursor **here** to show markup' asRopedText fontName: 'Source Sans Pro'; fontSize: 20.
+	text := 'Move cursor **here** to show markup' asRopedText
+			fontName: 'Source Sans Pro';
+			fontSize: 20.
 
 	(text from: 15 to: 18) bold.
 
@@ -30,18 +32,20 @@ BrTextAttributesHowToGuide >> hideMarkupInText [
 		attribute: (rightMarker := BrTextInvisibleMarkerAttribute new).
 
 	(text from: 11 to: 22)
-		onCursorEnter: [ :aTextEditor :anEvent :aFromIndex :aToIndex |
+		onCursorEnter: [ :aTextEditor :anEvent :aFromIndex :aToIndex | 
 			| aSubText |
-			(aSubText := (aTextEditor text from: aFromIndex to: aToIndex))
-				findAttributes: { leftMarker . rightMarker }
-				indicesDo: [ :aMarkupStart :aMarkupEnd |
-					(aSubText from: aMarkupStart to: aMarkupEnd) clearAttributesOfClass: BrTextHideAttribute ] ]
-		leave: [ :aTextEditor :anEvent :aFromIndex :aToIndex |
+			(aSubText := aTextEditor text from: aFromIndex to: aToIndex)
+				findAttributes: {leftMarker.
+						rightMarker}
+				indicesDo: [ :aMarkupStart :aMarkupEnd | 
+					(aSubText from: aMarkupStart to: aMarkupEnd)
+						clearAttributesOfClass: BrTextHideAttribute ] ]
+		leave: [ :aTextEditor :anEvent :aFromIndex :aToIndex | 
 			| aSubText |
-			(aSubText := (aTextEditor text from: aFromIndex to: aToIndex))
-				findAttributes: { leftMarker  . rightMarker }
-				indicesDo: [ :aMarkupStart :aMarkupEnd |
-					(aSubText from: aMarkupStart to: aMarkupEnd) attribute: BrTextHideAttribute new ] ].
+			(aSubText := aTextEditor text from: aFromIndex to: aToIndex)
+				findAttributes: {leftMarker.
+						rightMarker}
+				indicesDo: [ :aMarkupStart :aMarkupEnd | (aSubText from: aMarkupStart to: aMarkupEnd) attribute: BrTextHideAttribute new ] ].
 
 	^ BrEditor new
 		aptitude: BrGlamorousEditorAptitude new;
@@ -51,11 +55,13 @@ BrTextAttributesHowToGuide >> hideMarkupInText [
 { #category : #examples }
 BrTextAttributesHowToGuide >> linkInText [
 	<gtExample>
+	<return: #BlRunRopedText>
 	| text |
 	text := 'You can click on this.' asRopedText.
 	(text from: 9 to: 13)
 		foreground: Color blue;
 		onClick: [ :aTBrTextEditorTextualPiece :aTarget :aTextEditor :anEvent | anEvent currentTarget phlow spawnObject: aTBrTextEditorTextualPiece text ];
-		attribute: (BrTextHoverStylableAttribute new attribute: (BlTextDecorationAttribute new underline color: Color blue)).
+		attribute: (BrTextHoverStylableAttribute new
+				attribute: (BlTextDecorationAttribute new underline color: Color blue)).
 	^ text
 ]

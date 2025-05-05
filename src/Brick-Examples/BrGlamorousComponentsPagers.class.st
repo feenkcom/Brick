@@ -29,30 +29,26 @@ Class {
 { #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> dynamicPager [
 	<gtExample>
+	<return: #BrPager>
 	| aPager |
 	aPager := BrPager new.
 	aPager matchParent.
 	aPager
-		addPage:
-			(BrPagerPageElement new
+		addPage: (BrPagerPageElement new
 				weight: 1.0;
 				layout: BlLinearLayout vertical alignCenter;
 				background: (Color gray alpha: 0.1);
-				addChild:
-					(BrButton new
+				addChild: (BrButton new
 						beHugeSize;
 						aptitude: BrGlamorousButtonWithLabelAptitude new;
 						label: 'Next';
 						action: [ aPager
-								addPage:
-									(BrPagerPageElement new
+								addPage: (BrPagerPageElement new
 										layout: BlLinearLayout vertical alignCenter;
 										background: (Color random alpha: 0.1);
 										weight: 1.0;
-										addChild:
-											(BrLabel new
-												aptitude:
-													(BrGlamorousLabelAptitude new
+										addChild: (BrLabel new
+												aptitude: (BrGlamorousLabelAptitude new
 														fontSize: 30;
 														foreground: Color red);
 												text: 'New page')).
@@ -63,29 +59,27 @@ BrGlamorousComponentsPagers >> dynamicPager [
 { #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> infinitePager [
 	<gtExample>
+	<return: #BrPager>
 	| aPager aPageStencil |
 	aPager := BrPager new.
 	aPager matchParent.
 	aPageStencil := nil.
 	aPageStencil := [ BrPagerPageElement new
-		weight: 1.0;
-		layout: BlLinearLayout vertical alignCenter;
-		background: (Color random alpha: 0.1);
-		addChild:
-			(BrLabel new
-				aptitude:
-					(BrGlamorousLabelAptitude new
-						fontSize: 30;
-						foreground: Color gray);
-				margin: (BlInsets all: 30);
-				text: ('Page {1}' format: {(aPager pages size + 1)}));
-		addChild:
-			(BrButton new
-				aptitude: BrGlamorousButtonWithLabelAptitude new;
-				beHugeSize;
-				label: 'Next';
-				action: [ aPager addPage: aPageStencil asElement.
-					aPager scrollToLast ]) ] asStencil.
+			weight: 1.0;
+			layout: BlLinearLayout vertical alignCenter;
+			background: (Color random alpha: 0.1);
+			addChild: (BrLabel new
+					aptitude: (BrGlamorousLabelAptitude new
+							fontSize: 30;
+							foreground: Color gray);
+					margin: (BlInsets all: 30);
+					text: ('Page {1}' format: {aPager pages size + 1}));
+			addChild: (BrButton new
+					aptitude: BrGlamorousButtonWithLabelAptitude new;
+					beHugeSize;
+					label: 'Next';
+					action: [ aPager addPage: aPageStencil asElement.
+						aPager scrollToLast ]) ] asStencil.
 	aPager addPage: aPageStencil asElement.
 	^ aPager
 ]
@@ -93,34 +87,42 @@ BrGlamorousComponentsPagers >> infinitePager [
 { #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> threeFullPagePager [
 	<gtExample>
+	<return: #BrPager>
 	| aPager |
-	
-	aPager := BrPager new
-		matchParent.
-	
-	aPager addPage: (BrPagerPageElement new
-		weight: 1.0;
-		layout: BlLinearLayout horizontal alignCenter;
-		background: (Color gray alpha: 0.1);
-		addChild: (BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new fontSize: 30; foreground: Color gray);
-			text: 'Page 1')).
-			
-	aPager addPage: (BrPagerPageElement new
-		weight: 1.0;
-		layout: BlLinearLayout horizontal alignCenter;
-		background: (Color red alpha: 0.1);
-		addChild: (BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new fontSize: 30; foreground: Color red);
-			text: 'Page 2')).
+	aPager := BrPager new matchParent.
 
-	aPager addPage: (BrPagerPageElement new
-		weight: 1.0;
-		layout: BlLinearLayout horizontal alignCenter;
-		background: (Color blue alpha: 0.1);
-		addChild: (BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new fontSize: 30; foreground: Color blue);
-			text: 'Page 3')).
+	aPager
+		addPage: (BrPagerPageElement new
+				weight: 1.0;
+				layout: BlLinearLayout horizontal alignCenter;
+				background: (Color gray alpha: 0.1);
+				addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 30;
+								foreground: Color gray);
+						text: 'Page 1')).
+
+	aPager
+		addPage: (BrPagerPageElement new
+				weight: 1.0;
+				layout: BlLinearLayout horizontal alignCenter;
+				background: (Color red alpha: 0.1);
+				addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 30;
+								foreground: Color red);
+						text: 'Page 2')).
+
+	aPager
+		addPage: (BrPagerPageElement new
+				weight: 1.0;
+				layout: BlLinearLayout horizontal alignCenter;
+				background: (Color blue alpha: 0.1);
+				addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 30;
+								foreground: Color blue);
+						text: 'Page 3')).
 
 	^ aPager
 ]
@@ -128,26 +130,31 @@ BrGlamorousComponentsPagers >> threeFullPagePager [
 { #category : #'pager - examples' }
 BrGlamorousComponentsPagers >> twoHalfPagePager [
 	<gtExample>
+	<return: #BrPager>
 	| aPager |
-	
-	aPager := BrPager new
-		matchParent.
-	
-	aPager addPage: (BrPagerPageElement new
-		weight: 0.5;
-		layout: BlLinearLayout horizontal alignCenter;
-		background: (Color gray alpha: 0.1);
-		addChild: (BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new fontSize: 30; foreground: Color gray);
-			text: 'Page 1')).
-			
-	aPager addPage: (BrPagerPageElement new
-		weight: 0.5;
-		layout: BlLinearLayout horizontal alignCenter;
-		background: (Color red alpha: 0.1);
-		addChild: (BrLabel new
-			aptitude: (BrGlamorousLabelAptitude new fontSize: 30; foreground: Color red);
-			text: 'Page 2')).
+	aPager := BrPager new matchParent.
+
+	aPager
+		addPage: (BrPagerPageElement new
+				weight: 0.5;
+				layout: BlLinearLayout horizontal alignCenter;
+				background: (Color gray alpha: 0.1);
+				addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 30;
+								foreground: Color gray);
+						text: 'Page 1')).
+
+	aPager
+		addPage: (BrPagerPageElement new
+				weight: 0.5;
+				layout: BlLinearLayout horizontal alignCenter;
+				background: (Color red alpha: 0.1);
+				addChild: (BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 30;
+								foreground: Color red);
+						text: 'Page 2')).
 
 	^ aPager
 ]

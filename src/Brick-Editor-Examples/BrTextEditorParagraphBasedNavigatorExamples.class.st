@@ -7,15 +7,16 @@ Class {
 { #category : #'examples - performance' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_1_does_not_rebuild_editor [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor thePreviousSegments theNewSegments thePreviousTextPieces theNewTextPieces |
-	
 	anEditor := self editorOnMultilineText.
 
 	thePreviousSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: thePreviousSegments size equals: 11.
-	
-	thePreviousTextPieces := thePreviousSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+
+	thePreviousTextPieces := thePreviousSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: thePreviousTextPieces size equals: 11.
 
 	anEditor navigator
@@ -24,25 +25,28 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_1_does_not_rebuild_
 
 	anEditor forceLayout.
 
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 1 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 1}.
+
 	theNewSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: theNewSegments size equals: 11.
-	
-	theNewTextPieces := theNewSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+
+	theNewTextPieces := theNewSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: theNewTextPieces size equals: 12.
-	
+
 	self assert: thePreviousSegments equals: theNewSegments.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_1_in_empty [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
 	anEditor := self editorOnMultilineText.
 
 	theAddedEvents := OrderedCollection new.
@@ -60,23 +64,25 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_1_in_empty [
 	anEditor forceLayout.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 1 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 1}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 1.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 1}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_2_in_empty [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
 	anEditor := self editorOnMultilineText.
 
 	theAddedEvents := OrderedCollection new.
@@ -94,25 +100,27 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_2_in_empty [
 	anEditor forceLayout.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 2 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 2}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 2.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 2}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - add' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_68_in_empty [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
 	anEditor := self editorOnMultilineText.
-	
+
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
@@ -125,57 +133,59 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_add_at_68_in_empty [
 		addAt: 68;
 		apply;
 		unsubscribe.
-		
+
 	anEditor forceLayout.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 68 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 68}.
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: {
-		BrTextEditorSingleCursor new position: 68.
-	}.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: {BrTextEditorSingleCursor new position: 68}.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	
+
 	^ anEditor
 ]
 
 { #category : #'examples - no duplication' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_is_not_duplicated [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor thePiecesWithCursor |
-	
 	anEditor := self editorFor: 'Hello World'.
-	
+
 	anEditor navigator
 		moveTo: 6;
 		apply.
 	anEditor forceLayout.
-	
+
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
 	self assert: thePiecesWithCursor first text asString equals: 'Hello World'.
-	
+
 	anEditor deleter
 		oneBeforeCursor;
-		delete.		
+		delete.
 	anEditor forceLayout.
-	
+
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
 	self assert: thePiecesWithCursor first text asString equals: 'HelloWorld'.
-	
+
 	anEditor inserter
 		atCursor;
 		string: 'O';
 		insert.
 	anEditor forceLayout.
-	
+
 	thePiecesWithCursor := self piecesWithCursorIn: anEditor.
 	self assert: thePiecesWithCursor size equals: 1.
 	self assert: thePiecesWithCursor first text asString equals: 'HelloOWorld'.
-	
+
 	^ anEditor
 ]
 
@@ -183,6 +193,7 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_is_not_duplicated [
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_left_half_in_empty [
 	<gtExample>
 	<label: 'Click on the left half of the first character'>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self editorOnMultilineText.
 
@@ -215,10 +226,10 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_left_half_i
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_middle_in_empty [
 	<gtExample>
 	<label: 'Click right in the middle of the first character'>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
 	anEditor := self editorOnMultilineText.
-	
+
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
@@ -227,18 +238,20 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_middle_in_e
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
 		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
 		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: ("self paragraphMargin left + "(self glyphWidth / 2.0)) @ ("self paragraphMargin top +" (self glyphHeight / 2.0));
+		moveToScreenPosition: (self glyphWidth / 2.0) @ (self glyphHeight / 2.0);
 		apply;
-		unsubscribe.
-		
+		unsubscribe.	"self paragraphMargin left + "	"self paragraphMargin top +"
+
 	self assert: anEditor cursors isNotEmpty.
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(0)).
-	
+
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(0)) allCursors.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(0)) allCursors.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	
+
 	^ anEditor
 ]
 
@@ -246,6 +259,7 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_middle_in_e
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_right_half_in_empty [
 	<gtExample>
 	<label: 'Click on the right half of the first character'>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
 	anEditor := self editorOnMultilineText.
 
@@ -279,8 +293,8 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_1_right_half_
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_41_right_in_empty [
 	<gtExample>
 	<label: 'Click on the right half of the 41th character'>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-
 	anEditor := self editorOnMultilineText.
 
 	theAddedEvents := OrderedCollection new.
@@ -291,7 +305,7 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_41_right_in_e
 		whenAdded: [ :anEvent | theAddedEvents add: anEvent ];
 		whenMoved: [ :anEvent | theMovedEvents add: anEvent ];
 		whenRemoved: [ :anEvent | theRemovedEvents add: anEvent ];
-		moveToScreenPosition: (400@100);
+		moveToScreenPosition: 400 @ 100;
 		apply;
 		unsubscribe.
 
@@ -299,10 +313,12 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_41_right_in_e
 	self assert: anEditor cursors equals: (BrTextEditorCursor atAll: #(67)).
 
 	self assert: theAddedEvents size equals: 1.
-	self assert: (theAddedEvents collect: #cursor) asArray equals: (BrTextEditorCursor atAll: #(67)) allCursors.
+	self
+		assert: (theAddedEvents collect: #cursor) asArray
+		equals: (BrTextEditorCursor atAll: #(67)) allCursors.
 	self assert: theMovedEvents isEmpty.
 	self assert: theRemovedEvents isEmpty.
-	
+
 	^ anEditor
 ]
 
@@ -340,10 +356,10 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveToScreen_with_folded_t
 { #category : #'examples - move to' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68 [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor theAddedEvents theMovedEvents theRemovedEvents |
-	
 	anEditor := self cursor_add_at_68_in_empty.
-	
+
 	theAddedEvents := OrderedCollection new.
 	theMovedEvents := OrderedCollection new.
 	theRemovedEvents := OrderedCollection new.
@@ -355,15 +371,19 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68
 		moveTo: 67;
 		apply;
 		unsubscribe.
-	
+
 	anEditor forceLayout.
 
 	self assert: anEditor cursors isNotEmpty.
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 67 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 67}.
+
 	self assert: theAddedEvents isEmpty.
 	self assert: theMovedEvents size equals: 1.
-	self assert: theMovedEvents first cursor equals: (BrTextEditorSingleCursor new position: 67).
+	self
+		assert: theMovedEvents first cursor
+		equals: (BrTextEditorSingleCursor new position: 67).
 	self assert: theMovedEvents first oldIndex equals: 68.
 	self assert: theMovedEvents first newIndex equals: 67.
 	self assert: theRemovedEvents isEmpty.
@@ -374,15 +394,16 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_moveTo_67_in_cursors_at_68
 { #category : #'examples - performance' }
 BrTextEditorParagraphBasedNavigatorExamples >> cursor_move_from_1_to_2_does_not_rebuild_editor [
 	<gtExample>
+	<return: #BrEditor>
 	| anEditor thePreviousSegments theNewSegments thePreviousTextPieces theNewTextPieces |
-
 	anEditor := self cursor_add_at_1_does_not_rebuild_editor.
 
 	thePreviousSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: thePreviousSegments size equals: 11.
 
-	thePreviousTextPieces := thePreviousSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+	thePreviousTextPieces := thePreviousSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: thePreviousTextPieces size equals: 12.
 
 	anEditor navigator
@@ -391,18 +412,21 @@ BrTextEditorParagraphBasedNavigatorExamples >> cursor_move_from_1_to_2_does_not_
 
 	anEditor forceLayout.
 
-	self assert: anEditor cursors allCursors equals: { BrTextEditorSingleCursor new position: 2 }.
-	
+	self
+		assert: anEditor cursors allCursors
+		equals: {BrTextEditorSingleCursor new position: 2}.
+
 	theNewSegments := anEditor children
-		select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].	
+			select: [ :eachChild | eachChild isKindOf: BrTextEditorSegmentElement ].
 	self assert: theNewSegments size equals: 11.
-	
-	theNewTextPieces := theNewSegments flatCollect: [ :eachSegment | eachSegment children asArray ].
+
+	theNewTextPieces := theNewSegments
+			flatCollect: [ :eachSegment | eachSegment children asArray ].
 	self assert: theNewTextPieces size equals: 12.
-	
+
 	self assert: thePreviousSegments equals: theNewSegments.
 	self assert: thePreviousTextPieces equals: theNewTextPieces.
-	
+
 	^ anEditor
 ]
 

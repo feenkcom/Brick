@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> appendingAdornmentAtEndTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text attr |
 	text := self simpleText.
 	text
@@ -34,6 +35,7 @@ BrTextEditorSegmentSplitterExamples >> appendingAdornmentAtEndTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> appendingAdornmentTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text attr |
 	text := self simpleText.
 	text
@@ -65,7 +67,8 @@ BrTextEditorSegmentSplitterExamples >> appendingAdornmentTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> appendingInReplacingAdornmentTextSplit [
 	<gtExample>
-	| segments text replacing appending|
+	<return: #Array>
+	| segments text replacing appending |
 	text := self simpleText.
 	text
 		attributes: {replacing := BrTextAdornmentDynamicAttribute new
@@ -108,6 +111,7 @@ BrTextEditorSegmentSplitterExamples >> appendingInReplacingAdornmentTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> cursorTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text |
 	text := self simpleText.
 	text
@@ -138,6 +142,7 @@ BrTextEditorSegmentSplitterExamples >> cursorTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> emptyTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments |
 	segments := self splitterClass new
 			split: '' asRopedText
@@ -153,6 +158,7 @@ BrTextEditorSegmentSplitterExamples >> emptyTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> noAttributes [
 	<gtExample>
+	<return: #Array>
 	| text pieces |
 	text := 'Hello World' asRopedText.
 	pieces := self splitterClass new
@@ -166,6 +172,7 @@ BrTextEditorSegmentSplitterExamples >> noAttributes [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> overlayAdornmentTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text attr |
 	text := self simpleText.
 	text
@@ -197,6 +204,7 @@ BrTextEditorSegmentSplitterExamples >> overlayAdornmentTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> replacingAdornmentTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text attr |
 	text := self simpleText.
 	text
@@ -229,6 +237,7 @@ BrTextEditorSegmentSplitterExamples >> replacingAdornmentTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> replacingAdornmentWithCursorTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text attr |
 	text := self simpleText.
 	text
@@ -256,6 +265,7 @@ BrTextEditorSegmentSplitterExamples >> replacingAdornmentWithCursorTextSplit [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> simpleStyledTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text |
 	text := self simpleText.
 	text bold.
@@ -279,6 +289,7 @@ BrTextEditorSegmentSplitterExamples >> simpleText [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> simpleTextSplit [
 	<gtExample>
+	<return: #Array>
 	| segments text |
 	text := self simpleText.
 	segments := self splitterClass new
@@ -300,6 +311,7 @@ BrTextEditorSegmentSplitterExamples >> splitterClass [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> withAdornments [
 	<gtExample>
+	<return: #Array>
 	| text pieces |
 	text := 'Hello World' asRopedText.
 	text
@@ -321,6 +333,7 @@ BrTextEditorSegmentSplitterExamples >> withAdornments [
 { #category : #accessing }
 BrTextEditorSegmentSplitterExamples >> withAttributes [
 	<gtExample>
+	<return: #Array>
 	| text pieces |
 	text := 'Hello World' asRopedText.
 	text

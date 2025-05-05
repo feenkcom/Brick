@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrColumnExamples >> default [
 	<gtExample>
+	<return: #BrColumn>
 	| aColumn |
 	aColumn := BrColumn new.
 	self assert: aColumn title equals: 'Column'.
@@ -17,6 +18,7 @@ BrColumnExamples >> default [
 { #category : #accessing }
 BrColumnExamples >> setFixed [
 	<gtExample>
+	<return: #BrColumn>
 	| aColumn |
 	aColumn := self default.
 	aColumn width: 300.
@@ -29,8 +31,8 @@ BrColumnExamples >> setFixed [
 { #category : #accessing }
 BrColumnExamples >> setTitle [
 	<gtExample>
+	<return: #BrColumn>
 	| aColumn |
-
 	aColumn := self default.
 	aColumn title: 'Index'.
 
@@ -42,6 +44,7 @@ BrColumnExamples >> setTitle [
 { #category : #accessing }
 BrColumnExamples >> setWeight [
 	<gtExample>
+	<return: #BrColumn>
 	| aColumn |
 	aColumn := self default.
 	aColumn weight: 0.5.

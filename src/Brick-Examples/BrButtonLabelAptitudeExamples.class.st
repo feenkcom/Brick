@@ -34,7 +34,7 @@ Class {
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> allModels [
 	<gtExample>
-	
+	<return: #BrButtonModel>
 	| aModel |
 	aModel := self buttonModel + self labelModel + self iconModel.
 	self assert: aModel widgetModels size equals: 2.
@@ -44,12 +44,12 @@ BrButtonLabelAptitudeExamples >> allModels [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonContentElementWithFrameLayout [
 	<gtExample>
-
+	<return: #BlElement>
 	^ BlElement new
 		border: (BlBorder paint: Color black width: 1);
 		background: (Color white alpha: 0.5);
 		layout: BlFrameLayout new;
-		constraintsDo: [ :c |
+		constraintsDo: [ :c | 
 			c horizontal fitContent.
 			c vertical fitContent.
 			c padding: (BlInsets all: 10) ]
@@ -58,12 +58,12 @@ BrButtonLabelAptitudeExamples >> buttonContentElementWithFrameLayout [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonContentElementWithLinearLayout [
 	<gtExample>
-
+	<return: #BlElement>
 	^ BlElement new
 		border: (BlBorder paint: Color black width: 1);
 		background: (Color white alpha: 0.5);
 		layout: BlLinearLayout new alignCenter;
-		constraintsDo: [ :c |
+		constraintsDo: [ :c | 
 			c horizontal fitContent.
 			c vertical fitContent.
 			c padding: (BlInsets all: 10) ]
@@ -72,10 +72,10 @@ BrButtonLabelAptitudeExamples >> buttonContentElementWithLinearLayout [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonElement [
 	<gtExample>
-
+	<return: #BlElement>
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c |
+		constraintsDo: [ :c | 
 			c horizontal fitContent.
 			c vertical fitContent ];
 		background: (Color gray alpha: 0.3);
@@ -85,9 +85,9 @@ BrButtonLabelAptitudeExamples >> buttonElement [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonLabelElement [
 	<gtExample>
-	
+	<return: #BlTextElement>
 	^ (BlTextElement text: self labelText asRopedText)
-		constraintsDo: [ :c |
+		constraintsDo: [ :c | 
 			c frame vertical alignCenter.
 			c frame horizontal alignCenter ]
 ]
@@ -95,60 +95,62 @@ BrButtonLabelAptitudeExamples >> buttonLabelElement [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonLabelLookWithConstraints [
 	<gtExample>
-
-	^ BrTextLabelAptitude new labelDo: [ :aLabelElement | 
-		aLabelElement constraintsDo: [ :c |
-			c frame vertical alignCenter.
-			c frame horizontal alignCenter ] ]
+	<return: #BrTextLabelAptitude>
+	^ BrTextLabelAptitude new
+		labelDo: [ :aLabelElement | 
+			aLabelElement
+				constraintsDo: [ :c | 
+					c frame vertical alignCenter.
+					c frame horizontal alignCenter ] ]
 ]
 
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonLabelLookWithoutConstraints [
 	<gtExample>
-
+	<return: #BrTextLabelAptitude>
 	^ BrTextLabelAptitude asLook
 ]
 
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> buttonModel [
 	<gtExample>
-	
+	<return: #BrButtonModel>
 	^ BrButtonModel new action: [ self inform: 'Clicked!' ]
 ]
 
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithChangedConstraintsInLook [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aContent aLabelLook |
-	
 	aButton := self buttonElement.
 	aContent := self buttonContentElementWithLinearLayout.
 	aLabelLook := self buttonLabelLookWithoutConstraints
-		labelDo: [ :aLabelElement | aLabelElement constraintsDo: [ :c | c linear vertical alignBottom ] ];
-		fontSize: 30;
-		bold.
-	
+			labelDo: [ :aLabelElement | aLabelElement constraintsDo: [ :c | c linear vertical alignBottom ] ];
+			fontSize: 30;
+			bold.
+
 	aButton addChild: aContent as: #content.
 
 	aButton viewModel: self buttonModel.
 	aButton aptitude: aLabelLook.
-	
+
 	^ aButton
 ]
 
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithDirectlyEmbeddedLabel [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aLabelLook |
-	
 	aButton := self buttonElement.
 	aLabelLook := self buttonLabelLookWithConstraints.
 
 	aButton viewModel: self allModels.
 	aButton aptitude: aLabelLook.
-	
+
 	self assert: aLabelLook label text asString equals: self labelText.
-	self assert: aButton children asArray equals: { aLabelLook label }.
+	self assert: aButton children asArray equals: {aLabelLook label}.
 
 	^ aButton
 ]
@@ -156,12 +158,12 @@ BrButtonLabelAptitudeExamples >> buttonWithDirectlyEmbeddedLabel [
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithModelAndLookAndChangedModelLabel [
 	<gtExample>
+	<return: #BlElement>
 	| aButton newLabel |
-	
-	newLabel := self labelText, ' World'.
-	
+	newLabel := self labelText , ' World'.
+
 	aButton := self buttonWithModelAndLookWithoutConstraints.
-	
+
 	aButton viewModel widgetModels first text: newLabel.
 
 	self assert: aButton aptitude text asString equals: newLabel.
@@ -173,21 +175,21 @@ BrButtonLabelAptitudeExamples >> buttonWithModelAndLookAndChangedModelLabel [
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithModelAndLookWithConstraints [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aContent aLabelLook |
-	
 	aButton := self buttonElement.
 	aContent := self buttonContentElementWithFrameLayout.
 	aLabelLook := self buttonLabelLookWithConstraints.
-	
+
 	aButton addChild: aContent as: #content.
 
 	aButton viewModel: self allModels.
 	aButton aptitude: aLabelLook.
-	
+
 	self assert: aLabelLook label text asString equals: self labelText.
-	
-	self assert: aButton children asArray equals: { aContent }.
-	self assert: aContent children asArray equals: { aLabelLook label }.
+
+	self assert: aButton children asArray equals: {aContent}.
+	self assert: aContent children asArray equals: {aLabelLook label}.
 
 	^ aButton
 ]
@@ -195,21 +197,21 @@ BrButtonLabelAptitudeExamples >> buttonWithModelAndLookWithConstraints [
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithModelAndLookWithoutConstraints [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aContent aLabelLook |
-	
 	aButton := self buttonElement.
 	aContent := self buttonContentElementWithLinearLayout.
 	aLabelLook := self buttonLabelLookWithoutConstraints.
-	
+
 	aButton addChild: aContent as: #content.
 
 	aButton viewModel: self allModels.
 	aButton aptitude: aLabelLook.
-	
+
 	self assert: aLabelLook label text asString equals: self labelText.
 
-	self assert: aButton children asArray equals: { aContent }.
-	self assert: aContent children asArray equals: { aLabelLook label }.
+	self assert: aButton children asArray equals: {aContent}.
+	self assert: aContent children asArray equals: {aLabelLook label}.
 
 	^ aButton
 ]
@@ -217,8 +219,8 @@ BrButtonLabelAptitudeExamples >> buttonWithModelAndLookWithoutConstraints [
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithModelAndWrongContentPlacement [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aContent aLabelLook |
-	
 	aButton := self buttonElement.
 	aContent := self buttonContentElementWithFrameLayout.
 	aLabelLook := self buttonLabelLookWithConstraints.
@@ -228,8 +230,11 @@ BrButtonLabelAptitudeExamples >> buttonWithModelAndWrongContentPlacement [
 	aButton viewModel: self allModels.
 	aButton aptitude: aLabelLook.
 
-	self assert: aButton children asArray equals: { aContent . aLabelLook label }.
-	self assert: aContent children asArray equals: { }.
+	self
+		assert: aButton children asArray
+		equals: {aContent.
+				aLabelLook label}.
+	self assert: aContent children asArray equals: {}.
 
 	^ aButton
 ]
@@ -237,33 +242,33 @@ BrButtonLabelAptitudeExamples >> buttonWithModelAndWrongContentPlacement [
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithModelFirstThenLook [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aModel aLook modelLabel lookLabel |
-	
 	modelLabel := 'Hello world'.
 	lookLabel := 'Hello cruel world'.
-	
+
 	aButton := self buttonElement.
 
 	aModel := self labelModel + self buttonModel.
 	aModel text: modelLabel.
-	
+
 	aLook := self buttonLabelLookWithConstraints.
 	aLook text: lookLabel.
-	
+
 	aButton viewModel: aModel.
 	aButton aptitude: aLook.
-	
+
 	self assert: aLook text asString equals: modelLabel.
 	self assert: aModel text asString equals: modelLabel.
-	
+
 	^ aButton
 ]
 
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithOnlyModel [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aContent aLabel |
-	
 	aButton := self buttonElement.
 	aContent := self buttonContentElementWithFrameLayout.
 	aLabel := self buttonLabelElement.
@@ -275,8 +280,8 @@ BrButtonLabelAptitudeExamples >> buttonWithOnlyModel [
 
 	self assert: aLabel text asString equals: self labelText.
 
-	self assert: aButton children asArray equals: { aContent }.
-	self assert: aContent children asArray equals: { aLabel }.
+	self assert: aButton children asArray equals: {aContent}.
+	self assert: aContent children asArray equals: {aLabel}.
 
 	^ aButton
 ]
@@ -284,16 +289,12 @@ BrButtonLabelAptitudeExamples >> buttonWithOnlyModel [
 { #category : #'example - button' }
 BrButtonLabelAptitudeExamples >> buttonWithOnlyModelAndChangedModelLabel [
 	<gtExample>
+	<return: #BlElement>
 	| aButton aLabel |
-	
-	aButton := self buttonWithOnlyModel.
-	
-	"we know the structure from the sub-example"
-	aLabel := aButton children first children first.
-	
-	"changing label in the view model does not propagate to the label element"
+	aButton := self buttonWithOnlyModel.	"we know the structure from the sub-example"
+	aLabel := aButton children first children first.	"changing label in the view model does not propagate to the label element"
 	self flag: 'Do we need the following line?'.
-	self labelModel text: self labelText, ' world'.
+	self labelModel text: self labelText , ' world'.
 	self assert: aLabel text asString equals: self labelText.
 
 	^ aButton
@@ -302,89 +303,97 @@ BrButtonLabelAptitudeExamples >> buttonWithOnlyModelAndChangedModelLabel [
 { #category : #'example - model' }
 BrButtonLabelAptitudeExamples >> changeIconOfButtonModelEvent [
 	<gtExample>
+	<return: #BrIconChanged>
 	| anIconModel aButtonIcon anIconChangedEvent |
-
 	anIconModel := self iconModel.
-	aButtonIcon := ((BlEllipseGeometry new) extent: 10@10) asElement.
-	
+	aButtonIcon := (BlEllipseGeometry new extent: 10 @ 10) asElement.
+
 	anIconChangedEvent := nil.
-	anIconModel when: BrIconChanged do: [ :anEvent | anIconChangedEvent := anEvent copy ].
-	
+	anIconModel
+		when: BrIconChanged
+		do: [ :anEvent | anIconChangedEvent := anEvent copy ].
+
 	anIconModel icon: aButtonIcon.
-	
+
 	self assert: anIconModel icon equals: aButtonIcon.
-	
+
 	self assert: anIconChangedEvent isNotNil.
 	self assert: anIconChangedEvent source equals: anIconModel.
 	self assert: anIconChangedEvent target equals: anIconModel.
 	self assert: anIconChangedEvent currentTarget equals: anIconModel.
 	self assert: anIconChangedEvent isConsumed not.
-	
+
 	^ anIconChangedEvent
 ]
 
 { #category : #'example - model' }
 BrButtonLabelAptitudeExamples >> changeLabelOfButtonModelEvent [
 	<gtExample>
+	<return: #BrLabelChanged>
 	| aButtonModel aButtonLabel aLabelChangedEvent |
-	
 	aButtonModel := self labelModel + self buttonModel.
 	aButtonLabel := 'Hello glamorous world'.
-	
+
 	aLabelChangedEvent := nil.
-	aButtonModel when: BrLabelChanged do: [ :anEvent | aLabelChangedEvent := anEvent copy ].
-	
+	aButtonModel
+		when: BrLabelChanged
+		do: [ :anEvent | aLabelChangedEvent := anEvent copy ].
+
 	aButtonModel text: aButtonLabel.
-	
+
 	self assert: aButtonModel text asString equals: aButtonLabel.
-	
+
 	self assert: aLabelChangedEvent isNotNil.
 	self assert: aLabelChangedEvent source equals: aButtonModel.
 	self assert: aLabelChangedEvent target equals: aButtonModel.
 	self assert: aLabelChangedEvent currentTarget equals: aButtonModel.
 	self assert: aLabelChangedEvent isConsumed not.
-	
+
 	^ aLabelChangedEvent
 ]
 
 { #category : #'example - events' }
 BrButtonLabelAptitudeExamples >> clickOnButtonTriggersAction [
 	<gtExample>
+	<return: #BlElement>
 	| aButton actionTriggeredCount |
-
 	actionTriggeredCount := 0.
 
 	aButton := self buttonWithModelAndLookWithoutConstraints.
 	aButton viewModel action: [ actionTriggeredCount := actionTriggeredCount + 1 ].
-	
+
 	BlSpace simulateClickOn: aButton.
-	
+
 	self assert: actionTriggeredCount equals: 1.
-	
+
 	^ aButton
 ]
 
 { #category : #'example - events' }
 BrButtonLabelAptitudeExamples >> iconChangedEvent [
 	<gtExample>
+	<return: #BrIconChanged>
 	| aButton newIcon anIconChangedEvent |
-
 	anIconChangedEvent := nil.
-	newIcon := ((BlEllipseGeometry new) extent: 10@10) asElement.
+	newIcon := (BlEllipseGeometry new extent: 10 @ 10) asElement.
 
 	aButton := self buttonWithModelAndLookWithoutConstraints.
-	aButton aptitude when: BrIconChanged do: [ :anEvent | anIconChangedEvent := anEvent copy ].
+	aButton aptitude
+		when: BrIconChanged
+		do: [ :anEvent | anIconChangedEvent := anEvent copy ].
 	aButton viewModel widgetModels second icon: newIcon.
-	
+
 	self assert: aButton viewModel widgetModels second icon equals: newIcon.
 
 	self assert: anIconChangedEvent notNil.
 	self assert: anIconChangedEvent isConsumed not.
 	self assert: anIconChangedEvent target equals: aButton.
 	self assert: anIconChangedEvent currentTarget equals: aButton aptitude.
-	self assert: anIconChangedEvent source equals: aButton viewModel widgetModels second.
+	self
+		assert: anIconChangedEvent source
+		equals: aButton viewModel widgetModels second.
 	self assert: anIconChangedEvent icon equals: newIcon.
-	self assert: anIconChangedEvent timestamp isNil.	
+	self assert: anIconChangedEvent timestamp isNil.
 
 	^ anIconChangedEvent
 ]
@@ -392,29 +401,35 @@ BrButtonLabelAptitudeExamples >> iconChangedEvent [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> iconModel [
 	<gtExample>
-	
+	<return: #BrIconModel>
 	^ BrIconModel new
 ]
 
 { #category : #'example - events' }
 BrButtonLabelAptitudeExamples >> labelChangedEvent [
 	<gtExample>
+	<return: #BrLabelChanged>
 	| aButton newLabel aLabelChangedEvent |
-
 	aLabelChangedEvent := nil.
-	newLabel := self labelText, ' World'.
+	newLabel := self labelText , ' World'.
 
 	aButton := self buttonWithModelAndLookWithoutConstraints.
-	aButton aptitude when: BrLabelChanged do: [ :anEvent | aLabelChangedEvent := anEvent copy ].
+	aButton aptitude
+		when: BrLabelChanged
+		do: [ :anEvent | aLabelChangedEvent := anEvent copy ].
 	aButton viewModel widgetModels first text: newLabel.
 
-	self assert: aButton viewModel widgetModels first text asString equals: newLabel.
+	self
+		assert: aButton viewModel widgetModels first text asString
+		equals: newLabel.
 
 	self assert: aLabelChangedEvent notNil.
 	self assert: aLabelChangedEvent isConsumed not.
 	self assert: aLabelChangedEvent target equals: aButton.
 	self assert: aLabelChangedEvent currentTarget equals: aButton aptitude.
-	self assert: aLabelChangedEvent source equals: aButton viewModel widgetModels first.
+	self
+		assert: aLabelChangedEvent source
+		equals: aButton viewModel widgetModels first.
 	self assert: aLabelChangedEvent text asString equals: newLabel.
 	self assert: aLabelChangedEvent timestamp isNil.
 
@@ -424,7 +439,7 @@ BrButtonLabelAptitudeExamples >> labelChangedEvent [
 { #category : #'example - instance creation' }
 BrButtonLabelAptitudeExamples >> labelModel [
 	<gtExample>
-	
+	<return: #BrLabelModel>
 	^ BrLabelModel new text: self labelText
 ]
 
