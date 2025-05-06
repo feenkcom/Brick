@@ -31,9 +31,9 @@ Class {
 { #category : #'examples - model' }
 BrButtonModelExamples >> buttonModelWithAction [
 	<gtExample>
-
+	<return: #BrButtonModel>
 	^ self default
-		action: [ :aButtonElement :aButtonModel |
+		action: [ :aButtonElement :aButtonModel | 
 			aButtonModel model: #clicked.
 			self inform: 'clicked' ]
 ]
@@ -41,8 +41,8 @@ BrButtonModelExamples >> buttonModelWithAction [
 { #category : #'examples - with element' }
 BrButtonModelExamples >> clickOnElementWithButtonModel [
 	<gtExample>
+	<return: #BlElement>
 	| anElement |
-
 	anElement := self elementWithButtonModel.
 	BlSpace simulateClickOn: anElement.
 
@@ -54,8 +54,8 @@ BrButtonModelExamples >> clickOnElementWithButtonModel [
 { #category : #'examples - model' }
 BrButtonModelExamples >> default [
 	<gtExample>
+	<return: #BrButtonModel>
 	| aButtonModel |
-	
 	aButtonModel := BrButtonModel new.
 
 	self assertEventTarget: aButtonModel hasEventHandlerOn: BlClickEvent.
@@ -68,20 +68,20 @@ BrButtonModelExamples >> default [
 { #category : #'examples - with element' }
 BrButtonModelExamples >> elementWithButtonModel [
 	<gtExample>
+	<return: #BlElement>
 	| anElement aButtonModel |
-
 	aButtonModel := self buttonModelWithAction.
-	
+
 	anElement := BlElement new
-		size: 60@30;
-		background: Color veryLightGray.
-		
+			size: 60 @ 30;
+			background: Color veryLightGray.
+
 	self assertEventTarget: anElement hasNoEventHandlerOn: BlClickEvent.
-	
+
 	anElement viewModel: aButtonModel.
-	
+
 	self assertEventTarget: aButtonModel hasNoEventHandlerOn: BlClickEvent.
 	self assertEventTarget: anElement hasEventHandlerOn: BlClickEvent.
-	
+
 	^ anElement
 ]

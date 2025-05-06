@@ -46,324 +46,261 @@ This leaves us with a final custom checkbox widget built from almost from scratc
 Class {
 	#name : #BrCustomCheckboxLookHowToGuide,
 	#superclass : #Object,
-	#category : 'Brick-Examples-Checkbox'
+	#category : #'Brick-Examples-Checkbox'
 }
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _1_withLabelLook [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook |
-
 	aLabel := BrGlamorousLabelAptitude new.
 
 	aLook := BrCheckboxAptitude new.
 
-	^ self checkboxWidget
-		aptitude: aLook + aLabel
+	^ self checkboxWidget aptitude: aLook + aLabel
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _1_withLabelLookAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_1_withLabelLook
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _2_withBorder [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook |
-
 	aLabel := BrGlamorousLabelAptitude new.
-	
-	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ].
 
-	^ self checkboxWidget
-		aptitude: aLook + aLabel
+	aLook := BrCheckboxAptitude new
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ].
+
+	^ self checkboxWidget aptitude: aLook + aLabel
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _2_withBorderAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_2_withBorder
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _3_withShape [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook aShape |
-
 	aLabel := BrGlamorousLabelAptitude new.
 	aShape := BrGlamorousButtonRectangularAptitude new.
-	
-	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ].
 
-	^ self checkboxWidget
-		aptitude: aLook + aLabel + aShape
+	aLook := BrCheckboxAptitude new
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ].
+
+	^ self checkboxWidget aptitude: aLook + aLabel + aShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _3_withShapeAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_3_withShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _4_withStateText [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook aShape |
-
 	aLabel := BrGlamorousLabelAptitude new.
 	aShape := BrGlamorousButtonRectangularAptitude new.
-	
-	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ];
-		checked: [ :aWidget |
-			aLabel text: 'Checked' ];
-		unchecked: [ :aWidget |
-			aLabel text: 'Unchecked' ];
-		indeterminate: [ :aWidget |
-			aLabel text: 'Indeterminate' ].
 
-	^ self checkboxWidget
-		aptitude: aLook + aLabel + aShape
+	aLook := BrCheckboxAptitude new
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ];
+			checked: [ :aWidget | aLabel text: 'Checked' ];
+			unchecked: [ :aWidget | aLabel text: 'Unchecked' ];
+			indeterminate: [ :aWidget | aLabel text: 'Indeterminate' ].
+
+	^ self checkboxWidget aptitude: aLook + aLabel + aShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _4_withStateTextAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_4_withStateText
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _5_withStyledStateText [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook aShape |
-
 	aLabel := BrGlamorousLabelAptitude new.
 	aShape := BrGlamorousButtonRectangularAptitude new.
-	
-	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ];
-		checked: [ :aWidget |
-			aLabel
-				text: 'Checked';
-				foreground: Color black;
-				bold ];
-		unchecked: [ :aWidget |
-			aLabel
-				text: 'Unchecked';
-				foreground: Color gray;
-				regular ];
-		indeterminate: [ :aWidget |
-			aLabel
-				text: 'Indeterminate';
-				foreground: Color veryLightGray;
-				regular ].
 
-	^ self checkboxWidget
-		aptitude: aLook + aLabel + aShape
+	aLook := BrCheckboxAptitude new
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ];
+			checked: [ :aWidget | 
+				aLabel
+					text: 'Checked';
+					foreground: Color black;
+					bold ];
+			unchecked: [ :aWidget | 
+				aLabel
+					text: 'Unchecked';
+					foreground: Color gray;
+					regular ];
+			indeterminate: [ :aWidget | 
+				aLabel
+					text: 'Indeterminate';
+					foreground: Color veryLightGray;
+					regular ].
+
+	^ self checkboxWidget aptitude: aLook + aLabel + aShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _5_withStyledStateTextAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_5_withStyledStateText
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _6_withStyledBackground [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook aShape |
-
 	aLabel := BrGlamorousLabelAptitude new.
 	aShape := BrGlamorousButtonRectangularAptitude new.
-	
+
 	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ];
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ];
+			checked: [ :aWidget | 
+				aWidget background: self checkedBackground.
+				aLabel
+					text: 'Checked';
+					foreground: Color black;
+					bold ];
+			unchecked: [ :aWidget | 
+				aWidget background: self uncheckedBackground.
+				aLabel
+					text: 'Unchecked';
+					foreground: Color gray;
+					regular ];
+			indeterminate: [ :aWidget | 
+				aWidget background: self indeterminateBackground.
+				aLabel
+					text: 'Indeterminate';
+					foreground: Color veryLightGray;
+					regular ].
 
-		checked: [ :aWidget |
-			aWidget
-				background: self checkedBackground.
-			aLabel
-				text: 'Checked';
-				foreground: Color black;
-				bold ];
-
-		unchecked: [ :aWidget |
-			aWidget
-				background: self uncheckedBackground.
-			aLabel
-				text: 'Unchecked';
-				foreground: Color gray;
-				regular ];
-	
-		indeterminate: [ :aWidget |
-			aWidget
-				background: self indeterminateBackground.
-			aLabel
-				text: 'Indeterminate';
-				foreground: Color veryLightGray;
-				regular ].
-
-	^ self checkboxWidget
-		aptitude: aLook + aLabel + aShape
+	^ self checkboxWidget aptitude: aLook + aLabel + aShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _6_withStyledBackgroundAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_6_withStyledBackground
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _7_withHoveredBackground [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook aShape |
-
 	aLabel := BrGlamorousLabelAptitude new.
 	aShape := BrGlamorousButtonRectangularAptitude new.
-	
+
 	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ];
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ];
+			checked: [ :aWidget | 
+				aWidget background: self checkedBackground.
+				aLabel
+					text: 'Checked';
+					foreground: Color black;
+					bold ];
+			when: [ :aState | aState checked & aState hovered ]
+				style: [ :aWidget | aWidget background: self checkedBackground darker ];
+			unchecked: [ :aWidget | 
+				aWidget background: self uncheckedBackground.
+				aLabel
+					text: 'Unchecked';
+					foreground: Color gray;
+					regular ];
+			when: [ :aState | aState unchecked & aState hovered ]
+				style: [ :aWidget | aWidget background: self uncheckedBackground darker ];
+			indeterminate: [ :aWidget | 
+				aWidget background: self indeterminateBackground.
+				aLabel
+					text: 'Indeterminate';
+					foreground: Color veryLightGray;
+					regular ];
+			when: [ :aState | aState indeterminate & aState hovered ]
+				style: [ :aWidget | aWidget background: self indeterminateBackground darker ].
 
-		checked: [ :aWidget |
-			aWidget
-				background: self checkedBackground.
-			aLabel
-				text: 'Checked';
-				foreground: Color black;
-				bold ];
-			
-		when: [ :aState | aState checked & aState hovered ]
-			style: [ :aWidget |
-				aWidget
-					background: self checkedBackground darker ];
-
-		unchecked: [ :aWidget |
-			aWidget
-				background: self uncheckedBackground.
-			aLabel
-				text: 'Unchecked';
-				foreground: Color gray;
-				regular ];
-			
-		when: [ :aState | aState unchecked & aState hovered ]
-			style: [ :aWidget |
-				aWidget
-					background: self uncheckedBackground darker ];
-	
-		indeterminate: [ :aWidget |
-			aWidget
-				background: self indeterminateBackground.
-			aLabel
-				text: 'Indeterminate';
-				foreground: Color veryLightGray;
-				regular ];
-			
-		when: [ :aState | aState indeterminate & aState hovered ]
-			style: [ :aWidget |
-				aWidget
-					background: self indeterminateBackground darker ].
-
-	^ self checkboxWidget
-		aptitude: aLook + aLabel + aShape
+	^ self checkboxWidget aptitude: aLook + aLabel + aShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _7_withHoveredBackgroundAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_7_withHoveredBackground
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _8_withPressedBackground [
 	<gtExample>
+	<return: #BrCheckbox>
 	| aLabel aLook aShape |
-
 	aLabel := BrGlamorousLabelAptitude new.
 	aShape := BrGlamorousButtonRectangularAptitude new.
 
 	aLook := BrCheckboxAptitude new
-		default: [ :aWidget |
-			aWidget border: ((BlBorder paint: Color gray width: 1)) ];
+			default: [ :aWidget | aWidget border: (BlBorder paint: Color gray width: 1) ];
+			checked: [ :aWidget | 
+				aWidget background: self checkedBackground.
+				aLabel
+					text: 'Checked';
+					foreground: Color black;
+					bold ];
+			when: [ :aState | aState checked & aState hovered ]
+				style: [ :aWidget | aWidget background: self checkedBackground darker ];
+			when: [ :aState | aState checked & aState pressed ]
+				style: [ :aWidget | aWidget background: self checkedBackground darker darker ];
+			unchecked: [ :aWidget | 
+				aWidget background: self uncheckedBackground.
+				aLabel
+					text: 'Unchecked';
+					foreground: Color gray;
+					regular ];
+			when: [ :aState | aState unchecked & aState hovered ]
+				style: [ :aWidget | aWidget background: self uncheckedBackground darker ];
+			when: [ :aState | aState unchecked & aState pressed ]
+				style: [ :aWidget | aWidget background: self uncheckedBackground darker darker ];
+			indeterminate: [ :aWidget | 
+				aWidget background: self indeterminateBackground.
+				aLabel
+					text: 'Indeterminate';
+					foreground: Color veryLightGray;
+					regular ];
+			when: [ :aState | aState indeterminate & aState hovered ]
+				style: [ :aWidget | aWidget background: self indeterminateBackground darker ];
+			when: [ :aState | aState indeterminate & aState pressed ]
+				style: [ :aWidget | aWidget background: self indeterminateBackground darker darker ].
 
-		checked: [ :aWidget |
-			aWidget
-				background: self checkedBackground.
-			aLabel
-				text: 'Checked';
-				foreground: Color black;
-				bold ];
-			
-		when: [ :aState | aState checked & aState hovered ]
-			style: [ :aWidget |
-				aWidget
-					background: self checkedBackground darker ];
-				
-		when: [ :aState | aState checked & aState pressed ]
-			style: [ :aWidget |
-				aWidget
-					background: self checkedBackground darker darker ];
-
-		unchecked: [ :aWidget |
-			aWidget
-				background: self uncheckedBackground.
-			aLabel
-				text: 'Unchecked';
-				foreground: Color gray;
-				regular ];
-			
-		when: [ :aState | aState unchecked & aState hovered ]
-			style: [ :aWidget |
-				aWidget
-					background: self uncheckedBackground darker ];
-				
-		when: [ :aState | aState unchecked & aState pressed ]
-			style: [ :aWidget |
-				aWidget
-					background: self uncheckedBackground darker darker ];
-
-		indeterminate: [ :aWidget |
-			aWidget
-				background: self indeterminateBackground.
-			aLabel
-				text: 'Indeterminate';
-				foreground: Color veryLightGray;
-				regular ];
-
-		when: [ :aState | aState indeterminate & aState hovered ]
-			style: [ :aWidget |
-				aWidget
-					background: self indeterminateBackground darker ];
-
-		when: [ :aState | aState indeterminate & aState pressed ]
-			style: [ :aWidget |
-				aWidget
-					background: self indeterminateBackground darker darker ].
-
-	^ self checkboxWidget
-		aptitude: aLook + aLabel + aShape
+	^ self checkboxWidget aptitude: aLook + aLabel + aShape
 ]
 
 { #category : #'examples - look' }
 BrCustomCheckboxLookHowToGuide >> _8_withPressedBackgroundAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #_8_withPressedBackground
 ]
 
@@ -396,41 +333,44 @@ BrCustomCheckboxLookHowToGuide >> allCheckboxStates: anExampleName [
 { #category : #'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkboxLook [
 	<gtExample>
-	
+	<return: #BrCheckboxAptitude>
 	^ BrCheckboxAptitude new
 ]
 
 { #category : #'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkboxWidget [
 	<gtExample>
-
+	<return: #BrCheckbox>
 	^ BrCheckbox new
 ]
 
 { #category : #'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkboxWidgetAll [
 	<gtExample>
-
+	<return: #BrHorizontalFlow>
 	^ self allCheckboxStates: #checkboxWidget
 ]
 
 { #category : #'instance creation' }
 BrCustomCheckboxLookHowToGuide >> checkedBackground [
 	<gtExample>
-
-	^ Color r: 0.71 g: 0.87 b: 1
+	<return: #Color>
+	^ Color
+		r: 0.71
+		g: 0.87
+		b: 1
 ]
 
 { #category : #'instance creation' }
 BrCustomCheckboxLookHowToGuide >> indeterminateBackground [
 	<gtExample>
-
+	<return: #Color>
 	^ Color veryVeryLightGray lighter
 ]
 
 { #category : #'instance creation' }
 BrCustomCheckboxLookHowToGuide >> uncheckedBackground [
 	<gtExample>
-
+	<return: #Color>
 	^ Color white
 ]

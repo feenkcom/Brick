@@ -33,6 +33,7 @@ BrThemeMigration >> childThemeClassName: aString [
 { #category : #accessing }
 BrThemeMigration >> colorMethodsToMigrate [
 	<gtExample>
+	<return: #Array>
 	^ BrGlamorousColors class methods
 		reject: [ :e | 
 			(e category beginsWith: '*')
@@ -208,6 +209,7 @@ BrThemeMigration >> scaffoldingChanges [
 { #category : #accessing }
 BrThemeMigration >> themeSelectorsMapping [
 	<gtExample>
+	<return: #Dictionary>
 	| themes |
 	themes := Dictionary new.
 	self colorMethodsToMigrate

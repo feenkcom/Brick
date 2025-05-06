@@ -7,6 +7,7 @@ Class {
 { #category : #examples }
 BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelect [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := BlScripter new
 			element: self subclassesOfCollectionMultiSelect fitContent.
@@ -23,6 +24,7 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelect [
 { #category : #examples }
 BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectExpanded [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelect.
 
@@ -46,6 +48,7 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectExpanded [
 { #category : #examples }
 BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelectExpanded.
 
@@ -77,6 +80,7 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelected [
 { #category : #examples }
 BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDiscontinuous [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripterOnSubclassesOfCollectionMultiSelectSelected.
 
@@ -101,18 +105,20 @@ BrSimpleTreeExamples >> scripterOnSubclassesOfCollectionMultiSelectSelectedDisco
 { #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection [
 	<gtExample>
+	<return: #BrSimpleTree>
 	| aTree |
 	aTree := BrSimpleTree new
-		nodeStencil: [ BrLabel new aptitude: BrGlamorousLabelAptitude ];
-		nodeDataBinder: [ :aNodeElement :aClass | aNodeElement text: aClass name ];
-		items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
+			nodeStencil: [ BrLabel new aptitude: BrGlamorousLabelAptitude ];
+			nodeDataBinder: [ :aNodeElement :aClass | aNodeElement text: aClass name ];
+			items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
 	^ aTree
 ]
 
 { #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollectionMultiSelect [
 	<gtExample>
-	 ^ self subclassesOfCollection
+	<return: #BrSimpleTree>
+	^ self subclassesOfCollection
 		rowStencil: BrGlamorousSimpleTreeSelectableRowElementStencilBuilder new;
 		aptitude: BrMultiTreeAptitude
 ]
@@ -120,45 +126,48 @@ BrSimpleTreeExamples >> subclassesOfCollectionMultiSelect [
 { #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection_InefficientUse [
 	<gtExample>
+	<return: #BrSimpleTree>
 	| aTree |
 	aTree := BrSimpleTree new
-		stencil: [ :eachClass :eachIndex | 
-			BrLabel new
-				aptitude: BrGlamorousLabelAptitude;
-				text: eachClass name;
-				fitContent ];
-		items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
+			stencil: [ :eachClass :eachIndex | 
+				BrLabel new
+					aptitude: BrGlamorousLabelAptitude;
+					text: eachClass name;
+					fitContent ];
+			items: {Collection} lazy: [ :eachClass | eachClass subclasses ].
 	^ aTree
 ]
 
 { #category : #examples }
 BrSimpleTreeExamples >> subclassesOfCollection_immediate [
 	<gtExample>
+	<return: #BrSimpleTree>
 	| aTree |
-
 	aTree := BrSimpleTree new.
 	aTree
-		nodeStencil: [
-			BrHorizontalPane new
+		nodeStencil: [ BrHorizontalPane new
 				vFitContent;
 				hMatchParent;
 				alignCenterLeft;
 				cellSpacing: 5;
 				addChild: (BrLabel new aptitude: BrGlamorousLabelAptitude) as: #label;
-				addChild: (BrButton new beTiny; aptitude: BrGlamorousButtonWithLabelAptitude new; label: 'Add child') as: #add;
-				addChild: (BrButton new beTiny; aptitude: BrGlamorousButtonWithLabelAptitude new; label: 'Delete') as: #delete ];
-		nodeDataBinder: [ :aNodeElement :aClass :aTreeNode |
+				addChild: (BrButton new
+							beTiny;
+							aptitude: BrGlamorousButtonWithLabelAptitude new;
+							label: 'Add child')
+					as: #add;
+				addChild: (BrButton new
+							beTiny;
+							aptitude: BrGlamorousButtonWithLabelAptitude new;
+							label: 'Delete')
+					as: #delete ];
+		nodeDataBinder: [ :aNodeElement :aClass :aTreeNode | 
 			(aNodeElement childNamed: #label) text: aClass printString.
-			(aNodeElement childNamed: #delete)
-				action: [ aTreeNode removeFromParent ].
+			(aNodeElement childNamed: #delete) action: [ aTreeNode removeFromParent ].
 			(aNodeElement childNamed: #add)
-				action: [
-					aTreeNode
-						insert: Smalltalk allClasses atRandom
-						atChildIndex: 1.
+				action: [ aTreeNode insert: Smalltalk allClasses atRandom atChildIndex: 1.
 					aTreeNode expand ] ];
-		items: { Collection }
-			immediate: [ :eachClass | eachClass subclasses ].
+		items: {Collection} immediate: [ :eachClass | eachClass subclasses ].
 
 	^ aTree
 ]
@@ -166,17 +175,14 @@ BrSimpleTreeExamples >> subclassesOfCollection_immediate [
 { #category : #examples }
 BrSimpleTreeExamples >> subropesTree [
 	<gtExample>
+	<return: #BrSimpleTree>
 	| aRope aTree |
 	aRope := BlConcatenationRopeExamples new small_from_1_to_2.
-	
+
 	aTree := BrSimpleTree new
-		nodeStencil: [ 
-			BrLabel new 
-			aptitude: BrGlamorousLabelAptitude ];
-		nodeDataBinder: [ :aNodeElement :eachaRope | aNodeElement text: eachaRope ].
-		
-	aTree 
-		items: {aRope} 
-		lazy: [ :eachRope | eachRope children ].
+			nodeStencil: [ BrLabel new aptitude: BrGlamorousLabelAptitude ];
+			nodeDataBinder: [ :aNodeElement :eachaRope | aNodeElement text: eachaRope ].
+
+	aTree items: {aRope} lazy: [ :eachRope | eachRope children ].
 	^ aTree
 ]

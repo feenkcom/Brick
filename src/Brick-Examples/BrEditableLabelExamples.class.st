@@ -7,74 +7,74 @@ Class {
 { #category : #'examples - actions' }
 BrEditableLabelExamples >> acceptTextInEditorMode [
 	<gtExample>
+	<return: #BrEditableLabel>
 	| anEditableLabel wasAccepted acceptedText |
-	
 	anEditableLabel := self editTextInEditorMode.
 
 	wasAccepted := 0.
 	acceptedText := ''.
-	anEditableLabel when: BrEditorAcceptWish do: [ :aWish |
-		acceptedText := aWish text.
-		wasAccepted := wasAccepted + 1 ].
-	
+	anEditableLabel
+		when: BrEditorAcceptWish
+		do: [ :aWish | 
+			acceptedText := aWish text.
+			wasAccepted := wasAccepted + 1 ].
+
 	anEditableLabel acceptEdition.
-	
+
 	self assert: anEditableLabel viewModel model asString equals: 'edit me'.
 	self assert: anEditableLabel text asString equals: 'edit me'.
 	self assert: acceptedText asString equals: 'edit me'.
 	self assert: wasAccepted equals: 1.
 	self assert: anEditableLabel isReadOnly.
-	
+
 	^ anEditableLabel
 ]
 
 { #category : #'examples - actions' }
 BrEditableLabelExamples >> cancelTextInEditorMode [
 	<gtExample>
+	<return: #BrEditableLabel>
 	| anEditableLabel wasCancelled |
-	
 	anEditableLabel := self editTextInEditorMode.
 
 	wasCancelled := 0.
-	anEditableLabel when: BrEditorCancelWish do: [ wasCancelled := wasCancelled + 1 ].
-	
-	anEditableLabel cancelEdition.
-	
-	"the original text is restored"
+	anEditableLabel
+		when: BrEditorCancelWish
+		do: [ wasCancelled := wasCancelled + 1 ].
+
+	anEditableLabel cancelEdition.	"the original text is restored"
 	self assert: anEditableLabel viewModel model asString equals: 'Double click me'.
 	self assert: anEditableLabel text asString equals: 'Double click me'.
 	self assert: wasCancelled equals: 1.
 	self assert: anEditableLabel isReadOnly.
-	
+
 	^ anEditableLabel
 ]
 
 { #category : #'examples - actions' }
 BrEditableLabelExamples >> editTextInEditorMode [
 	<gtExample>
+	<return: #BrEditableLabel>
 	| anEditableLabel |
-
 	anEditableLabel := self switchToEditor.
-	
+
 	anEditableLabel text
 		deleteAll;
-		append: 'edit me' asRopedText.
-	
-	"the original text is stored in order to be restored if edition cancelled"
+		append: 'edit me' asRopedText.	"the original text is stored in order to be restored if edition cancelled"
 	self assert: anEditableLabel viewModel model asString equals: 'Double click me'.
 	self assert: anEditableLabel text asString equals: 'edit me'.
-	
+
 	^ anEditableLabel
 ]
 
 { #category : #'examples - instance creation' }
 BrEditableLabelExamples >> editableLabelWithGlamorousLook [
 	<gtExample>
+	<return: #BrEditableLabel>
 	| anEditableLabel |
-
 	anEditableLabel := BrEditableLabel new
-		aptitude: BrGlamorousEditableLabelAptitude new glamorousRegularFontAndSize;
-		text: 'Double click me'.
+			aptitude: BrGlamorousEditableLabelAptitude new glamorousRegularFontAndSize;
+			text: 'Double click me'.
 
 	self assert: anEditableLabel isReadOnly.
 	self assert: anEditableLabel text asString equals: 'Double click me'.
@@ -85,17 +85,18 @@ BrEditableLabelExamples >> editableLabelWithGlamorousLook [
 { #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_01_initial [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
-	
 	aScripter := BlScripter new.
 	aScripter element: self editableLabelWithGlamorousLook.
-	
+
 	^ aScripter
 ]
 
 { #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_02_double_click_to_edit [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripter_01_initial.
 	aScripter
@@ -133,6 +134,7 @@ BrEditableLabelExamples >> scripter_02_double_click_to_edit [
 { #category : #'examples - scripter' }
 BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripter_02_double_click_to_edit.
 	aScripter
@@ -160,31 +162,31 @@ BrEditableLabelExamples >> scripter_03_press_esc_to_cancel_changes [
 { #category : #'examples - actions' }
 BrEditableLabelExamples >> switchToEditor [
 	<gtExample>
+	<return: #BrEditableLabel>
 	| anEditableLabel |
-
 	anEditableLabel := self editableLabelWithGlamorousLook.
 	anEditableLabel switchToEditor.
-	
+
 	self assert: anEditableLabel isEditable.
-	self assert: anEditableLabel viewModel model asString equals: anEditableLabel text asString.
-	
+	self
+		assert: anEditableLabel viewModel model asString
+		equals: anEditableLabel text asString.
+
 	^ anEditableLabel
 ]
 
 { #category : #'examples - actions' }
 BrEditableLabelExamples >> switchToLabelWhileInEditorMode [
 	<gtExample>
+	<return: #BrEditableLabel>
 	| anEditableLabel |
-	
 	anEditableLabel := self editTextInEditorMode.
-	
+
 	anEditableLabel switchToLabel.
-	
-	self assert: anEditableLabel viewModel model asString equals: 'Double click me'.
-	
-	"manual switching to label does nothing to the current text"
+
+	self assert: anEditableLabel viewModel model asString equals: 'Double click me'.	"manual switching to label does nothing to the current text"
 	self assert: anEditableLabel text asString equals: 'edit me'.
 	self assert: anEditableLabel isReadOnly.
-	
+
 	^ anEditableLabel
 ]

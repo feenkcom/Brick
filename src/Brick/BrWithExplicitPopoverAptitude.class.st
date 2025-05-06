@@ -478,6 +478,9 @@ BrWithExplicitPopoverAptitude >> onMenuIsHiddenEvent: anEvent [
 
 { #category : #'event handling' }
 BrWithExplicitPopoverAptitude >> onMenuIsVisibleEvent: anEvent [
+	"There is another popover opened from my menu container.
+	Let's register the menu containter to handle properly popover-in-popover use cases."
+
 	anEvent consumed: true.
 	self submenus add: anEvent menuContainer
 ]
@@ -640,21 +643,29 @@ BrWithExplicitPopoverAptitude >> showIn: aParentElement dueToEvent: anEventOrNil
 	self hide.
 
 	self
-		widgetDo: [ :aWidget | 
+		widgetDo: [ :anAnchorElement | 
 			aMenu := menuStencil
 					context: (BrMenuInitialContext new
 							elementBuilder: menuContainer elementBuilder;
-							anchorElement: aWidget;
+							anchorElement: anAnchorElement;
 							menuAptitude: self;
 							dueToEvent: anEventOrNil);
 					build ].
 	aMenu ifNil: [ ^ self ].
+	
+	self
+		widgetDo: [ :anAnchorElement | 
+			self fireEvent: (BrPopoverAboutToShowEvent new
+					anchorElement: anAnchorElement;
+					menuModel: aMenu;
+					menuContainer: menuContainer) ].
+	
 	menuContainer menuModel: aMenu.
 	menuContainer show.
 
 	self
-		widgetDo: [ :aWidget | 
-			aWidget
+		widgetDo: [ :anAnchorElement | 
+			anAnchorElement
 				addEventHandler: extentChangedEventHandler;
 				addEventHandler: positionInSpaceChangedEventHandler;
 				addEventHandler: addedToSceneEventHandler;

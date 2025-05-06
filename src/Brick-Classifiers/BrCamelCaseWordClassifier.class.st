@@ -7,6 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 BrCamelCaseWordClassifier >> itself [
 	<gtExample>
+	<return: #BrCamelCaseWordClassifier>
 	^ self
 ]
 

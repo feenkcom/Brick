@@ -12,6 +12,7 @@ Class {
 { #category : #'examples - demo' }
 BrDateAndTimeSinceNowPrinterExamples >> asDemoLabelElement [
 	<gtExample>
+	<return: #BrFrame>
 	| aLabel |
 	aLabel := self newTimeElement.
 	aLabel
@@ -30,6 +31,7 @@ BrDateAndTimeSinceNowPrinterExamples >> asDemoLabelElement [
 { #category : #'examples - demo' }
 BrDateAndTimeSinceNowPrinterExamples >> asDemoListElement [
 	<gtExample>
+	<return: #BrVerticalPane>
 	^ BrVerticalPane new
 		matchParent;
 		addChild: (BrLabel new
@@ -49,6 +51,7 @@ BrDateAndTimeSinceNowPrinterExamples >> assertResult: aResult output: aString ne
 { #category : #examples }
 BrDateAndTimeSinceNowPrinterExamples >> basicPrinter [
 	<gtExample>
+	<return: #BrDateAndTimeSinceNowPrinter>
 	| aPrinter |
 	aPrinter := BrDateAndTimeSinceNowPrinter new.
 
@@ -58,6 +61,7 @@ BrDateAndTimeSinceNowPrinterExamples >> basicPrinter [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> fiftyNineMinutesAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -72,6 +76,7 @@ BrDateAndTimeSinceNowPrinterExamples >> fiftyNineMinutesAgo [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> fiftyNineMinutesAgo59Minutes59Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -86,6 +91,7 @@ BrDateAndTimeSinceNowPrinterExamples >> fiftyNineMinutesAgo59Minutes59Seconds [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> fiveHoursAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -109,6 +115,7 @@ BrDateAndTimeSinceNowPrinterExamples >> gtDemoFor: aView [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> hourAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -123,6 +130,7 @@ BrDateAndTimeSinceNowPrinterExamples >> hourAgo [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> hourAgoPlus1Second [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -137,6 +145,7 @@ BrDateAndTimeSinceNowPrinterExamples >> hourAgoPlus1Second [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> hourAgoPlus59Minutes59Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -151,6 +160,7 @@ BrDateAndTimeSinceNowPrinterExamples >> hourAgoPlus59Minutes59Seconds [
 { #category : #'examples - future' }
 BrDateAndTimeSinceNowPrinterExamples >> inFuture [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -165,6 +175,7 @@ BrDateAndTimeSinceNowPrinterExamples >> inFuture [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> justNow0Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -179,6 +190,7 @@ BrDateAndTimeSinceNowPrinterExamples >> justNow0Seconds [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> justNow14Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -193,6 +205,7 @@ BrDateAndTimeSinceNowPrinterExamples >> justNow14Seconds [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo15Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -207,6 +220,7 @@ BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo15Seconds [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo59Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -221,6 +235,7 @@ BrDateAndTimeSinceNowPrinterExamples >> lessThanMinuteAgo59Seconds [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -235,6 +250,7 @@ BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute1Second [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -249,6 +265,7 @@ BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute1Second [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> minuteAgo1Minute59Second [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -300,6 +317,7 @@ BrDateAndTimeSinceNowPrinterExamples >> newColumnedListWithDurations: aCollectio
 { #category : #'examples - demo' }
 BrDateAndTimeSinceNowPrinterExamples >> newTimeElement [
 	<gtExample>
+	<return: #BrLabel>
 	^ BrLabel new
 		updatingDateAndTimeModel;
 		aptitude: BrGlamorousLabelAptitude new;
@@ -336,6 +354,7 @@ BrDateAndTimeSinceNowPrinterExamples >> pastDurations [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> sevenDaysAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -350,6 +369,7 @@ BrDateAndTimeSinceNowPrinterExamples >> sevenDaysAgo [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> thirtyMinutesAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -364,6 +384,7 @@ BrDateAndTimeSinceNowPrinterExamples >> thirtyMinutesAgo [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> thirtyMinutesAnd1SecondAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -378,6 +399,7 @@ BrDateAndTimeSinceNowPrinterExamples >> thirtyMinutesAnd1SecondAgo [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> twentyThreeHoursAgoPlus59Minutes59Seconds [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -392,6 +414,7 @@ BrDateAndTimeSinceNowPrinterExamples >> twentyThreeHoursAgoPlus59Minutes59Second
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> twoDaysAgo [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -406,6 +429,7 @@ BrDateAndTimeSinceNowPrinterExamples >> twoDaysAgo [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> twoMinutesAgo2Minutes [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.
@@ -432,6 +456,7 @@ BrDateAndTimeSinceNowPrinterExamples >> updateTimeElement: aLabel time: aTime [
 { #category : #'examples - past' }
 BrDateAndTimeSinceNowPrinterExamples >> yesterday [
 	<gtExample>
+	<return: #BrDateAndTimeLabel>
 	| aPrinter aNow aResult |
 	aPrinter := self basicPrinter.
 	aNow := self now.

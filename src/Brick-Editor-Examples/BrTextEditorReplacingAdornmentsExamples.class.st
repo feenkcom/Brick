@@ -27,20 +27,18 @@ Class {
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleOverlappingReplacements [
 	<gtExample>
 	<description: 'Multiple replacements can overlapp. In this case the order of the added elements is defined by the end index of the intervals of the attributes'>
+	<return: #BlRunRopedText>
 	| aText |
-
 	aText := 'The Earth is round' asRopedText.
 	(aText from: 1 to: 7)
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color blue ].
 	(aText from: 5 to: 9)
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color red ].
 
 	^ aText
@@ -50,19 +48,17 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleOverlapping
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleReplacementsOnTopEachOther [
 	<gtExample>
 	<description: 'Multiple replacements can stack up. The order of added elements is defined by the order in which the attributes are added'>
+	<return: #BlRunRopedText>
 	| aText |
-
 	aText := 'The Earth is round' asRopedText.
 	(aText from: 5 to: 9)
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color red ];
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color blue ].
 
 	^ aText
@@ -72,14 +68,13 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithMultipleReplacement
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementAll [
 	<gtExample>
 	<description: 'Even the whole line of text can be replaced'>
+	<return: #BlRunRopedText>
 	| aText |
-
 	aText := 'To be replaced' asRopedText
-		replacingAdornment: [
-			BlElement new
-				geometry: BlEllipseGeometry new;
-				size: 20@20;
-				background: Color gray ].
+			replacingAdornment: [ BlElement new
+					geometry: BlEllipseGeometry new;
+					size: 20 @ 20;
+					background: Color gray ].
 
 	^ aText
 ]
@@ -88,16 +83,15 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementAll [
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementFirst [
 	<gtExample>
 	<description: 'We can replace the first word in a sentence'>
+	<return: #BlRunRopedText>
 	| aText |
-
 	aText := 'The Earth is round' asRopedText.
 	(aText from: 1 to: 3)
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color blue ].
-			
+
 	^ aText
 ]
 
@@ -105,16 +99,15 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementFirst [
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementLast [
 	<gtExample>
 	<description: 'We can replace the last word in a sentence'>
+	<return: #BlRunRopedText>
 	| aText |
-
 	aText := 'The Earth is round' asRopedText.
 	(aText from: 14 to: 18)
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color gray ].
-			
+
 	^ aText
 ]
 
@@ -122,14 +115,13 @@ BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementLast [
 BrTextEditorReplacingAdornmentsExamples >> singleLineTextWithReplacementMiddle [
 	<gtExample>
 	<description: 'We can replace a word in the middle of a sentence'>
+	<return: #BlRunRopedText>
 	| aText |
-
 	aText := 'The Earth is round' asRopedText.
 	(aText from: 5 to: 9)
-		replacingAdornment: [
-			BlElement new
+		replacingAdornment: [ BlElement new
 				geometry: BlEllipseGeometry new;
-				size: 20@20;
+				size: 20 @ 20;
 				background: Color red ].
 
 	^ aText

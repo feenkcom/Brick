@@ -162,7 +162,14 @@ BrMenuItemsListElement >> unsubscribeFromMenuModelExcludingUserSubscriptions [
 
 { #category : #'private - updating' }
 BrMenuItemsListElement >> updateListElement [
-	listElement items: self menuModel items
+	listElement items: self menuModel items.
+	self menuModel selectedItem
+		ifNotNil: [ :anItem | 
+			listElement
+				itemSuchThat: [ :eachItem | anItem = eachItem ]
+				ifFound: [ :anIndex :isSynchronous | listElement selectOne: anIndex ]
+				ifNone: [ :isSynchronous | "ignore" ].
+			listElement scrollToSelection ]
 ]
 
 { #category : #initialization }

@@ -7,6 +7,7 @@ Class {
 { #category : #examples }
 BrTextEditorCompositeInputFilterExamples >> simpleInputFilter [
 	<gtExample>
+	<return: #BrTextEditorCompositeInputFilter>
 	| filter |
 	filter := BrTextEditorCompositeInputFilter new
 			addFilter: BrTextEditorNoSpaceInputFilter new;
