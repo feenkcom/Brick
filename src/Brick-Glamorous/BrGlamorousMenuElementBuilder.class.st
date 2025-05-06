@@ -4,6 +4,13 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
+{ #category : #visiting }
+BrGlamorousMenuElementBuilder >> decorateMenuItem: anElement [
+	super decorateMenuItem: anElement.
+
+	anElement addAptitude: BrPopoverCommonAptitude
+]
+
 { #category : #initialization }
 BrGlamorousMenuElementBuilder >> defaultTypeBuilder [
 	^ BrGlamorousMenuItemTypeBuilder new

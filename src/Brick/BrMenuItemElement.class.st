@@ -19,6 +19,13 @@ BrMenuItemElement >> initialize [
 
 	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ].
 	self when: BlMouseLeaveEvent do: [ :anEvent | self onMouseLeaveEvent: anEvent ].
+	
+	self
+		padding: (BlInsets
+				top: BrMenuConstants defaultMenuItemTopPadding
+				bottom: BrMenuConstants defaultMenuItemBottomPadding
+				left: BrMenuConstants defaultMenuItemLeftPadding
+				right: BrMenuConstants defaultMenuItemRightPadding)
 ]
 
 { #category : #initialization }
@@ -44,7 +51,8 @@ BrMenuItemElement >> menuItem: aMenuItem [
 BrMenuItemElement >> onMenuModelChanged [
 	super onMenuModelChanged.
 	self updateElementSubscriptions.
-	self enabled: self menuModel isEnabled
+	self enabled: self menuModel isEnabled.
+	self dispatchEvent: (BlElementSelectedStateWish selected: self menuModel isSelected)
 ]
 
 { #category : #'event handling' }

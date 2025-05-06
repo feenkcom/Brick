@@ -15,18 +15,31 @@ BrMenuExamples >> assertGlamorousElementForMenuModel: aMenu [
 { #category : #'examples - action item' }
 BrMenuExamples >> basicMenuActionItem [
 	<gtExample>
-	
+	<return: #BrMenuActionItem>
 	| anItem |
 	anItem := BrMenuActionItem new.
-	
+
 	self assert: anItem hideOnClick.
-	
+
 	^ anItem
 ]
 
-{ #category : #'examples - items' }
+{ #category : #'examples - explicit item' }
+BrMenuExamples >> basicMenuExplicitItem [
+	<gtExample>
+	<return: #BrMenuExplicitItem>
+	| anItem |
+	anItem := BrMenuExplicitItem new.
+
+
+
+	^ anItem
+]
+
+{ #category : #'examples - label item' }
 BrMenuExamples >> basicMenuLabelItem [
 	<gtExample>
+	<return: #BrMenuLabelItem>
 	| anItem |
 	anItem := BrMenuLabelItem new.
 
@@ -36,15 +49,13 @@ BrMenuExamples >> basicMenuLabelItem [
 { #category : #'examples - submenu' }
 BrMenuExamples >> explicitDecoratedMenuWithButtons [
 	<gtExample>
+	<return: #BrMenuDecoratoringModel>
 	| aMenuModel aDecoratedMenu |
 	aMenuModel := self explicitMenuWithWithButtons.
 	aDecoratedMenu := BrMenuDecoratoringModel new.
 	aDecoratedMenu
-			menuModel: aMenuModel;
-			decorator: [ :theOriginalElement | 
-				theOriginalElement userData 
-					at: BrMenuDecoratoringModel 
-					put: aDecoratedMenu ].
+		menuModel: aMenuModel;
+		decorator: [ :theOriginalElement | theOriginalElement userData at: BrMenuDecoratoringModel put: aDecoratedMenu ].
 
 	self assert: aDecoratedMenu menuModel equals: aMenuModel.
 	self assert: aDecoratedMenu decorator isNotNil.
@@ -57,6 +68,7 @@ BrMenuExamples >> explicitDecoratedMenuWithButtons [
 { #category : #'examples - submenu' }
 BrMenuExamples >> explicitMenu [
 	<gtExample>
+	<return: #BrMenuExplicit>
 	| aMenu |
 	aMenu := BrMenuExplicit new.
 	aMenu
@@ -78,48 +90,53 @@ BrMenuExamples >> explicitMenu [
 { #category : #'examples - submenu' }
 BrMenuExamples >> explicitMenuInSeparateCompositionLayer [
 	<gtExample>
+	<return: #BrMenuExplicit>
 	| aMenu |
 	aMenu := BrMenuExplicit new.
-	aMenu stencil: [ BlElement new
-		beInSeparateCompositionLayer;
-		size: 150@100;
-		addAptitude: (BrGlamorousPopoverPinnableAptitude new 
-			menuModel: aMenu;
-			withResizers;
-			withAllPinActions);
-		addAptitude: BrPopoverCommonAptitude new;
-		background: Color paleOrange ].
-	
+	aMenu
+		stencil: [ BlElement new
+				beInSeparateCompositionLayer;
+				size: 150 @ 100;
+				addAptitude: (BrGlamorousPopoverPinnableAptitude new
+						menuModel: aMenu;
+						withResizers;
+						withAllPinActions);
+				addAptitude: BrPopoverCommonAptitude new;
+				background: Color paleOrange ].
+
 	self assert: aMenu stencil isNotNil.
 	self assertGlamorousElementForMenuModel: aMenu.
-	
+
 	^ aMenu
 ]
 
 { #category : #'examples - submenu' }
 BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 	<gtExample>
+	<return: #BrMenuExplicit>
 	| aMenu |
 	aMenu := BrMenuExplicit new.
-	aMenu stencil: [ BlElement new
-		beInSingleCompositionLayer;
-		size: 150@100;
-		addAptitude: (BrGlamorousPopoverPinnableAptitude new 
-			menuModel: aMenu;
-			withResizers;
-			withAllPinActions);
-		addAptitude: BrPopoverCommonAptitude new;
-		background: Color paleGreen ].
-	
+	aMenu
+		stencil: [ BlElement new
+				beInSingleCompositionLayer;
+				size: 150 @ 100;
+				addAptitude: (BrGlamorousPopoverPinnableAptitude new
+						menuModel: aMenu;
+						withResizers;
+						withAllPinActions);
+				addAptitude: BrPopoverCommonAptitude new;
+				background: Color paleGreen ].
+
 	self assert: aMenu stencil isNotNil.
 	self assertGlamorousElementForMenuModel: aMenu.
-	
+
 	^ aMenu
 ]
 
 { #category : #'examples - submenu' }
 BrMenuExamples >> explicitMenuWithWithButtons [
 	<gtExample>
+	<return: #BrMenuExplicit>
 	| aMenu |
 	aMenu := BrMenuExplicit new.
 	aMenu
@@ -133,10 +150,10 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 				addAptitude: BrPopoverCommonAptitude new;
 				background: Color palePeach;
 				addChild: (BlElement new
-					size: 10@10;
-					id: #'menu-in-outside-click';
-					background: (Color lightGray alpha: 0.5);
-					constraintsDo: [ :c | 
+						size: 10 @ 10;
+						id: #'menu-in-outside-click';
+						background: (Color lightGray alpha: 0.5);
+						constraintsDo: [ :c | 
 							c margin: (BlInsets all: 10).
 							c frame horizontal alignLeft.
 							c frame vertical alignTop ]);
@@ -145,17 +162,17 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 						size: 70 @ 20;
 						background: Color palePeach darker;
 						constraintsDo: [ :c | 
-								c margin: (BlInsets all: 10).
-								c frame horizontal alignCenter.
-								c frame vertical alignCenter ];
+							c margin: (BlInsets all: 10).
+							c frame horizontal alignCenter.
+							c frame vertical alignCenter ];
 						aptitude: (BrGlamorousWithExplicitDropdownAptitude new
 								handle: [ BlElement new
 										id: #'menu-in-submenu-handle';
 										size: 70 @ 20;
 										background: Color palePeach darker ]
 								submenu: [ BrMenuItems new
-									addItem: self submenuInlineMessageItems;
-									addItem: self submenuExtractTemporaryItems ])) ].
+										addItem: self submenuInlineMessageItems;
+										addItem: self submenuExtractTemporaryItems ])) ].
 
 	self assert: aMenu stencil isNotNil.
 	self assertGlamorousElementForMenuModel: aMenu.
@@ -166,80 +183,117 @@ BrMenuExamples >> explicitMenuWithWithButtons [
 { #category : #'examples - action item' }
 BrMenuExamples >> menuActionItemWithIconAndLabel [
 	<gtExample>
-	
+	<return: #BrMenuActionItem>
 	| anItem |
 	anItem := self basicMenuActionItem.
 	anItem icon: BrGlamorousVectorIcons clipboard label: 'Copy'.
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Copy'.
 	self assert: anItem labelModel icon isNotNil.
-	
+
 	^ anItem
 ]
 
 { #category : #'examples - action item' }
 BrMenuExamples >> menuActionItemWithLabel [
 	<gtExample>
-	
+	<return: #BrMenuActionItem>
 	| anItem |
 	anItem := self basicMenuActionItem.
 	anItem label: 'Copy'.
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Copy'.
-	
+
 	^ anItem
 ]
 
 { #category : #'examples - items' }
 BrMenuExamples >> menuActionItemWithUpdateSubscription [
 	<gtExample>
-	
+	<return: #BrMenuItems>
 	| anIncreaseItem aCounter anAnnouncer anItemsModel aLabelItem aDecreaseItem |
 	aCounter := 0.
 	anAnnouncer := Announcer new.
 	anItemsModel := BrMenuItems new.
 	anIncreaseItem := self basicMenuActionItem.
-	anIncreaseItem icon: BrGlamorousVectorIcons add label: 'Increase' preview: [ aCounter printString ].
-	anIncreaseItem action: [ aCounter := aCounter + 1. anAnnouncer announce: Announcement new ].
+	anIncreaseItem
+		icon: BrGlamorousVectorIcons add
+		label: 'Increase'
+		preview: [ aCounter printString ].
+	anIncreaseItem
+		action: [ aCounter := aCounter + 1.
+			anAnnouncer announce: Announcement new ].
 	anIncreaseItem hideOnClick: false.
 	anItemsModel addItem: anIncreaseItem.
-	
+
 	aDecreaseItem := self basicMenuActionItem.
-	aDecreaseItem icon: BrGlamorousVectorIcons remove label: 'Decrease' preview: [ aCounter printString ].
-	aDecreaseItem action: [ aCounter := aCounter - 1. anAnnouncer announce: Announcement new ].
+	aDecreaseItem
+		icon: BrGlamorousVectorIcons remove
+		label: 'Decrease'
+		preview: [ aCounter printString ].
+	aDecreaseItem
+		action: [ aCounter := aCounter - 1.
+			anAnnouncer announce: Announcement new ].
 	aDecreaseItem hideOnClick: false.
 	anItemsModel addItem: aDecreaseItem.
-	
+
 	self assert: anIncreaseItem labelModel isNotNil.
 	self assert: anIncreaseItem labelModel text equals: 'Increase'.
 	self assert: anIncreaseItem labelModel preview equals: '0'.
-	
+
 	aCounter := aCounter + 1.
 	self assert: anIncreaseItem labelModel text equals: 'Increase'.
 	self assert: anIncreaseItem labelModel preview equals: '1'.
-	
+
 	anIncreaseItem updateWhen: Announcement from: anAnnouncer.
 	aDecreaseItem updateWhen: Announcement from: anAnnouncer.
 	self assert: anAnnouncer numberOfSubscriptions equals: 0.
-	
+
 	aLabelItem := self basicMenuLabelItem.
-	aLabelItem label: [ ('Counter value is {1}.' ) format: { aCounter } ].
+	aLabelItem label: [ 'Counter value is {1}.' format: {aCounter} ].
 	aLabelItem updateWhen: Announcement from: anAnnouncer.
 	aLabelItem disableIf: [ aCounter odd ].
 	anItemsModel addItem: aLabelItem.
-	
+
 	anIncreaseItem disableIf: [ aCounter >= 10 ].
 	aDecreaseItem disableIf: [ aCounter <= 0 ].
-	
+
 	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.
 	self assert: anAnnouncer numberOfSubscriptions equals: 0.
-	
+
 	^ anItemsModel
+]
+
+{ #category : #'examples - explicit item' }
+BrMenuExamples >> menuExplicitItemWithEditor [
+	<gtExample>
+	<return: #BrMenuExplicitItem>
+	| anItem anElement |
+	anItem := self basicMenuExplicitItem.
+
+	anItem
+		stencil: [ :aMenuItem | 
+			BrEditor new
+				aptitude: BrGlamorousRegularEditorAptitude;
+				background: BrGlamorousColors defaultButtonBackgroundColor;
+				geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
+				text: ('' asRopedText
+						attribute: (BrGhostTextAttribute
+								for: ('explicit item with text editor' asRopedText glamorousRegularFontAndSize
+										foreground: Color lightGray)));
+				hMatchParent;
+				vFitContent ].
+
+	anElement := BrGlamorousMenuElementBuilder new visitModel: anItem.
+	self assert: (anElement isKindOf: BrEditor).
+
+	^ anItem
 ]
 
 { #category : #'examples - label' }
 BrMenuExamples >> menuIconTextAndShortcutLabel [
 	<gtExample>
+	<return: #BrMenuIconTextLabelModel>
 	| aLabel |
 	aLabel := BrMenuIconTextLabelModel new.
 	aLabel text: 'Copy'.
@@ -257,15 +311,15 @@ BrMenuExamples >> menuIconTextAndShortcutLabel [
 { #category : #'examples - items' }
 BrMenuExamples >> menuItems [
 	<gtExample>
-	| aMenuItems anInlineSubmenu |
+	<return: #BrMenuItems>
+	| aMenuItems anInlineSubmenu anElement |
 	aMenuItems := BrMenuItems new.
 	anInlineSubmenu := self submenuInlineMessageItems.
-	anInlineSubmenu select.
-	anInlineSubmenu items second select.
 	aMenuItems addItem: anInlineSubmenu.
 	aMenuItems addItem: self submenuExtractTemporaryItems.
 	aMenuItems
-		addItemLabel: 'Cut'
+		addItemId: #'menu-cut-item'
+		label: 'Cut'
 		action: [ NonInteractiveTranscript stdout show: 'Cut ' ].
 	aMenuItems
 		addItemLabel: 'Copy'
@@ -276,19 +330,27 @@ BrMenuExamples >> menuItems [
 		label: 'Paste'
 		shortcut: 'CMD+V'
 		action: [ NonInteractiveTranscript stdout show: 'Paste ' ].
-	aMenuItems addItem: (BrMenuSubmenuItem new
-		label: 'Create view';
-		submenu: self explicitMenu).
-	aMenuItems addItem: (BrMenuSubmenuItem new
-		label: 'Create view (single layer)';
-		submenu: self explicitMenuInSingleCompositionLayer).
-	aMenuItems addItem: (BrMenuSubmenuItem new
-		label: 'Create view (comp. layer)';
-		submenu: self explicitMenuInSeparateCompositionLayer).
-	aMenuItems addItem: (BrMenuSubmenuItem new
-			id: #'menu-complex-submenu';
-			label: 'Complex submenu';
-			submenu: self explicitMenuWithWithButtons).
+	aMenuItems
+		addItem: (BrMenuSubmenuItem new
+				label: 'Create view';
+				submenu: self explicitMenu).
+	aMenuItems
+		addItem: (BrMenuSubmenuItem new
+				label: 'Create view' preview: 'single layer';
+				submenu: self explicitMenuInSingleCompositionLayer).
+	aMenuItems
+		addItem: (BrMenuSubmenuItem new
+				label: 'Create view' preview: 'comp. layer';
+				submenu: self explicitMenuInSeparateCompositionLayer).
+	aMenuItems
+		addItem: (BrMenuSubmenuItem new
+				id: #'menu-complex-submenu';
+				label: 'Complex submenu';
+				submenu: self explicitMenuWithWithButtons).
+	aMenuItems addItem: self menuExplicitItemWithEditor.
+
+	anElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
+	self assert: (anElement isKindOf: BlElement).
 
 	^ aMenuItems
 ]
@@ -296,16 +358,20 @@ BrMenuExamples >> menuItems [
 { #category : #'examples - items' }
 BrMenuExamples >> menuItems_selectAnotherInlineMenu [
 	<gtExample>
+	<return: #BrMenuItems>
 	| aMenuItems anInlineRootItem anItemOne anItemTwo |
 	aMenuItems := self menuItems.
 	anInlineRootItem := aMenuItems items first.
 	anItemOne := anInlineRootItem items second.
 	anItemTwo := anInlineRootItem items third.
 	
+	anInlineRootItem select.
+	anItemOne select.
+	
 	self assert: anInlineRootItem isSelected.
 	self assert: anItemOne isSelected.
 	self assert: anItemTwo isSelected not.
-	
+
 	anItemTwo select.
 	self assert: anInlineRootItem isSelected.
 	self assert: anItemOne isSelected not.
@@ -317,6 +383,7 @@ BrMenuExamples >> menuItems_selectAnotherInlineMenu [
 { #category : #'examples - items' }
 BrMenuExamples >> menuItems_selectExtractMenu [
 	<gtExample>
+	<return: #BrMenuItems>
 	| aMenuItems anInlineRootItem anItemOne anItemTwo anExtractRootItem |
 	aMenuItems := self menuItems_selectAnotherInlineMenu.
 	anInlineRootItem := aMenuItems items first.
@@ -338,9 +405,10 @@ BrMenuExamples >> menuItems_selectExtractMenu [
 	^ aMenuItems
 ]
 
-{ #category : #'examples - items' }
+{ #category : #'examples - label item' }
 BrMenuExamples >> menuLabelItem [
 	<gtExample>
+	<return: #BrMenuLabelItem>
 	| aMenuItem |
 	aMenuItem := self basicMenuLabelItem.
 
@@ -353,6 +421,7 @@ BrMenuExamples >> menuLabelItem [
 { #category : #'examples - label' }
 BrMenuExamples >> menuTextAndShortcutLabel [
 	<gtExample>
+	<return: #BrMenuTextLabelModel>
 	| aLabel |
 	aLabel := BrMenuTextLabelModel new.
 	aLabel text: 'Copy'.
@@ -367,6 +436,7 @@ BrMenuExamples >> menuTextAndShortcutLabel [
 { #category : #'examples - label' }
 BrMenuExamples >> menuTextLabel [
 	<gtExample>
+	<return: #BrMenuTextLabelModel>
 	| aLabel |
 	aLabel := BrMenuTextLabelModel new.
 	aLabel text: 'Copy'.
@@ -379,34 +449,39 @@ BrMenuExamples >> menuTextLabel [
 { #category : #'examples - submenu' }
 BrMenuExamples >> refactoringGroup [
 	<gtExample>
+	<return: #BrMenuItemGroupConfiguration>
 	| aGroup |
-	aGroup := BrMenuItemGroupConfiguration new 
-		name: 'Refactoring';
-		priority: 30.
-	
+	aGroup := BrMenuItemGroupConfiguration new
+			name: 'Refactoring';
+			priority: 30.
+
 	self assert: aGroup name equals: 'Refactoring'.
 	self assert: aGroup priority equals: 30.
-	
+
 	^ aGroup
 ]
 
 { #category : #'examples - submenu' }
 BrMenuExamples >> submenuExtractTemporaryItems [
 	<gtExample>
+	<return: #BrMenuSubmenuItem>
 	| anItem |
 	anItem := BrMenuSubmenuItem new.
+	anItem id: #'menu-extract-temporary-item'.
 	anItem label: 'Extract temporary'.
 	anItem group: self refactoringGroup.
-	anItem submenuItem: (BrMenuActionItem new
-		label: 'Extract temporary' preview: BrMenuSubmenuItem name).
-	anItem submenuItem: (BrMenuActionItem new
-		label: 'Extract temporary' preview: BrMenuSubmenuItem name, ' new').
-	
+	anItem
+		submenuItem: (BrMenuActionItem new label: 'Extract temporary' preview: BrMenuSubmenuItem name).
+	anItem
+		submenuItem: (BrMenuActionItem new
+				label: 'Extract temporary'
+				preview: BrMenuSubmenuItem name , ' new').
+
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Extract temporary'.
 	self assert: anItem submenu isNotNil.
 	self assert: anItem submenu itemsCount equals: 2.
-	
+
 	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem
@@ -415,22 +490,33 @@ BrMenuExamples >> submenuExtractTemporaryItems [
 { #category : #'examples - submenu' }
 BrMenuExamples >> submenuInlineMessageItems [
 	<gtExample>
+	<return: #BrMenuSubmenuItem>
 	| anItem |
 	anItem := BrMenuSubmenuItem new.
+	anItem id: #'menu-inline-message-item'.
 	anItem icon: BrGlamorousVectorIcons down label: 'Inline message'.
 	anItem group: self refactoringGroup.
-	anItem submenuItem: (BrMenuActionItem new
-		icon: BrGlamorousVectorIcons down label: 'Inline message' preview: 'anItem label').
-	anItem submenuItem: (BrMenuActionItem new
-		icon: BrGlamorousVectorIcons down label: 'Inline message' preview: 'anItem label text').
-	anItem submenuItem: (BrMenuActionItem new
-		icon: BrGlamorousVectorIcons down label: 'Inline message' preview: 'self assert: anItem labelModel text equals: ''Copy''').
-	
+	anItem
+		submenuItem: (BrMenuActionItem new
+				icon: BrGlamorousVectorIcons down
+				label: 'Inline message'
+				preview: 'anItem label').
+	anItem
+		submenuItem: (BrMenuActionItem new
+				icon: BrGlamorousVectorIcons down
+				label: 'Inline message'
+				preview: 'anItem label text').
+	anItem
+		submenuItem: (BrMenuActionItem new
+				icon: BrGlamorousVectorIcons down
+				label: 'Inline message'
+				preview: 'self assert: anItem labelModel text equals: ''Copy''').
+
 	self assert: anItem labelModel isNotNil.
 	self assert: anItem labelModel text equals: 'Inline message'.
 	self assert: anItem submenu isNotNil.
 	self assert: anItem submenu itemsCount equals: 3.
-	
+
 	self assert: anItem submenu items first parent equals: anItem submenu.
 
 	^ anItem

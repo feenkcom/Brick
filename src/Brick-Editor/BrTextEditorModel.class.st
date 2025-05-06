@@ -60,13 +60,6 @@ BrTextEditorModel >> addEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 		do: [ :eachShortcut | self addEditorShortcut: eachShortcut ]
 ]
 
-{ #category : #'api - word movement' }
-BrTextEditorModel >> alphanumericUnderscoreWordClassifier [
-	^ [ :c1 :c2 | 
-	c1 isSeparator ~= c2 isSeparator
-		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_)) ] ]
-]
-
 { #category : #asserting }
 BrTextEditorModel >> assertUIProcess [
 	"I check if the current process is a UI process of all attached editor elements"
@@ -109,14 +102,6 @@ BrTextEditorModel >> beReadOnlyWithSelection [
 { #category : #'api - mode' }
 BrTextEditorModel >> beReadOnlyWithoutSelection [
 	self editorMode: BrTextEditorReadonlyWithoutSelectionMode new
-]
-
-{ #category : #'api - word movement' }
-BrTextEditorModel >> camelCaseWordClassifier [
-	^ [ :c1 :c2 | 
-	c1 isSeparator ~= c2 isSeparator
-		or: [ (c1 isAlphaNumeric | (c1 = $_)) ~= (c2 isAlphaNumeric | (c2 = $_))
-				or: [ c1 isUppercase not and: [ c2 isUppercase ] ] ] ]
 ]
 
 { #category : #'private - selection' }
@@ -397,8 +382,8 @@ BrTextEditorModel >> initialize [
 	shouldStyleWhenTextModified := true.
 	shouldConsumeClickEvent := true.
 	
-	movementWordClassifier := self camelCaseWordClassifier.
-	doubleClickWordClassifier := self alphanumericUnderscoreWordClassifier.
+	movementWordClassifier := BrCamelCaseWordClassifier new.
+	doubleClickWordClassifier := BrAlphanumericUnderscoreWordClassifier new.
 	
 	"only when the editor mode is null, set an actual mode.
 	Setting an editor mode can be slow therefore we provide a class side
@@ -551,27 +536,32 @@ BrTextEditorModel >> newUpdateCommand [
 
 { #category : #'private - cursor' }
 BrTextEditorModel >> notifyAttributesWithinCursor: aCollectionOfAttributes [
-
 	"I select and notify those attributes in the given collection that are within any of the cursors"
+
 	| theEventHandlingAttributes anEvent aCurrentText aCurrentTextSize |
 	self isFocused ifFalse: [ ^ self ].
 
 	anEvent := BrTextCursorAttributeEnterEvent new.
 
-	theEventHandlingAttributes := (aCollectionOfAttributes select: [ 
-		                               :eachAttribute | 
-		                               eachAttribute isEventHandler ]) asSet.
+	theEventHandlingAttributes := (aCollectionOfAttributes
+			select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
 
 	aCurrentText := self text.
 	aCurrentTextSize := aCurrentText size.
-		                               
-	self cursors do: [ :eachCursor | 
-		| atts |
-		atts := aCurrentText attributesAt: (eachCursor position min: aCurrentTextSize).
-		atts do: [ :eachAttribute | 
-			(theEventHandlingAttributes includes: eachAttribute) ifTrue: [ 
-				(eachAttribute wantsEvent: anEvent in: self) ifTrue: [ 
-					eachAttribute handleEvent: anEvent in: self on: nil ] ] ] ]
+
+	self cursors
+		do: [ :eachCursor | 
+			| atts |
+			atts := aCurrentText
+					attributesAt: (eachCursor position min: aCurrentTextSize).
+			atts
+				do: [ :eachAttribute | 
+					(theEventHandlingAttributes includes: eachAttribute)
+						ifTrue: [ (eachAttribute wantsEvent: anEvent)
+								ifTrue: [ eachAttribute
+										handleEvent: anEvent
+										in: self
+										on: nil ] ] ] ]
 ]
 
 { #category : #'event firing' }
@@ -921,8 +911,7 @@ BrTextEditorModel >> processCursorEnterEvents [
 			eachAttribute := eachEventHandlerAttributeAndInterval key.
 			eachInterval := eachEventHandlerAttributeAndInterval value.
 			anEnteredEvent interval: eachInterval.
-
-			(eachAttribute wantsEvent: anEnteredEvent in: self)
+			(eachAttribute wantsEvent: anEnteredEvent)
 				ifTrue: [ eachAttribute
 						handleEvent: anEnteredEvent
 						in: self
@@ -945,7 +934,7 @@ BrTextEditorModel >> processCursorLeaveEvents [
 			eachAttribute := eachEventHandlerAttributeAndInterval key.
 			eachInterval := eachEventHandlerAttributeAndInterval value.
 			aLeavedEvent interval: eachInterval.
-			(eachAttribute wantsEvent: aLeavedEvent in: self)
+			(eachAttribute wantsEvent: aLeavedEvent)
 				ifTrue: [ eachAttribute
 						handleEvent: aLeavedEvent
 						in: self
@@ -1144,14 +1133,6 @@ BrTextEditorModel >> setEditorShortcuts: aBrTextEditorShortcuts [
 { #category : #accessing }
 BrTextEditorModel >> shouldConsumeClickEvent [
 	^ shouldConsumeClickEvent ifNil: [ shouldConsumeClickEvent := true ]
-]
-
-{ #category : #'as yet unclassified' }
-BrTextEditorModel >> smalltalkWordClassifier [
-	^ [ :c1 :c2 | 
-	c1 isSeparator ~= c2 isSeparator
-		or: [ ((c1 isAlphaNumeric | (c1 = $_)) not and: [ c2 isAlphaNumeric | (c2 = $_) ])
-				or: [ c1 isAlphaNumeric | (c1 = $_) and: [ c2 tokenish not ] ] ] ]
 ]
 
 { #category : #'text - styling' }

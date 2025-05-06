@@ -20,13 +20,17 @@ BrMenuItemsGroupedElement >> initialize [
 	self initializeListElement.
 
 	self addChild: listElement as: #'menu--list'.
-	self initializeCommonStyle
+	self initializeCommonStyle.
+	
+	self 
+		when: BrPopoverGainFocusWish
+		do: [ :anEvent | self onPopoverGainFocusWish: anEvent ]
 ]
 
 { #category : #initialization }
 BrMenuItemsGroupedElement >> initializeListElement [
 	listElement := BrGroupedList new
-			beNotFocusable;
+			"beNotFocusable;"
 			fitContentLimited;
 			headerElementStencil: [ :anItemType :aListWidget | 
 				BrLabel new
@@ -88,6 +92,13 @@ BrMenuItemsGroupedElement >> onMenuUnsubscribeWish: anEvent [
 	aScrollable := listElement childWithId: #scrollable.
 	aScrollable childrenDo: [ :eachChild | 
 		eachChild dispatchEvent: (BrPopoverUnsubscribeWish new alsoUserSubscriptions: true) ]
+]
+
+{ #category : #initialization }
+BrMenuItemsGroupedElement >> onPopoverGainFocusWish: anEvent [ 
+	anEvent consumed: true.
+	
+	listElement selectOne: 1
 ]
 
 { #category : #'event handling' }

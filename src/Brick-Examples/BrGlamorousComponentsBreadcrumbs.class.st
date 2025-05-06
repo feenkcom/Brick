@@ -18,58 +18,58 @@ Class {
 { #category : #breacrumb }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithButtons [
 	<gtExample>
-
+	<return: #BrBreadcrumb>
 	^ BrBreadcrumb new
-		aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
-			BrLabel new
-				aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-				text: '/';
-				margin: (BlInsets left: 5 right: 5) ]);
+		aptitude: (BrGlamorousBreadcrumbAptitude new
+				separator: [ BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+						text: '/';
+						margin: (BlInsets left: 5 right: 5) ]);
 		addItem: (BrButton new
-			aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
-			label: 'Home');
+				aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
+				label: 'Home');
 		addItem: (BrButton new
-			aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
-			label: 'Store');
+				aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
+				label: 'Store');
 		addItem: (BrButton new
-			aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
-			label: 'T-Shirt')
+				aptitude: BrGlamorousLinkSquaredButtonWithLabelAptitude new glamorousRegularFont;
+				label: 'T-Shirt')
 ]
 
 { #category : #breacrumb }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithLabels [
 	<gtExample>
-
+	<return: #BrBreadcrumb>
 	^ BrBreadcrumb new
-		aptitude: (BrGlamorousBreadcrumbAptitude new separator: [
-			BrLabel new
-				aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
-				text: '>';
-				margin: (BlInsets left: 5 right: 5) ]);
+		aptitude: (BrGlamorousBreadcrumbAptitude new
+				separator: [ BrLabel new
+						aptitude: (BrGlamorousLabelAptitude new thin foreground: Color gray);
+						text: '>';
+						margin: (BlInsets left: 5 right: 5) ]);
 		addItem: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			text: 'Home');
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'Home');
 		addItem: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			text: 'Store');
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'Store');
 		addItem: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			text: 'T-Shirt')
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'T-Shirt')
 ]
 
 { #category : #breacrumb }
 BrGlamorousComponentsBreadcrumbs >> breadcrumbWithoutSeparator [
 	<gtExample>
-
+	<return: #BrBreadcrumb>
 	^ BrBreadcrumb new
 		aptitude: BrGlamorousBreadcrumbAptitude;
 		addItem: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			text: 'Home');
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'Home');
 		addItem: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			text: 'Store');
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'Store');
 		addItem: (BrLabel new
-			aptitude: BrGlamorousLabelAptitude;
-			text: 'T-Shirt')
+				aptitude: BrGlamorousLabelAptitude;
+				text: 'T-Shirt')
 ]

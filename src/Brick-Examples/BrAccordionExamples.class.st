@@ -22,21 +22,23 @@ Class {
 { #category : #examples }
 BrAccordionExamples >> glamorousWithEditor [
 	<gtExample>
+	<return: #BrAccordion>
 	| anAccordion |
-
 	anAccordion := BrAccordion new.
-	anAccordion hMatchParent; vFitContent.
+	anAccordion
+		hMatchParent;
+		vFitContent.
 
 	anAccordion aptitude: BrGlamorousAccordionAptitude new.
-	anAccordion header: [
-		BrButton new
-			aptitude: BrGlamorousAccordionHeaderAptitude new;
-			label: 'Click to expand/collapse';
-			action: [ anAccordion toggle ] ].
-	anAccordion content: [
-		BrEditor new
-			aptitude: BrGlamorousEditorAptitude new;
-			text: (String loremIpsum: 200) trimBoth ].
+	anAccordion
+		header: [ BrButton new
+				aptitude: BrGlamorousAccordionHeaderAptitude new;
+				label: 'Click to expand/collapse';
+				action: [ anAccordion toggle ] ].
+	anAccordion
+		content: [ BrEditor new
+				aptitude: BrGlamorousEditorAptitude new;
+				text: (String loremIpsum: 200) trimBoth ].
 
 	^ anAccordion
 ]
@@ -44,21 +46,21 @@ BrAccordionExamples >> glamorousWithEditor [
 { #category : #examples }
 BrAccordionExamples >> glamorousWithEditorExpanded [
 	<gtExample>
+	<return: #BrAccordion>
 	| anAccordion |
-
 	anAccordion := self glamorousWithEditor.
 	anAccordion expand.
-		
+
 	^ anAccordion
 ]
 
 { #category : #examples }
 BrAccordionExamples >> glamorousWithEditorExpandedWithFocus [
 	<gtExample>
+	<return: #BrAccordion>
 	| anAccordion |
-
 	anAccordion := self glamorousWithEditorExpanded.
 	anAccordion requestFocus.
-		
+
 	^ anAccordion
 ]

@@ -40,7 +40,8 @@ BaselineOfBrick >> baseline: spec [
 				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
 			baseline: 'GToolkitResourcesUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:main/src' ].
-		spec 
+		spec
+			package: #'Brick-Classifiers'; 
 			package: #'Brick-Core' with: [
 				spec requires: #('Bloc' 'BlocPac' ). ];
 			package: #'Brick-Editor' with: [

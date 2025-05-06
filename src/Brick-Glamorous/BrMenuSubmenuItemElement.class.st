@@ -1,6 +1,6 @@
 Class {
 	#name : #BrMenuSubmenuItemElement,
-	#superclass : #BrMenuItemLabeledElement,
+	#superclass : #BrMenuLabeledItemElement,
 	#category : #'Brick-Glamorous-Menu'
 }
 
@@ -31,6 +31,11 @@ BrMenuSubmenuItemElement >> initializeStyling [
 				when: BlElementState hovered not & BlElementState selected
 					style: [ :aStyle | aStyle background: self theme item hoveredColor ];
 				pressed: [ :aStyle | aStyle background: self theme item pressedColor ])
+]
+
+{ #category : #'event handling' }
+BrMenuSubmenuItemElement >> onActionRequestedAnnouncement: anAnnouncement [
+	self dispatchEvent: BlClickEvent new
 ]
 
 { #category : #'event handling' }
@@ -68,4 +73,13 @@ BrMenuSubmenuItemElement >> onSelectionChanged: anAnnouncement [
 		
 	"Note: hide action happens in BrMenuSubmenuItem>>#onSelectionChanged.
 	Is looks confusing."
+]
+
+{ #category : #'event handling' }
+BrMenuSubmenuItemElement >> subscribeToMenuModel [
+	super subscribeToMenuModel.
+	self menuItem announcer weak
+		when: BrMenuModelActionRequestedAnnouncement
+		send: #onActionRequestedAnnouncement:
+		to: self.
 ]

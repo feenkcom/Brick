@@ -9,6 +9,10 @@ Class {
 	#category : #'Brick-Menu - UI'
 }
 
+{ #category : #visiting }
+BrMenuElementBuilder >> decorateMenuItem: anElement [ 
+]
+
 { #category : #initialization }
 BrMenuElementBuilder >> defaultTypeBuilder [
 	^ BrMenuItemTypeBuilder new
@@ -52,6 +56,8 @@ BrMenuElementBuilder >> visitMenuExplicit: aMenuModel [
 			menuModel: aMenuModel;
 			asElement.
 
+	aMenuModel id ifNotNil: [ :anId | anElement id: anId ].
+
 	anElement addAptitude: (BrPopoverHideableAptitude new menuModel: aMenuModel).
 
 	^ anElement
@@ -72,6 +78,18 @@ BrMenuElementBuilder >> visitMenuExplicitHandle: aMenuModel [
 ]
 
 { #category : #visiting }
+BrMenuElementBuilder >> visitMenuExplicitItem: aMenuModel [
+	| anElement |
+	anElement := aMenuModel stencil
+			menuModel: aMenuModel;
+			asElement.
+			
+	aMenuModel id ifNotNil: [ :anId | anElement id: anId ].
+
+	^ anElement
+]
+
+{ #category : #visiting }
 BrMenuElementBuilder >> visitMenuItem: aMenuModel [
 	"Use type builder to get element class.
 	Since menu item instances are supposed to be used
@@ -83,6 +101,12 @@ BrMenuElementBuilder >> visitMenuItem: aMenuModel [
 	| aType anElement |
 	aType := aMenuModel acceptVisitor: self typeBuilder.
 	anElement := self typeBuilder buildElementFromItemType: aType.
+	
+	"Menu items are created using this builder only if they are used as a main element,
+	not as a part of a list. Builders may therefore need to decorate those elements,
+	to look properly, e.g, set geometry."
+	self decorateMenuItem: anElement.
+	
 	^ anElement menuModel: aMenuModel
 ]
 

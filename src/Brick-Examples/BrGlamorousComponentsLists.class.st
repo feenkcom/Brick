@@ -20,27 +20,26 @@ Class {
 { #category : #examples }
 BrGlamorousComponentsLists >> columnedListOfColors [
 	<gtExample>
+	<return: #BrColumnedList>
 	| aList |
 	aList := BrColumnedList new.
 	aList column
 		width: 50;
 		title: 'Index';
-		cellStencil: [
-			BrLabel new
+		cellStencil: [ BrLabel new
 				aptitude: BrGlamorousLabelAptitude new;
 				padding: (BlInsets all: 12) ];
-		dataBinder: [ :eachElement :eachColor :eachIndex | 
-			eachElement text: eachIndex asString ].
+		dataBinder: [ :eachElement :eachColor :eachIndex | eachElement text: eachIndex asString ].
 	aList column
 		matchParent;
 		title: 'Color';
-		cellStencil: [
-			BrLabel new
+		cellStencil: [ BrLabel new
 				aptitude: BrGlamorousLabelAptitude new;
 				padding: (BlInsets all: 12) ];
 		dataBinder: [ :eachElement :eachColor :eachIndex | 
 			eachElement
-				text: (('#', eachColor asHexString) asRopedText foreground: eachColor contrastingBlackAndWhiteColor);
+				text: (('#' , eachColor asHexString) asRopedText
+						foreground: eachColor contrastingBlackAndWhiteColor);
 				background: eachColor ].
 	aList items: Color indexedColors.
 	^ aList
@@ -49,9 +48,9 @@ BrGlamorousComponentsLists >> columnedListOfColors [
 { #category : #examples }
 BrGlamorousComponentsLists >> listOfClasses [
 	<gtExample>
+	<return: #BrSimpleList>
 	^ BrSimpleList new
-		itemStencil: [
-			BrLabel new
+		itemStencil: [ BrLabel new
 				hMatchParent;
 				aptitude: BrGlamorousLabelAptitude new;
 				padding: (BlInsets all: 5) ];
@@ -62,13 +61,13 @@ BrGlamorousComponentsLists >> listOfClasses [
 { #category : #examples }
 BrGlamorousComponentsLists >> listOfColors [
 	<gtExample>
+	<return: #BrSimpleList>
 	^ BrSimpleList new
-		itemStencil: [
-			BrLabel new
+		itemStencil: [ BrLabel new
 				hMatchParent;
 				aptitude: BrGlamorousLabelAptitude new;
 				padding: (BlInsets all: 12) ];
-		itemDataBinder: [ :eachElement :eachColor :eachIndex |
+		itemDataBinder: [ :eachElement :eachColor :eachIndex | 
 			eachElement
 				text: (eachColor asRopedText foreground: eachColor contrastingBlackAndWhiteColor);
 				background: eachColor ];

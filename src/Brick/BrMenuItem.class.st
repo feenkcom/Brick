@@ -104,6 +104,24 @@ BrMenuItem >> notifySelectionChanged [
 BrMenuItem >> onSelectionChanged [
 ]
 
+{ #category : #'as yet unclassified' }
+BrMenuItem >> requestAct [
+	super requestAct.
+
+	announcer
+		announce: (BrMenuModelActionRequestedAnnouncement new menuModel: self)
+]
+
+{ #category : #'api - navigation' }
+BrMenuItem >> requestNavigateHere [
+	"Subclasses may perform actions on navigate in menus.
+	Must be executed from a UI process."
+
+	super requestNavigateHere.
+	self parentDo: [ :aParent | aParent requestNavigateHere ].
+	self select
+]
+
 { #category : #'api - selection' }
 BrMenuItem >> select [
 	^ self isSelected: true

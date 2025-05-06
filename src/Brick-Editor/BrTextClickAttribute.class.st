@@ -44,6 +44,6 @@ BrTextClickAttribute >> performAction: anEvent in: aTextEditor on: aTBrTextEdito
 ]
 
 { #category : #events }
-BrTextClickAttribute >> wantsEvent: anEvent in: aTextEditor [
+BrTextClickAttribute >> wantsEvent: anEvent [
 	^ anEvent isKindOf: BlClickEvent
 ]

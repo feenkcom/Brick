@@ -20,13 +20,13 @@ BrAsyncWidgetExamples >> asyncWidgetWithContents [
 
 { #category : #accessing }
 BrAsyncWidgetExamples >> basicAsyncWidget [
-
 	<gtExample>
+	<return: #BrAsyncWidget>
 	| widget |
 	widget := BrAsyncWidget new.
-	self assert: widget errorBlock compiledBlock
-		= widget defaultErrorBlock compiledBlock.
-	self assert: widget pendingBlock compiledBlock
-		= widget defaultPendingBlock compiledBlock.
+	self
+		assert: widget errorBlock compiledBlock = widget defaultErrorBlock compiledBlock.
+	self
+		assert: widget pendingBlock compiledBlock = widget defaultPendingBlock compiledBlock.
 	^ widget
 ]

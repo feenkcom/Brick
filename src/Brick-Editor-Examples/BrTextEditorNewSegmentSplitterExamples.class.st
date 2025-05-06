@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrTextEditorNewSegmentSplitterExamples >> noAttributes [
 	<gtExample>
+	<return: #Array>
 	| text pieces |
 	text := 'Hello World' asRopedText.
 	pieces := BrTextEditorNewSegmentSplitter new
@@ -20,6 +21,7 @@ BrTextEditorNewSegmentSplitterExamples >> noAttributes [
 { #category : #accessing }
 BrTextEditorNewSegmentSplitterExamples >> withAdornments [
 	<gtExample>
+	<return: #Array>
 	| text pieces |
 	text := 'Hello World' asRopedText.
 	text
@@ -41,6 +43,7 @@ BrTextEditorNewSegmentSplitterExamples >> withAdornments [
 { #category : #accessing }
 BrTextEditorNewSegmentSplitterExamples >> withAttributes [
 	<gtExample>
+	<return: #Array>
 	| text pieces |
 	text := 'Hello World' asRopedText.
 	text

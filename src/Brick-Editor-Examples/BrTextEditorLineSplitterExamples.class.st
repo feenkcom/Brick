@@ -7,16 +7,18 @@ Class {
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> beReplaceTextAttribute [
 	<gtExample>
+	<return: #BrTextAdornmentDynamicAttribute>
 	^ BrTextAdornmentDynamicAttribute new
 		beReplace;
-		stencil: [ BlElement new 
-			size: 10@10; 
-			background: Color lightGray ]
+		stencil: [ BlElement new
+				size: 10 @ 10;
+				background: Color lightGray ]
 ]
 
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningEmptyCollection [
 	<gtExample>
+	<return: #BrTextAdornmentDynamicAttribute>
 	^ BrTextAdornmentDynamicAttribute new
 		beReplace;
 		stencil: [ #() ]
@@ -25,22 +27,22 @@ BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningEmptyCollecti
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> beReplaceTextAttributeReturningTwoElements [
 	<gtExample>
+	<return: #BrTextAdornmentDynamicAttribute>
 	^ BrTextAdornmentDynamicAttribute new
 		beReplace;
-		stencil: [ 
-			{ BlElement new 
-				size: 10@10; 
-				background: Color lightGray.
-			 BlElement new 
-				size: 10@10; 
-				background: Color gray } ]
+		stencil: [ {BlElement new
+					size: 10 @ 10;
+					background: Color lightGray.
+				BlElement new
+					size: 10 @ 10;
+					background: Color gray} ]
 ]
 
 { #category : #'examples - split subtext' }
 BrTextEditorLineSplitterExamples >> splitSub_Hello_from_HabaHelloFoo [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSubText aSplitter aStream |
-
 	aText := 'HabaHelloFoo' asRopedText.
 	aSubText := aText from: 5 to: 9.
 
@@ -59,11 +61,11 @@ BrTextEditorLineSplitterExamples >> splitSub_Hello_from_HabaHelloFoo [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningEmptyCollection_FollowedByLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aTextAttribute theAttributes |
-
 	aTextAttribute := self beReplaceTextAttributeReturningEmptyCollection.
 	aText := 'Hello' asRopedText attribute: aTextAttribute.
-	
+
 	self assert: aText size equals: 5.
 	theAttributes := (aText from: aText size to: aText size) iterator attributes.
 	self assert: theAttributes size equals: 1.
@@ -74,7 +76,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningEmptyCo
 	theAttributes := (aText from: aText size to: aText size) iterator attributes.
 	self assert: theAttributes size equals: 1.
 	self assert: theAttributes first equals: aTextAttribute.
-	
+
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
@@ -83,7 +85,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningEmptyCo
 	self assert: aStream segments size equals: 2.
 	self assert: aStream segments first textStart equals: 0.
 	self assert: aStream segments first textEnd equals: 5.
-	
+
 	self assert: aStream segments second textStart equals: 6.
 	self assert: aStream segments second textEnd equals: 6.
 
@@ -93,11 +95,11 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningEmptyCo
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningTwoElements_FollowedByLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aTextAttribute theAttributes |
-
 	aTextAttribute := self beReplaceTextAttributeReturningTwoElements.
 	aText := 'Hello' asRopedText attribute: aTextAttribute.
-	
+
 	self assert: aText size equals: 5.
 	theAttributes := (aText from: aText size to: aText size) iterator attributes.
 	self assert: theAttributes size equals: 1.
@@ -108,7 +110,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningTwoElem
 	theAttributes := (aText from: aText size to: aText size) iterator attributes.
 	self assert: theAttributes size equals: 1.
 	self assert: theAttributes first equals: aTextAttribute.
-	
+
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
@@ -117,7 +119,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningTwoElem
 	self assert: aStream segments size equals: 2.
 	self assert: aStream segments first textStart equals: 0.
 	self assert: aStream segments first textEnd equals: 5.
-	
+
 	self assert: aStream segments second textStart equals: 6.
 	self assert: aStream segments second textEnd equals: 6.
 
@@ -127,11 +129,11 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtributeReturningTwoElem
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtribute_FollowedByLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aTextAttribute theAttributes |
-
 	aTextAttribute := self beReplaceTextAttribute.
 	aText := 'Hello' asRopedText attribute: aTextAttribute.
-	
+
 	self assert: aText size equals: 5.
 	theAttributes := (aText from: aText size to: aText size) iterator attributes.
 	self assert: theAttributes size equals: 1.
@@ -142,7 +144,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtribute_FollowedByLf [
 	theAttributes := (aText from: aText size to: aText size) iterator attributes.
 	self assert: theAttributes size equals: 1.
 	self assert: theAttributes first equals: aTextAttribute.
-	
+
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
@@ -151,7 +153,7 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtribute_FollowedByLf [
 	self assert: aStream segments size equals: 2.
 	self assert: aStream segments first textStart equals: 0.
 	self assert: aStream segments first textEnd equals: 5.
-	
+
 	self assert: aStream segments second textStart equals: 6.
 	self assert: aStream segments second textEnd equals: 6.
 
@@ -161,8 +163,8 @@ BrTextEditorLineSplitterExamples >> split_BeReplacedTextAtribute_FollowedByLf [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_Cr [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
 	aText := String cr asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
@@ -176,7 +178,7 @@ BrTextEditorLineSplitterExamples >> split_Cr [
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment textEndDelimited equals: 1.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 1.
@@ -189,28 +191,28 @@ BrTextEditorLineSplitterExamples >> split_Cr [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CrCr [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, String cr) asRopedText.
+	aText := (String cr , String cr) asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 3.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment textEndDelimited equals: 1.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 1.
 	self assert: aSegment textEndDelimited equals: 2.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 2.
 	self assert: aSegment textEnd equals: 2.
@@ -223,22 +225,22 @@ BrTextEditorLineSplitterExamples >> split_CrCr [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CrLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, String lf) asRopedText.
+	aText := (String cr , String lf) asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 2.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment textEndDelimited equals: 2.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 2.
 	self assert: aSegment textEnd equals: 2.
@@ -251,28 +253,28 @@ BrTextEditorLineSplitterExamples >> split_CrLf [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CrLfCrLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, String lf, String cr, String lf) asRopedText.
+	aText := (String cr , String lf , String cr , String lf) asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 3.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment textEndDelimited equals: 2.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 2.
 	self assert: aSegment textEnd equals: 2.
 	self assert: aSegment textEndDelimited equals: 4.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 4.
 	self assert: aSegment textEnd equals: 4.
@@ -285,21 +287,21 @@ BrTextEditorLineSplitterExamples >> split_CrLfCrLf [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_Cra [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, 'a') asRopedText.
+	aText := (String cr , 'a') asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 2.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 2.
@@ -311,9 +313,9 @@ BrTextEditorLineSplitterExamples >> split_Cra [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCr [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, 'a', String cr) asRopedText.
+	aText := (String cr , 'a' , String cr) asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
@@ -325,12 +327,12 @@ BrTextEditorLineSplitterExamples >> split_CraCr [
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 2.
 	self assert: aSegment text asString equals: 'a'.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 3.
 	self assert: aSegment textEnd equals: 3.
@@ -342,26 +344,26 @@ BrTextEditorLineSplitterExamples >> split_CraCr [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCrLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, 'a', String cr, String lf) asRopedText.
+	aText := (String cr , 'a' , String cr , String lf) asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 3.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 2.
 	self assert: aSegment text asString equals: 'a'.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 4.
 	self assert: aSegment textEnd equals: 4.
@@ -373,26 +375,26 @@ BrTextEditorLineSplitterExamples >> split_CraCrLf [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCrLfb [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, 'a', String cr, String lf, 'b') asRopedText.
+	aText := (String cr , 'a' , String cr , String lf , 'b') asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 3.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 2.
 	self assert: aSegment text asString equals: 'a'.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 4.
 	self assert: aSegment textEnd equals: 5.
@@ -404,34 +406,35 @@ BrTextEditorLineSplitterExamples >> split_CraCrLfb [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_CraCrLfbLf [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := (String cr, 'a', String cr, String lf, 'b', String lf) asRopedText.
+	aText := (String cr , 'a' , String cr , String lf , 'b' , String lf)
+			asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 4.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
 	self assert: aSegment textEndDelimited equals: 1.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 1.
 	self assert: aSegment textEnd equals: 2.
 	self assert: aSegment textEndDelimited equals: 4.
 	self assert: aSegment text asString equals: 'a'.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 4.
 	self assert: aSegment textEnd equals: 5.
 	self assert: aSegment textEndDelimited equals: 6.
 	self assert: aSegment text asString equals: 'b'.
-	
+
 	aSegment := aStream segments fourth.
 	self assert: aSegment textStart equals: 6.
 	self assert: aSegment textEnd equals: 6.
@@ -443,8 +446,8 @@ BrTextEditorLineSplitterExamples >> split_CraCrLfbLf [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_Hello [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
 	aText := 'Hello' asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
@@ -464,10 +467,13 @@ BrTextEditorLineSplitterExamples >> split_Hello [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacement [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream |
-
-	aText := ('Hello', String cr, 'World') asRopedText.
-	(aText from: 4 to: 8) replacingAdornment: [ BlElement new size: 6@6; background: Color red ].
+	aText := ('Hello' , String cr , 'World') asRopedText.
+	(aText from: 4 to: 8)
+		replacingAdornment: [ BlElement new
+				size: 6 @ 6;
+				background: Color red ].
 
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
@@ -484,12 +490,16 @@ BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacement
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacementAndAppending [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream |
-
-	aText := ('Hello', String cr, 'World') asRopedText.
+	aText := ('Hello' , String cr , 'World') asRopedText.
 	(aText from: 4 to: 8)
-		replacingAdornment: [ BlElement new size: 6@6; background: Color red ];
-		appendingAdornment: [ BlElement new size: 6@6; background: Color blue ].
+		replacingAdornment: [ BlElement new
+				size: 6 @ 6;
+				background: Color red ];
+		appendingAdornment: [ BlElement new
+				size: 6 @ 6;
+				background: Color blue ].
 
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
@@ -506,10 +516,13 @@ BrTextEditorLineSplitterExamples >> split_HelloCrBeautifulCrWorldWithReplacement
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloCrWorldWithReplacement [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream |
-
-	aText := ('Hello', String cr, 'World') asRopedText.
-	(aText from: 4 to: 8) replacingAdornment: [ BlElement new size: 6@6; background: Color red ].
+	aText := ('Hello' , String cr , 'World') asRopedText.
+	(aText from: 4 to: 8)
+		replacingAdornment: [ BlElement new
+				size: 6 @ 6;
+				background: Color red ].
 
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
@@ -526,10 +539,13 @@ BrTextEditorLineSplitterExamples >> split_HelloCrWorldWithReplacement [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_HelloSpaceWorldWithReplacementOfSpace [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream |
-
-	aText := ('Hello World') asRopedText.
-	(aText from: 5 to: 7) replacingAdornment: [ BlElement new size: 6@6; background: Color red ].
+	aText := 'Hello World' asRopedText.
+	(aText from: 5 to: 7)
+		replacingAdornment: [ BlElement new
+				size: 6 @ 6;
+				background: Color red ].
 
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
@@ -546,8 +562,8 @@ BrTextEditorLineSplitterExamples >> split_HelloSpaceWorldWithReplacementOfSpace 
 { #category : #'examples - split subtext' }
 BrTextEditorLineSplitterExamples >> split_Hello_from_HabaHelloFoo [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream |
-
 	aText := 'HabaHelloFoo' asRopedText.
 
 	aSplitter := self textLineSplitter.
@@ -565,16 +581,16 @@ BrTextEditorLineSplitterExamples >> split_Hello_from_HabaHelloFoo [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_a [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := ('a') asRopedText.
+	aText := 'a' asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 1.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 1.
@@ -586,16 +602,16 @@ BrTextEditorLineSplitterExamples >> split_a [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_empty [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
 	aText := '' asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
-	
+
 	aSplitter split: aText in: aStream.
-	
+
 	self assert: aStream segments size equals: 1.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 0.
@@ -607,31 +623,31 @@ BrTextEditorLineSplitterExamples >> split_empty [
 { #category : #'examples - split' }
 BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 	<gtExample>
+	<return: #BrEditorSegmentStream>
 	| aText aSplitter aStream aSegment |
-
-	aText := ('ha', String cr, String cr, 'ba', String cr) asRopedText.
+	aText := ('ha' , String cr , String cr , 'ba' , String cr) asRopedText.
 	aSplitter := self textLineSplitter.
 	aStream := self textSegmentStream.
 
 	aSplitter split: aText in: aStream.
 
 	self assert: aStream segments size equals: 4.
-	
+
 	aSegment := aStream segments first.
 	self assert: aSegment textStart equals: 0.
 	self assert: aSegment textEnd equals: 2.
 	self assert: aSegment text asString equals: 'ha'.
-	
+
 	aSegment := aStream segments second.
 	self assert: aSegment textStart equals: 3.
 	self assert: aSegment textEnd equals: 3.
 	self assert: aSegment text asString equals: ''.
-	
+
 	aSegment := aStream segments third.
 	self assert: aSegment textStart equals: 4.
 	self assert: aSegment textEnd equals: 6.
 	self assert: aSegment text asString equals: 'ba'.
-	
+
 	aSegment := aStream segments fourth.
 	self assert: aSegment textStart equals: 7.
 	self assert: aSegment textEnd equals: 7.
@@ -643,6 +659,7 @@ BrTextEditorLineSplitterExamples >> split_haCrCrbaCr [
 { #category : #'examples - instance creation' }
 BrTextEditorLineSplitterExamples >> textLineSplitter [
 	<gtExample>
+	<return: #BrTextEditorSplitter>
 	^ BrTextEditorSplitter new
 		segmentClass: BrTextEditorParagraphSegment;
 		yourself
@@ -651,6 +668,6 @@ BrTextEditorLineSplitterExamples >> textLineSplitter [
 { #category : #'examples - instance creation' }
 BrTextEditorLineSplitterExamples >> textSegmentStream [
 	<gtExample>
-
+	<return: #BrEditorSegmentStream>
 	^ BrEditorSegmentStream new
 ]

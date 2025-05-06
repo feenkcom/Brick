@@ -13,6 +13,7 @@ Class {
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> basicUpdater [
 	<gtExample>
+	<return: #BrElementUpdater>
 	| anUpdater |
 	anUpdater := BrElementUpdater new.
 	self assert: anUpdater element isNil.
@@ -32,23 +33,26 @@ BrElementUpdaterByScripterExamples >> defaultBackgroundColor [
 { #category : #'examples - support' }
 BrElementUpdaterByScripterExamples >> element [
 	<gtExample>
+	<return: #BlElement>
 	^ BlElement new
 		background: self defaultBackgroundColor;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent.
-			c margin: (BlInsets all: 10) ].
+			c margin: (BlInsets all: 10) ]
 ]
 
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> postponedDuration [
 	<gtExample>
+	<return: #Duration>
 	^ 300 milliSeconds
 ]
 
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> postponedUpdateRequest_AfterElementAddedInSceneGraph [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self postponedUpdaterInScripterAndElementInSpace.
 
@@ -89,6 +93,7 @@ BrElementUpdaterByScripterExamples >> postponedUpdateRequest_AfterElementAddedIn
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> postponedUpdateRequest_BeforeElementAddedInSceneGraph [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self postponedUpdaterInScripterAndElementNotInSpace.
 
@@ -166,6 +171,7 @@ BrElementUpdaterByScripterExamples >> postponedUpdateRequest_BeforeElementAddedI
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> postponedUpdaterInScripterAndElementInSpace [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithModel: [ :aTarget :theScripter | self updaterWithElementAndPostponedAction ]
@@ -177,6 +183,7 @@ BrElementUpdaterByScripterExamples >> postponedUpdaterInScripterAndElementInSpac
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> postponedUpdaterInScripterAndElementNotInSpace [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripter.
 	aScripter
@@ -194,6 +201,7 @@ BrElementUpdaterByScripterExamples >> postponedUpdaterInScripterAndElementNotInS
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updateRequest_AfterElementAddedInSceneGraph [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self updaterInScripterAndElementInSpace.
 
@@ -234,6 +242,7 @@ BrElementUpdaterByScripterExamples >> updateRequest_AfterElementAddedInSceneGrap
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updateRequest_BeforeElementAddedInSceneGraph [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self updaterInScripterAndElementNotInSpace.
 
@@ -308,6 +317,7 @@ BrElementUpdaterByScripterExamples >> updatedBackgroundColor [
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updaterInScripterAndElementInSpace [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithModel: [ :aTarget :theScripter | self updaterWithElementAndAction ]
@@ -319,6 +329,7 @@ BrElementUpdaterByScripterExamples >> updaterInScripterAndElementInSpace [
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updaterInScripterAndElementNotInSpace [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scripter.
 	aScripter
@@ -336,27 +347,28 @@ BrElementUpdaterByScripterExamples >> updaterInScripterAndElementNotInSpace [
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updaterWithElementAndAction [
 	<gtExample>
+	<return: #BrElementUpdater>
 	| anUpdater anElement anAction |
 	anUpdater := self basicUpdater.
-	
+
 	anElement := self element.
-	anAction := [ :theElement | 
-		theElement background: self updatedBackgroundColor ].
-	
+	anAction := [ :theElement | theElement background: self updatedBackgroundColor ].
+
 	anUpdater element: anElement.
 	anUpdater action: anAction.
-	
+
 	self assert: anUpdater element equals: anElement.
 	self assert: anUpdater action equals: anAction.
 	self assert: anUpdater isUpdateRequested not.
 	self assert: anElement taskQueue tasks size equals: 0.
-	
+
 	^ anUpdater
 ]
 
 { #category : #'examples - updater' }
 BrElementUpdaterByScripterExamples >> updaterWithElementAndPostponedAction [
 	<gtExample>
+	<return: #BrElementUpdater>
 	| anUpdater |
 	anUpdater := self updaterWithElementAndAction.
 

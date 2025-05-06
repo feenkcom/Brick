@@ -27,6 +27,13 @@ BrMenuItemTypeBuilder >> buildElementFromItemType: anItemType [
 	^ BrMenuInvalidItemElement new
 ]
 
+{ #category : #private }
+BrMenuItemTypeBuilder >> decorateType: aType [
+	"Subclasses may add type decorator"
+
+	
+]
+
 { #category : #visiting }
 BrMenuItemTypeBuilder >> visitMenuDecoratingModel: aMenuModel [
 	| anOriginalMenuModel |
@@ -37,21 +44,33 @@ BrMenuItemTypeBuilder >> visitMenuDecoratingModel: aMenuModel [
 ]
 
 { #category : #visiting }
+BrMenuItemTypeBuilder >> visitMenuExplicitItem: aMenuModel [
+	| aType |
+	aType := BrMenuElementClassType new elementClass: BrMenuExplicitItemElement.
+	self decorateType: aType.
+	^ aType
+]
+
+{ #category : #visiting }
 BrMenuItemTypeBuilder >> visitMenuLabelModel: aLabelModel [
 	^ BlInfiniteItemType invalid
 ]
 
 { #category : #visiting }
 BrMenuItemTypeBuilder >> visitMenuLabeledItem: aMenuModel withElementClass: anElementClass [
-	| aLabelType |
+	| aLabelType aType |
 	aLabelType := aMenuModel labelModel acceptVisitor: self.
 
 	aLabelType class = BrMenuElementClassType ifFalse: [ 
 		^ self visitMenuLabeledItem: aMenuModel ].
 	
-	^ BrMenuLabeledElementClassType new 
+	aType := BrMenuLabeledElementClassType new 
 		elementClass: anElementClass;
-		labelElementClass: aLabelType elementClass
+		labelElementClass: aLabelType elementClass.
+		
+	self decorateType: aType.
+	
+	^ aType
 ]
 
 { #category : #visiting }

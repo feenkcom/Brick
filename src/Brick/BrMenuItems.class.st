@@ -110,6 +110,16 @@ BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString shortcut:
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemId: anId label: aLabelString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem id: anId.
+	aMenuItem label: aLabelString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemId: anId label: aText preview: aPreviewText action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.
@@ -126,6 +136,15 @@ BrMenuItems >> addItemId: anId label: aLabelString shortcut: aShortcutString act
 	aMenuItem id: anId.
 	aMenuItem label: aLabelString shortcut: aShortcutString.
 	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemId: anId stencil: aStencil [
+	| aMenuItem |
+	aMenuItem := BrMenuExplicitItem new.
+	aMenuItem id: anId.
+	aMenuItem stencil: aStencil.
 	self addItem: aMenuItem
 ]
 
@@ -192,6 +211,14 @@ BrMenuItems >> addItemLabel: aText submenu: aSubmenu [
 	aMenuItem := BrMenuSubmenuItem new.
 	aMenuItem label: aText.
 	aMenuItem submenu: aSubmenu.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
+BrMenuItems >> addItemStencil: aStencil [
+	| aMenuItem |
+	aMenuItem := BrMenuExplicitItem new.
+	aMenuItem stencil: aStencil.
 	self addItem: aMenuItem
 ]
 
@@ -305,6 +332,7 @@ BrMenuItems >> items [
 { #category : #'add / remove' }
 BrMenuItems >> items: aCollection [
 	groups := nil.
+	selectedItem := nil.
 	aCollection do: [ :eachItem | eachItem parent: self ].
 	self items removeAll.
 	self items addAll: aCollection.

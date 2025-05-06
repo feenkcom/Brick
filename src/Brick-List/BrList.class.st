@@ -62,15 +62,19 @@ BrList >> initializeEventHandlers [
 					rowIndex: anEvent rowIndex;
 					rowValue: anEvent rowValue) ] ];
 		addShortcut: (BlShortcutWithAction new
+			name: 'Select next list item';
 			combination: BlKeyCombination builder arrowDown build;
 			action: [ self selectNext; scrollToSelection ]);
 		addShortcut: (BlShortcutWithAction new
+			name: 'Select previous list item';
 			combination: BlKeyCombination builder arrowUp build;
 			action: [ self selectPrevious; scrollToSelection ]);
 		addShortcut: (BlShortcutWithAction new
+			name: 'Select the first menu item';
 			combination: BlKeyCombination builder primary home build;
 			action: [ self selectFirst; scrollToSelection ]);
 		addShortcut: (BlShortcutWithAction new
+			name: 'Select the last menu item';
 			combination: BlKeyCombination builder primary end build;
 			action: [ self selectLast; scrollToSelection ] )
 ]

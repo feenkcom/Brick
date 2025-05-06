@@ -69,52 +69,55 @@ BrTextEditorCursorChangeCommand >> printOn: aStream [
 { #category : #executing }
 BrTextEditorCursorChangeCommand >> processAttributesOn: aTextEditor [
 	| anEditorText thePotentialHandlerTextInterval theEventHandlingAttributes eventHandlingAttributesOutside eventHandlingAttributesInside |
-
 	anEditorText := aTextEditor text.
 
-	self position > anEditorText size
-		ifTrue: [ ^ self ].
+	self position > anEditorText size ifTrue: [ ^ self ].
 
-	self position <= 0
-		ifTrue: [ ^ self ].
-	
-	"only chars to the left from the cursor handle cursor events"
+	self position <= 0 ifTrue: [ ^ self ].	"only chars to the left from the cursor handle cursor events"
 	thePotentialHandlerTextInterval := self position to: self position.
 
 	theEventHandlingAttributes := ((thePotentialHandlerTextInterval
-		flatCollect: [ :eachTextIndex | anEditorText attributesAt: eachTextIndex ])
+			flatCollect: [ :eachTextIndex | anEditorText attributesAt: eachTextIndex ])
 			select: [ :eachAttribute | eachAttribute isEventHandler ]) asSet.
 
-	theEventHandlingAttributes
-		ifEmpty: [ ^ self ].
-	
+	theEventHandlingAttributes ifEmpty: [ ^ self ].
+
 	eventHandlingAttributesOutside := OrderedCollection new.
 	eventHandlingAttributesInside := OrderedCollection new.
 
 	anEditorText
 		findAttributes: theEventHandlingAttributes
-		indicesDo: [ :eachEventHandlerStart :eachEventHandlerEnd :eachEventHandlerAttribute |
-			aTextEditor cursors do: [ :eachCursor |
-				(eachCursor position between: eachEventHandlerStart and: eachEventHandlerEnd)
-					ifTrue: [ eventHandlingAttributesInside add: eachEventHandlerAttribute -> (eachEventHandlerStart to: eachEventHandlerEnd) ]
-					ifFalse: [ eventHandlingAttributesOutside add: eachEventHandlerAttribute -> (eachEventHandlerStart to: eachEventHandlerEnd) ] ] ].
-	
-	eventHandlingAttributesOutside do: [ :eachEventHandlerAttributeAndInterval |
-		| eachAttribute eachInterval anEvent |
-		
-		eachAttribute := eachEventHandlerAttributeAndInterval key.
-		eachInterval := eachEventHandlerAttributeAndInterval value.
+		indicesDo: [ :eachEventHandlerStart :eachEventHandlerEnd :eachEventHandlerAttribute | 
+			aTextEditor cursors
+				do: [ :eachCursor | 
+					(eachCursor position between: eachEventHandlerStart and: eachEventHandlerEnd)
+						ifTrue: [ eventHandlingAttributesInside
+								add: eachEventHandlerAttribute -> (eachEventHandlerStart to: eachEventHandlerEnd) ]
+						ifFalse: [ eventHandlingAttributesOutside
+								add: eachEventHandlerAttribute -> (eachEventHandlerStart to: eachEventHandlerEnd) ] ] ].
 
-		anEvent := BrTextCursorAttributeLeaveEvent new interval: eachInterval.
-		(eachAttribute wantsEvent: anEvent in: aTextEditor)
-			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ].
+	eventHandlingAttributesOutside
+		do: [ :eachEventHandlerAttributeAndInterval | 
+			| eachAttribute eachInterval anEvent |
+			eachAttribute := eachEventHandlerAttributeAndInterval key.
+			eachInterval := eachEventHandlerAttributeAndInterval value.
 
-	eventHandlingAttributesInside do: [ :eachEventHandlerAttributeAndInterval |
-		| eachAttribute eachInterval anEvent |
-		
-		eachAttribute := eachEventHandlerAttributeAndInterval key.
-		eachInterval := eachEventHandlerAttributeAndInterval value.
-		anEvent := BrTextCursorAttributeEnterEvent new interval: eachInterval.
-		(eachAttribute wantsEvent: anEvent in: aTextEditor)
-			ifTrue: [ eachAttribute handleEvent: anEvent in: aTextEditor on: nil ] ]
+			anEvent := BrTextCursorAttributeLeaveEvent new interval: eachInterval.
+			(eachAttribute wantsEvent: anEvent)
+				ifTrue: [ eachAttribute
+						handleEvent: anEvent
+						in: aTextEditor
+						on: nil ] ].
+
+	eventHandlingAttributesInside
+		do: [ :eachEventHandlerAttributeAndInterval | 
+			| eachAttribute eachInterval anEvent |
+			eachAttribute := eachEventHandlerAttributeAndInterval key.
+			eachInterval := eachEventHandlerAttributeAndInterval value.
+			anEvent := BrTextCursorAttributeEnterEvent new interval: eachInterval.
+			(eachAttribute wantsEvent: anEvent)
+				ifTrue: [ eachAttribute
+						handleEvent: anEvent
+						in: aTextEditor
+						on: nil ] ]
 ]

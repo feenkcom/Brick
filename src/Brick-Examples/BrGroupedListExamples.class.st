@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 BrGroupedListExamples >> basic [
 	<gtExample>
+	<return: #BrGroupedList>
 	| items even odd groups |
 	items := 1 to: 20.
 	even := items asAsyncStream select: #even.

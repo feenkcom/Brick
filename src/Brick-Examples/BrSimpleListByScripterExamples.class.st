@@ -9,6 +9,7 @@ Class {
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithElement: [ BrSimpleListExamples new horizontalAndVerticalNumbers ].
@@ -28,6 +29,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_DownBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self horizontalAndVerticalLists.
 
@@ -59,6 +61,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_DownBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_LeftBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self horizontalAndVerticalLists_RightBy.
 
@@ -90,6 +93,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_LeftBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_RightBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self horizontalAndVerticalLists.
 
@@ -121,6 +125,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_RightBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> horizontalAndVerticalLists_UpBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self horizontalAndVerticalLists_DownBy.
 
@@ -152,6 +157,7 @@ BrSimpleListByScripterExamples >> horizontalAndVerticalLists_UpBy [
 { #category : #'examples - horizontal list' }
 BrSimpleListByScripterExamples >> horizontalList [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithElement: [ BrSimpleListExamples new horizontalNumbers ].
@@ -170,6 +176,7 @@ BrSimpleListByScripterExamples >> horizontalList [
 { #category : #'examples - horizontal list' }
 BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_LeftBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scrollHorizontallyHorizontalList_RightBy.
 
@@ -199,6 +206,7 @@ BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_LeftBy [
 { #category : #'examples - horizontal list' }
 BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_RightBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self horizontalList.
 
@@ -228,6 +236,7 @@ BrSimpleListByScripterExamples >> scrollHorizontallyHorizontalList_RightBy [
 { #category : #'examples - vertical list' }
 BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_DownBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self verticalList.
 
@@ -257,6 +266,7 @@ BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_DownBy [
 { #category : #'examples - vertical list' }
 BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_UpBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self scrollVerticallyVerticalList_DownBy.
 
@@ -286,6 +296,7 @@ BrSimpleListByScripterExamples >> scrollVerticallyVerticalList_UpBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithElement: [ BrSimpleListExamples new verticalAndHorizontalNumbers ].
@@ -305,6 +316,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_DownBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self verticalAndHorizontalLists.
 
@@ -336,6 +348,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_DownBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_LeftBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self verticalAndHorizontalLists_RightBy.
 
@@ -367,6 +380,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_LeftBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_RightBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self verticalAndHorizontalLists.
 
@@ -398,6 +412,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_RightBy [
 { #category : #'examples - nested lists' }
 BrSimpleListByScripterExamples >> verticalAndHorizontalLists_UpBy [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self verticalAndHorizontalLists_DownBy.
 
@@ -429,6 +444,7 @@ BrSimpleListByScripterExamples >> verticalAndHorizontalLists_UpBy [
 { #category : #'examples - vertical list' }
 BrSimpleListByScripterExamples >> verticalList [
 	<gtExample>
+	<return: #BlScripter>
 	| aScripter |
 	aScripter := self
 			scripterWithElement: [ BrSimpleListExamples new verticalNumbers ].
