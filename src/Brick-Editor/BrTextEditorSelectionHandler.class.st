@@ -30,11 +30,20 @@ BrTextEditorSelectionHandler >> dragEvent: anEvent [
 			format: { currentIndex . 0 to: anEditor text size } ].
 	
 	startIndex ifNil: [ startIndex := currentIndex ].
-
-	anEditor selecter
-		overwrite;
-		from: startIndex to: currentIndex;
-		select
+	
+	startIndex = currentIndex
+		ifTrue: [
+			anEditor deselecter
+				all;
+				deselect.
+			anEditor navigator
+				  moveTo: currentIndex;
+				  apply ]
+		ifFalse: [
+			anEditor selecter
+				overwrite;
+				from: startIndex to: currentIndex;
+				select ]
 ]
 
 { #category : #'dnd handlers' }
