@@ -33,8 +33,7 @@ BrTextEditorSelectionHandler >> dragEvent: anEvent [
 
 	anEditor selecter
 		overwrite;
-		from: (startIndex min: currentIndex)
-			to: (startIndex max: currentIndex);
+		from: startIndex to: currentIndex;
 		select
 ]
 
