@@ -959,7 +959,7 @@ BrTextEditorModel >> recordDeselection: aMonotoneTextSelection [
 	(self selection + self selectionRecorder selection) isEmpty
 		ifTrue: [ ^ self ].
 		
-	self moveCursorTo: (self selection + self selectionRecorder selection) to
+	"self moveCursorTo: (self selection + self selectionRecorder selection) to"
 ]
 
 { #category : #'private - selection' }
@@ -969,7 +969,7 @@ BrTextEditorModel >> recordSelection: aMonotoneTextSelection [
 	(self selection + self selectionRecorder selection) isEmpty
 		ifTrue: [ ^ self ].
 		
-	self moveCursorTo: (self selection + self selectionRecorder selection) to
+	"self moveCursorTo: (self selection + self selectionRecorder selection) to"
 ]
 
 { #category : #'text - undo/redo' }

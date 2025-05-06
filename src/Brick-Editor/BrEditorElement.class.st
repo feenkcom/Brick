@@ -6,7 +6,8 @@ Class {
 	#superclass : #BlInfiniteElement,
 	#instVars : [
 		'hasFocus',
-		'textStyleHandler'
+		'textStyleHandler',
+		'textScrollOnModifyHandler'
 	],
 	#category : #'Brick-Editor-UI'
 }
@@ -31,8 +32,10 @@ BrEditorElement >> editor [
 { #category : #accessing }
 BrEditorElement >> editor: aBrTextEditor [
 	self editor removeEventHandler: textStyleHandler.
+	self editor removeEventHandler: textScrollOnModifyHandler.
 	self dataSource: aBrTextEditor.
 	self editor addEventHandler: textStyleHandler.
+	self editor addEventHandler: textScrollOnModifyHandler.
 ]
 
 { #category : #'focus testing' }
@@ -54,7 +57,11 @@ BrEditorElement >> initialize [
 	
 	textStyleHandler := BlEventHandler
 		on: BrTextEditorTextStyleRequested
-		do: [ :anEvent | self privateDoStyleTextAndAfterDo: anEvent afterAction ]
+		do: [ :anEvent | self privateDoStyleTextAndAfterDo: anEvent afterAction ].
+		
+	textScrollOnModifyHandler := BlEventHandler
+		on: BrTextEditorModifiedEvent
+		do: [ :anEvent | self privateScrollWhenTextModified: anEvent ].
 ]
 
 { #category : #accessing }
@@ -66,6 +73,20 @@ BrEditorElement >> privateDoStyleTextAndAfterDo: aBlock [
 	self editor stylerStrategy
 		styleTextInEditorElement: self
 		thenDo: aBlock
+]
+
+{ #category : #initialization }
+BrEditorElement >> privateScrollWhenTextModified: anEvent [
+	| allCursors aMaxIndex aTargetLine |
+	anEvent isDueToInsertion ifFalse: [ ^ self ].
+
+	allCursors := self editor cursors allCursors
+		ifEmpty: [ ^ self ].
+
+	aMaxIndex := (allCursors detectMax: [ :each | each position ]) position.
+	aTargetLine := (self text from: 1 to: aMaxIndex) lineCount.
+
+	self scrollToPosition: aTargetLine + 1
 ]
 
 { #category : #scrolling }
