@@ -84,6 +84,7 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 		ifEmpty: [ ^ self ].
 
 	aMaxIndex := (allCursors detectMax: [ :each | each position ]) position.
+	aMaxIndex := aMaxIndex min: self text size.
 	aTargetLine := (self text from: 1 to: aMaxIndex) lineCount.
 
 	self scrollToPosition: aTargetLine + 1
