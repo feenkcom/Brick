@@ -19,6 +19,11 @@ BrTextEditorModifiedEvent >> editCommand: anEditCommand [
 	editCommand := anEditCommand
 ]
 
+{ #category : #testing }
+BrTextEditorModifiedEvent >> isDueToInsertion [
+	^ reason isKindOf: BlTextStringsInserted
+]
+
 { #category : #accessing }
 BrTextEditorModifiedEvent >> reason [
 	^ reason

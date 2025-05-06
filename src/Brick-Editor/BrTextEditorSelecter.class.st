@@ -180,14 +180,18 @@ BrTextEditorSelecter >> findExistingSelectionStartBefore: aTextIndex within: aTe
 
 { #category : #'api - configuration' }
 BrTextEditorSelecter >> from: aFromIndex to: aToIndex [
+	| aMinIndex aMaxIndex |
 	self assertUIProcess.
 
 	aFromIndex = aToIndex
 		ifTrue: [ ^ self ].
 	
+	aMinIndex := aFromIndex min: aToIndex.
+	aMaxIndex := aFromIndex max: aToIndex.
+	
 	commands add: (BrExtendSelectionCommand new 
 		editor: editor;
-		toSelect: { BlSelection from: aFromIndex to: aToIndex };
+		toSelect: { BlSelection from: aMinIndex to: aMaxIndex };
 		toAddCursor: aToIndex;
 		toRemoveCursors: self cursors allCursors)
 ]
@@ -553,17 +557,6 @@ BrTextEditorSelecter >> selectionUnitAt: aTextIndex [
 					findWordAt: aTextIndex
 					withClassifier: editor doubleClickWordClassifier ].
 	self from: aUnitInterval first to: aUnitInterval last
-]
-
-{ #category : #private }
-BrTextEditorSelecter >> updateCursors [
-	| aNavigator |
-	
-	aNavigator := self editor navigator.
-	aNavigator dueTo: self.
-	aNavigator removeAll.
-	self selection do: [ :aMonotoneSelection | aNavigator addAt: aMonotoneSelection to ].
-	aNavigator apply
 ]
 
 { #category : #'api - configuration' }
