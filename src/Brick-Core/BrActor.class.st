@@ -232,6 +232,18 @@ BrActor >> owner [
 	^ self widget
 ]
 
+{ #category : #'event management' }
+BrActor >> removeEventHandler: anEventHandler [
+	self
+		widgetDo: [ :aWidget | 
+			aWidget
+				removeEventHandlersSuchThat: [ :eachHandler | 
+					(eachHandler isKindOf: BlEventForwarder)
+						and: [ eachHandler eventHandler == anEventHandler
+								and: [ eachHandler eventTarget == self ] ] ] ].
+	self eventDispatcher removeEventHandler: anEventHandler
+]
+
 { #category : #'private - event management' }
 BrActor >> removeEventHandlersFromWidget [
 	self widget removeEventHandlersSuchThat: [ :eachEventHandler |
