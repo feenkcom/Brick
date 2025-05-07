@@ -68,6 +68,7 @@ BrTextEditorSelecter >> extendToEnd [
 { #category : #accessing }
 BrTextEditorSelecter >> extendToIndex: anIndex [
 	| cursorPosition |
+	self cursors isEmpty ifTrue: [ ^ self ].
 	cursorPosition := self cursors first position.
 	anIndex > cursorPosition
 		ifTrue: [ self from: cursorPosition to: anIndex ]
