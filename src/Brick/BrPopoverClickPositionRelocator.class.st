@@ -35,7 +35,7 @@ BrPopoverClickPositionRelocator >> initialize [
 { #category : #'api - relocating' }
 BrPopoverClickPositionRelocator >> mouseEvent: anEvent given: anAnchorElement [
 	super mouseEvent: anEvent given: anAnchorElement.
-anEvent position asBeaconSignal emit.	
+
 	"Remember distance of the mouse event compared to the given anchor element"
 	topLeftShift := anAnchorElement globalPointToLocal: anEvent position
 ]
