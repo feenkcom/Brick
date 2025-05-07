@@ -59,6 +59,16 @@ BrEditorSearchTextPatternFinder >> markText: aText context: aMarkContext [
 { #category : #'api - styling' }
 BrEditorSearchTextPatternFinder >> markText: aText indexes: someItems context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
+	| oldAttributes |
+	oldAttributes := Array streamContents: [ :aStream | 
+		aText
+			findAttributesSuchThat: [ :eachAttribute | 
+				eachAttribute class = BrEditorSearchTextMark ]
+			indicesDo: [ :aStart :aStop :anAttribute | 
+				aStream nextPut: anAttribute ] ].
+
+	aText removeAttributes: oldAttributes.
+
 	someItems
 		doWithIndex: [ :eachItem :eachIndex | 
 			| isCurrentItem |
@@ -66,11 +76,11 @@ BrEditorSearchTextPatternFinder >> markText: aText indexes: someItems context: a
 			(aText from: eachItem startIndex to: eachItem stopIndex)
 				attribute: (BrEditorSearchTextMark new
 						index: eachIndex;
-						isCurrent: isCurrentItem);
-				highlight: (isCurrentItem
-						ifTrue: [ BrGlamorousColors failureBackgroundColor ]
-						ifFalse: [ BrGlamorousColors disabledButtonTextColor ]) ].
-
+						isCurrent: isCurrentItem;
+						paint: (isCurrentItem
+								ifTrue: [ BrGlamorousColors failureBackgroundColor ]
+								ifFalse: [ BrGlamorousColors disabledButtonTextColor ])) ].
+	
 	^ someItems
 ]
 
