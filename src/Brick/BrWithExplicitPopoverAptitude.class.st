@@ -653,6 +653,10 @@ BrWithExplicitPopoverAptitude >> showIn: aParentElement dueToEvent: anEventOrNil
 					build ].
 	aMenu ifNil: [ ^ self ].
 	
+	self widgetDo: [ :aWidget | 
+		anEventOrNil ifNotNil: [
+			self relocator mouseEvent: anEventOrNil given: aWidget ] ].
+	
 	self
 		widgetDo: [ :anAnchorElement | 
 			self fireEvent: (BrPopoverAboutToShowEvent new

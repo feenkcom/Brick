@@ -65,6 +65,28 @@ BrMenuWithScripterExamples >> buttonWithContextMenuAndTooltip [
 	^ anElement
 ]
 
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> buttonWithContextMenuWithoutMouseEventHandler [
+	<gtExample>
+	| aMenuItems aFrame aButton |
+	aMenuItems := BrMenuExamples new menuItems.
+	aMenuItems beListElementType.
+	aMenuItems items first select.
+	aFrame := self buttonWithContextMenu: aMenuItems.
+	aButton := (aFrame query // #'menu-context-menu-button') anyOne.
+	aButton beFocusable.
+	aButton requestFocus.
+	aButton aptitude
+		findActor: BrGlamorousWithExplicitContextMenuAptitude
+		ifFound: [ :anAptitude | anAptitude withoutMouseEventHandler ]
+		ifNone: [ 
+			NotFound
+				signalFor: BrGlamorousWithExplicitContextMenuAptitude
+				in: aButton ].
+	
+	^ aFrame
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> buttonWithDropdown [
 	<gtExample>
@@ -235,6 +257,28 @@ BrMenuWithScripterExamples >> buttonWithTooltipMenu: aMenuStencil [
 					c frame vertical alignCenter ];
 				addAptitude: (BrGlamorousWithExplicitTooltipAptitude
 						menu: aMenuStencil))
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> buttonWithTooltipWithoutMouseEventHandler [
+	<gtExample>
+	| aMenuItems aFrame aButton |
+	aMenuItems := BrMenuExamples new menuItems.
+	aMenuItems beListElementType.
+	aMenuItems items first select.
+	aFrame := self buttonWithTooltipMenu: aMenuItems.
+	aButton := (aFrame query // #'menu-tooltip-button') anyOne.
+	aButton beFocusable.
+	aButton requestFocus.
+	aButton aptitude
+		findActor: BrGlamorousWithExplicitTooltipAptitude
+		ifFound: [ :anAptitude | anAptitude withoutMouseEventHandler ]
+		ifNone: [ 
+			NotFound
+				signalFor: BrGlamorousWithExplicitTooltipAptitude
+				in: aButton ].
+	
+	^ aFrame
 ]
 
 { #category : #'examples - context menu' }
@@ -873,6 +917,108 @@ BrMenuWithScripterExamples >> displayButtonWithContextMenuAndTooltip [
 	^ self scripterWithElement: [ self buttonWithContextMenuAndTooltip ]
 ]
 
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenuWithoutMouseEventHandler [
+	<gtExample>
+	| aScripter |
+	aScripter := self
+			scripterWithElement: [ self buttonWithContextMenuWithoutMouseEventHandler ].
+
+	self assert: (aScripter root query // #'menu-context-menu-button') anyOne isFocused.
+	
+	^ aScripter
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenuWithoutMouseEventHandler_explicitlyShowWithMouseEvent [
+	<gtExample>
+	| aScripter aPoint aRectangle |
+	aScripter := self displayButtonWithContextMenuWithoutMouseEventHandler.
+
+	aScripter do
+		label: 'Explicitly show context menu';
+		block: [ :theButton | 
+			theButton aptitude
+				findActor: BrGlamorousWithExplicitContextMenuAptitude
+				ifFound: [ :anAptitude | anAptitude showDueTo: (BlMouseEvent new position: 100@150) ]
+				ifNone: [ NotFound
+						signalFor: BrGlamorousWithExplicitContextMenuAptitude
+						in: theButton ] ];
+		// #'menu-context-menu-button';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+	
+	aPoint := 100@150.
+	aRectangle := Rectangle 
+		origin: (aPoint - (BrMenuConstants handleExtent / 2)) 
+		extent: BrMenuConstants handleExtent.
+		
+	aScripter menuStep
+		assertMenuContainerLayoutAnchorBounds: aRectangle;
+		assertMenuContainerHandleGlobalCenterPosition: aRectangle center;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenuWithoutMouseEventHandler_explicitlyShowWithoutMouseEvent [
+	<gtExample>
+	| aScripter aButton aPoint aRectangle |
+	aScripter := self displayButtonWithContextMenuWithoutMouseEventHandler.
+
+	aScripter do
+		label: 'Explicitly show context menu';
+		block: [ :theButton | 
+			theButton aptitude
+				findActor: BrGlamorousWithExplicitContextMenuAptitude
+				ifFound: [ :anAptitude | anAptitude showDueTo: nil ]
+				ifNone: [ NotFound
+						signalFor: BrGlamorousWithExplicitContextMenuAptitude
+						in: theButton ] ];
+		// #'menu-context-menu-button';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+		
+	aButton := (aScripter root query // #'menu-context-menu-button') anyOne.
+	aPoint := aButton bounds inSpace topLeft.
+	aRectangle := Rectangle 
+		origin: (aPoint - (BrMenuConstants handleExtent / 2)) 
+		extent: BrMenuConstants handleExtent.
+		
+	aScripter menuStep
+		assertMenuContainerLayoutAnchorBounds: aRectangle;
+		assertMenuContainerHandleGlobalCenterPosition: aRectangle center;
+		onPopover;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenuWithoutMouseEventHandler_secondaryClick [
+	"The context menu must not display because there is no mouse event handler to display it."
+
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithContextMenuWithoutMouseEventHandler.
+
+	aScripter menuStep
+		openContextMenu;
+		assertClosedMenuContainer;
+		// #'menu-context-menu-button';
+		play.
+
+	^ aScripter
+]
+
 { #category : #'examples - dropdown' }
 BrMenuWithScripterExamples >> displayButtonWithDropdown [
 	<gtExample>
@@ -960,6 +1106,61 @@ BrMenuWithScripterExamples >> displayButtonWithTooltipLongString [
 	<gtExample>
 	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithTooltipLongString ]
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipWithoutMouseEventHandler [
+	<gtExample>
+	| aScripter |
+	aScripter := self
+			scripterWithElement: [ self buttonWithTooltipWithoutMouseEventHandler ].
+
+	self assert: (aScripter root query // #'menu-tooltip-button') anyOne isFocused.
+	
+	^ aScripter
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipWithoutMouseEventHandler_explicitlyShowWithoutMouseEvent [
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithTooltipWithoutMouseEventHandler.
+
+	aScripter do
+		label: 'Explicitly show tooltip';
+		block: [ :aButton |  ];
+		// #'menu-tooltip-button';
+		onChildFromBlock: [ :aButton | 
+			aButton aptitude
+				findActor: BrGlamorousWithExplicitTooltipAptitude
+				ifFound: [ :anAptitude | anAptitude showDueTo: nil ]
+				ifNone: [ NotFound
+						signalFor: BrGlamorousWithExplicitTooltipAptitude
+						in: aButton ] ];
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - mouse event handler' }
+BrMenuWithScripterExamples >> displayButtonWithTooltipWithoutMouseEventHandler_hoverButton [
+	"The tooltip must not display because there is no mouse event handler to display it."
+
+	<gtExample>
+	| aScripter |
+	aScripter := self displayButtonWithTooltipWithoutMouseEventHandler.
+
+	aScripter menuStep
+		displayTooltip;
+		assertClosedMenuContainer;
+		// #'menu-tooltip-button';
+		play.
+
+	^ aScripter
 ]
 
 { #category : #'examples - keyboard navigation' }
