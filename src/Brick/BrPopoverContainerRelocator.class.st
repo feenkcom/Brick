@@ -33,7 +33,7 @@ BrPopoverContainerRelocator >> mouseEvent: anEvent given: anAnchorElement [
 ]
 
 { #category : #'api - relocating' }
-BrPopoverContainerRelocator >> relocateGiven: anAnchorElement reason: aReason [
+BrPopoverContainerRelocator >> relocateGiven: anAnchorElement [
 	"Relocate menu elements given the anchor element.
 	aReason is `BrPopoverRelocateReason` kind of instance"
 

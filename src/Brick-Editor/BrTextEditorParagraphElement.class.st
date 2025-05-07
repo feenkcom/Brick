@@ -213,6 +213,12 @@ BrTextEditorParagraphElement >> cursorElements [
 	^ cursorElements
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextEditorParagraphElement >> cursorRectangleForCharacter: offset [
+	^ paragraph
+		valueDo: [ :aParagraph | aParagraph cursorRectangleForCharacter: offset ]
+]
+
 { #category : #accessing }
 BrTextEditorParagraphElement >> cursorStencil [
 	^ cursorStencil
@@ -281,6 +287,12 @@ BrTextEditorParagraphElement >> drawSelectionOnSpartaCanvas: aCanvas [
 		path: aPathBuilder build;
 		paint: self defaultSelectionColor;
 		draw
+]
+
+{ #category : #'visiting - variables' }
+BrTextEditorParagraphElement >> globalCursorBoundsForIndex: offset [
+	^ self
+		localBoundsToGlobal: (BlBounds fromRectangle: (self cursorRectangleForCharacter: offset))
 ]
 
 { #category : #accessing }

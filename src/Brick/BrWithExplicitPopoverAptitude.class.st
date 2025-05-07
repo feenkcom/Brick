@@ -573,7 +573,7 @@ BrWithExplicitPopoverAptitude >> relocateDueToReason: aReason [
 
 	self
 		widgetDo: [ :aWidget | 
-			relocator relocateGiven: aWidget reason: aReason.
+			relocator relocateGiven: aWidget.
 			self visibilityUpdater updateGiven: aWidget reason: aReason ]
 ]
 
