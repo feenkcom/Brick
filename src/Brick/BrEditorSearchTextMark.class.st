@@ -2,7 +2,8 @@ Class {
 	#name : #BrEditorSearchTextMark,
 	#superclass : #BlTextAttribute,
 	#instVars : [
-		'index'
+		'index',
+		'isCurrent'
 	],
 	#category : #'Brick-Editor - Search'
 }
@@ -15,4 +16,14 @@ BrEditorSearchTextMark >> index [
 { #category : #accessing }
 BrEditorSearchTextMark >> index: anInteger [
 	index := anInteger
+]
+
+{ #category : #accessing }
+BrEditorSearchTextMark >> isCurrent [
+	^ isCurrent
+]
+
+{ #category : #accessing }
+BrEditorSearchTextMark >> isCurrent: anObject [
+	isCurrent := anObject
 ]
