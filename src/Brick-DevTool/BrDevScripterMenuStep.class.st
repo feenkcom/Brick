@@ -128,6 +128,37 @@ BrDevScripterMenuStep >> assertMenuContainerExist: anExpectedCount [
 ]
 
 { #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuContainerHandleGlobalCenterPosition: aPoint [
+	^ self assert
+		label: ('Assert handle global center position: {1}' format: {aPoint});
+		value: [ :aMenuContainer | 
+				self
+					assert: (aMenuContainer isKindOf: BrMenuSteppedElement)
+					description: [ 'Menu container must be kind of {1}, but is {2}'
+							format: {BrMenuSteppedElement.
+									aMenuContainer class} ].
+				self
+					assert: aMenuContainer hasChildren
+					description: [ 'Menu container must have children' ].
+				(aMenuContainer childAt: 1) bounds inSpace center ]
+			equals: aPoint;
+		referenceSender;
+		onParentStepTarget: self
+]
+
+{ #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuContainerHandleGlobalTopLeftPosition: aPoint [
+	^ self assert
+		label: ('Assert handle global top left position: {1}' format: {aPoint});
+		value: [ :aMenuContainer | 
+				self assert: aMenuContainer hasChildren.
+				(aMenuContainer childAt: 1) bounds inSpace topLeft ]
+			equals: aPoint;
+		referenceSender;
+		onParentStepTarget: self
+]
+
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertMenuContainerHasEmptyElementCacheFor: aMenuAptitudeClass [
 	^ self assert
 		referenceSender;
@@ -150,6 +181,22 @@ BrDevScripterMenuStep >> assertMenuContainerHasFocus [
 		referenceSender;
 		onParentStepTarget: self;
 		onThisOrBreadthFirstChildOfKind: BrMenuSteppedElement
+]
+
+{ #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuContainerLayoutAnchorBounds: aRectangle [
+	^ self assert
+		label: ('Assert menu container layout anchor bounds: {1}' format: {aRectangle});
+		value: [ :aMenuContainer | 
+				self
+					assert: (aMenuContainer isKindOf: BrMenuSteppedElement)
+					description: [ 'Menu container must be kind of {1}, but is {2}'
+							format: {BrMenuSteppedElement.
+									aMenuContainer class} ].
+				aMenuContainer layout anchorBounds ]
+			equals: aRectangle;
+		referenceSender;
+		onParentStepTarget: self
 ]
 
 { #category : #'steps - checks' }

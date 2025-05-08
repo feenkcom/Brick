@@ -81,7 +81,6 @@ BrEditorSearchTextStyler >> privateStyle: aText [
 			endPosition := eachStartPosition + aSubstring size - 1.
 			isCurrentItem ifTrue: [ currentRange := eachStartPosition to: endPosition ].
 			(aText from: eachStartPosition to: endPosition)
-				attribute: (BrEditorSearchTextMark new index: eachIndex);
 				highlight: (isCurrentItem
 						ifTrue: [ BrGlamorousColors failureBackgroundColor ]
 						ifFalse: [ BrGlamorousColors disabledButtonTextColor ]) ].

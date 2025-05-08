@@ -573,7 +573,7 @@ BrWithExplicitPopoverAptitude >> relocateDueToReason: aReason [
 
 	self
 		widgetDo: [ :aWidget | 
-			relocator relocateGiven: aWidget reason: aReason.
+			relocator relocateGiven: aWidget.
 			self visibilityUpdater updateGiven: aWidget reason: aReason ]
 ]
 
@@ -652,6 +652,10 @@ BrWithExplicitPopoverAptitude >> showIn: aParentElement dueToEvent: anEventOrNil
 							dueToEvent: anEventOrNil);
 					build ].
 	aMenu ifNil: [ ^ self ].
+	
+	self widgetDo: [ :aWidget | 
+		anEventOrNil ifNotNil: [
+			self relocator mouseEvent: anEventOrNil given: aWidget ] ].
 	
 	self
 		widgetDo: [ :anAnchorElement | 
