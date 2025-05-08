@@ -98,5 +98,5 @@ BrEditorSearchTextAsyncFutureComputation >> onSearchTextResult: aSearchTextResul
 
 	anEditorModel updater
 		all;
-		update
+		update.
 ]

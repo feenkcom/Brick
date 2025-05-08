@@ -1,5 +1,5 @@
 Class {
-	#name : #BrEditorSearchTextPatternFinder,
+	#name : #BrEditorSearchTextPatternMarker,
 	#superclass : #Object,
 	#instVars : [
 		'computation',
@@ -9,25 +9,25 @@ Class {
 }
 
 { #category : #accessing }
-BrEditorSearchTextPatternFinder >> computation [
+BrEditorSearchTextPatternMarker >> computation [
 	<return: #BrEditorSearchTextComputation>
 	^ computation
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternFinder >> computation: aBrEditorSearchTextComputation [
+BrEditorSearchTextPatternMarker >> computation: aBrEditorSearchTextComputation [
 	computation := aBrEditorSearchTextComputation
 ]
 
 { #category : #initialization }
-BrEditorSearchTextPatternFinder >> initialize [
+BrEditorSearchTextPatternMarker >> initialize [
 	super initialize.
 	announcer := Announcer new.
 	computation := BrEditorSearchTextSameProcessComputation new
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternFinder >> mark: aMarkContext [
+BrEditorSearchTextPatternMarker >> mark: aMarkContext [
 	"It must be called from a UI process"
 
 	| someItems |
@@ -42,7 +42,7 @@ BrEditorSearchTextPatternFinder >> mark: aMarkContext [
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternFinder >> markText: aText context: aMarkContext [
+BrEditorSearchTextPatternMarker >> markText: aText context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
 	| someIndexes |
 	someIndexes := aMarkContext pattern findAllIndexesIn: aText.
@@ -53,7 +53,7 @@ BrEditorSearchTextPatternFinder >> markText: aText context: aMarkContext [
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternFinder >> markText: aText indexes: someItems context: aMarkContext [
+BrEditorSearchTextPatternMarker >> markText: aText indexes: someItems context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
 	| oldAttributes |
 	oldAttributes := Array streamContents: [ :aStream | 
@@ -82,12 +82,12 @@ BrEditorSearchTextPatternFinder >> markText: aText indexes: someItems context: a
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternFinder >> markVisibleText: aMarkContext [
+BrEditorSearchTextPatternMarker >> markVisibleText: aMarkContext [
 	^ self markText: aMarkContext visibleText context: aMarkContext
 ]
 
 { #category : #'api - notifying' }
-BrEditorSearchTextPatternFinder >> notifyFoundItems: somePatternItems context: aMarkContext [
+BrEditorSearchTextPatternMarker >> notifyFoundItems: somePatternItems context: aMarkContext [
 	"Notification may be called from a non-UI process."
 
 	announcer
@@ -97,12 +97,12 @@ BrEditorSearchTextPatternFinder >> notifyFoundItems: somePatternItems context: a
 ]
 
 { #category : #'api - subscriptions' }
-BrEditorSearchTextPatternFinder >> unsubscribe: anObject [
+BrEditorSearchTextPatternMarker >> unsubscribe: anObject [
 	^ announcer unsubscribe: anObject
 ]
 
 { #category : #'api - subscriptions' }
-BrEditorSearchTextPatternFinder >> when: anEventSelector send: aMessageSelector to: anObject [
+BrEditorSearchTextPatternMarker >> when: anEventSelector send: aMessageSelector to: anObject [
 	^ announcer weak
 		when: anEventSelector
 		send: aMessageSelector
