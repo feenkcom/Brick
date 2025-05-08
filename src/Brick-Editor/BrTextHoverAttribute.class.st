@@ -76,12 +76,15 @@ BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [
 
 	isHovered := false.
 	
-	self leaveAction gtValueWithArgs: {
-		anEvent currentTarget text. "first we pass text"
-		anEvent currentTarget. "then the text piece (word) element"
-		aTextEditor. "then the whole editor element"
-		anEvent "the event itself"
-	}
+	anEvent currentTarget text
+		findAttribute: self
+		indicesDo: [ :st :nd | 
+			self leaveAction
+				gtValueWithArgs: {
+						anEvent currentTarget text from: st to: nd. "first we pass text"
+						anEvent currentTarget. "then the text piece (word) element"
+						aTextEditor. "then the whole editor element"
+						anEvent} "the event itself" ]
 ]
 
 { #category : #events }

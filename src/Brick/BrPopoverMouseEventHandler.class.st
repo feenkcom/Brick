@@ -33,11 +33,13 @@ BrPopoverMouseEventHandler >> menuAptitude [
 { #category : #accessing }
 BrPopoverMouseEventHandler >> menuAptitude: aBrWithExplicitMenuAptitude [
 	self
-		assert: [ menuAptitude isNil ]
-		description: [ 'Menu aptitude can be initialized only once' ].
-	self
 		assert: [ aBrWithExplicitMenuAptitude isNotNil ]
 		description: [ 'Menu aptitude must be non-nil' ].
+
+	menuAptitude == aBrWithExplicitMenuAptitude ifTrue: [ ^ self ].
+	self
+		assert: [ menuAptitude isNil ]
+		description: [ 'Menu aptitude can be initialized only once' ].
 
 	menuAptitude := aBrWithExplicitMenuAptitude.
 	self onMenuAptitudeInitialized
