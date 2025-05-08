@@ -5,10 +5,42 @@ Class {
 		'pattern',
 		'startIndex',
 		'stopIndex',
-		'text'
+		'text',
+		'isSelected',
+		'absoluteStartIndex',
+		'absoluteStopIndex'
 	],
 	#category : #'Brick-Editor - Search'
 }
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> absoluteStartIndex [
+	^ absoluteStartIndex
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> absoluteStartIndex: anObject [ 
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> absoluteStopIndex [
+	^ absoluteStopIndex
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> absoluteStopIndex: anObject [
+	absoluteStopIndex := anObject
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> isSelected [
+	^ isSelected ifNil: [ false ]
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> isSelected: aBoolean [
+	isSelected := aBoolean
+]
 
 { #category : #accessing }
 BrEditorSearchTextPatternItem >> pattern [

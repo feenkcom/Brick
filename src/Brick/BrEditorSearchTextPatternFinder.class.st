@@ -42,10 +42,6 @@ BrEditorSearchTextPatternFinder >> mark: aMarkContext [
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternFinder >> markNextGenerationText: aMarkContext [ 
-]
-
-{ #category : #'api - styling' }
 BrEditorSearchTextPatternFinder >> markText: aText context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
 	| someIndexes |
@@ -68,11 +64,12 @@ BrEditorSearchTextPatternFinder >> markText: aText indexes: someItems context: a
 				aStream nextPut: anAttribute ] ].
 
 	aText removeAttributes: oldAttributes.
-
+	
 	someItems
 		doWithIndex: [ :eachItem :eachIndex | 
 			| isCurrentItem |
-			isCurrentItem := aMarkContext currentIndex = eachIndex.
+			isCurrentItem := aMarkContext isCurrentPatternItem: eachItem index: eachIndex.
+			eachItem isSelected: isCurrentItem.
 			(aText from: eachItem startIndex to: eachItem stopIndex)
 				attribute: (BrEditorSearchTextMark new
 						index: eachIndex;

@@ -11,10 +11,28 @@ Class {
 		'currentIndex',
 		'nextGenerationText',
 		'computedPatternItems',
-		'element'
+		'element',
+		'computedCurrentPatternItem'
 	],
 	#category : #'Brick-Editor - Search'
 }
+
+{ #category : #'api - pattern' }
+BrEditorSearchTextContext >> computedCurrentPatternItem [
+	<return: #BrEditorSearchTextPatternItem or: nil>
+	self computedPatternItems ifNil: [ ^ nil ].
+	computedCurrentPatternItem ifNotNil: [ ^ computedCurrentPatternItem ].
+	^ self computedPatternItems
+		detect: [ :eachItem | eachItem isSelected ]
+		ifFound: [ :anItem | computedCurrentPatternItem := anItem ]
+		ifNone: [ nil ]
+]
+
+{ #category : #'api - pattern' }
+BrEditorSearchTextContext >> computedPatternItems [
+	<return: #Collection of: #BrEditorSearchTextPatternItem>
+	^ computedPatternItems
+]
 
 { #category : #'api - pattern' }
 BrEditorSearchTextContext >> computedPatternItems: aCollection [
@@ -79,6 +97,16 @@ BrEditorSearchTextContext >> hasText [
 { #category : #'api - testing' }
 BrEditorSearchTextContext >> hasVisibleText [
 	^ self hasText and: [ visibleTextStart isNotNil and: [ visibleTextEnd isNotNil ] ]
+]
+
+{ #category : #'api - pattern' }
+BrEditorSearchTextContext >> isCurrentPatternItem: aPatternItem index: anIndex [
+	| anItem |
+	anItem := self computedCurrentPatternItem.
+	anItem ifNil: [ ^ self currentIndex = anIndex ].
+
+	^ anItem absoluteStartIndex = aPatternItem absoluteStartIndex
+		and: [ anItem absoluteStopIndex = aPatternItem absoluteStopIndex ]
 ]
 
 { #category : #accessing }

@@ -11,17 +11,22 @@ Class {
 { #category : #'api - search' }
 BrEditorSearchTextSubstringPattern >> findAllIndexesIn: aText [
 	<return: #Array of: #BrEditorSearchTextPatternItem>
-	| allIndexes |
+	| allIndexes anOffset |
 	allIndexes := aText finder
 		caseInsensitiveSubstring: self string;
 		searchAll.
+	anOffset := aText textOffset.
 		
 	^ allIndexes collect: [ :aStart |
+		| aStop |
+		aStop := aStart + self string size - 1.
 		BrEditorSearchTextPatternItem new 
 			text: aText;
 			pattern: self;
 			startIndex: aStart;
-			stopIndex: aStart + self string size - 1 ]
+			stopIndex: aStop;
+			absoluteStartIndex: anOffset + aStart;
+			absoluteStopIndex: anOffset + aStop ]
 ]
 
 { #category : #private }
