@@ -203,6 +203,19 @@ BrTextEditorSelecterExamples >> select_double_quotes_end [
 	^ anEditor
 ]
 
+{ #category : #'examples - move' }
+BrTextEditorSelecterExamples >> select_extendSelectionWithNoCursor [
+	<gtExample>
+	<return: #BrEditor>
+	| anEditor |
+	anEditor := self editorOnMultilineText.
+	anEditor selecter
+		extendToIndex: 5;
+		select.
+
+	^ anEditor
+]
+
 { #category : #'examples - from to' }
 BrTextEditorSelecterExamples >> select_from_0_to_5 [
 	<gtExample>
