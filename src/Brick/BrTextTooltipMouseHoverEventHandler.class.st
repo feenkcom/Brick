@@ -8,20 +8,10 @@ Class {
 	#superclass : #BrPopoverMouseHoverEventHandler,
 	#instVars : [
 		'isEnabled',
-		'aptitudeId'
+		'subtext'
 	],
 	#category : #'Brick-Attributes - Support'
 }
-
-{ #category : #accessing }
-BrTextTooltipMouseHoverEventHandler >> aptitudeId [
-	^ aptitudeId
-]
-
-{ #category : #accessing }
-BrTextTooltipMouseHoverEventHandler >> aptitudeId: anObject [
-	aptitudeId := anObject
-]
 
 { #category : #'api - accessing' }
 BrTextTooltipMouseHoverEventHandler >> eventsToHandle [
@@ -53,9 +43,9 @@ BrTextTooltipMouseHoverEventHandler >> isEnabled: aBoolean [
 { #category : #printing }
 BrTextTooltipMouseHoverEventHandler >> printOn: aStream [
 	super printOn: aStream.
-	self aptitudeId ifNil: [ ^ self ].
+	self subtext ifNil: [ ^ self ].
 
-	self aptitudeId printIdOn: aStream
+	self subtext printIdOn: aStream
 ]
 
 { #category : #private }
@@ -64,9 +54,19 @@ BrTextTooltipMouseHoverEventHandler >> startShowLaterTaskDueToEvent: anEvent [
 	super startShowLaterTaskDueToEvent: anEvent
 ]
 
+{ #category : #accessing }
+BrTextTooltipMouseHoverEventHandler >> subtext [
+	^ subtext
+]
+
+{ #category : #accessing }
+BrTextTooltipMouseHoverEventHandler >> subtext: aSubtext [
+	subtext := aSubtext
+]
+
 { #category : #'api - event managing' }
 BrTextTooltipMouseHoverEventHandler >> textTooltipDisableMouseEventHandlerWish: aWish [
-	self aptitudeId = aWish aptitudeId ifFalse: [ ^ self ].
+	self subtext = aWish subtext ifFalse: [ ^ self ].
 	aWish consumed: true.
 	self isEnabled: false.
 	self cancelShowLaterTask.
@@ -75,7 +75,7 @@ BrTextTooltipMouseHoverEventHandler >> textTooltipDisableMouseEventHandlerWish: 
 
 { #category : #'api - event managing' }
 BrTextTooltipMouseHoverEventHandler >> textTooltipEnableMouseEventHandlerWish: aWish [
-	self aptitudeId = aWish aptitudeId ifFalse: [ ^ self ].
+	self subtext = aWish subtext ifFalse: [ ^ self ].
 	aWish consumed: true.
 	self isEnabled: true.
 	self cancelHideLaterTask.
@@ -84,6 +84,6 @@ BrTextTooltipMouseHoverEventHandler >> textTooltipEnableMouseEventHandlerWish: a
 
 { #category : #'api - event managing' }
 BrTextTooltipMouseHoverEventHandler >> textTooltipSetAptitudeIdWish: aWish [
-	self aptitudeId: aWish aptitudeId.
+	self subtext: aWish subtext.
 	aWish consumed: true.
 ]

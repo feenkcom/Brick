@@ -7,26 +7,13 @@ Class {
 	#category : #'Brick-Attributes'
 }
 
-{ #category : #'event handling' }
-BrTextTooltipAttribute >> aptitudeIdForText: aText [
-	| aStopIndex aStartIndex |
-	aStartIndex := aText textOffset.
-	aStopIndex := aStartIndex + aText size - 1.
-	^ self aptitudeIdFrom: aStartIndex to: aStopIndex
-]
-
 { #category : #private }
-BrTextTooltipAttribute >> aptitudeIdFrom: aStartIndex to: aStopIndex [
-	^ BrTextTooltipId from: aStartIndex to: aStopIndex
-]
-
-{ #category : #private }
-BrTextTooltipAttribute >> ensureTooltipWithId: anAptitudeId forTextElement: aTextElement [
+BrTextTooltipAttribute >> ensureTooltipWithText: anAptitudeId forTextElement: aTextElement [
 	| aCache |
 	aCache := aTextElement userData
-			at: BrTextTooltipsCache
+			at: #TextTooltipsCache
 			ifPresent: [ :theCache | theCache ]
-			ifAbsentPut: [ BrTextTooltipsCache new ].
+			ifAbsentPut: [ WeakValueDictionary new ].
 
 	^ aCache
 		at: anAptitudeId
@@ -58,33 +45,30 @@ BrTextTooltipAttribute >> newTooltipAptitudeForId: anAptitudeId [
 	| anAptitude |
 	anAptitude := tooltipStencil create.
 	anAptitude
-		dispatchEvent: (BrTextTooltipSetAptitudeIdWish new aptitudeId: anAptitudeId).
+		dispatchEvent: (BrTextTooltipSetAptitudeIdWish new subtext: anAptitudeId).
 	^ anAptitude
 ]
 
 { #category : #'event handling' }
 BrTextTooltipAttribute >> onHideTooltipActionForText: aText textElement: aTextElement event: anEvent [
-	| anAptitudeId |
 	tooltipStencil ifNil: [ ^ self ].
-	anAptitudeId := self aptitudeIdForText: aText.
 	aTextElement
 		dispatchEvent: (BrTextTooltipDisableMouseEventHandlerWish new
-				aptitudeId: anAptitudeId;
+				subtext: aText;
 				dueToEvent: anEvent)
 ]
 
 { #category : #'event handling' }
 BrTextTooltipAttribute >> onShowTooltipActionForText: aText textElement: aTextElement event: anEvent [
-	| aBounds anOffset anAptitude anAptitudeId |
+	| aBounds anOffset anAptitude |
 	tooltipStencil ifNil: [ ^ self ].
-	anAptitudeId := self aptitudeIdForText: aText.
-	anAptitude := self ensureTooltipWithId: anAptitudeId forTextElement: aTextElement.
+	anAptitude := self ensureTooltipWithText: aText forTextElement: aTextElement.
 	anOffset := aText textOffset - aTextElement text textOffset + (aText size / 2).
 	aBounds := aTextElement globalCursorBoundsForIndex: anOffset.
 	anAptitude relocator: (BrPopoverExplicitRelocator new globalBounds: aBounds).
 	aTextElement
 		dispatchEvent: (BrTextTooltipEnableMouseEventHandlerWish new
-				aptitudeId: anAptitudeId;
+				subtext: aText;
 				dueToEvent: anEvent)
 ]
 

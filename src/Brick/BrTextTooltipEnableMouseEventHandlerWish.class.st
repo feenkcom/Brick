@@ -8,21 +8,11 @@ Class {
 	#name : #BrTextTooltipEnableMouseEventHandlerWish,
 	#superclass : #BrPopoverWish,
 	#instVars : [
-		'aptitudeId',
-		'dueToEvent'
+		'dueToEvent',
+		'subtext'
 	],
 	#category : #'Brick-Attributes - Support'
 }
-
-{ #category : #accessing }
-BrTextTooltipEnableMouseEventHandlerWish >> aptitudeId [
-	^ aptitudeId
-]
-
-{ #category : #accessing }
-BrTextTooltipEnableMouseEventHandlerWish >> aptitudeId: anObject [
-	aptitudeId := anObject
-]
 
 { #category : #accessing }
 BrTextTooltipEnableMouseEventHandlerWish >> dueToEvent [
@@ -37,4 +27,14 @@ BrTextTooltipEnableMouseEventHandlerWish >> dueToEvent: anObject [
 { #category : #sending }
 BrTextTooltipEnableMouseEventHandlerWish >> sendTo: anObject [
 	anObject textTooltipEnableMouseEventHandlerWish: self
+]
+
+{ #category : #accessing }
+BrTextTooltipEnableMouseEventHandlerWish >> subtext [
+	^ subtext
+]
+
+{ #category : #accessing }
+BrTextTooltipEnableMouseEventHandlerWish >> subtext: aSubtext [
+	subtext := aSubtext
 ]
