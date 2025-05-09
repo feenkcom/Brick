@@ -11,17 +11,17 @@ Class {
 	#category : #'Brick-Attributes - Support'
 }
 
+{ #category : #sending }
+BrTextTooltipSetAptitudeIdWish >> sendTo: anObject [
+	anObject textTooltipSetAptitudeIdWish: self
+]
+
 { #category : #accessing }
-BrTextTooltipSetAptitudeIdWish >> aptitudeId [
+BrTextTooltipSetAptitudeIdWish >> subtext [
 	^ aptitudeId
 ]
 
 { #category : #accessing }
-BrTextTooltipSetAptitudeIdWish >> aptitudeId: anObject [
+BrTextTooltipSetAptitudeIdWish >> subtext: anObject [
 	aptitudeId := anObject
-]
-
-{ #category : #sending }
-BrTextTooltipSetAptitudeIdWish >> sendTo: anObject [
-	anObject textTooltipSetAptitudeIdWish: self
 ]
