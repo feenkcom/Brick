@@ -29,6 +29,7 @@ BrEditorSearchTextAsyncFutureComputation >> markText: aText context: aMarkContex
 	| allPatternItems |
 	allPatternItems := aMarker markText: aText context: aMarkContext.
 	
+	aMarkContext computedPatternItems: allPatternItems.
 	aMarker notifyFoundItems: allPatternItems context: aMarkContext.
 	
 	^ BrEditorSearchTextResult new

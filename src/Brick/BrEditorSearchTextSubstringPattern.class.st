@@ -29,6 +29,22 @@ BrEditorSearchTextSubstringPattern >> findAllIndexesIn: aText [
 			absoluteStopIndex: anOffset + aStop ]
 ]
 
+{ #category : #printing }
+BrEditorSearchTextSubstringPattern >> gtDisplayOn: aStream [
+	aStream
+		nextPutAll: 'Substring: ';
+		print: self text
+]
+
+{ #category : #printing }
+BrEditorSearchTextSubstringPattern >> printOn: aStream [
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		print: self text;
+		nextPut: $)
+]
+
 { #category : #private }
 BrEditorSearchTextSubstringPattern >> string [
 	^ string ifNil: [ string := self text ifNotNil: #asString ]

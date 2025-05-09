@@ -42,6 +42,30 @@ BrEditorSearchTextPatternMarker >> mark: aMarkContext [
 ]
 
 { #category : #'api - styling' }
+BrEditorSearchTextPatternMarker >> markNext: aMarkContext [
+	aMarkContext editorElementDo: [ :anEditor | 
+		| aCurrentItem aNewItem |
+	
+		aCurrentItem := aMarkContext computedCurrentPatternItem.
+		aNewItem := aMarkContext computeNextPatternItem.
+	
+		self switchText: anEditor text attributeFor: aCurrentItem.
+		self switchText: anEditor text attributeFor: aNewItem ]
+]
+
+{ #category : #'api - styling' }
+BrEditorSearchTextPatternMarker >> markPrevious: aMarkContext [
+	aMarkContext editorElementDo: [ :anEditor | 
+		| aCurrentItem aNewItem |
+	
+		aCurrentItem := aMarkContext computedCurrentPatternItem.
+		aNewItem := aMarkContext computePreviousPatternItem.
+	
+		self switchText: anEditor text attributeFor: aCurrentItem.
+		self switchText: anEditor text attributeFor: aNewItem ]
+]
+
+{ #category : #'api - styling' }
 BrEditorSearchTextPatternMarker >> markText: aText context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
 	| someIndexes |
@@ -56,34 +80,40 @@ BrEditorSearchTextPatternMarker >> markText: aText context: aMarkContext [
 BrEditorSearchTextPatternMarker >> markText: aText indexes: someItems context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
 	| oldAttributes |
-	oldAttributes := Array streamContents: [ :aStream | 
-		aText
-			findAttributesSuchThat: [ :eachAttribute | 
-				eachAttribute class = BrEditorSearchTextMark ]
-			indicesDo: [ :aStart :aStop :anAttribute | 
-				aStream nextPut: anAttribute ] ].
+	oldAttributes := Array
+			streamContents: [ :aStream | 
+				aText
+					findAttributesSuchThat: [ :eachAttribute | eachAttribute class = BrEditorSearchTextMark ]
+					indicesDo: [ :aStart :aStop :anAttribute | aStream nextPut: anAttribute ] ].
 
 	aText removeAttributes: oldAttributes.
-	
+
 	someItems
 		doWithIndex: [ :eachItem :eachIndex | 
-			| isCurrentItem |
+			| isCurrentItem anAttribute |
 			isCurrentItem := aMarkContext isCurrentPatternItem: eachItem index: eachIndex.
 			eachItem isSelected: isCurrentItem.
+			anAttribute := BrEditorSearchTextMark new
+					index: eachIndex;
+					isCurrent: isCurrentItem;
+					paint: (self newTextMarkPaint: isCurrentItem).
 			(aText from: eachItem startIndex to: eachItem stopIndex)
-				attribute: (BrEditorSearchTextMark new
-						index: eachIndex;
-						isCurrent: isCurrentItem;
-						paint: (isCurrentItem
-								ifTrue: [ BrGlamorousColors failureBackgroundColor ]
-								ifFalse: [ BrGlamorousColors disabledButtonTextColor ])) ].
-	
+				attribute: anAttribute.
+			eachItem textAttribute: anAttribute ].
+
 	^ someItems
 ]
 
 { #category : #'api - styling' }
 BrEditorSearchTextPatternMarker >> markVisibleText: aMarkContext [
 	^ self markText: aMarkContext visibleText context: aMarkContext
+]
+
+{ #category : #private }
+BrEditorSearchTextPatternMarker >> newTextMarkPaint: isCurrentItem [
+	^ isCurrentItem
+		ifTrue: [ BrGlamorousColors failureBackgroundColor ]
+		ifFalse: [ BrGlamorousColors disabledButtonTextColor ]
 ]
 
 { #category : #'api - notifying' }
@@ -94,6 +124,23 @@ BrEditorSearchTextPatternMarker >> notifyFoundItems: somePatternItems context: a
 		announce: (BrEditorSearchTextFinishedAnnouncement new
 				items: somePatternItems;
 				context: aMarkContext)
+]
+
+{ #category : #private }
+BrEditorSearchTextPatternMarker >> switchText: aText attributeFor: aPatternItem [
+	| anOldAttribute aNewAttribute aSelection aSubText |
+	anOldAttribute := aPatternItem textAttribute.
+	aSelection := aPatternItem isSelected.
+	aNewAttribute := BrEditorSearchTextMark new
+			isCurrent: aSelection;
+			index: anOldAttribute index;
+			paint: (self newTextMarkPaint: aSelection).
+	aSubText := aText
+			from: aPatternItem absoluteStartIndex
+			to: aPatternItem absoluteStopIndex.
+	aSubText removeAttribute: anOldAttribute.
+	aSubText attribute: aNewAttribute.
+	aPatternItem textAttribute: aNewAttribute
 ]
 
 { #category : #'api - subscriptions' }

@@ -8,7 +8,8 @@ Class {
 		'text',
 		'isSelected',
 		'absoluteStartIndex',
-		'absoluteStopIndex'
+		'absoluteStopIndex',
+		'textAttribute'
 	],
 	#category : #'Brick-Editor - Search'
 }
@@ -19,7 +20,8 @@ BrEditorSearchTextPatternItem >> absoluteStartIndex [
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> absoluteStartIndex: anObject [ 
+BrEditorSearchTextPatternItem >> absoluteStartIndex: anInteger [
+	absoluteStartIndex := anInteger
 ]
 
 { #category : #accessing }
@@ -59,9 +61,9 @@ BrEditorSearchTextPatternItem >> printOn: aStream [
 	aStream
 		nextPut: $(;
 		nextPutAll: 'from ';
-		print: self startIndex;
+		print: self absoluteStartIndex;
 		nextPutAll: ' to ';
-		print: self stopIndex;
+		print: self absoluteStopIndex;
 		nextPutAll: ', subtext: ';
 		print: self substring;
 		nextPut: $)
@@ -105,4 +107,15 @@ BrEditorSearchTextPatternItem >> text [
 { #category : #accessing }
 BrEditorSearchTextPatternItem >> text: anObject [
 	text := anObject
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> textAttribute [
+	<return: #BrEditorSearchTextMark>
+	^ textAttribute
+]
+
+{ #category : #accessing }
+BrEditorSearchTextPatternItem >> textAttribute: aBrEditorSearchTextMark [
+	textAttribute := aBrEditorSearchTextMark
 ]

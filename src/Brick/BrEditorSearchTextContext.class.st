@@ -17,6 +17,40 @@ Class {
 	#category : #'Brick-Editor - Search'
 }
 
+{ #category : #accessing }
+BrEditorSearchTextContext >> computeNextPatternItem [
+	| aNewIndex aNewItem anIndex aCurrentItem |
+	aCurrentItem := self computedCurrentPatternItem.
+	aCurrentItem ifNil: [ self ].
+	anIndex := self computedPatternItems
+			identityIndexOf: aCurrentItem
+			ifAbsent: [ self ].
+	aNewIndex := anIndex + 1.
+	aNewIndex > self computedPatternItems size ifTrue: [ aNewIndex := 1 ].
+	aNewItem := self computedPatternItems at: aNewIndex.
+	aCurrentItem isSelected: false.
+	aNewItem isSelected: true.
+	computedCurrentPatternItem := aNewItem.
+	^ aNewItem
+]
+
+{ #category : #accessing }
+BrEditorSearchTextContext >> computePreviousPatternItem [
+	| aNewIndex aNewItem anIndex aCurrentItem |
+	aCurrentItem := self computedCurrentPatternItem.
+	aCurrentItem ifNil: [ self ].
+	anIndex := self computedPatternItems
+			identityIndexOf: aCurrentItem
+			ifAbsent: [ self ].
+	aNewIndex := anIndex - 1.
+	aNewIndex < 1 ifTrue: [ aNewIndex := self computedPatternItems size ].
+	aNewItem := self computedPatternItems at: aNewIndex.
+	aCurrentItem isSelected: false.
+	aNewItem isSelected: true.
+	computedCurrentPatternItem := aNewItem.
+	^ aNewItem
+]
+
 { #category : #'api - pattern' }
 BrEditorSearchTextContext >> computedCurrentPatternItem [
 	<return: #BrEditorSearchTextPatternItem or: nil>
@@ -36,7 +70,8 @@ BrEditorSearchTextContext >> computedPatternItems [
 
 { #category : #'api - pattern' }
 BrEditorSearchTextContext >> computedPatternItems: aCollection [
-	computedPatternItems := aCollection
+	computedPatternItems := aCollection.
+	computedCurrentPatternItem := nil.
 ]
 
 { #category : #'api - accessing' }
@@ -86,7 +121,8 @@ BrEditorSearchTextContext >> fromEditor: aBrEditor [
 	aBrEditor firstVisibleSegment ifNotNil: [ :aSegment | 
 		self visibleTextStart: aSegment textStart ].
 	aBrEditor lastVisibleSegment ifNotNil: [ :aSegment | 
-		self visibleTextEnd: aSegment textEnd ]
+		self visibleTextEnd: aSegment textEnd ].
+	self hasVisibleText ifTrue: [ self visibleText ].
 ]
 
 { #category : #'api - testing' }
@@ -132,9 +168,11 @@ BrEditorSearchTextContext >> subtext: aBlText [
 
 { #category : #'api - accessing' }
 BrEditorSearchTextContext >> text [
-	"Return a text in which a pattern is searched for"
+	"Return a text in which a pattern is searched for.
+	Note that this text is shared with editor, so it can be accessed only from a UI process."
 
 	<return: #BlText>
+	self editorElementDo: [ :anEditor | anEditor editor assertUIProcess ].
 	^ text
 ]
 
@@ -148,6 +186,8 @@ BrEditorSearchTextContext >> visibleText [
 	"Return a visible part of the text in which a pattern is searched for"
 
 	<return: #BlText>
+	self editorElementDo: [ :anEditor | anEditor editor assertUIProcess ].
+	
 	^ visibleText ifNil: [
 		visibleText := self text from: visibleTextStart to: visibleTextEnd ]
 ]
