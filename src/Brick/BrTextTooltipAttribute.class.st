@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tooltipStencil'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : #'Brick-Attributes'
 }
 
 { #category : #'event handling' }
