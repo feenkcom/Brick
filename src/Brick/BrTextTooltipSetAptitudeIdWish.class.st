@@ -1,5 +1,5 @@
 "
-I dispatch {{gtClass:BrTextTooltipId}} from {{gtClass:BrTextTooltipAttribute}} to {{gtClass:BrTextTooltipMouseHoverEventHandler}}. 
+I dispatch a tooltip it from {{gtClass:BrTextTooltipAttribute}} to {{gtClass:BrTextTooltipMouseHoverEventHandler}}. 
 
 "
 Class {
