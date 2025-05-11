@@ -41,7 +41,9 @@ BrTabGroupModel >> addTab: aBrTabModel at: anIndex [
 
 { #category : #'as yet unclassified' }
 BrTabGroupModel >> addTabAfterSelectedTab: aBrTab [
-	self addTab: aBrTab at: (self indexOf: self selectedTab) + 1
+	self hasSelectedTab
+		ifTrue: [ self addTab: aBrTab at: (self indexOf: self selectedTab) + 1 ]
+		ifFalse: [ self addTab: aBrTab ]
 ]
 
 { #category : #'api - tabs' }
