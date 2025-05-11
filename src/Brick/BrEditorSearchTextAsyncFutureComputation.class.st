@@ -29,6 +29,7 @@ BrEditorSearchTextAsyncFutureComputation >> markText: aText context: aMarkContex
 	| allPatternItems |
 	allPatternItems := aMarker markText: aText context: aMarkContext.
 	
+	aMarkContext computedPatternItems: allPatternItems.
 	aMarker notifyFoundItems: allPatternItems context: aMarkContext.
 	
 	^ BrEditorSearchTextResult new
@@ -77,57 +78,26 @@ BrEditorSearchTextAsyncFutureComputation >> onSearchTextResult: aSearchTextResul
 	anEditorModel assertUIProcess.
 
 	aSearchTextResult isNextGeneration
-		ifFalse: [ BlTaskAction
-				enqueueElement: anEditorElement
-				action: [ self markText: aSearchTextResult context using: aSearchTextResult marker ].
+		ifFalse: [ false
+				ifTrue: [ self flag: #todo.
+					BlTaskAction
+						enqueueElement: anEditorElement
+						action: [ self markText: aSearchTextResult context using: aSearchTextResult marker ] ].
 			^ self ].
 
 	(anEditorModel segmentBuilder
 		requiresResplittingFrom: anEditorModel text
 		to: aSearchTextResult styledText)
-		ifTrue: [  "It is possible that the segment structure has changed"
-			anEditorModel segmentBuilder
-				resetSegmentCacheAndNotify: anEditorModel ].
-	
+		ifTrue: [  "It is possible that the segment structure has changed"anEditorModel
+				segmentBuilder resetSegmentCacheAndNotify: anEditorModel ].
+
 	anEditorModel text updateFrom: aSearchTextResult styledText text.
-	
+
 	anEditorModel notifyTextStyled: anEditorModel text.
-	
+
 	anEditorModel processCursorEnterEvents.
-	
+
 	anEditorModel updater
 		all;
-		update
-]
-
-{ #category : #'as yet unclassified' }
-BrEditorSearchTextAsyncFutureComputation >> onTextStyled: aBlTextStyledEvent [
-	self assertUIProcess.
-
-	(aBlTextStyledEvent text isNextGenerationOf: self text)
-		ifTrue: [ (self segmentBuilder
-				requiresResplittingFrom: self text
-				to: aBlTextStyledEvent text)
-				ifTrue: [  "It is possible that the segment structure has changed"self segmentBuilder
-						resetSegmentCacheAndNotify: self ].
-			self text updateFrom: aBlTextStyledEvent text text.
-
-			BlFrameTelemetry
-				time: [ 'Execute after-action: {1}' format: {aBlTextStyledEvent afterAction} ]
-				during: [ aBlTextStyledEvent afterAction value: self text ].
-
-			BlFrameTelemetry
-				time: [ 'notifyTextStyled' ]
-				during: [ self notifyTextStyled: self text ].
-
-			BlFrameTelemetry
-				time: [ 'processCursorAttributes' ]
-				during: [ self processCursorEnterEvents ].
-
-			BlFrameTelemetry
-				time: [ 'Invalidate the whole text editor due to text change' ]
-				during: [ self updater
-						all;
-						update ] ]
-		ifFalse: [ self styleTextAndAfterDo: aBlTextStyledEvent afterAction ]
+		update.
 ]

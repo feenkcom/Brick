@@ -366,6 +366,7 @@ BrWithExplicitPopoverAptitude >> mouseEventHandler [
 { #category : #accessing }
 BrWithExplicitPopoverAptitude >> mouseEventHandler: aBrMenuMouseEventHandler [
 	mouseEventHandler == aBrMenuMouseEventHandler ifTrue: [ ^ self ].
+	aBrMenuMouseEventHandler menuAptitude: self.
 
 	self withoutMouseEventHandler.
 	mouseEventHandler := aBrMenuMouseEventHandler.
