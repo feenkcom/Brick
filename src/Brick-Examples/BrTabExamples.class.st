@@ -4,6 +4,27 @@ Class {
 	#category : #'Brick-Examples-Tab'
 }
 
+{ #category : #'as yet unclassified' }
+BrTabExamples >> addTabAfterSelectedTab [
+	<gtExample>
+	<return: #BrTabModel>
+	| aTabGroupModel aTab1 aTab2 aTab3 |
+	aTabGroupModel := self tabGroupModel.
+	aTab1 := self tabModel.
+	aTabGroupModel addTab: aTab1.
+	self assert: aTab1 isSelected.
+	aTab2 := self tabModel.
+	aTabGroupModel addTabAfterSelectedTab: aTab2.
+	self assert: aTab1 isSelected.
+	aTab3 := self tabModel.
+	aTabGroupModel addTabAfterSelectedTab: aTab3.
+	self assert: aTabGroupModel tabs size equals: 3.
+	self assert: (aTabGroupModel indexOf: aTab1) equals: 1.
+	self assert: (aTabGroupModel indexOf: aTab2) equals: 3.
+	self assert: (aTabGroupModel indexOf: aTab3) equals: 2.
+	^ aTabGroupModel
+]
+
 { #category : #'examples - tab model' }
 BrTabExamples >> changeStencilTabModel [
 	<gtExample>

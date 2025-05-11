@@ -23,6 +23,11 @@ BrTabGroup >> addTab: anElement at: anInteger [
 	self viewModel addTab: anElement viewModel at: anInteger
 ]
 
+{ #category : #'as yet unclassified' }
+BrTabGroup >> addTabAfterSelectedTab: aBrTab [
+	self viewModel addTabAfterSelectedTab: aBrTab viewModel
+]
+
 { #category : #'api - adding / removing' }
 BrTabGroup >> addTabs: aCollectionOfElements [
 	self viewModel addTabs: (aCollectionOfElements collect: [ :anElement | anElement viewModel])
