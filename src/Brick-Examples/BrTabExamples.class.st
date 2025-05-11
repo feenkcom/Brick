@@ -11,7 +11,7 @@ BrTabExamples >> addTabAfterSelectedTab [
 	| aTabGroupModel aTab1 aTab2 aTab3 |
 	aTabGroupModel := self tabGroupModel.
 	aTab1 := self tabModel.
-	aTabGroupModel addTab: aTab1.
+	aTabGroupModel addTabAfterSelectedTab: aTab1.
 	self assert: aTab1 isSelected.
 	aTab2 := self tabModel.
 	aTabGroupModel addTabAfterSelectedTab: aTab2.
