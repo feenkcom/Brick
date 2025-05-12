@@ -29,7 +29,7 @@ BrEditorSearchTextAsyncFutureComputation >> markText: aText context: aMarkContex
 	| allPatternItems |
 	allPatternItems := aMarker markText: aText context: aMarkContext.
 	
-	aMarkContext computedPatternItems: allPatternItems.
+	aMarkContext patternItems: allPatternItems.
 	aMarker notifyFoundItems: allPatternItems context: aMarkContext.
 	
 	^ BrEditorSearchTextResult new
@@ -41,15 +41,12 @@ BrEditorSearchTextAsyncFutureComputation >> markText: aText context: aMarkContex
 
 { #category : #'api - styling' }
 BrEditorSearchTextAsyncFutureComputation >> markText: aMarkContext using: aMarker [
-	| anElement anElementFuture aText anEditorElement |
+	| anElement anElementFuture aText |
 	anElement := aMarkContext element ifNil: [ ^ self ].
-	anEditorElement := aMarkContext editorElement ifNil: [ ^ self ].
 	anElementFuture := anElement userData
 			at: BrEditorSearchTextAsyncFutureComputation
 			ifPresent: [ :theElementFuture | theElementFuture ]
-			ifAbsentPut: [ self
-					newElementFutureFor: anElement
-					editorElement: anEditorElement ].
+			ifAbsentPut: [ self newElementFutureFor: anElement ].
 
 	aText := aMarkContext nextGenerationText.
 	anElementFuture
@@ -60,44 +57,27 @@ BrEditorSearchTextAsyncFutureComputation >> markText: aMarkContext using: aMarke
 ]
 
 { #category : #private }
-BrEditorSearchTextAsyncFutureComputation >> newElementFutureFor: anElement editorElement: anEditorElement [
+BrEditorSearchTextAsyncFutureComputation >> newElementFutureFor: anElement [
 	^ (BrAsyncElementFuture on: anElement)
 		executionConfiguration: self executionConfiguration;
 		whenPending: [ :theElement | ];
 		whenError: [ :theElement :anError | ];
 		whenSuccess: [ :theElement :aSearchTextResult | 
-			self onSearchTextResult: aSearchTextResult editorElement: anEditorElement ]
+			self onSearchTextResult: aSearchTextResult fromElement: theElement ]
 ]
 
 { #category : #private }
-BrEditorSearchTextAsyncFutureComputation >> onSearchTextResult: aSearchTextResult editorElement: anEditorElement [
-	"Influenced by `BrTextEditorModel>>#onTextStyled:`"
+BrEditorSearchTextAsyncFutureComputation >> onSearchTextResult: aSearchTextResult fromElement: anElement [
+	"This method must be called from a UI process"
 
-	| anEditorModel |
-	anEditorModel := anEditorElement editor.
-	anEditorModel assertUIProcess.
+	| aResult |
+	aResult := aSearchTextResult context textSource updateText: aSearchTextResult styledText.
+	aResult ifTrue: [ ^ self ].
 
-	aSearchTextResult isNextGeneration
-		ifFalse: [ false
-				ifTrue: [ self flag: #todo.
-					BlTaskAction
-						enqueueElement: anEditorElement
-						action: [ self markText: aSearchTextResult context using: aSearchTextResult marker ] ].
-			^ self ].
+	true ifTrue: [ ^ self ].
 
-	(anEditorModel segmentBuilder
-		requiresResplittingFrom: anEditorModel text
-		to: aSearchTextResult styledText)
-		ifTrue: [  "It is possible that the segment structure has changed"anEditorModel
-				segmentBuilder resetSegmentCacheAndNotify: anEditorModel ].
-
-	anEditorModel text updateFrom: aSearchTextResult styledText text.
-
-	anEditorModel notifyTextStyled: anEditorModel text.
-
-	anEditorModel processCursorEnterEvents.
-
-	anEditorModel updater
-		all;
-		update.
+	self flag: #todo.
+	BlTaskAction
+		enqueueElement: anElement
+		action: [ self markText: aSearchTextResult context using: aSearchTextResult marker ]
 ]

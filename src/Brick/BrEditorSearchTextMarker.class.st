@@ -1,5 +1,5 @@
 Class {
-	#name : #BrEditorSearchTextPatternMarker,
+	#name : #BrEditorSearchTextMarker,
 	#superclass : #Object,
 	#instVars : [
 		'computation',
@@ -9,25 +9,25 @@ Class {
 }
 
 { #category : #accessing }
-BrEditorSearchTextPatternMarker >> computation [
+BrEditorSearchTextMarker >> computation [
 	<return: #BrEditorSearchTextComputation>
 	^ computation
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternMarker >> computation: aBrEditorSearchTextComputation [
+BrEditorSearchTextMarker >> computation: aBrEditorSearchTextComputation [
 	computation := aBrEditorSearchTextComputation
 ]
 
 { #category : #initialization }
-BrEditorSearchTextPatternMarker >> initialize [
+BrEditorSearchTextMarker >> initialize [
 	super initialize.
 	announcer := Announcer new.
 	computation := BrEditorSearchTextSameProcessComputation new
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternMarker >> mark: aMarkContext [
+BrEditorSearchTextMarker >> mark: aMarkContext [
 	"It must be called from a UI process"
 
 	| someItems |
@@ -36,37 +36,37 @@ BrEditorSearchTextPatternMarker >> mark: aMarkContext [
 	aMarkContext hasVisibleText ifTrue: [ 
 		someItems := self markVisibleText: aMarkContext ].
 
-	aMarkContext computedPatternItems: someItems.
+	aMarkContext patternItems: someItems.
 	
 	computation markText: aMarkContext using: self
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternMarker >> markNext: aMarkContext [
-	aMarkContext editorElementDo: [ :anEditor | 
+BrEditorSearchTextMarker >> markNext: aMarkContext [
+	aMarkContext editorModelTextDo: [ :aCurrentText | 
 		| aCurrentItem aNewItem |
 	
-		aCurrentItem := aMarkContext computedCurrentPatternItem.
+		aCurrentItem := aMarkContext selectedPatternItem.
 		aNewItem := aMarkContext computeNextPatternItem.
 	
-		self switchText: anEditor text attributeFor: aCurrentItem.
-		self switchText: anEditor text attributeFor: aNewItem ]
+		self switchText: aCurrentText attributeFor: aCurrentItem.
+		self switchText: aCurrentText attributeFor: aNewItem ]
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternMarker >> markPrevious: aMarkContext [
-	aMarkContext editorElementDo: [ :anEditor | 
+BrEditorSearchTextMarker >> markPrevious: aMarkContext [
+	aMarkContext editorModelTextDo: [ :aCurrentText | 
 		| aCurrentItem aNewItem |
 	
-		aCurrentItem := aMarkContext computedCurrentPatternItem.
+		aCurrentItem := aMarkContext selectedPatternItem.
 		aNewItem := aMarkContext computePreviousPatternItem.
 	
-		self switchText: anEditor text attributeFor: aCurrentItem.
-		self switchText: anEditor text attributeFor: aNewItem ]
+		self switchText: aCurrentText attributeFor: aCurrentItem.
+		self switchText: aCurrentText attributeFor: aNewItem ]
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternMarker >> markText: aText context: aMarkContext [
+BrEditorSearchTextMarker >> markText: aText context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
 	| someIndexes |
 	someIndexes := aMarkContext pattern findAllIndexesIn: aText.
@@ -77,16 +77,10 @@ BrEditorSearchTextPatternMarker >> markText: aText context: aMarkContext [
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternMarker >> markText: aText indexes: someItems context: aMarkContext [
+BrEditorSearchTextMarker >> markText: aText indexes: someItems context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
-	| oldAttributes |
-	oldAttributes := Array
-			streamContents: [ :aStream | 
-				aText
-					findAttributesSuchThat: [ :eachAttribute | eachAttribute class = BrEditorSearchTextMark ]
-					indicesDo: [ :aStart :aStop :anAttribute | aStream nextPut: anAttribute ] ].
-
-	aText removeAttributes: oldAttributes.
+	aText clearAttributes: [ :eachAttribute | 
+		eachAttribute class = BrEditorSearchTextMark ].
 
 	someItems
 		doWithIndex: [ :eachItem :eachIndex | 
@@ -105,29 +99,30 @@ BrEditorSearchTextPatternMarker >> markText: aText indexes: someItems context: a
 ]
 
 { #category : #'api - styling' }
-BrEditorSearchTextPatternMarker >> markVisibleText: aMarkContext [
+BrEditorSearchTextMarker >> markVisibleText: aMarkContext [
 	^ self markText: aMarkContext visibleText context: aMarkContext
 ]
 
 { #category : #private }
-BrEditorSearchTextPatternMarker >> newTextMarkPaint: isCurrentItem [
+BrEditorSearchTextMarker >> newTextMarkPaint: isCurrentItem [
 	^ isCurrentItem
 		ifTrue: [ BrGlamorousColors failureBackgroundColor ]
 		ifFalse: [ BrGlamorousColors disabledButtonTextColor ]
 ]
 
 { #category : #'api - notifying' }
-BrEditorSearchTextPatternMarker >> notifyFoundItems: somePatternItems context: aMarkContext [
+BrEditorSearchTextMarker >> notifyFoundItems: somePatternItems context: aMarkContext [
 	"Notification may be called from a non-UI process."
 
 	announcer
 		announce: (BrEditorSearchTextFinishedAnnouncement new
 				items: somePatternItems;
+				selectedIndex: aMarkContext selectedIndex; 
 				context: aMarkContext)
 ]
 
 { #category : #private }
-BrEditorSearchTextPatternMarker >> switchText: aText attributeFor: aPatternItem [
+BrEditorSearchTextMarker >> switchText: aText attributeFor: aPatternItem [
 	| anOldAttribute aNewAttribute aSelection aSubText |
 	anOldAttribute := aPatternItem textAttribute.
 	aSelection := aPatternItem isSelected.
@@ -143,13 +138,21 @@ BrEditorSearchTextPatternMarker >> switchText: aText attributeFor: aPatternItem 
 	aPatternItem textAttribute: aNewAttribute
 ]
 
+{ #category : #'api - styling' }
+BrEditorSearchTextMarker >> unmark: aMarkContext [
+	"It must be called from a UI process"
+
+	aMarkContext editorElementDo: [ :anEditor |
+		anEditor text removeAttributes: (aMarkContext patternItems collect: #textAttribute as: IdentitySet) ]
+]
+
 { #category : #'api - subscriptions' }
-BrEditorSearchTextPatternMarker >> unsubscribe: anObject [
+BrEditorSearchTextMarker >> unsubscribe: anObject [
 	^ announcer unsubscribe: anObject
 ]
 
 { #category : #'api - subscriptions' }
-BrEditorSearchTextPatternMarker >> when: anEventSelector send: aMessageSelector to: anObject [
+BrEditorSearchTextMarker >> when: anEventSelector send: aMessageSelector to: anObject [
 	^ announcer weak
 		when: anEventSelector
 		send: aMessageSelector

@@ -3,14 +3,15 @@ Class {
 	#superclass : #Announcement,
 	#instVars : [
 		'items',
-		'context'
+		'context',
+		'selectedIndex'
 	],
 	#category : #'Brick-Editor - Search'
 }
 
 { #category : #accessing }
 BrEditorSearchTextFinishedAnnouncement >> context [
-	<return: #BrEditorSearchTextContext>
+	<return: #BrEditorSearchTextMarkerContext>
 	^ context
 ]
 
@@ -37,10 +38,25 @@ BrEditorSearchTextFinishedAnnouncement >> gtFoundItemsFor: aView [
 { #category : #accessing }
 BrEditorSearchTextFinishedAnnouncement >> items [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
-	^ items
+	^ items ifNil: [ #() ]
 ]
 
 { #category : #accessing }
 BrEditorSearchTextFinishedAnnouncement >> items: aCollectionOfMarks [
 	items := aCollectionOfMarks
+]
+
+{ #category : #accessing }
+BrEditorSearchTextFinishedAnnouncement >> itemsCount [
+	^ self items size
+]
+
+{ #category : #accessing }
+BrEditorSearchTextFinishedAnnouncement >> selectedIndex [
+	^ selectedIndex
+]
+
+{ #category : #accessing }
+BrEditorSearchTextFinishedAnnouncement >> selectedIndex: anObject [
+	selectedIndex := anObject
 ]

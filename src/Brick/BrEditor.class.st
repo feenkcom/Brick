@@ -235,3 +235,16 @@ BrEditor >> text [
 BrEditor >> text: aBlText [
 	self viewModel text: aBlText asRopedText
 ]
+
+{ #category : #accessing }
+BrEditor >> visibleText [
+	<return: #BlText or: nil>
+	| aStart aStop |
+	self firstVisibleSegment
+		ifNotNil: [ :aSegment | aStart := aSegment textStart max: 1 ].
+	self lastVisibleSegment 
+		ifNotNil: [ :aSegment | aStop := aSegment textEnd ].
+	(aStart isNil or: [ aStop isNil ]) ifTrue: [ ^ nil ].
+
+	^ self text from: aStart to: aStop
+]
