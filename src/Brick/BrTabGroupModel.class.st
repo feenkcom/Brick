@@ -39,6 +39,13 @@ BrTabGroupModel >> addTab: aBrTabModel at: anIndex [
 	self onTabAdded: aBrTabModel at: anIndex
 ]
 
+{ #category : #'as yet unclassified' }
+BrTabGroupModel >> addTabAfterSelectedTab: aBrTab [
+	self hasSelectedTab
+		ifTrue: [ self addTab: aBrTab at: (self indexOf: self selectedTab) + 1 ]
+		ifFalse: [ self addTab: aBrTab ]
+]
+
 { #category : #'api - tabs' }
 BrTabGroupModel >> addTabs: aCollectionOfTabModels [
 	aCollectionOfTabModels do: [ :aTabModel | self addTab: aTabModel ]
