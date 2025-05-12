@@ -20,13 +20,6 @@ BrEditorSearchTextResult >> context: anObject [
 	context := anObject
 ]
 
-{ #category : #testing }
-BrEditorSearchTextResult >> isNextGeneration [
-	self context
-		editorElementDo: [ :anEditor | ^ self styledText isNextGenerationOf: anEditor text ].
-	^ true
-]
-
 { #category : #accessing }
 BrEditorSearchTextResult >> marker [
 	^ marker
