@@ -71,13 +71,9 @@ BrEditorSearchTextAsyncFutureComputation >> onSearchTextResult: aSearchTextResul
 	"This method must be called from a UI process"
 
 	| aResult |
-	aResult := aSearchTextResult context textSource updateText: aSearchTextResult styledText.
+	aResult := aSearchTextResult context textSource
+			updateText: aSearchTextResult styledText.
 	aResult ifTrue: [ ^ self ].
 
-	true ifTrue: [ ^ self ].
-
-	self flag: #todo.
-	BlTaskAction
-		enqueueElement: anElement
-		action: [ self markText: aSearchTextResult context using: aSearchTextResult marker ]
+	self flag: #todo
 ]

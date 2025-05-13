@@ -31,7 +31,7 @@ BrEditorSearchTextMarker >> mark: aMarkContext [
 	"It must be called from a UI process"
 
 	| someItems |
-	aMarkContext hasText ifNil: [ ^ nil ].
+	aMarkContext hasText ifNil: [ ^ self ].
 
 	aMarkContext hasVisibleText ifTrue: [ 
 		someItems := self markVisibleText: aMarkContext ].
@@ -50,7 +50,9 @@ BrEditorSearchTextMarker >> markNext: aMarkContext [
 		aNewItem := aMarkContext computeNextPatternItem.
 	
 		self switchText: aCurrentText attributeFor: aCurrentItem.
-		self switchText: aCurrentText attributeFor: aNewItem ]
+		self switchText: aCurrentText attributeFor: aNewItem.
+		
+		self notifyFoundItems: aMarkContext patternItems context: aMarkContext ]
 ]
 
 { #category : #'api - styling' }
@@ -62,7 +64,9 @@ BrEditorSearchTextMarker >> markPrevious: aMarkContext [
 		aNewItem := aMarkContext computePreviousPatternItem.
 	
 		self switchText: aCurrentText attributeFor: aCurrentItem.
-		self switchText: aCurrentText attributeFor: aNewItem ]
+		self switchText: aCurrentText attributeFor: aNewItem.
+		
+		self notifyFoundItems: aMarkContext patternItems context: aMarkContext ]
 ]
 
 { #category : #'api - styling' }
@@ -142,8 +146,12 @@ BrEditorSearchTextMarker >> switchText: aText attributeFor: aPatternItem [
 BrEditorSearchTextMarker >> unmark: aMarkContext [
 	"It must be called from a UI process"
 
-	aMarkContext editorElementDo: [ :anEditor |
-		anEditor text removeAttributes: (aMarkContext patternItems collect: #textAttribute as: IdentitySet) ]
+	aMarkContext
+		editorModelTextDo: [ :aCurrentText | 
+			aCurrentText
+				removeAttributes: (aMarkContext patternItems collect: #textAttribute as: IdentitySet) ].
+
+	self notifyFoundItems: #() context: aMarkContext
 ]
 
 { #category : #'api - subscriptions' }

@@ -24,9 +24,9 @@ BrSearchTextElement >> editorDo: aBlock [
 
 { #category : #'api - accessing' }
 BrSearchTextElement >> index: anIndex total: aCount [
-	(anIndex isNil or: [ aCount isNil ]) ifTrue: [
-		index text: '0'.
-		^ self ].
+	(anIndex isNil or: [ aCount isNil or: [ aCount isZero ] ])
+		ifTrue: [ index text: '0'.
+			^ self ].
 
 	index
 		text: ('{1}/{2}'
