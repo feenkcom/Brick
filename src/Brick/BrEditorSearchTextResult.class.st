@@ -1,3 +1,6 @@
+"
+I hold search text result, including {{gtClass:BrEditorSearchTextItem}}. 
+"
 Class {
 	#name : #BrEditorSearchTextResult,
 	#superclass : #Object,

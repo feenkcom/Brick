@@ -1,3 +1,9 @@
+"
+I am a {{gtClass:BrEditorSearchTextComputation}}. 
+I search all text places in a {{gtMethod:Processor class >> #activeProcess | label=active process}}. 
+Note that the active process must be a UI process. 
+
+"
 Class {
 	#name : #BrEditorSearchTextSameProcessComputation,
 	#superclass : #BrEditorSearchTextComputation,

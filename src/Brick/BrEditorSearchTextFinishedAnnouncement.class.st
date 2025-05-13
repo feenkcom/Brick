@@ -1,3 +1,9 @@
+"
+I notify that a search text activity is finished.
+I may be announced from a non-UI process.
+Note, that a given {{gtClass:BlText}} in which a searched happened may not be completelly marked yet.
+
+"
 Class {
 	#name : #BrEditorSearchTextFinishedAnnouncement,
 	#superclass : #Announcement,
@@ -37,7 +43,7 @@ BrEditorSearchTextFinishedAnnouncement >> gtFoundItemsFor: aView [
 
 { #category : #accessing }
 BrEditorSearchTextFinishedAnnouncement >> items [
-	<return: #Collection of: #BrEditorSearchTextPatternItem>
+	<return: #Collection of: #BrEditorSearchTextItem>
 	^ items ifNil: [ #() ]
 ]
 

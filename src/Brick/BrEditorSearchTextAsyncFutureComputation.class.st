@@ -1,3 +1,8 @@
+"
+I am a {{gtClass:BrEditorSearchTextComputation}}. 
+I search all text places using a {{gtClass:TAsyncFuture}}. 
+
+"
 Class {
 	#name : #BrEditorSearchTextAsyncFutureComputation,
 	#superclass : #BrEditorSearchTextComputation,
