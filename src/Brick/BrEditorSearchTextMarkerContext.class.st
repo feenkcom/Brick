@@ -123,7 +123,7 @@ BrEditorSearchTextMarkerContext >> pattern: aPattern [
 { #category : #'api - pattern' }
 BrEditorSearchTextMarkerContext >> patternItems [
 	<return: #Collection of: #BrEditorSearchTextPatternItem>
-	^ patternItems
+	^ patternItems ifNil: [ #() ]
 ]
 
 { #category : #'api - pattern' }
@@ -156,6 +156,13 @@ BrEditorSearchTextMarkerContext >> selectedPatternItem [
 				ifNotNil: [ :anIndex | selectedIndex := anIndex ].
 			selectedPatternItem := anItem ]
 		ifNone: [ nil ]
+]
+
+{ #category : #'api - pattern' }
+BrEditorSearchTextMarkerContext >> selectedRange [
+	<return: #Interval>
+	^ self selectedPatternItem absoluteStartIndex
+		to: self selectedPatternItem absoluteStopIndex
 ]
 
 { #category : #'api - pattern' }
