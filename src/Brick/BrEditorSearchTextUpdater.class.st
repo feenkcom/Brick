@@ -1,3 +1,9 @@
+"
+I update existing {{gtMethod:BrEditorModel >> #text}} styling using a new {{gtMethod:BrEditorSearchTextUpdater>>#styledText | label=#selector}}. 
+Inspired by {{gtMethod:BrTextEditorModel>>#onTextStyled:}}. 
+The difference is that {{gtMethod:BrEditorSearchTextUpdater>>#update | label=#selector}} does not trigger a new style text request when an editor's text changed in the meantime.
+
+"
 Class {
 	#name : #BrEditorSearchTextUpdater,
 	#superclass : #Object,
@@ -10,22 +16,24 @@ Class {
 
 { #category : #accessing }
 BrEditorSearchTextUpdater >> editorModel [
+	<return: #BrTextEditorModel>
 	^ editorModel
 ]
 
 { #category : #accessing }
-BrEditorSearchTextUpdater >> editorModel: anObject [
-	editorModel := anObject
+BrEditorSearchTextUpdater >> editorModel: aBrTextEditorModel [
+	editorModel := aBrTextEditorModel
 ]
 
 { #category : #accessing }
 BrEditorSearchTextUpdater >> styledText [
+	<return: #BlGenerationText>
 	^ styledText
 ]
 
 { #category : #accessing }
-BrEditorSearchTextUpdater >> styledText: anObject [
-	styledText := anObject
+BrEditorSearchTextUpdater >> styledText: aBlGenerationText [
+	styledText := aBlGenerationText
 ]
 
 { #category : #'api - updating' }

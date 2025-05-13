@@ -1,5 +1,9 @@
+"
+I represent a place in a {{gtClass:BlText}} where a given {{gtClass:BrEditorSearchTextPattern}} was found.
+
+"
 Class {
-	#name : #BrEditorSearchTextPatternItem,
+	#name : #BrEditorSearchTextItem,
 	#superclass : #Object,
 	#instVars : [
 		'pattern',
@@ -15,47 +19,47 @@ Class {
 }
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> absoluteStartIndex [
+BrEditorSearchTextItem >> absoluteStartIndex [
 	^ absoluteStartIndex
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> absoluteStartIndex: anInteger [
+BrEditorSearchTextItem >> absoluteStartIndex: anInteger [
 	absoluteStartIndex := anInteger
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> absoluteStopIndex [
+BrEditorSearchTextItem >> absoluteStopIndex [
 	^ absoluteStopIndex
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> absoluteStopIndex: anObject [
+BrEditorSearchTextItem >> absoluteStopIndex: anObject [
 	absoluteStopIndex := anObject
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> isSelected [
+BrEditorSearchTextItem >> isSelected [
 	^ isSelected ifNil: [ false ]
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> isSelected: aBoolean [
+BrEditorSearchTextItem >> isSelected: aBoolean [
 	isSelected := aBoolean
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> pattern [
+BrEditorSearchTextItem >> pattern [
 	^ pattern
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> pattern: anObject [
+BrEditorSearchTextItem >> pattern: anObject [
 	pattern := anObject
 ]
 
 { #category : #printing }
-BrEditorSearchTextPatternItem >> printOn: aStream [
+BrEditorSearchTextItem >> printOn: aStream [
 	super printOn: aStream.
 
 	aStream
@@ -70,52 +74,52 @@ BrEditorSearchTextPatternItem >> printOn: aStream [
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> startIndex [
+BrEditorSearchTextItem >> startIndex [
 	^ startIndex
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> startIndex: anObject [
+BrEditorSearchTextItem >> startIndex: anObject [
 	startIndex := anObject
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> stopIndex [
+BrEditorSearchTextItem >> stopIndex [
 	^ stopIndex
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> stopIndex: anObject [
+BrEditorSearchTextItem >> stopIndex: anObject [
 	stopIndex := anObject
 ]
 
 { #category : #acessing }
-BrEditorSearchTextPatternItem >> substring [
+BrEditorSearchTextItem >> substring [
 	^ self subtext asString
 ]
 
 { #category : #acessing }
-BrEditorSearchTextPatternItem >> subtext [
+BrEditorSearchTextItem >> subtext [
 	^ self text from: self startIndex to: self stopIndex
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> text [
+BrEditorSearchTextItem >> text [
 	^ text
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> text: anObject [
+BrEditorSearchTextItem >> text: anObject [
 	text := anObject
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> textAttribute [
+BrEditorSearchTextItem >> textAttribute [
 	<return: #BrEditorSearchTextMark>
 	^ textAttribute
 ]
 
 { #category : #accessing }
-BrEditorSearchTextPatternItem >> textAttribute: aBrEditorSearchTextMark [
+BrEditorSearchTextItem >> textAttribute: aBrEditorSearchTextMark [
 	textAttribute := aBrEditorSearchTextMark
 ]

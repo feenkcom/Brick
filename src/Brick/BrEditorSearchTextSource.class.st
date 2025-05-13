@@ -1,3 +1,8 @@
+"
+I am an abstract class.
+I am responsible for accessing {{gtClass:BlText}} instances in which a search happens.
+
+"
 Class {
 	#name : #BrEditorSearchTextSource,
 	#superclass : #Object,

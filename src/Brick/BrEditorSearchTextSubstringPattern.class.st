@@ -1,3 +1,7 @@
+"
+I am {{gtClass:BrEditorSearchTextPattern}}. 
+I search substrings in a given {{gtClass:BlText}}. 
+"
 Class {
 	#name : #BrEditorSearchTextSubstringPattern,
 	#superclass : #BrEditorSearchTextPattern,
@@ -10,7 +14,7 @@ Class {
 
 { #category : #'api - search' }
 BrEditorSearchTextSubstringPattern >> findAllIndexesIn: aText [
-	<return: #Array of: #BrEditorSearchTextPatternItem>
+	<return: #Array of: #BrEditorSearchTextItem>
 	| allIndexes anOffset |
 	allIndexes := aText finder
 		caseInsensitiveSubstring: self string;
@@ -20,7 +24,7 @@ BrEditorSearchTextSubstringPattern >> findAllIndexesIn: aText [
 	^ allIndexes collect: [ :aStart |
 		| aStop |
 		aStop := aStart + self string size - 1.
-		BrEditorSearchTextPatternItem new 
+		BrEditorSearchTextItem new 
 			text: aText;
 			pattern: self;
 			startIndex: aStart;

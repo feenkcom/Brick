@@ -1,3 +1,13 @@
+"
+I am a core class for the search text activity.
+I {{gtMethod:BrEditorSearchTextMarker>>#mark: | label=mark}} all places for a given {{gtMethod:BrEditorSearchTextMarkerContext >> #pattern | label=#selector}}. 
+Main methods:
+- {{gtMethod:BrEditorSearchTextMarker>>#mark: | label=#selector}}, 
+- {{gtMethod:BrEditorSearchTextMarker>>#markNext: | label=#selector}}, 
+- {{gtMethod:BrEditorSearchTextMarker>>#markPrevious: | label=#selector}}, 
+- {{gtMethod:BrEditorSearchTextMarker>>#unmark: | label=#selector}}. 
+
+"
 Class {
 	#name : #BrEditorSearchTextMarker,
 	#superclass : #Object,
@@ -46,8 +56,8 @@ BrEditorSearchTextMarker >> markNext: aMarkContext [
 	aMarkContext editorModelTextDo: [ :aCurrentText | 
 		| aCurrentItem aNewItem |
 	
-		aCurrentItem := aMarkContext selectedPatternItem.
-		aNewItem := aMarkContext computeNextPatternItem.
+		aCurrentItem := aMarkContext selectedItem.
+		aNewItem := aMarkContext computeNextItem.
 	
 		self switchText: aCurrentText attributeFor: aCurrentItem.
 		self switchText: aCurrentText attributeFor: aNewItem.
@@ -60,8 +70,8 @@ BrEditorSearchTextMarker >> markPrevious: aMarkContext [
 	aMarkContext editorModelTextDo: [ :aCurrentText | 
 		| aCurrentItem aNewItem |
 	
-		aCurrentItem := aMarkContext selectedPatternItem.
-		aNewItem := aMarkContext computePreviousPatternItem.
+		aCurrentItem := aMarkContext selectedItem.
+		aNewItem := aMarkContext computePreviousItem.
 	
 		self switchText: aCurrentText attributeFor: aCurrentItem.
 		self switchText: aCurrentText attributeFor: aNewItem.
@@ -71,7 +81,7 @@ BrEditorSearchTextMarker >> markPrevious: aMarkContext [
 
 { #category : #'api - styling' }
 BrEditorSearchTextMarker >> markText: aText context: aMarkContext [
-	<return: #Collection of: #BrEditorSearchTextPatternItem>
+	<return: #Collection of: #BrEditorSearchTextItem>
 	| someIndexes |
 	someIndexes := aMarkContext pattern findAllIndexesIn: aText.
 	^ self
@@ -82,14 +92,14 @@ BrEditorSearchTextMarker >> markText: aText context: aMarkContext [
 
 { #category : #'api - styling' }
 BrEditorSearchTextMarker >> markText: aText indexes: someItems context: aMarkContext [
-	<return: #Collection of: #BrEditorSearchTextPatternItem>
+	<return: #Collection of: #BrEditorSearchTextItem>
 	aText clearAttributes: [ :eachAttribute | 
 		eachAttribute class = BrEditorSearchTextMark ].
 
 	someItems
 		doWithIndex: [ :eachItem :eachIndex | 
 			| isCurrentItem anAttribute |
-			isCurrentItem := aMarkContext isCurrentPatternItem: eachItem index: eachIndex.
+			isCurrentItem := aMarkContext isSelectedItem: eachItem index: eachIndex.
 			eachItem isSelected: isCurrentItem.
 			anAttribute := BrEditorSearchTextMark new
 					index: eachIndex;

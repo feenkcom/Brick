@@ -12,6 +12,11 @@ Class {
 	#category : #'Brick-Editor - Search'
 }
 
+{ #category : #testing }
+BrEditorSearchTextStyler class >> isDeprecated [
+	^ true
+]
+
 { #category : #accessing }
 BrEditorSearchTextStyler >> currentCount [
 	^ currentCount

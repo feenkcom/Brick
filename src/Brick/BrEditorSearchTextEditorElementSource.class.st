@@ -1,3 +1,7 @@
+"
+I am {{gtClass:BrEditorSearchTextSource}}. 
+I know how to access {{gtMethod:BrEditor>>#text}}. 
+"
 Class {
 	#name : #BrEditorSearchTextEditorElementSource,
 	#superclass : #BrEditorSearchTextSource,

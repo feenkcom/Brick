@@ -12,6 +12,11 @@ Class {
 	#category : #'Brick-Editor - Search'
 }
 
+{ #category : #testing }
+BrEditorSearchTextVisualizerContext class >> isDeprecated [
+	^ true
+]
+
 { #category : #accessing }
 BrEditorSearchTextVisualizerContext >> allStartPositions [
 	^ allStartPositions

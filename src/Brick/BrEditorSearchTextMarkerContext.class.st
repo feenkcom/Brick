@@ -1,3 +1,17 @@
+"
+I hold basic input and output information of {{gtMethod:BrEditorSearchTextMarker >> #mark:}} execution.
+Input information:
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#textSource | label=#selector}} with its {{gtMethod: BrEditorSearchTextMarkerContext>>#text | label=#selector}} and {{gtMethod:BrEditorSearchTextMarkerContext>>#visibleText | label=#selector}}, 
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#pattern | label=#selector}}.
+Output information:
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#patternItems | label=#selector}},
+- {{gtMethod: BrEditorSearchTextMarkerContext>>#selectedItem | label=#selector}}, 
+- {{gtMethod: BrEditorSearchTextMarkerContext>>#selectedIndex | label=#selector}}, 
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#selectedLine | label=#selector}},
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#selectedRange | label=#selector}},
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#selectedStartPosition | label=#selector}},
+- {{gtMethod:BrEditorSearchTextMarkerContext>>#selectedStopPosition | label=#selector}}. 
+"
 Class {
 	#name : #BrEditorSearchTextMarkerContext,
 	#superclass : #Object,
@@ -9,44 +23,42 @@ Class {
 		'element',
 		'textSource',
 		'selectedIndex',
-		'selectedPatternItem',
-		'patternItems'
+		'patternItems',
+		'selectedItem'
 	],
 	#category : #'Brick-Editor - Search'
 }
 
-{ #category : #'api - pattern' }
-BrEditorSearchTextMarkerContext >> computeNextPatternItem [
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> computeNextItem [
+	<return: #BrEditorSearchTextItem>
 	| aNewIndex aNewItem anIndex aCurrentItem |
-	aCurrentItem := self selectedPatternItem.
+	aCurrentItem := self selectedItem.
 	aCurrentItem ifNil: [ self ].
-	anIndex := self patternItems
-			identityIndexOf: aCurrentItem
-			ifAbsent: [ self ].
+	anIndex := self patternItems identityIndexOf: aCurrentItem ifAbsent: [ self ].
 	aNewIndex := anIndex + 1.
 	aNewIndex > self patternItems size ifTrue: [ aNewIndex := 1 ].
 	aNewItem := self patternItems at: aNewIndex.
 	aCurrentItem isSelected: false.
 	aNewItem isSelected: true.
-	selectedPatternItem := aNewItem.
+	selectedItem := aNewItem.
 	selectedIndex := aNewIndex.
 	^ aNewItem
 ]
 
-{ #category : #'api - pattern' }
-BrEditorSearchTextMarkerContext >> computePreviousPatternItem [
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> computePreviousItem [
+	<return: #BrEditorSearchTextItem>
 	| aNewIndex aNewItem anIndex aCurrentItem |
-	aCurrentItem := self selectedPatternItem.
+	aCurrentItem := self selectedItem.
 	aCurrentItem ifNil: [ self ].
-	anIndex := self patternItems
-			identityIndexOf: aCurrentItem
-			ifAbsent: [ self ].
+	anIndex := self patternItems identityIndexOf: aCurrentItem ifAbsent: [ self ].
 	aNewIndex := anIndex - 1.
 	aNewIndex < 1 ifTrue: [ aNewIndex := self patternItems size ].
 	aNewItem := self patternItems at: aNewIndex.
 	aCurrentItem isSelected: false.
 	aNewItem isSelected: true.
-	selectedPatternItem := aNewItem.
+	selectedItem := aNewItem.
 	selectedIndex := aNewIndex.
 	^ aNewItem
 ]
@@ -94,14 +106,14 @@ BrEditorSearchTextMarkerContext >> hasVisibleText [
 	^ self textSource hasVisibleText
 ]
 
-{ #category : #'api - pattern' }
-BrEditorSearchTextMarkerContext >> isCurrentPatternItem: aPatternItem index: anIndex [
-	| anItem |
-	anItem := self selectedPatternItem.
-	anItem ifNil: [ ^ self selectedIndex = anIndex ].
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> isSelectedItem: anItem index: anIndex [
+	| aSelectedItem |
+	aSelectedItem := self selectedItem.
+	aSelectedItem ifNil: [ ^ self selectedIndex = anIndex ].
 
-	^ anItem absoluteStartIndex = aPatternItem absoluteStartIndex
-		and: [ anItem absoluteStopIndex = aPatternItem absoluteStopIndex ]
+	^ aSelectedItem absoluteStartIndex = anItem absoluteStartIndex
+		and: [ aSelectedItem absoluteStopIndex = anItem absoluteStopIndex ]
 ]
 
 { #category : #'api - accessing' }
@@ -120,55 +132,70 @@ BrEditorSearchTextMarkerContext >> pattern: aPattern [
 	pattern := aPattern
 ]
 
-{ #category : #'api - pattern' }
+{ #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> patternItems [
-	<return: #Collection of: #BrEditorSearchTextPatternItem>
+	<return: #Collection of: #BrEditorSearchTextItem>
 	^ patternItems ifNil: [ #() ]
 ]
 
-{ #category : #'api - pattern' }
+{ #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> patternItems: aCollection [
 	patternItems := aCollection.
-	selectedPatternItem := nil.
+	selectedItem := nil.
 ]
 
-{ #category : #'api - pattern' }
+{ #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedIndex [
+	"Return an index among #patternItems"
+
 	<return: #Integer>
 	^ selectedIndex ifNil: [ selectedIndex := 1 ]
 ]
 
-{ #category : #'api - pattern' }
-BrEditorSearchTextMarkerContext >> selectedLine [
-	<return: #Integer>
-	^ (self text from: 1 to: self selectedPatternItem absoluteStartIndex) lineCount
-]
-
-{ #category : #'api - pattern' }
-BrEditorSearchTextMarkerContext >> selectedPatternItem [
-	<return: #BrEditorSearchTextPatternItem or: nil>
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> selectedItem [
+	<return: #BrEditorSearchTextItem or: nil>
 	self patternItems ifNil: [ ^ nil ].
-	selectedPatternItem ifNotNil: [ ^ selectedPatternItem ].
+	selectedItem ifNotNil: [ ^ selectedItem ].
 	^ self patternItems
 		detect: [ :eachItem | eachItem isSelected ]
 		ifFound: [ :anItem |
 			(self patternItems identityIndexOf: anItem ifAbsent: [ nil ])
 				ifNotNil: [ :anIndex | selectedIndex := anIndex ].
-			selectedPatternItem := anItem ]
+			selectedItem := anItem ]
 		ifNone: [ nil ]
 ]
 
-{ #category : #'api - pattern' }
-BrEditorSearchTextMarkerContext >> selectedRange [
-	<return: #Interval>
-	^ self selectedPatternItem absoluteStartIndex
-		to: self selectedPatternItem absoluteStopIndex
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> selectedLine [
+	"Return line number for a given selected item"
+
+	<return: #Integer>
+	^ (self text from: 1 to: self selectedItem absoluteStartIndex) lineCount
 ]
 
-{ #category : #'api - pattern' }
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> selectedRange [
+	"Return character start and stop positions for a given selected item"
+
+	<return: #Interval>
+	^ self selectedItem absoluteStartIndex to: self selectedItem absoluteStopIndex
+]
+
+{ #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedStartPosition [
+	"Return a character start position for a given selected item"
+
 	<return: #Integer>
-	^ self selectedPatternItem absoluteStartIndex
+	^ self selectedItem absoluteStartIndex
+]
+
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> selectedStopPosition [
+	"Return a character stop position for a given selected item"
+
+	<return: #Integer>
+	^ self selectedItem absoluteStopIndex
 ]
 
 { #category : #'api - pattern' }
