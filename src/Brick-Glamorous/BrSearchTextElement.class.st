@@ -147,8 +147,14 @@ BrSearchTextElement >> onFindPreviousOccurenceEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-BrSearchTextElement >> onSearchPatternModifiedEvent: anEvent [ 
-	self dispatchEvent: (BrSearchTextPatternWish new text: anEvent text)
+BrSearchTextElement >> onSearchPatternModifiedEvent: anEvent [
+	| aText |
+	aText := anEvent text.
+	aText size isZero
+		ifTrue: [ self dispatchEvent: BrSearchTextNoPatternWish new ]
+		ifFalse: [ self
+				dispatchEvent: (BrSearchTextPatternWish new
+						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
 ]
 
 { #category : #'api - accessing' }

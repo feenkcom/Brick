@@ -4,5 +4,5 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Glamorous-Editor'
+	#category : #'Brick-Editor - Search'
 }
