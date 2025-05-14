@@ -5,6 +5,20 @@ Class {
 }
 
 { #category : #initialization }
+BrGlamorousEditorSearchTextAptitude >> newPopoverAptitude [
+	^ BrGlamorousWithExplicitDropdownAptitude new
+		withoutHandle;
+		withoutMouseEventHandler;
+		withGainFocusOnShow;
+		relocator: BrEditorSearchTextPopoverContainerRelocator new;
+		stencil: [ :aBrMenuInitialContext | 
+			BrMenuExplicit new
+				stencil: [ searchElement
+						removeFromParent;
+						editorDo: [ :anEditor | anEditor requestFocus ] ] ]
+]
+
+{ #category : #initialization }
 BrGlamorousEditorSearchTextAptitude >> newSearchElement [
 	^ BrSearchTextElement new
 		hFitContentLimited;
@@ -12,4 +26,19 @@ BrGlamorousEditorSearchTextAptitude >> newSearchElement [
 			c minWidth: 300.
 			c frame horizontal alignCenter.
 			c frame vertical alignCenter ]
+]
+
+{ #category : #'private - event management' }
+BrGlamorousEditorSearchTextAptitude >> onBrSearchTextEndWish: anEvent [
+	super onBrSearchTextEndWish: anEvent.
+
+	self
+		widgetDo: [ :aWidget | self dispatchEvent: (BrDropdownHideWish new anchor: aWidget) ]
+]
+
+{ #category : #'private - event management' }
+BrGlamorousEditorSearchTextAptitude >> onOpenSearchTextDialogEvent: anEvent [
+	super onOpenSearchTextDialogEvent: anEvent.
+	self widgetDo: [ :aWidget | 
+		self dispatchEvent: (BrDropdownShowWish new anchor: aWidget) ]
 ]

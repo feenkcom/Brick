@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'marker',
 		'searchElement',
-		'context'
+		'context',
+		'searchShortcut'
 	],
 	#category : #'Brick-Editor - Search'
 }
@@ -15,26 +16,12 @@ BrEditorSearchTextAptitude >> initialize [
 
 	self initializeSearchElement.
 	self initializeMarker.
-	self initializeEventHandlers
-]
-
-{ #category : #initialization }
-BrEditorSearchTextAptitude >> initializeEventHandlers [
-	self
-		when: BrSearchTextPatternWish
-		do: [ :anEvent | self onBrSearchTextPatternWish: anEvent ].
-	self
-		when: BrSearchTextNoPatternWish
-		do: [ :anEvent | self onBrSearchTextNoPatternWish: anEvent ].
-	self
-		when: BrSearchTextNextOccurenceWish
-		do: [ :anEvent | self onBrSearchTextNextOccurenceWish: anEvent ].
-	self
-		when: BrSearchTextPreviousOccurenceWish
-		do: [ :anEvent | self onBrSearchTextPreviousOccurenceWish: anEvent ].
-	self
-		when: BrSearchTextEndWish
-		do: [ :anEvent | self onBrSearchTextEndWish: anEvent ].
+	self initializePopover.
+	searchShortcut := BlShortcutWithAction new
+			name: 'Search';
+			description: 'Search text in a given text editor';
+			combination: BlKeyCombination primaryF;
+			action: [ :anEvent | self onOpenSearchTextDialogEvent: anEvent ]
 ]
 
 { #category : #initialization }
@@ -48,8 +35,33 @@ BrEditorSearchTextAptitude >> initializeMarker [
 ]
 
 { #category : #initialization }
+BrEditorSearchTextAptitude >> initializePopover [
+	self add: self newPopoverAptitude.
+
+	self
+		when: BrPopoverIsHiddenEvent
+		do: [ :anEvent | self onBrPopoverIsHiddenEvent: anEvent ]
+]
+
+{ #category : #initialization }
 BrEditorSearchTextAptitude >> initializeSearchElement [
-	searchElement := self newSearchElement
+	searchElement := self newSearchElement.
+
+	searchElement
+		when: BrSearchTextPatternWish
+		do: [ :anEvent | self onBrSearchTextPatternWish: anEvent ].
+	searchElement
+		when: BrSearchTextNoPatternWish
+		do: [ :anEvent | self onBrSearchTextNoPatternWish: anEvent ].
+	searchElement
+		when: BrSearchTextNextOccurenceWish
+		do: [ :anEvent | self onBrSearchTextNextOccurenceWish: anEvent ].
+	searchElement
+		when: BrSearchTextPreviousOccurenceWish
+		do: [ :anEvent | self onBrSearchTextPreviousOccurenceWish: anEvent ].
+	searchElement
+		when: BrSearchTextEndWish
+		do: [ :anEvent | self onBrSearchTextEndWish: anEvent ]
 ]
 
 { #category : #initialization }
@@ -73,11 +85,23 @@ BrEditorSearchTextAptitude >> newMarkerContext [
 ]
 
 { #category : #initialization }
+BrEditorSearchTextAptitude >> newPopoverAptitude [
+	<return: #BrWithExplicitPopoverAptitude>
+	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
 BrEditorSearchTextAptitude >> newSearchElement [
 	"Create a new search element that understands #index:total:"
 
 	<return: #BlElement>
 	^ self subclassResponsibility
+]
+
+{ #category : #'api - hooks' }
+BrEditorSearchTextAptitude >> onAttachedTo: anElement [
+	super onAttachedTo: anElement.
+	anElement addShortcut: searchShortcut
 ]
 
 { #category : #'private - event management' }
@@ -89,6 +113,15 @@ BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnoun
 				action: [ searchElement
 						index: anAnnouncement selectedIndex
 						total: anAnnouncement itemsCount ] ]
+]
+
+{ #category : #'private - event management' }
+BrEditorSearchTextAptitude >> onBrPopoverIsHiddenEvent: anEvent [
+	| aContext |
+	aContext := context ifNil: [ ^ self ].
+	context := nil.
+
+	marker unmark: aContext
 ]
 
 { #category : #'private - event management' }
@@ -164,4 +197,9 @@ BrEditorSearchTextAptitude >> onBrSearchTextPreviousOccurenceWish: anEvent [
 				characterStartPosition: aContext selectedStartPosition;
 				characterStopPosition: aContext selectedStopPosition;
 				scroll ]
+]
+
+{ #category : #'private - event management' }
+BrEditorSearchTextAptitude >> onOpenSearchTextDialogEvent: anEvent [
+	anEvent consumed: true
 ]
