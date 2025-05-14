@@ -10,6 +10,14 @@ BrGlamorousEditorSearchTextAptitude >> newPopoverAptitude [
 		withoutHandle;
 		withoutMouseEventHandler;
 		withGainFocusOnShow;
+		withContainerAreaBuilders: {
+				BlSteppedLayoutAreaBuilder contextMenuBottomLeft.
+				BlSteppedLayoutAreaBuilder dropdownBottomLeft.
+				BlSteppedLayoutAreaBuilder dropdownBottomRight.
+				BlSteppedLayoutAreaBuilder contextMenuBottomRight.
+				BlSteppedLayoutAreaBuilder dropdownUpLeft.
+				BlSteppedLayoutAreaBuilder tooltipUpAlmostLeft.
+				BlSteppedLayoutAreaBuilder tooltipLeftBottom.};
 		relocator: BrEditorSearchTextPopoverContainerRelocator new;
 		stencil: [ :aBrMenuInitialContext | 
 			BrMenuExplicit new
