@@ -31,6 +31,9 @@ BrEditorSearchTextAptitude >> initializeMarker [
 	marker
 		when: BrEditorSearchTextFinishedAnnouncement
 		send: #onBrEditorSearchTextFinishedAnnouncement:
+		to: self;
+		when: BrEditorSearchTextProgressAnnouncement
+		send: #onBrEditorSearchTextProgressAnnouncement:
 		to: self
 ]
 
@@ -89,7 +92,7 @@ BrEditorSearchTextAptitude >> newPopoverAptitude [
 
 { #category : #initialization }
 BrEditorSearchTextAptitude >> newSearchElement [
-	"Create a new search element that understands #index:total:"
+	"Create a new search element that understands #index:total: and #progressIndex:total:"
 
 	<return: #BlElement>
 	^ self subclassResponsibility
@@ -103,6 +106,9 @@ BrEditorSearchTextAptitude >> onAttachedTo: anElement [
 
 { #category : #'private - event management' }
 BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnouncement [
+	context ifNil: [ ^ self ].
+	context == anAnnouncement context ifFalse: [ ^ self ].
+
 	self
 		widgetDo: [ :aBrEditor | 
 			BlTaskAction
@@ -111,6 +117,38 @@ BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnoun
 					searchElement
 						index: anAnnouncement selectedIndex
 						total: anAnnouncement itemsCount.
+					BrEditorSearchTextScroller new
+						editorElement: aBrEditor;
+						lineIndex: anAnnouncement context selectedLine;
+						characterStartPosition: anAnnouncement context selectedStartPosition;
+						characterStopPosition: anAnnouncement context selectedStopPosition;
+						scroll ] ]
+]
+
+{ #category : #'private - event management' }
+BrEditorSearchTextAptitude >> onBrEditorSearchTextProgressAnnouncement: anAnnouncement [
+	context ifNil: [ ^ self ].
+	context == anAnnouncement context ifFalse: [ ^ self ].
+
+	self
+		widgetDo: [ :aBrEditor | 
+			BlTaskAction
+				enqueueElement: aBrEditor
+				action: [ | aSegment |
+					aSegment := (aBrEditor layout
+							findFirstVisibleChildClosestToStartCompletelyVisible: true
+							acceptPartiallyVisible: false) ifNotNil: #segment.
+
+					aSegment
+						ifNil: [ searchElement progressIndex: nil total: anAnnouncement itemsCount ]
+						ifNotNil: [ aSegment index = 1
+								ifTrue: [ searchElement
+										progressIndex: anAnnouncement selectedIndex
+										total: anAnnouncement itemsCount ]
+								ifFalse: [ searchElement
+										progressIndex: nil
+										total: anAnnouncement itemsCount ] ].
+
 					BrEditorSearchTextScroller new
 						editorElement: aBrEditor;
 						lineIndex: anAnnouncement context selectedLine;
@@ -136,6 +174,8 @@ BrEditorSearchTextAptitude >> onBrSearchTextEndWish: anEvent [
 	context := nil.
 
 	marker unmark: aContext.
+	
+	"Select the last highlighted text"
 	aRange := aContext selectedRange.
 	aRange ifNil: [ ^ self ].
 

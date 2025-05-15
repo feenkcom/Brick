@@ -47,6 +47,7 @@ BrEditorSearchTextMarker >> mark: aMarkContext [
 		someItems := self markVisibleText: aMarkContext ].
 
 	aMarkContext patternItems: someItems.
+	self notifyProgressItems: someItems context: aMarkContext.
 	
 	computation markText: aMarkContext using: self
 ]
@@ -144,6 +145,17 @@ BrEditorSearchTextMarker >> notifyFoundItems: somePatternItems context: aMarkCon
 
 	announcer
 		announce: (BrEditorSearchTextFinishedAnnouncement new
+				items: somePatternItems;
+				selectedIndex: aMarkContext selectedIndex; 
+				context: aMarkContext)
+]
+
+{ #category : #'api - notifying' }
+BrEditorSearchTextMarker >> notifyProgressItems: somePatternItems context: aMarkContext [
+	"Notification may be called from a non-UI process."
+
+	announcer
+		announce: (BrEditorSearchTextProgressAnnouncement new
 				items: somePatternItems;
 				selectedIndex: aMarkContext selectedIndex; 
 				context: aMarkContext)

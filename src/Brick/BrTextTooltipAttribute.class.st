@@ -12,10 +12,10 @@ BrTextTooltipAttribute >> ensureTooltipWithText: anAptitudeId forTextElement: aT
 	| aCache |
 	aCache := aTextElement userData
 			at: #TextTooltipsCache
-			ifPresent: [ :theCache | theCache ]
-			ifAbsentPut: [ WeakValueDictionary new ].
-
-	^ aCache
+			ifPresent: [ :theCache | theCache prepareForTextElement: aTextElement ]
+			ifAbsentPut: [ BrTextTooltipCache new text: aTextElement text ].
+	
+	^ aCache 
 		at: anAptitudeId
 		ifPresent: [ :theAptitude | theAptitude ]
 		ifAbsentPut: [ | newAptitude |
