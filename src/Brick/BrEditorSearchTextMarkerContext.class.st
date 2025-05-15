@@ -22,7 +22,6 @@ Class {
 		'nextGenerationText',
 		'element',
 		'textSource',
-		'selectedIndex',
 		'patternItems',
 		'selectedItem'
 	],
@@ -42,7 +41,6 @@ BrEditorSearchTextMarkerContext >> computeNextItem [
 	aCurrentItem isSelected: false.
 	aNewItem isSelected: true.
 	selectedItem := aNewItem.
-	selectedIndex := aNewIndex.
 	^ aNewItem
 ]
 
@@ -59,7 +57,6 @@ BrEditorSearchTextMarkerContext >> computePreviousItem [
 	aCurrentItem isSelected: false.
 	aNewItem isSelected: true.
 	selectedItem := aNewItem.
-	selectedIndex := aNewIndex.
 	^ aNewItem
 ]
 
@@ -149,7 +146,6 @@ BrEditorSearchTextMarkerContext >> patternItems [
 BrEditorSearchTextMarkerContext >> patternItems: aCollection [
 	patternItems := aCollection.
 	selectedItem := nil.
-	selectedIndex := nil.
 ]
 
 { #category : #'api - result' }
@@ -157,8 +153,7 @@ BrEditorSearchTextMarkerContext >> selectedIndex [
 	"Return an index among #patternItems"
 
 	<return: #Integer>
-	^ selectedIndex
-		ifNil: [ self selectedItem ifNotNil: #index ifNil: [ 1 ] ]
+	^ self selectedItem ifNotNil: #index ifNil: [ 1 ]
 ]
 
 { #category : #'api - result' }
