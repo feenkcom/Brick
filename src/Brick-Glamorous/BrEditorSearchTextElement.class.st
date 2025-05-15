@@ -111,7 +111,7 @@ BrEditorSearchTextElement >> initializeNextItemElement [
 	nextItem := BrButton new
 			beTinySize;
 			aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonWithLabelTooltipAptitude2;
-			addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: 'Find next occurence of the find text' shortcut: 'Return');
+			addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: 'Find next occurence of the find text' shortcut: BlKeyCombination return);
 			margin: (BlInsets right: 3);
 			label: 'Find next occurence of the find text';
 			icon: BrGlamorousVectorIcons right;
@@ -124,7 +124,7 @@ BrEditorSearchTextElement >> initializePreviousItemElement [
 	previousItem := BrButton new
 			beTinySize;
 			aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonWithLabelTooltipAptitude2;
-			addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: 'Find previous occurence of the find text' shortcut: 'Primary+Return');
+			addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: 'Find previous occurence of the find text' shortcut: BlKeyCombination builder primary return build);
 			icon: BrGlamorousVectorIcons left;
 			label: 'Find previous occurence of the find text';
 			action: [ :aButton :aButtonModel :anEvent | self onFindPreviousOccurenceEvent: anEvent ];
