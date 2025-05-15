@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlTextHighlightAttribute,
 	#instVars : [
 		'index',
-		'isCurrent'
+		'isSelected'
 	],
 	#category : #'Brick-Editor - Search'
 }
@@ -12,7 +12,7 @@ Class {
 BrEditorSearchTextMark >> equals: anAnotherAttribute [
 	^ (super equals: anAnotherAttribute)
 		and: [ self index = anAnotherAttribute index
-				and: [ self isCurrent = anAnotherAttribute isCurrent ] ]
+				and: [ self isSelected = anAnotherAttribute isSelected ] ]
 ]
 
 { #category : #accessing }
@@ -30,15 +30,32 @@ BrEditorSearchTextMark >> initialize [
 	super initialize.
 
 	index := 1.
-	isCurrent := false.
+	isSelected := false.
 ]
 
 { #category : #accessing }
 BrEditorSearchTextMark >> isCurrent [
-	^ isCurrent
+	self
+		deprecated: 'Please use #isSelected instead.'
+		transformWith: '`@receiver isCurrent' -> '`@receiver isSelected'.
+
+	^ self isSelected
 ]
 
 { #category : #accessing }
 BrEditorSearchTextMark >> isCurrent: aBoolean [
-	isCurrent := aBoolean
+	self
+		deprecated: 'Please use isSelected: instead.'
+		transformWith: '`@receiver isCurrent: `@statements1' -> '`@receiver isSelected: `@statements1'.
+	self isSelected: aBoolean
+]
+
+{ #category : #accessing }
+BrEditorSearchTextMark >> isSelected [
+	^ isSelected
+]
+
+{ #category : #accessing }
+BrEditorSearchTextMark >> isSelected: aBoolean [
+	isSelected := aBoolean
 ]

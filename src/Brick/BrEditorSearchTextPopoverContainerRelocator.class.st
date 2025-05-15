@@ -13,7 +13,7 @@ BrEditorSearchTextPopoverContainerRelocator >> relocateGiven: anAnchorElement [
 					| aBounds anInsideRectangle aTopRightRectangle |
 					aBounds := anAnchorElement bounds inParent: aParent.
 					anInsideRectangle := aBounds asRectangle
-							blocRelocateFullyInsideRectangle: aParent bounds asRectangle.
+							intersect: aParent bounds asRectangle.
 					aTopRightRectangle := anInsideRectangle topRight - (2 @ 0)
 							corner: anInsideRectangle topRight + (0 @ 2).
 					aLayout anchorBounds: aTopRightRectangle ] ]

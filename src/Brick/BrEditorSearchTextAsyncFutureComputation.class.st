@@ -12,6 +12,14 @@ Class {
 	#category : #'Brick-Editor - Search'
 }
 
+{ #category : #'instance creation' }
+BrEditorSearchTextAsyncFutureComputation class >> newDefault [
+	^ self new
+		executionConfiguration: (AsyncFutureExecutionConfiguration new
+				customGroup: #SearchText;
+				defaultPriority)
+]
+
 { #category : #accessing }
 BrEditorSearchTextAsyncFutureComputation >> defaultExecutionConfiguration [
 	^ AsyncFutureExecutionConfiguration new

@@ -48,29 +48,26 @@ BrEditorSearchTextAptitude >> initializeSearchElement [
 	searchElement := self newSearchElement.
 
 	searchElement
-		when: BrSearchTextPatternWish
+		when: BrEditorSearchTextPatternWish
 		do: [ :anEvent | self onBrSearchTextPatternWish: anEvent ].
 	searchElement
-		when: BrSearchTextNoPatternWish
+		when: BrEditorSearchTextNoPatternWish
 		do: [ :anEvent | self onBrSearchTextNoPatternWish: anEvent ].
 	searchElement
-		when: BrSearchTextNextOccurenceWish
+		when: BrEditorSearchTextNextOccurenceWish
 		do: [ :anEvent | self onBrSearchTextNextOccurenceWish: anEvent ].
 	searchElement
-		when: BrSearchTextPreviousOccurenceWish
+		when: BrEditorSearchTextPreviousOccurenceWish
 		do: [ :anEvent | self onBrSearchTextPreviousOccurenceWish: anEvent ].
 	searchElement
-		when: BrSearchTextEndWish
+		when: BrEditorSearchTextEndWish
 		do: [ :anEvent | self onBrSearchTextEndWish: anEvent ]
 ]
 
 { #category : #initialization }
 BrEditorSearchTextAptitude >> newMarker [
 	^ BrEditorSearchTextMarker new
-		computation: (BrEditorSearchTextAsyncFutureComputation new
-				executionConfiguration: (AsyncFutureExecutionConfiguration new
-						customGroup: #SearchText;
-						defaultPriority))
+		computation: BrEditorSearchTextAsyncFutureComputation newDefault
 ]
 
 { #category : #private }
@@ -107,12 +104,19 @@ BrEditorSearchTextAptitude >> onAttachedTo: anElement [
 { #category : #'private - event management' }
 BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnouncement [
 	self
-		widgetDo: [ :aWidget | 
+		widgetDo: [ :aBrEditor | 
 			BlTaskAction
-				enqueueElement: aWidget
-				action: [ searchElement
+				enqueueElement: aBrEditor
+				action: [ 
+					searchElement
 						index: anAnnouncement selectedIndex
-						total: anAnnouncement itemsCount ] ]
+						total: anAnnouncement itemsCount.
+					BrEditorSearchTextScroller new
+						editorElement: aBrEditor;
+						lineIndex: anAnnouncement context selectedLine;
+						characterStartPosition: anAnnouncement context selectedStartPosition;
+						characterStopPosition: anAnnouncement context selectedStopPosition;
+						scroll ] ]
 ]
 
 { #category : #'private - event management' }

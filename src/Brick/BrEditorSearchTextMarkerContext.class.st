@@ -22,46 +22,11 @@ Class {
 		'nextGenerationText',
 		'element',
 		'textSource',
-		'selectedIndex',
 		'patternItems',
 		'selectedItem'
 	],
 	#category : #'Brick-Editor - Search'
 }
-
-{ #category : #'api - result' }
-BrEditorSearchTextMarkerContext >> computeNextItem [
-	<return: #BrEditorSearchTextItem>
-	| aNewIndex aNewItem anIndex aCurrentItem |
-	aCurrentItem := self selectedItem.
-	aCurrentItem ifNil: [ self ].
-	anIndex := self patternItems identityIndexOf: aCurrentItem ifAbsent: [ self ].
-	aNewIndex := anIndex + 1.
-	aNewIndex > self patternItems size ifTrue: [ aNewIndex := 1 ].
-	aNewItem := self patternItems at: aNewIndex.
-	aCurrentItem isSelected: false.
-	aNewItem isSelected: true.
-	selectedItem := aNewItem.
-	selectedIndex := aNewIndex.
-	^ aNewItem
-]
-
-{ #category : #'api - result' }
-BrEditorSearchTextMarkerContext >> computePreviousItem [
-	<return: #BrEditorSearchTextItem>
-	| aNewIndex aNewItem anIndex aCurrentItem |
-	aCurrentItem := self selectedItem.
-	aCurrentItem ifNil: [ self ].
-	anIndex := self patternItems identityIndexOf: aCurrentItem ifAbsent: [ self ].
-	aNewIndex := anIndex - 1.
-	aNewIndex < 1 ifTrue: [ aNewIndex := self patternItems size ].
-	aNewItem := self patternItems at: aNewIndex.
-	aCurrentItem isSelected: false.
-	aNewItem isSelected: true.
-	selectedItem := aNewItem.
-	selectedIndex := aNewIndex.
-	^ aNewItem
-]
 
 { #category : #'api - accessing' }
 BrEditorSearchTextMarkerContext >> editorModelText [
@@ -94,6 +59,13 @@ BrEditorSearchTextMarkerContext >> element: anElement [
 { #category : #'api - initialization' }
 BrEditorSearchTextMarkerContext >> fromEditor: aBrEditor [
 	self textSource: (BrEditorSearchTextEditorElementSource new editorElement: aBrEditor).
+]
+
+{ #category : #'api - initialization' }
+BrEditorSearchTextMarkerContext >> fromText: aText visibleText: aVisibleText [
+	textSource := BrEditorSearchTextBasicSource new
+			text: aText;
+			visibleText: aVisibleText
 ]
 
 { #category : #'api - testing' }
@@ -149,21 +121,37 @@ BrEditorSearchTextMarkerContext >> selectedIndex [
 	"Return an index among #patternItems"
 
 	<return: #Integer>
-	^ selectedIndex ifNil: [ selectedIndex := 1 ]
+	^ self selectedItem ifNotNil: #index ifNil: [ 1 ]
 ]
 
 { #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedItem [
 	<return: #BrEditorSearchTextItem or: nil>
-	self patternItems ifNil: [ ^ nil ].
+	self patternItems ifEmpty: [ ^ nil ].
 	selectedItem ifNotNil: [ ^ selectedItem ].
 	^ self patternItems
 		detect: [ :eachItem | eachItem isSelected ]
-		ifFound: [ :anItem |
-			(self patternItems identityIndexOf: anItem ifAbsent: [ nil ])
-				ifNotNil: [ :anIndex | selectedIndex := anIndex ].
-			selectedItem := anItem ]
+		ifFound: [ :anItem | selectedItem := anItem ]
 		ifNone: [ nil ]
+]
+
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> selectedItem: aBrEditorSearchTextItem [
+	self
+		assert: [ self patternItems isNotEmpty ]
+		description: [ 'There are no pattern items' ].
+
+	selectedItem
+		ifNotNil: [ :anItem | 
+			self
+				assert: [ anItem isSelected not ]
+				description: [ 'Currently selected item is still marked as selected' ] ].
+
+	self
+		assert: [ aBrEditorSearchTextItem isSelected ]
+		description: [ 'New selected item must be marked as selected' ].
+
+	selectedItem := aBrEditorSearchTextItem
 ]
 
 { #category : #'api - result' }

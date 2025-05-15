@@ -13,7 +13,8 @@ Class {
 		'isSelected',
 		'absoluteStartIndex',
 		'absoluteStopIndex',
-		'textAttribute'
+		'textAttribute',
+		'index'
 	],
 	#category : #'Brick-Editor - Search'
 }
@@ -36,6 +37,16 @@ BrEditorSearchTextItem >> absoluteStopIndex [
 { #category : #accessing }
 BrEditorSearchTextItem >> absoluteStopIndex: anObject [
 	absoluteStopIndex := anObject
+]
+
+{ #category : #accessing }
+BrEditorSearchTextItem >> index [
+	^ index
+]
+
+{ #category : #accessing }
+BrEditorSearchTextItem >> index: anObject [
+	index := anObject
 ]
 
 { #category : #accessing }

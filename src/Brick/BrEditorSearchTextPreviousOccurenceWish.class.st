@@ -1,5 +1,5 @@
 Class {
-	#name : #BrSearchTextPreviousOccurenceWish,
+	#name : #BrEditorSearchTextPreviousOccurenceWish,
 	#superclass : #BrWish,
 	#instVars : [
 		'text'
