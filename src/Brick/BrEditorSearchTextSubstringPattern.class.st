@@ -21,12 +21,13 @@ BrEditorSearchTextSubstringPattern >> findAllIndexesIn: aText [
 		searchAll.
 	anOffset := aText textOffset.
 		
-	^ allIndexes collect: [ :aStart |
+	^ allIndexes withIndexCollect: [ :aStart :anIndex |
 		| aStop |
 		aStop := aStart + self string size - 1.
 		BrEditorSearchTextItem new 
 			text: aText;
 			pattern: self;
+			index: anIndex;
 			startIndex: aStart;
 			stopIndex: aStop;
 			absoluteStartIndex: anOffset + aStart;

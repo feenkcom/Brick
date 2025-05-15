@@ -41,7 +41,7 @@ BrEditorSearchTextMarker >> mark: aMarkContext [
 	"It must be called from a UI process"
 
 	| someItems |
-	aMarkContext hasText ifNil: [ ^ self ].
+	aMarkContext hasText ifFalse: [ ^ self ].
 
 	aMarkContext hasVisibleText ifTrue: [ 
 		someItems := self markVisibleText: aMarkContext ].
@@ -93,8 +93,8 @@ BrEditorSearchTextMarker >> markText: aText context: aMarkContext [
 { #category : #'api - styling' }
 BrEditorSearchTextMarker >> markText: aText indexes: someItems context: aMarkContext [
 	<return: #Collection of: #BrEditorSearchTextItem>
-	aText clearAttributes: [ :eachAttribute | 
-		eachAttribute class = BrEditorSearchTextMark ].
+	aText
+		clearAttributes: [ :eachAttribute | eachAttribute class = BrEditorSearchTextMark ].
 
 	someItems
 		doWithIndex: [ :eachItem :eachIndex | 
@@ -103,7 +103,7 @@ BrEditorSearchTextMarker >> markText: aText indexes: someItems context: aMarkCon
 			eachItem isSelected: isCurrentItem.
 			anAttribute := BrEditorSearchTextMark new
 					index: eachIndex;
-					isCurrent: isCurrentItem;
+					isSelected: isCurrentItem;
 					paint: (self newTextMarkPaint: isCurrentItem).
 			(aText from: eachItem startIndex to: eachItem stopIndex)
 				attribute: anAttribute.
@@ -141,7 +141,7 @@ BrEditorSearchTextMarker >> switchText: aText attributeFor: aPatternItem [
 	anOldAttribute := aPatternItem textAttribute.
 	aSelection := aPatternItem isSelected.
 	aNewAttribute := BrEditorSearchTextMark new
-			isCurrent: aSelection;
+			isSelected: aSelection;
 			index: anOldAttribute index;
 			paint: (self newTextMarkPaint: aSelection).
 	aSubText := aText

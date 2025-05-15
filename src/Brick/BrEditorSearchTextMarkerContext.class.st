@@ -96,6 +96,13 @@ BrEditorSearchTextMarkerContext >> fromEditor: aBrEditor [
 	self textSource: (BrEditorSearchTextEditorElementSource new editorElement: aBrEditor).
 ]
 
+{ #category : #'api - initialization' }
+BrEditorSearchTextMarkerContext >> fromText: aText visibleText: aVisibleText [
+	textSource := BrEditorSearchTextBasicSource new
+			text: aText;
+			visibleText: aVisibleText
+]
+
 { #category : #'api - testing' }
 BrEditorSearchTextMarkerContext >> hasText [
 	^ self textSource hasText
@@ -142,6 +149,7 @@ BrEditorSearchTextMarkerContext >> patternItems [
 BrEditorSearchTextMarkerContext >> patternItems: aCollection [
 	patternItems := aCollection.
 	selectedItem := nil.
+	selectedIndex := nil.
 ]
 
 { #category : #'api - result' }
@@ -149,20 +157,18 @@ BrEditorSearchTextMarkerContext >> selectedIndex [
 	"Return an index among #patternItems"
 
 	<return: #Integer>
-	^ selectedIndex ifNil: [ selectedIndex := 1 ]
+	^ selectedIndex
+		ifNil: [ self selectedItem ifNotNil: #index ifNil: [ 1 ] ]
 ]
 
 { #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedItem [
 	<return: #BrEditorSearchTextItem or: nil>
-	self patternItems ifNil: [ ^ nil ].
+	self patternItems ifEmpty: [ ^ nil ].
 	selectedItem ifNotNil: [ ^ selectedItem ].
 	^ self patternItems
 		detect: [ :eachItem | eachItem isSelected ]
-		ifFound: [ :anItem |
-			(self patternItems identityIndexOf: anItem ifAbsent: [ nil ])
-				ifNotNil: [ :anIndex | selectedIndex := anIndex ].
-			selectedItem := anItem ]
+		ifFound: [ :anItem | selectedItem := anItem ]
 		ifNone: [ nil ]
 ]
 

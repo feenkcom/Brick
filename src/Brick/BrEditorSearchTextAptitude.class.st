@@ -67,10 +67,7 @@ BrEditorSearchTextAptitude >> initializeSearchElement [
 { #category : #initialization }
 BrEditorSearchTextAptitude >> newMarker [
 	^ BrEditorSearchTextMarker new
-		computation: (BrEditorSearchTextAsyncFutureComputation new
-				executionConfiguration: (AsyncFutureExecutionConfiguration new
-						customGroup: #SearchText;
-						defaultPriority))
+		computation: BrEditorSearchTextAsyncFutureComputation newDefault
 ]
 
 { #category : #private }
