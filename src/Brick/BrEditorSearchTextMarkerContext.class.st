@@ -28,38 +28,6 @@ Class {
 	#category : #'Brick-Editor - Search'
 }
 
-{ #category : #'api - result' }
-BrEditorSearchTextMarkerContext >> computeNextItem [
-	<return: #BrEditorSearchTextItem>
-	| aNewIndex aNewItem anIndex aCurrentItem |
-	aCurrentItem := self selectedItem.
-	aCurrentItem ifNil: [ self ].
-	anIndex := self patternItems identityIndexOf: aCurrentItem ifAbsent: [ self ].
-	aNewIndex := anIndex + 1.
-	aNewIndex > self patternItems size ifTrue: [ aNewIndex := 1 ].
-	aNewItem := self patternItems at: aNewIndex.
-	aCurrentItem isSelected: false.
-	aNewItem isSelected: true.
-	selectedItem := aNewItem.
-	^ aNewItem
-]
-
-{ #category : #'api - result' }
-BrEditorSearchTextMarkerContext >> computePreviousItem [
-	<return: #BrEditorSearchTextItem>
-	| aNewIndex aNewItem anIndex aCurrentItem |
-	aCurrentItem := self selectedItem.
-	aCurrentItem ifNil: [ self ].
-	anIndex := self patternItems identityIndexOf: aCurrentItem ifAbsent: [ self ].
-	aNewIndex := anIndex - 1.
-	aNewIndex < 1 ifTrue: [ aNewIndex := self patternItems size ].
-	aNewItem := self patternItems at: aNewIndex.
-	aCurrentItem isSelected: false.
-	aNewItem isSelected: true.
-	selectedItem := aNewItem.
-	^ aNewItem
-]
-
 { #category : #'api - accessing' }
 BrEditorSearchTextMarkerContext >> editorModelText [
 	"Return a current editor model text.
@@ -165,6 +133,25 @@ BrEditorSearchTextMarkerContext >> selectedItem [
 		detect: [ :eachItem | eachItem isSelected ]
 		ifFound: [ :anItem | selectedItem := anItem ]
 		ifNone: [ nil ]
+]
+
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> selectedItem: aBrEditorSearchTextItem [
+	self
+		assert: [ self patternItems isNotEmpty ]
+		description: [ 'There are no pattern items' ].
+
+	selectedItem
+		ifNotNil: [ :anItem | 
+			self
+				assert: [ anItem isSelected not ]
+				description: [ 'Currently selected item is still marked as selected' ] ].
+
+	self
+		assert: [ aBrEditorSearchTextItem isSelected ]
+		description: [ 'New selected item must be marked as selected' ].
+
+	selectedItem := aBrEditorSearchTextItem
 ]
 
 { #category : #'api - result' }

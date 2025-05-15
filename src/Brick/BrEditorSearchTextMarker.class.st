@@ -54,10 +54,17 @@ BrEditorSearchTextMarker >> mark: aMarkContext [
 { #category : #'api - styling' }
 BrEditorSearchTextMarker >> markNext: aMarkContext [
 	aMarkContext editorModelTextDo: [ :aCurrentText | 
-		| aCurrentItem aNewItem |
+		| aCurrentItem aNewItem aNewIndex |
 	
 		aCurrentItem := aMarkContext selectedItem.
-		aNewItem := aMarkContext computeNextItem.
+		aCurrentItem ifNil: [ ^ self ].
+		
+		aNewIndex := aCurrentItem index + 1.
+		aNewIndex > aMarkContext patternItems size ifTrue: [ aNewIndex := 1 ].
+		aNewItem := aMarkContext patternItems at: aNewIndex.
+		aCurrentItem isSelected: false.
+		aNewItem isSelected: true.
+		aMarkContext selectedItem: aNewItem.
 	
 		self switchText: aCurrentText attributeFor: aCurrentItem.
 		self switchText: aCurrentText attributeFor: aNewItem.
@@ -68,10 +75,17 @@ BrEditorSearchTextMarker >> markNext: aMarkContext [
 { #category : #'api - styling' }
 BrEditorSearchTextMarker >> markPrevious: aMarkContext [
 	aMarkContext editorModelTextDo: [ :aCurrentText | 
-		| aCurrentItem aNewItem |
+		| aCurrentItem aNewItem aNewIndex |
 	
 		aCurrentItem := aMarkContext selectedItem.
-		aNewItem := aMarkContext computePreviousItem.
+		aCurrentItem ifNil: [ ^ self ].
+	
+		aNewIndex := aCurrentItem index - 1.
+		aNewIndex < 1 ifTrue: [ aNewIndex := aMarkContext patternItems size ].
+		aNewItem := aMarkContext patternItems at: aNewIndex.
+		aCurrentItem isSelected: false.
+		aNewItem isSelected: true.
+		aMarkContext selectedItem: aNewItem.
 	
 		self switchText: aCurrentText attributeFor: aCurrentItem.
 		self switchText: aCurrentText attributeFor: aNewItem.
