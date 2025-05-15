@@ -45,7 +45,10 @@ BrTextTooltipMouseHoverEventHandler >> printOn: aStream [
 	super printOn: aStream.
 	self subtext ifNil: [ ^ self ].
 
-	self subtext printIdOn: aStream
+	aStream
+		nextPut: $(;
+		print: self subtext;
+		nextPut: $)
 ]
 
 { #category : #private }
