@@ -1,5 +1,5 @@
 Class {
-	#name : #BrSearchTextEndWish,
+	#name : #BrEditorSearchTextEndWish,
 	#superclass : #BrWish,
 	#instVars : [
 		'text'

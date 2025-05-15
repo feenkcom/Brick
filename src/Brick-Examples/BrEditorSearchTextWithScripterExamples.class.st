@@ -93,7 +93,7 @@ BrEditorSearchTextWithScripterExamples >> editorOpenSearchDialog [
 		label: 'Search text element exists';
 		exists;
 		onPopover;
-		// BrSearchTextElement;
+		// BrEditorSearchTextElement;
 		play.
 
 	^ aScripter
@@ -120,7 +120,7 @@ BrEditorSearchTextWithScripterExamples >> editorSearchAB [
 		label: 'Search text element exists';
 		exists;
 		onPopover;
-		// BrSearchTextElement;
+		// BrEditorSearchTextElement;
 		play.
 		
 	allMarks := self allMarksFromScripter: aScripter.
@@ -150,7 +150,7 @@ BrEditorSearchTextWithScripterExamples >> editorSearchNextAB [
 		label: 'Search text element exists';
 		exists;
 		onPopover;
-		// BrSearchTextElement;
+		// BrEditorSearchTextElement;
 		play.
 
 	allMarks := self allMarksFromScripter: aScripter.
@@ -193,7 +193,7 @@ BrEditorSearchTextWithScripterExamples >> editorSearchPreviousAB [
 		label: 'Search text element exists';
 		exists;
 		onPopover;
-		// BrSearchTextElement;
+		// BrEditorSearchTextElement;
 		play.
 
 	allMarks := self allMarksFromScripter: aScripter.

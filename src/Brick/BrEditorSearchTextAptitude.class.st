@@ -48,19 +48,19 @@ BrEditorSearchTextAptitude >> initializeSearchElement [
 	searchElement := self newSearchElement.
 
 	searchElement
-		when: BrSearchTextPatternWish
+		when: BrEditorSearchTextPatternWish
 		do: [ :anEvent | self onBrSearchTextPatternWish: anEvent ].
 	searchElement
-		when: BrSearchTextNoPatternWish
+		when: BrEditorSearchTextNoPatternWish
 		do: [ :anEvent | self onBrSearchTextNoPatternWish: anEvent ].
 	searchElement
-		when: BrSearchTextNextOccurenceWish
+		when: BrEditorSearchTextNextOccurenceWish
 		do: [ :anEvent | self onBrSearchTextNextOccurenceWish: anEvent ].
 	searchElement
-		when: BrSearchTextPreviousOccurenceWish
+		when: BrEditorSearchTextPreviousOccurenceWish
 		do: [ :anEvent | self onBrSearchTextPreviousOccurenceWish: anEvent ].
 	searchElement
-		when: BrSearchTextEndWish
+		when: BrEditorSearchTextEndWish
 		do: [ :anEvent | self onBrSearchTextEndWish: anEvent ]
 ]
 

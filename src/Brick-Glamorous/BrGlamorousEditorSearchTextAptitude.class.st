@@ -28,7 +28,7 @@ BrGlamorousEditorSearchTextAptitude >> newPopoverAptitude [
 
 { #category : #initialization }
 BrGlamorousEditorSearchTextAptitude >> newSearchElement [
-	^ BrSearchTextElement new
+	^ BrEditorSearchTextElement new
 		hFitContentLimited;
 		constraintsDo: [ :c | 
 			c minWidth: 300.

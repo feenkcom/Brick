@@ -1,5 +1,5 @@
 Class {
-	#name : #BrSearchTextPatternWish,
+	#name : #BrEditorSearchTextPatternWish,
 	#superclass : #BrWish,
 	#instVars : [
 		'pattern'
@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #accessing }
-BrSearchTextPatternWish >> pattern [
+BrEditorSearchTextPatternWish >> pattern [
 	^ pattern
 ]
 
 { #category : #accessing }
-BrSearchTextPatternWish >> pattern: anObject [
+BrEditorSearchTextPatternWish >> pattern: anObject [
 	pattern := anObject
 ]
 
 { #category : #'event handling' }
-BrSearchTextPatternWish >> text: aBlText [
+BrEditorSearchTextPatternWish >> text: aBlText [
 	pattern := BrEditorSearchTextSubstringPattern new text: aBlText copy
 ]

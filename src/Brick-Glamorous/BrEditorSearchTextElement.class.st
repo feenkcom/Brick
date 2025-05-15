@@ -1,5 +1,5 @@
 Class {
-	#name : #BrSearchTextElement,
+	#name : #BrEditorSearchTextElement,
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait',
@@ -13,17 +13,17 @@ Class {
 }
 
 { #category : #initialization }
-BrSearchTextElement >> defaultLayout [
+BrEditorSearchTextElement >> defaultLayout [
 	^ BlLinearLayout horizontal
 ]
 
 { #category : #'api - accessing' }
-BrSearchTextElement >> editorDo: aBlock [
+BrEditorSearchTextElement >> editorDo: aBlock [
 	aBlock cull: search
 ]
 
 { #category : #'api - accessing' }
-BrSearchTextElement >> index: anIndex total: aCount [
+BrEditorSearchTextElement >> index: anIndex total: aCount [
 	(anIndex isNil or: [ aCount isNil or: [ aCount isZero ] ])
 		ifTrue: [ index text: '0'.
 			^ self ].
@@ -35,7 +35,7 @@ BrSearchTextElement >> index: anIndex total: aCount [
 ]
 
 { #category : #initialization }
-BrSearchTextElement >> initialize [
+BrEditorSearchTextElement >> initialize [
 	super initialize.
 
 	self initializeInputFieldElement.
@@ -64,7 +64,7 @@ BrSearchTextElement >> initialize [
 ]
 
 { #category : #initialization }
-BrSearchTextElement >> initializeIndexElement [
+BrEditorSearchTextElement >> initializeIndexElement [
 	index := BrLabel new
 			beTinySize;
 			aptitude: BrGlamorousLabelAptitude;
@@ -74,7 +74,7 @@ BrSearchTextElement >> initializeIndexElement [
 ]
 
 { #category : #initialization }
-BrSearchTextElement >> initializeInputFieldElement [
+BrEditorSearchTextElement >> initializeInputFieldElement [
 	search := BrEditor new
 			hMatchParent;
 			vFitContent;
@@ -107,7 +107,7 @@ BrSearchTextElement >> initializeInputFieldElement [
 ]
 
 { #category : #initialization }
-BrSearchTextElement >> initializeNextItemElement [
+BrEditorSearchTextElement >> initializeNextItemElement [
 	nextItem := BrButton new
 			beTinySize;
 			aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonWithLabelTooltipAptitude2;
@@ -120,7 +120,7 @@ BrSearchTextElement >> initializeNextItemElement [
 ]
 
 { #category : #initialization }
-BrSearchTextElement >> initializePreviousItemElement [
+BrEditorSearchTextElement >> initializePreviousItemElement [
 	previousItem := BrButton new
 			beTinySize;
 			aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonWithLabelTooltipAptitude2;
@@ -132,40 +132,40 @@ BrSearchTextElement >> initializePreviousItemElement [
 ]
 
 { #category : #'event handling' }
-BrSearchTextElement >> onEndSearchEvent: anEvent [
-	self dispatchEvent: BrSearchTextEndWish new
+BrEditorSearchTextElement >> onEndSearchEvent: anEvent [
+	self dispatchEvent: BrEditorSearchTextEndWish new
 ]
 
 { #category : #'event handling' }
-BrSearchTextElement >> onFindNextOccurenceEvent: anEvent [
-	self dispatchEvent: BrSearchTextNextOccurenceWish new
+BrEditorSearchTextElement >> onFindNextOccurenceEvent: anEvent [
+	self dispatchEvent: BrEditorSearchTextNextOccurenceWish new
 ]
 
 { #category : #'event handling' }
-BrSearchTextElement >> onFindPreviousOccurenceEvent: anEvent [
-	self dispatchEvent: BrSearchTextPreviousOccurenceWish new
+BrEditorSearchTextElement >> onFindPreviousOccurenceEvent: anEvent [
+	self dispatchEvent: BrEditorSearchTextPreviousOccurenceWish new
 ]
 
 { #category : #'event handling' }
-BrSearchTextElement >> onSearchPatternModifiedEvent: anEvent [
+BrEditorSearchTextElement >> onSearchPatternModifiedEvent: anEvent [
 	| aText |
 	aText := anEvent text.
 	aText size isZero
-		ifTrue: [ self dispatchEvent: BrSearchTextNoPatternWish new ]
+		ifTrue: [ self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
 		ifFalse: [ self
-				dispatchEvent: (BrSearchTextPatternWish new
+				dispatchEvent: (BrEditorSearchTextPatternWish new
 						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
 ]
 
 { #category : #'api - accessing' }
-BrSearchTextElement >> pattern: aBlTextOrNil [
+BrEditorSearchTextElement >> pattern: aBlTextOrNil [
 	aBlTextOrNil ifNil: [ ^ self ].
 	search text characters = aBlTextOrNil asRopedText characters ifTrue: [ ^ self ].
 	search text: aBlTextOrNil asRopedText
 ]
 
 { #category : #'api - search' }
-BrSearchTextElement >> styler: aStyler [
+BrEditorSearchTextElement >> styler: aStyler [
 	"Convenience method to set counter.
 	Must be called from a UI process."
 

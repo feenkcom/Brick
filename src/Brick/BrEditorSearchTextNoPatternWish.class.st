@@ -1,8 +1,5 @@
 Class {
-	#name : #BrSearchTextNextOccurenceWish,
+	#name : #BrEditorSearchTextNoPatternWish,
 	#superclass : #BrWish,
-	#instVars : [
-		'text'
-	],
 	#category : #'Brick-Editor - Search'
 }
