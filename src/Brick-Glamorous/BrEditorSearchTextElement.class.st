@@ -169,6 +169,27 @@ BrEditorSearchTextElement >> pattern: aBlTextOrNil [
 	search text: aBlTextOrNil asRopedText
 ]
 
+{ #category : #'api - accessing' }
+BrEditorSearchTextElement >> progressIndex: anIndex total: aCount [
+	"Possible inputs:
+	- anything, nil or 0 => display 0+
+	- nil     , integer  => display ?/integer+
+	- integer , integer  => display integer/integer+"
+
+	(aCount isNil or: [ aCount isZero ])
+		ifTrue: [ index text: '0+'.
+			^ self ].
+
+	(anIndex isNil and: [ aCount isNotNil ])
+		ifTrue: [ index text: ('{1}+' format: {aCount}).
+			^ self ].
+
+	index
+		text: ('{1}/{2}+'
+				format: {anIndex.
+						aCount})
+]
+
 { #category : #'api - search' }
 BrEditorSearchTextElement >> styler: aStyler [
 	"Convenience method to set counter.

@@ -61,6 +61,9 @@ BrEditorSearchTextScroller >> lineIndex: anInteger [
 { #category : #scrolling }
 BrEditorSearchTextScroller >> scroll [
 	| aFirstSegment aLastSegment aLineDistance |
+	lineIndex ifNil: [ ^ self ].
+	characterStartPosition ifNil: [ ^ self ].
+	characterStopPosition ifNil: [ ^ self ].
 	
 	"Get range of visible lines and characters"
 	aFirstSegment := (editorElement layout
