@@ -131,6 +131,15 @@ BrEditorSearchTextElement >> initializePreviousItemElement [
 			constraintsDo: [ :c | c linear vertical alignCenter ]
 ]
 
+{ #category : #'api - notifying' }
+BrEditorSearchTextElement >> notifySearchText: aText [
+	aText size isZero
+		ifTrue: [ self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
+		ifFalse: [ self
+				dispatchEvent: (BrEditorSearchTextPatternWish new
+						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
+]
+
 { #category : #'event handling' }
 BrEditorSearchTextElement >> onEndSearchEvent: anEvent [
 	self dispatchEvent: BrEditorSearchTextEndWish new
@@ -150,11 +159,7 @@ BrEditorSearchTextElement >> onFindPreviousOccurenceEvent: anEvent [
 BrEditorSearchTextElement >> onSearchPatternModifiedEvent: anEvent [
 	| aText |
 	aText := anEvent text.
-	aText size isZero
-		ifTrue: [ self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
-		ifFalse: [ self
-				dispatchEvent: (BrEditorSearchTextPatternWish new
-						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
+	self notifySearchText: aText
 ]
 
 { #category : #'api - accessing' }

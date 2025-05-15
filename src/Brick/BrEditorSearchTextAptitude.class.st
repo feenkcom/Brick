@@ -104,12 +104,19 @@ BrEditorSearchTextAptitude >> onAttachedTo: anElement [
 { #category : #'private - event management' }
 BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnouncement [
 	self
-		widgetDo: [ :aWidget | 
+		widgetDo: [ :aBrEditor | 
 			BlTaskAction
-				enqueueElement: aWidget
-				action: [ searchElement
+				enqueueElement: aBrEditor
+				action: [ 
+					searchElement
 						index: anAnnouncement selectedIndex
-						total: anAnnouncement itemsCount ] ]
+						total: anAnnouncement itemsCount.
+					BrEditorSearchTextScroller new
+						editorElement: aBrEditor;
+						lineIndex: anAnnouncement context selectedLine;
+						characterStartPosition: anAnnouncement context selectedStartPosition;
+						characterStopPosition: anAnnouncement context selectedStopPosition;
+						scroll ] ]
 ]
 
 { #category : #'private - event management' }
