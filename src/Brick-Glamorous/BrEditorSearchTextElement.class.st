@@ -134,8 +134,12 @@ BrEditorSearchTextElement >> initializePreviousItemElement [
 { #category : #'api - notifying' }
 BrEditorSearchTextElement >> notifySearchText: aText [
 	aText size isZero
-		ifTrue: [ self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
-		ifFalse: [ self
+		ifTrue: [ 
+			self index: nil total: nil.
+			self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
+		ifFalse: [ 
+			self progressIndex: nil total: 0.
+			self
 				dispatchEvent: (BrEditorSearchTextPatternWish new
 						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
 ]

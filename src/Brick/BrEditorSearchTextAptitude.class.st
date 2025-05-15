@@ -106,6 +106,9 @@ BrEditorSearchTextAptitude >> onAttachedTo: anElement [
 
 { #category : #'private - event management' }
 BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnouncement [
+	context ifNil: [ ^ self ].
+	context == anAnnouncement context ifFalse: [ ^ self ].
+
 	self
 		widgetDo: [ :aBrEditor | 
 			BlTaskAction
@@ -124,6 +127,9 @@ BrEditorSearchTextAptitude >> onBrEditorSearchTextFinishedAnnouncement: anAnnoun
 
 { #category : #'private - event management' }
 BrEditorSearchTextAptitude >> onBrEditorSearchTextProgressAnnouncement: anAnnouncement [
+	context ifNil: [ ^ self ].
+	context == anAnnouncement context ifFalse: [ ^ self ].
+
 	self
 		widgetDo: [ :aBrEditor | 
 			BlTaskAction
@@ -168,6 +174,8 @@ BrEditorSearchTextAptitude >> onBrSearchTextEndWish: anEvent [
 	context := nil.
 
 	marker unmark: aContext.
+	
+	"Select the last highlighted text"
 	aRange := aContext selectedRange.
 	aRange ifNil: [ ^ self ].
 

@@ -168,8 +168,9 @@ BrEditorSearchTextMarkerContext >> selectedLine [
 BrEditorSearchTextMarkerContext >> selectedRange [
 	"Return character start and stop positions for a given selected item"
 
-	<return: #Interval>
-	^ self selectedItem absoluteStartIndex to: self selectedItem absoluteStopIndex
+	<return: #Interval or: nil>
+	^ self selectedItem absoluteStartIndex
+		ifNotNil: [ :aStart | self selectedItem absoluteStopIndex ifNotNil: [ :aStop | aStart to: aStop ] ]
 ]
 
 { #category : #'api - result' }
