@@ -134,8 +134,12 @@ BrEditorSearchTextElement >> initializePreviousItemElement [
 { #category : #'api - notifying' }
 BrEditorSearchTextElement >> notifySearchText: aText [
 	aText size isZero
-		ifTrue: [ self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
-		ifFalse: [ self
+		ifTrue: [ 
+			self index: nil total: nil.
+			self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
+		ifFalse: [ 
+			self progressIndex: nil total: 0.
+			self
 				dispatchEvent: (BrEditorSearchTextPatternWish new
 						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
 ]
@@ -167,6 +171,27 @@ BrEditorSearchTextElement >> pattern: aBlTextOrNil [
 	aBlTextOrNil ifNil: [ ^ self ].
 	search text characters = aBlTextOrNil asRopedText characters ifTrue: [ ^ self ].
 	search text: aBlTextOrNil asRopedText
+]
+
+{ #category : #'api - accessing' }
+BrEditorSearchTextElement >> progressIndex: anIndex total: aCount [
+	"Possible inputs:
+	- anything, nil or 0 => display 0+
+	- nil     , integer  => display ?/integer+
+	- integer , integer  => display integer/integer+"
+
+	(aCount isNil or: [ aCount isZero ])
+		ifTrue: [ index text: '0+'.
+			^ self ].
+
+	(anIndex isNil and: [ aCount isNotNil ])
+		ifTrue: [ index text: ('{1}+' format: {aCount}).
+			^ self ].
+
+	index
+		text: ('{1}/{2}+'
+				format: {anIndex.
+						aCount})
 ]
 
 { #category : #'api - search' }

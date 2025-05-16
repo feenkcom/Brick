@@ -158,32 +158,37 @@ BrEditorSearchTextMarkerContext >> selectedItem: aBrEditorSearchTextItem [
 BrEditorSearchTextMarkerContext >> selectedLine [
 	"Return line number for a given selected item"
 
-	<return: #Integer>
-	^ (self text from: 1 to: self selectedItem absoluteStartIndex) lineCount
+	<return: #Integer or: nil>
+	^ self selectedItem
+		ifNotNil: [ :anItem | (self text from: 1 to: anItem absoluteStartIndex) lineCount ]
+		ifNil: [ nil ]
 ]
 
 { #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedRange [
 	"Return character start and stop positions for a given selected item"
 
-	<return: #Interval>
-	^ self selectedItem absoluteStartIndex to: self selectedItem absoluteStopIndex
+	<return: #Interval or: nil>
+	^ self selectedItem
+		ifNotNil: [ :anItem | 
+			anItem absoluteStartIndex
+				ifNotNil: [ :aStart | anItem absoluteStopIndex ifNotNil: [ :aStop | aStart to: aStop ] ] ]
 ]
 
 { #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedStartPosition [
 	"Return a character start position for a given selected item"
 
-	<return: #Integer>
-	^ self selectedItem absoluteStartIndex
+	<return: #Integer or: nil>
+	^ self selectedItem ifNotNil: #absoluteStartIndex
 ]
 
 { #category : #'api - result' }
 BrEditorSearchTextMarkerContext >> selectedStopPosition [
 	"Return a character stop position for a given selected item"
 
-	<return: #Integer>
-	^ self selectedItem absoluteStopIndex
+	<return: #Integer or: nil>
+	^ self selectedItem ifNotNil: #absoluteStopIndex
 ]
 
 { #category : #'api - pattern' }
