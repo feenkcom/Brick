@@ -15,6 +15,49 @@ BrEditorSearchTextExamples >> basicMarker [
 ]
 
 { #category : #'examples - marker' }
+BrEditorSearchTextExamples >> markAA [
+	<gtExample>
+	| aMarker aContext aText aPreviousText aVisibleText allItems aVisibleItems aPreviousItems allAnnouncements |
+	aMarker := self basicMarker.
+	aText := self simple500Lines asRopedText.
+	aPreviousText := aText from: 1 to: 999.
+	aVisibleText := aText from: 1000 to: 2000.
+
+	aContext := BrEditorSearchTextMarkerContext new
+			fromText: aText visibleText: aVisibleText;
+			subtext: 'a a' asRopedText.
+
+	allItems := aContext pattern findAllIndexesIn: aText.
+	aPreviousItems := aContext pattern findAllIndexesIn: aPreviousText.
+	aVisibleItems := aContext pattern findAllIndexesIn: aVisibleText.
+	self assert: aVisibleItems isEmpty.
+
+	allAnnouncements := OrderedCollection new.
+	
+	aMarker
+		when: BrEditorSearchTextFinishedAnnouncement
+		send: #add:
+		to: allAnnouncements.
+	aMarker mark: aContext.
+	
+	self assert: allAnnouncements size equals: 1.
+	self assert: allAnnouncements anyOne itemsCount equals: allItems size.
+	self assert: allAnnouncements anyOne itemsCount equals: 0.
+	self assert: allAnnouncements anyOne selectedIndex equals: aPreviousItems size + 1.
+	self assert: allAnnouncements anyOne selectedIndex equals: 1.
+
+	self assert: aContext selectedItem isNil.
+	self assert: aContext selectedIndex isNotNil.
+	self assert: aContext selectedIndex equals: 1.
+	self assert: aContext selectedRange equals: nil.
+
+	^ BrEditorSearchTextExampleResult new
+		marker: aMarker;
+		context: aContext;
+		text: aText
+]
+
+{ #category : #'examples - marker' }
 BrEditorSearchTextExamples >> markAB [
 	<gtExample>
 	| aMarker aContext aText aPreviousText aVisibleText allItems aVisibleItems aPreviousItems allAnnouncements |
@@ -48,11 +91,12 @@ BrEditorSearchTextExamples >> markAB [
 
 	self assert: aContext selectedItem isNotNil.
 	self assert: aContext selectedItem isSelected.
-	self assert: aContext selectedItem startIndex >= 1000.
+	self assert: aContext selectedItem startIndex equals: 1008.
 	self
 		assert: aContext selectedItem stopIndex equals: (aContext selectedItem startIndex + 2).
 	self assert: aContext selectedIndex isNotNil.
-	self assert: aContext selectedIndex > 1.
+	self assert: aContext selectedIndex equals: 20.
+	self assert: aContext selectedRange equals: (1008 to: 1010).
 
 	^ BrEditorSearchTextExampleResult new
 		marker: aMarker;
