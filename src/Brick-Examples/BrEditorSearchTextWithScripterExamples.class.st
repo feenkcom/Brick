@@ -36,6 +36,56 @@ BrEditorSearchTextWithScripterExamples >> basicMarker [
 ]
 
 { #category : #'examples - editor' }
+BrEditorSearchTextWithScripterExamples >> closeSearchDialogWithEscapeKey: aScripter withSelection: isWithSelection [
+	<gtExample>
+	| aMarkArray allMarks |
+	allMarks := self allMarksFromScripter: aScripter.
+	aMarkArray := allMarks
+			detect: [ :anArray | anArray third isSelected ]
+			ifFound: [ :aMark | 
+				isWithSelection
+					ifFalse: [ AssertionFailure signal: 'Selected mark must not exist' ].
+				aMark ]
+			ifNone: [ isWithSelection
+					ifTrue: [ NotFound signalFor: #isSelected in: allMarks ].
+				nil ].
+
+	aScripter shortcut
+		label: 'End search';
+		combination: BlKeyCombination escape;
+		onPopover;
+		// BrEditorSearchTextElement;
+		// BrEditor;
+		play.
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		play.
+
+	aScripter assert
+		label: 'Search text element does not exist';
+		notExists;
+		onPopover;
+		// BrEditorSearchTextElement;
+		play.
+
+	aScripter assert
+		label: 'Editor has focus';
+		satisfies: [ :aBrEditor | aBrEditor isFocused ];
+		play.
+
+	aScripter assert
+		label: ('Editor {1} selection'
+				format: {isWithSelection ifTrue: [ 'has' ] ifFalse: [ 'has not' ]});
+		satisfies: [ :aBrEditor | 
+			isWithSelection
+				ifTrue: [ (aBrEditor selection containsIndex: aMarkArray first)
+						and: [ aBrEditor selection containsIndex: aMarkArray second ] ]
+				ifFalse: [ aBrEditor selection isEmpty ] ];
+		play
+]
+
+{ #category : #'examples - editor' }
 BrEditorSearchTextWithScripterExamples >> editor [
 	<gtExample>
 	| anEditor aScripter |
@@ -108,6 +158,50 @@ BrEditorSearchTextWithScripterExamples >> editorOpenSearchDialog [
 ]
 
 { #category : #'examples - editor' }
+BrEditorSearchTextWithScripterExamples >> editorSearchAA [
+	<gtExample>
+	| aScripter allMarks |
+	aScripter := self editorOpenSearchDialog.
+
+	aScripter type
+		label: 'Search "a a"';
+		text: 'a a';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		assertMenuContainerHasFocus;
+		onPopover;
+		play.
+
+	aScripter assert
+		label: 'Search text element exists';
+		exists;
+		onPopover;
+		// BrEditorSearchTextElement;
+		play.
+
+	allMarks := self allMarksFromScripter: aScripter.
+	self assert: allMarks size equals: 0.
+
+	^ aScripter
+]
+
+{ #category : #'examples - editor' }
+BrEditorSearchTextWithScripterExamples >> editorSearchAA_endByEscape [
+	<gtExample>
+	| aScripter allMarks |
+	aScripter := self editorSearchAA.
+
+	self closeSearchDialogWithEscapeKey: aScripter withSelection: false.
+
+	allMarks := self allMarksFromScripter: aScripter.
+	self assert: allMarks size equals: 0.
+
+	^ aScripter
+]
+
+{ #category : #'examples - editor' }
 BrEditorSearchTextWithScripterExamples >> editorSearchAB [
 	<gtExample>
 	| aScripter allMarks allSelectedMarks |
@@ -139,6 +233,36 @@ BrEditorSearchTextWithScripterExamples >> editorSearchAB [
 			thenCollect: #third.
 	self assert: allSelectedMarks size equals: 1.
 	self assert: allSelectedMarks first index equals: 161.
+
+	^ aScripter
+]
+
+{ #category : #'examples - editor' }
+BrEditorSearchTextWithScripterExamples >> editorSearchAB_thenAA [
+	<gtExample>
+	| aScripter allMarks |
+	aScripter := self editorSearchAB.
+
+	aScripter type
+		label: 'Search "a a"';
+		text: 'a a';
+		play.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		assertMenuContainerHasFocus;
+		onPopover;
+		play.
+
+	aScripter assert
+		label: 'Search text element exists';
+		exists;
+		onPopover;
+		// BrEditorSearchTextElement;
+		play.
+
+	allMarks := self allMarksFromScripter: aScripter.
+	self assert: allMarks size equals: 0.
 
 	^ aScripter
 ]
@@ -224,43 +348,9 @@ BrEditorSearchTextWithScripterExamples >> editorSearchPreviousAB [
 { #category : #'examples - editor' }
 BrEditorSearchTextWithScripterExamples >> editorSearchPreviousAB_endByEscape [
 	<gtExample>
-	| aScripter allMarks aMarkArray |
+	| aScripter |
 	aScripter := self editorSearchPreviousAB.
-	allMarks := self allMarksFromScripter: aScripter.
-	aMarkArray := allMarks detect: [ :anArray | anArray third isSelected ].
-
-	aScripter shortcut
-		label: 'End search';
-		combination: BlKeyCombination escape;
-		onPopover;
-		// BrEditorSearchTextElement;
-		// BrEditor;
-		play.
-
-	aScripter menuStep
-		assertClosedMenuContainer;
-		play.
-
-	aScripter assert
-		label: 'Search text element does not exist';
-		notExists;
-		onPopover;
-		// BrEditorSearchTextElement;
-		play.
-
-	aScripter assert
-		label: 'Editor has focus';
-		satisfies: [ :aBrEditor | aBrEditor isFocused ];
-		play.
-
-	aScripter assert
-		label: 'Editor has selection';
-		satisfies: [ :aBrEditor | 
-			(aBrEditor selection containsIndex: aMarkArray first)
-				and: [ aBrEditor selection containsIndex: aMarkArray second ] ];
-		play.
-
-
+	self closeSearchDialogWithEscapeKey: aScripter withSelection: true.
 	^ aScripter
 ]
 
