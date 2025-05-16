@@ -7,6 +7,25 @@ Class {
 	#category : #'Brick-List-Grouped-Elements'
 }
 
+{ #category : #'instance creation' }
+BrGroupedList class >> multiSelection [
+	^ self basicNew
+		initialize;
+		initializeAptitude: BrMultiGroupedListAptitude + BrGlamorousListWithScrollbarAptitude
+]
+
+{ #category : #'instance creation' }
+BrGroupedList class >> new [
+	^ self singleSelection
+]
+
+{ #category : #'instance creation' }
+BrGroupedList class >> singleSelection [
+	^ self basicNew
+		initialize;
+		initializeAptitude: BrGroupedListAptitude + BrGlamorousListWithScrollbarAptitude
+]
+
 { #category : #'api - orientation' }
 BrGroupedList >> beHorizontal [
 	self states addState: BrListOrientationState horizontal
@@ -52,14 +71,17 @@ BrGroupedList >> initialize [
 	super initialize.
 
 	self beVertical.
-
-	self aptitude: BrGroupedListAptitude + BrGlamorousListWithScrollbarAptitude.
 		
 	updater := BrElementUpdater new
 		element: self
 		selector: #onGroupsChanged.
 
 	self when: BrGroupedListGroupsChanged do: [ updater requestUpdate ]
+]
+
+{ #category : #initialization }
+BrGroupedList >> initializeAptitude: aGroupedListAptitude [
+	self addAptitude: aGroupedListAptitude
 ]
 
 { #category : #'private - event handling' }
