@@ -15,5 +15,6 @@ BrSmalltalkWordClassifier >> itself [
 BrSmalltalkWordClassifier >> value: c1 value: c2 [
 	^ c1 isSeparator ~= c2 isSeparator
 		or: [ (c1 isIdentifierish not and: [ c2 isIdentifierish ])
-				or: [ c1 isIdentifierish and: [ c2 tokenish not ] ] ]
+				or: [ (c1 isIdentifierish and: [ c2 tokenish not ])
+						or: [ c1 tokenish and: [ c2 tokenish not ] ] ] ]
 ]
