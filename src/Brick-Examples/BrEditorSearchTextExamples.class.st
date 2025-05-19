@@ -181,6 +181,32 @@ BrEditorSearchTextExamples >> markNext483a [
 ]
 
 { #category : #'examples - marker' }
+BrEditorSearchTextExamples >> markNextAA [
+	<gtExample>
+	| aResult aMarker aContext allAnnouncements |
+	aResult := self markAA.
+	aMarker := aResult marker.
+	aContext := aResult context.
+
+	allAnnouncements := OrderedCollection new.
+	aMarker
+		when: BrEditorSearchTextFinishedAnnouncement
+		send: #add:
+		to: allAnnouncements.
+	aMarker markNext: aContext.
+
+	self assert: allAnnouncements size equals: 0.
+
+	self assert: aContext selectedItem isNil.
+	self assert: aContext selectedIndex equals: 1.
+
+	^ BrEditorSearchTextExampleResult new
+		marker: aMarker;
+		context: aContext;
+		text: aResult text
+]
+
+{ #category : #'examples - marker' }
 BrEditorSearchTextExamples >> markNextAB [
 	<gtExample>
 	| aResult aMarker aContext allAnnouncements |
@@ -240,6 +266,32 @@ BrEditorSearchTextExamples >> markPrevious483a [
 		assert: aContext selectedItem startIndex equals: (aContext selectedItem stopIndex - 5).
 	self assert: aContext selectedIndex isNotNil.
 	self assert: aContext selectedIndex equals: aResult selectedIndex.
+
+	^ BrEditorSearchTextExampleResult new
+		marker: aMarker;
+		context: aContext;
+		text: aResult text
+]
+
+{ #category : #'examples - marker' }
+BrEditorSearchTextExamples >> markPreviousAA [
+	<gtExample>
+	| aResult aMarker aContext allAnnouncements |
+	aResult := self markAA.
+	aMarker := aResult marker.
+	aContext := aResult context.
+
+	allAnnouncements := OrderedCollection new.
+	aMarker
+		when: BrEditorSearchTextFinishedAnnouncement
+		send: #add:
+		to: allAnnouncements.
+	aMarker markPrevious: aContext.
+
+	self assert: allAnnouncements size equals: 0.
+
+	self assert: aContext selectedItem isNil.
+	self assert: aContext selectedIndex equals: 1.
 
 	^ BrEditorSearchTextExampleResult new
 		marker: aMarker;
