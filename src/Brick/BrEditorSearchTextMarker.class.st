@@ -62,6 +62,9 @@ BrEditorSearchTextMarker >> markNext: aMarkContext [
 		
 		aNewIndex := aCurrentItem index + 1.
 		aNewIndex > aMarkContext patternItems size ifTrue: [ aNewIndex := 1 ].
+		
+		aNewIndex = aCurrentItem index ifTrue: [ ^ self ].
+		
 		aNewItem := aMarkContext patternItems at: aNewIndex.
 		aCurrentItem isSelected: false.
 		aNewItem isSelected: true.
@@ -83,6 +86,9 @@ BrEditorSearchTextMarker >> markPrevious: aMarkContext [
 	
 		aNewIndex := aCurrentItem index - 1.
 		aNewIndex < 1 ifTrue: [ aNewIndex := aMarkContext patternItems size ].
+		
+		aNewIndex = aCurrentItem index ifTrue: [ ^ self ].
+		
 		aNewItem := aMarkContext patternItems at: aNewIndex.
 		aCurrentItem isSelected: false.
 		aNewItem isSelected: true.
