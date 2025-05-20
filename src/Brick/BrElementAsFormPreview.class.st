@@ -34,7 +34,7 @@ BrElementAsFormPreview class >> forElement: anElement preferredScale: anNumber [
 BrElementAsFormPreview >> createAsFormFuture: anElement [
 	| anHdpiScaleFactor aFuture |
 	
-	anHdpiScaleFactor := 1.0.
+	anHdpiScaleFactor := 2.0.
 	self spaceDo: [ :aSpace | anHdpiScaleFactor := aSpace windowScale ].
 	
 	aFuture := (BlElementAsFormFuture forElement: anElement)
