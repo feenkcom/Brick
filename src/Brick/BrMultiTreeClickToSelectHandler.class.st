@@ -14,7 +14,7 @@ BrMultiTreeClickToSelectHandler >> clickEvent: aBlClickEvent [
 			dataSourcePosition.
 	anItemIndex <= 0 ifTrue: [ ^ self ].
 
-	aBlClickEvent modifiers isEmpty
+	(aBlClickEvent modifiers isEmpty or: [ self selectionStart isNil ])
 		ifTrue: [ self selectionStart: anItemIndex.
 			^ super clickEvent: aBlClickEvent ].
 
