@@ -7,6 +7,16 @@ Class {
 	#category : #'Brick-Tree - UI'
 }
 
+{ #category : #'instance  creation' }
+BrColumnedTree class >> newMultiSelectionAptitude [
+	^ BrColumnedMultiTreeAptitude + BrGlamorousWithVerticalScrollbarAptitude
+]
+
+{ #category : #'instance  creation' }
+BrColumnedTree class >> newSingleSelectionAptitude [
+	^ BrColumnedTreeAptitude + BrGlamorousWithVerticalScrollbarAptitude
+]
+
 { #category : #'api - scripting' }
 BrColumnedTree >> column [
 	<return: #BrColumn>
@@ -30,9 +40,7 @@ BrColumnedTree >> defaultListModel [
 BrColumnedTree >> initialize [
 	super initialize.
 
-	self viewModel add: (columnedModel := BrColumnedModel new).
-
-	self aptitude: BrColumnedTreeAptitude + BrGlamorousWithVerticalScrollbarAptitude
+	self viewModel add: (columnedModel := BrColumnedModel new)
 ]
 
 { #category : #'api - scripting' }

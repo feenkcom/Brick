@@ -9,6 +9,35 @@ Class {
 	#category : #'Brick-Tree - UI'
 }
 
+{ #category : #'instance  creation' }
+BrTree class >> multiSelection [
+	^ self basicNew
+		initialize;
+		initializeAptitude: self newMultiSelectionAptitude
+]
+
+{ #category : #'instance  creation' }
+BrTree class >> new [
+	^ self singleSelection
+]
+
+{ #category : #'instance  creation' }
+BrTree class >> newMultiSelectionAptitude [
+	^ self subclassResponsibility
+]
+
+{ #category : #'instance  creation' }
+BrTree class >> newSingleSelectionAptitude [
+	^ self subclassResponsibility
+]
+
+{ #category : #'instance  creation' }
+BrTree class >> singleSelection [
+	^ self basicNew
+		initialize;
+		initializeAptitude: self newSingleSelectionAptitude
+]
+
 { #category : #'api - tree' }
 BrTree >> collapseAll [
 	self viewModel collapseAll
@@ -167,6 +196,17 @@ BrTree >> selectAndScrollTo: anObject [
 					(self isSelectedAt: treeNode indexInTree)
 						ifFalse: [ self selectOne: treeNode indexInTree ].
 					self scrollToIndex: treeNode indexInTree ] ]
+]
+
+{ #category : #'api - selection' }
+BrTree >> selectedItems [
+	^ Array
+		new: self selectedIndices size
+		streamContents: [ :aStream | 
+			self selectedIndices
+				do: [ :anIndex | 
+					(anIndex between: 1 and: self viewModel itemCount)
+						ifTrue: [ aStream nextPut: (self viewModel itemAt: anIndex) ] ] ]
 ]
 
 { #category : #'api - selection' }
