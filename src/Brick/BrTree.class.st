@@ -101,6 +101,11 @@ BrTree >> initialize [
 ]
 
 { #category : #initialization }
+BrTree >> initializeAptitude: aGroupedListAptitude [
+	self addAptitude: aGroupedListAptitude
+]
+
+{ #category : #initialization }
 BrTree >> initializeEventHandlers [
 	"shortcuts only work when tree has focus.
 	click handler must not be added as a filter"

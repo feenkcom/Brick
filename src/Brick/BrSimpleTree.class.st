@@ -19,11 +19,6 @@ BrSimpleTree >> defaultListModel [
 	^ BrSimpleTreeModel new
 ]
 
-{ #category : #initialization }
-BrSimpleTree >> initializeAptitude: aGroupedListAptitude [
-	self addAptitude: aGroupedListAptitude
-]
-
 { #category : #'api - scripting' }
 BrSimpleTree >> nodeDataBinder: aBrTreeNodeDataBinderOrBlock [
 	"An item type stencil can be a #value-able of the form [ :aNodeElement :anItemObject :aTreeNode :thePayloads | ]"
