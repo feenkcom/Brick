@@ -4,16 +4,19 @@ Class {
 	#category : #'Brick-Tree - UI'
 }
 
-{ #category : #initialization }
-BrSimpleTree >> defaultListModel [
-	^ BrSimpleTreeModel new
+{ #category : #'instance  creation' }
+BrSimpleTree class >> newMultiSelectionAptitude [
+	^ BrMultiTreeAptitude + BrGlamorousWithVerticalScrollbarAptitude
+]
+
+{ #category : #'instance  creation' }
+BrSimpleTree class >> newSingleSelectionAptitude [
+	^ BrSimpleTreeAptitude + BrGlamorousWithVerticalScrollbarAptitude
 ]
 
 { #category : #initialization }
-BrSimpleTree >> initialize [
-	super initialize.
-	
-	self aptitude: BrSimpleTreeAptitude + BrGlamorousWithVerticalScrollbarAptitude
+BrSimpleTree >> defaultListModel [
+	^ BrSimpleTreeModel new
 ]
 
 { #category : #'api - scripting' }
