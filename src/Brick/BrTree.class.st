@@ -205,13 +205,7 @@ BrTree >> selectAndScrollTo: anObject [
 
 { #category : #'api - selection' }
 BrTree >> selectedItems [
-	^ Array
-		new: self selectedIndices size
-		streamContents: [ :aStream | 
-			self selectedIndices
-				do: [ :anIndex | 
-					(anIndex between: 1 and: self viewModel itemCount)
-						ifTrue: [ aStream nextPut: (self viewModel itemAt: anIndex) ] ] ]
+	^ self selectedNodes collect: #value
 ]
 
 { #category : #'api - selection' }
@@ -222,6 +216,18 @@ BrTree >> selectedNodeDo: aBlock [
 		ifNotEmpty: [ :theIndices |
 			(theIndices first between: 1 and: self viewModel itemCount)
 				ifTrue: [ aBlock value: (self viewModel itemAt: theIndices first) ] ]
+]
+
+{ #category : #'api - selection' }
+BrTree >> selectedNodes [
+	<return: #Array of: #BrTreeNode>
+	^ Array
+		new: self selectedIndices size
+		streamContents: [ :aStream | 
+			self selectedIndices
+				do: [ :anIndex | 
+					(anIndex between: 1 and: self viewModel itemCount)
+						ifTrue: [ aStream nextPut: (self viewModel itemAt: anIndex) ] ] ]
 ]
 
 { #category : #accessing }
