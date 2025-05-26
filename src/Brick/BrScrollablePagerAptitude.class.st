@@ -48,6 +48,11 @@ BrScrollablePagerAptitude >> onPage: aPageMopdel elementDetached: aPageElement [
 	pagesListElement dataSource pageElements: self pageElements
 ]
 
+{ #category : #accessing }
+BrScrollablePagerAptitude >> pagesListElement [
+	^ pagesListElement
+]
+
 { #category : #'api - scrolling' }
 BrScrollablePagerAptitude >> scrollTo: aPageIndex [
 	pagesListElement scrollToPosition: aPageIndex
