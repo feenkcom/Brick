@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousHeaderTheme,
-	#superclass : #BrTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'textMarkupColor',
 		'defaultBackgroundColor',

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrThemeExampleA,
-	#superclass : #BrTheme,
+	#superclass : #BlTheme,
 	#category : #'Brick-Theme-Examples-Brick-Theme-Examples'
 }
 

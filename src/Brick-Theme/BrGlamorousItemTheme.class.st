@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousItemTheme,
-	#superclass : #BrTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'selectedColor',
 		'deselectedColor',

@@ -95,7 +95,7 @@ BrThemeMigration >> refactoringAddChildThemeClassNamed: aString in: aModel [
 	^ RBAddClassRefactoring
 		model: aModel
 		addClass: (self childThemeClassName: aString)
-		superclass: BrTheme
+		superclass: BlTheme
 		subclasses: #()
 		category: #'Brick-Theme-Glamorous'
 ]
@@ -125,7 +125,7 @@ BrThemeMigration >> refactoringAddParentThemeClassIn: aModel [
 	^ RBAddClassRefactoring
 		model: aModel
 		addClass: #BrGlamorousTheme
-		superclass: BrTheme
+		superclass: BlTheme
 		subclasses: #()
 		category: #'Brick-Theme-Glamorous'
 ]
@@ -165,8 +165,8 @@ BrThemeMigration >> referencesChanges [
 	<gtExample>
 	<noTest>
 	| selectorThemesMapping model |
-	(BrTheme default isKindOf: BrGlamorousTheme)
-		ifFalse: [ BrTheme default: BrGlamorousTheme new ].
+	(BlTheme default isKindOf: BrGlamorousTheme)
+		ifFalse: [ BlTheme default: BrGlamorousTheme new ].
 	selectorThemesMapping := (self themeSelectorsMapping associations
 		flatCollect:
 			[ :e | e value associations collect: [ :f | f value -> (e key -> f key) ] ])
