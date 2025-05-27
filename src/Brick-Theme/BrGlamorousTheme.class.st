@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousTheme,
-	#superclass : #BrTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'link',
 		'status',
@@ -13,6 +13,11 @@ Class {
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme class >> canBeDefault [
+	^ true
+]
 
 { #category : #accessing }
 BrGlamorousTheme >> button [

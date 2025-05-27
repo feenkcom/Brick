@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousButtonTheme,
-	#superclass : #BrTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'disabledBackgroundColor',
 		'disabledTextColor',

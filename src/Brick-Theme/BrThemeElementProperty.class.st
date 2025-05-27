@@ -26,7 +26,7 @@ BrThemeElementProperty >> applyOnElement: anElement [
 		^ self ].
 	
 	anElement userData at: #brickTheme put: theme.	
-	anElement dispatchEvent: BrThemeChanged new.
+	anElement dispatchEvent: BlElementThemeChanged new.
 ]
 
 { #category : #accessing }

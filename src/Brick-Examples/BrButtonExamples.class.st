@@ -122,7 +122,7 @@ BrButtonExamples >> buttonWithAsyncBehavior [
 	- initially has a label of 'Initial Label'.
 	- when pressed the label changes to 'Pending...'.
 	- If the current minute number is odd, an error is raised and the button label is changed to display it.
-	- If the current minute number is even, the action waits 5 seconds and completes successfully."
+	- If the current minute number is even, the action waits 1 second and completes successfully."
 
 	<gtExample>
 	<return: #BrButton>
@@ -151,7 +151,7 @@ BrButtonExamples >> buttonWithAsyncBehavior [
 					aButton asyncFuture
 						future: [ self inform: 'Starting wait'.
 							Time now minutes odd ifTrue: [ self error: 'You got unlucky' ].
-							5 seconds wait.
+							1 seconds wait.
 							self inform: 'Completed wait' ] asAsyncFuture ] ].
 	^ button
 ]
@@ -276,18 +276,19 @@ BrButtonExamples >> buttonWithLabelLookReactingToHoverAndPressAndDisabled [
 	<gtExample>
 	<return: #BrButton>
 	| aLabelLook |
-	aLabelLook := BrTextLabelAptitude new.
+	aLabelLook := BrGlamorousLabelAptitude new.
 	aLabelLook
 		bold;
 		fontName: 'Source Sans Pro';
 		fontSize: 20.
 
 	aLabelLook
-		add: (BrInteractiveCommonAptitude new
-				default: [ aLabelLook foreground: Color gray ];
-				hovered: [ aLabelLook foreground: Color darkGray ];
-				pressed: [ aLabelLook foreground: Color black ];
-				disabled: [ aLabelLook foreground: Color veryLightGray ]).
+		add: (BrStyleCommonAptitude new
+				@ aLabelLook label;
+				default: [ :aStyle | aStyle foreground: Color gray ];
+				hovered: [ :aStyle | aStyle foreground: Color darkGray ];
+				pressed: [ :aStyle | aStyle  foreground: Color black ];
+				disabled: [ :aStyle | aStyle  foreground: Color veryLightGray ]).
 
 	^ self newButton
 		disable;

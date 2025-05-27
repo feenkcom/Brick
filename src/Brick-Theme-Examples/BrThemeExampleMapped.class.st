@@ -1,6 +1,6 @@
 Class {
 	#name : #BrThemeExampleMapped,
-	#superclass : #BrTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'map'
 	],

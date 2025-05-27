@@ -32,7 +32,7 @@ BrThemeableAptitude >> initialize [
 		on: BlElementAddedToSceneGraphEvent
 		do: [ self delegate: (widget theme newLookFor: widget) ].
 	themeChangedEventHandler := BlEventHandler
-		on: BrThemeChanged
+		on: BlElementThemeChanged
 		do: [ self delegate: (widget theme newLookFor: widget) ].
 	self
 		addChange:
