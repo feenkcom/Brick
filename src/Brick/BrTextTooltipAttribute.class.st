@@ -81,6 +81,15 @@ BrTextTooltipAttribute >> stencil: aStencilBuilder [
 		stencil: aStencilBuilder ]
 ]
 
+{ #category : #'api - initialization' }
+BrTextTooltipAttribute >> text: aLabelString [
+	"Equivalent to `BrWithExplicitTooltipAptitude>>#text:`"
+
+	self tooltipStencil: [ BrGlamorousWithExplicitTooltipAptitude new 
+		mouseEventHandler: BrTextTooltipMouseHoverEventHandler new;
+		text: aLabelString ]
+]
+
 { #category : #accessing }
 BrTextTooltipAttribute >> tooltipStencil [
 	<return: #BrStencil of: #BrWithExplicitTooltipAptitude>
