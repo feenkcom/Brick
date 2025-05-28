@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'iconElement'
 	],
-	#category : #'Brick-! Core - Looks'
+	#category : #'Brick-! Core - Aptitudes'
 }
 
 { #category : #initialization }

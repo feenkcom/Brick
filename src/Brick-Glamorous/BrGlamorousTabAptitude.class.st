@@ -10,12 +10,8 @@ Class {
 { #category : #initialization }
 BrGlamorousTabAptitude >> initialize [
 	super initialize.
-	self add: (BrGlamorousTextLabelAptitude new foreground: Color black).
+	self add: BrGlamorousLabelAptitude.
 	self add: BrGlamorousTabActionbarAptitude new.
-	self add: BrLayoutAlignmentAptitude new.
-	self
-		addChangeProperty: #(widget layout)
-		with: [ BlLinearLayout horizontal ].
 		
 	bar := BlElement new
 		visibility: BlVisibility hidden;

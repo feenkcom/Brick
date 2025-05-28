@@ -9,15 +9,10 @@ Class {
 		'button',
 		'item',
 		'header',
-		'propertiesById'
+		'label'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
-
-{ #category : #'as yet unclassified' }
-BrGlamorousTheme class >> canBeDefault [
-	^ true
-]
 
 { #category : #accessing }
 BrGlamorousTheme >> button [
@@ -66,11 +61,10 @@ BrGlamorousTheme >> initialize [
 	status := BrGlamorousStatusTheme new.
 	default := BrGlamorousDefaultTheme new.
 	editor := BrGlamorousEditorTheme new.
-	button := BrGlamorousButtonTheme new.
+	button := BrGlamorousButtonLightTheme new.
 	item := BrGlamorousItemTheme new.
 	header := BrGlamorousHeaderTheme new.
-	
-	propertiesById := OrderedDictionary new.
+	label := BrGlamorousLabelLightTheme new
 ]
 
 { #category : #accessing }
@@ -81,6 +75,16 @@ BrGlamorousTheme >> item [
 { #category : #accessing }
 BrGlamorousTheme >> item: anObject [
 	item := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> label [
+	^ label ifNil: [ label := BrGlamorousLabelLightTheme new]
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> label: anObject [
+	label := anObject
 ]
 
 { #category : #accessing }

@@ -9,7 +9,7 @@ Class {
 		'descriptionElement',
 		'text'
 	],
-	#category : #'Brick-! Core - Looks'
+	#category : #'Brick-! Core - Aptitudes'
 }
 
 { #category : #accessing }

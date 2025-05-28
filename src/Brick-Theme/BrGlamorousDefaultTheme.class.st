@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousDefaultTheme,
-	#superclass : #BlTheme,
+	#superclass : #Object,
 	#instVars : [
 		'defaultShadowColor',
 		'backdropColor',

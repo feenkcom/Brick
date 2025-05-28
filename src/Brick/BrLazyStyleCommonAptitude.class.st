@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLazyStyleCommonAptitude,
 	#superclass : #BrLazyStyleAptitude,
-	#category : #'Brick-! Core - Looks'
+	#category : #'Brick-! Core - Aptitudes'
 }
 
 { #category : #'api - styles' }

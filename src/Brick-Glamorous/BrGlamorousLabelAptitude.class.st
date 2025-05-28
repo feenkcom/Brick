@@ -12,4 +12,10 @@ BrGlamorousLabelAptitude >> initialize [
 	self
 		addChangeProperty: #(widget layout)
 		with: [ BlLinearLayout horizontal ].
+		
+	self
+		add:
+			(BrLazyStyleCommonAptitude new
+				@ labelElement;
+				default: [ :aStyle | aStyle foreground: self theme label textColor  ])
 ]

@@ -16,7 +16,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> defaultColor [
-	^ defaultColor
+	^ defaultColor ifNil: [ self theme button defaultTextColor ]
 ]
 
 { #category : #accessing }
@@ -25,8 +25,13 @@ BrGlamorousButtonLabelAptitude >> defaultColor: aPaint [
 ]
 
 { #category : #accessing }
+BrGlamorousButtonLabelAptitude >> disabledTextColor [
+	^ self theme button disabledTextColor
+]
+
+{ #category : #accessing }
 BrGlamorousButtonLabelAptitude >> hoveredColor [
-	^ hoveredColor
+	^ hoveredColor ifNil: [ self theme button hoveredTextColor ]
 ]
 
 { #category : #accessing }
@@ -42,11 +47,6 @@ BrGlamorousButtonLabelAptitude >> initialize [
 		weight: 400;
 		fontName: 'Source Sans Pro'.
 
-	defaultColor := self theme button defaultTextColor.
-	selectedColor := self theme button hoveredTextColor.
-	hoveredColor := self theme button hoveredTextColor.
-	pressedColor := self theme button pressedTextColor.
-
 	labelElement
 		addAptitude:
 			(BrSizeAdjustmentAptitude new
@@ -60,16 +60,16 @@ BrGlamorousButtonLabelAptitude >> initialize [
 		add:
 			(foregroundAptitude := BrLazyStyleCommonAptitude new
 				@ labelElement;
-				default: [ :aStyle | aStyle foreground: defaultColor ];
-				hovered: [ :aStyle | aStyle foreground: hoveredColor ];
-				pressed: [ :aStyle | aStyle foreground: pressedColor ];
-				disabled: [ :aStyle | aStyle foreground: self theme button disabledTextColor ];
-				selected: [ :aStyle | aStyle foreground: selectedColor ])
+				default: [ :aStyle | aStyle foreground: self defaultColor ];
+				hovered: [ :aStyle | aStyle foreground: self hoveredColor ];
+				pressed: [ :aStyle | aStyle foreground: self pressedColor ];
+				disabled: [ :aStyle | aStyle foreground: self disabledTextColor ];
+				selected: [ :aStyle | aStyle foreground: self selectedColor ])
 ]
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> pressedColor [
-	^ pressedColor
+	^ pressedColor ifNil: [ self theme button pressedTextColor ]
 ]
 
 { #category : #accessing }
@@ -79,7 +79,7 @@ BrGlamorousButtonLabelAptitude >> pressedColor: aPaint [
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> selectedColor [
-	^ selectedColor
+	^ selectedColor ifNil: [ self theme button hoveredTextColor ]
 ]
 
 { #category : #accessing }
