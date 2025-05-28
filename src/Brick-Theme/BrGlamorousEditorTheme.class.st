@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousEditorTheme,
-	#superclass : #BlTheme,
+	#superclass : #Object,
 	#instVars : [
 		'borderColor',
 		'focusedBorderColor'

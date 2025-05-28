@@ -9,12 +9,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 BrGlamorousThemePreviewElement >> initialize [
-	| containerAptitude |
 	super initialize.
-
-	containerAptitude := BrLazyStyleCommonAptitude new.
-	containerAptitude
-		default: [ :s | s background: containerAptitude theme default contentBackgroundColor ].
 
 	container := BrHorizontalFlow new
 			matchParent;
@@ -23,7 +18,7 @@ BrGlamorousThemePreviewElement >> initialize [
 			border: (BlBorder builder dashed
 					paint: Color gray;
 					build);
-			addAptitude: containerAptitude.
+			background: BlTheme default default contentBackground.
 
 	self
 		matchParent;

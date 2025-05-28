@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousDefaultTheme,
-	#superclass : #Object,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'defaultShadowColor',
 		'backdropColor',
@@ -12,7 +12,8 @@ Class {
 		'expandCollapseTriangleBackgroundColor',
 		'shadowColor',
 		'distinctTenLightColors',
-		'contentBackgroundColor'
+		'contentBackgroundColor',
+		'contentBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -25,6 +26,11 @@ BrGlamorousDefaultTheme >> backdropColor [
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropColor: anObject [
 	backdropColor := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> contentBackground [
+	^ contentBackground ifNil: [ self contentBackgroundColor ]
 ]
 
 { #category : #accessing }
@@ -87,21 +93,11 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 	expandCollapseTriangleBackgroundColor := anObject
 ]
 
-{ #category : #initialization }
-BrGlamorousDefaultTheme >> initialize [
-	super initialize.
-	contentBackgroundColor := Color white.
-	defaultShadowColor := BrGlamorousColors defaultShadowColor.
-	backdropColor := BrGlamorousColors backdropColor.
-	primaryBorderColor := BrGlamorousColors primaryBorderColor.
-	darkBorderColor := BrGlamorousColors darkBorderColor.
-	distinctTenStrongColors := BrGlamorousColors distinctTenStrongColors.
-	newsBackgroundColor := BrGlamorousColors newsBackgroundColor.
-	lightBorderColor := BrGlamorousColors lightBorderColor.
-	expandCollapseTriangleBackgroundColor := BrGlamorousColors
-		expandCollapseTriangleBackgroundColor.
-	shadowColor := BrGlamorousColors shadowColor.
-	distinctTenLightColors := BrGlamorousColors distinctTenLightColors
+{ #category : #'as yet unclassified' }
+BrGlamorousDefaultTheme >> initializeTheme [
+	contentBackground := self
+		background: [ :aTheme | aTheme default contentBackgroundColor ]
+		source: [ :aTheme | aTheme default contentBackground ].
 ]
 
 { #category : #accessing }

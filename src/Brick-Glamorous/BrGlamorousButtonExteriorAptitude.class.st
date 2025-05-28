@@ -11,7 +11,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousButtonExteriorAptitude >> backgroundPaint [
-	^ backgroundPaint ifNil: [ self theme button defaultBackgroundColor ]
+	^ backgroundPaint ifNil: [ self theme button defaultBackground ]
 ]
 
 { #category : #accessing }

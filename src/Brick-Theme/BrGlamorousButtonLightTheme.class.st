@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BrGlamorousButtonLightTheme >> initialize [
-	super initialize.
+BrGlamorousButtonLightTheme >> initializeColors [
+	super initializeColors.
 	
 	"default state"
 	defaultBackgroundColor := BrGlamorousColors defaultButtonBackgroundColor.

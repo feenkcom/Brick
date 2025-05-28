@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousLinkTheme,
-	#superclass : #BlTheme,
+	#superclass : #Object,
 	#instVars : [
 		'color',
 		'errorColor'

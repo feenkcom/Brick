@@ -1,16 +1,15 @@
 Class {
-	#name : #BrGlamorousDefaultDarkTheme,
+	#name : #BrGlamorousDefaultLightTheme,
 	#superclass : #BrGlamorousDefaultTheme,
 	#category : #'Brick-Theme-Glamorous'
 }
 
 { #category : #'as yet unclassified' }
-BrGlamorousDefaultDarkTheme >> initializeColors [
+BrGlamorousDefaultLightTheme >> initializeColors [
 	super initialize.
-	contentBackgroundColor := Color black.
-	backdropColor := Color gray.
-	
+	contentBackgroundColor := Color white.
 	defaultShadowColor := BrGlamorousColors defaultShadowColor.
+	backdropColor := BrGlamorousColors backdropColor.
 	primaryBorderColor := BrGlamorousColors primaryBorderColor.
 	darkBorderColor := BrGlamorousColors darkBorderColor.
 	distinctTenStrongColors := BrGlamorousColors distinctTenStrongColors.

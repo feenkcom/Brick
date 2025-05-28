@@ -54,19 +54,6 @@ BrGlamorousTheme >> header: anObject [
 	header := anObject
 ]
 
-{ #category : #initialization }
-BrGlamorousTheme >> initialize [
-	super initialize.
-	link := BrGlamorousLinkTheme new.
-	status := BrGlamorousStatusTheme new.
-	default := BrGlamorousDefaultTheme new.
-	editor := BrGlamorousEditorTheme new.
-	button := BrGlamorousButtonLightTheme new.
-	item := BrGlamorousItemTheme new.
-	header := BrGlamorousHeaderTheme new.
-	label := BrGlamorousLabelLightTheme new
-]
-
 { #category : #accessing }
 BrGlamorousTheme >> item [
 	^ item

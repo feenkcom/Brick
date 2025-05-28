@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousButtonTheme,
-	#superclass : #Object,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'disabledBackgroundColor',
 		'disabledTextColor',
@@ -14,10 +14,16 @@ Class {
 		'hoveredTextColor',
 		'textHighlightColor',
 		'fadedBackgroundColor',
-		'focusedFadedBackgroundColor'
+		'focusedFadedBackgroundColor',
+		'defaultBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #accessing }
+BrGlamorousButtonTheme >> defaultBackground [
+	^ defaultBackground ifNil: [ self defaultBackgroundColor ]
+]
 
 { #category : #accessing }
 BrGlamorousButtonTheme >> defaultBackgroundColor [
@@ -120,9 +126,7 @@ BrGlamorousButtonTheme >> hoveredTextColor: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-BrGlamorousButtonTheme >> initialize [
-	super initialize.
-	
+BrGlamorousButtonTheme >> initializeColors [
 	"default state"
 	defaultBackgroundColor := Color black.
 	defaultTextColor := Color white.
@@ -146,6 +150,14 @@ BrGlamorousButtonTheme >> initialize [
 	focusedFadedBackgroundColor := BrGlamorousColors hoveredButtonBorderColor.
 	
 	textHighlightColor := BrGlamorousColors textHighlightColor
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousButtonTheme >> initializeTheme [
+	"default state"
+	defaultBackground := self
+		background: [ :aTheme | aTheme button defaultBackgroundColor ]
+		source: [ :aTheme | aTheme button defaultBackground ].
 ]
 
 { #category : #accessing }

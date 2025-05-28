@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousStatusTheme,
-	#superclass : #BlTheme,
+	#superclass : #Object,
 	#instVars : [
 		'successBackgroundColor',
 		'successBorderColor',

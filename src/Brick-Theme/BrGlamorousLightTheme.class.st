@@ -14,9 +14,13 @@ BrGlamorousLightTheme >> initialize [
 	super initialize.
 	link := BrGlamorousLinkTheme new.
 	status := BrGlamorousStatusTheme new.
-	default := BrGlamorousDefaultTheme new.
+	default := BrGlamorousDefaultLightTheme theme: self.
+	default initializeTheme.
+	
 	editor := BrGlamorousEditorTheme new.
-	button := BrGlamorousButtonLightTheme new.
+	button := BrGlamorousButtonLightTheme theme: self.
+	button initializeTheme.
+
 	item := BrGlamorousItemTheme new.
 	header := BrGlamorousHeaderLightTheme new.
 	label := BrGlamorousLabelLightTheme new

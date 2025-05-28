@@ -240,7 +240,7 @@ BrMenuItems >> asTreeElement [
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		padding: (BlInsets all: 5);
 		border: (BlBorder paint: Color veryLightGray width: 1);
-		background: anElement theme default contentBackgroundColor;
+		background: anElement theme default contentBackground;
 		items: self groups lazy: #items;
 		expandUpTo: 2;
 		addAptitude: (BrPopoverHideableAptitude new menuModel: self).

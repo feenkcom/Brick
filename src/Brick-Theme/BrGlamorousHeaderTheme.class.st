@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousHeaderTheme,
-	#superclass : #BlTheme,
+	#superclass : #Object,
 	#instVars : [
 		'textMarkupColor',
 		'defaultBackgroundColor',
@@ -39,18 +39,6 @@ BrGlamorousHeaderTheme >> disabledTextColor [
 { #category : #accessing }
 BrGlamorousHeaderTheme >> disabledTextColor: anObject [
 	disabledTextColor := anObject
-]
-
-{ #category : #initialization }
-BrGlamorousHeaderTheme >> initialize [
-	super initialize.
-	textMarkupColor := BrGlamorousColors textMarkupColor.
-	defaultBackgroundColor := BrGlamorousColors
-		defaultHeaderBackgroundColor.
-	disabledTextColor := BrGlamorousColors disabledHeaderTextColor.
-	defaultTextColor := BrGlamorousColors defaultHeaderTextColor.
-	secondaryBackgroundColor := BrGlamorousColors
-		secondaryHeaderBackgroundColor
 ]
 
 { #category : #accessing }

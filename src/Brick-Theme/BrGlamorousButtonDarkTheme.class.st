@@ -5,14 +5,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BrGlamorousButtonDarkTheme >> initialize [
-	super initialize.
-	
+BrGlamorousButtonDarkTheme >> initializeColors [
+	super initializeColors.
+
 	"default state"
 	defaultBackgroundColor := Color black.
 	defaultTextColor := Color white.
 	defaultBorderColor := Color gray.
-	
+
 	"disabled state"
 	disabledBackgroundColor := Color black.
 	disabledTextColor := Color gray.
