@@ -9,6 +9,7 @@ BrGlamorousDefaultDarkTheme >> initializeColors [
 	super initialize.
 	contentBackgroundColor := Color veryDarkGray.
 	backdropColor := Color veryVeryDarkGray.
+	navigationBackgroundColor := Color veryVeryDarkGray.
 	
 	defaultShadowColor := BrGlamorousColors defaultShadowColor.
 	primaryBorderColor := BrGlamorousColors primaryBorderColor.

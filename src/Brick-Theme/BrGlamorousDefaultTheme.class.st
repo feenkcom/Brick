@@ -14,12 +14,14 @@ Class {
 		'distinctTenLightColors',
 		'contentBackgroundColor',
 		'contentBackground',
-		'backdropBackground'
+		'backdropBackground',
+		'navigationBackgroundColor',
+		'navigationBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
 
-{ #category : #accessing }
+{ #category : #'accessing - background' }
 BrGlamorousDefaultTheme >> backdropBackground [
 	^ backdropBackground ifNil: [ self backdropColor ]
 ]
@@ -34,7 +36,7 @@ BrGlamorousDefaultTheme >> backdropColor: anObject [
 	backdropColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - background' }
 BrGlamorousDefaultTheme >> contentBackground [
 	^ contentBackground ifNil: [ self contentBackgroundColor ]
 ]
@@ -108,6 +110,10 @@ BrGlamorousDefaultTheme >> initializeTheme [
 	backdropBackground := self
 		background: [ :aTheme | aTheme default backdropColor ]
 		source: [ :aTheme | aTheme default backdropBackground ].
+		
+	navigationBackground := self
+		background: [ :aTheme | aTheme default navigationBackgroundColor ]
+		source: [ :aTheme | aTheme default navigationBackground ].
 ]
 
 { #category : #accessing }
@@ -118,6 +124,21 @@ BrGlamorousDefaultTheme >> lightBorderColor [
 { #category : #accessing }
 BrGlamorousDefaultTheme >> lightBorderColor: anObject [
 	lightBorderColor := anObject
+]
+
+{ #category : #'accessing - background' }
+BrGlamorousDefaultTheme >> navigationBackground [
+	^ navigationBackground ifNil: [ BrGlamorousColors neutralBackgroundColor ]
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> navigationBackgroundColor [
+	^ navigationBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> navigationBackgroundColor: anObject [
+	navigationBackgroundColor := anObject
 ]
 
 { #category : #accessing }
