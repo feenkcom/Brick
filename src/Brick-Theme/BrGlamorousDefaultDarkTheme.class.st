@@ -7,8 +7,8 @@ Class {
 { #category : #'as yet unclassified' }
 BrGlamorousDefaultDarkTheme >> initializeColors [
 	super initialize.
-	contentBackgroundColor := Color black.
-	backdropColor := Color gray.
+	contentBackgroundColor := Color veryDarkGray.
+	backdropColor := Color veryVeryDarkGray.
 	
 	defaultShadowColor := BrGlamorousColors defaultShadowColor.
 	primaryBorderColor := BrGlamorousColors primaryBorderColor.

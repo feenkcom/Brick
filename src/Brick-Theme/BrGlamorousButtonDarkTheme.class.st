@@ -9,12 +9,12 @@ BrGlamorousButtonDarkTheme >> initializeColors [
 	super initializeColors.
 
 	"default state"
-	defaultBackgroundColor := Color black.
+	defaultBackgroundColor := Color veryDarkGray.
 	defaultTextColor := Color white.
 	defaultBorderColor := Color gray.
 
 	"disabled state"
-	disabledBackgroundColor := Color black.
+	disabledBackgroundColor := Color veryDarkGray.
 	disabledTextColor := Color gray.
 	disabledBorderColor := Color gray.
 ]

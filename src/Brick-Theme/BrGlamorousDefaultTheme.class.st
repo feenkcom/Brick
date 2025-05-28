@@ -13,10 +13,16 @@ Class {
 		'shadowColor',
 		'distinctTenLightColors',
 		'contentBackgroundColor',
-		'contentBackground'
+		'contentBackground',
+		'backdropBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> backdropBackground [
+	^ backdropBackground
+]
 
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropColor [
@@ -98,6 +104,10 @@ BrGlamorousDefaultTheme >> initializeTheme [
 	contentBackground := self
 		background: [ :aTheme | aTheme default contentBackgroundColor ]
 		source: [ :aTheme | aTheme default contentBackground ].
+		
+	backdropBackground := self
+		background: [ :aTheme | aTheme default backdropColor ]
+		source: [ :aTheme | aTheme default backdropBackground ].
 ]
 
 { #category : #accessing }
