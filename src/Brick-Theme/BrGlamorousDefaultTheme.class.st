@@ -21,7 +21,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropBackground [
-	^ backdropBackground
+	^ backdropBackground ifNil: [ self backdropColor ]
 ]
 
 { #category : #accessing }
