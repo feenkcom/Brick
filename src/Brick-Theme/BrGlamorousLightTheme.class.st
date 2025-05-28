@@ -18,6 +18,6 @@ BrGlamorousLightTheme >> initialize [
 	editor := BrGlamorousEditorTheme new.
 	button := BrGlamorousButtonLightTheme new.
 	item := BrGlamorousItemTheme new.
-	header := BrGlamorousHeaderTheme new.
+	header := BrGlamorousHeaderLightTheme new.
 	label := BrGlamorousLabelLightTheme new
 ]
