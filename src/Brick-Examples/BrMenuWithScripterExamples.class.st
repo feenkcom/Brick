@@ -7,6 +7,20 @@ Class {
 }
 
 { #category : #'examples - updates' }
+BrMenuWithScripterExamples >> actionElement: anActionElement hasForegroundColor: aColor [
+	| aSize |
+	aSize := anActionElement menuModel labelModel text size.
+
+	^ ((anActionElement query // #'menu--label')
+		@ [ :eachLabel | 
+			(eachLabel text from: 1 to: aSize)
+				hasAttributeSuchThat: [ :anAttribute | 
+					anAttribute class = BlTextForegroundAttribute
+						and: [ anAttribute paint = aColor ] ] ])
+		isNotEmpty
+]
+
+{ #category : #'examples - updates' }
 BrMenuWithScripterExamples >> actionElementIsWithoutForegroundAttribute: anActionElement [
 	| aSize |
 	aSize := anActionElement menuModel labelModel text size.

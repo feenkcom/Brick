@@ -60,3 +60,29 @@ BrLabelExamples >> glamorousLabelWithText [
 
 	^ aLabel
 ]
+
+{ #category : #'examples - label' }
+BrLabelExamples >> glamorousSmallMetadataLabel [
+	<gtExample>
+	<return: #BrLabel>
+	| aLabel |
+	aLabel := BrLabel new
+		beSmallSize;
+		aptitude: BrGlamorousMetadataLabelAptitude;
+		text: 'Metadata-Label'.
+
+	^ aLabel
+]
+
+{ #category : #'examples - label' }
+BrLabelExamples >> glamorousSmallSummaryLabel [
+	<gtExample>
+	<return: #BrLabel>
+	| aLabel |
+	aLabel := BrLabel new
+		beSmallSize;
+		aptitude: BrGlamorousSummaryLabelAptitude;
+		text: 'Summary-Label'.
+
+	^ aLabel
+]

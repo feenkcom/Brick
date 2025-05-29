@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'container'
 	],
-	#category : #'Brick-Theme-Glamorous'
+	#category : #'Brick-Theme-Tools'
 }
 
 { #category : #'as yet unclassified' }

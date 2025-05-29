@@ -8,7 +8,7 @@ Class {
 BrGlamorousDarkTheme >> initialize [
 	super initialize.
 
-	colors := BrGlamorousDarkThemeColors new.
+	colors := BrGlamorousDarkThemeColors theme: self.
 	
 	link := BrGlamorousLinkTheme new.
 	status := BrGlamorousStatusTheme new.

@@ -9,7 +9,6 @@ BrGlamorousTextLabelAptitude >> initialize [
 	super initialize.
 
 	self defaultFontName: 'Source Sans Pro'.
-	self foreground: self theme label defaultTextForeground.
 
 	labelElement addAptitude: (BrSizeAdjustmentAptitude new
 		mini: [ :aStyle | aStyle fontSizeEm: 0.55 ];

@@ -42,7 +42,8 @@ BrGlamorousTheme >> colors [
 
 { #category : #accessing }
 BrGlamorousTheme >> colors: anObject [
-	colors := anObject
+	colors := anObject.
+	self themeModified
 ]
 
 { #category : #accessing }
@@ -63,6 +64,24 @@ BrGlamorousTheme >> editor [
 { #category : #accessing }
 BrGlamorousTheme >> editor: anObject [
 	editor := anObject
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme >> gtColorsEditorFor: aView [
+	<gtView>
+	
+	^ aView explicit
+		title: 'Colors';
+		priority: 5;
+		stencil: [
+			BrGlamorousThemeColorsEditorElement new
+				padding: (BlInsets all: 10);
+				colors: colors ];
+		actionButtonIcon: BrGlamorousVectorIcons accept
+			tooltip: 'Compile'
+			action: [ :aButton |
+				aButton phlow firstParentWithViewContent phlow firstChildWithViewContent compileChanges.
+				aButton addChangingColorAnimationFor: aButton theme status successBackgroundColor ]
 ]
 
 { #category : #accessing }
@@ -103,6 +122,22 @@ BrGlamorousTheme >> link [
 { #category : #accessing }
 BrGlamorousTheme >> link: anObject [
 	link := anObject
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme >> onThemeModified [
+	super onThemeModified.
+	
+	default initializeTheme.
+	editor initializeTheme.
+	button initializeTheme.
+	label initializeTheme.
+	header initializeTheme
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme >> privateColors [
+	^ colors
 ]
 
 { #category : #accessing }

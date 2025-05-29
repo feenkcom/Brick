@@ -13,7 +13,7 @@ BrGlamorousLightTheme class >> canBeDefault [
 BrGlamorousLightTheme >> initialize [
 	super initialize.
 	
-	colors := BrGlamorousLightThemeColors new.
+	colors := BrGlamorousLightThemeColors theme: self.
 	
 	link := BrGlamorousLinkTheme new.
 	status := BrGlamorousStatusTheme new.
