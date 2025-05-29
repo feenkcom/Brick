@@ -19,6 +19,8 @@ BrGlamorousDarkTheme >> initialize [
 	button initializeTheme.
 	
 	item := BrGlamorousItemTheme new.
-	header := BrGlamorousHeaderDarkTheme new.
+	header := BrGlamorousHeaderDarkTheme theme: self.
+	header initializeTheme.
+	
 	label := BrGlamorousLabelDarkTheme new
 ]

@@ -5,10 +5,10 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BrGlamorousHeaderDarkTheme >> initialize [
-	super initialize.
+BrGlamorousHeaderDarkTheme >> initializeColors [
+	super initializeColors.
 	
-	defaultBackgroundColor := Color darkGray.
+	defaultBackgroundColor := Color veryVeryDarkGray slightlyDarker.
 	secondaryBackgroundColor := Color black.
 	
 	defaultTextColor := Color white.

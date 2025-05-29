@@ -22,6 +22,9 @@ BrGlamorousLightTheme >> initialize [
 	button initializeTheme.
 
 	item := BrGlamorousItemTheme new.
-	header := BrGlamorousHeaderLightTheme new.
+
+	header := BrGlamorousHeaderLightTheme theme: self.
+	header initializeTheme.
+
 	label := BrGlamorousLabelLightTheme new
 ]

@@ -5,13 +5,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BrGlamorousHeaderLightTheme >> initialize [
-	super initialize.
+BrGlamorousHeaderLightTheme >> initializeColors [
+	super initializeColors.
+	
+	defaultBackgroundColor := BrGlamorousColors defaultHeaderBackgroundColor.
+	secondaryBackgroundColor := BrGlamorousColors secondaryHeaderBackgroundColor.
+
 	textMarkupColor := BrGlamorousColors textMarkupColor.
-	defaultBackgroundColor := BrGlamorousColors
-		defaultHeaderBackgroundColor.
+	
 	disabledTextColor := BrGlamorousColors disabledHeaderTextColor.
 	defaultTextColor := BrGlamorousColors defaultHeaderTextColor.
-	secondaryBackgroundColor := BrGlamorousColors
-		secondaryHeaderBackgroundColor
 ]
