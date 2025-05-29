@@ -74,6 +74,17 @@ BrButton >> actionsWithModifiers: aCollection [
 	self viewModel actionsWithModifiers: aCollection
 ]
 
+{ #category : #utils }
+BrButton >> addChangingColorAnimationFor: aColor [ 
+	| animation |
+	animation := (BlColorTransition new
+			from: (aColor alpha: 0.5);
+			to: (aColor alpha: 0);
+			onStepDo: [ :eachColor :eachButton |
+				eachButton effect: (BlOverlayAboveEffect new paint: eachColor) ]).
+	self addAnimation: animation
+]
+
 { #category : #layout }
 BrButton >> baselineOffset [
 	^ self
