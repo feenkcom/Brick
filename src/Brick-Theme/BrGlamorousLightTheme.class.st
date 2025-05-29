@@ -12,12 +12,17 @@ BrGlamorousLightTheme class >> canBeDefault [
 { #category : #'as yet unclassified' }
 BrGlamorousLightTheme >> initialize [
 	super initialize.
+	
+	colors := BrGlamorousLightThemeColors new.
+	
 	link := BrGlamorousLinkTheme new.
 	status := BrGlamorousStatusTheme new.
 	default := BrGlamorousDefaultLightTheme theme: self.
 	default initializeTheme.
 	
-	editor := BrGlamorousEditorTheme new.
+	editor := BrGlamorousEditorTheme theme: self.
+	editor initializeTheme.
+	
 	button := BrGlamorousButtonLightTheme theme: self.
 	button initializeTheme.
 
@@ -26,5 +31,6 @@ BrGlamorousLightTheme >> initialize [
 	header := BrGlamorousHeaderLightTheme theme: self.
 	header initializeTheme.
 
-	label := BrGlamorousLabelLightTheme new
+	label := BrGlamorousLabelTheme theme: self.
+	label initializeTheme
 ]

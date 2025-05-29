@@ -9,7 +9,7 @@ BrGlamorousFocusableShadowAptitude >> initialize [
 	super initialize.
 	self
 		add:
-			(BrStyleCommonAptitude new
+			(BrLazyStyleCommonAptitude new
 				focused: [ :aStyle | 
 					aStyle
 						do: [ self color: (self theme default primaryBorderColor) ]

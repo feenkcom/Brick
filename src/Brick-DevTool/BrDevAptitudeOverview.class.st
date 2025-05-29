@@ -35,7 +35,7 @@ BrDevAptitudeOverview >> buildCategoryLabel: aString [
 		beSmallSize;
 		aptitude:
 			(BrGlamorousLabelAptitude new
-				foreground: (self theme button defaultTextColor alpha: 0.5));
+				foreground: (self theme header defaultTextColor alpha: 0.5));
 		margin: (BlInsets bottom: 5);
 		text: aString
 ]

@@ -7,11 +7,10 @@ Class {
 { #category : #'as yet unclassified' }
 BrGlamorousDefaultDarkTheme >> initializeColors [
 	super initialize.
-	contentBackgroundColor := Color veryDarkGray.
-	backdropColor := Color veryVeryDarkGray.
-	navigationBackgroundColor := Color veryVeryDarkGray.
 	
 	defaultShadowColor := BrGlamorousColors defaultShadowColor.
+	shadowColor := BrGlamorousColors shadowColor.
+	
 	primaryBorderColor := BrGlamorousColors primaryBorderColor.
 	darkBorderColor := BrGlamorousColors darkBorderColor.
 	distinctTenStrongColors := BrGlamorousColors distinctTenStrongColors.
@@ -19,6 +18,5 @@ BrGlamorousDefaultDarkTheme >> initializeColors [
 	lightBorderColor := BrGlamorousColors lightBorderColor.
 	expandCollapseTriangleBackgroundColor := BrGlamorousColors
 		expandCollapseTriangleBackgroundColor.
-	shadowColor := BrGlamorousColors shadowColor.
 	distinctTenLightColors := BrGlamorousColors distinctTenLightColors
 ]

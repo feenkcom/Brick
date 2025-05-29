@@ -3,7 +3,6 @@ Class {
 	#superclass : #BlSubTheme,
 	#instVars : [
 		'defaultShadowColor',
-		'backdropColor',
 		'primaryBorderColor',
 		'darkBorderColor',
 		'distinctTenStrongColors',
@@ -12,43 +11,27 @@ Class {
 		'expandCollapseTriangleBackgroundColor',
 		'shadowColor',
 		'distinctTenLightColors',
-		'contentBackgroundColor',
 		'contentBackground',
 		'backdropBackground',
-		'navigationBackgroundColor',
-		'navigationBackground'
+		'navigationBackground',
+		'appBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
 
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> appBackground [
+	^ appBackground
+]
+
 { #category : #'accessing - background' }
 BrGlamorousDefaultTheme >> backdropBackground [
-	^ backdropBackground ifNil: [ self backdropColor ]
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> backdropColor [
-	^ backdropColor
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> backdropColor: anObject [
-	backdropColor := anObject
+	^ backdropBackground
 ]
 
 { #category : #'accessing - background' }
 BrGlamorousDefaultTheme >> contentBackground [
-	^ contentBackground ifNil: [ self contentBackgroundColor ]
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> contentBackgroundColor [
-	^ contentBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> contentBackgroundColor: aColor [
-	contentBackgroundColor := aColor
+	^ contentBackground
 ]
 
 { #category : #accessing }
@@ -103,16 +86,20 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 
 { #category : #'as yet unclassified' }
 BrGlamorousDefaultTheme >> initializeTheme [
-	contentBackground := self
-		background: [ :aTheme | aTheme default contentBackgroundColor ]
-		source: [ :aTheme | aTheme default contentBackground ].
-		
+	appBackground := self
+		background: [ :aTheme | aTheme colors appBackgroundColor ]
+		source: [ :aTheme | aTheme default appBackground ].
+
 	backdropBackground := self
-		background: [ :aTheme | aTheme default backdropColor ]
+		background: [ :aTheme | aTheme colors backdropBackgroundColor ]
 		source: [ :aTheme | aTheme default backdropBackground ].
 		
+	contentBackground := self
+		background: [ :aTheme | aTheme colors contentBackgroundColor ]
+		source: [ :aTheme | aTheme default contentBackground ].
+		
 	navigationBackground := self
-		background: [ :aTheme | aTheme default navigationBackgroundColor ]
+		background: [ :aTheme | aTheme colors sidebarBackgroundColor ]
 		source: [ :aTheme | aTheme default navigationBackground ].
 ]
 
@@ -128,17 +115,7 @@ BrGlamorousDefaultTheme >> lightBorderColor: anObject [
 
 { #category : #'accessing - background' }
 BrGlamorousDefaultTheme >> navigationBackground [
-	^ navigationBackground ifNil: [ BrGlamorousColors neutralBackgroundColor ]
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> navigationBackgroundColor [
-	^ navigationBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> navigationBackgroundColor: anObject [
-	navigationBackgroundColor := anObject
+	^ navigationBackground
 ]
 
 { #category : #accessing }

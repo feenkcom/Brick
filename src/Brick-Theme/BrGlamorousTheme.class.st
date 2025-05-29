@@ -9,7 +9,8 @@ Class {
 		'button',
 		'item',
 		'header',
-		'label'
+		'label',
+		'colors'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -22,6 +23,26 @@ BrGlamorousTheme >> button [
 { #category : #accessing }
 BrGlamorousTheme >> button: anObject [
 	button := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> colors [
+	"Returns an object with color contanstants.
+	
+	Must not be used by user code, as those Colors will not adapt to the theme change."
+	| sender |
+	
+	sender := thisContext sender compiledCode methodClass.
+	self
+		assert: [ sender inheritsFrom: BlSubTheme  ]
+		description: [ 'Must only be used within a Theme.' ].
+
+	^ colors
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> colors: anObject [
+	colors := anObject
 ]
 
 { #category : #accessing }

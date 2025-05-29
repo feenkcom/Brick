@@ -86,7 +86,7 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 					"we first collect font properties and text style from the attributes"
 					aFontAndStyleBuilder := BlTextFontAndStyleBuilder new.
 					theAttributes
-						do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: aFontAndStyleBuilder ].
+						do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: aFontAndStyleBuilder theme: self theme ].
 
 					SkiaParagraphTextStyle
 						newDuring: [ :aTextStyle | 
@@ -119,7 +119,7 @@ BrTextEditorParagraphElement >> addText: aBlText toBuilder: aParagraphBuilder [
 
 							aFontAndStyleBuilder hasCustomColor
 								ifTrue: [ aTextStyle color: aFontAndStyleBuilder color ]
-								ifFalse: [ aTextStyle color: self defaultTextColor ].
+								ifFalse: [ aTextStyle color: (self defaultTextColor blocResolveColorForTheme: self theme) ].
 
 							aFontAndStyleBuilder hasCustomBackground
 								ifTrue: [
@@ -241,7 +241,7 @@ BrTextEditorParagraphElement >> defaultSelectionColor [
 
 { #category : #initialization }
 BrTextEditorParagraphElement >> defaultTextColor [
-	^ Color black
+	^ self theme editor defaultTextForeground
 ]
 
 { #category : #drawing }
@@ -450,6 +450,12 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 		time: 'Measure cursors'
 		during: [ self cursorElements
 				ifNotEmpty: [ :theCursors | self measureCursors: theCursors paragraph: aParagraph ] ]
+]
+
+{ #category : #'as yet unclassified' }
+BrTextEditorParagraphElement >> onThemeChanged [
+	paragraph value: nil.
+	self requestLayout
 ]
 
 { #category : #drawing }

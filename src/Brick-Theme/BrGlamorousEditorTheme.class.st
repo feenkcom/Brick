@@ -1,9 +1,10 @@
 Class {
 	#name : #BrGlamorousEditorTheme,
-	#superclass : #Object,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'borderColor',
-		'focusedBorderColor'
+		'focusedBorderColor',
+		'defaultTextForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -16,6 +17,11 @@ BrGlamorousEditorTheme >> borderColor [
 { #category : #accessing }
 BrGlamorousEditorTheme >> borderColor: anObject [
 	borderColor := anObject
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousEditorTheme >> defaultTextForeground [
+	^ defaultTextForeground
 ]
 
 { #category : #accessing }
@@ -33,4 +39,13 @@ BrGlamorousEditorTheme >> initialize [
 	super initialize.
 	borderColor := BrGlamorousColors editorBorderColor.
 	focusedBorderColor := BrGlamorousColors focusedEditorBorderColor
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousEditorTheme >> initializeTheme [
+	super initializeTheme.
+	
+	defaultTextForeground := self
+		color: [ :aTheme | aTheme colors primaryTextColor ]
+		source: [ :aTheme | aTheme editor defaultTextForeground ]
 ]
