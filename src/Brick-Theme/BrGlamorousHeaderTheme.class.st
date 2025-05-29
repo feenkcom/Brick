@@ -1,15 +1,21 @@
 Class {
 	#name : #BrGlamorousHeaderTheme,
-	#superclass : #BlTheme,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'textMarkupColor',
 		'defaultBackgroundColor',
 		'disabledTextColor',
 		'defaultTextColor',
-		'secondaryBackgroundColor'
+		'secondaryBackgroundColor',
+		'defaultBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #accessing }
+BrGlamorousHeaderTheme >> defaultBackground [
+	^ defaultBackground ifNil: [ self defaultBackgroundColor ]
+]
 
 { #category : #accessing }
 BrGlamorousHeaderTheme >> defaultBackgroundColor [
@@ -41,16 +47,11 @@ BrGlamorousHeaderTheme >> disabledTextColor: anObject [
 	disabledTextColor := anObject
 ]
 
-{ #category : #initialization }
-BrGlamorousHeaderTheme >> initialize [
-	super initialize.
-	textMarkupColor := BrGlamorousColors textMarkupColor.
-	defaultBackgroundColor := BrGlamorousColors
-		defaultHeaderBackgroundColor.
-	disabledTextColor := BrGlamorousColors disabledHeaderTextColor.
-	defaultTextColor := BrGlamorousColors defaultHeaderTextColor.
-	secondaryBackgroundColor := BrGlamorousColors
-		secondaryHeaderBackgroundColor
+{ #category : #'as yet unclassified' }
+BrGlamorousHeaderTheme >> initializeTheme [
+	defaultBackground := self
+		background: [ :aTheme | aTheme header defaultBackgroundColor ]
+		source: [ :aTheme | aTheme header defaultBackground ].
 ]
 
 { #category : #accessing }

@@ -23,7 +23,7 @@ BrGlamorousPopoverDefiningMethodAptitude >> initialize [
 						aCoderElement 
 							hExact: 500;
 							vFitContentLimited;
-							background: aCoderElement theme default contentBackgroundColor ] ];
+							background: aCoderElement theme default contentBackground ] ];
 				down: [ :aLook |  ];
 				yourself).
 

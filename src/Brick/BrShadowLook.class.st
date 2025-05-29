@@ -1,7 +1,7 @@
 Class {
 	#name : #BrShadowLook,
 	#superclass : #BrShadowAptitude,
-	#category : 'Brick-! Core - Looks'
+	#category : #'Brick-! Core - Aptitudes'
 }
 
 { #category : #accessing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousButtonTheme,
-	#superclass : #BlTheme,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'disabledBackgroundColor',
 		'disabledTextColor',
@@ -14,10 +14,16 @@ Class {
 		'hoveredTextColor',
 		'textHighlightColor',
 		'fadedBackgroundColor',
-		'focusedFadedBackgroundColor'
+		'focusedFadedBackgroundColor',
+		'defaultBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #accessing }
+BrGlamorousButtonTheme >> defaultBackground [
+	^ defaultBackground ifNil: [ self defaultBackgroundColor ]
+]
 
 { #category : #accessing }
 BrGlamorousButtonTheme >> defaultBackgroundColor [
@@ -119,24 +125,39 @@ BrGlamorousButtonTheme >> hoveredTextColor: anObject [
 	hoveredTextColor := anObject
 ]
 
-{ #category : #initialization }
-BrGlamorousButtonTheme >> initialize [
-	super initialize.
-	disabledBackgroundColor := BrGlamorousColors
-		disabledButtonBackgroundColor.
-	disabledTextColor := BrGlamorousColors disabledButtonTextColor.
-	disabledBorderColor := BrGlamorousColors disabledButtonBorderColor.
+{ #category : #'as yet unclassified' }
+BrGlamorousButtonTheme >> initializeColors [
+	"default state"
+	defaultBackgroundColor := Color black.
+	defaultTextColor := Color white.
+	defaultBorderColor := Color gray.
+	
+	"disabled state"
+	disabledBackgroundColor := Color black.
+	disabledTextColor := Color gray.
+	disabledBorderColor := Color gray.
+	
+	"pressed state"
 	pressedBorderColor := BrGlamorousColors pressedButtonBorderColor.
-	defaultBorderColor := BrGlamorousColors defaultButtonBorderColor.
-	defaultTextColor := BrGlamorousColors defaultButtonTextColor.
+	pressedTextColor := BrGlamorousColors pressedButtonTextColor.
+	
+	"hovered state"
+	hoveredBorderColor := BrGlamorousColors hoveredButtonBorderColor.
+	hoveredTextColor := BrGlamorousColors hoveredButtonTextColor.
+	
+	"faded button"
 	fadedBackgroundColor := BrGlamorousColors fadedButtonBackgroundColor.
 	focusedFadedBackgroundColor := BrGlamorousColors hoveredButtonBorderColor.
-	hoveredBorderColor := BrGlamorousColors hoveredButtonBorderColor.
-	pressedTextColor := BrGlamorousColors pressedButtonTextColor.
-	defaultBackgroundColor := BrGlamorousColors
-		defaultButtonBackgroundColor.
-	hoveredTextColor := BrGlamorousColors hoveredButtonTextColor.
+	
 	textHighlightColor := BrGlamorousColors textHighlightColor
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousButtonTheme >> initializeTheme [
+	"default state"
+	defaultBackground := self
+		background: [ :aTheme | aTheme button defaultBackgroundColor ]
+		source: [ :aTheme | aTheme button defaultBackground ].
 ]
 
 { #category : #accessing }

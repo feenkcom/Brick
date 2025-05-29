@@ -30,6 +30,13 @@ BrLazyStyleAptitude >> initialize [
 	targetQuery := BlElementLazyQuery new
 ]
 
+{ #category : #'as yet unclassified' }
+BrLazyStyleAptitude >> initializeListeners [
+	super initializeListeners.
+	
+	self when: BlElementThemeChanged do: [ self updateWith: [ ] ].
+]
+
 { #category : #'api - hooks' }
 BrLazyStyleAptitude >> onAttachedTo: anElement [
 	super onAttachedTo: anElement.	
@@ -61,7 +68,7 @@ BrLazyStyleAptitude >> updateWith: aBlock [
 	aBlock ensure: [
 		self widgetDo: [ :anElement |
 			styles clearCache.
-			"plaese note that we should request the style recomputation of the widget itself and we shouldn't compute the target element (query) manually because they are forwarded from the widget itself"
+			"Please note that we should request the style recomputation of the widget itself and we shouldn't compute the target element (query) manually because they are forwarded from the widget itself"
 			anElement requestStyle ] ]
 ]
 

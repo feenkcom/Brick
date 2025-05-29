@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousDefaultTheme,
-	#superclass : #BlTheme,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'defaultShadowColor',
 		'backdropColor',
@@ -12,10 +12,19 @@ Class {
 		'expandCollapseTriangleBackgroundColor',
 		'shadowColor',
 		'distinctTenLightColors',
-		'contentBackgroundColor'
+		'contentBackgroundColor',
+		'contentBackground',
+		'backdropBackground',
+		'navigationBackgroundColor',
+		'navigationBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
+
+{ #category : #'accessing - background' }
+BrGlamorousDefaultTheme >> backdropBackground [
+	^ backdropBackground ifNil: [ self backdropColor ]
+]
 
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropColor [
@@ -25,6 +34,11 @@ BrGlamorousDefaultTheme >> backdropColor [
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropColor: anObject [
 	backdropColor := anObject
+]
+
+{ #category : #'accessing - background' }
+BrGlamorousDefaultTheme >> contentBackground [
+	^ contentBackground ifNil: [ self contentBackgroundColor ]
 ]
 
 { #category : #accessing }
@@ -87,21 +101,19 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 	expandCollapseTriangleBackgroundColor := anObject
 ]
 
-{ #category : #initialization }
-BrGlamorousDefaultTheme >> initialize [
-	super initialize.
-	contentBackgroundColor := Color white.
-	defaultShadowColor := BrGlamorousColors defaultShadowColor.
-	backdropColor := BrGlamorousColors backdropColor.
-	primaryBorderColor := BrGlamorousColors primaryBorderColor.
-	darkBorderColor := BrGlamorousColors darkBorderColor.
-	distinctTenStrongColors := BrGlamorousColors distinctTenStrongColors.
-	newsBackgroundColor := BrGlamorousColors newsBackgroundColor.
-	lightBorderColor := BrGlamorousColors lightBorderColor.
-	expandCollapseTriangleBackgroundColor := BrGlamorousColors
-		expandCollapseTriangleBackgroundColor.
-	shadowColor := BrGlamorousColors shadowColor.
-	distinctTenLightColors := BrGlamorousColors distinctTenLightColors
+{ #category : #'as yet unclassified' }
+BrGlamorousDefaultTheme >> initializeTheme [
+	contentBackground := self
+		background: [ :aTheme | aTheme default contentBackgroundColor ]
+		source: [ :aTheme | aTheme default contentBackground ].
+		
+	backdropBackground := self
+		background: [ :aTheme | aTheme default backdropColor ]
+		source: [ :aTheme | aTheme default backdropBackground ].
+		
+	navigationBackground := self
+		background: [ :aTheme | aTheme default navigationBackgroundColor ]
+		source: [ :aTheme | aTheme default navigationBackground ].
 ]
 
 { #category : #accessing }
@@ -112,6 +124,21 @@ BrGlamorousDefaultTheme >> lightBorderColor [
 { #category : #accessing }
 BrGlamorousDefaultTheme >> lightBorderColor: anObject [
 	lightBorderColor := anObject
+]
+
+{ #category : #'accessing - background' }
+BrGlamorousDefaultTheme >> navigationBackground [
+	^ navigationBackground ifNil: [ BrGlamorousColors neutralBackgroundColor ]
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> navigationBackgroundColor [
+	^ navigationBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> navigationBackgroundColor: anObject [
+	navigationBackgroundColor := anObject
 ]
 
 { #category : #accessing }

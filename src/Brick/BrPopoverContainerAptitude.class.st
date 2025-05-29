@@ -22,7 +22,7 @@ BrPopoverContainerAptitude >> initialize [
 	self addChangeProperty: #(widget outskirts) with: [ BlOutskirts outside ].
 	self
 		addChangeProperty: #(widget background)
-		with: [ self theme default contentBackgroundColor ].
+		with: [ self theme default contentBackground ].
 
 	self add: BrShadowAptitude new
 ]

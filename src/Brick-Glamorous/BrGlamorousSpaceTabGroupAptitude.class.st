@@ -95,7 +95,7 @@ BrGlamorousSpaceTabGroupAptitude >> initialize [
 				up: [ :e | 
 					self
 						widgetDo:
-							[ :aWidget | aWidget background: self theme header defaultBackgroundColor ] ];
+							[ :aWidget | aWidget background: self theme header defaultBackground ] ];
 				down: [ :e |  ];
 				yourself)
 ]

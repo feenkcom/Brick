@@ -11,5 +11,5 @@ BrGlamorousLabelAptitude >> initialize [
 	self add: BrLayoutAlignmentAptitude new.
 	self
 		addChangeProperty: #(widget layout)
-		with: [ BlLinearLayout horizontal ].
+		with: [ BlLinearLayout horizontal ]
 ]
