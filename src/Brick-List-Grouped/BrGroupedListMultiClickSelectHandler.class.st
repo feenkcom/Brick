@@ -29,13 +29,10 @@ BrGroupedListMultiClickSelectHandler >> clickEvent: aBlClickEvent [
 	aBlClickEvent modifiers isShift
 		ifTrue: [ aBlClickEvent consumed: true.
 			listWidget requestFocus.
-			listWidget deselectAll.
-
-			(self selectionStart min: anItemIndex)
-				to: (self selectionStart max: anItemIndex)
-				do: [ :anIndex | 
-					(listWidget viewModel entityAt: anIndex) isItem
-						ifTrue: [ listWidget addToSelection: anIndex dueTo: aBlClickEvent ] ] ]
+			listWidget
+				selectSeveral: ((self selectionStart min: anItemIndex)
+						to: (self selectionStart max: anItemIndex))
+				dueTo: aBlClickEvent ]
 ]
 
 { #category : #initialization }

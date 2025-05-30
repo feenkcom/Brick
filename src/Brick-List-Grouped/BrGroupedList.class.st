@@ -26,6 +26,15 @@ BrGroupedList class >> singleSelection [
 		initializeAptitude: BrGroupedListAptitude + BrGlamorousListWithScrollbarAptitude
 ]
 
+{ #category : #'api - selection' }
+BrGroupedList >> addToSelection: anIndex dueTo: aSourceEvent [
+	| anEntity |
+	anEntity := self viewModel entityAt: anIndex.
+	anEntity isItem ifFalse: [ ^ self ].
+
+	selectionModel addToSelection: anIndex dueTo: aSourceEvent
+]
+
 { #category : #'api - orientation' }
 BrGroupedList >> beHorizontal [
 	self states addState: BrListOrientationState horizontal
@@ -172,6 +181,19 @@ BrGroupedList >> selectPrevious [
 	self selectedIndices
 		ifEmpty: [ self selectAtOrNext: 1 dueTo: nil ]
 		ifNotEmpty: [ :theIndices | self selectAtOrPrevious: theIndices first - 1 dueTo: nil ]
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectSeveral: someIndexes [
+	self selectSeveral: someIndexes dueTo: nil
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectSeveral: someIndexes dueTo: aSourceEvent [
+	| filteredIndexes |
+	filteredIndexes := someIndexes
+			reject: [ :eachIndex | (self viewModel entityAt: eachIndex) isItem not ].
+	selectionModel selectSeveral: filteredIndexes dueTo: aSourceEvent
 ]
 
 { #category : #'api - selection' }
