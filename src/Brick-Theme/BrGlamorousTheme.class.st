@@ -9,7 +9,8 @@ Class {
 		'button',
 		'item',
 		'header',
-		'label'
+		'label',
+		'colors'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -22,6 +23,27 @@ BrGlamorousTheme >> button [
 { #category : #accessing }
 BrGlamorousTheme >> button: anObject [
 	button := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> colors [
+	"Returns an object with color contanstants.
+	
+	Must not be used by user code, as those Colors will not adapt to the theme change."
+	| sender |
+	
+	sender := thisContext sender compiledCode methodClass.
+	self
+		assert: [ sender inheritsFrom: BlSubTheme  ]
+		description: [ 'Must only be used within a Theme.' ].
+
+	^ colors
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> colors: anObject [
+	colors := anObject.
+	self themeModified
 ]
 
 { #category : #accessing }
@@ -42,6 +64,24 @@ BrGlamorousTheme >> editor [
 { #category : #accessing }
 BrGlamorousTheme >> editor: anObject [
 	editor := anObject
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme >> gtColorsEditorFor: aView [
+	<gtView>
+	
+	^ aView explicit
+		title: 'Colors';
+		priority: 5;
+		stencil: [
+			BrGlamorousThemeColorsEditorElement new
+				padding: (BlInsets all: 10);
+				colors: colors ];
+		actionButtonIcon: BrGlamorousVectorIcons accept
+			tooltip: 'Compile'
+			action: [ :aButton |
+				aButton phlow firstParentWithViewContent phlow firstChildWithViewContent compileChanges.
+				aButton addChangingColorAnimationFor: aButton theme status successBackgroundColor ]
 ]
 
 { #category : #accessing }
@@ -82,6 +122,22 @@ BrGlamorousTheme >> link [
 { #category : #accessing }
 BrGlamorousTheme >> link: anObject [
 	link := anObject
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme >> onThemeModified [
+	super onThemeModified.
+	
+	default initializeTheme.
+	editor initializeTheme.
+	button initializeTheme.
+	label initializeTheme.
+	header initializeTheme
+]
+
+{ #category : #'as yet unclassified' }
+BrGlamorousTheme >> privateColors [
+	^ colors
 ]
 
 { #category : #accessing }

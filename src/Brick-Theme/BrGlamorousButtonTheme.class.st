@@ -15,7 +15,8 @@ Class {
 		'textHighlightColor',
 		'fadedBackgroundColor',
 		'focusedFadedBackgroundColor',
-		'defaultBackground'
+		'defaultBackground',
+		'defaultTextForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -53,6 +54,11 @@ BrGlamorousButtonTheme >> defaultTextColor [
 { #category : #accessing }
 BrGlamorousButtonTheme >> defaultTextColor: anObject [
 	defaultTextColor := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousButtonTheme >> defaultTextForeground [
+	^ defaultTextForeground
 ]
 
 { #category : #accessing }
@@ -158,6 +164,10 @@ BrGlamorousButtonTheme >> initializeTheme [
 	defaultBackground := self
 		background: [ :aTheme | aTheme button defaultBackgroundColor ]
 		source: [ :aTheme | aTheme button defaultBackground ].
+
+	defaultTextForeground := self
+		color: [ :aTheme | aTheme colors primaryTextColor ]
+		source: [ :aTheme | aTheme button defaultTextForeground ]
 ]
 
 { #category : #accessing }

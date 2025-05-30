@@ -64,9 +64,9 @@ BrColumnedListHeaderAptitude >> initialize [
 		labelStencil: [ :aColumn | 
 			| label |
 			label := BrLabel new
-					aptitude: BrGlamorousLabelAptitude;
+					aptitude: (BrGlamorousLabelAptitude new foreground: self theme header defaultTextColor);
 					padding: self newCellPaddingInsets;
-					text: (aColumn title asRopedText foreground: self theme button defaultTextColor).
+					text: aColumn title.
 			aColumn columnWidth applyOn: label.
 			label ].
 	self when: BrColumnsChanged do: [ :evt | self rebuildHeadersDueTo: evt ].

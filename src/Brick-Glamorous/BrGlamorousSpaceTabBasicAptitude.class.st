@@ -34,8 +34,8 @@ BrGlamorousSpaceTabBasicAptitude >> initialize [
 								bottom: 4
 								right: 10) ];
 				when: (BlElementState deselected & BlElementState hovered not)
-					style: [ :aStyle | aStyle background: self theme default backdropColor darker ];
+					style: [ :aStyle | aStyle background: Color transparent ];
 				when: (BlElementState deselected & BlElementState hovered)
-					style: [ :aStyle | aStyle background: self theme default backdropColor ];
-				selected: [ :aStyle | aStyle background: self theme default backdropColor ])
+					style: [ :aStyle | aStyle background: self theme default backdropBackground ];
+				selected: [ :aStyle | aStyle background: self theme default backdropBackground ])
 ]

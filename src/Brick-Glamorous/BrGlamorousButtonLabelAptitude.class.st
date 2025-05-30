@@ -16,7 +16,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousButtonLabelAptitude >> defaultColor [
-	^ defaultColor ifNil: [ self theme button defaultTextColor ]
+	^ defaultColor ifNil: [ self theme button defaultTextForeground ]
 ]
 
 { #category : #accessing }

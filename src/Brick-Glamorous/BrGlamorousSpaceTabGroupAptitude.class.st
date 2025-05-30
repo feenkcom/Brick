@@ -87,15 +87,5 @@ BrGlamorousSpaceTabGroupAptitude >> initialize [
 
 	self
 		addChangeProperty: #(widget layout)
-		with: [ BlLinearLayout vertical ].
-
-	self
-		addChange:
-			(BrLookChange new
-				up: [ :e | 
-					self
-						widgetDo:
-							[ :aWidget | aWidget background: self theme header defaultBackground ] ];
-				down: [ :e |  ];
-				yourself)
+		with: [ BlLinearLayout vertical ]
 ]
