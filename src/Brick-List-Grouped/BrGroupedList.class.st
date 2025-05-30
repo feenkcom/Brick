@@ -93,6 +93,88 @@ BrGroupedList >> onGroupsChanged [
 ]
 
 { #category : #'api - selection' }
+BrGroupedList >> select: anInteger to: anotherIndex dueTo: aSourceEvent [
+	| aStart aStop someIndexes |
+	aStart := (anInteger min: anotherIndex) max: 1.
+	aStop := ((anInteger max: anotherIndex) min: self maxSelectionIndex) max: 1.
+	someIndexes := Array
+			new: aStop - aStart + 1
+			streamContents: [ :aStream | 
+				aStart
+					to: aStop
+					do: [ :anIndex | (self viewModel entityAt: anIndex) isItem ifTrue: [ aStream nextPut: anIndex ] ] ].
+
+	selectionModel selectSeveral: someIndexes dueTo: aSourceEvent
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectAll [
+	"Select all items"
+
+	self
+		select: 1
+		to: self maxSelectionIndex
+		dueTo: nil
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectAtOrNext: anIndex dueTo: aSourceEvent [
+	| anEntity |
+	anIndex < 1 ifTrue: [ ^ self ].
+	anIndex > self maxSelectionIndex ifTrue: [ ^ self ].
+	anEntity := self viewModel entityAt: anIndex.
+	anEntity isItem ifTrue: [ ^ selectionModel selectOne: anIndex ].
+	self selectAtOrNext: anIndex + 1 dueTo: aSourceEvent
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectAtOrPrevious: anIndex dueTo: aSourceEvent [
+	| anEntity |
+	anIndex < 1 ifTrue: [ ^ self ].
+	anIndex > self maxSelectionIndex ifTrue: [ ^ self ].
+	anEntity := self viewModel entityAt: anIndex.
+	anEntity isItem ifTrue: [ ^ selectionModel selectOne: anIndex ].
+	self selectAtOrPrevious: anIndex - 1 dueTo: aSourceEvent
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectFirst [
+	self selectAtOrNext: 1 dueTo: nil
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectLast [
+	self selectAtOrPrevious: self maxSelectionIndex dueTo: nil
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectNext [
+	self selectedIndices
+		ifEmpty: [ self selectAtOrNext: 1 dueTo: nil ]
+		ifNotEmpty: [ :theIndices | self selectAtOrNext: theIndices first + 1 dueTo: nil ]
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectOne: anIndex [
+	self selectOne: anIndex dueTo: nil
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectOne: anIndex dueTo: aSourceEvent [
+	anIndex < 1 ifTrue: [ ^ self ].
+	anIndex > self maxSelectionIndex ifTrue: [ ^ self ].
+	(self viewModel entityAt: anIndex) isItem
+		ifTrue: [ selectionModel selectOne: anIndex dueTo: aSourceEvent ]
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectPrevious [
+	self selectedIndices
+		ifEmpty: [ self selectAtOrNext: 1 dueTo: nil ]
+		ifNotEmpty: [ :theIndices | self selectAtOrPrevious: theIndices first - 1 dueTo: nil ]
+]
+
+{ #category : #'api - selection' }
 BrGroupedList >> selectedEntityDo: aBlock [
 	"Evaluate aBlock with the currently selected entity and index"
 
