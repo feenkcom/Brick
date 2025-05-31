@@ -48,7 +48,7 @@ BrGlamorousHeaderTheme >> disabledTextColor: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-BrGlamorousHeaderTheme >> initializeTheme [
+BrGlamorousHeaderTheme >> initializeThemeable [
 	defaultBackground := self
 		background: [ :aTheme | aTheme header defaultBackgroundColor ]
 		source: [ :aTheme | aTheme header defaultBackground ].

@@ -159,7 +159,7 @@ BrGlamorousButtonTheme >> initializeColors [
 ]
 
 { #category : #'as yet unclassified' }
-BrGlamorousButtonTheme >> initializeTheme [
+BrGlamorousButtonTheme >> initializeThemeable [
 	"default state"
 	defaultBackground := self
 		background: [ :aTheme | aTheme button defaultBackgroundColor ]

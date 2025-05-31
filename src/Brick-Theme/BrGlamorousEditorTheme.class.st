@@ -9,7 +9,8 @@ Class {
 		'pharoUndeclaredVariableForeground',
 		'pharoSelfVariableForeground',
 		'pharoSuperVariableForeground',
-		'pharoThisContextVariableForeground'
+		'pharoThisContextVariableForeground',
+		'someForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -47,8 +48,8 @@ BrGlamorousEditorTheme >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-BrGlamorousEditorTheme >> initializeTheme [
-	super initializeTheme.
+BrGlamorousEditorTheme >> initializeThemeable [
+	super initializeThemeable.
 	
 	defaultTextForeground := self
 		color: [ :aTheme | aTheme colors primaryTextColor ]
@@ -72,7 +73,7 @@ BrGlamorousEditorTheme >> initializeTheme [
 
 	pharoThisContextVariableForeground := self
 		color: [ :aTheme | aTheme colors pharoThisContextVariableColor ]
-		source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ].
+		source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ]
 ]
 
 { #category : #'as yet unclassified' }

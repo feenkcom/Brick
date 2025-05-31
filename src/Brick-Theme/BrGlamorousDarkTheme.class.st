@@ -14,19 +14,19 @@ BrGlamorousDarkTheme >> initialize [
 	status := BrGlamorousStatusTheme new.
 
 	default := BrGlamorousDefaultDarkTheme theme: self.
-	default initializeTheme.
+	default initializeThemeable.
 	
 	editor := BrGlamorousEditorTheme theme: self.
-	editor initializeTheme.
+	editor initializeThemeable.
 	
 	button := BrGlamorousButtonDarkTheme theme: self.
-	button initializeTheme.
+	button initializeThemeable.
 	
 	item := BrGlamorousItemTheme new.
 	
 	header := BrGlamorousHeaderDarkTheme theme: self.
-	header initializeTheme.
+	header initializeThemeable.
 	
 	label := BrGlamorousLabelTheme theme: self.
-	label initializeTheme
+	label initializeThemeable
 ]
