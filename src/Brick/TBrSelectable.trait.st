@@ -89,6 +89,16 @@ TBrSelectable >> selectPrevious [
 ]
 
 { #category : #'api - selection' }
+TBrSelectable >> selectSeveral: someIndexes [
+	selectionModel selectSeveral: someIndexes
+]
+
+{ #category : #'api - selection' }
+TBrSelectable >> selectSeveral: someIndexes dueTo: aSourceEvent [
+	selectionModel selectSeveral: someIndexes dueTo: aSourceEvent
+]
+
+{ #category : #'api - selection' }
 TBrSelectable >> selectedIndices [
 	"Return a collection of selected indices"
 	<return: #Collection of: #Number>
