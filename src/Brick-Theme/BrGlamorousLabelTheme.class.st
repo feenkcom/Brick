@@ -16,8 +16,8 @@ BrGlamorousLabelTheme >> defaultTextForeground [
 ]
 
 { #category : #'as yet unclassified' }
-BrGlamorousLabelTheme >> initializeTheme [
-	super initializeTheme.
+BrGlamorousLabelTheme >> initializeThemeable [
+	super initializeThemeable.
 	
 	defaultTextForeground := self
 		color: [ :aTheme | aTheme colors primaryTextColor ]

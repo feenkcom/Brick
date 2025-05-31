@@ -66,24 +66,6 @@ BrGlamorousTheme >> editor: anObject [
 	editor := anObject
 ]
 
-{ #category : #'as yet unclassified' }
-BrGlamorousTheme >> gtColorsEditorFor: aView [
-	<gtView>
-	
-	^ aView explicit
-		title: 'Colors';
-		priority: 5;
-		stencil: [
-			BrGlamorousThemeColorsEditorElement new
-				padding: (BlInsets all: 10);
-				colors: colors ];
-		actionButtonIcon: BrGlamorousVectorIcons accept
-			tooltip: 'Compile'
-			action: [ :aButton |
-				aButton phlow firstParentWithViewContent phlow firstChildWithViewContent compileChanges.
-				aButton addChangingColorAnimationFor: aButton theme status successBackgroundColor ]
-]
-
 { #category : #accessing }
 BrGlamorousTheme >> header [
 	^ header
@@ -128,11 +110,11 @@ BrGlamorousTheme >> link: anObject [
 BrGlamorousTheme >> onThemeModified [
 	super onThemeModified.
 	
-	default initializeTheme.
-	editor initializeTheme.
-	button initializeTheme.
-	label initializeTheme.
-	header initializeTheme
+	default initializeThemeable.
+	editor initializeThemeable.
+	button initializeThemeable.
+	label initializeThemeable.
+	header initializeThemeable
 ]
 
 { #category : #'as yet unclassified' }

@@ -85,7 +85,7 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-BrGlamorousDefaultTheme >> initializeTheme [
+BrGlamorousDefaultTheme >> initializeThemeable [
 	appBackground := self
 		background: [ :aTheme | aTheme colors appBackgroundColor ]
 		source: [ :aTheme | aTheme default appBackground ].
