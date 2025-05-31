@@ -154,3 +154,19 @@ BrSelectionModel >> selectOne: anIndex dueTo: aSourceEvent [
 	selection select: anIndex - 1 to: anIndex.
 	self notifySelected: (anIndex to: anIndex) dueTo: aSourceEvent
 ]
+
+{ #category : #'api - selection' }
+BrSelectionModel >> selectSeveral: someIndexes [
+	"Select items of the given indexes"
+
+	self selectSeveral: someIndexes dueTo: nil
+]
+
+{ #category : #'api - selection' }
+BrSelectionModel >> selectSeveral: someIndexes dueTo: aSourceEvent [
+	"Select items of the given indexes"
+
+	self deselectAll.
+	someIndexes do: [ :eachIndex | selection select: eachIndex - 1 to: eachIndex ].
+	self notifySelected: someIndexes dueTo: aSourceEvent
+]
