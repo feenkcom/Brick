@@ -103,15 +103,23 @@ BrGroupedList >> onGroupsChanged [
 
 { #category : #'api - selection' }
 BrGroupedList >> select: anInteger to: anotherIndex dueTo: aSourceEvent [
-	| aStart aStop someIndexes |
+	| aStart aStop someIndexes aMax |
 	aStart := (anInteger min: anotherIndex) max: 1.
-	aStop := ((anInteger max: anotherIndex) min: self maxSelectionIndex) max: 1.
+	aStop := (anInteger max: anotherIndex) max: 1.
+	aMax := self maxSelectionIndex.
 	someIndexes := Array
 			new: aStop - aStart + 1
 			streamContents: [ :aStream | 
 				aStart
 					to: aStop
-					do: [ :anIndex | (self viewModel entityAt: anIndex) isItem ifTrue: [ aStream nextPut: anIndex ] ] ].
+					do: [ :anIndex |
+						anIndex > aMax 
+							ifTrue: [
+								"We have not loaded that much items yet. We just select it."
+								aStream nextPut: anIndex ]
+							ifFalse: [ 
+					 			(self viewModel entityAt: anIndex) isItem ifTrue: [ 
+					 				aStream nextPut: anIndex ] ] ] ].
 
 	selectionModel selectSeveral: someIndexes dueTo: aSourceEvent
 ]
@@ -132,7 +140,8 @@ BrGroupedList >> selectAtOrNext: anIndex dueTo: aSourceEvent [
 	anIndex < 1 ifTrue: [ ^ self ].
 	anIndex > self maxSelectionIndex ifTrue: [ ^ self ].
 	anEntity := self viewModel entityAt: anIndex.
-	anEntity isItem ifTrue: [ ^ selectionModel selectOne: anIndex ].
+	anEntity isItem
+		ifTrue: [ ^ selectionModel selectOne: anIndex dueTo: aSourceEvent ].
 	self selectAtOrNext: anIndex + 1 dueTo: aSourceEvent
 ]
 
@@ -142,7 +151,8 @@ BrGroupedList >> selectAtOrPrevious: anIndex dueTo: aSourceEvent [
 	anIndex < 1 ifTrue: [ ^ self ].
 	anIndex > self maxSelectionIndex ifTrue: [ ^ self ].
 	anEntity := self viewModel entityAt: anIndex.
-	anEntity isItem ifTrue: [ ^ selectionModel selectOne: anIndex ].
+	anEntity isItem
+		ifTrue: [ ^ selectionModel selectOne: anIndex dueTo: aSourceEvent ].
 	self selectAtOrPrevious: anIndex - 1 dueTo: aSourceEvent
 ]
 
@@ -171,7 +181,11 @@ BrGroupedList >> selectOne: anIndex [
 { #category : #'api - selection' }
 BrGroupedList >> selectOne: anIndex dueTo: aSourceEvent [
 	anIndex < 1 ifTrue: [ ^ self ].
-	anIndex > self maxSelectionIndex ifTrue: [ ^ self ].
+	anIndex > self maxSelectionIndex
+		ifTrue: [ 
+			"We have not loaded that much items yet. We just select it."
+			selectionModel selectOne: anIndex dueTo: aSourceEvent.
+			^ self ].
 	(self viewModel entityAt: anIndex) isItem
 		ifTrue: [ selectionModel selectOne: anIndex dueTo: aSourceEvent ]
 ]
@@ -190,9 +204,14 @@ BrGroupedList >> selectSeveral: someIndexes [
 
 { #category : #'api - selection' }
 BrGroupedList >> selectSeveral: someIndexes dueTo: aSourceEvent [
-	| filteredIndexes |
-	filteredIndexes := someIndexes
-			reject: [ :eachIndex | (self viewModel entityAt: eachIndex) isItem not ].
+	| filteredIndexes aMax |
+	aMax := self maxSelectionIndex.
+	filteredIndexes := someIndexes reject: [ :eachIndex | 
+		eachIndex > aMax 
+			ifTrue: [
+				"We have not loaded that much items yet. We just select it."
+				false ]
+			ifFalse: [ (self viewModel entityAt: eachIndex) isItem not ] ].
 	selectionModel selectSeveral: filteredIndexes dueTo: aSourceEvent
 ]
 
@@ -206,6 +225,19 @@ BrGroupedList >> selectedEntityDo: aBlock [
 				ifTrue: [ aBlock 
 					cull: (self viewModel entityAt: theIndices first) 
 					cull: theIndices first ] ]
+]
+
+{ #category : #'api - selection' }
+BrGroupedList >> selectedItems [
+	| aMax theIndices |
+	aMax := self maxSelectionIndex.
+	theIndices := self selectedIndices.
+	^ Array
+		new: theIndices size
+		streamContents: [ :aStream | 
+			theIndices do: [ :anIndex | 
+				anIndex <= aMax ifTrue: [ 
+					aStream nextPut: (self viewModel itemAt: anIndex) ] ] ]
 ]
 
 { #category : #'api - accessing' }
