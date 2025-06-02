@@ -47,33 +47,48 @@ BrGlamorousEditorTheme >> initialize [
 	focusedBorderColor := BrGlamorousColors focusedEditorBorderColor
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+BrGlamorousEditorTheme >> initializeColors [
+	super initializeColors.
+
+
+]
+
+{ #category : #initialization }
+BrGlamorousEditorTheme >> initializeConstants [
+	super initializeConstants.
+
+	self constantAt: #pharoSelfVariableForeground put: (self theme colors pharoSelfVariableColor).
+
+]
+
+{ #category : #initialization }
 BrGlamorousEditorTheme >> initializeThemeable [
 	super initializeThemeable.
-	
+
 	defaultTextForeground := self
-		color: [ :aTheme | aTheme colors primaryTextColor ]
-		source: [ :aTheme | aTheme editor defaultTextForeground ].
+			color: [ :aTheme | aTheme colors primaryTextColor ]
+			source: [ :aTheme | aTheme editor defaultTextForeground ].
 
 	pharoDeclaredVariableForeground := self
-		color: [ :aTheme | aTheme colors pharoDeclaredVariableColor ]
-		source: [ :aTheme | aTheme editor pharoDeclaredVariableForeground ].
+			color: [ :aTheme | aTheme colors pharoDeclaredVariableColor ]
+			source: [ :aTheme | aTheme editor pharoDeclaredVariableForeground ].
 
 	pharoUndeclaredVariableForeground := self
-		color: [ :aTheme | aTheme colors pharoUndeclaredVariableColor ]
-		source: [ :aTheme | aTheme editor pharoUndeclaredVariableForeground ].
+			color: [ :aTheme | aTheme colors pharoUndeclaredVariableColor ]
+			source: [ :aTheme | aTheme editor pharoUndeclaredVariableForeground ].
 
 	pharoSelfVariableForeground := self
-		color: [ :aTheme | aTheme colors pharoSelfVariableColor ]
-		source: [ :aTheme | aTheme editor pharoSelfVariableForeground ].
+			color: [ :aTheme | aTheme editor constantAt: #pharoSelfVariableForeground ]
+			source: [ :aTheme | aTheme editor pharoSelfVariableForeground ].
 
 	pharoSuperVariableForeground := self
-		color: [ :aTheme | aTheme colors pharoSuperVariableColor ]
-		source: [ :aTheme | aTheme editor pharoSuperVariableForeground ].
+			color: [ :aTheme | aTheme colors pharoSuperVariableColor ]
+			source: [ :aTheme | aTheme editor pharoSuperVariableForeground ].
 
 	pharoThisContextVariableForeground := self
-		color: [ :aTheme | aTheme colors pharoThisContextVariableColor ]
-		source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ]
+			color: [ :aTheme | aTheme colors pharoThisContextVariableColor ]
+			source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ]
 ]
 
 { #category : #'as yet unclassified' }
