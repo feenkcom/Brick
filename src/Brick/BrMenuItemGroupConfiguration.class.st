@@ -35,13 +35,6 @@ BrMenuItemGroupConfiguration class >> gemstone [
 ]
 
 { #category : #factory }
-BrMenuItemGroupConfiguration class >> llm [
-	^ self new
-		name: #'AI';
-		priority: 45
-]
-
-{ #category : #factory }
 BrMenuItemGroupConfiguration class >> navigation [
 	^ self new
 		name: #Navigation;
