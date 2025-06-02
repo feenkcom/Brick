@@ -84,23 +84,41 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 	expandCollapseTriangleBackgroundColor := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+BrGlamorousDefaultTheme >> initializeColors [
+	super initializeColors.
+
+
+]
+
+{ #category : #initialization }
+BrGlamorousDefaultTheme >> initializeConstants [
+	super initializeConstants.
+
+
+]
+
+{ #category : #initialization }
 BrGlamorousDefaultTheme >> initializeThemeable [
-	appBackground := self
-		background: [ :aTheme | aTheme colors appBackgroundColor ]
-		source: [ :aTheme | aTheme default appBackground ].
+	super initializeThemeable.
+
+	contentBackground := self
+	background: [ :aTheme | aTheme colors contentBackgroundColor ]
+	source: [ :aTheme | aTheme default contentBackground ].
 
 	backdropBackground := self
-		background: [ :aTheme | aTheme colors backdropBackgroundColor ]
-		source: [ :aTheme | aTheme default backdropBackground ].
-		
-	contentBackground := self
-		background: [ :aTheme | aTheme colors contentBackgroundColor ]
-		source: [ :aTheme | aTheme default contentBackground ].
-		
+	background: [ :aTheme | aTheme colors backdropBackgroundColor ]
+	source: [ :aTheme | aTheme default backdropBackground ].
+
 	navigationBackground := self
-		background: [ :aTheme | aTheme colors sidebarBackgroundColor ]
-		source: [ :aTheme | aTheme default navigationBackground ].
+	background: [ :aTheme | aTheme colors sidebarBackgroundColor ]
+	source: [ :aTheme | aTheme default navigationBackground ].
+
+	appBackground := self
+	background: [ :aTheme | aTheme colors appBackgroundColor ]
+	source: [ :aTheme | aTheme default appBackground ].
+
+
 ]
 
 { #category : #accessing }
