@@ -37,7 +37,7 @@ BrMenuItemGroupConfiguration class >> gemstone [
 { #category : #factory }
 BrMenuItemGroupConfiguration class >> llm [
 	^ self new
-		name: #'OpenAI';
+		name: #'AI';
 		priority: 45
 ]
 
