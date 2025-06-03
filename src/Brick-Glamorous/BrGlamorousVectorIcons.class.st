@@ -100,6 +100,24 @@ BrGlamorousVectorIcons class >> changes [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> chat [
+	<script: 'self chat inspect'>
+	^ [ | geometry element |
+	geometry := BlPolygonGeometry
+			vertices: {2 @ 3.
+					14 @ 3.
+					14 @ 10.
+					10 @ 10.
+					6 @ 14.
+					6 @ 10.
+					2 @ 10}.
+	element := BlElement new
+			geometry: geometry;
+			size: 16 @ 16;
+			border: (BlBorder paint: Color black width: 1.5) ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> checkbox [
 	<script: 'self checkbox inspect'>
 
