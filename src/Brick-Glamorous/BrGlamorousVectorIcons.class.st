@@ -107,7 +107,7 @@ BrGlamorousVectorIcons class >> chat [
 			vertices: {2 @ 3.
 					14 @ 3.
 					14 @ 10.
-					8 @ 10.
+					10 @ 10.
 					6 @ 14.
 					6 @ 10.
 					2 @ 10}.
