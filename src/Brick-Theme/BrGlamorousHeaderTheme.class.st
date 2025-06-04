@@ -47,11 +47,29 @@ BrGlamorousHeaderTheme >> disabledTextColor: anObject [
 	disabledTextColor := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+BrGlamorousHeaderTheme >> initializeColors [
+	super initializeColors.
+
+
+]
+
+{ #category : #initialization }
+BrGlamorousHeaderTheme >> initializeConstants [
+	super initializeConstants.
+
+
+]
+
+{ #category : #initialization }
 BrGlamorousHeaderTheme >> initializeThemeable [
+	super initializeThemeable.
+
 	defaultBackground := self
-		background: [ :aTheme | aTheme header defaultBackgroundColor ]
-		source: [ :aTheme | aTheme header defaultBackground ].
+	background: [ :aTheme | aTheme header defaultBackgroundColor ]
+	source: [ :aTheme | aTheme header defaultBackground ].
+
+
 ]
 
 { #category : #accessing }
@@ -70,6 +88,9 @@ BrGlamorousHeaderTheme >> textMarkupColor [
 ]
 
 { #category : #accessing }
-BrGlamorousHeaderTheme >> textMarkupColor: anObject [
-	textMarkupColor := anObject
+BrGlamorousHeaderTheme >> textMarkupColor: aColor [
+	self
+		constantAt: #textMarkupColor
+		put: aColor.
+	self initializeThemeable
 ]

@@ -108,7 +108,7 @@ BrAsyncElementFuture >> future: anAsyncFuture initialValue: anObject shouldCance
 						emit.
 					^ self ] ].
 		promise := nil.
-		whenDonePromise := AsyncPendingPromise new.
+		whenDonePromise := AsyncManualPromise new.
 		future := anAsyncFuture asAsyncFuture.
 		aPreviousDataSnapshot := dataSnapshot.
 		aNewDataSnapshot := dataSnapshot := BrFromFutureDataSnapshot new setPending: anObject.
