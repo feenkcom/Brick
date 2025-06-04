@@ -834,6 +834,13 @@ BrWithExplicitPopoverAptitude >> withContainerContextMenuAreas [
 ]
 
 { #category : #'api - initialization' }
+BrWithExplicitPopoverAptitude >> withContainerDownDropdown [
+	"Place dropdowns only down"
+
+	menuContainer withDownDropdownAreas
+]
+
+{ #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withContainerDownUpDropdown [
 	"Place dropdowns only down or up"
 

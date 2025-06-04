@@ -58,7 +58,7 @@ BrAsyncElementPromise >> privateInitializeElement [
 
 	isProcessed := false.
 
-	aResultPromise := AsyncPendingPromise new.
+	aResultPromise := AsyncManualPromise new.
 	aPromise := promise.
 	aPromise
 		then: [ :aResult :isSynchronous |
