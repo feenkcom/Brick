@@ -51,7 +51,9 @@ GtBlocThemePropertyAssignment >> subThemeClass: anObject [
 
 { #category : #'as yet unclassified' }
 GtBlocThemePropertyAssignment >> subThemeMethod [
-	^ subThemeClass >> subThemeSelector
+	^ subThemeClass
+		compiledMethodAt: subThemeSelector
+		ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }

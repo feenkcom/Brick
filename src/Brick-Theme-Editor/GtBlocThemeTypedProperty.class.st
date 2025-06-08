@@ -101,6 +101,17 @@ GtBlocThemeTypedProperty >> postCopy [
 ]
 
 { #category : #'as yet unclassified' }
+GtBlocThemeTypedProperty >> printPropertyAccessor: useGlobal [
+	^ '{1} {2} {3}' format: {
+		useGlobal
+			ifTrue: [ 'BlTheme default' ]
+			ifFalse: [ 'self theme' ].
+		self subThemeModel subThemeName.
+		self propertyName
+	}
+]
+
+{ #category : #'as yet unclassified' }
 GtBlocThemeTypedProperty >> printShortThemeableValue [
 	^ self themeProperty printShortThemeableValue
 ]

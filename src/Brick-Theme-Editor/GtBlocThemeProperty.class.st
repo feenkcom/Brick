@@ -8,7 +8,8 @@ Class {
 		'propertyName',
 		'propertyValue',
 		'propertyGetters',
-		'definingSubThemeClass'
+		'definingSubThemeClass',
+		'neighbourConstantAssignments'
 	],
 	#category : #'Brick-Theme-Editor-Model'
 }
@@ -104,6 +105,16 @@ GtBlocThemeProperty >> gtValueAssignmentsFor: aView [
 GtBlocThemeProperty >> hardcodedValueAssignments [
 	^ self valueAssignments reject: [ :eachAssignment |
 		self doesAstUseConstantGetter: eachAssignment valueAst ]
+]
+
+{ #category : #accessing }
+GtBlocThemeProperty >> neighbourConstantAssignments [
+	^ neighbourConstantAssignments
+]
+
+{ #category : #accessing }
+GtBlocThemeProperty >> neighbourConstantAssignments: anObject [
+	neighbourConstantAssignments := anObject
 ]
 
 { #category : #copying }

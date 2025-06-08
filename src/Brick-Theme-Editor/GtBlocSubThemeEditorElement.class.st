@@ -105,6 +105,15 @@ GtBlocSubThemeEditorElement >> createExpandedHeaderForProperty: aTypedThemePrope
 				vFitContent;
 				label: aTypedThemeProperty printShortThemeableValue;
 				action: [ :aButton | aButton phlow spawnObject: aTypedThemeProperty propertyValue ]).
+				
+	header addAptitude: (BrGlamorousWithExplicitContextMenuAptitude
+							itemsWithAnchorActions: [
+							{
+							'Copy `self theme` accessor'
+										-> [ Clipboard clipboardText: (aTypedThemeProperty printPropertyAccessor: false) ].
+							'Copy `BlTheme default` accessor'
+										-> [ Clipboard clipboardText: (aTypedThemeProperty printPropertyAccessor: true) ]} ]).
+		
 	^ header
 ]
 
@@ -200,74 +209,102 @@ GtBlocSubThemeEditorElement >> createIssueSummary: eachIssue [
 
 { #category : #'as yet unclassified' }
 GtBlocSubThemeEditorElement >> createNewPropertyForm [
-	| nameEditor classPicker currentTargetClass |
-
+	| nameEditor classPicker currentTargetClass valueCoderViewModel acceptShortcut |
 	nameEditor := BrEditor new
-		aptitude: BrGlamorousRegularEditorAptitude + BrGlamorousInputFieldSpacingAptitude;
-		fitContent;
-		constraintsDo: [ :c | c minWidth: 200 ];
-		text: ('' asRopedText attribute: (BrGhostTextAttribute
-					for: ('new property name' asRopedText glamorousRegularFontAndSize
-							foreground: Color lightGray)));
-		requestFocus.
-	
-	currentTargetClass := self subThemeModel subThemeSuperclasses last.
-	
-	classPicker := BrButton new
-		label: currentTargetClass name;
-		icon: BrGlamorousVectorIcons downwards;
-		aptitude: BrGlamorousButtonWithLabelAndIconAptitude + (BrGlamorousWithExplicitDropdownAptitude
-			handle:  [
-				BrButton new
-					label: currentTargetClass name;
-					icon: BrGlamorousVectorIcons downwards;
-					aptitude: BrGlamorousButtonWithLabelAndIconAptitude - BrGlamorousButtonExteriorAptitude
-			]
-			content: [
-				BrVerticalPane new
-					hFitContent;
-					vFitContentLimited;
-					
-					addChildren: (self subThemeModel subThemeSuperclasses reversed collect: [ :eachSuperclass |
-						BrButton new
-							hMatchParent;
-							vFitContent;
-							alignCenterLeft;
-							disabled: currentTargetClass = eachSuperclass;
-							model: eachSuperclass;
-							padding: (BlInsets top: 4 bottom: 4 left: 8 right: 4);
-							label: eachSuperclass;
-							aptitude: BrGlamorousButtonLabelAptitude + BrGlamorousButtonLayoutAptitude + BrGlamorousListItemAptitude;
-							action: [ :aButton |
-								currentTargetClass := eachSuperclass.
-								classPicker label: eachSuperclass name.
-								aButton fireEvent: BrDropdownHideWish new
-							]
-					])
-			]).
-	
-	nameEditor addEditorShortcut: (BlShortcutWithAction new
-			combination: BlKeyCombination enter;
-			action: [ :aShortcutEvent |
-				aShortcutEvent consumed: true.
-				aShortcutEvent currentTarget fireEvent: (BrDropdownHideWish new).
-				
-				self subThemeModel
-					addThemePropertyNamed: aShortcutEvent currentTarget text asString
-					inClass: currentTargetClass
-			]).
+			aptitude: BrGlamorousRegularEditorAptitude + BrGlamorousEditorSpacingAptitude;
+			fitContent;
+			constraintsDo: [ :c | c minWidth: 200 ];
+			padding: (BlInsets all: 5);
+			text: ('' asRopedText
+					attribute: (BrGhostTextAttribute
+							for: ('name' asRopedText glamorousRegularFontAndSize foreground: Color lightGray)));
+			requestFocus.
 
-	^ BrHorizontalPane new
+	currentTargetClass := self subThemeModel subThemeSuperclasses last.
+
+	classPicker := BrButton new
+			label: currentTargetClass name;
+			icon: BrGlamorousVectorIcons downwards;
+			aptitude: BrGlamorousButtonWithLabelAndIconAptitude
+					+ (BrGlamorousWithExplicitDropdownAptitude
+							handle: [ BrButton new
+									label: currentTargetClass name;
+									icon: BrGlamorousVectorIcons downwards;
+									aptitude: BrGlamorousButtonWithLabelAndIconAptitude - BrGlamorousButtonExteriorAptitude ]
+							content: [ BrVerticalPane new
+									hFitContent;
+									vFitContentLimited;
+									addChildren: (self subThemeModel subThemeSuperclasses reversed
+											collect: [ :eachSuperclass | 
+												BrButton new
+													hMatchParent;
+													vFitContent;
+													alignCenterLeft;
+													disabled: currentTargetClass = eachSuperclass;
+													model: eachSuperclass;
+													padding: (BlInsets
+															top: 4
+															bottom: 4
+															left: 8
+															right: 4);
+													label: eachSuperclass;
+													aptitude: BrGlamorousButtonLabelAptitude + BrGlamorousButtonLayoutAptitude
+															+ BrGlamorousListItemAptitude;
+													action: [ :aButton | 
+														currentTargetClass := eachSuperclass.
+														classPicker label: eachSuperclass name.
+														aButton fireEvent: BrDropdownHideWish new ] ]) ]).
+
+	valueCoderViewModel := (GtPharoSnippetCoder forSource: 'Color black')
+			asCoderViewModel.
+
+	acceptShortcut := BlShortcutWithAction new
+			combination: BlKeyCombination enter;
+			action: [ :aShortcutEvent | 
+				aShortcutEvent consumed: true.
+				aShortcutEvent currentTarget fireEvent: BrDropdownHideWish new.
+
+				self subThemeModel
+					addThemePropertyNamed: nameEditor text asString
+					valueSource: valueCoderViewModel coderModel currentSourceString
+					inClass: currentTargetClass ].
+
+	nameEditor addEditorShortcut: acceptShortcut.
+	valueCoderViewModel addShortcut: acceptShortcut.
+	
+
+	^ BrHorizontalGrid new
 		fitContent;
-		alignCenterLeft;
+		columnCount: 2;
 		padding: (BlInsets all: 6);
-		addChild: nameEditor;
-		addChild: (BrLabel new
-			beSmallSize;
-			text: 'in:';
-			aptitude: BrGlamorousLabelAptitude;
-			margin: (BlInsets left: 5 right: 5));
-		addChild: classPicker
+		cellSpacing: 2;
+		addChildren: {BrLabel new
+					beSmallSize;
+					constraintsDo: [ :c | c grid vertical alignCenter ];
+					aptitude: BrGlamorousLabelAptitude;
+					text: 'Property:';
+					margin: (BlInsets right: 5).
+				BrHorizontalPane new
+					fitContent;
+					alignCenterLeft;
+					addChild: nameEditor;
+					addChild: (BrLabel new
+							beSmallSize;
+							text: 'in:';
+							aptitude: BrGlamorousLabelAptitude;
+							margin: (BlInsets left: 5 right: 5));
+					addChild: classPicker.
+				BrLabel new
+					beSmallSize;
+					constraintsDo: [ :c | c grid vertical alignCenter ];
+					aptitude: BrGlamorousLabelAptitude;
+					text: 'Value:'.
+				GtSourceCoderEditorElement new
+					textualCoderViewModel: valueCoderViewModel;
+					hMatchParent;
+					vFitContent;
+					padding: (BlInsets all: 5);
+					addAptitude: BrGlamorousEditorSpacingAptitude}
 ]
 
 { #category : #'as yet unclassified' }
@@ -312,17 +349,25 @@ GtBlocSubThemeEditorElement >> createProtoHeaderForProperty: eachProperty [
 { #category : #'as yet unclassified' }
 GtBlocSubThemeEditorElement >> initialize [
 	super initialize.
-	
+
 	nameId := #'theme-colors--name'.
 	editorId := #'theme-colors--coder'.
 	headerId := #'theme-editor--value-header'.
-	
-	self hMatchParent;
+
+	self
+		hMatchParent;
 		vFitContent;
 		padding: (BlInsets all: 3).
-	
+
 	subThemeLabel := BrLabel new
-			aptitude: BrGlamorousMetadataLabelAptitude..
+			aptitude: BrGlamorousMetadataLabelAptitude
+					+ (BrGlamorousWithExplicitContextMenuAptitude
+							itemsWithAnchorActions: [
+							{
+							'Inspect model'
+										-> [ :aLabel | aLabel phlow spawnObject: self subThemeModel ].
+							'Inspect changes'
+										-> [ :aLabel | aLabel phlow spawnObject: self subThemeModel generateThemeMethods ]} ]).
 
 	addPropertyButton := BrButton new
 			beSmallSize;
@@ -330,21 +375,19 @@ GtBlocSubThemeEditorElement >> initialize [
 			icon: BrGlamorousVectorIcons add;
 			aptitude: BrGlamorousButtonWithIconAptitude
 					+ (BrGlamorousWithExplicitDropdownAptitude
-							handle: [
-								BrButton new
+							handle: [ BrButton new
 									beSmallSize;
 									icon: BrGlamorousVectorIcons add;
 									aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonExteriorAptitude;
 									yourself ]
 							content: [ self createNewPropertyForm ]).
-							
+
 	self
 		addChild: (BrHorizontalPane new
 				vFitContent;
 				hMatchParent;
-				addChildren: {
-					subThemeLabel.
-					addPropertyButton}).
+				addChildren: {subThemeLabel.
+						addPropertyButton})
 ]
 
 { #category : #'as yet unclassified' }

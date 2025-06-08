@@ -153,20 +153,15 @@ GtBlocThemeableProperty >> issuesOn: aStream [
 			ifTrue: [ aStream nextPut: (GtBlocThemeConstantAssignedTooHighIssue new
 				typedThemeProperty: self;
 				constantAssignment: eachConstantAssignment) ] ].
-				
-	self themeProperty definingSubThemeClass allSubclassesDo: [ :eachSubclass |
-		((eachSubclass ~= self subThemeModel subThemeClass) and: [ eachSubclass hasSubclasses not ])
-			ifTrue: [
-				| constantAssignmentsInAnotherSubTheme |
-				constantAssignmentsInAnotherSubTheme := (GtBlocSubThemeModel detectAllConstantAssignmentsIn: eachSubclass)
-					at: self propertyName
-					ifAbsent: [ #() ].
-				constantAssignmentsInAnotherSubTheme ifEmpty:  [
-					aStream nextPut: (GtBlocThemeConstantNotAssignedIssue new
-						subThemeClass: eachSubclass;
-						typedThemeProperty: self)
-				]
-			] ]
+	
+	self subThemeModel subThemeNeighbourClasses
+		do: [ :eachSubThemeClass |
+			(self themeProperty neighbourConstantAssignments anySatisfy: [ :eachAssignment |
+				eachAssignment subThemeClass = eachSubThemeClass ])
+					ifFalse: [
+						aStream nextPut: (GtBlocThemeConstantNotAssignedIssue new
+							subThemeClass: eachSubThemeClass;
+							typedThemeProperty: self) ] ].
 ]
 
 { #category : #'as yet unclassified' }
