@@ -79,13 +79,13 @@ GtBlocThemeTypedProperty >> issuesOn: aStream withinSubThemeModel: aSubThemeMode
 	
 	self valueAssignments
 		ifEmpty: [ aStream nextPut: (GtBlocThemeValueNotAssignedIssue new themeableValue: self themeProperty) ].
-		
-	self propertyGetters
-		ifEmpty: [ aStream nextPut: (GtBlocThemePropertyNoGetterIssue new typedThemeProperty: self) ].
 	
 	self valueAssignments size > 1
 		ifTrue: [ aStream nextPut: (GtBlocThemeTooManyAssignmentsIssue new typedThemeProperty: self) ].
-		
+	
+	self propertyGetters
+		ifEmpty: [ aStream nextPut: (GtBlocThemePropertyNoGetterIssue new typedThemeProperty: self) ].
+	
 	self propertyGetters size > 1
 		ifTrue: [ aStream nextPut: (GtBlocThemeTooManyGettersIssue new typedThemeProperty: self) ]
 ]
