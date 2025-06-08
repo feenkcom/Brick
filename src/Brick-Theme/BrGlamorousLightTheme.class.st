@@ -20,7 +20,7 @@ BrGlamorousLightTheme >> initialize [
 	default := BrGlamorousDefaultLightTheme theme: self.
 	default initializeThemeable.
 	
-	editor := BrGlamorousEditorTheme theme: self.
+	editor := BrGlamorousEditorLightTheme theme: self.
 	editor initializeThemeable.
 	
 	button := BrGlamorousButtonLightTheme theme: self.

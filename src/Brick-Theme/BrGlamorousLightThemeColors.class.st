@@ -21,11 +21,6 @@ BrGlamorousLightThemeColors >> initialize [
 	raisedBackgroundColor := nil.
 	floatBackgroundColor := nil.
 	sidebarTextColor := Color black.
-	pharoDeclaredVariableColor := Color blue muchDarker.
-	pharoUndeclaredVariableColor := Color blue muchDarker.
-	pharoSelfVariableColor := Color cyan muchDarker.
-	pharoSuperVariableColor := Color cyan muchDarker.
-	pharoThisContextVariableColor := Color cyan muchDarker.
 	pharoStringLiteralColor := Color magenta muchDarker.
 	pharoSymbolLiteralColor := Color magenta muchDarker.
 	pharoNilLiteralColor := nil.

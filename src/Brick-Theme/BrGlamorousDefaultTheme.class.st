@@ -24,12 +24,12 @@ BrGlamorousDefaultTheme >> appBackground [
 	^ appBackground
 ]
 
-{ #category : #'accessing - background' }
+{ #category : #accessing }
 BrGlamorousDefaultTheme >> backdropBackground [
 	^ backdropBackground
 ]
 
-{ #category : #'accessing - background' }
+{ #category : #accessing }
 BrGlamorousDefaultTheme >> contentBackground [
 	^ contentBackground
 ]
@@ -86,16 +86,12 @@ BrGlamorousDefaultTheme >> expandCollapseTriangleBackgroundColor: anObject [
 
 { #category : #initialization }
 BrGlamorousDefaultTheme >> initializeColors [
-	super initializeColors.
-
-
+	super initializeColors
 ]
 
 { #category : #initialization }
 BrGlamorousDefaultTheme >> initializeConstants [
-	super initializeConstants.
-
-
+	super initializeConstants
 ]
 
 { #category : #initialization }
@@ -103,22 +99,20 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 	super initializeThemeable.
 
 	contentBackground := self
-	background: [ :aTheme | aTheme colors contentBackgroundColor ]
-	source: [ :aTheme | aTheme default contentBackground ].
+			background: [ :aTheme | aTheme colors contentBackgroundColor ]
+			source: [ :aTheme | aTheme default contentBackground ].
 
 	backdropBackground := self
-	background: [ :aTheme | aTheme colors backdropBackgroundColor ]
-	source: [ :aTheme | aTheme default backdropBackground ].
+			background: [ :aTheme | aTheme colors backdropBackgroundColor ]
+			source: [ :aTheme | aTheme default backdropBackground ].
 
 	navigationBackground := self
-	background: [ :aTheme | aTheme colors sidebarBackgroundColor ]
-	source: [ :aTheme | aTheme default navigationBackground ].
+			background: [ :aTheme | aTheme colors sidebarBackgroundColor ]
+			source: [ :aTheme | aTheme default navigationBackground ].
 
 	appBackground := self
-	background: [ :aTheme | aTheme colors appBackgroundColor ]
-	source: [ :aTheme | aTheme default appBackground ].
-
-
+			background: [ :aTheme | aTheme colors appBackgroundColor ]
+			source: [ :aTheme | aTheme default appBackground ].
 ]
 
 { #category : #accessing }
@@ -131,7 +125,7 @@ BrGlamorousDefaultTheme >> lightBorderColor: anObject [
 	lightBorderColor := anObject
 ]
 
-{ #category : #'accessing - background' }
+{ #category : #accessing }
 BrGlamorousDefaultTheme >> navigationBackground [
 	^ navigationBackground
 ]

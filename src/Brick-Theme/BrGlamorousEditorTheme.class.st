@@ -9,8 +9,7 @@ Class {
 		'pharoUndeclaredVariableForeground',
 		'pharoSelfVariableForeground',
 		'pharoSuperVariableForeground',
-		'pharoThisContextVariableForeground',
-		'someForeground'
+		'pharoThisContextVariableForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -25,7 +24,7 @@ BrGlamorousEditorTheme >> borderColor: anObject [
 	borderColor := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrGlamorousEditorTheme >> defaultTextForeground [
 	^ defaultTextForeground
 ]
@@ -49,17 +48,12 @@ BrGlamorousEditorTheme >> initialize [
 
 { #category : #initialization }
 BrGlamorousEditorTheme >> initializeColors [
-	super initializeColors.
-
-
+	super initializeColors
 ]
 
 { #category : #initialization }
 BrGlamorousEditorTheme >> initializeConstants [
-	super initializeConstants.
-
-	self constantAt: #pharoSelfVariableForeground put: (self theme colors pharoSelfVariableColor).
-
+	super initializeConstants
 ]
 
 { #category : #initialization }
@@ -71,11 +65,11 @@ BrGlamorousEditorTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme editor defaultTextForeground ].
 
 	pharoDeclaredVariableForeground := self
-			color: [ :aTheme | aTheme colors pharoDeclaredVariableColor ]
+			color: [ :aTheme | aTheme editor constantAt: #pharoDeclaredVariableForeground ]
 			source: [ :aTheme | aTheme editor pharoDeclaredVariableForeground ].
 
 	pharoUndeclaredVariableForeground := self
-			color: [ :aTheme | aTheme colors pharoUndeclaredVariableColor ]
+			color: [ :aTheme | aTheme editor constantAt: #pharoUndeclaredVariableForeground ]
 			source: [ :aTheme | aTheme editor pharoUndeclaredVariableForeground ].
 
 	pharoSelfVariableForeground := self
@@ -83,15 +77,15 @@ BrGlamorousEditorTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme editor pharoSelfVariableForeground ].
 
 	pharoSuperVariableForeground := self
-			color: [ :aTheme | aTheme colors pharoSuperVariableColor ]
+			color: [ :aTheme | aTheme editor constantAt: #pharoSuperVariableForeground ]
 			source: [ :aTheme | aTheme editor pharoSuperVariableForeground ].
 
 	pharoThisContextVariableForeground := self
-			color: [ :aTheme | aTheme colors pharoThisContextVariableColor ]
+			color: [ :aTheme | aTheme editor constantAt: #pharoThisContextVariableForeground ]
 			source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrGlamorousEditorTheme >> pharoDeclaredVariableForeground [
 	^ pharoDeclaredVariableForeground
 ]
@@ -111,7 +105,7 @@ BrGlamorousEditorTheme >> pharoThisContextVariableForeground [
 	^ pharoThisContextVariableForeground
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrGlamorousEditorTheme >> pharoUndeclaredVariableForeground [
 	^ pharoUndeclaredVariableForeground
 ]
