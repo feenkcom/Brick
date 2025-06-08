@@ -15,7 +15,7 @@ GtBlocThemeIssue >> description [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeIssue >> fixIt [
+GtBlocThemeIssue >> fixItForTheme: aTheme [
 	^ nil
 ]
 

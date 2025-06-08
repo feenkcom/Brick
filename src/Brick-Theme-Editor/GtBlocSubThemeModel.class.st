@@ -209,7 +209,7 @@ GtBlocSubThemeModel >> addThemePropertyNamed: aPropertyName valueSource: newCons
 			getterAst: (RBParser parseMethod: newPropertyGetterSourceCode).
 
 	aNewProperty := GtBlocThemeProperty new
-			subThemeModel: self;
+			subThemeName: self subThemeName;
 			definingSubThemeClass: aSubThemeClass;
 			propertyName: aPropertyName;
 			valueAssignments: {newPropertyAssignment};
@@ -341,7 +341,7 @@ GtBlocSubThemeModel >> computeThemeProperties: propertyNames assignments: themea
 
 	^ propertyNames collect: [ :eachVarName | 
 		(GtBlocThemeProperty new
-			subThemeModel: self;
+			subThemeName: self subThemeName;
 			definingSubThemeClass: (self subThemeClass slotNamed: eachVarName) definingClass;
 			propertyName: eachVarName;
 			propertyValue: (subTheme instVarNamed: eachVarName);
@@ -485,16 +485,14 @@ GtBlocSubThemeModel >> notifyThemeModified [
 
 { #category : #accessing }
 GtBlocSubThemeModel >> postCopy [
-	themeProperties := themeProperties copy.
-	themeProperties do: [ :each | each subThemeModel: self ]
+	themeProperties := themeProperties copy
 ]
 
 { #category : #accessing }
 GtBlocSubThemeModel >> replaceThemeProperty: aThemeableValue with: anotherValue [
 	| index |
 	index:= self themeProperties indexOf: aThemeableValue.
-	self themeProperties at: index put: anotherValue.
-	anotherValue subThemeModel: self.
+	self themeProperties at: index put: anotherValue
 ]
 
 { #category : #accessing }

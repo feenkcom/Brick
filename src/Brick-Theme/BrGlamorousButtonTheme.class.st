@@ -10,7 +10,6 @@ Class {
 		'defaultTextColor',
 		'hoveredBorderColor',
 		'pressedTextColor',
-		'defaultBackgroundColor',
 		'hoveredTextColor',
 		'textHighlightColor',
 		'fadedBackgroundColor',
@@ -23,17 +22,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousButtonTheme >> defaultBackground [
-	^ defaultBackground ifNil: [ self defaultBackgroundColor ]
-]
-
-{ #category : #accessing }
-BrGlamorousButtonTheme >> defaultBackgroundColor [
-	^ defaultBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousButtonTheme >> defaultBackgroundColor: anObject [
-	defaultBackgroundColor := anObject
+	^ defaultBackground
 ]
 
 { #category : #accessing }
@@ -131,43 +120,49 @@ BrGlamorousButtonTheme >> hoveredTextColor: anObject [
 	hoveredTextColor := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BrGlamorousButtonTheme >> initializeColors [
-	"default state"
-	defaultBackgroundColor := Color black.
-	defaultTextColor := Color white.
-	defaultBorderColor := Color gray.
-	
-	"disabled state"
-	disabledBackgroundColor := Color black.
-	disabledTextColor := Color gray.
-	disabledBorderColor := Color gray.
-	
-	"pressed state"
+	super initializeColors.
+
 	pressedBorderColor := BrGlamorousColors pressedButtonBorderColor.
-	pressedTextColor := BrGlamorousColors pressedButtonTextColor.
-	
-	"hovered state"
+
+	defaultBorderColor := Color gray.
+
+	defaultTextColor := Color white.
+
 	hoveredBorderColor := BrGlamorousColors hoveredButtonBorderColor.
+
+	pressedTextColor := BrGlamorousColors pressedButtonTextColor.
+
 	hoveredTextColor := BrGlamorousColors hoveredButtonTextColor.
-	
-	"faded button"
+
+	textHighlightColor := BrGlamorousColors textHighlightColor.
+
 	fadedBackgroundColor := BrGlamorousColors fadedButtonBackgroundColor.
-	focusedFadedBackgroundColor := BrGlamorousColors hoveredButtonBorderColor.
-	
-	textHighlightColor := BrGlamorousColors textHighlightColor
+
+	focusedFadedBackgroundColor := BrGlamorousColors hoveredButtonBorderColor
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+BrGlamorousButtonTheme >> initializeConstants [
+	super initializeConstants
+]
+
+{ #category : #initialization }
 BrGlamorousButtonTheme >> initializeThemeable [
-	"default state"
+	super initializeThemeable.
+
+	disabledBackgroundColor := self
+			color: [ :aTheme | aTheme button constantAt: #disabledBackgroundColor ]
+			source: [ :aTheme | aTheme button disabledBackgroundColor ].
+
 	defaultBackground := self
-		background: [ :aTheme | aTheme button defaultBackgroundColor ]
-		source: [ :aTheme | aTheme button defaultBackground ].
+			color: [ :aTheme | aTheme button constantAt: #defaultBackground ]
+			source: [ :aTheme | aTheme button defaultBackground ].
 
 	defaultTextForeground := self
-		color: [ :aTheme | aTheme colors primaryTextColor ]
-		source: [ :aTheme | aTheme button defaultTextForeground ]
+			color: [ :aTheme | aTheme colors primaryTextColor ]
+			source: [ :aTheme | aTheme button defaultTextForeground ]
 ]
 
 { #category : #accessing }

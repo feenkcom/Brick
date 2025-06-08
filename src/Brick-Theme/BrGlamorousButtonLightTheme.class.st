@@ -4,17 +4,38 @@ Class {
 	#category : #'Brick-Theme-Glamorous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BrGlamorousButtonLightTheme >> initializeColors [
 	super initializeColors.
-	
-	"default state"
-	defaultBackgroundColor := BrGlamorousColors defaultButtonBackgroundColor.
-	defaultTextColor := BrGlamorousColors defaultButtonTextColor.
+
 	defaultBorderColor := BrGlamorousColors defaultButtonBorderColor.
-	
-	"disabled state"
-	disabledBackgroundColor := BrGlamorousColors disabledButtonBackgroundColor.
-	disabledTextColor := BrGlamorousColors disabledButtonTextColor.
-	disabledBorderColor := BrGlamorousColors disabledButtonBorderColor.
+
+	defaultTextColor := BrGlamorousColors defaultButtonTextColor
+]
+
+{ #category : #initialization }
+BrGlamorousButtonLightTheme >> initializeConstants [
+	super initializeConstants.
+
+	self constantAt: #disabledBackgroundColor put: (Color fromHexString: #f5f5f5).
+	self
+		constantAt: #disabledTextColor
+		put: BrGlamorousColors disabledButtonTextColor.
+	self
+		constantAt: #disabledBorderColor
+		put: BrGlamorousColors disabledButtonBorderColor.
+	self constantAt: #defaultBackground put: Color white
+]
+
+{ #category : #initialization }
+BrGlamorousButtonLightTheme >> initializeThemeable [
+	super initializeThemeable.
+
+	disabledTextColor := self
+			color: [ :aTheme | aTheme button constantAt: #disabledTextColor ]
+			source: [ :aTheme | aTheme button disabledTextColor ].
+
+	disabledBorderColor := self
+			color: [ :aTheme | aTheme button constantAt: #disabledBorderColor ]
+			source: [ :aTheme | aTheme button disabledBorderColor ]
 ]

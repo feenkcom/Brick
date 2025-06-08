@@ -4,17 +4,34 @@ Class {
 	#category : #'Brick-Theme-Glamorous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BrGlamorousButtonDarkTheme >> initializeColors [
 	super initializeColors.
 
-	"default state"
-	defaultBackgroundColor := Color veryDarkGray.
-	defaultTextColor := Color white.
+	disabledTextColor := Color gray.
+
+	disabledBorderColor := Color gray.
+
 	defaultBorderColor := Color gray.
 
-	"disabled state"
-	disabledBackgroundColor := Color veryDarkGray.
-	disabledTextColor := Color gray.
-	disabledBorderColor := Color gray.
+	defaultTextColor := Color white
+]
+
+{ #category : #initialization }
+BrGlamorousButtonDarkTheme >> initializeConstants [
+	super initializeConstants.
+
+	self constantAt: #disabledBackgroundColor put: Color veryDarkGray.
+	self
+		constantAt: #disabledTextColor
+		put: BrGlamorousColors disabledButtonTextColor.
+	self
+		constantAt: #disabledBorderColor
+		put: BrGlamorousColors disabledButtonBorderColor.
+	self constantAt: #defaultBackground put: Color veryDarkGray
+]
+
+{ #category : #initialization }
+BrGlamorousButtonDarkTheme >> initializeThemeable [
+	super initializeThemeable
 ]

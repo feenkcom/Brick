@@ -10,6 +10,6 @@ GtBlocThemeStaticProperty >> isStaticType [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeStaticProperty >> transformToThemeable [
+GtBlocThemeStaticProperty >> transformToThemeable: aTheme withinSubThemeModel: anObject [
 	^ nil
 ]

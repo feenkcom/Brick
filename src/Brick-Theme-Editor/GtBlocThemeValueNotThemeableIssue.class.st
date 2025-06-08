@@ -2,32 +2,37 @@ Class {
 	#name : #GtBlocThemeValueNotThemeableIssue,
 	#superclass : #GtBlocThemeIssue,
 	#instVars : [
-		'typedThemeProperty'
+		'typedThemeProperty',
+		'subThemeModel'
 	],
 	#category : #'Brick-Theme-Editor-Issues'
 }
 
 { #category : #'as yet unclassified' }
 GtBlocThemeValueNotThemeableIssue >> canFixIt [
-	^ self typedThemeProperty isStaticType
+	typedThemeProperty valueAssignments size > 1
+		ifTrue: [ ^ false ].
+
+	^ typedThemeProperty isStaticType
 ]
 
 { #category : #accessing }
 GtBlocThemeValueNotThemeableIssue >> description [
-	^ 'Not a themeable value' format: { self typedThemeProperty propertyName }
+	^ 'Not a themeable value' format: { typedThemeProperty propertyName }
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeValueNotThemeableIssue >> fixIt [
-	self typedThemeProperty isStaticType
-		ifFalse: [ ^ nil ].
-		
-	^ self typedThemeProperty transformToThemeable
+GtBlocThemeValueNotThemeableIssue >> fixItForTheme: aTheme [
+	typedThemeProperty isStaticType ifFalse: [ ^ nil ].
+
+	^ typedThemeProperty
+		transformToThemeable: aTheme
+		withinSubThemeModel: subThemeModel
 ]
 
 { #category : #accessing }
-GtBlocThemeValueNotThemeableIssue >> typedThemeProperty [
-	^ typedThemeProperty
+GtBlocThemeValueNotThemeableIssue >> subThemeModel: anObject [
+	subThemeModel := anObject
 ]
 
 { #category : #accessing }

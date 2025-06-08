@@ -3,17 +3,18 @@ Class {
 	#superclass : #GtBlocThemeIssue,
 	#instVars : [
 		'typedThemeableProperty',
-		'valueAssignment'
+		'valueAssignment',
+		'subThemeModel'
 	],
 	#category : #'Brick-Theme-Editor-Issues'
 }
 
 { #category : #'as yet unclassified' }
 GtBlocThemeablePropertyHardcodedIssue >> canFixIt [
-	(self typedThemeableProperty isThemeableType)
+	(typedThemeableProperty isThemeableType)
 		ifFalse: [ ^ false ].
 		
-	(self typedThemeableProperty extractPropertyConstantAst: self valueAssignment)
+	(typedThemeableProperty extractPropertyConstantAst: valueAssignment)
 		ifNil: [ ^ false ].
 		
 	^ true
@@ -21,62 +22,57 @@ GtBlocThemeablePropertyHardcodedIssue >> canFixIt [
 
 { #category : #accessing }
 GtBlocThemeablePropertyHardcodedIssue >> description [
-	^ 'Hardcoded value' format: { self typedThemeableProperty propertyName }
+	^ 'Hardcoded value' format: { typedThemeableProperty propertyName }
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeablePropertyHardcodedIssue >> fixIt [
+GtBlocThemeablePropertyHardcodedIssue >> fixItForTheme: aTheme [
 	| newThemeProperty subThemeModelCopy hardcodedValueAst newAssignment newConstantAssignment newValueAst |
 	
-	self typedThemeableProperty isThemeableType
+	typedThemeableProperty isThemeableType
 		ifFalse: [ ^ nil ].
 
-	hardcodedValueAst := self typedThemeableProperty
-		extractPropertyConstantAst: self valueAssignment.
+	hardcodedValueAst := typedThemeableProperty
+		extractPropertyConstantAst: valueAssignment.
 	
-	subThemeModelCopy := self typedThemeableProperty subThemeModel copy.
+	subThemeModelCopy := subThemeModel copy.
 	
 	newConstantAssignment := GtBlocThemeConstantAssignment new
-		subThemeClass: self valueAssignment subThemeClass;
+		subThemeClass: valueAssignment subThemeClass;
 		subThemeSelector: #initializeConstants;
-		valueName: self typedThemeableProperty propertyName;
+		valueName: typedThemeableProperty propertyName;
 		valueAst: hardcodedValueAst;
 		yourself.
 	
-	newThemeProperty := self typedThemeableProperty themeProperty copy.
+	newThemeProperty := typedThemeableProperty themeProperty copy.
 
 	newValueAst := RBParser parseExpression:
-		self typedThemeableProperty generateThemeableInitializationSource.
+		typedThemeableProperty generateThemeableInitializationSource.
 	
-	newAssignment := self valueAssignment copy.
+	newAssignment := valueAssignment copy.
 	newAssignment valueAst: newValueAst.
 	
 	newThemeProperty
-		replaceValueAssignment: self valueAssignment
+		replaceValueAssignment: valueAssignment
 		with: newAssignment.
 		
 	newThemeProperty := newThemeProperty withConstantAssignment: newConstantAssignment.
 
 	subThemeModelCopy
-		replaceThemeProperty: self typedThemeableProperty themeProperty
+		replaceThemeProperty: typedThemeableProperty themeProperty
 		with: newThemeProperty.
 
 	^ subThemeModelCopy generateThemeMethods
 ]
 
 { #category : #accessing }
-GtBlocThemeablePropertyHardcodedIssue >> typedThemeableProperty [
-	^ typedThemeableProperty
+GtBlocThemeablePropertyHardcodedIssue >> subThemeModel: anObject [
+	subThemeModel := anObject
 ]
 
 { #category : #accessing }
 GtBlocThemeablePropertyHardcodedIssue >> typedThemeableProperty: anObject [
 	typedThemeableProperty := anObject
-]
-
-{ #category : #accessing }
-GtBlocThemeablePropertyHardcodedIssue >> valueAssignment [
-	^ valueAssignment
 ]
 
 { #category : #accessing }

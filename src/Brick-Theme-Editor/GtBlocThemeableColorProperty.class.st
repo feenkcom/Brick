@@ -70,7 +70,7 @@ GtBlocThemeableColorProperty >> extractPropertyConstantAst: aPropertyAssignment 
 	pattern := RBPatternParser parseExpression: ('self
 		color: [ :aTheme | `@constant ]
 		source: [ :aTheme | aTheme {1} {2} ]' format: {
-			self subThemeModel subThemeName.
+			self subThemeName.
 			self propertyName
 		}).
 		

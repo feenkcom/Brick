@@ -26,7 +26,7 @@ GtBlocSubThemeEditorElement >> createCollapsedHeaderForProperty: aTypedThemeProp
 GtBlocSubThemeEditorElement >> createEditorForProperty: aTypedThemeProperty assignment: eachValueAssignment [
 	| assignmentForCoder container assignmentHeader valueSourceCoderViewModel modificationIndicator valueSourceCoderElement editorContainer |
 	
-	assignmentForCoder := (aTypedThemeProperty transformAssignmentForCoder: eachValueAssignment)
+	assignmentForCoder := (aTypedThemeProperty transformAssignmentForCoder: eachValueAssignment subThemeModel: subThemeModel)
 		asCoderAssignmentFor: aTypedThemeProperty.
 	
 	container := BrVerticalPane new
@@ -48,7 +48,8 @@ GtBlocSubThemeEditorElement >> createEditorForProperty: aTypedThemeProperty assi
 	editorContainer addChild: modificationIndicator.
 	
 	valueSourceCoderViewModel := aTypedThemeProperty
-		createCoderViewModel: assignmentForCoder.
+		createCoderViewModel: assignmentForCoder
+		subThemeModel: subThemeModel.
 		
 	valueSourceCoderViewModel selfObject: subTheme.
 		
@@ -132,7 +133,7 @@ GtBlocSubThemeEditorElement >> createExpanderExpandedForProperty: aTypedThemePro
 		vFitContent;
 		margin: (BlInsets left: 3).
 
-	aTypedThemeProperty issues do: [ :eachIssue |
+	(aTypedThemeProperty issuesWithinSubThemeModel: subThemeModel) do: [ :eachIssue |
 		issuesContainer addChild: (self createIssueSummary: eachIssue) ].
 		
 	container addChild: issuesContainer.
@@ -159,7 +160,7 @@ GtBlocSubThemeEditorElement >> createExpanderExpandedForProperty: aTypedThemePro
 GtBlocSubThemeEditorElement >> createExpanderForProperty: aTypedThemeProperty [
 	| anExpander anExpanderBackground |
 	
-	anExpanderBackground := aTypedThemeProperty issues
+	anExpanderBackground := (aTypedThemeProperty issuesWithinSubThemeModel: subThemeModel)
 		ifEmpty: [ self theme default lightBorderColor ]
 		ifNotEmpty: [ :theIssues |
 			(theIssues anySatisfy: [ :eachIssue | eachIssue isSeriousIssue ])
@@ -202,7 +203,7 @@ GtBlocSubThemeEditorElement >> createIssueSummary: eachIssue [
 				fitContent;
 				margin: (BlInsets left: 5);
 				aptitude: BrGlamorousButtonWithLabelAndIconAptitude;
-				action: [ :aButton | aButton phlow spawnObject: eachIssue fixIt ]) ].
+				action: [ :aButton | aButton phlow spawnObject: (eachIssue fixItForTheme: subTheme theme) ]) ].
 	
 	^ container
 ]

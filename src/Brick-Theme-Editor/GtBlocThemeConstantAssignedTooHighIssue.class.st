@@ -3,7 +3,8 @@ Class {
 	#superclass : #GtBlocThemeIssue,
 	#instVars : [
 		'typedThemeProperty',
-		'constantAssignment'
+		'constantAssignment',
+		'subThemeModel'
 	],
 	#category : #'Brick-Theme-Editor-Issues'
 }
@@ -11,11 +12,6 @@ Class {
 { #category : #'as yet unclassified' }
 GtBlocThemeConstantAssignedTooHighIssue >> canFixIt [
 	^ true
-]
-
-{ #category : #accessing }
-GtBlocThemeConstantAssignedTooHighIssue >> constantAssignment [
-	^ constantAssignment
 ]
 
 { #category : #accessing }
@@ -29,11 +25,11 @@ GtBlocThemeConstantAssignedTooHighIssue >> description [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeConstantAssignedTooHighIssue >> fixIt [
+GtBlocThemeConstantAssignedTooHighIssue >> fixItForTheme: aTheme [
 	| sourceClass targetClass copyToClasses previousClass currentClass newSubThemeModel compositeChange |
 	
-	sourceClass := self constantAssignment subThemeClass.
-	targetClass := self typedThemeProperty subThemeModel subThemeClass.
+	sourceClass := constantAssignment subThemeClass.
+	targetClass := subThemeModel subThemeClass.
 	self
 		assert: [ targetClass inheritsFrom: sourceClass ]
 		description: [ 'Target class must inherit from the source class' ].
@@ -49,10 +45,10 @@ GtBlocThemeConstantAssignedTooHighIssue >> fixIt [
 	compositeChange := GtBlocThemeCompositeChange new.
 	
 	newSubThemeModel := self
-		moveConstantAssignmentsOPropertyNamed: self constantAssignment propertyName
+		moveConstantAssignmentsOPropertyNamed: constantAssignment propertyName
 		fromClass: sourceClass
 		to: targetClass
-		in: self typedThemeProperty subThemeModel copy.
+		in: subThemeModel copy.
 	newSubThemeModel changesOn: compositeChange.
 	
 	copyToClasses do: [ :eachSubThemeClass |
@@ -60,7 +56,7 @@ GtBlocThemeConstantAssignedTooHighIssue >> fixIt [
 		
 		eachSubThemeModel := newSubThemeModel instantiateNewSubThemeModel: eachSubThemeClass.
 		eachSubThemeModel := self
-			moveConstantAssignmentsOPropertyNamed: self constantAssignment propertyName
+			moveConstantAssignmentsOPropertyNamed: constantAssignment propertyName
 			fromClass: sourceClass
 			to: eachSubThemeClass
 			in: eachSubThemeModel.
@@ -95,8 +91,8 @@ GtBlocThemeConstantAssignedTooHighIssue >> moveConstantAssignmentsOPropertyNamed
 ]
 
 { #category : #accessing }
-GtBlocThemeConstantAssignedTooHighIssue >> typedThemeProperty [
-	^ typedThemeProperty
+GtBlocThemeConstantAssignedTooHighIssue >> subThemeModel: anObject [
+	subThemeModel := anObject
 ]
 
 { #category : #accessing }
