@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'changes'
 	],
-	#category : #'Brick-Theme-Editor-Model'
+	#category : #'Brick-Theme-Editor-Changes'
 }
 
 { #category : #compiling }
@@ -37,6 +37,17 @@ GtBlocThemeCompositeChange >> compile: methodSourceCode in: methodClass selector
 		methodProtocol: methodProtocol)
 ]
 
+{ #category : #'as yet unclassified' }
+GtBlocThemeCompositeChange >> gtPreviewFor: aView [
+	<gtView>
+	
+	^ aView explicit
+		title: 'Preview';
+		priority: 5;
+		stencil: [ GtBlocThemeChangesElement new themeChanges: self ];
+		actionUpdateButton
+]
+
 { #category : #initialization }
 GtBlocThemeCompositeChange >> initialize [
 	super initialize.
@@ -58,9 +69,4 @@ GtBlocThemeCompositeChange >> relevantChanges [
 		reject: [ :eachChange | eachChange isRedundantForNamespace: model ].
 
 	^ relevantChanges copyWithoutDuplicates
-]
-
-{ #category : #'as yet unclassified' }
-GtBlocThemeCompositeChange >> relevantChangesByType [
-	^ self relevantChanges groupedBy: [ :each | each class ]
 ]

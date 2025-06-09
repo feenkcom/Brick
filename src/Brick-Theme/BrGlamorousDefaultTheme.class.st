@@ -112,7 +112,7 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 
 	appBackground := self
 			color: [ :aTheme | aTheme colors appBackgroundColor ]
-			source: [ :aTheme | aTheme default appBackground ].
+			source: [ :aTheme | aTheme default appBackground ]
 ]
 
 { #category : #accessing }

@@ -5,8 +5,18 @@ Class {
 		'variableClass',
 		'variableName'
 	],
-	#category : #'Brick-Theme-Editor-Model'
+	#category : #'Brick-Theme-Editor-Changes'
 }
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeAddInstanceVariableChange class >> description [
+	^ 'New instance variable(s)'
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeAddInstanceVariableChange class >> priority [
+	^ 1
+]
 
 { #category : #comparing }
 GtBlocThemeAddInstanceVariableChange >> = anObject [
@@ -16,6 +26,11 @@ GtBlocThemeAddInstanceVariableChange >> = anObject [
 	self class = anObject class ifFalse: [ ^ false ].
 	^ variableName = anObject variableName
 		and: [ variableClass = anObject variableClass ]
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeAddInstanceVariableChange >> affectedClass [
+	^ variableClass
 ]
 
 { #category : #'as yet unclassified' }

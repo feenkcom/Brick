@@ -58,5 +58,5 @@ GtBlocThemeStaticColorType >> transformToThemeable: aTheme withinSubThemeModel: 
 		replaceThemeProperty: self themeProperty
 		with: newThemeProperty.
 
-	^ subThemeModelCopy generateThemeMethods
+	^ subThemeModelCopy generateThemeChanges
 ]

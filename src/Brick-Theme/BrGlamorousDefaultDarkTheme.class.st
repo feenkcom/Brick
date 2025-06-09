@@ -25,7 +25,7 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	super initializeConstants.
 
 	self constantAt: #defaultShadowColor put: Color green.
-	self constantAt: #primaryBorderColor put: BrGlamorousColors primaryBorderColor.
+	self constantAt: #primaryBorderColor put: BrGlamorousColors primaryBorderColor
 ]
 
 { #category : #initialization }
