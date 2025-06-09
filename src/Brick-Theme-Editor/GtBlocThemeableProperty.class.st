@@ -39,7 +39,7 @@ GtBlocThemeableProperty class >> computePropertyNameSourceBlock: aBlockClosure [
 { #category : #generation }
 GtBlocThemeableProperty class >> generateSourceComputationFor: aThemeProperty [
 	^ '[ :aTheme | aTheme {1} {2} ]' format: {
-		aThemeProperty subThemeModel subThemeName.
+		aThemeProperty subThemeName.
 		aThemeProperty propertyName }
 ]
 
@@ -49,27 +49,16 @@ GtBlocThemeableProperty class >> generateValueComputation: sourceCode [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeableProperty >> changeConstantNamed: aConstantName to: anObject [
-	self subThemeModel
-		changeConstantNamed: aConstantName
-		to: anObject
-]
-
-{ #category : #'as yet unclassified' }
-GtBlocThemeableProperty >> compileConstantAssignment: aCoderAssignment to: anAST [
-	aCoderAssignment valueAst: anAST.
-	self subThemeModel generateThemeMethods changes execute
-]
-
-{ #category : #'as yet unclassified' }
-GtBlocThemeableProperty >> createCoderViewModel: aCoderModel coderAssignment: aForCoderAssignment [
+GtBlocThemeableProperty >> createCoderViewModel: aCoderModel coderAssignment: aForCoderAssignment subThemeModel: aSubThemeModel [
 	| coderViewModel |
 	
 	coderViewModel := super
 		createCoderViewModel: aCoderModel
-		coderAssignment: aForCoderAssignment.
+		coderAssignment: aForCoderAssignment
+		subThemeModel: aSubThemeModel.
 	
-	self issues ifNotEmpty: [ ^ coderViewModel ].
+	(self issuesWithinSubThemeModel: aSubThemeModel)
+		ifNotEmpty: [ ^ coderViewModel ].
 	
 	self
 		assert: [ aForCoderAssignment isConstantAssignment ]
@@ -80,10 +69,10 @@ GtBlocThemeableProperty >> createCoderViewModel: aCoderModel coderAssignment: aF
 		do: [ :anAnnouncement |
 			anAnnouncement evaluationResult isSuccess
 				ifTrue: [				
-					self
+					aSubThemeModel
 						changeConstantNamed: aForCoderAssignment propertyName
 						to: anAnnouncement evaluationResult value.
-					self subThemeModel subTheme theme themeModified  ] ].
+					aSubThemeModel notifyThemeModified  ] ].
 						
 	coderViewModel addShortcut: (GtSourceCoderSaveShortcut new).
 	coderViewModel announcer
@@ -98,16 +87,17 @@ GtBlocThemeableProperty >> createCoderViewModel: aCoderModel coderAssignment: aF
 							all;
 							requesterObject: coderViewModel)
 						thenDo: [ :anEvaluationResult |
-							self
-								compileConstantAssignment: aForCoderAssignment originalAssignment
-								to: (RBParser parseExpression: coderViewModel sourceText asString).
-							self
+							aSubThemeModel
 								changeConstantNamed: aForCoderAssignment propertyName
 								to: anEvaluationResult value.
+							
+							aForCoderAssignment originalAssignment
+								valueAst: (RBParser parseExpression: coderViewModel sourceText asString).
 								
+							aSubThemeModel generateThemeMethods changes execute.
 							coderViewModel coder forSource: (aForCoderAssignment originalAssignment valueSourceCode).
 							
-							self subThemeModel notifyThemeModified ] ].
+							aSubThemeModel notifyThemeModified ] ].
 			 ].
 	
 	^ coderViewModel
@@ -121,7 +111,7 @@ GtBlocThemeableProperty >> extractPropertyConstantAst: aPropertyAssignment [
 { #category : #generation }
 GtBlocThemeableProperty >> generateConstantGetter [
 	^ 'aTheme {1} constantAt: #{2}' format: {
-		self subThemeModel subThemeName.
+		self subThemeName.
 		self propertyName
 	}
 ]
@@ -142,36 +132,36 @@ GtBlocThemeableProperty >> isThemeableType [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeableProperty >> issuesOn: aStream [
-	super issuesOn: aStream.
+GtBlocThemeableProperty >> issuesOn: aStream  withinSubThemeModel: aSubThemeModel [
+	super issuesOn: aStream  withinSubThemeModel: aSubThemeModel.
 	
 	self themeProperty hardcodedValueAssignments do: [ :eachAssignment |
-		aStream nextPut: (GtBlocThemeablePropertyHardcodedIssue new typedThemeableProperty: self; valueAssignment: eachAssignment) ].
+		aStream nextPut: (GtBlocThemeablePropertyHardcodedIssue new
+			subThemeModel: aSubThemeModel;
+			typedThemeableProperty: self;
+			valueAssignment: eachAssignment) ].
 
 	self constantAssignments do: [ :eachConstantAssignment |
-		(self subThemeModel subThemeClass inheritsFrom: eachConstantAssignment subThemeClass)
+		(aSubThemeModel subThemeClass inheritsFrom: eachConstantAssignment subThemeClass)
 			ifTrue: [ aStream nextPut: (GtBlocThemeConstantAssignedTooHighIssue new
+				subThemeModel: aSubThemeModel;
 				typedThemeProperty: self;
 				constantAssignment: eachConstantAssignment) ] ].
-				
-	self themeProperty definingSubThemeClass allSubclassesDo: [ :eachSubclass |
-		((eachSubclass ~= self subThemeModel subThemeClass) and: [ eachSubclass hasSubclasses not ])
-			ifTrue: [
-				| constantAssignmentsInAnotherSubTheme |
-				constantAssignmentsInAnotherSubTheme := (GtBlocSubThemeModel detectAllConstantAssignmentsIn: eachSubclass)
-					at: self propertyName
-					ifAbsent: [ #() ].
-				constantAssignmentsInAnotherSubTheme ifEmpty:  [
-					aStream nextPut: (GtBlocThemeConstantNotAssignedIssue new
-						subThemeClass: eachSubclass;
-						typedThemeProperty: self)
-				]
-			] ]
+	
+	aSubThemeModel subThemeNeighbourClasses
+		do: [ :eachSubThemeClass |
+			(self themeProperty neighbourConstantAssignments anySatisfy: [ :eachAssignment |
+				eachAssignment subThemeClass = eachSubThemeClass ])
+					ifFalse: [
+						aStream nextPut: (GtBlocThemeConstantNotAssignedIssue new
+							subThemeModel: aSubThemeModel;
+							subThemeClass: eachSubThemeClass;
+							typedThemeProperty: self) ] ].
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeableProperty >> transformAssignmentForCoder: aThemeableAssignment [
-	self issues
+GtBlocThemeableProperty >> transformAssignmentForCoder: aThemeableAssignment subThemeModel: aSubThemeModel [
+	(self issuesWithinSubThemeModel: aSubThemeModel)
 		ifNotEmpty: [ ^ aThemeableAssignment ].
 
 	^ self constantAssignments

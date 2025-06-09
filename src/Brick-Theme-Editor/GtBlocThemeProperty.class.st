@@ -2,13 +2,14 @@ Class {
 	#name : #GtBlocThemeProperty,
 	#superclass : #Object,
 	#instVars : [
-		'subThemeModel',
+		'subThemeName',
 		'valueAssignments',
 		'constantAssignments',
 		'propertyName',
 		'propertyValue',
 		'propertyGetters',
-		'definingSubThemeClass'
+		'definingSubThemeClass',
+		'neighbourConstantAssignments'
 	],
 	#category : #'Brick-Theme-Editor-Model'
 }
@@ -106,10 +107,25 @@ GtBlocThemeProperty >> hardcodedValueAssignments [
 		self doesAstUseConstantGetter: eachAssignment valueAst ]
 ]
 
+{ #category : #accessing }
+GtBlocThemeProperty >> neighbourConstantAssignments [
+	^ neighbourConstantAssignments
+]
+
+{ #category : #accessing }
+GtBlocThemeProperty >> neighbourConstantAssignments: aCollectionOfAssignments [
+	self
+		assert: [ neighbourConstantAssignments isNil ]
+		description: [ 'Can''t modify already assigned constants' ].
+
+	self privateSetNeighbourConstantAssignments: aCollectionOfAssignments
+]
+
 { #category : #copying }
 GtBlocThemeProperty >> postCopy [
 	valueAssignments := valueAssignments copy.
 	constantAssignments := constantAssignments copy.
+	neighbourConstantAssignments := neighbourConstantAssignments copy.
 	propertyGetters := propertyGetters copy
 ]
 
@@ -126,6 +142,11 @@ GtBlocThemeProperty >> printShortThemeableValue [
 { #category : #accessing }
 GtBlocThemeProperty >> privateSetConstantAssignments: aCollectionOfAssignments [
 	constantAssignments := aCollectionOfAssignments asArray
+]
+
+{ #category : #accessing }
+GtBlocThemeProperty >> privateSetNeighbourConstantAssignments: aCollectionOfAssignments [
+	neighbourConstantAssignments := aCollectionOfAssignments asArray
 ]
 
 { #category : #accessing }
@@ -167,17 +188,22 @@ GtBlocThemeProperty >> replaceValueAssignment: anAssignment with: anotherAssignm
 
 { #category : #accessing }
 GtBlocThemeProperty >> subThemeModel [
-	^ subThemeModel
+	self shouldNotImplement
 ]
 
 { #category : #accessing }
-GtBlocThemeProperty >> subThemeModel: anObject [
-	subThemeModel := anObject
+GtBlocThemeProperty >> subThemeName [
+	^ subThemeName
+]
+
+{ #category : #accessing }
+GtBlocThemeProperty >> subThemeName: anObject [
+	subThemeName := anObject
 ]
 
 { #category : #accessing }
 GtBlocThemeProperty >> theme [
-	^ self subThemeModel subTheme theme
+	self shouldNotImplement
 ]
 
 { #category : #accessing }
@@ -201,6 +227,13 @@ GtBlocThemeProperty >> valueType [
 GtBlocThemeProperty >> withConstantAssignment: aConstantAssignment [
 	^ self copy
 		privateSetConstantAssignments: (self constantAssignments copyWith: aConstantAssignment);
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeProperty >> withNeighbourConstantAssignment: aConstantAssignment [
+	^ self copy
+		privateSetNeighbourConstantAssignments: (self neighbourConstantAssignments copyWith: aConstantAssignment);
 		yourself
 ]
 

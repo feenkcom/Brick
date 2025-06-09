@@ -30,7 +30,15 @@ GtBlocThemeTypedProperty >> constantAssignments [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeTypedProperty >> createCoderViewModel: anAssignmentForCoder [
+GtBlocThemeTypedProperty >> createCoderViewModel: aCoderModel coderAssignment: aCoderAssignment subThemeModel: aSubThemeModel [
+	| valueSourceCoderViewModel|
+	
+	valueSourceCoderViewModel := aCoderModel asCoderViewModel.
+	^ valueSourceCoderViewModel
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeTypedProperty >> createCoderViewModel: anAssignmentForCoder subThemeModel: aSubThemeModel [
 	| valueSourceCoder |
 	
 	valueSourceCoder := GtPharoSnippetCoder
@@ -38,15 +46,8 @@ GtBlocThemeTypedProperty >> createCoderViewModel: anAssignmentForCoder [
 	
 	^ self
 		createCoderViewModel: valueSourceCoder
-		coderAssignment: anAssignmentForCoder.
-]
-
-{ #category : #'as yet unclassified' }
-GtBlocThemeTypedProperty >> createCoderViewModel: aCoderModel coderAssignment: aCoderAssignment [
-	| valueSourceCoderViewModel|
-	
-	valueSourceCoderViewModel := aCoderModel asCoderViewModel.
-	^ valueSourceCoderViewModel
+		coderAssignment: anAssignmentForCoder
+		subThemeModel: aSubThemeModel
 ]
 
 { #category : #accessing }
@@ -70,34 +71,47 @@ GtBlocThemeTypedProperty >> isUnknownType [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeTypedProperty >> issues [
-	issues ifNotNil: [ :theIssues | ^ theIssues ].
-	issues := Array streamContents: [ :s | self issuesOn: s ].
-	^ issues
-]
-
-{ #category : #'as yet unclassified' }
-GtBlocThemeTypedProperty >> issuesOn: aStream [
+GtBlocThemeTypedProperty >> issuesOn: aStream withinSubThemeModel: aSubThemeModel [
 	self isThemeableType
-		ifFalse: [ aStream nextPut: (GtBlocThemeValueNotThemeableIssue new typedThemeProperty: self) ].
+		ifFalse: [ aStream nextPut: (GtBlocThemeValueNotThemeableIssue new
+			subThemeModel: aSubThemeModel;
+			typedThemeProperty: self) ].
 	
 	self valueAssignments
 		ifEmpty: [ aStream nextPut: (GtBlocThemeValueNotAssignedIssue new themeableValue: self themeProperty) ].
-		
-	self propertyGetters
-		ifEmpty: [ aStream nextPut: (GtBlocThemePropertyNoGetterIssue new typedThemeProperty: self) ].
 	
 	self valueAssignments size > 1
 		ifTrue: [ aStream nextPut: (GtBlocThemeTooManyAssignmentsIssue new typedThemeProperty: self) ].
-		
+	
+	self propertyGetters
+		ifEmpty: [ aStream nextPut: (GtBlocThemePropertyNoGetterIssue new typedThemeProperty: self) ].
+	
 	self propertyGetters size > 1
 		ifTrue: [ aStream nextPut: (GtBlocThemeTooManyGettersIssue new typedThemeProperty: self) ]
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeTypedProperty >> issuesWithinSubThemeModel: aSubThemeModel [
+	issues ifNotNil: [ :theIssues | ^ theIssues ].
+	issues := Array streamContents: [ :s | self issuesOn: s withinSubThemeModel: aSubThemeModel ].
+	^ issues
 ]
 
 { #category : #'as yet unclassified' }
 GtBlocThemeTypedProperty >> postCopy [
 	themeProperty := themeProperty copy.
 	issues := nil
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeTypedProperty >> printPropertyAccessor: useGlobal [
+	^ '{1} {2} {3}' format: {
+		useGlobal
+			ifTrue: [ 'BlTheme default' ]
+			ifFalse: [ 'self theme' ].
+		self subThemeName.
+		self propertyName
+	}
 ]
 
 { #category : #'as yet unclassified' }
@@ -122,7 +136,12 @@ GtBlocThemeTypedProperty >> propertyValue [
 
 { #category : #'as yet unclassified' }
 GtBlocThemeTypedProperty >> subThemeModel [
-	^ self themeProperty subThemeModel
+	self shouldNotImplement
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeTypedProperty >> subThemeName [
+	^ themeProperty subThemeName
 ]
 
 { #category : #accessing }
@@ -136,7 +155,7 @@ GtBlocThemeTypedProperty >> themeableValue [
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeTypedProperty >> transformAssignmentForCoder: aThemeableAssignment [
+GtBlocThemeTypedProperty >> transformAssignmentForCoder: aThemeableAssignment subThemeModel: aSubThemeModel [
 	^ aThemeableAssignment
 ]
 

@@ -3,29 +3,39 @@ Class {
 	#superclass : #GtBlocThemeIssue,
 	#instVars : [
 		'typedThemeProperty',
-		'subThemeClass'
+		'subThemeClass',
+		'subThemeModel'
 	],
 	#category : #'Brick-Theme-Editor-Issues'
 }
 
 { #category : #'as yet unclassified' }
 GtBlocThemeConstantNotAssignedIssue >> canFixIt [
-	^ true
+	^ typedThemeProperty constantAssignments size = 1
 ]
 
 { #category : #accessing }
 GtBlocThemeConstantNotAssignedIssue >> description [
-	^ 'Constant is not assigned in {1}' format: { self subThemeClass name }
+	^ 'Constant is not assigned in {1}' format: { subThemeClass name }
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocThemeConstantNotAssignedIssue >> fixIt [
-	^ nil
-]
+GtBlocThemeConstantNotAssignedIssue >> fixItForTheme: aTheme [
+	| constantAssignment newConstantAssignment newThemeProperty newSubThemeModel |
+	
+	constantAssignment := typedThemeProperty constantAssignments first.
+	newConstantAssignment := constantAssignment copyWithSubThemeClass: subThemeClass.
+	
+	newThemeProperty := typedThemeProperty themeProperty copy.
+	newThemeProperty := newThemeProperty
+		withNeighbourConstantAssignment: newConstantAssignment.
+	
+	newSubThemeModel := subThemeModel copy.
+	newSubThemeModel
+		replaceThemeProperty: typedThemeProperty themeProperty
+		with: newThemeProperty.
 
-{ #category : #accessing }
-GtBlocThemeConstantNotAssignedIssue >> subThemeClass [
-	^ subThemeClass
+	^ newSubThemeModel generateThemeMethods
 ]
 
 { #category : #accessing }
@@ -34,8 +44,8 @@ GtBlocThemeConstantNotAssignedIssue >> subThemeClass: anObject [
 ]
 
 { #category : #accessing }
-GtBlocThemeConstantNotAssignedIssue >> typedThemeProperty [
-	^ typedThemeProperty
+GtBlocThemeConstantNotAssignedIssue >> subThemeModel: anObject [
+	subThemeModel := anObject
 ]
 
 { #category : #accessing }

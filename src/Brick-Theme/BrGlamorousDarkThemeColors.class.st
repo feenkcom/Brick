@@ -21,19 +21,4 @@ BrGlamorousDarkThemeColors >> initialize [
 	raisedBackgroundColor := nil.
 	floatBackgroundColor := nil.
 	sidebarTextColor := Color fromHexString: '#CFCFCF'.
-	pharoDeclaredVariableColor := Color fromHexString: '#5C7BD9'.
-	pharoUndeclaredVariableColor := Color fromHexString: '#5C7BD9'.
-	pharoSelfVariableColor := Color fromHexString: '#5EEAD4'.
-	pharoSuperVariableColor := Color fromHexString: '#5EEAD4'.
-	pharoThisContextVariableColor := Color fromHexString: '#5EEAD4'.
-	pharoStringLiteralColor := Color magenta muchDarker.
-	pharoSymbolLiteralColor := Color magenta muchDarker.
-	pharoNilLiteralColor := nil.
-	pharoNumberLiteralColor := nil.
-	pharoBooleanLiteralColor := nil.
-	pharoCharacterLiteralColor := nil.
-	pharoPragmaColor := nil.
-	pharoReturnArrowColor := nil.
-	pharoCommentColor := nil.
-
 ]

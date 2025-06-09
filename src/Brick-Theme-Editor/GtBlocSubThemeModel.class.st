@@ -11,6 +11,17 @@ Class {
 	#category : #'Brick-Theme-Editor-Model'
 }
 
+{ #category : #'as yet unclassified' }
+GtBlocSubThemeModel class >> allLeafNeighbourSubThemeClasses: aSubThemeClass [
+	| allSuperclasses topSubThemeClass |
+	
+	allSuperclasses := self subThemeSuperclasses: aSubThemeClass.
+	topSubThemeClass := allSuperclasses last.
+	
+	^ topSubThemeClass allSubclasses
+		reject: [ :eachSubThemeClass | eachSubThemeClass hasSubclasses or: [ eachSubThemeClass = aSubThemeClass ] ].
+]
+
 { #category : #'private - initialization' }
 GtBlocSubThemeModel class >> detectAllConstantAssignmentsIn: aSubThemeClass [
 	<return: #OrderedDictionary>
@@ -22,6 +33,35 @@ GtBlocSubThemeModel class >> detectAllConstantAssignmentsIn: aSubThemeClass [
 	[ currentClass = BlSubTheme ] whileFalse: [
 		assignments addAll: (self detectConstantAssignmentsIn: currentClass).
 		currentClass := currentClass superclass ].
+	
+	^ assignments groupedBy: [ :each | each valueName ]
+]
+
+{ #category : #'private - initialization' }
+GtBlocSubThemeModel class >> detectAllNeighbourConstantAssignmentsIn: aSubThemeClass [
+	<return: #OrderedDictionary>
+	| assignments allSuperclasses topSubThemeClass allLeafSubThemes  |
+	
+	assignments := OrderedCollection new.
+	
+	allSuperclasses := self subThemeSuperclasses: aSubThemeClass.
+	topSubThemeClass := allSuperclasses last.
+	
+	allSuperclasses := allSuperclasses asSet.
+	allLeafSubThemes := topSubThemeClass allSubclasses
+		reject: [ :eachSubThemeClass | eachSubThemeClass hasSubclasses ].
+		
+	allLeafSubThemes do: [ :eachLeafSubTheme |
+		| currentClass |
+		currentClass := eachLeafSubTheme.
+		[ currentClass = BlSubTheme ] whileFalse: [
+			(allSuperclasses includes: currentClass)
+				ifFalse: [
+					(self detectConstantAssignmentsIn: currentClass)
+						do: [ :eachAssignment |
+							(assignments includes: eachAssignment)
+								ifFalse: [ assignments add: eachAssignment ] ] ].
+			currentClass := currentClass superclass ] ].
 	
 	^ assignments groupedBy: [ :each | each valueName ]
 ]
@@ -67,21 +107,34 @@ GtBlocSubThemeModel class >> generateInitializeColorsSourceCode: theThemeableVal
 ]
 
 { #category : #generation }
-GtBlocSubThemeModel class >> generateInitializeConstantsSourceCode: theThemeableValues for: aSubThemeClass [
+GtBlocSubThemeModel class >> generateInitializeConstantsSourceCode: collectionOfAssignments for: aSubThemeClass [
 	^ String streamContents: [ :s |
 		s nextPutAll: 'initializeConstants'; cr.
 		s tab nextPutAll: 'super initializeConstants.'; cr; cr.
 		
-		theThemeableValues do: [ :eachValue |		
-			eachValue constantAssignments
-				select: [ :eachAssignment | eachAssignment subThemeClass = aSubThemeClass and: [ eachAssignment subThemeSelector = #initializeConstants ] ]
-				thenDo: [ :eachAssignment |
-					s tab.
-					s nextPutAll: ('self constantAt: #{1} put: ({2}).' format: {
-						eachAssignment valueName.
-						eachAssignment valueSourceCode
-					}).
-					s cr ] ] ]
+		collectionOfAssignments
+			select: [ :eachAssignment | eachAssignment subThemeClass = aSubThemeClass and: [ eachAssignment subThemeSelector = #initializeConstants ] ]
+			thenDo: [ :eachAssignment |
+				s tab.
+				s nextPutAll: ('self constantAt: #{1} put: ({2}).' format: {
+					eachAssignment valueName.
+					eachAssignment valueSourceCode
+				}).
+				s cr ] ]
+]
+
+{ #category : #generation }
+GtBlocSubThemeModel class >> generateInitializeNeighbourConstantsSourceCode: theThemeProperties [
+	| assignmentsPerClass |
+
+	assignmentsPerClass := (theThemeProperties flatCollect: [ :each | each neighbourConstantAssignments ])
+		groupedBy: [ :eachAssignment | eachAssignment subThemeClass ].
+	
+	
+	^ (assignmentsPerClass associations collect: [ :eachAssociation |
+		eachAssociation key -> (self
+			generateInitializeConstantsSourceCode: eachAssociation value
+			for: eachAssociation key) ]) asOrderedDictionary
 ]
 
 { #category : #generation }
@@ -99,14 +152,30 @@ GtBlocSubThemeModel class >> generateInitializeThemeableSourceCode: theThemeable
 ]
 
 { #category : #'as yet unclassified' }
-GtBlocSubThemeModel >> addThemePropertyNamed: aPropertyName inClass: aSubThemeClass [
-	| newConstantValueSource newPropertyClass newPropertyValueBlockSource newPropertySourceBlockSource newPropertySourceCode newPropertyAssignment newContantAssignment aNewProperty newPropertyGetter newPropertyGetterSourceCode |
+GtBlocSubThemeModel class >> subThemeSuperclasses: aSubThemeClass [
+	^ Array streamContents: [ :s | self subThemeSuperclasses: aSubThemeClass do: [ :eachClass | s nextPut: eachClass ] ]
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocSubThemeModel class >> subThemeSuperclasses: aSubThemeClass do: aBlock [
+	| currentClass|
+	
+	currentClass := aSubThemeClass.
+	[ currentClass = BlSubTheme or: [ currentClass isNil ] ]
+		whileFalse: [
+			aBlock value: currentClass.
+			currentClass := currentClass superclass ]
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocSubThemeModel >> addThemePropertyNamed: aPropertyName valueSource: newConstantValueSource inClass: aSubThemeClass [
+	| newConstantValue newPropertyClass newPropertyValueBlockSource newPropertySourceBlockSource newPropertySourceCode newPropertyAssignment newContantAssignment aNewProperty newPropertyGetter newPropertyGetterSourceCode |
 	self
 		assert: [ (themeProperties anySatisfy: [ :each | each propertyName = aPropertyName ])
 				not ]
 		description: [ 'Property `{1}` must not already exist' format: {aPropertyName} ].
 
-	newConstantValueSource := 'Color black'.
+	newConstantValue := self class evaluate: newConstantValueSource.
 	newPropertyClass := GtBlocThemeableColorProperty.
 
 	newContantAssignment := GtBlocThemeConstantAssignment new
@@ -140,16 +209,19 @@ GtBlocSubThemeModel >> addThemePropertyNamed: aPropertyName inClass: aSubThemeCl
 			getterAst: (RBParser parseMethod: newPropertyGetterSourceCode).
 
 	aNewProperty := GtBlocThemeProperty new
-			subThemeModel: self;
+			subThemeName: self subThemeName;
 			definingSubThemeClass: aSubThemeClass;
 			propertyName: aPropertyName;
 			valueAssignments: {newPropertyAssignment};
 			constantAssignments: {newContantAssignment};
+			neighbourConstantAssignments: (self subThemeNeighbourClasses collect: [ :eachSubThemeClass |
+				newContantAssignment copyWithSubThemeClass: eachSubThemeClass
+			]);
 			propertyGetters: {newPropertyGetter}.
 
 	aNewProperty
 		propertyValue: (BlThemeableColor new
-				privateSetColor: Color black
+				privateSetColor: newConstantValue
 				computation: (self class compiler evaluate: newPropertyValueBlockSource)
 				source: (self class compiler evaluate: newPropertySourceBlockSource)
 				forTheme: subTheme theme).
@@ -203,7 +275,7 @@ GtBlocSubThemeModel >> changesOn: compositeChange [
 			compositeChange
 				compile: (self
 						formatMethod: (self class
-								generateInitializeConstantsSourceCode: self themeProperties
+								generateInitializeConstantsSourceCode: (self themeProperties flatCollect: [ :eachProperty | eachProperty constantAssignments ])
 								for: eachClass))
 				in: eachClass
 				selector: #initializeConstants
@@ -217,14 +289,28 @@ GtBlocSubThemeModel >> changesOn: compositeChange [
 							compile: (eachGetter getterAst formattedCode)
 							in: eachClass
 							selector: eachGetter propertyName
-							classified: 'accessing' ].
-							
-	] ].
+							classified: 'accessing' ] ] ].
+	
+	(self class generateInitializeNeighbourConstantsSourceCode: self themeProperties)
+		keysAndValuesDo:  [ :eachSubThemeClass :eachSourceCode |
+			compositeChange
+				compile: (self formatMethod: eachSourceCode)
+				in: eachSubThemeClass
+				selector: #initializeConstants
+				classified: 'initialization' ]
+]
+
+{ #category : #'private - initialization' }
+GtBlocSubThemeModel >> computeAllConstantAssignmentsInNeighbourThemes [
+	<return: #OrderedDictionary>
+
+	^ self class detectAllNeighbourConstantAssignmentsIn: self subThemeClass
 ]
 
 { #category : #'private - initialization' }
 GtBlocSubThemeModel >> computeConstantAssignments [
 	<return: #OrderedDictionary>
+
 	^ self class detectAllConstantAssignmentsIn: subThemeClass 
 ]
 
@@ -251,16 +337,17 @@ GtBlocSubThemeModel >> computePropertyNames [
 ]
 
 { #category : #'private - initialization' }
-GtBlocSubThemeModel >> computeThemeProperties: propertyNames assignments: themeableAssignments constantAssignments: constantAssignments getters: propertyGetters [
+GtBlocSubThemeModel >> computeThemeProperties: propertyNames assignments: themeableAssignments constantAssignments: constantAssignments neighbourConstantAssignments: neighbourConstantAssignments getters: propertyGetters [
 
 	^ propertyNames collect: [ :eachVarName | 
 		(GtBlocThemeProperty new
-			subThemeModel: self;
+			subThemeName: self subThemeName;
 			definingSubThemeClass: (self subThemeClass slotNamed: eachVarName) definingClass;
 			propertyName: eachVarName;
 			propertyValue: (subTheme instVarNamed: eachVarName);
 			valueAssignments: (themeableAssignments at: eachVarName ifAbsent: [ #() ]);
 			constantAssignments: (constantAssignments at: eachVarName ifAbsent:  [ #() ]);
+			neighbourConstantAssignments: (neighbourConstantAssignments at: eachVarName ifAbsent:  [ #() ]);
 			propertyGetters: (propertyGetters at: eachVarName ifAbsent: [ #() ])) ]
 		as: OrderedCollection
 ]
@@ -398,16 +485,14 @@ GtBlocSubThemeModel >> notifyThemeModified [
 
 { #category : #accessing }
 GtBlocSubThemeModel >> postCopy [
-	themeProperties := themeProperties copy.
-	themeProperties do: [ :each | each subThemeModel: self ]
+	themeProperties := themeProperties copy
 ]
 
 { #category : #accessing }
 GtBlocSubThemeModel >> replaceThemeProperty: aThemeableValue with: anotherValue [
 	| index |
 	index:= self themeProperties indexOf: aThemeableValue.
-	self themeProperties at: index put: anotherValue.
-	anotherValue subThemeModel: self.
+	self themeProperties at: index put: anotherValue
 ]
 
 { #category : #accessing }
@@ -435,6 +520,7 @@ GtBlocSubThemeModel >> subTheme: aBlSubTheme name: aSubThemeName [
 			computeThemeProperties: propertyNames
 			assignments: self computeThemeableAssignments
 			constantAssignments: self computeConstantAssignments
+			neighbourConstantAssignments: self computeAllConstantAssignmentsInNeighbourThemes
 			getters: propertyGetters
 ]
 
@@ -449,19 +535,20 @@ GtBlocSubThemeModel >> subThemeName [
 ]
 
 { #category : #'as yet unclassified' }
+GtBlocSubThemeModel >> subThemeNeighbourClasses [
+	^ self class allLeafNeighbourSubThemeClasses: self subThemeClass
+]
+
+{ #category : #'as yet unclassified' }
 GtBlocSubThemeModel >> subThemeSuperclasses [
 	^ Array streamContents: [ :s | self subThemeSuperclassesDo: [ :eachClass | s nextPut: eachClass ] ]
 ]
 
 { #category : #'as yet unclassified' }
 GtBlocSubThemeModel >> subThemeSuperclassesDo: aBlock [
-	| currentClass|
-	
-	currentClass := self subThemeClass.
-	[ currentClass = BlSubTheme or: [ currentClass isNil ] ]
-		whileFalse: [
-			aBlock value: currentClass.
-			currentClass := currentClass superclass ]
+	self class
+		subThemeSuperclasses: self subThemeClass
+		do: aBlock
 ]
 
 { #category : #accessing }

@@ -21,14 +21,4 @@ BrGlamorousLightThemeColors >> initialize [
 	raisedBackgroundColor := nil.
 	floatBackgroundColor := nil.
 	sidebarTextColor := Color black.
-	pharoStringLiteralColor := Color magenta muchDarker.
-	pharoSymbolLiteralColor := Color magenta muchDarker.
-	pharoNilLiteralColor := nil.
-	pharoNumberLiteralColor := nil.
-	pharoBooleanLiteralColor := nil.
-	pharoCharacterLiteralColor := nil.
-	pharoPragmaColor := nil.
-	pharoReturnArrowColor := nil.
-	pharoCommentColor := nil.
-
 ]

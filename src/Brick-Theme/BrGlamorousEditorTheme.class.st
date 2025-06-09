@@ -9,7 +9,17 @@ Class {
 		'pharoUndeclaredVariableForeground',
 		'pharoSelfVariableForeground',
 		'pharoSuperVariableForeground',
-		'pharoThisContextVariableForeground'
+		'pharoThisContextVariableForeground',
+		'pharoPragmaForeground',
+		'pharoReturnArrowForeground',
+		'pharoStringLiteralForeground',
+		'pharoSymbolLiteralForeground',
+		'pharoNumberLiteralForeground',
+		'pharoNilLiteralForeground',
+		'pharoBooleanLiteralForeground',
+		'pharoCharacterLiteralForeground',
+		'pharoCommentForeground',
+		'pharoErrorTokenForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -82,7 +92,62 @@ BrGlamorousEditorTheme >> initializeThemeable [
 
 	pharoThisContextVariableForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #pharoThisContextVariableForeground ]
-			source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ]
+			source: [ :aTheme | aTheme editor pharoThisContextVariableForeground ].
+
+	pharoPragmaForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoPragmaForeground ]
+			source: [ :aTheme | aTheme editor pharoPragmaForeground ].
+
+	pharoReturnArrowForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoReturnArrowForeground ]
+			source: [ :aTheme | aTheme editor pharoReturnArrowForeground ].
+
+	pharoStringLiteralForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoStringLiteralForeground ]
+			source: [ :aTheme | aTheme editor pharoStringLiteralForeground ].
+
+	pharoSymbolLiteralForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoSymbolLiteralForeground ]
+			source: [ :aTheme | aTheme editor pharoSymbolLiteralForeground ].
+
+	pharoNumberLiteralForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoNumberLiteralForeground ]
+			source: [ :aTheme | aTheme editor pharoNumberLiteralForeground ].
+
+	pharoNilLiteralForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoNilLiteralForeground ]
+			source: [ :aTheme | aTheme editor pharoNilLiteralForeground ].
+
+	pharoBooleanLiteralForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoBooleanLiteralForeground ]
+			source: [ :aTheme | aTheme editor pharoBooleanLiteralForeground ].
+
+	pharoCharacterLiteralForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoCharacterLiteralForeground ]
+			source: [ :aTheme | aTheme editor pharoCharacterLiteralForeground ].
+
+	pharoCommentForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoCommentForeground ]
+			source: [ :aTheme | aTheme editor pharoCommentForeground ].
+
+	pharoErrorTokenForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #pharoErrorTokenForeground ]
+			source: [ :aTheme | aTheme editor pharoErrorTokenForeground ]
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoBooleanLiteralForeground [
+	^ pharoBooleanLiteralForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoCharacterLiteralForeground [
+	^ pharoCharacterLiteralForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoCommentForeground [
+	^ pharoCommentForeground
 ]
 
 { #category : #accessing }
@@ -91,13 +156,48 @@ BrGlamorousEditorTheme >> pharoDeclaredVariableForeground [
 ]
 
 { #category : #accessing }
+BrGlamorousEditorTheme >> pharoErrorTokenForeground [
+	^ pharoErrorTokenForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoNilLiteralForeground [
+	^ pharoNilLiteralForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoNumberLiteralForeground [
+	^ pharoNumberLiteralForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoPragmaForeground [
+	^ pharoPragmaForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoReturnArrowForeground [
+	^ pharoReturnArrowForeground
+]
+
+{ #category : #accessing }
 BrGlamorousEditorTheme >> pharoSelfVariableForeground [
 	^ pharoSelfVariableForeground
 ]
 
 { #category : #accessing }
+BrGlamorousEditorTheme >> pharoStringLiteralForeground [
+	^ pharoStringLiteralForeground
+]
+
+{ #category : #accessing }
 BrGlamorousEditorTheme >> pharoSuperVariableForeground [
 	^ pharoSuperVariableForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> pharoSymbolLiteralForeground [
+	^ pharoSymbolLiteralForeground
 ]
 
 { #category : #accessing }
