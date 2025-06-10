@@ -4,15 +4,27 @@ Class {
 	#category : #'Brick-Theme-Glamorous'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BrGlamorousHeaderLightTheme >> initializeColors [
 	super initializeColors.
-	
-	defaultBackgroundColor := BrGlamorousColors defaultHeaderBackgroundColor.
-	secondaryBackgroundColor := BrGlamorousColors secondaryHeaderBackgroundColor.
 
 	textMarkupColor := BrGlamorousColors textMarkupColor.
-	
+
+	defaultBackgroundColor := BrGlamorousColors defaultHeaderBackgroundColor.
+
 	disabledTextColor := BrGlamorousColors disabledHeaderTextColor.
+
 	defaultTextColor := BrGlamorousColors defaultHeaderTextColor.
+
+	secondaryBackgroundColor := BrGlamorousColors secondaryHeaderBackgroundColor
+]
+
+{ #category : #initialization }
+BrGlamorousHeaderLightTheme >> initializeConstants [
+	super initializeConstants
+]
+
+{ #category : #initialization }
+BrGlamorousHeaderLightTheme >> initializeThemeable [
+	super initializeThemeable
 ]

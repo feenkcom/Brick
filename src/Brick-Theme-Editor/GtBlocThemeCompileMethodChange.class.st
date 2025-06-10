@@ -7,8 +7,18 @@ Class {
 		'methodSourceCode',
 		'methodProtocol'
 	],
-	#category : #'Brick-Theme-Editor-Model'
+	#category : #'Brick-Theme-Editor-Changes'
 }
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeCompileMethodChange class >> description [
+	^ 'Changed method(s)'
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeCompileMethodChange class >> priority [
+	^ 3
+]
 
 { #category : #comparing }
 GtBlocThemeCompileMethodChange >> = anObject [
@@ -20,6 +30,11 @@ GtBlocThemeCompileMethodChange >> = anObject [
 		and: [ methodClass = anObject methodClass
 				and: [ methodProtocol = anObject methodProtocol
 						and: [ methodSelector = anObject methodSelector ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocThemeCompileMethodChange >> affectedClass [
+	^ methodClass
 ]
 
 { #category : #'as yet unclassified' }

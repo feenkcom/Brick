@@ -94,7 +94,7 @@ GtBlocThemeableProperty >> createCoderViewModel: aCoderModel coderAssignment: aF
 							aForCoderAssignment originalAssignment
 								valueAst: (RBParser parseExpression: coderViewModel sourceText asString).
 								
-							aSubThemeModel generateThemeMethods changes execute.
+							aSubThemeModel generateThemeChanges execute.
 							coderViewModel coder forSource: (aForCoderAssignment originalAssignment valueSourceCode).
 							
 							aSubThemeModel notifyThemeModified ] ].
