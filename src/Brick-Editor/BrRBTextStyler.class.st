@@ -185,24 +185,32 @@ BrRBTextStyler >> parse: aText isMethod: isMethod [
 ]
 
 { #category : #private }
-BrRBTextStyler >> privateStyle: aText [ 
-    | ast |
+BrRBTextStyler >> privateStyle: aText [
+	| ast |
+	ast := self
+			forPharo12: [ 
+				| compiler |
+				compiler := classOrMetaClass compiler
+						source: aText asString;
+						receiver: (self isScripting 
+							ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
+						isScripting: self isScripting;
+						requestor: workspace.
+				compiler parse ]
+			forPharo11AndPharo10: [ 
+				| currentAst |
+				currentAst := self parse: aText isMethod: self isForWorkspace not.
+				currentAst methodNode
+					compilationContext: (CompilationContext new
+							class: (classOrMetaClass ifNil: [ UndefinedObject ]);
+							requestor: workspace).
+				currentAst doSemanticAnalysis.
+				currentAst ].
 
-    ast := self parse: aText isMethod: self isForWorkspace not.
-    ast methodNode compilationContext: (CompilationContext new
-            class: (classOrMetaClass ifNil: [UndefinedObject]);
-				requestor: workspace).
-				"Requestor already has support for obtaining the bindings. 
-				Adding both the requestor and the bindings creates two scopes
-				that are used for looking up variables."
-				"bindings: (workspace ifNil: [ Dictionary new ]);"
-    ast doSemanticAnalysis.
-
-
-   self style: aText ast: ast.
+	self style: aText ast: ast.
 	self extraStyle: aText ast: ast.
 
-    ^ aText
+	^ aText
 ]
 
 { #category : #private }
