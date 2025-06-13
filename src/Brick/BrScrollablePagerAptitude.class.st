@@ -17,7 +17,6 @@ BrScrollablePagerAptitude >> initialize [
 	pagesListElement addAptitude: (BrLayoutResizerAptitude new inherit: [ pagesListElement children ]).
 
 	self addChangeAddChildAs: #(content list) with: [ pagesListElement ].
-	self add: (BrLayoutResizerAptitude new inherit: pagesListElement)
 ]
 
 { #category : #initialization }
