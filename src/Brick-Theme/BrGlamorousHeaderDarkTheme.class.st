@@ -23,8 +23,7 @@ BrGlamorousHeaderDarkTheme >> initializeColors [
 BrGlamorousHeaderDarkTheme >> initializeConstants [
 	super initializeConstants.
 
-	self constantAt: #textMarkupColor put: (Color gray).
-
+	self constantAt: #textMarkupColor put: Color gray
 ]
 
 { #category : #initialization }

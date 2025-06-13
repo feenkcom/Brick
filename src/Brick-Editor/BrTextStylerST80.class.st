@@ -13,7 +13,7 @@ Class {
 		'textAttributesByPixelHeight',
 		'textAttributes'
 	],
-	#category : 'Brick-Editor-Styler'
+	#category : #'Brick-Editor-Styler'
 }
 
 { #category : #private }
@@ -1011,6 +1011,13 @@ BrTextStylerST80 >> isForWorkspace [
 { #category : #accessing }
 BrTextStylerST80 >> isForWorkspace: aBoolean [
 	isForWorkspace := aBoolean
+]
+
+{ #category : #accessing }
+BrTextStylerST80 >> isScripting [
+	^workspace
+		ifNil: [ isForWorkspace ifNil: [ false ]]
+		ifNotNil: [ workspace isScripting ]
 ]
 
 { #category : #private }

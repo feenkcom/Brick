@@ -73,21 +73,23 @@ GtBlocSubThemeEditorElement >> createEditorForProperty: aTypedThemeProperty assi
 { #category : #'as yet unclassified' }
 GtBlocSubThemeEditorElement >> createEditorHeaderForProperty: aTypedThemeProperty assignmentForCoder: assignmentForCoder [
 	| container |
-	
 	container := BrHorizontalPane new
-		hMatchParent;
-		vFitContent.
-	
-	container addChild: (BrButton new
-		fitContent;
-		beSmallSize;
-		margin: (BlInsets top: 6 left: 3);
-		label: assignmentForCoder subThemeMethod printString;
-		aptitude: BrGlamorousMetadataLabelAptitude + (BrLazyStyleCommonAptitude new hovered: [ :s :t | s border: t button hoveredBorderColor ]);
-		action: [ :aButton |
-			aButton phlow spawnTool: 
-				(GtMethodCoderTool compiledMethod: assignmentForCoder subThemeMethod)]).
-	
+			hMatchParent;
+			vFitContent.
+
+	container
+		addChild: (BrButton new
+				fitContent;
+				beSmallSize;
+				margin: (BlInsets top: 6 left: 3);
+				label: assignmentForCoder printSubThemeMethod;
+				aptitude: BrGlamorousMetadataLabelAptitude
+						+ (BrLazyStyleCommonAptitude new
+								hovered: [ :s :t | s border: t button hoveredBorderColor ]);
+				action: [ :aButton | 
+					assignmentForCoder subThemeMethod
+						ifNotNil: [ :aCompiledMethod | aButton phlow spawnTool: (GtMethodCoderTool compiledMethod: aCompiledMethod) ] ]).
+
 	^ container
 ]
 
@@ -368,7 +370,7 @@ GtBlocSubThemeEditorElement >> initialize [
 							'Inspect model'
 										-> [ :aLabel | aLabel phlow spawnObject: self subThemeModel ].
 							'Inspect changes'
-										-> [ :aLabel | aLabel phlow spawnObject: self subThemeModel generateThemeMethods ]} ]).
+										-> [ :aLabel | aLabel phlow spawnObject: self subThemeModel generateThemeChanges ]} ]).
 
 	addPropertyButton := BrButton new
 			beSmallSize;

@@ -49,16 +49,12 @@ BrGlamorousHeaderTheme >> disabledTextColor: anObject [
 
 { #category : #initialization }
 BrGlamorousHeaderTheme >> initializeColors [
-	super initializeColors.
-
-
+	super initializeColors
 ]
 
 { #category : #initialization }
 BrGlamorousHeaderTheme >> initializeConstants [
-	super initializeConstants.
-
-
+	super initializeConstants
 ]
 
 { #category : #initialization }
@@ -66,10 +62,8 @@ BrGlamorousHeaderTheme >> initializeThemeable [
 	super initializeThemeable.
 
 	defaultBackground := self
-	background: [ :aTheme | aTheme header defaultBackgroundColor ]
-	source: [ :aTheme | aTheme header defaultBackground ].
-
-
+			background: [ :aTheme | aTheme header defaultBackgroundColor ]
+			source: [ :aTheme | aTheme header defaultBackground ]
 ]
 
 { #category : #accessing }

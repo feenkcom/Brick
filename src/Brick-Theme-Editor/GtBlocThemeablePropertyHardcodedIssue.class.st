@@ -62,7 +62,7 @@ GtBlocThemeablePropertyHardcodedIssue >> fixItForTheme: aTheme [
 		replaceThemeProperty: typedThemeableProperty themeProperty
 		with: newThemeProperty.
 
-	^ subThemeModelCopy generateThemeMethods
+	^ subThemeModelCopy generateThemeChanges
 ]
 
 { #category : #accessing }

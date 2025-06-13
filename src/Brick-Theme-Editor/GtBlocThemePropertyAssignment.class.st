@@ -34,6 +34,11 @@ GtBlocThemePropertyAssignment >> isConstantAssignment [
 	^ false
 ]
 
+{ #category : #'as yet unclassified' }
+GtBlocThemePropertyAssignment >> printSubThemeMethod [
+	^ '{1} >> #{2}' format: { subThemeClass name . subThemeSelector }
+]
+
 { #category : #accessing }
 GtBlocThemePropertyAssignment >> propertyName [
 	^ propertyName

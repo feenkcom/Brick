@@ -434,12 +434,12 @@ GtBlocSubThemeModel >> generatePropertyValueBlockSourceCode: aThemePropertyName 
 ]
 
 { #category : #generation }
-GtBlocSubThemeModel >> generateThemeMethods [
+GtBlocSubThemeModel >> generateThemeChanges [
 	| compositeChange |
 
 	compositeChange := GtBlocThemeCompositeChange new.
 	self changesOn: compositeChange.
-	^ compositeChange changedNamespace
+	^ compositeChange
 ]
 
 { #category : #'as yet unclassified' }

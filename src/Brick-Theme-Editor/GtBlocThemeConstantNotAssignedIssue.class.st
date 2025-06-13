@@ -35,7 +35,7 @@ GtBlocThemeConstantNotAssignedIssue >> fixItForTheme: aTheme [
 		replaceThemeProperty: typedThemeProperty themeProperty
 		with: newThemeProperty.
 
-	^ newSubThemeModel generateThemeMethods
+	^ newSubThemeModel generateThemeChanges
 ]
 
 { #category : #accessing }
