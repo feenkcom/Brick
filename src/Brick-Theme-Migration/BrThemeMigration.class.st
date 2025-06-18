@@ -171,7 +171,7 @@ BrThemeMigration >> referencesChanges [
 		flatCollect:
 			[ :e | e value associations collect: [ :f | f value -> (e key -> f key) ] ])
 		asDictionary.
-	model := RBClassModelFactory rbNamespace
+	model := Smalltalk createRbNamespace
 		onEnvironment: RBBrowserEnvironment new.
 	(BrThemeColorSenderRefactoring
 		model: model
@@ -185,7 +185,7 @@ BrThemeMigration >> scaffoldingChanges [
 	<noTest>
 	| themeSelectorsMapping model |
 	themeSelectorsMapping := self themeSelectorsMapping.
-	model := RBClassModelFactory rbNamespace
+	model := Smalltalk createRbNamespace
 		onEnvironment: RBBrowserEnvironment new.
 	(self refactoringAddParentThemeClassIn: model) primitiveExecute.
 	themeSelectorsMapping
