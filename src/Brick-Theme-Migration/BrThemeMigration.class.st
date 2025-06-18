@@ -36,7 +36,7 @@ BrThemeMigration >> colorMethodsToMigrate [
 	<return: #Array>
 	^ BrGlamorousColors class methods
 		reject: [ :e | 
-			(e category beginsWith: '*')
+			(e protocolName beginsWith: '*')
 				or: [ e category = #initialization or: [ e selector isUnary not ] ] ]
 ]
 
