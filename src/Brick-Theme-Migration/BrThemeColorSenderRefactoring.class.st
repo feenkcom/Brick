@@ -49,7 +49,7 @@ BrThemeColorSenderRefactoring >> preconditions [
 ]
 
 { #category : #transforming }
-BrThemeColorSenderRefactoring >> privateTranform [
+BrThemeColorSenderRefactoring >> privateTransform [
 	self basicTransform
 ]
 
