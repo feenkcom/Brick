@@ -22,18 +22,8 @@ BrThemeColorSenderRefactoring class >> selectorThemesMapping: aDictionary [
 		yourself
 ]
 
-{ #category : #accessing }
-BrThemeColorSenderRefactoring >> preconditions [
-	^ RBCondition withBlock: [ true ]
-]
-
-{ #category : #accessing }
-BrThemeColorSenderRefactoring >> selectorThemesMapping: aDictionary [
-	selectorThemesMapping := aDictionary
-]
-
-{ #category : #accessing }
-BrThemeColorSenderRefactoring >> transform [
+{ #category : #transforming }
+BrThemeColorSenderRefactoring >> basicTransform [
 	"Note that this refactoring ignores the model in querying, but writes to the model"
 
 	BlElement gtIsOrInheritsFrom | BrAptitude gtIsOrInheritsFrom
@@ -43,8 +33,7 @@ BrThemeColorSenderRefactoring >> transform [
 				ifFalse: [ self
 						convertMethod: m selector
 						for: (self classObjectFor: m methodClass)
-						using:
-							(RBParseTreeRewriter new
+						using: (RBParseTreeRewriter new
 								replace: 'BrGlamorousColors `@s: `@a'
 								withValueFrom: [ :n | 
 									| themeSelector |
@@ -52,4 +41,24 @@ BrThemeColorSenderRefactoring >> transform [
 									RBParser
 										parseExpression: 'self theme ' , themeSelector key , ' ' , themeSelector value ]
 								when: [ :n | selectorThemesMapping includesKey: n selector ]) ] ]
+]
+
+{ #category : #accessing }
+BrThemeColorSenderRefactoring >> preconditions [
+	^ RBCondition withBlock: [ true ]
+]
+
+{ #category : #transforming }
+BrThemeColorSenderRefactoring >> privateTranform [
+	self basicTransform
+]
+
+{ #category : #accessing }
+BrThemeColorSenderRefactoring >> selectorThemesMapping: aDictionary [
+	selectorThemesMapping := aDictionary
+]
+
+{ #category : #transforming }
+BrThemeColorSenderRefactoring >> transform [
+	self basicTransform
 ]
