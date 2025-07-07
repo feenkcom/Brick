@@ -37,7 +37,7 @@ BrThemeMigration >> colorMethodsToMigrate [
 	^ BrGlamorousColors class methods
 		reject: [ :e | 
 			(e protocolName beginsWith: '*')
-				or: [ e category = #initialization or: [ e selector isUnary not ] ] ]
+				or: [ e protocolName = #initialization or: [ e selector isUnary not ] ] ]
 ]
 
 { #category : #accessing }
@@ -63,7 +63,7 @@ BrThemeMigration >> methodToTheme: aMethod [
 	| category |
 	aMethod selector = #expandCollapseTriangleBackgroundColor
 		ifTrue: [ ^ 'default' ].
-	category := aMethod category.
+	category := aMethod protocolName.
 	category = #accessing ifTrue: [ ^ 'default' ].
 	(category beginsWith: 'list') ifTrue: [ ^ 'item' ].
 	(category beginsWith: 'links') ifTrue: [ ^ 'link' ].
