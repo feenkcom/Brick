@@ -1,3 +1,9 @@
+"
+I notify a {{gtClass:BrMaximizerHostAptitude}} that an {{gtMethod:BrMaximizerMaximizeWish>>#elementToMaximize | label=element}} wishes to be maximized.
+I am called from {{gtMethod:BrWithMaximizerAptitude>>#maximizeElement:in:}}. 
+I am used internally to communicate wished between two maximizer aptitudes.
+If you want to send a maximize wish from your code, please, use {{gtClass:BrWithMaximizerAptitudeMaximizeWish}}. 
+"
 Class {
 	#name : #BrMaximizerMaximizeWish,
 	#superclass : #BlEvent,
@@ -6,7 +12,7 @@ Class {
 		'elementToMaximize',
 		'preferredBackground'
 	],
-	#category : 'Brick-Maximizer - Event'
+	#category : #'Brick-Maximizer - Event'
 }
 
 { #category : #accessing }
