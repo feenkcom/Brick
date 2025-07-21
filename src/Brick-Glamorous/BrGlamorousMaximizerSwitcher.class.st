@@ -7,7 +7,13 @@ Class {
 		'closeButton',
 		'maximizerAptitude',
 		'containerElement',
-		'contentElement'
+		'contentElement',
+		'originalElevation',
+		'previousHorizontalResizerState',
+		'previousVerticalResizerState',
+		'originalHorizontalResizingStrategy',
+		'originalVerticalResizingStrategy',
+		'originalPosition'
 	],
 	#category : #'Brick-Glamorous-Maximizer'
 }
@@ -95,9 +101,35 @@ BrGlamorousMaximizerSwitcher >> maximizerAptitude: anAptitude [
 	maximizerAptitude := anAptitude
 ]
 
+{ #category : #private }
+BrGlamorousMaximizerSwitcher >> minimize [
+	hostElement removeChild: containerElement.
+	elementToMaximize removeFromParent.
+
+	originalElevation ifNotNil: [ elementToMaximize elevation: originalElevation ].
+
+	previousHorizontalResizerState
+		ifNil: [ elementToMaximize states
+				removeState: BrLayoutHorizontalResizerState matchParent ]
+		ifNotNil: [ elementToMaximize states addState: previousHorizontalResizerState ].
+
+	previousVerticalResizerState
+		ifNil: [ elementToMaximize states removeState: BrLayoutVerticalResizerState matchParent ]
+		ifNotNil: [ elementToMaximize states addState: previousVerticalResizerState ].
+
+	elementToMaximize constraints horizontal
+		resizer: originalHorizontalResizingStrategy.
+	elementToMaximize constraints vertical
+		resizer: originalVerticalResizingStrategy.
+	elementToMaximize constraints position: originalPosition.
+	maximizerAptitude
+		dispatchEvent: (BrMaximizerMinimizeWish new
+				elementToMinimize: elementToMaximize;
+				hostElement: hostElement)
+]
+
 { #category : #building }
 BrGlamorousMaximizerSwitcher >> switch [
-	| originalElevation originalHorizontalResizingStrategy originalVerticalResizingStrategy originalPosition previousHorizontalResizerState previousVerticalResizerState |
 	self assert: [ closeButton isKindOf: BlElement ].
 	self assert: [ closeButton respondsTo: #action: ].
 	self assert: [ elementToMaximize isKindOf: BlElement ].
@@ -133,27 +165,15 @@ BrGlamorousMaximizerSwitcher >> switch [
 	elementToMaximize states addState: BrLayoutHorizontalResizerState matchParent.
 	elementToMaximize states addState: BrLayoutVerticalResizerState matchParent.
 	
-	closeButton action: [
-		hostElement removeChild: containerElement.
-		elementToMaximize removeFromParent.
+	containerElement when: BrMaximizerHostMinimizeWish do: [ :anEvent |
+		anEvent consumed: true.
+		self minimize ].
 		
-		originalElevation ifNotNil: [
-			elementToMaximize elevation: originalElevation ].
-		
-		previousHorizontalResizerState
-			ifNil: [ elementToMaximize states removeState: BrLayoutHorizontalResizerState matchParent ]
-			ifNotNil: [ elementToMaximize states addState: previousHorizontalResizerState ].
-			
-		previousVerticalResizerState
-			ifNil: [ elementToMaximize states removeState: BrLayoutVerticalResizerState matchParent ]
-			ifNotNil: [ elementToMaximize states addState: previousVerticalResizerState ].
-		
-		elementToMaximize constraints horizontal resizer: originalHorizontalResizingStrategy.
-		elementToMaximize constraints vertical resizer: originalVerticalResizingStrategy.
-		elementToMaximize constraints position: originalPosition.
-		maximizerAptitude dispatchEvent: (BrMaximizerMinimizeWish new 
-			elementToMinimize: elementToMaximize; 
-			hostElement: hostElement) ].
+	containerElement when: BrMaximizerHostMaximizedElementWish do: [ :anEvent |
+		anEvent consumed: true.
+		anEvent maximizedElement: elementToMaximize ].
+	
+	closeButton action: [ self minimize ].
 			
 	contentElement 
 		ifNil: [
