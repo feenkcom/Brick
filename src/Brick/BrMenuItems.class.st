@@ -100,6 +100,16 @@ BrMenuItems >> addItemIcon: anIconStencil label: aText submenu: aSubmenu [
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString preview: aPreviewString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem id: anId.
+	aMenuItem icon: anIconStencil label: aLabelString preview: aPreviewString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.

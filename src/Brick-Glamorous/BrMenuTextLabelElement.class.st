@@ -109,7 +109,7 @@ BrMenuTextLabelElement >> onLabelModelChanged [
 
 { #category : #'event handling' }
 BrMenuTextLabelElement >> onMenuUpdateWish: anEvent [
-	self updateLabelElement
+	self updateElement
 ]
 
 { #category : #'private - updating' }

@@ -30,7 +30,7 @@ BrMenuIconTextLabelElement >> updateIconElement [
 	| anIconElement |
 	iconContainer removeChildren.
 	self labelModel icon ifNil: [ ^ self ].
-	anIconElement := self labelModel icon asElement.
+	anIconElement := self labelModel icon value asElement.
 	anIconElement ifNil: [ ^ self ].
 	iconContainer addChild: anIconElement as: #'menu-icon'
 ]
