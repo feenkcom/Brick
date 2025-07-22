@@ -35,6 +35,13 @@ BrMenuItemGroupConfiguration class >> gemstone [
 ]
 
 { #category : #factory }
+BrMenuItemGroupConfiguration class >> inspection [
+	^ self new
+		name: #Inspection;
+		priority: 40
+]
+
+{ #category : #factory }
 BrMenuItemGroupConfiguration class >> navigation [
 	^ self new
 		name: #Navigation;
