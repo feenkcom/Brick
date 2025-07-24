@@ -20,5 +20,5 @@ BrMenuIconTextLabelModel >> icon [
 
 { #category : #accessing }
 BrMenuIconTextLabelModel >> icon: aStencil [
-	icon := aStencil
+	icon := aStencil asStencil
 ]
