@@ -142,38 +142,44 @@ BrSimpleListExamples >> scripterAllClassesMultiSelect [
 BrSimpleListExamples >> scripterAllClassesMultiSelectSelected [
 	<gtExample>
 	<return: #BlScripter>
-	| aScripter |
+	| aScripter allSystemClasses |
 	aScripter := self scripterAllClassesMultiSelect.
-
-	aScripter
-		clickStep: [ :s | 
+	aScripter clickStep: 
+			[:s |
 			s
 				label: 'Select items in list';
 				id: #scrollable;
-				onChildAt: 2 ].
-
-
-	aScripter
-		clickStep: [ :s | 
+				onChildAt: 2].
+	aScripter clickStep: 
+			[:s |
 			s
 				label: 'Select items in list';
 				id: #scrollable;
 				onChildAt: 5;
-				modifiers: BlKeyModifiers shift ].
-
-	aScripter
-		checkStep: [ :s | 
+				modifiers: BlKeyModifiers shift].
+	aScripter checkStep: 
+			[:s |
 			s
 				label: 'Check that selection works';
-				satisfies: [ :anElement | anElement selectedIndices size = 4 ] ].
-
-	aScripter
-		checkStep: [ :s | 
+				satisfies: [:anElement | anElement selectedIndices size = 4]].
+		
+	allSystemClasses := SystemNavigation new allClasses
+			sorted: [:a :b | a name < b name].
+	aScripter checkStep: 
+			[:s |
 			s
-				label: 'Check that selected items are correct';
-				satisfies: [ :anElement | anElement selectedItems includes: AIBFS ] ].
-
-	^ aScripter
+				label: 'Check that selected items are correct - first';
+				satisfies: [:anElement | anElement selectedItems includes: allSystemClasses second]].
+				
+	aScripter checkStep: 
+			[:s |
+			s
+				label: 'Check that selected items are correct - last';
+				satisfies: 
+						[:anElement |
+						anElement selectedItems
+							includes: allSystemClasses fifth]].
+	^aScripter
 ]
 
 { #category : #'examples - vertical list' }
