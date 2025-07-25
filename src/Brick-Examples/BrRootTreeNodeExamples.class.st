@@ -16,7 +16,6 @@ BrRootTreeNodeExamples >> collapse_depth_1 [
 			for: self.
 
 	aNode collapse.
-
 	aNode announcer removeSubscription: aCollapsedSubscription.
 
 	self assert: aNode isExpanded not.
