@@ -1,5 +1,5 @@
 Class {
 	#name : #BrExampleTaggerCatTag,
 	#superclass : #BrExampleTaggerAnimalTag,
-	#category : 'Brick-Examples-Tagger'
+	#category : #'Brick-Examples-Tagger'
 }
