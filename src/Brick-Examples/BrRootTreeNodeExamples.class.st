@@ -12,10 +12,10 @@ BrRootTreeNodeExamples >> collapse_depth_1 [
 	aNode := self expand_depth_1.
 	aCollapsedSubscription := aNode announcer
 			when: BrTreeNodeCollapsed
-			do: [ :ann | anAnnouncement := ann ].
+			do: [ :ann | anAnnouncement := ann ]
+			for: self.
 
 	aNode collapse.
-
 	aNode announcer removeSubscription: aCollapsedSubscription.
 
 	self assert: aNode isExpanded not.
@@ -65,7 +65,8 @@ BrRootTreeNodeExamples >> expand_depth_1 [
 	aNode := self depth_1.
 	anExpandedSubscription := aNode announcer
 			when: BrTreeNodeExpanded
-			do: [ :ann | anAnnouncement := ann ].
+			do: [ :ann | anAnnouncement := ann ]
+			for: self.
 
 	aNode expand.
 
