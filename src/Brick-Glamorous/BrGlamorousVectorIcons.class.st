@@ -279,6 +279,11 @@ BrGlamorousVectorIcons class >> emphasizedPlay [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> empty [
+	^ [ BlElement new size: 16 @ 16 ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> feenk [
 	<script: 'self feenk inspect'>
 
