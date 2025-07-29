@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'announcer',
 		'parent',
-		'id'
+		'id',
+		'definitionComputation'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -27,6 +28,29 @@ BrMenuModel >> announcer [
 { #category : #'api - converting' }
 BrMenuModel >> asStencil [
 	^ [ self ] asStencil
+]
+
+{ #category : #accessing }
+BrMenuModel >> definition [
+	"Return a menu model defining method."
+
+	^ definitionComputation value
+]
+
+{ #category : #accessing }
+BrMenuModel >> definition: aDefinitionComputation [
+	"Set a menu model defining method.
+	It can be a block that computes the defining method."
+
+	definitionComputation := aDefinitionComputation
+]
+
+{ #category : #accessing }
+BrMenuModel >> definitionComputation [
+	"Return a menu model defining method.
+	It can be a block that computes the defining method."
+
+	^ definitionComputation
 ]
 
 { #category : #accessing }

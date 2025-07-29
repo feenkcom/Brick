@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrMenuLabeledItem,
 	#instVars : [
 		'action',
-		'hideOnClick'
+		'hideOnClick',
+		'actionWithModifiers'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -27,6 +28,27 @@ BrMenuActionItem >> action: aBlock [
 ]
 
 { #category : #accessing }
+BrMenuActionItem >> actionWithModifiers [
+	^ actionWithModifiers
+]
+
+{ #category : #accessing }
+BrMenuActionItem >> actionWithModifiers: aBlock [
+	"Set a block that is evaluated on click events.
+	It has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
+
+	actionWithModifiers := aBlock
+]
+
+{ #category : #accessing }
+BrMenuActionItem >> definition: aBlock [
+	super definition: aBlock.
+	self actionWithModifiers: [ :anElement :aButtonModel :anEvent |
+		self definition ifNotNil: [ :aDefinition |
+			anElement phlow spawnObject: aDefinition ] ]
+]
+
+{ #category : #accessing }
 BrMenuActionItem >> hideOnClick [
 	<return: #Boolean>
 	^ hideOnClick ifNil: [ true ]
@@ -42,5 +64,6 @@ BrMenuActionItem >> initialize [
 	super initialize.
 	
 	action := [ :anElement :aButtonModel :anEvent | ].
+	actionWithModifiers := [ :anElement :aButtonModel :anEvent | ].
 	hideOnClick := true
 ]
