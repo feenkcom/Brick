@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'submenu',
 		'action',
-		'hideOnClick'
+		'hideOnClick',
+		'actionWithModifiers'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -28,8 +29,29 @@ BrMenuSubmenuItem >> action: aBlock [
 ]
 
 { #category : #'api - action' }
+BrMenuSubmenuItem >> actionWithModifiers [
+	^ actionWithModifiers
+]
+
+{ #category : #'api - action' }
+BrMenuSubmenuItem >> actionWithModifiers: aBlock [
+	"Set a block that is evaluated on click events.
+	It has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
+
+	actionWithModifiers := aBlock
+]
+
+{ #category : #'api - action' }
 BrMenuSubmenuItem >> bePinSubmenuAction [
 	self action: [ :anElement :aButtonModel :anEvent | self notifyPinRequest ]
+]
+
+{ #category : #accessing }
+BrMenuSubmenuItem >> definition: aBlock [
+	super definition: aBlock.
+	self actionWithModifiers: [ :anElement :aButtonModel :anEvent |
+		self definition ifNotNil: [ :aDefinition |
+			anElement phlow spawnObject: aDefinition ] ]
 ]
 
 { #category : #'gt - extensions' }
@@ -52,6 +74,7 @@ BrMenuSubmenuItem >> hideOnClick: aBoolean [
 BrMenuSubmenuItem >> initialize [
 	super initialize.
 	action := [ :anElement :aButtonModel :anEvent |  ].
+	actionWithModifiers := [ :anElement :aButtonModel :anEvent | ].
 	hideOnClick := false.
 	submenu := BrMenuItems new parent: self
 ]
