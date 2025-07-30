@@ -9,7 +9,7 @@ Class {
 		'preferredBackground',
 		'targetQuery'
 	],
-	#category : 'Brick-Maximizer - Look'
+	#category : #'Brick-Maximizer - Look'
 }
 
 { #category : #private }
@@ -62,6 +62,8 @@ BrWithMaximizerAptitude >> isMaximized [
 
 { #category : #'api - maximization' }
 BrWithMaximizerAptitude >> maximize [
+	isMaximized ifTrue: [ ^ self ].
+
 	self widgetDo: [ :anElement |
 		| anElementToMaximize |
 		
