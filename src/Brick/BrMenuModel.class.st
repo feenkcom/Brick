@@ -30,27 +30,36 @@ BrMenuModel >> asStencil [
 	^ [ self ] asStencil
 ]
 
-{ #category : #accessing }
+{ #category : #'api - definitions' }
 BrMenuModel >> definition [
 	"Return a menu model defining method."
 
-	^ definitionComputation value
+	^ definitionComputation ifNotNil: #definition
 ]
 
-{ #category : #accessing }
+{ #category : #'api - definitions' }
 BrMenuModel >> definition: aDefinitionComputation [
 	"Set a menu model defining method.
 	It can be a block that computes the defining method."
 
-	definitionComputation := aDefinitionComputation
+	definitionComputation := BrMenuDefinitionExplicitComputation new
+			valuable: aDefinitionComputation
 ]
 
-{ #category : #accessing }
+{ #category : #'api - definitions' }
 BrMenuModel >> definitionComputation [
-	"Return a menu model defining method.
-	It can be a block that computes the defining method."
+	"Return a menu model defining method."
 
+	<return: #TBrMenuDefinitionComputation>
 	^ definitionComputation
+]
+
+{ #category : #'api - definitions' }
+BrMenuModel >> definitionComputation: aDefinitionComputation [
+	"Set a menu model defining method."
+
+	<return: #TBrMenuDefinitionComputation>
+	definitionComputation := aDefinitionComputation
 ]
 
 { #category : #accessing }
