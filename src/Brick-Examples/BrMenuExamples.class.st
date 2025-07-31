@@ -308,6 +308,46 @@ BrMenuExamples >> menuIconTextAndShortcutLabel [
 	^ aLabel
 ]
 
+{ #category : #'examples - label' }
+BrMenuExamples >> menuIconTextLabel [
+	<gtExample>
+	<return: #BrMenuTextLabelModel>
+	| aLabel anElement |
+	aLabel := BrMenuIconTextLabelModel new.
+	aLabel
+		text: 'Copy';
+		preview: 'class name';
+		shortcut: 'CMD+C';
+		icon: BrGlamorousVectorIcons clipboard.
+
+	anElement := BrMenuIconTextLabelElement new.
+	anElement labelModel: aLabel.
+
+	^ anElement
+]
+
+{ #category : #'examples - label' }
+BrMenuExamples >> menuIconTextLabelWithIconError [
+	<gtExample>
+	<return: #BrMenuTextLabelModel>
+	| aLabel anElement |
+	aLabel := BrMenuIconTextLabelModel new.
+	aLabel
+		text: 'Copy';
+		preview: 'class name';
+		shortcut: 'CMD+C';
+		icon: [ 1/0. BrGlamorousVectorIcons clipboard ].
+
+	anElement := BrMenuIconTextLabelElement new.
+	anElement labelModel: aLabel.
+
+	self assert: anElement childrenCount equals: 4.
+	anElement children
+		detect: [ :each | each id = #'menu--icon-exception' asBlocElementId ].
+
+	^ anElement
+]
+
 { #category : #'examples - items' }
 BrMenuExamples >> menuItems [
 	<gtExample>
@@ -348,6 +388,15 @@ BrMenuExamples >> menuItems [
 				label: 'Complex submenu';
 				submenu: self explicitMenuWithWithButtons).
 	aMenuItems addItem: self menuExplicitItemWithEditor.
+	aMenuItems
+		addItem: (BrMenuActionItem new
+				icon: [ 1 / 0.
+						nil ]
+					label: [ 1 / 0.
+						'Label error' ]
+					preview: [ 1 / 0 ]
+					shortcut: [ 1 / 0 ];
+				action: [ :aButton | aButton phlow spawnObject: aButton ]).
 
 	anElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
 	self assert: (anElement isKindOf: BlElement).
@@ -444,6 +493,69 @@ BrMenuExamples >> menuTextLabel [
 	self assert: aLabel text equals: 'Copy'.
 
 	^ aLabel
+]
+
+{ #category : #'examples - label' }
+BrMenuExamples >> menuTextLabelWithPreviewError [
+	<gtExample>
+	<return: #BrMenuTextLabelElement>
+	| aLabel anElement |
+	aLabel := BrMenuTextLabelModel new.
+	aLabel
+		text: 'Copy';
+		preview: [ 1 / 0.
+			'class name' ].
+
+	anElement := BrMenuTextLabelElement new.
+	anElement labelModel: aLabel.
+
+	self assert: anElement childrenCount equals: 3.
+	anElement children
+		detect: [ :each | each id = #'menu--label-exception' asBlocElementId ].
+
+	^ anElement
+]
+
+{ #category : #'examples - label' }
+BrMenuExamples >> menuTextLabelWithShortcutError [
+	<gtExample>
+	<return: #BrMenuTextLabelElement>
+	| aLabel anElement |
+	aLabel := BrMenuTextLabelModel new.
+	aLabel
+		text: 'Copy';
+		preview: 'class name';
+		shortcut: [ 1 / 0.
+			'CMD+C' ].
+
+	anElement := BrMenuTextLabelElement new.
+	anElement labelModel: aLabel.
+
+	self assert: anElement childrenCount equals: 3.
+	anElement children
+		detect: [ :each | each id = #'menu--shortcut-exception' asBlocElementId ].
+
+	^ anElement
+]
+
+{ #category : #'examples - label' }
+BrMenuExamples >> menuTextLabelWithTextError [
+	<gtExample>
+	<return: #BrMenuTextLabelElement>
+	| aLabel anElement |
+	aLabel := BrMenuTextLabelModel new.
+	aLabel
+		text: [ 1 / 0.
+			'Copy' ].
+
+	anElement := BrMenuTextLabelElement new.
+	anElement labelModel: aLabel.
+
+	self assert: anElement childrenCount equals: 3.
+	anElement children
+		detect: [ :each | each id = #'menu--label-exception' asBlocElementId ].
+
+	^ anElement
 ]
 
 { #category : #'examples - submenu' }
