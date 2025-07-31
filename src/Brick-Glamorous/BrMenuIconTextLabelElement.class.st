@@ -30,7 +30,15 @@ BrMenuIconTextLabelElement >> updateIconElement [
 	| anIconElement |
 	iconContainer removeChildren.
 	self labelModel icon ifNil: [ ^ self ].
-	anIconElement := self labelModel icon asStencil asElement.
+	[ anIconElement := self labelModel icon asStencil asElement ]
+		onErrorDo: [ :anException | 
+			| aButton |
+			aButton := BrDebuggableElementStencil new
+					freeze: anException;
+					createDebugButton.
+			aButton id: #'menu--icon-exception'.
+			self addChild: aButton after: iconContainer.
+			anException return: nil ].
 	anIconElement ifNil: [ ^ self ].
 	iconContainer addChild: anIconElement as: #'menu-icon'
 ]

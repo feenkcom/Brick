@@ -120,15 +120,37 @@ BrMenuTextLabelElement >> updateElement [
 
 { #category : #'private - updating' }
 BrMenuTextLabelElement >> updateLabelElement [
-	labelElement text: self labelText.
+	| aText |
+	aText := [ self labelText ]
+			onErrorDo: [ :anException | 
+				| aButton |
+				aButton := BrDebuggableElementStencil new
+						freeze: anException;
+						createDebugButton.
+				aButton id: #'menu--label-exception'.
+				self addChild: aButton after: labelElement.
+				anException
+					return: ('Error' asRopedText foreground: self theme status errorBackgroundColor) ].
+	labelElement text: aText
 ]
 
 { #category : #'private - updating' }
 BrMenuTextLabelElement >> updateShortcutElement [
-	self labelModel shortcutDo: [ :aText | 
-		shortcutElement visibility: BlVisibility visible.
-		shortcutLabel text: aText.
-		^ self ].
+	[ self labelModel
+		shortcutDo: [ :aText | 
+			shortcutElement visibility: BlVisibility visible.
+			shortcutLabel text: aText.
+			^ self ] ]
+		onErrorDo: [ :anException | 
+			| aButton |
+			aButton := BrDebuggableElementStencil new
+					freeze: anException;
+					createDebugButton.
+			aButton id: #'menu--shortcut-exception'.
+			self addChild: aButton after: shortcutElement.
+			anException
+				return: ('Error' asRopedText foreground: self theme status errorBackgroundColor) ].
+
 	shortcutElement visibility: BlVisibility gone.
-	shortcutLabel text: ''.
+	shortcutLabel text: ''
 ]
