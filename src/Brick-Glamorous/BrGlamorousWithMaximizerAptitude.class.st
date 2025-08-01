@@ -35,9 +35,7 @@ BrGlamorousWithMaximizerAptitude >> initialize [
 	showMaximizeButton := true.
 
 	actionButton := self createActionButton.
-	actionButton action: [
-		isMaximized
-			ifFalse: [ self maximize ] ].
+	actionButton action: [ self maximize ].
 
 	actionButton constraintsDo: [ :c |
 		c ignoreByLayout.
