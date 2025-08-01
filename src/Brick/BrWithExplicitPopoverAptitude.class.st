@@ -161,6 +161,17 @@ BrWithExplicitPopoverAptitude >> handle: aHandleStencil content: aContentStencil
 ]
 
 { #category : #'api - menu' }
+BrWithExplicitPopoverAptitude >> handle: aHandleStencil menu: aMenuStencil [
+	"Initialize a menu with a handle.
+	aHandleBlock is a stencil that creates a BlElement instance.
+	aMenuBlock is a stencil that creates a BrMenu instance."
+
+	self stencil: (BrMenuExplicitHandle new
+		handle: aHandleStencil;
+		submenu: aMenuStencil)
+]
+
+{ #category : #'api - menu' }
 BrWithExplicitPopoverAptitude >> handle: aHandleStencil submenu: aMenuStencil [
 	"Initialize a menu with a handle.
 	aHandleBlock is a stencil that creates a BlElement instance.
