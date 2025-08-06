@@ -15,6 +15,7 @@ BrGlamorousDarkThemeColors >> initialize [
 	invertedTextColor := Color fromHexString: '#1A1A1A'.
 	appBackgroundColor := Color fromHexString: '#1A1A1A'.
 	backdropBackgroundColor := Color fromHexString: '#262626'.
+	backdropEmphasisBackgroundColor := Color fromHexString: '#B3B3B3'.
 	sidebarBackgroundColor := Color fromHexString: '#333333'.
 	contentBackgroundColor := Color fromHexString: '#262626'.
 	groupBackgroundColor := nil.
