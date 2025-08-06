@@ -14,7 +14,8 @@ Class {
 		'contentBackground',
 		'backdropBackground',
 		'navigationBackground',
-		'appBackground'
+		'appBackground',
+		'backdropEmphasisBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -27,6 +28,11 @@ BrGlamorousDefaultTheme >> appBackground [
 { #category : #accessing }
 BrGlamorousDefaultTheme >> backdropBackground [
 	^ backdropBackground
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> backdropEmphasisBackground [
+	^ backdropEmphasisBackground
 ]
 
 { #category : #accessing }
@@ -105,6 +111,10 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 	backdropBackground := self
 			color: [ :aTheme | aTheme colors backdropBackgroundColor ]
 			source: [ :aTheme | aTheme default backdropBackground ].
+			
+	backdropEmphasisBackground := self
+			color: [ :aTheme | aTheme colors backdropEmphasisBackgroundColor ]
+			source: [ :aTheme | aTheme default backdropEmphasisBackground ].
 
 	navigationBackground := self
 			color: [ :aTheme | aTheme colors sidebarBackgroundColor ]

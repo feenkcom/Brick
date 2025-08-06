@@ -15,7 +15,8 @@ Class {
 		'groupBackgroundColor',
 		'raisedBackgroundColor',
 		'floatBackgroundColor',
-		'sidebarTextColor'
+		'sidebarTextColor',
+		'backdropEmphasisBackgroundColor'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -47,6 +48,16 @@ BrGlamorousThemeColors >> backdropBackgroundColor [
 { #category : #accessing }
 BrGlamorousThemeColors >> backdropBackgroundColor: anObject [
 	backdropBackgroundColor := anObject
+]
+
+{ #category : #accessing }
+BrGlamorousThemeColors >> backdropEmphasisBackgroundColor [
+	^ backdropEmphasisBackgroundColor
+]
+
+{ #category : #accessing }
+BrGlamorousThemeColors >> backdropEmphasisBackgroundColor: anObject [
+	backdropEmphasisBackgroundColor := anObject
 ]
 
 { #category : #accessing }
