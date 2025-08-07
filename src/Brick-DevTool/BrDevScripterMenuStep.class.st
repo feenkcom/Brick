@@ -287,6 +287,22 @@ BrDevScripterMenuStep >> assertTemporarilyHiddenMenuContainerFor: aMenuAptitudeC
 ]
 
 { #category : #'steps - interactions' }
+BrDevScripterMenuStep >> clickHandle [
+	^ self click
+		label: 'Click handle';
+		referenceSender;
+		onChildAt: 1
+]
+
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> clickHandleWithId: anElementId [
+	^ self click
+		label: ('Click handle with ID: {1}' format: {anElementId});
+		referenceSender;
+		// anElementId
+]
+
+{ #category : #'steps - interactions' }
 BrDevScripterMenuStep >> clickMenuItemWithId: anElementId [
 	^ self click
 		label: ('Click menu item with ID: {1}' format: {anElementId});
