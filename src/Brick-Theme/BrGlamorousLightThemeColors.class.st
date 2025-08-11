@@ -15,7 +15,7 @@ BrGlamorousLightThemeColors >> initialize [
 	invertedTextColor := Color white.
 	appBackgroundColor := BrGlamorousColors defaultHeaderBackgroundColor.
 	backdropBackgroundColor := BrGlamorousColors backdropColor.
-	backdropEmphasisBackgroundColor := Color fromHexString: '#B3B3B3'.
+	backdropEmphasisBackgroundColor := Color fromHexString: '#D9D9D9'.
 	sidebarBackgroundColor := BrGlamorousColors neutralBackgroundColor.
 	contentBackgroundColor := Color white.
 	groupBackgroundColor := nil.
