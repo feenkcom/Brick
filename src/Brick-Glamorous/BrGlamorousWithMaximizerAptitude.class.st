@@ -8,6 +8,23 @@ Class {
 	#category : #'Brick-Glamorous-Maximizer'
 }
 
+{ #category : #accessing }
+BrGlamorousWithMaximizerAptitude >> actionButton: anElement [
+	| aButton |
+	aButton := anElement asStencil.
+	aButton action: [ self maximize ].
+
+	self widgetDo: [ :aWidget | 
+		aWidget replaceChild: actionButton with: aButton ].
+
+	actionButton := aButton
+]
+
+{ #category : #accessing }
+BrGlamorousWithMaximizerAptitude >> actionButtonDo: aBlock [
+	actionButton ifNotNil: aBlock
+]
+
 { #category : #initialization }
 BrGlamorousWithMaximizerAptitude >> createActionButton [
 	^ BrButton new
@@ -19,7 +36,7 @@ BrGlamorousWithMaximizerAptitude >> createActionButton [
 		geometry: BlEllipseGeometry new;
 		layout: BlLinearLayout horizontal alignCenter;
 		icon: (BrPlusIconStencil new radius: 4);
-		size: 16@16
+		exact: 16@16
 ]
 
 { #category : #'api - visibility' }

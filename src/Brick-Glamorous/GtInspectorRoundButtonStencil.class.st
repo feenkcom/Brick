@@ -39,7 +39,7 @@ GtInspectorRoundButtonStencil >> create [
 		aptitude: BrIconAptitude + BrGlamorousFocusableShadowAptitude new;
 		geometry: BlEllipseGeometry new;
 		layout: BlLinearLayout horizontal alignCenter;
-		size: self size;
+		exact: self size;
 		when: BlMouseEnterEvent do: [ :anEvent | anEvent currentTarget background: Color veryVeryLightGray lighter ];
 		when: BlMouseLeaveEvent do: [ :anEvent | anEvent currentTarget background: Color white ];
 		yourself
