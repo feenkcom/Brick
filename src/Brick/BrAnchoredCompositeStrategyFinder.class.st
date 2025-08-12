@@ -20,20 +20,6 @@ Class {
 	#category : #'Brick-Anchored - Support'
 }
 
-{ #category : #'api - visual analysis' }
-BrAnchoredCompositeStrategyFinder >> beForDropdown [
-	"I am used for visual user analysis.
-	It does not affect computation."
-	visualAnalysis := BrAnchoredDropdownVisualAnalysis new
-]
-
-{ #category : #'api - visual analysis' }
-BrAnchoredCompositeStrategyFinder >> beForTooltip [
-	"I am used for visual user analysis.
-	It does not affect computation."
-	visualAnalysis := BrAnchoredTooltipVisualAnalysis new
-]
-
 { #category : #'private - finding' }
 BrAnchoredCompositeStrategyFinder >> evaluateStrategy: aStrategy [
 	<return: #BrAnchoredCompositeStrategyEvaluation>
@@ -113,20 +99,6 @@ BrAnchoredCompositeStrategyFinder >> gtStrategiesFor: aView [
 					ifFalse: [ aText foreground: BrGlamorousColors errorBackgroundColor ].
 				aText ]
 			width: 90
-]
-
-{ #category : #'gt - extensions' }
-BrAnchoredCompositeStrategyFinder >> gtStrategyBoundsFor: aView [
-	<gtView>
-	self strategies ifEmpty: [ ^ aView empty ].
-	self referenceElement ifNil: [ ^ aView empty ].
-
-	^ aView explicit
-		title: 'Strategy bounds';
-		priority: 1;
-		stencil: [ BrAnchoredVisualAnalysisElement new
-				finder: self;
-				margin: (BlInsets all: 10) ]
 ]
 
 { #category : #'private - finding' }
