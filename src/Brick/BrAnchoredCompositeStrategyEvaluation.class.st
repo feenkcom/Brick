@@ -99,22 +99,6 @@ BrAnchoredCompositeStrategyEvaluation >> gtDetailsFor: aView [
 		send: #value
 ]
 
-{ #category : #'gt - extensions' }
-BrAnchoredCompositeStrategyEvaluation >> gtSpaceFor: aView [
-	<gtView>
-	strategy ifNil: [ ^ aView empty ].
-
-	^ aView explicit
-		title: 'Preview';
-		priority: 1;
-		stencil: [ BrAnchoredVisualAnalysisElement new
-				referenceElement: self referenceElement
-					preferredExtent: self preferredExtent
-					visualAnalysis: self visualAnalysis
-					evaluations: {self};
-				margin: (BlInsets all: 10) ]
-]
-
 { #category : #accessing }
 BrAnchoredCompositeStrategyEvaluation >> isAppropriate [
 	^ isAppropriate
