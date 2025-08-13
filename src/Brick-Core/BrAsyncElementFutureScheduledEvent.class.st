@@ -19,3 +19,8 @@ BrAsyncElementFutureScheduledEvent >> futurePromise [
 BrAsyncElementFutureScheduledEvent >> futurePromise: anObject [
 	futurePromise := anObject
 ]
+
+{ #category : #sending }
+BrAsyncElementFutureScheduledEvent >> sendTo: anObject [
+	^ anObject asyncElementFutureScheduledEvent: self
+]

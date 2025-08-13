@@ -58,8 +58,7 @@ BrTabGroupContentAptitude >> onTabDeselected: aTabModel [
 BrTabGroupContentAptitude >> onTabRemoved: aTabModel [
 	aTabModel
 		cachedContentElementDo: [ :aRemovedContentElement |
-			aRemovedContentElement withAllChildrenBreadthFirstDo: [ :anElement |
-				anElement dispatchEvent: BrWidgetPermanentlyRemovedEvent new ] ]
+			BrWidgetPermanentlyRemovedEvent notifyWithAllChildren: aRemovedContentElement ]
 		ifAbsent: [ ^ self ]
 ]
 
