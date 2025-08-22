@@ -927,7 +927,9 @@ BrTextEditorModel >> processCursorLeaveEvents [
 		do: [ :eachCursor | 
 			self text
 				findAttributesSuchThat: [ :eachAttribute | eachAttribute isEventHandler ]
-				indicesDo: [ :aStart :anEnd :anAttribute | eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ].
+				indicesDo: [ :aStart :anEnd :anAttribute | 
+					(eachCursor position between: aStart and: anEnd)
+						ifTrue: [ eventHandlingAttributesOutside add: anAttribute -> (aStart to: anEnd) ] ] ].
 	eventHandlingAttributesOutside
 		do: [ :eachEventHandlerAttributeAndInterval | 
 			| eachAttribute eachInterval |
