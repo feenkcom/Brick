@@ -6,7 +6,7 @@ Class {
 		'index',
 		'payload'
 	],
-	#category : 'Brick-Tree - Events'
+	#category : #'Brick-Tree - Events'
 }
 
 { #category : #accessing }

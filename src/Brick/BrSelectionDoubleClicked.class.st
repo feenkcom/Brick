@@ -5,7 +5,7 @@ Class {
 		'selection',
 		'sourceEvent'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #accessing }
@@ -18,6 +18,11 @@ BrSelectionDoubleClicked >> selection [
 { #category : #accessing }
 BrSelectionDoubleClicked >> selection: anObject [
 	selection := anObject
+]
+
+{ #category : #sending }
+BrSelectionDoubleClicked >> sendTo: anObject [
+	^ anObject selectionDoubleClickedEvent: self
 ]
 
 { #category : #accessing }

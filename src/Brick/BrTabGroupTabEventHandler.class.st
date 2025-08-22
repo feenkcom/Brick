@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tabGroup'
 	],
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #'api - accessing' }

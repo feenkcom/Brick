@@ -1,7 +1,7 @@
 Class {
 	#name : #BrInteractiveCommonAptitude,
 	#superclass : #BrInteractiveAptitude,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

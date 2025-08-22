@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'index'
 	],
-	#category : 'Brick-Toggle - Events'
+	#category : #'Brick-Toggle - Events'
 }
 
 { #category : #accessing }

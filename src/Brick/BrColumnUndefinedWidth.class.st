@@ -1,7 +1,7 @@
 Class {
 	#name : #BrColumnUndefinedWidth,
 	#superclass : #BrColumnWidth,
-	#category : 'Brick-Column - Model'
+	#category : #'Brick-Column - Model'
 }
 
 { #category : #comparing }

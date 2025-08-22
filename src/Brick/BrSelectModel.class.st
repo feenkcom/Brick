@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'selected'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

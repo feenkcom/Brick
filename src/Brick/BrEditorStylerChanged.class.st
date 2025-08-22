@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'styler'
 	],
-	#category : 'Brick-Editor - Events'
+	#category : #'Brick-Editor - Events'
 }
 
 { #category : #accessing }

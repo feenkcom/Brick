@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLazyTreeNode,
 	#superclass : #BrTreeNode,
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #initialization }

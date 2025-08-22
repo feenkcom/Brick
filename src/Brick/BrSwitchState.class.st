@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSwitchState,
 	#superclass : #BrInteractionState,
-	#category : 'Brick-Switch - States'
+	#category : #'Brick-Switch - States'
 }
 
 { #category : #'instance creation' }

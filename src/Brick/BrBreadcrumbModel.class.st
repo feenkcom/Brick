@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'items'
 	],
-	#category : 'Brick-Breadcrumb - Model'
+	#category : #'Brick-Breadcrumb - Model'
 }
 
 { #category : #'api - items' }

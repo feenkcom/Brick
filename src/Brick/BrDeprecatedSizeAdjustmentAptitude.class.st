@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDeprecatedSizeAdjustmentAptitude,
 	#superclass : #BrInteractiveAptitude,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrCheckboxModel,
 	#superclass : #BrWidgetModel,
-	#category : 'Brick-Checkbox - Model'
+	#category : #'Brick-Checkbox - Model'
 }
 
 { #category : #'mouse handlers' }

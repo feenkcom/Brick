@@ -6,7 +6,7 @@ Class {
 		'nodeDataBinder',
 		'nodeUnbinder'
 	],
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #initialization }

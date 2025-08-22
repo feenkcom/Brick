@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLayoutResizerRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

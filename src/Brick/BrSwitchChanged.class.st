@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'switchedOn'
 	],
-	#category : 'Brick-Switch - Events'
+	#category : #'Brick-Switch - Events'
 }
 
 { #category : #'instance creation' }

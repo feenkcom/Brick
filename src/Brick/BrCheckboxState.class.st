@@ -1,7 +1,7 @@
 Class {
 	#name : #BrCheckboxState,
 	#superclass : #BlElementUniqueState,
-	#category : 'Brick-Checkbox - States'
+	#category : #'Brick-Checkbox - States'
 }
 
 { #category : #'instance creation' }

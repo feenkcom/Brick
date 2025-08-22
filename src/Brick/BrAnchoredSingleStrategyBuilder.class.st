@@ -8,7 +8,7 @@ Class {
 		'scaleFactor',
 		'apply'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #accessing }

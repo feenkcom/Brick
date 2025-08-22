@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'toggle'
 	],
-	#category : 'Brick-Toggle - Events'
+	#category : #'Brick-Toggle - Events'
 }
 
 { #category : #'instance creation' }

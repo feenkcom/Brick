@@ -1,7 +1,7 @@
 Class {
 	#name : #BrResizerFitContentLength,
 	#superclass : #BrResizerElementLength,
-	#category : 'Brick-Resizer - Support'
+	#category : #'Brick-Resizer - Support'
 }
 
 { #category : #'api - size' }

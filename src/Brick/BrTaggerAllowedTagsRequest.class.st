@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTaggerAllowedTagsRequest,
 	#superclass : #BrTaggerRequest,
-	#category : 'Brick-Tagger - Events'
+	#category : #'Brick-Tagger - Events'
 }
 
 { #category : #initialization }

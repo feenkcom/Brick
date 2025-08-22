@@ -6,7 +6,7 @@ Class {
 		'newName',
 		'oldName'
 	],
-	#category : 'Brick-Tagger - Events'
+	#category : #'Brick-Tagger - Events'
 }
 
 { #category : #accessing }

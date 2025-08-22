@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stencil'
 	],
-	#category : 'Brick-Entailment - Events'
+	#category : #'Brick-Entailment - Events'
 }
 
 { #category : #accessing }

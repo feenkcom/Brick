@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredOuterContainer,
 	#superclass : #BlElement,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #initialization }

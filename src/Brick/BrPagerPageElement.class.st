@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'weight'
 	],
-	#category : 'Brick-Pager - Support'
+	#category : #'Brick-Pager - Support'
 }
 
 { #category : #initialization }

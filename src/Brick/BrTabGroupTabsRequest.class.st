@@ -4,7 +4,7 @@ I am sent to request a tab group view model to respond with all the registered t
 Class {
 	#name : #BrTabGroupTabsRequest,
 	#superclass : #BrTabGroupRequest,
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #initialization }

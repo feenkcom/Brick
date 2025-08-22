@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'itemType'
 	],
-	#category : 'Brick-Tree - Stencil'
+	#category : #'Brick-Tree - Stencil'
 }
 
 { #category : #accessing }

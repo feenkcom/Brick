@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'nodeElementStencil'
 	],
-	#category : 'Brick-Tree - Events'
+	#category : #'Brick-Tree - Events'
 }
 
 { #category : #accessing }

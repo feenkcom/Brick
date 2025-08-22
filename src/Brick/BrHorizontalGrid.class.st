@@ -1,7 +1,7 @@
 Class {
 	#name : #BrHorizontalGrid,
 	#superclass : #BrWidgetContainer,
-	#category : 'Brick-Layout Widgets'
+	#category : #'Brick-Layout Widgets'
 }
 
 { #category : #accessing }

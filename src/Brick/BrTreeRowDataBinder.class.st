@@ -6,7 +6,7 @@ Class {
 		'itemNode',
 		'itemPosition'
 	],
-	#category : 'Brick-Tree - Stencil'
+	#category : #'Brick-Tree - Stencil'
 }
 
 { #category : #'api - instantiation' }

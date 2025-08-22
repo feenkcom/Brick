@@ -1,5 +1,5 @@
 Class {
 	#name : #BrDropdownShowWish,
 	#superclass : #BrAnchoredShowWish,
-	#category : 'Brick-Dropdown - Events'
+	#category : #'Brick-Dropdown - Events'
 }

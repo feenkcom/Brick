@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTabToolbarRequest,
 	#superclass : #BrTabRequest,
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #initialization }

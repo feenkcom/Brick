@@ -1,7 +1,7 @@
 Class {
 	#name : #BrInteractionState,
 	#superclass : #Object,
-	#category : 'Brick-! Core - States'
+	#category : #'Brick-! Core - States'
 }
 
 { #category : #'instance creation' }

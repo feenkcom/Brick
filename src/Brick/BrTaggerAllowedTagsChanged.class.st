@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'allowedTags'
 	],
-	#category : 'Brick-Tagger - Events'
+	#category : #'Brick-Tagger - Events'
 }
 
 { #category : #accessing }

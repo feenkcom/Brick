@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEntailmentConclusionRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-Entailment - Events'
+	#category : #'Brick-Entailment - Events'
 }
 
 { #category : #initialization }

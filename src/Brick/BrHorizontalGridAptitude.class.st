@@ -1,5 +1,5 @@
 Class {
 	#name : #BrHorizontalGridAptitude,
 	#superclass : #BrWidgetContainerAptitude,
-	#category : 'Brick-Layout Widgets'
+	#category : #'Brick-Layout Widgets'
 }

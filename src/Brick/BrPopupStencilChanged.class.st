@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'popupStencil'
 	],
-	#category : 'Brick-Popup - Events'
+	#category : #'Brick-Popup - Events'
 }
 
 { #category : #accessing }

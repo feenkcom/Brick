@@ -1,5 +1,5 @@
 Class {
 	#name : #BrDropdownStencilChanged,
 	#superclass : #BrAnchoredStencilChanged,
-	#category : 'Brick-Dropdown - Events'
+	#category : #'Brick-Dropdown - Events'
 }

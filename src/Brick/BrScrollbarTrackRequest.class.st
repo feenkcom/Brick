@@ -1,7 +1,7 @@
 Class {
 	#name : #BrScrollbarTrackRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-Scrollbar - Events'
+	#category : #'Brick-Scrollbar - Events'
 }
 
 { #category : #initialization }

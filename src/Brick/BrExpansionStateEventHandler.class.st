@@ -1,7 +1,7 @@
 Class {
 	#name : #BrExpansionStateEventHandler,
 	#superclass : #BlElementStateEventHandler,
-	#category : 'Brick-! Core - Expansion'
+	#category : #'Brick-! Core - Expansion'
 }
 
 { #category : #private }

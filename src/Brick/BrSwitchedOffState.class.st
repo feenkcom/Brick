@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSwitchedOffState,
 	#superclass : #BrSwitchState,
-	#category : 'Brick-Switch - States'
+	#category : #'Brick-Switch - States'
 }
 
 { #category : #printing }

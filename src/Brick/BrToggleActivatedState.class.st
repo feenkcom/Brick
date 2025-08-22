@@ -1,7 +1,7 @@
 Class {
 	#name : #BrToggleActivatedState,
 	#superclass : #BrToggleState,
-	#category : 'Brick-Toggle - States'
+	#category : #'Brick-Toggle - States'
 }
 
 { #category : #testing }

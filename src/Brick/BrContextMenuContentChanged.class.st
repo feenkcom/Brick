@@ -1,5 +1,5 @@
 Class {
 	#name : #BrContextMenuContentChanged,
 	#superclass : #BrAnchoredContentChanged,
-	#category : 'Brick-Context Menu - Events'
+	#category : #'Brick-Context Menu - Events'
 }

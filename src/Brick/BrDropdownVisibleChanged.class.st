@@ -1,5 +1,5 @@
 Class {
 	#name : #BrDropdownVisibleChanged,
 	#superclass : #BrAnchoredVisibleChanged,
-	#category : 'Brick-Dropdown - Events'
+	#category : #'Brick-Dropdown - Events'
 }

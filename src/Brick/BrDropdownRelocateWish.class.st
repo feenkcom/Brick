@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDropdownRelocateWish,
 	#superclass : #BrAnchoredRelocateWish,
-	#category : 'Brick-Dropdown - Events'
+	#category : #'Brick-Dropdown - Events'
 }
 
 { #category : #'as yet unclassified' }

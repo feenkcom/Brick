@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredStencilRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-Anchored - Events'
+	#category : #'Brick-Anchored - Events'
 }
 
 { #category : #initialization }

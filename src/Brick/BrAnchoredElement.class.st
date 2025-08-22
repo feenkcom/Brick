@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredElement,
 	#superclass : #BlElement,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #'change reporting' }

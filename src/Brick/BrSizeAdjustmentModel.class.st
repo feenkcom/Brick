@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'dimension'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'stencil'
 	],
-	#category : 'Brick-Accordion - Events'
+	#category : #'Brick-Accordion - Events'
 }
 
 { #category : #'instance creation' }

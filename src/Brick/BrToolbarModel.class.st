@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'items'
 	],
-	#category : 'Brick-Toolbar - Model'
+	#category : #'Brick-Toolbar - Model'
 }
 
 { #category : #'api - items' }

@@ -5,7 +5,7 @@ Class {
 		'tag',
 		'index'
 	],
-	#category : 'Brick-Tagger - Events'
+	#category : #'Brick-Tagger - Events'
 }
 
 { #category : #accessing }

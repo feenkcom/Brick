@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'nodeUnbinder'
 	],
-	#category : 'Brick-Tree - Events'
+	#category : #'Brick-Tree - Events'
 }
 
 { #category : #accessing }

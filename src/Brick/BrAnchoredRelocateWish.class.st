@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredRelocateWish,
 	#superclass : #BrAnchoredWish,
-	#category : 'Brick-Anchored - Events'
+	#category : #'Brick-Anchored - Events'
 }
 
 { #category : #'as yet unclassified' }

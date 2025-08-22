@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'focused'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #'instance creation' }

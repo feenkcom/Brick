@@ -5,7 +5,7 @@ Class {
 		'hostElement',
 		'placeholderElement'
 	],
-	#category : 'Brick-Maximizer - Event'
+	#category : #'Brick-Maximizer - Event'
 }
 
 { #category : #accessing }

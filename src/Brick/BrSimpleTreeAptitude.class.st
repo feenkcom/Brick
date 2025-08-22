@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSimpleTreeAptitude,
 	#superclass : #BrTreeAptitude,
-	#category : 'Brick-Tree - Aptitude'
+	#category : #'Brick-Tree - Aptitude'
 }
 
 { #category : #initialization }

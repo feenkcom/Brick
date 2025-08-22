@@ -1,7 +1,7 @@
 Class {
 	#name : #BrToggleAptitude,
 	#superclass : #BrStyleCommonAptitude,
-	#category : 'Brick-Toggle - Look'
+	#category : #'Brick-Toggle - Look'
 }
 
 { #category : #'api - style' }

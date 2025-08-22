@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredGlobalScaleFactor,
 	#superclass : #BrAnchoredScaleFactor,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrScrollbarOrientationAptitude,
 	#superclass : #BrStyleCommonAptitude,
-	#category : 'Brick-Scrollbar - Look'
+	#category : #'Brick-Scrollbar - Look'
 }
 
 { #category : #'api - style' }

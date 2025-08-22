@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTreeDefaultItemTypeStencilBuilder,
 	#superclass : #BrTreeNodeTypeStencilBuilder,
-	#category : 'Brick-Tree - Stencil'
+	#category : #'Brick-Tree - Stencil'
 }
 
 { #category : #'api - instantiation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSwitchAptitude,
 	#superclass : #BrInteractiveAptitude,
-	#category : 'Brick-Switch - Look'
+	#category : #'Brick-Switch - Look'
 }
 
 { #category : #accessing }

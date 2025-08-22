@@ -6,7 +6,7 @@ Class {
 		'activatedToggle',
 		'toggleEventHandler'
 	],
-	#category : 'Brick-Toggle - Model'
+	#category : #'Brick-Toggle - Model'
 }
 
 { #category : #'api - toggles' }

@@ -1,5 +1,5 @@
 Class {
 	#name : #BrContextMenuStencilChanged,
 	#superclass : #BrAnchoredStencilChanged,
-	#category : 'Brick-Context Menu - Events'
+	#category : #'Brick-Context Menu - Events'
 }

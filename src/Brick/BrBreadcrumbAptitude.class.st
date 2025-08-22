@@ -6,7 +6,7 @@ Class {
 		'separators',
 		'separatorStencil'
 	],
-	#category : 'Brick-Breadcrumb - Look'
+	#category : #'Brick-Breadcrumb - Look'
 }
 
 { #category : #initialization }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredVisibleRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-Anchored - Events'
+	#category : #'Brick-Anchored - Events'
 }
 
 { #category : #initialization }

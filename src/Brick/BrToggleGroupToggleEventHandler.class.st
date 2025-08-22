@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'toggleGroup'
 	],
-	#category : 'Brick-Toggle - Events'
+	#category : #'Brick-Toggle - Events'
 }
 
 { #category : #'api - accessing' }

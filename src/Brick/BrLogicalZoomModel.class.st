@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'levels'
 	],
-	#category : 'Brick-Logical Zooming - Model'
+	#category : #'Brick-Logical Zooming - Model'
 }
 
 { #category : #initialization }

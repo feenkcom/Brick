@@ -1,7 +1,7 @@
 Class {
 	#name : #BrContextMenuAptitude,
 	#superclass : #BrAnchoredWithHandleAndContentAptitude,
-	#category : 'Brick-Context Menu - Look'
+	#category : #'Brick-Context Menu - Look'
 }
 
 { #category : #initialization }

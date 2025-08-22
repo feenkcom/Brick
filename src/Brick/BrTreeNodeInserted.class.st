@@ -6,7 +6,7 @@ Class {
 		'from',
 		'to'
 	],
-	#category : 'Brick-Tree - Events'
+	#category : #'Brick-Tree - Events'
 }
 
 { #category : #accessing }

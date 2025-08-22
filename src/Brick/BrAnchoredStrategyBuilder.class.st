@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredStrategyBuilder,
 	#superclass : #Object,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #building }

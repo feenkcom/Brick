@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'splitter'
 	],
-	#category : 'Brick-Tabs - Look'
+	#category : #'Brick-Tabs - Look'
 }
 
 { #category : #initialization }

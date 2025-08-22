@@ -1,7 +1,7 @@
 Class {
 	#name : #BrWithDropdownModel,
 	#superclass : #BrWithAnchoredModel,
-	#category : 'Brick-Dropdown - Model'
+	#category : #'Brick-Dropdown - Model'
 }
 
 { #category : #notifying }

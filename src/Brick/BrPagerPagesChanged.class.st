@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pages'
 	],
-	#category : 'Brick-Pager - Events'
+	#category : #'Brick-Pager - Events'
 }
 
 { #category : #accessing }

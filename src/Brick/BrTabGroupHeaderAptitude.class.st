@@ -7,7 +7,7 @@ Class {
 		'tabbar',
 		'scrollTabbar'
 	],
-	#category : 'Brick-Tabs - Look'
+	#category : #'Brick-Tabs - Look'
 }
 
 { #category : #'api - accessing' }

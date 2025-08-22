@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditorModeAptitude,
 	#superclass : #BrInteractiveAptitude,
-	#category : 'Brick-Editor - Look'
+	#category : #'Brick-Editor - Look'
 }
 
 { #category : #'api - style' }

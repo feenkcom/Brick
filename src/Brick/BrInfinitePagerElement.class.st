@@ -1,7 +1,7 @@
 Class {
 	#name : #BrInfinitePagerElement,
 	#superclass : #BlInfiniteElement,
-	#category : 'Brick-Pager - Support'
+	#category : #'Brick-Pager - Support'
 }
 
 { #category : #initialization }

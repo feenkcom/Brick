@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditorStylerRequest,
 	#superclass : #BrEditorRequest,
-	#category : 'Brick-Editor - Events'
+	#category : #'Brick-Editor - Events'
 }
 
 { #category : #initialization }

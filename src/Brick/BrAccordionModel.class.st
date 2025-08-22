@@ -5,7 +5,7 @@ Class {
 		'contentStencil',
 		'headerStencil'
 	],
-	#category : 'Brick-Accordion - Model'
+	#category : #'Brick-Accordion - Model'
 }
 
 { #category : #'api - accessing' }

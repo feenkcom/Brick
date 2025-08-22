@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTooltipBottomCenterAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Tooltip - Look'
+	#category : #'Brick-Tooltip - Look'
 }
 
 { #category : #initialization }

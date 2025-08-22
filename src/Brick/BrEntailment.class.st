@@ -6,7 +6,7 @@ I can be embedded in various contexts
 Class {
 	#name : #BrEntailment,
 	#superclass : #BlElement,
-	#category : 'Brick-Entailment - UI'
+	#category : #'Brick-Entailment - UI'
 }
 
 { #category : #accessing }

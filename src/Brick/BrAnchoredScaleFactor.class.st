@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredScaleFactor,
 	#superclass : #Object,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #converting }

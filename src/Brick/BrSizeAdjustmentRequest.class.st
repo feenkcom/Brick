@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSizeAdjustmentRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

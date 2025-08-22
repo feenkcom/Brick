@@ -1,7 +1,7 @@
 Class {
 	#name : #BrUmlClassStencil,
 	#superclass : #BrStencil,
-	#category : 'Brick-UML - Stencil'
+	#category : #'Brick-UML - Stencil'
 }
 
 { #category : #'api - instantiation' }

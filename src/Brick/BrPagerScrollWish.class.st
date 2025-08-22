@@ -5,7 +5,7 @@ Class {
 		'isSmooth',
 		'pageIndex'
 	],
-	#category : 'Brick-Pager - Events'
+	#category : #'Brick-Pager - Events'
 }
 
 { #category : #accessing }

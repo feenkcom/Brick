@@ -6,7 +6,7 @@ A target can be for example a separate window, a modal dialog or an arbitrary UI
 Class {
 	#name : #BrPopupTarget,
 	#superclass : #Object,
-	#category : 'Brick-Popup - Model'
+	#category : #'Brick-Popup - Model'
 }
 
 { #category : #'api - popup' }

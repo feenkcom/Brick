@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSizeAdjustmentNoneState,
 	#superclass : #BrSizeAdjustmentState,
-	#category : 'Brick-! Core - Size Adjustment'
+	#category : #'Brick-! Core - Size Adjustment'
 }
 
 { #category : #testing }

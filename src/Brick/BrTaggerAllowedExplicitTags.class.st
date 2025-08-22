@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tags'
 	],
-	#category : 'Brick-Tagger - Model'
+	#category : #'Brick-Tagger - Model'
 }
 
 { #category : #accessing }

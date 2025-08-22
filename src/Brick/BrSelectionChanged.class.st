@@ -71,6 +71,11 @@ BrSelectionChanged >> selectionDo: aBlock [
 	aBlock value: selection
 ]
 
+{ #category : #sending }
+BrSelectionChanged >> sendTo: anObject [
+	^ anObject selectionChangedEvent: self
+]
+
 { #category : #accessing }
 BrSelectionChanged >> sourceEvent [
 	^ sourceEvent

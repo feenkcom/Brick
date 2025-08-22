@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDropdownVisibleRequest,
 	#superclass : #BrAnchoredVisibleRequest,
-	#category : 'Brick-Dropdown - Events'
+	#category : #'Brick-Dropdown - Events'
 }
 
 { #category : #initialization }

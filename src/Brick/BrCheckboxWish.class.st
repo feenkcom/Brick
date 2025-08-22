@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'state'
 	],
-	#category : 'Brick-Checkbox - Events'
+	#category : #'Brick-Checkbox - Events'
 }
 
 { #category : #'instance creation' }

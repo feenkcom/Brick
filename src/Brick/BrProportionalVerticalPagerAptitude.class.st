@@ -5,7 +5,7 @@ Class {
 		'pagesListElement',
 		'resizers'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #accessing }

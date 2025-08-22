@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDropdownContentRequest,
 	#superclass : #BrAnchoredContentRequest,
-	#category : 'Brick-Dropdown - Events'
+	#category : #'Brick-Dropdown - Events'
 }
 
 { #category : #initialization }

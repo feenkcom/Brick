@@ -1,7 +1,7 @@
 Class {
 	#name : #BrAnchoredBottomCenterAvailableBounds,
 	#superclass : #BrAnchoredAvailableBounds,
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #accessing }

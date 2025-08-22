@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'forceUpdate'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #accessing }

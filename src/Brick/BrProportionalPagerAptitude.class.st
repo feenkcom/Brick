@@ -1,7 +1,7 @@
 Class {
 	#name : #BrProportionalPagerAptitude,
 	#superclass : #BrProportionalHorizontalPagerAptitude,
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #testing }

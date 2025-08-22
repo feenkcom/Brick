@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'factor'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #converting }

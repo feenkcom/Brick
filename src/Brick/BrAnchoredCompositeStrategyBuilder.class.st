@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'strategies'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #building }
