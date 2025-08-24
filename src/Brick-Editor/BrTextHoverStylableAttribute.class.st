@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'attributes'
 	],
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }
@@ -24,6 +24,26 @@ BrTextHoverStylableAttribute >> attributes [
 BrTextHoverStylableAttribute >> attributes: aCollectionOfAttributes [
 	"Set a collection of attribtues that should be added when user hover a text with a mouse"
 	attributes := aCollectionOfAttributes
+]
+
+{ #category : #views }
+BrTextHoverStylableAttribute >> gtEnterActionFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Enter action';
+		priority: 10;
+		object: [ enterAction ];
+		view: #gtSourceCodeFor:
+]
+
+{ #category : #views }
+BrTextHoverStylableAttribute >> gtLeaveActionFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Leave action';
+		priority: 11;
+		object: [ leaveAction ];
+		view: #gtSourceCodeFor:
 ]
 
 { #category : #initialization }
