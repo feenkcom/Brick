@@ -29,3 +29,12 @@ BrGlamorousTriangleExpanderTextAttribute >> doAffect: aTBrTextEditorTextualPiece
 
 	^ aToggle
 ]
+
+{ #category : #views }
+BrGlamorousTriangleExpanderTextAttribute >> gtAttributesCreatingCodeFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Attribute creating code';
+		object: [ attributesCreatingBlock ];
+		view: #gtSourceCodeFor:
+]

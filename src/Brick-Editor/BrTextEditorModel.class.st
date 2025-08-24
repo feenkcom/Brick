@@ -320,6 +320,26 @@ BrTextEditorModel >> gtStringFor: aView [
 		priority: 5
 ]
 
+{ #category : #views }
+BrTextEditorModel >> gtTextAttributesFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Text attributes';
+		priority: 20;
+		object: [ text ];
+		view: #gtAttributeTreeFor:
+]
+
+{ #category : #views }
+BrTextEditorModel >> gtTextIntervalsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Text intervals';
+		priority: 21;
+		object: [ text ];
+		view: #gtIntervalTreeFor:
+]
+
 { #category : #'text - selection' }
 BrTextEditorModel >> hasCursors [
 	"Return true of there is at least one cursor, false otherwise"
