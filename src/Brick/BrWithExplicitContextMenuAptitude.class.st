@@ -99,3 +99,17 @@ BrWithExplicitContextMenuAptitude >> initializeMenuContainer [
 	menuContainer when: BrContextMenuShowWish do: [ :anEvent | self onShowWish: anEvent ].
 	menuContainer when: BrContextMenuHideWish do: [ :anEvent | self onHideWish: anEvent ]
 ]
+
+{ #category : #'private - event management' }
+BrWithExplicitContextMenuAptitude >> onHidden [
+	super onHidden.
+	
+	self dispatchEvent: BrContextMenuIsHidden new.
+]
+
+{ #category : #'private - event management' }
+BrWithExplicitContextMenuAptitude >> onShown [
+	super onShown.
+	
+	self dispatchEvent: BrContextMenuIsVisible new.
+]
