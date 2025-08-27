@@ -3,8 +3,8 @@ I indicate that another menu was opened inside of existing menu.
 I am used internally.
 Users should use dedicated events to listen to show/hide state changes:
 - for dropdowns: {{gtClass:BrDropdownIsVisible}}. 
-- for context menus: *not implemented*, 
-- for tooltips: *not implemented*.
+- for context menus: {{gtClass:BrContextMenuIsVisible}}, 
+- for tooltips: {{gtClass:BrTooltipIsVisible}}. 
 "
 Class {
 	#name : #BrPopoverIsVisibleEvent,
