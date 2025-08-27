@@ -125,6 +125,20 @@ BrWithExplicitTooltipAptitude >> newMenuModelWithLabel: aLabelString shortcut: a
 		ifNil: [ BrMenuLabelItem new label: aLabelString value asString ]
 ]
 
+{ #category : #'private - event management' }
+BrWithExplicitTooltipAptitude >> onHidden [
+	super onHidden.
+	
+	self dispatchEvent: BrTooltipIsHidden new.
+]
+
+{ #category : #'private - event management' }
+BrWithExplicitTooltipAptitude >> onShown [
+	super onShown.
+	
+	self dispatchEvent: BrTooltipIsVisible new.
+]
+
 { #category : #'api - initialization' }
 BrWithExplicitTooltipAptitude >> showDelay: aDuration [
 	"Note: It assumes that the mouse event handler is the tooltip event handler."
