@@ -17,6 +17,7 @@ BrMenuItems >> acceptVisitor: aVisitor [
 
 { #category : #'add / remove' }
 BrMenuItems >> addItem: aMenuItem [
+	aMenuItem ifNil: [ ^ self ].
 	groups := nil.
 	aMenuItem parent: self.
 	self items add: aMenuItem.
