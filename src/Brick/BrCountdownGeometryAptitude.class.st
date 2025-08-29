@@ -22,7 +22,8 @@ Class {
 		'geometryStencil',
 		'state',
 		'animation',
-		'widgetSpace'
+		'widgetSpace',
+		'isFinishedActionEnabled'
 	],
 	#category : #'Brick-Countdown - Aptitude'
 }
@@ -80,6 +81,7 @@ BrCountdownGeometryAptitude >> initialize [
 	animationStencil := [ :aWidget :aGeometryStencil | self newDefaultAnimation ] 
 		asStencilBuilder:  BrCountdownGeometryAnimationStencilBuilder.
 	finishedAction := [ :aWidget | ].
+	isFinishedActionEnabled := true.
 	animation := nil.
 	state := BrCountdownGeometryState enabled
 ]
@@ -110,6 +112,11 @@ BrCountdownGeometryAptitude >> initializeListeners [
 	self
 		when: BlElementRemovedFromSceneGraphEvent
 		do: [ :anEvent | self onBlElementRemovedFromSceneGraphEvent: anEvent ]
+]
+
+{ #category : #'private - event management' }
+BrCountdownGeometryAptitude >> isFinishedActionEnabled [
+	^ isFinishedActionEnabled ifNil: [ true ]
 ]
 
 { #category : #initialization }
@@ -144,7 +151,8 @@ BrCountdownGeometryAptitude >> onAnimationFinished [
 	Other states, e.g., opened context menu, prevent execution."
 	state ifRunFinished: [
 		self widgetDo: [ :aWidget | 
-			finishedAction cull: aWidget ] ].
+			self isFinishedActionEnabled ifTrue: [
+				finishedAction cull: aWidget ] ] ].
 	
 	state := state finish.
 ]
@@ -180,12 +188,18 @@ BrCountdownGeometryAptitude >> onBlElementRemovedFromSceneGraphEvent: anEvent [
 { #category : #'private - event management' }
 BrCountdownGeometryAptitude >> onGtTreePagerCountdownDisableWish: anEvent [
 	anEvent consumed: true.
+	anEvent isDisableFinishedAction 
+		ifTrue: [ self withoutFinishedAction ]
+		ifFalse: [ self withFinishedAction ].
 	self disableAnimation
 ]
 
 { #category : #'private - event management' }
 BrCountdownGeometryAptitude >> onGtTreePagerCountdownEnableWish: anEvent [
 	anEvent consumed: true.
+	anEvent isDisableFinishedAction 
+		ifTrue: [ self withoutFinishedAction ]
+		ifFalse: [ self withFinishedAction ].
 	self enableAnimation
 ]
 
@@ -289,4 +303,14 @@ BrCountdownGeometryAptitude >> withDropdownEventHandlers [
 			do: [ :anEvent | self onPopoverIsVisible: anEvent ];
 		when: BrDropdownIsHidden
 			do: [ :anEvent | self onPopoverIsHidden: anEvent ]
+]
+
+{ #category : #'api - animation' }
+BrCountdownGeometryAptitude >> withFinishedAction [
+	isFinishedActionEnabled := true
+]
+
+{ #category : #'api - animation' }
+BrCountdownGeometryAptitude >> withoutFinishedAction [
+	isFinishedActionEnabled := false
 ]

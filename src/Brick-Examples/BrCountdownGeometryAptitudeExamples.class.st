@@ -640,6 +640,70 @@ BrCountdownGeometryAptitudeExamples >> first11seconds [
 ]
 
 { #category : #'examples - animations' }
+BrCountdownGeometryAptitudeExamples >> first11seconds_disableWishWithCallback [
+	<gtExample>
+	| aScripter |
+	aScripter := self first11seconds.
+
+	aScripter do
+		label: 'Disable and stop animation';
+		block: [ :anElement | anElement dispatchEvent: BrCountdownDisableAndStopWish withFinishedAction ];
+		// self countdownId;
+		playPulseOnce.
+
+	self assertScripter: aScripter startAngle: 240.
+	self assertScripter: aScripter finishCallbackCalled: 1.
+	self
+		assertScripter: aScripter
+		animationTasks: 0
+		running: 0
+		progress: 0.91.
+
+	self scripter: aScripter wait: 1 seconds.
+	self assertScripter: aScripter startAngle: 240.
+	self assertScripter: aScripter finishCallbackCalled: 1.
+	self
+		assertScripter: aScripter
+		animationTasks: 0
+		running: false
+		progress: 0.91.
+
+	^ aScripter
+]
+
+{ #category : #'examples - animations' }
+BrCountdownGeometryAptitudeExamples >> first11seconds_disableWishWithoutCallback [
+	<gtExample>
+	| aScripter |
+	aScripter := self first11seconds.
+
+	aScripter do
+		label: 'Disable and stop animation';
+		block: [ :anElement | anElement dispatchEvent: BrCountdownDisableAndStopWish withoutFinishedAction ];
+		// self countdownId;
+		playPulseOnce.
+
+	self assertScripter: aScripter startAngle: 240.
+	self assertScripter: aScripter finishCallbackCalled: 0.
+	self
+		assertScripter: aScripter
+		animationTasks: 0
+		running: 0
+		progress: 0.91.
+
+	self scripter: aScripter wait: 1 seconds.
+	self assertScripter: aScripter startAngle: 240.
+	self assertScripter: aScripter finishCallbackCalled: 0.
+	self
+		assertScripter: aScripter
+		animationTasks: 0
+		running: false
+		progress: 0.91.
+
+	^ aScripter
+]
+
+{ #category : #'examples - animations' }
 BrCountdownGeometryAptitudeExamples >> first12seconds [
 	"Timeout without any interactions"
 
