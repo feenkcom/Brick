@@ -121,8 +121,7 @@ BrCountdownGeometryAptitude >> newDefaultAnimation [
 		from: -90;
 		to: 270;
 		by: 6;
-		duration: 12 seconds;
-		onFinishedDo: [ self onAnimationFinished ]
+		duration: 12 seconds
 ]
 
 { #category : #initialization }
