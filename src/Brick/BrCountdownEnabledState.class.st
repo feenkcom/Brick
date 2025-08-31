@@ -1,7 +1,7 @@
 "
 Animation is currently enabled.
 I can be set by:
-- dispatching {{gtClass:BrCountdownEnableWish}} to {{gtClass:BrCountdownGeometryAptitude}}, or 
+- dispatching {{gtClass:BrCountdownEnableAndStartWish}} to {{gtClass:BrCountdownGeometryAptitude}}, or 
 - calling {{gtMethod:BrCountdownGeometryAptitude >> enableAnimation}}. 
 "
 Class {
