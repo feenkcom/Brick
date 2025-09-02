@@ -912,6 +912,41 @@ BrWithExplicitPopoverAptitude >> withKeepAllCacheCleaner [
 	self cacheCleaner: BrPopoverCacheCleaner allKeeper
 ]
 
+{ #category : #'api - menu' }
+BrWithExplicitPopoverAptitude >> withMaximizerEventHandler [
+	<menuContainerInitialization>
+	self menuContainer
+		when: BrMaximizerHostMinimizeWish
+		do: [ :anEvent | 
+			anEvent isConsumed
+				ifFalse: [ self
+						widgetDo: [ :aWidget | 
+							| aNewEvent |
+							aNewEvent := BrMaximizerHostMinimizeWish new.
+							aWidget fireEvent: aNewEvent.
+							anEvent consumed: aNewEvent isConsumed ] ] ].
+	self menuContainer
+		when: BrMaximizerHostMaximizedElementWish
+		do: [ :anEvent | 
+			anEvent isConsumed
+				ifFalse: [ self
+						widgetDo: [ :aWidget | 
+							| aNewEvent |
+							aNewEvent := BrMaximizerHostMaximizedElementWish new.
+							aWidget fireEvent: aNewEvent.
+							anEvent consumed: aNewEvent isConsumed ] ] ].
+	self menuContainer
+		when: BrWithMaximizerAptitudeMaximizeWish
+		do: [ :anEvent | 
+			anEvent isConsumed
+				ifFalse: [ self
+						widgetDo: [ :aWidget | 
+							| aNewEvent |
+							aNewEvent := BrWithMaximizerAptitudeMaximizeWish new.
+							aWidget fireEvent: aNewEvent.
+							anEvent consumed: aNewEvent isConsumed ] ] ]
+]
+
 { #category : #'api - initialization' }
 BrWithExplicitPopoverAptitude >> withMouseHoverEventHandler [
 	"Show menu on mouse enter events."
