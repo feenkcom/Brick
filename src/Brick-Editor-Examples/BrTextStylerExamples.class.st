@@ -32,7 +32,7 @@ BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 	anElement := BrEditorElement new editor: anEditor. 
 	anEditor styleTextAndAfterDo: [ :aStyledText | aSemaphore signal ].
 
-	aTimeout := aSemaphore waitTimeoutMSecs: 100.
+	aTimeout := aSemaphore waitTimeoutMilliseconds: 100.
 	"It timeouts anyway as the element is not in a Space yet."
 	self assert: aTimeout.
 
@@ -48,7 +48,7 @@ BrTextStylerExamples >> editorWithAsyncStylerStrategy [
 	"no more tasks"
 	self assert: anElement taskQueue tasks size equals: 0.
 	
-	aTimeout := aSemaphore waitTimeoutMSecs: 100.
+	aTimeout := aSemaphore waitTimeoutMilliseconds: 100.
 	"It does not timeout as styling is processed in the same process as this test."
 	self assert: aTimeout not.
 	
