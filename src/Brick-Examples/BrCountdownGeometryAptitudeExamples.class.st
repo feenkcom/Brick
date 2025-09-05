@@ -157,13 +157,10 @@ BrCountdownGeometryAptitudeExamples >> first03seconds_clickTab1 [
 	| aScripter |
 	aScripter := self first03seconds_clickTab2.
 
-	aScripter memoryLogger
-		runFor: GtJustContextStackSignal
-		during: [ :aStep | 
-			aStep click
-				label: 'Display tab1 content';
-				// self tab1Id;
-				playPulseOnce ].
+	aScripter click
+		label: 'Display tab1 content';
+		// self tab1Id;
+		playPulseOnce.
 
 	self assertScripter: aScripter startAngle: -90.
 	self assertScripter: aScripter finishCallbackCalled: 0.
@@ -222,13 +219,10 @@ BrCountdownGeometryAptitudeExamples >> first03seconds_clickTab2 [
 	| aScripter |
 	aScripter := self first03seconds.
 
-	aScripter memoryLogger
-		runFor: GtJustContextStackSignal
-		during: [ :aStep | 
-			aStep click
-				label: 'Display tab2 content';
-				// self tab2Id;
-				playPulseOnce ].
+	aScripter click
+		label: 'Display tab2 content';
+		// self tab2Id;
+		playPulseOnce.
 
 	self assertScripter: aScripter startAngle: 0.
 	self assertScripter: aScripter finishCallbackCalled: 0.
@@ -456,13 +450,10 @@ BrCountdownGeometryAptitudeExamples >> first03seconds_popover_clickTab2 [
 	| aScripter |
 	aScripter := self first03seconds_popover_leave.
 
-	aScripter memoryLogger
-		runFor: GtJustContextStackSignal
-		during: [ :aStep | 
-			aStep click
-				label: 'Display tab2 content';
-				// self tab2Id;
-				playPulseOnce ].
+	aScripter click
+		label: 'Display tab2 content';
+		// self tab2Id;
+		playPulseOnce.
 
 	self assertScripter: aScripter startAngle: -90.
 	self assertScripter: aScripter finishCallbackCalled: 0.
