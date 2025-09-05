@@ -10,12 +10,13 @@ BrTextCursorAttributeExamples >> changingForeground [
 	<return: #BlRunRopedText>
 	| text |
 	text := 'Hello World
-- click here
+- place the cursor here
 - second item' asRopedText fontSize: 20.
 
-	(text from: 13 to: 24)
+	(text from: 14 to: 35)
+		foreground: Color blue;
 		onCursorEnter: [ :aTextEditor :anEvent :aFromIndex :aToIndex | (aTextEditor text from: aFromIndex to: aToIndex) foreground: Color red ]
-		leave: [ :aTextEditor :anEvent :aFromIndex :aToIndex | (aTextEditor text from: aFromIndex to: aToIndex) foreground: Color blue ].
+			leave: [ :aTextEditor :anEvent :aFromIndex :aToIndex | (aTextEditor text from: aFromIndex to: aToIndex) foreground: Color blue ].
 
 	^ text
 ]
