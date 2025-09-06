@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'cursor'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'instance creation' }

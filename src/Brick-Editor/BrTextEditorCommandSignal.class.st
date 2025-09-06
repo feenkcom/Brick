@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'command'
 	],
-	#category : 'Brick-Editor-Signals'
+	#category : #'Brick-Editor-Signals'
 }
 
 { #category : #accessing }

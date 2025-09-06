@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'duration'
 	],
-	#category : 'Brick-Editor-Styler'
+	#category : #'Brick-Editor-Styler'
 }
 
 { #category : #accessing }

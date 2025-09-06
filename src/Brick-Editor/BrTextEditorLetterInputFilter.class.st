@@ -4,7 +4,7 @@ I only allow letters
 Class {
 	#name : #BrTextEditorLetterInputFilter,
 	#superclass : #BrTextEditorInputFilter,
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #accessing }

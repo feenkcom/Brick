@@ -4,7 +4,7 @@ I store metadata for this package. These meta data are used by other tools such 
 Class {
 	#name : #ManifestBrickEditor,
 	#superclass : #PackageManifest,
-	#category : 'Brick-Editor-Manifest'
+	#category : #'Brick-Editor-Manifest'
 }
 
 { #category : #accessing }

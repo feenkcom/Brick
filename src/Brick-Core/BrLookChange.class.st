@@ -7,7 +7,7 @@ Class {
 		'down',
 		'source'
 	],
-	#category : 'Brick-Core-Changes'
+	#category : #'Brick-Core-Changes'
 }
 
 { #category : #accessing }

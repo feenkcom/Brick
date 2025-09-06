@@ -5,7 +5,7 @@ Class {
 		'fromIndices',
 		'toIndices'
 	],
-	#category : 'Brick-Editor-History'
+	#category : #'Brick-Editor-History'
 }
 
 { #category : #accessing }

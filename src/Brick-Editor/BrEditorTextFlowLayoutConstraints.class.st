@@ -11,7 +11,7 @@ Class {
 		'breakLineAfter',
 		'assignedLine'
 	],
-	#category : 'Brick-Editor-Layout'
+	#category : #'Brick-Editor-Layout'
 }
 
 { #category : #accessing }

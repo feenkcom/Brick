@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLookPropertyCopyChange,
 	#superclass : #BrLookPropertyChange,
-	#category : 'Brick-Core-Changes'
+	#category : #'Brick-Core-Changes'
 }
 
 { #category : #initialization }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'childrenElements'
 	],
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #accessing }

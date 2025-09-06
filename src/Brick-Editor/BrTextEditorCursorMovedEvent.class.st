@@ -10,7 +10,7 @@ Class {
 		'newIndex',
 		'dueTo'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
 
 { #category : #'instance creation' }

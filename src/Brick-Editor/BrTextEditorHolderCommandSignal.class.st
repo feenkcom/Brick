@@ -5,7 +5,7 @@ Class {
 		'command',
 		'interval'
 	],
-	#category : 'Brick-Editor-Signals'
+	#category : #'Brick-Editor-Signals'
 }
 
 { #category : #accessing }

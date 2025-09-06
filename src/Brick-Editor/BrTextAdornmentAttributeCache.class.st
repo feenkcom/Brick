@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextAdornmentAttributeCache,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor-Attributes - Support'
 }
 
 { #category : #'api - cache' }

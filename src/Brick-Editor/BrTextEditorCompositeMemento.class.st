@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'mementos'
 	],
-	#category : 'Brick-Editor-Model - Memento'
+	#category : #'Brick-Editor-Model - Memento'
 }
 
 { #category : #'api - memento' }

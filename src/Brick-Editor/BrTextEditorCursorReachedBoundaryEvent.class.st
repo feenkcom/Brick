@@ -12,7 +12,7 @@ Class {
 		'Bottom',
 		'Top'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
 
 { #category : #'class initialization' }

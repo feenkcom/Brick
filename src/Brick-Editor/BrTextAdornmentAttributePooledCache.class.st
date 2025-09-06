@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'cachePool'
 	],
-	#category : 'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor-Attributes - Support'
 }
 
 { #category : #'private - cache' }

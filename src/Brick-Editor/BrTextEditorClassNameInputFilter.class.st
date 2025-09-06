@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorClassNameInputFilter,
 	#superclass : #BrTextEditorInputFilter,
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #accessing }

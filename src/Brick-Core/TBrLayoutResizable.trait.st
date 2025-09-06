@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBrLayoutResizable,
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #'api - layout resizeable' }

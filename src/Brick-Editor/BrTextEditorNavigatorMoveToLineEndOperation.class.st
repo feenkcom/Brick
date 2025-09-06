@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorNavigatorMoveToLineEndOperation,
 	#superclass : #BrTextEditorNavigatorOperation,
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #matching }

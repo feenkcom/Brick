@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'delta'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #accessing }

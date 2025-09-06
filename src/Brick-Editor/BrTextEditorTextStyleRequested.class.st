@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'afterAction'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
 
 { #category : #accessing }
