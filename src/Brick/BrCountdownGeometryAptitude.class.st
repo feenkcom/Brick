@@ -144,7 +144,6 @@ BrCountdownGeometryAptitude >> onAnimationFinished [
 	| anAnimation aState |
 	anAnimation := animation.
 	aState := state.
-	GtJustContextStackSignal emit.
 	animation := nil.
 	
 	"Let's ensure we run the finished action only in running state.
@@ -177,7 +176,6 @@ BrCountdownGeometryAptitude >> onBlElementRemovedFromSceneGraphEvent: anEvent [
 	| anAnimation aState |
 	anAnimation := animation.
 	aState := state.
-	GtJustContextStackSignal emit.
 	state ifRunning: [ 
 		state := BrCountdownGeometryState ready.
 		self stopAnimation ].
@@ -271,7 +269,6 @@ BrCountdownGeometryAptitude >> stopAnimation [
 		isRunning := oldAnimation isRunning.
 		isStarted := oldAnimation isStarted ].
 	aState := state.
-	GtJustContextStackSignal emit.
 
 	animation
 		ifNotNil: [ :anAnimation | 
