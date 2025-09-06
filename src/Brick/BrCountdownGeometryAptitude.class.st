@@ -269,7 +269,7 @@ BrCountdownGeometryAptitude >> stopAnimation [
 		isRunning := oldAnimation isRunning.
 		isStarted := oldAnimation isStarted ].
 	aState := state.
-	
+
 	animation
 		ifNotNil: [ :anAnimation | 
 			anAnimation isStarted 
