@@ -70,6 +70,32 @@ BrEditorStep >> assertTextEqualsTo: aString [
 		onThisOrBreadthFirstChildOfKind: BrEditor
 ]
 
+{ #category : #'steps - interactions' }
+BrEditorStep >> deselectAll [
+	^ self do
+		referenceSender;
+		label: 'Select all editor text';
+		block: [ :anEditor | anEditor selecter all; select ];
+		onParentStepTarget: self;
+		onThisOrBreadthFirstChildOfKind: BrEditor
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> moveToEnd [
+	^ self keyPress
+		label: 'Move to end';
+		key: BlKeyboardKey end;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> pressReturn [
+	^ self keyPress
+		label: 'Press return';
+		key: BlKeyboardKey return;
+		referenceSender
+]
+
 { #category : #private }
 BrEditorStep >> privateShortString: aText [
 	| aString |

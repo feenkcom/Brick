@@ -3,10 +3,17 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'preEndPinBlock',
-		'preStartPinBlock'
+		'preStartPinBlock',
+		'postEndPinBlock'
 	],
 	#category : #'Brick-Menu - Support'
 }
+
+{ #category : #'api - execution' }
+BrMenuPinAction >> executePostEndPinBlockInContext: aContext [
+	self postEndPinBlock ifNotNil: [ :aBlock | 
+		aBlock cull: aContext ]
+]
 
 { #category : #'api - execution' }
 BrMenuPinAction >> executePreEndPinBlockInContext: aContext [
@@ -21,13 +28,31 @@ BrMenuPinAction >> executePreStartPinBlockInContext: aContext [
 ]
 
 { #category : #accessing }
+BrMenuPinAction >> postEndPinBlock [
+	^ postEndPinBlock
+]
+
+{ #category : #accessing }
+BrMenuPinAction >> postEndPinBlock: oneArgBlock [
+	"Define an action that is performed after a menu element is pinned.
+	The block must have one argument: [ :aContext | ].
+	aContext is an BrMenuPinActionContext object."
+
+	preEndPinBlock := oneArgBlock
+]
+
+{ #category : #accessing }
 BrMenuPinAction >> preEndPinBlock [
 	^ preEndPinBlock
 ]
 
 { #category : #accessing }
-BrMenuPinAction >> preEndPinBlock: anObject [
-	preEndPinBlock := anObject
+BrMenuPinAction >> preEndPinBlock: oneArgBlock [
+	"Define an action that is performed when a menu element is about to be pinned.
+	The block must have one argument: [ :aContext | ].
+	aContext is an BrMenuPinActionContext object."
+
+	preEndPinBlock := oneArgBlock
 ]
 
 { #category : #accessing }
@@ -36,6 +61,10 @@ BrMenuPinAction >> preStartPinBlock [
 ]
 
 { #category : #accessing }
-BrMenuPinAction >> preStartPinBlock: anObject [
-	preStartPinBlock := anObject
+BrMenuPinAction >> preStartPinBlock: oneArgBlock [
+	"Define an action that is performed before a menu element is pinned.
+	The block must have one argument: [ :aContext | ].
+	aContext is an BrMenuPinActionContext object."
+
+	preStartPinBlock := oneArgBlock
 ]

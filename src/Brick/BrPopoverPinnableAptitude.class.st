@@ -40,7 +40,7 @@ BrPopoverPinnableAptitude >> addCloseButton [
 			as: BrPopoverPinnedCloseButtonId ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - initialization' }
 BrPopoverPinnableAptitude >> addPinningAction: anAction [
 	pinningActions := self pinningActions copyWith: anAction
 ]
@@ -93,7 +93,8 @@ BrPopoverPinnableAptitude >> endPinning [
 			self performPreEndPinActions.
 			pinner pinMenuElement: aWidget.
 			self addCloseButton.
-			isPinned := true. ]
+			isPinned := true.
+			self performPostEndPinActions. ]
 ]
 
 { #category : #initialization }
@@ -213,6 +214,20 @@ BrPopoverPinnableAptitude >> onUninstalledIn: anElement [
 ]
 
 { #category : #'private - updating' }
+BrPopoverPinnableAptitude >> performPostEndPinActions [
+	| aContext |
+	self pinningActions ifEmpty: [ ^ self ].
+	self widgetDo: [ :aWidget | 
+		aContext := BrMenuPinActionContext new
+			menuElement: aWidget;
+			pinnableAptitude: self ].
+	aContext ifNil: [ ^ self ].
+
+	self pinningActions do: [ :eachAction |
+		eachAction executePostEndPinBlockInContext: aContext ].
+]
+
+{ #category : #'private - updating' }
 BrPopoverPinnableAptitude >> performPreEndPinActions [
 	| aContext |
 	self pinningActions ifEmpty: [ ^ self ].
@@ -298,4 +313,31 @@ BrPopoverPinnableAptitude >> withPinnedAptitude [
 	<menuPinAction>
 	self addPinningAction: (BrMenuPinAction new
 		preEndPinBlock: [ self add: BrPopoverPinnedAptitude new ])
+]
+
+{ #category : #'api - initialization' }
+BrPopoverPinnableAptitude >> withPostEndPinBlock: aOneArgBlock [
+	"Define an action that is performed after a menu element is pinned.
+	The block must have one argument: [ :aContext | ].
+	aContext is an BrMenuPinActionContext object."
+
+	self addPinningAction: (BrMenuPinAction new postEndPinBlock: aOneArgBlock)
+]
+
+{ #category : #'api - initialization' }
+BrPopoverPinnableAptitude >> withPreEndPinBlock: aOneArgBlock [
+	"Define an action that is performed when a menu element is about to be pinned.
+	The block must have one argument: [ :aContext | ].
+	aContext is an BrMenuPinActionContext object."
+
+	self addPinningAction: (BrMenuPinAction new preEndPinBlock: aOneArgBlock)
+]
+
+{ #category : #'api - initialization' }
+BrPopoverPinnableAptitude >> withPreStartPinBlock: aOneArgBlock [
+	"Define an action that is performed before a menu element is pinned.
+	The block must have one argument: [ :aContext | ].
+	aContext is an BrMenuPinActionContext object."
+
+	self addPinningAction: (BrMenuPinAction new preStartPinBlock: aOneArgBlock)
 ]

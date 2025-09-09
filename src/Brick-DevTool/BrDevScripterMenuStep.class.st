@@ -17,7 +17,7 @@ BrDevScripterMenuStep >> assertClosedMenuContainer [
 	^ (self assertMenuContainerExist: 0) referenceSender
 ]
 
-{ #category : #'steps - interactions' }
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertDeselectedMenuItem: anElementId [
 	^ self assert
 		label: ('Assert deselected menu item with ID: {1}' format: {anElementId});
@@ -239,7 +239,7 @@ BrDevScripterMenuStep >> assertPermanentlyHiddenMenuContainerFor: aMenuAptitudeC
 		onParentStepTarget: self
 ]
 
-{ #category : #'steps - interactions' }
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertSelectedMenuItem: anElementId [
 	^ self assert
 		label: ('Assert selected menu item with ID: {1}' format: {anElementId});
