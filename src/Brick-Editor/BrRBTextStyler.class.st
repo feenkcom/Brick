@@ -239,6 +239,19 @@ BrRBTextStyler >> resolveStyleFor: aVariableNode [
 ]
 
 { #category : #private }
+BrRBTextStyler >> resolveStyleOpenBracket: aBlockNode [
+	^ aBlockNode isFaulty
+		ifTrue: [ 
+			"A block will be marked as faulty in case it has undeclared variables.
+			For now use the default style as we do not highlight undeclared variables.
+			
+			https://github.com/feenkcom/gtoolkit/issues/4681"
+			#default
+			"#invalid" ]
+		ifFalse: [ self currentOpenedBracketStyleName ].
+]
+
+{ #category : #private }
 BrRBTextStyler >> resolveTextLinkFor: aVariableNode [
 
 	aVariableNode binding isGlobalVariable
@@ -279,9 +292,7 @@ BrRBTextStyler >> styleCloseParenthese: aMessageNode [
 { #category : #private }
 BrRBTextStyler >> styleOpenBracket: aBlockNode [
 	| style |
-	style := aBlockNode isFaulty
-		ifTrue: [ #invalid ]
-		ifFalse: [ self currentOpenedBracketStyleName ].
+	style := self resolveStyleOpenBracket: aBlockNode.
 	self addStyle: style from: aBlockNode left to: aBlockNode left.
 	bracketLevel := bracketLevel + 1
 ]

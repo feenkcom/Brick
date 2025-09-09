@@ -11,3 +11,8 @@ Class {
 BrDummyObjectForTextStyling >> methodOne: arg [
 	slotOne := [:x|x] value: arg
 ]
+
+{ #category : #accessing }
+BrDummyObjectForTextStyling >> methodTwo [
+	[slotOne] 
+]

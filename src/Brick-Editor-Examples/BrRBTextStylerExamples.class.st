@@ -4,8 +4,16 @@ Class {
 	#category : #'Brick-Editor-Examples-Styler'
 }
 
+{ #category : #assertions }
+BrRBTextStylerExamples >> assertAttributesInText: aStyledText equalAttributesInText: anotherStyledtext [ 
+	self 
+		assert: (self extractIntervalsFrom: aStyledText)  items
+		equals:(self 
+			extractIntervalsFrom: anotherStyledtext) items. 
+]
+
 { #category : #accessing }
-BrRBTextStylerExamples >> expectedStyledTextForMethodWithExplicitClass [
+BrRBTextStylerExamples >> expectedStyledTextForMethodOneWithExplicitClass [
 	| text  |
 	text := (BrDummyObjectForTextStyling>>#methodOne:) 
 		sourceCode asRopedText.
@@ -37,7 +45,7 @@ BrRBTextStylerExamples >> expectedStyledTextForMethodWithExplicitClass [
 ]
 
 { #category : #accessing }
-BrRBTextStylerExamples >> expectedStyledTextForMethodWithNoExplicitClass [
+BrRBTextStylerExamples >> expectedStyledTextForMethodOneWithNoExplicitClass [
 	| text  |
 	text := (BrDummyObjectForTextStyling>>#methodOne:) 
 		sourceCode asRopedText.
@@ -64,6 +72,56 @@ BrRBTextStylerExamples >> expectedStyledTextForMethodWithNoExplicitClass [
 		
 	(text from: 35 to: 40)
 		attributes: {BlTextMethodLink new}.
+		
+	^ text
+]
+
+{ #category : #accessing }
+BrRBTextStylerExamples >> expectedStyledTextForMethodTwoWithExplicitClass [
+	| text  |
+	text := (BrDummyObjectForTextStyling>>#methodTwo) 
+		sourceCode asRopedText.
+	
+	{ 1->12 . 20->21} do: [ :each |	
+		(text from: each key to: each value)
+			foreground: Color black].
+
+	text
+		attributes: {BlFontEmphasisAttribute normal}.
+		
+	(text from: 1 to: 9)
+		attributes: {BlFontWeightAttribute bold}.
+		
+	(text from: 13 to: 19)
+		attributes: {BlTextVariableLink new}.
+		
+	(text from: 13 to: 19)
+		foreground: Color blue muchDarker.
+		
+	^ text
+]
+
+{ #category : #accessing }
+BrRBTextStylerExamples >> expectedStyledTextForMethodTwoWithNoExplicitClass [
+	| text  |
+	text := (BrDummyObjectForTextStyling>>#methodTwo) 
+		sourceCode asRopedText.
+	
+	{ 1->12 . 20->21} do: [ :each |	
+		(text from: each key to: each value)
+			foreground: Color black].
+
+	text
+		attributes: {BlFontEmphasisAttribute normal}.
+		
+	(text from: 1 to: 9)
+		attributes: {BlFontWeightAttribute bold}.
+		
+	(text from: 13 to: 19)
+		attributes: {BlTextVariableLink new}.
+		
+	(text from: 13 to: 19)
+		foreground: Color veryDarkGray.
 		
 	^ text
 ]
@@ -98,7 +156,7 @@ BrRBTextStylerExamples >> extractIntervalsFrom: aText [
 ]
 
 { #category : #examples }
-BrRBTextStylerExamples >> styledMethodWithExplicitClass [
+BrRBTextStylerExamples >> styledMethodOneWithExplicitClass [
 	<gtExample>
 	| unstyledText styledText styler |
 	
@@ -109,15 +167,15 @@ BrRBTextStylerExamples >> styledMethodWithExplicitClass [
 	styledText := styler style: unstyledText.	
 	
 	self 
-		assert: (self extractIntervalsFrom: styledText)  items
-		equals:(self 
-			extractIntervalsFrom:  self expectedStyledTextForMethodWithExplicitClass) items. 
+		assertAttributesInText: styledText
+		equalAttributesInText: self
+			expectedStyledTextForMethodOneWithExplicitClass.
 
 	^ styledText
 ]
 
 { #category : #examples }
-BrRBTextStylerExamples >> styledMethodWithNoExplicitClass [
+BrRBTextStylerExamples >> styledMethodOneWithNoExplicitClass [
 	<gtExample>
 	| unstyledText styledText styler |
 	
@@ -128,10 +186,47 @@ BrRBTextStylerExamples >> styledMethodWithNoExplicitClass [
 	styledText := styler style: unstyledText.	
 	
 	self 
-		assert: (self extractIntervalsFrom: styledText)  items
-		equals:(self 
-			extractIntervalsFrom: self 
-				expectedStyledTextForMethodWithNoExplicitClass) items. 
+		assertAttributesInText: styledText
+		equalAttributesInText:self 
+			expectedStyledTextForMethodOneWithNoExplicitClass. 
+
+	^ styledText
+]
+
+{ #category : #examples }
+BrRBTextStylerExamples >> styledMethodTwoWithExplicitClass [
+	<gtExample>
+	| unstyledText styledText styler |
+	
+	unstyledText := (BrDummyObjectForTextStyling >> #methodTwo) sourceCode
+			asRopedText.
+			
+	styler := self testStylerWithExplicitClass.
+	styledText := styler style: unstyledText.	
+	
+	self 
+		assertAttributesInText: styledText
+		equalAttributesInText:self 
+			expectedStyledTextForMethodTwoWithExplicitClass. 
+
+	^ styledText
+]
+
+{ #category : #examples }
+BrRBTextStylerExamples >> styledMethodTwoWithNoExplicitClass [
+	<gtExample>
+	| unstyledText styledText styler |
+	
+	unstyledText := (BrDummyObjectForTextStyling >> #methodTwo) sourceCode
+			asRopedText.
+			
+	styler := self testStylerWithNoExplicitClass.
+	styledText := styler style: unstyledText.	
+	
+	self 
+		assertAttributesInText: styledText
+		equalAttributesInText: self 
+			expectedStyledTextForMethodTwoWithNoExplicitClass. 
 
 	^ styledText
 ]
