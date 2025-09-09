@@ -326,7 +326,7 @@ BrPopoverPinnableAptitude >> withPostEndPinBlock: aOneArgBlock [
 
 { #category : #'api - initialization' }
 BrPopoverPinnableAptitude >> withPreEndPinBlock: aOneArgBlock [
-	"Define an action that is performed after a menu element is pinned.
+	"Define an action that is performed when a menu element is about to be pinned.
 	The block must have one argument: [ :aContext | ].
 	aContext is an BrMenuPinActionContext object."
 
