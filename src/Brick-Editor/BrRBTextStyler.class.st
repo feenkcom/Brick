@@ -190,7 +190,13 @@ BrRBTextStyler >> privateStyle: aText [
 	ast := self
 			forPharo12: [ 
 				| compiler |
-				compiler := classOrMetaClass compiler
+				compiler := (classOrMetaClass ifNil: [
+							"We pass a class here, as if we pass nil we cannot
+							change the compiler to not be for scripting.
+							#isScripting: wants a class in order to be able
+							to do the switch.
+							https://github.com/feenkcom/gtoolkit/issues/4681"
+							UndefinedObject])compiler
 						source: aText asString;
 						receiver: (self isScripting 
 							ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
@@ -230,6 +236,19 @@ BrRBTextStyler >> resolveStyleFor: aVariableNode [
 	aVariableNode hasIncompleteIdentifier ifTrue: [ 
 		^ #incompleteIdentifier ].
 	^ #invalid
+]
+
+{ #category : #private }
+BrRBTextStyler >> resolveStyleOpenBracket: aBlockNode [
+	^ aBlockNode isFaulty
+		ifTrue: [ 
+			"A block will be marked as faulty in case it has undeclared variables.
+			For now use the default style as we do not highlight undeclared variables.
+			
+			https://github.com/feenkcom/gtoolkit/issues/4681"
+			#default
+			"#invalid" ]
+		ifFalse: [ self currentOpenedBracketStyleName ].
 ]
 
 { #category : #private }
@@ -273,9 +292,7 @@ BrRBTextStyler >> styleCloseParenthese: aMessageNode [
 { #category : #private }
 BrRBTextStyler >> styleOpenBracket: aBlockNode [
 	| style |
-	style := aBlockNode isFaulty
-		ifTrue: [ #invalid ]
-		ifFalse: [ self currentOpenedBracketStyleName ].
+	style := self resolveStyleOpenBracket: aBlockNode.
 	self addStyle: style from: aBlockNode left to: aBlockNode left.
 	bracketLevel := bracketLevel + 1
 ]

@@ -17,21 +17,20 @@ BrTextAttributesHowToGuide >> hideMarkupInText [
 	<gtExample>
 	<return: #BrEditor>
 	| text leftMarker rightMarker |
-	text := 'Move cursor **here** to show markup' asRopedText
-			fontName: 'Source Sans Pro';
+	text := 'Move the cursor **here** to show the markup' asRopedText
 			fontSize: 20.
 
-	(text from: 15 to: 18) bold.
+	(text from: 19 to: 22) bold.
 
-	(text from: 13 to: 14)
-		foreground: Color gray;
+	(text from: 17 to: 18)
+		foreground: Color blue;
 		attribute: (leftMarker := BrTextInvisibleMarkerAttribute new).
 
-	(text from: 19 to: 20)
-		foreground: Color gray;
+	(text from: 23 to: 24)
+		foreground: Color blue;
 		attribute: (rightMarker := BrTextInvisibleMarkerAttribute new).
 
-	(text from: 11 to: 22)
+	(text from: 15 to: 26)
 		onCursorEnter: [ :aTextEditor :anEvent :aFromIndex :aToIndex | 
 			| aSubText |
 			(aSubText := aTextEditor text from: aFromIndex to: aToIndex)
@@ -60,7 +59,12 @@ BrTextAttributesHowToGuide >> linkInText [
 	text := 'You can click on this.' asRopedText.
 	(text from: 9 to: 13)
 		foreground: Color blue;
-		onClick: [ :aTBrTextEditorTextualPiece :aTarget :aTextEditor :anEvent | anEvent currentTarget phlow spawnObject: aTBrTextEditorTextualPiece text ];
+		onClick: [ :aTBrTextEditorTextualPiece :aTarget :aTextEditor :anEvent | 
+			anEvent currentTarget phlow
+				spawnObject: {aTBrTextEditorTextualPiece.
+						aTarget.
+						aTextEditor.
+						anEvent} ];
 		attribute: (BrTextHoverStylableAttribute new
 				attribute: (BlTextDecorationAttribute new underline color: Color blue)).
 	^ text
