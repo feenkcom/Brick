@@ -190,7 +190,13 @@ BrRBTextStyler >> privateStyle: aText [
 	ast := self
 			forPharo12: [ 
 				| compiler |
-				compiler := classOrMetaClass compiler
+				compiler := (classOrMetaClass ifNil: [
+							"We pass a class here, as if we pass nil we cannot
+							change the compiler to not be for scripting.
+							#isScripting: wants a class in order to be able
+							to do the switch.
+							https://github.com/feenkcom/gtoolkit/issues/4681"
+							UndefinedObject])compiler
 						source: aText asString;
 						receiver: (self isScripting 
 							ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
