@@ -188,7 +188,7 @@ BrRBTextStyler >> parse: aText isMethod: isMethod [
 BrRBTextStyler >> privateStyle: aText [
 	| ast |
 	ast := self
-			forPharo12: [ 
+			forPharo12AndNewer: [ 
 				| compiler |
 				compiler := (classOrMetaClass ifNil: [
 							"We pass a class here, as if we pass nil we cannot
@@ -203,7 +203,7 @@ BrRBTextStyler >> privateStyle: aText [
 						isScripting: self isScripting;
 						requestor: workspace.
 				compiler parse ]
-			forPharo11AndPharo10: [ 
+			forPharo11: [ 
 				| currentAst |
 				currentAst := self parse: aText isMethod: self isForWorkspace not.
 				currentAst methodNode
