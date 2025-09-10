@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Brick-Editor-UI - Word'
+	#category : #'Brick-Editor-UI - Word'
 }
 
 { #category : #accessing }

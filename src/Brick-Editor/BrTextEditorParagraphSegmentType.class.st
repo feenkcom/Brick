@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorParagraphSegmentType,
 	#superclass : #BrEditorSegmentType,
-	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'cursors'
 	],
-	#category : 'Brick-Editor-Model - Memento'
+	#category : #'Brick-Editor-Model - Memento'
 }
 
 { #category : #accessing }

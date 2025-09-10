@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'commands'
 	],
-	#category : 'Brick-Editor-History'
+	#category : #'Brick-Editor-History'
 }
 
 { #category : #initialization }

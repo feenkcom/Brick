@@ -6,7 +6,7 @@ I should be treated differently by text widgets with the support of multi-line t
 Class {
 	#name : #BrTextParagraphAttribute,
 	#superclass : #BlTextAttribute,
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #hook }

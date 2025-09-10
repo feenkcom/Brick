@@ -4,7 +4,7 @@ I move a cursor to the beginning of the current word when in the middle of a wor
 Class {
 	#name : #BrTextEditorNavigatorMoveToStartPreviousWordOperation,
 	#superclass : #BrTextEditorNavigatorOperation,
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #matching }

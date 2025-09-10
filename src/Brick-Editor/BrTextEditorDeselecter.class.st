@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'selection'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }

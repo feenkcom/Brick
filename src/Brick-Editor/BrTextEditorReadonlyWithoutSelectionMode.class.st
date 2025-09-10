@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorReadonlyWithoutSelectionMode,
 	#superclass : #BrTextEditorBasicMode,
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #'api - hooks' }

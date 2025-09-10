@@ -5,7 +5,7 @@ Class {
 		'resultBlock',
 		'resultIndex'
 	],
-	#category : 'Brick-Editor-Model - Cursor'
+	#category : #'Brick-Editor-Model - Cursor'
 }
 
 { #category : #dispatching }

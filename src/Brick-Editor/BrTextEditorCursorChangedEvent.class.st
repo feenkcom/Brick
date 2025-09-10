@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'cursors'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
 
 { #category : #accessing }

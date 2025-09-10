@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorMode,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Model'
+	#category : #'Brick-Editor-Model'
 }
 
 { #category : #comparing }

@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'attribute'
 	],
-	#category : 'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor-Attributes - Support'
 }
 
 { #category : #accessing }

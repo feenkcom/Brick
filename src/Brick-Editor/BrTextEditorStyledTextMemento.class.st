@@ -5,7 +5,7 @@ Class {
 		'text',
 		'styler'
 	],
-	#category : 'Brick-Editor-Model - Memento'
+	#category : #'Brick-Editor-Model - Memento'
 }
 
 { #category : #initialization }

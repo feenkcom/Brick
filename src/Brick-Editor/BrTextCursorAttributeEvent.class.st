@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'interval'
 	],
-	#category : 'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor-Attributes - Support'
 }
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Class {
 		'afterAction',
 		'editorElement'
 	],
-	#category : 'Brick-Editor-Model - Events'
+	#category : #'Brick-Editor-Model - Events'
 }
 
 { #category : #accessing }

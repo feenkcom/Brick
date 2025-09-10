@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Brick-Editor-Model - Memento'
+	#category : #'Brick-Editor-Model - Memento'
 }
 
 { #category : #initialization }

@@ -5,7 +5,7 @@ Class {
 		'cursor',
 		'direction'
 	],
-	#category : 'Brick-Editor-Model - Cursor'
+	#category : #'Brick-Editor-Model - Cursor'
 }
 
 { #category : #accessing }

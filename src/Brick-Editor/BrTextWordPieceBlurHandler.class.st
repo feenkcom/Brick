@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextWordPieceBlurHandler,
 	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : 'Brick-Editor-UI - Word'
+	#category : #'Brick-Editor-UI - Word'
 }
 
 { #category : #'api - event managing' }
