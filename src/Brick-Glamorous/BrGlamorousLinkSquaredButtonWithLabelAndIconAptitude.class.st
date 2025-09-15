@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousLinkSquaredButtonWithLabelAndIconAptitude,
 	#superclass : #BrGlamorousLinkSquaredButtonWithLabelAptitude,
-	#category : 'Brick-Glamorous-Buttons'
+	#category : #'Brick-Glamorous-Buttons'
 }
 
 { #category : #initialization }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'labelLook'
 	],
-	#category : 'Brick-Glamorous-Accordion'
+	#category : #'Brick-Glamorous-Accordion'
 }
 
 { #category : #initialization }

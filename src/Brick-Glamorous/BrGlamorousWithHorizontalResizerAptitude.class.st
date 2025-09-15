@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousWithHorizontalResizerAptitude,
 	#superclass : #BrGlamorousWithResizerAptitude,
-	#category : 'Brick-Glamorous-Resizer'
+	#category : #'Brick-Glamorous-Resizer'
 }
 
 { #category : #'api - location' }

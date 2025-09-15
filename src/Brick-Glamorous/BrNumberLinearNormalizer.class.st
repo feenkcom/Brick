@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scale'
 	],
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #initialization }

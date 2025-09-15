@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousButtonIconAptitude,
 	#superclass : #BrIconAptitude,
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #initialization }

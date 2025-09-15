@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousTooltipAptitude2,
 	#superclass : #BrGlamorousTooltipAptitude,
-	#category : 'Brick-Glamorous-Tooltip'
+	#category : #'Brick-Glamorous-Tooltip'
 }
 
 { #category : #testing }

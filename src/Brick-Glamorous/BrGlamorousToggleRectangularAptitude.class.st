@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'cornerRadius'
 	],
-	#category : 'Brick-Glamorous-Toggle - Support'
+	#category : #'Brick-Glamorous-Toggle - Support'
 }
 
 { #category : #accessing }

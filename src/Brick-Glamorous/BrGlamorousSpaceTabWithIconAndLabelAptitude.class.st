@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousSpaceTabWithIconAndLabelAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Glamorous-Tabs - Space'
+	#category : #'Brick-Glamorous-Tabs - Space'
 }
 
 { #category : #initialization }

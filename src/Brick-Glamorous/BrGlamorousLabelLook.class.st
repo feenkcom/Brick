@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousLabelLook,
 	#superclass : #BrGlamorousLabelAptitude,
-	#category : 'Brick-Glamorous-Label'
+	#category : #'Brick-Glamorous-Label'
 }
 
 { #category : #accessing }

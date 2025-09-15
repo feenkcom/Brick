@@ -5,7 +5,7 @@ Class {
 		'minScale',
 		'maxScale'
 	],
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #'initialize-release' }

@@ -9,7 +9,7 @@ Class {
 		'paddingScale',
 		'heightScale'
 	],
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #'instance creation' }

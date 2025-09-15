@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousWithContextMenuAptitude,
 	#superclass : #BrWithContextMenuAptitude,
-	#category : 'Brick-Glamorous-Context Menu'
+	#category : #'Brick-Glamorous-Context Menu'
 }
 
 { #category : #accessing }

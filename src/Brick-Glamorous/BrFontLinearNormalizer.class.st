@@ -1,7 +1,7 @@
 Class {
 	#name : #BrFontLinearNormalizer,
 	#superclass : #BrLinearNormalizer,
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #accessing }

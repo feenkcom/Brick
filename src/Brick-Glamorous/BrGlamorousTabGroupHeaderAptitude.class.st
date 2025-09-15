@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousTabGroupHeaderAptitude,
 	#superclass : #BrTabGroupHeaderWithToolbarAptitude,
-	#category : 'Brick-Glamorous-Tabs - Support'
+	#category : #'Brick-Glamorous-Tabs - Support'
 }
 
 { #category : #initialization }

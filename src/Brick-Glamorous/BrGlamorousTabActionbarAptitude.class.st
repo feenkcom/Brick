@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'actionbarContainer'
 	],
-	#category : 'Brick-Glamorous-Tabs - Support'
+	#category : #'Brick-Glamorous-Tabs - Support'
 }
 
 { #category : #initialization }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousResizerBottomBarAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Glamorous-Resizer'
+	#category : #'Brick-Glamorous-Resizer'
 }
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Class {
 		'context',
 		'minimumValue'
 	],
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #'instance creation' }

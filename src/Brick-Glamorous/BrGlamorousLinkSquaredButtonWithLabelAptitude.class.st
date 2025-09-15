@@ -16,7 +16,7 @@ Class {
 	#instVars : [
 		'labelLook'
 	],
-	#category : 'Brick-Glamorous-Buttons'
+	#category : #'Brick-Glamorous-Buttons'
 }
 
 { #category : #accessing }

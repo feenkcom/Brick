@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'labelLook'
 	],
-	#category : 'Brick-Glamorous-Progress'
+	#category : #'Brick-Glamorous-Progress'
 }
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Class {
 		'contentBottomBorder',
 		'rightBorder'
 	],
-	#category : 'Brick-Glamorous-Accordion'
+	#category : #'Brick-Glamorous-Accordion'
 }
 
 { #category : #accessing }

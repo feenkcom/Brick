@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousBadgeCircularAptitude,
 	#superclass : #BrStyleCommonAptitude,
-	#category : 'Brick-Glamorous-Badge'
+	#category : #'Brick-Glamorous-Badge'
 }
 
 { #category : #initialization }

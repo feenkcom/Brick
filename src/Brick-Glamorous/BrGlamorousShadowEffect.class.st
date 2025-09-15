@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousShadowEffect,
 	#superclass : #BlGaussianShadowEffect,
-	#category : 'Brick-Glamorous-Shadow'
+	#category : #'Brick-Glamorous-Shadow'
 }
 
 { #category : #initialization }

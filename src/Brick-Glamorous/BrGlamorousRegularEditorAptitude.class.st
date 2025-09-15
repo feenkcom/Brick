@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousRegularEditorAptitude,
 	#superclass : #BrGlamorousEditorAptitude,
-	#category : 'Brick-Glamorous-Editor'
+	#category : #'Brick-Glamorous-Editor'
 }
 
 { #category : #initialization }

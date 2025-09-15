@@ -4,7 +4,7 @@ I define how a link (with a label) looks inside of a text, for example font size
 Class {
 	#name : #BrGlamorousLinkButtonLabelAptitude,
 	#superclass : #BrTextLabelAptitude,
-	#category : 'Brick-Glamorous-Buttons - Support'
+	#category : #'Brick-Glamorous-Buttons - Support'
 }
 
 { #category : #initialization }

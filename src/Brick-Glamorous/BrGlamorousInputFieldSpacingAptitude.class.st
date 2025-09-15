@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousInputFieldSpacingAptitude,
 	#superclass : #BrGlamorousEditorSpacingAptitude,
-	#category : 'Brick-Glamorous-Editor'
+	#category : #'Brick-Glamorous-Editor'
 }
 
 { #category : #initialization }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousWithMaximizerLook,
 	#superclass : #BrGlamorousWithMaximizerAptitude,
-	#category : 'Brick-Glamorous-Maximizer'
+	#category : #'Brick-Glamorous-Maximizer'
 }
 
 { #category : #accessing }

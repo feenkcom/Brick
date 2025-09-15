@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'normalizers'
 	],
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #'instance creation' }

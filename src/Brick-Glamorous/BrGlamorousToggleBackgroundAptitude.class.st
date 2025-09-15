@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousToggleBackgroundAptitude,
 	#superclass : #BrToggleAptitude,
-	#category : 'Brick-Glamorous-Toggle - Support'
+	#category : #'Brick-Glamorous-Toggle - Support'
 }
 
 { #category : #initialization }

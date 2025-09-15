@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousContextMenuAptitude,
 	#superclass : #BrContextMenuAptitude,
-	#category : 'Brick-Glamorous-Context Menu'
+	#category : #'Brick-Glamorous-Context Menu'
 }
 
 { #category : #'instance creation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousEditorSpacingAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Glamorous-Editor'
+	#category : #'Brick-Glamorous-Editor'
 }
 
 { #category : #'focus handlers' }

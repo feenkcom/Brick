@@ -1,7 +1,7 @@
 Class {
 	#name : #GtInspectorPlusIconStencil,
 	#superclass : #BrPlusIconStencil,
-	#category : 'Brick-Glamorous'
+	#category : #'Brick-Glamorous'
 }
 
 { #category : #testing }

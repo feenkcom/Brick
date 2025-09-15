@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousDropdownAptitude2,
 	#superclass : #BrGlamorousDropdownAptitude,
-	#category : 'Brick-Glamorous-Dropdown'
+	#category : #'Brick-Glamorous-Dropdown'
 }
 
 { #category : #testing }

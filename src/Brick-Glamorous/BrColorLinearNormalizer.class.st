@@ -7,7 +7,7 @@ Class {
 		'lowColor',
 		'highColor'
 	],
-	#category : 'Brick-Glamorous-Normalizer'
+	#category : #'Brick-Glamorous-Normalizer'
 }
 
 { #category : #'instance creation' }
