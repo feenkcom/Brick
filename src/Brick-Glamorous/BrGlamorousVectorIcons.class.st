@@ -164,6 +164,14 @@ BrGlamorousVectorIcons class >> close [
 		background: Color black ] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> copyToClipboard [
+	<script: 'self close copyToClipboard'>
+
+	^ [ self largeCopyToClipboard asElement asScalableElement size: 16 @ 16 ]
+		  asStencil
+]
+
 { #category : #'private - geometry' }
 BrGlamorousVectorIcons class >> crossGeometry: aThickness extent: anExtent origin: anOrigin [
 	<return: #BlElementVectorGeometry>
@@ -436,6 +444,29 @@ BrGlamorousVectorIcons class >> largeChanges [
 						viewbox: (0@0 extent: 64@64));
 					outskirts: BlOutskirts centered;
 					border: (BlBorder builder paint: Color black; width: 4; capSquare; build).
+			} ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> largeCopyToClipboard [
+	<script: 'self largeCopyToClipboard inspect'>
+	^ [
+		BlElement new
+			size: 64@64;
+			addChildren: { 
+				BlElement new
+					size: 24@32;
+					relocate: 15@26;
+					outskirts: BlOutskirts centered;
+					border: (BlBorder builder paint: Color black; width: 6; capSquare; build).
+				BlElement new
+					size: 64@64;
+					outskirts: BlOutskirts centered;
+					relocate: 5@0;
+					geometry: (BlSvgPath new
+						svg: 'M 20.1916 15.865 L 44.163646 15.915941 L 44.1916 47.865'
+						viewbox: (0@0 extent: 64@64));
+					border: (BlBorder builder paint: Color black; width: 5; capSquare; build).
 			} ] asStencil
 ]
 
