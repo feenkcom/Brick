@@ -142,10 +142,10 @@ BrRBTextStylerExamples >> extractIntervalsFrom: aText [
 		runsGroup addRun: (GtPhlowRun  
 		 	from: currentInterval first
 		 	to: currentInterval second
-		 	attributes: (currentInterval third 
+		 	attributes: ((currentInterval third 
 		 		collect: [ :anAttribute |
 		 			anAttribute  ]
-		 		as: Array ) ).
+		 		as: Array ) sorted: [:each | each printString] ascending) ).
 		 currentIntervals addAll: (aText
 			gtIntervalsFrom: currentInterval first
 			to: currentInterval second
