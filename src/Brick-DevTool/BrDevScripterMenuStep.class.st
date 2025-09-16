@@ -240,6 +240,37 @@ BrDevScripterMenuStep >> assertPermanentlyHiddenMenuContainerFor: aMenuAptitudeC
 ]
 
 { #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertPositionToTheRightOfElementWithId: anElementId [
+	^ self assert
+		referenceSender;
+		onParentStepTarget: self;
+		label: ('Assert popover element position is to the right: {1}' format: {anElementId});
+		satisfies: [ :anElement :aUserData | 
+			| anIndex aSibling |
+			self
+				assert: anElement hasParent
+				description: [ 'Element must have a parent' ].
+			anIndex := anElement parent childIndexOf: anElement.
+			self
+				assert: anIndex > 1
+				description: [ 'Element must have previous siblings (having child index > 1)' ].
+			aSibling := anElement parent childAt: anIndex - 1.
+			aSibling bounds inSpace right <= anElement bounds inSpace left ];
+		// anElementId
+]
+
+{ #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertSamePositionOfElementWithId: anElementId [
+	^ self assert
+		referenceSender;
+		onParentStepTarget: self;
+		label: ('Assert popover element position: {1}' format: { anElementId });
+		value: [ :anElement :aUserData | anElement position ]
+			equals: [ :anElement :aUserData | aUserData at: { #elementPosition. anElementId } ];
+		// anElementId
+]
+
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertSelectedMenuItem: anElementId [
 	^ self assert
 		label: ('Assert selected menu item with ID: {1}' format: {anElementId});
@@ -454,4 +485,14 @@ BrDevScripterMenuStep >> previousMenuItemKeyPress [
 		label: 'Press arrow up';
 		key: BlKeyboardKey arrowUp;
 		referenceSender
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> storePositionOfElementWithId: anElementId [
+	^ self do 
+		referenceSender;
+		onParentStepTarget: self;
+		label: ('Store popover element position: {1}' format: { anElementId });
+		block: [ :anElement :aUserData | aUserData at: { #elementPosition. anElementId } put: anElement position ];
+		// anElementId
 ]
