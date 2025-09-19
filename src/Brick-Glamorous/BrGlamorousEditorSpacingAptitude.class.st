@@ -31,6 +31,6 @@ BrGlamorousEditorSpacingAptitude >> initialize [
 BrGlamorousEditorSpacingAptitude >> initializeListeners [
 	super initializeListeners.
 	
-	self when: BlBlurEvent do: [ :anEvent | self blurEvent: anEvent ].
-	self when: BlFocusEvent do: [ :anEvent | self focusEvent: anEvent ]
+	self when: BlFocusOutEvent do: [ :anEvent | self blurEvent: anEvent ].
+	self when: BlFocusInEvent do: [ :anEvent | self focusEvent: anEvent ]
 ]
