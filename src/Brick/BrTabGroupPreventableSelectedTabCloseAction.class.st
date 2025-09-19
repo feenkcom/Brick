@@ -16,8 +16,9 @@ BrTabGroupPreventableSelectedTabCloseAction >> addPreventor: aPreventor [
 { #category : #'api - actions' }
 BrTabGroupPreventableSelectedTabCloseAction >> close [
 	self tabGroup ifNil: [ ^ self ].
-	self selectedTabShouldBeRetained ifTrue: [ ^ self ].
-	self forceClose
+	self preventionReason
+		ifReason: [ :aReason | aReason feedbackOnPreventedClose ]
+		ifNone: [ self forceClose ]
 ]
 
 { #category : #'api - actions' }
@@ -53,6 +54,17 @@ BrTabGroupPreventableSelectedTabCloseAction >> keepContentElement: aContentEleme
 		contentElement: aContentElement)
 ]
 
+{ #category : #testing }
+BrTabGroupPreventableSelectedTabCloseAction >> preventionReason [
+	<return: #BrTabGroupActionPreventionReason>
+	self preventors do: [ :eachPreventor | 
+		| aReason |
+		aReason := eachPreventor retainReasonInTabGroup: self tabGroup.
+		aReason isReason ifTrue: [ ^ aReason ] ].
+		
+	^ BrTabGroupActionPreventionReason noReason
+]
+
 { #category : #'api - preventors' }
 BrTabGroupPreventableSelectedTabCloseAction >> preventors [
 	^ preventors
@@ -66,8 +78,7 @@ BrTabGroupPreventableSelectedTabCloseAction >> preventors: aCollection [
 { #category : #testing }
 BrTabGroupPreventableSelectedTabCloseAction >> selectedTabShouldBeRetained [
 	<return: #Boolean>
-	^ self preventors anySatisfy: [ :eachPreventor | 
-		eachPreventor selectedTabShouldBeRetainedInTabGroup: self tabGroup ]
+	^ self preventionReason isReason
 ]
 
 { #category : #accessing }
