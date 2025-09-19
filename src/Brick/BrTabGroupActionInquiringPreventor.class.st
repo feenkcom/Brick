@@ -7,18 +7,18 @@ Class {
 }
 
 { #category : #'api - testing' }
-BrTabGroupActionInquiringPreventor >> selectedTabShouldBeRetainedInTabGroup: aTabGroup [
-	"Return true if a selected tab cannot be closed.
-	 Return false if a selected tab can be closed."
-
-	<return: #Boolean>
+BrTabGroupActionInquiringPreventor >> retainReasonInTabGroup: aTabGroup [
+	<return: #BrTabGroupActionPreventionReason>
 	| anEvent |
 	anEvent := BrTabGroupCanBeClosedQuestionEvent new.
 
 	aTabGroup content
 		allChildrenBreadthFirstDo: [ :eachElement | 
 			eachElement dispatchEvent: anEvent.
-			anEvent isPrevented ifTrue: [ ^ true ] ].
+			anEvent isPrevented ifTrue: [ 
+				^ BrTabGroupActionPreventionReason 
+					preventedByContent: aTabGroup content 
+					child: eachElement ] ].
 
-	^ false
+	^  BrTabGroupActionPreventionReason noReason 
 ]

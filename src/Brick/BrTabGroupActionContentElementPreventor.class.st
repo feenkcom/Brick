@@ -20,9 +20,11 @@ BrTabGroupActionContentElementPreventor >> contentElement: anObject [
 ]
 
 { #category : #'api - testing' }
-BrTabGroupActionContentElementPreventor >> selectedTabShouldBeRetainedInTabGroup: aTabGroup [
+BrTabGroupActionContentElementPreventor >> retainReasonInTabGroup: aTabGroup [
 	^ aTabGroup content children
 		detect: [ :each | each == contentElement ]
-		ifFound: [ :anElement | true ]
-		ifNone: [ false ]
+		ifFound: [ :anElement | 
+			BrTabGroupActionPermanentTabPreventionReason new 
+				contentElement: self contentElement ]
+		ifNone: [ BrTabGroupActionPreventionReason noReason ]
 ]
