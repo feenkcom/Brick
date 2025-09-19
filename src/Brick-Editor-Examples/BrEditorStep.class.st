@@ -62,6 +62,20 @@ BrEditorStep >> assertFullyVisibleParagraphAt: anIndexBlock hasText: aStringBloc
 ]
 
 { #category : #'steps - checks' }
+BrEditorStep >> assertIsEditableSingleLineMode [
+	^ self assertModeClassIs: BrTextEditorEditableSingleLineMode
+]
+
+{ #category : #'steps - checks' }
+BrEditorStep >> assertModeClassIs: aClass [
+	^ self assert
+		label: ('Assert editor mode is {1}' format: {aClass});
+		value: [ :anEditor | anEditor viewModel mode class ] equals: aClass;
+		onParentStepTarget: self;
+		onThisOrBreadthFirstChildOfKind: BrEditor
+]
+
+{ #category : #'steps - checks' }
 BrEditorStep >> assertTextEqualsTo: aString [
 	^ self assert
 		label: ('Assert editor text is "{1}"' format: {self privateShortString: aString});
