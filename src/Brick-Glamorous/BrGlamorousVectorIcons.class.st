@@ -653,6 +653,54 @@ BrGlamorousVectorIcons class >> link [
 			} ] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> maximize [
+	<script: 'self pause maximize'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 12 14 L 14 14 L 14 12 L 14 10 L 12 10 L 12 12 L 10 12 L 10 14 Z M 4 14 L 6 14 L 6 12 L 4 12 L 4 10 L 2 10 L 2 12 L 2 14 Z M 4 2 L 2 2 L 2 4 L 2 6 L 4 6 L 4 4 L 6 4 L 6 2 Z M 12 4 L 12 6 L 14 6 L 14 4 L 14 2 L 12 2 L 10 2 L 10 4 Z'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> maximizeWithArrows [
+	<script: 'self pause maximize'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 14 2.7071068 L 14 2 L 13.292893 2 L 13 2 L 11 2 L 11 3 L 12.292893 3 L 9.757359 5.535534 L 10.464466 6.242641 L 13 3.707107 L 13 5 L 14 5 L 14 3 L 14 2.7071068 L 14 2 L 13.292893 2 L 13 2 M 14 3 L 14 2.7071068 M 3.7071068 3 L 5 3 L 5 2 L 3 2 L 2 2 L 2 2.7071068 L 2 3 L 2 5 L 3 5 L 3 3.707107 L 5.535534 6.242641 L 6.242641 5.535534 Z M 2 2 L 2 2.7071068 L 2 3 M 3.707107 12.8 L 6.242641 10.264466 L 5.535534 9.55736 L 3 12.092893 L 3 10.8 L 2 10.8 L 2 12.8 L 2 13.8 L 2 13.8 L 3 13.8 L 3 13.8 L 5 13.8 L 5 12.8 Z M 13.292893 13.8 L 14 13.8 L 14 13.092893 L 14 12.8 L 14 10.8 L 13 10.8 L 13 12.092893 L 10.464466 9.55736 L 9.757359 10.264466 L 12.292893 12.8 L 11 12.8 L 11 13.8 L 13 13.8 Z M 14 13.092893 L 14 12.8 M 13.292893 13.8 L 14 13.8 L 14 13.092893 M 13 13.8 L 13.292893 13.8'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> minimize [
+	<script: 'self pause minimize'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 9 9 L 9 11 L 9 13 L 11 13 L 11 11 L 13 11 L 13 9 L 11 9 Z M 11 7 L 13 7 L 13 5 L 11 5 L 11 3 L 9 3 L 9 5 L 9 7 Z M 7 7 L 7 5 L 7 3 L 5 3 L 5 5 L 3 5 L 3 7 L 5 7 Z M 5 11 L 5 13 L 7 13 L 7 11 L 7 9 L 5 9 L 3 9 L 3 11 Z'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> minimizeWithArrows [
+	<script: 'self pause minimize'>
+
+	^ [ BlElement new
+		size: 16@16;
+		geometry: (BlSvgPath new
+			svg: 'M 10.464466 9.55736 L 9.757359 9.55736 L 9.757359 10.264466 L 9.757359 10.55736 L 9.757359 12.55736 L 10.757359 12.55736 L 10.757359 11.264466 L 13.292893 13.8 L 14 13.092893 L 11.464466 10.55736 L 12.75736 10.55736 L 12.75736 9.55736 L 10.757359 9.55736 L 10.464466 9.55736 L 9.757359 9.55736 L 9.757359 10.264466 L 9.757359 10.55736 M 10.757359 9.55736 L 10.464466 9.55736 M 11.464466 5.242641 L 14 2.7071068 L 13.292893 2 L 10.757359 4.535534 L 10.757359 3.2426407 L 9.757359 3.2426407 L 9.757359 5.242641 L 9.757359 5.535534 L 9.757359 6.242641 L 10.757359 6.242641 L 12.75736 6.242641 L 12.75736 5.242641 Z M 9.757359 5.535534 L 9.757359 6.242641 M 9.757359 5.242641 L 9.757359 5.535534 M 6.242641 5.535534 L 6.242641 5.242641 L 6.242641 3.2426407 L 5.2426407 3.2426407 L 5.2426407 4.535534 L 2.7071068 2 L 2 2.7071068 L 4.535534 5.242641 L 3.2426407 5.242641 L 3.2426407 6.242641 L 5.2426407 6.242641 L 6.242641 6.242641 Z M 6.242641 5.535534 L 6.242641 5.242641 M 6.242641 6.242641 L 6.242641 5.535534 M 4.535534 10.55736 L 2 13.092893 L 2.7071068 13.8 L 5.2426407 11.264466 L 5.2426407 12.55736 L 6.242641 12.55736 L 6.242641 10.55736 L 6.242641 10.264466 L 6.242641 9.55736 L 5.535534 9.55736 L 5.2426407 9.55736 L 3.2426407 9.55736 L 3.2426407 10.55736 Z M 5.535534 9.55736 L 5.2426407 9.55736 M 6.242641 10.264466 L 6.242641 9.55736 L 5.535534 9.55736 M 6.242641 10.55736 L 6.242641 10.264466'
+			viewbox: (0@0 extent: 16@16));
+		background: Color black ] asStencil
+]
+
 { #category : #'private - geometry' }
 BrGlamorousVectorIcons class >> minusGeometry: aThickness extent: anExtent origin: anOrigin [
 	<return: #BlElementVectorGeometry>
