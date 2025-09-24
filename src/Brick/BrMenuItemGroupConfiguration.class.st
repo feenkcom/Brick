@@ -42,6 +42,13 @@ BrMenuItemGroupConfiguration class >> inspection [
 ]
 
 { #category : #factory }
+BrMenuItemGroupConfiguration class >> modification [
+	^ self new
+		name: #Modification;
+		priority: 35
+]
+
+{ #category : #factory }
 BrMenuItemGroupConfiguration class >> navigation [
 	^ self new
 		name: #Navigation;
@@ -53,6 +60,13 @@ BrMenuItemGroupConfiguration class >> refactoring [
 	^ self new
 		name: #Refactoring;
 		priority: 30
+]
+
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> removal [
+	^ self new
+		name: #Removal;
+		priority: 100
 ]
 
 { #category : #accessing }
