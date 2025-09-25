@@ -343,15 +343,27 @@ BrGlamorousVectorIcons class >> feenk [
 ]
 
 { #category : #icons }
-BrGlamorousVectorIcons class >> filter [
-	<script: 'self filter inspect'>
+BrGlamorousVectorIcons class >> file [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 13 5.5508 C 13 4.41404 12.873 4.2734 11.9453 3.1484 L 11.9355 3.13676 C 11.0029 2 10.9932 2 10.0361 2 C 8.7617 2 3 2 3 2 L 3 14 L 13 14 L 13 5.5508 Z M 13 5.49224 C 13 4.41404 12.9902 4.41404 10.9932 4.41404 L 10.9932 4.41404 C 10.9932 2.01176 10.9932 2 10.0947 2'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	border: (BlBorder builder
+		paint: Color black;
+		width: 1;
+		capRound;
+		build)}] asStencil
+]
 
-	^ [ BlElement new
-		size: 16@16;
-		geometry: (BlSvgPath new
-			svg: 'M 6 7 L 6 14 L 10 12.4 L 10 7 L 14 2 L 2 2 Z'
-			viewbox: (0@0 extent: 16@16));
-		background: Color black ] asStencil
+{ #category : #icons }
+BrGlamorousVectorIcons class >> filter [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 6 7 L 6 14 L 10 12.4 L 10 7 L 14 2 L 2 2 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
@@ -401,6 +413,16 @@ BrGlamorousVectorIcons class >> hamburger [
 			svg: 'M 4 3 L 12 3 L 12 5 L 4 5 Z M 4 7 L 12 7 L 12 9 L 4 9 Z M 4 11 L 12 11 L 12 13 L 4 13 Z'
 			viewbox: (0@0 extent: 16@16));
 		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> hierarchy [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 10.3 11.5 L 12.3 11.5 L 12.3 13.5 L 10.3 13.5 Z M 3.7 11.5 L 5.7 11.5 L 5.7 13.5 L 3.7 13.5 Z M 7 2.5 L 9 2.5 L 9 4.5 L 7 4.5 Z M 4.2 10.5 L 3.7 10.5 L 2.7 10.5 L 2.7 11.5 L 2.7 13.5 L 2.7 14.5 L 3.7 14.5 L 5.7 14.5 L 6.7 14.5 L 6.7 13.5 L 6.7 11.5 L 6.7 10.5 L 5.7 10.5 L 5.2 10.5 L 5.2 8.5 L 7.5 8.5 L 8.5 8.5 L 10.8 8.5 L 10.8 10.5 L 10.3 10.5 L 9.3 10.5 L 9.3 11.5 L 9.3 13.5 L 9.3 14.5 L 10.3 14.5 L 12.3 14.5 L 13.3 14.5 L 13.3 13.5 L 13.3 11.5 L 13.3 10.5 L 12.3 10.5 L 11.8 10.5 L 11.8 8.5 L 11.8 7.5 L 10.8 7.5 L 8.5 7.5 L 8.5 5.5 L 9 5.5 L 10 5.5 L 10 4.5 L 10 2.5 L 10 1.5 L 9 1.5 L 7 1.5 L 6 1.5 L 6 2.5 L 6 4.5 L 6 5.5 L 7 5.5 L 7.5 5.5 L 7.5 7.5 L 5.2 7.5 L 4.2 7.5 L 4.2 8.5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
 ]
 
 { #category : #utility }
@@ -1178,6 +1200,16 @@ BrGlamorousVectorIcons class >> transparent [
 	^ [ BlElement new
 			size: 16@16;
 			background: BlBackground transparent ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> tree [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 10 12 L 12 12 L 12 14 L 10 14 Z M 10 7 L 12 7 L 12 9 L 10 9 Z M 4 2 L 6 2 L 6 4 L 4 4 Z M 9 8.5 L 9 9 L 9 10 L 10 10 L 12 10 L 13 10 L 13 9 L 13 7 L 13 6 L 12 6 L 10 6 L 9 6 L 9 7 L 9 7.5 L 5.5 7.5 L 5.5 5 L 6 5 L 7 5 L 7 4 L 7 2 L 7 1 L 6 1 L 4 1 L 3 1 L 3 2 L 3 4 L 3 5 L 4 5 L 4.5 5 L 4.5 13.5 L 5.5 13.5 L 9 13.5 L 9 14 L 9 15 L 10 15 L 12 15 L 13 15 L 13 14 L 13 12 L 13 11 L 12 11 L 10 11 L 9 11 L 9 12 L 9 12.5 L 5.5 12.5 L 5.5 8.5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
 ]
 
 { #category : #geometry }
