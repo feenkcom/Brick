@@ -465,33 +465,9 @@ BrGlamorousVectorIcons class >> into [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 12 4 L 8 10 L 4 4 Z'
+	geometry: (BlSvgPath new svg: 'M 10 12 L 10 14 L 14 14 L 14 12 Z M 2 12 L 2 14 L 6 14 L 6 12 Z M 7 7 L 4 7 L 8 13 L 12 7 L 9 7 L 9 4 L 9 2 L 7 2 L 2 2 L 2 4 L 7 4 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 2;
-		capRound;
-		build).
-BlElement new
-	size: 4 @ 2;
-	relocate: 10 @ 11.5;
-	outskirts: BlOutskirts centered;
-	background: Color black;
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build).
-BlElement new
-	size: 4 @ 2;
-	relocate: 2 @ 11.5;
-	outskirts: BlOutskirts centered;
-	background: Color black;
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build)}] asStencil
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
@@ -848,23 +824,9 @@ BrGlamorousVectorIcons class >> over [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 5 3 L 11 7 L 5 11 Z'
+	geometry: (BlSvgPath new svg: 'M 2 12 L 2 14 L 8 14 L 8 12 Z M 9 7 L 6 7 L 10 13 L 14 7 L 11 7 L 11 2 L 10 2 L 9 2 L 2 2 L 2 4 L 9 4 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 2;
-		capRound;
-		build).
-BlElement new
-	size: 6 @ 2;
-	relocate: 7 @ 12;
-	outskirts: BlOutskirts centered;
-	background: Color black;
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build)}] asStencil
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
@@ -1006,23 +968,9 @@ BrGlamorousVectorIcons class >> restart [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 13 4 L 7 8 L 13 12 Z'
+	geometry: (BlSvgPath new svg: 'M 2 4 L 2 12 L 4 12 L 4 4 Z M 11 9 L 14 9 L 14 7 L 11 7 L 11 4 L 5 8 L 11 12 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 2;
-		capRound;
-		build).
-BlElement new
-	size: 2 @ 8;
-	relocate: 2 @ 4;
-	outskirts: BlOutskirts centered;
-	background: Color black;
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build)}] asStencil
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
@@ -1068,37 +1016,19 @@ BrGlamorousVectorIcons class >> run [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 5 4 L 11 8 L 5 12 Z'
+	geometry: (BlSvgPath new svg: 'M 8 7 L 2 7 L 2 9 L 8 9 L 8 12 L 14 8 L 8 4 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 2;
-		capRound;
-		build)}] asStencil
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> runupto [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
-	size: 2 @ 8;
-	relocate: 12 @ 4;
-	outskirts: BlOutskirts centered;
-	background: Color black;
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build).
-BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 3 4 L 9 8 L 3 12 Z'
+	geometry: (BlSvgPath new svg: 'M 12 4 L 12 12 L 14 12 L 14 4 Z M 5 9 L 5 12 L 11 8 L 5 4 L 5 7 L 2 7 L 2 9 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 2;
-		capRound;
-		build)}] asStencil
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
@@ -1226,23 +1156,7 @@ BrGlamorousVectorIcons class >> through [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 12 3 L 8 9 L 4 3 Z'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 2;
-		capRound;
-		build).
-BlElement new
-	size: 16 @ 16;
-	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 2 10 L 2 11 L 2 13 L 2 15 L 4 15 L 6 15 L 6 13 L 4 13 L 4 11 L 6 11 L 6 9 L 2 9 Z'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	background: Color black.
-BlElement new
-	size: 16 @ 16;
-	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 12 11 L 12 13 L 10 13 L 10 15 L 12 15 L 14 15 L 14 13 L 14 11 L 14 10 L 14 9 L 10 9 L 10 11 Z'
+	geometry: (BlSvgPath new svg: 'M 7 4 L 7 5 L 4 5 L 8 11 L 12 5 L 9 5 L 9 4 L 9 2 L 7 2 L 2 2 L 2 4 Z M 2 13 L 2 15 L 4 15 L 6 15 L 6 13 L 4 13 L 4 11.5 L 6 11.5 L 6 9.5 L 2 9.5 L 2 10 L 2 11.5 Z M 12 13 L 10 13 L 10 15 L 12 15 L 14 15 L 14 13 L 14 11.5 L 14 10 L 14 9.5 L 10 9.5 L 10 11.5 L 12 11.5 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
