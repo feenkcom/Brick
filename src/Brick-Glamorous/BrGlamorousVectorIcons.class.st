@@ -1022,16 +1022,6 @@ BrGlamorousVectorIcons class >> run [
 ]
 
 { #category : #icons }
-BrGlamorousVectorIcons class >> runupto [
-	^ [BlElement new size: 16@16; addChildren: {BlElement new
-	size: 16 @ 16;
-	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 12 4 L 12 12 L 14 12 L 14 4 Z M 5 9 L 5 12 L 11 8 L 5 4 L 5 7 L 2 7 L 2 9 Z'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	background: Color black}] asStencil
-]
-
-{ #category : #icons }
 BrGlamorousVectorIcons class >> rustLogo [
 	<script: 'self rustLogo inspect'>
 
@@ -1163,15 +1153,12 @@ BrGlamorousVectorIcons class >> through [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> tohere [
-	<script: 'self tohere inspect'>
-
-	^ [
-		BlElement new
-			size: self standardSize;
-			geometry: (BlSvgPath new
-				svg: 'M 1 9 L 1 7 L 5.75 7 L 5.75 4 L 11 8 L 5.75 12 L 5.75 9 Z M 12.015 3.999 l 0 8 l 3 0 l 0 -8 z'
-				viewbox: (0@0 extent: 16@16));
-			background: Color black ] asStencil
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 12 4 L 12 12 L 14 12 L 14 4 Z M 5 9 L 5 12 L 11 8 L 5 4 L 5 7 L 2 7 L 2 9 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
