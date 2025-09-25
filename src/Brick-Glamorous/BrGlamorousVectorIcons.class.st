@@ -473,11 +473,25 @@ BrGlamorousVectorIcons class >> into [
 		capRound;
 		build).
 BlElement new
-	size: 16 @ 16;
+	size: 4 @ 2;
+	relocate: 10 @ 11.5;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 2 12 L 2 14 L 6 14 L 6 12 Z M 10 12 L 10 14 L 14 14 L 14 12 Z'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	background: Color black}] asStencil
+	background: Color black;
+	border: (BlBorder builder
+		paint: Color black;
+		width: 1;
+		capRound;
+		build).
+BlElement new
+	size: 4 @ 2;
+	relocate: 2 @ 11.5;
+	outskirts: BlOutskirts centered;
+	background: Color black;
+	border: (BlBorder builder
+		paint: Color black;
+		width: 1;
+		capRound;
+		build)}] asStencil
 ]
 
 { #category : #icons }
