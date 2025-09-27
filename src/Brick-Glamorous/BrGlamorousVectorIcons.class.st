@@ -109,32 +109,26 @@ BrGlamorousVectorIcons class >> asynchronous [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> bin [
-	^ [BlElement new size: 16@16; addChildren: {BlElement new
-	size: 16 @ 16;
-	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 3 5 L 13 5 L 11 15 L 5 15 Z'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build).
-BlElement new
-	size: 12 @ 1;
-	relocate: 2 @ 3;
-	outskirts: BlOutskirts centered;
-	background: Color black;
-	border: (BlBorder builder
-		paint: Color black;
-		width: 1;
-		capRound;
-		build).
-BlElement new
-	size: 16 @ 16;
-	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 6.5 3 C 6.5 1.89543 7.171574 1 8 1 C 8.828426 1 9.5 1.89543 9.5 3 L 6.5 3'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	background: Color black}] asStencil
+	^ [ BlElement new
+		size: 16 @ 16;
+		addChildren: {BlElement new
+					size: 16 @ 16;
+					outskirts: BlOutskirts centered;
+					geometry: (BlSvgPath new
+							svg: 'M 3 6 L 13 6 L 11 14 L 5 14 Z'
+							viewbox: (0 @ 0 extent: 16 @ 16));
+					border: (BlBorder builder
+							paint: Color black;
+							width: 1;
+							capRound;
+							build).
+				BlElement new
+					size: 16 @ 16;
+					outskirts: BlOutskirts centered;
+					geometry: (BlSvgPath new
+							svg: 'M 9.452743 3.5 C 9.286227 2.637386 8.698939 2 8 2 C 7.301061 2 6.713773 2.637386 6.5472566 3.5 L 2 3.5 L 2 4.5 L 14 4.5 L 14 3.5 Z'
+							viewbox: (0 @ 0 extent: 16 @ 16));
+					background: Color black} ] asStencil
 ]
 
 { #category : #icons }
@@ -485,6 +479,28 @@ BrGlamorousVectorIcons class >> gemStone [
 			svg: 'M .6566631 8.155139 L 5.523536 13.35011 L 3.179939 8.155139 Z M 7 14.185994 L 9.726383 8.155139 L 4.273617 8.155139 Z M 3.2033764 7.155211 L 4.7970187 4.1553993 L 2.7502784 4.1553993 L .50042206 7.155211 L 3.2033675 7.155211 Z M 8.476464 13.350119 L 13.343337 8.155139 L 10.820061 8.155139 Z M 4.336108 7.155211 L 9.663892 7.155211 L 8.070241 4.1553993 L 5.929759 4.1553993 Z M 10.796624 7.155211 L 13.499569 7.155211 L 11.24973 4.1553993 L 9.20299 4.1553993 Z M 11.898114 3.3585782 L 14.897917 7.358318 C 14.970833 7.452068 15.004687 7.560133 14.99948 7.682514 C 14.99427 7.804901 14.950003 7.910362 14.866676 7.998898 L 7.367161 15.998377 C 7.2734166 16.102538 7.15103 16.154618 7 16.154618 C 6.84897 16.154618 6.7265834 16.102538 6.6328394 15.998377 L -.8666756 7.998907 C -.950003 7.910365 -.9942708 7.804901 -.9994792 7.682514 C -1.0046875 7.560133 -.9708333 7.452068 -.8979167 7.358318 L 2.1018858 3.358587 C 2.1956298 3.2231705 2.3284333 3.1554622 2.5002963 3.1554622 L 11.499704 3.1554622 C 11.671567 3.1554622 11.80437 3.2231705 11.898114 3.358587 Z'
 			viewbox: (0@0 extent: 16@16));
 		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> graycircle [
+	^ [ BlElement new
+		size: 16 @ 16;
+		addChildren: {BlElement new
+					size: 8 @ 8;
+					relocate: 4 @ 4;
+					geometry: BlCircleGeometry new;
+					background: BrGlamorousColors neutralBackgroundColor} ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> greencircle [
+	^ [ BlElement new
+		size: 16 @ 16;
+		addChildren: {BlElement new
+					size: 8 @ 8;
+					relocate: 4 @ 4;
+					geometry: BlCircleGeometry new;
+					background: BrGlamorousColors successBackgroundColor} ] asStencil
 ]
 
 { #category : #icons }
@@ -1066,6 +1082,17 @@ BrGlamorousVectorIcons class >> playinspect [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> redcircle [
+	^ [ BlElement new
+		size: 16 @ 16;
+		addChildren: {BlElement new
+					size: 8 @ 8;
+					relocate: 4 @ 4;
+					geometry: BlCircleGeometry new;
+					background: BrGlamorousColors errorBackgroundColor} ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> refresh [
 	<script: 'self refresh inspect'>
 
@@ -1360,6 +1387,11 @@ BrGlamorousVectorIcons class >> transparent [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> trash [
+	^ self bin
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> tree [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
@@ -1431,6 +1463,17 @@ BrGlamorousVectorIcons class >> window [
 
 	^ [ self largeWindow asElement asScalableElement size: 16 @ 16 ]
 		  asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> yellowcircle [
+	^ [ BlElement new
+		size: 16 @ 16;
+		addChildren: {BlElement new
+					size: 8 @ 8;
+					relocate: 4 @ 4;
+					geometry: BlCircleGeometry new;
+					background: BrGlamorousColors failureBackgroundColor} ] asStencil
 ]
 
 { #category : #icons }
