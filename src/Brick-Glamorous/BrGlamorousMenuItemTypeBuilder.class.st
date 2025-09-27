@@ -12,13 +12,6 @@ BrGlamorousMenuItemTypeBuilder >> decorateType: aType [
 ]
 
 { #category : #visiting }
-BrGlamorousMenuItemTypeBuilder >> visitCoderMenuActionItem: aMenuModel [
-	^ self
-		visitMenuLabeledItem: aMenuModel
-		withElementClass: GtCoderMenuActionItemElement
-]
-
-{ #category : #visiting }
 BrGlamorousMenuItemTypeBuilder >> visitMenuActionItem: aMenuModel [
 	^ self
 		visitMenuLabeledItem: aMenuModel
