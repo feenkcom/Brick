@@ -60,6 +60,11 @@ BrGlamorousVectorIcons class >> allIcons [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> async [
+	^ [BlElement new size: 16@16; addChildren: {}] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> asynchronous [
 	<script: 'self play asynchronous'>
 
@@ -911,6 +916,16 @@ BrGlamorousVectorIcons class >> minusGeometry: aThickness extent: anExtent origi
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> newwindow [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 13 13 L 10 13 L 10 14 L 13 14 L 14 14 L 14 13 L 14 3 L 14 2 L 3 2 L 2 2 L 2 6 L 3 6 L 3 3 L 13 3 Z M 6.247233 9.07566 L 2 13.322893 L 2.7071068 14.03 L 6.95434 9.782767 L 9.414214 12.24264 L 9.414214 6.5857864 L 3.7573593 6.5857864 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> noIcon [
 	^ [ BlElement new
 			size: 0@0;
@@ -1487,12 +1502,14 @@ BrGlamorousVectorIcons class >> web [
 	element ] asStencil
 ]
 
-{ #category : #accessing }
+{ #category : #icons }
 BrGlamorousVectorIcons class >> window [
-	<script: 'self window inspect'>
-
-	^ [ self largeWindow asElement asScalableElement size: 16 @ 16 ]
-		  asStencil
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 3 3.25 L 4.5 3.25 L 4.5 4.75 L 3 4.75 Z M 5 3.25 L 6.5 3.25 L 6.5 4.75 L 5 4.75 Z M 7 3.25 L 8.5 3.25 L 8.5 4.75 L 7 4.75 Z M 2 6 L 2 14 L 3 14 L 13 14 L 14 14 L 14 5 L 14 5 L 14 2 L 2 2 L 2 5 Z M 3 6 L 13 6 L 13 13 L 3 13 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
 ]
 
 { #category : #icons }
