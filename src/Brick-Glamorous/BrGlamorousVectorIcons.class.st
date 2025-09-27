@@ -1457,6 +1457,27 @@ BrGlamorousVectorIcons class >> verticaltree [
 					background: Color black} ] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> web [
+	<script: 'self actor inspect'>
+	^ [ | element svg |
+	svg := '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M8 1.5 a 6.5 6.5 0 1 1 0 13 a 6.5 6.5 0 1 1 0 -13
+           M8 1.5 a 3.4 6.5 0 0 1 0 13
+           M8 1.5 a 3.4 6.5 0 0 0 0 13
+           M1.5 8 H14.5
+           M1.5 8 a 6.5 3.4 0 0 1 13 0
+           M1.5 8 a 6.5 3.4 0 0 0 13 0"/>
+</svg>'.
+
+	element := BlSkiaSvgElement new
+			extent: 16 @ 16;
+			svg: svg;
+			yourself.
+
+	element ] asStencil
+]
+
 { #category : #accessing }
 BrGlamorousVectorIcons class >> window [
 	<script: 'self window inspect'>
