@@ -84,8 +84,8 @@ BrFileBrowser >> createTable [
 		width: 40;
 		stencil: [ :each | 
 			each isDirectory
-				ifTrue: [ BrGlamorousIcons folder ]
-				ifFalse: [ BrGlamorousIcons file ] ].
+				ifTrue: [ BrGlamorousVectorIcons folder ]
+				ifFalse: [ BrGlamorousVectorIcons file ] ].
 	aTable column
 		title: 'Name' translated;
 		matchParent;

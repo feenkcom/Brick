@@ -26,12 +26,12 @@ BrGlamorousComponentsDropdowns >> buttonWithIcon [
 				+ (BrGlamorousWithExplicitDropdownAptitude
 						handle: [ BrButton new
 								aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-								icon: BrGlamorousIcons menu ]
+								icon: BrGlamorousVectorIcons menu ]
 						content: [ BlElement new
 								background: (Color gray alpha: 0.2);
 								size: 100 @ 100;
 								margin: (BlInsets all: 10) ]);
-		icon: BrGlamorousIcons menu;
+		icon: BrGlamorousVectorIcons menu;
 		label: 'Click me'
 ]
 
@@ -61,7 +61,7 @@ BrGlamorousComponentsDropdowns >> hideDropdown [
 				+ (BrGlamorousWithExplicitDropdownAptitude
 						handle: [ BrButton new
 								aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-								icon: BrGlamorousIcons menu ]
+								icon: BrGlamorousVectorIcons menu ]
 						content: [ BrFrame new
 								fitContent;
 								addChild: (BrButton new
@@ -69,6 +69,6 @@ BrGlamorousComponentsDropdowns >> hideDropdown [
 										margin: (BlInsets all: 20);
 										label: 'Close';
 										action: [ :aButton | aButton fireEvent: BrDropdownHideWish new ]) ]);
-		icon: BrGlamorousIcons menu;
+		icon: BrGlamorousVectorIcons menu;
 		label: 'Click me'
 ]

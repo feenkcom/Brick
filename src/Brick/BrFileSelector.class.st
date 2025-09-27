@@ -105,7 +105,7 @@ BrFileSelector >> computeFolderParents [
 BrFileSelector >> createAddFolderButton [
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude;
-		icon: BrGlamorousIcons add;
+		icon: BrGlamorousVectorIcons add;
 		action: [ self replaceAddFolderWithEditor ];
 		label: 'Add directory'
 ]
@@ -166,8 +166,8 @@ BrFileSelector >> createTable [
 		width: 40;
 		stencil: [ :each | 
 			each isDirectory
-				ifTrue: [ BrGlamorousIcons folder ]
-				ifFalse: [ BrGlamorousIcons file ] ].
+				ifTrue: [ BrGlamorousVectorIcons folder ]
+				ifFalse: [ BrGlamorousVectorIcons file ] ].
 	aTable column
 		title: 'Name' translated;
 		matchParent;

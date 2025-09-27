@@ -165,7 +165,7 @@ BrDropdownExamples >> hideOnClickViaDropdownLook [
 	aWithDropdownLook := BrGlamorousWithExplicitDropdownAptitude
 			handle: [ BrButton new
 					aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-					icon: BrGlamorousIcons menu ]
+					icon: BrGlamorousVectorIcons menu ]
 			content: [ BrFrame new
 					fitContent;
 					addChild: (BrButton new
@@ -176,7 +176,7 @@ BrDropdownExamples >> hideOnClickViaDropdownLook [
 
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude + aWithDropdownLook;
-		icon: BrGlamorousIcons menu;
+		icon: BrGlamorousVectorIcons menu;
 		yourself
 ]
 
@@ -188,7 +188,7 @@ BrDropdownExamples >> hideOnClickViaWish [
 	aWithDropdownLook := BrGlamorousWithExplicitDropdownAptitude
 			handle: [ BrButton new
 					aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-					icon: BrGlamorousIcons menu ]
+					icon: BrGlamorousVectorIcons menu ]
 			content: [ BrButton new
 					aptitude: BrGlamorousButtonWithLabelAptitude new;
 					label: 'Close';
@@ -197,7 +197,7 @@ BrDropdownExamples >> hideOnClickViaWish [
 
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude + aWithDropdownLook;
-		icon: BrGlamorousIcons menu;
+		icon: BrGlamorousVectorIcons menu;
 		yourself
 ]
 
@@ -209,7 +209,7 @@ BrDropdownExamples >> hideOnClickViaWishInNestedDropdown [
 	aWithDropdownLook := BrGlamorousWithExplicitDropdownAptitude
 			handle: [ BrButton new
 					aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-					icon: BrGlamorousIcons menu ]
+					icon: BrGlamorousVectorIcons menu ]
 			content: [ BrVerticalPane new
 					fitContent;
 					padding: (BlInsets all: 20);
@@ -223,7 +223,7 @@ BrDropdownExamples >> hideOnClickViaWishInNestedDropdown [
 										+ (BrGlamorousWithExplicitDropdownAptitude
 												handle: [ BrButton new
 														aptitude: BrGlamorousButtonRectangularAptitude + BrGlamorousButtonIconAptitude;
-														icon: BrGlamorousIcons menu ]
+														icon: BrGlamorousVectorIcons menu ]
 												content: [ BrFrame new
 														fitContent;
 														addChild: (BrButton new
@@ -231,11 +231,11 @@ BrDropdownExamples >> hideOnClickViaWishInNestedDropdown [
 																margin: (BlInsets all: 20);
 																label: 'Close';
 																action: [ :aButton | aButton fireEvent: BrDropdownHideWish new ]) ]);
-								icon: BrGlamorousIcons menu} ].
+								icon: BrGlamorousVectorIcons menu} ].
 
 	^ BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude + aWithDropdownLook;
-		icon: BrGlamorousIcons menu;
+		icon: BrGlamorousVectorIcons menu;
 		yourself
 ]
 
