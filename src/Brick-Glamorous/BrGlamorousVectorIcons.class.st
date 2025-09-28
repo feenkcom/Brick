@@ -453,7 +453,7 @@ BrGlamorousVectorIcons class >> gitcommit [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 15 8 L 15 7 L 10 7 L 10 4 L 6 8 L 10 12 L 10 9 L 13 9 L 13 12 L 15 12 L 15 9 Z'
+	geometry: (BlSvgPath new svg: 'M 3 14 L 3 11 L 2 11 L 2 14 Z M 3 5 L 3 2 L 2 2 L 2 5 Z M 3 9.5 L 3 6.5 L 2 6.5 L 2 9.5 Z M 14 8.5 L 14 7.5 L 9.5 7.5 L 9.5 4.5 L 5.5 8 L 9.5 11.5 L 9.5 8.5 L 13 8.5 L 13 12.5 L 14 12.5 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
@@ -463,7 +463,7 @@ BrGlamorousVectorIcons class >> gitfetch [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 10 9 L 15 9 L 15 8 L 15 7 L 15 4 L 13 4 L 13 7 L 10 7 L 10 4 L 6 8 L 10 12 Z'
+	geometry: (BlSvgPath new svg: 'M 9.5 7.5 L 9.5 4.5 L 5.5 8 L 9.5 11.5 L 9.5 8.5 L 14 8.5 L 14 8 L 14 7.5 L 14 4 L 13 4 L 13 7.5 Z M 3 14 L 3 11 L 2 11 L 2 14 Z M 3 5 L 3 2 L 2 2 L 2 5 Z M 3 9.5 L 3 6.5 L 2 6.5 L 2 9.5 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
@@ -473,7 +473,7 @@ BrGlamorousVectorIcons class >> gitpull [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 10 13 L 15 13 L 15 12 L 15 11 L 15 8 L 13 8 L 13 11 L 10 11 L 10 8 L 6 12 L 10 16 Z'
+	geometry: (BlSvgPath new svg: 'M 3 9.5 L 3 6.5 L 2 6.5 L 2 9.5 Z M 3 5 L 3 2 L 2 2 L 2 5 Z M 3 14 L 3 11 L 2 11 L 2 14 Z M 9.5 12 L 9.5 9 L 5.5 12.5 L 9.5 16 L 9.5 13 L 14 13 L 14 12.5 L 14 12 L 14 8.5 L 13 8.5 L 13 12 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
@@ -483,7 +483,7 @@ BrGlamorousVectorIcons class >> gitpush [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 15 4 L 15 3 L 10 3 L 10 0 L 6 4 L 10 8 L 10 5 L 13 5 L 13 8 L 15 8 L 15 5 Z'
+	geometry: (BlSvgPath new svg: 'M 3 9.5 L 3 6.5 L 2 6.5 L 2 9.5 Z M 3 5 L 3 2 L 2 2 L 2 5 Z M 3 14 L 3 11 L 2 11 L 2 14 Z M 9.5 3 L 9.5 0 L 5.5 3.5 L 9.5 7 L 9.5 4 L 13 4 L 13 8 L 14 8 L 14 4 L 14 3 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
