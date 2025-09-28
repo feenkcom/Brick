@@ -449,6 +449,46 @@ BrGlamorousVectorIcons class >> gemStone [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> gitcommit [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 15 8 L 15 7 L 10 7 L 10 4 L 6 8 L 10 12 L 10 9 L 13 9 L 13 12 L 15 12 L 15 9 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> gitfetch [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 10 9 L 15 9 L 15 8 L 15 7 L 15 4 L 13 4 L 13 7 L 10 7 L 10 4 L 6 8 L 10 12 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> gitpull [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 10 13 L 15 13 L 15 12 L 15 11 L 15 8 L 13 8 L 13 11 L 10 11 L 10 8 L 6 12 L 10 16 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> gitpush [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 4 13 L 4 11 L 1 11 L 1 13 Z M 4 5 L 4 3 L 1 3 L 1 5 Z M 4 9 L 4 7 L 1 7 L 1 9 Z M 15 4 L 15 3 L 10 3 L 10 0 L 6 4 L 10 8 L 10 5 L 13 5 L 13 8 L 15 8 L 15 5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> graycircle [
 	^ [ BlElement new
 		size: 16 @ 16;
@@ -811,7 +851,7 @@ BrGlamorousVectorIcons class >> load [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 12.5 14 L 12.5 12 L 4.5 12 L 4.5 14 Z M 9.5 6 L 12.5 6 L 8.5 2 L 4.5 6 L 7.5 6 L 7.5 9 L 9.5 9 Z'
+	geometry: (BlSvgPath new svg: 'M 12 14 L 12 12 L 4 12 L 4 14 Z M 7 6 L 7 9 L 9 9 L 9 6 L 12 6 L 8 2 L 4 6 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
@@ -1091,7 +1131,7 @@ BrGlamorousVectorIcons class >> refresh [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 10.5 4 L 7 4 L 11 8 L 15 4 L 11.5 4 L 11.5 2.985 L 11.5 2 L 11.5 1.985 L 3 1.985 L 2 1.985 L 2 5.985 L 3 5.985 L 3 2.985 L 10.5 2.985 Z M 5 14 L 5.5 14 L 13 14 L 13.5 14 L 14 14 L 14 10 L 13 10 L 13 13 L 5.5 13 L 5.5 12 L 9 12 L 5 8 L 1 12 L 4.5 12 L 4.5 14 Z'
+	geometry: (BlSvgPath new svg: 'M 2.4178236 3 L 2 3 L 2 13 L 2.4178236 13 L 3 13 L 10.5 13 L 11.417824 13 L 11.5 13 L 11.5 11 L 10.5 11 L 10.5 12 L 3 12 L 3 4 L 10.5 4 L 10.5 5 L 7 5 L 11 9 L 15 5 L 11.5 5 L 11.5 3 L 11.417824 3 L 10.5 3 L 3 3 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
@@ -1195,7 +1235,7 @@ BrGlamorousVectorIcons class >> save [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 12.5 14 L 12.5 12 L 4.5 12 L 4.5 14 Z M 9.5 5 L 9.5 2 L 7.5 2 L 7.5 5 L 4.5 5 L 8.5 9 L 12.5 5 Z'
+	geometry: (BlSvgPath new svg: 'M 12 14 L 12 12 L 4 12 L 4 14 Z M 9 5 L 9 2 L 7 2 L 7 5 L 4 5 L 8 9 L 12 5 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
