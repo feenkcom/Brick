@@ -16,7 +16,7 @@ Class {
 { #category : #accessing }
 BrFolderCreateWidget >> createButton [
 	^ BrButton new
-				icon: BrGlamorousIcons accept;
+				icon: BrGlamorousVectorIcons accept;
 				aptitude: (BrGlamorousButtonRectangularAptitude new + BrGlamorousButtonIconAptitude new+BrGlamorousButtonExteriorAptitude new);
 				disable
 ]

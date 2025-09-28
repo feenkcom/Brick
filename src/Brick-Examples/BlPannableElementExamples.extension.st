@@ -132,22 +132,22 @@ BlPannableElementExamples >> pannablePinchableGraphEditorDemo [
 			border: (BlBorder paint: Color orange width: 1);
 			addChild: (BrButton new
 					aptitude: BrGlamorousButtonWithIconAptitude;
-					icon: BrGlamorousIcons zoomin;
+					icon: BrGlamorousVectorIcons zoomin;
 					label: 'Zoom In';
 					action: [ graphContainer zoomIn ]);
 			addChild: (BrButton new
 					aptitude: BrGlamorousButtonWithIconAptitude;
-					icon: BrGlamorousIcons zoomout;
+					icon: BrGlamorousVectorIcons zoomout;
 					label: 'Zoom Out';
 					action: [ graphContainer zoomOut ]);
 			addChild: (BrButton new
 					aptitude: BrGlamorousButtonWithIconAptitude;
-					icon: BrGlamorousIcons zoomtofit;
+					icon: BrGlamorousVectorIcons zoomtofit;
 					label: 'Fit';
 					action: [ graphContainer zoomToFit ]);
 			addChild: (BrButton new
 					aptitude: BrGlamorousButtonWithIconAptitude;
-					icon: BrGlamorousIcons actualsize;
+					icon: BrGlamorousVectorIcons actualsize;
 					label: 'Resize';
 					action: [ graphContainer zoomToActualSize ]).
 

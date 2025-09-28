@@ -7,5 +7,5 @@ String >> asHexColor [
 
 { #category : #'*Brick-Glamorous' }
 String >> asThemedIcon [
-	^ BrGlamorousIcons perform: self asSymbol
+	^ BrGlamorousVectorIcons perform: self asSymbol
 ]
