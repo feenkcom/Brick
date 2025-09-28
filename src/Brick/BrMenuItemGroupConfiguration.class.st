@@ -21,6 +21,13 @@ BrMenuItemGroupConfiguration class >> default [
 ]
 
 { #category : #factory }
+BrMenuItemGroupConfiguration class >> editing [
+	^ self new
+		name: #Editing;
+		priority: 48
+]
+
+{ #category : #factory }
 BrMenuItemGroupConfiguration class >> evaluation [
 	^ self new
 		name: #Evaluation;
@@ -67,13 +74,6 @@ BrMenuItemGroupConfiguration class >> removal [
 	^ self new
 		name: #Removal;
 		priority: 100
-]
-
-{ #category : #factory }
-BrMenuItemGroupConfiguration class >> text [
-	^ self new
-		name: #Text;
-		priority: 48
 ]
 
 { #category : #accessing }
