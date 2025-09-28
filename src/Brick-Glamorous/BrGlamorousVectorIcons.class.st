@@ -81,17 +81,17 @@ BrGlamorousVectorIcons class >> bin [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 3 6 L 13 6 L 11 14 L 5 14 Z'
+	geometry: (BlSvgPath new svg: 'M 3.8333333 5.75 L 12.166667 5.75 L 10.5 13.75 L 5.5 13.75 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	border: (BlBorder builder
 		paint: Color black;
-		width: 1;
+		width: 1.5;
 		capRound;
 		build).
 BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 9.452743 3.5 C 9.286227 2.637386 8.698939 2 8 2 C 7.301061 2 6.713773 2.637386 6.5472566 3.5 L 2 3.5 L 2 4.5 L 14 4.5 L 14 3.5 Z'
+	geometry: (BlSvgPath new svg: 'M 9.936991 2.75 C 9.71497 1.8873861 8.931919 1.25 8 1.25 C 7.0680815 1.25 6.2850304 1.8873861 6.063009 2.75 L 3 2.75 L 3 3.75 L 13 3.75 L 13 2.75 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
