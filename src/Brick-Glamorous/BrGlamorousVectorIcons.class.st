@@ -1131,7 +1131,7 @@ BrGlamorousVectorIcons class >> refresh [
 	^ [BlElement new size: 16@16; addChildren: {BlElement new
 	size: 16 @ 16;
 	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 2.4178236 3 L 2 3 L 2 13 L 2.4178236 13 L 3 13 L 10.5 13 L 11.417824 13 L 11.5 13 L 11.5 11 L 10.5 11 L 10.5 12 L 3 12 L 3 4 L 10.5 4 L 10.5 5 L 7 5 L 11 9 L 15 5 L 11.5 5 L 11.5 3 L 11.417824 3 L 10.5 3 L 3 3 Z'
+	geometry: (BlSvgPath new svg: 'M 2.4178236 3 L 2 3 L 2 13 L 2.4178236 13 L 3 13 L 11.417824 13 L 11.417824 12 L 3 12 L 3 4 L 10.5 4 L 10.5 6 L 7 6 L 11 10 L 15 6 L 11.5 6 L 11.5 3 L 11.417824 3 L 10.5 3 L 3 3 Z'
 	viewbox: (0 @ 0 extent: 16 @ 16));
 	background: Color black}] asStencil
 ]
