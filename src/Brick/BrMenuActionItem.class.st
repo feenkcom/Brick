@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'action',
 		'hideOnClick',
-		'actionWithModifiers'
+		'actionsWithModifiers'
 	],
 	#category : #'Brick-Menu - Model'
 }
@@ -28,24 +28,37 @@ BrMenuActionItem >> action: aBlock [
 ]
 
 { #category : #accessing }
-BrMenuActionItem >> actionWithModifiers [
-	^ actionWithModifiers
-]
-
-{ #category : #accessing }
 BrMenuActionItem >> actionWithModifiers: aBlock [
 	"Set a block that is evaluated on click events.
 	It has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
 
-	actionWithModifiers := aBlock
+	self actionsWithModifiers: (self actionsWithModifiers copyWith: aBlock)
+]
+
+{ #category : #accessing }
+BrMenuActionItem >> actionsWithModifiers [
+	"Return a collection of blocks that are evaluated on click events with modifiers.
+	Every block has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
+
+	<return: #Collection of: #BlockClosure>
+	^ actionsWithModifiers
+]
+
+{ #category : #accessing }
+BrMenuActionItem >> actionsWithModifiers: aCollectionOfBlocks [
+	"Set a collection of blocks that are evaluated on click events with modifiers.
+	Every block has the following arguments: [ :anElement :aButtonModel :anEvent | ]"
+
+	actionsWithModifiers := aCollectionOfBlocks
 ]
 
 { #category : #accessing }
 BrMenuActionItem >> definition: aBlock [
 	super definition: aBlock.
 	self actionWithModifiers: [ :anElement :aButtonModel :anEvent |
-		self definition ifNotNil: [ :aDefinition |
-			anElement phlow spawnObject: aDefinition ] ]
+		anEvent modifiers isSoftAltOnly ifTrue: [
+			self definition ifNotNil: [ :aDefinition |
+				anElement phlow spawnObject: aDefinition ] ] ]
 ]
 
 { #category : #accessing }
@@ -64,6 +77,6 @@ BrMenuActionItem >> initialize [
 	super initialize.
 	
 	action := [ :anElement :aButtonModel :anEvent | ].
-	actionWithModifiers := [ :anElement :aButtonModel :anEvent | ].
+	actionsWithModifiers := #().
 	hideOnClick := true
 ]
