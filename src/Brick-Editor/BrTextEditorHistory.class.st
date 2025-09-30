@@ -6,7 +6,8 @@ Class {
 		'redoCommands',
 		'isEnabled',
 		'shouldGroup',
-		'currentGroup'
+		'currentGroup',
+		'editorModel'
 	],
 	#category : #'Brick-Editor-History'
 }
@@ -19,7 +20,8 @@ BrTextEditorHistory >> addCommand: aCommand [
 	shouldGroup
 		ifTrue: [ currentGroup addCommand: aCommand ]
 		ifFalse: [ undoCommands add: aCommand ].
-	redoCommands removeAll
+	redoCommands removeAll.
+	self notifyHistoryChanged
 ]
 
 { #category : #'api - history' }
@@ -47,6 +49,16 @@ BrTextEditorHistory >> disableDuring: aBlock [
 	isEnabled := false.
 	
 	aBlock ensure: [ isEnabled := wasEnabled ]
+]
+
+{ #category : #accessing }
+BrTextEditorHistory >> editorModel [
+	^ editorModel
+]
+
+{ #category : #accessing }
+BrTextEditorHistory >> editorModel: anObject [
+	editorModel := anObject
 ]
 
 { #category : #'api - history' }
@@ -101,6 +113,21 @@ BrTextEditorHistory >> isEnabled [
 	^ isEnabled
 ]
 
+{ #category : #private }
+BrTextEditorHistory >> notifyHistoryChanged [
+	editorModel ifNil: [^self].
+	editorModel notifyHistoryChanged
+]
+
+{ #category : #copying }
+BrTextEditorHistory >> postCopy [
+	super postCopy.
+	undoCommands := undoCommands copy.
+	redoCommands := redoCommands copy.
+	shouldGroup := false.
+	editorModel := nil
+]
+
 { #category : #accessing }
 BrTextEditorHistory >> redoCommands [
 	^ redoCommands
@@ -108,8 +135,11 @@ BrTextEditorHistory >> redoCommands [
 
 { #category : #'api - undo/redo' }
 BrTextEditorHistory >> redoOn: aBrTextEditor [
-	redoCommands ifNotEmpty: [ :theCommands |
-		self disableDuring: [ undoCommands add: (theCommands removeLast redoOn: aBrTextEditor) ] ]
+	redoCommands
+		ifNotEmpty: [ :theCommands | 
+			self
+				disableDuring: [ undoCommands add: (theCommands removeLast redoOn: aBrTextEditor) ].
+			self notifyHistoryChanged ]
 ]
 
 { #category : #'api - history' }
@@ -132,6 +162,9 @@ BrTextEditorHistory >> undoCommands [
 
 { #category : #'api - undo/redo' }
 BrTextEditorHistory >> undoOn: aBrTextEditor [
-	undoCommands ifNotEmpty: [ :theCommands |
-		self disableDuring: [ redoCommands add: (theCommands removeLast undoOn: aBrTextEditor) ] ]
+	undoCommands
+		ifNotEmpty: [ :theCommands | 
+			self
+				disableDuring: [ redoCommands add: (theCommands removeLast undoOn: aBrTextEditor) ].
+			self notifyHistoryChanged ]
 ]
