@@ -53,10 +53,10 @@ BrGlamorousVectorIcons class >> add [
 { #category : #utility }
 BrGlamorousVectorIcons class >> allIcons [
 	<script: 'super inspect'>
-	^ (self class methodsInProtocol: #icons)
+	^ ((self class methodsInProtocol: #icons)
+		select: [ :m | (m messages select: [ :s | s beginsWith: 'deprecated' ]) isEmpty ])
 		sort: [ :a :b | a selector < b selector ];
-		collect: [ :eachCompiledMethod | 
-			eachCompiledMethod selector -> (self perform: eachCompiledMethod selector) ]
+		collect: [ :eachCompiledMethod | eachCompiledMethod selector -> (self perform: eachCompiledMethod selector) ]
 ]
 
 { #category : #icons }
