@@ -1,6 +1,14 @@
 Extension { #name : #BrPopoverPinnableAptitude }
 
 { #category : #'*Brick-Glamorous' }
+BrPopoverPinnableAptitude >> withLeftAndRightResizers [
+	self addPinningAction: (BrMenuPinAction new
+		preEndPinBlock: [ :aContext |
+			self add: BrGlamorousWithHorizontalResizerAptitude new beLeft.
+			self add: BrGlamorousWithHorizontalResizerAptitude new beRight ])
+]
+
+{ #category : #'*Brick-Glamorous' }
 BrPopoverPinnableAptitude >> withResizers [
 	self addPinningAction: (BrMenuPinAction new
 		preEndPinBlock: [ :aContext |

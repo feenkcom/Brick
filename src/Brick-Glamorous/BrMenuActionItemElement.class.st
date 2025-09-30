@@ -45,7 +45,7 @@ BrMenuActionItemElement >> onClickWithModifiers: anEvent element: anElement mode
 	| aMenuModel |
 	aMenuModel := self menuModel.
 	aMenuModel ifNil: [ ^ self ].
-	aMenuModel actionWithModifiers ifNotNil: [ :anAction | 
+	aMenuModel actionsWithModifiers do: [ :anAction | 
 		anAction gtValueWithArgs: {anElement. aButtonModel. anEvent} ].
 	aMenuModel hideOnClick ifTrue: [ aMenuModel hideAll ]
 ]
