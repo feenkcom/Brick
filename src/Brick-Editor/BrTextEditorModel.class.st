@@ -365,7 +365,9 @@ BrTextEditorModel >> history [
 
 { #category : #accessing }
 BrTextEditorModel >> history: aBrTextEditorHistory [
-	history := aBrTextEditorHistory
+	history ifNotNil: [ history editorModel: nil ].
+	history := aBrTextEditorHistory.
+	history ifNotNil: [ history editorModel: self ]
 ]
 
 { #category : #initialization }
@@ -396,7 +398,7 @@ BrTextEditorModel >> initialize [
 	self useDefaultStylerStrategy.
 
 	shortcuts := BrTextEditorShortcuts new.
-	history := BrTextEditorHistory new.
+	self history: BrTextEditorHistory new.
 
 	isFocused := false.
 	shouldStyleWhenTextModified := true.
@@ -590,6 +592,11 @@ BrTextEditorModel >> notifyDeletedFrom: aFromIndex to: aToIndex [
 		editor: self;
 		fromIndex: aFromIndex;
 		toIndex: aToIndex)
+]
+
+{ #category : #'event firing' }
+BrTextEditorModel >> notifyHistoryChanged [
+	self dispatchEvent: (BrTextEditorHistoryChangedEvent new editor: self)
 ]
 
 { #category : #'event firing' }
@@ -1028,7 +1035,6 @@ BrTextEditorModel >> restoreText: aBrText [
 	segmentCollector text: text.
 
 	self onTextReplaced: oldText.	"notify UI about structural update"
-	history := BrTextEditorHistory new.
 	self notifyChanged.	"text changed, we should style it"
 	shouldStyleWhenTextModified ifTrue: [ self styleText ]
 ]

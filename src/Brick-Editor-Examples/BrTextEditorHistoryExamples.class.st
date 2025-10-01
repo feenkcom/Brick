@@ -134,6 +134,7 @@ BrTextEditorHistoryExamples >> newTextEditorWithInitialText [
 	| textEditor |
 	textEditor := self newTextEditor.
 	textEditor text: '1234' asRopedText.
+	textEditor history: BrTextEditorHistory new.
 
 	self assert: textEditor history isEnabled.
 	self assert: textEditor history shouldGroup not.
