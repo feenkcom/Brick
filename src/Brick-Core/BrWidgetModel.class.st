@@ -10,7 +10,7 @@ Class {
 		'model',
 		'whenAttachedActions'
 	],
-	#category : 'Brick-Core'
+	#category : #'Brick-Core'
 }
 
 { #category : #'api - composition' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLayoutHorizontalMatchParentResizerPropagatedState,
 	#superclass : #BrLayoutHorizontalMatchParentResizerState,
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #converting }

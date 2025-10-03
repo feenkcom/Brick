@@ -28,6 +28,14 @@ BrLayoutResizerAptitude >> anyToFitContent: aChildElementOrBlock [
 	propagations anyToFitContent: aChildElementOrBlock
 ]
 
+{ #category : #'api - common' }
+BrLayoutResizerAptitude >> commonResizing: aChildElementOrBlock [
+	self matchParentToMatchParent: aChildElementOrBlock.
+	self fitContentToFitContent: aChildElementOrBlock.
+	self fitContentLimitedToFitContentLimited: aChildElementOrBlock.
+	self exactToMatchParent: aChildElementOrBlock
+]
+
 { #category : #'api - style' }
 BrLayoutResizerAptitude >> exactDo: aBlock [
 	aBlock value: (self styleFor: (BrLayoutHorizontalResizerState exact and: BrLayoutVerticalResizerState exact))
@@ -100,6 +108,14 @@ BrLayoutResizerAptitude >> hAnyToMatchParent: aChildElementOrBlock [
 	"Match parent horizontally"
 
 	propagations hAnyToMatchParent: aChildElementOrBlock
+]
+
+{ #category : #'api - common' }
+BrLayoutResizerAptitude >> hCommonResizing: aChildElementOrBlock [
+	self hMatchParentToMatchParent: aChildElementOrBlock.
+	self hFitContentToFitContent: aChildElementOrBlock.
+	self hFitContentLimitedToFitContentLimited: aChildElementOrBlock.
+	self hExactToMatchParent: aChildElementOrBlock
 ]
 
 { #category : #'api - style' }
@@ -319,6 +335,14 @@ BrLayoutResizerAptitude >> vAnyToMatchParent: aChildElementOrBlock [
 	"Match parent horizontally"
 
 	propagations vAnyToMatchParent: aChildElementOrBlock
+]
+
+{ #category : #'api - common' }
+BrLayoutResizerAptitude >> vCommonResizing: aChildElementOrBlock [
+	self vMatchParentToMatchParent: aChildElementOrBlock.
+	self vFitContentToFitContent: aChildElementOrBlock.
+	self vFitContentLimitedToFitContentLimited: aChildElementOrBlock.
+	self vExactToMatchParent: aChildElementOrBlock
 ]
 
 { #category : #'api - style' }

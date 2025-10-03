@@ -4,7 +4,7 @@ BrLookAddChildFirstChange is the same as BrLookAddChildChange, but the element i
 Class {
 	#name : #BrLookAddChildFirstChange,
 	#superclass : #BrLookAddChildChange,
-	#category : 'Brick-Core-Changes'
+	#category : #'Brick-Core-Changes'
 }
 
 { #category : #initialization }

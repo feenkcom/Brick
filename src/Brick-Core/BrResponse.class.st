@@ -1,7 +1,7 @@
 Class {
 	#name : #BrResponse,
 	#superclass : #BlEvent,
-	#category : 'Brick-Core-Events'
+	#category : #'Brick-Core-Events'
 }
 
 { #category : #initialization }

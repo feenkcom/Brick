@@ -1,5 +1,5 @@
 Class {
 	#name : #BrWish,
 	#superclass : #BlEvent,
-	#category : 'Brick-Core-Events'
+	#category : #'Brick-Core-Events'
 }

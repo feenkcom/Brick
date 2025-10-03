@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #'adding / removing' }

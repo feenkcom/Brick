@@ -5,7 +5,7 @@ Class {
 		'initialized',
 		'changes'
 	],
-	#category : 'Brick-Core-Changes'
+	#category : #'Brick-Core-Changes'
 }
 
 { #category : #adding }
