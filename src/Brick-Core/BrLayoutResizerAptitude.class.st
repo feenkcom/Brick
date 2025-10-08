@@ -29,11 +29,16 @@ BrLayoutResizerAptitude >> anyToFitContent: aChildElementOrBlock [
 ]
 
 { #category : #'api - common' }
-BrLayoutResizerAptitude >> commonResizing: aChildElementOrBlock [
+BrLayoutResizerAptitude >> common: aChildElementOrBlock [
 	self matchParentToMatchParent: aChildElementOrBlock.
 	self fitContentToFitContent: aChildElementOrBlock.
 	self fitContentLimitedToFitContentLimited: aChildElementOrBlock.
 	self exactToMatchParent: aChildElementOrBlock
+]
+
+{ #category : #'api - common' }
+BrLayoutResizerAptitude >> commonResizing: aChildElementOrBlock [
+	self common: aChildElementOrBlock
 ]
 
 { #category : #'api - style' }
@@ -111,11 +116,16 @@ BrLayoutResizerAptitude >> hAnyToMatchParent: aChildElementOrBlock [
 ]
 
 { #category : #'api - common' }
-BrLayoutResizerAptitude >> hCommonResizing: aChildElementOrBlock [
+BrLayoutResizerAptitude >> hCommon: aChildElementOrBlock [
 	self hMatchParentToMatchParent: aChildElementOrBlock.
 	self hFitContentToFitContent: aChildElementOrBlock.
 	self hFitContentLimitedToFitContentLimited: aChildElementOrBlock.
 	self hExactToMatchParent: aChildElementOrBlock
+]
+
+{ #category : #'api - common' }
+BrLayoutResizerAptitude >> hCommonResizing: aChildElementOrBlock [
+	self hCommon: aChildElementOrBlock
 ]
 
 { #category : #'api - style' }
@@ -338,11 +348,16 @@ BrLayoutResizerAptitude >> vAnyToMatchParent: aChildElementOrBlock [
 ]
 
 { #category : #'api - common' }
-BrLayoutResizerAptitude >> vCommonResizing: aChildElementOrBlock [
+BrLayoutResizerAptitude >> vCommon: aChildElementOrBlock [
 	self vMatchParentToMatchParent: aChildElementOrBlock.
 	self vFitContentToFitContent: aChildElementOrBlock.
 	self vFitContentLimitedToFitContentLimited: aChildElementOrBlock.
 	self vExactToMatchParent: aChildElementOrBlock
+]
+
+{ #category : #'api - common' }
+BrLayoutResizerAptitude >> vCommonResizing: aChildElementOrBlock [
+	self vCommon: aChildElementOrBlock
 ]
 
 { #category : #'api - style' }
