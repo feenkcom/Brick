@@ -1555,7 +1555,7 @@ BrGlamorousVectorIcons class >> web [
 </svg>'.
 
 	element := BlSkiaSvgElement new
-			extent: 16 @ 16;
+			size: 16 @ 16;
 			svg: svg;
 			yourself.
 
