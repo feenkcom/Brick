@@ -104,3 +104,16 @@ BrTextStylerExamples >> newMethodText [
 BrTextStylerExamples >> timeoutMilliseconds [
 	^ 500
 ]
+
+{ #category : #'examples - editor' }
+BrTextStylerExamples >> workspaceStyler [
+	<gtExample>
+	<return: #BrRBTextStyler>
+	| styler ast |
+	styler := BrRBTextStyler new
+			isForWorkspace: true;
+			yourself.
+	ast := styler parseWithSemanticAnalysis: '3 + 4' asRopedText.
+	self assert: ast isMethod not.
+	^ styler
+]
