@@ -239,6 +239,26 @@ BrGlamorousVectorIcons class >> cloud [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> collapsehorizontal [
+	^ [BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 6.739433 8 L 6.767767 7.971666 L 3.93934 5.143239 L 3.232233 5.850346 L 5.381887 8 L 3.232233 10.149654 L 3.93934 10.856761 L 6.767767 8.028334 Z M 10.618113 8 L 12.767767 5.850346 L 12.06066 5.143239 L 9.232233 7.971666 L 9.260567 8 L 9.232233 8.028334 L 12.06066 10.856761 L 12.767767 10.149654 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> collapsevertical [
+	^ [BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 8 6.739433 L 8.028334 6.767767 L 10.856761 3.93934 L 10.149654 3.232233 L 8 5.381887 L 5.850346 3.232233 L 5.1432393 3.93934 L 7.971666 6.767767 Z M 8 10.618113 L 10.149654 12.767767 L 10.856761 12.06066 L 8.028334 9.232233 L 8 9.260567 L 7.971666 9.232233 L 5.143239 12.06066 L 5.850346 12.767767 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> copyToClipboard [
 	<script: 'self close copyToClipboard'>
 
@@ -374,6 +394,26 @@ BrGlamorousVectorIcons class >> emphasizedPlay [
 { #category : #icons }
 BrGlamorousVectorIcons class >> empty [
 	^ [ BlElement new size: 16 @ 16 ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> expandhorizontal [
+	^ [BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 12.739433 8 L 12.767767 7.971666 L 9.93934 5.143239 L 9.232233 5.850346 L 11.381887 8 L 9.232233 10.149654 L 9.93934 10.856761 L 12.767767 8.028334 Z M 4.618113 8 L 6.767767 5.850346 L 6.06066 5.143239 L 3.232233 7.971666 L 3.260567 8 L 3.232233 8.028334 L 6.06066 10.856761 L 6.767767 10.149654 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> expandvertical [
+	^ [BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 8 12.739433 L 8.028334 12.767767 L 10.856761 9.93934 L 10.149654 9.232233 L 8 11.381887 L 5.850346 9.232233 L 5.143239 9.93934 L 7.971666 12.767767 Z M 8 4.618113 L 10.149654 6.767767 L 10.856761 6.06066 L 8.028334 3.232233 L 8 3.260567 L 7.971666 3.232233 L 5.143239 6.06066 L 5.850346 6.767767 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black] asStencil
 ]
 
 { #category : #icons }
