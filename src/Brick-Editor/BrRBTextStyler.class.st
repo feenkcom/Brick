@@ -185,37 +185,39 @@ BrRBTextStyler >> parse: aText isMethod: isMethod [
 ]
 
 { #category : #private }
-BrRBTextStyler >> privateStyle: aText [
+BrRBTextStyler >> parseWithSemanticAnalysis: aText [
 	| ast |
-	ast := self
-			forPharo12AndNewer: [ 
-				| compiler |
-				compiler := (classOrMetaClass ifNil: [
-							"We pass a class here, as if we pass nil we cannot
+	self
+		forPharo12AndNewer: [ | compiler |
+			compiler := (classOrMetaClass
+					ifNil: [  "We pass a class here, as if we pass nil we cannot
 							change the compiler to not be for scripting.
 							#isScripting: wants a class in order to be able
 							to do the switch.
 							https://github.com/feenkcom/gtoolkit/issues/4681"
-							UndefinedObject])compiler
-						source: aText asString;
-						receiver: (self isScripting 
-							ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
-						isScripting: self isScripting;
-						requestor: workspace.
-				compiler parse ]
-			forPharo11: [ 
-				| currentAst |
-				currentAst := self parse: aText isMethod: self isForWorkspace not.
-				currentAst methodNode
-					compilationContext: (CompilationContext new
-							class: (classOrMetaClass ifNil: [ UndefinedObject ]);
-							requestor: workspace).
-				currentAst doSemanticAnalysis.
-				currentAst ].
+							UndefinedObject ])
+					compiler
+					source: aText asString;
+					receiver: (self isScripting ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
+					isScripting: self isScripting;
+					requestor: workspace.
+			ast := compiler parse.
+			(self isForWorkspace and: [ ast isMethod ]) ifTrue: [ ast := ast body ] ]
+		forPharo11: [ ast := self parse: aText isMethod: self isForWorkspace not.
+			ast methodNode
+				compilationContext: (CompilationContext new
+						class: (classOrMetaClass ifNil: [ UndefinedObject ]);
+						requestor: workspace).
+			ast doSemanticAnalysis ].
+	^ ast
+]
 
+{ #category : #private }
+BrRBTextStyler >> privateStyle: aText [
+	| ast |
+	ast := self parseWithSemanticAnalysis: aText.
 	self style: aText ast: ast.
 	self extraStyle: aText ast: ast.
-
 	^ aText
 ]
 
