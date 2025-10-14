@@ -40,6 +40,21 @@ BrTreeNode >> allChildrenNodesBreadthFirst [
 ]
 
 { #category : #enumeration }
+BrTreeNode >> allChildrenNodesBreadthFirstConditionedDo: aBlock [
+	"Continue with children if a block returns true,
+	ignore children otherwise."
+
+	| queue next |
+	queue := LinkedList new.
+	queue addAll: self childrenNodes.
+	[ queue notEmpty ]
+		whileTrue: [ | result |
+			next := queue removeFirst.
+			result := aBlock value: next.
+			result ifTrue: [ queue addAll: next childrenNodes ] ]
+]
+
+{ #category : #enumeration }
 BrTreeNode >> allChildrenNodesBreadthFirstDo: aBlock [
 	| queue next |
 	queue := LinkedList new.
@@ -720,6 +735,12 @@ BrTreeNode >> withAllChildrenNodesBreadthFirst [
 	nodes := OrderedCollection new.
 	self withAllChildrenNodesBreadthFirstDo: [ :e | nodes add: e ].
 	^ nodes
+]
+
+{ #category : #enumeration }
+BrTreeNode >> withAllChildrenNodesBreadthFirstConditionedDo: aBlock [ 
+	aBlock value: self.
+	self allChildrenNodesBreadthFirstConditionedDo: aBlock
 ]
 
 { #category : #enumeration }
