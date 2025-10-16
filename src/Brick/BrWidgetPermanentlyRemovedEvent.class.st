@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : #'api - convenience' }
+BrWidgetPermanentlyRemovedEvent class >> notifyElements: aCollectionOfElements [
+	"All elements and their children are notified that are permanently removed.
+	Note: Elements must be already removed from the scene graph (space),
+	so that it does not schedule any tasks, e.g., due to canceled future promises."
+
+	aCollectionOfElements do: [ :aParentElement |
+		self notifyWithAllChildren: aParentElement ]
+]
+
+{ #category : #'api - convenience' }
 BrWidgetPermanentlyRemovedEvent class >> notifyWithAllChildren: aParentElement [
 	"All children are notified that are permanently removed.
 	Note: aParentElement must be already removed from the scene graph (space),
