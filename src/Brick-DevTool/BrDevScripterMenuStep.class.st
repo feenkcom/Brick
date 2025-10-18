@@ -200,6 +200,18 @@ BrDevScripterMenuStep >> assertMenuContainerLayoutAnchorBounds: aRectangle [
 ]
 
 { #category : #'steps - checks' }
+BrDevScripterMenuStep >> assertMenuItemWithLabelExists: aLabel [
+	^ self assert
+		label: ('Assert menu item with label {1} exists' format: {aLabel});
+		exists;
+		referenceSender;
+		onParentStepTarget: self;
+		// #'menu--list';
+		// #'menu--label';
+		@ [ :each | each text asString = aLabel ]
+]
+
+{ #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertPermanentlyHiddenDropdown [
 	"It means that the menu will not be displayed unless explicitly requested.
 	For example, temporarily hidden menus are opened again, once its anchor element 
@@ -363,6 +375,16 @@ BrDevScripterMenuStep >> hoverMenuItemWithId: anElementId [
 		label: ('Hover menu item with ID: {1}' format: {anElementId});
 		referenceSender;
 		// anElementId
+]
+
+{ #category : #'steps - interactions' }
+BrDevScripterMenuStep >> hoverMenuItemWithLabel: aLabel [
+	^ self hoverMenuItem
+		label: ('Hover menu item with label: {1}' format: {aLabel});
+		referenceSender;
+		// #'menu--list';
+		// #'menu--label';
+		@ [ :each | each text asString = aLabel ]
 ]
 
 { #category : #'private - support' }
