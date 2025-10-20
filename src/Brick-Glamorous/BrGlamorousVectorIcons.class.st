@@ -1255,6 +1255,34 @@ BrGlamorousVectorIcons class >> rightSide [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> roadmap [
+	^ [BlElement new size: 16@16; addChildren: {BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 11.453009 8.5 L 11.453009 8.5 L 11.45 8.499999 C 11.451003 8.5 11.452006 8.5 11.453009 8.5 Z M 11.453009 8.5 L 11.453009 8.5 L 11.453009 7.5 C 11.964518 7.499745 12.475949 7.304482 12.866217 6.914211 C 13.647269 6.133164 13.647269 4.8668364 12.866217 4.0857888 C 12.475949 3.695518 11.964518 3.500255 11.453009 3.5000003 L 11.453009 2.5 C 12.220775 2.5 12.98854 2.7928943 13.574326 3.378683 C 14.745904 4.5502545 14.745904 6.4497456 13.574326 7.621317 C 12.98854 8.207106 12.220775 8.5 11.453009 8.5 Z M 4.5000004 13.5 L 4.5000004 13.5 L 4.5000004 13.5 L 4.5000004 13.5 Z M 4.5000004 13.5 L 4.5000004 12.5 C 3.988491 12.499745 3.4770607 12.304482 3.086792 11.914211 C 2.3057403 11.133164 2.3057403 9.866836 3.086792 9.085789 C 3.4770607 8.695518 3.988491 8.500255 4.5000004 8.5 L 4.5000004 7.5 C 3.7322347 7.5 2.964469 7.792894 2.378683 8.378683 C 1.2071057 9.550255 1.2071057 11.449746 2.378683 12.621317 C 2.964469 13.207106 3.7322347 13.5 4.5000004 13.5 L 4.5030094 13.499999 C 4.5020064 13.5 4.5010034 13.5 4.5000004 13.5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black.
+BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 4.414583 3.5 L 11.5 3.5 L 11.5 2.5 L 4.414583 2.5 C 4.3423813 2.295274 4.2244066 2.1030878 4.060659 1.939341 C 3.474873 1.353552 2.525127 1.353552 1.939341 1.939341 C 1.353552 2.525127 1.353552 3.474873 1.939341 4.060659 C 2.525127 4.646448 3.474873 4.646448 4.060659 4.060659 C 4.2244066 3.8969123 4.3423813 3.704726 4.414583 3.5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black.
+BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 7.085417 8.5 C 7.157619 8.704726 7.2755935 8.896912 7.439341 9.060659 C 8.025127 9.646448 8.974873 9.646448 9.560659 9.060659 C 9.724407 8.896912 9.842381 8.704726 9.914583 8.5 L 11.5 8.5 L 11.5 7.5 L 9.914583 7.5 C 9.842381 7.295274 9.724407 7.103088 9.560659 6.939341 C 8.974873 6.353552 8.025127 6.353552 7.439341 6.939341 C 7.275593 7.103088 7.157619 7.295274 7.085417 7.5 L 4.5 7.5 L 4.5 8.5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black.
+BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 11.585417 12.5 L 4.5 12.5 L 4.5 13.5 L 11.585417 13.5 C 11.657619 13.704726 11.775593 13.896912 11.939341 14.060659 C 12.525127 14.646448 13.474873 14.646448 14.060659 14.060659 C 14.646448 13.474873 14.646448 12.525127 14.060659 11.939341 C 13.474873 11.353552 12.525127 11.353552 11.939341 11.939341 C 11.775593 12.103088 11.657619 12.295274 11.585417 12.5 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black}] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> robot [
 	<script: 'self robot inspect'>
 
@@ -1585,7 +1613,7 @@ BrGlamorousVectorIcons class >> verticaltree [
 BrGlamorousVectorIcons class >> web [
 	<script: 'self actor inspect'>
 	^ [ | element svg |
-	svg := '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+	svg := '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
   <path d="M8 1.5 a 6.5 6.5 0 1 1 0 13 a 6.5 6.5 0 1 1 0 -13
            M8 1.5 a 3.4 6.5 0 0 1 0 13
            M8 1.5 a 3.4 6.5 0 0 0 0 13
