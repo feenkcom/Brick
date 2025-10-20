@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'preferredExtent',
 		'formElement',
-		'preferredScale'
+		'preferredScale',
+		'targetElement',
+		'formStream'
 	],
 	#category : #'Brick-Future - Support'
 }
@@ -77,9 +79,26 @@ BrElementAsFormPreview >> initialize [
 
 { #category : #initialization }
 BrElementAsFormPreview >> initializeForElement: anElement [
-	| aFormStream |
-	aFormStream := self createAsFormStream: anElement.
-	formElement stream: aFormStream
+	targetElement := anElement
+]
+
+{ #category : #'as yet unclassified' }
+BrElementAsFormPreview >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	
+	formStream ifNotNil: [ :aStream | aStream terminate ].
+	targetElement ifNil: [ ^ self ].
+	
+	formStream := (self createAsFormStream: targetElement) terminatable.
+	formElement stream: formStream
+]
+
+{ #category : #'as yet unclassified' }
+BrElementAsFormPreview >> onRemovedFromSceneGraph [
+	super onRemovedFromSceneGraph.
+	
+	formStream ifNotNil: [ :aStream | aStream terminate ].
+	formStream := nil.
 ]
 
 { #category : #accessing }
