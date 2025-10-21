@@ -19,6 +19,9 @@ GtBlocSubThemeEditorElement >> createCollapsedHeaderForProperty: aTypedThemeProp
 	
 	header := self createProtoHeaderForProperty: aTypedThemeProperty.
 	
+	header
+		addAptitude: (self createHeaderContextMenuAptitudeForProperty: aTypedThemeProperty).
+	
 	^ header
 ]
 
@@ -104,19 +107,16 @@ GtBlocSubThemeEditorElement >> createExpandedHeaderForProperty: aTypedThemePrope
 	header
 		addChild: (BrButton new
 				beSmallSize;
-				aptitude: BrGlamorousMetadataLabelAptitude + (BrLazyStyleCommonAptitude new hovered: [ :s :t | s border: t button hoveredBorderColor ]);
+				aptitude: BrGlamorousMetadataLabelAptitude
+						+ (BrLazyStyleCommonAptitude new
+								hovered: [ :s :t | s border: t button hoveredBorderColor ]);
 				vFitContent;
 				label: aTypedThemeProperty printShortThemeableValue;
 				action: [ :aButton | aButton phlow spawnObject: aTypedThemeProperty propertyValue ]).
-				
-	header addAptitude: (BrGlamorousWithExplicitContextMenuAptitude
-							itemsWithAnchorActions: [
-							{
-							'Copy `self theme` accessor'
-										-> [ Clipboard clipboardText: (aTypedThemeProperty printPropertyAccessor: false) ].
-							'Copy `BlTheme default` accessor'
-										-> [ Clipboard clipboardText: (aTypedThemeProperty printPropertyAccessor: true) ]} ]).
-		
+
+	header
+		addAptitude: (self createHeaderContextMenuAptitudeForProperty: aTypedThemeProperty).
+
 	^ header
 ]
 
@@ -180,6 +180,15 @@ GtBlocSubThemeEditorElement >> createExpanderForProperty: aTypedThemeProperty [
 		aptitude: (GtCoderExpanderAptitude new borderPaint: anExpanderBackground).
 
 	^ anExpander
+]
+
+{ #category : #'as yet unclassified' }
+GtBlocSubThemeEditorElement >> createHeaderContextMenuAptitudeForProperty: aTypedThemeProperty [
+	^ BrGlamorousWithExplicitContextMenuAptitude
+		itemsWithAnchorActions: [ {'Copy `self theme` accessor'
+					-> [ Clipboard clipboardText: (aTypedThemeProperty printPropertyAccessor: false) ].
+				'Copy `BlTheme default` accessor'
+					-> [ Clipboard clipboardText: (aTypedThemeProperty printPropertyAccessor: true) ]} ]
 ]
 
 { #category : #'as yet unclassified' }
