@@ -32,6 +32,24 @@ BrWidgetPermanentlyRemovedEvent class >> notifyWithAllChildren: aParentElement [
 		anElement dispatchEvent: self new ]
 ]
 
+{ #category : #'api - convenience' }
+BrWidgetPermanentlyRemovedEvent class >> removeElement: anElement [
+	"Given alement is removed from its parent and
+	the element and its children are notified that are permanently removed."
+
+	anElement removeFromParent.
+	self notifyElements: {anElement}
+]
+
+{ #category : #'api - convenience' }
+BrWidgetPermanentlyRemovedEvent class >> removeElements: aCollectionOfElements [
+	"Given alements are removed from their parents and
+	all elements and their children are notified that are permanently removed."
+
+	aCollectionOfElements do: #removeFromParent.
+	self notifyElements: aCollectionOfElements
+]
+
 { #category : #sending }
 BrWidgetPermanentlyRemovedEvent >> sendTo: anObject [
 	^ anObject widgetPermanentlyRemovedEvent: self
