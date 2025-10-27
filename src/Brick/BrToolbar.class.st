@@ -43,6 +43,12 @@ BrToolbar >> itemAt: anIndex [
 ]
 
 { #category : #accessing }
+BrToolbar >> items [
+	<return: #Collection of: #BlElement>
+	^ self viewModel items collect: #widget
+]
+
+{ #category : #accessing }
 BrToolbar >> numberOfItems [
 	<return: #Number>
 
