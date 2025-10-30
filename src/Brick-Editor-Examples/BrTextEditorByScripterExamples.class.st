@@ -57,6 +57,42 @@ BrTextEditorByScripterExamples >> click_empty [
 	^ aScripter
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextEditorByScripterExamples >> doNotIgnoreInputWhenShiftAndPrimaryModifierPressed [
+	<gtExample>
+	| scripter|
+	
+	scripter := self scripterWithElement.
+	scripter requestFocus play.
+	
+	scripter type
+		text: 'hello';
+		modifiers: (BlKeyModifiers primary shift: true);
+		play.
+	
+	self assert: scripter element text asString equals: 'hello'.
+	
+	^ scripter
+]
+
+{ #category : #'as yet unclassified' }
+BrTextEditorByScripterExamples >> ignoreInputWhenOnlyPrimaryModifierPressed [
+	<gtExample>
+	| scripter|
+	
+	scripter := self scripterWithElement.
+	scripter requestFocus play.
+	
+	scripter type
+		text: 'hello';
+		modifiers: BlKeyModifiers primary;
+		play.
+	
+	self assert: scripter element text isEmpty.
+	
+	^ scripter
+]
+
 { #category : #'instance creation' }
 BrTextEditorByScripterExamples >> scripter [
 	<gtExample>
