@@ -57,6 +57,9 @@ BrTextEditorInsertionHandler >> textInputEvent: anEvent [
     without this check if users try to use shortcuts that may don't exist such as (meta+s) the action will result in typing
     which lead to unwanted effects"
 
+    anEvent modifiers isPrimaryModifierOnly
+    	ifTrue: [ ^ self ].
+    
 	(anEvent text allSatisfy: [ :aCharacter | Unicode isPrintable: aCharacter ])
 		ifFalse: [ ^ self ].
 
