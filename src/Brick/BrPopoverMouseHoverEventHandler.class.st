@@ -9,8 +9,34 @@ Class {
 		'hideDelay',
 		'showDelay'
 	],
+	#classInstVars : [
+		'defaultShowDelay',
+		'defaultHideDelay'
+	],
 	#category : #'Brick-Menu - Support'
 }
+
+{ #category : #initialization }
+BrPopoverMouseHoverEventHandler class >> defaultHideDelay [
+	^ defaultHideDelay ifNil: [ defaultHideDelay := 300 milliSeconds ]
+]
+
+{ #category : #initialization }
+BrPopoverMouseHoverEventHandler class >> defaultHideDelay: aDuration [
+	self assert: (aDuration isKindOf: Duration).
+	defaultHideDelay := aDuration
+]
+
+{ #category : #initialization }
+BrPopoverMouseHoverEventHandler class >> defaultShowDelay [
+	^ defaultShowDelay ifNil: [ defaultShowDelay := 1000 milliseconds ]
+]
+
+{ #category : #initialization }
+BrPopoverMouseHoverEventHandler class >> defaultShowDelay: aDuration [
+	self assert: (aDuration isKindOf: Duration).
+	defaultShowDelay := aDuration
+]
 
 { #category : #private }
 BrPopoverMouseHoverEventHandler >> cancelHideLaterTask [
@@ -26,12 +52,12 @@ BrPopoverMouseHoverEventHandler >> cancelShowLaterTask [
 
 { #category : #initialization }
 BrPopoverMouseHoverEventHandler >> defaultHideDelay [
-	^ 300 milliSeconds
+	^ self class defaultHideDelay
 ]
 
 { #category : #initialization }
 BrPopoverMouseHoverEventHandler >> defaultShowDelay [
-	^ 1000 milliSeconds
+	^ self class defaultShowDelay
 ]
 
 { #category : #'api - accessing' }
