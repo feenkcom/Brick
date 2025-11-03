@@ -6,10 +6,45 @@ Class {
 		'blinkingTask',
 		'blinkingScheduleTask'
 	],
+	#classVars : [
+		'BlinkDelay',
+		'BlinkInterval',
+		'ShouldBlink'
+	],
 	#category : #'Brick-Editor-UI'
 }
 
-{ #category : #initialization }
+{ #category : #accessing }
+BrCursorElement class >> blinkDelay [
+	^ BlinkDelay ifNil: [ 1 second ]
+]
+
+{ #category : #accessing }
+BrCursorElement class >> blinkDelay: aDuration [
+	BlinkDelay := aDuration
+]
+
+{ #category : #accessing }
+BrCursorElement class >> blinkInterval [
+	^ BlinkInterval ifNil: [ 1 second ]
+]
+
+{ #category : #accessing }
+BrCursorElement class >> blinkInterval: aDuration [
+	BlinkInterval := aDuration
+]
+
+{ #category : #accessing }
+BrCursorElement class >> shouldBlink [
+	^ ShouldBlink ifNil: [ true ]
+]
+
+{ #category : #accessing }
+BrCursorElement class >> shouldBlink: aBoolean [
+	ShouldBlink := aBoolean
+]
+
+{ #category : #'private - blinking' }
 BrCursorElement >> doBlink [
 	(self opacity > 0.5)
 		ifTrue: [ self opacity: 0.0 ]
@@ -26,14 +61,14 @@ BrCursorElement >> initialize [
 	self scheduleBlinking
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'hooks - children' }
 BrCursorElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
 	
 	self scheduleBlinking
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'hooks - geometry' }
 BrCursorElement >> onPositionInSpaceChanged [
 	super onPositionChanged.
 	
@@ -41,34 +76,36 @@ BrCursorElement >> onPositionInSpaceChanged [
 	self scheduleBlinking
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'hooks - children' }
 BrCursorElement >> onRemovedFromSceneGraph [
 	super onRemovedFromSceneGraph.
 	
-	self scheduleBlinking
+	self stopBlinking
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - blinking' }
 BrCursorElement >> scheduleBlinking [
-	self opacity: 1.0.
-	blinkingScheduleTask ifNotNil: [ :aTask | aTask stop ].
-	blinkingTask ifNotNil: [ :aTask | aTask stop ].
+	self stopBlinking.
+	
+	self class shouldBlink
+		ifFalse: [ ^ self ].
+	
 	blinkingScheduleTask := (BlDelayedTaskAction new
-		delay: 1 second;
+		delay: self class blinkDelay;
 		action: [ self startBlinking ]).
 
 	self enqueueTask: blinkingScheduleTask
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - blinking' }
 BrCursorElement >> startBlinking [
 	blinkingTask := (BlRepeatedTaskAction new
-		delay: 1 second;
+		delay: self class blinkInterval;
 		action: [ self doBlink ]).
 	self enqueueTask: blinkingTask
 ]
 
-{ #category : #accessing }
+{ #category : #'private - blinking' }
 BrCursorElement >> stopBlinking [
 	blinkingScheduleTask ifNotNil: [ :aTask | aTask stop ].
 	blinkingTask ifNotNil: [ :aTask | aTask stop ].
