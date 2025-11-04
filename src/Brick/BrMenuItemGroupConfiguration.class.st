@@ -76,6 +76,13 @@ BrMenuItemGroupConfiguration class >> removal [
 		priority: 100
 ]
 
+{ #category : #factory }
+BrMenuItemGroupConfiguration class >> ui [
+	^ self new
+		name: #UI;
+		priority: 50
+]
+
 { #category : #accessing }
 BrMenuItemGroupConfiguration >> id [
 	^ self name
