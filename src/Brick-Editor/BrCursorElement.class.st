@@ -36,7 +36,7 @@ BrCursorElement class >> blinkInterval: aDuration [
 
 { #category : #accessing }
 BrCursorElement class >> shouldBlink [
-	^ ShouldBlink ifNil: [ true ]
+	^ ShouldBlink ifNil: [ false ]
 ]
 
 { #category : #accessing }
