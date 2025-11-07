@@ -91,6 +91,7 @@ BrCursorElement >> scheduleBlinking [
 		ifFalse: [ ^ self ].
 	
 	blinkingScheduleTask := (BlDelayedTaskAction new
+		isIndefiniteTermTask: true;
 		delay: self class blinkDelay;
 		action: [ self startBlinking ]).
 
