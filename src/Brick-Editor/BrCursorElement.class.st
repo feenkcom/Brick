@@ -70,7 +70,7 @@ BrCursorElement >> onAddedToSceneGraph [
 
 { #category : #'hooks - geometry' }
 BrCursorElement >> onPositionInSpaceChanged [
-	super onPositionChanged.
+	super onPositionInSpaceChanged.
 	
 	self stopBlinking.
 	self scheduleBlinking
