@@ -36,7 +36,7 @@ BrCursorElement class >> blinkInterval: aDuration [
 
 { #category : #accessing }
 BrCursorElement class >> shouldBlink [
-	^ ShouldBlink ifNil: [ false ]
+	^ ShouldBlink ifNil: [ true ]
 ]
 
 { #category : #accessing }
@@ -70,7 +70,7 @@ BrCursorElement >> onAddedToSceneGraph [
 
 { #category : #'hooks - geometry' }
 BrCursorElement >> onPositionInSpaceChanged [
-	super onPositionChanged.
+	super onPositionInSpaceChanged.
 	
 	self stopBlinking.
 	self scheduleBlinking
@@ -91,6 +91,7 @@ BrCursorElement >> scheduleBlinking [
 		ifFalse: [ ^ self ].
 	
 	blinkingScheduleTask := (BlDelayedTaskAction new
+		isIndefiniteTermTask: true;
 		delay: self class blinkDelay;
 		action: [ self startBlinking ]).
 
