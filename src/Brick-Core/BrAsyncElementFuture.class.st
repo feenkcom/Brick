@@ -250,8 +250,8 @@ BrAsyncElementFuture >> privateInitializeElement [
 
 	isFinished
 		ifFalse: [
-		| anElement |
-		anElement := updater element.
+			| anElement |
+			anElement := updater element.
 			anElement enqueueTask: (BlPromiseTask new promise: aPromise).
 			
 			"users have to opt-in to fire future scheduled events"

@@ -11,10 +11,21 @@ Class {
 		'elementDataBinder',
 		'element',
 		'updater',
-		'configuration'
+		'configuration',
+		'futureCancellation'
 	],
 	#category : #'Brick-Future - Support'
 }
+
+{ #category : #accessing }
+BrFromFuture >> cancelHard [
+	futureCancellation := AsyncFutureExecutionHardCancellation uniqueInstance
+]
+
+{ #category : #accessing }
+BrFromFuture >> cancelSoft [
+	futureCancellation := AsyncFutureExecutionSoftCancellation uniqueInstance
+]
 
 { #category : #accessing }
 BrFromFuture >> configuration [
@@ -64,6 +75,12 @@ BrFromFuture >> initialize [
 	elementDataBinder := BrFromFutureDataBinder new.
 	updater := BrElementUpdater new.
 	updater element: self selector: #privateUpdateElement.
+	futureCancellation := AsyncFutureExecutionSoftCancellation uniqueInstance.
+]
+
+{ #category : #accessing }
+BrFromFuture >> interrupt [
+	futureExecution ifNotNil: [ futureExecution cancel: futureCancellation ]
 ]
 
 { #category : #'hooks - children' }
@@ -91,7 +108,8 @@ BrFromFuture >> onAddedToSceneGraph [
 		otherwise: [ :anError |
 			anError freeze.
 			self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ].
-	element enqueueTask: (BlPromiseTask new promise: promise).
+	self enqueueTask: (BlPromiseTask new promise: promise).
+	self fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: promise)
 ]
 
 { #category : #private }

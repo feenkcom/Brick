@@ -15,7 +15,8 @@ Class {
 		'elementStencil',
 		'elementDataBinder',
 		'element',
-		'stream'
+		'stream',
+		'configuration'
 	],
 	#category : #'Brick-Future - Support'
 }
@@ -29,8 +30,26 @@ BrFromStream >> add: anItem [
 ]
 
 { #category : #'api - accessing' }
+BrFromStream >> configuration [
+	<return: #AsyncFutureExecutionConfiguration>
+	^ configuration ifNil: [ configuration := self defaultConfiguration ]
+]
+
+{ #category : #'api - accessing' }
+BrFromStream >> configuration: aAsyncFutureExecutionConfiguration [
+	configuration := aAsyncFutureExecutionConfiguration
+]
+
+{ #category : #'api - accessing' }
 BrFromStream >> dataBinder: aFromFutureDataBinder [
 	elementDataBinder := aFromFutureDataBinder asStencilBuilder: BrFromFutureDataBinder
+]
+
+{ #category : #initialization }
+BrFromStream >> defaultConfiguration [
+	^ AsyncFutureExecutionConfiguration new
+		customGroup: #UI;
+		highPriority
 ]
 
 { #category : #initialization }
@@ -80,7 +99,7 @@ BrFromStream >> privateInitializeElement [
 
 	isProcessed := false.
 	
-	aPromise := promise := future asAsyncPromise.
+	aPromise := promise := future await: self configuration.
 	aPromise
 		then: [ :aResult |
 			isProcessed := true.
@@ -101,7 +120,8 @@ BrFromStream >> privateInitializeElement [
 			
 	isProcessed ifFalse: [
 		"To let the space know that we are waiting for a promise to finish"
-		self enqueueTask: (BlPromiseTask new promise: aPromise) ]
+		self enqueueTask: (BlPromiseTask new promise: aPromise).
+		self fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: aPromise) ]
 ]
 
 { #category : #'private - update' }

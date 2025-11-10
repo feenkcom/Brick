@@ -76,6 +76,7 @@ BrFromPromise >> privateInitializeElement [
 	isProcessed ifFalse: [
 		"To let the space know that we are waiting for a promise to finish"
 		self enqueueTask: (BlPromiseTask new promise: aPromise).
+		self fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: aPromise).
 		self privateUpdateElement ]
 ]
 
