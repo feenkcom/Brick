@@ -97,6 +97,14 @@ BrSelectionModel >> notifySelected: anInterval dueTo: aSourceEvent [
 	self dispatchEvent: (BrSelectionChanged new selection: selection; selectedInterval: anInterval; sourceEvent: aSourceEvent)
 ]
 
+{ #category : #'as yet unclassified' }
+BrSelectionModel >> printOn: aStream [
+
+	aStream nextPutAll: self modelName.
+	aStream space.
+	selection printOn: aStream
+]
+
 { #category : #'api - selection' }
 BrSelectionModel >> removeFromSelection: anIndex dueTo: aSourceEvent [
 	"Remove an item at a given index from the selection"
