@@ -9,8 +9,22 @@ Class {
 		'textStyleHandler',
 		'textScrollOnModifyHandler'
 	],
+	#classVars : [
+		'EditorTabSize'
+	],
 	#category : #'Brick-Editor-UI'
 }
+
+{ #category : #accessing }
+BrEditorElement class >> editorTabSize [
+	^ EditorTabSize ifNil: [ EditorTabSize := 2 ]
+]
+
+{ #category : #accessing }
+BrEditorElement class >> editorTabSize: aNumber [
+	self assert: aNumber isNumber.
+	EditorTabSize := aNumber
+]
 
 { #category : #conversion }
 BrEditorElement >> asScrollableElement [

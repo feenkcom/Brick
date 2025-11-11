@@ -64,6 +64,7 @@ BrUngroupedList >> itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFo
 	].
 
 	self enqueueTask: (BlPromiseTask new promise: aPromise).
+	self fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: aPromise).
 	
 	^ aPromise
 ]

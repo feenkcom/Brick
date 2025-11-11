@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBrLayoutResizable,
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #'api - layout resizeable' }
@@ -37,7 +37,7 @@ TBrLayoutResizable >> hExact: aNumber [
 
 { #category : #'api - layout resizeable' }
 TBrLayoutResizable >> hFitContent [
-	(self constraints horizontal resizer isFitContent)
+	(self constraints horizontal resizer isFitContent and: [ self constraints horizontal resizer isFitContentLimited not ])
 		ifFalse: [ self constraintsDo: [ :c | c horizontal fitContent ] ].
 
 	self states addState: BrLayoutHorizontalResizerState fitContent
@@ -84,7 +84,7 @@ TBrLayoutResizable >> vExact: aNumber [
 
 { #category : #'api - layout resizeable' }
 TBrLayoutResizable >> vFitContent [
-	(self constraints vertical resizer isFitContent)
+	(self constraints vertical resizer isFitContent and: [ self constraints vertical resizer isFitContentLimited not ])
 		ifFalse: [ self constraintsDo: [ :c | c vertical fitContent ] ].
 
 	self states addState: BrLayoutVerticalResizerState fitContent
