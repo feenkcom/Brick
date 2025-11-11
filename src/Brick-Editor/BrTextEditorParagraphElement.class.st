@@ -149,7 +149,7 @@ BrTextEditorParagraphElement >> buildParagraph [
 							color: Color black;
 							fontSize: self defaultFontSize))
 			fontCollection: SkiaFontCollection default
-			tabSize: 4.
+			tabSize: BrEditorElement editorTabSize.
 
 	self
 		childrenDo: [ :eachElement | 
