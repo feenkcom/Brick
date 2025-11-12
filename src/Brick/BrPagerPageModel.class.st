@@ -65,6 +65,8 @@ BrPagerPageModel >> pendingFuturePromises [
 
 { #category : #'api - futures' }
 BrPagerPageModel >> registerFuturePromise: aFuturePromise comingFrom: anElement [
+	(aFuturePromise respondsTo: #cancelHard) ifFalse: [ ^ self ].
+
 	futurePromises add: aFuturePromise.
 	
 	aFuturePromise
