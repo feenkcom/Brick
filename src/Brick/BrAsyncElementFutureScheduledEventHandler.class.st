@@ -52,6 +52,8 @@ BrAsyncElementFutureScheduledEventHandler >> pendingFuturePromises [
 
 { #category : #'api - futures' }
 BrAsyncElementFutureScheduledEventHandler >> registerFuturePromise: aFuturePromise comingFrom: anElement [
+	(aFuturePromise respondsTo: #cancelHard) ifFalse: [ ^ self ].
+
 	futurePromises add: aFuturePromise.
 	
 	aFuturePromise
