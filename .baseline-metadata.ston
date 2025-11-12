@@ -1,8 +1,8 @@
 {
 	"repositories" : {
-		"github://feenkcom/bloc-pac/src" : "v0.6.938",
-		"github://feenkcom/gtoolkit-utility/src" : "v0.8.417",
-		"github://feenkcom/Bloc/src" : "v0.8.987",
-		"github://feenkcom/pharo-futures/src" : "v0.6.153"
+		"github://feenkcom/bloc-pac/src" : "v0.6.939",
+		"github://feenkcom/gtoolkit-utility/src" : "v0.8.418",
+		"github://feenkcom/Bloc/src" : "v0.8.988",
+		"github://feenkcom/pharo-futures/src" : "v0.6.154"
 	}
 }
