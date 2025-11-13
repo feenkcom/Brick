@@ -30,10 +30,21 @@ BrTextEditorHistoryReplaceTextCommand >> oldText: aText [
 
 { #category : #accessing }
 BrTextEditorHistoryReplaceTextCommand >> redoOn: aBrTextEditor [
-	aBrTextEditor text: newText
+	self setText: newText on: aBrTextEditor
+]
+
+{ #category : #accessing }
+BrTextEditorHistoryReplaceTextCommand >> setText: aText on: aBrTextEditor [
+	aBrTextEditor selecter
+		all;
+		select.
+	aBrTextEditor inserter
+		text: aText;
+		at: 0;
+		insert
 ]
 
 { #category : #accessing }
 BrTextEditorHistoryReplaceTextCommand >> undoOn: aBrTextEditor [
-	aBrTextEditor text: oldText
+	self setText: oldText on: aBrTextEditor
 ]
