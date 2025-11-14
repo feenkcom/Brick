@@ -17,5 +17,6 @@ BrTextEditorHistory >> gtHistoryFor: aView [
 		column: 'Command' text: [ :eachCommandAndType |
 			eachCommandAndType value = #Redo
 				ifTrue: [ eachCommandAndType key gtDisplayText foreground: Color gray ]
-				ifFalse: [ eachCommandAndType key gtDisplayText ] ]
+				ifFalse: [ eachCommandAndType key gtDisplayText ] ];
+		send: [ :eachCommandAndType | eachCommandAndType key ]
 ]
