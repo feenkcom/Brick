@@ -6,6 +6,6 @@ Class {
 
 { #category : #updating }
 BrGlamorousSpaceTabIconAptitude >> updateIcon [
-	self icon margin: (self icon margin + (BlInsets top: 2)).
-	super updateIcon.
+	self icon margin: self icon margin + (BlInsets top: 2 right: 4).
+	super updateIcon
 ]
