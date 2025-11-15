@@ -61,6 +61,11 @@ BrMenuActionItem >> definition: aBlock [
 				anElement phlow spawnObject: aDefinition ] ] ]
 ]
 
+{ #category : #printing }
+BrMenuActionItem >> gtDisplayOn: stream [
+	labelModel gtDisplayOn: stream
+]
+
 { #category : #accessing }
 BrMenuActionItem >> hideOnClick [
 	<return: #Boolean>

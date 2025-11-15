@@ -103,10 +103,27 @@ BrEditorStep >> moveToEnd [
 ]
 
 { #category : #'steps - interactions' }
+BrEditorStep >> pressPrimaryReturn [
+	^ self keyPress
+		label: 'Press return';
+		key: BlKeyboardKey return;
+		modifiers: BlKeyModifiers primary;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
 BrEditorStep >> pressReturn [
 	^ self keyPress
 		label: 'Press return';
 		key: BlKeyboardKey return;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> pressTab [
+	^ self keyPress
+		label: 'Press tab';
+		key: BlKeyboardKey tab;
 		referenceSender
 ]
 

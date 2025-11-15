@@ -14,6 +14,23 @@ BrMenuTextLabelModel >> acceptVisitor: aVisitor [
 	^ aVisitor visitMenuTextLabelModel: self
 ]
 
+{ #category : #printing }
+BrMenuTextLabelModel >> gtDisplayOn: aStream [
+	aStream
+		nextPutAll: self text asString.
+	self preview
+		ifNotNil: [ :aString | 
+			aStream
+				space;
+				nextPutAll: self preview asString ].
+	self shortcut
+		ifNotNil: [ :aString | 
+			aStream
+				nextPutAll: ' [';
+				nextPutAll: self shortcut asString;
+				nextPut: $] ].
+]
+
 { #category : #accessing }
 BrMenuTextLabelModel >> preview [
 	<return: #String>

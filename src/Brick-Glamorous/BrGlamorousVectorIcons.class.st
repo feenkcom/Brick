@@ -239,6 +239,16 @@ BrGlamorousVectorIcons class >> cloud [
 ]
 
 { #category : #icons }
+BrGlamorousVectorIcons class >> collapsebar [
+	^ [ BlElement new
+		size: 16 @ 16;
+		addChild: (BlElement new
+				size: 2 @ 10;
+				relocate: 7 @ 3;
+				background: Color black) ] asStencil
+]
+
+{ #category : #icons }
 BrGlamorousVectorIcons class >> collapsehorizontal [
 	^ [BlElement new
 	size: 16 @ 16;

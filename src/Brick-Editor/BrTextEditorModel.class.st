@@ -824,7 +824,7 @@ BrTextEditorModel >> onTextReplaced: oldText [
 
 	self assertUIProcess.
 
-	history replaceText: self text oldText: oldText.
+	history replaceText: self text copy oldText: oldText.
 	self processCursorEnterEvents.
 	self notifyTextReplaced: self text
 ]
