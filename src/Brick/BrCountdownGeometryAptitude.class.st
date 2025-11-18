@@ -148,10 +148,7 @@ BrCountdownGeometryAptitude >> onAnimationFinished [
 	
 	"Let's ensure we run the finished action only in running state.
 	Other states, e.g., opened context menu, prevent execution."
-	state ifRunFinished: [
-		self widgetDo: [ :aWidget | 
-			self isFinishedActionEnabled ifTrue: [
-				finishedAction cull: aWidget ] ] ].
+	state ifRunFinished: [ self onPerformFinishAction ].
 	
 	state := state finish.
 ]
@@ -207,6 +204,13 @@ BrCountdownGeometryAptitude >> onHovered [
 		state := BrCountdownGeometryState hovered.
 		self stopAnimation.
 		self setInitialGeometry ].
+]
+
+{ #category : #'private - event management' }
+BrCountdownGeometryAptitude >> onPerformFinishAction [
+	self widgetDo: [ :aWidget | 
+			self isFinishedActionEnabled ifTrue: [
+				finishedAction cull: aWidget ] ]
 ]
 
 { #category : #'private - event management' }
