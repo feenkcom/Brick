@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'referencePoint'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #'as yet unclassified' }

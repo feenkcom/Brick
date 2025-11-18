@@ -8,7 +8,7 @@ Class {
 		'rowElementStencil',
 		'rowDataBinder'
 	],
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #'expanding-collapsing' }

@@ -6,7 +6,7 @@ Class {
 		'thumbStencil',
 		'scrollableElement'
 	],
-	#category : 'Brick-Scrollbar - Model'
+	#category : #'Brick-Scrollbar - Model'
 }
 
 { #category : #initialization }

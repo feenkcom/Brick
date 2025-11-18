@@ -4,7 +4,7 @@ I am sent by a look to request the activation status (enabled/disabled) of the w
 Class {
 	#name : #BrEnablementRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #initialization }

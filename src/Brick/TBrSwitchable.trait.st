@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBrSwitchable,
-	#category : 'Brick-Switch - Support'
+	#category : #'Brick-Switch - Support'
 }
 
 { #category : #'api - switch' }

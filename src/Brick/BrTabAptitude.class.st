@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTabAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Tabs - Look'
+	#category : #'Brick-Tabs - Look'
 }
 
 { #category : #initialization }

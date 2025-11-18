@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTriangleStencilsRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-Triangle - Events'
+	#category : #'Brick-Triangle - Events'
 }
 
 { #category : #initialization }

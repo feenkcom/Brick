@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSelectedState,
 	#superclass : #BrInteractionState,
-	#category : 'Brick-! Core - States'
+	#category : #'Brick-! Core - States'
 }
 
 { #category : #printing }

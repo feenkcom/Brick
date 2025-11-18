@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDeprecatedLayoutHorizontalResizerState,
 	#superclass : #BrDeprecatedLayoutResizerState,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

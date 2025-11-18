@@ -1,7 +1,7 @@
 Class {
 	#name : #BrWidgetContainerAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Layout Widgets'
+	#category : #'Brick-Layout Widgets'
 }
 
 { #category : #initialization }

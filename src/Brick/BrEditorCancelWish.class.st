@@ -1,5 +1,5 @@
 Class {
 	#name : #BrEditorCancelWish,
 	#superclass : #BrEditorWish,
-	#category : 'Brick-Editor - Events'
+	#category : #'Brick-Editor - Events'
 }

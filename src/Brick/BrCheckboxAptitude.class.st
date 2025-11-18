@@ -1,7 +1,7 @@
 Class {
 	#name : #BrCheckboxAptitude,
 	#superclass : #BrStyleCommonAptitude,
-	#category : 'Brick-Checkbox - Look'
+	#category : #'Brick-Checkbox - Look'
 }
 
 { #category : #'api - style' }

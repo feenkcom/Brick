@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'tabs'
 	],
-	#category : 'Brick-Tabs - Events'
+	#category : #'Brick-Tabs - Events'
 }
 
 { #category : #'instance creation' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #'instance creation' }

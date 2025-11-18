@@ -4,7 +4,7 @@ I am sent to the accordion model to receive a response with its current header s
 Class {
 	#name : #BrAccordionHeaderStencilRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-Accordion - Events'
+	#category : #'Brick-Accordion - Events'
 }
 
 { #category : #initialization }

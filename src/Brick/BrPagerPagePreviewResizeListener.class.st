@@ -8,7 +8,7 @@ Class {
 		'previewElement',
 		'height'
 	],
-	#category : 'Brick-Pager - Look'
+	#category : #'Brick-Pager - Look'
 }
 
 { #category : #'element handlers' }

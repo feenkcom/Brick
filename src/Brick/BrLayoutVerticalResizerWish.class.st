@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLayoutVerticalResizerWish,
 	#superclass : #BrLayoutResizerWish,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

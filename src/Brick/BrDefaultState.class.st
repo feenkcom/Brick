@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDefaultState,
 	#superclass : #BrInteractionState,
-	#category : 'Brick-! Core - States'
+	#category : #'Brick-! Core - States'
 }
 
 { #category : #testing }

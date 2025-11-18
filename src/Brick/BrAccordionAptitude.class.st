@@ -7,7 +7,7 @@ Class {
 		'headerStencil',
 		'headerElement'
 	],
-	#category : 'Brick-Accordion - Look'
+	#category : #'Brick-Accordion - Look'
 }
 
 { #category : #hooks }

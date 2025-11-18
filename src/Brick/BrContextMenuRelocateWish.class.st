@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'position'
 	],
-	#category : 'Brick-Context Menu - Events'
+	#category : #'Brick-Context Menu - Events'
 }
 
 { #category : #converting }

@@ -9,7 +9,7 @@ Class {
 		'shouldRecreateHeader',
 		'shouldReplaceHeader'
 	],
-	#category : 'Brick-Expander - Look'
+	#category : #'Brick-Expander - Look'
 }
 
 { #category : #'protected - adding / removing' }

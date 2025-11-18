@@ -5,7 +5,7 @@ Class {
 		'activated',
 		'oneWay'
 	],
-	#category : 'Brick-Toggle - Model'
+	#category : #'Brick-Toggle - Model'
 }
 
 { #category : #'api - toggle' }

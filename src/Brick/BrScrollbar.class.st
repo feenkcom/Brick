@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable',
 	#classTraits : 'TBrLayoutResizable classTrait',
-	#category : 'Brick-Scrollbar - UI'
+	#category : #'Brick-Scrollbar - UI'
 }
 
 { #category : #'api - scrollbar' }

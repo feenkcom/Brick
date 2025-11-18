@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'block'
 	],
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #accessing }

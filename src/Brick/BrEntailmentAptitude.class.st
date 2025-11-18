@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'example'
 	],
-	#category : 'Brick-Entailment - Look'
+	#category : #'Brick-Entailment - Look'
 }
 
 { #category : #initialization }

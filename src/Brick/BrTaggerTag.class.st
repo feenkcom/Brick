@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#category : 'Brick-Tagger - Model'
+	#category : #'Brick-Tagger - Model'
 }
 
 { #category : #'instance creation' }

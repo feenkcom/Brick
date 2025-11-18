@@ -1,7 +1,7 @@
 Class {
 	#name : #BrFocusedRequest,
 	#superclass : #BrRequest,
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #initialization }

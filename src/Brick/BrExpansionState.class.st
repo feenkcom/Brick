@@ -1,7 +1,7 @@
 Class {
 	#name : #BrExpansionState,
 	#superclass : #BlElementUniqueState,
-	#category : 'Brick-! Core - Expansion'
+	#category : #'Brick-! Core - Expansion'
 }
 
 { #category : #enumerating }

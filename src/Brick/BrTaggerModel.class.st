@@ -5,7 +5,7 @@ Class {
 		'tags',
 		'allowedTags'
 	],
-	#category : 'Brick-Tagger - Model'
+	#category : #'Brick-Tagger - Model'
 }
 
 { #category : #'api - tags' }

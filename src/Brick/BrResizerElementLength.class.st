@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Brick-Resizer - Support'
+	#category : #'Brick-Resizer - Support'
 }
 
 { #category : #factory }

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : 'Brick-Popup - Model'
+	#category : #'Brick-Popup - Model'
 }
 
 { #category : #'api - popup' }

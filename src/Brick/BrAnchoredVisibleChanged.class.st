@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'visible'
 	],
-	#category : 'Brick-Anchored - Events'
+	#category : #'Brick-Anchored - Events'
 }
 
 { #category : #accessing }

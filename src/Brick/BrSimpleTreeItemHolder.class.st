@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'nodeElement'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #accessing }

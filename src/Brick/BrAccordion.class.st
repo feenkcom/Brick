@@ -32,7 +32,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrExpandable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrExpandable classTrait',
-	#category : 'Brick-Accordion - UI'
+	#category : #'Brick-Accordion - UI'
 }
 
 { #category : #'api - expandable' }

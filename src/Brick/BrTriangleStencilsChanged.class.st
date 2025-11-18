@@ -5,7 +5,7 @@ Class {
 		'collapsedStencil',
 		'expandedStencil'
 	],
-	#category : 'Brick-Triangle - Events'
+	#category : #'Brick-Triangle - Events'
 }
 
 { #category : #accessing }

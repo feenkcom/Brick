@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'icon'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #accessing }

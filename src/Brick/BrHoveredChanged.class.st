@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'hovered'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #'instance creation' }

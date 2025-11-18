@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'expanded'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #controlling }

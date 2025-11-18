@@ -1,7 +1,7 @@
 Class {
 	#name : #BrInfiniteTreeElement,
 	#superclass : #BlInfiniteElement,
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #initialization }

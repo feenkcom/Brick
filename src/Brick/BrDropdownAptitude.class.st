@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'clickEventHandler'
 	],
-	#category : 'Brick-Dropdown - Look'
+	#category : #'Brick-Dropdown - Look'
 }
 
 { #category : #accessing }

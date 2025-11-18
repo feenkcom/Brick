@@ -1,7 +1,7 @@
 Class {
 	#name : #BrSizeAdjustmentState,
 	#superclass : #BlElementUniqueState,
-	#category : 'Brick-! Core - Size Adjustment'
+	#category : #'Brick-! Core - Size Adjustment'
 }
 
 { #category : #'instance creation' }

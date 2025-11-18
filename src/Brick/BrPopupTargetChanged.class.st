@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'popupTarget'
 	],
-	#category : 'Brick-Popup - Events'
+	#category : #'Brick-Popup - Events'
 }
 
 { #category : #initialization }

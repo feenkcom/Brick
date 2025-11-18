@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTaggerAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Tagger - Look'
+	#category : #'Brick-Tagger - Look'
 }
 
 { #category : #accessing }

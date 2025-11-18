@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBrCheckable,
-	#category : 'Brick-Checkbox - Support'
+	#category : #'Brick-Checkbox - Support'
 }
 
 { #category : #'api - checkbox' }

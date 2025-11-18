@@ -5,7 +5,7 @@ Class {
 		'content',
 		'handle'
 	],
-	#category : 'Brick-Anchored - Model'
+	#category : #'Brick-Anchored - Model'
 }
 
 { #category : #accessing }

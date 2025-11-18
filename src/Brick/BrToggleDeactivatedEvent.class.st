@@ -6,7 +6,7 @@ Class {
 	#superclass : #BrToggleEvent,
 	#traits : 'TBrToggleOriginalEvent',
 	#classTraits : 'TBrToggleOriginalEvent classTrait',
-	#category : 'Brick-Toggle - Events'
+	#category : #'Brick-Toggle - Events'
 }
 
 { #category : #sending }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Brick-Editor - Events'
+	#category : #'Brick-Editor - Events'
 }
 
 { #category : #accessing }

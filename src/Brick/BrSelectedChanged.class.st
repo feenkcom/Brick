@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'selected'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #initialization }

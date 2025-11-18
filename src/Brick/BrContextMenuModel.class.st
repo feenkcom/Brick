@@ -1,7 +1,7 @@
 Class {
 	#name : #BrContextMenuModel,
 	#superclass : #BrAnchoredModel,
-	#category : 'Brick-Context Menu - Model'
+	#category : #'Brick-Context Menu - Model'
 }
 
 { #category : #notifying }

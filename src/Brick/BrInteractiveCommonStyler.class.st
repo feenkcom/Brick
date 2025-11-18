@@ -1,7 +1,7 @@
 Class {
 	#name : #BrInteractiveCommonStyler,
 	#superclass : #BrInteractiveStyler,
-	#category : 'Brick-! Core - Support'
+	#category : #'Brick-! Core - Support'
 }
 
 { #category : #builder }

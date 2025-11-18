@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrExpandable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrExpandable classTrait',
-	#category : 'Brick-Expander - UI'
+	#category : #'Brick-Expander - UI'
 }
 
 { #category : #'api - expandable' }

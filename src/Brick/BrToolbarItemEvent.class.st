@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'item'
 	],
-	#category : 'Brick-Toolbar - Events'
+	#category : #'Brick-Toolbar - Events'
 }
 
 { #category : #'instance creation' }

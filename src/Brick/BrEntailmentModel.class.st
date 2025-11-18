@@ -5,7 +5,7 @@ Class {
 		'conclusionStencil',
 		'premiseStencil'
 	],
-	#category : 'Brick-Entailment - Model'
+	#category : #'Brick-Entailment - Model'
 }
 
 { #category : #accessing }

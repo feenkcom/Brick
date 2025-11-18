@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'weight'
 	],
-	#category : 'Brick-Resizer - Support'
+	#category : #'Brick-Resizer - Support'
 }
 
 { #category : #'api - size' }

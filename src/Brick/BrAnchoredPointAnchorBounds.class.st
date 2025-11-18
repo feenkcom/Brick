@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'point'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #accessing }

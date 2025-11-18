@@ -1,7 +1,7 @@
 Class {
 	#name : #BrWithTooltipAptitude2,
 	#superclass : #BrWithTooltipAptitude,
-	#category : 'Brick-Tooltip - Look'
+	#category : #'Brick-Tooltip - Look'
 }
 
 { #category : #'as yet unclassified' }

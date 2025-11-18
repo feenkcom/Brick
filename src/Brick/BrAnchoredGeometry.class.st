@@ -5,7 +5,7 @@ Class {
 		'element',
 		'cornerRadius'
 	],
-	#category : 'Brick-Anchored - Support'
+	#category : #'Brick-Anchored - Support'
 }
 
 { #category : #'as yet unclassified' }

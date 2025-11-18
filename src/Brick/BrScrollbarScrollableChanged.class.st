@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scrollableElement'
 	],
-	#category : 'Brick-Scrollbar - Events'
+	#category : #'Brick-Scrollbar - Events'
 }
 
 { #category : #accessing }

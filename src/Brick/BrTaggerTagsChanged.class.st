@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tags'
 	],
-	#category : 'Brick-Tagger - Events'
+	#category : #'Brick-Tagger - Events'
 }
 
 { #category : #initialization }

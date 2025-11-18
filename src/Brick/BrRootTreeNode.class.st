@@ -5,7 +5,7 @@ Class {
 		'announcer',
 		'isLazy'
 	],
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #'instance creation' }

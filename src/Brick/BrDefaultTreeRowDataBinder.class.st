@@ -4,7 +4,7 @@ I am used by default by both simple and columned trees to update the row element
 Class {
 	#name : #BrDefaultTreeRowDataBinder,
 	#superclass : #BrTreeRowDataBinder,
-	#category : 'Brick-Tree - Stencil'
+	#category : #'Brick-Tree - Stencil'
 }
 
 { #category : #'api - instantiation' }

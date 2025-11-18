@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBrDeprecatedSizeAdjustable,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

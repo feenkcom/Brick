@@ -1,7 +1,7 @@
 Class {
 	#name : #BrScrollbarAptitude,
 	#superclass : #BrBasicScrollbarAptitude,
-	#category : 'Brick-Scrollbar - Look'
+	#category : #'Brick-Scrollbar - Look'
 }
 
 { #category : #initialization }

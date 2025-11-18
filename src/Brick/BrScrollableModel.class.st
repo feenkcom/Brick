@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'contentStencil'
 	],
-	#category : 'Brick-Scrollable - Model'
+	#category : #'Brick-Scrollable - Model'
 }
 
 { #category : #accessing }

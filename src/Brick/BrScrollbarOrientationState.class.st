@@ -5,7 +5,7 @@ Class {
 		'vertical',
 		'horizontal'
 	],
-	#category : 'Brick-Scrollbar - State'
+	#category : #'Brick-Scrollbar - State'
 }
 
 { #category : #'instance creation' }

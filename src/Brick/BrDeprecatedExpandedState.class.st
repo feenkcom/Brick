@@ -1,7 +1,7 @@
 Class {
 	#name : #BrDeprecatedExpandedState,
 	#superclass : #BrInteractionState,
-	#category : 'Brick-! Deprecated'
+	#category : #'Brick-! Deprecated'
 }
 
 { #category : #testing }

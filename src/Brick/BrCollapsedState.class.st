@@ -1,7 +1,7 @@
 Class {
 	#name : #BrCollapsedState,
 	#superclass : #BrExpansionState,
-	#category : 'Brick-! Core - Expansion'
+	#category : #'Brick-! Core - Expansion'
 }
 
 { #category : #enumerating }

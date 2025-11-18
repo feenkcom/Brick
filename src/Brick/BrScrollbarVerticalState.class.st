@@ -1,7 +1,7 @@
 Class {
 	#name : #BrScrollbarVerticalState,
 	#superclass : #BrScrollbarOrientationState,
-	#category : 'Brick-Scrollbar - State'
+	#category : #'Brick-Scrollbar - State'
 }
 
 { #category : #accessing }

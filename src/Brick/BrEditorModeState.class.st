@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'mode'
 	],
-	#category : 'Brick-Editor - Model'
+	#category : #'Brick-Editor - Model'
 }
 
 { #category : #'instance creation' }

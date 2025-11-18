@@ -5,7 +5,7 @@ Class {
 		'item',
 		'index'
 	],
-	#category : 'Brick-Breadcrumb - Events'
+	#category : #'Brick-Breadcrumb - Events'
 }
 
 { #category : #'instance creation' }

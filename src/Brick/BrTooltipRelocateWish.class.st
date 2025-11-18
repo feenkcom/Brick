@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTooltipRelocateWish,
 	#superclass : #BrAnchoredRelocateWish,
-	#category : 'Brick-Tooltip - Events'
+	#category : #'Brick-Tooltip - Events'
 }
 
 { #category : #'as yet unclassified' }

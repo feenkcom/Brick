@@ -5,7 +5,7 @@ Class {
 		'stencil',
 		'target'
 	],
-	#category : 'Brick-Popup - Model'
+	#category : #'Brick-Popup - Model'
 }
 
 { #category : #initialization }

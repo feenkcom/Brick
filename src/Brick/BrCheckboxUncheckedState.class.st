@@ -1,7 +1,7 @@
 Class {
 	#name : #BrCheckboxUncheckedState,
 	#superclass : #BrCheckboxState,
-	#category : 'Brick-Checkbox - States'
+	#category : #'Brick-Checkbox - States'
 }
 
 { #category : #testing }

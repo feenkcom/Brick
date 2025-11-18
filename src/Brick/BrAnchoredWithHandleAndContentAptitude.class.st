@@ -5,7 +5,7 @@ Class {
 		'handle',
 		'contentWrapper'
 	],
-	#category : 'Brick-Anchored - Look'
+	#category : #'Brick-Anchored - Look'
 }
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Class {
 		'column',
 		'columnIndex'
 	],
-	#category : 'Brick-Column - Stencil'
+	#category : #'Brick-Column - Stencil'
 }
 
 { #category : #'api - instantiation' }

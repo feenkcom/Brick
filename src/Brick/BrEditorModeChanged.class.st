@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'mode'
 	],
-	#category : 'Brick-Editor - Events'
+	#category : #'Brick-Editor - Events'
 }
 
 { #category : #initialization }

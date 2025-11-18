@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLogicalZoomLevel,
 	#superclass : #Object,
-	#category : 'Brick-Logical Zooming - Model'
+	#category : #'Brick-Logical Zooming - Model'
 }
 
 { #category : #initialization }

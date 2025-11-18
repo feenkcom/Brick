@@ -11,7 +11,7 @@ Class {
 		'detachedBlock',
 		'recycledBlock'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #'accessing - stencils' }

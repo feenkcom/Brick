@@ -1,5 +1,5 @@
 Class {
 	#name : #BrToggleGroupAptitude,
 	#superclass : #BrAptitude,
-	#category : 'Brick-Toggle - Look'
+	#category : #'Brick-Toggle - Look'
 }

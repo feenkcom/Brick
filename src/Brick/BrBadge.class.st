@@ -8,7 +8,7 @@ Class {
 		'activationModel',
 		'dimensionModel'
 	],
-	#category : 'Brick-Badge - UI'
+	#category : #'Brick-Badge - UI'
 }
 
 { #category : #'api - widget' }

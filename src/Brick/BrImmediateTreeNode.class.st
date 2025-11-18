@@ -1,7 +1,7 @@
 Class {
 	#name : #BrImmediateTreeNode,
 	#superclass : #BrTreeNode,
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #initialization }

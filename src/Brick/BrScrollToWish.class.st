@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'position'
 	],
-	#category : 'Brick-Scrollable - Events'
+	#category : #'Brick-Scrollable - Events'
 }
 
 { #category : #accessing }

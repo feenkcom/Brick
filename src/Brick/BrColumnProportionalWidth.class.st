@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'weight'
 	],
-	#category : 'Brick-Column - Model'
+	#category : #'Brick-Column - Model'
 }
 
 { #category : #comparing }

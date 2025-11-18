@@ -5,7 +5,7 @@ Class {
 		'columns',
 		'columnElements'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #accessing }

@@ -5,7 +5,7 @@ Class {
 		'rowValue',
 		'rowNode'
 	],
-	#category : 'Brick-Tree - Support'
+	#category : #'Brick-Tree - Support'
 }
 
 { #category : #accessing }

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Brick-! Core - Events'
+	#category : #'Brick-! Core - Events'
 }
 
 { #category : #'instance creation' }

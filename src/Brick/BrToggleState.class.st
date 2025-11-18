@@ -1,7 +1,7 @@
 Class {
 	#name : #BrToggleState,
 	#superclass : #BlElementUniqueState,
-	#category : 'Brick-Toggle - States'
+	#category : #'Brick-Toggle - States'
 }
 
 { #category : #'instance creation' }

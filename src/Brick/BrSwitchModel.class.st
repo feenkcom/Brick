@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'switchedOn'
 	],
-	#category : 'Brick-Switch - Model'
+	#category : #'Brick-Switch - Model'
 }
 
 { #category : #initialization }

@@ -7,7 +7,7 @@ Class {
 		'overridenLogic',
 		'restoredLogic'
 	],
-	#category : 'Brick-Logical Zooming - Model'
+	#category : #'Brick-Logical Zooming - Model'
 }
 
 { #category : #navigating }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTreeManyNodesComputation,
 	#superclass : #BrTreeNodeComputation,
-	#category : 'Brick-Tree - Model'
+	#category : #'Brick-Tree - Model'
 }
 
 { #category : #'api - expandable' }
