@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBrExamplesUtility,
-	#category : 'Brick-Examples-Utilities'
+	#category : #'Brick-Examples-Utilities'
 }
 
 { #category : #asserting }

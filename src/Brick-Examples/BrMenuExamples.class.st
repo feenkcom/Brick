@@ -134,6 +134,34 @@ BrMenuExamples >> explicitMenuInSingleCompositionLayer [
 ]
 
 { #category : #'examples - submenu' }
+BrMenuExamples >> explicitMenuWithHideAllClick [
+	<gtExample>
+	<return: #BrMenuExplicit>
+	| aMenu |
+	aMenu := BrMenuExplicit new.
+	aMenu
+		stencil: [ :anExplicitMenu | 
+			BlElement new
+				id: #'menu--click-to-hideall';
+				when: BlClickEvent
+					do: [ :anEvent | 
+						anEvent consumed: true.
+						anExplicitMenu hideAll ];
+				size: 150 @ 100;
+				addAptitude: (BrGlamorousPopoverPinnableAptitude new
+						menuModel: anExplicitMenu;
+						withResizers;
+						withAllPinActions);
+				addAptitude: BrPopoverCommonAptitude new;
+				background: Color paleBlue ].
+
+	self assert: aMenu stencil isNotNil.
+	self assertGlamorousElementForMenuModel: aMenu.
+
+	^ aMenu
+]
+
+{ #category : #'examples - submenu' }
 BrMenuExamples >> explicitMenuWithWithButtons [
 	<gtExample>
 	<return: #BrMenuExplicit>
@@ -397,6 +425,26 @@ BrMenuExamples >> menuItems [
 					preview: [ 1 / 0 ]
 					shortcut: [ 1 / 0 ];
 				action: [ :aButton | aButton phlow spawnObject: aButton ]).
+
+	anElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
+	self assert: (anElement isKindOf: BlElement).
+
+	^ aMenuItems
+]
+
+{ #category : #'examples - items' }
+BrMenuExamples >> menuItemsWithPinnableSubmenu [
+	<gtExample>
+	<return: #BrMenuItems>
+	| aMenuItems anElement |
+	aMenuItems := BrMenuItems new.
+
+	aMenuItems
+		addItem: (BrMenuSubmenuItem new
+				id: #'menu--pinnable-item';
+				label: 'Pinnable with hideAll';
+				submenu: self explicitMenuWithHideAllClick;
+				bePinSubmenuAction).
 
 	anElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
 	self assert: (anElement isKindOf: BlElement).
