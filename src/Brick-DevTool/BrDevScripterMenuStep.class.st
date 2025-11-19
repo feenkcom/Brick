@@ -354,6 +354,13 @@ BrDevScripterMenuStep >> clickMenuItemWithId: anElementId [
 ]
 
 { #category : #'steps - interactions' }
+BrDevScripterMenuStep >> clickPinnedElementCloseButton [
+	^ self click
+		label: 'Click pinned element close button';
+		// BrPopoverPinnedCloseButtonId
+]
+
+{ #category : #'steps - interactions' }
 BrDevScripterMenuStep >> displayTooltip [
 	^ self mouseMoveOver
 		label: 'Display tooltip';

@@ -79,6 +79,29 @@ BrMenuWithScripterExamples >> buttonWithContextMenuAndTooltip [
 	^ anElement
 ]
 
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> buttonWithContextMenuWithPinnableSubmenu [
+	<gtExample>
+	<return: #BrFrame>
+	| anElement |
+	anElement := self
+			buttonWithContextMenu: BrMenuExamples new menuItemsWithPinnableSubmenu.
+
+	anElement
+		when: BrPopoverWhoToPinToEvent
+		do: [ :anEvent | 
+			anEvent
+				consumed: true;
+				anchorElement: anElement ].
+
+	self
+		assert: (anElement eventDispatcher
+				hasEventHandlerSuchThat: [ :each | each class = BrPopoverAnchorWithPinnedElementHandler ])
+				not.
+
+	^ anElement
+]
+
 { #category : #'examples - mouse event handler' }
 BrMenuWithScripterExamples >> buttonWithContextMenuWithoutMouseEventHandler [
 	<gtExample>
@@ -334,6 +357,91 @@ BrMenuWithScripterExamples >> clickButtonWithContextMenuAndTooltip [
 	aScripter menuStep
 		assertMenuContainerExist;
 		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> clickButtonWithContextMenuWithPinnableSubmenu [
+	<gtExample>
+	<return: #BlScripter>
+	| aScripter anAnchorElement aClickPosition |
+	aScripter := self displayButtonWithContextMenuWithPinnableSubmenu.
+
+	aScripter menuStep
+		openContextMenu;
+		/ #'menu-context-menu-button';
+		play.
+
+	anAnchorElement := (aScripter root query // #'menu-context-menu-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+	aClickPosition := anAnchorElement bounds inSpace center.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		assertHandleCenterInSpacePosition: aClickPosition;
+		play.
+
+	aScripter menuStep
+		hoverMenuItemWithId: #'menu--pinnable-item';
+		onPopover;
+		play.
+
+	self
+		assert: (aScripter element eventDispatcher
+				hasEventHandlerSuchThat: [ :each | each class = BrPopoverAnchorWithPinnedElementHandler ])
+				not.
+
+	aScripter menuStep
+		clickMenuItemWithId: #'menu--pinnable-item';
+		onPopover;
+		play.
+
+	self
+		assert: (aScripter element eventDispatcher
+				hasEventHandlerSuchThat: [ :each | each class = BrPopoverAnchorWithPinnedElementHandler ]).
+
+	aScripter menuStep
+		assertClosedMenuContainer;
+		play.
+
+	aScripter assert
+		exists;
+		onSpaceRoot;
+		// #'menu--click-to-hideall';
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> clickButtonWithContextMenuWithPinnableSubmenu_closeUsingCloseButton [
+	<gtExample>
+	<return: #BlScripter>
+	| aScripter |
+	aScripter := self clickButtonWithContextMenuWithPinnableSubmenu.
+
+	aScripter assert
+		exists;
+		onSpaceRoot;
+		// #'menu--click-to-hideall';
+		play.
+
+	aScripter menuStep
+		clickPinnedElementCloseButton;
+		onSpaceRoot;
+		play.
+
+	aScripter assert
+		notExists;
+		onSpaceRoot;
+		// #'menu--click-to-hideall';
+		play.
+
+	self
+		assert: (aScripter element eventDispatcher
+				hasEventHandlerSuchThat: [ :each | each class = BrPopoverAnchorWithPinnedElementHandler ])
+				not.
 
 	^ aScripter
 ]
@@ -929,6 +1037,13 @@ BrMenuWithScripterExamples >> displayButtonWithContextMenuAndTooltip [
 	<gtExample>
 	<return: #BlScripter>
 	^ self scripterWithElement: [ self buttonWithContextMenuAndTooltip ]
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> displayButtonWithContextMenuWithPinnableSubmenu [
+	<gtExample>
+	<return: #BlScripter>
+	^ self scripterWithElement: [ self buttonWithContextMenuWithPinnableSubmenu ]
 ]
 
 { #category : #'examples - mouse event handler' }
