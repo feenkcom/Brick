@@ -131,7 +131,7 @@ BrAsyncElementFuture >> initialize [
 	super initialize.
 	
 	mutex := Mutex new.
-	whenPending := nil. "[ :anElement :aData | ]".
+	whenPending := nil. "[ :anElement :aData | ]"
 	whenSuccess := nil.  "[ :anElement :aData | ]"
 	whenError := nil.  "[ :anElement :aData | ]"
 	future := nil.
