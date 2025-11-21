@@ -8,5 +8,5 @@ Override me for more advanced customizations
 Class {
 	#name : #BrTextEditorSegmentElement,
 	#superclass : #BlElement,
-	#category : 'Brick-Editor-UI'
+	#category : #'Brick-Editor-UI'
 }

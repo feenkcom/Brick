@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor-Attributes - Support'
 }
 
 { #category : #accessing }

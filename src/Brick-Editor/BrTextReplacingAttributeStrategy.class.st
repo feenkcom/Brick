@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextReplacingAttributeStrategy,
 	#superclass : #Object,
-	#category : 'Brick-Editor-Attributes - Support'
+	#category : #'Brick-Editor-Attributes - Support'
 }
 
 { #category : #replacing }

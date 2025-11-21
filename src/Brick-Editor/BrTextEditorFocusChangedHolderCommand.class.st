@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'hasFocus'
 	],
-	#category : 'Brick-Editor-Commands-Holder'
+	#category : #'Brick-Editor-Commands-Holder'
 }
 
 { #category : #executing }

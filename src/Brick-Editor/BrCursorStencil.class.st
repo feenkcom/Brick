@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Brick-Editor-UI - Stencils'
+	#category : #'Brick-Editor-UI - Stencils'
 }
 
 { #category : #accessing }

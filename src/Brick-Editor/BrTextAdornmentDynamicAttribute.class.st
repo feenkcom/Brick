@@ -25,7 +25,7 @@ Class {
 	#instVars : [
 		'stencilBuilder'
 	],
-	#category : 'Brick-Editor-Attributes'
+	#category : #'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }

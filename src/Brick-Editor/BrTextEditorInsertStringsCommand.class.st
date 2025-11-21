@@ -5,7 +5,7 @@ Class {
 		'strings',
 		'indices'
 	],
-	#category : 'Brick-Editor-Commands'
+	#category : #'Brick-Editor-Commands'
 }
 
 { #category : #executing }

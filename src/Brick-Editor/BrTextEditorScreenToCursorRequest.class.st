@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transformation'
 	],
-	#category : 'Brick-Editor-UI - Requests'
+	#category : #'Brick-Editor-UI - Requests'
 }
 
 { #category : #accessing }

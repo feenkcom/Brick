@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'screenPosition'
 	],
-	#category : 'Brick-Editor-Model - Operators'
+	#category : #'Brick-Editor-Model - Operators'
 }
 
 { #category : #matching }

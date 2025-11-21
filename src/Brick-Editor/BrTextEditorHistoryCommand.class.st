@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorHistoryCommand,
 	#superclass : #Object,
-	#category : 'Brick-Editor-History'
+	#category : #'Brick-Editor-History'
 }
 
 { #category : #testing }
