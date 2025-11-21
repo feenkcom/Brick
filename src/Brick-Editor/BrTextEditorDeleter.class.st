@@ -121,7 +121,9 @@ BrTextEditorDeleter >> from: aFromIndex to: aToIndex [
 
 { #category : #'api - configuration' }
 BrTextEditorDeleter >> ifIndentAfter: start [
-	^ (self text at: start + 1) == Character tab ifTrue: [ self from: start to: start + 1 ]
+	start >= self text size ifTrue: [ ^ self ].
+	^ (self text at: start + 1) == Character tab
+		ifTrue: [ self from: start to: start + 1 ]
 ]
 
 { #category : #initialization }

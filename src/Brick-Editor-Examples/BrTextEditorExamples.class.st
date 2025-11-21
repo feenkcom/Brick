@@ -451,3 +451,21 @@ BrTextEditorExamples >> newThreeLineText [
 	<return: #BlRunRopedText>
 	^ ('first' , String cr , 'second' , String cr , 'third') asRopedText
 ]
+
+{ #category : #examples }
+BrTextEditorExamples >> scrollToLastInLargeEditor [
+	<gtExample>
+	<return: #BrEditorElement>
+	| editor |
+	editor := self newElement.
+	editor
+		editor: (self newEditor
+				text: ((String cr join: ((1 to: 10000) collect: [ :i | i printPaddedWith: $0 to: 5 ]))
+						asRopedText
+						fontSize: 16;
+						monospace)).
+	self assert: (editor editor segmentCollector isCachedAt: 10000) not.
+	editor scrollToLast.
+	self assert: (editor editor segmentCollector isCachedAt: 10000).
+	^ editor
+]
