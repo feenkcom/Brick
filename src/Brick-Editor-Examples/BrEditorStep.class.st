@@ -56,9 +56,10 @@ BrEditorStep >> assertFullyVisibleParagraphAt: anIndexBlock hasText: aStringBloc
 				aParagraph := anIndexBlock cull: allVisibleParagraphs.
 				aParagraph text asString = aStringBlock value ]
 			description: [ :anEditor | 
-				'Paragraph line at `{1}` must have: `{2}`'
+				'Paragraph line at `{1}` has `{2}`, but `{3}` is expected'
 					format: {anIndexBlock.
-							aParagraph ifNotNil: [ aParagraph text asString ]} ]
+							aParagraph ifNotNil: [ aParagraph text asString ].
+							aStringBlock value} ]
 ]
 
 { #category : #'steps - checks' }
