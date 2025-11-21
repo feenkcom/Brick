@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLayoutVerticalFitContentResizerPropagatedState,
 	#superclass : #BrLayoutVerticalFitContentResizerState,
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #converting }

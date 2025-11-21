@@ -1,7 +1,7 @@
 Class {
 	#name : #BrLayoutHorizontalFitContentLimitedResizerState,
 	#superclass : #BrLayoutHorizontalResizerState,
-	#category : 'Brick-Core-Layout Resizer'
+	#category : #'Brick-Core-Layout Resizer'
 }
 
 { #category : #comparing }

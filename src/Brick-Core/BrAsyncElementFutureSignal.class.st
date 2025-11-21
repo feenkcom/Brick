@@ -41,11 +41,7 @@ BrAsyncElementFutureSignal >> elementUpdater [
 
 { #category : #accessing }
 BrAsyncElementFutureSignal >> elementUpdater: anUpdater [
-	elementUpdater := anUpdater.
-	element := anUpdater ifNotNil: #element.
-	isElementAttachedToSpace := element
-		ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
-		ifNil: [ false ]
+	elementUpdater := anUpdater
 ]
 
 { #category : #accessing }
@@ -61,6 +57,17 @@ BrAsyncElementFutureSignal >> future: anObject [
 { #category : #testing }
 BrAsyncElementFutureSignal >> isElementAttachedToSpace [
 	^ isElementAttachedToSpace
+]
+
+{ #category : #initialize }
+BrAsyncElementFutureSignal >> prepareForDelivery [
+	super prepareForDelivery.
+	
+	element := elementUpdater ifNotNil: #element.
+	
+	isElementAttachedToSpace := element
+		ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
+		ifNil: [ false ].
 ]
 
 { #category : #printing }
