@@ -20,6 +20,19 @@ BrTextEditorDeleterExamples >> backwardsDeleteCrlf [
 	^ anEditor
 ]
 
+{ #category : #'examples - deletion special' }
+BrTextEditorDeleterExamples >> beforeCurrentLineIfIndentOnEmptyText [
+	<gtExample>
+	<return: #BrEditor>
+	| anEditor |
+	anEditor := self editorOnEmptyText.
+	anEditor editor moveCursorTo: 0.
+	anEditor deleter
+		beforeCurrentLineIfIndent;
+		delete.
+	^ anEditor
+]
+
 { #category : #'examples - deletion' }
 BrTextEditorDeleterExamples >> delete_0_to_0_cursorAt_0_selection_0_to_0 [
 	<gtExample>
