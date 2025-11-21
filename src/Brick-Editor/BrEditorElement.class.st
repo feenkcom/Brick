@@ -115,7 +115,7 @@ BrEditorElement >> scrollToFirst [
 BrEditorElement >> scrollToLast [
 	"Scroll instantly to the last segment"
 	
-	self scrollToPosition: self editor segmentCollector computedSegmentsCount
+	self scrollToPosition: self editor text lineCount
 ]
 
 { #category : #accessing }
