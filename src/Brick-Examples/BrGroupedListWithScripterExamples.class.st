@@ -143,6 +143,199 @@ BrGroupedListWithScripterExamples >> multiSelectionWithEmptyGroup_selectLast [
 	^ aScripter
 ]
 
+{ #category : #'examples - item index' }
+BrGroupedListWithScripterExamples >> multiSelection_evenItemIndex [
+	<gtExample>
+	<return: #BrGroupedList>
+	| scripter groups group promise semaphore itemIndex wasSynchronous timeout |
+	scripter := self multiSelection.
+
+	groups := scripter element viewModel groups loadedGroups.
+	self assert: groups size equals: 2.
+
+	group := groups at: 1.
+	semaphore := Semaphore new.
+	itemIndex := -1.
+	wasSynchronous := false.
+	promise := group
+			itemSuchThat: [ :each | each = 8 ]
+			ifFound: [ :anIndex :isSynchronous | 
+				itemIndex := anIndex.
+				wasSynchronous := isSynchronous.
+				semaphore signal ]
+			ifNone: [ :isSynchronous | 
+				itemIndex := 0.
+				wasSynchronous := isSynchronous.
+				semaphore signal ].
+	timeout := false.
+	wasSynchronous ifFalse: [ timeout := semaphore waitTimeoutSeconds: 3 ].
+
+	scripter userData
+		at: #promise put: promise;
+		at: #wasSynchronous put: wasSynchronous.
+
+	self assert: timeout not.
+	self assert: itemIndex equals: 5.
+
+	^ scripter
+]
+
+{ #category : #'examples - item index' }
+BrGroupedListWithScripterExamples >> multiSelection_evenItemIndex_listAPI [
+	<gtExample>
+	<return: #BrGroupedList>
+	| list scripter groups group promise semaphore itemIndex wasSynchronous timeout |
+	scripter := self multiSelection.
+	list := scripter element.
+
+	groups := scripter element viewModel groups loadedGroups.
+	self assert: groups size equals: 2.
+
+	group := groups at: 1.
+	semaphore := Semaphore new.
+	itemIndex := -1.
+	wasSynchronous := false.
+	promise := list
+			group: group group
+			itemSuchThat: [ :each | each = 8 ]
+			ifFound: [ :anIndex :isSynchronous | 
+				itemIndex := anIndex.
+				wasSynchronous := isSynchronous.
+				semaphore signal ]
+			ifNone: [ :isSynchronous | 
+				itemIndex := 0.
+				wasSynchronous := isSynchronous.
+				semaphore signal ].
+	
+	timeout := false.
+	wasSynchronous ifFalse: [ timeout := semaphore waitTimeoutSeconds: 3 ].
+
+	scripter userData
+		at: #promise put: promise;
+		at: #wasSynchronous put: wasSynchronous.
+
+	self assert: timeout not.
+	self assert: itemIndex equals: 5.
+
+	^ scripter
+]
+
+{ #category : #'examples - item index' }
+BrGroupedListWithScripterExamples >> multiSelection_evenItemIndex_viewModelAPI [
+	<gtExample>
+	<return: #BrGroupedList>
+	| list scripter groups group promise semaphore itemIndex wasSynchronous timeout |
+	scripter := self multiSelection.
+	list := scripter element.
+
+	groups := scripter element viewModel groups loadedGroups.
+	self assert: groups size equals: 2.
+
+	group := groups at: 1.
+	semaphore := Semaphore new.
+	itemIndex := -1.
+	wasSynchronous := false.
+	promise := list viewModel
+			group: group group
+			itemSuchThat: [ :each | each = 8 ]
+			ifFound: [ :anIndex :isSynchronous | 
+				itemIndex := anIndex.
+				wasSynchronous := isSynchronous.
+				semaphore signal ]
+			ifNone: [ :isSynchronous | 
+				itemIndex := 0.
+				wasSynchronous := isSynchronous.
+				semaphore signal ].
+	
+	timeout := false.
+	wasSynchronous ifFalse: [ timeout := semaphore waitTimeoutSeconds: 3 ].
+
+	scripter userData
+		at: #promise put: promise;
+		at: #wasSynchronous put: wasSynchronous.
+
+	self assert: timeout not.
+	self assert: itemIndex equals: 5.
+
+	^ scripter
+]
+
+{ #category : #'examples - item index' }
+BrGroupedListWithScripterExamples >> multiSelection_oddItemIndex [
+	<gtExample>
+	<return: #BrGroupedList>
+	| scripter groups group promise semaphore itemIndex wasSynchronous timeout |
+	scripter := self multiSelection.
+
+	groups := scripter element viewModel groups loadedGroups.
+	self assert: groups size equals: 2.
+
+	group := groups at: 2.
+	semaphore := Semaphore new.
+	itemIndex := -1.
+	wasSynchronous := false.
+	promise := group
+			itemSuchThat: [ :each | each = 3 ]
+			ifFound: [ :anIndex :isSynchronous | 
+				itemIndex := anIndex.
+				wasSynchronous := isSynchronous.
+				semaphore signal ]
+			ifNone: [ :isSynchronous | 
+				itemIndex := 0.
+				semaphore signal ].
+	timeout := false.
+	wasSynchronous ifFalse: [ timeout := semaphore waitTimeoutSeconds: 3 ].
+
+	scripter userData
+		at: #promise put: promise;
+		at: #wasSynchronous put: wasSynchronous.
+
+	self assert: timeout not.
+	self assert: itemIndex equals: 14.
+
+	^ scripter
+]
+
+{ #category : #'examples - item index' }
+BrGroupedListWithScripterExamples >> multiSelection_oddItemIndex_listAPI [
+	<gtExample>
+	<return: #BrGroupedList>
+	| list scripter groups group promise semaphore itemIndex wasSynchronous timeout |
+	scripter := self multiSelection.
+	list := scripter element.
+
+	groups := scripter element viewModel groups loadedGroups.
+	self assert: groups size equals: 2.
+
+	group := groups at: 2.
+	semaphore := Semaphore new.
+	itemIndex := -1.
+	wasSynchronous := false.
+	promise := list
+			group: group group
+			itemSuchThat: [ :each | each = 5 ]
+			ifFound: [ :anIndex :isSynchronous | 
+				itemIndex := anIndex.
+				wasSynchronous := isSynchronous.
+				semaphore signal ]
+			ifNone: [ :isSynchronous | 
+				itemIndex := 0.
+				wasSynchronous := isSynchronous.
+				semaphore signal ].
+	
+	timeout := false.
+	wasSynchronous ifFalse: [ timeout := semaphore waitTimeoutSeconds: 3 ].
+
+	scripter userData
+		at: #promise put: promise;
+		at: #wasSynchronous put: wasSynchronous.
+
+	self assert: timeout not.
+	self assert: itemIndex equals: 15.
+
+	^ scripter
+]
+
 { #category : #'examples - list' }
 BrGroupedListWithScripterExamples >> multiSelection_select1 [
 	<gtExample>

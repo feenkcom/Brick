@@ -51,6 +51,20 @@ BrGroupedList >> defaultListModel [
 ]
 
 { #category : #'api - accessing' }
+BrGroupedList >> group: aBrGroup itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found.
+	Evaluates aNotFoundBlock if there are no more items to check and nothing was found"
+
+	<return: #TAsyncPromise>
+	^ self viewModel
+		group: aBrGroup
+		itemSuchThat: aMatchBlock
+		ifFound: aFoundBlock
+		ifNone: aNotFoundBlock
+]
+
+{ #category : #'api - accessing' }
 BrGroupedList >> groups: aCollectionOfBrGroup [
 	self groupsProvider: (BrSequenceableCollectionItemsProvider new collection: aCollectionOfBrGroup)
 ]

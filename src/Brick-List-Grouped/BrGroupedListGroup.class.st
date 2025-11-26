@@ -89,6 +89,20 @@ BrGroupedListGroup >> itemAt: anIndex [
 	^ group itemsProvider itemAt: anIndex
 ]
 
+{ #category : #accessing }
+BrGroupedListGroup >> itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found.
+	Evaluates aNotFoundBlock if there are no more items to check and nothing was found"
+
+	<return: #TAsyncPromise>
+	^ group
+		itemSuchThat: aMatchBlock
+		ifFound: [ :anIndex :isSynchronous | 
+			aFoundBlock cull: anIndex + self headerIndex cull: isSynchronous ]
+		ifNone: aNotFoundBlock
+]
+
 { #category : #'private - event handling' }
 BrGroupedListGroup >> onItemsLoaded: anAnnouncement [
 	groups notifyGroupsChanged
