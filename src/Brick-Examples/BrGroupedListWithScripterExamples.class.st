@@ -6,7 +6,7 @@ Class {
 	#category : #'Brick-Examples'
 }
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> emptyMultiSelection [
 	<gtExample>
 	| aScripter |
@@ -23,7 +23,7 @@ BrGroupedListWithScripterExamples >> emptyMultiSelection [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> emptyMultiSelection_selectFirst [
 	<gtExample>
 	| aScripter |
@@ -44,7 +44,7 @@ BrGroupedListWithScripterExamples >> emptyMultiSelection_selectFirst [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> emptyMultiSelection_selectLast [
 	<gtExample>
 	| aScripter |
@@ -65,7 +65,7 @@ BrGroupedListWithScripterExamples >> emptyMultiSelection_selectLast [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection [
 	<gtExample>
 	| aScripter |
@@ -82,7 +82,7 @@ BrGroupedListWithScripterExamples >> multiSelection [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelectionWithEmptyGroup [
 	<gtExample>
 	| aScripter |
@@ -99,7 +99,7 @@ BrGroupedListWithScripterExamples >> multiSelectionWithEmptyGroup [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelectionWithEmptyGroup_selectAll [
 	<gtExample>
 	| aScripter |
@@ -121,7 +121,7 @@ BrGroupedListWithScripterExamples >> multiSelectionWithEmptyGroup_selectAll [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelectionWithEmptyGroup_selectLast [
 	<gtExample>
 	| aScripter |
@@ -336,7 +336,7 @@ BrGroupedListWithScripterExamples >> multiSelection_oddItemIndex_listAPI [
 	^ scripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select1 [
 	<gtExample>
 	| aScripter |
@@ -346,7 +346,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select1 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select18 [
 	<gtExample>
 	| aScripter |
@@ -356,7 +356,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select18 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select18to3 [
 	<gtExample>
 	| aScripter |
@@ -382,7 +382,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select18to3 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select19 [
 	<gtExample>
 	| aScripter |
@@ -392,7 +392,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select19 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select19_selectNext [
 	<gtExample>
 	| aScripter |
@@ -411,7 +411,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select19_selectNext [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select1To14DueTo [
 	<gtExample>
 	| aScripter |
@@ -437,7 +437,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select1To14DueTo [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select1_selectPrevious [
 	<gtExample>
 	| aScripter |
@@ -456,7 +456,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select1_selectPrevious [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select2 [
 	<gtExample>
 	| aScripter |
@@ -466,7 +466,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select2 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select20 [
 	<gtExample>
 	| aScripter |
@@ -476,7 +476,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select20 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select20_selectNext [
 	<gtExample>
 	| aScripter |
@@ -495,7 +495,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select20_selectNext [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_select2_selectPrevious [
 	<gtExample>
 	| aScripter |
@@ -514,7 +514,7 @@ BrGroupedListWithScripterExamples >> multiSelection_select2_selectPrevious [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectAll [
 	<gtExample>
 	| aScripter |
@@ -536,7 +536,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectAll [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectFirst [
 	<gtExample>
 	| aScripter |
@@ -558,7 +558,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectFirst [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectLast [
 	<gtExample>
 	| aScripter |
@@ -580,7 +580,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectLast [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectOne1 [
 	<gtExample>
 	| aScripter |
@@ -601,7 +601,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectOne1 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectOne1DueTo [
 	<gtExample>
 	| aScripter |
@@ -622,7 +622,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectOne1DueTo [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectOne2 [
 	<gtExample>
 	| aScripter |
@@ -644,7 +644,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectOne2 [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #'examples - selection' }
 BrGroupedListWithScripterExamples >> multiSelection_selectOne2DueTo [
 	<gtExample>
 	| aScripter |
@@ -666,7 +666,7 @@ BrGroupedListWithScripterExamples >> multiSelection_selectOne2DueTo [
 	^ aScripter
 ]
 
-{ #category : #'examples - list' }
+{ #category : #support }
 BrGroupedListWithScripterExamples >> step: aStepOrScripter selectNumber: anInteger [
 	<gtExample>
 	^ aStepOrScripter
@@ -696,7 +696,7 @@ BrGroupedListWithScripterExamples >> step: aStepOrScripter selectNumber: anInteg
 				play ]
 ]
 
-{ #category : #'examples - list' }
+{ #category : #support }
 BrGroupedListWithScripterExamples >> waitForDisplayedItems: anotherStep [
 	anotherStep wait
 		forElementCondition: [ :anInfiniteList | 
