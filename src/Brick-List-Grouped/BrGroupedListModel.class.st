@@ -20,6 +20,20 @@ BrGroupedListModel >> entityCount [
 	^ groups amountOfEntities
 ]
 
+{ #category : #'api - accessing' }
+BrGroupedListModel >> group: aBrGroup itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	"Attempt to find the first item matching a given block which may involve
+	preloading items until such item is found.
+	Evaluates aNotFoundBlock if there are no more items to check and nothing was found"
+
+	<return: #TAsyncPromise>
+	^ self groups
+		group: aBrGroup
+		itemSuchThat: aMatchBlock
+		ifFound: aFoundBlock
+		ifNone: aNotFoundBlock
+]
+
 { #category : #accessing }
 BrGroupedListModel >> groups [
 	<return: #BrGroupedListGroups>

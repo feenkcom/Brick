@@ -105,7 +105,7 @@ BrGroup >> itemSuchThat: aMatchBlock ifFound: aFoundBlock ifNone: aNotFoundBlock
 	^ itemsProvider
 		itemSuchThat: aMatchBlock
 		ifFound: aFoundBlock
-		 ifNone: aNotFoundBlock
+		ifNone: aNotFoundBlock
 ]
 
 { #category : #accessing }
