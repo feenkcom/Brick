@@ -104,6 +104,13 @@ BrWithExplicitContextMenuAptitude >> initializeMenuContainer [
 BrWithExplicitContextMenuAptitude >> onHidden [
 	super onHidden.
 	
+	"See https://github.com/feenkcom/gtoolkit/issues/4875.
+	Not an optimal solution. It happens that it is usually
+	anchor's parent which has the pressed state."
+	self widgetDo: [ :aWidget | 
+		aWidget states removeState: BlElementState pressed.
+		aWidget parent ifNotNil: [ :aParent | 
+			aParent states removeState: BlElementState pressed ] ].
 	self dispatchEvent: BrContextMenuIsHidden new.
 ]
 
