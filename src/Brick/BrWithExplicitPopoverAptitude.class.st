@@ -123,7 +123,7 @@ BrWithExplicitPopoverAptitude >> defaultMenuContainerPadding [
 
 { #category : #initialization }
 BrWithExplicitPopoverAptitude >> defaultModifiersMatcher [
-	^ [ :aBlKeyModifiers | true ]
+	^ [ :aBlKeyModifiers | aBlKeyModifiers isSoftEmpty ]
 ]
 
 { #category : #initialization }
