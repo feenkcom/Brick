@@ -458,6 +458,15 @@ BrDevScripterMenuStep >> openContextMenu [
 ]
 
 { #category : #'steps - interactions' }
+BrDevScripterMenuStep >> openContextMenuAtLocalPosition: aPosition [
+	^ self secondaryClick
+		label: 'Open context menu';
+		localPosition: aPosition;
+		onParentStepTarget: self;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
 BrDevScripterMenuStep >> openDropdown [
 	^ self click
 		label: 'Open dropdown';
