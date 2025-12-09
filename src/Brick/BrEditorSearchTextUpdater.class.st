@@ -11,7 +11,7 @@ Class {
 		'editorModel',
 		'styledText'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Support'
 }
 
 { #category : #accessing }

@@ -10,7 +10,7 @@ Class {
 		'marker',
 		'styledText'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #accessing }

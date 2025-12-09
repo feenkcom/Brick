@@ -12,7 +12,7 @@ Class {
 		'context',
 		'selectedIndex'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Events'
 }
 
 { #category : #accessing }

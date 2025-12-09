@@ -6,7 +6,7 @@ I am responsible for accessing {{gtClass:BlText}} instances in which a search ha
 Class {
 	#name : #BrEditorSearchTextSource,
 	#superclass : #Object,
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #accessing }

@@ -7,7 +7,7 @@ Class {
 		'context',
 		'searchShortcut'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Aptitude'
 }
 
 { #category : #initialization }

@@ -25,7 +25,7 @@ Class {
 		'patternItems',
 		'selectedItem'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #'api - accessing' }
