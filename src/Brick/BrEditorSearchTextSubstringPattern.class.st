@@ -9,7 +9,7 @@ Class {
 		'text',
 		'string'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #'api - search' }

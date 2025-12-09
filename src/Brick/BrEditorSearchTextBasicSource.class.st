@@ -5,7 +5,7 @@ Class {
 		'text',
 		'visibleText'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #accessing }

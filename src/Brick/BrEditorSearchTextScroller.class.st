@@ -8,7 +8,7 @@ Class {
 		'characterStopPosition',
 		'smoothScrollThreshold'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Support'
 }
 
 { #category : #accessing }

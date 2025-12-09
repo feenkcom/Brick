@@ -1,5 +1,5 @@
 Class {
 	#name : #BrEditorSearchTextNoPatternWish,
 	#superclass : #BrWish,
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Events'
 }

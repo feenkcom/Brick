@@ -1,3 +1,7 @@
+"
+I am {{gtClass:BlTextHighlightAttribute}}. 
+I highlight text parts that matches a {{gtClass:BrEditorSearchTextPattern | label=searched pattern}}. 
+"
 Class {
 	#name : #BrEditorSearchTextMark,
 	#superclass : #BlTextHighlightAttribute,
@@ -5,7 +9,7 @@ Class {
 		'index',
 		'isSelected'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #comparing }

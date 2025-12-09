@@ -4,5 +4,5 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Events'
 }

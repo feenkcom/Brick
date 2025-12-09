@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditorSearchTextPopoverContainerRelocator,
 	#superclass : #BrPopoverContainerRelocator,
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Support'
 }
 
 { #category : #'api - relocating' }

@@ -6,7 +6,7 @@ I am used by {{gtClass:BrEditorSearchTextMarker}}.
 Class {
 	#name : #BrEditorSearchTextComputation,
 	#superclass : #Object,
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #'api - styling' }

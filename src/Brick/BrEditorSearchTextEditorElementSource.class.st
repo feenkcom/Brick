@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'editorElement'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #accessing }

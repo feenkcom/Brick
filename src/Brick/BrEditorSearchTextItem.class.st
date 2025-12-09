@@ -16,7 +16,7 @@ Class {
 		'textAttribute',
 		'index'
 	],
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #accessing }

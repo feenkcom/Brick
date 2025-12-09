@@ -7,7 +7,7 @@ Note that the active process must be a UI process.
 Class {
 	#name : #BrEditorSearchTextSameProcessComputation,
 	#superclass : #BrEditorSearchTextComputation,
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #'api - styling' }

@@ -6,7 +6,7 @@ I return collection of {{gtClass:BrEditorSearchTextItem}}.
 Class {
 	#name : #BrEditorSearchTextPattern,
 	#superclass : #Object,
-	#category : #'Brick-Editor - Search'
+	#category : #'Brick-Editor - Search Model'
 }
 
 { #category : #'api - search' }
