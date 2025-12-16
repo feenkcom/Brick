@@ -1,7 +1,7 @@
 Class {
 	#name : #BrGlamorousEditorSearchTextAptitude,
 	#superclass : #BrEditorSearchTextAptitude,
-	#category : #'Brick-Glamorous-Editor'
+	#category : #'Brick-Glamorous-Editor - Search'
 }
 
 { #category : #initialization }

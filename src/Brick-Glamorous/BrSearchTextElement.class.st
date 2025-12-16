@@ -1,5 +1,5 @@
 Class {
-	#name : #BrEditorSearchTextElement,
+	#name : #BrSearchTextElement,
 	#superclass : #BlElement,
 	#traits : 'TBrLayoutResizable + TBrLayoutAlignable',
 	#classTraits : 'TBrLayoutResizable classTrait + TBrLayoutAlignable classTrait',
@@ -9,21 +9,21 @@ Class {
 		'previousItem',
 		'nextItem'
 	],
-	#category : #'Brick-Glamorous-Editor - Search'
+	#category : #'Brick-Glamorous-List, Tree - Search'
 }
 
 { #category : #initialization }
-BrEditorSearchTextElement >> defaultLayout [
+BrSearchTextElement >> defaultLayout [
 	^ BlLinearLayout horizontal
 ]
 
 { #category : #'api - accessing' }
-BrEditorSearchTextElement >> editorDo: aBlock [
+BrSearchTextElement >> editorDo: aBlock [
 	aBlock cull: search
 ]
 
 { #category : #'api - accessing' }
-BrEditorSearchTextElement >> index: anIndex total: aCount [
+BrSearchTextElement >> index: anIndex total: aCount [
 	(anIndex isNil or: [ aCount isNil or: [ aCount isZero ] ])
 		ifTrue: [ index text: '0'.
 			^ self ].
@@ -35,7 +35,7 @@ BrEditorSearchTextElement >> index: anIndex total: aCount [
 ]
 
 { #category : #initialization }
-BrEditorSearchTextElement >> initialize [
+BrSearchTextElement >> initialize [
 	super initialize.
 
 	self initializeInputFieldElement.
@@ -64,7 +64,7 @@ BrEditorSearchTextElement >> initialize [
 ]
 
 { #category : #initialization }
-BrEditorSearchTextElement >> initializeIndexElement [
+BrSearchTextElement >> initializeIndexElement [
 	index := BrLabel new
 			beTinySize;
 			aptitude: BrGlamorousLabelAptitude;
@@ -74,7 +74,7 @@ BrEditorSearchTextElement >> initializeIndexElement [
 ]
 
 { #category : #initialization }
-BrEditorSearchTextElement >> initializeInputFieldElement [
+BrSearchTextElement >> initializeInputFieldElement [
 	search := BrEditor new
 			hMatchParent;
 			vFitContent;
@@ -107,7 +107,7 @@ BrEditorSearchTextElement >> initializeInputFieldElement [
 ]
 
 { #category : #initialization }
-BrEditorSearchTextElement >> initializeNextItemElement [
+BrSearchTextElement >> initializeNextItemElement [
 	nextItem := BrButton new
 			beTinySize;
 			aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonWithLabelTooltipAptitude2;
@@ -120,7 +120,7 @@ BrEditorSearchTextElement >> initializeNextItemElement [
 ]
 
 { #category : #initialization }
-BrEditorSearchTextElement >> initializePreviousItemElement [
+BrSearchTextElement >> initializePreviousItemElement [
 	previousItem := BrButton new
 			beTinySize;
 			aptitude: BrGlamorousButtonWithIconAptitude - BrGlamorousButtonWithLabelTooltipAptitude2;
@@ -132,49 +132,49 @@ BrEditorSearchTextElement >> initializePreviousItemElement [
 ]
 
 { #category : #'api - notifying' }
-BrEditorSearchTextElement >> notifySearchText: aText [
+BrSearchTextElement >> notifySearchText: aText [
 	aText size isZero
 		ifTrue: [ 
 			self index: nil total: nil.
-			self dispatchEvent: BrEditorSearchTextNoPatternWish new ]
+			self dispatchEvent: BrSearchNoPatternWish new ]
 		ifFalse: [ 
 			self progressIndex: nil total: 0.
 			self
-				dispatchEvent: (BrEditorSearchTextPatternWish new
-						pattern: (BrEditorSearchTextSubstringPattern new text: aText copy)) ]
+				dispatchEvent: (BrSearchPatternWish new
+						pattern: (BrSearchSubstringPattern new text: aText copy)) ]
 ]
 
 { #category : #'event handling' }
-BrEditorSearchTextElement >> onEndSearchEvent: anEvent [
-	self dispatchEvent: BrEditorSearchTextEndWish new
+BrSearchTextElement >> onEndSearchEvent: anEvent [
+	self dispatchEvent: BrSearchEndWish new
 ]
 
 { #category : #'event handling' }
-BrEditorSearchTextElement >> onFindNextOccurenceEvent: anEvent [
-	self dispatchEvent: BrEditorSearchTextNextOccurenceWish new
+BrSearchTextElement >> onFindNextOccurenceEvent: anEvent [
+	self dispatchEvent: BrSearchNextOccurenceWish new
 ]
 
 { #category : #'event handling' }
-BrEditorSearchTextElement >> onFindPreviousOccurenceEvent: anEvent [
-	self dispatchEvent: BrEditorSearchTextPreviousOccurenceWish new
+BrSearchTextElement >> onFindPreviousOccurenceEvent: anEvent [
+	self dispatchEvent: BrSearchPreviousOccurenceWish new
 ]
 
 { #category : #'event handling' }
-BrEditorSearchTextElement >> onSearchPatternModifiedEvent: anEvent [
+BrSearchTextElement >> onSearchPatternModifiedEvent: anEvent [
 	| aText |
 	aText := anEvent text.
 	self notifySearchText: aText
 ]
 
 { #category : #'api - accessing' }
-BrEditorSearchTextElement >> pattern: aBlTextOrNil [
+BrSearchTextElement >> pattern: aBlTextOrNil [
 	aBlTextOrNil ifNil: [ ^ self ].
 	search text characters = aBlTextOrNil asRopedText characters ifTrue: [ ^ self ].
 	search text: aBlTextOrNil asRopedText
 ]
 
 { #category : #'api - accessing' }
-BrEditorSearchTextElement >> progressIndex: anIndex total: aCount [
+BrSearchTextElement >> progressIndex: anIndex total: aCount [
 	"Possible inputs:
 	- anything, nil or 0 => display 0+
 	- nil     , integer  => display ?/integer+
@@ -195,7 +195,7 @@ BrEditorSearchTextElement >> progressIndex: anIndex total: aCount [
 ]
 
 { #category : #'api - search' }
-BrEditorSearchTextElement >> styler: aStyler [
+BrSearchTextElement >> styler: aStyler [
 	"Convenience method to set counter.
 	Must be called from a UI process."
 
