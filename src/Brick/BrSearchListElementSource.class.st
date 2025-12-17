@@ -18,10 +18,12 @@ BrSearchListElementSource >> findAllItems: aMarkContext using: aMarker [
 	listElement
 			itemSuchThat: [ :eachItem | 
 				| aText foundIndexes |
-				aText := itemText value: eachItem.
+				aText := (itemText value: eachItem) asRopedText.
 				foundIndexes := aMarkContext pattern findAllIndexesInText: aText.
 				cache at: eachItem put: foundIndexes.
-				allItems addAll: foundIndexes.	"we need to iterate all items"
+				allItems addAll: foundIndexes.
+				
+				"we need to iterate all items"
 				false ]
 			ifFound: [ :anIndex :isSynchronous |
 				allItemsPromise fulfillWithValue: allItems asArray ]
@@ -45,6 +47,15 @@ BrSearchListElementSource >> findVisibleItems: aMarkContext using: aMarker [
 				inElements: anInfiniteElement children
 				cache: cache ]
 		ifNone: [ ^ #() ]
+]
+
+{ #category : #'gt - extensions' }
+BrSearchListElementSource >> gtCacheFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Cache';
+		object: [ cache ];
+		view: #gtItemsFor:
 ]
 
 { #category : #'api - testing' }

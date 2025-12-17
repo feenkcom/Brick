@@ -34,13 +34,29 @@ BrSearchMarkableAptitude >> foundItemsDo: aFoundBlock ifAbsent: anAbsentBlock [
 BrSearchMarkableAptitude >> initializeListeners [
 	super initializeListeners.
 
-	self when: BrSearchFoundItemsWish do: [ :anEvent | self onBrSearchFoundItemsWish: anEvent ].
-	self when: BrSearchItemIdWish do: [ :anEvent | self onBrSearchItemIdWish: anEvent ]
+	self when: BrLabelChanged do: [ :anEvent | self onBrLabelChanged: anEvent ].
+	self
+		when: BrSearchFoundItemsWish
+		do: [ :anEvent | self onBrSearchFoundItemsWish: anEvent ].
+	self
+		when: BrSearchItemIdWish
+		do: [ :anEvent | self onBrSearchItemIdWish: anEvent ]
 ]
 
 { #category : #'private - search' }
 BrSearchMarkableAptitude >> itemIdDo: aBlock [
 	^ itemId ifNotNil: aBlock 
+]
+
+{ #category : #'private - event handling' }
+BrSearchMarkableAptitude >> onBrLabelChanged: anEvent [
+	anEvent consumed: true.
+
+	self
+		foundItemsDo: [ :foundItems | 
+			foundItems
+				do: [ :eachFoundItem | eachFoundItem text characters = anEvent text characters ifTrue: [ self halt ] ] ]
+		ifAbsent: [  ]
 ]
 
 { #category : #'private - event handling' }
