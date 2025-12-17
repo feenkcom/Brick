@@ -55,7 +55,7 @@ BrSearchMarkableAptitude >> onBrLabelChanged: anEvent [
 	self
 		foundItemsDo: [ :foundItems | 
 			foundItems
-				do: [ :eachFoundItem | eachFoundItem text characters = anEvent text characters ifTrue: [ self halt ] ] ]
+				do: [ :eachFoundItem | eachFoundItem text characters = anEvent text characters ifTrue: [ self flag: #todo ] ] ]
 		ifAbsent: [  ]
 ]
 
