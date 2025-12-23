@@ -25,9 +25,11 @@ BrTabGroupContentAptitude >> initialize [
 
 	content := BlElement new 
 		layout: BlLinearLayout horizontal;
-		labeled: 'Content'.
+		labeled: 'Content';
+		addAptitude: (BrLayoutResizerAptitude new 
+			common: [ content children ]).
 	
-	self add: (BrLayoutResizerAptitude new inherit: content).
+	self add: (BrLayoutResizerAptitude new common: content).
 
 	self addChangeAddChildAs: #(content) with: [ content ]
 ]
@@ -67,7 +69,10 @@ BrTabGroupContentAptitude >> onTabSelected: aTabModel [
 
 	self widgetContent
 		removeChildren;
-		addChild: aTabModel contentElement
+		addChild: aTabModel contentElement.
+		
+	"It is necessary to propagate BrLayoutResizerAptitude-"
+	content requestStyle
 ]
 
 { #category : #hooks }
