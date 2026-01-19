@@ -503,6 +503,13 @@ BrLayoutResizerAptitude >> vMatchParentToFitContent: aChildElementOrBlock [
 	propagations vMatchParentToFitContent: aChildElementOrBlock
 ]
 
+{ #category : #'api - to fit content element' }
+BrLayoutResizerAptitude >> vMatchParentToFitContentLimited: aChildElementOrBlock [
+	"Fit content limited vertically if model says match parent"
+	
+	propagations vMatchParentToFitContentLimited: aChildElementOrBlock
+]
+
 { #category : #'api - to match parent' }
 BrLayoutResizerAptitude >> vMatchParentToMatchParent [
 	"Inherit match parent vertical if model says so"
