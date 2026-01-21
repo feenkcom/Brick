@@ -62,6 +62,13 @@ BrLayoutResizerAptitude >> fitContentDo: aBlock [
 	aBlock value: (self styleFor: (BrLayoutHorizontalResizerState fitContent and: BrLayoutVerticalResizerState fitContent))
 ]
 
+{ #category : #'api - to fit content' }
+BrLayoutResizerAptitude >> fitContentLimitedToFitContent: aChildElementOrBlock [
+	"Set fit content if model specifies fit content limited"
+
+	propagations fitContentLimitedToFitContent: aChildElementOrBlock
+]
+
 { #category : #'api - to fit content limited element' }
 BrLayoutResizerAptitude >> fitContentLimitedToFitContentLimited: aChildElementOrBlock [
 	"Inherit fit content limited in both directions if model says so"
@@ -195,6 +202,13 @@ BrLayoutResizerAptitude >> hFitContentLimitedToFitContent [
 	"Fit content if model specifies fit content limited horizontally"
 
 	self hFitContentLimited hFitContent
+]
+
+{ #category : #'api - to fit content' }
+BrLayoutResizerAptitude >> hFitContentLimitedToFitContent: aChildElementOrBlock [
+	"Set fit content if model specifies fit content limited horizontally"
+
+	propagations hFitContentLimitedToFitContent: aChildElementOrBlock
 ]
 
 { #category : #'api - to fit content limited' }
@@ -427,6 +441,13 @@ BrLayoutResizerAptitude >> vFitContentLimitedToFitContent [
 	"Fit content if model specifies fit content limited vertically"
 
 	self vFitContentLimited vFitContent
+]
+
+{ #category : #'api - to fit content' }
+BrLayoutResizerAptitude >> vFitContentLimitedToFitContent: aChildElementOrBlock [
+	"Set fit content if model specifies fit content limited vertically"
+
+	propagations vFitContentLimitedToFitContent: aChildElementOrBlock
 ]
 
 { #category : #'api - to fit content limited' }

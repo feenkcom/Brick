@@ -216,6 +216,14 @@ BrEditorSearchTextMarkerContext >> textSource: aTextSource [
 	textSource := aTextSource
 ]
 
+{ #category : #'api - result' }
+BrEditorSearchTextMarkerContext >> totalCount [
+	"Return a total amount of found items"
+
+	<return: #Integer>
+	^ self patternItems size
+]
+
 { #category : #'api - accessing' }
 BrEditorSearchTextMarkerContext >> visibleText [
 	"Return a visible part of the text in which a pattern is searched for.

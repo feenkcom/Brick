@@ -115,6 +115,15 @@ BrLayoutResizerPropagations >> exactToMatchParent: aChildElementOrBlock [
 			to: self class vMatchParent
 ]
 
+{ #category : #'api - to fit content' }
+BrLayoutResizerPropagations >> fitContentLimitedToFitContent: aChildElementOrBlock [
+	(self addPropagationFor: aChildElementOrBlock)
+		from: self class hFitContentLimited
+			to: self class hFitContent;
+		from: self class vFitContentLimited
+			to: self class vFitContent
+]
+
 { #category : #'api - to fit content limited' }
 BrLayoutResizerPropagations >> fitContentLimitedToFitContentLimited: aChildElementOrBlock [
 	(self addPropagationFor: aChildElementOrBlock)
