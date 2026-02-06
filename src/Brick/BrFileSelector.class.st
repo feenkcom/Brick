@@ -319,7 +319,7 @@ BrFileSelector >> replaceAddFolderWithEditor [
 	| folderCreator |
 	breadcrumb removeItemAt: breadcrumb numberOfItems.
 	folderCreator := BrFolderCreateWidget new folder: self folder.
-	folderCreator defaultFolderName: ''.
+	folderCreator defaultFolderName: 'untitled folder'.
 	folderCreator
 		onFolderCreated: [ :aFolder |
 			self folder: aFolder.
