@@ -159,6 +159,13 @@ BrLayoutResizerAptitude >> hExactToFitContent: aChildElementOrBlock [
 	propagations hExactToFitContent: aChildElementOrBlock
 ]
 
+{ #category : #'api - to fit content limited' }
+BrLayoutResizerAptitude >> hExactToFitContentLimited: aChildElementOrBlock [
+	"Fit content limited horizontally if model says to be exact size"	
+
+	propagations hExactToFitContentLimited: aChildElementOrBlock
+]
+
 { #category : #'api - to match parent' }
 BrLayoutResizerAptitude >> hExactToMatchParent [
 	"Match parent if model specifies exact size horizontally"
@@ -283,6 +290,13 @@ BrLayoutResizerAptitude >> hMatchParentToFitContent: aChildElementOrBlock [
 	"Fit content horizontally if model says match parent"
 
 	propagations hMatchParentToFitContent: aChildElementOrBlock
+]
+
+{ #category : #'api - to fit content limited' }
+BrLayoutResizerAptitude >> hMatchParentToFitContentLimited: aChildElementOrBlock [
+	"Fit content limited horizontally if model says match parent"
+
+	propagations hMatchParentToFitContentLimited: aChildElementOrBlock
 ]
 
 { #category : #'api - to match parent' }
