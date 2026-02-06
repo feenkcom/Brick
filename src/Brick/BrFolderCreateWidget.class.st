@@ -90,8 +90,9 @@ BrFolderCreateWidget >> onFolderCreated: aBlock [
 BrFolderCreateWidget >> onTextEditorModifiedEvent: anEvent [
 	| newDirectoryName |
 	newDirectoryName := anEvent text asString trimBoth.
-	newDirectoryName
-		ifEmpty: [ button disable.
+
+	(folder fileSystem pathFromString: newDirectoryName) isAbsolute
+		ifTrue: [ button disable.
 			^ self ].
 
 	^ (folder / newDirectoryName) exists
