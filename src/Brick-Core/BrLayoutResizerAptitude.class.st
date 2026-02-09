@@ -62,6 +62,13 @@ BrLayoutResizerAptitude >> fitContentDo: aBlock [
 	aBlock value: (self styleFor: (BrLayoutHorizontalResizerState fitContent and: BrLayoutVerticalResizerState fitContent))
 ]
 
+{ #category : #'api - to fit content' }
+BrLayoutResizerAptitude >> fitContentLimitedToFitContent: aChildElementOrBlock [
+	"Set fit content if model specifies fit content limited"
+
+	propagations fitContentLimitedToFitContent: aChildElementOrBlock
+]
+
 { #category : #'api - to fit content limited element' }
 BrLayoutResizerAptitude >> fitContentLimitedToFitContentLimited: aChildElementOrBlock [
 	"Inherit fit content limited in both directions if model says so"
@@ -152,6 +159,13 @@ BrLayoutResizerAptitude >> hExactToFitContent: aChildElementOrBlock [
 	propagations hExactToFitContent: aChildElementOrBlock
 ]
 
+{ #category : #'api - to fit content limited' }
+BrLayoutResizerAptitude >> hExactToFitContentLimited: aChildElementOrBlock [
+	"Fit content limited horizontally if model says to be exact size"	
+
+	propagations hExactToFitContentLimited: aChildElementOrBlock
+]
+
 { #category : #'api - to match parent' }
 BrLayoutResizerAptitude >> hExactToMatchParent [
 	"Match parent if model specifies exact size horizontally"
@@ -195,6 +209,13 @@ BrLayoutResizerAptitude >> hFitContentLimitedToFitContent [
 	"Fit content if model specifies fit content limited horizontally"
 
 	self hFitContentLimited hFitContent
+]
+
+{ #category : #'api - to fit content' }
+BrLayoutResizerAptitude >> hFitContentLimitedToFitContent: aChildElementOrBlock [
+	"Set fit content if model specifies fit content limited horizontally"
+
+	propagations hFitContentLimitedToFitContent: aChildElementOrBlock
 ]
 
 { #category : #'api - to fit content limited' }
@@ -269,6 +290,13 @@ BrLayoutResizerAptitude >> hMatchParentToFitContent: aChildElementOrBlock [
 	"Fit content horizontally if model says match parent"
 
 	propagations hMatchParentToFitContent: aChildElementOrBlock
+]
+
+{ #category : #'api - to fit content limited' }
+BrLayoutResizerAptitude >> hMatchParentToFitContentLimited: aChildElementOrBlock [
+	"Fit content limited horizontally if model says match parent"
+
+	propagations hMatchParentToFitContentLimited: aChildElementOrBlock
 ]
 
 { #category : #'api - to match parent' }
@@ -427,6 +455,13 @@ BrLayoutResizerAptitude >> vFitContentLimitedToFitContent [
 	"Fit content if model specifies fit content limited vertically"
 
 	self vFitContentLimited vFitContent
+]
+
+{ #category : #'api - to fit content' }
+BrLayoutResizerAptitude >> vFitContentLimitedToFitContent: aChildElementOrBlock [
+	"Set fit content if model specifies fit content limited vertically"
+
+	propagations vFitContentLimitedToFitContent: aChildElementOrBlock
 ]
 
 { #category : #'api - to fit content limited' }

@@ -48,7 +48,7 @@ BrFolderCreateWidget >> folder: aFolderReference [
 { #category : #accessing }
 BrFolderCreateWidget >> initialize [
 	super initialize.
-	
+
 	self viewModel: BrWidgetModel new.
 	self layout: BlLinearLayout horizontal.
 	self aptitude: BrLayoutAlignmentStatelessAptitude new.
@@ -63,10 +63,7 @@ BrFolderCreateWidget >> initialize [
 	self addChild: button.
 	label editor
 		when: BrTextEditorModifiedEvent
-		do: [ :anEvent | 
-			(folder / anEvent text asString) exists
-				ifTrue: [ button disable ];
-				ifFalse: [ button enable ] ].
+		do: [ :anEvent | self onTextEditorModifiedEvent: anEvent ].
 	button
 		action: [ (folder / label text asString) ensureCreateDirectory.
 			button disable.
@@ -87,6 +84,20 @@ BrFolderCreateWidget >> label: anObject [
 { #category : #accessing }
 BrFolderCreateWidget >> onFolderCreated: aBlock [
 	onFolderCreated := aBlock.
+]
+
+{ #category : #'private - event handling' }
+BrFolderCreateWidget >> onTextEditorModifiedEvent: anEvent [
+	| newDirectoryName |
+	newDirectoryName := anEvent text asString trimBoth.
+
+	(folder fileSystem pathFromString: newDirectoryName) isAbsolute
+		ifTrue: [ button disable.
+			^ self ].
+
+	^ (folder / newDirectoryName) exists
+		ifTrue: [ button disable ];
+		ifFalse: [ button enable ]
 ]
 
 { #category : #accessing }
