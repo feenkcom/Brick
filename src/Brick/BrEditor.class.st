@@ -199,6 +199,11 @@ BrEditor >> onScrollBy: aWish [
 	self scrollToPosition: position
 ]
 
+{ #category : #'api - editor' }
+BrEditor >> removeTextAttribute: anAttribute [
+	self editor text clearAttributes: [ :each | each == anAttribute ]
+]
+
 { #category : #'editor - operations' }
 BrEditor >> selecter [
 	<return: #BrTextEditorSelecter>
