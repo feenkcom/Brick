@@ -104,6 +104,11 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 	self scrollToPosition: aTargetLine + 1
 ]
 
+{ #category : #'api - editor' }
+BrEditorElement >> removeTextAttribute: anAttribute [
+	self editor text clearAttributes: [ :each | each == anAttribute ]
+]
+
 { #category : #scrolling }
 BrEditorElement >> scrollToFirst [
 	"Scroll instantly to the first position"
