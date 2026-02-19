@@ -213,6 +213,11 @@ BrEditor >> selection [
 	^ self editor selection
 ]
 
+{ #category : #'as yet unclassified' }
+BrEditor >> styleText [
+	self editor styleText
+]
+
 { #category : #'editor - accessing' }
 BrEditor >> styler [
 	^ self viewModel styler
