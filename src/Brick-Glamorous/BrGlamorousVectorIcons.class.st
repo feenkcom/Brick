@@ -1591,6 +1591,45 @@ BrGlamorousVectorIcons class >> tree [
 	background: Color black}] asStencil
 ]
 
+{ #category : #icons }
+BrGlamorousVectorIcons class >> twoColumnTable [
+	<script: 'self chat inspect'>
+	^ [ | container outline vLine h1 |
+	container := BlElement new size: 16 @ 16.
+	outline := BlElement new
+			geometry: (BlPolygonGeometry
+					vertices: {1 @ 1.
+							15 @ 1.
+							15 @ 15.
+							1 @ 15});
+			size: 16 @ 16;
+			border: (BlBorder paint: Color black width: 1);
+			yourself.
+	vLine := BlElement new
+			geometry: (BlPolygonGeometry
+					vertices: {8 @ 2.
+							9 @ 2.
+							9 @ 14.
+							8 @ 14});
+			size: 16 @ 16;
+			background: Color black;
+			yourself.
+	h1 := BlElement new
+			geometry: (BlPolygonGeometry
+					vertices: {2 @ 6.
+							14 @ 6.
+							14 @ 7.
+							2 @ 7});
+			size: 16 @ 16;
+			background: Color black;
+			yourself.
+	container
+		addChildren: {outline.
+				vLine.
+				h1}.
+	container ] asStencil
+]
+
 { #category : #geometry }
 BrGlamorousVectorIcons class >> uncheckedCheckboxGeometry [
 	<return: #BlElementGeometry>
