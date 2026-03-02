@@ -215,7 +215,7 @@ BrTree >> selectedNodeDo: aBlock [
 	self selectedIndices
 		ifNotEmpty: [ :theIndices |
 			(theIndices first between: 1 and: self viewModel itemCount)
-				ifTrue: [ aBlock value: (self viewModel itemAt: theIndices first) ] ]
+				ifTrue: [ aBlock cull: (self viewModel itemAt: theIndices first) cull: theIndices first ] ]
 ]
 
 { #category : #'api - selection' }
