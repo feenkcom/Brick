@@ -43,7 +43,7 @@ BrEditor >> computeVerticalScrollExtent [
 	^ self lastVisibleSegment 
 		ifNotNil: [ :aLastSegment | 
 			self firstVisibleSegment 
-				ifNotNil: [ :aFirstSegment | aLastSegment index - aFirstSegment index ]
+				ifNotNil: [ :aFirstSegment | aLastSegment index - aFirstSegment index + 1 ]
 				ifNil: [ 0 ] ]
 		ifNil: [ 0 ]
 ]
@@ -134,8 +134,9 @@ BrEditor >> initialize [
 
 	self viewModel: self defaultEditorModel.
 	
-	self viewModel when: BrEditorTextChanged do: [ lineCount := nil].
-	
+	self viewModel when: BrEditorTextChanged do: [ lineCount := nil ].
+	self editor when: BrTextEditorModifiedEvent do: [ lineCount := nil ].
+		
 	self when: BlMouseUpEvent do: [ :anEvent | anEvent consumed: true ].
 	self when: BlClickEvent do: [ :anEvent | anEvent consumed: true ].
 	self when: BrScrollByWish do: [:aWish | self onScrollBy: aWish]
