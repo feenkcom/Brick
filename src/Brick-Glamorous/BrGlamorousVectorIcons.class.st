@@ -208,9 +208,12 @@ BrGlamorousVectorIcons class >> classicon [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> clipboard [
-	<script: 'self clipboard inspect'>
-
-	^ self transcript
+	^ [BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 5 6 L 5 7 L 11 7 L 11 6 Z M 5 8.5 L 5 9.5 L 11 9.5 L 11 8.5 Z M 5 11 L 5 12 L 11 12 L 11 11 Z M 6 3 L 3.5 3 L 3 3 L 2.5 3 L 2.5 14.5 L 3 14.5 L 3.5 14.5 L 12.5 14.5 L 13 14.5 L 13.5 14.5 L 13.5 3 L 13 3 L 12.5 3 L 10 3 L 10 2.5 L 10 1.5 L 9 1.5 L 7 1.5 L 6 1.5 L 6 2.5 Z M 7 3 L 7 2.5 L 9 2.5 L 9 3 Z M 6 4 L 6 4.5 L 7 4.5 L 9 4.5 L 10 4.5 L 10 4 L 12.5 4 L 12.5 13.5 L 3.5 13.5 L 3.5 4 L 6 4 L 6 4.5 M 10 4.5 L 10 4'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black] asStencil
 ]
 
 { #category : #icons }
