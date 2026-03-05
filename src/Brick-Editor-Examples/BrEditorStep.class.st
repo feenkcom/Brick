@@ -96,11 +96,39 @@ BrEditorStep >> deselectAll [
 ]
 
 { #category : #'steps - interactions' }
+BrEditorStep >> moveDown [
+	^ self keyPress
+		label: 'Move down';
+		key: BlKeyboardKey arrowDown
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> moveLeft [
+	^ self keyPress
+		label: 'Move left';
+		key: BlKeyboardKey arrowLeft
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> moveRight [
+	^ self keyPress
+		label: 'Move right';
+		key: BlKeyboardKey arrowRight
+]
+
+{ #category : #'steps - interactions' }
 BrEditorStep >> moveToEnd [
 	^ self keyPress
 		label: 'Move to end';
 		key: BlKeyboardKey end;
 		referenceSender
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> moveUp [
+	^ self keyPress
+		label: 'Move up';
+		key: BlKeyboardKey arrowUp
 ]
 
 { #category : #'steps - interactions' }
