@@ -12,6 +12,11 @@ BrGlamorousTabGroupAptitude >> headerBackground: aBackground [
 	headerLook headerDo: [ :aHeaderElement | aHeaderElement background: aBackground ]
 ]
 
+{ #category : #'api - accessing' }
+BrGlamorousTabGroupAptitude >> headerDo: aBlock [
+	headerLook headerDo: aBlock
+]
+
 { #category : #initialization }
 BrGlamorousTabGroupAptitude >> initialize [
 	super initialize.
