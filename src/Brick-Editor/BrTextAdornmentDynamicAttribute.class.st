@@ -46,6 +46,11 @@ BrTextAdornmentDynamicAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEd
 ]
 
 { #category : #accessing }
+BrTextAdornmentDynamicAttribute >> stencil [
+	^ stencilBuilder
+]
+
+{ #category : #accessing }
 BrTextAdornmentDynamicAttribute >> stencil: anAdornmentStencilBuilder [
 	stencilBuilder := anAdornmentStencilBuilder asStencilBuilder: BrTextAdornmentStencilBuilder
 ]
