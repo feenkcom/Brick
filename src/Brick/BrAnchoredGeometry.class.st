@@ -38,7 +38,7 @@ BrAnchoredGeometry >> buildPathOnSpartaCanvas: aCanvas [
 			e corner} ].
 	xs := (vertices collect: #x) asSet asOrderedCollection sorted.
 	ys := (vertices collect: #y) asSet asOrderedCollection sorted.
-	areas := (Array2D
+	areas := (BlArray2D
 		rows: ys size - 1
 		columns: xs size - 1
 		element: false)
@@ -51,7 +51,7 @@ BrAnchoredGeometry >> buildPathOnSpartaCanvas: aCanvas [
 								origin: (xs at: j) @ (ys at: i)
 								corner: (xs at: j + 1) @ (ys at: i + 1)) ] ].
 	"2. detect corners around covered area"
-	corners := (Array2D rows: ys size columns: xs size element: false)
+	corners := (BlArray2D rows: ys size columns: xs size element: false)
 		withIndicesCollect: [ :e :i :j | 
 			| topLeft topRight bottomLeft bottomRight neighbours |
 			topLeft := areas at: i - 1 at: j - 1 ifInvalid: false.
