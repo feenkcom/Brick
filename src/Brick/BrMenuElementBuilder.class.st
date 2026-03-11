@@ -120,5 +120,5 @@ BrMenuElementBuilder >> visitMenuLabelModel: aLabelModel [
 
 { #category : #visiting }
 BrMenuElementBuilder >> visitMenuModel: aMenuModel [
-	^ BrMenuInvalidItemElement new menuModel: aMenuModel
+	^ BrMenuInvalidElement new menuModel: aMenuModel
 ]

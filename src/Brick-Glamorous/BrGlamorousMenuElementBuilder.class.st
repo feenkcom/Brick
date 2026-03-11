@@ -28,3 +28,10 @@ BrGlamorousMenuElementBuilder >> visitMenuItems: aMenuModel [
 		menuModel: aMenuModel;
 		typeBuilder: self typeBuilder
 ]
+
+{ #category : #visiting }
+BrGlamorousMenuElementBuilder >> visitMenuStreamingItems: aMenuModel [
+	^ BrMenuItemsListElement new
+		menuModel: aMenuModel;
+		typeBuilder: self typeBuilder
+]

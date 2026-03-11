@@ -63,6 +63,11 @@ TBrMenuModelVisitor >> visitMenuModel: aMenuModel [
 ]
 
 { #category : #visiting }
+TBrMenuModelVisitor >> visitMenuStreamingItems: aMenuModel [
+	^ self visitMenu: aMenuModel
+]
+
+{ #category : #visiting }
 TBrMenuModelVisitor >> visitMenuSubmenuItem: aMenuModel [
 	^ self visitMenuLabeledItem: aMenuModel
 ]

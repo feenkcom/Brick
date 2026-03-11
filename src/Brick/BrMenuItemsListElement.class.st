@@ -44,7 +44,10 @@ BrMenuItemsListElement >> initializeListElement [
 		itemStencil: [ :anItemType | 
 			self typeBuilder buildElementFromItemType: anItemType ];
 		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
-			anItemElement menuModel: anItemObject ];
+			anItemElement menuModel: anItemObject.
+			(anItemElement id = BlElementId noId) ifTrue: [ 
+				anItemElement id: (#'menu--item' asBlocElementId indexed: anItemIndex) ].
+			anItemElement ];
 		when: BrSelectionChanged do: [ :anEvent | self onSelectionChanged: anEvent ];
 		addShortcut: (BlShortcutWithAction new
 			name: 'Navigate to submenu';
@@ -162,7 +165,7 @@ BrMenuItemsListElement >> unsubscribeFromMenuModelExcludingUserSubscriptions [
 
 { #category : #'private - updating' }
 BrMenuItemsListElement >> updateListElement [
-	listElement items: self menuModel items.
+	self menuModel updateSimpleListElementItems: listElement.
 	self menuModel selectedItem
 		ifNotNil: [ :anItem | 
 			listElement

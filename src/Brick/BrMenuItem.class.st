@@ -86,6 +86,8 @@ BrMenuItem >> isSelected: aBoolean [
 	isSelected := aBoolean.
 	self onSelectionChanged.
 	self notifySelectionChanged.
+	self parentDo: [ :aParent |
+		aParent notifyMenuItem: self selectionChanged: isSelected ]
 ]
 
 { #category : #accessing }
