@@ -515,6 +515,39 @@ BrMenuExamples >> menuLabelItem [
 	^ aMenuItem
 ]
 
+{ #category : #'examples - items' }
+BrMenuExamples >> menuStreamingItems [
+	<gtExample>
+	<return: #BrMenuStreamingItems>
+	| aMenuItems someClasses aStream aMenuElement aCollectionOne aCollectionTwo |
+	aMenuItems := BrMenuStreamingItems new.
+	someClasses := GtPhlowView withAllSubclasses
+			, GtPhlowAbstractTool withAllSubclasses.
+	aStream := someClasses asAsyncStream
+			map: [ :aClass | 
+				BrMenuSubmenuItem new
+					icon: [ aClass iconNamed: aClass systemIconName ] label: aClass name;
+					action: [ :anElement :aButtonModel :anEvent | anElement phlow spawnObject: aClass ];
+					submenu: (BrMenuExplicit new
+							stencil: [ BrEditor new
+									aptitude: BrGlamorousCodeEditorAptitude;
+									beReadOnlyWithSelection;
+									fitContentLimited;
+									text: aClass definitionString ]) ].
+
+	aMenuItems stream: aStream.
+
+	aMenuElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
+	self assert: (aMenuElement isKindOf: BlElement).	"We want to ask for menu items multiple times, in case new streaming items element is created."
+	aCollectionOne := aMenuItems stream toArray wait.
+	aCollectionTwo := aMenuItems stream toArray wait.
+	self assert: aCollectionOne isNotEmpty.
+	self assert: aCollectionOne size equals: aCollectionTwo size.	"Menu items must be identical, so we ensure that each menu item state is preserved."
+	self assert: aCollectionOne first == aCollectionTwo first.
+
+	^ aMenuItems
+]
+
 { #category : #'examples - label' }
 BrMenuExamples >> menuTextAndShortcutLabel [
 	<gtExample>

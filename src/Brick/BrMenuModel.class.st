@@ -131,6 +131,14 @@ BrMenuModel >> navigate [
 	announcer announce: (BrMenuNavigateAnnouncement new menuModel: self)
 ]
 
+{ #category : #'api - notifying' }
+BrMenuModel >> notifyMenuItem: aMenuItem selectionChanged: isMenuItemSelected [
+	"Parents receive menu item selection changes directly so that they do not have to subscribe for the changes.
+	It may be called from a non-UI process, e.g., async futures."
+
+	
+]
+
 { #category : #'api - hooks' }
 BrMenuModel >> onMenuDisplayed: aMenuElement [
 	"Subclasses may react when a menu is dispalyed using a given element"

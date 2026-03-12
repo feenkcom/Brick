@@ -181,7 +181,7 @@ BrMenuWithScripterExamples >> buttonWithDropdownMenu: aMenuStencil [
 				constraintsDo: [ :c | 
 					c margin: (BlInsets all: 10).
 					c frame horizontal alignCenter.
-					c frame vertical alignCenterAt: 0.3 ];
+					c frame vertical alignCenterAt: 0.1 ];
 				addAptitude: (BrGlamorousWithExplicitDropdownAptitude
 						handle: [ BrButton new
 								id: #'menu-dropdown-handle';
@@ -210,6 +210,29 @@ BrMenuWithScripterExamples >> buttonWithSelectedListItemDropdown [
 				in: aButton ].
 	
 	^ aFrame
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> buttonWithStreamingItemsContextMenu [
+	<gtExample>
+	<return: #BrFrame>
+	| anElement |
+	anElement := self
+			buttonWithContextMenu: BrMenuExamples new menuStreamingItems.
+
+	anElement
+		when: BrPopoverWhoToPinToEvent
+		do: [ :anEvent | 
+			anEvent
+				consumed: true;
+				anchorElement: anElement ].
+
+	self
+		assert: (anElement eventDispatcher
+				hasEventHandlerSuchThat: [ :each | each class = BrPopoverAnchorWithPinnedElementHandler ])
+				not.
+
+	^ anElement
 ]
 
 { #category : #'examples - tooltip' }
@@ -527,6 +550,99 @@ BrMenuWithScripterExamples >> clickButtonWithDropdownExplicitMenu [
 		onSpaceRoot;
 		// BrMenuSteppedElement;
 		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> clickButtonWithStreamingItemsContextMenu [
+	<gtExample>
+	<return: #BlScripter>
+	| aScripter anAnchorElement aClickPosition |
+	aScripter := self displayButtonWithStreamingItemsContextMenu.
+
+	aScripter menuStep
+		openContextMenu;
+		/ #'menu-context-menu-button';
+		play.
+
+	anAnchorElement := (aScripter root query // #'menu-context-menu-button') anyOne.
+	self assert: anAnchorElement isNotNil.
+	aClickPosition := anAnchorElement bounds inSpace center.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		assertHandleCenterInSpacePosition: aClickPosition;
+		play.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> clickButtonWithStreamingItemsContextMenu_hoverThreeItems [
+	<gtExample>
+	<return: #BlScripter>
+	| aScripter aListElement |
+	aScripter := self clickButtonWithStreamingItemsContextMenu.
+
+	aScripter menuStep
+		hoverMenuItemWithId: (#'menu--item' asBlocElementId indexed: 8);
+		hoverMenuItemWithId: (#'menu--item' asBlocElementId indexed: 9);
+		hoverMenuItemWithId: (#'menu--item' asBlocElementId indexed: 10);
+		assertDeselectedMenuItem: (#'menu--item' asBlocElementId indexed: 7);
+		assertDeselectedMenuItem: (#'menu--item' asBlocElementId indexed: 8);
+		assertDeselectedMenuItem: (#'menu--item' asBlocElementId indexed: 9);
+		assertSelectedMenuItem: (#'menu--item' asBlocElementId indexed: 10);
+		onPopover;
+		play.
+
+	aListElement := (aScripter root query // BrMenuItemsListElement) anyOne.
+	self assert: aListElement isNotNil.
+	self
+		assert: aListElement menuModel selectedItem
+		equals: (aScripter root query // (#'menu--item' asBlocElementId indexed: 10)) anyOne menuModel.
+
+	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> clickButtonWithStreamingItemsContextMenu_hoverThreeItems_closeAndReopen [
+	<gtExample>
+	<return: #BlScripter>
+	| aScripter aListElement |
+	aScripter := self clickButtonWithStreamingItemsContextMenu_hoverThreeItems.
+
+	aScripter menuStep
+		assertMenuContainerExist;
+		play.
+	aScripter click
+		// #'outside-click';
+		play.
+	aScripter menuStep
+		assertClosedMenuContainer;
+		play.
+	aScripter menuStep
+		openContextMenu;
+		/ #'menu-context-menu-button';
+		play.
+
+	aScripter menuStep
+		hoverMenuItemWithId: (#'menu--item' asBlocElementId indexed: 8);
+		hoverMenuItemWithId: (#'menu--item' asBlocElementId indexed: 9);
+		hoverMenuItemWithId: (#'menu--item' asBlocElementId indexed: 10);
+		assertDeselectedMenuItem: (#'menu--item' asBlocElementId indexed: 7);
+		assertDeselectedMenuItem: (#'menu--item' asBlocElementId indexed: 8);
+		assertDeselectedMenuItem: (#'menu--item' asBlocElementId indexed: 9);
+		assertSelectedMenuItem: (#'menu--item' asBlocElementId indexed: 10);
+		onPopover;
+		play.
+
+	aListElement := (aScripter root query // BrMenuItemsListElement) anyOne.
+	self assert: aListElement isNotNil.
+	self
+		assert: aListElement menuModel selectedItem
+		equals: (aScripter root query // (#'menu--item' asBlocElementId indexed: 10)) anyOne
+				menuModel.
 
 	^ aScripter
 ]
@@ -1207,6 +1323,13 @@ BrMenuWithScripterExamples >> displayButtonWithSelectedListItemDropdown_displayD
 		play.
 
 	^ aScripter
+]
+
+{ #category : #'examples - context menu' }
+BrMenuWithScripterExamples >> displayButtonWithStreamingItemsContextMenu [
+	<gtExample>
+	<return: #BlScripter>
+	^ self scripterWithElement: [ self buttonWithStreamingItemsContextMenu ]
 ]
 
 { #category : #'examples - tooltip' }

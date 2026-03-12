@@ -22,7 +22,6 @@ BrMenuActionItemElement >> initialize [
 							onClickWithModifiers: anEvent
 							element: anElement
 							model: aButtonModel ]).
-	self initializeCommonStyling
 ]
 
 { #category : #'event handling' }

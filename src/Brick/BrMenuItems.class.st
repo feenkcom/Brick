@@ -1,3 +1,8 @@
+"
+I am a menu with explicitly defined {{gtClass:BrMenuItem | label=menu items}}. 
+# Example
+{{gtExample:BrMenuExamples>>#menuItems | codeExpanded=false | previewExpanded=true | previewHeight=500}}
+"
 Class {
 	#name : #BrMenuItems,
 	#superclass : #BrMenu,
@@ -25,11 +30,6 @@ BrMenuItems >> addItem: aMenuItem [
 	aMenuItem isSelected ifTrue: [
 		self selectedItem: aMenuItem ].
 
-	aMenuItem announcer weak
-		when: BrMenuItemSelectionChangedAnnouncement
-		send: #onMenuItemSelection:
-		to: self.
-		
 	self announcer announce: (BrMenuItemsChangedAnnouncement new menuModel: self)
 ]
 
@@ -352,12 +352,6 @@ BrMenuItems >> items: aCollection [
 		eachItem isSelected ifTrue: [
 			self selectedItem: aCollection ] ].
 
-	aCollection do: [ :eachItem |
-		eachItem announcer weak
-			when: BrMenuItemSelectionChangedAnnouncement
-			send: #onMenuItemSelection:
-			to: self ].
-	
 	self announcer announce: (BrMenuItemsChangedAnnouncement new menuModel: self)
 ]
 
@@ -371,8 +365,19 @@ BrMenuItems >> menuType [
 	^ self class
 ]
 
+{ #category : #'api - notifying' }
+BrMenuItems >> notifyMenuItem: aMenuItem selectionChanged: isMenuItemSelected [
+	super notifyMenuItem: aMenuItem selectionChanged: isMenuItemSelected.
+
+	isMenuItemSelected
+		ifTrue: [ self selectedItem: aMenuItem ]
+		ifFalse: [ self deselectedItem: aMenuItem ]
+]
+
 { #category : #'event handling' }
 BrMenuItems >> onMenuItemSelection: anAnnouncement [
+	"Can be removed in a week or so."
+
 	anAnnouncement menuModel isSelected
 		ifTrue: [ self selectedItem: anAnnouncement menuModel ]
 		ifFalse: [ self deselectedItem: anAnnouncement menuModel ]
@@ -403,4 +408,9 @@ BrMenuItems >> selectedItem: aMenuItem [
 
 	selectedItem ifNotNil: #deselect.
 	selectedItem := aMenuItem
+]
+
+{ #category : #'api - updating' }
+BrMenuItems >> updateSimpleListElementItems: aSimpleListElement [
+	aSimpleListElement items: self items
 ]
