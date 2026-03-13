@@ -538,11 +538,14 @@ BrMenuExamples >> menuStreamingItems [
 	aMenuItems stream: aStream.
 
 	aMenuElement := BrGlamorousMenuElementBuilder new visitModel: aMenuItems.
-	self assert: (aMenuElement isKindOf: BlElement).	"We want to ask for menu items multiple times, in case new streaming items element is created."
+	self assert: (aMenuElement isKindOf: BlElement).
+	
+	"We want to ask for menu items multiple times, in case new streaming items element is created."
 	aCollectionOne := aMenuItems stream toArray wait.
 	aCollectionTwo := aMenuItems stream toArray wait.
 	self assert: aCollectionOne isNotEmpty.
-	self assert: aCollectionOne size equals: aCollectionTwo size.	"Menu items must be identical, so we ensure that each menu item state is preserved."
+	self assert: aCollectionOne size equals: aCollectionTwo size.
+	"Menu items must be identical, so we ensure that each menu item state is preserved."
 	self assert: aCollectionOne first == aCollectionTwo first.
 
 	^ aMenuItems
