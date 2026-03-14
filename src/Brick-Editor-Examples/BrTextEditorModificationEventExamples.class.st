@@ -5,6 +5,33 @@ Class {
 }
 
 { #category : #examples }
+BrTextEditorModificationEventExamples >> deleteTextCreatesModificationEvent [
+	<gtExample>
+	<return: #BrTextEditorDeletionModificationEvent>
+	| textEditor targetEvent triggerCount |
+	textEditor := self newTextEditorWithNonEmptyText.
+
+	targetEvent := nil.
+	triggerCount := 0.
+	textEditor
+		when: BrTextEditorModificationEvent
+		do: [ :anEvent | 
+			targetEvent := anEvent.
+			triggerCount := triggerCount + 1 ].
+
+	textEditor deleter
+		from: 1 to: 3;
+		delete.
+
+	self assert: triggerCount equals: 1.
+	self assert: textEditor text asString equals: '14'.
+	self assert: targetEvent indices asArray equals: #(2).
+	self assert: targetEvent lengths asArray equals: #(2).
+
+	^ targetEvent
+]
+
+{ #category : #examples }
 BrTextEditorModificationEventExamples >> deleteTextIntoEditorEvent [
 	<gtExample>
 	<return: #BrTextEditorModifiedEvent>
@@ -45,6 +72,35 @@ BrTextEditorModificationEventExamples >> deleteTextIntoEditorEvent_deleteCommand
 	self assert: insertCommand redoIndices equals: #(2).
 
 	^ insertCommand
+]
+
+{ #category : #examples }
+BrTextEditorModificationEventExamples >> insertTextCreatesModificationEvent [
+	<gtExample>
+	<return: #BrTextEditorDeletionModificationEvent>
+	| textEditor targetEvent triggerCount |
+	textEditor := self newTextEditorWithEmptyText.
+
+	targetEvent := nil.
+	triggerCount := 0.
+	textEditor
+		when: BrTextEditorModificationEvent
+		do: [ :anEvent | 
+			targetEvent := anEvent.
+			triggerCount := triggerCount + 1 ].
+
+	textEditor inserter
+		atEnd;
+		string: 'abc';
+		insert.
+
+	self assert: triggerCount equals: 1.
+	self assert: textEditor text asString equals: 'abc'.
+	self assert: targetEvent indices asArray equals: #(0).
+	self assert: targetEvent lengths asArray equals: #(3).
+	self assert: targetEvent strings asArray equals: #('abc').
+
+	^ targetEvent
 ]
 
 { #category : #examples }

@@ -21,3 +21,8 @@ BrTextEditorEvent >> editor [
 BrTextEditorEvent >> editor: aBrTextEditor [
 	editor := aBrTextEditor
 ]
+
+{ #category : #testing }
+BrTextEditorEvent >> isModification [
+	^ false
+]

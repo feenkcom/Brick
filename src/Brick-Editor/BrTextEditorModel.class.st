@@ -594,6 +594,15 @@ BrTextEditorModel >> notifyDeletedFrom: aFromIndex to: aToIndex [
 		toIndex: aToIndex)
 ]
 
+{ #category : #'hooks - text modifications' }
+BrTextEditorModel >> notifyDeletionsFrom: aBlTextsDeleted [
+	self
+		dispatchEvent: (BrTextEditorDeletionModificationEvent new
+				indices: (aBlTextsDeleted finalIntervals collect: #first);
+				lengths: (aBlTextsDeleted finalIntervals collect: #size);
+				yourself)
+]
+
 { #category : #'event firing' }
 BrTextEditorModel >> notifyHistoryChanged [
 	self dispatchEvent: (BrTextEditorHistoryChangedEvent new editor: self)
@@ -602,6 +611,15 @@ BrTextEditorModel >> notifyHistoryChanged [
 { #category : #'event firing' }
 BrTextEditorModel >> notifyInserted: aText at: aTextIndex [
 	self dispatchEvent: (BrTextEditorInsertedEvent text: aText at: aTextIndex)
+]
+
+{ #category : #'hooks - text modifications' }
+BrTextEditorModel >> notifyInsertionsFrom: aBlTextStringsInserted [
+	self
+		dispatchEvent: (BrTextEditorInsertionModificationEvent new
+				indices: aBlTextStringsInserted finalIndices;
+				strings: aBlTextStringsInserted strings;
+				yourself)
 ]
 
 { #category : #'event firing' }
@@ -789,6 +807,8 @@ BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
 		notifyModified: self text 
 		fromCommand: insertCommand
 		dueTo: aBlTextStringsInserted.
+		
+	self notifyInsertionsFrom: aBlTextStringsInserted.
 
 	shouldStyleWhenTextModified
 		ifTrue: [ self styleText ]
@@ -891,6 +911,8 @@ BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 	self 
 		notifyModified: self text
 		fromCommand: deleteCommand.
+		
+	self notifyDeletionsFrom: aBlTextsDeleted.
 	
 	shouldStyleWhenTextModified
 		ifTrue: [ self styleText ]
