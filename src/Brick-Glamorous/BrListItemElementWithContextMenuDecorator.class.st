@@ -8,6 +8,13 @@ Class {
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
+{ #category : #testing }
+BrListItemElementWithContextMenuDecorator class >> isDeprecated [
+	"Use BrGlamorousSimpleListItemElementWithContextMenuDecorator instead"
+
+	^ true
+]
+
 { #category : #accessing }
 BrListItemElementWithContextMenuDecorator class >> stencilProperties [
 	^ #(contextMenuStencil stencilBuilder)
