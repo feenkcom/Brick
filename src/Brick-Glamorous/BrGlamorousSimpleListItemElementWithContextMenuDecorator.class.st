@@ -11,7 +11,7 @@ Class {
 
 { #category : #accessing }
 BrGlamorousSimpleListItemElementWithContextMenuDecorator class >> stencilProperties [
-	^ #(contextMenuStencil stencilBuilder)
+	^ #(contextMenuStencil stencilBuilder multipleSelectionEnabled)
 ]
 
 { #category : #'api - instantiation' }
