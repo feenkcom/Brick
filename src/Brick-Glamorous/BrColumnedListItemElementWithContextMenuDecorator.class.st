@@ -4,6 +4,13 @@ Class {
 	#category : #'Brick-Glamorous-List, Tree'
 }
 
+{ #category : #testing }
+BrColumnedListItemElementWithContextMenuDecorator class >> isDeprecated [
+	"Use BrGlamorousColumnedListItemElementWithContextMenuDecorator instead"
+
+	^ true
+]
+
 { #category : #accessing }
 BrColumnedListItemElementWithContextMenuDecorator >> buildDefault [
 	<return: #BrStencil or: #BlElement>
