@@ -1,6 +1,6 @@
 Class {
 	#name : #BrThemeColorSenderRefactoring,
-	#superclass : #RBRefactoring,
+	#superclass : #ReRefactoring,
 	#instVars : [
 		'selectorThemesMapping'
 	],
