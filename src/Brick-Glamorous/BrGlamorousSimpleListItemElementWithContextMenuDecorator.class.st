@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrListItemElementStencilBuilder,
 	#instVars : [
 		'stencilBuilder',
-		'contextMenuStencil'
+		'contextMenuStencil',
+		'multipleSelectionEnabled'
 	],
 	#category : #'Brick-Glamorous-List, Tree'
 }
@@ -26,19 +27,27 @@ BrGlamorousSimpleListItemElementWithContextMenuDecorator >> buildDefault [
 			menu: [ anElement
 					allParentsDetect: [ :eachParent | eachParent isKindOf: self listOfKindClass ]
 					ifFound: [ :aListElement | 
-						| anItemHolder anItemPosition anItemObject anItemType |
+						| anItemHolder anItemPosition anItemObject anItemType selectedItems aPickedObject |
 						anItemHolder := anElement constraints infinite holder.
 						anItemPosition := anItemHolder dataSourcePosition.
 						anItemObject := aListElement viewModel itemAt: anItemPosition.
 
+						selectedItems := aListElement selectedItems 
+							ifEmpty: [ { anItemObject } ].
+						(selectedItems includes: anItemObject) ifFalse: [
+							selectedItems := { anItemObject } ].
+						aPickedObject := self isMultipleSelectionEnabled
+							ifTrue: [ selectedItems ]
+							ifFalse: [ selectedItems anyOne ].
+						
 						anItemType := aListElement viewModel itemTypeStencil
 								itemPosition: anItemPosition;
-								itemObject: anItemObject;
+								itemObject: aPickedObject;
 								build.
 
 						contextMenuStencil
 							itemType: anItemType;
-							itemObject: anItemObject;
+							itemObject: aPickedObject;
 							itemPosition: anItemPosition;
 							itemElement: anElement;
 							build ]
@@ -60,9 +69,26 @@ BrGlamorousSimpleListItemElementWithContextMenuDecorator >> contextMenuStencil: 
 	contextMenuStencil := aGtPhlowListContextMenuStencilBuilder asStencilBuilder: BrGlamorousListContextMenuItemsStencilBuilder
 ]
 
+{ #category : #initialization }
+BrGlamorousSimpleListItemElementWithContextMenuDecorator >> initialize [
+	super initialize.
+	
+	multipleSelectionEnabled := false.
+]
+
+{ #category : #testing }
+BrGlamorousSimpleListItemElementWithContextMenuDecorator >> isMultipleSelectionEnabled [
+	^ multipleSelectionEnabled == true
+]
+
 { #category : #'api - instantiation' }
 BrGlamorousSimpleListItemElementWithContextMenuDecorator >> listOfKindClass [
 	^ BrSimpleList
+]
+
+{ #category : #'api - initialization' }
+BrGlamorousSimpleListItemElementWithContextMenuDecorator >> multipleSelectionEnabled: aBoolean [
+	multipleSelectionEnabled := aBoolean
 ]
 
 { #category : #accessing }
