@@ -266,7 +266,8 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 	handle := [ BlElement new
 			size: handleSize;
 			yourself ] asStencil.
-	content := [ (BrVerticalPane new fitContent
+	content := [ (BrVerticalPane new
+			fitContent;
 			id: #itemsContainer;
 			in: [ :thePane | 
 				1
@@ -274,6 +275,7 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 					do: [ :anIndex | 
 						thePane
 							addChild: (BrLabel new
+									fitContent;
 									aptitude: (BrGlamorousLabelAptitude new
 											glamorousRegularFontAndSize;
 											yourself);
