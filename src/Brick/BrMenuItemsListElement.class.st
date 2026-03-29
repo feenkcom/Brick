@@ -42,7 +42,10 @@ BrMenuItemsListElement >> initializeListElement [
 		itemType: [ :aFactory :anObject :anIndex | 
 			self visitMenuModel: anObject ];
 		itemStencil: [ :anItemType | 
-			self typeBuilder buildElementFromItemType: anItemType ];
+			| anItemElement |
+			anItemElement := self typeBuilder buildElementFromItemType: anItemType.
+			anItemElement dispatchEvent: BrPopoverBeListItemWish new.
+			anItemElement ];
 		itemDataBinder: [ :anItemElement :anItemObject :anItemIndex |
 			anItemElement menuModel: anItemObject.
 			(anItemElement id = BlElementId noId) ifTrue: [ 

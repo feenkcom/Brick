@@ -284,6 +284,9 @@ BrAnchoredByScripterExamples >> elementWithLongContextMenu [
 									yourself) ] ];
 			yourself) asScrollableElement
 			alignCenter;
+			constraintsDo: [ :c |
+				c horizontal fitContent.
+				c vertical fitContentLimited ];
 			id: #itemsScrollableContainer;
 			yourself ] asStencil.
 	container := BlElement new
