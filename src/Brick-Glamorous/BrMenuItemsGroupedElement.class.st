@@ -30,7 +30,6 @@ BrMenuItemsGroupedElement >> initialize [
 { #category : #initialization }
 BrMenuItemsGroupedElement >> initializeListElement [
 	listElement := BrGroupedList new
-			"beNotFocusable;"
 			fitContentLimited;
 			headerElementStencil: [ :anItemType :aListWidget | 
 				BrLabel new
@@ -58,7 +57,10 @@ BrMenuItemsGroupedElement >> listGroups [
 				itemType: [ :aFactory :anObject :anIndex | 
 					self visitMenuModel: anObject ];
 				itemStencil: [ :anItemType | 
-					self typeBuilder buildElementFromItemType: anItemType ];
+					| anItemElement |
+					anItemElement := self typeBuilder buildElementFromItemType: anItemType.
+					anItemElement dispatchEvent: BrPopoverBeListItemWish new.
+					anItemElement ];
 				itemDataBinder: [ :anItemElement :anItem | 
 					anItemElement menuModel: anItem ] ]
 ]

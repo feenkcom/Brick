@@ -14,11 +14,12 @@ BrMenuItemElement >> defaultLayout [
 { #category : #initialization }
 BrMenuItemElement >> initialize [
 	super initialize.
-	self hMatchParent.
+	self hFitContentLimited.
 	self vFitContent.
 
 	self when: BlMouseEnterEvent do: [ :anEvent | self onMouseEnterEvent: anEvent ].
 	self when: BlMouseLeaveEvent do: [ :anEvent | self onMouseLeaveEvent: anEvent ].
+	self when: BrPopoverBeListItemWish do: [ :anEvent | self onPopoverBeListItemWish: anEvent ].
 	
 	self
 		padding: (BlInsets
@@ -67,6 +68,17 @@ BrMenuItemElement >> onMouseEnterEvent: anEvent [
 { #category : #'event handling' }
 BrMenuItemElement >> onMouseLeaveEvent: anEvent [
 	
+]
+
+{ #category : #initialization }
+BrMenuItemElement >> onPopoverBeListItemWish: anEvent [ 
+	"When the item element is part of a list of items,
+	all list items should occupy same width, which is
+	the width of the widest item element."
+
+	anEvent consumed: true.
+	
+	self hMatchParent
 ]
 
 { #category : #'event handling' }
