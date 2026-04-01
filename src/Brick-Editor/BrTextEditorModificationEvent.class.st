@@ -7,6 +7,11 @@ Class {
 	#category : #'Brick-Editor-Model - Events'
 }
 
+{ #category : #'as yet unclassified' }
+BrTextEditorModificationEvent >> documentId [
+	^ nil
+]
+
 { #category : #accessing }
 BrTextEditorModificationEvent >> indices [
 	^ indices
