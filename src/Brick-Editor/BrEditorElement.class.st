@@ -109,6 +109,11 @@ BrEditorElement >> removeTextAttribute: anAttribute [
 	self editor text clearAttributes: [ :each | each == anAttribute ]
 ]
 
+{ #category : #styling }
+BrEditorElement >> requestManualStyling [
+	self editor styleText
+]
+
 { #category : #scrolling }
 BrEditorElement >> scrollToFirst [
 	"Scroll instantly to the first position"
@@ -137,6 +142,15 @@ BrEditorElement >> smoothScrollToPosition: aPosition [
 		and: [ self editor segmentCollector cachedInterval last < aPosition ])
 		ifTrue: [ self editor segmentCollector computeForwardAt: aPosition ].
 	^ super smoothScrollToPosition: aPosition
+]
+
+{ #category : #styling }
+BrEditorElement >> styleText [
+	self
+		deprecated: 'Use #requestManualStyling instead.'
+		transformWith: '`@receiver styleText' -> '`@receiver requestManualStyling'.
+
+	self editor styleText
 ]
 
 { #category : #accessing }
