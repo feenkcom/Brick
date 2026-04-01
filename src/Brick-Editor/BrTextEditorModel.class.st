@@ -1035,6 +1035,13 @@ BrTextEditorModel >> removeEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 	aCollectionOfBrTextEditorShortcut do: [ :eachShortcut | self removeEditorShortcut: eachShortcut ]
 ]
 
+{ #category : #'text - styling' }
+BrTextEditorModel >> requestManualStyling [
+	"I request styler to re-style my current text"
+
+	self styleTextAndAfterDo: [ :aStyledText |  ]
+]
+
 { #category : #'api - save state' }
 BrTextEditorModel >> restoreState: aBrTextEditorMemento [
 	self assertUIProcess.
