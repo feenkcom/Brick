@@ -4,10 +4,21 @@ Class {
 	#instVars : [
 		'text',
 		'editCommand',
-		'reason'
+		'reason',
+		'documentId'
 	],
 	#category : #'Brick-Editor-Model - Events'
 }
+
+{ #category : #accessing }
+BrTextEditorModifiedEvent >> documentId [
+	^ documentId
+]
+
+{ #category : #accessing }
+BrTextEditorModifiedEvent >> documentId: anObject [
+	documentId := anObject
+]
 
 { #category : #accessing }
 BrTextEditorModifiedEvent >> editCommand [
