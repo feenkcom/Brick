@@ -8,6 +8,11 @@ Class {
 	#category : #'Brick-Editor-Attributes'
 }
 
+{ #category : #printing }
+BrTextInvisibleMarkerAttribute >> gtDisplayOn: stream [
+	stream nextPutAll: 'Marker'
+]
+
 { #category : #comparing }
 BrTextInvisibleMarkerAttribute >> type [
 	^ self
