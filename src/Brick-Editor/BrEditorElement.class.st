@@ -26,6 +26,18 @@ BrEditorElement class >> editorTabSize: aNumber [
 	EditorTabSize := aNumber
 ]
 
+{ #category : #'api - highlighting' }
+BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
+	self assert: [ aBrTextRange isCharacterRange ].
+
+	self text
+		addAttribute: (BlTextHighlightAttribute new
+				paint: aBrTextHighlight color;
+				id: aBrTextHighlight id)
+		from: aBrTextRange start
+		to: aBrTextRange end
+]
+
 { #category : #conversion }
 BrEditorElement >> asScrollableElement [
 	^ self
@@ -102,6 +114,14 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 	aTargetLine := (self text from: 1 to: aMaxIndex) lineCount.
 
 	self scrollToPosition: aTargetLine + 1
+]
+
+{ #category : #'api - highlighting' }
+BrEditorElement >> removeHighlightsWithId: aStringId [
+	self text
+		clearAttributes: [ :eachAttribute | 
+			eachAttribute = BlTextHighlightAttribute and: [ 
+				eachAttribute id = aStringId ] ]
 ]
 
 { #category : #'api - editor' }
