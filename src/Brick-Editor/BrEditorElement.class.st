@@ -31,9 +31,9 @@ BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	self assert: [ aBrTextRange isCharacterRange ].
 
 	self text
-		addAttribute: (BlTextHighlightAttribute new
-				paint: aBrTextHighlight color;
-				id: aBrTextHighlight id)
+		attributes: {BlTextHighlightAttribute new
+					paint: aBrTextHighlight color;
+					id: aBrTextHighlight id}
 		from: aBrTextRange start
 		to: aBrTextRange end
 ]
@@ -120,7 +120,7 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 BrEditorElement >> removeHighlightsWithId: aStringId [
 	self text
 		clearAttributes: [ :eachAttribute | 
-			eachAttribute = BlTextHighlightAttribute and: [ 
+			eachAttribute class = BlTextHighlightAttribute and: [ 
 				eachAttribute id = aStringId ] ]
 ]
 
