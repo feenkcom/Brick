@@ -42,9 +42,11 @@ BrTextRange >> gtDisplayOn: stream [
 		space;
 		nextPut: $[;
 		print: start;
-		nextPutAll: ' .. ';
+		nextPutAll: '..';
 		print: end;
-		nextPut: $)
+		nextPut: $];
+		space.
+	documentId gtDisplayOn: stream
 ]
 
 { #category : #testing }
