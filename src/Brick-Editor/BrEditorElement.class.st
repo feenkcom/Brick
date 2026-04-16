@@ -26,6 +26,47 @@ BrEditorElement class >> editorTabSize: aNumber [
 	EditorTabSize := aNumber
 ]
 
+{ #category : #'api - attributes' }
+BrEditorElement >> addAttribute: anAttribute overMarker: aMarkerAttribute [
+	"Return an attribute tag, currently it is the very same attribute."
+
+	self text
+		findAttribute: aMarkerAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			self text
+				attributes: {anAttribute}
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition ].
+
+	^ anAttribute
+]
+
+{ #category : #'api - attributes' }
+BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
+	"Return an attribute tag, currently it is the very same attribute."
+
+	self assert: [ aBrTextRange isCharacterRange ].
+
+	self text
+		attributes: {anAttribute}
+		from: aBrTextRange start
+		to: aBrTextRange end.
+		
+	^ anAttribute
+]
+
+{ #category : #'api - highlighting' }
+BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
+	self assert: [ aBrTextRange isCharacterRange ].
+
+	self text
+		attributes: {BlTextHighlightAttribute new
+					paint: aBrTextHighlight color;
+					id: aBrTextHighlight id}
+		from: aBrTextRange start
+		to: aBrTextRange end
+]
+
 { #category : #conversion }
 BrEditorElement >> asScrollableElement [
 	^ self
@@ -102,6 +143,28 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 	aTargetLine := (self text from: 1 to: aMaxIndex) lineCount.
 
 	self scrollToPosition: aTargetLine + 1
+]
+
+{ #category : #'api - attributes' }
+BrEditorElement >> removeAttributeTagged: anAttributeTag [
+	"anAttributeTag is currently the very same attribute."
+
+	self text removeAttribute: anAttributeTag
+]
+
+{ #category : #'api - attributes' }
+BrEditorElement >> removeAttributeTagged: anAttributeTag overMarker: aMarkerAttribute [
+	"anAttributeTag is currently the very same attribute."
+
+	self text removeAttribute: anAttributeTag
+]
+
+{ #category : #'api - highlighting' }
+BrEditorElement >> removeHighlightsWithId: aStringId [
+	self text
+		clearAttributes: [ :eachAttribute | 
+			eachAttribute class = BlTextHighlightAttribute and: [ 
+				eachAttribute id = aStringId ] ]
 ]
 
 { #category : #'api - editor' }
