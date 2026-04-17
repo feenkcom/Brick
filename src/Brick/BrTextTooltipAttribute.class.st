@@ -1,6 +1,6 @@
 Class {
 	#name : #BrTextTooltipAttribute,
-	#superclass : #BrTextHoverAttribute,
+	#superclass : #BrTextHoverProtoAttribute,
 	#instVars : [
 		'tooltipStencil'
 	],
