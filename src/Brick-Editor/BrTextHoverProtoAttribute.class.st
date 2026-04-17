@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTextHoverAttribute,
+	#name : #BrTextHoverProtoAttribute,
 	#superclass : #BrTextEventHandlerAttribute,
 	#instVars : [
 		'enterAction',
@@ -9,18 +9,28 @@ Class {
 	#category : #'Brick-Editor-Attributes'
 }
 
-{ #category : #accessing }
-BrTextHoverAttribute >> enterAction [
-	^ enterAction
+{ #category : #views }
+BrTextHoverProtoAttribute >> gtEnterActionFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Enter action';
+		priority: 10;
+		object: [ enterAction ];
+		view: #gtSourceCodeFor:
 ]
 
-{ #category : #accessing }
-BrTextHoverAttribute >> enterAction: anObject [
-	enterAction := anObject
+{ #category : #views }
+BrTextHoverProtoAttribute >> gtLeaveActionFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Leave action';
+		priority: 11;
+		object: [ leaveAction ];
+		view: #gtSourceCodeFor:
 ]
 
 { #category : #events }
-BrTextHoverAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
+BrTextHoverProtoAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorTextualPiece [
 	"Handle a given event or dispatch it using #sendTo:"
 
 	(anEvent isKindOf: BlMouseMoveEvent)
@@ -31,7 +41,7 @@ BrTextHoverAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextEditorT
 ]
 
 { #category : #initialization }
-BrTextHoverAttribute >> initialize [
+BrTextHoverProtoAttribute >> initialize [
 	super initialize.
 
 	enterAction := [ :aText :aTextElement :aTextEditor :anEvent | ].
@@ -39,22 +49,8 @@ BrTextHoverAttribute >> initialize [
 	isHovered := false
 ]
 
-{ #category : #accessing }
-BrTextHoverAttribute >> leaveAction [
-	^ leaveAction
-]
-
-{ #category : #accessing }
-BrTextHoverAttribute >> leaveAction: aBlock [
-	self 
-		assert: [ aBlock notNil ] 
-		description: [ 'Leave action should be initialized' ].
-
-	leaveAction := aBlock
-]
-
 { #category : #private }
-BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
+BrTextHoverProtoAttribute >> performEnterAction: anEvent in: aTextEditor [
 	isHovered ifTrue: [ ^ self ].
 
 	isHovered := true.
@@ -62,7 +58,7 @@ BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
 	anEvent currentTarget text
 		findAttribute: self
 		indicesDo: [ :st :nd | 
-			self enterAction
+			enterAction
 				gtValueWithArgs: {anEvent currentTarget text from: st to: nd.
 						anEvent currentTarget.
 						aTextEditor.
@@ -70,7 +66,7 @@ BrTextHoverAttribute >> performEnterAction: anEvent in: aTextEditor [
 ]
 
 { #category : #private }
-BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [	
+BrTextHoverProtoAttribute >> performLeaveAction: anEvent in: aTextEditor [	
 	isHovered
 		ifFalse: [ ^ self ].
 
@@ -79,7 +75,7 @@ BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [
 	anEvent currentTarget text
 		findAttribute: self
 		indicesDo: [ :st :nd | 
-			self leaveAction
+			leaveAction
 				gtValueWithArgs: {
 						anEvent currentTarget text from: st to: nd. "first we pass text"
 						anEvent currentTarget. "then the text piece (word) element"
@@ -88,12 +84,12 @@ BrTextHoverAttribute >> performLeaveAction: anEvent in: aTextEditor [
 ]
 
 { #category : #events }
-BrTextHoverAttribute >> performMoveAction: anEvent in: aTextEditor [
+BrTextHoverProtoAttribute >> performMoveAction: anEvent in: aTextEditor [
 	self performEnterAction: anEvent in: aTextEditor
 ]
 
 { #category : #events }
-BrTextHoverAttribute >> wantsEvent: anEvent [
+BrTextHoverProtoAttribute >> wantsEvent: anEvent [
 	"Return true if I am interested in a given event and want to handle it,
 	false otherwise"
 	<return: #Boolean>
