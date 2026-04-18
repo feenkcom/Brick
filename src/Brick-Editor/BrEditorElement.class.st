@@ -47,8 +47,8 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 
 	self assert: [ aBrTextRange isCharacterRange ].
 	
-	(self editor isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ self ].
+	"(self editor isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ]."
 
 	self text
 		attributes: {anAttribute}
@@ -62,8 +62,8 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	self assert: [ aBrTextRange isCharacterRange ].
 
-	(self editor isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ self ].
+	"(self editor isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ]."
 
 	self text
 		attributes: {BlTextHighlightAttribute new
