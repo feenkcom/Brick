@@ -2,14 +2,20 @@ Class {
 	#name : #BrTextEditorModificationEvent,
 	#superclass : #BrTextEditorEvent,
 	#instVars : [
-		'indices'
+		'indices',
+		'documentId'
 	],
 	#category : #'Brick-Editor-Model - Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BrTextEditorModificationEvent >> documentId [
-	^ nil
+	^ documentId
+]
+
+{ #category : #accessing }
+BrTextEditorModificationEvent >> documentId: anObject [
+	documentId := anObject
 ]
 
 { #category : #accessing }

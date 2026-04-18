@@ -46,6 +46,9 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 	"Return an attribute tag, currently it is the very same attribute."
 
 	self assert: [ aBrTextRange isCharacterRange ].
+	
+	"(self editor isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ]."
 
 	self text
 		attributes: {anAttribute}
@@ -58,6 +61,9 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 { #category : #'api - highlighting' }
 BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	self assert: [ aBrTextRange isCharacterRange ].
+
+	"(self editor isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ]."
 
 	self text
 		attributes: {BlTextHighlightAttribute new
