@@ -315,10 +315,10 @@ BrTextEditorModel >> ensureNoUndoRedoShortcuts [
 
 { #category : #accessing }
 BrTextEditorModel >> gtStringFor: aView [
+	"I recommend to keep it before Text view, because there are cases when attributes do not behave well when displayed twice. Which is of course problem of those attributes that should be fixed."
+
 	<gtView>
-	^ (self text 
-		gtStringFor: aView)
-		priority: 5
+	^ (self text gtStringFor: aView) priority: 0
 ]
 
 { #category : #views }
