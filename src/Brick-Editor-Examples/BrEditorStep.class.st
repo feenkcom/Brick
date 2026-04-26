@@ -89,8 +89,8 @@ BrEditorStep >> assertTextEqualsTo: aString [
 BrEditorStep >> deselectAll [
 	^ self do
 		referenceSender;
-		label: 'Select all editor text';
-		block: [ :anEditor | anEditor selecter all; select ];
+		label: 'Deselect all editor text';
+		block: [ :anEditor | anEditor deselecter all; deselect ];
 		onParentStepTarget: self;
 		onThisOrBreadthFirstChildOfKind: BrEditor
 ]
@@ -129,6 +129,14 @@ BrEditorStep >> moveUp [
 	^ self keyPress
 		label: 'Move up';
 		key: BlKeyboardKey arrowUp
+]
+
+{ #category : #'steps - interactions' }
+BrEditorStep >> pressBackspace [
+	^ self keyPress
+		label: 'Press backspace';
+		key: BlKeyboardKey backspace;
+		referenceSender
 ]
 
 { #category : #'steps - interactions' }
