@@ -80,3 +80,10 @@ BrLazyStyleCommonAptitude >> unfocused: aBlock [
 		when: BlElementState unfocused
 		style: aBlock
 ]
+
+{ #category : #'api - styles' }
+BrLazyStyleCommonAptitude >> unhovered: aBlock [
+	self
+		when: BlElementState unhovered
+		style: aBlock
+]
