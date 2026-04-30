@@ -8,6 +8,20 @@ Class {
 }
 
 { #category : #'steps - checks' }
+BrEditorStep >> assertCursorPosition: aPosition [
+	^ self assert
+		label: ('Assert editor cursor position is {1}' format: {aPosition});
+		value: [ :anEditor | 
+				| allCursors |
+				allCursors := anEditor cursors allCursors.
+				self assert: allCursors size equals: 1.
+				allCursors anyOne position ]
+			equals: aPosition;
+		onParentStepTarget: self;
+		onThisOrBreadthFirstChildOfKind: BrEditor
+]
+
+{ #category : #'steps - checks' }
 BrEditorStep >> assertFullyVisibleParagraphAt: anIndexBlock hasNotText: aStringBlock [
 	| aParagraph |
 	^ self assert referenceSender
