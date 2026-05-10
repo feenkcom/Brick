@@ -5,14 +5,16 @@ TBlTextStyleable >> expanded: aBoolean adornment: aBrTextAdornmentStencilBuilder
 	"Append a visual element defined by a given stencil builder right after a text on which I am applied.
 	A stencil builder can also be a block in the following form:
 	[ :aTBrTextEditorTextualPiece :anEditorElement | ] - where aText represents a piece of text after which an element should be append"
-
-	self attributesBuilder attribute: (
-		BrGlamorousTriangleExpanderTextAttribute new 
-			isExpanded: aBoolean;
-			attributesCreatingBlock: [
-				BrTextAdornmentDynamicAttribute new 	
-					beAppend;
-					stencil: aBrTextAdornmentStencilBuilder ])
+	| anExpanderAttribute |
+	
+	anExpanderAttribute := BrGlamorousTriangleExpanderTextAttributeV2 new
+		stencil: aBrTextAdornmentStencilBuilder.
+	
+	self attributesBuilder attribute: anExpanderAttribute.
+	
+	aBoolean ifTrue: [
+		anExpanderAttribute beExpandedByDefault.
+		self attributesBuilder attribute: anExpanderAttribute expandedAppendingAttribute ].
 ]
 
 { #category : #'*Brick-Glamorous' }
