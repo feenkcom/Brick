@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousTriangleExpanderTextAttributeV2,
-	#superclass : #BrTextExpandButtonAttributeV2,
+	#superclass : #BrTextExpanderTextAttributeV2,
 	#instVars : [
 		'stencil',
 		'expandedAppendingAttribute'

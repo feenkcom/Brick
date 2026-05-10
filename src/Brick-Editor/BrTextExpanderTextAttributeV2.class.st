@@ -1,5 +1,5 @@
 Class {
-	#name : #BrTextExpandButtonAttributeV2,
+	#name : #BrTextExpanderTextAttributeV2,
 	#superclass : #BrTextAdornmentAttribute,
 	#instVars : [
 		'isExpanded',
@@ -10,28 +10,28 @@ Class {
 }
 
 { #category : #accessing }
-BrTextExpandButtonAttributeV2 >> beExpandedByDefault [
+BrTextExpanderTextAttributeV2 >> beExpandedByDefault [
 	isExpanded := true
 ]
 
 { #category : #private }
-BrTextExpandButtonAttributeV2 >> collapseAttributeIn: aTextEditor [
+BrTextExpanderTextAttributeV2 >> collapseAttributeIn: aTextEditor [
 	isExpanded := false.
 	aTextEditor removeAdornmentAttribute: self expandedAppendingAttribute
 ]
 
 { #category : #accessing }
-BrTextExpandButtonAttributeV2 >> definingMethod [
+BrTextExpanderTextAttributeV2 >> definingMethod [
 	^ definingMethod
 ]
 
 { #category : #accessing }
-BrTextExpandButtonAttributeV2 >> definingMethod: anObject [
+BrTextExpanderTextAttributeV2 >> definingMethod: anObject [
 	definingMethod := anObject
 ]
 
 { #category : #private }
-BrTextExpandButtonAttributeV2 >> expandAttributeIn: aTextEditor [
+BrTextExpanderTextAttributeV2 >> expandAttributeIn: aTextEditor [
 	isExpanded := true.
 	aTextEditor
 		addAppendingAttribute: self expandedAppendingAttribute
@@ -39,24 +39,24 @@ BrTextExpandButtonAttributeV2 >> expandAttributeIn: aTextEditor [
 ]
 
 { #category : #private }
-BrTextExpandButtonAttributeV2 >> expandedAppendingAttribute [
+BrTextExpanderTextAttributeV2 >> expandedAppendingAttribute [
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
-BrTextExpandButtonAttributeV2 >> id [
+BrTextExpanderTextAttributeV2 >> id [
 	<return: #BlElementId>
 	
 	^ id
 ]
 
 { #category : #accessing }
-BrTextExpandButtonAttributeV2 >> id: anElementId [
+BrTextExpanderTextAttributeV2 >> id: anElementId [
 	id := anElementId
 ]
 
 { #category : #initialization }
-BrTextExpandButtonAttributeV2 >> initialize [
+BrTextExpanderTextAttributeV2 >> initialize [
 	super initialize.
 	
 	self beAppend.
@@ -67,12 +67,12 @@ BrTextExpandButtonAttributeV2 >> initialize [
 ]
 
 { #category : #accessing }
-BrTextExpandButtonAttributeV2 >> isExpanded [
+BrTextExpanderTextAttributeV2 >> isExpanded [
 	^ isExpanded
 ]
 
 { #category : #private }
-BrTextExpandButtonAttributeV2 >> toggleExpandedOrCollapsedIn: aTextEditor [
+BrTextExpanderTextAttributeV2 >> toggleExpandedOrCollapsedIn: aTextEditor [
 	self isExpanded
 		ifTrue: [ self collapseAttributeIn: aTextEditor ]
 		ifFalse: [ self expandAttributeIn: aTextEditor ]
