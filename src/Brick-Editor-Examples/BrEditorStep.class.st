@@ -139,6 +139,14 @@ BrEditorStep >> moveToEnd [
 ]
 
 { #category : #'steps - interactions' }
+BrEditorStep >> moveToHome [
+	^ self keyPress
+		label: 'Move to home';
+		key: BlKeyboardKey home;
+		referenceSender
+]
+
+{ #category : #'steps - interactions' }
 BrEditorStep >> moveUp [
 	^ self keyPress
 		label: 'Move up';
