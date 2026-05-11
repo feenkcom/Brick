@@ -27,6 +27,21 @@ BrEditorElement class >> editorTabSize: aNumber [
 ]
 
 { #category : #'api - attributes' }
+BrEditorElement >> addAppendingAttribute: anAppendingAttribute atAppendingAttribute: anotherAppendingAttribute [
+	"Return an attribute tag, currently it is the very same attribute."
+
+	self text
+		findAttribute: anotherAppendingAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			self text
+				attributes: { anAppendingAttribute }
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition ].
+
+	^ anAppendingAttribute
+]
+
+{ #category : #'api - attributes' }
 BrEditorElement >> addAttribute: anAttribute overMarker: aMarkerAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
@@ -149,6 +164,11 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 	aTargetLine := (self text from: 1 to: aMaxIndex) lineCount.
 
 	self scrollToPosition: aTargetLine + 1
+]
+
+{ #category : #'api - attributes' }
+BrEditorElement >> removeAdornmentAttribute: anAdornmentAttribute [
+	self text removeAttribute: anAdornmentAttribute
 ]
 
 { #category : #'api - attributes' }

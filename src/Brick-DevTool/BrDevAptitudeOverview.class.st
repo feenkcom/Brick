@@ -123,16 +123,13 @@ BrDevAptitudeOverview >> buildEventsSection [
 
 { #category : #'private - references' }
 BrDevAptitudeOverview >> buildExpandArtifctReferencesAttribute: theWishes [
-	^ BrGlamorousTriangleExpanderTextAttribute new 
-		attributesCreatingBlock: [
-			BrTextAdornmentDynamicAttribute new 	
-				beAppend;
-				stencil:  [
-					(self buildSmallReferencesList: theWishes)
-						addAptitude: BrShadowAptitude;
-						background: Color white;
-						margin: (BlInsets all: 10);
-						constraintsDo: [ :c | c textFlow pushLine ] ] ]
+	^ BrGlamorousTriangleExpanderTextAttributeV2 new 
+		stencil:  [
+				(self buildSmallReferencesList: theWishes)
+					addAptitude: BrShadowAptitude;
+					background: Color white;
+					margin: (BlInsets all: 10);
+					constraintsDo: [ :c | c textFlow pushLine ] ]
 ]
 
 { #category : #'private - instance creation' }
