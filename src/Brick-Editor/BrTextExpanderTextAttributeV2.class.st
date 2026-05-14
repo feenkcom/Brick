@@ -52,7 +52,7 @@ BrTextExpanderTextAttributeV2 >> id [
 
 { #category : #accessing }
 BrTextExpanderTextAttributeV2 >> id: anElementId [
-	id := anElementId
+	id := anElementId asBlocElementId
 ]
 
 { #category : #initialization }
