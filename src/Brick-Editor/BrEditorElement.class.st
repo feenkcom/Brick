@@ -227,6 +227,10 @@ BrEditorElement >> scrollToPosition: aPosition [
 
 { #category : #'api - selection' }
 BrEditorElement >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
+	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
+	- aSelectedTextBlock has one parameter [ :aSelectedString | ],
+	- aCursorTextPositionBlock has one parameter [ :aStringPosition | ]."
+
 	self editor
 		selectedStringDo: aSelectedTextBlock
 		orCursorStringPositionDo: aCursorTextPositionBlock

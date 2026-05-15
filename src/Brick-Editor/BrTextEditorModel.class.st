@@ -1190,16 +1190,25 @@ BrTextEditorModel >> selectNone [
 
 { #category : #'api - selection' }
 BrTextEditorModel >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
+	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
+	- aSelectedTextBlock have two optional parameters [ :aSelectedString :aSelectedInterval | ],
+	- aCursorTextPositionBlock has one parameter [ :aStringPosition | ]."
+	
 	self selectedText
+		ifNotEmpty: [ :aSelectedText | 
+				| aFromIndex aToIndex |
+				aFromIndex := (self selection from + 1) min: self text size max: 1.
+				aToIndex := ((self selection to) max: 1) min: self text size.
+				
+				aSelectedTextBlock cull: aSelectedText asString cull: (aFromIndex to: aToIndex) ]
 		ifEmpty: [ self hasCursors 
 			ifTrue: [
 				| aCursorPosition aTextPosition |
 				
 				aCursorPosition := self cursors first position.
 				aTextPosition := aCursorPosition min: self text size max: 1.
-
+				
 				aCursorTextPositionBlock value: aTextPosition ] ]
-		ifNotEmpty: [ :aSelectedText | aSelectedTextBlock value: aSelectedText asString ]
 ]
 
 { #category : #'text - selection' }
