@@ -226,6 +226,13 @@ BrEditorElement >> scrollToPosition: aPosition [
 ]
 
 { #category : #accessing }
+BrEditorElement >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
+	self editor
+		selectedStringDo: aSelectedTextBlock
+		orCursorStringPositionDo: aCursorTextPositionBlock
+]
+
+{ #category : #accessing }
 BrEditorElement >> smoothScrollToPosition: aPosition [
 	(self editor segmentCollector end < self editor segmentCollector text size
 		and: [ self editor segmentCollector cachedInterval last < aPosition ])

@@ -1188,6 +1188,20 @@ BrTextEditorModel >> selectNone [
 		to: self selection to
 ]
 
+{ #category : #accessing }
+BrTextEditorModel >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
+	self selectedText
+		ifEmpty: [ self hasCursors 
+			ifTrue: [
+				| aCursorPosition aTextPosition |
+				
+				aCursorPosition := self cursors first position.
+				aTextPosition := aCursorPosition min: self text size max: 1.
+
+				aCursorTextPositionBlock value: aTextPosition ] ]
+		ifNotEmpty: [ :aSelectedText | aSelectedTextBlock value: aSelectedText asString ]
+]
+
 { #category : #'text - selection' }
 BrTextEditorModel >> selectedText [
 	<return: #BlText>
