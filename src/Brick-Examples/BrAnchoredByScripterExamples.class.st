@@ -403,7 +403,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheLeft [
 				block: [ :aSpace | aSpace extent: 300 @ 500 ];
 				onSpace ].
 
-	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+	aScripter menuStep prepareSteppedLayoutContextMenuLastStateAnalyzer
 		// #anchorElement;
 		play.
 
@@ -517,7 +517,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight [
 				block: [ :aSpace | aSpace extent: 650 @ 500 ];
 				onSpace ].
 
-	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+	aScripter menuStep prepareSteppedLayoutContextMenuLastStateAnalyzer
 		// #anchorElement;
 		play.
 
@@ -564,7 +564,7 @@ BrAnchoredByScripterExamples >> longContextMenuTheRight_AnchorMoreToTheRight [
 				block: [ :aSpace | aSpace extent: 650 @ 500 ];
 				onSpace ].
 
-	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+	aScripter menuStep prepareSteppedLayoutContextMenuLastStateAnalyzer
 		// #anchorElement;
 		play.
 

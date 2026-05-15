@@ -1069,7 +1069,7 @@ BrMenuWithScripterExamples >> clickTransformedContainerWithContextMenu [
 	| aScripter anAnchorElement anAnchorCenterPosition anEventPosition |
 	aScripter := self displayTransformedContainerWithContextMenu.
 
-	aScripter menuStep prepareSteppedLayoutContextMenuAnalyzer
+	aScripter menuStep prepareSteppedLayoutContextMenuLastStateAnalyzer
 		// #'menu-anchor';
 		play.
 
