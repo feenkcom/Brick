@@ -225,7 +225,7 @@ BrEditorElement >> scrollToPosition: aPosition [
 	^ super scrollToPosition: aPosition
 ]
 
-{ #category : #accessing }
+{ #category : #'api - selection' }
 BrEditorElement >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
 	self editor
 		selectedStringDo: aSelectedTextBlock

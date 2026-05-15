@@ -1188,7 +1188,7 @@ BrTextEditorModel >> selectNone [
 		to: self selection to
 ]
 
-{ #category : #accessing }
+{ #category : #'api - selection' }
 BrTextEditorModel >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
 	self selectedText
 		ifEmpty: [ self hasCursors 
