@@ -75,7 +75,9 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 
 { #category : #'api - highlighting' }
 BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
-	self assert: [ aBrTextRange isCharacterRange ].	"(self editor isWithDocumentId: aBrTextRange documentId)
+	self assert: [ aBrTextRange isCharacterRange ].
+	
+	"(self editor isWithDocumentId: aBrTextRange documentId)
 		ifFalse: [ ^ self ]."
 
 	self text
