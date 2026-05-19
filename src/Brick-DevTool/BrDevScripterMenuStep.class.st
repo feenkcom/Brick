@@ -482,10 +482,52 @@ BrDevScripterMenuStep >> openDropdownWithId: anElementId [
 ]
 
 { #category : #'steps - other' }
-BrDevScripterMenuStep >> prepareSteppedLayoutAnalyzerFor: aMenuAptitudeClass [
+BrDevScripterMenuStep >> prepareSteppedLayoutAllStatesAnalyzerFor: aMenuAptitudeClass [
 	^ self do
 		referenceSender;
-		label: 'Prepare stepped layout analyser';
+		label: 'Prepare stepped layout all states analyser';
+		block: [ :aButton :aUserData | 
+			self
+				ifAnchorElement: aButton
+				hasMenuAptitudeOfClass: aMenuAptitudeClass
+				do: [ :aMenuAptitude | 
+					| anAnalyzer |
+					anAnalyzer := BlSteppedLayoutAllStatesAnalyzer new.
+					anAnalyzer menuContainer: aMenuAptitude menuContainer.
+					aMenuAptitude menuContainer layout analyzer: anAnalyzer.
+					aUserData at: BlSteppedLayoutStateAnalyzer put: anAnalyzer ]
+				ifAbsent: [ NotFound signalFor: aMenuAptitudeClass in: aButton ] ]
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutContextMenuAllStatesAnalyzer [
+	^ (self prepareSteppedLayoutAllStatesAnalyzerFor: BrGlamorousWithExplicitContextMenuAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutContextMenuLastStateAnalyzer [
+	^ (self prepareSteppedLayoutLastStateAnalyzerFor: BrGlamorousWithExplicitContextMenuAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutDropdownAllStatesAnalyzer [
+	^ (self prepareSteppedLayoutAllStatesAnalyzerFor: BrWithExplicitDropdownAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutDropdownLastStateAnalyzer [
+	^ (self prepareSteppedLayoutLastStateAnalyzerFor: BrWithExplicitDropdownAptitude)
+		referenceSender
+]
+
+{ #category : #'steps - other' }
+BrDevScripterMenuStep >> prepareSteppedLayoutLastStateAnalyzerFor: aMenuAptitudeClass [
+	^ self do
+		referenceSender;
+		label: 'Prepare stepped layout last state analyser';
 		block: [ :aButton :aUserData | 
 			self
 				ifAnchorElement: aButton
@@ -495,25 +537,19 @@ BrDevScripterMenuStep >> prepareSteppedLayoutAnalyzerFor: aMenuAptitudeClass [
 					anAnalyzer := BlSteppedLayoutLastStateAnalyzer new.
 					anAnalyzer menuContainer: aMenuAptitude menuContainer.
 					aMenuAptitude menuContainer layout analyzer: anAnalyzer.
-					aUserData at: BlSteppedLayoutLastStateAnalyzer put: anAnalyzer ]
+					aUserData at: BlSteppedLayoutStateAnalyzer put: anAnalyzer ]
 				ifAbsent: [ NotFound signalFor: aMenuAptitudeClass in: aButton ] ]
 ]
 
 { #category : #'steps - other' }
-BrDevScripterMenuStep >> prepareSteppedLayoutContextMenuAnalyzer [
-	^ (self prepareSteppedLayoutAnalyzerFor: BrGlamorousWithExplicitContextMenuAptitude)
+BrDevScripterMenuStep >> prepareSteppedLayoutTooltipAllStatesAnalyzer [
+	^ (self prepareSteppedLayoutAllStatesAnalyzerFor: BrGlamorousWithExplicitTooltipAptitude)
 		referenceSender
 ]
 
 { #category : #'steps - other' }
-BrDevScripterMenuStep >> prepareSteppedLayoutDropdownAnalyzer [
-	^ (self prepareSteppedLayoutAnalyzerFor: BrWithExplicitDropdownAptitude)
-		referenceSender
-]
-
-{ #category : #'steps - other' }
-BrDevScripterMenuStep >> prepareSteppedLayoutTooltipAnalyzer [
-	^ (self prepareSteppedLayoutAnalyzerFor: BrGlamorousWithExplicitTooltipAptitude)
+BrDevScripterMenuStep >> prepareSteppedLayoutTooltipLastStateAnalyzer [
+	^ (self prepareSteppedLayoutLastStateAnalyzerFor: BrGlamorousWithExplicitTooltipAptitude)
 		referenceSender
 ]
 

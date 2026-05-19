@@ -19,16 +19,16 @@ BlScripter >> gtAnchoredContainerOverviewFor: aView [
 { #category : #'*Brick-DevTool' }
 BlScripter >> gtMenuSteppedLayoutAnalysisFor: aView [
 	<gtView>
-	self userData at: BlSteppedLayoutLastStateAnalyzer ifAbsent: [ ^ aView empty ].
+	self userData at: BlSteppedLayoutStateAnalyzer ifAbsent: [ ^ aView empty ].
 
 	^ aView forward
 		title: 'Menu analysis';
 		tooltip: 'Dropdown, context menu, and tooltip stepped layout analysis';
 		priority: -1;
-		object: [ self userData at: BlSteppedLayoutLastStateAnalyzer ];
+		object: [ self userData at: BlSteppedLayoutStateAnalyzer ];
 		view: #gtAreasPreviewFor:context:;
 		actionButtonIcon: BrGlamorousVectorIcons inspect
 			label: 'Details'
 			tooltip: 'Inspect menu analysis details'
-			action: [ :aButton | aButton phlow spawnObject: (self userData at: BlSteppedLayoutLastStateAnalyzer) ]
+			action: [ :aButton | aButton phlow spawnObject: (self userData at: BlSteppedLayoutStateAnalyzer) ]
 ]

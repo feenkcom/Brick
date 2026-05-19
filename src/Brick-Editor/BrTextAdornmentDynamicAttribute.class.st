@@ -31,17 +31,21 @@ Class {
 { #category : #accessing }
 BrTextAdornmentDynamicAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	"Return an element that should affect (either append or replace) a provided text piece"
+
 	<return: #SequenceableCollection of: #BlElement>
 	| aResult |
-
 	aResult := stencilBuilder
-		segmentPiece: aTBrTextEditorTextualPiece;
-		editor: anEditorElement;
-		build.
+			segmentPiece: aTBrTextEditorTextualPiece;
+			editor: anEditorElement;
+			build.
 
-	aResult isCollection
-		ifTrue: [ ^ aResult ].
-
+	aResult isCollection ifTrue: [ ^ aResult collect: #asElement as: Array ].
+	
+	"See https://github.com/feenkcom/gtoolkit/issues/5072
+	Example: LeUIByScripterExamples>>#pageToCOfDatabaseWithManyPagesOfDifferentCreateTimesAndToC"
+	(aResult isKindOf: BlElement) ifFalse: [ aResult := aResult create ].
+	aResult isCollection ifTrue: [ ^ aResult collect: #asElement as: Array ].
+	
 	^ aResult asElement asOrderedCollection
 ]
 

@@ -76,14 +76,14 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 { #category : #'api - highlighting' }
 BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	self assert: [ aBrTextRange isCharacterRange ].
-
+	
 	"(self editor isWithDocumentId: aBrTextRange documentId)
 		ifFalse: [ ^ self ]."
 
 	self text
-		attributes: {BlTextHighlightAttribute new
+		attributes: {(BlTextHighlightAttribute new
 					paint: aBrTextHighlight color;
-					id: aBrTextHighlight id}
+					id: aBrTextHighlight id) beNotOverwritableByStyler}
 		from: aBrTextRange start
 		to: aBrTextRange end
 ]
@@ -223,6 +223,17 @@ BrEditorElement >> scrollToPosition: aPosition [
 		and: [ self editor segmentCollector cachedInterval last < aPosition ])
 		ifTrue: [ self editor segmentCollector computeForwardAt: aPosition ].
 	^ super scrollToPosition: aPosition
+]
+
+{ #category : #'api - selection' }
+BrEditorElement >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
+	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
+	- aSelectedTextBlock has one parameter [ :aSelectedString | ],
+	- aCursorTextPositionBlock has one parameter [ :aStringPosition | ]."
+
+	self editor
+		selectedStringDo: aSelectedTextBlock
+		orCursorStringPositionDo: aCursorTextPositionBlock
 ]
 
 { #category : #accessing }
