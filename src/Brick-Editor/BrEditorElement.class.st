@@ -74,6 +74,19 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 ]
 
 { #category : #'api - highlighting' }
+BrEditorElement >> addHighlight: aBrTextHighlight overMarker: aMarkerAttribute [
+	self text
+		findAttribute: aMarkerAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			self text
+				attributes: {(BlTextHighlightAttribute new
+							paint: aBrTextHighlight color;
+							id: aBrTextHighlight id) beNotOverwritableByStyler}
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition ]
+]
+
+{ #category : #'api - highlighting' }
 BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	self assert: [ aBrTextRange isCharacterRange ].
 	
