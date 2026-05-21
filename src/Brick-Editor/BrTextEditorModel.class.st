@@ -1189,7 +1189,7 @@ BrTextEditorModel >> selectNone [
 ]
 
 { #category : #'api - selection' }
-BrTextEditorModel >> selectedStringDo: aSelectedTextBlock orCursorStringPositionDo: aCursorTextPositionBlock [
+BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
 	- aSelectedTextBlock have two optional parameters [ :aSelectedString :aSelectedInterval | ],
 	- aCursorTextPositionBlock has one parameter [ :aStringPosition | ]."
