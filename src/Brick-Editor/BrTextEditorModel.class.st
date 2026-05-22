@@ -1190,12 +1190,9 @@ BrTextEditorModel >> removeEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 
 { #category : #'api - highlighting' }
 BrTextEditorModel >> removeHighlightsWithId: aStringId [
-	aStringId = #'advice--error' ifTrue: [
-		GtJustContextStackSignal emit ].
-	
 	self text
 		clearAttributes: [ :eachAttribute | 
-			(eachAttribute isKindOf: BlTextHighlightAttribute) and: [ 
+			eachAttribute class = BlTextHighlightAttribute and: [ 
 				eachAttribute id = aStringId ] ]
 ]
 
