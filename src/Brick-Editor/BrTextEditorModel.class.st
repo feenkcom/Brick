@@ -47,6 +47,53 @@ BrTextEditorModel class >> withEditorMode: anEditorMode [
 		yourself
 ]
 
+{ #category : #'api - attributes' }
+BrTextEditorModel >> addAppendingAttribute: anAppendingAttribute atAppendingAttribute: anotherAppendingAttribute [
+	"Return an attribute tag, currently it is the very same attribute."
+
+	self text
+		findAttribute: anotherAppendingAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			self text
+				attributes: { anAppendingAttribute }
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition ].
+
+	^ anAppendingAttribute
+]
+
+{ #category : #'api - attributes' }
+BrTextEditorModel >> addAttribute: anAttribute overMarker: aMarkerAttribute [
+	"Return an attribute tag, currently it is the very same attribute."
+
+	self text
+		findAttribute: aMarkerAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			self text
+				attributes: {anAttribute}
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition ].
+
+	^ anAttribute
+]
+
+{ #category : #'api - attributes' }
+BrTextEditorModel >> addAttribute: anAttribute overRange: aBrTextRange [
+	"Return an attribute tag, currently it is the very same attribute."
+
+	self assert: [ aBrTextRange isCharacterRange ].
+	
+	"(self isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ]."
+
+	self text
+		attributes: {anAttribute}
+		from: aBrTextRange start
+		to: aBrTextRange end.
+		
+	^ anAttribute
+]
+
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
 	self editorShortcuts
@@ -59,6 +106,43 @@ BrTextEditorModel >> addEditorShortcut: aBrTextEditorShortcut [
 BrTextEditorModel >> addEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 	aCollectionOfBrTextEditorShortcut
 		do: [ :eachShortcut | self addEditorShortcut: eachShortcut ]
+]
+
+{ #category : #'api - highlighting' }
+BrTextEditorModel >> addHighlight: aBrTextHighlight overMarker: aMarkerAttribute [
+	self
+		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
+		description: [ 'aMarkerAttribute must be a marker attribute: {1}' format: { aMarkerAttribute } ].
+
+	self text
+		findAttribute: aMarkerAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			"The `beNotOverwritableByStyler` part is removed for now, because `GtMethodAdvice>>#styleFixIt:using:`
+			calls `#addHighlight:overMarker:` in the `#onCursorEnter:...` part immediately as users type, 
+			but the `..leave:` part is not called.
+			To test it: enable `beNotOverwritableByStyler` in both model and element methods and type `self.`. It will remain
+			highlighted after the fixIt button disappears."
+			self text
+				attributes: {(BlTextHighlightAttribute new
+							paint: aBrTextHighlight color;
+							id: aBrTextHighlight id) beNotOverwritableByStyler}
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition ]
+]
+
+{ #category : #'api - highlighting' }
+BrTextEditorModel >> addHighlight: aBrTextHighlight overRange: aBrTextRange [ 
+	self assert: [ aBrTextRange isCharacterRange ].
+	
+	"(self isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ]."
+
+	self text
+		attributes: {(BlTextHighlightAttribute new
+					paint: aBrTextHighlight color;
+					id: aBrTextHighlight id) beNotOverwritableByStyler}
+		from: aBrTextRange start
+		to: aBrTextRange end
 ]
 
 { #category : #asserting }
@@ -1067,10 +1151,29 @@ BrTextEditorModel >> redo [
 	history redoOn: self
 ]
 
+{ #category : #'api - attributes' }
+BrTextEditorModel >> removeAdornmentAttribute: anAdornmentAttribute [
+	self text removeAttribute: anAdornmentAttribute
+]
+
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> removeAllEditorShortcuts [
 	self editorShortcuts
 		removeAllShortcutsAndDo: [ :aPreviousShortcut | self onShortcutRemoved: aPreviousShortcut ]
+]
+
+{ #category : #'api - attributes' }
+BrTextEditorModel >> removeAttributeTagged: anAttributeTag [
+	"anAttributeTag is currently the very same attribute."
+
+	self text removeAttribute: anAttributeTag
+]
+
+{ #category : #'api - attributes' }
+BrTextEditorModel >> removeAttributeTagged: anAttributeTag overMarker: aMarkerAttribute [
+	"anAttributeTag is currently the very same attribute."
+
+	self text removeAttribute: anAttributeTag
 ]
 
 { #category : #'api - shortcuts' }
@@ -1083,6 +1186,17 @@ BrTextEditorModel >> removeEditorShortcut: aBrTextEditorShortcut [
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> removeEditorShortcuts: aCollectionOfBrTextEditorShortcut [
 	aCollectionOfBrTextEditorShortcut do: [ :eachShortcut | self removeEditorShortcut: eachShortcut ]
+]
+
+{ #category : #'api - highlighting' }
+BrTextEditorModel >> removeHighlightsWithId: aStringId [
+	aStringId = #'advice--error' ifTrue: [
+		GtJustContextStackSignal emit ].
+	
+	self text
+		clearAttributes: [ :eachAttribute | 
+			(eachAttribute isKindOf: BlTextHighlightAttribute) and: [ 
+				eachAttribute id = aStringId ] ]
 ]
 
 { #category : #'text - styling' }
