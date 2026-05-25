@@ -275,6 +275,14 @@ BrEditorElement >> styleText [
 	self editor styleText
 ]
 
+{ #category : #'api - attributes' }
+BrEditorElement >> styledTextAttributesDo: aBlock [
+	"Iterate styled text attributes. 
+	`aBlock` have two optional parameters [ :allAttributes :eachPosition | ]"
+
+	self text attributesDo: aBlock
+]
+
 { #category : #accessing }
 BrEditorElement >> text [
 	^ self editor text
