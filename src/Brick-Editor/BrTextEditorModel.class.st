@@ -1394,6 +1394,14 @@ BrTextEditorModel >> styleTextAndAfterDo: aBlock [
 	self dispatchEvent: (BrTextEditorTextStyleRequested new afterAction: aBlock)
 ]
 
+{ #category : #'api - attributes' }
+BrTextEditorModel >> styledTextAttributesDo: aBlock [
+	"Iterate styled text attributes. 
+	`aBlock` have two optional parameters [ :allAttributes :eachPosition | ]"
+
+	self text attributesDo: aBlock
+]
+
 { #category : #accessing }
 BrTextEditorModel >> styler [
 	<return: #BlTextStyler>
