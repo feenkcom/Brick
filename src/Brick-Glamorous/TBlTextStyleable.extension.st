@@ -39,6 +39,78 @@ TBlTextStyleable >> expandingAdornment: aBrTextAdornmentStencilBuilder [
 ]
 
 { #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> foldableMarkerAttribute: aFoldableMarkerAttribute [
+	"Append a foldable element that can fold (hide) and unfold (show) text parts marked by the foldable marker attribute."
+
+	^ self
+		folded: false
+		foldableMarkerAttribute: aFoldableMarkerAttribute
+		tooltipText: nil
+		id: BlElementId noId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableMarkerAttribute: aFoldableMarkerAttribute [
+	"Append a foldable element that can fold (hide) and unfold (show) text parts marked by the foldable marker attribute."
+
+	^ self
+		folded: isFolded
+		foldableMarkerAttribute: aFoldableMarkerAttribute
+		tooltipText: nil
+		id: BlElementId noId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableMarkerAttribute: aFoldableMarkerAttribute tooltipText: aTooltipTextOrNil [
+	"Append a foldable element that can fold (hide) and unfold (show) text parts marked by the foldable marker attribute."
+
+	^ self
+		folded: isFolded
+		foldableMarkerAttribute: aFoldableMarkerAttribute
+		tooltipText: aTooltipTextOrNil
+		id: BlElementId noId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableMarkerAttribute: aFoldableMarkerAttribute tooltipText: aTooltipTextOrNil id: anElementId [
+	"Append a foldable element that can fold (hide) and unfold (show) text parts marked by the foldable marker attribute."
+
+	^ self
+		folded: isFolded
+		foldableMarkerAttribute: aFoldableMarkerAttribute
+		tooltipText: aTooltipTextOrNil
+		id: anElementId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableMarkerAttribute: aFoldableMarkerAttribute tooltipText: aTooltipTextOrNil id: anElementId definingMethod: aDefiningMethodOrNil [
+	"Append a foldable element that can fold (hide) and unfold (show) text parts marked by the foldable marker attribute."
+
+	| aFolderAttribute |
+	self
+		assert: [ isFolded isBoolean ]
+		description: [ 'The isFolded attribute must be a boolean value: {1}' format: {isFolded} ].
+
+	aFolderAttribute := BrGlamorousFolderTextAttributeV2 "GtTextFolderAttribute" new
+			foldableMarkerAttribute: aFoldableMarkerAttribute;
+			tooltipText: aTooltipTextOrNil;
+			id: anElementId;
+			definingMethod: aDefiningMethodOrNil.
+
+	self attributesBuilder attribute: aFolderAttribute.
+
+	isFolded
+		ifTrue: [ aFolderAttribute beFoldedByDefault.
+			self attributesBuilder attribute: aFolderAttribute hideReplacableAttribute ].
+
+	^ aFolderAttribute
+]
+
+{ #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousCodeDefaultFont [
 	self defaultFontName: 'Source Code Pro'
 ]

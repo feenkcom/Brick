@@ -5,7 +5,7 @@ Class {
 		'stencil',
 		'expandedAppendingAttribute'
 	],
-	#category : #'Brick-Glamorous'
+	#category : #'Brick-Glamorous-Editor - Attributes'
 }
 
 { #category : #'as yet unclassified' }
