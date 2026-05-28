@@ -95,6 +95,19 @@ BrTextFolderTextAttributeV2 >> isFolded: aBoolean fromTextEditorElement: aTextEd
 	self applyFoldedOrUnfoledInEditorElement: aTextEditorElement
 ]
 
+{ #category : #'api - styling' }
+BrTextFolderTextAttributeV2 >> isFolded: aBoolean inStyledText: aText [
+	self
+		assert: [ aBoolean isBoolean ]
+		description: [ 'The isFolded argument must be a boolean value: {1}' format: {aBoolean} ].
+
+	isFolded = aBoolean ifTrue: [ ^ self ].
+		
+	isFolded := aBoolean.
+	
+	aText removeAttribute: self hideReplacableAttribute.
+]
+
 { #category : #private }
 BrTextFolderTextAttributeV2 >> toggleFoldedOrUnfoledInEditorElement: aTextEditorElement [
 	self isFolded
