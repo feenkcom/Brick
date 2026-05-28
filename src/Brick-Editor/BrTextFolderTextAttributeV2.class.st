@@ -49,17 +49,6 @@ BrTextFolderTextAttributeV2 >> foldableMarkerAttribute [
 ]
 
 { #category : #accessing }
-BrTextFolderTextAttributeV2 >> foldableMarkerAttribute: aMarkerAttribute [
-	"Set a marker that indicates foldable text part(s)."
-
-	self
-		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
-		description: [ 'aMarkerAttribute must be a marker attribute: {1}' format: {aMarkerAttribute} ].
-
-	foldableMarkerAttribute := aMarkerAttribute
-]
-
-{ #category : #accessing }
 BrTextFolderTextAttributeV2 >> hideReplacableAttribute [
 	^ hideAttribute
 ]
@@ -79,14 +68,14 @@ BrTextFolderTextAttributeV2 >> id: anElementId [
 { #category : #initialization }
 BrTextFolderTextAttributeV2 >> initialize [
 	super initialize.
-	
+
 	self beAppend.
 	self placeholderAlignment: #alignMiddle.
-	
+
 	id := BlElementId noId.
 	isFolded := false.
 	hideAttribute := BrTextFoldAttribute new.
-	foldableMarkerAttribute := nil
+	foldableMarkerAttribute := BrTextInvisibleMarkerAttribute new
 ]
 
 { #category : #accessing }
@@ -98,7 +87,7 @@ BrTextFolderTextAttributeV2 >> isFolded [
 BrTextFolderTextAttributeV2 >> isFolded: aBoolean fromTextEditorElement: aTextEditorElement [
 	self
 		assert: [ aBoolean isBoolean ]
-		description: [ 'The isFolded attribute must be a boolean value: {1}' format: {aBoolean} ].
+		description: [ 'The isFolded argument must be a boolean value: {1}' format: {aBoolean} ].
 
 	isFolded = aBoolean ifTrue: [ ^ self ].
 		
