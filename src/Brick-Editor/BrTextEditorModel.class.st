@@ -1464,7 +1464,7 @@ BrTextEditorModel >> text [
 	which would give a copy of the current text"
 	<return: #BlText>
 	
-"	self assertUIProcess."
+	self assertUIProcess.
 	^ text
 ]
 
