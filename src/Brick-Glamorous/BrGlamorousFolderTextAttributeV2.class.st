@@ -1,3 +1,8 @@
+"
+I am a text attribute that knows how to fold (hide) and unfold (show) text parts.
+# How to use this text attribute
+Use {{gtMethod:TBlTextStyleable>>#folded:foldableSubTexts:tooltipText:id:definingMethod:}} fluent API.
+"
 Class {
 	#name : #BrGlamorousFolderTextAttributeV2,
 	#superclass : #BrTextFolderTextAttributeV2,

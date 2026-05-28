@@ -85,6 +85,8 @@ BrTextFolderTextAttributeV2 >> isFolded [
 
 { #category : #'api - styling' }
 BrTextFolderTextAttributeV2 >> isFolded: aBoolean fromTextEditorElement: aTextEditorElement [
+	"Must be called only from a UI to dynamicaly change attribute and toggle element folding state."
+
 	self
 		assert: [ aBoolean isBoolean ]
 		description: [ 'The isFolded argument must be a boolean value: {1}' format: {aBoolean} ].
@@ -97,6 +99,8 @@ BrTextFolderTextAttributeV2 >> isFolded: aBoolean fromTextEditorElement: aTextEd
 
 { #category : #'api - styling' }
 BrTextFolderTextAttributeV2 >> isFolded: aBoolean inStyledText: aText [
+	"Must be called only from a styler while styling a new unstyled text."
+
 	self
 		assert: [ aBoolean isBoolean ]
 		description: [ 'The isFolded argument must be a boolean value: {1}' format: {aBoolean} ].

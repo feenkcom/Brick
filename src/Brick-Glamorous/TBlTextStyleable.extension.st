@@ -101,7 +101,7 @@ TBlTextStyleable >> folded: isFolded foldableSubTexts: foldableSubTexts tooltipT
 		description: [ 'The isFolded argument must be a boolean value: {1}' format: {isFolded} ].
 	foldableSubTexts ifEmpty: [ ^ self ].
 
-	aFolderAttribute := BrGlamorousFolderTextAttributeV2 "GtTextFolderAttribute" new
+	aFolderAttribute := BrGlamorousFolderTextAttributeV2 new
 			tooltipText: aTooltipTextOrNil;
 			id: anElementId;
 			definingMethod: aDefiningMethodOrNil.
