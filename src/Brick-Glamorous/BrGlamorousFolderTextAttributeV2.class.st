@@ -19,6 +19,32 @@ BrGlamorousFolderTextAttributeV2 >> clearHighlightInTextEditorElement: aTextEdit
 	aTextEditorElement removeHighlightsWithId: self highlightId
 ]
 
+{ #category : #private }
+BrGlamorousFolderTextAttributeV2 >> createContextMenuItems [
+	| aMenuItems |
+	aMenuItems := BrMenuItems new.
+
+	self definingMethod
+		ifNotNil: [ :aMethod | 
+			aMenuItems
+				addItemId: #'menu--inspect-defining-method'
+				icon: BrGlamorousVectorIcons inspect
+				label: 'Inspect defining method'
+				shortcut: 'Alt+Click'
+				action: [ :aButton | aButton phlow spawnObject: aMethod ].
+			aMethod ].
+
+	aMenuItems
+		addItemId: #'menu--inspect-text-attribute'
+		icon: BrGlamorousVectorIcons inspect
+		label: 'Inspect text attribute'
+		preview: [ self gtDisplayString ]
+		shortcut: (self definingMethod ifNil: [ 'Alt+Click' ] ifNotNil: [ nil ])
+		action: [ :aButton | aButton phlow spawnObject: self ].
+
+	^ aMenuItems
+]
+
 { #category : #accessing }
 BrGlamorousFolderTextAttributeV2 >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
 	| aToggle |
@@ -31,8 +57,12 @@ BrGlamorousFolderTextAttributeV2 >> doAffect: aTBrTextEditorTextualPiece in: anE
 			mouseCursor: BlCursor default;
 			toggleAction: [ :aWidget | self toggleFoldedOrUnfoledInEditorElement: anEditorElement ].
 
-	self tooltipText ifNotNil: [ :aText | 
-		aToggle addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: aText) ].
+	self tooltipText
+		ifNotNil: [ :aText | aToggle addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: aText) ].
+	aToggle
+		addAptitude: (BrGlamorousWithExplicitContextMenuAptitude
+				menu: [ self createContextMenuItems ]).
+
 	aToggle
 		when: BlMouseEnterEvent
 		do: [ :evt | self highlightFoldableTextInTextEditorElement: anEditorElement ].
