@@ -76,6 +76,7 @@ BrTextFolderTextAttributeV2 >> initialize [
 	isFolded := false.
 	hideAttribute := BrTextFoldAttribute new.
 	foldableMarkerAttribute := BrTextInvisibleMarkerAttribute new
+			purpose: #'foldable-text'
 ]
 
 { #category : #accessing }
@@ -109,7 +110,8 @@ BrTextFolderTextAttributeV2 >> isFolded: aBoolean inStyledText: aText [
 		
 	isFolded := aBoolean.
 	
-	aText removeAttribute: self hideReplacableAttribute.
+	aBoolean ifFalse: [
+		aText removeAttribute: self hideReplacableAttribute ].
 ]
 
 { #category : #private }

@@ -120,7 +120,8 @@ TBlTextStyleable >> folded: isFolded foldableSubTexts: foldableSubTexts tooltipT
 
 	isFolded ifTrue: [ 
 		aFolderAttribute beFoldedByDefault.
-		self attributesBuilder attribute: aFolderAttribute hideReplacableAttribute ].
+		foldableSubTexts do: [ :eachSubText | 
+			eachSubText attributes: {aFolderAttribute hideReplacableAttribute} ] ].
 
 	^ aFolderAttribute
 ]
