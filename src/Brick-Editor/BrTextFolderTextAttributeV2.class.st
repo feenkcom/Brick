@@ -6,7 +6,8 @@ Class {
 		'definingMethod',
 		'isFolded',
 		'hideAttribute',
-		'foldableMarkerAttribute'
+		'foldableMarkerAttribute',
+		'foldModel'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
@@ -95,7 +96,8 @@ BrTextFolderTextAttributeV2 >> isFolded: aBoolean fromTextEditorElement: aTextEd
 	isFolded = aBoolean ifTrue: [ ^ self ].
 		
 	isFolded := aBoolean.
-	self applyFoldedOrUnfoledInEditorElement: aTextEditorElement
+	self applyFoldedOrUnfoledInEditorElement: aTextEditorElement.
+	self onFoldedChanged.
 ]
 
 { #category : #'api - styling' }
@@ -112,6 +114,10 @@ BrTextFolderTextAttributeV2 >> isFolded: aBoolean inStyledText: aText [
 	
 	aBoolean ifFalse: [
 		aText removeAttribute: self hideReplacableAttribute ].
+]
+
+{ #category : #private }
+BrTextFolderTextAttributeV2 >> onFoldedChanged [
 ]
 
 { #category : #private }

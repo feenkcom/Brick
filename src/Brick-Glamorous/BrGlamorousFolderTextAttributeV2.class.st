@@ -7,7 +7,8 @@ Class {
 	#name : #BrGlamorousFolderTextAttributeV2,
 	#superclass : #BrTextFolderTextAttributeV2,
 	#instVars : [
-		'tooltipText'
+		'tooltipText',
+		'announcer'
 	],
 	#category : #'Brick-Glamorous-Editor - Attributes'
 }
@@ -76,6 +77,11 @@ BrGlamorousFolderTextAttributeV2 >> doAffect: aTBrTextEditorTextualPiece in: anE
 				ifTrue: [ anEvent consumed: true.
 					anEvent target phlow
 						spawnObject: (self definingMethod ifNil: [ self ] ifNotNil: [ :aMethod | aMethod ]) ] ].
+						
+	BrGlamorousFolderTextAttributeAnnouncementHandler new
+		announcer: announcer;
+		element: aToggle;
+		install.
 
 	^ aToggle
 ]
@@ -94,6 +100,21 @@ BrGlamorousFolderTextAttributeV2 >> highlightFoldableTextInTextEditorElement: aT
 { #category : #'private - event handling' }
 BrGlamorousFolderTextAttributeV2 >> highlightId [
 	^ #'folder-foldable-text'
+]
+
+{ #category : #initialization }
+BrGlamorousFolderTextAttributeV2 >> initialize [
+	super initialize.
+	announcer := Announcer new
+]
+
+{ #category : #private }
+BrGlamorousFolderTextAttributeV2 >> onFoldedChanged [
+	super onFoldedChanged.
+
+	announcer ifNil: [ ^ self ].
+	announcer
+		announce: (BrTextFolderTextAttributeFoldingChanged new isFolded: self isFolded)
 ]
 
 { #category : #accessing }
