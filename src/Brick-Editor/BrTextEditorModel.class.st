@@ -66,6 +66,10 @@ BrTextEditorModel >> addAppendingAttribute: anAppendingAttribute atAppendingAttr
 BrTextEditorModel >> addAttribute: anAttribute overMarker: aMarkerAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
+	self
+		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
+		description:  [ 'aMarkerAttribute must be a marker attribute: {1}' format: { aMarkerAttribute } ].
+
 	self text
 		findAttribute: aMarkerAttribute
 		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 

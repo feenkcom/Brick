@@ -1,0 +1,128 @@
+"
+I am a text attribute that knows how to fold (hide) and unfold (show) text parts.
+# How to use this text attribute
+Use {{gtMethod:TBlTextStyleable>>#folded:foldableSubTexts:tooltipText:id:definingMethod:}} fluent API.
+"
+Class {
+	#name : #BrGlamorousFolderTextAttributeV2,
+	#superclass : #BrTextFolderTextAttributeV2,
+	#instVars : [
+		'tooltipText',
+		'announcer'
+	],
+	#category : #'Brick-Glamorous-Editor - Attributes'
+}
+
+{ #category : #'private - event handling' }
+BrGlamorousFolderTextAttributeV2 >> clearHighlightInTextEditorElement: aTextEditorElement [
+	self foldableMarkerAttribute ifNil: [ ^ self ].
+
+	aTextEditorElement removeHighlightsWithId: self highlightId
+]
+
+{ #category : #private }
+BrGlamorousFolderTextAttributeV2 >> createContextMenuItems [
+	| aMenuItems |
+	aMenuItems := BrMenuItems new.
+
+	self definingMethod
+		ifNotNil: [ :aMethod | 
+			aMenuItems
+				addItemId: #'menu--inspect-defining-method'
+				icon: BrGlamorousVectorIcons inspect
+				label: 'Inspect defining method'
+				shortcut: 'Alt+Click'
+				action: [ :aButton | aButton phlow spawnObject: aMethod ].
+			aMethod ].
+
+	aMenuItems
+		addItemId: #'menu--inspect-text-attribute'
+		icon: BrGlamorousVectorIcons inspect
+		label: 'Inspect text attribute'
+		preview: [ self gtDisplayString ]
+		shortcut: (self definingMethod ifNil: [ 'Alt+Click' ] ifNotNil: [ nil ])
+		action: [ :aButton | aButton phlow spawnObject: self ].
+
+	^ aMenuItems
+]
+
+{ #category : #accessing }
+BrGlamorousFolderTextAttributeV2 >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
+	| aToggle |
+	aToggle := BrInlineExpanderElement new
+			id: self id;
+			aptitude: (BrLabelExpanderAptitude new text: tooltipText);
+			expanded: self isFolded not;
+			padding: (BlInsets all: 2);
+			margin: (BlInsets top: 2);
+			mouseCursor: BlCursor default;
+			toggleAction: [ :aWidget | self toggleFoldedOrUnfoledInEditorElement: anEditorElement ].
+
+	self tooltipText
+		ifNotNil: [ :aText | aToggle addAptitude: (BrGlamorousWithExplicitTooltipAptitude text: aText) ].
+	aToggle
+		addAptitude: (BrGlamorousWithExplicitContextMenuAptitude
+				menu: [ self createContextMenuItems ]).
+
+	aToggle
+		when: BlMouseEnterEvent
+		do: [ :evt | self highlightFoldableTextInTextEditorElement: anEditorElement ].
+	aToggle
+		when: BlMouseLeaveEvent
+		do: [ :evt | self clearHighlightInTextEditorElement: anEditorElement ].
+	aToggle
+		when: BlClickEvent
+		do: [ :anEvent | 
+			anEvent modifiers isSoftAltOnly
+				ifTrue: [ anEvent consumed: true.
+					anEvent target phlow
+						spawnObject: (self definingMethod ifNil: [ self ] ifNotNil: [ :aMethod | aMethod ]) ] ].
+						
+	BrGlamorousFolderTextAttributeAnnouncementHandler new
+		announcer: announcer;
+		element: aToggle;
+		install.
+
+	^ aToggle
+]
+
+{ #category : #'private - event handling' }
+BrGlamorousFolderTextAttributeV2 >> highlightFoldableTextInTextEditorElement: aTextEditorElement [
+	self foldableMarkerAttribute ifNil: [ ^ self ].
+
+	aTextEditorElement
+		addHighlight: (BrTextHighlight
+				id: self highlightId
+				color: BrGlamorousColors neutralBackgroundColor)
+		overMarker: self foldableMarkerAttribute
+]
+
+{ #category : #'private - event handling' }
+BrGlamorousFolderTextAttributeV2 >> highlightId [
+	^ #'folder-foldable-text'
+]
+
+{ #category : #initialization }
+BrGlamorousFolderTextAttributeV2 >> initialize [
+	super initialize.
+	announcer := Announcer new
+]
+
+{ #category : #private }
+BrGlamorousFolderTextAttributeV2 >> onFoldedChanged [
+	super onFoldedChanged.
+
+	announcer ifNil: [ ^ self ].
+	announcer
+		announce: (BrTextFolderTextAttributeFoldingChanged new isFolded: self isFolded)
+]
+
+{ #category : #accessing }
+BrGlamorousFolderTextAttributeV2 >> tooltipText [
+	^ tooltipText
+]
+
+{ #category : #accessing }
+BrGlamorousFolderTextAttributeV2 >> tooltipText: anObject [
+	tooltipText := anObject
+]

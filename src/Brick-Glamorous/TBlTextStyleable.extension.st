@@ -39,6 +39,94 @@ TBlTextStyleable >> expandingAdornment: aBrTextAdornmentStencilBuilder [
 ]
 
 { #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> foldableSubTexts: foldableSubTexts [
+	"Append a foldable element that can fold (hide) and unfold (show) foldableSubTexts."
+
+	<return: #BrGlamorousFolderTextAttributeV2>
+	^ self
+		folded: false
+		foldableSubTexts: foldableSubTexts
+		tooltipText: nil
+		id: BlElementId noId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableSubTexts: foldableSubTexts [
+	"Append a foldable element that can fold (hide) and unfold (show) foldableSubTexts."
+
+	<return: #BrGlamorousFolderTextAttributeV2>
+	^ self
+		folded: isFolded
+		foldableSubTexts: foldableSubTexts
+		tooltipText: nil
+		id: BlElementId noId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableSubTexts: foldableSubTexts tooltipText: aTooltipTextOrNil [
+	"Append a foldable element that can fold (hide) and unfold (show) foldableSubTexts."
+
+	<return: #BrGlamorousFolderTextAttributeV2>
+	^ self
+		folded: isFolded
+		foldableSubTexts: foldableSubTexts
+		tooltipText: aTooltipTextOrNil
+		id: BlElementId noId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableSubTexts: foldableSubTexts tooltipText: aTooltipTextOrNil id: anElementId [
+	"Append a foldable element that can fold (hide) and unfold (show) foldableSubTexts."
+
+	<return: #BrGlamorousFolderTextAttributeV2>
+	^ self
+		folded: isFolded
+		foldableSubTexts: foldableSubTexts
+		tooltipText: aTooltipTextOrNil
+		id: anElementId
+		definingMethod: nil
+]
+
+{ #category : #'*Brick-Glamorous' }
+TBlTextStyleable >> folded: isFolded foldableSubTexts: foldableSubTexts tooltipText: aTooltipTextOrNil id: anElementId definingMethod: aDefiningMethodOrNil [
+	"Append a foldable element that can fold (hide) and unfold (show) foldableSubTexts."
+
+	<return: #BrGlamorousFolderTextAttributeV2>
+	| aFoldableMarker aFolderAttribute |
+	self
+		assert: [ isFolded isBoolean ]
+		description: [ 'The isFolded argument must be a boolean value: {1}' format: {isFolded} ].
+	foldableSubTexts ifEmpty: [ ^ self ].
+
+	aFolderAttribute := BrGlamorousFolderTextAttributeV2 new
+			tooltipText: aTooltipTextOrNil;
+			id: anElementId;
+			definingMethod: aDefiningMethodOrNil.
+
+	aFoldableMarker := aFolderAttribute foldableMarkerAttribute.
+
+	self
+		assert: [ aFoldableMarker isNotNil ]
+		description: [ 'The aFoldableMarker attribute must be a non-nil value: {1}'
+				format: {aFoldableMarker} ].
+
+	foldableSubTexts
+		do: [ :eachSubText | eachSubText attributes: {aFoldableMarker} ].
+
+	self attributesBuilder attribute: aFolderAttribute.
+
+	isFolded ifTrue: [ 
+		aFolderAttribute beFoldedByDefault.
+		foldableSubTexts do: [ :eachSubText | 
+			eachSubText attributes: {aFolderAttribute hideReplacableAttribute} ] ].
+
+	^ aFolderAttribute
+]
+
+{ #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousCodeDefaultFont [
 	self defaultFontName: 'Source Code Pro'
 ]
