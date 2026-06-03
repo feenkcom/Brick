@@ -66,6 +66,10 @@ BrTextEditorModel >> addAppendingAttribute: anAppendingAttribute atAppendingAttr
 BrTextEditorModel >> addAttribute: anAttribute overMarker: aMarkerAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
+	self
+		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
+		description:  [ 'aMarkerAttribute must be a marker attribute: {1}' format: { aMarkerAttribute } ].
+
 	self text
 		findAttribute: aMarkerAttribute
 		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
@@ -1302,24 +1306,27 @@ BrTextEditorModel >> selectNone [
 { #category : #'api - selection' }
 BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
-	- aSelectedTextBlock have two optional parameters [ :aSelectedString :aSelectedInterval | ],
-	- aCursorTextPositionBlock has one parameter [ :aStringPosition | ]."
-	
+	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize | ],
+	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize | ]."
+
 	self selectedText
 		ifNotEmpty: [ :aSelectedText | 
-				| aFromIndex aToIndex |
-				aFromIndex := (self selection from + 1) min: self text size max: 1.
-				aToIndex := ((self selection to) max: 1) min: self text size.
-				
-				aSelectedTextBlock cull: aSelectedText asString cull: (aFromIndex to: aToIndex) ]
-		ifEmpty: [ self hasCursors 
-			ifTrue: [
-				| aCursorPosition aTextPosition |
-				
-				aCursorPosition := self cursors first position.
-				aTextPosition := aCursorPosition min: self text size max: 1.
-				
-				aCursorTextPositionBlock value: aTextPosition ] ]
+			| aFromIndex aToIndex aTextSize |
+			aTextSize := self text size.
+			aFromIndex := self selection from + 1 min: aTextSize max: 1.
+			aToIndex := (self selection to max: 1) min: aTextSize.
+
+			aSelectedTextBlock
+				cull: aSelectedText asString
+				cull: (aFromIndex to: aToIndex)
+				cull: aTextSize ]
+		ifEmpty: [ self hasCursors
+				ifTrue: [ | aCursorPosition aTextPosition aTextSize |
+					aCursorPosition := self cursors first position.
+					aTextSize := self text size.
+					aTextPosition := aCursorPosition min: aTextSize max: 1.
+
+					aCursorTextPositionBlock cull: aTextPosition cull: aTextSize ] ]
 ]
 
 { #category : #'text - selection' }

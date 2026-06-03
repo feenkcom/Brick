@@ -111,6 +111,20 @@ BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString preview: 
 ]
 
 { #category : #'add / remove' }
+BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString preview: aPreviewString shortcut: aShortcutString action: anAction [
+	| aMenuItem |
+	aMenuItem := BrMenuActionItem new.
+	aMenuItem id: anId.
+	aMenuItem
+		icon: anIconStencil
+		label: aLabelString
+		preview: aPreviewString
+		shortcut: aShortcutString.
+	aMenuItem action: anAction.
+	self addItem: aMenuItem
+]
+
+{ #category : #'add / remove' }
 BrMenuItems >> addItemId: anId icon: anIconStencil label: aLabelString shortcut: aShortcutString action: anAction [
 	| aMenuItem |
 	aMenuItem := BrMenuActionItem new.

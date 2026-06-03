@@ -45,6 +45,10 @@ BrEditorElement >> addAppendingAttribute: anAppendingAttribute atAppendingAttrib
 BrEditorElement >> addAttribute: anAttribute overMarker: aMarkerAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
+	self
+		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
+		description:  [ 'aMarkerAttribute must be a marker attribute: {1}' format: { aMarkerAttribute } ].
+
 	self text
 		findAttribute: aMarkerAttribute
 		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
@@ -250,8 +254,8 @@ BrEditorElement >> scrollToPosition: aPosition [
 { #category : #'api - selection' }
 BrEditorElement >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
-	- aSelectedTextBlock has one parameter [ :aSelectedString | ],
-	- aCursorTextPositionBlock has one parameter [ :aStringPosition | ]."
+	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize | ],
+	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize | ]."
 
 	self editor
 		selectedStringAndIntervalDo: aSelectedTextBlock

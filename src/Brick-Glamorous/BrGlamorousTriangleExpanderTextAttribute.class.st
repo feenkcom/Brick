@@ -4,7 +4,7 @@ I am a text attribute that adds a small expand button that when clicked may appl
 Class {
 	#name : #BrGlamorousTriangleExpanderTextAttribute,
 	#superclass : #BrTextExpandButtonAttribute,
-	#category : #'Brick-Glamorous'
+	#category : #'Brick-Glamorous-Editor - Attributes'
 }
 
 { #category : #accessing }
