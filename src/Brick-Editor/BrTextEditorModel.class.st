@@ -125,7 +125,7 @@ BrTextEditorModel >> addHighlight: aBrTextHighlight overMarker: aMarkerAttribute
 			self text
 				attributes: {(BlTextHighlightAttribute new
 							paint: aBrTextHighlight color;
-							id: aBrTextHighlight id) beNotOverwritableByStyler}
+							id: aBrTextHighlight id) "beNotOverwritableByStyler"}
 				from: aMarkerStartPosition
 				to: aMarkerEndPosition ]
 ]
