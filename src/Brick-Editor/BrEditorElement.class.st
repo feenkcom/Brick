@@ -254,8 +254,8 @@ BrEditorElement >> scrollToPosition: aPosition [
 { #category : #'api - selection' }
 BrEditorElement >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
-	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize | ],
-	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize | ]."
+	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize :aDocumentId | ],
+	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize :aDocumentId | ]."
 
 	self editor
 		selectedStringAndIntervalDo: aSelectedTextBlock
