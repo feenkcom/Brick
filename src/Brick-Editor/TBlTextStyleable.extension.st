@@ -12,6 +12,13 @@ TBlTextStyleable >> appendingAdornment: aBrTextAdornmentStencilBuilder [
 ]
 
 { #category : #'*Brick-Editor' }
+TBlTextStyleable >> appendingText: aTextOrString [
+	self attributesBuilder attribute: (BrTextAdornmentTextAttribute new
+		beAppend;
+		text: aTextOrString asRopedText)
+]
+
+{ #category : #'*Brick-Editor' }
 TBlTextStyleable >> hideText [
 	"Visually replace a piece of text with a repeating aCharacter"
 
@@ -37,7 +44,7 @@ TBlTextStyleable >> onCursorEnter: anEnterAction leave: aLeaveAction [
 	The enter action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorAddedEvent :anAttributeStart :anAttributeEnd | ]
 	The leave action is a block in the following form: [ :aTextEditor :aBrTextEditorCursorRemovedEvent :anAttributeStart :anAttributeEnd | ]"
 
-	self attributesBuilder attribute: (BrTextCursorAttribute new
+	self attributesBuilder attribute: (BrTextCursorDynamicAttribute new
 			enterAction: anEnterAction;
 			leaveAction: aLeaveAction)
 ]

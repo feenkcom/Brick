@@ -115,11 +115,11 @@ BrTextEditorSegmentSplitterExamples >> cursorTextSplit [
 	| segments text |
 	text := self simpleText.
 	text
-		attributes: {BrTextCursorAttribute new enterAction: [ :editor |  ]}
+		attributes: {BrTextCursorDynamicAttribute new enterAction: [ :editor |  ]}
 		from: 1
 		to: 1.
 	text
-		attributes: {BrTextCursorAttribute new enterAction: [ :editor |  ]}
+		attributes: {BrTextCursorDynamicAttribute new enterAction: [ :editor |  ]}
 		from: text size
 		to: text size.
 	segments := self splitterClass new
@@ -249,7 +249,7 @@ BrTextEditorSegmentSplitterExamples >> replacingAdornmentWithCursorTextSplit [
 		from: 1
 		to: text size.
 	text
-		attributes: {BrTextCursorAttribute new enterAction: [ :editor |  ]}
+		attributes: {BrTextCursorDynamicAttribute new enterAction: [ :editor |  ]}
 		from: text size
 		to: text size.
 	segments := self splitterClass new
