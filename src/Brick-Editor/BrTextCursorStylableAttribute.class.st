@@ -2,33 +2,87 @@ Class {
 	#name : #BrTextCursorStylableAttribute,
 	#superclass : #BrTextCursorProtoAttribute,
 	#instVars : [
-		'attributes'
+		'attributes',
+		'selectionTriggersCursorEnter',
+		'shouldAddAttributeOnEnter',
+		'selectionBehavior',
+		'cursorEnterActions',
+		'cursorLeaveActions'
+	],
+	#classVars : [
+		'IgnoreSelection',
+		'SelectionPreservesCursorEnter',
+		'SelectionTriggersCursorEnter'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
 
-{ #category : #accessing }
-BrTextCursorStylableAttribute >> attribute: aTextAttribute [
-	self attributes: { aTextAttribute }
+{ #category : #'class initialization' }
+BrTextCursorStylableAttribute class >> initialize [
+	IgnoreSelection := #IgnoreSelection.
+	SelectionPreservesCursorEnter := #SelectionPreservesCursorEnter.
+	SelectionTriggersCursorEnter := #SelectionTriggersCursorEnter
 ]
 
-{ #category : #accessing }
-BrTextCursorStylableAttribute >> attributes [
-	^ attributes
+{ #category : #'api - actions' }
+BrTextCursorStylableAttribute >> addAttributeOverSelfOnLeave: anAttribute [
+	cursorLeaveActions add: (BrTextAddAttributeOverSelfAction attribute: anAttribute)
 ]
 
-{ #category : #accessing }
-BrTextCursorStylableAttribute >> attributes: aCollectionOfAttributes [
-	"Set a collection of attribtues that should be added when user hover a text with a mouse"
-	attributes := aCollectionOfAttributes
+{ #category : #'api - actions' }
+BrTextCursorStylableAttribute >> addAttributeOverSelfOnLeave: anAttribute firstCharacters: aCharCount [
+	cursorLeaveActions add: (BrTextAddAttributeOverSelfFirstCharsAction attribute: anAttribute firstCharacters: aCharCount)
+]
+
+{ #category : #'api - actions' }
+BrTextCursorStylableAttribute >> addAttributeOverSelfOnLeave: anAttribute lastCharacters: aCharCount [
+	cursorLeaveActions add: (BrTextAddAttributeOverSelfLastCharsAction attribute: anAttribute lastCharacters: aCharCount)
+]
+
+{ #category : #'api - selection' }
+BrTextCursorStylableAttribute >> ignoreSelection [
+	selectionBehavior := IgnoreSelection
 ]
 
 { #category : #initialization }
 BrTextCursorStylableAttribute >> initialize [
 	super initialize.
 
-	attributes := #().
-	enterAction := [ :aText :aTextElement :aTextEditor :anEvent | aText attributes: self attributes ].
-	leaveAction := [ :aText :aTextElement :aTextEditor :anEvent |
-		aText clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ]
+	selectionBehavior := IgnoreSelection.
+	cursorEnterActions := OrderedCollection new.
+	cursorLeaveActions := OrderedCollection new.
+	
+	
+	
+	enterAction := [ :aTextEditorModel :aTextElement :aStart :anEnd | 
+		shouldAddAttributeOnEnter
+			ifTrue: [ (aTextEditorModel text from: aStart to: anEnd) attributes: self attributes ]
+			ifFalse: [ (aTextEditorModel text from: aStart to: anEnd)
+					clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ] ].
+	leaveAction := [ :aTextEditorModel :aTextElement :aStart :anEnd | 
+		shouldAddAttributeOnEnter
+			ifTrue: [ (aTextEditorModel text from: aStart to: anEnd)
+					clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ]
+			ifFalse: [ (aTextEditorModel text from: aStart to: anEnd)
+					attributes: self attributes ] ]
+]
+
+{ #category : #'api - selection' }
+BrTextCursorStylableAttribute >> preserveCursorEnterOnSelection [
+	selectionBehavior := SelectionPreservesCursorEnter
+]
+
+{ #category : #'api - actions' }
+BrTextCursorStylableAttribute >> removeAttributeOverSelfOnEnter: anAttribute [
+	cursorEnterActions add: (BrTextRemoveAttributeOverSelfAction attribute: anAttribute)
+]
+
+{ #category : #'api - actions' }
+BrTextCursorStylableAttribute >> removeAttributeOverSelfOnLeave: anAttribute [
+	cursorLeaveActions add: (BrTextRemoveAttributeOverSelfAction attribute: anAttribute)
+]
+
+{ #category : #'api - selection' }
+BrTextCursorStylableAttribute >> triggerCursorEnterOnSelection [
+	selectionBehavior := SelectionTriggersCursorEnter
 ]

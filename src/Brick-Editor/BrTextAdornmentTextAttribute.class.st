@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #accessing }
+BrTextAdornmentTextAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorElement [
+	"Return an element that should affect (either append or replace) a provided text piece"
+	<return: #SequenceableCollection of: #BlElement>
+
+	^ BlTextElement new text: text
+]
+
+{ #category : #accessing }
 BrTextAdornmentTextAttribute >> text [
 	^ text
 ]
