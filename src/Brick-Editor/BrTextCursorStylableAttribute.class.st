@@ -25,6 +25,18 @@ BrTextCursorStylableAttribute class >> initialize [
 ]
 
 { #category : #'api - actions' }
+BrTextCursorStylableAttribute >> addAttributeOverSelfOnEnter: anAttribute [
+	cursorEnterActions add: (BrTextAddAttributeOverSelfAction attribute: anAttribute)
+]
+
+{ #category : #'api - actions' }
+BrTextCursorStylableAttribute >> addAttributeOverSelfOnEnterAndRemoveOnLeave: anAttribute [
+	self
+		addAttributeOverSelfOnEnter: anAttribute;
+		removeAttributeOverSelfOnLeave: anAttribute
+]
+
+{ #category : #'api - actions' }
 BrTextCursorStylableAttribute >> addAttributeOverSelfOnLeave: anAttribute [
 	cursorLeaveActions add: (BrTextAddAttributeOverSelfAction attribute: anAttribute)
 ]

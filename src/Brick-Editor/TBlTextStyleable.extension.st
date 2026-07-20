@@ -101,14 +101,15 @@ TBlTextStyleable >> previewAsText: aText [
 			text: '' asRopedText.
 
 	self attributesBuilder
-		attributes: {hideAttribute.
+		attributes: {
+				hideAttribute.
 				BrTextAdornmentTextAttribute new
 					beAppend;
 					text: aText asRopedText.
 				BrTextCursorStylableAttribute new
-					triggerCursorEnterOnSelection;
-					addAttributeOnLeave;
-					attribute: hideAttribute }
+					preserveCursorEnterOnSelection;
+					addAttributeOverSelfOnLeave: hideAttribute;
+					removeAttributeOverSelfOnEnter: hideAttribute }
 ]
 
 { #category : #'*Brick-Editor' }
