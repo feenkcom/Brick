@@ -304,6 +304,11 @@ BrTextEditorModel >> deselect: aFromTextIndex to: aToTextIndex [
 		deselect
 ]
 
+{ #category : #'api - selection' }
+BrTextEditorModel >> deselectAll [
+	self deselecter all deselect
+]
+
 { #category : #'api - modification' }
 BrTextEditorModel >> deselecter [
 	<return: #BrTextEditorDeselecter>

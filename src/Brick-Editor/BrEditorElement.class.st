@@ -124,6 +124,11 @@ BrEditorElement >> defaultLayout [
 	^ BlInfiniteLinearLayout vertical
 ]
 
+{ #category : #'api - selection' }
+BrEditorElement >> deselectAll [
+	self editor deselectAll
+]
+
 { #category : #accessing }
 BrEditorElement >> editor [
 	<return: #BrTextEditorModel>
