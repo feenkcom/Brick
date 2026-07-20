@@ -19,6 +19,34 @@ TBlTextStyleable >> appendingText: aTextOrString [
 ]
 
 { #category : #'*Brick-Editor' }
+TBlTextStyleable >> hideMarkupLeft: amountOfCharactersToHideLeft right: amountOfCharactersToHideRight [
+	| hideAttributeLeft hideAttributeRight |
+
+	hideAttributeLeft := BrTextAdornmentTextAttribute new
+			beReplace;
+			text: '' asRopedText.
+
+	hideAttributeRight := BrTextAdornmentTextAttribute new
+			beReplace;
+			text: '' asRopedText.
+			
+	(self from: 1 to: amountOfCharactersToHideLeft)
+		attribute: hideAttributeLeft.
+		
+	(self from: (self size - amountOfCharactersToHideRight + 1) to: self size)
+		attribute: hideAttributeRight.
+
+	self attributesBuilder
+		attribute:
+			(BrTextCursorStylableAttribute new
+				preserveCursorEnterOnSelection;
+				removeAttributeOverSelfOnEnter: hideAttributeLeft;
+				removeAttributeOverSelfOnEnter: hideAttributeRight;
+				addAttributeOverSelfOnLeave: hideAttributeLeft firstCharacters: 2;
+				addAttributeOverSelfOnLeave: hideAttributeRight lastCharacters: 2)
+]
+
+{ #category : #'*Brick-Editor' }
 TBlTextStyleable >> hideText [
 	"Visually replace a piece of text with a repeating aCharacter"
 
@@ -66,6 +94,25 @@ TBlTextStyleable >> paragraphMargin: anInsets [
 ]
 
 { #category : #'*Brick-Editor' }
+TBlTextStyleable >> previewAsText: aText [
+	| hideAttribute |
+	hideAttribute := BrTextAdornmentTextAttribute new
+			beReplace;
+			text: '' asRopedText.
+
+	self attributesBuilder
+		attributes: {
+				hideAttribute.
+				BrTextAdornmentTextAttribute new
+					beAppend;
+					text: aText asRopedText.
+				BrTextCursorStylableAttribute new
+					preserveCursorEnterOnSelection;
+					addAttributeOverSelfOnLeave: hideAttribute;
+					removeAttributeOverSelfOnEnter: hideAttribute }
+]
+
+{ #category : #'*Brick-Editor' }
 TBlTextStyleable >> replacingAdornment: aBrTextAdornmentStencilBuilder [
 	"Visually replace a piece of text with an element defined by a given stencil builder.
 	A stencil builder can also be a block in the following form:
@@ -77,10 +124,10 @@ TBlTextStyleable >> replacingAdornment: aBrTextAdornmentStencilBuilder [
 ]
 
 { #category : #'*Brick-Editor' }
-TBlTextStyleable >> replacingText: aCharacter [
-	"Visually replace a piece of text with a repeating aCharacter"
-
-	self attributesBuilder attribute: (BrTextReplacingAttribute new withCharacter: aCharacter)
+TBlTextStyleable >> replacingText: aTextOrString [
+	self attributesBuilder attribute: (BrTextAdornmentTextAttribute new
+		beReplace;
+		text: aTextOrString asRopedText)
 ]
 
 { #category : #'*Brick-Editor' }

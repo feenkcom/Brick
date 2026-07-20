@@ -36,7 +36,7 @@ BrTextCursorProtoAttribute >> performEnterAction: anEvent in: aTextEditor [
 
 	isInside := true.
 	
-	self enterAction gtValueWithArgs: {
+	enterAction gtValueWithArgs: {
 		aTextEditor. "then the whole editor element"
 		anEvent. "the event itself"
 		anEvent attributeStart.
@@ -50,7 +50,7 @@ BrTextCursorProtoAttribute >> performLeaveAction: anEvent in: aTextEditor [
 
 	isInside := false.
 
-	self leaveAction gtValueWithArgs: {
+	leaveAction gtValueWithArgs: {
 		aTextEditor. "then the whole editor element"
 		anEvent. "the event itself"
 		anEvent attributeStart.
