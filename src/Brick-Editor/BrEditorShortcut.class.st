@@ -86,19 +86,13 @@ BrEditorShortcut class >> deleteOneLetterAfterCursor [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> deleteOneLetterBeforeCursor [
-
 	^ self new
-		  name: 'Delete';
-		  description:
-			  'Moves the display cursor one position backwards, deletes the character at that position, and shifts back the text after that position by one position.';
-		  combination: BlKeyCombination backspace;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deleter
-				  selected;
-				  oneBeforeCursorIfOutsideOfSelection;
-				  surroundings: aBrTextEditor surroundMap;
-				  delete ];
-		  yourself
+		name: 'Delete';
+		description: 'Moves the display cursor one position backwards, deletes the character at that position, and shifts back the text after that position by one position.';
+		combination: BlKeyCombination backspace;
+		performBlock: [ :aBrTextEditor | 
+			aBrTextEditor deletePreviousAtCursor ];
+		yourself
 ]
 
 { #category : #accessing }

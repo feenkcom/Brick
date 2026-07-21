@@ -124,6 +124,11 @@ BrEditorElement >> defaultLayout [
 	^ BlInfiniteLinearLayout vertical
 ]
 
+{ #category : #'api - editing' }
+BrEditorElement >> deletePreviousAtCursor [
+	self editor deletePreviousAtCursor
+]
+
 { #category : #'api - selection' }
 BrEditorElement >> deselectAll [
 	self editor deselectAll
@@ -169,6 +174,13 @@ BrEditorElement >> initialize [
 	textScrollOnModifyHandler := BlEventHandler
 		on: BrTextEditorModifiedEvent
 		do: [ :anEvent | self privateScrollWhenTextModified: anEvent ].
+]
+
+{ #category : #'api - cursors' }
+BrEditorElement >> moveCursorTo: aTextIndex [
+	"Moves cursor to a given position without any further action such as cancelling selection"
+
+	self editor moveCursorTo: aTextIndex
 ]
 
 { #category : #accessing }
@@ -259,8 +271,8 @@ BrEditorElement >> scrollToPosition: aPosition [
 { #category : #'api - selection' }
 BrEditorElement >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
-	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize :aDocumentId | ],
-	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize :aDocumentId | ]."
+	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize :aDocumentId :aCaretOffset | ],
+	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize :aDocumentId :aCaretOffset | ]."
 
 	self editor
 		selectedStringAndIntervalDo: aSelectedTextBlock

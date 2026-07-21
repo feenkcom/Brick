@@ -287,6 +287,15 @@ BrTextEditorModel >> delete: aFromTextIndex to: aToTextIndex [
 		delete
 ]
 
+{ #category : #'api - editing' }
+BrTextEditorModel >> deletePreviousAtCursor [
+	self deleter
+		selected;
+		oneBeforeCursorIfOutsideOfSelection;
+		surroundings: self surroundMap;
+		delete
+]
+
 { #category : #'api - modification' }
 BrTextEditorModel >> deleter [
 	^ BrTextEditorDeleter new editor: self
@@ -1311,28 +1320,34 @@ BrTextEditorModel >> selectNone [
 { #category : #'api - selection' }
 BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
-	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize :aDocumentId | ],
-	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize :aDocumentId | ]."
+	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize :aDocumentId :aCaretOffset | ],
+	- aCursorTextPositionBlock has two optional parameters [ :aStringPosition :aTextSize :aDocumentId :aCaretOffset | ]."
 
 	self selectedText
 		ifNotEmpty: [ :aSelectedText | 
-			| aFromIndex aToIndex aTextSize |
+			| aCursorPosition aFromIndex aToIndex aTextSize |
+			aCursorPosition := self cursors first position.
 			aTextSize := self text size.
 			aFromIndex := self selection from + 1 min: aTextSize max: 1.
 			aToIndex := (self selection to max: 1) min: aTextSize.
 
-			aSelectedTextBlock
-				cull: aSelectedText asString
-				cull: (aFromIndex to: aToIndex)
-				cull: aTextSize
-				cull: documentId ]
+			aSelectedTextBlock valueWithEnoughArguments: {
+						aSelectedText asString.
+						(aFromIndex to: aToIndex).
+						aTextSize.
+						documentId.
+						aCursorPosition } ]
 		ifEmpty: [ self hasCursors
 				ifTrue: [ | aCursorPosition aTextPosition aTextSize |
 					aCursorPosition := self cursors first position.
 					aTextSize := self text size.
 					aTextPosition := aCursorPosition min: aTextSize max: 1.
-
-					aCursorTextPositionBlock cull: aTextPosition cull: aTextSize cull: documentId ] ]
+					
+					aCursorTextPositionBlock valueWithEnoughArguments: { 
+						aTextPosition. 
+						aTextSize. 
+						documentId. 
+						aCursorPosition } ] ]
 ]
 
 { #category : #'text - selection' }
