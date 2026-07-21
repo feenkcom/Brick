@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Brick-Editor-UI - Handlers'
+	#category : 'Brick-Editor-UI - Handlers'
 }
 
 { #category : #accessing }

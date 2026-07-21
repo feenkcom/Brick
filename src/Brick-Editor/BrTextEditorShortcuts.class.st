@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'shortcuts'
 	],
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #'adding / removing' }

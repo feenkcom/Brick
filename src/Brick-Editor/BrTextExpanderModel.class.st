@@ -5,7 +5,7 @@ Class {
 		'announcer',
 		'isExpanded'
 	],
-	#category : #'Brick-Editor-Attributes - Support'
+	#category : 'Brick-Editor-Attributes - Support'
 }
 
 { #category : #accessing }

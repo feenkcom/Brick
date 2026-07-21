@@ -6,7 +6,7 @@ Class {
 		'undoIndices',
 		'redoIndices'
 	],
-	#category : #'Brick-Editor-History'
+	#category : 'Brick-Editor-History'
 }
 
 { #category : #'api - cursors' }

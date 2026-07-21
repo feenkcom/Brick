@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'editorStylingFuture'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #initialization }

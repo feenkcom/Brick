@@ -21,7 +21,7 @@ Class {
 	#instVars : [
 		'definitions'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #'instance creation' }

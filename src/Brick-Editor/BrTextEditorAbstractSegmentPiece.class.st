@@ -7,7 +7,7 @@ Class {
 		'segment',
 		'currentCursors'
 	],
-	#category : #'Brick-Editor-Model - Segment'
+	#category : 'Brick-Editor-Model - Segment'
 }
 
 { #category : #'instance creation' }

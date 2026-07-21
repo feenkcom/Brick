@@ -9,7 +9,7 @@ Class {
 		'purpose',
 		'userData'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #printing }

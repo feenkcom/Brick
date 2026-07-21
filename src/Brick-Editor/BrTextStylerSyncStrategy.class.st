@@ -11,7 +11,7 @@ Example: {{gtExample:BrTextStylerExamples>>#editorWithSyncStylerStrategy|codeExp
 Class {
 	#name : #BrTextStylerSyncStrategy,
 	#superclass : #BrTextStylerStrategy,
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #styling }

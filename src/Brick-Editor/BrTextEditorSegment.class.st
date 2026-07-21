@@ -16,7 +16,7 @@ Class {
 		'wordPadding',
 		'paragraphMargin'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'pieces - computation' }

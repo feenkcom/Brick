@@ -10,7 +10,7 @@ Class {
 		'cursorStencil',
 		'segmentPiece'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
 { #category : #'cursor - management' }

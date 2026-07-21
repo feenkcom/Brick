@@ -7,7 +7,7 @@ I always insert `CR` line ending when a user presses the `return` key.
 Class {
 	#name : #BrTextEditorEditableCodeMode,
 	#superclass : #BrTextEditorEditableMode,
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #shortcuts }

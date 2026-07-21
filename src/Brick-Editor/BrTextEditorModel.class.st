@@ -30,7 +30,7 @@ Class {
 	#classVars : [
 		'DontUseParagraphEditor'
 	],
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #accessing }
@@ -184,13 +184,13 @@ BrTextEditorModel >> beParagraphBased [
 ]
 
 { #category : #'api - mode' }
-BrTextEditorModel >> beReadOnlyWithSelection [
-	self editorMode: BrTextEditorReadonlyWithSelectionMode new
+BrTextEditorModel >> beReadOnlyWithoutSelection [
+	self editorMode: BrTextEditorReadonlyWithoutSelectionMode new
 ]
 
 { #category : #'api - mode' }
-BrTextEditorModel >> beReadOnlyWithoutSelection [
-	self editorMode: BrTextEditorReadonlyWithoutSelectionMode new
+BrTextEditorModel >> beReadOnlyWithSelection [
+	self editorMode: BrTextEditorReadonlyWithSelectionMode new
 ]
 
 { #category : #'private - selection' }
@@ -548,6 +548,11 @@ BrTextEditorModel >> inputFilter: aBrTextEditorInputFilter [
 	filter := aBrTextEditorInputFilter
 ]
 
+{ #category : #'api - modification' }
+BrTextEditorModel >> inserter [
+	^ BrTextEditorInserter new editor: self
+]
+
 { #category : #'private - text' }
 BrTextEditorModel >> insertString: aString at: aTextIndex [
 
@@ -558,11 +563,6 @@ BrTextEditorModel >> insertString: aString at: aTextIndex [
 		withoutSelectionUpdate;
 		withoutSelectionDelete;
 		insert
-]
-
-{ #category : #'api - modification' }
-BrTextEditorModel >> inserter [
-	^ BrTextEditorInserter new editor: self
 ]
 
 { #category : #initialization }
@@ -970,38 +970,6 @@ BrTextEditorModel >> onTextReplaced: oldText [
 ]
 
 { #category : #'hooks - text modifications' }
-BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
-	self assertUIProcess.
-
-	(aBlTextStyledEvent text isNextGenerationOf: self text)
-		ifTrue: [ (self segmentBuilder
-				requiresResplittingFrom: self text
-				to: aBlTextStyledEvent text)
-				ifTrue: [  "It is possible that the segment structure has changed"self segmentBuilder
-						resetSegmentCacheAndNotify: self ].
-			self text updateFrom: aBlTextStyledEvent text text.
-
-			BlFrameTelemetry
-				time: [ 'Execute after-action: {1}' format: {aBlTextStyledEvent afterAction} ]
-				during: [ aBlTextStyledEvent afterAction value: self text ].
-
-			BlFrameTelemetry
-				time: [ 'notifyTextStyled' ]
-				during: [ self notifyTextStyled: self text ].
-
-			BlFrameTelemetry
-				time: [ 'processCursorAttributes' ]
-				during: [ self processCursorEnterEvents ].
-
-			BlFrameTelemetry
-				time: [ 'Invalidate the whole text editor due to text change' ]
-				during: [ self updater
-						all;
-						update ] ]
-		ifFalse: [ self styleTextAndAfterDo: aBlTextStyledEvent afterAction ]
-]
-
-{ #category : #'hooks - text modifications' }
 BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 	"Is sent after a piece of text was deleted in a text model"
 	| deleteCommand |
@@ -1038,6 +1006,38 @@ BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 	
 	shouldStyleWhenTextModified
 		ifTrue: [ self styleText ]
+]
+
+{ #category : #'hooks - text modifications' }
+BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
+	self assertUIProcess.
+
+	(aBlTextStyledEvent text isNextGenerationOf: self text)
+		ifTrue: [ (self segmentBuilder
+				requiresResplittingFrom: self text
+				to: aBlTextStyledEvent text)
+				ifTrue: [  "It is possible that the segment structure has changed"self segmentBuilder
+						resetSegmentCacheAndNotify: self ].
+			self text updateFrom: aBlTextStyledEvent text text.
+
+			BlFrameTelemetry
+				time: [ 'Execute after-action: {1}' format: {aBlTextStyledEvent afterAction} ]
+				during: [ aBlTextStyledEvent afterAction value: self text ].
+
+			BlFrameTelemetry
+				time: [ 'notifyTextStyled' ]
+				during: [ self notifyTextStyled: self text ].
+
+			BlFrameTelemetry
+				time: [ 'processCursorAttributes' ]
+				during: [ self processCursorEnterEvents ].
+
+			BlFrameTelemetry
+				time: [ 'Invalidate the whole text editor due to text change' ]
+				during: [ self updater
+						all;
+						update ] ]
+		ifFalse: [ self styleTextAndAfterDo: aBlTextStyledEvent afterAction ]
 ]
 
 { #category : #'text - copy/paste' }
@@ -1302,21 +1302,6 @@ BrTextEditorModel >> select: aFromTextIndex to: aToTextIndex [
 		select
 ]
 
-{ #category : #'text - selection' }
-BrTextEditorModel >> selectNone [
-	"Deselect the whole text in the editor without any other side effects.
-	Note:
-		- I don't change cursor position.
-		- I request segments update"
-
-	self selection isEmpty
-		ifTrue: [ ^ self ].
-
-	self
-		deselect: self selection from
-		to: self selection to
-]
-
 { #category : #'api - selection' }
 BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
@@ -1391,6 +1376,21 @@ BrTextEditorModel >> selectionRecorder [
 	^ selectionRecorder
 ]
 
+{ #category : #'text - selection' }
+BrTextEditorModel >> selectNone [
+	"Deselect the whole text in the editor without any other side effects.
+	Note:
+		- I don't change cursor position.
+		- I request segments update"
+
+	self selection isEmpty
+		ifTrue: [ ^ self ].
+
+	self
+		deselect: self selection from
+		to: self selection to
+]
+
 { #category : #'api - shortcuts' }
 BrTextEditorModel >> setEditorShortcuts: aBrTextEditorShortcuts [
 	self
@@ -1406,20 +1406,6 @@ BrTextEditorModel >> setEditorShortcuts: aBrTextEditorShortcuts [
 { #category : #accessing }
 BrTextEditorModel >> shouldConsumeClickEvent [
 	^ shouldConsumeClickEvent ifNil: [ shouldConsumeClickEvent := true ]
-]
-
-{ #category : #'text - styling' }
-BrTextEditorModel >> styleText [
-	"I request styler to re-style my current text"
-	
-	self styleTextAndAfterDo: [ :aStyledText | "do nothing" ]
-]
-
-{ #category : #'text - styling' }
-BrTextEditorModel >> styleTextAndAfterDo: aBlock [
-	"I first style, and then I do aBlock once I am finished"
-	
-	self dispatchEvent: (BrTextEditorTextStyleRequested new afterAction: aBlock)
 ]
 
 { #category : #'api - attributes' }
@@ -1461,6 +1447,20 @@ BrTextEditorModel >> stylerStrategy: aBrTextStylerStrategy [
 		description: [ 'Text styler strategy must be non-nil' ].
 
 	stylerStrategy := aBrTextStylerStrategy
+]
+
+{ #category : #'text - styling' }
+BrTextEditorModel >> styleText [
+	"I request styler to re-style my current text"
+	
+	self styleTextAndAfterDo: [ :aStyledText | "do nothing" ]
+]
+
+{ #category : #'text - styling' }
+BrTextEditorModel >> styleTextAndAfterDo: aBlock [
+	"I first style, and then I do aBlock once I am finished"
+	
+	self dispatchEvent: (BrTextEditorTextStyleRequested new afterAction: aBlock)
 ]
 
 { #category : #'api - shortcuts' }
@@ -1527,6 +1527,13 @@ BrTextEditorModel >> undo [
 	history undoOn: self
 ]
 
+{ #category : #'api - modification' }
+BrTextEditorModel >> updater [
+	<return: #BrTextEditorUpdater>
+
+	^ BrTextEditorUpdater new editor: self
+]
+
 { #category : #'private - updating' }
 BrTextEditorModel >> updateSelection: aFromTextIndex to: aToTextIndex [
 	"Update text rendering within an interval defined by provided from and to indices."
@@ -1536,13 +1543,6 @@ BrTextEditorModel >> updateSelection: aFromTextIndex to: aToTextIndex [
 		fromIndex: aFromTextIndex;
 		toIndex: aToTextIndex.
 	self enqueueCommand: aCommand
-]
-
-{ #category : #'api - modification' }
-BrTextEditorModel >> updater [
-	<return: #BrTextEditorUpdater>
-
-	^ BrTextEditorUpdater new editor: self
 ]
 
 { #category : #initialization }

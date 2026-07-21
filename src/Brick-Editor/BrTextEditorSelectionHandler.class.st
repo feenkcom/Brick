@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'startIndex'
 	],
-	#category : #'Brick-Editor-UI - Handlers'
+	#category : 'Brick-Editor-UI - Handlers'
 }
 
 { #category : #'dnd handlers' }

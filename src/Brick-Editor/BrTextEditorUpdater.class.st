@@ -6,7 +6,7 @@ Class {
 		'shouldRecreate',
 		'commandClass'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }

@@ -6,7 +6,7 @@ Class {
 		'leaveAction',
 		'isInside'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #events }

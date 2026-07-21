@@ -33,7 +33,7 @@ Class {
 		'segmentsInterval',
 		'map'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'api - modifications' }
@@ -81,23 +81,6 @@ BrTextEditorSegmentCollector >> assertSegmentsIntervalConsistency [
 ]
 
 { #category : #accessing }
-BrTextEditorSegmentCollector >> cacheLimit [
-	"Answer the maximum number of segments that will be loaded by #segmentAt:.
-	Explicitly adding segments via #addSegments:after: or #addSegments:before: may safely exceed this limit."
-	<return: #Number>
-	
-	^ limit
-]
-
-{ #category : #accessing }
-BrTextEditorSegmentCollector >> cacheLimit: aNumber [
-	"Set the soft maximum number of segments to cache.
-	See the class comments for further information."
-
-	limit := aNumber
-]
-
-{ #category : #accessing }
 BrTextEditorSegmentCollector >> cachedInterval [
 	"Return the interval of the indices of the currently cached segments"
 	<return: #Number>
@@ -114,6 +97,35 @@ BrTextEditorSegmentCollector >> cachedSegmentAt: anIndex [
 
 	aCachedIndex := anIndex - segmentsInterval first + 1.
 	^ segments at: aCachedIndex
+]
+
+{ #category : #accessing }
+BrTextEditorSegmentCollector >> cacheLimit [
+	"Answer the maximum number of segments that will be loaded by #segmentAt:.
+	Explicitly adding segments via #addSegments:after: or #addSegments:before: may safely exceed this limit."
+	<return: #Number>
+	
+	^ limit
+]
+
+{ #category : #accessing }
+BrTextEditorSegmentCollector >> cacheLimit: aNumber [
+	"Set the soft maximum number of segments to cache.
+	See the class comments for further information."
+
+	limit := aNumber
+]
+
+{ #category : #'cache - accessing' }
+BrTextEditorSegmentCollector >> computedSegmentsCount [
+	"Return amount of cached segments. If segments are not cached,
+	try to cache them and return their amount"
+	<return: #Number>
+	
+	self hasCached
+		ifFalse: [ self computeForwardAt: 1 ].
+
+	^ self lastSegmentIndex
 ]
 
 { #category : #'cache - computation' }
@@ -168,18 +180,6 @@ BrTextEditorSegmentCollector >> computeInterval: anIndex [
 	end := start + self cacheLimit - 1.
 	
 	^ start to: end
-]
-
-{ #category : #'cache - accessing' }
-BrTextEditorSegmentCollector >> computedSegmentsCount [
-	"Return amount of cached segments. If segments are not cached,
-	try to cache them and return their amount"
-	<return: #Number>
-	
-	self hasCached
-		ifFalse: [ self computeForwardAt: 1 ].
-
-	^ self lastSegmentIndex
 ]
 
 { #category : #accessing }

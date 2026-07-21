@@ -11,7 +11,7 @@ Class {
 		'BlinkInterval',
 		'ShouldBlink'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
 { #category : #accessing }

@@ -10,7 +10,7 @@ Class {
 		'position',
 		'cursor'
 	],
-	#category : #'Brick-Editor-Commands'
+	#category : 'Brick-Editor-Commands'
 }
 
 { #category : #accessing }

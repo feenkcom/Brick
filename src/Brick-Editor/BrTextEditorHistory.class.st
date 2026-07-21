@@ -9,7 +9,7 @@ Class {
 		'currentGroup',
 		'editorModel'
 	],
-	#category : #'Brick-Editor-History'
+	#category : 'Brick-Editor-History'
 }
 
 { #category : #private }

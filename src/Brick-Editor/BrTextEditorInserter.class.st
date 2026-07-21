@@ -23,7 +23,7 @@ Class {
 		'inputFilter',
 		'surroundMap'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }
@@ -498,11 +498,6 @@ BrTextEditorInserter >> updateSelectionAfterInsertion: aText withSurround: aSurr
 ]
 
 { #category : #'api - configuration' }
-BrTextEditorInserter >> withSelectionDelete [
-	shouldDeleteSelected := true
-]
-
-{ #category : #'api - configuration' }
 BrTextEditorInserter >> withoutCursorUpdate [
 	shouldUpdateCursor := false
 ]
@@ -515,4 +510,9 @@ BrTextEditorInserter >> withoutSelectionDelete [
 { #category : #'api - configuration' }
 BrTextEditorInserter >> withoutSelectionUpdate [
 	shouldUpdateSelection := false
+]
+
+{ #category : #'api - configuration' }
+BrTextEditorInserter >> withSelectionDelete [
+	shouldDeleteSelected := true
 ]

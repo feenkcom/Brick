@@ -12,7 +12,7 @@ Class {
 	#classVars : [
 		'EditorTabSize'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
 { #category : #accessing }
@@ -287,6 +287,14 @@ BrEditorElement >> smoothScrollToPosition: aPosition [
 	^ super smoothScrollToPosition: aPosition
 ]
 
+{ #category : #'api - attributes' }
+BrEditorElement >> styledTextAttributesDo: aBlock [
+	"Iterate styled text attributes. 
+	`aBlock` have two optional parameters [ :allAttributes :eachPosition | ]"
+
+	self text attributesDo: aBlock
+]
+
 { #category : #styling }
 BrEditorElement >> styleText [
 	self
@@ -294,14 +302,6 @@ BrEditorElement >> styleText [
 		transformWith: '`@receiver styleText' -> '`@receiver requestManualStyling'.
 
 	self editor styleText
-]
-
-{ #category : #'api - attributes' }
-BrEditorElement >> styledTextAttributesDo: aBlock [
-	"Iterate styled text attributes. 
-	`aBlock` have two optional parameters [ :allAttributes :eachPosition | ]"
-
-	self text attributesDo: aBlock
 ]
 
 { #category : #accessing }

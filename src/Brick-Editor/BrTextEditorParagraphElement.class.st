@@ -14,7 +14,7 @@ Class {
 		'Slants',
 		'Stretches'
 	],
-	#category : #'Brick-Editor-UI'
+	#category : 'Brick-Editor-UI'
 }
 
 { #category : #'instance creation' }

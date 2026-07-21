@@ -17,7 +17,7 @@ Class {
 		'origin',
 		'baseline'
 	],
-	#category : #'Brick-Editor-Layout'
+	#category : 'Brick-Editor-Layout'
 }
 
 { #category : #adding }

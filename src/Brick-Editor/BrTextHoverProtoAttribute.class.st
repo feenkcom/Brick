@@ -6,7 +6,7 @@ Class {
 		'leaveAction',
 		'isHovered'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #views }

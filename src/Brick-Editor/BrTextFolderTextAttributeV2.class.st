@@ -9,7 +9,7 @@ Class {
 		'foldableMarkerAttribute',
 		'foldModel'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #private }
@@ -34,6 +34,11 @@ BrTextFolderTextAttributeV2 >> definingMethod: anObject [
 	definingMethod := anObject
 ]
 
+{ #category : #accessing }
+BrTextFolderTextAttributeV2 >> foldableMarkerAttribute [
+	^ foldableMarkerAttribute
+]
+
 { #category : #private }
 BrTextFolderTextAttributeV2 >> foldAttributeInTextEditorElement: aTextEditorElement [
 	self foldableMarkerAttribute ifNil: [ ^ self ].
@@ -42,11 +47,6 @@ BrTextFolderTextAttributeV2 >> foldAttributeInTextEditorElement: aTextEditorElem
 	aTextEditorElement
 		addAttribute: self hideReplacableAttribute
 		overMarker: self foldableMarkerAttribute
-]
-
-{ #category : #accessing }
-BrTextFolderTextAttributeV2 >> foldableMarkerAttribute [
-	^ foldableMarkerAttribute
 ]
 
 { #category : #accessing }

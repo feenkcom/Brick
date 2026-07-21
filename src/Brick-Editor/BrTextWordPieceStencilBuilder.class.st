@@ -10,7 +10,7 @@ Class {
 	#classInstVars : [
 		'TextPiecePool'
 	],
-	#category : #'Brick-Editor-UI - Stencils'
+	#category : 'Brick-Editor-UI - Stencils'
 }
 
 { #category : #'class initialization' }

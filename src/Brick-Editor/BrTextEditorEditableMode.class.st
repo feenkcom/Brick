@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorEditableMode,
 	#superclass : #BrTextEditorBasicMode,
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #shortcuts }

@@ -6,7 +6,7 @@ Class {
 		'text',
 		'documentId'
 	],
-	#category : #'Brick-Editor-Signals'
+	#category : 'Brick-Editor-Signals'
 }
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'filters'
 	],
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #accessing }

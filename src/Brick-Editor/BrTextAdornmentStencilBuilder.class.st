@@ -30,7 +30,7 @@ Class {
 		'editorElement',
 		'segmentPiece'
 	],
-	#category : #'Brick-Editor-UI - Stencils'
+	#category : 'Brick-Editor-UI - Stencils'
 }
 
 { #category : #'api - instantiation' }

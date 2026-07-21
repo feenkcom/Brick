@@ -12,7 +12,7 @@ Class {
 		'wordStencilBuilder',
 		'lineSplitter'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'text - modifications' }
@@ -53,6 +53,38 @@ BrTextEditorLineSegmentBuilder >> defaultSplitter [
 	^ BrTextEditorSplitter new
 		segmentClass: BrTextEditorParagraphSegment;
 		yourself
+]
+
+{ #category : #'text - modifications' }
+BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
+	| aFromSegment aToSegment aTargetSegment |
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ '`From` index must be less or equal to `to` index' ].
+
+	aBrTextEditor segmentCollector
+		findCachedSegmentForLetterAt: aFromIndex
+		ifFound: [ :aSegment | aFromSegment := aSegment ]
+		ifNotFound: [  ].
+
+	aBrTextEditor segmentCollector
+		findCachedSegmentForLetterAt: aToIndex
+		ifFound: [ :aSegment | aToSegment := aSegment ]
+		ifNotFound: [  ].
+
+	(aFromSegment isNil or: [ aToSegment isNil ])
+		ifTrue: [ ^ self resetSegmentCacheAndNotify: aBrTextEditor ].
+
+	aTargetSegment := self
+			deleteFrom: aFromIndex
+			segment: aFromSegment
+			to: aToIndex
+			segment: aToSegment
+			in: aBrTextEditor.
+
+	aBrTextEditor updater
+		from: aTargetSegment textStart to: aTargetSegment textEnd;
+		update
 ]
 
 { #category : #'private - deletion' }
@@ -96,38 +128,6 @@ BrTextEditorLineSegmentBuilder >> deleteFrom: aFromIndex segment: aFromSegment t
 		after: aTargetSegment.
 		
 	^ aTargetSegment
-]
-
-{ #category : #'text - modifications' }
-BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTextEditor [
-	| aFromSegment aToSegment aTargetSegment |
-	self
-		assert: [ aFromIndex <= aToIndex ]
-		description: [ '`From` index must be less or equal to `to` index' ].
-
-	aBrTextEditor segmentCollector
-		findCachedSegmentForLetterAt: aFromIndex
-		ifFound: [ :aSegment | aFromSegment := aSegment ]
-		ifNotFound: [  ].
-
-	aBrTextEditor segmentCollector
-		findCachedSegmentForLetterAt: aToIndex
-		ifFound: [ :aSegment | aToSegment := aSegment ]
-		ifNotFound: [  ].
-
-	(aFromSegment isNil or: [ aToSegment isNil ])
-		ifTrue: [ ^ self resetSegmentCacheAndNotify: aBrTextEditor ].
-
-	aTargetSegment := self
-			deleteFrom: aFromIndex
-			segment: aFromSegment
-			to: aToIndex
-			segment: aToSegment
-			in: aBrTextEditor.
-
-	aBrTextEditor updater
-		from: aTargetSegment textStart to: aTargetSegment textEnd;
-		update
 ]
 
 { #category : #initialization }

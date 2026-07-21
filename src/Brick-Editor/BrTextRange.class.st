@@ -6,7 +6,7 @@ Class {
 		'end',
 		'documentId'
 	],
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #'as yet unclassified' }

@@ -10,7 +10,7 @@ Class {
 		'alignmentMode',
 		'placeholderAlignment'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }

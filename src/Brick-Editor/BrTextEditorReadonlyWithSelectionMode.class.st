@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorReadonlyWithSelectionMode,
 	#superclass : #BrTextEditorBasicMode,
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #initialization }

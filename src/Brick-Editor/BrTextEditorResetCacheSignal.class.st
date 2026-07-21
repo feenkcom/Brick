@@ -1,5 +1,5 @@
 Class {
 	#name : #BrTextEditorResetCacheSignal,
 	#superclass : #BrTextEditorSignal,
-	#category : #'Brick-Editor-Signals'
+	#category : 'Brick-Editor-Signals'
 }

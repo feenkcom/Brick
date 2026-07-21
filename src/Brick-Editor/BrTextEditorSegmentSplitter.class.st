@@ -6,7 +6,7 @@ Class {
 		'start',
 		'text'
 	],
-	#category : #'Brick-Editor-Model - Segment'
+	#category : 'Brick-Editor-Model - Segment'
 }
 
 { #category : #accessing }

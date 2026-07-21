@@ -6,7 +6,7 @@ Class {
 		'toIndex',
 		'affectedText'
 	],
-	#category : #'Brick-Editor-Signals'
+	#category : 'Brick-Editor-Signals'
 }
 
 { #category : #accessing }

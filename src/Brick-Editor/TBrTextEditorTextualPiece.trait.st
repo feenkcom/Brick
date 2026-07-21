@@ -6,7 +6,7 @@ Trait {
 		'textEnd',
 		'delimiterLength'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'text - copying' }

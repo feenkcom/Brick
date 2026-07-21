@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextCursorAttribute,
 	#superclass : #BrTextCursorDynamicAttribute,
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #testing }

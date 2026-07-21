@@ -10,7 +10,7 @@ Class {
 		'adornmentAttribute',
 		'isVirtual'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #comparing }

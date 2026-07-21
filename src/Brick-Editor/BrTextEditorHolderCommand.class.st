@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : #'Brick-Editor-Commands-Holder'
+	#category : 'Brick-Editor-Commands-Holder'
 }
 
 { #category : #accessing }

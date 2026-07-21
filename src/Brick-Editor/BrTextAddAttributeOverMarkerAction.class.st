@@ -5,7 +5,7 @@ Class {
 		'attribute',
 		'markerAttribute'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #'instance creation' }

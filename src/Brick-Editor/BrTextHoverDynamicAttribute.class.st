@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextHoverDynamicAttribute,
 	#superclass : #BrTextHoverProtoAttribute,
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }

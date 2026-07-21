@@ -5,7 +5,7 @@ Class {
 		'id',
 		'color'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #'instance creation' }

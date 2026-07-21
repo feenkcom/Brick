@@ -5,7 +5,7 @@ Class {
 		'newText',
 		'oldText'
 	],
-	#category : #'Brick-Editor-History'
+	#category : 'Brick-Editor-History'
 }
 
 { #category : #printing }

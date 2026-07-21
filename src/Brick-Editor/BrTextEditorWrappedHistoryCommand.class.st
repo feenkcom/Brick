@@ -8,7 +8,7 @@ Class {
 		'targetCommand',
 		'shouldApplyUndo'
 	],
-	#category : #'Brick-Editor-History'
+	#category : 'Brick-Editor-History'
 }
 
 { #category : #'instance creation' }

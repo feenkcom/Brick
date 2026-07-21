@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'attribute'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #'instance creation' }

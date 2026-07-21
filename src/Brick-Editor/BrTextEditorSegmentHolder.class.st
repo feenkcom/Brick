@@ -8,7 +8,7 @@ Class {
 		'segment',
 		'pieceElements'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'private - testing' }

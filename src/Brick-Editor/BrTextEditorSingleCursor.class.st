@@ -6,7 +6,7 @@ Class {
 		'isVisible',
 		'desiredCoordinate'
 	],
-	#category : #'Brick-Editor-Model - Cursor'
+	#category : 'Brick-Editor-Model - Cursor'
 }
 
 { #category : #accessing }

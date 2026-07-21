@@ -17,7 +17,7 @@ Class {
 		'dueTo',
 		'shouldHistorize'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #'api - configuration' }
@@ -514,11 +514,11 @@ BrTextEditorNavigator >> withHistorization [
 ]
 
 { #category : #'api - configuration' }
-BrTextEditorNavigator >> withResettingDesiredCoordinate [
-	shouldResetDesiredCoordinate := true
+BrTextEditorNavigator >> withoutResettingDesiredCoordinate [
+	shouldResetDesiredCoordinate := false
 ]
 
 { #category : #'api - configuration' }
-BrTextEditorNavigator >> withoutResettingDesiredCoordinate [
-	shouldResetDesiredCoordinate := false
+BrTextEditorNavigator >> withResettingDesiredCoordinate [
+	shouldResetDesiredCoordinate := true
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextByteRange,
 	#superclass : #BrTextRange,
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #testing }

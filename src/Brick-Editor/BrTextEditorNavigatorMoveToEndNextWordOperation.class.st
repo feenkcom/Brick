@@ -4,7 +4,7 @@ I move a cursor to the end of the current word when in the middle of a word, or 
 Class {
 	#name : #BrTextEditorNavigatorMoveToEndNextWordOperation,
 	#superclass : #BrTextEditorNavigatorOperation,
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #matching }

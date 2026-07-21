@@ -5,7 +5,7 @@ Class {
 		'textEditor',
 		'text'
 	],
-	#category : #'Brick-Editor-Signals'
+	#category : 'Brick-Editor-Signals'
 }
 
 { #category : #testing }

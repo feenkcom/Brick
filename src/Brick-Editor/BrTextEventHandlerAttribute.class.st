@@ -6,7 +6,7 @@ Is the superclass of all attributes with the ability to handle some text events 
 Class {
 	#name : #BrTextEventHandlerAttribute,
 	#superclass : #BlTextAttribute,
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #events }

@@ -6,7 +6,7 @@ Class {
 		'id',
 		'definingMethod'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }

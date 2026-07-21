@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'defaultSegmentLayoutBlock'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text-Paragraph'
+	#category : 'Brick-Editor-Model - Segment-Text-Paragraph'
 }
 
 { #category : #cleanup }

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'segmentClass'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #'instance creation' }

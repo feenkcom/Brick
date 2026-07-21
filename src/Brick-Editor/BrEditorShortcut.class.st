@@ -3,7 +3,7 @@ BrEditorShortcut can be used in a pluggable manner by writing a class-side const
 "
 Class {
 	#name : #BrEditorShortcut,
-	#superclass : #BlBasicShortcut,
+	#superclass : #BlDynamicShortcut,
 	#instVars : [
 		'name',
 		'performBlock',
@@ -12,7 +12,7 @@ Class {
 		'combinationForMacOS',
 		'combinationForWindows'
 	],
-	#category : #'Brick-Editor-Shortcuts'
+	#category : 'Brick-Editor-Shortcuts'
 }
 
 { #category : #'shortcut creation' }
@@ -617,7 +617,9 @@ BrEditorShortcut class >> undo [
 
 { #category : #accessing }
 BrEditorShortcut >> combinationForMacOS [
-	^combinationForMacOS ifNil: [combination]
+	^shortcutId
+		 ifNil: [ combinationForMacOS ifNil: [combination] ]
+		 ifNotNil: [ :anId | self registry combinationForMacOSFor: anId ]
 ]
 
 { #category : #accessing }
@@ -627,7 +629,9 @@ BrEditorShortcut >> combinationForMacOS: aKeyCombination [
 
 { #category : #accessing }
 BrEditorShortcut >> combinationForUnix [
-	^combinationForUnix ifNil: [combination]
+	^shortcutId
+		 ifNil: [ combinationForUnix ifNil: [combination] ]
+		 ifNotNil: [ :anId | self registry combinationForUnixFor: anId ]
 ]
 
 { #category : #accessing }
@@ -637,7 +641,9 @@ BrEditorShortcut >> combinationForUnix: aKeyCombination [
 
 { #category : #accessing }
 BrEditorShortcut >> combinationForWindows [
-	^combinationForWindows ifNil: [combination]
+	^shortcutId
+		 ifNil: [ combinationForWindows ifNil: [combination] ]
+		 ifNotNil: [ :anId | self registry combinationForWindowsFor: anId ]
 ]
 
 { #category : #accessing }

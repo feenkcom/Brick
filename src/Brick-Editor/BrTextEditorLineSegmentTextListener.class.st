@@ -4,7 +4,7 @@ I add support of BrTextEventHandlerAttribute - special kind of attribute that ca
 Class {
 	#name : #BrTextEditorLineSegmentTextListener,
 	#superclass : #BrTextWordPieceUniqueHandler,
-	#category : #'Brick-Editor-UI - Word'
+	#category : 'Brick-Editor-UI - Word'
 }
 
 { #category : #cleanup }

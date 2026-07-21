@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'announcer'
 	],
-	#category : #'Brick-Editor-Attributes - Support'
+	#category : 'Brick-Editor-Attributes - Support'
 }
 
 { #category : #accessing }

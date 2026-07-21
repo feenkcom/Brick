@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lengths'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
 { #category : #testing }

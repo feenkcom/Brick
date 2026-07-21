@@ -1,7 +1,7 @@
 Class {
 	#name : #BrEditableLabelModel,
 	#superclass : #BrTextEditorModel,
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #'private - focus' }

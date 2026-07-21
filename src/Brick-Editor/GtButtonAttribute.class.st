@@ -1,5 +1,5 @@
 Class {
 	#name : #GtButtonAttribute,
 	#superclass : #BrTextAdornmentDynamicAttribute,
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }

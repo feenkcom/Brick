@@ -5,7 +5,7 @@ Class {
 		'unstyledText',
 		'styler'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #initialization }

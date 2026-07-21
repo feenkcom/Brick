@@ -5,7 +5,7 @@ Class {
 		'eventHandlers',
 		'shortcuts'
 	],
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #initialization }

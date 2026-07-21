@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextFoldAttribute,
 	#superclass : #BrTextHideAttribute,
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #'as yet unclassified' }

@@ -6,7 +6,7 @@ Class {
 		'subscriptions',
 		'context'
 	],
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #'private - asserting' }

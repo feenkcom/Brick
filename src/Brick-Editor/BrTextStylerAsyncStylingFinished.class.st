@@ -5,7 +5,7 @@ Class {
 		'styledText',
 		'styler'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #'gt - extensions' }

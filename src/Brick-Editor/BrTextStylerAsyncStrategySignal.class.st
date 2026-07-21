@@ -7,7 +7,7 @@ Class {
 		'isElementAttachedToSpace',
 		'text'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #testing }

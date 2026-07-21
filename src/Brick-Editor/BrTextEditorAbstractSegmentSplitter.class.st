@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorAbstractSegmentSplitter,
 	#superclass : #Object,
-	#category : #'Brick-Editor-Model - Segment'
+	#category : 'Brick-Editor-Model - Segment'
 }
 
 { #category : #'instance creation' }
@@ -84,43 +84,6 @@ BrTextEditorAbstractSegmentSplitter >> processStartingAdornments: aText in: aStr
 ]
 
 { #category : #'private - pieces computation' }
-BrTextEditorAbstractSegmentSplitter >> processWithReplacements: aTextIterator in: aStream offset: anOffset [
-	"There is at least one replacement attribute applied on every character within the scope of the given text iterator"
-
-	aTextIterator
-		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
-		indicesDo: [ :aStart :anEnd :theAdornmentAttributes |
-			| theAttributes replacementFound |
-			
-			theAttributes := theAdornmentAttributes
-				ifEmpty: [ aTextIterator attributes
-					select: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldReplace ] ] ].
-			
-			replacementFound := false.
-			
-			theAttributes do: [ :eachAttribute |
-				| anAdornmentSpan aTextStart aTextEnd |
-				
-				aTextStart := ((aStart - 1) max: 0) + anOffset.
-				aTextEnd := anEnd + anOffset.
-				
-				"adornment span must not be cached, because each line piece requires a unique sub-text"
-				anAdornmentSpan := aTextIterator text from: aStart to: anEnd.
-					
-				(anAdornmentSpan allSatisfy: #isLineBreak)
-					ifTrue: [ aTextEnd := aTextStart ].
-				
-				self
-					processAdornmentAttribute: eachAttribute
-					of: anAdornmentSpan
-					in: aStream
-					from: aTextStart
-					to: aTextEnd
-					virtual: (eachAttribute shouldAppend or: [ replacementFound ]).
-				replacementFound := replacementFound or: [ eachAttribute shouldReplace ]  ] ]
-]
-
-{ #category : #'private - pieces computation' }
 BrTextEditorAbstractSegmentSplitter >> processWithoutAdornments: aTextIterator in: aStream offset: anOffset [
 	"Process a text within the scope of the given iterator as there are no adornment attributes.
 	Now that adornment attributes are filtered we can split text into pieces based on the presence of
@@ -183,6 +146,43 @@ BrTextEditorAbstractSegmentSplitter >> processWithoutReplacements: aTextIterator
 										from: aTextStart
 										to: aTextEnd
 										virtual: true ]	] ] ] ]
+]
+
+{ #category : #'private - pieces computation' }
+BrTextEditorAbstractSegmentSplitter >> processWithReplacements: aTextIterator in: aStream offset: anOffset [
+	"There is at least one replacement attribute applied on every character within the scope of the given text iterator"
+
+	aTextIterator
+		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
+		indicesDo: [ :aStart :anEnd :theAdornmentAttributes |
+			| theAttributes replacementFound |
+			
+			theAttributes := theAdornmentAttributes
+				ifEmpty: [ aTextIterator attributes
+					select: [ :eachAttribute | eachAttribute isAdornment and: [ eachAttribute shouldReplace ] ] ].
+			
+			replacementFound := false.
+			
+			theAttributes do: [ :eachAttribute |
+				| anAdornmentSpan aTextStart aTextEnd |
+				
+				aTextStart := ((aStart - 1) max: 0) + anOffset.
+				aTextEnd := anEnd + anOffset.
+				
+				"adornment span must not be cached, because each line piece requires a unique sub-text"
+				anAdornmentSpan := aTextIterator text from: aStart to: anEnd.
+					
+				(anAdornmentSpan allSatisfy: #isLineBreak)
+					ifTrue: [ aTextEnd := aTextStart ].
+				
+				self
+					processAdornmentAttribute: eachAttribute
+					of: anAdornmentSpan
+					in: aStream
+					from: aTextStart
+					to: aTextEnd
+					virtual: (eachAttribute shouldAppend or: [ replacementFound ]).
+				replacementFound := replacementFound or: [ eachAttribute shouldReplace ]  ] ]
 ]
 
 { #category : #splitting }

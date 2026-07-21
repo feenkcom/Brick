@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorNewSegmentSplitter,
 	#superclass : #BrTextEditorAbstractSegmentSplitter,
-	#category : #'Brick-Editor-Model - Segment'
+	#category : 'Brick-Editor-Model - Segment'
 }
 
 { #category : #accessing }

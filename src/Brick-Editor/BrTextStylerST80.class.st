@@ -13,7 +13,7 @@ Class {
 		'textAttributesByPixelHeight',
 		'textAttributes'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #private }
@@ -475,6 +475,13 @@ BrTextStylerST80 class >> glamorousStyleTable [
 ]
 
 { #category : #initialization }
+BrTextStylerST80 class >> initialize [
+	"self initialize"
+	styleTable := nil.
+	textAttributes := nil.
+]
+
+{ #category : #initialization }
 BrTextStylerST80 class >> initialTextAttributes [
 	| theAttributes |
 
@@ -494,13 +501,6 @@ BrTextStylerST80 class >> initialTextAttributes [
 		theAttributes at: aStyle put: attrArray ].
 
 	^ theAttributes
-]
-
-{ #category : #initialization }
-BrTextStylerST80 class >> initialize [
-	"self initialize"
-	styleTable := nil.
-	textAttributes := nil.
 ]
 
 { #category : #'style tables' }

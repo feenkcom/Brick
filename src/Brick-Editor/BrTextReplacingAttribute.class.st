@@ -9,7 +9,7 @@ Class {
 		'originalString',
 		'replacementString'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }
@@ -81,6 +81,18 @@ BrTextReplacingAttribute >> padding: anObject [
 	padding := anObject
 ]
 
+{ #category : #accessing }
+BrTextReplacingAttribute >> replacement [
+	<return: #BrTextReplacingAttributeStrategy>
+
+	^ replacement
+]
+
+{ #category : #accessing }
+BrTextReplacingAttribute >> replacement: aBrTextReplacingAttributeStrategy [
+	replacement := aBrTextReplacingAttributeStrategy
+]
+
 { #category : #private }
 BrTextReplacingAttribute >> replaceTextInPiece: aTBrTextEditorTextualPiece [
 	| aNewText anOriginalText |
@@ -96,18 +108,6 @@ BrTextReplacingAttribute >> replaceTextInPiece: aTBrTextEditorTextualPiece [
 		attributesDo: [ :theAttributes :anIndex | aNewText attributes: theAttributes from: anIndex to: anIndex ].
 
 	^ aTBrTextEditorTextualPiece copyWithText: aNewText
-]
-
-{ #category : #accessing }
-BrTextReplacingAttribute >> replacement [
-	<return: #BrTextReplacingAttributeStrategy>
-
-	^ replacement
-]
-
-{ #category : #accessing }
-BrTextReplacingAttribute >> replacement: aBrTextReplacingAttributeStrategy [
-	replacement := aBrTextReplacingAttributeStrategy
 ]
 
 { #category : #private }

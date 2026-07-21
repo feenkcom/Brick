@@ -11,17 +11,17 @@ Class {
 		'breakLineAfter',
 		'assignedLine'
 	],
-	#category : #'Brick-Editor-Layout'
+	#category : 'Brick-Editor-Layout'
 }
-
-{ #category : #accessing }
-BrEditorTextFlowLayoutConstraints >> assignToLine: aBrEditorTextFlowLine [
-	assignedLine := aBrEditorTextFlowLine
-]
 
 { #category : #accessing }
 BrEditorTextFlowLayoutConstraints >> assignedLine [
 	^ assignedLine
+]
+
+{ #category : #accessing }
+BrEditorTextFlowLayoutConstraints >> assignToLine: aBrEditorTextFlowLine [
+	assignedLine := aBrEditorTextFlowLine
 ]
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ Class {
 		'SelectionPreservesCursorEnter',
 		'SelectionTriggersCursorEnter'
 	],
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #'class initialization' }

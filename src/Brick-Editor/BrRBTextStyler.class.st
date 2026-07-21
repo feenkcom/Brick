@@ -27,7 +27,7 @@ Class {
 		'parentheseLevel',
 		'bracketLevel'
 	],
-	#category : #'Brick-Editor-Styler'
+	#category : 'Brick-Editor-Styler'
 }
 
 { #category : #formatting }
@@ -291,38 +291,6 @@ BrRBTextStyler >> styleCloseParenthese: aMessageNode [
 					self addStyle: self currentClosedParenthesisStyleName from: pos to: pos ] ]
 ]
 
-{ #category : #private }
-BrRBTextStyler >> styleOpenBracket: aBlockNode [
-	| style |
-	style := self resolveStyleOpenBracket: aBlockNode.
-	self addStyle: style from: aBlockNode left to: aBlockNode left.
-	bracketLevel := bracketLevel + 1
-]
-
-{ #category : #private }
-BrRBTextStyler >> styleOpenParenthese: aMessageNode [
-	aMessageNode parentheses
-		ifNotEmpty: [ 
-			aMessageNode parentheses
-				do: [ :interval | 
-					| pos |
-					pos := interval first.
-					self addStyle:  self currentOpenedParenthesisStyleName from: pos to: pos.
-					parentheseLevel := parentheseLevel + 1 ] ]
-]
-
-{ #category : #private }
-BrRBTextStyler >> styleTempBars: aSequenceNode [
-	| tempBarAttribute |
-	tempBarAttribute := aSequenceNode scope isMethodScope
-		ifTrue: [ #methodTempBar ]
-		ifFalse: [ #blockTempBar ].
-	aSequenceNode leftBar
-		ifNotNil: [ :pos | self addStyle: tempBarAttribute from: pos to: pos ].
-	aSequenceNode rightBar
-		ifNotNil: [ :pos | self addStyle: tempBarAttribute from: pos to: pos ]
-]
-
 { #category : #moldability }
 BrRBTextStyler >> styledParseCsv: aText [
 	| aString indices |
@@ -357,6 +325,38 @@ BrRBTextStyler >> styledParseImage: aText [
 		attributes: { BlTextBackgroundAttribute paint: Color yellow }
 		from: indices first value + 1
 		to: indices second key - 1
+]
+
+{ #category : #private }
+BrRBTextStyler >> styleOpenBracket: aBlockNode [
+	| style |
+	style := self resolveStyleOpenBracket: aBlockNode.
+	self addStyle: style from: aBlockNode left to: aBlockNode left.
+	bracketLevel := bracketLevel + 1
+]
+
+{ #category : #private }
+BrRBTextStyler >> styleOpenParenthese: aMessageNode [
+	aMessageNode parentheses
+		ifNotEmpty: [ 
+			aMessageNode parentheses
+				do: [ :interval | 
+					| pos |
+					pos := interval first.
+					self addStyle:  self currentOpenedParenthesisStyleName from: pos to: pos.
+					parentheseLevel := parentheseLevel + 1 ] ]
+]
+
+{ #category : #private }
+BrRBTextStyler >> styleTempBars: aSequenceNode [
+	| tempBarAttribute |
+	tempBarAttribute := aSequenceNode scope isMethodScope
+		ifTrue: [ #methodTempBar ]
+		ifFalse: [ #blockTempBar ].
+	aSequenceNode leftBar
+		ifNotNil: [ :pos | self addStyle: tempBarAttribute from: pos to: pos ].
+	aSequenceNode rightBar
+		ifNotNil: [ :pos | self addStyle: tempBarAttribute from: pos to: pos ]
 ]
 
 { #category : #'visiting rb nodes' }

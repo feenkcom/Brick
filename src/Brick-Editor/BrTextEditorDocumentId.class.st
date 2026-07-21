@@ -5,7 +5,7 @@ Class {
 		'textId',
 		'revisionId'
 	],
-	#category : #'Brick-Editor-Model'
+	#category : 'Brick-Editor-Model'
 }
 
 { #category : #'instance creation' }

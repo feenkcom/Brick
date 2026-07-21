@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditableWordPieceStencilBuilder,
 	#superclass : #BrTextWordPieceStencilBuilder,
-	#category : #'Brick-Editor-UI - Stencils'
+	#category : 'Brick-Editor-UI - Stencils'
 }
 
 { #category : #initialization }

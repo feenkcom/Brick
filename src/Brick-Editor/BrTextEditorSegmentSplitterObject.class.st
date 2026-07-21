@@ -8,7 +8,7 @@ Class {
 		'intervalLast',
 		'splitter'
 	],
-	#category : #'Brick-Editor-Model - Segment'
+	#category : 'Brick-Editor-Model - Segment'
 }
 
 { #category : #accessing }

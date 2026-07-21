@@ -27,7 +27,7 @@ Class {
 		'map',
 		'minEntrySpacing'
 	],
-	#category : #'Brick-Editor-Model - Segment-Text'
+	#category : 'Brick-Editor-Model - Segment-Text'
 }
 
 { #category : #adding }

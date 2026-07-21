@@ -1,7 +1,7 @@
 Class {
 	#name : #BrTextEditorNavigatorMoveToStartOfFoldedTextOperation,
 	#superclass : #BrTextEditorNavigatorOperation,
-	#category : #'Brick-Editor-Model - Operators'
+	#category : 'Brick-Editor-Model - Operators'
 }
 
 { #category : #'as yet unclassified' }

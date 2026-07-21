@@ -7,7 +7,7 @@ Class {
 		'reason',
 		'documentId'
 	],
-	#category : #'Brick-Editor-Model - Events'
+	#category : 'Brick-Editor-Model - Events'
 }
 
 { #category : #accessing }

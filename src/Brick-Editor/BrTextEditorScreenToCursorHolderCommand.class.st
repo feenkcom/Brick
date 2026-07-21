@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transformation'
 	],
-	#category : #'Brick-Editor-Commands-Holder'
+	#category : 'Brick-Editor-Commands-Holder'
 }
 
 { #category : #executing }

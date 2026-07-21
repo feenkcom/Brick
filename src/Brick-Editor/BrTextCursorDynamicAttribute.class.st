@@ -7,7 +7,7 @@ Allows users to react to the cursor movement within the editor.
 Class {
 	#name : #BrTextCursorDynamicAttribute,
 	#superclass : #BrTextCursorProtoAttribute,
-	#category : #'Brick-Editor-Attributes'
+	#category : 'Brick-Editor-Attributes'
 }
 
 { #category : #accessing }
