@@ -2,9 +2,7 @@ Class {
 	#name : #BrTextCursorStylableAttribute,
 	#superclass : #BrTextCursorProtoAttribute,
 	#instVars : [
-		'attributes',
 		'selectionTriggersCursorEnter',
-		'shouldAddAttributeOnEnter',
 		'selectionBehavior',
 		'cursorEnterActions',
 		'cursorLeaveActions'
@@ -75,11 +73,8 @@ BrTextCursorStylableAttribute >> performEnterAction: anEvent in: aTextEditor [
 	aStart := anEvent attributeStart.
 	anEnd := anEvent attributeEnd.
 	
-	shouldAddAttributeOnEnter
-			ifTrue: [ (aTextEditor text from: aStart to: anEnd) attributes: self attributes ]
-			ifFalse: [ (aTextEditor text from: aStart to: anEnd)
-					clearAttributes: [ :eachTextAttribute | 
-						self attributes identityIncludes: eachTextAttribute ] ].
+	cursorEnterActions do: [ :eachAction |
+		eachAction performEnterAction: anEvent in: aTextEditor ].
 ]
 
 { #category : #private }
@@ -92,12 +87,8 @@ BrTextCursorStylableAttribute >> performLeaveAction: anEvent in: aTextEditor [
 	aStart := anEvent attributeStart.
 	anEnd := anEvent attributeEnd.
 	
-	shouldAddAttributeOnEnter
-			ifTrue: [ (aTextEditor text from: aStart to: anEnd)
-					clearAttributes: [ :eachTextAttribute | 
-						self attributes identityIncludes: eachTextAttribute ] ]
-			ifFalse: [ (aTextEditor text from: aStart to: anEnd)
-					attributes: self attributes ].
+	cursorLeaveActions do: [ :eachAction |
+		eachAction performLeaveAction: anEvent in: aTextEditor ].
 ]
 
 { #category : #'api - selection' }
