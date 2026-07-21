@@ -5,7 +5,7 @@ Class {
 		'newLineShortcutId',
 		'loseFocusShortcutId'
 	],
-	#category : 'Brick-Editor-Shortcutsi'
+	#category : 'Brick-Editor-Shortcuts'
 }
 
 { #category : #initialization }
