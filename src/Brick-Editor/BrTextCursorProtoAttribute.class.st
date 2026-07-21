@@ -2,8 +2,6 @@ Class {
 	#name : #BrTextCursorProtoAttribute,
 	#superclass : #BrTextEventHandlerAttribute,
 	#instVars : [
-		'enterAction',
-		'leaveAction',
 		'isInside'
 	],
 	#category : 'Brick-Editor-Attributes'
@@ -24,37 +22,7 @@ BrTextCursorProtoAttribute >> handleEvent: anEvent in: aTextEditor on: aTBrTextE
 BrTextCursorProtoAttribute >> initialize [
 	super initialize.
 
-	enterAction := [ :aTextEditor :anEvent :aTextStart :aTextEnd | ].
-	leaveAction := [ :aTextEditor :anEvent :aTextStart :aTextEnd | ].
 	isInside := nil
-]
-
-{ #category : #private }
-BrTextCursorProtoAttribute >> performEnterAction: anEvent in: aTextEditor [
-	isInside = true
-		ifTrue: [ ^ self ].
-
-	isInside := true.
-	
-	enterAction gtValueWithArgs: {
-		aTextEditor. "then the whole editor element"
-		anEvent. "the event itself"
-		anEvent attributeStart.
-		anEvent attributeEnd }
-]
-
-{ #category : #private }
-BrTextCursorProtoAttribute >> performLeaveAction: anEvent in: aTextEditor [
-	isInside = false
-		ifTrue: [ ^ self ].
-
-	isInside := false.
-
-	leaveAction gtValueWithArgs: {
-		aTextEditor. "then the whole editor element"
-		anEvent. "the event itself"
-		anEvent attributeStart.
-		anEvent attributeEnd }
 ]
 
 { #category : #events }

@@ -15,6 +15,15 @@ BrTextAddAttributeOverSelfLastCharsAction class >> attribute: anAttribute lastCh
 		lastCharacters: aCharCount
 ]
 
+{ #category : #private }
+BrTextAddAttributeOverSelfLastCharsAction >> performAction: anEvent in: aTextEditor [
+	| aStart anEnd |
+	anEnd := anEvent attributeEnd.
+	aStart := (anEnd - charCount) max: anEvent attributeStart.
+
+	(aTextEditor text from: aStart to: anEnd) attributes: {attribute}
+]
+
 { #category : #initialization }
 BrTextAddAttributeOverSelfLastCharsAction >> setAttribute: anAttribute lastCharacters: aCharCount [
 	attribute := anAttribute.

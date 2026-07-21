@@ -7,6 +7,10 @@ Allows users to react to the cursor movement within the editor.
 Class {
 	#name : #BrTextCursorDynamicAttribute,
 	#superclass : #BrTextCursorProtoAttribute,
+	#instVars : [
+		'enterAction',
+		'leaveAction'
+	],
 	#category : 'Brick-Editor-Attributes'
 }
 
@@ -25,6 +29,14 @@ BrTextCursorDynamicAttribute >> enterAction: aBlock [
 	enterAction := aBlock
 ]
 
+{ #category : #'as yet unclassified' }
+BrTextCursorDynamicAttribute >> initialize [
+	super initialize.
+
+	enterAction := [ :aTextEditor :anEvent :aTextStart :aTextEnd | ].
+	leaveAction := [ :aTextEditor :anEvent :aTextStart :aTextEnd | ].
+]
+
 { #category : #accessing }
 BrTextCursorDynamicAttribute >> leaveAction [
 	^ leaveAction
@@ -38,4 +50,32 @@ BrTextCursorDynamicAttribute >> leaveAction: aBlock [
 		description: [ 'Leave action should be initialized' ].
 
 	leaveAction := aBlock
+]
+
+{ #category : #private }
+BrTextCursorDynamicAttribute >> performEnterAction: anEvent in: aTextEditor [
+	isInside = true
+		ifTrue: [ ^ self ].
+
+	isInside := true.
+	
+	enterAction gtValueWithArgs: {
+		aTextEditor. "then the whole editor element"
+		anEvent. "the event itself"
+		anEvent attributeStart.
+		anEvent attributeEnd }
+]
+
+{ #category : #private }
+BrTextCursorDynamicAttribute >> performLeaveAction: anEvent in: aTextEditor [
+	isInside = false
+		ifTrue: [ ^ self ].
+
+	isInside := false.
+
+	leaveAction gtValueWithArgs: {
+		aTextEditor. "then the whole editor element"
+		anEvent. "the event itself"
+		anEvent attributeStart.
+		anEvent attributeEnd }
 ]
