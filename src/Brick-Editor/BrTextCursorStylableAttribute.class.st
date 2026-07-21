@@ -63,20 +63,41 @@ BrTextCursorStylableAttribute >> initialize [
 	selectionBehavior := IgnoreSelection.
 	cursorEnterActions := OrderedCollection new.
 	cursorLeaveActions := OrderedCollection new.
+]
+
+{ #category : #private }
+BrTextCursorStylableAttribute >> performEnterAction: anEvent in: aTextEditor [
+	| aStart anEnd |
+	isInside = true
+		ifTrue: [ ^ self ].
+
+	isInside := true.
+	aStart := anEvent attributeStart.
+	anEnd := anEvent attributeEnd.
 	
+	shouldAddAttributeOnEnter
+			ifTrue: [ (aTextEditor text from: aStart to: anEnd) attributes: self attributes ]
+			ifFalse: [ (aTextEditor text from: aStart to: anEnd)
+					clearAttributes: [ :eachTextAttribute | 
+						self attributes identityIncludes: eachTextAttribute ] ].
+]
+
+{ #category : #private }
+BrTextCursorStylableAttribute >> performLeaveAction: anEvent in: aTextEditor [
+	| aStart anEnd |
+	isInside = false
+		ifTrue: [ ^ self ].
+
+	isInside := false.
+	aStart := anEvent attributeStart.
+	anEnd := anEvent attributeEnd.
 	
-	
-	enterAction := [ :aTextEditorModel :aTextElement :aStart :anEnd | 
-		shouldAddAttributeOnEnter
-			ifTrue: [ (aTextEditorModel text from: aStart to: anEnd) attributes: self attributes ]
-			ifFalse: [ (aTextEditorModel text from: aStart to: anEnd)
-					clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ] ].
-	leaveAction := [ :aTextEditorModel :aTextElement :aStart :anEnd | 
-		shouldAddAttributeOnEnter
-			ifTrue: [ (aTextEditorModel text from: aStart to: anEnd)
-					clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ]
-			ifFalse: [ (aTextEditorModel text from: aStart to: anEnd)
-					attributes: self attributes ] ]
+	shouldAddAttributeOnEnter
+			ifTrue: [ (aTextEditor text from: aStart to: anEnd)
+					clearAttributes: [ :eachTextAttribute | 
+						self attributes identityIncludes: eachTextAttribute ] ]
+			ifFalse: [ (aTextEditor text from: aStart to: anEnd)
+					attributes: self attributes ].
 ]
 
 { #category : #'api - selection' }
