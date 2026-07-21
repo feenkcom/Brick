@@ -15,6 +15,15 @@ BrTextAddAttributeOverSelfFirstCharsAction class >> attribute: anAttribute first
 		firstCharacters: aCharCount
 ]
 
+{ #category : #private }
+BrTextAddAttributeOverSelfFirstCharsAction >> performAction: anEvent in: aTextEditor [
+	| aStart anEnd |
+	aStart := anEvent attributeStart.
+	anEnd := (aStart + charCount) min: anEvent attributeEnd.
+
+	(aTextEditor text from: aStart to: anEnd) attributes: {attribute}
+]
+
 { #category : #initialization }
 BrTextAddAttributeOverSelfFirstCharsAction >> setAttribute: anAttribute firstCharacters: aCharCount [
 	attribute := anAttribute.

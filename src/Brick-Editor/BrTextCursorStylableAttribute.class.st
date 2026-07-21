@@ -2,9 +2,7 @@ Class {
 	#name : #BrTextCursorStylableAttribute,
 	#superclass : #BrTextCursorProtoAttribute,
 	#instVars : [
-		'attributes',
 		'selectionTriggersCursorEnter',
-		'shouldAddAttributeOnEnter',
 		'selectionBehavior',
 		'cursorEnterActions',
 		'cursorLeaveActions'
@@ -63,20 +61,34 @@ BrTextCursorStylableAttribute >> initialize [
 	selectionBehavior := IgnoreSelection.
 	cursorEnterActions := OrderedCollection new.
 	cursorLeaveActions := OrderedCollection new.
+]
+
+{ #category : #private }
+BrTextCursorStylableAttribute >> performEnterAction: anEvent in: aTextEditor [
+	| aStart anEnd |
+	isInside = true
+		ifTrue: [ ^ self ].
+
+	isInside := true.
+	aStart := anEvent attributeStart.
+	anEnd := anEvent attributeEnd.
 	
+	cursorEnterActions do: [ :eachAction |
+		eachAction performEnterAction: anEvent in: aTextEditor ].
+]
+
+{ #category : #private }
+BrTextCursorStylableAttribute >> performLeaveAction: anEvent in: aTextEditor [
+	| aStart anEnd |
+	isInside = false
+		ifTrue: [ ^ self ].
+
+	isInside := false.
+	aStart := anEvent attributeStart.
+	anEnd := anEvent attributeEnd.
 	
-	
-	enterAction := [ :aTextEditorModel :aTextElement :aStart :anEnd | 
-		shouldAddAttributeOnEnter
-			ifTrue: [ (aTextEditorModel text from: aStart to: anEnd) attributes: self attributes ]
-			ifFalse: [ (aTextEditorModel text from: aStart to: anEnd)
-					clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ] ].
-	leaveAction := [ :aTextEditorModel :aTextElement :aStart :anEnd | 
-		shouldAddAttributeOnEnter
-			ifTrue: [ (aTextEditorModel text from: aStart to: anEnd)
-					clearAttributes: [ :aTextAttribute | self attributes identityIncludes: aTextAttribute ] ]
-			ifFalse: [ (aTextEditorModel text from: aStart to: anEnd)
-					attributes: self attributes ] ]
+	cursorLeaveActions do: [ :eachAction |
+		eachAction performLeaveAction: anEvent in: aTextEditor ].
 ]
 
 { #category : #'api - selection' }
