@@ -14,11 +14,12 @@ BrTextRemoveAttributeOverSelfAction class >> attribute: anAttribute [
 
 { #category : #private }
 BrTextRemoveAttributeOverSelfAction >> performAction: anEvent in: aTextEditor [
-	| aStart anEnd |
+	| aStart anEnd aText |
+	aText := aTextEditor text.
 	aStart := anEvent attributeStart.
 	anEnd := anEvent attributeEnd.
-
-	(aTextEditor text from: aStart to: anEnd) clearAttributes: [ :eachTextAttribute | 
+	
+	(aText from: aStart to: anEnd) clearAttributes: [ :eachTextAttribute | 
 		attribute == eachTextAttribute ] 
 ]
 
