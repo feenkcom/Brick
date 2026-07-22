@@ -25,6 +25,16 @@ BrTextCursorProtoAttribute >> initialize [
 	isInside := nil
 ]
 
+{ #category : #private }
+BrTextCursorProtoAttribute >> performEnterAction: anEvent in: aTextEditor [
+	self subclassResponsibility
+]
+
+{ #category : #private }
+BrTextCursorProtoAttribute >> performLeaveAction: anEvent in: aTextEditor [
+	self subclassResponsibility
+]
+
 { #category : #events }
 BrTextCursorProtoAttribute >> wantsEvent: anEvent [
 	"Return true if I am interested in a given event and want to handle it,

@@ -42,8 +42,8 @@ TBlTextStyleable >> hideMarkupLeft: amountOfCharactersToHideLeft right: amountOf
 				preserveCursorEnterOnSelection;
 				removeAttributeOverSelfOnEnter: hideAttributeLeft;
 				removeAttributeOverSelfOnEnter: hideAttributeRight;
-				addAttributeOverSelfOnLeave: hideAttributeLeft firstCharacters: 2;
-				addAttributeOverSelfOnLeave: hideAttributeRight lastCharacters: 2)
+				addAttributeOverSelfOnLeave: hideAttributeLeft firstCharacters: amountOfCharactersToHideLeft;
+				addAttributeOverSelfOnLeave: hideAttributeRight lastCharacters: amountOfCharactersToHideRight)
 ]
 
 { #category : #'*Brick-Editor' }

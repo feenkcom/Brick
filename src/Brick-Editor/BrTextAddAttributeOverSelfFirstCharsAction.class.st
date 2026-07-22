@@ -19,7 +19,7 @@ BrTextAddAttributeOverSelfFirstCharsAction class >> attribute: anAttribute first
 BrTextAddAttributeOverSelfFirstCharsAction >> performAction: anEvent in: aTextEditor [
 	| aStart anEnd |
 	aStart := anEvent attributeStart.
-	anEnd := (aStart + charCount) min: anEvent attributeEnd.
+	anEnd := ((aStart + charCount - 1) max: aStart) min: anEvent attributeEnd.
 
 	(aTextEditor text from: aStart to: anEnd) attributes: {attribute}
 ]
