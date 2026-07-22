@@ -1,6 +1,6 @@
 Class {
 	#name : #BrEditorKeymapRegistry,
-	#superclass : #BlKeymapRegistryCategory,
+	#superclass : #BlShortcutKeymapRegistryCategory,
 	#category : #'Brick-Editor-Shortcuts'
 }
 
