@@ -14,6 +14,8 @@ TBlDevScripterActionStep >> addDropdownVisualAnalysis [
 
 { #category : #'*Brick-DevTool' }
 TBlDevScripterActionStep >> menuStep [
+	<scripterActionStep>
+
 	^ self
 		addStep: (BrDevScripterMenuStep new
 				label: 'Menu';
