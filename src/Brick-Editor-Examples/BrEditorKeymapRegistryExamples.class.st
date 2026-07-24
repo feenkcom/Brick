@@ -14,7 +14,7 @@ BrEditorKeymapRegistryExamples >> allEntriesHaveShortcutId [
 	"Verifies that every entry in the editor registry has its shortcutId set"
 	| registry |
 	registry := self editorKeymapRegistry.
-	(registry instVarNamed: 'keymaps') keysAndValuesDo: [ :shortcutId :entry |
+	registry keymapsById keysAndValuesDo: [ :shortcutId :entry |
 		self assert: entry shortcutId notNil.
 		self assert: entry shortcutId equals: shortcutId ].
 	^ registry
