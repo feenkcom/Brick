@@ -22,7 +22,7 @@ BrEditorShortcut class >> carriageReturn [
 		  name: 'Insert carriage return';
 		  description:
 			  'Inserts a carriage return (cr) at the cursor location and indents the new line to match the indentation of the previous line.';
-		  combination: BlKeyCombination enter;
+		  editorShortcutId: BrEditorShortcutIds default carriageReturnShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor inserter
 				  inputFilter: aBrTextEditor inputFilter;
@@ -38,7 +38,7 @@ BrEditorShortcut class >> copy [
 	^ self new
 		  name: 'Copy';
 		  description: 'Copies the selection text into the clipboard.';
-		  combination: BlKeyCombination primaryC;
+		  editorShortcutId: BrEditorShortcutIds default copyShortcutId;
 		  performBlock: [ :aBrTextEditor | aBrTextEditor copySelected ];
 		  yourself
 ]
@@ -50,17 +50,17 @@ BrEditorShortcut class >> cut [
 		  name: 'Cut';
 		  description:
 			  'Cut selected text and save it to the clipboard ready to paste elsewhere.';
-		  combination: BlKeyCombination primaryX;
+		  editorShortcutId: BrEditorShortcutIds default cutShortcutId;
 		  performBlock: [ :aBrTextEditor | aBrTextEditor cutSelected ];
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'shortcut creation' }
 BrEditorShortcut class >> deleteNextWord [
 	^ self new
 		name: 'Forward delete word';
 		description: 'Delete up to the end of the word starting at the current cursor';
-		combination: BlKeyCombination builder primary delete build;
+		editorShortcutId: BrEditorShortcutIds default deleteNextWordShortcutId;
 		performBlock: [ :aBrTextEditor | 
 			aBrTextEditor deleter
 				oneWordAfterCursor;
@@ -75,7 +75,7 @@ BrEditorShortcut class >> deleteOneLetterAfterCursor [
 		  name: 'Forward delete';
 		  description:
 			  'Discards the character ahead of the cursor''s position, moving all following characters one position "back" towards the freed letterspace.';
-		  combination: BlKeyCombination delete;
+		  editorShortcutId: BrEditorShortcutIds default deleteOneLetterAfterCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deleteNextAtCursor ];
 		  yourself
@@ -86,18 +86,18 @@ BrEditorShortcut class >> deleteOneLetterBeforeCursor [
 	^ self new
 		name: 'Delete';
 		description: 'Moves the display cursor one position backwards, deletes the character at that position, and shifts back the text after that position by one position.';
-		combination: BlKeyCombination backspace;
+		editorShortcutId: BrEditorShortcutIds default deleteOneLetterBeforeCursorShortcutId;
 		performBlock: [ :aBrTextEditor | 
 			aBrTextEditor deletePreviousAtCursor ];
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'shortcut creation' }
 BrEditorShortcut class >> deletePreviousWord [
 	^ self new
 		name: 'Backwards delete word';
 		description: 'Delete backwards to the start of the word starting at the current cursor';
-		combination: BlKeyCombination builder primary backspace build;
+		editorShortcutId: BrEditorShortcutIds default deletePreviousWordShortcutId;
 		performBlock: [ :aBrTextEditor | 
 			aBrTextEditor deleter
 				oneWordBeforeCursor;
@@ -107,11 +107,10 @@ BrEditorShortcut class >> deletePreviousWord [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> deselectAll [
-
 	^ self new
 		  name: 'Deselect';
 		  description: 'Deselects any currently selected text.';
-		  combination: BlKeyCombination escape;
+		  editorShortcutId: BrEditorShortcutIds default deselectAllShortcutId;
 		  performBlock: [ :aBrTextEditor | aBrTextEditor selectNone ];
 		  yourself
 ]
@@ -122,7 +121,7 @@ BrEditorShortcut class >> focusNext [
 	^ self new
 		  name: 'Focus next';
 		  description: 'Gives focus to the next focusable element.';
-		  combination: BlKeyCombination arrowRight;
+		  editorShortcutId: BrEditorShortcutIds default focusNextShortcutId;
 		  performBlock: [ :aTextEditor :aBrEditorElement | 
 			  aBrEditorElement
 				  nextSiblingSuchThat: [ :eachElement | eachElement isFocusable ]
@@ -136,7 +135,7 @@ BrEditorShortcut class >> focusPrevious [
 	^ self new
 		  name: 'Focus previous';
 		  description: 'Gives focus to the previous focusable element.';
-		  combination: BlKeyCombination arrowLeft;
+		  editorShortcutId: BrEditorShortcutIds default focusPreviousShortcutId;
 		  performBlock: [ :aTextEditor :aBrEditorElement | 
 			  aBrEditorElement
 				  previousSiblingSuchThat: [ :eachElement | 
@@ -152,7 +151,7 @@ BrEditorShortcut class >> lineEnding [
 		  name: 'Insert line ending';
 		  description:
 			  'Inserts a platform specific line ending at the cursor location and indents the new line to match the indentation of the previous line.';
-		  combination: BlKeyCombination enter;
+		  editorShortcutId: BrEditorShortcutIds default newLineShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor inserter
 				  inputFilter: aBrTextEditor inputFilter;
@@ -168,7 +167,7 @@ BrEditorShortcut class >> loseFocus [
 	^ self new
 		  name: 'Lose focus';
 		  description: 'Loses focus.';
-		  combination: BlKeyCombination escape;
+		  editorShortcutId: BrEditorShortcutIds default loseFocusShortcutId;
 		  performBlock: [ :aTextEditor :aBrEditorElement | 
 			  aBrEditorElement loseFocus ];
 		  yourself
@@ -181,7 +180,7 @@ BrEditorShortcut class >> moveCursorDown [
 		  name: 'Move cursor down';
 		  description:
 			  'Moves the cursor one line at a time below the current position and deselects any selected text.';
-		  combination: BlKeyCombination arrowDown;
+		  editorShortcutId: BrEditorShortcutIds default moveCursorDownShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deselecter
 				  all;
@@ -198,7 +197,7 @@ BrEditorShortcut class >> moveCursorLeft [
 	^ self new
 		name: 'Move cursor left';
 		description: 'Moves the cursor one letter at a time to the left from the current position and deselects any selected text.';
-		combination: BlKeyCombination arrowLeft;
+		editorShortcutId: BrEditorShortcutIds default moveCursorLeftShortcutId;
 		performBlock: [ :aBrTextEditor | 
 			aBrTextEditor selection isEmpty
 				ifTrue: [ aBrTextEditor navigator
@@ -215,7 +214,7 @@ BrEditorShortcut class >> moveCursorRight [
 	^ self new
 		name: 'Move cursor right';
 		description: 'Moves the cursor one letter at a time to the right from the current position and deselects any selected text.';
-		combination: BlKeyCombination arrowRight;
+		editorShortcutId: BrEditorShortcutIds default moveCursorRightShortcutId;
 		performBlock: [ :aBrTextEditor | 
 			aBrTextEditor selection isEmpty
 				ifTrue: [ aBrTextEditor navigator
@@ -232,7 +231,7 @@ BrEditorShortcut class >> moveCursorToBeginning [
 	^ self new
 		name: 'Move beginning';
 		description: 'Moves the cursor to the beginning of the current editor and deselects any selected text.';
-		combination: BlKeyCombination builder primary home build;
+		editorShortcutId: BrEditorShortcutIds default moveCursorToBeginningShortcutId;
 		performBlock: [ :aBrTextEditor :aBrEditorElement | 
 			aBrTextEditor deselecter
 				all;
@@ -249,7 +248,7 @@ BrEditorShortcut class >> moveCursorToEnd [
 	^ self new
 		name: 'Move end';
 		description: 'Moves the cursor to the end of the current editor and deselects any selected text.';
-		combination: BlKeyCombination builder primary end build;
+		editorShortcutId: BrEditorShortcutIds default moveCursorToEndShortcutId;
 		performBlock: [ :aBrTextEditor :aBrEditorElement | 
 			aBrTextEditor deselecter
 				all;
@@ -268,9 +267,7 @@ BrEditorShortcut class >> moveCursorToLineEnd [
 		  name: 'Move cursor to the line end';
 		  description:
 			  'Moves the cursor to the end of the current line and deselects any selected text.';
-		  combination: BlKeyCombination end;
-		  combinationForMacOS:
-			  (BlKeyCombination end or: BlKeyCombination primaryArrowRight);
+		  editorShortcutId: BrEditorShortcutIds default moveCursorToLineEndShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deselecter
 				  all;
@@ -288,9 +285,7 @@ BrEditorShortcut class >> moveCursorToLineStart [
 		  name: 'Move cursor to the line start';
 		  description:
 			  'Moves the cursor to the start of the current line and deselects any selected text.';
-		  combination: BlKeyCombination home;
-		  combinationForMacOS:
-			  (BlKeyCombination home or: BlKeyCombination primaryArrowLeft);
+		  editorShortcutId: BrEditorShortcutIds default moveCursorToLineStartShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deselecter
 				  all;
@@ -308,8 +303,7 @@ BrEditorShortcut class >> moveCursorToNextWord [
 		  name: 'Move cursor to the next word';
 		  description:
 			  'Moves the cursor to the end of the next (or current) word and deselects any selected text.';
-		  combination: BlKeyCombination builder control arrowRight build;
-		  combinationForMacOS: BlKeyCombination builder alt arrowRight build;
+		  editorShortcutId: BrEditorShortcutIds default moveCursorToNextWordShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deselecter
 				  all;
@@ -327,8 +321,7 @@ BrEditorShortcut class >> moveCursorToPreviousWord [
 		  name: 'Move cursor to the previous word';
 		  description:
 			  'Moves the cursor to the start of the previous (or current) word and deselects any selected text.';
-		  combination: BlKeyCombination builder control arrowLeft build;
-		  combinationForMacOS: BlKeyCombination builder alt arrowLeft build;
+		  editorShortcutId: BrEditorShortcutIds default moveCursorToPreviousWordShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deselecter
 				  all;
@@ -347,7 +340,7 @@ BrEditorShortcut class >> moveCursorUp [
 		  name: 'Move cursor up';
 		  description:
 			  'Moves the cursor one line at a time above the current position and deselects any selected text.';
-		  combination: BlKeyCombination arrowUp;
+		  editorShortcutId: BrEditorShortcutIds default moveCursorUpShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor deselecter
 				  all;
@@ -366,7 +359,7 @@ BrEditorShortcut class >> paste [
 		  name: 'Paste';
 		  description:
 			  'Paste a text from the clipboard at the current cursor position and delete any currently selected text.';
-		  combination: BlKeyCombination primaryV;
+		  editorShortcutId: BrEditorShortcutIds default pasteShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor paster
 				  inputFilter: aBrTextEditor inputFilter;
@@ -382,7 +375,7 @@ BrEditorShortcut class >> redo [
 	^ self new
 		  name: 'Redo';
 		  description: 'Reverses the undo or advances the document to a more recent state.';
-		  combination: BlKeyCombination primaryShiftZ;
+		  editorShortcutId: BrEditorShortcutIds default redoShortcutId;
 		  performBlock: [ :aBrTextEditor | aBrTextEditor redo ];
 		  yourself
 ]
@@ -393,7 +386,7 @@ BrEditorShortcut class >> selectAll [
 	^ self new
 		  name: 'Select all';
 		  description: 'Selects all text';
-		  combination: BlKeyCombination primaryA;
+		  editorShortcutId: BrEditorShortcutIds default selectAllShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  all;
@@ -408,7 +401,7 @@ BrEditorShortcut class >> selectLetterAfterCursor [
 		  name: 'Select letter to the right';
 		  description:
 			  'Selects one letter at a time to the right from the cursor.';
-		  combination: BlKeyCombination shiftArrowRight;
+		  editorShortcutId: BrEditorShortcutIds default selectLetterAfterCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  moveOneToRight;
@@ -423,7 +416,7 @@ BrEditorShortcut class >> selectLetterBeforeCursor [
 		  name: 'Select letter to the left';
 		  description:
 			  'Selects one letter at a time to the left from the cursor.';
-		  combination: BlKeyCombination shiftArrowLeft;
+		  editorShortcutId: BrEditorShortcutIds default selectLetterBeforeCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  moveOneToLeft;
@@ -437,7 +430,7 @@ BrEditorShortcut class >> selectLineAboveCursor [
 	^ self new
 		  name: 'Select line above';
 		  description: 'Selects one line at a time above the cursor.';
-		  combination: BlKeyCombination shiftArrowUp;
+		  editorShortcutId: BrEditorShortcutIds default selectLineAboveCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  moveOneUp;
@@ -447,14 +440,13 @@ BrEditorShortcut class >> selectLineAboveCursor [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> selectLineAfterCursor [
-	^ (self new)
+	^ self new
 		name: 'Select to the end of a line';
 		description: 'Extends the selection from the current cursor position to the end of a line.';
-		combination: BlKeyCombination shiftEnd;
-		combinationForMacOS: (BlKeyCombination primaryShiftArrowRight or: BlKeyCombination shiftEnd);
+		editorShortcutId: BrEditorShortcutIds default selectLineAfterCursorShortcutId;
 		performBlock:
 				[ :aBrTextEditor | 
-					(aBrTextEditor selecter)
+					aBrTextEditor selecter
 						extendToLineEnd;
 						select ];
 		yourself
@@ -462,14 +454,13 @@ BrEditorShortcut class >> selectLineAfterCursor [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> selectLineBeforeCursor [
-	^ (self new)
+	^ self new
 		name: 'Select to the beginning of a line';
 		description: 'Extends the selection from the current cursor position to the beginning of a line.';
-		combination: BlKeyCombination shiftHome;
-		combinationForMacOS: (BlKeyCombination primaryShiftArrowLeft or: BlKeyCombination shiftHome);
+		editorShortcutId: BrEditorShortcutIds default selectLineBeforeCursorShortcutId;
 		performBlock:
 				[ :aBrTextEditor | 
-					(aBrTextEditor selecter)
+					aBrTextEditor selecter
 						extendToLineStart;
 						select ];
 		yourself
@@ -481,7 +472,7 @@ BrEditorShortcut class >> selectLineBelowCursor [
 	^ self new
 		  name: 'Select line below';
 		  description: 'Selects one line at a time below the cursor.';
-		  combination: BlKeyCombination shiftArrowDown;
+		  editorShortcutId: BrEditorShortcutIds default selectLineBelowCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  moveOneDown;
@@ -496,7 +487,7 @@ BrEditorShortcut class >> selectToBeginning [
 		  name: 'Select to the beginning of the editor';
 		  description:
 			  'Extends the selection from the current cursor position to the beginning of the editor.';
-		  combination: BlKeyCombination builder primary shift home build;
+		  editorShortcutId: BrEditorShortcutIds default selectToBeginningShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  extendToBeginning;
@@ -511,7 +502,7 @@ BrEditorShortcut class >> selectToEnd [
 		  name: 'Select to the end of the editor';
 		  description:
 			  'Extends the selection from the current cursor position to the end of the editor.';
-		  combination: BlKeyCombination builder primary shift end build;
+		  editorShortcutId: BrEditorShortcutIds default selectToEndShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  extendToEnd;
@@ -526,11 +517,7 @@ BrEditorShortcut class >> selectWordAfterCursor [
 		  name: 'Select next word';
 		  description:
 			  'Extends the selection from the current cursor position to the end of the next word.';
-		  combination:
-			  BlKeyCombination builder shift control arrowRight build;
-		  combinationForMacOS:
-			  BlKeyCombination builder shift alt arrowRight
-				  build;
+		  editorShortcutId: BrEditorShortcutIds default selectWordAfterCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  extendToNextWordEnd;
@@ -545,10 +532,7 @@ BrEditorShortcut class >> selectWordBeforeCursor [
 		  name: 'Select previous word';
 		  description:
 			  'Extends the selection from the current cursor position to the beginning of previous word.';
-		  combination:
-			  BlKeyCombination builder shift control arrowLeft build;
-		  combinationForMacOS:
-			  BlKeyCombination builder shift alt arrowLeft build;
+		  editorShortcutId: BrEditorShortcutIds default selectWordBeforeCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selecter
 				  extendToPreviousWordStart;
@@ -563,7 +547,7 @@ BrEditorShortcut class >> shiftLeft [
 		  name: 'Shift left';
 		  description:
 			  'Shift text at the cursor or if there is selection, the selected lines, one indetation to the left.';
-		  combination: BlKeyCombination builder shift tab build;
+		  editorShortcutId: BrEditorShortcutIds default shiftLeftShortcutId;
 		  performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selection isEmpty
 				  ifTrue: [ 
@@ -579,13 +563,11 @@ BrEditorShortcut class >> shiftLeft [
 
 { #category : #'shortcut creation' }
 BrEditorShortcut class >> shiftRight [
-
 	^ self new
-		  name: 'Shift right';
-		  description:
-			  'Shift text at the cursor or if there is selection, the selected lines, one indetation to the right.';
-		  combination: BlKeyCombination tab;
-		  performBlock: [ :aBrTextEditor | 
+		name: 'Shift right';
+		description: 'Shift text at the cursor or if there is selection, the selected lines, one indetation to the right.';
+		editorShortcutId: BrEditorShortcutIds default shiftRightShortcutId;
+		performBlock: [ :aBrTextEditor | 
 			  aBrTextEditor selection isEmpty
 				  ifTrue: [ 
 					  aBrTextEditor inserter
@@ -607,7 +589,7 @@ BrEditorShortcut class >> undo [
 	^ self new
 		  name: 'Undo';
 		  description: 'Erases the last change done to the document, reverting it to an older state.';
-		  combination: BlKeyCombination primaryZ;
+		  editorShortcutId: BrEditorShortcutIds default undoShortcutId;
 		  performBlock: [ :aBrTextEditor | aBrTextEditor undo ];
 		  yourself
 ]
