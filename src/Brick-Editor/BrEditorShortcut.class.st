@@ -77,10 +77,7 @@ BrEditorShortcut class >> deleteOneLetterAfterCursor [
 			  'Discards the character ahead of the cursor''s position, moving all following characters one position "back" towards the freed letterspace.';
 		  editorShortcutId: BrEditorShortcutIds default deleteOneLetterAfterCursorShortcutId;
 		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor deleter
-				  selected;
-				  oneAfterCursorIfOutsideOfSelection;
-				  delete ];
+			  aBrTextEditor deleteNextAtCursor ];
 		  yourself
 ]
 
