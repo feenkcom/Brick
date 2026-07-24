@@ -288,6 +288,14 @@ BrTextEditorModel >> delete: aFromTextIndex to: aToTextIndex [
 ]
 
 { #category : #'api - editing' }
+BrTextEditorModel >> deleteNextAtCursor [
+	self deleter
+		selected;
+		oneAfterCursorIfOutsideOfSelection;
+		delete
+]
+
+{ #category : #'api - editing' }
 BrTextEditorModel >> deletePreviousAtCursor [
 	self deleter
 		selected;

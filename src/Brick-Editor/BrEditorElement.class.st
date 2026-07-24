@@ -125,6 +125,11 @@ BrEditorElement >> defaultLayout [
 ]
 
 { #category : #'api - editing' }
+BrEditorElement >> deleteNextAtCursor [
+	self editor deleteNextAtCursor
+]
+
+{ #category : #'api - editing' }
 BrEditorElement >> deletePreviousAtCursor [
 	self editor deletePreviousAtCursor
 ]
