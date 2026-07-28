@@ -11,19 +11,11 @@ Class {
 BrDebuggableElementStencil >> create [
 	<return: #BlElement>
 	| aLabel aButton aContainer |
-	aLabel := BrButton new
-		hFitContentLimited;
-		vFitContent;
-		label: self newTextLabel;
-		aptitude: BrGlamorousLabelAptitude new;
-		margin: (BlInsets right: 6);
-		constraintsDo: [ :c | 
-			c linear vertical alignCenter.
-			c linear horizontal alignLeft ];
-		action: self newDebugAction.
+	aLabel := self createDebugLabel.
 	aButton := self createDebugButton.
 	aContainer := BlElement new
 		layout: BlLinearLayout horizontal;
+		id: BrDebuggableElementContentId;
 		constraintsDo: [ :c | 
 			c horizontal fitContentLimited.
 			c vertical fitContent.
@@ -46,9 +38,25 @@ BrDebuggableElementStencil >> createDebugButton [
 		aptitude: BrGlamorousButtonWithIconAptitude new;
 		icon: BrGlamorousVectorIcons debug;
 		label: 'Open debugger';
+		id: BrDebuggableElementOpenDebuggerButtonId;
 		beTinySize;
 		constraintsDo: [ :c | 
 			c linear vertical alignCenter ];
+		action: self newDebugAction
+]
+
+{ #category : #'api - instantiation' }
+BrDebuggableElementStencil >> createDebugLabel [
+	^ BrButton new
+		hFitContentLimited;
+		vFitContent;
+		label: self newTextLabel;
+		aptitude: BrGlamorousLabelAptitude new;
+		id: BrDebuggableElementExceptionMessageId;
+		margin: (BlInsets right: 6);
+		constraintsDo: [ :c | 
+			c linear vertical alignCenter.
+			c linear horizontal alignLeft ];
 		action: self newDebugAction
 ]
 
