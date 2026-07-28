@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'isExpanded',
 		'id',
-		'definingMethod'
+		'definingMethod',
+		'expandedAppendingAttribute',
+		'stencil'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
@@ -12,12 +14,6 @@ Class {
 { #category : #accessing }
 BrTextExpanderTextAttributeV2 >> beExpandedByDefault [
 	isExpanded := true
-]
-
-{ #category : #private }
-BrTextExpanderTextAttributeV2 >> collapseAttributeIn: aTextEditor [
-	isExpanded := false.
-	aTextEditor removeAdornmentAttribute: self expandedAppendingAttribute
 ]
 
 { #category : #accessing }
@@ -28,14 +24,6 @@ BrTextExpanderTextAttributeV2 >> definingMethod [
 { #category : #accessing }
 BrTextExpanderTextAttributeV2 >> definingMethod: anObject [
 	definingMethod := anObject
-]
-
-{ #category : #private }
-BrTextExpanderTextAttributeV2 >> expandAttributeIn: aTextEditor [
-	isExpanded := true.
-	aTextEditor
-		addAppendingAttribute: self expandedAppendingAttribute
-		atAppendingAttribute: self
 ]
 
 { #category : #private }
@@ -64,6 +52,13 @@ BrTextExpanderTextAttributeV2 >> initialize [
 	
 	id := BlElementId noId.
 	isExpanded := false.
+	
+	expandedAppendingAttribute := BrTextAdornmentDynamicAttribute new
+		beAppend;
+		stencil: [ :aSegmentPiece :anEditor | stencil ].
+
+	adornmentAction := BrTextAdornmentToggleAppendingAttributeAction new
+		appendingAttribute: expandedAppendingAttribute.
 ]
 
 { #category : #accessing }
@@ -73,7 +68,6 @@ BrTextExpanderTextAttributeV2 >> isExpanded [
 
 { #category : #private }
 BrTextExpanderTextAttributeV2 >> toggleExpandedOrCollapsedIn: aTextEditor [
-	self isExpanded
-		ifTrue: [ self collapseAttributeIn: aTextEditor ]
-		ifFalse: [ self expandAttributeIn: aTextEditor ]
+	aTextEditor executeAdornmentActionOfAdornmentAttribute: self.
+	isExpanded := isExpanded not
 ]
