@@ -30,15 +30,9 @@ BrEditorElement class >> editorTabSize: aNumber [
 BrEditorElement >> addAppendingAttribute: anAppendingAttribute atAppendingAttribute: anotherAppendingAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
-	self text
-		findAttribute: anotherAppendingAttribute
-		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
-			self text
-				attributes: { anAppendingAttribute }
-				from: aMarkerStartPosition
-				to: aMarkerEndPosition ].
-
-	^ anAppendingAttribute
+	^ self editor
+		addAppendingAttribute: anAppendingAttribute
+		atAppendingAttribute: anotherAppendingAttribute
 ]
 
 { #category : #'api - attributes' }
@@ -153,6 +147,11 @@ BrEditorElement >> editor: aBrTextEditor [
 	self dataSource: aBrTextEditor.
 	self editor addEventHandler: textStyleHandler.
 	self editor addEventHandler: textScrollOnModifyHandler.
+]
+
+{ #category : #'api - attributes' }
+BrEditorElement >> executeAdornmentActionOfAdornmentAttribute: anAdornmentAttribute [
+	anAdornmentAttribute executeAdornmentActionOnEditorElement: self
 ]
 
 { #category : #'focus testing' }
@@ -312,4 +311,11 @@ BrEditorElement >> styledTextAttributesDo: aBlock [
 { #category : #accessing }
 BrEditorElement >> text [
 	^ self editor text
+]
+
+{ #category : #'api - attributes' }
+BrEditorElement >> toggleAppendingAttribute: anAppendingAttribute atAppendingAttribute: anotherAppendingAttribute [
+	self editor
+		toggleAppendingAttribute: anAppendingAttribute
+		atAppendingAttribute: anotherAppendingAttribute
 ]

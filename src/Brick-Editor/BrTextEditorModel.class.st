@@ -1530,6 +1530,19 @@ BrTextEditorModel >> textSnapshot [
 	^ text copy
 ]
 
+{ #category : #'api - attributes' }
+BrTextEditorModel >> toggleAppendingAttribute: anAppendingAttribute atAppendingAttribute: anotherAppendingAttribute [
+	self text
+		findAttribute: anAppendingAttribute
+		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
+			(self text
+				from: aMarkerStartPosition
+				to: aMarkerEndPosition) removeAttribute: anAppendingAttribute.
+			^ self ].
+
+	self addAppendingAttribute: anAppendingAttribute atAppendingAttribute: anotherAppendingAttribute
+]
+
 { #category : #'text - undo/redo' }
 BrTextEditorModel >> undo [
 	history undoOn: self

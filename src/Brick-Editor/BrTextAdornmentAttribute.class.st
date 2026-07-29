@@ -8,10 +8,21 @@ Class {
 		'renderingStrategy',
 		'cache',
 		'alignmentMode',
-		'placeholderAlignment'
+		'placeholderAlignment',
+		'adornmentAction'
 	],
 	#category : #'Brick-Editor-Attributes'
 }
+
+{ #category : #accessing }
+BrTextAdornmentAttribute >> adornmentAction [
+	^ adornmentAction
+]
+
+{ #category : #accessing }
+BrTextAdornmentAttribute >> adornmentAction: anObject [
+	adornmentAction := anObject
+]
 
 { #category : #accessing }
 BrTextAdornmentAttribute >> affect: aTBrTextEditorTextualPiece in: anEditorElement [
@@ -59,6 +70,12 @@ BrTextAdornmentAttribute >> doAffect: aTBrTextEditorTextualPiece in: anEditorEle
 	<return: #SequenceableCollection of: #BlElement>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+BrTextAdornmentAttribute >> executeAdornmentActionOnEditorElement: anEditorElement [
+	adornmentAction
+		ifNotNil: [ :anAction | anAction executeOnEditorElement: anEditorElement fromAdornmentAttribute: self ]
 ]
 
 { #category : #initialization }
