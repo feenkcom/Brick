@@ -1,10 +1,6 @@
 Class {
 	#name : #BrGlamorousTriangleExpanderTextAttributeV2,
 	#superclass : #BrTextExpanderTextAttributeV2,
-	#instVars : [
-		'stencil',
-		'expandedAppendingAttribute'
-	],
 	#category : #'Brick-Glamorous-Editor - Attributes'
 }
 
@@ -33,15 +29,6 @@ BrGlamorousTriangleExpanderTextAttributeV2 >> doAffect: aTBrTextEditorTextualPie
 { #category : #'as yet unclassified' }
 BrGlamorousTriangleExpanderTextAttributeV2 >> expandedAppendingAttribute [
 	^ expandedAppendingAttribute
-]
-
-{ #category : #'as yet unclassified' }
-BrGlamorousTriangleExpanderTextAttributeV2 >> initialize [
-	super initialize.
-
-	expandedAppendingAttribute := BrTextAdornmentDynamicAttribute new
-		beAppend;
-		stencil: [ :aSegmentPiece :anEditor | stencil ]
 ]
 
 { #category : #'as yet unclassified' }
