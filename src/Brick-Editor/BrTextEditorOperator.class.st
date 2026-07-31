@@ -184,15 +184,20 @@ BrTextEditorOperator >> findLineStartBefore: aTextIndex [
 { #category : #private }
 BrTextEditorOperator >> findLineStartsBetween: aTextStart and: aTextEnd [
 	<return: #Number>
-	| aText aTextIterator |
-
+	| aText aTextIterator char |
 	aText := self text.
 	aTextIterator := aText iterator: aTextStart to: aTextEnd.
-	
-	^ Array streamContents: [ :aStream |
-		[ aTextIterator hasNext ] whileTrue: [
-			aTextIterator next isLineBreak
-				ifTrue: [ aStream nextPut: aTextIterator position ] ] ]
+
+	^ Array
+		streamContents: [ :aStream | 
+			[ aTextIterator hasNext ]
+				whileTrue: [ char := aTextIterator next.
+					char = Character cr
+						ifTrue: [ (aTextIterator hasNext and: [ aTextIterator peek = Character lf ])
+								ifTrue: [ aTextIterator next ].
+							aStream nextPut: aTextIterator position ]
+						ifFalse: [ char isLineBreak
+								ifTrue: [ aStream nextPut: aTextIterator position ] ] ] ]
 ]
 
 { #category : #'api - utility' }

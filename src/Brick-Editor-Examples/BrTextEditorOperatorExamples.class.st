@@ -506,6 +506,13 @@ baz)'.
 ]
 
 { #category : #'instance creation' }
+BrTextEditorOperatorExamples >> indentedCrlfText [
+	^ ('	'
+		, (self crlfText asString copyReplaceAll: String lf with: String lf , '	'))
+		asRopedText
+]
+
+{ #category : #'instance creation' }
 BrTextEditorOperatorExamples >> multilineFoldedText [
 	| text |
 	text := 'segment: anEditorSegment

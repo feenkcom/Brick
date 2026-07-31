@@ -462,6 +462,30 @@ BrTextEditorInserterExamples >> insert_indentation_selection_29_to_67 [
 	^ anEditor
 ]
 
+{ #category : #'examples - indentation' }
+BrTextEditorInserterExamples >> insert_indentation_with_crlf [
+	<gtExample>
+	<return: #BrEditor>
+	| anEditor |
+	anEditor := self editorOnCrlfText.
+	anEditor selecter
+		all;
+		select.
+
+	anEditor inserter
+		indentation;
+		beforeSelectedLines;
+		withoutSelectionDelete;
+		insert.
+
+	self assert: anEditor text asString equals: self indentedCrlfText asString.
+	self
+		assert: anEditor selection allSelections
+		equals: {BlSelection from: 1 to: anEditor text size}.
+
+	^ anEditor
+]
+
 { #category : #'examples - insertion' }
 BrTextEditorInserterExamples >> insert_openParentheses_at_cursor_0_and_1_and_3_selection_0_to_0 [
 	<gtExample>

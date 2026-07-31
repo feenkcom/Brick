@@ -10,9 +10,11 @@ Class {
 { #category : #'api - instantiation' }
 BrDebuggableElementStencil >> create [
 	<return: #BlElement>
-	| aLabel aButton aContainer |
-	aLabel := self createDebugLabel.
-	aButton := self createDebugButton.
+	| debugLabel debugButton aContainer |
+	
+	debugLabel := self createDebugLabel.
+	debugButton := self createDebugButton.
+	
 	aContainer := BlElement new
 		layout: BlLinearLayout horizontal;
 		id: BrDebuggableElementContentId;
@@ -21,7 +23,8 @@ BrDebuggableElementStencil >> create [
 			c vertical fitContent.
 			c frame horizontal alignCenter.
 			c frame vertical alignCenter ];
-		addChildren: {aLabel. aButton}.
+		addChildren: {debugLabel. debugButton}.
+		
 	^ BrFrame new
 		matchParent;
 		addChild: aContainer;
@@ -30,7 +33,7 @@ BrDebuggableElementStencil >> create [
 		yourself
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : #'building widgets' }
 BrDebuggableElementStencil >> createDebugButton [
 	^ BrButton new
 		hFitContent;
@@ -42,7 +45,7 @@ BrDebuggableElementStencil >> createDebugButton [
 		beTinySize;
 		constraintsDo: [ :c | 
 			c linear vertical alignCenter ];
-		action: self newDebugAction
+		action: [ self openDebuggerOnException ]
 ]
 
 { #category : #'api - instantiation' }
@@ -57,7 +60,7 @@ BrDebuggableElementStencil >> createDebugLabel [
 		constraintsDo: [ :c | 
 			c linear vertical alignCenter.
 			c linear horizontal alignLeft ];
-		action: self newDebugAction
+		action: [ self openDebuggerOnException ]
 ]
 
 { #category : #accessing }
@@ -82,10 +85,16 @@ BrDebuggableElementStencil >> freeze: anException [
 ]
 
 { #category : #'instance creation' }
-BrDebuggableElementStencil >> newDebugAction [
+BrDebuggableElementStencil >> newTextLabel [
+	^ self exception printString asRopedText 
+		glamorousCodeFontAndSmallSize;
+		foreground: BrGlamorousColors linkWithErrorColor
+]
 
-	^ [ 
-	  [ 
+{ #category : #'instance creation' }
+BrDebuggableElementStencil >> openDebuggerOnException [
+
+	 [ 
 	  UIManager default
 		  gtDebugProcess: Processor activeProcess
 		  context:
@@ -94,12 +103,5 @@ BrDebuggableElementStencil >> newDebugAction [
 		  label: self exception description
 		  fullView: true
 		  notification: nil
-		  forException: self exception ] forkNamed: 'Debug' ]
-]
-
-{ #category : #'instance creation' }
-BrDebuggableElementStencil >> newTextLabel [
-	^ self exception printString asRopedText 
-		glamorousCodeFontAndSmallSize;
-		foreground: BrGlamorousColors linkWithErrorColor
+		  forException: self exception ] forkNamed: 'Debug' 
 ]
