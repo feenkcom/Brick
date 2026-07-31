@@ -51,13 +51,13 @@ BrTextEditorInserter >> beforeSelectedLines [
 	"We insert text at the beginning of all selected lines"
 	| aCollectionOfLineStarts |
 	
-	aCollectionOfLineStarts := OrderedCollection new.
+	aCollectionOfLineStarts := Set new.
 	
 	self selection do: [ :aMonotoneSelection |
 		aCollectionOfLineStarts add: (self findLineStartBefore: aMonotoneSelection from + 1).
 		aCollectionOfLineStarts addAll: (self findLineStartsBetween: aMonotoneSelection from + 1 and: aMonotoneSelection to) ].
 
-	aCollectionOfLineStarts asSet do: [ :anIndex | self at: anIndex ]
+	aCollectionOfLineStarts do: [ :anIndex | self at: anIndex ]
 ]
 
 { #category : #private }

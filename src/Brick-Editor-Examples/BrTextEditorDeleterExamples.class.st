@@ -347,6 +347,27 @@ BrTextEditorDeleterExamples >> delete_0_to_5_from_HelloCr [
 ]
 
 { #category : #'examples - deletion special' }
+BrTextEditorDeleterExamples >> delete_indention_in_crlf [
+	<gtExample>
+	<return: #BrEditor>
+	| editor |
+	editor := self editorFor: self indentedCrlfText.
+
+	editor selecter all select.
+
+	editor deleter
+		beforeSelectedLinesIfIndent;
+		delete.
+
+	self assert: editor text asString equals: self crlfText asString.
+	self
+		assert: editor selection allSelections
+		equals: {BlSelection from: 0 to: editor text size}.
+
+	^ editor
+]
+
+{ #category : #'examples - deletion special' }
 BrTextEditorDeleterExamples >> forwardDeleteCrlf [
 	<gtExample>
 	<return: #BrEditor>

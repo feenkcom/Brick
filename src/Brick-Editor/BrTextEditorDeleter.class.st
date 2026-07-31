@@ -47,13 +47,13 @@ BrTextEditorDeleter >> beforeSelectedLinesIfIndent [
 	"We delete indents at the beginning of all selected lines"
 
 	| aCollectionOfLineStarts |
-	aCollectionOfLineStarts := OrderedCollection new.
+	aCollectionOfLineStarts := Set new.
 	self selection
 		do:
 			[ :aMonotoneSelection | 
 			aCollectionOfLineStarts add: (self findLineStartBefore: aMonotoneSelection from + 1).
 			aCollectionOfLineStarts addAll: (self findLineStartsBetween: aMonotoneSelection from + 1 and: aMonotoneSelection to) ].
-	aCollectionOfLineStarts asSet do: [ :start | self ifIndentAfter: start ]
+	aCollectionOfLineStarts do: [ :start | self ifIndentAfter: start ]
 ]
 
 { #category : #private }
