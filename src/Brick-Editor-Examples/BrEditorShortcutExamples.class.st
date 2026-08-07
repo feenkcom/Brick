@@ -215,3 +215,29 @@ BrEditorShortcutExamples >> deleteWordBeforeCursor [
 
 	^ anEditorElement
 ]
+
+{ #category : #examples }
+BrEditorShortcutExamples >> lineEndingIndentsToMatchPreviousLine [
+	"End-to-end check that BrEditorShortcut class>>#lineEnding still produces the
+	right result now that its behavior lives in BrTextEditorModel>>#insertLineEndingAtCursor."
+	<gtExample>
+	<return: #BrEditor>
+	| indentedLine anEditorElement anEditor |
+	indentedLine := String tab , 'Hello'.
+	anEditorElement := BrTextEditorOperatorExamples new editorFor: indentedLine asRopedText.
+	anEditor := anEditorElement editor.
+
+	anEditor moveCursorTo: indentedLine size.
+	anEditor select: indentedLine size to: indentedLine size.
+
+	BrEditorShortcut lineEnding
+		performOnEditor: anEditor
+		element: anEditorElement
+		dueTo: nil.
+
+	self
+		assert: anEditor text asString
+		equals: indentedLine , OSPlatform current lineEnding , String tab.
+
+	^ anEditorElement
+]

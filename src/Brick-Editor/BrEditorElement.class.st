@@ -180,6 +180,11 @@ BrEditorElement >> initialize [
 		do: [ :anEvent | self privateScrollWhenTextModified: anEvent ].
 ]
 
+{ #category : #'api - editing' }
+BrEditorElement >> insertLineEndingAtCursor [
+	self editor insertLineEndingAtCursor
+]
+
 { #category : #'api - cursors' }
 BrEditorElement >> moveCursorTo: aTextIndex [
 	"Moves cursor to a given position without any further action such as cancelling selection"

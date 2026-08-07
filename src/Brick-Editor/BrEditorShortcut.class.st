@@ -152,12 +152,7 @@ BrEditorShortcut class >> lineEnding [
 		  description:
 			  'Inserts a platform specific line ending at the cursor location and indents the new line to match the indentation of the previous line.';
 		  editorShortcutId: BrEditorShortcutIds default newLineShortcutId;
-		  performBlock: [ :aBrTextEditor | 
-			  aBrTextEditor inserter
-				  inputFilter: aBrTextEditor inputFilter;
-				  atCursor;
-				  lineEndingWithWhitespace;
-				  insert ];
+		  performBlock: [ :aBrTextEditor | aBrTextEditor insertLineEndingAtCursor ];
 		  yourself
 ]
 
