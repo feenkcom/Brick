@@ -556,6 +556,15 @@ BrTextEditorModel >> inputFilter: aBrTextEditorInputFilter [
 	filter := aBrTextEditorInputFilter
 ]
 
+{ #category : #'api - editing' }
+BrTextEditorModel >> insertLineEndingAtCursor [
+	self inserter
+		inputFilter: self inputFilter;
+		atCursor;
+		lineEndingWithWhitespace;
+		insert
+]
+
 { #category : #'private - text' }
 BrTextEditorModel >> insertString: aString at: aTextIndex [
 
