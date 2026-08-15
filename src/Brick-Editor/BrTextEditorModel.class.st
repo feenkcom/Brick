@@ -24,8 +24,7 @@ Class {
 		'shouldStyleWhenTextModified',
 		'shouldConsumeClickEvent',
 		'movementWordClassifier',
-		'doubleClickWordClassifier',
-		'documentId'
+		'doubleClickWordClassifier'
 	],
 	#classVars : [
 		'DontUseParagraphEditor'
@@ -138,8 +137,8 @@ BrTextEditorModel >> addHighlight: aBrTextHighlight overMarker: aMarkerAttribute
 BrTextEditorModel >> addHighlight: aBrTextHighlight overRange: aBrTextRange [ 
 	self assert: [ aBrTextRange isCharacterRange ].
 	
-	"(self isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ self ]."
+	(self isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ self ].
 
 	self text
 		attributes: {(BlTextHighlightAttribute new
@@ -342,6 +341,14 @@ BrTextEditorModel >> disableStyleTextWhenModifiedDuring: aBlock [
 	aBlock ensure: [ shouldStyleWhenTextModified := aPreviousShouldStyleWhenTextModified ]
 ]
 
+{ #category : #accessing }
+BrTextEditorModel >> documentId [
+	"Answer the id identifying the version of the document I edit.
+	The id belongs to the text, not to me: see BlText >> #documentId."
+
+	^ self text documentId
+]
+
 { #category : #'api - word movement' }
 BrTextEditorModel >> doubleClickWordClassifier [
 	^doubleClickWordClassifier
@@ -481,7 +488,7 @@ BrTextEditorModel >> history: aBrTextEditorHistory [
 	history ifNotNil: [ history editorModel: self ]
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BrTextEditorModel >> initialize [
 	super initialize.
 	
@@ -495,7 +502,6 @@ BrTextEditorModel >> initialize [
 	selection := BlCompositeSelection new.
 	selectionRecorder := BrTextEditorSelectionOverwriteRecorder new.
 
-	documentId := BrTextEditorDocumentId textId: 1 revisionId: 1.
 	text := '' asRopedText.
 	self initializeText: text.
 
@@ -603,7 +609,7 @@ BrTextEditorModel >> isFocused [
 
 { #category : #testing }
 BrTextEditorModel >> isWithDocumentId: aDocumentId [
-	^ documentId = aDocumentId
+	^ self documentId = aDocumentId
 ]
 
 { #category : #accessing }
@@ -722,14 +728,26 @@ BrTextEditorModel >> notifyDeletedFrom: aFromIndex to: aToIndex [
 		toIndex: aToIndex)
 ]
 
-{ #category : #'hooks - text modifications' }
+{ #category : #'private - notifying' }
 BrTextEditorModel >> notifyDeletionsFrom: aBlTextsDeleted [
 	self
 		dispatchEvent: (BrTextEditorDeletionModificationEvent new
-				documentId: documentId;
+				documentId: self documentId;
 				indices: (aBlTextsDeleted finalIntervals collect: #first);
 				lengths: (aBlTextsDeleted finalIntervals collect: #size);
 				yourself)
+]
+
+{ #category : #'private - notifying' }
+BrTextEditorModel >> notifyDocumentIdChanged [
+	"Signal that the document id of the text I edit has changed.
+	The id itself lives in the text, I only report the change."
+
+	BrTextEditorModelDocumentIdChangedSignal new
+		editorModel: self;
+		text: text;
+		documentId: self documentId;
+		emit
 ]
 
 { #category : #'event firing' }
@@ -742,11 +760,11 @@ BrTextEditorModel >> notifyInserted: aText at: aTextIndex [
 	self dispatchEvent: (BrTextEditorInsertedEvent text: aText at: aTextIndex)
 ]
 
-{ #category : #'hooks - text modifications' }
+{ #category : #'private - notifying' }
 BrTextEditorModel >> notifyInsertionsFrom: aBlTextStringsInserted [
 	self
 		dispatchEvent: (BrTextEditorInsertionModificationEvent new
-				documentId: documentId;
+				documentId: self documentId;
 				indices: aBlTextStringsInserted finalIndices;
 				strings: aBlTextStringsInserted strings;
 				yourself)
@@ -757,18 +775,18 @@ BrTextEditorModel >> notifyModified: aText [
 	self notifyModified: aText fromCommand: nil
 ]
 
-{ #category : #'event firing' }
+{ #category : #'private - notifying' }
 BrTextEditorModel >> notifyModified: aText fromCommand: anEditCommand [
 	self dispatchEvent: (BrTextEditorModifiedEvent new 
-		documentId: documentId;
+		documentId: self documentId;
 		text: aText;
 		editCommand: anEditCommand)
 ]
 
-{ #category : #'event firing' }
+{ #category : #'private - notifying' }
 BrTextEditorModel >> notifyModified: aText fromCommand: anEditCommand dueTo: aReasonEvent [
 	self dispatchEvent: (BrTextEditorModifiedEvent new 
-		documentId: documentId;
+		documentId: self documentId;
 		text: aText;
 		editCommand: anEditCommand;
 		reason: aReasonEvent)
@@ -779,12 +797,12 @@ BrTextEditorModel >> notifySelectionChanged: aSelection [
 	self dispatchEvent: (BrTextEditorSelectionChangedEvent new selection: aSelection)
 ]
 
-{ #category : #'event firing' }
+{ #category : #'private - notifying' }
 BrTextEditorModel >> notifyTextReplaced: aText [
 	self
 		dispatchEvent: (BrTextEditorTextReplacedEvent new
 				text: aText;
-				documentId: documentId)
+				documentId: self documentId)
 ]
 
 { #category : #'event firing' }
@@ -912,7 +930,7 @@ BrTextEditorModel >> onShortcutRemoved: anInteraction [
 	attachedElements do: [ :eachElement | self onInteractionRemoved: anInteraction from: eachElement ]
 ]
 
-{ #category : #'private - updating' }
+{ #category : #'text - events' }
 BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
 	| insertCommand |
 	"Is sent after a few strings (or one) are inserted in a text model"
@@ -938,7 +956,7 @@ BrTextEditorModel >> onStringsInserted: aBlTextStringsInserted [
 				notifyInserted: aString asRopedText
 				at: anIndex ].
 
-	self privateIncreaseDocumentRevisionId.
+	self notifyDocumentIdChanged.
 				
 	self 
 		notifyModified: self text 
@@ -1018,7 +1036,7 @@ BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
 		ifFalse: [ self styleTextAndAfterDo: aBlTextStyledEvent afterAction ]
 ]
 
-{ #category : #'hooks - text modifications' }
+{ #category : #'text - events' }
 BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 	"Is sent after a piece of text was deleted in a text model"
 	| deleteCommand |
@@ -1045,7 +1063,7 @@ BrTextEditorModel >> onTextsDeleted: aBlTextsDeleted [
 				notifyDeletedFrom: eachInterval first
 				to:  eachInterval last ].
 
-	self privateIncreaseDocumentRevisionId.
+	self notifyDocumentIdChanged.
 				
 	self 
 		notifyModified: self text
@@ -1084,28 +1102,8 @@ BrTextEditorModel >> printOn: aStream [
 
 	aStream
 		nextPut: $(;
-		print: documentId;
+		print: self documentId;
 		nextPut: $)
-]
-
-{ #category : #'private - updating' }
-BrTextEditorModel >> privateIncreaseDocumentRevisionId [
-	documentId := documentId ifNotNil: #withIncreasedRevisionId.
-	BrTextEditorModelDocumentIdChangedSignal new 
-		editorModel: self;
-		text: text;
-		documentId: documentId;
-		emit.
-]
-
-{ #category : #'private - updating' }
-BrTextEditorModel >> privateIncreaseDocumentTextId [
-	documentId := documentId ifNotNil: #withIncreasedTextId.
-	BrTextEditorModelDocumentIdChangedSignal new 
-		editorModel: self;
-		text: text;
-		documentId: documentId;
-		emit.
 ]
 
 { #category : #'private - cursor' }
@@ -1245,7 +1243,7 @@ BrTextEditorModel >> restoreState: aBrTextEditorMemento [
 	aBrTextEditorMemento restoreStateOf: self
 ]
 
-{ #category : #accessing }
+{ #category : #'text - modifications' }
 BrTextEditorModel >> restoreText: aBrText [
 	| oldText |
 	"before changing the text we must unsubscribe from existing one"
@@ -1253,7 +1251,7 @@ BrTextEditorModel >> restoreText: aBrText [
 	text unsubscribe: self.
 
 	text := aBrText.
-	self privateIncreaseDocumentTextId.
+	self notifyDocumentIdChanged.
 	self initializeText: text.
 	
 	"Replacing text instance means that we can not guarantee structural integrity
@@ -1334,7 +1332,7 @@ BrTextEditorModel >> selectNone [
 		to: self selection to
 ]
 
-{ #category : #'api - selection' }
+{ #category : #accessing }
 BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPositionDo: aCursorTextPositionBlock [
 	"If a text is selected, evaluate aSelectedTextBlock, aCursorTextPositionBlock otherwise.
 	- aSelectedTextBlock have three optional parameters [ :aSelectedString :aSelectedInterval :aTextSize :aDocumentId :aCaretOffset | ],
@@ -1352,7 +1350,7 @@ BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPos
 						aSelectedText asString.
 						(aFromIndex to: aToIndex).
 						aTextSize.
-						documentId.
+						self documentId.
 						aCursorPosition } ]
 		ifEmpty: [ self hasCursors
 				ifTrue: [ | aCursorPosition aTextPosition aTextSize |
@@ -1363,7 +1361,7 @@ BrTextEditorModel >> selectedStringAndIntervalDo: aSelectedTextBlock orCursorPos
 					aCursorTextPositionBlock valueWithEnoughArguments: { 
 						aTextPosition. 
 						aTextSize. 
-						documentId. 
+						self documentId. 
 						aCursorPosition } ] ]
 ]
 

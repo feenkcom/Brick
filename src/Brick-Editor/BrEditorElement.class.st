@@ -73,39 +73,12 @@ BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 
 { #category : #'api - highlighting' }
 BrEditorElement >> addHighlight: aBrTextHighlight overMarker: aMarkerAttribute [
-	self
-		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
-		description: [ 'aMarkerAttribute must be a marker attribute: {1}' format: { aMarkerAttribute } ].
-
-	self text
-		findAttribute: aMarkerAttribute
-		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
-			"The `beNotOverwritableByStyler` part is removed for now, because `GtMethodAdvice>>#styleFixIt:using:`
-			calls `#addHighlight:overMarker:` in the `#onCursorEnter:...` part immediately as users type, 
-			but the `..leave:` part is not called.
-			To test it: enable `beNotOverwritableByStyler` in both model and element methods and type `self.`. It will remain
-			highlighted after the fixIt button disappears."
-			self text
-				attributes: {(BlTextHighlightAttribute new
-							paint: aBrTextHighlight color;
-							id: aBrTextHighlight id) "beNotOverwritableByStyler"}
-				from: aMarkerStartPosition
-				to: aMarkerEndPosition ]
+	self editor addHighlight: aBrTextHighlight overMarker: aMarkerAttribute
 ]
 
 { #category : #'api - highlighting' }
 BrEditorElement >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
-	self assert: [ aBrTextRange isCharacterRange ].
-	
-	"(self editor isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ self ]."
-
-	self text
-		attributes: {(BlTextHighlightAttribute new
-					paint: aBrTextHighlight color;
-					id: aBrTextHighlight id) beNotOverwritableByStyler}
-		from: aBrTextRange start
-		to: aBrTextRange end
+	self editor addHighlight: aBrTextHighlight overRange: aBrTextRange
 ]
 
 { #category : #conversion }
