@@ -86,8 +86,11 @@ BrTextEditorModel >> addAttribute: anAttribute overRange: aBrTextRange [
 
 	self assert: [ aBrTextRange isCharacterRange ].
 	
-	"(self isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ self ]."
+	"The range names a different document than the one I edit: ignore it.
+	Answer the tag anyway, so callers always hold a tag of the expected type.
+	Removing a tag that was never added is a no-op."
+	(self isWithDocumentId: aBrTextRange documentId)
+		ifFalse: [ ^ anAttribute ].
 
 	self text
 		attributes: {anAttribute}
@@ -120,11 +123,15 @@ BrTextEditorModel >> addHighlight: aBrTextHighlight overMarker: aMarkerAttribute
 	self text
 		findAttribute: aMarkerAttribute
 		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
-			"The `beNotOverwritableByStyler` part is removed for now, because `GtMethodAdvice>>#styleFixIt:using:`
+			"Note 1: The `beNotOverwritableByStyler` part is removed for now, because `GtMethodAdvice>>#styleFixIt:using:`
 			calls `#addHighlight:overMarker:` in the `#onCursorEnter:...` part immediately as users type, 
 			but the `..leave:` part is not called.
 			To test it: enable `beNotOverwritableByStyler` in both model and element methods and type `self.`. It will remain
-			highlighted after the fixIt button disappears."
+			highlighted after the fixIt button disappears.
+			
+			Note 2: This, `#addHighlight:overRange:`, and `#removeHighlightsWithId:` 
+			are the only places where `BlTextHighlightAttribute` is valid.
+			For the other cases, this API must be used."
 			self text
 				attributes: {(BlTextHighlightAttribute new
 							paint: aBrTextHighlight color;
@@ -140,10 +147,16 @@ BrTextEditorModel >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	(self isWithDocumentId: aBrTextRange documentId)
 		ifFalse: [ ^ self ].
 
+	"Note: 1: See `#addHighlight:overMarker:` that explains 
+	why `beNotOverwritableByStyler` is disabled. We disable it also here to be consistent.
+	
+	Note 2: This, `#addHighlight:overMarker:`, and `#removeHighlightsWithId:` 
+	are the only places where `BlTextHighlightAttribute` is valid.
+	For the other cases, this API must be used."
 	self text
 		attributes: {(BlTextHighlightAttribute new
 					paint: aBrTextHighlight color;
-					id: aBrTextHighlight id) beNotOverwritableByStyler}
+					id: aBrTextHighlight id) "beNotOverwritableByStyler"}
 		from: aBrTextRange start
 		to: aBrTextRange end
 ]
