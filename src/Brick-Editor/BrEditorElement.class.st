@@ -39,36 +39,14 @@ BrEditorElement >> addAppendingAttribute: anAppendingAttribute atAppendingAttrib
 BrEditorElement >> addAttribute: anAttribute overMarker: aMarkerAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
-	self
-		assert: [ aMarkerAttribute isKindOf: BrTextInvisibleMarkerAttribute ]
-		description:  [ 'aMarkerAttribute must be a marker attribute: {1}' format: { aMarkerAttribute } ].
-
-	self text
-		findAttribute: aMarkerAttribute
-		indicesDo: [ :aMarkerStartPosition :aMarkerEndPosition | 
-			self text
-				attributes: {anAttribute}
-				from: aMarkerStartPosition
-				to: aMarkerEndPosition ].
-
-	^ anAttribute
+	^ self editor addAttribute: anAttribute overMarker: aMarkerAttribute
 ]
 
 { #category : #'api - attributes' }
 BrEditorElement >> addAttribute: anAttribute overRange: aBrTextRange [
 	"Return an attribute tag, currently it is the very same attribute."
 
-	self assert: [ aBrTextRange isCharacterRange ].
-	
-	"(self editor isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ self ]."
-
-	self text
-		attributes: {anAttribute}
-		from: aBrTextRange start
-		to: aBrTextRange end.
-		
-	^ anAttribute
+	^ self editor addAttribute: anAttribute overRange: aBrTextRange
 ]
 
 { #category : #'api - highlighting' }
@@ -193,29 +171,26 @@ BrEditorElement >> privateScrollWhenTextModified: anEvent [
 
 { #category : #'api - attributes' }
 BrEditorElement >> removeAdornmentAttribute: anAdornmentAttribute [
-	self text removeAttribute: anAdornmentAttribute
+	self editor removeAdornmentAttribute: anAdornmentAttribute
 ]
 
 { #category : #'api - attributes' }
 BrEditorElement >> removeAttributeTagged: anAttributeTag [
 	"anAttributeTag is currently the very same attribute."
 
-	self text removeAttribute: anAttributeTag
+	self editor removeAttributeTagged: anAttributeTag
 ]
 
 { #category : #'api - attributes' }
 BrEditorElement >> removeAttributeTagged: anAttributeTag overMarker: aMarkerAttribute [
 	"anAttributeTag is currently the very same attribute."
 
-	self text removeAttribute: anAttributeTag
+	self editor removeAttributeTagged: anAttributeTag overMarker: aMarkerAttribute
 ]
 
 { #category : #'api - highlighting' }
 BrEditorElement >> removeHighlightsWithId: aStringId [
-	self text
-		clearAttributes: [ :eachAttribute | 
-			eachAttribute class = BlTextHighlightAttribute and: [ 
-				eachAttribute id = aStringId ] ]
+	self editor removeHighlightsWithId: aStringId
 ]
 
 { #category : #'api - editor' }
@@ -283,7 +258,7 @@ BrEditorElement >> styledTextAttributesDo: aBlock [
 	"Iterate styled text attributes. 
 	`aBlock` have two optional parameters [ :allAttributes :eachPosition | ]"
 
-	self text attributesDo: aBlock
+	self editor styledTextAttributesDo: aBlock
 ]
 
 { #category : #accessing }
