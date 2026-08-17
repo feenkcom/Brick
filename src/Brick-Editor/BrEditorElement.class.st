@@ -39,7 +39,7 @@ BrEditorElement >> addAppendingAttribute: anAppendingAttribute atAppendingAttrib
 BrEditorElement >> addAttribute: anAttribute overMarker: aMarkerAttribute [
 	"Return an attribute tag, currently it is the very same attribute."
 
-	^ self addAttribute: anAttribute overMarker: aMarkerAttribute
+	^ self editor addAttribute: anAttribute overMarker: aMarkerAttribute
 ]
 
 { #category : #'api - attributes' }
