@@ -156,7 +156,7 @@ BrTextEditorModel >> addHighlight: aBrTextHighlight overRange: aBrTextRange [
 	self text
 		attributes: {(BlTextHighlightAttribute new
 					paint: aBrTextHighlight color;
-					id: aBrTextHighlight id) "beNotOverwritableByStyler"}
+					id: aBrTextHighlight id) beNotOverwritableByStyler}
 		from: aBrTextRange start
 		to: aBrTextRange end
 ]
