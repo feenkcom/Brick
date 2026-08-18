@@ -15,7 +15,7 @@ BaselineOfBrickEditor >> baseline: spec [
 			baseline: 'Traits' with: [ spec loads: 'AST-Core-Traits' ];"
 
 			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon/src' ];
+				spec repository: 'github://feenkcom/pharo-beacon:main/src' ];
 			
 			baseline: 'BlocCore' with: [
 				spec repository: 'github://feenkcom/Bloc/src' ];
