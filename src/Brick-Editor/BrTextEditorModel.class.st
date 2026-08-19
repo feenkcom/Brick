@@ -88,9 +88,15 @@ BrTextEditorModel >> addAttribute: anAttribute overRange: aBrTextRange [
 	
 	"The range names a different document than the one I edit: ignore it.
 	Answer the tag anyway, so callers always hold a tag of the expected type.
-	Removing a tag that was never added is a no-op."
-	(self isWithDocumentId: aBrTextRange documentId)
-		ifFalse: [ ^ anAttribute ].
+	Removing a tag that was never added is a no-op.
+	TODO: we are not ready yet"
+	self flag: #TODO.
+	false 
+		ifTrue: [ 
+			(self isWithDocumentId: aBrTextRange documentId)
+				ifFalse: [ ^ anAttribute ] ]
+		ifFalse: [
+			self text size <= aBrTextRange end ifFalse: [ ^ anAttribute ] ].
 
 	self text
 		attributes: {anAttribute}
