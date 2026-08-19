@@ -96,7 +96,7 @@ BrTextEditorModel >> addAttribute: anAttribute overRange: aBrTextRange [
 			(self isWithDocumentId: aBrTextRange documentId)
 				ifFalse: [ ^ anAttribute ] ]
 		ifFalse: [
-			self text size <= aBrTextRange end ifFalse: [ ^ anAttribute ] ].
+			aBrTextRange end <= self text size  ifFalse: [ ^ anAttribute ] ].
 
 	self text
 		attributes: {anAttribute}
