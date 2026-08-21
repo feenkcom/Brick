@@ -24,6 +24,26 @@ BrAsyncElementPromise >> element: anElement [
 		action: (MessageSend receiver: self selector: #privateUpdateElement)
 ]
 
+{ #category : #'gt - extensions' }
+BrAsyncElementPromise >> gtFulfilledComputationSourceCodeFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Source code';
+		object: [ whenSuccess ];
+		view: #gtSourceCodeFor:
+]
+
+{ #category : #'gt - extensions' }
+BrAsyncElementPromise >> gtPromiseCompositionFor: aView [
+	<gtView>
+	promise ifNil: [ ^ aView empty ].
+	
+	^ aView forward
+		title: 'Composition';
+		object: [ promise ];
+		view: #gtCompositionFor:
+]
+
 { #category : #initialization }
 BrAsyncElementPromise >> initialize [
 	super initialize.

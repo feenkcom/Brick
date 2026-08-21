@@ -163,3 +163,46 @@ BrTextEditorHistoryExamples >> newTextEditor_noInitialHistory [
 
 	^ textEditor
 ]
+
+{ #category : #'examples - document id' }
+BrTextEditorHistoryExamples >> undoAndRedoAdvanceTheRevisionOfTheSameDocument [
+	"History keeps snapshots taken with #copy, and a copy preserves the document id. Undo and
+	redo are themselves content changes, so each advances the revision of the editor's text
+	while its text id stays the same — the editor keeps editing one document throughout."
+
+	<gtExample>
+	<return: #BrTextEditorModel>
+	| textEditor aDocumentIdBefore |
+	textEditor := self newTextEditorWithInitialText.
+	aDocumentIdBefore := textEditor documentId.
+
+	textEditor inserter
+		atEnd;
+		string: 'a';
+		insert.
+	self assert: textEditor text asString equals: '1234a'.
+	self assertEditorHistoryFor: textEditor undoCount: 1 redoCount: 0.
+	self assert: textEditor documentId textId equals: aDocumentIdBefore textId.
+	self
+		assert: textEditor documentId revisionId
+		equals: aDocumentIdBefore revisionId + 1.
+
+	textEditor undo.
+	self assert: textEditor text asString equals: '1234'.
+	self assertEditorHistoryFor: textEditor undoCount: 0 redoCount: 1.
+	self assert: textEditor documentId textId equals: aDocumentIdBefore textId.
+	self
+		assert: textEditor documentId revisionId
+		equals: aDocumentIdBefore revisionId + 2.
+
+	textEditor redo.
+	self assert: textEditor text asString equals: '1234a'.
+	self assertEditorHistoryFor: textEditor undoCount: 1 redoCount: 0.
+
+	self assert: textEditor documentId textId equals: aDocumentIdBefore textId.
+	self
+		assert: textEditor documentId revisionId
+		equals: aDocumentIdBefore revisionId + 3.
+
+	^ textEditor
+]
