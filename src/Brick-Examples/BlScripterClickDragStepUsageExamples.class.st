@@ -12,8 +12,7 @@ BlScripterClickDragStepUsageExamples >> doubleClickDragToSelectMultipleWords [
 	| aScripter beforeClickVector whileDragVector |
 	beforeClickVector := BlVector x: -65 y: 0.
 	whileDragVector := BlVector x: 50 y: 0.
-	aScripter := self scripter.
-	aScripter element: self elementWithEditor.
+	aScripter := self scripterWithElement: [ self elementWithEditor ].
 	aScripter clickDragStep: 
 			[:s |
 			s
@@ -76,7 +75,6 @@ BlScripterClickDragStepUsageExamples >> elementWithEditor [
 			aTextElement measurer textOffset: aPiece textStart.
 			aTextElement ].
 	editor requestFocus.
-	editor forceLayout.
 	^ BrFrame new
 			matchParent;
 			addChild: editor
