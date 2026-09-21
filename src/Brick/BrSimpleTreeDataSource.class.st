@@ -61,6 +61,7 @@ BrSimpleTreeDataSource >> onBindHolder: anElementHolder at: aPosition payloads: 
 	nodeDataBinder
 		nodeElement: anElementHolder nodeElement;
 		itemObject: anItemNode value;
+		itemIndex: anItemNode indexInTree;
 		treeNode: anItemNode;
 		payloads: aCollectionOfPayloads;
 		build.

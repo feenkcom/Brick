@@ -8,7 +8,8 @@ Class {
 		'nodeElement',
 		'itemObject',
 		'treeNode',
-		'payloads'
+		'payloads',
+		'itemIndex'
 	],
 	#category : #'Brick-Tree - Stencil'
 }
@@ -18,6 +19,16 @@ BrTreeNodeDataBinder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 	
 	^ nil
+]
+
+{ #category : #accessing }
+BrTreeNodeDataBinder >> itemIndex [
+	^ itemIndex
+]
+
+{ #category : #accessing }
+BrTreeNodeDataBinder >> itemIndex: anObject [
+	itemIndex := anObject
 ]
 
 { #category : #accessing }
@@ -49,7 +60,8 @@ BrTreeNodeDataBinder >> paramsOn: aStencilExecutor [
 	aStencilExecutor
 		push: self nodeElement;
 		push: self itemObject;
-		push: self treeNode;
+		push: self itemIndex;
+		push: self treeNode;  
 		push: self payloads
 ]
 
