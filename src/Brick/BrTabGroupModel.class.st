@@ -295,18 +295,16 @@ BrTabGroupModel >> selectTab: aBrTabModel [
 
 { #category : #accessing }
 BrTabGroupModel >> selectTabToTheLeft [
-	self selectedTabDo: [:aTab | 
-		self selectTab: (self tabs 
-			before: aTab 
-			ifAbsent: [ aTab ]) ]
+	self selectedTabDo: 
+			[:aTab |
+			self selectTab: (self tabs before: aTab ifAbsent: [self tabs last])]
 ]
 
 { #category : #accessing }
 BrTabGroupModel >> selectTabToTheRight [
-	self selectedTabDo: [:aTab | 
-		self selectTab: (self tabs 
-			after: aTab 
-			ifAbsent: [ aTab ]) ]
+	self selectedTabDo: 
+			[:aTab |
+			self selectTab: (self tabs after: aTab ifAbsent: [self tabs first])]
 ]
 
 { #category : #'api - tabs' }
