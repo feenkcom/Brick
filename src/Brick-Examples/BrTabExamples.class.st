@@ -397,7 +397,7 @@ BrTabExamples >> selectTabOnTheLeftOfTheFirstTab [
 	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
 	self assert: tabGroup tabs first isSelected.
 	tabGroup selectTabToTheLeft.
-	self assert: tabGroup tabs first isSelected.
+	self assert: tabGroup tabs second isSelected.
 	^ tabGroup
 ]
 
@@ -433,7 +433,7 @@ BrTabExamples >> selectTabOnTheRightOfTheLastTab [
 	tabGroup := self tabGroupWithSecondSelectedTabAddedAtFirstPosition.
 	tabGroup selectTab: tabGroup tabs last.
 	tabGroup selectTabToTheRight.
-	self assert: tabGroup tabs second isSelected.
+	self assert: tabGroup tabs first isSelected.
 	^ tabGroup
 ]
 
