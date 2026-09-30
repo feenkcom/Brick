@@ -199,6 +199,19 @@ BrDevScripterMenuStep >> assertMenuContainerLayoutAnchorBounds: aRectangle [
 		onParentStepTarget: self
 ]
 
+{ #category : #'steps - assert' }
+BrDevScripterMenuStep >> assertMenuItemLabels: anArray [
+	^ self assert
+		label: ('Assert menu item labels: {1}' format: {anArray asCommaString});
+		value: [ :aMenuContainer | 
+			((aMenuContainer query // #'menu--label') result 
+				collect: [ :each | each text asString ]) asArray ]
+			equals: anArray;
+		referenceSender;
+		onSpaceRoot;
+		// BrMenuSteppedElement
+]
+
 { #category : #'steps - checks' }
 BrDevScripterMenuStep >> assertMenuItemWithLabelExists: aLabel [
 	^ self assert
@@ -351,6 +364,16 @@ BrDevScripterMenuStep >> clickMenuItemWithId: anElementId [
 		label: ('Click menu item with ID: {1}' format: {anElementId});
 		referenceSender;
 		// anElementId
+]
+
+{ #category : #'steps - click' }
+BrDevScripterMenuStep >> clickMenuItemWithLabel: aLabel [
+	^ self click
+		label: ('Click menu item with label: {1}' format: {aLabel});
+		referenceSender;
+		// #'menu--list';
+		// #'menu--label';
+		@ [ :each | each text asString = aLabel ]
 ]
 
 { #category : #'steps - interactions' }
