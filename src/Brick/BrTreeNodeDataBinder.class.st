@@ -79,6 +79,7 @@ BrTreeNodeDataBinder >> payloads: anObject [
 BrTreeNodeDataBinder >> reset [
 	nodeElement := nil.
 	itemObject := nil.
+	itemIndex := nil.
 	treeNode := nil.
 	payloads := nil
 ]
