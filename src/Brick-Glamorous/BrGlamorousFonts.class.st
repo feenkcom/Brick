@@ -58,6 +58,21 @@ BrGlamorousFonts class >> fontNamed: aFontFileName fromFolderNamed: aFontFolderN
 				aFileStream contents ] ]
 ]
 
+{ #category : #accessing }
+BrGlamorousFonts class >> fontSpecifications [
+	"Answer a specification for every font face that Glamorous Toolkit bundles.
+	Each one comes from a method of mine tagged with the <glamorousFont> pragma, which keeps
+	a face's description and the file it loads together in a single place, and makes this the
+	only list that has to be maintained when a font is added or removed."
+	<return: #Array of: #BrGlamorousFontSpecification>
+	^ (self class selectors
+		select: [ :eachSelector |
+			(self class >> eachSelector) pragmas
+				anySatisfy: [ :eachPragma | eachPragma selector = #glamorousFont ] ])
+		asSortedCollection asArray
+			collect: [ :eachSelector | self perform: eachSelector ]
+]
+
 { #category : #'private - accessing' }
 BrGlamorousFonts class >> fontsFolder [
 	"Determine the fonts folder. Should work both for releaser and in development mode when the repository is present."
@@ -73,6 +88,16 @@ BrGlamorousFonts class >> fontsSourceCodeProFolderName [
 { #category : #'private - accessing' }
 BrGlamorousFonts class >> fontsSourceSansProFolderName [
 	^ 'Source_Sans_Pro' 
+]
+
+{ #category : #'gt - extensions' }
+BrGlamorousFonts class >> gtFontSpecificationsFor: aView [
+	<gtView>
+	<gtClassView>
+	^ aView columnedList
+		title: 'Custom fonts';
+		items: [ self fontSpecifications ];
+		column: 'Font' text: #gtDisplayString
 ]
 
 { #category : #initialization }
@@ -98,354 +123,345 @@ BrGlamorousFonts class >> initializeFonts [
 { #category : #initialization }
 BrGlamorousFonts class >> initializeFontsOn: aCanvas [
 
-	self initializeSourceCodeProOn: aCanvas.
-	self initializeSourceSansProOn: aCanvas
-]
-
-{ #category : #initialization }
-BrGlamorousFonts class >> initializeSourceCodeProOn: aCanvas [
-
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weightNormal;
-		source: self sourceCodePro400Regular;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weightNormal;
-		source: self sourceCodePro400italicRegular;
-		build.
-
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 200;
-		source: self sourceCodePro200ExtraLight;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 200;
-		source: self sourceCodePro200italicExtraLight;
-		build.
-
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 300;
-		source: self sourceCodePro300Light;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 300;
-		source: self sourceCodePro300italicLight;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 500;
-		source: self sourceCodePro500Medium;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 500;
-		source: self sourceCodePro500italicMedium;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 600;
-		source: self sourceCodePro600Semibold;
-		build.
-	
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 600;
-		source: self sourceCodePro600italicSemibold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 700;
-		source: self sourceCodePro700Bold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 700;
-		source: self sourceCodePro700italicBold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 900;
-		source: self sourceCodePro900Black;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Code Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 900;
-		source: self sourceCodePro900italicBlack;
-		build
-]
-
-{ #category : #initialization }
-BrGlamorousFonts class >> initializeSourceSansProOn: aCanvas [
-
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleNormal;
-		weightNormal;
-		source: self sourceSansPro400Regular;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleItalic;
-		weightNormal;
-		source: self sourceSansPro400italicRegular;
-		build.
-
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 200;
-		source: self sourceSansPro200ExtraLight;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 200;
-		source: self sourceSansPro200italicExtraLight;
-		build.
-
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 300;
-		source: self sourceSansPro300Light;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 300;
-		source: self sourceSansPro300italicLight;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 600;
-		source: self sourceSansPro600Semibold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 600;
-		source: self sourceSansPro600italicSemibold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 700;
-		source: self sourceSansPro700Bold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 700;
-		source: self sourceSansPro700italicBold;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleNormal;
-		weight: 900;
-		source: self sourceSansPro900Black;
-		build.
-		
-	aCanvas fontFace
-		familyName: 'Source Sans Pro';
-		stretchNormal;
-		styleItalic;
-		weight: 900;
-		source: self sourceSansPro900italicBlack;
-		build
+	self fontSpecifications do: [ :each | each installOn: aCanvas ]
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro200ExtraLight [
-	^ self fontNamed: 'Source Code Pro 200.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 200;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro 200.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro200italicExtraLight [
-	^ self fontNamed: 'Source Code Pro 200italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 200;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro 200italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro300Light [
-	^ self fontNamed: 'Source Code Pro 300.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 300;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro 300.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro300italicLight [
-	^ self fontNamed: 'Source Code Pro 300italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 300;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro 300italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro400Regular [
-	^ self fontNamed: 'Source Code Pro regular.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 400;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro regular.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro400italicRegular [
-	^ self fontNamed: 'Source Code Pro italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 400;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro500Medium [
-	^ self fontNamed: 'Source Code Pro 500.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 500;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro 500.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro500italicMedium [
-	^ self fontNamed: 'Source Code Pro 500italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 500;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro 500italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro600Semibold [
-	^ self fontNamed: 'Source Code Pro 600.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 600;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro 600.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro600italicSemibold [
-	^ self fontNamed: 'Source Code Pro 600italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 600;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro 600italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro700Bold [
-	^ self fontNamed: 'Source Code Pro 700.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 700;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro 700.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro700italicBold [
-	^ self fontNamed: 'Source Code Pro 700italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 700;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro 700italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro900Black [
-	^ self fontNamed: 'Source Code Pro 900.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 900;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Code Pro 900.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source code pro' }
 BrGlamorousFonts class >> sourceCodePro900italicBlack [
-	^ self fontNamed: 'Source Code Pro 900italic.ttf' fromFolderNamed: self fontsSourceCodeProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Code Pro';
+		weight: 900;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Code Pro 900italic.ttf';
+		folderName: self fontsSourceCodeProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro200ExtraLight [
-	^ self fontNamed: 'Source Sans Pro 200.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 200;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Sans Pro 200.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro200italicExtraLight [
-	^ self fontNamed: 'Source Sans Pro 200italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 200;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Sans Pro 200italic.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro300Light [
-	^ self fontNamed: 'Source Sans Pro 300.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 300;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Sans Pro 300.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro300italicLight [
-	^ self fontNamed: 'Source Sans Pro 300italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 300;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Sans Pro 300italic.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro400Regular [
-	^ self fontNamed: 'Source Sans Pro regular.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 400;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Sans Pro regular.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro400italicRegular [
-	^ self fontNamed: 'Source Sans Pro italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 400;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Sans Pro italic.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro600Semibold [
-	^ self fontNamed: 'Source Sans Pro 600.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 600;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Sans Pro 600.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro600italicSemibold [
-	^ self fontNamed: 'Source Sans Pro 600italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 600;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Sans Pro 600italic.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro700Bold [
-	^ self fontNamed: 'Source Sans Pro 700.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 700;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Sans Pro 700.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro700italicBold [
-	^ self fontNamed: 'Source Sans Pro 700italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 700;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Sans Pro 700italic.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro900Black [
-	^ self fontNamed: 'Source Sans Pro 900.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 900;
+		styleNormal;
+		stretchNormal;
+		fileName: 'Source Sans Pro 900.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #'fonts - source sans pro' }
 BrGlamorousFonts class >> sourceSansPro900italicBlack [
-	^ self fontNamed: 'Source Sans Pro 900italic.ttf' fromFolderNamed: self fontsSourceSansProFolderName
+	<glamorousFont>
+	^ BrGlamorousFontSpecification new
+		familyName: 'Source Sans Pro';
+		weight: 900;
+		styleItalic;
+		stretchNormal;
+		fileName: 'Source Sans Pro 900italic.ttf';
+		folderName: self fontsSourceSansProFolderName;
+		yourself
 ]
 
 { #category : #initialization }
