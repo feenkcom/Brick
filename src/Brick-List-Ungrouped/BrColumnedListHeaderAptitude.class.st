@@ -1,9 +1,5 @@
 "
-BrColumnedListHeaderLook adds a header row to a BrColumnedList.
-
-- All columns are assumed to have a title.
-- The look must be added after the columns have been defined.
-- The header row is constructed as a BrHorizontalPane containing the header labels and inserted as the first child of the columned list.
+Adds an opt-in header row to BrColumnedList. Attach before or after defining columns. Header labels are customizable with labelStencil:. Right-edge resizers convert a column to a fixed width (minimum 20). Headers and body cells observe column width changes using weak subscriptions. Columns configured with sortKey: or sortComparator: toggle ascending/descending order for local sequenceable-collection providers; other providers are not materialized. Configure sorting before building the header.
 "
 Class {
 	#name : #BrColumnedListHeaderAptitude,
@@ -15,21 +11,24 @@ Class {
 	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
-{ #category : #private }
+{ #category : #building }
 BrColumnedListHeaderAptitude >> buildColumnHeadersInto: headerPane [
-	widget viewModel
-		columnsDo: [ :aColumn | 
-			| titleLabel resizer |
-			titleLabel := labelStencil value: aColumn.
-			resizer := BrResizer new
-					aptitude: BrGlamorousThinBarResizerAptitude;
-					beRight;
-					target: titleLabel;
-					constraintsDo: [ :c | c ignoreByLayout ];
-					when: BlResizerResizedEvent
-						do: [ :anEvent | aColumn width: anEvent extent x ].
-			titleLabel addChild: resizer.
-			headerPane addChild: titleLabel ]
+	widget viewModel columnsDo: [ :aColumn |
+		| titleElement iconElement columnHeader index |
+		index := widget columns identityIndexOf: aColumn.
+		titleElement := labelStencil value: aColumn.
+		titleElement hMatchParent.
+		iconElement := widget sortState iconElementForColumn: aColumn.
+		iconElement id: #columnSortIcon.
+		columnHeader := BrHorizontalPane new
+			id: ('columnHeader', index asString) asSymbol;
+			alignCenterLeft;
+			vFitContent;
+			addChildren: { titleElement. iconElement }.
+		(aColumn isSortable and: [ widget canSortColumns ]) ifTrue: [
+			columnHeader addEventHandlerOn: BlClickEvent do: [ :event | widget sortByColumn: aColumn ] ].
+		aColumn addResizerTo: columnHeader cellSpacing: self cellSpacing.
+		headerPane addChild: columnHeader ]
 ]
 
 { #category : #private }
@@ -58,21 +57,15 @@ BrColumnedListHeaderAptitude >> headerPane [
 { #category : #initialization }
 BrColumnedListHeaderAptitude >> initialize [
 	super initialize.
-
-	self cellSpacing: 0.
-	self
-		labelStencil: [ :aColumn | 
-			| label |
-			label := BrLabel new
-					aptitude: (BrGlamorousLabelAptitude new foreground: self theme header defaultTextColor);
-					padding: self newCellPaddingInsets;
-					text: aColumn title.
-			aColumn columnWidth applyOn: label.
-			label ].
+	self cellSpacing: 10.
+	self labelStencil: [ :aColumn |
+		BrLabel new
+			aptitude: (BrGlamorousLabelAptitude new foreground: BrGlamorousColors defaultButtonTextColor);
+			alignCenterLeft;
+			padding: self newCellPaddingInsets;
+			text: aColumn title ].
 	self when: BrColumnsChanged do: [ :evt | self rebuildHeadersDueTo: evt ].
-	self
-		when: BrItemsProviderItemsChangedEvent
-		do: [ :evt | self rebuildHeadersDueTo: evt ].
+	self when: BrItemsProviderItemsChangedEvent do: [ :evt | self rebuildHeadersDueTo: evt ].
 	self addChangeAddChildFirst: #() with: [ self headerPane ]
 ]
 
