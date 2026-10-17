@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrUngroupedList,
 	#instVars : [
 		'columnedModel',
-		'sortState'
+		'sortState',
+		'cellSpacing'
 	],
 	#category : #'Brick-List-Ungrouped-Elements'
 }
@@ -36,6 +37,18 @@ BrColumnedList >> beUnsorted [
 BrColumnedList >> canSortColumns [
 	"Never materialize streams or remote providers implicitly."
 	^ self itemsProvider class = BrSequenceableCollectionItemsProvider
+]
+
+{ #category : #accessing }
+BrColumnedList >> cellSpacing [
+	^ cellSpacing ifNil: [ BrColumn defaultCellSpacing ]
+]
+
+{ #category : #accessing }
+BrColumnedList >> cellSpacing: aNumber [
+	"Configure before installing headers; custom rows must honor this setting."
+	cellSpacing := aNumber.
+	self rowStencil: (BrGlamorousColumnedListSelectableRowElementStencilBuilder new cellSpacing: aNumber)
 ]
 
 { #category : #'api - scripting' }
@@ -108,5 +121,13 @@ BrColumnedList >> sortedColumn [
 
 { #category : #headers }
 BrColumnedList >> withHeaders [
-	self addAptitude: BrColumnedListHeaderAptitude new
+	self withHeadersDo: [ :header | ]
+]
+
+{ #category : #headers }
+BrColumnedList >> withHeadersDo: aBlock [
+	| header |
+	header := BrColumnedListHeaderAptitude new cellSpacing: self cellSpacing.
+	aBlock value: header.
+	self addAptitude: header
 ]

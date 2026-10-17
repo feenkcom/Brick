@@ -41,8 +41,7 @@ BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> cellSpacing: anObje
 { #category : #initialization }
 BrGlamorousColumnedTreeSelectableRowElementStencilBuilder >> initialize [
 	super initialize.
-	
-	cellSpacing := 0.
+	cellSpacing := BrColumn defaultCellSpacing.
 	padding := BlInsets empty
 ]
 

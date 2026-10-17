@@ -8,21 +8,19 @@ Class {
 	#category : #'Brick-Tree - Stencil'
 }
 
-{ #category : #'api - instantiation' }
+{ #category : #building }
 BrColumnedTreeRowElementStencilBuilder >> buildDefault [
-	<return: #BrStencil or: #BlElement>
-	| aRowElement theCellElements |
-	aRowElement := self createRowElement.
-	theCellElements := OrderedCollection new: self columns size.
-	columnElements
-		ifNotEmpty: [ | aToggleButton |
-			aToggleButton := self createExpandCollapseElement
-					id: #toggle;
-					toggleAction: [ :aToggleElement :aToggleModel | aToggleModel model toggle ].
-			theCellElements add: aToggleButton ].
-	theCellElements addAll: columnElements.
-	aRowElement addChildren: theCellElements.
-	^ aRowElement
+	| row toggle |
+	row := self createRowElement.
+	columnElements ifEmpty: [ ^ row ].
+	toggle := self createExpandCollapseElement
+		id: #toggle;
+		toggleAction: [ :element :model | model model toggle ];
+		constraintsDo: [ :c | c ignoreByLayout. c ignored horizontal alignLeft. c ignored vertical alignCenter ].
+	columnElements first clipChildren: true.
+	row addChildren: columnElements.
+	row addChild: toggle.
+	^ row
 ]
 
 { #category : #accessing }
@@ -51,13 +49,11 @@ BrColumnedTreeRowElementStencilBuilder >> createExpandCollapseElement [
 		aptitude: BrGlamorousTriangleInCircleExpanderAptitude
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : #building }
 BrColumnedTreeRowElementStencilBuilder >> createRowElement [
 	^ BlElement new
-		layout: BlLinearLayout horizontal alignCenterLeft;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical fitContent ]
+		layout: (BlLinearLayout horizontal alignCenterLeft cellSpacing: BrColumn defaultCellSpacing);
+		constraintsDo: [ :c | c horizontal matchParent. c vertical fitContent ]
 ]
 
 { #category : #'api - instantiation' }

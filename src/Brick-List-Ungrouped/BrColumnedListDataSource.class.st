@@ -24,8 +24,7 @@ BrColumnedListDataSource >> columns: aCollectionOfBrListColumn [
 { #category : #initialization }
 BrColumnedListDataSource >> initialize [
 	super initialize.
-	"Use the same inter-column whitespace as the header and Phlow rows."
-	itemElementStencil := BrColumnedListRowElementStencilBuilder new cellSpacing: 10.
+	itemElementStencil := BrColumnedListRowElementStencilBuilder new cellSpacing: BrColumn defaultCellSpacing.
 	columns := #()
 ]
 

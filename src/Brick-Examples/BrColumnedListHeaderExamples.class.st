@@ -110,6 +110,31 @@ BrColumnedListHeaderExamples >> columnWhitespace [
 ]
 
 { #category : #examples }
+BrColumnedListHeaderExamples >> customHeaderAndSpacing [
+	<gtExample>
+	| s |
+	s := self scripterWithElement: [
+		| list |
+		list := BrColumnedList new size: 450 @ 300.
+		list cellSpacing: 18.
+		list column title: 'Number'; width: 160; sortBy: [ :a :b | a <= b ]; stencil: [ :item | BrLabel new aptitude: BrGlamorousLabelAptitude; text: item asString ].
+		list column title: 'Squared'; width: 180; stencil: [ :item | BrLabel new aptitude: BrGlamorousLabelAptitude; text: (item * item) asString ].
+		list items: #(3 2).
+		list withHeadersDo: [ :header | header headerId: #customHeader;
+			labelStencil: [ :column | BrLabel new aptitude: BrGlamorousLabelAptitude; text: column title ];
+			resizerIdStencil: [ :column | (column title asString, '-resize') asSymbol ] ].
+		list ].
+	s clickStep: [ :step | step label: 'Sort with custom header'; id: #columnHeader1 ].
+	s assertStep: [ :step | step label: 'Custom header survives sorting and stays aligned'; satisfies: [ :list |
+		| header value |
+		header := (list query // #customHeader) anyOne.
+		value := (list query // BrLabel) all detect: [ :label | label text asString = '9' ].
+		list sortState isAscending and: [ (value bounds inSpace asRectangle left - header children second bounds inSpace asRectangle left) abs < 1 ] ] ].
+	s assertStep: [ :step | step label: 'Custom resizer identity retained'; exists; id: #'Number-resize' ].
+	^ s
+]
+
+{ #category : #examples }
 BrColumnedListHeaderExamples >> headerScripter [
 	<gtExample>
 	^ self scripterWithElement: [ self list ]

@@ -29,6 +29,12 @@ Class {
 	#category : #'Brick-Column - Model'
 }
 
+{ #category : #defaults }
+BrColumn class >> defaultCellSpacing [
+	"Default horizontal gap between adjacent columns, shared by headers and body rows."
+	^ 10
+]
+
 { #category : #headers }
 BrColumn >> addResizerTo: anElement [
 	| resizer |
