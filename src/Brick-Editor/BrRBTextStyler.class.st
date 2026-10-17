@@ -186,29 +186,20 @@ BrRBTextStyler >> parse: aText isMethod: isMethod [
 
 { #category : #private }
 BrRBTextStyler >> parseWithSemanticAnalysis: aText [
-	| ast |
-	self
-		forPharo12AndNewer: [ | compiler |
-			compiler := (classOrMetaClass
-					ifNil: [  "We pass a class here, as if we pass nil we cannot
+	| ast compiler |
+	compiler := (classOrMetaClass
+			ifNil: [  "We pass a class here, as if we pass nil we cannot
 							change the compiler to not be for scripting.
 							#isScripting: wants a class in order to be able
 							to do the switch.
-							https://github.com/feenkcom/gtoolkit/issues/4681"
-							UndefinedObject ])
-					compiler
-					source: aText asString;
-					receiver: (self isScripting ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
-					isScripting: self isScripting;
-					requestor: workspace.
-			ast := compiler parse.
-			(self isForWorkspace and: [ ast isMethod ]) ifTrue: [ ast := ast body ] ]
-		forPharo11: [ ast := self parse: aText isMethod: self isForWorkspace not.
-			ast methodNode
-				compilationContext: (CompilationContext new
-						class: (classOrMetaClass ifNil: [ UndefinedObject ]);
-						requestor: workspace).
-			ast doSemanticAnalysis ].
+							https://github.com/feenkcom/gtoolkit/issues/4681"UndefinedObject ])
+			compiler
+			source: aText asString;
+			receiver: (self isScripting ifTrue: [ workspace ifNotNil: [ :w | w doItReceiver ] ]);
+			isScripting: self isScripting;
+			requestor: workspace.
+	ast := compiler parse.
+	(self isForWorkspace and: [ ast isMethod ]) ifTrue: [ ast := ast body ].
 	^ ast
 ]
 
