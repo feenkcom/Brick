@@ -212,7 +212,11 @@ BrColumnedListHeaderExamples >> resizeAndScroll [
 	s := self resize.
 	s doStep: [ :step | step label: 'Replace items and realize later rows'; block: [ :list | list items: (1 to: 200). list scrollToIndex: 200 ] ].
 	s assertStep: [ :step | step label: 'Header keeps fixed resized width'; id: #columnHeader1; satisfies: [ :header | (header width - 190) abs < 1 ] ].
-	s assertStep: [ :step | step label: 'Later rows use resized width'; // BrLabel; @ [ :label | label text asString = '200' ]; satisfies: [ :cell | (cell width - 190) abs < 1 ] ].
+	s assertStep: [ :step |
+		step label: 'Newly realized cell wrapper uses resized width and clips its content';
+			// BrLabel;
+			@ [ :label | label text asString = '200' ];
+			satisfies: [ :label | (label parent width - 190) abs < 1 and: [ label parent clipChildren ] ] ].
 	^ s
 ]
 
@@ -307,8 +311,13 @@ BrColumnedListHeaderExamples >> shrinkFirstColumn [
 		step mouseMove by: -220 @ 0.
 		step mouseUp.
 		step play ].
-	s assertStep: [ :step | step label: 'Body content follows narrowed column'; // BrLabel; @ [ :label | label text asString = 'Charlie' ]; satisfies: [ :label |
-		(label parent width - 40) abs < 1 and: [ label width <= 41 and: [ label parent clipChildren ] ] ] ].
+	s assertStep: [ :step |
+		step label: 'Narrowed cell clips overflowing content';
+			// BrLabel;
+			@ [ :label | label text asString = 'Charlie' ];
+			satisfies: [ :label |
+				(label parent width - 40) abs < 1
+					and: [ label parent clipChildren and: [ label width > label parent width ] ] ] ].
 	^ s
 ]
 
