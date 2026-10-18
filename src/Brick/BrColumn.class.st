@@ -174,7 +174,6 @@ BrColumn >> stencil: aStencil [
 	self dataBinder: [ :_ :aRowObject :aRowIndex :aRowHolder :aColumnIndex |
 		| aCellChild |
 		aCellChild := (aStencil cull: aRowObject cull: aRowIndex cull: aColumnIndex) asElement.
-		aCellChild hMatchParent.
 		(aRowHolder columnElements at: aColumnIndex)
 			removeChildren;
 			addChild: aCellChild ]
