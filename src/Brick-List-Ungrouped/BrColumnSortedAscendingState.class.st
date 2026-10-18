@@ -9,7 +9,7 @@ Class {
 
 { #category : #headers }
 BrColumnSortedAscendingState >> iconElement [
-	^ BrGlamorousVectorIcons smallUpwards asElement
+	^ BrGlamorousVectorIcons up asElement
 		background: BrGlamorousColors defaultButtonTextColor
 ]
 
