@@ -1,35 +1,33 @@
 "
-BrColumnedListHeaderLook adds a header row to a BrColumnedList.
-
-- All columns are assumed to have a title.
-- The look must be added after the columns have been defined.
-- The header row is constructed as a BrHorizontalPane containing the header labels and inserted as the first child of the columned list.
+Adds opt-in column headers to BrColumnedList. Customize title elements with labelStencil:, container identity with headerId:, and resize-control identities with resizerIdStencil:. Brick owns composition, sorting icons, bubbled clicks, spacing and resizers. Configure sortBy: on columns before attaching headers. Manual resizing creates fixed widths; headers observe column width changes weakly. BrColumnedTreeHeaderAptitude adds tree indentation and tree-change handling.
 "
 Class {
 	#name : #BrColumnedListHeaderAptitude,
 	#superclass : #BrAptitude,
 	#instVars : [
 		'labelStencil',
-		'cellSpacing'
+		'cellSpacing',
+		'headerId',
+		'resizerIdentifierStencil'
 	],
 	#category : #'Brick-List-Ungrouped-Aptitudes'
 }
 
-{ #category : #private }
+{ #category : #building }
 BrColumnedListHeaderAptitude >> buildColumnHeadersInto: headerPane [
-	widget viewModel
-		columnsDo: [ :aColumn | 
-			| titleLabel resizer |
-			titleLabel := labelStencil value: aColumn.
-			resizer := BrResizer new
-					aptitude: BrGlamorousThinBarResizerAptitude;
-					beRight;
-					target: titleLabel;
-					constraintsDo: [ :c | c ignoreByLayout ];
-					when: BlResizerResizedEvent
-						do: [ :anEvent | aColumn width: anEvent extent x ].
-			titleLabel addChild: resizer.
-			headerPane addChild: titleLabel ]
+	widget viewModel columnsDo: [ :column |
+		| title icon header resizer index |
+		index := widget columns identityIndexOf: column.
+		title := labelStencil value: column.
+		title hMatchParent.
+		icon := (widget sortState iconElementForColumn: column) id: #columnSortIcon.
+		header := BrHorizontalPane new id: ('columnHeader', index asString) asSymbol;
+			alignCenterLeft; vFitContent; addChildren: { title. icon }.
+		(column isSortable and: [ widget canSortColumns ]) ifTrue: [
+			header addEventHandlerOn: BlClickEvent do: [ :event | widget sortByColumn: column ] ].
+		resizer := column addResizerTo: header cellSpacing: self cellSpacing.
+		resizer id: (resizerIdentifierStencil value: column).
+		headerPane addChild: header ]
 ]
 
 { #category : #private }
@@ -42,37 +40,32 @@ BrColumnedListHeaderAptitude >> cellSpacing: aNumber [
 	cellSpacing := aNumber
 ]
 
-{ #category : #private }
+{ #category : #accessing }
+BrColumnedListHeaderAptitude >> headerId: anId [
+	headerId := anId
+]
+
+{ #category : #building }
 BrColumnedListHeaderAptitude >> headerPane [
-	| headerPane |
-	headerPane := BrHorizontalPane new
-			id: #'column-header';
-			cellSpacing: self cellSpacing;
-			padding: (BlInsets top: 5 bottom: 5);
-			hMatchParent;
-			vFitContent.
-	self buildColumnHeadersInto: headerPane.
-	^ headerPane
+	| pane |
+	pane := BrHorizontalPane new id: headerId;
+		cellSpacing: self cellSpacing; padding: (BlInsets top: 5 bottom: 5);
+		hMatchParent; vFitContent.
+	self buildColumnHeadersInto: pane.
+	^ pane
 ]
 
 { #category : #initialization }
 BrColumnedListHeaderAptitude >> initialize [
 	super initialize.
-
-	self cellSpacing: 0.
-	self
-		labelStencil: [ :aColumn | 
-			| label |
-			label := BrLabel new
-					aptitude: (BrGlamorousLabelAptitude new foreground: self theme header defaultTextColor);
-					padding: self newCellPaddingInsets;
-					text: aColumn title.
-			aColumn columnWidth applyOn: label.
-			label ].
-	self when: BrColumnsChanged do: [ :evt | self rebuildHeadersDueTo: evt ].
-	self
-		when: BrItemsProviderItemsChangedEvent
-		do: [ :evt | self rebuildHeadersDueTo: evt ].
+	headerId := #'column-header'.
+	resizerIdentifierStencil := [ :column | #columnResizer ].
+	self cellSpacing: BrColumn defaultCellSpacing.
+	self labelStencil: [ :column | BrLabel new
+		aptitude: (BrGlamorousLabelAptitude new foreground: BrGlamorousColors defaultButtonTextColor);
+		alignCenterLeft; padding: self newCellPaddingInsets; text: column title ].
+	self when: BrColumnsChanged do: [ :event | self rebuildHeadersDueTo: event ].
+	self when: BrItemsProviderItemsChangedEvent do: [ :event | self rebuildHeadersDueTo: event ].
 	self addChangeAddChildFirst: #() with: [ self headerPane ]
 ]
 
@@ -86,11 +79,14 @@ BrColumnedListHeaderAptitude >> newCellPaddingInsets [
 	^ BlInsets empty
 ]
 
-{ #category : #initialization }
-BrColumnedListHeaderAptitude >> rebuildHeadersDueTo: evt [
-	evt target
-		enqueueTask: [ | header |
-			header := (evt target query // #'column-header') anyOne.
-			header removeChildren.
-			self buildColumnHeadersInto: header ] asBlTask
+{ #category : #updating }
+BrColumnedListHeaderAptitude >> rebuildHeadersDueTo: event [
+	event target enqueueTask: [
+		(event target query // headerId) anyOne removeChildren;
+			in: [ :header | self buildColumnHeadersInto: header ] ] asBlTask
+]
+
+{ #category : #accessing }
+BrColumnedListHeaderAptitude >> resizerIdStencil: aBlock [
+	resizerIdentifierStencil := aBlock
 ]

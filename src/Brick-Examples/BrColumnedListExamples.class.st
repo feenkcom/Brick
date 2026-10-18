@@ -212,45 +212,34 @@ BrColumnedListExamples >> compositeAllClassesAndPackageMultiSelect [
 	^ self compositeAllClassesAndPackage aptitude: BrColumnedMultiListAptitude new
 ]
 
-{ #category : #'examples - scripting' }
+{ #category : #examples }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersAfter [
 	<gtExample>
-	<return: #BrColumnedList>
-	| aList query header |
+	| aList header |
 	aList := BrColumnedList new.
 	self addColumnsAndItemsTo: aList.
 	aList addAptitude: BrColumnedListHeaderAptitude.
-	query := aList query // #'column-header'.
-	self assert: query isNotEmpty.
-	header := query anyOne.
-	self assert: header children size = 2.
-	self assert: header children first text asString = 'Class'.
-	self assert: header children second text asString = 'Package'.
+	header := (aList query // #'column-header') anyOne.
+	self assert: header children size equals: 2.
+	self assert: (header children first query // BrLabel) anyOne text asString equals: 'Class'.
+	self assert: (header children second query // BrLabel) anyOne text asString equals: 'Package'.
 	^ aList
 ]
 
-{ #category : #'examples - scripting' }
+{ #category : #examples }
 BrColumnedListExamples >> compositeAllClassesAndPackageWithHeadersBefore [
 	<gtExample>
-	<return: #BlScripter>
-	| query header scripter |
+	| scripter |
 	scripter := BlScripter new.
-	scripter
-		element: (BrColumnedList new
-				addAptitude: BrColumnedListHeaderAptitude;
-				yourself).
+	scripter element: (BrColumnedList new addAptitude: BrColumnedListHeaderAptitude; yourself).
 	scripter doStep: [ :s | s action: [ :list | self addColumnsAndItemsTo: list ] ].
-	scripter
-		checkStep: [ :s | 
-			s
-				label: 'Check header exists';
-				do: [ :list | 
-					query := list query // #'column-header'.
-					self assert: query isNotEmpty.
-					header := query anyOne.
-					self assert: header children size = 2.
-					self assert: header children first text asString = 'Class'.
-					self assert: header children second text asString = 'Package' ] ].
+	scripter checkStep: [ :s |
+		s label: 'Check header titles in horizontal panes'; do: [ :list |
+			| header |
+			header := (list query // #'column-header') anyOne.
+			self assert: header children size equals: 2.
+			self assert: (header children first query // BrLabel) anyOne text asString equals: 'Class'.
+			self assert: (header children second query // BrLabel) anyOne text asString equals: 'Package' ] ].
 	^ scripter
 ]
 

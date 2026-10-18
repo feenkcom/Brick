@@ -16,17 +16,54 @@ aColumn
 Class {
 	#name : #BrColumn,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#traits : 'TAssertable',
+	#classTraits : 'TAssertable classTrait',
 	#instVars : [
 		'announcer',
 		'title',
 		'cellStencil',
 		'dataBinder',
-		'columnWidth'
+		'columnWidth',
+		'sortBlock'
 	],
 	#category : #'Brick-Column - Model'
 }
+
+{ #category : #defaults }
+BrColumn class >> defaultCellSpacing [
+	"Default horizontal gap between adjacent columns, shared by headers and body rows."
+	^ 10
+]
+
+{ #category : #headers }
+BrColumn >> addResizerTo: anElement [
+	| resizer |
+	self columnWidth applyOn: anElement.
+	self announcer weak
+		when: BrColumnWidthChanged
+		do: (BrColumnWidthChangeAction new cellElement: anElement)
+		for: anElement.
+	resizer := BrResizer new
+		id: #columnResizer;
+		aptitude: BrGlamorousThinBarResizerAptitude;
+		beRight;
+		target: anElement;
+		constraintsDo: [ :c | c ignoreByLayout ];
+		when: BlResizerResizedEvent do: [ :event | self width: (event extent x max: 20) ].
+	resizer addEventHandlerOn: BlClickEvent do: [ :event | event consumed: true ].
+	anElement addChild: resizer.
+	^ resizer
+]
+
+{ #category : #headers }
+BrColumn >> addResizerTo: anElement cellSpacing: aNumber [
+	"Center the resize handle in the inter-column gap rather than inside the cell."
+	| resizer |
+	resizer := self addResizerTo: anElement.
+	anElement clipChildren: false.
+	resizer margin: (BlInsets right: (aNumber + self resizerWidth) / -2).
+	^ resizer
+]
 
 { #category : #accessing }
 BrColumn >> announcer [
@@ -96,6 +133,11 @@ BrColumn >> initialize [
 	columnWidth := BrColumnUndefinedWidth new
 ]
 
+{ #category : #sorting }
+BrColumn >> isSortable [
+	^ sortBlock notNil
+]
+
 { #category : #'api - column width' }
 BrColumn >> matchParent [
 	"Make a column match parent with a given proportion as a number (usually between 0 and 1)"
@@ -103,25 +145,37 @@ BrColumn >> matchParent [
 	self weight: 1
 ]
 
+{ #category : #headers }
+BrColumn >> resizerWidth [
+	"Thin resize bar plus separation on both sides."
+	^ 5
+]
+
+{ #category : #sorting }
+BrColumn >> sortBlock [
+	^ sortBlock
+]
+
+{ #category : #sorting }
+BrColumn >> sortBy: aBlock [
+	"A non-strict ordering on domain items. Configure before building headers."
+	sortBlock := aBlock
+]
+
 { #category : #accessing }
 BrColumn >> stencil: aStencil [
-	"aStencil is a BlockClosure of type [ :aRowObject :aRowIndex :aCellIndex ]"
-
+	"The wrapper owns the column width; content follows it as the column resizes."
 	self cellStencil: [
-		| aCellWrapper |
-		aCellWrapper := BlElement new
+		BlElement new
 			layout: BlFrameLayout new;
 			constraintsDo: [ :c |
 				c vertical fitContent.
-				c horizontal matchParent ].
-		aCellWrapper ].
+				c horizontal matchParent ] ].
 	self dataBinder: [ :_ :aRowObject :aRowIndex :aRowHolder :aColumnIndex |
 		| aCellChild |
 		aCellChild := (aStencil cull: aRowObject cull: aRowIndex cull: aColumnIndex) asElement.
-		columnWidth applyOn: aCellChild.
-		
 		(aRowHolder columnElements at: aColumnIndex)
-			removeChildren
+			removeChildren;
 			addChild: aCellChild ]
 ]
 

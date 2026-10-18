@@ -16,3 +16,9 @@ BrColumnedTreeModel >> columnsDo: aFullBlockClosure [
 BrColumnedTreeModel >> defaultRowElementStencil [
 	^ BrColumnedTreeRowElementStencilBuilder new
 ]
+
+{ #category : #initialization }
+BrColumnedTreeModel >> initialize [
+	super initialize.
+	rowDataBinder := BrColumnedTreeRowDataBinder new
+]

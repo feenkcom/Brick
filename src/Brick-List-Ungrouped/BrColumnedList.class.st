@@ -2,10 +2,54 @@ Class {
 	#name : #BrColumnedList,
 	#superclass : #BrUngroupedList,
 	#instVars : [
-		'columnedModel'
+		'columnedModel',
+		'sortState',
+		'cellSpacing'
 	],
 	#category : #'Brick-List-Ungrouped-Elements'
 }
+
+{ #category : #sorting }
+BrColumnedList >> applyColumnSort [
+	self applyColumnSortPreserving: self selectedItems asArray
+]
+
+{ #category : #sorting }
+BrColumnedList >> applyColumnSortPreserving: selected [
+	| ordered indices |
+	ordered := self sortState orderedItems: self items.
+	self deselectAll.
+	super itemsProvider: (BrSequenceableCollectionItemsProvider new collection: ordered).
+	indices := OrderedCollection new.
+	self items withIndexDo: [ :item :index |
+		(selected anySatisfy: [ :each | each == item ]) ifTrue: [ indices add: index ] ].
+	indices ifNotEmpty: [ self selectSeveral: indices ]
+]
+
+{ #category : #sorting }
+BrColumnedList >> beUnsorted [
+	"Stop applying an ordering. Keep the current presentation order; do not invent a source order."
+	sortState := BrColumnUnsortedState new.
+	self canSortColumns ifTrue: [ self applyColumnSort ]
+]
+
+{ #category : #sorting }
+BrColumnedList >> canSortColumns [
+	"Never materialize streams or remote providers implicitly."
+	^ self itemsProvider class = BrSequenceableCollectionItemsProvider
+]
+
+{ #category : #accessing }
+BrColumnedList >> cellSpacing [
+	^ cellSpacing ifNil: [ BrColumn defaultCellSpacing ]
+]
+
+{ #category : #accessing }
+BrColumnedList >> cellSpacing: aNumber [
+	"Configure before installing headers; custom rows must honor this setting."
+	cellSpacing := aNumber.
+	self rowStencil: (BrGlamorousColumnedListSelectableRowElementStencilBuilder new cellSpacing: aNumber)
+]
 
 { #category : #'api - scripting' }
 BrColumnedList >> column [
@@ -33,6 +77,19 @@ BrColumnedList >> initialize [
 	self aptitude: BrColumnedListAptitude + BrGlamorousWithVerticalScrollbarAptitude
 ]
 
+{ #category : #sorting }
+BrColumnedList >> isSortAscending [
+	^ self sortState isAscending
+]
+
+{ #category : #accessing }
+BrColumnedList >> itemsProvider: aProvider [
+	| selected |
+	selected := self sortState isUnsorted ifTrue: [ #() ] ifFalse: [ self selectedItems asArray ].
+	super itemsProvider: aProvider.
+	(self sortState isUnsorted not and: [ self canSortColumns ]) ifTrue: [ self applyColumnSortPreserving: selected ]
+]
+
 { #category : #initialization }
 BrColumnedList >> rowDataBinder: aBrListRowDataBinderOrBlock [
 	"An item type stencil can be a #value-able of the form [ :aRowElement :aTreeNode :aRowPosition | ]"
@@ -43,4 +100,34 @@ BrColumnedList >> rowDataBinder: aBrListRowDataBinderOrBlock [
 { #category : #'api - scripting' }
 BrColumnedList >> rowStencil: aRowStencil [
 	self aptitude rowStencilBuilder: aRowStencil
+]
+
+{ #category : #sorting }
+BrColumnedList >> sortByColumn: aColumn [
+	(self canSortColumns and: [ aColumn isSortable ]) ifFalse: [ ^ self ].
+	sortState := self sortState nextForColumn: aColumn.
+	self applyColumnSort
+]
+
+{ #category : #sorting }
+BrColumnedList >> sortState [
+	^ sortState ifNil: [ sortState := BrColumnUnsortedState new ]
+]
+
+{ #category : #sorting }
+BrColumnedList >> sortedColumn [
+	^ self sortState column
+]
+
+{ #category : #headers }
+BrColumnedList >> withHeaders [
+	self withHeadersDo: [ :header | ]
+]
+
+{ #category : #headers }
+BrColumnedList >> withHeadersDo: aBlock [
+	| header |
+	header := BrColumnedListHeaderAptitude new cellSpacing: self cellSpacing.
+	aBlock value: header.
+	self addAptitude: header
 ]

@@ -24,8 +24,7 @@ BrColumnedListDataSource >> columns: aCollectionOfBrListColumn [
 { #category : #initialization }
 BrColumnedListDataSource >> initialize [
 	super initialize.
-	
-	itemElementStencil := BrColumnedListRowElementStencilBuilder new.
+	itemElementStencil := BrColumnedListRowElementStencilBuilder new cellSpacing: BrColumn defaultCellSpacing.
 	columns := #()
 ]
 
