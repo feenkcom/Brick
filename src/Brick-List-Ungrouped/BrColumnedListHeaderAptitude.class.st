@@ -19,7 +19,6 @@ BrColumnedListHeaderAptitude >> buildColumnHeadersInto: headerPane [
 		| title icon header resizer index |
 		index := widget columns identityIndexOf: column.
 		title := labelStencil value: column.
-		title hMatchParent.
 		icon := (widget sortState iconElementForColumn: column) id: #columnSortIcon.
 		header := BrHorizontalPane new id: ('columnHeader', index asString) asSymbol;
 			alignCenterLeft; vFitContent; addChildren: { title. icon }.

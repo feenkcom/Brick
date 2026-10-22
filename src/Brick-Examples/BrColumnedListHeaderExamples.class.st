@@ -158,6 +158,50 @@ BrColumnedListHeaderExamples >> headerTitleAndSortIcon [
 ]
 
 { #category : #examples }
+BrColumnedListHeaderExamples >> headerWithPlainElementTitle [
+	<gtExample>
+	| s |
+	s := self
+			scripterWithElement: [ | list |
+				list := BrColumnedList new size: 400 @ 300.
+				list column
+					title: 'Number';
+					width: 200;
+					sortBy: [ :a :b | a <= b ];
+					stencil: [ :item | 
+						BrLabel new
+							aptitude: BrGlamorousLabelAptitude;
+							text: item asString ].
+				list items: #(30 2 10).
+				list
+					withHeadersDo: [ :header | 
+						header
+							labelStencil: [ :column | 
+								BlElement new
+									id: #plainHeaderTitle;
+									height: 24;
+									background: Color lightGray ] ].
+				list ].
+	s
+		assertStep: [ :step | 
+			step
+				label: 'Title is an arbitrary Bloc element';
+				id: #plainHeaderTitle;
+				satisfies: [ :title | title class = BlElement and: [ title width > 0 ] ] ].
+	s
+		clickStep: [ :step | 
+			step
+				label: 'Click plain title element to sort';
+				id: #plainHeaderTitle ].
+	s
+		assertStep: [ :step | 
+			step
+				label: 'Sorting works with a plain element title';
+				value: [ :list | list items asArray ] equals: [ #(2 10 30) ] ].
+	^ s
+]
+
+{ #category : #examples }
 BrColumnedListHeaderExamples >> list [
 	<gtExample>
 	| list |
@@ -426,4 +470,18 @@ BrColumnedListHeaderExamples >> unsupportedProvider [
 	self assert: list canSortColumns not.
 	self assert: list sortedColumn isNil.
 	^ list
+]
+
+{ #category : #examples }
+BrColumnedListHeaderExamples >> withoutHeaders [
+	<gtExample>
+	| s |
+	s := self scripterWithElement: [
+		BrColumnedListExamples new compositeAllClassesAndPackage
+			size: 500 @ 300;
+			yourself ].
+	s assertStep: [ :step | step label: 'Headerless list has columns and items'; satisfies: [ :list | list columns size = 2 and: [ list items notEmpty ] ] ].
+	s assertStep: [ :step | step label: 'No column header is constructed'; notExists; id: #'column-header' ].
+	s assertStep: [ :step | step label: 'No header resizer is installed'; notExists; id: #columnResizer ].
+	^ s
 ]
