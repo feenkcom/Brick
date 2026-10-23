@@ -16,6 +16,8 @@ BrBasicScrollbarAptitude >> beHorizontal [
 	scrollbar class = BlHorizontalScrollbarElement ifTrue: [ ^ self ].
 	aCurrentScrollbar := scrollbar.
 	aCurrentScrollbar detach.
+	"The new scrollbar reuses the thumb"
+	aCurrentScrollbar releaseThumb.
 	scrollbar := BlHorizontalScrollbarElement new.
 	self initializeScrollbar: scrollbar.
 	self replaceScrollbarElement: aCurrentScrollbar by: scrollbar.
@@ -27,6 +29,8 @@ BrBasicScrollbarAptitude >> beVertical [
 	scrollbar class = BlVerticalScrollbarElement ifTrue: [ ^ self ].
 	aCurrentScrollbar := scrollbar.
 	aCurrentScrollbar detach.
+	"The new scrollbar reuses the thumb"
+	aCurrentScrollbar releaseThumb.
 	scrollbar := BlVerticalScrollbarElement new.
 	self initializeScrollbar: scrollbar.
 	self replaceScrollbarElement: aCurrentScrollbar by: scrollbar.
@@ -89,7 +93,9 @@ BrBasicScrollbarAptitude >> replaceScrollbarElement: anOldScrollbar by: aNewScro
 	self widgetDo: [ :aWidget |
 		| aParent |
 		aParent := anOldScrollbar parent.
-		aParent replaceChild: anOldScrollbar with: aNewScrollbar as: #scrollbar. ]
+		aParent replaceChild: anOldScrollbar with: aNewScrollbar as: #scrollbar.
+		"The widget styles may target the new thumb and track"
+		aWidget requestStyle ]
 ]
 
 { #category : #'event handling' }
@@ -101,11 +107,15 @@ BrBasicScrollbarAptitude >> scrollableChanged: aTBlScrollable [
 { #category : #'event handling' }
 BrBasicScrollbarAptitude >> thumbChanged: aStencil [
 	thumbStencil := aStencil.
-	scrollbar thumb: thumbStencil asElement
+	scrollbar thumb: thumbStencil asElement.
+	"The widget styles may target the new thumb"
+	self widgetDo: [ :aWidget | aWidget requestStyle ]
 ]
 
 { #category : #'event handling' }
 BrBasicScrollbarAptitude >> trackChanged: aStencil [
 	trackStencil := aStencil.
-	scrollbar track: trackStencil asElement
+	scrollbar track: trackStencil asElement.
+	"The widget styles may target the new track"
+	self widgetDo: [ :aWidget | aWidget requestStyle ]
 ]
