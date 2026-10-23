@@ -35,6 +35,16 @@ TBlDevScripterTarget >> onMenuContainer [
 ]
 
 { #category : #'*Brick-DevTool' }
+TBlDevScripterTarget >> onMenuItemWithLabel: aLabel [
+	"Select the menu item label with a given text, for example within #onMenuContainer"
+
+	self
+		// #'menu--list';
+		// #'menu--label';
+		@ [ :each | each text asString = aLabel ]
+]
+
+{ #category : #'*Brick-DevTool' }
 TBlDevScripterTarget >> onPopover [
 	self
 		onSpaceRoot;
