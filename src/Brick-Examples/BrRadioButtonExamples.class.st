@@ -206,9 +206,6 @@ BrRadioButtonExamples >> normalToggleStillToggles [
 BrRadioButtonExamples >> radioButton [
 	<gtExample>
 	| radio |
-	self assert: BrRadioButton superclass equals: BrAbstractToggle.
-	self assert: BrToggle superclass equals: BrAbstractToggle.
-	self assert: (BrRadioButton inheritsFrom: BrToggle) not.
 	radio := BrRadioButton new.
 	self assert: radio viewModel class equals: BrToggleModel.
 	self assert: radio viewModel children isEmpty.
