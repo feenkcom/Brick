@@ -87,8 +87,15 @@ BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
 	delims := self delimiters.
 	level := 0.
 
-	endingDelimiter := delims at: aTextIterator peer ifAbsent: [ ^ self reverseFindDelimitedUnitAt: aTextIndex ].
-	startingDelimiter := aTextIterator peer.
+	endingDelimiter := delims
+			at: aTextIterator peer
+			ifAbsent: [ ^ self reverseFindDelimitedUnitAt: aTextIndex ].
+	startingDelimiter := aTextIterator peer.	"A quote is both an opening and a closing delimiter. Only search forward
+	from an opening quote, otherwise a closing quote would be paired with the
+	opening quote of the next string or comment"
+	(startingDelimiter = endingDelimiter
+		and: [ (self quoteRoleAt: aTextIndex) ~= #open ])
+		ifTrue: [ ^ self reverseFindDelimitedUnitAt: aTextIndex ].
 
 	aUnitStart := aTextIndex.
 
@@ -102,6 +109,21 @@ BrTextEditorOperator >> findDelimitedUnitAt: aTextIndex [
 						ifTrue: [ ^ aUnitStart to: aTextIterator position - 1 ]
 						ifFalse: [ level := level - 1 ] ] ].
 	^ emptyInterval
+]
+
+{ #category : #private }
+BrTextEditorOperator >> findDragUnitAt: aTextIndex anchor: anAnchor [
+	"Answer the text interval to which a double-click + drag selection extends when the
+	pointer is at aTextIndex. anAnchor is the unit where the drag started (first -> last).
+	Extend word by word, but stop exactly at the pointer when it is next to a quote or
+	a bracket, so that the selection can end right before or after it.
+	Never jump to the other end of a string or bracket group."
+
+	<return: #Interval>
+	((aTextIndex > anAnchor value or: [ aTextIndex < anAnchor key ])
+		and: [ (self isDelimiterAt: aTextIndex) or: [ self isDelimiterAt: aTextIndex + 1 ] ])
+		ifTrue: [ ^ aTextIndex to: aTextIndex ].
+	^ self findWordAt: aTextIndex withClassifier: editor doubleClickWordClassifier
 ]
 
 { #category : #'api - folding' }
@@ -490,6 +512,21 @@ BrTextEditorOperator >> initialize [
 	subscriptions := OrderedCollection new
 ]
 
+{ #category : #private }
+BrTextEditorOperator >> isApostropheAt: aCharIndex [
+	"Answer true if the character at aCharIndex is a single quote between two letters
+	(don't, Bob's): an apostrophe rather than a string delimiter"
+
+	<return: #Boolean>
+	| aText |
+	aText := self text.
+	^ (aText at: aCharIndex) = $'
+		and: [ aCharIndex > 1
+				and: [ aCharIndex < aText size
+						and: [ (aText at: aCharIndex - 1) isLetter
+								and: [ (aText at: aCharIndex + 1) isLetter ] ] ] ]
+]
+
 { #category : #testing }
 BrTextEditorOperator >> isCursorOnTheFirstLine: aCursor [
 	<return: #Boolean>
@@ -509,6 +546,19 @@ BrTextEditorOperator >> isDeleter [
 	^ false
 ]
 
+{ #category : #private }
+BrTextEditorOperator >> isDelimiterAt: aCharIndex [
+	"Answer true if the character at aCharIndex is a quote or a bracket (apostrophes excluded)"
+
+	<return: #Boolean>
+	| aChar |
+	(aCharIndex between: 1 and: self text size) ifFalse: [ ^ false ].
+	aChar := self text at: aCharIndex.
+	((self delimiters includesKey: aChar) or: [ self delimiters includes: aChar ])
+		ifFalse: [ ^ false ].
+	^ (self isApostropheAt: aCharIndex) not
+]
+
 { #category : #testing }
 BrTextEditorOperator >> isInserter [
 	^ false
@@ -519,6 +569,36 @@ BrTextEditorOperator >> isWordChar: aCharacter [
 	<return: #Number>
 
 	^ aCharacter isAlphaNumeric
+]
+
+{ #category : #private }
+BrTextEditorOperator >> quoteRoleAt: aCharIndex [
+	"Answer #open, #close or #none for the quote character at aCharIndex.
+	Quotes open and close with the same character, so first decide from the neighbouring
+	characters: a quote after a boundary (separator, bracket, punctuation, operator) and
+	before content opens, a quote after content and before a boundary closes, and an
+	apostrophe (don't) is neither. Only when that is unclear, scan the text before it."
+
+	<return: #Symbol>
+	| aText aQuote aPrevious aNext isBoundary isAfterBoundary isBeforeBoundary |
+	aText := self text.
+	aQuote := aText at: aCharIndex.
+	(aQuote = $' or: [ aQuote = $" ]) ifFalse: [ ^ #none ].
+	(self isApostropheAt: aCharIndex) ifTrue: [ ^ #none ].
+	aPrevious := aCharIndex > 1 ifTrue: [ aText at: aCharIndex - 1 ].
+	aNext := aCharIndex < aText size ifTrue: [ aText at: aCharIndex + 1 ].
+
+	(aPrevious = aQuote or: [ aNext = aQuote or: [ aPrevious = $$ ] ])
+		ifFalse: [ isBoundary := [ :aChar | 
+				aChar isNil
+					or: [ aChar isSeparator or: [ 
+						'()[]{}:;,.=#^|+-*/\<>~&@%!?' includes: aChar ] ] ].
+			isAfterBoundary := isBoundary value: aPrevious.
+			isBeforeBoundary := isBoundary value: aNext.
+			(isAfterBoundary and: [ isBeforeBoundary not ]) ifTrue: [ ^ #open ].
+			(isBeforeBoundary and: [ isAfterBoundary not ]) ifTrue: [ ^ #close ] ].
+
+	^ self scannedQuoteRoleAt: aCharIndex
 ]
 
 { #category : #private }
@@ -534,7 +614,14 @@ BrTextEditorOperator >> reverseFindDelimitedUnitAt: aTextIndex [
 	startingDelimiter := delims
 			keyAtValue: aTextIterator peek
 			ifAbsent: [ ^ emptyInterval ].
-	endingDelimiter := aTextIterator peek.
+	endingDelimiter := aTextIterator peek.	
+	
+	"A quote is both an opening and a closing delimiter. Only search backward
+	from a closing quote, otherwise an opening quote would be paired with the
+	closing quote of the previous string or comment"
+	(startingDelimiter = endingDelimiter
+		and: [ (self quoteRoleAt: aTextIndex + 1) ~= #close ])
+		ifTrue: [ ^ emptyInterval ].
 
 	aUnitEnd := aTextIndex.
 
@@ -548,6 +635,33 @@ BrTextEditorOperator >> reverseFindDelimitedUnitAt: aTextIndex [
 						ifTrue: [ ^ aTextIterator position + 1 to: aUnitEnd ]
 						ifFalse: [ level := level - 1 ] ] ].
 	^ emptyInterval
+]
+
+{ #category : #private }
+BrTextEditorOperator >> scannedQuoteRoleAt: aCharIndex [
+	"Answer #open, #close or #none for the quote character at aCharIndex by scanning the
+	text from its beginning, tracking whether we are inside a single- or double-quoted region.
+	A quote of the other kind inside a region is content, $ followed by a quote is a character literal"
+
+	<return: #Symbol>
+	| aQuote insideQuote isCharacterLiteral |
+	aQuote := self text at: aCharIndex.
+	insideQuote := nil.
+	isCharacterLiteral := false.
+	aCharIndex > 1
+		ifTrue: [ self text
+				from: 1
+				to: aCharIndex - 1
+				do: [ :aChar | 
+					isCharacterLiteral
+						ifTrue: [ isCharacterLiteral := false ]
+						ifFalse: [ insideQuote
+								ifNil: [ aChar = $$ ifTrue: [ isCharacterLiteral := true ].
+									(aChar = $' or: [ aChar = $" ]) ifTrue: [ insideQuote := aChar ] ]
+								ifNotNil: [ aChar = insideQuote ifTrue: [ insideQuote := nil ] ] ] ] ].
+	isCharacterLiteral ifTrue: [ ^ #none ].
+	insideQuote ifNil: [ ^ #open ].
+	^ insideQuote = aQuote ifTrue: [ #close ] ifFalse: [ #none ]
 ]
 
 { #category : #accessing }
