@@ -14,7 +14,7 @@ BrTextEditorSelectionHandler >> dragEndEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BrTextEditorSelectionHandler >> dragEvent: anEvent [
-	| anEditor currentIndex anchor aSelecter currentUnitInterval selStart selEnd |
+	| anEditor currentIndex anchor currentUnitInterval selStart selEnd |
 	anEvent consumed: true.
 	anEvent localPosition y <= 0
 		ifTrue: [ anEvent currentTarget smoothScrollBy: 0 @ 20 negated ].
@@ -22,31 +22,33 @@ BrTextEditorSelectionHandler >> dragEvent: anEvent [
 		ifTrue: [ anEvent currentTarget smoothScrollBy: 0 @ 20 ].
 	anEditor := anEvent currentTarget editor.
 	currentIndex := anEditor navigator
-		findTextIndexAtScreenPosition: anEvent localPosition
-		ifAbsent: [ ^ self ].
+			findTextIndexAtScreenPosition: anEvent localPosition
+			ifAbsent: [ ^ self ].
 	self
 		assert: [ currentIndex between: 0 and: anEditor text size ]
 		description: [ 'Text index ({1}) must be within text bounds {2}'
-			format: { currentIndex . 0 to: anEditor text size } ].
+				format: {currentIndex.
+						0 to: anEditor text size} ].
 	startIndex ifNil: [ startIndex := currentIndex ].
-	anchor := anEvent currentTarget userData at: #wordSelectionAnchor ifAbsent: [ nil ].
-	anchor ifNil: [
-		startIndex = currentIndex
-			ifTrue: [
-				anEditor deselecter all; deselect.
-				anEditor navigator moveTo: currentIndex; apply ]
-			ifFalse: [
-				anEditor selecter
-					overwrite;
-					from: startIndex to: currentIndex;
-					select ].
-		^ self ].
-	aSelecter := anEditor selecter.
-	currentUnitInterval := aSelecter findDelimitedUnitAt: currentIndex.
-	currentUnitInterval isEmpty
-		ifTrue: [ currentUnitInterval := aSelecter
-				findWordAt: currentIndex
-				withClassifier: anEditor doubleClickWordClassifier ].
+	anchor := anEvent currentTarget userData
+			at: #wordSelectionAnchor
+			ifAbsent: [ nil ].
+	anchor
+		ifNil: [ startIndex = currentIndex
+				ifTrue: [ anEditor deselecter
+						all;
+						deselect.
+					anEditor navigator
+						moveTo: currentIndex;
+						apply ]
+				ifFalse: [ anEditor selecter
+						overwrite;
+						from: startIndex to: currentIndex;
+						select ].
+			^ self ].
+	currentUnitInterval := anEditor selecter
+			findDragUnitAt: currentIndex
+			anchor: anchor.
 	selStart := anchor key min: currentUnitInterval first.
 	selEnd := anchor value max: currentUnitInterval last.
 	anEditor selecter
