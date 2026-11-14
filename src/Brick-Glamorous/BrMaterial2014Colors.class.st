@@ -33,6 +33,111 @@ Class {
 	#category : #'Brick-Glamorous-Colors'
 }
 
+{ #category : #'colors - primary' }
+BrMaterial2014Colors class >> amber [
+	^ self amber500
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber100 [
+	^ Color fromHexString: 'FFECB3'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber200 [
+	^ Color fromHexString: 'FFE082'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber300 [
+	^ Color fromHexString: 'FFD54F'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber400 [
+	^ Color fromHexString: 'FFCA28'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber50 [
+	^ Color fromHexString: 'FFF8E1'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber500 [
+	^ Color fromHexString: 'FFC107'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber600 [
+	^ Color fromHexString: 'FFB300'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber700 [
+	^ Color fromHexString: 'FFA000'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber800 [
+	^ Color fromHexString: 'FF8F00'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amber900 [
+	^ Color fromHexString: 'FF6F00'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amberA100 [
+	^ Color fromHexString: 'FFE57F'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amberA200 [
+	^ Color fromHexString: 'FFD740'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amberA400 [
+	^ Color fromHexString: 'FFC400'
+]
+
+{ #category : #'colors - amber' }
+BrMaterial2014Colors class >> amberA700 [
+	^ Color fromHexString: 'FFAB00'
+]
+
+{ #category : #'colors - neutral' }
+BrMaterial2014Colors class >> black [
+	^ Color fromHexString: '000000'
+]
+
+{ #category : #'colors - primary' }
+BrMaterial2014Colors class >> blue [
+	^ self blue500
+]
+
+{ #category : #'colors - blue' }
+BrMaterial2014Colors class >> blue100 [
+	^ Color fromHexString: 'BBDEFB'
+]
+
+{ #category : #'colors - blue' }
+BrMaterial2014Colors class >> blue200 [
+	^ Color fromHexString: '90CAF9'
+]
+
+{ #category : #'colors - blue' }
+BrMaterial2014Colors class >> blue300 [
+	^ Color fromHexString: '64B5F6'
+]
+
+{ #category : #'colors - blue' }
+BrMaterial2014Colors class >> blue400 [
+	^ Color fromHexString: '42A5F5'
+]
+
 { #category : #'colors - blue' }
 BrMaterial2014Colors class >> blue50 [
 	^ Color fromHexString: 'E3F2FD'
