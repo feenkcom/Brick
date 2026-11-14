@@ -106,10 +106,9 @@ BrGlamorousTheme >> link: anObject [
 	link := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 BrGlamorousTheme >> onThemeModified [
 	super onThemeModified.
-	
 	default initializeThemeable.
 	editor initializeThemeable.
 	button initializeThemeable.
