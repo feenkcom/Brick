@@ -344,14 +344,19 @@ BrAntColors class >> gtColorsFor: aView [
 		priority: 0.5;
 		items: [ (self class selectors
 				select: [ :each | 
-					each numArgs isZero
+					each isUnary
 						and: [ (self class >> each) protocolName beginsWith: 'colors -' ] ])
 				sorted ];
-		column: 'Icon'
-			icon: [ :selector | (self perform: selector) gtInspectorIcon asElement asScalableElement ]
-			width: 32;
-		column: 'Selector' text: [ :selector | selector asString ];
-		column: 'Hex' text: [ :selector | (self perform: selector) asHexString ];
+		column: 'Color'
+			textDo: [ :column | 
+				column
+					item: [ :selector | 
+						| color |
+						color := self perform: selector.
+						(selector asString, ' #', color asHexString) asRopedText
+							foreground: color contrastingBlackAndWhiteColor;
+							yourself ];
+					background: [ :cellValue :selector | self perform: selector ] ];
 		contextItemLabel: 'Browse method'
 			action: [ :anElement :selector | 
 				anElement phlow
