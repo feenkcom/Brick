@@ -1,9 +1,3 @@
-"
-I provide the Ant Design light color palettes.
-Shade selectors use the 0-9 labels shown on https://ant.design/docs/spec/colors/.
-Unnumbered selectors return primary shade 5 (the sixth color).
-Here is the list of available colors: {{gtClass:BrAntColors|show=gtColorsFor:|expanded=true}}
-"
 Class {
 	#name : #BrAntColors,
 	#superclass : #Object,
@@ -118,6 +112,116 @@ BrAntColors class >> cyan8 [
 { #category : #'colors - cyan' }
 BrAntColors class >> cyan9 [
 	^ Color fromHexString: '002329'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen [
+	^ self darkGreen5
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen0 [
+	^ Color fromHexString: '162312'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen1 [
+	^ Color fromHexString: '1D3712'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen2 [
+	^ Color fromHexString: '274916'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen3 [
+	^ Color fromHexString: '306317'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen4 [
+	^ Color fromHexString: '3C8618'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen5 [
+	^ Color fromHexString: '49AA19'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen6 [
+	^ Color fromHexString: '6ABE39'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen7 [
+	^ Color fromHexString: '8FD460'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen8 [
+	^ Color fromHexString: 'B2E58B'
+]
+
+{ #category : #'colors - darkGreen' }
+BrAntColors class >> darkGreen9 [
+	^ Color fromHexString: 'D5F2BB'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed [
+	^ self darkRed5
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed0 [
+	^ Color fromHexString: '2A1215'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed1 [
+	^ Color fromHexString: '431418'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed2 [
+	^ Color fromHexString: '58181C'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed3 [
+	^ Color fromHexString: '791A1F'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed4 [
+	^ Color fromHexString: 'A61D24'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed5 [
+	^ Color fromHexString: 'D32029'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed6 [
+	^ Color fromHexString: 'E84749'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed7 [
+	^ Color fromHexString: 'F37370'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed8 [
+	^ Color fromHexString: 'F89F9A'
+]
+
+{ #category : #'colors - darkRed' }
+BrAntColors class >> darkRed9 [
+	^ Color fromHexString: 'FAC8C3'
 ]
 
 { #category : #'colors - primary' }
@@ -238,6 +342,21 @@ BrAntColors class >> gray0 [
 { #category : #'colors - gray' }
 BrAntColors class >> gray1 [
 	^ Color fromHexString: 'FAFAFA'
+]
+
+{ #category : #'colors - gray' }
+BrAntColors class >> gray10 [
+	^ Color fromHexString: '1F1F1F'
+]
+
+{ #category : #'colors - gray' }
+BrAntColors class >> gray11 [
+	^ Color fromHexString: '141414'
+]
+
+{ #category : #'colors - gray' }
+BrAntColors class >> gray12 [
+	^ Color fromHexString: '000000'
 ]
 
 { #category : #'colors - gray' }
