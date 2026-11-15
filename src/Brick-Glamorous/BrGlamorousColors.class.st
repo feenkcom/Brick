@@ -143,6 +143,51 @@ BrGlamorousColors class >> deselectedtListItemColor: aColor [
 	DeselectedListItemBackgroundColor := aColor
 ]
 
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffAddedLineBackgroundColor [
+	^ BrAntColors green0
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffAddedTextBackgroundColor [
+	^ BrAntColors green1
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffBorderColor [
+	^ BrAntColors gray4
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffConnectorBackgroundColor [
+	^ BrAntColors gray2
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffDeletedLineBackgroundColor [
+	^ BrAntColors red0
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffDeletedTextBackgroundColor [
+	^ BrAntColors red1
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffEditorBackgroundColor [
+	^ BrAntColors gray0
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffEditorBorderColor [
+	^ BrAntColors gray3
+]
+
+{ #category : #'colors - diff' }
+BrGlamorousColors class >> diffUnchangedSideBackgroundColor [
+	^ BrAntColors gray2
+]
+
 { #category : #'button - background' }
 BrGlamorousColors class >> disabledButtonBackgroundColor [
 	^ DisabledButtonBackgroundColor

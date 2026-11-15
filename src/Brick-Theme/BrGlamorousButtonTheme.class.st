@@ -162,7 +162,10 @@ BrGlamorousButtonTheme >> initializeThemeable [
 
 	defaultTextForeground := self
 			color: [ :aTheme | aTheme colors primaryTextColor ]
-			source: [ :aTheme | aTheme button defaultTextForeground ]
+			source: [ :aTheme | aTheme button defaultTextForeground ].
+	disabledTextColor := self
+			color: [ :aTheme | aTheme button constantAt: #disabledTextColor ]
+			source: [ :aTheme | aTheme button disabledTextColor ]
 ]
 
 { #category : #accessing }
