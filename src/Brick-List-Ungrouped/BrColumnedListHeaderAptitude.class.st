@@ -15,18 +15,29 @@ Class {
 
 { #category : #building }
 BrColumnedListHeaderAptitude >> buildColumnHeadersInto: headerPane [
-	widget viewModel columnsDo: [ :column |
-		| title icon header resizer index |
-		index := widget columns identityIndexOf: column.
-		title := labelStencil value: column.
-		icon := (widget sortState iconElementForColumn: column) id: #columnSortIcon.
-		header := BrHorizontalPane new id: ('columnHeader', index asString) asSymbol;
-			alignCenterLeft; vFitContent; addChildren: { title. icon }.
-		(column isSortable and: [ widget canSortColumns ]) ifTrue: [
-			header addEventHandlerOn: BlClickEvent do: [ :event | widget sortByColumn: column ] ].
-		resizer := column addResizerTo: header cellSpacing: self cellSpacing.
-		resizer id: (resizerIdentifierStencil value: column).
-		headerPane addChild: header ]
+	widget viewModel
+		columnsDo: [ :column | 
+			| title icon header resizer index |
+			index := widget columns identityIndexOf: column.
+			title := labelStencil value: column.
+			icon := (widget sortState iconElementForColumn: column) id: #columnSortIcon.
+			header := BrHorizontalPane new
+					id: ('columnHeader' , index asString) asSymbol;
+					alignCenterLeft;
+					vFitContent;
+					addChildren: {title.
+							icon}.
+			(column isSortable and: [ widget canSortColumns ])
+				ifTrue: [ header
+						addAptitude: (BrStyleCommonAptitude new
+								default: [ :aStyle | aStyle background: self theme columnedList headerBackgroundColor ];
+								hovered: [ :aStyle | aStyle background: self theme columnedList sortableHeaderHoveredBackgroundColor ]).
+					header
+						addEventHandlerOn: BlClickEvent
+						do: [ :event | widget sortByColumn: column ] ].
+			resizer := column addResizerTo: header cellSpacing: self cellSpacing.
+			resizer id: (resizerIdentifierStencil value: column).
+			headerPane addChild: header ]
 ]
 
 { #category : #private }

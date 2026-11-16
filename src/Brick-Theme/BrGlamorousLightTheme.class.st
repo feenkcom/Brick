@@ -34,3 +34,8 @@ BrGlamorousLightTheme >> initialize [
 	label := BrGlamorousLabelTheme theme: self.
 	label initializeThemeable
 ]
+
+{ #category : #'instance creation' }
+BrGlamorousLightTheme >> newColumnedListTheme [
+	^ BrColumnedListLightTheme theme: self
+]
