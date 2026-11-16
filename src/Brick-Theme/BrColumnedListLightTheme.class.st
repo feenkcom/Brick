@@ -6,7 +6,7 @@ Class {
 
 { #category : #initialization }
 BrColumnedListLightTheme >> initializeConstants [
-	constants := OrderedDictionary new.
+	super initializeConstants.
 	self constantAt: #headerBackgroundColor put: Color transparent.
 	self constantAt: #sortableHeaderHoveredBackgroundColor put: BrAntColors gray2
 ]

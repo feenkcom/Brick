@@ -31,11 +31,6 @@ BrColumnedListTheme >> initializeColors [
 ]
 
 { #category : #initialization }
-BrColumnedListTheme >> initializeConstants [
-	self subclassResponsibility
-]
-
-{ #category : #initialization }
 BrColumnedListTheme >> initializeThemeable [
 	super initializeThemeable.
 	headerBackgroundColor := self
