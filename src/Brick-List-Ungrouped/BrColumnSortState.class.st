@@ -59,13 +59,20 @@ BrColumnSortState >> orderedItems: items [
 	| indexed sortBlock |
 	sortBlock := column sortBlock.
 	indexed := items asArray withIndexCollect: [ :item :index | index -> item ].
-	indexed := indexed sorted: [ :a :b |
-		| ab ba |
-		ab := sortBlock value: a value value: b value.
-		ba := sortBlock value: b value value: a value.
-		ab = ba
-			ifTrue: [ a key <= b key ]
-			ifFalse: [ self ordersAscending: ab descending: ba ] ].
+	indexed := indexed
+			sorted: [ :a :b | 
+				| ab ba |
+				ab := sortBlock
+						valueWithEnoughArguments: {a value.
+								b value.
+								a key.
+								b key}.
+				ba := sortBlock
+						valueWithEnoughArguments: {b value.
+								a value.
+								b key.
+								a key}.
+				ab = ba or: [ self ordersAscending: ab descending: ba ] ].
 	^ indexed collect: #value
 ]
 

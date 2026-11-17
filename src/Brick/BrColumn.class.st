@@ -158,7 +158,6 @@ BrColumn >> sortBlock [
 
 { #category : #sorting }
 BrColumn >> sortBy: aBlock [
-	"A non-strict ordering on domain items. Configure before building headers."
 	sortBlock := aBlock
 ]
 

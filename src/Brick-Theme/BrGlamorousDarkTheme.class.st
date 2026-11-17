@@ -30,3 +30,8 @@ BrGlamorousDarkTheme >> initialize [
 	label := BrGlamorousLabelTheme theme: self.
 	label initializeThemeable
 ]
+
+{ #category : #'instance creation' }
+BrGlamorousDarkTheme >> newColumnedListTheme [
+	^ BrColumnedListDarkTheme theme: self
+]

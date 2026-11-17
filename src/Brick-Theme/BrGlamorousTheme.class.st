@@ -47,6 +47,18 @@ BrGlamorousTheme >> colors: anObject [
 ]
 
 { #category : #accessing }
+BrGlamorousTheme >> columnedList [
+	^ self
+		subThemeAt: #brColumnedListTheme
+		ifAbsentPut: [ self newColumnedListTheme ]
+]
+
+{ #category : #accessing }
+BrGlamorousTheme >> columnedList: aColumnedListTheme [
+	self subThemeAt: #brColumnedListTheme put: aColumnedListTheme
+]
+
+{ #category : #accessing }
 BrGlamorousTheme >> default [
 	^ default
 ]
@@ -104,6 +116,11 @@ BrGlamorousTheme >> link [
 { #category : #accessing }
 BrGlamorousTheme >> link: anObject [
 	link := anObject
+]
+
+{ #category : #'instance creation' }
+BrGlamorousTheme >> newColumnedListTheme [
+	self subclassResponsibility
 ]
 
 { #category : #private }
