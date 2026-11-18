@@ -280,7 +280,7 @@ BrMenuItems >> beListElementType [
 
 { #category : #'api - selection' }
 BrMenuItems >> deselect [
-	selectedItem ifNotNil: #deselect.
+	selectedItem ifNotNil: [ :v | v deselect ].
 	selectedItem := nil
 ]
 
@@ -419,8 +419,7 @@ BrMenuItems >> selectedItem [
 BrMenuItems >> selectedItem: aMenuItem [
 	self assert: [ aMenuItem isSelected ].
 	selectedItem == aMenuItem ifTrue: [ ^ self ].
-
-	selectedItem ifNotNil: #deselect.
+	selectedItem ifNotNil: [ :v | v deselect ].
 	selectedItem := aMenuItem
 ]
 

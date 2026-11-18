@@ -107,7 +107,7 @@ BrEditorSearchTextStyler >> style: aText ast: anAst [
 
 { #category : #private }
 BrEditorSearchTextStyler >> substring [
-	^ self subtext ifNotNil: #asString
+	^ self subtext ifNotNil: [ :v | v asString ]
 ]
 
 { #category : #accessing }

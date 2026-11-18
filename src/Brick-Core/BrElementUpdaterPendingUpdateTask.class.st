@@ -38,7 +38,7 @@ BrElementUpdaterPendingUpdateTask >> printOn: aStream [
 
 	aStream
 		nextPutAll: 'Pending element update task: ';
-		print: (self updater ifNotNil: #element)
+		print: (self updater ifNotNil: [ :v | v element ])
 ]
 
 { #category : #'private - testing' }

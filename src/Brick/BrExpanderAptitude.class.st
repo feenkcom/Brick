@@ -29,19 +29,17 @@ BrExpanderAptitude >> contentStencil [
 
 { #category : #accessing }
 BrExpanderAptitude >> contentStencil: aBrStencil [
-
-	self
-		assert: [ aBrStencil isNotNil ]
-		description: [ 'Stencil must not be nil' ].
+	self assert: [ aBrStencil isNotNil ] description: [ 'Stencil must not be nil' ].
 
 	contentStencil := aBrStencil asStencil.
-	contentElement ifNotNil: #removeFromParent.
+	contentElement ifNotNil: [ :v | v removeFromParent ].
 	contentElement := nil.
-	
-	self widgetDo: [ :aWidget |
-		(aWidget states hasState: BrExpansionState expanded)
-			ifTrue: [ self onExpanded ]
-			ifFalse: [ self onCollapsed ] ]
+
+	self
+		widgetDo: [ :aWidget | 
+			(aWidget states hasState: BrExpansionState expanded)
+				ifTrue: [ self onExpanded ]
+				ifFalse: [ self onCollapsed ] ]
 ]
 
 { #category : #'api - configuration' }
@@ -58,19 +56,17 @@ BrExpanderAptitude >> headerStencil [
 
 { #category : #accessing }
 BrExpanderAptitude >> headerStencil: aBrStencil [
-
-	self
-		assert: [ aBrStencil isNotNil ]
-		description: [ 'Stencil must not be nil' ].
+	self assert: [ aBrStencil isNotNil ] description: [ 'Stencil must not be nil' ].
 
 	headerStencil := aBrStencil asStencil.
-	headerElement ifNotNil: #removeFromParent.
+	headerElement ifNotNil: [ :v | v removeFromParent ].
 	headerElement := nil.
 
-	self widgetDo: [ :aWidget |
-		(aWidget states hasState: BrExpansionState expanded)
-			ifTrue: [ self onExpanded ]
-			ifFalse: [ self onCollapsed ] ]
+	self
+		widgetDo: [ :aWidget | 
+			(aWidget states hasState: BrExpansionState expanded)
+				ifTrue: [ self onExpanded ]
+				ifFalse: [ self onCollapsed ] ]
 ]
 
 { #category : #initialization }
@@ -123,31 +119,25 @@ BrExpanderAptitude >> initializeRequests [
 
 { #category : #hooks }
 BrExpanderAptitude >> onCollapsed [
-	contentElement ifNotNil: #removeFromParent.
-	
+	contentElement ifNotNil: [ :v | v removeFromParent ].
+
 	shouldRecreateHeader
-		ifTrue: [
-			headerElement ifNotNil: #removeFromParent.
+		ifTrue: [ headerElement ifNotNil: [ :v | v removeFromParent ].
 			headerElement := nil ].
 
 	headerElement ifNil: [ self initializeHeaderElement ].
-	headerElement hasParent
-		ifFalse: [ self addHeaderElement: headerElement ]
+	headerElement hasParent ifFalse: [ self addHeaderElement: headerElement ]
 ]
 
 { #category : #hooks }
 BrExpanderAptitude >> onExpanded [
-
 	shouldReplaceHeader
-		ifTrue: [ headerElement ifNotNil: #removeFromParent ]
-		ifFalse: [
-			headerElement ifNil: [ self initializeHeaderElement ].
-			headerElement hasParent
-				ifFalse: [ self addHeaderElement: headerElement ] ].
-	
+		ifTrue: [ headerElement ifNotNil: [ :v | v removeFromParent ] ]
+		ifFalse: [ headerElement ifNil: [ self initializeHeaderElement ].
+			headerElement hasParent ifFalse: [ self addHeaderElement: headerElement ] ].
+
 	contentElement ifNil: [ self initializeContentElement ].
-	contentElement hasParent
-		ifFalse: [ self addContentElement: contentElement ]
+	contentElement hasParent ifFalse: [ self addContentElement: contentElement ]
 ]
 
 { #category : #'api - configuration' }

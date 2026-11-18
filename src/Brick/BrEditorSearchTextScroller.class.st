@@ -63,28 +63,21 @@ BrEditorSearchTextScroller >> scroll [
 	| aFirstSegment aLastSegment aLineDistance |
 	lineIndex ifNil: [ ^ self ].
 	characterStartPosition ifNil: [ ^ self ].
-	characterStopPosition ifNil: [ ^ self ].
-	
-	"Get range of visible lines and characters"
+	characterStopPosition ifNil: [ ^ self ].	"Get range of visible lines and characters"
 	aFirstSegment := (editorElement layout
 			findFirstVisibleChildClosestToStartCompletelyVisible: true
-			acceptPartiallyVisible: false) ifNotNil: #segment.
+			acceptPartiallyVisible: false) ifNotNil: [ :v | v segment ].
 	aLastSegment := (editorElement layout
 			findFirstVisibleChildClosestToEndCompletelyVisible: true
-			acceptPartiallyVisible: false) ifNotNil: #segment.
-			
-	"Scroll only if the character is not visible"
+			acceptPartiallyVisible: false) ifNotNil: [ :v | v segment ].	"Scroll only if the character is not visible"
 	(aFirstSegment isNotNil
 		and: [ aLastSegment isNotNil
 				and: [ aFirstSegment textStart >= characterStartPosition
-						and: [ aLastSegment textEnd <= characterStopPosition ] ] ]) ifTrue: [ ^ self ].	
-						
-	"Check the distance"
+						and: [ aLastSegment textEnd <= characterStopPosition ] ] ])
+		ifTrue: [ ^ self ].	"Check the distance"
 	(aFirstSegment isNotNil and: [ aLastSegment isNotNil ])
 		ifTrue: [ aLineDistance := (aFirstSegment index - lineIndex) abs
-					min: (aLastSegment index - lineIndex) abs ].
-					
-	"Scroll smoothly or jump to the position, depending on the distance."
+					min: (aLastSegment index - lineIndex) abs ].	"Scroll smoothly or jump to the position, depending on the distance."
 	(aLineDistance isNotNil and: [ aLineDistance < smoothScrollThreshold ])
 		ifTrue: [ editorElement smoothScrollToPosition: lineIndex ]
 		ifFalse: [ editorElement scrollToPosition: lineIndex ]

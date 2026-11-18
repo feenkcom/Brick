@@ -121,7 +121,7 @@ BrEditorSearchTextMarkerContext >> selectedIndex [
 	"Return an index among #patternItems"
 
 	<return: #Integer>
-	^ self selectedItem ifNotNil: #index ifNil: [ 1 ]
+	^ self selectedItem ifNotNil: [ :v | v index ] ifNil: [ 1 ]
 ]
 
 { #category : #'api - result' }
@@ -180,7 +180,7 @@ BrEditorSearchTextMarkerContext >> selectedStartPosition [
 	"Return a character start position for a given selected item"
 
 	<return: #Integer or: nil>
-	^ self selectedItem ifNotNil: #absoluteStartIndex
+	^ self selectedItem ifNotNil: [ :v | v absoluteStartIndex ]
 ]
 
 { #category : #'api - result' }
@@ -188,7 +188,7 @@ BrEditorSearchTextMarkerContext >> selectedStopPosition [
 	"Return a character stop position for a given selected item"
 
 	<return: #Integer or: nil>
-	^ self selectedItem ifNotNil: #absoluteStopIndex
+	^ self selectedItem ifNotNil: [ :v | v absoluteStopIndex ]
 ]
 
 { #category : #'api - pattern' }

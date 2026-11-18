@@ -214,5 +214,5 @@ BrPopoverMouseHoverEventHandler >> startShowLaterTaskDueToEvent: anEvent [
 
 { #category : #private }
 BrPopoverMouseHoverEventHandler >> wantToShowDueToEnterEvent: anEvent [
-	^ menuAptitude ifNotNil: #canShow ifNil: [ false ]
+	^ menuAptitude ifNotNil: [ :v | v canShow ] ifNil: [ false ]
 ]

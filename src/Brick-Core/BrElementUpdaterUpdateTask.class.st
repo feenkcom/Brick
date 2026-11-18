@@ -19,7 +19,7 @@ BrElementUpdaterUpdateTask >> printOn: aStream [
 
 	aStream
 		nextPutAll: 'Element update task: ';
-		print: (self updater ifNotNil: #element)
+		print: (self updater ifNotNil: [ :v | v element ])
 ]
 
 { #category : #'api - running' }

@@ -33,7 +33,7 @@ BrMenuExplicitHandle >> defaultElement [
 
 { #category : #initialization }
 BrMenuExplicitHandle >> defaultMenu [
-	^ submenuStencil ifNotNil: #create
+	^ submenuStencil ifNotNil: [ :v | v create ]
 ]
 
 { #category : #accessing }
