@@ -49,7 +49,9 @@ BlElement >> anchor [
 		- to keep your code more generic, and
 		- to keep your elements usable also ouside of menu containers."
 
-	^ self userData at: #brickAnchor ifAbsent: [ self parent ifNotNil: #anchor ]
+	^ self userData
+		at: #brickAnchor
+		ifAbsent: [ self parent ifNotNil: [ :v | v anchor ] ]
 ]
 
 { #category : #'*Brick' }

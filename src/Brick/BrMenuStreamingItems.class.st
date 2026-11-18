@@ -20,7 +20,7 @@ BrMenuStreamingItems >> acceptVisitor: aVisitor [
 
 { #category : #'api - selection' }
 BrMenuStreamingItems >> deselect [
-	selectedItem ifNotNil: #deselect.
+	selectedItem ifNotNil: [ :v | v deselect ].
 	selectedItem := nil
 ]
 
@@ -61,8 +61,7 @@ BrMenuStreamingItems >> selectedItem [
 BrMenuStreamingItems >> selectedItem: aMenuItem [
 	self assert: [ aMenuItem isSelected ].
 	selectedItem == aMenuItem ifTrue: [ ^ self ].
-
-	selectedItem ifNotNil: #deselect.
+	selectedItem ifNotNil: [ :v | v deselect ].
 	selectedItem := aMenuItem
 ]
 

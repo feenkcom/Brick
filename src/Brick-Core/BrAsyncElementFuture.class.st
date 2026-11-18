@@ -173,91 +173,83 @@ BrAsyncElementFuture >> privateDataSnapshot: aDataSnapshot [
 { #category : #'private - update' }
 BrAsyncElementFuture >> privateInitializeElement [
 	"May be called from any process"
+
 	| aPromise isFinished |
-	
-	mutex critical: [
-		| isPending needsUpdate |
-	
-		BrAsyncElementFutureReceivedSignal new 
-			elementFuture: self;
-			elementUpdater: updater;
-			future: future;
-			existingPromise: promise;
-			dataSnapshot: dataSnapshot;
-			isPending: (isPending := dataSnapshot ifNotNil: #isPending);
-			strategy: strategy;
-			needsUpdate: (needsUpdate := strategy needsUpdate: updater element);
-			emit.
+	mutex
+		critical: [ | isPending needsUpdate |
+			BrAsyncElementFutureReceivedSignal new
+				elementFuture: self;
+				elementUpdater: updater;
+				future: future;
+				existingPromise: promise;
+				dataSnapshot: dataSnapshot;
+				isPending: (isPending := dataSnapshot ifNotNil: [ :v | v isPending ]);
+				strategy: strategy;
+				needsUpdate: (needsUpdate := strategy needsUpdate: updater element);
+				emit.
 
-		future
-			ifNil: [ ^ self ].
-		
-		dataSnapshot
-			ifNil: [ ^ self ].
-		
-		"Do nothing if the data snaphot is no longer pending!"
-		isPending
-			ifFalse: [ ^ self ].
+			future ifNil: [ ^ self ].
 
-		needsUpdate
-			ifFalse: [ ^ self ].
-			
-		promise ifNotNil: [ ^ self ].
-		
-		isFinished := false.
-		promise := aPromise := future await: futureExecutionConfiguration.
-		BrAsyncElementFutureScheduledSignal new 
-			elementFuture: self;
-			elementUpdater: updater;
-			future: future;
-			promise: aPromise;
-			emit.
-		promise
-			then: [ :aResult |
-				isFinished := true.
-				mutex critical: [
-					BrAsyncElementFutureCompletedSuccessfullySignal new
-						elementFuture: self;
-						elementUpdater: updater;
-						future: future;
-						promise: aPromise;
-						isCurrentPromise: promise == aPromise;
-						result: aResult;
-						emit.
-				
-					(promise == aPromise)
-						ifTrue: [
-							promise := nil.
-							whenDonePromise fulfillWithValue: true.
-							self privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ] ] ]
-			otherwise: [ :anError |
-				isFinished := true.
-				mutex critical: [
-					BrAsyncElementFutureTerminatedUnsuccessfullySignal new
-						elementFuture: self;
-						elementUpdater: updater;
-						future: future;
-						promise: aPromise;
-						isCurrentPromise: promise == aPromise;
-						exception: anError copy freeze;
-						emit.
-				
-					(promise == aPromise)
-						ifTrue: [
-							promise := nil.
-							whenDonePromise rejectWithError: anError.
-							self privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ] ].
+			dataSnapshot ifNil: [ ^ self ].	"Do nothing if the data snaphot is no longer pending!"
+			isPending ifFalse: [ ^ self ].
+
+			needsUpdate ifFalse: [ ^ self ].
+
+			promise ifNotNil: [ ^ self ].
+
+			isFinished := false.
+			promise := aPromise := future await: futureExecutionConfiguration.
+			BrAsyncElementFutureScheduledSignal new
+				elementFuture: self;
+				elementUpdater: updater;
+				future: future;
+				promise: aPromise;
+				emit.
+			promise
+				then: [ :aResult | 
+					isFinished := true.
+					mutex
+						critical: [ BrAsyncElementFutureCompletedSuccessfullySignal new
+								elementFuture: self;
+								elementUpdater: updater;
+								future: future;
+								promise: aPromise;
+								isCurrentPromise: promise == aPromise;
+								result: aResult;
+								emit.
+
+							promise == aPromise
+								ifTrue: [ promise := nil.
+									whenDonePromise fulfillWithValue: true.
+									self
+										privateDataSnapshot: (BrFromFutureDataSnapshot new setData: aResult) ] ] ]
+				otherwise: [ :anError | 
+					isFinished := true.
+					mutex
+						critical: [ BrAsyncElementFutureTerminatedUnsuccessfullySignal new
+								elementFuture: self;
+								elementUpdater: updater;
+								future: future;
+								promise: aPromise;
+								isCurrentPromise: promise == aPromise;
+								exception: anError copy freeze;
+								emit.
+
+							promise == aPromise
+								ifTrue: [ promise := nil.
+									whenDonePromise rejectWithError: anError.
+									self
+										privateDataSnapshot: (BrFromFutureDataSnapshot new setError: anError) ] ] ] ].
 
 	isFinished
-		ifFalse: [
-			| anElement |
+		ifFalse: [ | anElement |
 			anElement := updater element.
-			anElement enqueueTask: (BlPromiseTask new promise: aPromise).
-			
-			"users have to opt-in to fire future scheduled events"
-			shouldFireScheduledEvent ifTrue: [
-				anElement enqueueTask: (BlTaskAction new action: [
-					anElement fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: aPromise) ]) ] ]
+			anElement enqueueTask: (BlPromiseTask new promise: aPromise).	"users have to opt-in to fire future scheduled events"
+			shouldFireScheduledEvent
+				ifTrue: [ anElement
+						enqueueTask: (BlTaskAction new
+								action: [ anElement
+										fireEvent: (BrAsyncElementFutureScheduledEvent new futurePromise: aPromise) ]) ] ]
 ]
 
 { #category : #'private - update' }

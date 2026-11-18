@@ -9,19 +9,19 @@ Class {
 
 { #category : #testing }
 BrPopoverMouseEventHandler >> canHide [
-	^ menuAptitude ifNotNil: #canHide ifNil: [ false ]
+	^ menuAptitude ifNotNil: [ :v | v canHide ] ifNil: [ false ]
 ]
 
 { #category : #testing }
 BrPopoverMouseEventHandler >> canShow [
-	^ menuAptitude ifNotNil: #canShow ifNil: [ false ]
+	^ menuAptitude ifNotNil: [ :v | v canShow ] ifNil: [ false ]
 ]
 
 { #category : #'api - displaying' }
 BrPopoverMouseEventHandler >> hide [
 	"Hide menu"
 
-	menuAptitude ifNotNil: #hide
+	menuAptitude ifNotNil: [ :v | v hide ]
 ]
 
 { #category : #accessing }
@@ -47,12 +47,12 @@ BrPopoverMouseEventHandler >> menuAptitude: aBrWithExplicitMenuAptitude [
 
 { #category : #accessing }
 BrPopoverMouseEventHandler >> modifiersMatcher [
-	^ menuAptitude ifNotNil: #modifiersMatcher
+	^ menuAptitude ifNotNil: [ :v | v modifiersMatcher ]
 ]
 
 { #category : #accessing }
 BrPopoverMouseEventHandler >> mouseButton [
-	^ menuAptitude ifNotNil: #mouseButton
+	^ menuAptitude ifNotNil: [ :v | v mouseButton ]
 ]
 
 { #category : #'api - hooks' }
@@ -70,7 +70,7 @@ BrPopoverMouseEventHandler >> onMenuAptitudeInitialized [
 
 { #category : #accessing }
 BrPopoverMouseEventHandler >> relocator [
-	^ menuAptitude ifNotNil: #relocator
+	^ menuAptitude ifNotNil: [ :v | v relocator ]
 ]
 
 { #category : #'api - displaying' }

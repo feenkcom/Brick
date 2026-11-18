@@ -40,5 +40,5 @@ BrAnchoredVisualAnalysisEvaluationElementId >> hash [
 
 { #category : #accessing }
 BrAnchoredVisualAnalysisEvaluationElementId >> name [
-	^ self evaluation ifNotNil: #name ifNil: [ '?' ]
+	^ self evaluation ifNotNil: [ :v | v name ] ifNil: [ '?' ]
 ]

@@ -52,17 +52,18 @@ BrEditorSearchTextBasicVisualizer >> scrollContext: aBrEditorSearchTextVisualize
 	aStartPosition := aBrEditorSearchTextVisualizerContext selectedStartPosition.
 	aFirstSegment := (editor layout
 			findFirstVisibleChildClosestToStartCompletelyVisible: true
-			acceptPartiallyVisible: false) ifNotNil: #segment.
+			acceptPartiallyVisible: false) ifNotNil: [ :v | v segment ].
 	aLastSegment := (editor layout
 			findFirstVisibleChildClosestToEndCompletelyVisible: true
-			acceptPartiallyVisible: false) ifNotNil: #segment.
+			acceptPartiallyVisible: false) ifNotNil: [ :v | v segment ].
 
-	(aFirstSegment isNotNil and: [ 
-		aLastSegment isNotNil and: [
-			aFirstSegment textStart >= aStartPosition and: [ 
-				aLastSegment textEnd <= aStartPosition ] ] ]) ifTrue: [ ^ self ].
+	(aFirstSegment isNotNil
+		and: [ aLastSegment isNotNil
+				and: [ aFirstSegment textStart >= aStartPosition
+						and: [ aLastSegment textEnd <= aStartPosition ] ] ]) ifTrue: [ ^ self ].
 
-	editor smoothScrollToPosition: aBrEditorSearchTextVisualizerContext selectedLine
+	editor
+		smoothScrollToPosition: aBrEditorSearchTextVisualizerContext selectedLine
 ]
 
 { #category : #'api - displaying' }

@@ -91,7 +91,7 @@ BrSearchMarkerContext >> selectedIndex [
 	"Return an index among #foundItems"
 
 	<return: #Integer>
-	^ self selectedItem ifNotNil: #index ifNil: [ 1 ]
+	^ self selectedItem ifNotNil: [ :v | v index ] ifNil: [ 1 ]
 ]
 
 { #category : #'api - found items' }

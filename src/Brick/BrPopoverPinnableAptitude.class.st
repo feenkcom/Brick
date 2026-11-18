@@ -208,9 +208,9 @@ BrPopoverPinnableAptitude >> onUninstalledIn: anElement [
 	super onUninstalledIn: anElement.
 	handleElement removeFromParent.
 	pullHandler targetElement: nil.
-	closeButton ifNotNil: #removeFromParent.
+	closeButton ifNotNil: [ :v | v removeFromParent ].
 	closeButton := nil.
-	isPinned := false.
+	isPinned := false
 ]
 
 { #category : #'private - updating' }

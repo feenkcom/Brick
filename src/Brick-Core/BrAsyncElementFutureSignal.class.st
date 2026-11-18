@@ -62,12 +62,12 @@ BrAsyncElementFutureSignal >> isElementAttachedToSpace [
 { #category : #initialize }
 BrAsyncElementFutureSignal >> prepareForDelivery [
 	super prepareForDelivery.
-	
-	element := elementUpdater ifNotNil: #element.
-	
+
+	element := elementUpdater ifNotNil: [ :v | v element ].
+
 	isElementAttachedToSpace := element
-		ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
-		ifNil: [ false ].
+			ifNotNil: [ :anElement | anElement isAttachedToSceneGraph ]
+			ifNil: [ false ]
 ]
 
 { #category : #printing }

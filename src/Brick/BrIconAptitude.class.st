@@ -42,18 +42,15 @@ BrIconAptitude >> iconDo: aBlock [
 
 { #category : #initialization }
 BrIconAptitude >> initialize [
-	super initialize.
-
-	"default icon"
+	super initialize.	"default icon"
 	iconElement := BlElement new.
 	iconElement size: 6 @ 6.
 	iconElement background: Color red.
 	iconElement geometry: BlEllipseGeometry new.
 	self
-		addChange:
-			(BrLookChange new
+		addChange: (BrLookChange new
 				up: [ :e | self updateIcon ];
-				down: [ :e | iconElement ifNotNil: #removeFromParent ];
+				down: [ :e | iconElement ifNotNil: [ :v | v removeFromParent ] ];
 				yourself)
 ]
 
