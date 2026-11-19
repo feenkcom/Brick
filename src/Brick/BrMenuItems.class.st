@@ -314,7 +314,7 @@ BrMenuItems >> groups [
 	self items
 		do: [ :eachItem | 
 			aDictionary
-				at: eachItem group id
+				at: eachItem group id asString
 				ifPresent: [ :aGroup | aGroup addItem: eachItem ]
 				ifAbsentPut: [ BrMenuItemGroup new addItem: eachItem ] ].
 
