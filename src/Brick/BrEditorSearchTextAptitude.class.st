@@ -137,7 +137,7 @@ BrEditorSearchTextAptitude >> onBrEditorSearchTextProgressAnnouncement: anAnnoun
 				action: [ | aSegment |
 					aSegment := (aBrEditor layout
 							findFirstVisibleChildClosestToStartCompletelyVisible: true
-							acceptPartiallyVisible: false) ifNotNil: #segment.
+							acceptPartiallyVisible: false) ifNotNil: [ :v | v segment ].
 
 					aSegment
 						ifNil: [ searchElement progressIndex: nil total: anAnnouncement itemsCount ]

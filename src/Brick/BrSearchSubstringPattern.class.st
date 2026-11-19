@@ -52,7 +52,7 @@ BrSearchSubstringPattern >> printOn: aStream [
 
 { #category : #accessing }
 BrSearchSubstringPattern >> string [
-	^ string ifNil: [ string := self text ifNotNil: #asString ]
+	^ string ifNil: [ string := self text ifNotNil: [ :v | v asString ] ]
 ]
 
 { #category : #accessing }

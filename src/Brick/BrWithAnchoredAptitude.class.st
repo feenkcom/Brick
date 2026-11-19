@@ -385,7 +385,7 @@ BrWithAnchoredAptitude >> strategy: anObject [
 
 { #category : #accessing }
 BrWithAnchoredAptitude >> visible [
-	^ innerContainer ifNil: [ false ] ifNotNil: #isAttachedToSceneGraph
+	^ innerContainer ifNil: [ false ] ifNotNil: [ :v | v isAttachedToSceneGraph ]
 ]
 
 { #category : #accessing }

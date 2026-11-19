@@ -56,16 +56,17 @@ BrGlamorousMaximizerOverlayHostAptitude >> onMaximize: aMaximizeWish [
 			attachTo: hostElement;
 			asElement.
 
-	contentElement := contentElementBuilderStencil build ifNotNil: #asElement.
-	
+	contentElement := contentElementBuilderStencil build
+			ifNotNil: [ :v | v asElement ].
+
 	BrGlamorousMaximizerSwitcher new
-			maximizerAptitude: aMaximizeWish maximizerAptitude;
-			hostElement: hostElement;
-			elementToMaximize: aMaximizeWish elementToMaximize;
-			containerElement: overlayElement;
-			contentElement: contentElement;
-			closeButton: closeButtonStencil asElement;
-			switch
+		maximizerAptitude: aMaximizeWish maximizerAptitude;
+		hostElement: hostElement;
+		elementToMaximize: aMaximizeWish elementToMaximize;
+		containerElement: overlayElement;
+		contentElement: contentElement;
+		closeButton: closeButtonStencil asElement;
+		switch
 ]
 
 { #category : #'api - initialization' }

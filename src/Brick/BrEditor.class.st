@@ -111,10 +111,9 @@ BrEditor >> editor: aBrTextEditor [
 { #category : #accessing }
 BrEditor >> firstVisibleSegment [
 	<return: #BrTextEditorSegment or: nil>
-	
 	^ (self layout
 		findFirstVisibleChildClosestToStartCompletelyVisible: true
-		acceptPartiallyVisible: true) ifNotNil: #segment
+		acceptPartiallyVisible: true) ifNotNil: [ :v | v segment ]
 ]
 
 { #category : #initialization }
@@ -171,10 +170,9 @@ BrEditor >> isReadOnly [
 { #category : #accessing }
 BrEditor >> lastVisibleSegment [
 	<return: #BrTextEditorSegment or: nil>
-	
 	^ (self layout
 		findFirstVisibleChildClosestToEndCompletelyVisible: true
-		acceptPartiallyVisible: true) ifNotNil: #segment
+		acceptPartiallyVisible: true) ifNotNil: [ :v | v segment ]
 ]
 
 { #category : #accessing }

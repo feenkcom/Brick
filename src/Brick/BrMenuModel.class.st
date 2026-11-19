@@ -34,7 +34,7 @@ BrMenuModel >> asStencil [
 BrMenuModel >> definition [
 	"Return a menu model defining method."
 
-	^ definitionComputation ifNotNil: #definition
+	^ definitionComputation ifNotNil: [ :v | v definition ]
 ]
 
 { #category : #'api - definitions' }

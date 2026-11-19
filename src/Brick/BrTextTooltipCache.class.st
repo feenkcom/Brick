@@ -47,7 +47,7 @@ BrTextTooltipCache >> printOn: aStream [
 
 { #category : #accessing }
 BrTextTooltipCache >> size [
-	^ cache ifNotNil: #size ifNil: [ 0 ]
+	^ cache ifNotNil: [ :v | v size ] ifNil: [ 0 ]
 ]
 
 { #category : #accessing }
