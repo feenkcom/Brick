@@ -34,14 +34,16 @@ GtInspectorRoundButtonStencil class >> tiny [
 
 { #category : #'api - instantiation' }
 GtInspectorRoundButtonStencil >> create [
-	^ BrButton new
-		background: Color white;
+	| aButton |
+	aButton := BrButton new.
+	^ aButton
+		background: aButton theme default contentBackground;
 		aptitude: BrIconAptitude + BrGlamorousFocusableShadowAptitude new;
+		addAptitude: (BrLazyStyleCommonAptitude new
+				hovered: [ :aStyle :aTheme | aStyle border: (BlBorder paint: aTheme button hoveredBorderColor width: 1) ]);
 		geometry: BlEllipseGeometry new;
 		layout: BlLinearLayout horizontal alignCenter;
 		exact: self size;
-		when: BlMouseEnterEvent do: [ :anEvent | anEvent currentTarget background: Color veryVeryLightGray lighter ];
-		when: BlMouseLeaveEvent do: [ :anEvent | anEvent currentTarget background: Color white ];
 		yourself
 ]
 
