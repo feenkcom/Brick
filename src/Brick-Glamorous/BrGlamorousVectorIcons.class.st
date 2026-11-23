@@ -245,10 +245,10 @@ BrGlamorousVectorIcons class >> cloud [
 BrGlamorousVectorIcons class >> collapsebar [
 	^ [ BlElement new
 		size: 16 @ 16;
-		addChild: (BlElement new
-				size: 2 @ 10;
-				relocate: 7 @ 3;
-				background: Color black) ] asStencil
+		geometry: (BlSvgPath new
+				svg: 'M 7 3 L 9 3 L 9 13 L 7 13 Z'
+				viewbox: (0 @ 0 extent: 16 @ 16));
+		background: Color black ] asStencil
 ]
 
 { #category : #icons }
@@ -1596,41 +1596,16 @@ BrGlamorousVectorIcons class >> tree [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> twoColumnTable [
-	<script: 'self chat inspect'>
-	^ [ | container outline vLine h1 |
-	container := BlElement new size: 16 @ 16.
-	outline := BlElement new
-			geometry: (BlPolygonGeometry
-					vertices: {1 @ 1.
-							15 @ 1.
-							15 @ 15.
-							1 @ 15});
-			size: 16 @ 16;
-			border: (BlBorder paint: Color black width: 1);
-			yourself.
-	vLine := BlElement new
-			geometry: (BlPolygonGeometry
-					vertices: {8 @ 2.
-							9 @ 2.
-							9 @ 14.
-							8 @ 14});
-			size: 16 @ 16;
-			background: Color black;
-			yourself.
-	h1 := BlElement new
-			geometry: (BlPolygonGeometry
-					vertices: {2 @ 6.
-							14 @ 6.
-							14 @ 7.
-							2 @ 7});
-			size: 16 @ 16;
-			background: Color black;
-			yourself.
-	container
-		addChildren: {outline.
-				vLine.
-				h1}.
-	container ] asStencil
+	<script: 'self twoColumnTable inspect'>
+	^ [ BlElement new
+		size: 16 @ 16;
+		geometry: (BlSvgPath new
+				svg: 'M 0.5 0.5 L 15.5 0.5 L 15.5 15.5 L 0.5 15.5 Z
+M 1.5 1.5 L 1.5 14.5 L 14.5 14.5 L 14.5 1.5 Z
+M 7.5 2 L 8.5 2 L 8.5 14 L 7.5 14 Z
+M 2 6 L 14 6 L 14 7 L 2 7 Z'
+				viewbox: (0 @ 0 extent: 16 @ 16));
+		background: Color black ] asStencil
 ]
 
 { #category : #geometry }
