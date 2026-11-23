@@ -35,14 +35,8 @@ GtInspectorRoundButtonStencil class >> tiny [
 { #category : #'api - instantiation' }
 GtInspectorRoundButtonStencil >> create [
 	^ BrButton new
-		background: Color white;
-		aptitude: BrIconAptitude + BrGlamorousFocusableShadowAptitude new;
-		geometry: BlEllipseGeometry new;
-		layout: BlLinearLayout horizontal alignCenter;
-		exact: self size;
-		when: BlMouseEnterEvent do: [ :anEvent | anEvent currentTarget background: Color veryVeryLightGray lighter ];
-		when: BlMouseLeaveEvent do: [ :anEvent | anEvent currentTarget background: Color white ];
-		yourself
+		aptitude: BrGlamorousRoundButtonWithIconAndShadowAptitude;
+		exact: self size
 ]
 
 { #category : #initialization }
