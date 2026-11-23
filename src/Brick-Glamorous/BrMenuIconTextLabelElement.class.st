@@ -7,6 +7,22 @@ Class {
 	#category : #'Brick-Glamorous-Menu'
 }
 
+{ #category : #private }
+BrMenuIconTextLabelElement >> applyDefaultForegroundToIcon: anIcon [
+	| aForeground aBlackBackground aBlackPaint |
+	aForeground := self theme label defaultTextForeground.
+	aBlackBackground := Color black asBlBackground.
+	aBlackPaint := aBlackBackground paint.
+	anIcon
+		withAllChildrenBreadthFirstDo: [ :anElement | 
+			| aBorder |
+			aBlackBackground = anElement background
+				ifTrue: [ anElement background: aForeground ].
+			aBorder := anElement border.
+			(aBorder isVisible and: [ aBlackPaint = aBorder paint ])
+				ifTrue: [ anElement border: (aBorder copyWithPaint: aForeground) ] ]
+]
+
 { #category : #initialization }
 BrMenuIconTextLabelElement >> initialize [
 	super initialize.
@@ -40,5 +56,6 @@ BrMenuIconTextLabelElement >> updateIconElement [
 			self addChild: aButton after: iconContainer.
 			anException return: nil ].
 	anIconElement ifNil: [ ^ self ].
+	self applyDefaultForegroundToIcon: anIconElement.
 	iconContainer addChild: anIconElement as: #'menu-icon'
 ]

@@ -20,18 +20,6 @@ BrMenuWithScripterExamples >> actionElement: anActionElement hasForegroundColor:
 		isNotEmpty
 ]
 
-{ #category : #'examples - updates' }
-BrMenuWithScripterExamples >> actionElementIsWithoutForegroundAttribute: anActionElement [
-	| aSize |
-	aSize := anActionElement menuModel labelModel text size.
-
-	^ ((anActionElement query // #'menu--label')
-		@ [ :eachLabel | 
-			((eachLabel text from: 1 to: aSize)
-				hasAttributeSuchThat: [ :anAttribute | anAttribute type = BlTextForegroundAttribute ])
-				not ]) isNotEmpty
-]
-
 { #category : #'examples - context menu' }
 BrMenuWithScripterExamples >> buttonWithContextMenu [
 	<gtExample>
@@ -2305,16 +2293,6 @@ BrMenuWithScripterExamples >> labelElement: aLabel hasNotForegroundColor: aColor
 		isNotEmpty
 ]
 
-{ #category : #'examples - updates' }
-BrMenuWithScripterExamples >> labelElementIsWithoutForegroundAttribute: aLabel [
-	^ ((aLabel query // #'menu--label')
-		@ [ :eachLabel | 
-			(eachLabel text
-				hasAttributeSuchThat: [ :anAttribute | 
-					anAttribute type = BlTextForegroundAttribute ]) not ])
-		isNotEmpty
-]
-
 { #category : #'examples - tooltip' }
 BrMenuWithScripterExamples >> leaveButtonWithTooltip [
 	<gtExample>
@@ -2422,7 +2400,11 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 
 	aScripter assert
 		label: 'Action item is enabled on 0';
-		satisfies: [ :aLabel | aLabel isEnabled and: [ self actionElementIsWithoutForegroundAttribute: aLabel ] ];
+		satisfies: [ :aLabel | 
+			aLabel isEnabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme label defaultTextForeground ] ];
 		onSpaceRoot;
 		onDropdown: true;
 		// #'increase-click';
@@ -2450,11 +2432,29 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 	self assert: aCounter equals: 1.
 	self assert: anActionItem labelModel text equals: 'Increase'.
 	self assert: anActionItem labelModel preview equals: '1'.
+	aScripter assert
+		label: 'The preview uses the theme summary foreground while the action is enabled';
+		satisfies: [ :aLabel | 
+			| aText |
+			aText := aLabel text.
+			(aText attributesAt: aText size)
+				anySatisfy: [ :anAttribute | 
+					(anAttribute isKindOf: BlTextForegroundAttribute)
+						and: [ anAttribute paint = aLabel theme label summaryTextForeground ] ] ];
+		onSpaceRoot;
+		onDropdown: true;
+		// #'increase-click';
+		// #'menu--label';
+		play.
 	self assert: aLabelItem labelModel text equals: 'Counter value is 1.'.
 
 	aScripter assert
 		label: 'Label item is enabled on 1';
-		satisfies: [ :aLabel | aLabel isEnabled and: [ self labelElementIsWithoutForegroundAttribute: aLabel ] ];
+		satisfies: [ :aLabel | 
+			aLabel isEnabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme label defaultTextForeground ] ];
 		onSpaceRoot;
 		onDropdown: true;
 		// BrMenuLabelItemElement;
@@ -2462,7 +2462,11 @@ BrMenuWithScripterExamples >> menuWithUpdatableMenuItems [
 
 	aScripter assert
 		label: 'Action item is enabled on 1';
-		satisfies: [ :aLabel | aLabel isEnabled and: [ self actionElementIsWithoutForegroundAttribute: aLabel ] ];
+		satisfies: [ :aLabel | 
+			aLabel isEnabled
+				and: [ self
+						labelElement: aLabel
+						hasForegroundColor: aLabel theme label defaultTextForeground ] ];
 		onSpaceRoot;
 		onDropdown: true;
 		// #'increase-click';
