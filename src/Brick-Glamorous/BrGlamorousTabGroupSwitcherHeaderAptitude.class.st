@@ -12,31 +12,33 @@ Class {
 
 { #category : #initialization }
 BrGlamorousTabGroupSwitcherHeaderAptitude >> initialize [
-	super initialize.
-	
-	"Header should always fit content vertically, while horizontal resizing depends on a resizing strategy of the tab group
+	super initialize.	"Header should always fit content vertically, while horizontal resizing depends on a resizing strategy of the tab group
 	We have the following structure:
 	
 	- header
 		- scrollable
 			- tabbar
 	"
-	
+
 	self header addAptitude: BrGlamorousFocusableShadowAptitude.
 
 	self addChangeProperty: #(header geometry) with: [ BlStadiumGeometry new ].
-	self addChangeProperty: #(header background) with: [ Color white ]. 
-	self addChangeProperty: #(header layout) with: [ BlLinearLayout horizontal alignCenter ].
-	
-	self addChangeProperty: #(tabbar layout) with: [ 
-		BlLinearLayout horizontal alignCenter cellSpacing: 0 ].
+	self
+		addChangeProperty: #(header background)
+		with: [ self theme default contentBackground ].
+	self
+		addChangeProperty: #(header layout)
+		with: [ BlLinearLayout horizontal alignCenter ].
 
-	self add: (BrLayoutResizerAptitude new
-		anyToFitContent: self header).
+	self
+		addChangeProperty: #(tabbar layout)
+		with: [ BlLinearLayout horizontal alignCenter cellSpacing: 0 ].
 
-	self header addAptitude: (BrLayoutResizerAptitude new
-		anyToFitContent: self scrollTabbar).
+	self add: (BrLayoutResizerAptitude new anyToFitContent: self header).
 
-	self scrollTabbar addAptitude: (BrLayoutResizerAptitude new
-		anyToFitContent: self tabbar)
+	self header
+		addAptitude: (BrLayoutResizerAptitude new anyToFitContent: self scrollTabbar).
+
+	self scrollTabbar
+		addAptitude: (BrLayoutResizerAptitude new anyToFitContent: self tabbar)
 ]
