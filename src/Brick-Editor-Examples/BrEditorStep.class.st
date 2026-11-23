@@ -94,7 +94,7 @@ BrEditorStep >> assertModeClassIs: aClass [
 BrEditorStep >> assertTextEqualsTo: aString [
 	^ self assert
 		label: ('Assert editor text is "{1}"' format: {self privateShortString: aString});
-		value: [ :anEditor | anEditor text asString ] equals: aString;
+		value: [ :anEditor | anEditor text asString ] sameContentAs: aString;
 		onParentStepTarget: self;
 		onThisOrBreadthFirstChildOfKind: BrEditor
 ]
