@@ -10,11 +10,11 @@ BrGlamorousDefaultLightTheme >> initializeConstants [
 	self constantAt: #defaultShadowColor put: BrGlamorousColors defaultShadowColor.
 	self constantAt: #primaryShadowColor put: BrGlamorousColors primaryBorderColor.
 	self constantAt: #primaryBorderColor put: BrGlamorousColors primaryBorderColor.
-	self constantAt: #darkBorderColor put: BrGlamorousColors darkBorderColor.
+	self constantAt: #strongBorderColor put: BrGlamorousColors darkBorderColor.
 	self
 		constantAt: #newsBackgroundColor
 		put: BrGlamorousColors newsBackgroundColor.
-	self constantAt: #lightBorderColor put: BrGlamorousColors lightBorderColor.
+	self constantAt: #subtleBorderColor put: BrGlamorousColors lightBorderColor.
 	self
 		constantAt: #expandCollapseTriangleBackgroundColor
 		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.

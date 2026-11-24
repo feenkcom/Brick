@@ -43,15 +43,7 @@ BrGlamorousDefaultTheme >> contentBackground [
 
 { #category : #accessing }
 BrGlamorousDefaultTheme >> darkBorderColor [
-	^ darkBorderColor
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> darkBorderColor: aColor [
-	self
-		constantAt: #darkBorderColor
-		put: (aColor blocResolveColorForTheme: self theme).
-	self initializeThemeable
+	^ self strongBorderColor
 ]
 
 { #category : #accessing }
@@ -139,14 +131,14 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 			color: [ :aTheme | aTheme default constantAt: #primaryBorderColor ]
 			source: [ :aTheme | aTheme default primaryBorderColor ].
 	darkBorderColor := self
-			color: [ :aTheme | aTheme default constantAt: #darkBorderColor ]
-			source: [ :aTheme | aTheme default darkBorderColor ].
+			color: [ :aTheme | aTheme default constantAt: #strongBorderColor ]
+			source: [ :aTheme | aTheme default strongBorderColor ].
 	newsBackgroundColor := self
 			color: [ :aTheme | aTheme default constantAt: #newsBackgroundColor ]
 			source: [ :aTheme | aTheme default newsBackgroundColor ].
 	lightBorderColor := self
-			color: [ :aTheme | aTheme default constantAt: #lightBorderColor ]
-			source: [ :aTheme | aTheme default lightBorderColor ].
+			color: [ :aTheme | aTheme default constantAt: #subtleBorderColor ]
+			source: [ :aTheme | aTheme default subtleBorderColor ].
 	expandCollapseTriangleBackgroundColor := self
 			color: [ :aTheme | aTheme default constantAt: #expandCollapseTriangleBackgroundColor ]
 			source: [ :aTheme | aTheme default expandCollapseTriangleBackgroundColor ].
@@ -167,15 +159,7 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 
 { #category : #accessing }
 BrGlamorousDefaultTheme >> lightBorderColor [
-	^ lightBorderColor
-]
-
-{ #category : #accessing }
-BrGlamorousDefaultTheme >> lightBorderColor: aColor [
-	self
-		constantAt: #lightBorderColor
-		put: (aColor blocResolveColorForTheme: self theme).
-	self initializeThemeable
+	^ self subtleBorderColor
 ]
 
 { #category : #accessing }
@@ -231,6 +215,32 @@ BrGlamorousDefaultTheme >> shadowColor [
 BrGlamorousDefaultTheme >> shadowColor: aColor [
 	self
 		constantAt: #shadowColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> strongBorderColor [
+	^ darkBorderColor
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> strongBorderColor: aColor [
+	self
+		constantAt: #strongBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> subtleBorderColor [
+	^ lightBorderColor
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> subtleBorderColor: aColor [
+	self
+		constantAt: #subtleBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
 ]
