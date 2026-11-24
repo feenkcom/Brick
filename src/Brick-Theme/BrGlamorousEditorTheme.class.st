@@ -19,7 +19,8 @@ Class {
 		'pharoBooleanLiteralForeground',
 		'pharoCharacterLiteralForeground',
 		'pharoCommentForeground',
-		'pharoErrorTokenForeground'
+		'pharoErrorTokenForeground',
+		'enabledBreakpointForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -43,6 +44,11 @@ BrGlamorousEditorTheme >> defaultTextForeground [
 ]
 
 { #category : #accessing }
+BrGlamorousEditorTheme >> enabledBreakpointForeground [
+	^ enabledBreakpointForeground
+]
+
+{ #category : #accessing }
 BrGlamorousEditorTheme >> focusedBorderColor [
 	^ focusedBorderColor
 ]
@@ -61,7 +67,8 @@ BrGlamorousEditorTheme >> initializeConstants [
 	self constantAt: #borderColor put: BrGlamorousColors editorBorderColor.
 	self
 		constantAt: #focusedBorderColor
-		put: BrGlamorousColors focusedEditorBorderColor
+		put: BrGlamorousColors focusedEditorBorderColor.
+	self constantAt: #enabledBreakpointForeground put: Color lightBrown
 ]
 
 { #category : #initialization }
@@ -136,7 +143,10 @@ BrGlamorousEditorTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme editor borderColor ].
 	focusedBorderColor := self
 			color: [ :aTheme | aTheme editor constantAt: #focusedBorderColor ]
-			source: [ :aTheme | aTheme editor focusedBorderColor ]
+			source: [ :aTheme | aTheme editor focusedBorderColor ].
+	enabledBreakpointForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #enabledBreakpointForeground ]
+			source: [ :aTheme | aTheme editor enabledBreakpointForeground ]
 ]
 
 { #category : #accessing }
