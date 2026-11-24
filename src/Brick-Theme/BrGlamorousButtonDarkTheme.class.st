@@ -5,19 +5,6 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousButtonDarkTheme >> initializeColors [
-	super initializeColors.
-
-	disabledTextColor := Color gray.
-
-	disabledBorderColor := Color gray.
-
-	defaultBorderColor := Color gray.
-
-	defaultTextColor := Color white
-]
-
-{ #category : #initialization }
 BrGlamorousButtonDarkTheme >> initializeConstants [
 	super initializeConstants.
 
@@ -25,13 +12,7 @@ BrGlamorousButtonDarkTheme >> initializeConstants [
 	self
 		constantAt: #disabledTextColor
 		put: BrGlamorousColors disabledButtonTextColor.
-	self
-		constantAt: #disabledBorderColor
-		put: BrGlamorousColors disabledButtonBorderColor.
-	self constantAt: #defaultBackground put: Color veryDarkGray
-]
-
-{ #category : #initialization }
-BrGlamorousButtonDarkTheme >> initializeThemeable [
-	super initializeThemeable
+	self constantAt: #disabledBorderColor put: Color gray.
+	self constantAt: #defaultBackground put: Color veryDarkGray.
+	self constantAt: #fadedBackgroundColor put: BrAntColors gray6
 ]

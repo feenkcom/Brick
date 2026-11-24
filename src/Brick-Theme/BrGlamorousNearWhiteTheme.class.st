@@ -20,8 +20,10 @@ BrGlamorousNearWhiteTheme >> initialize [
 
 	colors := BrGlamorousWhiteThemeColors theme: self.
 
-	link := BrGlamorousLinkTheme new.
-	status := BrGlamorousStatusTheme new.
+	link := BrGlamorousLinkTheme theme: self.
+	link initializeThemeable.
+	status := BrGlamorousStatusTheme theme: self.
+	status initializeThemeable.
 	default := BrGlamorousDefaultLightTheme theme: self.
 	default initializeThemeable.
 
@@ -31,11 +33,17 @@ BrGlamorousNearWhiteTheme >> initialize [
 	button := BrGlamorousButtonLightTheme theme: self.
 	button initializeThemeable.
 
-	item := BrGlamorousItemTheme new.
+	item := BrGlamorousItemTheme theme: self.
+	item initializeThemeable.
 
 	header := BrGlamorousHeaderLightTheme theme: self.
 	header initializeThemeable.
 
 	label := BrGlamorousLabelTheme theme: self.
 	label initializeThemeable
+]
+
+{ #category : #initialization }
+BrGlamorousNearWhiteTheme >> newColumnedListTheme [
+	^ BrColumnedListLightTheme theme: self
 ]

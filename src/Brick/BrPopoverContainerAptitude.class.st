@@ -17,8 +17,8 @@ BrPopoverContainerAptitude >> initialize [
 				cornerRadius: BrMenuConstants cornerRadius
 				enlargedBy: 1 ].
 	self
-		addChangeProperty: #(widget border)
-		with: [ BlBorder paint: Color veryLightGray width: 1 ].
+		add: (BrLazyStyleCommonAptitude new
+				default: [ :aStyle :aTheme | aStyle border: (BlBorder paint: aTheme button fadedBackgroundColor width: 1) ]).
 	self addChangeProperty: #(widget outskirts) with: [ BlOutskirts outside ].
 	self
 		addChangeProperty: #(widget background)

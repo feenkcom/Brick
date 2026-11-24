@@ -84,11 +84,20 @@ BrColumnedListThemeExamples >> sortableHeaderHover [
 			aStep
 				label: 'Modify the active hover palette';
 				block: [ :aList | 
-					aList theme columnedList sortableHeaderHoveredBackgroundColor: Color magenta.
+					aList theme columnedList
+						headerBackgroundColor: Color cyan;
+						sortableHeaderHoveredBackgroundColor: Color magenta.
 					aList theme themeModified ] ].
 	self
 		assertHeader: #columnHeader1
 		background: Color magenta
+		in: scripter.
+	scripter mouseMoveOver
+		id: #columnHeader2;
+		play.
+	self
+		assertHeader: #columnHeader1
+		background: Color cyan
 		in: scripter.
 	^ scripter
 ]
@@ -146,7 +155,7 @@ BrColumnedListThemeExamples >> streamHeaderDoesNotHighlight [
 { #category : #examples }
 BrColumnedListThemeExamples >> themeableHeaderColors [
 	<gtExample>
-	| light dark color |
+	| light dark color header hover |
 	light := BrGlamorousLightTheme new.
 	dark := BrGlamorousDarkTheme new.
 	self assert: light subThemes isEmpty.
@@ -157,8 +166,21 @@ BrColumnedListThemeExamples >> themeableHeaderColors [
 	color := light columnedList sortableHeaderHoveredBackgroundColor.
 	self assert: (color blocResolveColorForTheme: light) equals: BrAntColors gray2.
 	self assert: (color blocResolveColorForTheme: dark) equals: BrAntColors gray9.
-	dark columnedList sortableHeaderHoveredBackgroundColor: Color magenta.
+	header := dark columnedList headerBackgroundColor.
+	hover := dark columnedList sortableHeaderHoveredBackgroundColor.
+	dark columnedList
+		headerBackgroundColor: Color cyan;
+		sortableHeaderHoveredBackgroundColor: Color magenta.
+	self assert: dark columnedList headerBackgroundColor == header.
+	self assert: dark columnedList sortableHeaderHoveredBackgroundColor == hover.
+	self
+		assert: (dark columnedList constantAt: #headerBackgroundColor)
+		equals: Color cyan.
+	self
+		assert: (dark columnedList constantAt: #sortableHeaderHoveredBackgroundColor)
+		equals: Color magenta.
 	dark themeModified.
+	self assert: (header blocResolveColorForTheme: dark) equals: Color cyan.
 	self assert: (color blocResolveColorForTheme: dark) equals: Color magenta.
 	self assert: (color blocResolveColorForTheme: light) equals: BrAntColors gray2.
 	dark columnedList: (BrColumnedListDarkTheme theme: dark).

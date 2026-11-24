@@ -34,7 +34,8 @@ BrMenuItemsGroupedElement >> initializeListElement [
 			headerElementStencil: [ :anItemType :aListWidget | 
 				BrLabel new
 					beSmallSize;
-					aptitude: (BrGlamorousLabelAptitude new foreground: Color gray);
+					aptitude: (BrGlamorousLabelAptitude new
+							foreground: self theme label metadataTextForeground);
 					hMatchParent;
 					vFitContent;
 					margin: (BlInsets

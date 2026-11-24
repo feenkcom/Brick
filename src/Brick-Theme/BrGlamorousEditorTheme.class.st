@@ -30,8 +30,11 @@ BrGlamorousEditorTheme >> borderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousEditorTheme >> borderColor: anObject [
-	borderColor := anObject
+BrGlamorousEditorTheme >> borderColor: aColor [
+	self
+		constantAt: #borderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -45,25 +48,20 @@ BrGlamorousEditorTheme >> focusedBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousEditorTheme >> focusedBorderColor: anObject [
-	focusedBorderColor := anObject
-]
-
-{ #category : #initialization }
-BrGlamorousEditorTheme >> initialize [
-	super initialize.
-	borderColor := BrGlamorousColors editorBorderColor.
-	focusedBorderColor := BrGlamorousColors focusedEditorBorderColor
-]
-
-{ #category : #initialization }
-BrGlamorousEditorTheme >> initializeColors [
-	super initializeColors
+BrGlamorousEditorTheme >> focusedBorderColor: aColor [
+	self
+		constantAt: #focusedBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
 BrGlamorousEditorTheme >> initializeConstants [
-	super initializeConstants
+	super initializeConstants.
+	self constantAt: #borderColor put: BrGlamorousColors editorBorderColor.
+	self
+		constantAt: #focusedBorderColor
+		put: BrGlamorousColors focusedEditorBorderColor
 ]
 
 { #category : #initialization }
@@ -132,7 +130,13 @@ BrGlamorousEditorTheme >> initializeThemeable [
 
 	pharoErrorTokenForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #pharoErrorTokenForeground ]
-			source: [ :aTheme | aTheme editor pharoErrorTokenForeground ]
+			source: [ :aTheme | aTheme editor pharoErrorTokenForeground ].
+	borderColor := self
+			color: [ :aTheme | aTheme editor constantAt: #borderColor ]
+			source: [ :aTheme | aTheme editor borderColor ].
+	focusedBorderColor := self
+			color: [ :aTheme | aTheme editor constantAt: #focusedBorderColor ]
+			source: [ :aTheme | aTheme editor focusedBorderColor ]
 ]
 
 { #category : #accessing }

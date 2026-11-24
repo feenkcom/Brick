@@ -133,13 +133,14 @@ BrGlamorousVectorIcons class >> branching [
 { #category : #icons }
 BrGlamorousVectorIcons class >> browse [
 	<script: 'self browse inspect'>
-
-	^ [ BlElement new
-		size: 16@16;
+	^ [ | anIcon |
+	anIcon := BlElement new.
+	anIcon
+		size: 16 @ 16;
 		geometry: (BlSvgPath new
-			svg: 'M 7.468188 5.546875 L 7.468188 11.703125 C 6.593188 11.296875 6.061938 11.1875 4.9525633 11.03125 C 4.644486 10.987859 2.922108 10.967926 2.4681883 11.046875 L 2.4681883 4.5762466 C 2.922108 4.497298 4.0794197 4.469626 4.5306883 4.5 C 6.155688 4.609375 7.452563 5.171875 7.468188 5.546875 Z M 8.5 5.5546875 C 8.515625 5.1796875 9.8125 4.6171875 11.4375 4.5078125 C 11.888769 4.4774387 13.04608 4.5051105 13.5 4.5840593 L 13.5 11.054687 C 13.04608 10.975738 11.323703 10.995671 11.015625 11.039062 C 9.90625 11.195312 9.375 11.304688 8.5 11.710938 Z M 7.5 12.969612 L 7.5 13 C 7.825414 12.998916 8.369811 12.99186 8.468188 12.992188 L 8.468188 12.977424 C 8.474063 12.976874 8.476563 12.976562 8.476563 12.976562 C 8.476563 12.976562 8.822868 12.295372 10.960937 12.070313 C 11.554688 12.007813 12.585938 11.835938 14.507813 12.242188 L 14.5 3.75 C 13.796875 3.625 12.70639 3.4618137 11.929688 3.4921875 C 9.963313 3.569085 8.649562 3.9703634 7.988436 4.5608164 C 7.330181 3.9660904 6.013533 3.5616107 4.038501 3.484375 C 3.261798 3.454001 2.1713133 3.6171873 1.4681883 3.7421873 L 1.4603758 12.234375 C 3.382251 11.828125 4.413501 12 5.007251 12.0625 C 7.145321 12.28756 7.491626 12.96875 7.491626 12.96875 C 7.491626 12.96875 7.494126 12.969061 7.5 12.969612 Z'
-			viewbox: (0@0 extent: 16@16));
-		background: Color black ] asStencil
+				svg: 'M 7.468188 5.546875 L 7.468188 11.703125 C 6.593188 11.296875 6.061938 11.1875 4.9525633 11.03125 C 4.644486 10.987859 2.922108 10.967926 2.4681883 11.046875 L 2.4681883 4.5762466 C 2.922108 4.497298 4.0794197 4.469626 4.5306883 4.5 C 6.155688 4.609375 7.452563 5.171875 7.468188 5.546875 Z M 8.5 5.5546875 C 8.515625 5.1796875 9.8125 4.6171875 11.4375 4.5078125 C 11.888769 4.4774387 13.04608 4.5051105 13.5 4.5840593 L 13.5 11.054687 C 13.04608 10.975738 11.323703 10.995671 11.015625 11.039062 C 9.90625 11.195312 9.375 11.304688 8.5 11.710938 Z M 7.5 12.969612 L 7.5 13 C 7.825414 12.998916 8.369811 12.99186 8.468188 12.992188 L 8.468188 12.977424 C 8.474063 12.976874 8.476563 12.976562 8.476563 12.976562 C 8.476563 12.976562 8.822868 12.295372 10.960937 12.070313 C 11.554688 12.007813 12.585938 11.835938 14.507813 12.242188 L 14.5 3.75 C 13.796875 3.625 12.70639 3.4618137 11.929688 3.4921875 C 9.963313 3.569085 8.649562 3.9703634 7.988436 4.5608164 C 7.330181 3.9660904 6.013533 3.5616107 4.038501 3.484375 C 3.261798 3.454001 2.1713133 3.6171873 1.4681883 3.7421873 L 1.4603758 12.234375 C 3.382251 11.828125 4.413501 12 5.007251 12.0625 C 7.145321 12.28756 7.491626 12.96875 7.491626 12.96875 C 7.491626 12.96875 7.494126 12.969061 7.5 12.969612 Z'
+				viewbox: (0 @ 0 extent: 16 @ 16));
+		background: anIcon theme label defaultTextForeground ] asStencil
 ]
 
 { #category : #icons }
@@ -382,10 +383,12 @@ BrGlamorousVectorIcons class >> eg [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> emphasizedBrowse [
-	^ [ self browse asElement
+	^ [ | anIcon |
+	anIcon := self browse asElement.
+	anIcon
 		outskirts: BlOutskirts centered;
-		border: (BlBorder paint: Color black width: 0.5) 
-	] asStencil
+		border: (BlBorder paint: anIcon theme label defaultTextForeground width: 0.5) ]
+		asStencil
 ]
 
 { #category : #icons }
@@ -400,10 +403,12 @@ BrGlamorousVectorIcons class >> emphasizedChat [
 					6 @ 14.
 					6 @ 10.
 					2 @ 10}.
-	element := BlElement new
-			geometry: geometry;
-			size: 16 @ 16;
-			border: (BlBorder paint: Color black width: 2) ] asStencil
+	element := BlElement new.
+	element
+		geometry: geometry;
+		size: 16 @ 16;
+		border: (BlBorder paint: element theme label defaultTextForeground width: 2).
+	element ] asStencil
 ]
 
 { #category : #icons }
@@ -473,12 +478,18 @@ BrGlamorousVectorIcons class >> file [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> filter [
-	^ [BlElement new size: 16@16; addChildren: {BlElement new
-	size: 16 @ 16;
-	outskirts: BlOutskirts centered;
-	geometry: (BlSvgPath new svg: 'M 6 7 L 6 14 L 10 12.4 L 10 7 L 14 2 L 2 2 Z'
-	viewbox: (0 @ 0 extent: 16 @ 16));
-	background: Color black}] asStencil
+	^ [ | aGlyph |
+	aGlyph := BlElement new.
+	aGlyph
+		size: 16 @ 16;
+		outskirts: BlOutskirts centered;
+		geometry: (BlSvgPath new
+				svg: 'M 6 7 L 6 14 L 10 12.4 L 10 7 L 14 2 L 2 2 Z'
+				viewbox: (0 @ 0 extent: 16 @ 16));
+		background: aGlyph theme label defaultTextForeground.
+	BlElement new
+		size: 16 @ 16;
+		addChild: aGlyph ] asStencil
 ]
 
 { #category : #icons }

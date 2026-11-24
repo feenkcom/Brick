@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousStatusTheme,
-	#superclass : #Object,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'successBackgroundColor',
 		'successBorderColor',
@@ -22,7 +22,10 @@ BrGlamorousStatusTheme >> changesBackgroundColor [
 
 { #category : #accessing }
 BrGlamorousStatusTheme >> changesBackgroundColor: aColor [
-	changesBackgroundColor := aColor
+	self
+		constantAt: #changesBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -31,8 +34,11 @@ BrGlamorousStatusTheme >> errorBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> errorBackgroundColor: anObject [
-	errorBackgroundColor := anObject
+BrGlamorousStatusTheme >> errorBackgroundColor: aColor [
+	self
+		constantAt: #errorBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -41,8 +47,11 @@ BrGlamorousStatusTheme >> errorBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> errorBorderColor: anObject [
-	errorBorderColor := anObject
+BrGlamorousStatusTheme >> errorBorderColor: aColor [
+	self
+		constantAt: #errorBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -51,8 +60,11 @@ BrGlamorousStatusTheme >> failureBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> failureBackgroundColor: anObject [
-	failureBackgroundColor := anObject
+BrGlamorousStatusTheme >> failureBackgroundColor: aColor [
+	self
+		constantAt: #failureBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -61,23 +73,69 @@ BrGlamorousStatusTheme >> failureBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> failureBorderColor: anObject [
-	failureBorderColor := anObject
+BrGlamorousStatusTheme >> failureBorderColor: aColor [
+	self
+		constantAt: #failureBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
-BrGlamorousStatusTheme >> initialize [
-	super initialize.
+BrGlamorousStatusTheme >> initializeConstants [
+	super initializeConstants.
+	self
+		constantAt: #successBackgroundColor
+		put: BrGlamorousColors successBackgroundColor.
+	self constantAt: #successBorderColor put: BrGlamorousColors successBorderColor.
+	self
+		constantAt: #neutralBackgroundColor
+		put: BrGlamorousColors neutralBackgroundColor.
+	self constantAt: #errorBorderColor put: BrGlamorousColors errorBorderColor.
+	self
+		constantAt: #errorBackgroundColor
+		put: BrGlamorousColors errorBackgroundColor.
+	self constantAt: #failureBorderColor put: BrGlamorousColors failureBorderColor.
+	self
+		constantAt: #paleErrorBackgroundColor
+		put: BrGlamorousColors paleErrorBackgroundColor.
+	self
+		constantAt: #failureBackgroundColor
+		put: BrGlamorousColors failureBackgroundColor.
+	self
+		constantAt: #changesBackgroundColor
+		put: BrGlamorousColors failureBackgroundColor
+]
 
-	successBackgroundColor := BrGlamorousColors successBackgroundColor.
-	successBorderColor := BrGlamorousColors successBorderColor.
-	neutralBackgroundColor := BrGlamorousColors neutralBackgroundColor.
-	errorBorderColor := BrGlamorousColors errorBorderColor.
-	errorBackgroundColor := BrGlamorousColors errorBackgroundColor.
-	failureBorderColor := BrGlamorousColors failureBorderColor.
-	paleErrorBackgroundColor := BrGlamorousColors paleErrorBackgroundColor.
-	failureBackgroundColor := BrGlamorousColors failureBackgroundColor.
-	changesBackgroundColor := BrGlamorousColors failureBackgroundColor.
+{ #category : #initialization }
+BrGlamorousStatusTheme >> initializeThemeable [
+	super initializeThemeable.
+	successBackgroundColor := self
+			color: [ :aTheme | aTheme status constantAt: #successBackgroundColor ]
+			source: [ :aTheme | aTheme status successBackgroundColor ].
+	successBorderColor := self
+			color: [ :aTheme | aTheme status constantAt: #successBorderColor ]
+			source: [ :aTheme | aTheme status successBorderColor ].
+	neutralBackgroundColor := self
+			color: [ :aTheme | aTheme status constantAt: #neutralBackgroundColor ]
+			source: [ :aTheme | aTheme status neutralBackgroundColor ].
+	errorBorderColor := self
+			color: [ :aTheme | aTheme status constantAt: #errorBorderColor ]
+			source: [ :aTheme | aTheme status errorBorderColor ].
+	errorBackgroundColor := self
+			color: [ :aTheme | aTheme status constantAt: #errorBackgroundColor ]
+			source: [ :aTheme | aTheme status errorBackgroundColor ].
+	failureBorderColor := self
+			color: [ :aTheme | aTheme status constantAt: #failureBorderColor ]
+			source: [ :aTheme | aTheme status failureBorderColor ].
+	paleErrorBackgroundColor := self
+			color: [ :aTheme | aTheme status constantAt: #paleErrorBackgroundColor ]
+			source: [ :aTheme | aTheme status paleErrorBackgroundColor ].
+	failureBackgroundColor := self
+			color: [ :aTheme | aTheme status constantAt: #failureBackgroundColor ]
+			source: [ :aTheme | aTheme status failureBackgroundColor ].
+	changesBackgroundColor := self
+			color: [ :aTheme | aTheme status constantAt: #changesBackgroundColor ]
+			source: [ :aTheme | aTheme status changesBackgroundColor ]
 ]
 
 { #category : #accessing }
@@ -86,8 +144,11 @@ BrGlamorousStatusTheme >> neutralBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> neutralBackgroundColor: anObject [
-	neutralBackgroundColor := anObject
+BrGlamorousStatusTheme >> neutralBackgroundColor: aColor [
+	self
+		constantAt: #neutralBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -96,8 +157,11 @@ BrGlamorousStatusTheme >> paleErrorBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> paleErrorBackgroundColor: anObject [
-	paleErrorBackgroundColor := anObject
+BrGlamorousStatusTheme >> paleErrorBackgroundColor: aColor [
+	self
+		constantAt: #paleErrorBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -106,8 +170,11 @@ BrGlamorousStatusTheme >> successBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> successBackgroundColor: anObject [
-	successBackgroundColor := anObject
+BrGlamorousStatusTheme >> successBackgroundColor: aColor [
+	self
+		constantAt: #successBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -116,6 +183,9 @@ BrGlamorousStatusTheme >> successBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousStatusTheme >> successBorderColor: anObject [
-	successBorderColor := anObject
+BrGlamorousStatusTheme >> successBorderColor: aColor [
+	self
+		constantAt: #successBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]

@@ -31,8 +31,11 @@ BrGlamorousButtonTheme >> defaultBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> defaultBorderColor: anObject [
-	defaultBorderColor := anObject
+BrGlamorousButtonTheme >> defaultBorderColor: aColor [
+	self
+		constantAt: #defaultBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -41,8 +44,11 @@ BrGlamorousButtonTheme >> defaultTextColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> defaultTextColor: anObject [
-	defaultTextColor := anObject
+BrGlamorousButtonTheme >> defaultTextColor: aColor [
+	self
+		constantAt: #defaultTextColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -56,8 +62,11 @@ BrGlamorousButtonTheme >> disabledBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> disabledBackgroundColor: anObject [
-	disabledBackgroundColor := anObject
+BrGlamorousButtonTheme >> disabledBackgroundColor: aColor [
+	self
+		constantAt: #disabledBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -66,8 +75,11 @@ BrGlamorousButtonTheme >> disabledBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> disabledBorderColor: anObject [
-	disabledBorderColor := anObject
+BrGlamorousButtonTheme >> disabledBorderColor: aColor [
+	self
+		constantAt: #disabledBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -76,8 +88,11 @@ BrGlamorousButtonTheme >> disabledTextColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> disabledTextColor: anObject [
-	disabledTextColor := anObject
+BrGlamorousButtonTheme >> disabledTextColor: aColor [
+	self
+		constantAt: #disabledTextColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -86,8 +101,11 @@ BrGlamorousButtonTheme >> fadedBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> fadedBackgroundColor: anObject [
-	fadedBackgroundColor := anObject
+BrGlamorousButtonTheme >> fadedBackgroundColor: aColor [
+	self
+		constantAt: #fadedBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -96,8 +114,11 @@ BrGlamorousButtonTheme >> focusedFadedBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> focusedFadedBackgroundColor: anObject [
-	focusedFadedBackgroundColor := anObject
+BrGlamorousButtonTheme >> focusedFadedBackgroundColor: aColor [
+	self
+		constantAt: #focusedFadedBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -106,8 +127,11 @@ BrGlamorousButtonTheme >> hoveredBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> hoveredBorderColor: anObject [
-	hoveredBorderColor := anObject
+BrGlamorousButtonTheme >> hoveredBorderColor: aColor [
+	self
+		constantAt: #hoveredBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -116,36 +140,40 @@ BrGlamorousButtonTheme >> hoveredTextColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> hoveredTextColor: anObject [
-	hoveredTextColor := anObject
-]
-
-{ #category : #initialization }
-BrGlamorousButtonTheme >> initializeColors [
-	super initializeColors.
-
-	pressedBorderColor := BrGlamorousColors pressedButtonBorderColor.
-
-	defaultBorderColor := Color gray.
-
-	defaultTextColor := Color white.
-
-	hoveredBorderColor := BrGlamorousColors hoveredButtonBorderColor.
-
-	pressedTextColor := BrGlamorousColors pressedButtonTextColor.
-
-	hoveredTextColor := BrGlamorousColors hoveredButtonTextColor.
-
-	textHighlightColor := BrGlamorousColors textHighlightColor.
-
-	fadedBackgroundColor := BrGlamorousColors fadedButtonBackgroundColor.
-
-	focusedFadedBackgroundColor := BrGlamorousColors hoveredButtonBorderColor
+BrGlamorousButtonTheme >> hoveredTextColor: aColor [
+	self
+		constantAt: #hoveredTextColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
 BrGlamorousButtonTheme >> initializeConstants [
-	super initializeConstants
+	super initializeConstants.
+	self
+		constantAt: #pressedBorderColor
+		put: BrGlamorousColors pressedButtonBorderColor.
+	self constantAt: #defaultBorderColor put: Color gray.
+	self constantAt: #defaultTextColor put: Color white.
+	self
+		constantAt: #hoveredBorderColor
+		put: BrGlamorousColors hoveredButtonBorderColor.
+	self
+		constantAt: #pressedTextColor
+		put: BrGlamorousColors pressedButtonTextColor.
+	self
+		constantAt: #hoveredTextColor
+		put: BrGlamorousColors hoveredButtonTextColor.
+	self constantAt: #textHighlightColor put: BrGlamorousColors textHighlightColor.
+	self
+		constantAt: #fadedBackgroundColor
+		put: BrGlamorousColors fadedButtonBackgroundColor.
+	self
+		constantAt: #focusedFadedBackgroundColor
+		put: BrGlamorousColors hoveredButtonBorderColor.
+	self
+		constantAt: #disabledBorderColor
+		put: BrGlamorousColors disabledButtonBorderColor
 ]
 
 { #category : #initialization }
@@ -165,7 +193,37 @@ BrGlamorousButtonTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme button defaultTextForeground ].
 	disabledTextColor := self
 			color: [ :aTheme | aTheme button constantAt: #disabledTextColor ]
-			source: [ :aTheme | aTheme button disabledTextColor ]
+			source: [ :aTheme | aTheme button disabledTextColor ].
+	pressedBorderColor := self
+			color: [ :aTheme | aTheme button constantAt: #pressedBorderColor ]
+			source: [ :aTheme | aTheme button pressedBorderColor ].
+	defaultBorderColor := self
+			color: [ :aTheme | aTheme button constantAt: #defaultBorderColor ]
+			source: [ :aTheme | aTheme button defaultBorderColor ].
+	defaultTextColor := self
+			color: [ :aTheme | aTheme button constantAt: #defaultTextColor ]
+			source: [ :aTheme | aTheme button defaultTextColor ].
+	hoveredBorderColor := self
+			color: [ :aTheme | aTheme button constantAt: #hoveredBorderColor ]
+			source: [ :aTheme | aTheme button hoveredBorderColor ].
+	pressedTextColor := self
+			color: [ :aTheme | aTheme button constantAt: #pressedTextColor ]
+			source: [ :aTheme | aTheme button pressedTextColor ].
+	hoveredTextColor := self
+			color: [ :aTheme | aTheme button constantAt: #hoveredTextColor ]
+			source: [ :aTheme | aTheme button hoveredTextColor ].
+	textHighlightColor := self
+			color: [ :aTheme | aTheme button constantAt: #textHighlightColor ]
+			source: [ :aTheme | aTheme button textHighlightColor ].
+	fadedBackgroundColor := self
+			color: [ :aTheme | aTheme button constantAt: #fadedBackgroundColor ]
+			source: [ :aTheme | aTheme button fadedBackgroundColor ].
+	focusedFadedBackgroundColor := self
+			color: [ :aTheme | aTheme button constantAt: #focusedFadedBackgroundColor ]
+			source: [ :aTheme | aTheme button focusedFadedBackgroundColor ].
+	disabledBorderColor := self
+			color: [ :aTheme | aTheme button constantAt: #disabledBorderColor ]
+			source: [ :aTheme | aTheme button disabledBorderColor ]
 ]
 
 { #category : #accessing }
@@ -174,8 +232,11 @@ BrGlamorousButtonTheme >> pressedBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> pressedBorderColor: anObject [
-	pressedBorderColor := anObject
+BrGlamorousButtonTheme >> pressedBorderColor: aColor [
+	self
+		constantAt: #pressedBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -184,8 +245,11 @@ BrGlamorousButtonTheme >> pressedTextColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> pressedTextColor: anObject [
-	pressedTextColor := anObject
+BrGlamorousButtonTheme >> pressedTextColor: aColor [
+	self
+		constantAt: #pressedTextColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -194,6 +258,9 @@ BrGlamorousButtonTheme >> textHighlightColor [
 ]
 
 { #category : #accessing }
-BrGlamorousButtonTheme >> textHighlightColor: anObject [
-	textHighlightColor := anObject
+BrGlamorousButtonTheme >> textHighlightColor: aColor [
+	self
+		constantAt: #textHighlightColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]

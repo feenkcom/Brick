@@ -5,11 +5,6 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousEditorLightTheme >> initializeColors [
-	super initializeColors
-]
-
-{ #category : #initialization }
 BrGlamorousEditorLightTheme >> initializeConstants [
 	super initializeConstants.
 
