@@ -24,7 +24,7 @@ BrGlamorousNearWhiteTheme >> initialize [
 	link initializeThemeable.
 	status := BrGlamorousStatusTheme theme: self.
 	status initializeThemeable.
-	default := BrGlamorousDefaultLightTheme theme: self.
+	default := BrGlamorousDefaultNearWhiteTheme theme: self.
 	default initializeThemeable.
 
 	editor := BrGlamorousEditorLightTheme theme: self.

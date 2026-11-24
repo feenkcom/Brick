@@ -6,5 +6,8 @@ Class {
 
 { #category : #initialization }
 BrGlamorousDefaultLightTheme >> initializeConstants [
-	super initializeConstants
+	super initializeConstants.
+	self
+		constantAt: #appBackground
+		put: BrGlamorousColors defaultHeaderBackgroundColor
 ]

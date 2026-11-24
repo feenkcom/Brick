@@ -8,7 +8,6 @@ Class {
 		'tertiaryTextColor',
 		'disabledTextColor',
 		'invertedTextColor',
-		'appBackgroundColor',
 		'backdropBackgroundColor',
 		'sidebarBackgroundColor',
 		'contentBackgroundColor',
@@ -24,19 +23,6 @@ Class {
 { #category : #'instance creation' }
 BrGlamorousThemeColors class >> theme: aBlTheme [
 	^ self new theme: aBlTheme
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> appBackgroundColor [
-	"App shell, full-page background"
-	<return: #Color>
-	
-	^ appBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> appBackgroundColor: anObject [
-	appBackgroundColor := anObject
 ]
 
 { #category : #accessing }

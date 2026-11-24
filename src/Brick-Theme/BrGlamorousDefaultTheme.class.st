@@ -150,7 +150,7 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme default navigationBackground ].
 
 	appBackground := self
-			color: [ :aTheme | aTheme colors appBackgroundColor ]
+			color: [ :aTheme | aTheme default constantAt: #appBackground ]
 			source: [ :aTheme | aTheme default appBackground ].
 	defaultShadowColor := self
 			color: [ :aTheme | aTheme default constantAt: #defaultShadowColor ]
