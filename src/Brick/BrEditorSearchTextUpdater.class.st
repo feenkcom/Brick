@@ -49,8 +49,9 @@ BrEditorSearchTextUpdater >> update [
 	(styledText isNextGenerationOf: editorModel text)
 		ifFalse: [ ^ false ].
 
+	"Next generation is guaranteed to have the same text: use the fast path"
 	(editorModel segmentBuilder
-		requiresResplittingFrom: editorModel text
+		requiresResplittingOfSameCharactersFrom: editorModel text
 		to: styledText)
 			ifTrue: [
 				"It is possible that the segment structure has changed"

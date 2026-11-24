@@ -130,6 +130,14 @@ BrTextEditorLineSegmentBuilder >> deletedFrom: aFromIndex to: aToIndex in: aBrTe
 		update
 ]
 
+{ #category : #'text - modifications' }
+BrTextEditorLineSegmentBuilder >> hasAttributeMergingSegmentsIn: aBlText [
+	<return: #Boolean>
+
+	^ aBlText hasAttributeSuchThat: [ :eachAttribute |
+		self splitter wantsToMergeSegments: eachAttribute ]
+]
+
 { #category : #initialization }
 BrTextEditorLineSegmentBuilder >> initialize [
 	super initialize.
@@ -182,6 +190,19 @@ BrTextEditorLineSegmentBuilder >> requiresResplittingFrom: attributedSubText to:
 	oldSegmentCount := self splitSegmentCountOf: anAffectedText.
 	newSegmentCount := self splitSegmentCountOf: attributedSubText.
 	^ oldSegmentCount ~= newSegmentCount
+]
+
+{ #category : #'text - modifications' }
+BrTextEditorLineSegmentBuilder >> requiresResplittingOfSameCharactersFrom: attributedText to: anotherAttributedText [
+	"Return true if two texts are split into a different number of segments.
+  A faster alternative to #requiresResplittingFrom:to: when characters of the two texts equal."
+	<return: #Boolean>
+
+	((self hasAttributeMergingSegmentsIn: attributedText)
+		or: [ self hasAttributeMergingSegmentsIn: anotherAttributedText ])
+			ifFalse: [ ^ false ].
+
+	^ self requiresResplittingFrom: attributedText to: anotherAttributedText
 ]
 
 { #category : #'text - modifications' }

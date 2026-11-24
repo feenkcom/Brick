@@ -1028,8 +1028,9 @@ BrTextEditorModel >> onTextStyled: aBlTextStyledEvent [
 	self assertUIProcess.
 
 	(aBlTextStyledEvent text isNextGenerationOf: self text)
-		ifTrue: [ (self segmentBuilder
-				requiresResplittingFrom: self text
+		ifTrue: [ "Next generation has the same text underneath -> use fast path"
+			(self segmentBuilder
+				requiresResplittingOfSameCharactersFrom: self text
 				to: aBlTextStyledEvent text)
 				ifTrue: [  "It is possible that the segment structure has changed"self segmentBuilder
 						resetSegmentCacheAndNotify: self ].
