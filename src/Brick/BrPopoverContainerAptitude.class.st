@@ -18,7 +18,7 @@ BrPopoverContainerAptitude >> initialize [
 				enlargedBy: 1 ].
 	self
 		add: (BrLazyStyleCommonAptitude new
-				default: [ :aStyle :aTheme | aStyle border: (BlBorder paint: aTheme button fadedBackgroundColor width: 1) ]).
+				default: [ :aStyle :aTheme | aStyle border: (BlBorder paint: aTheme button defaultBorderColor width: 1) ]).
 	self addChangeProperty: #(widget outskirts) with: [ BlOutskirts outside ].
 	self
 		addChangeProperty: #(widget background)
