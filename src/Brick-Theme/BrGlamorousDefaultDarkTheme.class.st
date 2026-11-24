@@ -8,13 +8,13 @@ Class {
 BrGlamorousDefaultDarkTheme >> initializeConstants [
 	super initializeConstants.
 	self constantAt: #defaultShadowColor put: BrAntColors gray8.
-	self constantAt: #primaryShadowColor put: BrGlamorousColors primaryBorderColor.
-	self constantAt: #primaryBorderColor put: BrGlamorousColors primaryBorderColor.
+	self constantAt: #primaryShadowColor put: BrAntColors blue4.
+	self constantAt: #primaryBorderColor put: BrAntColors blue4.
 	self constantAt: #darkBorderColor put: BrGlamorousColors darkBorderColor.
 	self
 		constantAt: #newsBackgroundColor
 		put: BrGlamorousColors newsBackgroundColor.
-	self constantAt: #lightBorderColor put: BrGlamorousColors lightBorderColor.
+	self constantAt: #lightBorderColor put: BrAntColors gray7.
 	self
 		constantAt: #expandCollapseTriangleBackgroundColor
 		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.
