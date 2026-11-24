@@ -16,10 +16,6 @@ BrGlamorousWhiteThemeColors >> initialize [
 	tertiaryTextColor := Color gray.
 	disabledTextColor := Color gray.
 	invertedTextColor := Color white.
-	backdropBackgroundColor := Color fromHexString: '#FAFAFA'.
-	backdropEmphasisBackgroundColor := Color fromHexString: '#D9D9D9'.
-	sidebarBackgroundColor := BrGlamorousColors neutralBackgroundColor.
-	contentBackgroundColor := Color white.
 	groupBackgroundColor := nil.
 	raisedBackgroundColor := nil.
 	floatBackgroundColor := nil.

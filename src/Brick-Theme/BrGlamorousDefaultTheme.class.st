@@ -134,19 +134,19 @@ BrGlamorousDefaultTheme >> initializeThemeable [
 	super initializeThemeable.
 
 	contentBackground := self
-			color: [ :aTheme | aTheme colors contentBackgroundColor ]
+			color: [ :aTheme | aTheme default constantAt: #contentBackground ]
 			source: [ :aTheme | aTheme default contentBackground ].
 
 	backdropBackground := self
-			color: [ :aTheme | aTheme colors backdropBackgroundColor ]
+			color: [ :aTheme | aTheme default constantAt: #backdropBackground ]
 			source: [ :aTheme | aTheme default backdropBackground ].
 
 	backdropEmphasisBackground := self
-			color: [ :aTheme | aTheme colors backdropEmphasisBackgroundColor ]
+			color: [ :aTheme | aTheme default constantAt: #backdropEmphasisBackground ]
 			source: [ :aTheme | aTheme default backdropEmphasisBackground ].
 
 	navigationBackground := self
-			color: [ :aTheme | aTheme colors sidebarBackgroundColor ]
+			color: [ :aTheme | aTheme default constantAt: #navigationBackground ]
 			source: [ :aTheme | aTheme default navigationBackground ].
 
 	appBackground := self
