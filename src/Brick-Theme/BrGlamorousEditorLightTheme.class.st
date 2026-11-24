@@ -7,6 +7,9 @@ Class {
 { #category : #initialization }
 BrGlamorousEditorLightTheme >> initializeConstants [
 	super initializeConstants.
+	self
+		constantAt: #completionPreviewBackground
+		put: BrGlamorousColors editorBorderColor.
 	self constantAt: #borderColor put: BrGlamorousColors editorBorderColor.
 
 	self constantAt: #pharoDeclaredVariableForeground put: Color blue muchDarker.

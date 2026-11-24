@@ -23,7 +23,8 @@ Class {
 		'enabledBreakpointForeground',
 		'enabledBreakpointBackground',
 		'disabledBreakpointBackground',
-		'disabledBreakpointForeground'
+		'disabledBreakpointForeground',
+		'completionPreviewBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -39,6 +40,11 @@ BrGlamorousEditorTheme >> borderColor: aColor [
 		constantAt: #borderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> completionPreviewBackground [
+	^ completionPreviewBackground
 ]
 
 { #category : #accessing }
@@ -163,7 +169,10 @@ BrGlamorousEditorTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme editor disabledBreakpointBackground ].
 	disabledBreakpointForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #disabledBreakpointForeground ]
-			source: [ :aTheme | aTheme editor disabledBreakpointForeground ]
+			source: [ :aTheme | aTheme editor disabledBreakpointForeground ].
+	completionPreviewBackground := self
+			color: [ :aTheme | aTheme editor constantAt: #completionPreviewBackground ]
+			source: [ :aTheme | aTheme editor completionPreviewBackground ]
 ]
 
 { #category : #accessing }
