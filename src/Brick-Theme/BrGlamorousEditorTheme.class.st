@@ -20,7 +20,10 @@ Class {
 		'pharoCharacterLiteralForeground',
 		'pharoCommentForeground',
 		'pharoErrorTokenForeground',
-		'enabledBreakpointForeground'
+		'enabledBreakpointForeground',
+		'enabledBreakpointBackground',
+		'disabledBreakpointBackground',
+		'disabledBreakpointForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -44,6 +47,21 @@ BrGlamorousEditorTheme >> defaultTextForeground [
 ]
 
 { #category : #accessing }
+BrGlamorousEditorTheme >> disabledBreakpointBackground [
+	^ disabledBreakpointBackground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> disabledBreakpointForeground [
+	^ disabledBreakpointForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> enabledBreakpointBackground [
+	^ enabledBreakpointBackground
+]
+
+{ #category : #accessing }
 BrGlamorousEditorTheme >> enabledBreakpointForeground [
 	^ enabledBreakpointForeground
 ]
@@ -59,16 +77,6 @@ BrGlamorousEditorTheme >> focusedBorderColor: aColor [
 		constantAt: #focusedBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
-]
-
-{ #category : #initialization }
-BrGlamorousEditorTheme >> initializeConstants [
-	super initializeConstants.
-	self constantAt: #borderColor put: BrGlamorousColors editorBorderColor.
-	self
-		constantAt: #focusedBorderColor
-		put: BrGlamorousColors focusedEditorBorderColor.
-	self constantAt: #enabledBreakpointForeground put: Color lightBrown
 ]
 
 { #category : #initialization }
@@ -146,7 +154,16 @@ BrGlamorousEditorTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme editor focusedBorderColor ].
 	enabledBreakpointForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #enabledBreakpointForeground ]
-			source: [ :aTheme | aTheme editor enabledBreakpointForeground ]
+			source: [ :aTheme | aTheme editor enabledBreakpointForeground ].
+	enabledBreakpointBackground := self
+			color: [ :aTheme | aTheme editor constantAt: #enabledBreakpointBackground ]
+			source: [ :aTheme | aTheme editor enabledBreakpointBackground ].
+	disabledBreakpointBackground := self
+			color: [ :aTheme | aTheme editor constantAt: #disabledBreakpointBackground ]
+			source: [ :aTheme | aTheme editor disabledBreakpointBackground ].
+	disabledBreakpointForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #disabledBreakpointForeground ]
+			source: [ :aTheme | aTheme editor disabledBreakpointForeground ]
 ]
 
 { #category : #accessing }
