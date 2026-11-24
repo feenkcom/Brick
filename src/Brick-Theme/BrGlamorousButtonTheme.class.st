@@ -148,35 +148,6 @@ BrGlamorousButtonTheme >> hoveredTextColor: aColor [
 ]
 
 { #category : #initialization }
-BrGlamorousButtonTheme >> initializeConstants [
-	super initializeConstants.
-	self
-		constantAt: #pressedBorderColor
-		put: BrGlamorousColors pressedButtonBorderColor.
-	self constantAt: #defaultBorderColor put: Color gray.
-	self constantAt: #defaultTextColor put: Color white.
-	self
-		constantAt: #hoveredBorderColor
-		put: BrGlamorousColors hoveredButtonBorderColor.
-	self
-		constantAt: #pressedTextColor
-		put: BrGlamorousColors pressedButtonTextColor.
-	self
-		constantAt: #hoveredTextColor
-		put: BrGlamorousColors hoveredButtonTextColor.
-	self constantAt: #textHighlightColor put: BrGlamorousColors textHighlightColor.
-	self
-		constantAt: #fadedBackgroundColor
-		put: BrGlamorousColors fadedButtonBackgroundColor.
-	self
-		constantAt: #focusedFadedBackgroundColor
-		put: BrGlamorousColors hoveredButtonBorderColor.
-	self
-		constantAt: #disabledBorderColor
-		put: BrGlamorousColors disabledButtonBorderColor
-]
-
-{ #category : #initialization }
 BrGlamorousButtonTheme >> initializeThemeable [
 	super initializeThemeable.
 

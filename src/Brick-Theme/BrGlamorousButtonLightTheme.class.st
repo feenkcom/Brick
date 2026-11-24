@@ -21,5 +21,24 @@ BrGlamorousButtonLightTheme >> initializeConstants [
 		put: BrGlamorousColors defaultButtonBorderColor.
 	self
 		constantAt: #defaultTextColor
-		put: BrGlamorousColors defaultButtonTextColor
+		put: BrGlamorousColors defaultButtonTextColor.
+	self
+		constantAt: #pressedBorderColor
+		put: BrGlamorousColors pressedButtonBorderColor.
+	self
+		constantAt: #hoveredBorderColor
+		put: BrGlamorousColors hoveredButtonBorderColor.
+	self
+		constantAt: #pressedTextColor
+		put: BrGlamorousColors pressedButtonTextColor.
+	self
+		constantAt: #hoveredTextColor
+		put: BrGlamorousColors hoveredButtonTextColor.
+	self constantAt: #textHighlightColor put: BrGlamorousColors textHighlightColor.
+	self
+		constantAt: #fadedBackgroundColor
+		put: BrGlamorousColors fadedButtonBackgroundColor.
+	self
+		constantAt: #focusedFadedBackgroundColor
+		put: BrGlamorousColors hoveredButtonBorderColor
 ]
