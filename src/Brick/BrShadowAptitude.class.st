@@ -28,12 +28,16 @@ BrShadowAptitude >> color: aColor [
 BrShadowAptitude >> initialize [
 	super initialize.
 	shadow := BlGaussianShadowEffect
-		color: self theme default defaultShadowColor
-		width: 2
-		offset: 0 @ 1.
+			color: self theme default defaultShadowColor
+			width: 2
+			offset: 0 @ 1.
+	self initializeShadowStyle
+]
+
+{ #category : #initialization }
+BrShadowAptitude >> initializeShadowStyle [
 	self
-		addChange:
-			(BrLookChange new
+		addChange: (BrLookChange new
 				up: [ :e | e widget effect: shadow ];
 				down: [ :e | e widget effect: BlNullEffect new ])
 ]
