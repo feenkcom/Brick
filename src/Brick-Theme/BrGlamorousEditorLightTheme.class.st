@@ -29,8 +29,3 @@ BrGlamorousEditorLightTheme >> initializeConstants [
 	self constantAt: #pharoCommentForeground put: Color gray darker.
 	self constantAt: #pharoErrorTokenForeground put: Color red
 ]
-
-{ #category : #initialization }
-BrGlamorousEditorLightTheme >> initializeThemeable [
-	super initializeThemeable
-]
