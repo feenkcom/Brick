@@ -47,7 +47,9 @@ BrPagerExamples >> closePageWithPendingFuture [
 
 	self assert: firstPage viewModel pendingFuturePromises size equals: 0.	"because an element was removed from the scene graph, an update is not sceduled, therefore
 	whenError: block is not executed, it is expected and actually quite nice"
-	self assert: futureResult isNil.
+	self 
+		assert: futureResult isNil 
+		description: [ 'future result must be nil: {1}' format: { futureResult }  ].
 
 	^ scripter
 ]
