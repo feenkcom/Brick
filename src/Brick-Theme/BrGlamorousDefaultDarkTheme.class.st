@@ -14,7 +14,7 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	self
 		constantAt: #newsBackgroundColor
 		put: BrGlamorousColors newsBackgroundColor.
-	self constantAt: #subtleBorderColor put: BrAntColors gray8.
+	self constantAt: #subtleBorderColor put: BrAntColors gray10.
 	self
 		constantAt: #expandCollapseTriangleBackgroundColor
 		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.
@@ -25,9 +25,9 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	self
 		constantAt: #distinctTenLightColors
 		put: BrGlamorousColors distinctTenLightColors.
-	self constantAt: #appBackground put: BrAntColors gray8.
-	self constantAt: #contentBackground put: BrAntColors gray9.
-	self constantAt: #backdropBackground put: BrAntColors gray9.
+	self constantAt: #appBackground put: BrAntColors gray9 .
+	self constantAt: #contentBackground put: BrAntColors gray11.
+	self constantAt: #backdropBackground put: BrAntColors gray10.
 	self
 		constantAt: #backdropEmphasisBackground
 		put: (Color fromHexString: '#B3B3B3').
