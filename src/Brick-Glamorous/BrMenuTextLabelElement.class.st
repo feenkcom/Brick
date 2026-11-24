@@ -85,21 +85,21 @@ BrMenuTextLabelElement >> labelModel: aBrMenuTextLabelModel [
 
 { #category : #'private - updating' }
 BrMenuTextLabelElement >> labelText [
-	| aFormatedText |
-	aFormatedText := nil.
-	self labelModel textDo: [ :aText | 
-		aFormatedText := aText asRopedText glamorousRegularFont.
-		self labelModel previewDo: [ :aPreview | 
-		aFormatedText append: ((' ' , aPreview asString) asRopedText
-			glamorousCodeFont;
-			foreground: Color gray;
-			glamorousCodeTinySize) ] ].
-			
-	aFormatedText ifNotNil: [ 
-		self isDisabled ifTrue: [ 
-			aFormatedText foreground: self theme button disabledTextColor ] ].
-			
-	^ aFormatedText ifNil: [ '' ]
+	| aFormattedText |
+	aFormattedText := (self labelModel text ifNil: [ ^ '' ]) asRopedText
+			glamorousRegularFont;
+			foreground: self theme label defaultTextForeground;
+			yourself.
+	self labelModel
+		previewDo: [ :aPreview | 
+			aFormattedText
+				append: ((' ' , aPreview asString) asRopedText
+						glamorousCodeFont;
+						foreground: self theme label summaryTextForeground;
+						glamorousCodeTinySize) ].
+	self isDisabled
+		ifTrue: [ aFormattedText foreground: self theme button disabledTextColor ].
+	^ aFormattedText
 ]
 
 { #category : #'event handling' }
