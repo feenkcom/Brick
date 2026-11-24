@@ -245,10 +245,10 @@ BrGlamorousVectorIcons class >> cloud [
 BrGlamorousVectorIcons class >> collapsebar [
 	^ [ BlElement new
 		size: 16 @ 16;
-		addChild: (BlElement new
-				size: 2 @ 10;
-				relocate: 7 @ 3;
-				background: Color black) ] asStencil
+		geometry: (BlSvgPath new
+				svg: 'M 7 3 L 9 3 L 9 13 L 7 13 Z'
+				viewbox: (0 @ 0 extent: 16 @ 16));
+		background: Color black ] asStencil
 ]
 
 { #category : #icons }
@@ -920,6 +920,16 @@ BrGlamorousVectorIcons class >> leftSide [
 			svg: 'M 7.5 14.5 L 8.5 14.5 L 14.5 14.5 L 14.5 1.5 L 8.5 1.5 L 7.5 1.5 L 1.5 1.5 L 1.5 14.5 Z M 8.5 13.5 L 8.5 2.5 L 13.5 2.5 L 13.5 13.5 Z M 8.5 13.5 L 8.5 2.5'
 			viewbox: (0@0 extent: 16@16));
 		background: Color black ] asStencil
+]
+
+{ #category : #icons }
+BrGlamorousVectorIcons class >> lepiter [
+	^ [BlElement new
+	size: 16 @ 16;
+	outskirts: BlOutskirts centered;
+	geometry: (BlSvgPath new svg: 'M 7.124 6.337855 L 8.888 6.337855 L 8.888 12.289855 L 7.124 12.289855 Z M 8 5.401855 C 7.719999 5.401855 7.478001 5.3558555 7.274 5.263855 C 7.069999 5.1718546 6.900001 5.047856 6.764 4.891855 C 6.627999 4.7358543 6.524 4.557856 6.452 4.357855 C 6.38 4.157854 6.34 3.949856 6.332 3.733855 L 7.316 3.733855 C 7.34 3.925856 7.4079995 4.0898544 7.52 4.225855 C 7.632001 4.361856 7.791999 4.429855 8 4.429855 C 8.208001 4.429855 8.367999 4.361856 8.48 4.225855 C 8.592001 4.0898544 8.66 3.925856 8.684 3.733855 L 9.668 3.733855 C 9.66 3.949856 9.62 4.157854 9.548 4.357855 C 9.476 4.557856 9.372001 4.7358543 9.236 4.891855 C 9.099999 5.047856 8.930001 5.1718546 8.726 5.263855 C 8.521999 5.3558555 8.280001 5.401855 8 5.401855 Z'
+	viewbox: (0 @ 0 extent: 16 @ 16));
+	background: Color black] asStencil
 ]
 
 { #category : #icons }
@@ -1596,41 +1606,16 @@ BrGlamorousVectorIcons class >> tree [
 
 { #category : #icons }
 BrGlamorousVectorIcons class >> twoColumnTable [
-	<script: 'self chat inspect'>
-	^ [ | container outline vLine h1 |
-	container := BlElement new size: 16 @ 16.
-	outline := BlElement new
-			geometry: (BlPolygonGeometry
-					vertices: {1 @ 1.
-							15 @ 1.
-							15 @ 15.
-							1 @ 15});
-			size: 16 @ 16;
-			border: (BlBorder paint: Color black width: 1);
-			yourself.
-	vLine := BlElement new
-			geometry: (BlPolygonGeometry
-					vertices: {8 @ 2.
-							9 @ 2.
-							9 @ 14.
-							8 @ 14});
-			size: 16 @ 16;
-			background: Color black;
-			yourself.
-	h1 := BlElement new
-			geometry: (BlPolygonGeometry
-					vertices: {2 @ 6.
-							14 @ 6.
-							14 @ 7.
-							2 @ 7});
-			size: 16 @ 16;
-			background: Color black;
-			yourself.
-	container
-		addChildren: {outline.
-				vLine.
-				h1}.
-	container ] asStencil
+	<script: 'self twoColumnTable inspect'>
+	^ [ BlElement new
+		size: 16 @ 16;
+		geometry: (BlSvgPath new
+				svg: 'M 0.5 0.5 L 15.5 0.5 L 15.5 15.5 L 0.5 15.5 Z
+M 1.5 1.5 L 1.5 14.5 L 14.5 14.5 L 14.5 1.5 Z
+M 7.5 2 L 8.5 2 L 8.5 14 L 7.5 14 Z
+M 2 6 L 14 6 L 14 7 L 2 7 Z'
+				viewbox: (0 @ 0 extent: 16 @ 16));
+		background: Color black ] asStencil
 ]
 
 { #category : #geometry }

@@ -63,6 +63,13 @@ BrGlamorousEditableLabelAptitude >> defaultForeground: anObject [
 	defaultForeground := anObject
 ]
 
+{ #category : #accessing }
+BrGlamorousEditableLabelAptitude >> editableBackground: aBackground [
+	styleLook
+		when: BrEditorModeState editable
+		style: [ :aStyle | aStyle background: aBackground ]
+]
+
 { #category : #initialization }
 BrGlamorousEditableLabelAptitude >> initialize [
 	super initialize.

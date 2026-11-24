@@ -161,6 +161,18 @@ BrGlamorousDefaultTheme >> primaryBorderColor: anObject [
 ]
 
 { #category : #accessing }
+BrGlamorousDefaultTheme >> primaryShadowColor [
+	^ constants
+		at: #primaryShadowColor
+		ifAbsent: [ BrGlamorousColors primaryBorderColor ]
+]
+
+{ #category : #accessing }
+BrGlamorousDefaultTheme >> primaryShadowColor: aColor [
+	self constantAt: #primaryShadowColor put: aColor
+]
+
+{ #category : #accessing }
 BrGlamorousDefaultTheme >> shadowColor [
 	^ shadowColor
 ]

@@ -27,16 +27,9 @@ BrGlamorousWithMaximizerAptitude >> actionButtonDo: aBlock [
 
 { #category : #initialization }
 BrGlamorousWithMaximizerAptitude >> createActionButton [
-	^ BrButton new
-		background: Color white;
-		aptitude: BrIconAptitude + BrGlamorousFocusableShadowAptitude + (BrStyleCommonAptitude new
-			default: [ :s | s background: Color white ];
-			hovered: [ :s | s background: Color veryVeryLightGray lighter ];
-			pressed: [ :s | s background: Color veryVeryLightGray ]);
-		geometry: BlEllipseGeometry new;
-		layout: BlLinearLayout horizontal alignCenter;
-		icon: (BrPlusIconStencil new radius: 4);
-		exact: 16@16
+	^ GtInspectorRoundButtonStencil new asElement
+		icon: BrGlamorousVectorIcons add;
+		exact: 16 @ 16
 ]
 
 { #category : #'api - visibility' }

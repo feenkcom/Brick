@@ -32,10 +32,10 @@ BrMenuItemElement >> initialize [
 { #category : #initialization }
 BrMenuItemElement >> initializeCommonStyling [
 	self
-		addAptitude: (BrStyleCommonAptitude new
-				default: [ :aStyle | aStyle background: Color white ];
-				hovered: [ :aStyle | aStyle background: self theme item selectedColor ];
-				pressed: [ :aStyle | aStyle background: self theme item pressedColor ])
+		addAptitude: (BrLazyStyleCommonAptitude new
+				default: [ :aStyle :aTheme | aStyle background: aTheme item deselectedColor ];
+				hovered: [ :aStyle :aTheme | aStyle background: aTheme item selectedColor ];
+				pressed: [ :aStyle :aTheme | aStyle background: aTheme item pressedColor ])
 ]
 
 { #category : #accessing }
