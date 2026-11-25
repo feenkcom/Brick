@@ -24,7 +24,8 @@ Class {
 		'enabledBreakpointBackground',
 		'disabledBreakpointBackground',
 		'disabledBreakpointForeground',
-		'completionPreviewBackground'
+		'completionPreviewBackground',
+		'occurrenceHighlight'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -92,6 +93,10 @@ BrGlamorousEditorTheme >> initializeThemeable [
 	defaultTextForeground := self
 			color: [ :aTheme | aTheme colors primaryTextColor ]
 			source: [ :aTheme | aTheme editor defaultTextForeground ].
+
+	occurrenceHighlight := self
+			color: [ :aTheme | aTheme editor constantAt: #occurrenceHighlight ]
+			source: [ :aTheme | aTheme editor occurrenceHighlight ].
 
 	pharoDeclaredVariableForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #pharoDeclaredVariableForeground ]
@@ -173,6 +178,11 @@ BrGlamorousEditorTheme >> initializeThemeable [
 	completionPreviewBackground := self
 			color: [ :aTheme | aTheme editor constantAt: #completionPreviewBackground ]
 			source: [ :aTheme | aTheme editor completionPreviewBackground ]
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> occurrenceHighlight [
+	^ occurrenceHighlight
 ]
 
 { #category : #accessing }

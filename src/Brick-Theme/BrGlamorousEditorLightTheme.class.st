@@ -7,6 +7,7 @@ Class {
 { #category : #initialization }
 BrGlamorousEditorLightTheme >> initializeConstants [
 	super initializeConstants.
+	self constantAt: #occurrenceHighlight put: (Color fromHexString: '#F0F0F0').
 	self
 		constantAt: #completionPreviewBackground
 		put: BrGlamorousColors editorBorderColor.
