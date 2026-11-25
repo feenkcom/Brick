@@ -21,7 +21,7 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	self constantAt: #subtleBorderColor put: BrAntColors gray9.
 	self
 		constantAt: #newsBackgroundColor
-		put: BrGlamorousColors newsBackgroundColor.
+		put: BrAntColors orange2.
 	self
 		constantAt: #expandCollapseTriangleBackgroundColor
 		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.
@@ -29,15 +29,15 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	self
 		constantAt: #distinctTenStrongColors
 		put: (OrderedCollection new				
-				add: BrAntColors red4;
-				add: BrAntColors blue4;
-				add: BrAntColors orange4;
-				add: BrAntColors cyan4;
-				add: BrAntColors green4;
-				add: BrAntColors volcano4;
-				add: BrAntColors purple4;
-				add: BrAntColors magenta4;
-				add: BrAntColors yellow4;
+				add: BrAntColors red2;
+				add: BrAntColors blue2;
+				add: BrAntColors orange2;
+				add: BrAntColors cyan3;
+				add: BrAntColors green2;
+				add: BrAntColors purple2;
+				add: BrAntColors volcano3;
+				add: BrAntColors magenta3;
+				add: BrAntColors yellow2;
 				add: BrAntColors gray4;
 				yourself).
 	self
