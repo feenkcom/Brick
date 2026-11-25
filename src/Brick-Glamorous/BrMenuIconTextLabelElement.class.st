@@ -9,18 +9,10 @@ Class {
 
 { #category : #private }
 BrMenuIconTextLabelElement >> applyDefaultForegroundToIcon: anIcon [
-	| aForeground aBlackBackground aBlackPaint |
+	| aForeground |
 	aForeground := self theme label defaultTextForeground.
-	aBlackBackground := Color black asBlBackground.
-	aBlackPaint := aBlackBackground paint.
 	anIcon
-		withAllChildrenBreadthFirstDo: [ :anElement | 
-			| aBorder |
-			aBlackBackground = anElement background
-				ifTrue: [ anElement background: aForeground ].
-			aBorder := anElement border.
-			(aBorder isVisible and: [ aBlackPaint = aBorder paint ])
-				ifTrue: [ anElement border: (aBorder copyWithPaint: aForeground) ] ]
+		withAllChildrenBreadthFirstDo: [ :anElement | BrIconAptitude replaceBlackPaintOn: anElement with: aForeground ]
 ]
 
 { #category : #initialization }

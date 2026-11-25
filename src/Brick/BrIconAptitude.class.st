@@ -18,6 +18,17 @@ Class {
 	#category : #'Brick-! Core - Aptitudes'
 }
 
+{ #category : #styling }
+BrIconAptitude class >> replaceBlackPaintOn: anElement with: aForeground [
+	| aBlackBackground aBorder |
+	aBlackBackground := Color black asBlBackground.
+	aBlackBackground = anElement background
+		ifTrue: [ anElement background: aForeground ].
+	aBorder := anElement border.
+	(aBorder isVisible and: [ aBlackBackground paint = aBorder paint ])
+		ifTrue: [ anElement border: (aBorder copyWithPaint: aForeground) ]
+]
+
 { #category : #accessing }
 BrIconAptitude >> icon [
 	<return: #BlElement>
