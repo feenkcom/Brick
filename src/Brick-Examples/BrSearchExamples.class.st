@@ -85,7 +85,7 @@ BrSearchExamples >> simpleListWithLabelItem_02_scrollDown [
 			equals: #(#(10 10) #(14 14) #(23 23) #(25 25));
 		/ #methods;
 		// BrLabel;
-		@ [ :aLabel | aLabel text asString = #hasPropertiesToPropagateToChildren ];
+		@ [ :aLabel | aLabel text asString = 'hasPropertiesToPropagateToChildren' ];
 		play.
 
 	^ scripter
