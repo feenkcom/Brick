@@ -8,8 +8,8 @@ Class {
 BrGlamorousDefaultDarkTheme >> initializeConstants [
 	super initializeConstants.
 	self constantAt: #defaultShadowColor put: BrAntColors gray8.
-	self constantAt: #primaryShadowColor put: BrAntColors blue4.
-	self constantAt: #primaryBorderColor put: BrAntColors blue4.
+	self constantAt: #primaryShadowColor put: BrAntColors blue8.
+	self constantAt: #primaryBorderColor put: BrAntColors blue8.
 	self constantAt: #strongBorderColor put: BrAntColors gray3.
 	self
 		constantAt: #newsBackgroundColor
