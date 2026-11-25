@@ -88,6 +88,15 @@ BrGlamorousTheme >> header: anObject [
 	header := anObject
 ]
 
+{ #category : #utility }
+BrGlamorousTheme >> installAsDefault [
+	| previousTheme theme |
+	previousTheme := BlTheme default.
+	BlTheme default: theme.
+	previousTheme notifyThemeModified.
+	BlSpace allOpenSpacesDo: [ :s | s theme: theme ]
+]
+
 { #category : #accessing }
 BrGlamorousTheme >> item [
 	^ item
