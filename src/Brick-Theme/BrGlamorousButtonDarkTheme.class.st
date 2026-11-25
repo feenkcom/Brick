@@ -11,7 +11,7 @@ BrGlamorousButtonDarkTheme >> initializeConstants [
 	self constantAt: #disabledBackgroundColor put: BrAntColors gray8.
 	self constantAt: #disabledTextColor put: BrAntColors gray5.
 	self constantAt: #disabledBorderColor put: BrAntColors gray8.
-	self constantAt: #defaultBackground put: BrAntColors gray9.
+	self constantAt: #defaultBackground put: BrAntColors gray10.
 	self constantAt: #fadedBackgroundColor put: BrAntColors gray7.
 	self constantAt: #defaultBorderColor put: BrAntColors gray8.
 	self constantAt: #defaultTextColor put: BrAntColors gray3.
