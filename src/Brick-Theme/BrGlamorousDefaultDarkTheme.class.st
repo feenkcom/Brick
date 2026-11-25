@@ -7,14 +7,19 @@ Class {
 { #category : #initialization }
 BrGlamorousDefaultDarkTheme >> initializeConstants [
 	super initializeConstants.
+	self constantAt: #appBackground put: BrAntColors gray9 .
+	self constantAt: #contentBackground put: BrAntColors gray10.
+	self constantAt: #backdropBackground put: BrAntColors gray10.
+	self constantAt: #backdropEmphasisBackground put: (Color fromHexString: '#B3B3B3').
+
 	self constantAt: #defaultShadowColor put: BrAntColors gray8.
 	self constantAt: #primaryShadowColor put: BrAntColors blue8.
 	self constantAt: #primaryBorderColor put: BrAntColors blue8.
 	self constantAt: #strongBorderColor put: BrAntColors gray3.
+	self constantAt: #subtleBorderColor put: BrAntColors gray9.
 	self
 		constantAt: #newsBackgroundColor
 		put: BrGlamorousColors newsBackgroundColor.
-	self constantAt: #subtleBorderColor put: BrAntColors gray10.
 	self
 		constantAt: #expandCollapseTriangleBackgroundColor
 		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.
@@ -25,11 +30,5 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	self
 		constantAt: #distinctTenLightColors
 		put: BrGlamorousColors distinctTenLightColors.
-	self constantAt: #appBackground put: BrAntColors gray9 .
-	self constantAt: #contentBackground put: BrAntColors gray11.
-	self constantAt: #backdropBackground put: BrAntColors gray10.
-	self
-		constantAt: #backdropEmphasisBackground
-		put: (Color fromHexString: '#B3B3B3').
 	self constantAt: #navigationBackground put: (Color fromHexString: '#333333')
 ]
