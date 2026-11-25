@@ -15,8 +15,8 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 		put: (Color fromHexString: '#B3B3B3').
 
 	self constantAt: #defaultShadowColor put: BrAntColors gray8.
-	self constantAt: #primaryShadowColor put: BrAntColors blue8.
-	self constantAt: #primaryBorderColor put: BrAntColors blue8.
+	self constantAt: #primaryShadowColor put: BrAntColors blue6.
+	self constantAt: #primaryBorderColor put: BrAntColors blue6.
 	self constantAt: #strongBorderColor put: BrAntColors gray3.
 	self constantAt: #subtleBorderColor put: BrAntColors gray9.
 	self
