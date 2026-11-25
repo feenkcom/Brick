@@ -118,8 +118,18 @@ BrGlamorousTheme >> link: anObject [
 	link := anObject
 ]
 
+{ #category : #accessing }
+BrGlamorousTheme >> markup [
+	^ self subThemeAt: #brGlamorousMarkupTheme ifAbsentPut: [ self newMarkupTheme ]
+]
+
 { #category : #'instance creation' }
 BrGlamorousTheme >> newColumnedListTheme [
+	self subclassResponsibility
+]
+
+{ #category : #initialization }
+BrGlamorousTheme >> newMarkupTheme [
 	self subclassResponsibility
 ]
 

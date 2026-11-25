@@ -20,7 +20,7 @@ BrGlamorousNearWhiteTheme >> initialize [
 
 	colors := BrGlamorousWhiteThemeColors theme: self.
 
-	link := BrGlamorousLinkTheme theme: self.
+	link := BrGlamorousLinkLightTheme theme: self.
 	link initializeThemeable.
 	status := BrGlamorousStatusTheme theme: self.
 	status initializeThemeable.
@@ -46,4 +46,9 @@ BrGlamorousNearWhiteTheme >> initialize [
 { #category : #initialization }
 BrGlamorousNearWhiteTheme >> newColumnedListTheme [
 	^ BrColumnedListLightTheme theme: self
+]
+
+{ #category : #initialization }
+BrGlamorousNearWhiteTheme >> newMarkupTheme [
+	^ BrGlamorousMarkupLightTheme theme: self
 ]

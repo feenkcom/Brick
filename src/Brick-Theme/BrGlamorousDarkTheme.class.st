@@ -10,7 +10,7 @@ BrGlamorousDarkTheme >> initialize [
 
 	colors := BrGlamorousDarkThemeColors theme: self.
 
-	link := BrGlamorousLinkTheme theme: self.
+	link := BrGlamorousLinkDarkTheme theme: self.
 	link initializeThemeable.
 	status := BrGlamorousStatusDarkTheme theme: self.
 	status initializeThemeable.
@@ -37,4 +37,9 @@ BrGlamorousDarkTheme >> initialize [
 { #category : #'instance creation' }
 BrGlamorousDarkTheme >> newColumnedListTheme [
 	^ BrColumnedListDarkTheme theme: self
+]
+
+{ #category : #initialization }
+BrGlamorousDarkTheme >> newMarkupTheme [
+	^ BrGlamorousMarkupDarkTheme theme: self
 ]

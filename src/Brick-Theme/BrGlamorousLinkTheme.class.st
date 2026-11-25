@@ -31,13 +31,6 @@ BrGlamorousLinkTheme >> errorColor: aColor [
 ]
 
 { #category : #initialization }
-BrGlamorousLinkTheme >> initializeConstants [
-	super initializeConstants.
-	self constantAt: #color put: BrGlamorousColors linkColor.
-	self constantAt: #errorColor put: BrGlamorousColors linkWithErrorColor
-]
-
-{ #category : #initialization }
 BrGlamorousLinkTheme >> initializeThemeable [
 	super initializeThemeable.
 	color := self
