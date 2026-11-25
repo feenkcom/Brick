@@ -31,9 +31,9 @@ BrGlamorousWithHorizontalScrollbarAptitude >> initialize [
 
 { #category : #initialization }
 BrGlamorousWithHorizontalScrollbarAptitude >> scrollBarHoverAptitude [
-	^ BrStyleCommonAptitude new
-		default: [ :s | s background: self theme header defaultBackgroundColor ];
-		hovered: [ :s | s background: BrGlamorousColors hoveredButtonBorderColor ]
+	^ BrLazyStyleCommonAptitude new
+		default: [ :s :aTheme | s background: aTheme button fadedBackgroundColor ];
+		hovered: [ :s :aTheme | s background: aTheme button hoveredBorderColor ]
 ]
 
 { #category : #'private - accessing' }

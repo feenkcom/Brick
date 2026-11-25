@@ -5,13 +5,12 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousEditorLightTheme >> initializeColors [
-	super initializeColors
-]
-
-{ #category : #initialization }
 BrGlamorousEditorLightTheme >> initializeConstants [
 	super initializeConstants.
+	self
+		constantAt: #completionPreviewBackground
+		put: BrGlamorousColors editorBorderColor.
+	self constantAt: #borderColor put: BrGlamorousColors editorBorderColor.
 
 	self constantAt: #pharoDeclaredVariableForeground put: Color blue muchDarker.
 	self constantAt: #pharoUndeclaredVariableForeground put: Color blue muchDarker.
@@ -27,10 +26,14 @@ BrGlamorousEditorLightTheme >> initializeConstants [
 	self constantAt: #pharoBooleanLiteralForeground put: Color red muchDarker.
 	self constantAt: #pharoCharacterLiteralForeground put: Color red muchDarker.
 	self constantAt: #pharoCommentForeground put: Color gray darker.
-	self constantAt: #pharoErrorTokenForeground put: Color red
-]
-
-{ #category : #initialization }
-BrGlamorousEditorLightTheme >> initializeThemeable [
-	super initializeThemeable
+	self constantAt: #pharoErrorTokenForeground put: Color red.
+	self constantAt: #enabledBreakpointForeground put: Color black.
+	self constantAt: #enabledBreakpointBackground put: Color lightBrown.
+	self
+		constantAt: #disabledBreakpointBackground
+		put: BrGlamorousColors disabledButtonBorderColor.
+	self constantAt: #disabledBreakpointForeground put: Color black.
+	self
+		constantAt: #focusedBorderColor
+		put: BrGlamorousColors focusedEditorBorderColor
 ]

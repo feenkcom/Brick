@@ -126,11 +126,18 @@ BrGlamorousTheme >> newColumnedListTheme [
 { #category : #private }
 BrGlamorousTheme >> onThemeModified [
 	super onThemeModified.
-	default initializeThemeable.
-	editor initializeThemeable.
-	button initializeThemeable.
-	label initializeThemeable.
-	header initializeThemeable
+	{default.
+		editor.
+		button.
+		label.
+		header.
+		link.
+		status.
+		item}
+		do: [ :aSubTheme | 
+			aSubTheme
+				theme: self;
+				refreshThemeable ]
 ]
 
 { #category : #'as yet unclassified' }

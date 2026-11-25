@@ -13,11 +13,12 @@ Class {
 
 { #category : #initialization }
 BrGlamorousTabSwitcherAptitude >> createCommonStyleAptitude [
-	^ (BrStyleCommonAptitude new
-		default: [ :aStyle | aStyle background: Color white ];
-		hovered: [ :aStyle | aStyle background: Color veryVeryLightGray lighter ];
-		pressed: [ :aStyle | aStyle background: Color veryVeryLightGray  ];
-		selected: [ :aStyle | aStyle background: self theme item selectedColor ])
+	^ BrLazyStyleCommonAptitude new
+		default: [ :aStyle :aTheme | aStyle background: aTheme item deselectedColor ];
+		hovered: [ :aStyle :aTheme | aStyle background: aTheme item hoveredColor ];
+		pressed: [ :aStyle :aTheme | aStyle background: aTheme item pressedColor ];
+		selected: [ :aStyle :aTheme | aStyle background: aTheme item selectedColor ];
+		yourself
 ]
 
 { #category : #initialization }

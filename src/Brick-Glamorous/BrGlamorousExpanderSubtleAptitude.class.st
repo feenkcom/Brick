@@ -59,7 +59,7 @@ BrGlamorousExpanderSubtleAptitude >> cornerRadius: aNumber [
 
 { #category : #initialization }
 BrGlamorousExpanderSubtleAptitude >> defaultBorderPaint [
-	^ self theme default lightBorderColor
+	^ self theme default subtleBorderColor
 ]
 
 { #category : #initialization }

@@ -22,7 +22,7 @@ BrGlamorousCheckboxAptitude >> initialize [
 					(BlElement new
 						size: 8 @ 8;
 						background:
-							self theme default darkBorderColor muchDarker)).
+							self theme default darkBorderColor)).
 	self
 		add:
 			(BrCheckboxAptitude new

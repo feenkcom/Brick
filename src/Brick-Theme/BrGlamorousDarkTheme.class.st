@@ -9,24 +9,27 @@ BrGlamorousDarkTheme >> initialize [
 	super initialize.
 
 	colors := BrGlamorousDarkThemeColors theme: self.
-	
-	link := BrGlamorousLinkTheme new.
-	status := BrGlamorousStatusTheme new.
+
+	link := BrGlamorousLinkTheme theme: self.
+	link initializeThemeable.
+	status := BrGlamorousStatusDarkTheme theme: self.
+	status initializeThemeable.
 
 	default := BrGlamorousDefaultDarkTheme theme: self.
 	default initializeThemeable.
-	
+
 	editor := BrGlamorousEditorDarkTheme theme: self.
 	editor initializeThemeable.
-	
+
 	button := BrGlamorousButtonDarkTheme theme: self.
 	button initializeThemeable.
-	
-	item := BrGlamorousItemTheme new.
-	
+
+	item := BrGlamorousItemTheme theme: self.
+	item initializeThemeable.
+
 	header := BrGlamorousHeaderDarkTheme theme: self.
 	header initializeThemeable.
-	
+
 	label := BrGlamorousLabelTheme theme: self.
 	label initializeThemeable
 ]

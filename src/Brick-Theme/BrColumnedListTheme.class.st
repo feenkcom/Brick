@@ -18,16 +18,14 @@ BrColumnedListTheme >> headerBackgroundColor [
 
 { #category : #accessing }
 BrColumnedListTheme >> headerBackgroundColor: aColor [
-	self constantAt: #headerBackgroundColor put: aColor.
-	headerBackgroundColor := aColor
+	self constantAt: #headerBackgroundColor put: aColor
 ]
 
 { #category : #initialization }
-BrColumnedListTheme >> initializeColors [
-	super initializeColors.
-	headerBackgroundColor := self constantAt: #headerBackgroundColor.
-	sortableHeaderHoveredBackgroundColor := self
-			constantAt: #sortableHeaderHoveredBackgroundColor
+BrColumnedListTheme >> initializeConstants [
+	super initializeConstants.
+	self constantAt: #headerBackgroundColor put: Color transparent.
+	self constantAt: #sortableHeaderHoveredBackgroundColor put: BrAntColors gray2
 ]
 
 { #category : #initialization }
@@ -48,6 +46,5 @@ BrColumnedListTheme >> sortableHeaderHoveredBackgroundColor [
 
 { #category : #accessing }
 BrColumnedListTheme >> sortableHeaderHoveredBackgroundColor: aColor [
-	self constantAt: #sortableHeaderHoveredBackgroundColor put: aColor.
-	sortableHeaderHoveredBackgroundColor := aColor
+	self constantAt: #sortableHeaderHoveredBackgroundColor put: aColor
 ]

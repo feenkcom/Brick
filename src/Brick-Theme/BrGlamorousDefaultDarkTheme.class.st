@@ -5,46 +5,31 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousDefaultDarkTheme >> initializeColors [
-	super initializeColors.
-
-	distinctTenStrongColors := BrGlamorousColors distinctTenStrongColors.
-
-	lightBorderColor := BrGlamorousColors lightBorderColor.
-
-	expandCollapseTriangleBackgroundColor := BrGlamorousColors
-			expandCollapseTriangleBackgroundColor.
-
-	shadowColor := BrGlamorousColors shadowColor.
-
-	distinctTenLightColors := BrGlamorousColors distinctTenLightColors
-]
-
-{ #category : #initialization }
 BrGlamorousDefaultDarkTheme >> initializeConstants [
 	super initializeConstants.
-
-	self constantAt: #defaultShadowColor put: Color green.
-	self constantAt: #primaryBorderColor put: BrGlamorousColors primaryBorderColor
-]
-
-{ #category : #initialization }
-BrGlamorousDefaultDarkTheme >> initializeThemeable [
-	super initializeThemeable.
-
-	defaultShadowColor := self
-			color: [ :aTheme | aTheme default constantAt: #defaultShadowColor ]
-			source: [ :aTheme | aTheme default defaultShadowColor ].
-
-	primaryBorderColor := self
-			color: [ :aTheme | aTheme default constantAt: #primaryBorderColor ]
-			source: [ :aTheme | aTheme default primaryBorderColor ].
-
-	darkBorderColor := self
-			color: [ :aTheme | BrGlamorousColors darkBorderColor ]
-			source: [ :aTheme | aTheme default darkBorderColor ].
-
-	newsBackgroundColor := self
-			color: [ :aTheme | BrGlamorousColors newsBackgroundColor ]
-			source: [ :aTheme | aTheme default newsBackgroundColor ]
+	self constantAt: #defaultShadowColor put: BrAntColors gray8.
+	self constantAt: #primaryShadowColor put: BrAntColors blue4.
+	self constantAt: #primaryBorderColor put: BrAntColors blue4.
+	self constantAt: #strongBorderColor put: BrAntColors gray3.
+	self
+		constantAt: #newsBackgroundColor
+		put: BrGlamorousColors newsBackgroundColor.
+	self constantAt: #subtleBorderColor put: BrAntColors gray10.
+	self
+		constantAt: #expandCollapseTriangleBackgroundColor
+		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.
+	self constantAt: #shadowColor put: BrGlamorousColors shadowColor.
+	self
+		constantAt: #distinctTenStrongColors
+		put: BrGlamorousColors distinctTenStrongColors.
+	self
+		constantAt: #distinctTenLightColors
+		put: BrGlamorousColors distinctTenLightColors.
+	self constantAt: #appBackground put: BrAntColors gray9 .
+	self constantAt: #contentBackground put: BrAntColors gray11.
+	self constantAt: #backdropBackground put: BrAntColors gray10.
+	self
+		constantAt: #backdropEmphasisBackground
+		put: (Color fromHexString: '#B3B3B3').
+	self constantAt: #navigationBackground put: (Color fromHexString: '#333333')
 ]

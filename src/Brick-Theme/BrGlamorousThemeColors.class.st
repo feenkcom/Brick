@@ -8,15 +8,10 @@ Class {
 		'tertiaryTextColor',
 		'disabledTextColor',
 		'invertedTextColor',
-		'appBackgroundColor',
-		'backdropBackgroundColor',
-		'sidebarBackgroundColor',
-		'contentBackgroundColor',
 		'groupBackgroundColor',
 		'raisedBackgroundColor',
 		'floatBackgroundColor',
-		'sidebarTextColor',
-		'backdropEmphasisBackgroundColor'
+		'sidebarTextColor'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -24,53 +19,6 @@ Class {
 { #category : #'instance creation' }
 BrGlamorousThemeColors class >> theme: aBlTheme [
 	^ self new theme: aBlTheme
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> appBackgroundColor [
-	"App shell, full-page background"
-	<return: #Color>
-	
-	^ appBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> appBackgroundColor: anObject [
-	appBackgroundColor := anObject
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> backdropBackgroundColor [
-	<return: #Color>
-	^ backdropBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> backdropBackgroundColor: anObject [
-	backdropBackgroundColor := anObject
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> backdropEmphasisBackgroundColor [
-	^ backdropEmphasisBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> backdropEmphasisBackgroundColor: anObject [
-	backdropEmphasisBackgroundColor := anObject
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> contentBackgroundColor [
-	"Standard surfaces and main scrollable content background."
-	<return: #Color>
-
-	^ contentBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> contentBackgroundColor: anObject [
-	contentBackgroundColor := anObject
 ]
 
 { #category : #'accessing - text' }
@@ -157,16 +105,6 @@ BrGlamorousThemeColors >> secondaryTextColor [
 { #category : #'accessing - text' }
 BrGlamorousThemeColors >> secondaryTextColor: anObject [
 	secondaryTextColor := anObject
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> sidebarBackgroundColor [
-	^ sidebarBackgroundColor
-]
-
-{ #category : #accessing }
-BrGlamorousThemeColors >> sidebarBackgroundColor: anObject [
-	sidebarBackgroundColor := anObject
 ]
 
 { #category : #accessing }

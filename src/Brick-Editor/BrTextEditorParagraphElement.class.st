@@ -455,7 +455,8 @@ BrTextEditorParagraphElement >> onMeasure: anExtentMeasurementSpec [
 { #category : #'as yet unclassified' }
 BrTextEditorParagraphElement >> onThemeChanged [
 	paragraph value: nil.
-	self requestLayout
+	self requestLayout.
+	super onThemeChanged
 ]
 
 { #category : #drawing }

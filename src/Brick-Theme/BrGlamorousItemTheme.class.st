@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousItemTheme,
-	#superclass : #Object,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'selectedColor',
 		'deselectedColor',
@@ -18,8 +18,11 @@ BrGlamorousItemTheme >> defaultColor [
 ]
 
 { #category : #accessing }
-BrGlamorousItemTheme >> defaultColor: anObject [
-	defaultColor := anObject
+BrGlamorousItemTheme >> defaultColor: aColor [
+	self
+		constantAt: #defaultColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -28,8 +31,11 @@ BrGlamorousItemTheme >> deselectedColor [
 ]
 
 { #category : #accessing }
-BrGlamorousItemTheme >> deselectedColor: anObject [
-	deselectedColor := anObject
+BrGlamorousItemTheme >> deselectedColor: aColor [
+	self
+		constantAt: #deselectedColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -38,8 +44,11 @@ BrGlamorousItemTheme >> focusedBorderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousItemTheme >> focusedBorderColor: anObject [
-	focusedBorderColor := anObject
+BrGlamorousItemTheme >> focusedBorderColor: aColor [
+	self
+		constantAt: #focusedBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -48,19 +57,49 @@ BrGlamorousItemTheme >> hoveredColor [
 ]
 
 { #category : #accessing }
-BrGlamorousItemTheme >> hoveredColor: anObject [
-	hoveredColor := anObject
+BrGlamorousItemTheme >> hoveredColor: aColor [
+	self
+		constantAt: #hoveredColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
-BrGlamorousItemTheme >> initialize [
-	super initialize.
-	selectedColor := BrGlamorousColors selectedListItemColor.
-	deselectedColor := BrGlamorousColors deselectedListItemColor.
-	hoveredColor := BrGlamorousColors hoveredListItemColor.
-	defaultColor := BrGlamorousColors defaultListItemColor.
-	focusedBorderColor := BrGlamorousColors focusedListItemBorder.
-	pressedColor := BrGlamorousColors pressedListItemColor
+BrGlamorousItemTheme >> initializeConstants [
+	super initializeConstants.
+	self constantAt: #selectedColor put: BrGlamorousColors selectedListItemColor.
+	self
+		constantAt: #deselectedColor
+		put: BrGlamorousColors deselectedListItemColor.
+	self constantAt: #hoveredColor put: BrGlamorousColors hoveredListItemColor.
+	self constantAt: #defaultColor put: BrGlamorousColors defaultListItemColor.
+	self
+		constantAt: #focusedBorderColor
+		put: BrGlamorousColors focusedListItemBorder.
+	self constantAt: #pressedColor put: BrGlamorousColors pressedListItemColor
+]
+
+{ #category : #initialization }
+BrGlamorousItemTheme >> initializeThemeable [
+	super initializeThemeable.
+	selectedColor := self
+			color: [ :aTheme | aTheme item constantAt: #selectedColor ]
+			source: [ :aTheme | aTheme item selectedColor ].
+	deselectedColor := self
+			color: [ :aTheme | aTheme item constantAt: #deselectedColor ]
+			source: [ :aTheme | aTheme item deselectedColor ].
+	hoveredColor := self
+			color: [ :aTheme | aTheme item constantAt: #hoveredColor ]
+			source: [ :aTheme | aTheme item hoveredColor ].
+	defaultColor := self
+			color: [ :aTheme | aTheme item constantAt: #defaultColor ]
+			source: [ :aTheme | aTheme item defaultColor ].
+	focusedBorderColor := self
+			color: [ :aTheme | aTheme item constantAt: #focusedBorderColor ]
+			source: [ :aTheme | aTheme item focusedBorderColor ].
+	pressedColor := self
+			color: [ :aTheme | aTheme item constantAt: #pressedColor ]
+			source: [ :aTheme | aTheme item pressedColor ]
 ]
 
 { #category : #accessing }
@@ -69,8 +108,11 @@ BrGlamorousItemTheme >> pressedColor [
 ]
 
 { #category : #accessing }
-BrGlamorousItemTheme >> pressedColor: anObject [
-	pressedColor := anObject
+BrGlamorousItemTheme >> pressedColor: aColor [
+	self
+		constantAt: #pressedColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -79,6 +121,9 @@ BrGlamorousItemTheme >> selectedColor [
 ]
 
 { #category : #accessing }
-BrGlamorousItemTheme >> selectedColor: anObject [
-	selectedColor := anObject
+BrGlamorousItemTheme >> selectedColor: aColor [
+	self
+		constantAt: #selectedColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]

@@ -32,7 +32,7 @@ BrGlamorousRadioButtonAptitude >> initialize [
 	self
 		add: (BrToggleAptitude new
 				@ [ iconLook icon ];
-				activated: [ :aStyle | aStyle background: self theme default darkBorderColor muchDarker ];
+				activated: [ :aStyle | aStyle background: self theme default darkBorderColor  ];
 				deactivated: [ :aStyle | aStyle background: Color transparent ]).
 	self
 		add: (BrSizeAdjustmentAptitude new

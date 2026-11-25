@@ -19,7 +19,12 @@ Class {
 		'pharoBooleanLiteralForeground',
 		'pharoCharacterLiteralForeground',
 		'pharoCommentForeground',
-		'pharoErrorTokenForeground'
+		'pharoErrorTokenForeground',
+		'enabledBreakpointForeground',
+		'enabledBreakpointBackground',
+		'disabledBreakpointBackground',
+		'disabledBreakpointForeground',
+		'completionPreviewBackground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -30,8 +35,16 @@ BrGlamorousEditorTheme >> borderColor [
 ]
 
 { #category : #accessing }
-BrGlamorousEditorTheme >> borderColor: anObject [
-	borderColor := anObject
+BrGlamorousEditorTheme >> borderColor: aColor [
+	self
+		constantAt: #borderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> completionPreviewBackground [
+	^ completionPreviewBackground
 ]
 
 { #category : #accessing }
@@ -40,30 +53,36 @@ BrGlamorousEditorTheme >> defaultTextForeground [
 ]
 
 { #category : #accessing }
+BrGlamorousEditorTheme >> disabledBreakpointBackground [
+	^ disabledBreakpointBackground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> disabledBreakpointForeground [
+	^ disabledBreakpointForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> enabledBreakpointBackground [
+	^ enabledBreakpointBackground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> enabledBreakpointForeground [
+	^ enabledBreakpointForeground
+]
+
+{ #category : #accessing }
 BrGlamorousEditorTheme >> focusedBorderColor [
 	^ focusedBorderColor
 ]
 
 { #category : #accessing }
-BrGlamorousEditorTheme >> focusedBorderColor: anObject [
-	focusedBorderColor := anObject
-]
-
-{ #category : #initialization }
-BrGlamorousEditorTheme >> initialize [
-	super initialize.
-	borderColor := BrGlamorousColors editorBorderColor.
-	focusedBorderColor := BrGlamorousColors focusedEditorBorderColor
-]
-
-{ #category : #initialization }
-BrGlamorousEditorTheme >> initializeColors [
-	super initializeColors
-]
-
-{ #category : #initialization }
-BrGlamorousEditorTheme >> initializeConstants [
-	super initializeConstants
+BrGlamorousEditorTheme >> focusedBorderColor: aColor [
+	self
+		constantAt: #focusedBorderColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
@@ -132,7 +151,28 @@ BrGlamorousEditorTheme >> initializeThemeable [
 
 	pharoErrorTokenForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #pharoErrorTokenForeground ]
-			source: [ :aTheme | aTheme editor pharoErrorTokenForeground ]
+			source: [ :aTheme | aTheme editor pharoErrorTokenForeground ].
+	borderColor := self
+			color: [ :aTheme | aTheme editor constantAt: #borderColor ]
+			source: [ :aTheme | aTheme editor borderColor ].
+	focusedBorderColor := self
+			color: [ :aTheme | aTheme editor constantAt: #focusedBorderColor ]
+			source: [ :aTheme | aTheme editor focusedBorderColor ].
+	enabledBreakpointForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #enabledBreakpointForeground ]
+			source: [ :aTheme | aTheme editor enabledBreakpointForeground ].
+	enabledBreakpointBackground := self
+			color: [ :aTheme | aTheme editor constantAt: #enabledBreakpointBackground ]
+			source: [ :aTheme | aTheme editor enabledBreakpointBackground ].
+	disabledBreakpointBackground := self
+			color: [ :aTheme | aTheme editor constantAt: #disabledBreakpointBackground ]
+			source: [ :aTheme | aTheme editor disabledBreakpointBackground ].
+	disabledBreakpointForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #disabledBreakpointForeground ]
+			source: [ :aTheme | aTheme editor disabledBreakpointForeground ].
+	completionPreviewBackground := self
+			color: [ :aTheme | aTheme editor constantAt: #completionPreviewBackground ]
+			source: [ :aTheme | aTheme editor completionPreviewBackground ]
 ]
 
 { #category : #accessing }

@@ -7,13 +7,12 @@ Class {
 { #category : #initialization }
 BrMenuItemAptitude >> initialize [
 	super initialize.
-
 	self
-		add: (BrStyleCommonAptitude new
-				default: [ :aStyle | aStyle background: Color white ];
+		add: (BrLazyStyleCommonAptitude new
+				default: [ :aStyle :aTheme | aStyle background: aTheme item deselectedColor ];
 				when: BlElementState hovered & BlElementState selected
-					style: [ :aStyle | aStyle background: self theme item selectedColor ];
+					style: [ :aStyle :aTheme | aStyle background: aTheme item selectedColor ];
 				when: BlElementState hovered not & BlElementState selected
-					style: [ :aStyle | aStyle background: self theme item hoveredColor ];
-				pressed: [ :aStyle | aStyle background: self theme item pressedColor ])
+					style: [ :aStyle :aTheme | aStyle background: aTheme item hoveredColor ];
+				pressed: [ :aStyle :aTheme | aStyle background: aTheme item pressedColor ])
 ]
