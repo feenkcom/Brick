@@ -90,11 +90,11 @@ BrGlamorousTheme >> header: anObject [
 
 { #category : #utility }
 BrGlamorousTheme >> installAsDefault [
-	| previousTheme theme |
+	| previousTheme |
 	previousTheme := BlTheme default.
-	BlTheme default: theme.
+	BlTheme default: self.
 	previousTheme notifyThemeModified.
-	BlSpace allOpenSpacesDo: [ :s | s theme: theme ]
+	BlSpace allOpenSpacesDo: [ :s | s theme: self ]
 ]
 
 { #category : #accessing }
