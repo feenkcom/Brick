@@ -7,7 +7,7 @@ Class {
 { #category : #initialization }
 BrGlamorousEditorDarkTheme >> initializeConstants [
 	super initializeConstants.
-	self constantAt: #sourceReferenceHighlight put: BrAntColors orange6.
+	self constantAt: #sourceReferenceHighlight put: BrAntColors orange2.
 	
 	self constantAt: #occurrenceHighlight put: BrAntColors gray8.
 	self constantAt: #completionPreviewBackground put: BrAntColors gray8.
