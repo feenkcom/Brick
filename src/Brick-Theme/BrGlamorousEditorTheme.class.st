@@ -25,7 +25,8 @@ Class {
 		'disabledBreakpointBackground',
 		'disabledBreakpointForeground',
 		'completionPreviewBackground',
-		'occurrenceHighlight'
+		'occurrenceHighlight',
+		'sourceReferenceHighlight'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -97,6 +98,10 @@ BrGlamorousEditorTheme >> initializeThemeable [
 	occurrenceHighlight := self
 			color: [ :aTheme | aTheme editor constantAt: #occurrenceHighlight ]
 			source: [ :aTheme | aTheme editor occurrenceHighlight ].
+
+	sourceReferenceHighlight := self
+			color: [ :aTheme | aTheme editor constantAt: #sourceReferenceHighlight ]
+			source: [ :aTheme | aTheme editor sourceReferenceHighlight ].
 
 	pharoDeclaredVariableForeground := self
 			color: [ :aTheme | aTheme editor constantAt: #pharoDeclaredVariableForeground ]
@@ -258,4 +263,9 @@ BrGlamorousEditorTheme >> pharoThisContextVariableForeground [
 { #category : #accessing }
 BrGlamorousEditorTheme >> pharoUndeclaredVariableForeground [
 	^ pharoUndeclaredVariableForeground
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> sourceReferenceHighlight [
+	^ sourceReferenceHighlight
 ]

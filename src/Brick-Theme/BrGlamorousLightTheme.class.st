@@ -17,7 +17,7 @@ BrGlamorousLightTheme >> initialize [
 
 	link := BrGlamorousLinkLightTheme theme: self.
 	link initializeThemeable.
-	status := BrGlamorousStatusTheme theme: self.
+	status := BrGlamorousStatusLightTheme theme: self.
 	status initializeThemeable.
 	default := BrGlamorousDefaultLightTheme theme: self.
 	default initializeThemeable.

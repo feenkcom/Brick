@@ -22,7 +22,7 @@ BrGlamorousNearWhiteTheme >> initialize [
 
 	link := BrGlamorousLinkLightTheme theme: self.
 	link initializeThemeable.
-	status := BrGlamorousStatusTheme theme: self.
+	status := BrGlamorousStatusNearWhiteTheme theme: self.
 	status initializeThemeable.
 	default := BrGlamorousDefaultNearWhiteTheme theme: self.
 	default initializeThemeable.
