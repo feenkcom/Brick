@@ -14,6 +14,7 @@ BrGlamorousStatusLightTheme >> initializeConstants [
 	self
 		constantAt: #neutralBackgroundColor
 		put: BrGlamorousColors neutralBackgroundColor.
+	self constantAt: #neutralBorderColor put: BrAntColors gray6.
 	self constantAt: #errorBorderColor put: BrGlamorousColors errorBorderColor.
 	self
 		constantAt: #errorBackgroundColor

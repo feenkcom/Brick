@@ -7,12 +7,13 @@ Class {
 { #category : #initialization }
 BrGlamorousStatusDarkTheme >> initializeConstants [
 	super initializeConstants.
-	
+
 	self constantAt: #neutralBackgroundColor put: BrAntColors gray7.
-	
+	self constantAt: #neutralBorderColor put: BrAntColors gray5.
+
 	self constantAt: #successBackgroundColor put: BrAntColors darkGreen4.
 	self constantAt: #successBorderColor put: BrAntColors darkGreen5.
-	
+
 	self constantAt: #errorBackgroundColor put: BrAntColors darkRed4.
 	self constantAt: #errorBorderColor put: BrAntColors red6.
 
