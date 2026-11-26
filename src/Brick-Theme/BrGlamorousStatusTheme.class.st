@@ -10,7 +10,8 @@ Class {
 		'failureBorderColor',
 		'paleErrorBackgroundColor',
 		'failureBackgroundColor',
-		'changesBackgroundColor'
+		'changesBackgroundColor',
+		'neutralBorderColor'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -92,6 +93,10 @@ BrGlamorousStatusTheme >> initializeThemeable [
 	neutralBackgroundColor := self
 			color: [ :aTheme | aTheme status constantAt: #neutralBackgroundColor ]
 			source: [ :aTheme | aTheme status neutralBackgroundColor ].
+	(constants includesKey: #neutralBorderColor)
+		ifTrue: [ neutralBorderColor := self
+					color: [ :aTheme | aTheme status constantAt: #neutralBorderColor ]
+					source: [ :aTheme | aTheme status neutralBorderColor ] ].
 	errorBorderColor := self
 			color: [ :aTheme | aTheme status constantAt: #errorBorderColor ]
 			source: [ :aTheme | aTheme status errorBorderColor ].
@@ -121,6 +126,24 @@ BrGlamorousStatusTheme >> neutralBackgroundColor [
 BrGlamorousStatusTheme >> neutralBackgroundColor: aColor [
 	self
 		constantAt: #neutralBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> neutralBorderColor [
+	neutralBorderColor
+		ifNil: [ self refreshThemeable.
+			neutralBorderColor
+				ifNil: [ self
+						neutralBorderColor: (self theme class new status constantAt: #neutralBorderColor) ] ].
+	^ neutralBorderColor
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> neutralBorderColor: aColor [
+	self
+		constantAt: #neutralBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
 ]
