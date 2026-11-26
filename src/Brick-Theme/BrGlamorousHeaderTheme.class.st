@@ -23,8 +23,11 @@ BrGlamorousHeaderTheme >> defaultBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousHeaderTheme >> defaultBackgroundColor: anObject [
-	defaultBackgroundColor := anObject
+BrGlamorousHeaderTheme >> defaultBackgroundColor: aColor [
+	self
+		constantAt: #defaultBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -33,8 +36,11 @@ BrGlamorousHeaderTheme >> defaultTextColor [
 ]
 
 { #category : #accessing }
-BrGlamorousHeaderTheme >> defaultTextColor: anObject [
-	defaultTextColor := anObject
+BrGlamorousHeaderTheme >> defaultTextColor: aColor [
+	self
+		constantAt: #defaultTextColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -43,18 +49,29 @@ BrGlamorousHeaderTheme >> disabledTextColor [
 ]
 
 { #category : #accessing }
-BrGlamorousHeaderTheme >> disabledTextColor: anObject [
-	disabledTextColor := anObject
-]
-
-{ #category : #initialization }
-BrGlamorousHeaderTheme >> initializeColors [
-	super initializeColors
+BrGlamorousHeaderTheme >> disabledTextColor: aColor [
+	self
+		constantAt: #disabledTextColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
 BrGlamorousHeaderTheme >> initializeConstants [
-	super initializeConstants
+	super initializeConstants.
+	self constantAt: #textMarkupColor put: BrGlamorousColors textMarkupColor.
+	self
+		constantAt: #defaultBackgroundColor
+		put: BrGlamorousColors defaultHeaderBackgroundColor.
+	self
+		constantAt: #disabledTextColor
+		put: BrGlamorousColors disabledHeaderTextColor.
+	self
+		constantAt: #defaultTextColor
+		put: BrGlamorousColors defaultHeaderTextColor.
+	self
+		constantAt: #secondaryBackgroundColor
+		put: BrGlamorousColors secondaryHeaderBackgroundColor
 ]
 
 { #category : #initialization }
@@ -62,8 +79,23 @@ BrGlamorousHeaderTheme >> initializeThemeable [
 	super initializeThemeable.
 
 	defaultBackground := self
-			background: [ :aTheme | aTheme header defaultBackgroundColor ]
-			source: [ :aTheme | aTheme header defaultBackground ]
+			background: [ :aTheme | aTheme header constantAt: #defaultBackgroundColor ]
+			source: [ :aTheme | aTheme header defaultBackground ].
+	textMarkupColor := self
+			color: [ :aTheme | aTheme header constantAt: #textMarkupColor ]
+			source: [ :aTheme | aTheme header textMarkupColor ].
+	defaultBackgroundColor := self
+			color: [ :aTheme | aTheme header constantAt: #defaultBackgroundColor ]
+			source: [ :aTheme | aTheme header defaultBackgroundColor ].
+	disabledTextColor := self
+			color: [ :aTheme | aTheme header constantAt: #disabledTextColor ]
+			source: [ :aTheme | aTheme header disabledTextColor ].
+	defaultTextColor := self
+			color: [ :aTheme | aTheme header constantAt: #defaultTextColor ]
+			source: [ :aTheme | aTheme header defaultTextColor ].
+	secondaryBackgroundColor := self
+			color: [ :aTheme | aTheme header constantAt: #secondaryBackgroundColor ]
+			source: [ :aTheme | aTheme header secondaryBackgroundColor ]
 ]
 
 { #category : #accessing }
@@ -72,8 +104,11 @@ BrGlamorousHeaderTheme >> secondaryBackgroundColor [
 ]
 
 { #category : #accessing }
-BrGlamorousHeaderTheme >> secondaryBackgroundColor: anObject [
-	secondaryBackgroundColor := anObject
+BrGlamorousHeaderTheme >> secondaryBackgroundColor: aColor [
+	self
+		constantAt: #secondaryBackgroundColor
+		put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -85,6 +120,6 @@ BrGlamorousHeaderTheme >> textMarkupColor [
 BrGlamorousHeaderTheme >> textMarkupColor: aColor [
 	self
 		constantAt: #textMarkupColor
-		put: aColor.
+		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
 ]

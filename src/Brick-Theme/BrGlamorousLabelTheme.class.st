@@ -16,11 +16,6 @@ BrGlamorousLabelTheme >> defaultTextForeground [
 ]
 
 { #category : #initialization }
-BrGlamorousLabelTheme >> initializeColors [
-	super initializeColors
-]
-
-{ #category : #initialization }
 BrGlamorousLabelTheme >> initializeConstants [
 	super initializeConstants.
 

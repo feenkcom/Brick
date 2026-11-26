@@ -5,37 +5,31 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousEditorDarkTheme >> initializeColors [
-	super initializeColors
-]
-
-{ #category : #initialization }
 BrGlamorousEditorDarkTheme >> initializeConstants [
 	super initializeConstants.
+	self constantAt: #occurrenceHighlight put: BrAntColors gray8.
+	self constantAt: #completionPreviewBackground put: BrAntColors gray8.
+	self constantAt: #borderColor put: BrAntColors gray8.
+	self constantAt: #focusedBorderColor put: BrAntColors blue3.
 
-	self
-		constantAt: #pharoDeclaredVariableForeground
-		put: (Color fromHexString: '#5C7BD9').
-	self
-		constantAt: #pharoUndeclaredVariableForeground
-		put: (Color fromHexString: '#5C7BD9').
-	self
-		constantAt: #pharoSelfVariableForeground
-		put: (Color fromHexString: '#5EEAD4').
-	self
-		constantAt: #pharoSuperVariableForeground
-		put: (Color fromHexString: '#5EEAD4').
-	self
-		constantAt: #pharoThisContextVariableForeground
-		put: (Color fromHexString: '#5EEAD4').
-	self constantAt: #pharoPragmaForeground put: Color green muchDarker.
-	self constantAt: #pharoReturnArrowForeground put: Color cyan muchDarker.
-	self constantAt: #pharoStringLiteralForeground put: Color magenta muchDarker.
-	self constantAt: #pharoSymbolLiteralForeground put: Color magenta muchDarker.
-	self constantAt: #pharoNumberLiteralForeground put: Color red muchDarker.
-	self constantAt: #pharoNilLiteralForeground put: Color red muchDarker.
-	self constantAt: #pharoBooleanLiteralForeground put: Color red muchDarker.
-	self constantAt: #pharoCharacterLiteralForeground put: Color red muchDarker.
-	self constantAt: #pharoCommentForeground put: Color gray darker.
-	self constantAt: #pharoErrorTokenForeground put: Color red
+	self constantAt: #pharoDeclaredVariableForeground put: BrAntColors geekblue2.
+	self constantAt: #pharoUndeclaredVariableForeground put: BrAntColors geekblue3.
+	self constantAt: #pharoSelfVariableForeground put: BrAntColors purple2.
+	self constantAt: #pharoSuperVariableForeground put: BrAntColors purple2.
+	self constantAt: #pharoThisContextVariableForeground put: BrAntColors purple2.
+	self constantAt: #pharoPragmaForeground put: BrAntColors lime3.
+	self constantAt: #pharoReturnArrowForeground put: BrAntColors cyan3.
+	self constantAt: #pharoStringLiteralForeground put: BrAntColors magenta2.
+	self constantAt: #pharoSymbolLiteralForeground put: BrAntColors magenta2.
+	self constantAt: #pharoNumberLiteralForeground put: BrAntColors red2.
+	self constantAt: #pharoNilLiteralForeground put: BrAntColors red2.
+	self constantAt: #pharoBooleanLiteralForeground put: BrAntColors red2.
+	self constantAt: #pharoCharacterLiteralForeground put: BrAntColors magenta3.
+	self constantAt: #pharoCommentForeground put: BrAntColors gray6.
+	self constantAt: #pharoErrorTokenForeground put: BrAntColors red3.
+
+	self constantAt: #enabledBreakpointForeground put: BrAntColors gray12.
+	self constantAt: #enabledBreakpointBackground put: BrAntColors orange3.
+	self constantAt: #disabledBreakpointBackground put: BrAntColors gray3.
+	self constantAt: #disabledBreakpointForeground put: BrAntColors gray9
 ]

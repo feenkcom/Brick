@@ -5,35 +5,35 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousDefaultLightTheme >> initializeColors [
-	super initializeColors.
-
-	defaultShadowColor := BrGlamorousColors defaultShadowColor.
-
-	primaryBorderColor := BrGlamorousColors primaryBorderColor.
-
-	darkBorderColor := BrGlamorousColors darkBorderColor.
-
-	distinctTenStrongColors := BrGlamorousColors distinctTenStrongColors.
-
-	newsBackgroundColor := BrGlamorousColors newsBackgroundColor.
-
-	lightBorderColor := BrGlamorousColors lightBorderColor.
-
-	expandCollapseTriangleBackgroundColor := BrGlamorousColors
-			expandCollapseTriangleBackgroundColor.
-
-	shadowColor := BrGlamorousColors shadowColor.
-
-	distinctTenLightColors := BrGlamorousColors distinctTenLightColors
-]
-
-{ #category : #initialization }
 BrGlamorousDefaultLightTheme >> initializeConstants [
-	super initializeConstants
-]
-
-{ #category : #initialization }
-BrGlamorousDefaultLightTheme >> initializeThemeable [
-	super initializeThemeable
+	super initializeConstants.
+	self constantAt: #defaultShadowColor put: BrGlamorousColors defaultShadowColor.
+	self constantAt: #primaryShadowColor put: BrGlamorousColors primaryBorderColor.
+	self constantAt: #primaryBorderColor put: BrGlamorousColors primaryBorderColor.
+	self constantAt: #strongBorderColor put: BrGlamorousColors darkBorderColor.
+	self
+		constantAt: #newsBackgroundColor
+		put: BrGlamorousColors newsBackgroundColor.
+	self constantAt: #subtleBorderColor put: BrGlamorousColors lightBorderColor.
+	self
+		constantAt: #expandCollapseTriangleBackgroundColor
+		put: BrGlamorousColors expandCollapseTriangleBackgroundColor.
+	self constantAt: #shadowColor put: BrGlamorousColors shadowColor.
+	self
+		constantAt: #distinctTenStrongColors
+		put: BrGlamorousColors distinctTenStrongColors.
+	self
+		constantAt: #distinctTenLightColors
+		put: BrGlamorousColors distinctTenLightColors.
+	self
+		constantAt: #appBackground
+		put: BrGlamorousColors defaultHeaderBackgroundColor.
+	self constantAt: #contentBackground put: Color white.
+	self constantAt: #backdropBackground put: BrGlamorousColors backdropColor.
+	self
+		constantAt: #backdropEmphasisBackground
+		put: (Color fromHexString: '#D9D9D9').
+	self
+		constantAt: #navigationBackground
+		put: BrGlamorousColors neutralBackgroundColor
 ]

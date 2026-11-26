@@ -27,8 +27,9 @@ BrMenuExplicitHandle >> defaultElement [
 	^ BlElement new
 		size: BrMenuConstants handleExtent * 2.0;
 		geometry: BlCircleGeometry new;
-		background: Color white;
-		addAptitude: BrPopoverCommonAptitude new
+		addAptitude: BrPopoverCommonAptitude new;
+		addAptitude: (BrLazyStyleCommonAptitude new
+				default: [ :aStyle :aTheme | aStyle background: aTheme default contentBackground ])
 ]
 
 { #category : #initialization }

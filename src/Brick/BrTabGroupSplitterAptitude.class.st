@@ -11,7 +11,7 @@ Class {
 BrTabGroupSplitterAptitude >> initialize [
 	super initialize.
 	splitter := BlElement new labeled: 'Splitter'.
-	splitter background: self theme default lightBorderColor.
+	splitter background: self theme default subtleBorderColor.
 	splitter elevation: (BlRelativeElevation elevation: -1).
 	splitter
 		constraintsDo: [ :c | 

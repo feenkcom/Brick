@@ -1,17 +1,27 @@
 Class {
 	#name : #BrGlamorousFocusableShadowAptitude,
 	#superclass : #BrShadowAptitude,
+	#instVars : [
+		'shadowStyle'
+	],
 	#category : #'Brick-Glamorous-Shadow'
 }
 
 { #category : #initialization }
-BrGlamorousFocusableShadowAptitude >> initialize [
-	super initialize.
-	self
-		add:
-			(BrLazyStyleCommonAptitude new
-				focused: [ :aStyle | 
-					aStyle
-						do: [ self color: (self theme default primaryShadowColor) ]
-						after: [ self color: (self theme default defaultShadowColor) ] ])
+BrGlamorousFocusableShadowAptitude >> initializeShadowStyle [
+	shadowStyle := BrLazyStyleCommonAptitude new
+			default: [ :aStyle :aTheme | 
+				aStyle
+					effect: (self shadow copyWithColor: (self shadow color blocResolveColorForTheme: aTheme)) ];
+			focused: [ :aStyle :aTheme | 
+				aStyle
+					effect: (self shadow
+							copyWithColor: (aTheme default primaryShadowColor blocResolveColorForTheme: aTheme)) ];
+			yourself.
+	self add: shadowStyle
+]
+
+{ #category : #accessing }
+BrGlamorousFocusableShadowAptitude >> shadow: anEffect [
+	shadowStyle updateWith: [ shadow := anEffect ]
 ]

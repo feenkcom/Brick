@@ -1,6 +1,6 @@
 Class {
 	#name : #BrGlamorousLinkTheme,
-	#superclass : #Object,
+	#superclass : #BlSubTheme,
 	#instVars : [
 		'color',
 		'errorColor'
@@ -14,8 +14,9 @@ BrGlamorousLinkTheme >> color [
 ]
 
 { #category : #accessing }
-BrGlamorousLinkTheme >> color: anObject [
-	color := anObject
+BrGlamorousLinkTheme >> color: aColor [
+	self constantAt: #color put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #accessing }
@@ -24,13 +25,18 @@ BrGlamorousLinkTheme >> errorColor [
 ]
 
 { #category : #accessing }
-BrGlamorousLinkTheme >> errorColor: anObject [
-	errorColor := anObject
+BrGlamorousLinkTheme >> errorColor: aColor [
+	self constantAt: #errorColor put: (aColor blocResolveColorForTheme: self theme).
+	self initializeThemeable
 ]
 
 { #category : #initialization }
-BrGlamorousLinkTheme >> initialize [
-	super initialize.
-	color := BrGlamorousColors linkColor.
-	errorColor := BrGlamorousColors linkWithErrorColor
+BrGlamorousLinkTheme >> initializeThemeable [
+	super initializeThemeable.
+	color := self
+			color: [ :aTheme | aTheme link constantAt: #color ]
+			source: [ :aTheme | aTheme link color ].
+	errorColor := self
+			color: [ :aTheme | aTheme link constantAt: #errorColor ]
+			source: [ :aTheme | aTheme link errorColor ]
 ]

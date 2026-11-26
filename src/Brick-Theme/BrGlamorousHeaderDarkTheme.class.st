@@ -5,34 +5,12 @@ Class {
 }
 
 { #category : #initialization }
-BrGlamorousHeaderDarkTheme >> initializeColors [
-	super initializeColors.
-
-	defaultBackgroundColor := Color veryVeryDarkGray slightlyDarker.
-
-	disabledTextColor := Color gray.
-
-	defaultTextColor := Color white.
-
-	secondaryBackgroundColor := Color black.
-
-
-]
-
-{ #category : #initialization }
 BrGlamorousHeaderDarkTheme >> initializeConstants [
 	super initializeConstants.
 
-	self constantAt: #textMarkupColor put: Color gray
-]
-
-{ #category : #initialization }
-BrGlamorousHeaderDarkTheme >> initializeThemeable [
-	super initializeThemeable.
-
-	textMarkupColor := self
-	color: [ :aTheme | aTheme header constantAt: #textMarkupColor ]
-	source: [ :aTheme | aTheme header textMarkupColor ].
-
-
+	self constantAt: #textMarkupColor put: Color gray.
+	self constantAt: #defaultBackgroundColor put: BrAntColors gray9.
+	self constantAt: #disabledTextColor put: Color gray.
+	self constantAt: #defaultTextColor put: Color white.
+	self constantAt: #secondaryBackgroundColor put: BrAntColors gray11
 ]

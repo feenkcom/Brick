@@ -21,9 +21,11 @@ BrCursorStencil class >> uniqueInstance [
 
 { #category : #'api - instantiation' }
 BrCursorStencil >> create [
-	^ BrCursorElement new
-		constraintsDo: [ :c |
+	| aCursor |
+	aCursor := BrCursorElement new.
+	^ aCursor
+		constraintsDo: [ :c | 
 			c horizontal exact: 1.
 			c vertical matchParent ];
-		background: Color black
+		background: aCursor theme editor defaultTextForeground
 ]

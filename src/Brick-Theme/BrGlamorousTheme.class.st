@@ -88,6 +88,15 @@ BrGlamorousTheme >> header: anObject [
 	header := anObject
 ]
 
+{ #category : #utility }
+BrGlamorousTheme >> installAsDefault [
+	| previousTheme |
+	previousTheme := BlTheme default.
+	BlTheme default: self.
+	previousTheme notifyThemeModified.
+	BlSpace allOpenSpacesDo: [ :s | s theme: self ]
+]
+
 { #category : #accessing }
 BrGlamorousTheme >> item [
 	^ item
@@ -118,19 +127,36 @@ BrGlamorousTheme >> link: anObject [
 	link := anObject
 ]
 
+{ #category : #accessing }
+BrGlamorousTheme >> markup [
+	^ self subThemeAt: #brGlamorousMarkupTheme ifAbsentPut: [ self newMarkupTheme ]
+]
+
 { #category : #'instance creation' }
 BrGlamorousTheme >> newColumnedListTheme [
+	self subclassResponsibility
+]
+
+{ #category : #initialization }
+BrGlamorousTheme >> newMarkupTheme [
 	self subclassResponsibility
 ]
 
 { #category : #private }
 BrGlamorousTheme >> onThemeModified [
 	super onThemeModified.
-	default initializeThemeable.
-	editor initializeThemeable.
-	button initializeThemeable.
-	label initializeThemeable.
-	header initializeThemeable
+	{default.
+		editor.
+		button.
+		label.
+		header.
+		link.
+		status.
+		item}
+		do: [ :aSubTheme | 
+			aSubTheme
+				theme: self;
+				refreshThemeable ]
 ]
 
 { #category : #'as yet unclassified' }
