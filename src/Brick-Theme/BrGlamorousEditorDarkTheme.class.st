@@ -7,6 +7,8 @@ Class {
 { #category : #initialization }
 BrGlamorousEditorDarkTheme >> initializeConstants [
 	super initializeConstants.
+	self constantAt: #sourceReferenceHighlight put: BrAntColors orange6.
+	
 	self constantAt: #occurrenceHighlight put: BrAntColors gray8.
 	self constantAt: #completionPreviewBackground put: BrAntColors gray8.
 	self constantAt: #borderColor put: BrAntColors gray8.
@@ -28,8 +30,8 @@ BrGlamorousEditorDarkTheme >> initializeConstants [
 	self constantAt: #pharoCommentForeground put: BrAntColors gray6.
 	self constantAt: #pharoErrorTokenForeground put: BrAntColors red3.
 
-	self constantAt: #enabledBreakpointForeground put: BrAntColors gray12.
-	self constantAt: #enabledBreakpointBackground put: BrAntColors orange3.
-	self constantAt: #disabledBreakpointBackground put: BrAntColors gray3.
-	self constantAt: #disabledBreakpointForeground put: BrAntColors gray9
+	self constantAt: #enabledBreakpointForeground put: BrAntColors gray2.
+	self constantAt: #enabledBreakpointBackground put: BrAntColors red6.
+	self constantAt: #disabledBreakpointBackground put: BrAntColors gray7.
+	self constantAt: #disabledBreakpointForeground put: BrAntColors gray5
 ]
