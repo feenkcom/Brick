@@ -16,13 +16,6 @@ BrGlamorousLabelTheme >> defaultTextForeground [
 ]
 
 { #category : #initialization }
-BrGlamorousLabelTheme >> initializeConstants [
-	super initializeConstants.
-
-	self constantAt: #defaultTextForeground put: self theme colors primaryTextColor
-]
-
-{ #category : #initialization }
 BrGlamorousLabelTheme >> initializeThemeable [
 	super initializeThemeable.
 
@@ -31,15 +24,15 @@ BrGlamorousLabelTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme label defaultTextForeground ].
 
 	metadataTextForeground := self
-			color: [ :aTheme | aTheme colors secondaryTextColor ]
+			color: [ :aTheme | aTheme label constantAt: #metadataTextForeground ]
 			source: [ :aTheme | aTheme label metadataTextForeground ].
 
 	summaryTextForeground := self
-			color: [ :aTheme | aTheme colors secondaryTextColor ]
+			color: [ :aTheme | aTheme label constantAt: #summaryTextForeground ]
 			source: [ :aTheme | aTheme label summaryTextForeground ].
 
 	navigationTextForeground := self
-			color: [ :aTheme | aTheme colors sidebarTextColor ]
+			color: [ :aTheme | aTheme label constantAt: #navigationTextForeground ]
 			source: [ :aTheme | aTheme label navigationTextForeground ]
 ]
 

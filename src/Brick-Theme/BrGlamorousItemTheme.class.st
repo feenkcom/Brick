@@ -65,21 +65,6 @@ BrGlamorousItemTheme >> hoveredColor: aColor [
 ]
 
 { #category : #initialization }
-BrGlamorousItemTheme >> initializeConstants [
-	super initializeConstants.
-	self constantAt: #selectedColor put: BrGlamorousColors selectedListItemColor.
-	self
-		constantAt: #deselectedColor
-		put: BrGlamorousColors deselectedListItemColor.
-	self constantAt: #hoveredColor put: BrGlamorousColors hoveredListItemColor.
-	self constantAt: #defaultColor put: BrGlamorousColors defaultListItemColor.
-	self
-		constantAt: #focusedBorderColor
-		put: BrGlamorousColors focusedListItemBorder.
-	self constantAt: #pressedColor put: BrGlamorousColors pressedListItemColor
-]
-
-{ #category : #initialization }
 BrGlamorousItemTheme >> initializeThemeable [
 	super initializeThemeable.
 	selectedColor := self
