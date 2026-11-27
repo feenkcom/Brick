@@ -9,10 +9,9 @@ Class {
 
 { #category : #private }
 BrMenuIconTextLabelElement >> applyDefaultForegroundToIcon: anIcon [
-	| aForeground |
-	aForeground := self theme label defaultTextForeground.
-	anIcon
-		withAllChildrenBreadthFirstDo: [ :anElement | BrIconAptitude replaceBlackPaintOn: anElement with: aForeground ]
+	BrIconAptitude
+		replaceBlackPaintIn: anIcon
+		with: self theme label defaultTextForeground
 ]
 
 { #category : #initialization }

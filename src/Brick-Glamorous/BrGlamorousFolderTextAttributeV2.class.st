@@ -93,7 +93,7 @@ BrGlamorousFolderTextAttributeV2 >> highlightFoldableTextInTextEditorElement: aT
 	aTextEditorElement
 		addHighlight: (BrTextHighlight
 				id: self highlightId
-				color: BrGlamorousColors neutralBackgroundColor)
+				color: aTextEditorElement theme editor occurrenceHighlight)
 		overMarker: self foldableMarkerAttribute
 ]
 

@@ -39,5 +39,6 @@ BrGlamorousEditorLightTheme >> initializeConstants [
 	self constantAt: #disabledBreakpointForeground put: Color black.
 	self
 		constantAt: #focusedBorderColor
-		put: BrGlamorousColors focusedEditorBorderColor
+		put: BrGlamorousColors focusedEditorBorderColor.
+	self constantAt: #focusedReadOnlyTextForeground put: BrAntColors gray12
 ]

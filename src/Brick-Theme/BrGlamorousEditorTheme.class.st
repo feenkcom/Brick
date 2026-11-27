@@ -26,7 +26,8 @@ Class {
 		'disabledBreakpointForeground',
 		'completionPreviewBackground',
 		'occurrenceHighlight',
-		'sourceReferenceHighlight'
+		'sourceReferenceHighlight',
+		'focusedReadOnlyTextForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -85,6 +86,11 @@ BrGlamorousEditorTheme >> focusedBorderColor: aColor [
 		constantAt: #focusedBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousEditorTheme >> focusedReadOnlyTextForeground [
+	^ focusedReadOnlyTextForeground
 ]
 
 { #category : #initialization }
@@ -182,7 +188,10 @@ BrGlamorousEditorTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme editor disabledBreakpointForeground ].
 	completionPreviewBackground := self
 			color: [ :aTheme | aTheme editor constantAt: #completionPreviewBackground ]
-			source: [ :aTheme | aTheme editor completionPreviewBackground ]
+			source: [ :aTheme | aTheme editor completionPreviewBackground ].
+	focusedReadOnlyTextForeground := self
+			color: [ :aTheme | aTheme editor constantAt: #focusedReadOnlyTextForeground ]
+			source: [ :aTheme | aTheme editor focusedReadOnlyTextForeground ]
 ]
 
 { #category : #accessing }
