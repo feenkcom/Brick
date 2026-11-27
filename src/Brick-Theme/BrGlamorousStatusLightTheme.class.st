@@ -28,5 +28,7 @@ BrGlamorousStatusLightTheme >> initializeConstants [
 		put: BrGlamorousColors failureBackgroundColor.
 	self
 		constantAt: #changesBackgroundColor
-		put: BrGlamorousColors failureBackgroundColor
+		put: BrGlamorousColors failureBackgroundColor.
+	self constantAt: #errorTextForeground put: BrAntColors red7.
+	self constantAt: #successTextForeground put: BrAntColors green7
 ]

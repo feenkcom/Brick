@@ -8,7 +8,7 @@ Class {
 BrGlamorousDarkThemeColors >> initialize [
 	super initialize.
 
-	primaryTextColor := Color fromHexString: '#EAEAEA'.
+	primaryTextColor := BrAntColors gray1.
 	secondaryTextColor := Color fromHexString: '#B3B3B3'.
 	tertiaryTextColor := Color fromHexString: '#8A8A8A'.
 	disabledTextColor := Color fromHexString: '#666666'.

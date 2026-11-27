@@ -22,5 +22,7 @@ BrGlamorousStatusDarkTheme >> initializeConstants [
 	self constantAt: #failureBackgroundColor put: BrAntColors orange6.
 	self constantAt: #failureBorderColor put: BrAntColors orange4.
 
-	self constantAt: #changesBackgroundColor put: BrAntColors orange4
+	self constantAt: #changesBackgroundColor put: BrAntColors orange4.
+	self constantAt: #errorTextForeground put: BrAntColors red3.
+	self constantAt: #successTextForeground put: BrAntColors darkGreen6
 ]

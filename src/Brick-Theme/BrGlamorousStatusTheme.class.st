@@ -11,7 +11,9 @@ Class {
 		'paleErrorBackgroundColor',
 		'failureBackgroundColor',
 		'changesBackgroundColor',
-		'neutralBorderColor'
+		'neutralBorderColor',
+		'errorTextForeground',
+		'successTextForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -53,6 +55,11 @@ BrGlamorousStatusTheme >> errorBorderColor: aColor [
 		constantAt: #errorBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> errorTextForeground [
+	^ errorTextForeground
 ]
 
 { #category : #accessing }
@@ -114,7 +121,13 @@ BrGlamorousStatusTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme status failureBackgroundColor ].
 	changesBackgroundColor := self
 			color: [ :aTheme | aTheme status constantAt: #changesBackgroundColor ]
-			source: [ :aTheme | aTheme status changesBackgroundColor ]
+			source: [ :aTheme | aTheme status changesBackgroundColor ].
+	errorTextForeground := self
+			color: [ :aTheme | aTheme status constantAt: #errorTextForeground ]
+			source: [ :aTheme | aTheme status errorTextForeground ].
+	successTextForeground := self
+			color: [ :aTheme | aTheme status constantAt: #successTextForeground ]
+			source: [ :aTheme | aTheme status successTextForeground ]
 ]
 
 { #category : #accessing }
@@ -185,4 +198,9 @@ BrGlamorousStatusTheme >> successBorderColor: aColor [
 		constantAt: #successBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> successTextForeground [
+	^ successTextForeground
 ]

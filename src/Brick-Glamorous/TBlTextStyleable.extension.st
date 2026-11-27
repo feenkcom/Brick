@@ -196,10 +196,10 @@ TBlTextStyleable >> glamorousFormEditorCodeFontAndSize [
 
 { #category : #'*Brick-Glamorous' }
 TBlTextStyleable >> glamorousFormLabelStyle [
-	self 
+	self
 		glamorousRegularFont;
 		glamorousRegularSmallSize;
-		foreground: BrGlamorousColors formLabelTextColor
+		foreground: BlTheme default label metadataTextForeground
 ]
 
 { #category : #'*Brick-Glamorous' }
