@@ -10,10 +10,10 @@ BrGlamorousSpaceTabIconAptitude >> updateIcon [
 	super updateIcon.
 	self
 		widgetDo: [ :aTab | 
-			| aForeground |
-			aForeground := aTab theme label defaultTextForeground.
-			self icon
-				withAllChildrenBreadthFirstDo: [ :anElement | 
+			self class
+				replaceBlackPaintIn: self icon
+				with: aTab theme label defaultTextForeground
+				matching: [ :anElement | 
 					(anElement geometry isKindOf: BlSvgPath)
-						ifTrue: [ self class replaceBlackPaintOn: anElement with: aForeground ] ] ]
+						or: [ anElement isKindOf: BlTextElement ] ] ]
 ]

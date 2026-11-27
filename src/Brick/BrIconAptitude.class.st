@@ -18,6 +18,22 @@ Class {
 	#category : #'Brick-! Core - Aptitudes'
 }
 
+{ #category : #icons }
+BrIconAptitude class >> replaceBlackPaintIn: anIcon with: aForeground [
+	self
+		replaceBlackPaintIn: anIcon
+		with: aForeground
+		matching: [ :anElement | true ]
+]
+
+{ #category : #icons }
+BrIconAptitude class >> replaceBlackPaintIn: anIcon with: aForeground matching: aPredicate [
+	anIcon
+		withAllChildrenBreadthFirstDo: [ :anElement | 
+			(aPredicate value: anElement)
+				ifTrue: [ self replaceBlackPaintOn: anElement with: aForeground ] ]
+]
+
 { #category : #styling }
 BrIconAptitude class >> replaceBlackPaintOn: anElement with: aForeground [
 	| aBlackBackground aBorder |
@@ -26,7 +42,10 @@ BrIconAptitude class >> replaceBlackPaintOn: anElement with: aForeground [
 		ifTrue: [ anElement background: aForeground ].
 	aBorder := anElement border.
 	(aBorder isVisible and: [ aBlackBackground paint = aBorder paint ])
-		ifTrue: [ anElement border: (aBorder copyWithPaint: aForeground) ]
+		ifTrue: [ anElement border: (aBorder copyWithPaint: aForeground) ].
+	(anElement isKindOf: BlTextElement)
+		ifTrue: [ anElement defaultTextForeground = Color black
+				ifTrue: [ anElement defaultTextForeground: aForeground ] ]
 ]
 
 { #category : #accessing }

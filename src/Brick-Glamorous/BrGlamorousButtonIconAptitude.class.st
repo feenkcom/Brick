@@ -32,3 +32,17 @@ BrGlamorousButtonIconAptitude >> initialize [
 				mini: [ :aStyle | aStyle scaleBy: 0.5 ]).
 	self add: (self class newVectorIconColorAptitudeFor: [ self icon ])
 ]
+
+{ #category : #private }
+BrGlamorousButtonIconAptitude >> updateIcon [
+	super updateIcon.
+	(self icon geometry isKindOf: BlSvgPath) ifTrue: [ ^ self ].
+	self
+		widgetDo: [ :aButton | 
+			self class
+				replaceBlackPaintIn: self icon
+				with: aButton theme button defaultTextForeground
+				matching: [ :anElement | 
+					(anElement geometry isKindOf: BlSvgPath)
+						or: [ anElement isKindOf: BlTextElement ] ] ]
+]
