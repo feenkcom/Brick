@@ -28,13 +28,13 @@ BrGlamorousLightTheme >> initialize [
 	button := BrGlamorousButtonLightTheme theme: self.
 	button initializeThemeable.
 
-	item := BrGlamorousItemTheme theme: self.
+	item := BrGlamorousItemLightTheme theme: self.
 	item initializeThemeable.
 
 	header := BrGlamorousHeaderLightTheme theme: self.
 	header initializeThemeable.
 
-	label := BrGlamorousLabelTheme theme: self.
+	label := BrGlamorousLabelLightTheme theme: self.
 	label initializeThemeable
 ]
 

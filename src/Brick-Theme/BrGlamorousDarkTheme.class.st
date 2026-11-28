@@ -24,13 +24,13 @@ BrGlamorousDarkTheme >> initialize [
 	button := BrGlamorousButtonDarkTheme theme: self.
 	button initializeThemeable.
 
-	item := BrGlamorousItemTheme theme: self.
+	item := BrGlamorousItemDarkTheme theme: self.
 	item initializeThemeable.
 
 	header := BrGlamorousHeaderDarkTheme theme: self.
 	header initializeThemeable.
 
-	label := BrGlamorousLabelTheme theme: self.
+	label := BrGlamorousLabelDarkTheme theme: self.
 	label initializeThemeable
 ]
 

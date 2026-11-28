@@ -33,13 +33,13 @@ BrGlamorousNearWhiteTheme >> initialize [
 	button := BrGlamorousButtonLightTheme theme: self.
 	button initializeThemeable.
 
-	item := BrGlamorousItemTheme theme: self.
+	item := BrGlamorousItemNearWhiteTheme theme: self.
 	item initializeThemeable.
 
 	header := BrGlamorousHeaderLightTheme theme: self.
 	header initializeThemeable.
 
-	label := BrGlamorousLabelTheme theme: self.
+	label := BrGlamorousLabelNearWhiteTheme theme: self.
 	label initializeThemeable
 ]
 
