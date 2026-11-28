@@ -51,55 +51,53 @@ GtBlocThemeableProperty class >> generateValueComputation: sourceCode [
 { #category : #'as yet unclassified' }
 GtBlocThemeableProperty >> createCoderViewModel: aCoderModel coderAssignment: aForCoderAssignment subThemeModel: aSubThemeModel [
 	| coderViewModel |
-	
 	coderViewModel := super
-		createCoderViewModel: aCoderModel
-		coderAssignment: aForCoderAssignment
-		subThemeModel: aSubThemeModel.
-	
+			createCoderViewModel: aCoderModel
+			coderAssignment: aForCoderAssignment
+			subThemeModel: aSubThemeModel.
+
 	(self issuesWithinSubThemeModel: aSubThemeModel)
 		ifNotEmpty: [ ^ coderViewModel ].
-	
+
 	self
 		assert: [ aForCoderAssignment isConstantAssignment ]
-		description: [ 'Must be a constant assignment' ].	
-	
-	aCoderModel 
+		description: [ 'Must be a constant assignment' ].
+
+	aCoderModel
 		when: GtCoderEvaluationAnnouncement
-		do: [ :anAnnouncement |
+		do: [ :anAnnouncement | 
 			anAnnouncement evaluationResult isSuccess
-				ifTrue: [				
-					aSubThemeModel
+				ifTrue: [ aSubThemeModel
 						changeConstantNamed: aForCoderAssignment propertyName
 						to: anAnnouncement evaluationResult value.
-					aSubThemeModel notifyThemeModified  ] ].
-						
-	coderViewModel addShortcut: (GtSourceCoderSaveShortcut new).
+					aSubThemeModel notifyThemeModified ] ].
+
+	coderViewModel addShortcut: GtSourceCoderSaveShortcut new.
 	coderViewModel announcer
 		when: GtSourceCoderViewModelSaveRequested
-		do: [ :anAnnouncement |
+		do: [ :anAnnouncement | 
 			anAnnouncement consumed: true.
-			
-			 coderViewModel
-				handleCoderEvaluationUnhandledErrorDuring: [ 
-					coderViewModel coder
+
+			coderViewModel
+				handleCoderEvaluationUnhandledErrorDuring: [ coderViewModel coder
 						doItInContext: (coderViewModel evaluationContext
-							all;
-							requesterObject: coderViewModel)
-						thenDo: [ :anEvaluationResult |
+								all;
+								requesterObject: coderViewModel)
+						thenDo: [ :anEvaluationResult | 
 							aSubThemeModel
 								changeConstantNamed: aForCoderAssignment propertyName
 								to: anEvaluationResult value.
-							
+
 							aForCoderAssignment originalAssignment
 								valueAst: (RBParser parseExpression: coderViewModel sourceText asString).
-								
+
 							aSubThemeModel generateThemeChanges execute.
-							coderViewModel coder forSource: (aForCoderAssignment originalAssignment valueSourceCode).
-							
-							aSubThemeModel notifyThemeModified ] ].
-			 ].
-	
+							coderViewModel coder
+								forSource: aForCoderAssignment originalAssignment valueSourceCode.
+
+							aSubThemeModel notifyThemeModified ] ] ]
+		for: self.
+
 	^ coderViewModel
 ]
 

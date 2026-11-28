@@ -58,7 +58,8 @@ GtBlocSubThemeEditorElement >> createEditorForProperty: aTypedThemeProperty assi
 		
 	valueSourceCoderViewModel weak
 		when: GtTextualCoderViewModelTextChanged
-		do: [ modificationIndicator asyncPromise promise: valueSourceCoderViewModel isTextModifiedPromise  ].
+		do: [ modificationIndicator asyncPromise promise: valueSourceCoderViewModel isTextModifiedPromise  ]
+		for: self.
 	
 	valueSourceCoderElement := GtSourceCoderEditorElement new
 		id: editorId;
