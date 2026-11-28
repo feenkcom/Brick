@@ -13,7 +13,9 @@ Class {
 		'changesBackgroundColor',
 		'neutralBorderColor',
 		'errorTextForeground',
-		'successTextForeground'
+		'successTextForeground',
+		'notificationBadgeBackground',
+		'notificationBadgeForeground'
 	],
 	#category : #'Brick-Theme-Glamorous'
 }
@@ -127,7 +129,14 @@ BrGlamorousStatusTheme >> initializeThemeable [
 			source: [ :aTheme | aTheme status errorTextForeground ].
 	successTextForeground := self
 			color: [ :aTheme | aTheme status constantAt: #successTextForeground ]
-			source: [ :aTheme | aTheme status successTextForeground ]
+			source: [ :aTheme | aTheme status successTextForeground ].
+	(constants includesKey: #notificationBadgeBackground)
+		ifTrue: [ notificationBadgeBackground := self
+					color: [ :aTheme | aTheme status constantAt: #notificationBadgeBackground ]
+					source: [ :aTheme | aTheme status notificationBadgeBackground ].
+			notificationBadgeForeground := self
+					color: [ :aTheme | aTheme status constantAt: #notificationBadgeForeground ]
+					source: [ :aTheme | aTheme status notificationBadgeForeground ] ]
 ]
 
 { #category : #accessing }
@@ -159,6 +168,18 @@ BrGlamorousStatusTheme >> neutralBorderColor: aColor [
 		constantAt: #neutralBorderColor
 		put: (aColor blocResolveColorForTheme: self theme).
 	self initializeThemeable
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> notificationBadgeBackground [
+	notificationBadgeBackground ifNil: [ self refreshThemeable ].
+	^ notificationBadgeBackground
+]
+
+{ #category : #accessing }
+BrGlamorousStatusTheme >> notificationBadgeForeground [
+	notificationBadgeForeground ifNil: [ self refreshThemeable ].
+	^ notificationBadgeForeground
 ]
 
 { #category : #accessing }

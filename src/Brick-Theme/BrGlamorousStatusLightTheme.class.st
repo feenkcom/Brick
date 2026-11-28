@@ -30,5 +30,7 @@ BrGlamorousStatusLightTheme >> initializeConstants [
 		constantAt: #changesBackgroundColor
 		put: BrGlamorousColors failureBackgroundColor.
 	self constantAt: #errorTextForeground put: BrAntColors red7.
-	self constantAt: #successTextForeground put: BrAntColors green7
+	self constantAt: #successTextForeground put: BrAntColors green7.
+	self constantAt: #notificationBadgeBackground put: Color orange.
+	self constantAt: #notificationBadgeForeground put: BrAntColors gray12
 ]
