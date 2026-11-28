@@ -72,7 +72,7 @@ BrColumnedListHeaderAptitude >> initialize [
 	resizerIdentifierStencil := [ :column | #columnResizer ].
 	self cellSpacing: BrColumn defaultCellSpacing.
 	self labelStencil: [ :column | BrLabel new
-		aptitude: (BrGlamorousLabelAptitude new foreground: BrGlamorousColors defaultButtonTextColor);
+		aptitude: (BrGlamorousLabelAptitude new foreground: self theme label metadataTextForeground);
 		alignCenterLeft; padding: self newCellPaddingInsets; text: column title ].
 	self when: BrColumnsChanged do: [ :event | self rebuildHeadersDueTo: event ].
 	self when: BrItemsProviderItemsChangedEvent do: [ :event | self rebuildHeadersDueTo: event ].
