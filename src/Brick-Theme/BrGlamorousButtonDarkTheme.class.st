@@ -15,10 +15,10 @@ BrGlamorousButtonDarkTheme >> initializeConstants [
 	self constantAt: #fadedBackgroundColor put: BrAntColors gray7.
 	self constantAt: #defaultBorderColor put: BrAntColors gray8.
 	self constantAt: #defaultTextColor put: BrAntColors gray3.
-	self constantAt: #hoveredBorderColor put: BrAntColors blue3.
-	self constantAt: #hoveredTextColor put: BrAntColors blue3.
-	self constantAt: #pressedBorderColor put: BrAntColors blue2.
-	self constantAt: #pressedTextColor put: BrAntColors blue2.
+	self constantAt: #hoveredBorderColor put: BrAntColors blue4.
+	self constantAt: #hoveredTextColor put: BrAntColors blue4.
+	self constantAt: #pressedBorderColor put: BrAntColors blue3.
+	self constantAt: #pressedTextColor put: BrAntColors blue3.
 	self constantAt: #textHighlightColor put: BrAntColors gold7.
 	self constantAt: #focusedFadedBackgroundColor put: BrAntColors blue4
 ]

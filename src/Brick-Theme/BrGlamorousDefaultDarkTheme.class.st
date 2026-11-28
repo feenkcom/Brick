@@ -19,7 +19,7 @@ BrGlamorousDefaultDarkTheme >> initializeConstants [
 	self constantAt: #shadowColor put: BrGlamorousColors shadowColor.
 	self constantAt: #primaryBorderColor put: BrAntColors blue6.
 	self constantAt: #strongBorderColor put: BrAntColors gray3.
-	self constantAt: #subtleBorderColor put: BrAntColors gray9.
+	self constantAt: #subtleBorderColor put: BrAntColors gray7.
 	self
 		constantAt: #newsBackgroundColor
 		put: BrAntColors orange2.
